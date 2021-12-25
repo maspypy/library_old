@@ -124,7 +124,7 @@ data:
     - icon: ':warning:'
       path: graph/treedoubling.hpp
       title: graph/treedoubling.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: graph/treemonoid.hpp
       title: graph/treemonoid.hpp
     - icon: ':warning:'
@@ -264,11 +264,17 @@ data:
       path: test/library_checker/datastructure/unionfind.test.cpp
       title: test/library_checker/datastructure/unionfind.test.cpp
     - icon: ':x:'
-      path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-      title: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
+      path: test/library_checker/datastructure/vertex_add_path_sum_group_c.test.cpp
+      title: test/library_checker/datastructure/vertex_add_path_sum_group_c.test.cpp
     - icon: ':x:'
-      path: test/library_checker/datastructure/vertex_add_path_sum_monoido.test.cpp
-      title: test/library_checker/datastructure/vertex_add_path_sum_monoido.test.cpp
+      path: test/library_checker/datastructure/vertex_add_path_sum_group_nc.test.cpp
+      title: test/library_checker/datastructure/vertex_add_path_sum_group_nc.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
+      title: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
+      title: test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
     - icon: ':x:'
       path: test/library_checker/datastructure/vertex_add_subtree_sum.test.cpp
       title: test/library_checker/datastructure/vertex_add_subtree_sum.test.cpp
