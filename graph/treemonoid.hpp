@@ -72,6 +72,11 @@ struct TreeMonoid {
     return seg_f(seg.fold(hld.LID[u] + edge, hld.LID[v] + 1), val);
   }
 
+  E fold_subtree(int u) {
+    int l = hld.LID[u], r = hld.RID[u];
+    return seg.fold(l + edge, r);
+  }
+
   void debug() {
     print("hld");
     hld.debug();
