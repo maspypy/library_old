@@ -20,7 +20,7 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/rectangle_sum
     links:
     - https://judge.yosupo.jp/problem/rectangle_sum
-  bundledCode: "#line 1 \"test/library_checker/datastructure/rectangle_sum.test.cpp\"\
+  bundledCode: "#line 1 \"test/library_checker/datastructure/rectangle_sum_sweep.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/rectangle_sum\"\n\n#line 2\
     \ \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\nusing\
     \ ll = long long;\nusing ll8 = __int128;\nusing ld = long double;\nusing pi =\
@@ -106,7 +106,7 @@ data:
     \ (a < b ? a = b, 1 : 0); }\ntemplate <class T, class S> inline bool chmin(T &a,\
     \ const S &b) { return (a > b ? a = b, 1 : 0); }\n\ntemplate <typename T>\nvc<T>\
     \ merge_sort(vc<T>& A, vc<T>& B) {\n  vc<T> C;\n  C.reserve(A.size() + B.size());\n\
-    \  merge(all(A), all(B), back_inserter(C));\n  return C;\n}\n#line 4 \"test/library_checker/datastructure/rectangle_sum.test.cpp\"\
+    \  merge(all(A), all(B), back_inserter(C));\n  return C;\n}\n#line 4 \"test/library_checker/datastructure/rectangle_sum_sweep.test.cpp\"\
     \n\n#line 2 \"ds/fenwick.hpp\"\ntemplate <typename T>\nstruct FenwickTree {\n\
     \  vector<T> data;\n  T total;\n\n  FenwickTree(int sz) : total(0) { data.assign(++sz,\
     \ 0); }\n\n  void build(vector<T>& raw_data) {\n    assert(len(data) == len(raw_data)\
@@ -166,7 +166,7 @@ data:
     \u7FA4\u306B\u5BFE\u3057\u3066\u30AF\u30A8\u30EA\u3092\u3084\u308A\u76F4\u305B\
     \u308B\u3002\"); // abc233-h\r\n    print(\"SMALL=true \u306B\u3059\u308B\u3068\
     \u3001\u5EA7\u5727\u3092\u3057\u306A\u3044\u305F\u3081\u5C11\u3057\u9AD8\u901F\
-    \");\r\n  }\r\n};\r\n#line 7 \"test/library_checker/datastructure/rectangle_sum.test.cpp\"\
+    \");\r\n  }\r\n};\r\n#line 7 \"test/library_checker/datastructure/rectangle_sum_sweep.test.cpp\"\
     \n\nvoid solve() {\n  LL(N, Q);\n  RectangleSums RS(N);\n  FOR(_, N) {\n    LL(x,\
     \ y, w);\n    RS.add_pt(x, y, w);\n  }\n  FOR(_, Q) {\n    LL(l, d, r, u);\n \
     \   RS.add_rect(l, r, d, u);\n  }\n  auto ANS = RS.calc();\n  FORIN(x, ANS) print(x);\n\
@@ -184,15 +184,15 @@ data:
   - ds/fenwick.hpp
   - other/rectanglesums.hpp
   isVerificationFile: true
-  path: test/library_checker/datastructure/rectangle_sum.test.cpp
+  path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
   requiredBy: []
-  timestamp: '2021-12-26 04:18:05+09:00'
+  timestamp: '2021-12-26 04:31:05+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/library_checker/datastructure/rectangle_sum.test.cpp
+documentation_of: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/datastructure/rectangle_sum.test.cpp
-- /verify/test/library_checker/datastructure/rectangle_sum.test.cpp.html
-title: test/library_checker/datastructure/rectangle_sum.test.cpp
+- /verify/test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
+- /verify/test/library_checker/datastructure/rectangle_sum_sweep.test.cpp.html
+title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
 ---

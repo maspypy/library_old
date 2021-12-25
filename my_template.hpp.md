@@ -37,8 +37,8 @@ data:
     path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
     title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/rectangle_sum.test.cpp
-    title: test/library_checker/datastructure/rectangle_sum.test.cpp
+    path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
+    title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/unionfind.test.cpp
     title: test/library_checker/datastructure/unionfind.test.cpp
@@ -236,10 +236,10 @@ data:
   verifiedWith:
   - test/library_checker/tree/lca.test.cpp
   - test/library_checker/datastructure/unionfind.test.cpp
-  - test/library_checker/datastructure/rectangle_sum.test.cpp
   - test/library_checker/datastructure/point_add_range_sum.test.cpp
   - test/library_checker/datastructure/predecessor_problem.test..cpp
   - test/library_checker/datastructure/point_set_range_composite.test.cpp
+  - test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
   - test/library_checker/datastructure/associative_array.test.cpp
   - test/library_checker/datastructure/range_affine_range_sum.test.cpp
 documentation_of: my_template.hpp

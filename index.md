@@ -221,21 +221,60 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/point_add_range_sum.test.cpp
       title: test/library_checker/datastructure/point_add_range_sum.test.cpp
+    - icon: ':x:'
+      path: test/library_checker/datastructure/point_add_rectangle_sum.test.cpp
+      title: test/library_checker/datastructure/point_add_rectangle_sum.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/point_set_range_composite.test.cpp
       title: test/library_checker/datastructure/point_set_range_composite.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/predecessor_problem.test..cpp
       title: test/library_checker/datastructure/predecessor_problem.test..cpp
+    - icon: ':x:'
+      path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
+      title: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
       title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
+    - icon: ':x:'
+      path: test/library_checker/datastructure/range_chmin_chmax_add_range_sum.test.cpp
+      title: test/library_checker/datastructure/range_chmin_chmax_add_range_sum.test.cpp
+    - icon: ':x:'
+      path: test/library_checker/datastructure/range_kth_smallest.test.cpp
+      title: test/library_checker/datastructure/range_kth_smallest.test.cpp
     - icon: ':heavy_check_mark:'
-      path: test/library_checker/datastructure/rectangle_sum.test.cpp
-      title: test/library_checker/datastructure/rectangle_sum.test.cpp
+      path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
+      title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
+    - icon: ':x:'
+      path: test/library_checker/datastructure/rectangle_sum_wave.test.cpp
+      title: test/library_checker/datastructure/rectangle_sum_wave.test.cpp
+    - icon: ':x:'
+      path: test/library_checker/datastructure/static_range_frequency.test.cpp
+      title: test/library_checker/datastructure/static_range_frequency.test.cpp
+    - icon: ':x:'
+      path: test/library_checker/datastructure/static_range_inversion_query.test.cpp
+      title: test/library_checker/datastructure/static_range_inversion_query.test.cpp
+    - icon: ':x:'
+      path: test/library_checker/datastructure/static_range_sum.test.cpp
+      title: test/library_checker/datastructure/static_range_sum.test.cpp
+    - icon: ':x:'
+      path: test/library_checker/datastructure/staticrmq.test.cpp
+      title: test/library_checker/datastructure/staticrmq.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/unionfind.test.cpp
       title: test/library_checker/datastructure/unionfind.test.cpp
+    - icon: ':x:'
+      path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
+      title: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
+    - icon: ':x:'
+      path: test/library_checker/datastructure/vertex_add_path_sum_monoido.test.cpp
+      title: test/library_checker/datastructure/vertex_add_path_sum_monoido.test.cpp
+    - icon: ':x:'
+      path: test/library_checker/datastructure/vertex_add_subtree_sum.test.cpp
+      title: test/library_checker/datastructure/vertex_add_subtree_sum.test.cpp
+    - icon: ':x:'
+      path: test/library_checker/datastructure/vertex_set_path_composite.test.cpp
+      title: test/library_checker/datastructure/vertex_set_path_composite.test.cpp
   - name: test/library_checker/tree
     pages:
     - icon: ':heavy_check_mark:'
