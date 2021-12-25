@@ -34,6 +34,9 @@ data:
     path: test/library_checker/predecessor_problem.test..cpp
     title: test/library_checker/predecessor_problem.test..cpp
   - icon: ':heavy_check_mark:'
+    path: test/library_checker/range_affine_range_sum.test.cpp
+    title: test/library_checker/range_affine_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/unionfind.test.cpp
     title: test/library_checker/unionfind.test.cpp
   _isVerificationFailed: false
@@ -230,6 +233,7 @@ data:
   - test/library_checker/predecessor_problem.test..cpp
   - test/library_checker/point_set_range_composite.test.cpp
   - test/library_checker/associative_array.test.cpp
+  - test/library_checker/range_affine_range_sum.test.cpp
 documentation_of: my_template.hpp
 layout: document
 redirect_from:

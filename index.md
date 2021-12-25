@@ -37,7 +37,7 @@ data:
     - icon: ':warning:'
       path: ds/intervals.hpp
       title: ds/intervals.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: ds/lazysegtree.hpp
       title: ds/lazysegtree.hpp
     - icon: ':warning:'
@@ -224,6 +224,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/predecessor_problem.test..cpp
       title: test/library_checker/predecessor_problem.test..cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/range_affine_range_sum.test.cpp
+      title: test/library_checker/range_affine_range_sum.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/unionfind.test.cpp
       title: test/library_checker/unionfind.test.cpp

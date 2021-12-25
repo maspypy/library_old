@@ -5,10 +5,13 @@ data:
   - icon: ':warning:'
     path: graph/treemonoid_lazy.hpp
     title: graph/treemonoid_lazy.hpp
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/range_affine_range_sum.test.cpp
+    title: test/library_checker/range_affine_range_sum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"ds/lazysegtree.hpp\"\ntemplate <typename T, typename OP,\
@@ -89,8 +92,9 @@ data:
   requiredBy:
   - graph/treemonoid_lazy.hpp
   timestamp: '2021-12-25 22:40:58+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/library_checker/range_affine_range_sum.test.cpp
 documentation_of: ds/lazysegtree.hpp
 layout: document
 redirect_from:

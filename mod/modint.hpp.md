@@ -6,6 +6,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/point_set_range_composite.test.cpp
     title: test/library_checker/point_set_range_composite.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/range_affine_range_sum.test.cpp
+    title: test/library_checker/range_affine_range_sum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -93,6 +96,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/point_set_range_composite.test.cpp
+  - test/library_checker/range_affine_range_sum.test.cpp
 documentation_of: mod/modint.hpp
 layout: document
 redirect_from:
