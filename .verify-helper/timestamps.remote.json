@@ -10,5 +10,6 @@
 "test/library_checker/datastructure/unionfind.test.cpp": "2021-12-26 03:01:43 +0900",
 "test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp": "2021-12-26 04:58:43 +0900",
 "test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp": "2021-12-26 04:58:43 +0900",
+"test/library_checker/datastructure/vertex_set_path_composite.test.cpp": "2021-12-26 05:06:49 +0900",
 "test/library_checker/tree/lca.test.cpp": "2021-12-26 03:01:43 +0900"
 }
