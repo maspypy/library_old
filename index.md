@@ -29,6 +29,9 @@ data:
       path: ds/cht_monotone.hpp
       title: ds/cht_monotone.hpp
     - icon: ':heavy_check_mark:'
+      path: ds/disjointsparse.hpp
+      title: ds/disjointsparse.hpp
+    - icon: ':heavy_check_mark:'
       path: ds/fastset.hpp
       title: ds/fastset.hpp
     - icon: ':heavy_check_mark:'
@@ -257,9 +260,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/static_range_sum.test.cpp
       title: test/library_checker/datastructure/static_range_sum.test.cpp
-    - icon: ':x:'
-      path: test/library_checker/datastructure/staticrmq.test.cpp
-      title: test/library_checker/datastructure/staticrmq.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/datastructure/staticrmq_seg.test.cpp
+      title: test/library_checker/datastructure/staticrmq_seg.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/datastructure/staticrmq_sparse.test.cpp
+      title: test/library_checker/datastructure/staticrmq_sparse.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/unionfind.test.cpp
       title: test/library_checker/datastructure/unionfind.test.cpp
