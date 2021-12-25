@@ -2,10 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/predecessor_problem.test..cpp
+    title: test/library_checker/predecessor_problem.test..cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"ds/fastset.hpp\"\nstruct FastSet {\r\n  using uint = unsigned;\r\
@@ -66,8 +69,9 @@ data:
   path: ds/fastset.hpp
   requiredBy: []
   timestamp: '2021-12-25 22:40:58+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/library_checker/predecessor_problem.test..cpp
 documentation_of: ds/fastset.hpp
 layout: document
 redirect_from:

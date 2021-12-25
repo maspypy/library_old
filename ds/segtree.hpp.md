@@ -5,10 +5,13 @@ data:
   - icon: ':warning:'
     path: graph/treemonoid.hpp
     title: graph/treemonoid.hpp
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/point_set_range_composite.test.cpp
+    title: test/library_checker/point_set_range_composite.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"ds/segtree.hpp\"\n\ntemplate <typename T>\nstruct SegTree\
@@ -73,8 +76,9 @@ data:
   requiredBy:
   - graph/treemonoid.hpp
   timestamp: '2021-12-25 22:40:58+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/library_checker/point_set_range_composite.test.cpp
 documentation_of: ds/segtree.hpp
 layout: document
 redirect_from:

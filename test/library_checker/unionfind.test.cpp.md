@@ -2,40 +2,44 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: ds/unionfind.hpp
+    title: ds/unionfind.hpp
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/unionfind.test.cpp
-    title: test/library_checker/unionfind.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
+  _pathExtension: cpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
-  bundledCode: "#line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace\
-    \ std;\n\nusing ll = long long;\nusing ll8 = __int128;\nusing ld = long double;\n\
-    using pi = pair<ll, ll>;\nusing vi = vector<ll>;\ntemplate <class T> using vc\
-    \ = vector<T>;\ntemplate <class T> using vvc = vector<vc<T>>;\ntemplate <class\
-    \ T> using vvvc = vector<vvc<T>>;\ntemplate <class T> using vvvvc = vector<vvvc<T>>;\n\
-    template <class T> using vvvvvc = vector<vvvvc<T>>;\ntemplate <class T> using\
-    \ pq = priority_queue<T>;\ntemplate <class T> using pqg = priority_queue<T, vector<T>,\
-    \ greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
-    #define VEC(type, name, size)                                                \
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/unionfind
+    links:
+    - https://judge.yosupo.jp/problem/unionfind
+  bundledCode: "#line 1 \"test/library_checker/unionfind.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/unionfind\"\n#line 2 \"my_template.hpp\"\n\
+    #include <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\nusing\
+    \ ll8 = __int128;\nusing ld = long double;\nusing pi = pair<ll, ll>;\nusing vi\
+    \ = vector<ll>;\ntemplate <class T> using vc = vector<T>;\ntemplate <class T>\
+    \ using vvc = vector<vc<T>>;\ntemplate <class T> using vvvc = vector<vvc<T>>;\n\
+    template <class T> using vvvvc = vector<vvvc<T>>;\ntemplate <class T> using vvvvvc\
+    \ = vector<vvvvc<T>>;\ntemplate <class T> using pq = priority_queue<T>;\ntemplate\
+    \ <class T> using pqg = priority_queue<T, vector<T>, greater<T>>;\n\n#define vec(type,\
+    \ name, ...) vector<type> name(__VA_ARGS__)\n#define VEC(type, name, size)   \
     \                                                                            \
-    \      \\\n    vector<type> name(size);                                      \
+    \                                                   \\\n    vector<type> name(size);\
     \                                                                            \
-    \                 \\\n    IN(name)\n#define vv(type, name, h, ...) vector<vector<type>>\
-    \ name(h, vector<type>(__VA_ARGS__))\n#define VV(type, name, h, w)           \
+    \                                                       \\\n    IN(name)\n#define\
+    \ vv(type, name, h, ...) vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n\
+    #define VV(type, name, h, w)                                                 \
     \                                                                            \
-    \                                            \\\n    vector<vector<type>> name(h,\
-    \ vector<type>(w));                                                          \
-    \                                                   \\\n    IN(name)\n#define\
-    \ vvv(type, name, h, w, ...) vector<vector<vector<type>>> name(h, vector<vector<type>>(w,\
-    \ vector<type>(__VA_ARGS__)))\n#define vvvv(type, name, a, b, c, ...)        \
+    \      \\\n    vector<vector<type>> name(h, vector<type>(w));                \
     \                                                                            \
-    \                                     \\\n    vector<vector<vector<vector<type>>>>\
+    \                 \\\n    IN(name)\n#define vvv(type, name, h, w, ...) vector<vector<vector<type>>>\
+    \ name(h, vector<vector<type>>(w, vector<type>(__VA_ARGS__)))\n#define vvvv(type,\
+    \ name, a, b, c, ...)                                                        \
+    \                                                                 \\\n    vector<vector<vector<vector<type>>>>\
     \ name(a, vector<vector<vector<type>>>(b, vector<vector<type>>(c, vector<type>(__VA_ARGS__))))\n\
     \n#define FOR(i, n) for (ll i = 0; (i) < (ll)(n); ++(i))\n#define FOR3(i, m, n)\
     \ for (ll i = (m); (i) < (ll)(n); ++(i))\n#define FOR_R(i, n) for (ll i = (ll)(n)-1;\
@@ -99,39 +103,39 @@ data:
     \ (a < b ? a = b, 1 : 0); }\ntemplate <class T, class S> inline bool chmin(T &a,\
     \ const S &b) { return (a > b ? a = b, 1 : 0); }\n\ntemplate <typename T>\nvc<T>\
     \ merge_sort(vc<T>& A, vc<T>& B) {\n  vc<T> C;\n  C.reserve(A.size() + B.size());\n\
-    \  merge(all(A), all(B), back_inserter(C));\n  return C;\n}\n#line 3 \"ds/unionfind.hpp\"\
-    \n\nstruct UnionFind {\n  int num;\n  int comp;\n  vi size, par;\n  UnionFind(int\
-    \ n) : num(n), comp(n), size(n, 1), par(n) { iota(par.begin(), par.end(), 0);\
-    \ }\n  int find(int x) {\n    while (par[x] != x) {\n      par[x] = par[par[x]];\n\
-    \      x = par[x];\n    }\n    return x;\n  }\n\n  int operator[](int x) {\n \
-    \   return find(x);\n  }\n\n\n  bool merge(ll x, ll y) {\n    x = find(x);\n \
-    \   y = find(y);\n    if (x == y) {\n      return false;\n    }\n    comp--;\n\
+    \  merge(all(A), all(B), back_inserter(C));\n  return C;\n}\n#line 3 \"test/library_checker/unionfind.test.cpp\"\
+    \n\n#line 3 \"ds/unionfind.hpp\"\n\nstruct UnionFind {\n  int num;\n  int comp;\n\
+    \  vi size, par;\n  UnionFind(int n) : num(n), comp(n), size(n, 1), par(n) { iota(par.begin(),\
+    \ par.end(), 0); }\n  int find(int x) {\n    while (par[x] != x) {\n      par[x]\
+    \ = par[par[x]];\n      x = par[x];\n    }\n    return x;\n  }\n\n  int operator[](int\
+    \ x) {\n    return find(x);\n  }\n\n\n  bool merge(ll x, ll y) {\n    x = find(x);\n\
+    \    y = find(y);\n    if (x == y) {\n      return false;\n    }\n    comp--;\n\
     \    if (size[x] < size[y]) swap(x, y);\n    size[x] += size[y];\n    size[y]\
     \ = 0;\n    par[y] = x;\n    return true;\n  }\n\n  vi find_all() {\n    vi A(num);\n\
-    \    FOR(i, num) A[i] = find(i);\n    return A;\n  }\n};\n"
-  code: "#pragma once\n#include \"my_template.hpp\"\n\nstruct UnionFind {\n  int num;\n\
-    \  int comp;\n  vi size, par;\n  UnionFind(int n) : num(n), comp(n), size(n, 1),\
-    \ par(n) { iota(par.begin(), par.end(), 0); }\n  int find(int x) {\n    while\
-    \ (par[x] != x) {\n      par[x] = par[par[x]];\n      x = par[x];\n    }\n   \
-    \ return x;\n  }\n\n  int operator[](int x) {\n    return find(x);\n  }\n\n\n\
-    \  bool merge(ll x, ll y) {\n    x = find(x);\n    y = find(y);\n    if (x ==\
-    \ y) {\n      return false;\n    }\n    comp--;\n    if (size[x] < size[y]) swap(x,\
-    \ y);\n    size[x] += size[y];\n    size[y] = 0;\n    par[y] = x;\n    return\
-    \ true;\n  }\n\n  vi find_all() {\n    vi A(num);\n    FOR(i, num) A[i] = find(i);\n\
-    \    return A;\n  }\n};\n"
+    \    FOR(i, num) A[i] = find(i);\n    return A;\n  }\n};\n#line 5 \"test/library_checker/unionfind.test.cpp\"\
+    \n\nvoid solve() {\n  LL(N, Q);\n  UnionFind uf(N);\n  FOR(_, Q) {\n    LL(t,\
+    \ a, b);\n    if (t == 0) {\n      uf.merge(a, b);\n    } else {\n      print(uf[a]\
+    \ == uf[b]);\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
+    \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind\"\n#include \"\
+    my_template.hpp\"\n\n#include \"ds/unionfind.hpp\"\n\nvoid solve() {\n  LL(N,\
+    \ Q);\n  UnionFind uf(N);\n  FOR(_, Q) {\n    LL(t, a, b);\n    if (t == 0) {\n\
+    \      uf.merge(a, b);\n    } else {\n      print(uf[a] == uf[b]);\n    }\n  }\n\
+    }\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout\
+    \ << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
-  isVerificationFile: false
-  path: ds/unionfind.hpp
+  - ds/unionfind.hpp
+  isVerificationFile: true
+  path: test/library_checker/unionfind.test.cpp
   requiredBy: []
-  timestamp: '2021-12-25 22:40:58+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/library_checker/unionfind.test.cpp
-documentation_of: ds/unionfind.hpp
+  timestamp: '2021-12-26 01:16:10+09:00'
+  verificationStatus: TEST_ACCEPTED
+  verifiedWith: []
+documentation_of: test/library_checker/unionfind.test.cpp
 layout: document
 redirect_from:
-- /library/ds/unionfind.hpp
-- /library/ds/unionfind.hpp.html
-title: ds/unionfind.hpp
+- /verify/test/library_checker/unionfind.test.cpp
+- /verify/test/library_checker/unionfind.test.cpp.html
+title: test/library_checker/unionfind.test.cpp
 ---

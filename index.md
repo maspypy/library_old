@@ -28,7 +28,7 @@ data:
     - icon: ':warning:'
       path: ds/cht_monotone.hpp
       title: ds/cht_monotone.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: ds/fastset.hpp
       title: ds/fastset.hpp
     - icon: ':heavy_check_mark:'
@@ -43,7 +43,7 @@ data:
     - icon: ':warning:'
       path: ds/lichao.hpp
       title: ds/lichao.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: ds/segtree.hpp
       title: ds/segtree.hpp
     - icon: ':warning:'
@@ -52,7 +52,7 @@ data:
     - icon: ':warning:'
       path: ds/swag.hpp
       title: ds/swag.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: ds/unionfind.hpp
       title: ds/unionfind.hpp
   - name: flow
@@ -143,7 +143,7 @@ data:
     - icon: ':warning:'
       path: mod/amodint.hpp
       title: mod/amodint.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: mod/modint.hpp
       title: mod/modint.hpp
   - name: .
@@ -205,15 +205,27 @@ data:
       path: test/template.cpp
       title: test/template.cpp
   verificationCategories:
-  - name: test/ds
-    pages:
-    - icon: ':heavy_check_mark:'
-      path: test/ds/fenwick.test.cpp
-      title: test/ds/fenwick.test.cpp
   - name: test
     pages:
     - icon: ':heavy_check_mark:'
       path: test/example.test.cpp
       title: test/example.test.cpp
+  - name: test/library_checker
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/associative_array.test.cpp
+      title: test/library_checker/associative_array.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/point_add_range_sum.test.cpp
+      title: test/library_checker/point_add_range_sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/point_set_range_composite.test.cpp
+      title: test/library_checker/point_set_range_composite.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/predecessor_problem.test..cpp
+      title: test/library_checker/predecessor_problem.test..cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/unionfind.test.cpp
+      title: test/library_checker/unionfind.test.cpp
 layout: toppage
 ---

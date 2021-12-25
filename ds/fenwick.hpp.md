@@ -4,8 +4,8 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/ds/fenwick.test.cpp
-    title: test/ds/fenwick.test.cpp
+    path: test/library_checker/point_add_range_sum.test.cpp
+    title: test/library_checker/point_add_range_sum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -64,7 +64,7 @@ data:
   timestamp: '2021-12-25 22:40:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/ds/fenwick.test.cpp
+  - test/library_checker/point_add_range_sum.test.cpp
 documentation_of: ds/fenwick.hpp
 layout: document
 redirect_from:
