@@ -15,6 +15,9 @@ data:
   - icon: ':x:'
     path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
     title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/vertex_set_path_composite.test.cpp
+    title: test/library_checker/datastructure/vertex_set_path_composite.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -135,6 +138,7 @@ data:
   verifiedWith:
   - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
+  - test/library_checker/datastructure/vertex_set_path_composite.test.cpp
   - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
 documentation_of: graph/treemonoid.hpp
 layout: document
