@@ -2,9 +2,6 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: ds/fenwick.hpp
-    title: ds/fenwick.hpp
-  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
@@ -14,24 +11,24 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/point_add_range_sum
+    PROBLEM: https://judge.yosupo.jp/problem/associative_array
     links:
-    - https://judge.yosupo.jp/problem/point_add_range_sum
-  bundledCode: "#line 1 \"test/library_checker/point_add_range_sum.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/point_add_range_sum\"\n#line 2 \"\
-    my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll\
-    \ = long long;\nusing ll8 = __int128;\nusing ld = long double;\nusing pi = pair<ll,\
-    \ ll>;\nusing vi = vector<ll>;\ntemplate <class T> using vc = vector<T>;\ntemplate\
-    \ <class T> using vvc = vector<vc<T>>;\ntemplate <class T> using vvvc = vector<vvc<T>>;\n\
-    template <class T> using vvvvc = vector<vvvc<T>>;\ntemplate <class T> using vvvvvc\
-    \ = vector<vvvvc<T>>;\ntemplate <class T> using pq = priority_queue<T>;\ntemplate\
-    \ <class T> using pqg = priority_queue<T, vector<T>, greater<T>>;\n\n#define vec(type,\
-    \ name, ...) vector<type> name(__VA_ARGS__)\n#define VEC(type, name, size)   \
-    \                                                                            \
-    \                                                   \\\n    vector<type> name(size);\
-    \                                                                            \
-    \                                                       \\\n    IN(name)\n#define\
-    \ vv(type, name, h, ...) vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n\
+    - https://judge.yosupo.jp/problem/associative_array
+  bundledCode: "#line 1 \"test/library_checker/datastructure/associative_array.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/associative_array\"\n#line\
+    \ 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\n\
+    using ll = long long;\nusing ll8 = __int128;\nusing ld = long double;\nusing pi\
+    \ = pair<ll, ll>;\nusing vi = vector<ll>;\ntemplate <class T> using vc = vector<T>;\n\
+    template <class T> using vvc = vector<vc<T>>;\ntemplate <class T> using vvvc =\
+    \ vector<vvc<T>>;\ntemplate <class T> using vvvvc = vector<vvvc<T>>;\ntemplate\
+    \ <class T> using vvvvvc = vector<vvvvc<T>>;\ntemplate <class T> using pq = priority_queue<T>;\n\
+    template <class T> using pqg = priority_queue<T, vector<T>, greater<T>>;\n\n#define\
+    \ vec(type, name, ...) vector<type> name(__VA_ARGS__)\n#define VEC(type, name,\
+    \ size)                                                                      \
+    \                                                            \\\n    vector<type>\
+    \ name(size);                                                                \
+    \                                                                   \\\n    IN(name)\n\
+    #define vv(type, name, h, ...) vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n\
     #define VV(type, name, h, w)                                                 \
     \                                                                            \
     \      \\\n    vector<vector<type>> name(h, vector<type>(w));                \
@@ -103,55 +100,48 @@ data:
     \ (a < b ? a = b, 1 : 0); }\ntemplate <class T, class S> inline bool chmin(T &a,\
     \ const S &b) { return (a > b ? a = b, 1 : 0); }\n\ntemplate <typename T>\nvc<T>\
     \ merge_sort(vc<T>& A, vc<T>& B) {\n  vc<T> C;\n  C.reserve(A.size() + B.size());\n\
-    \  merge(all(A), all(B), back_inserter(C));\n  return C;\n}\n#line 3 \"test/library_checker/point_add_range_sum.test.cpp\"\
-    \n\n#line 2 \"ds/fenwick.hpp\"\ntemplate <typename T>\nstruct FenwickTree {\n\
-    \  vector<T> data;\n  T total;\n\n  FenwickTree(int sz) : total(0) { data.assign(++sz,\
-    \ 0); }\n\n  void build(vector<T>& raw_data) {\n    assert(len(data) == len(raw_data)\
-    \ + 1);\n    FOR(i, len(raw_data)) data[i + 1] = raw_data[i];\n    FOR(i, len(data))\
-    \ {\n      int j = i + (i & -i);\n      if (j < len(data)) data[j] += data[i];\n\
-    \    }\n  }\n\n  T sum(int k) {\n    T ret = 0;\n    for (; k > 0; k -= k & -k)\
-    \ ret += data[k];\n    return (ret);\n  }\n\n  T sum(int L, int R) {\n    T ret\
-    \ = 0;\n    while (L < R) {\n      ret += data[R];\n      R -= R & -R;\n    }\n\
-    \    while (R < L) {\n      ret -= data[L];\n      L -= L & -L;\n    }\n    return\
-    \ ret;\n  }\n\n  T sum_all() { return total; }\n\n  void add(int k, T x) {\n \
-    \   total += x;\n    for (++k; k < data.size(); k += k & -k) data[k] += x;\n \
-    \ }\n\n  template <class F>\n  int max_right(F& check) {\n    assert(f(T(0)));\n\
-    \    ll i = 0;\n    T s = 0;\n    int k = 1;\n    int N = len(data);\n    while\
-    \ (2 * k < N) k *= 2;\n    while (k) {\n      if (i + k < N && check(s + data[i\
-    \ + k])) {\n        i += k;\n        s += data[i];\n      }\n      k >>= 1;\n\
-    \    }\n    return i;\n  }\n\n  int find_kth_element(T k) {\n    auto check =\
-    \ [&](T x) -> bool { return x < k; };\n    return max_right(check);\n  }\n};\n\
-    \ntemplate <typename T>\nstruct Fenwick_RAQ {\n  int N;\n  FenwickTree<T> bit0;\n\
-    \  FenwickTree<T> bit1;\n\n  Fenwick_RAQ(int N) : N(N), bit0(N), bit1(N) {}\n\n\
-    \  void add(ll L, ll R, T val) {\n    bit0.add(L, -val * L);\n    bit1.add(L,\
-    \ +val);\n    bit0.add(R, +val * R);\n    bit1.add(R, -val);\n  }\n\n  T sum(ll\
-    \ L, ll R) {\n    T sum_R = R * bit1.sum(R) + bit0.sum(R);\n    T sum_L = L *\
-    \ bit1.sum(L) + bit0.sum(L);\n    return sum_R - sum_L;\n  }\n};\n#line 5 \"test/library_checker/point_add_range_sum.test.cpp\"\
-    \n\nvoid solve() {\n  LL(N, Q);\n  VEC(ll, A, N);\n  FenwickTree<ll> bit(N);\n\
-    \  bit.build(A);\n\n  FOR(_, Q) {\n    LL(t, a, b);\n    if (t == 0) {\n     \
-    \ bit.add(a, b);\n    } else {\n      print(bit.sum(a, b));\n    }\n  }\n}\n\n\
-    signed main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout <<\
-    \ setprecision(15);\n\n  solve();\n\n  return 0;\n}\n\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_range_sum\"\n\
-    #include \"my_template.hpp\"\n\n#include \"ds/fenwick.hpp\"\n\nvoid solve() {\n\
-    \  LL(N, Q);\n  VEC(ll, A, N);\n  FenwickTree<ll> bit(N);\n  bit.build(A);\n\n\
-    \  FOR(_, Q) {\n    LL(t, a, b);\n    if (t == 0) {\n      bit.add(a, b);\n  \
-    \  } else {\n      print(bit.sum(a, b));\n    }\n  }\n}\n\nsigned main() {\n \
-    \ cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\
-    \n  solve();\n\n  return 0;\n}\n\n"
+    \  merge(all(A), all(B), back_inserter(C));\n  return C;\n}\n#line 3 \"test/library_checker/datastructure/associative_array.test.cpp\"\
+    \n\nvoid sol_1() {\n  LL(Q);\n  map<ll, ll> A;\n  FOR(_, Q) {\n    LL(t);\n  \
+    \  if (t == 0) {\n      LL(k, v);\n      A[k] = v;\n    } else {\n      LL(k);\n\
+    \      print(A[k]);\n    }\n  }\n}\n\nvoid sol_2() {\n  LL(Q);\n  unordered_map<ll,\
+    \ ll> A;\n  A.reserve(Q);\n  FOR(_, Q) {\n    LL(t);\n    if (t == 0) {\n    \
+    \  LL(k, v);\n      A[k] = v;\n    } else {\n      LL(k);\n      print(A[k]);\n\
+    \    }\n  }\n}\n\nvoid sol_3() {\n  LL(Q);\n  using T = tuple<ll, ll, ll>;\n \
+    \ vc<T> query(Q);\n  vi key;\n  key.reserve(Q);\n  FOR(q, Q) {\n    LL(t);\n \
+    \   if (t == 0) {\n      LL(k, v);\n      query[q] = {t, k, v};\n      key.eb(k);\n\
+    \    } else {\n      LL(k);\n      query[q] = {t, k, 0};\n      key.eb(k);\n \
+    \   }\n  }\n  UNIQUE(key);\n  vi A(len(key));\n  FOR(q, Q) {\n    auto [t, k,\
+    \ v] = query[q];\n    k = LB(key, k);\n    if (t == 0) {\n      A[k] = v;\n  \
+    \  } else {\n      print(A[k]);\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
+    \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  // sol_1();\n\
+    \  // sol_2();\n  sol_3();\n\n  return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/associative_array\"\n#include\
+    \ \"my_template.hpp\"\n\nvoid sol_1() {\n  LL(Q);\n  map<ll, ll> A;\n  FOR(_,\
+    \ Q) {\n    LL(t);\n    if (t == 0) {\n      LL(k, v);\n      A[k] = v;\n    }\
+    \ else {\n      LL(k);\n      print(A[k]);\n    }\n  }\n}\n\nvoid sol_2() {\n\
+    \  LL(Q);\n  unordered_map<ll, ll> A;\n  A.reserve(Q);\n  FOR(_, Q) {\n    LL(t);\n\
+    \    if (t == 0) {\n      LL(k, v);\n      A[k] = v;\n    } else {\n      LL(k);\n\
+    \      print(A[k]);\n    }\n  }\n}\n\nvoid sol_3() {\n  LL(Q);\n  using T = tuple<ll,\
+    \ ll, ll>;\n  vc<T> query(Q);\n  vi key;\n  key.reserve(Q);\n  FOR(q, Q) {\n \
+    \   LL(t);\n    if (t == 0) {\n      LL(k, v);\n      query[q] = {t, k, v};\n\
+    \      key.eb(k);\n    } else {\n      LL(k);\n      query[q] = {t, k, 0};\n \
+    \     key.eb(k);\n    }\n  }\n  UNIQUE(key);\n  vi A(len(key));\n  FOR(q, Q) {\n\
+    \    auto [t, k, v] = query[q];\n    k = LB(key, k);\n    if (t == 0) {\n    \
+    \  A[k] = v;\n    } else {\n      print(A[k]);\n    }\n  }\n}\n\nsigned main()\
+    \ {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\
+    \n  // sol_1();\n  // sol_2();\n  sol_3();\n\n  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
-  - ds/fenwick.hpp
   isVerificationFile: true
-  path: test/library_checker/point_add_range_sum.test.cpp
+  path: test/library_checker/datastructure/associative_array.test.cpp
   requiredBy: []
-  timestamp: '2021-12-26 01:16:10+09:00'
+  timestamp: '2021-12-26 03:01:43+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/library_checker/point_add_range_sum.test.cpp
+documentation_of: test/library_checker/datastructure/associative_array.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/point_add_range_sum.test.cpp
-- /verify/test/library_checker/point_add_range_sum.test.cpp.html
-title: test/library_checker/point_add_range_sum.test.cpp
+- /verify/test/library_checker/datastructure/associative_array.test.cpp
+- /verify/test/library_checker/datastructure/associative_array.test.cpp.html
+title: test/library_checker/datastructure/associative_array.test.cpp
 ---

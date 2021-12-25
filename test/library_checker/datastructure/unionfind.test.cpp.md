@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: ds/unionfind.hpp
+    title: ds/unionfind.hpp
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
@@ -11,11 +14,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/associative_array
+    PROBLEM: https://judge.yosupo.jp/problem/unionfind
     links:
-    - https://judge.yosupo.jp/problem/associative_array
-  bundledCode: "#line 1 \"test/library_checker/associative_array.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/associative_array\"\n#line 2 \"my_template.hpp\"\
+    - https://judge.yosupo.jp/problem/unionfind
+  bundledCode: "#line 1 \"test/library_checker/datastructure/unionfind.test.cpp\"\n\
+    #define PROBLEM \"https://judge.yosupo.jp/problem/unionfind\"\n#line 2 \"my_template.hpp\"\
     \n#include <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\n\
     using ll8 = __int128;\nusing ld = long double;\nusing pi = pair<ll, ll>;\nusing\
     \ vi = vector<ll>;\ntemplate <class T> using vc = vector<T>;\ntemplate <class\
@@ -100,48 +103,39 @@ data:
     \ (a < b ? a = b, 1 : 0); }\ntemplate <class T, class S> inline bool chmin(T &a,\
     \ const S &b) { return (a > b ? a = b, 1 : 0); }\n\ntemplate <typename T>\nvc<T>\
     \ merge_sort(vc<T>& A, vc<T>& B) {\n  vc<T> C;\n  C.reserve(A.size() + B.size());\n\
-    \  merge(all(A), all(B), back_inserter(C));\n  return C;\n}\n#line 3 \"test/library_checker/associative_array.test.cpp\"\
-    \n\nvoid sol_1() {\n  LL(Q);\n  map<ll, ll> A;\n  FOR(_, Q) {\n    LL(t);\n  \
-    \  if (t == 0) {\n      LL(k, v);\n      A[k] = v;\n    } else {\n      LL(k);\n\
-    \      print(A[k]);\n    }\n  }\n}\n\nvoid sol_2() {\n  LL(Q);\n  unordered_map<ll,\
-    \ ll> A;\n  A.reserve(Q);\n  FOR(_, Q) {\n    LL(t);\n    if (t == 0) {\n    \
-    \  LL(k, v);\n      A[k] = v;\n    } else {\n      LL(k);\n      print(A[k]);\n\
-    \    }\n  }\n}\n\nvoid sol_3() {\n  LL(Q);\n  using T = tuple<ll, ll, ll>;\n \
-    \ vc<T> query(Q);\n  vi key;\n  key.reserve(Q);\n  FOR(q, Q) {\n    LL(t);\n \
-    \   if (t == 0) {\n      LL(k, v);\n      query[q] = {t, k, v};\n      key.eb(k);\n\
-    \    } else {\n      LL(k);\n      query[q] = {t, k, 0};\n      key.eb(k);\n \
-    \   }\n  }\n  UNIQUE(key);\n  vi A(len(key));\n  FOR(q, Q) {\n    auto [t, k,\
-    \ v] = query[q];\n    k = LB(key, k);\n    if (t == 0) {\n      A[k] = v;\n  \
-    \  } else {\n      print(A[k]);\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
-    \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  // sol_1();\n\
-    \  // sol_2();\n  sol_3();\n\n  return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/associative_array\"\n#include\
-    \ \"my_template.hpp\"\n\nvoid sol_1() {\n  LL(Q);\n  map<ll, ll> A;\n  FOR(_,\
-    \ Q) {\n    LL(t);\n    if (t == 0) {\n      LL(k, v);\n      A[k] = v;\n    }\
-    \ else {\n      LL(k);\n      print(A[k]);\n    }\n  }\n}\n\nvoid sol_2() {\n\
-    \  LL(Q);\n  unordered_map<ll, ll> A;\n  A.reserve(Q);\n  FOR(_, Q) {\n    LL(t);\n\
-    \    if (t == 0) {\n      LL(k, v);\n      A[k] = v;\n    } else {\n      LL(k);\n\
-    \      print(A[k]);\n    }\n  }\n}\n\nvoid sol_3() {\n  LL(Q);\n  using T = tuple<ll,\
-    \ ll, ll>;\n  vc<T> query(Q);\n  vi key;\n  key.reserve(Q);\n  FOR(q, Q) {\n \
-    \   LL(t);\n    if (t == 0) {\n      LL(k, v);\n      query[q] = {t, k, v};\n\
-    \      key.eb(k);\n    } else {\n      LL(k);\n      query[q] = {t, k, 0};\n \
-    \     key.eb(k);\n    }\n  }\n  UNIQUE(key);\n  vi A(len(key));\n  FOR(q, Q) {\n\
-    \    auto [t, k, v] = query[q];\n    k = LB(key, k);\n    if (t == 0) {\n    \
-    \  A[k] = v;\n    } else {\n      print(A[k]);\n    }\n  }\n}\n\nsigned main()\
-    \ {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\
-    \n  // sol_1();\n  // sol_2();\n  sol_3();\n\n  return 0;\n}\n"
+    \  merge(all(A), all(B), back_inserter(C));\n  return C;\n}\n#line 3 \"test/library_checker/datastructure/unionfind.test.cpp\"\
+    \n\n#line 3 \"ds/unionfind.hpp\"\n\nstruct UnionFind {\n  int num;\n  int comp;\n\
+    \  vi size, par;\n  UnionFind(int n) : num(n), comp(n), size(n, 1), par(n) { iota(par.begin(),\
+    \ par.end(), 0); }\n  int find(int x) {\n    while (par[x] != x) {\n      par[x]\
+    \ = par[par[x]];\n      x = par[x];\n    }\n    return x;\n  }\n\n  int operator[](int\
+    \ x) {\n    return find(x);\n  }\n\n\n  bool merge(ll x, ll y) {\n    x = find(x);\n\
+    \    y = find(y);\n    if (x == y) {\n      return false;\n    }\n    comp--;\n\
+    \    if (size[x] < size[y]) swap(x, y);\n    size[x] += size[y];\n    size[y]\
+    \ = 0;\n    par[y] = x;\n    return true;\n  }\n\n  vi find_all() {\n    vi A(num);\n\
+    \    FOR(i, num) A[i] = find(i);\n    return A;\n  }\n};\n#line 5 \"test/library_checker/datastructure/unionfind.test.cpp\"\
+    \n\nvoid solve() {\n  LL(N, Q);\n  UnionFind uf(N);\n  FOR(_, Q) {\n    LL(t,\
+    \ a, b);\n    if (t == 0) {\n      uf.merge(a, b);\n    } else {\n      print(uf[a]\
+    \ == uf[b]);\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
+    \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind\"\n#include \"\
+    my_template.hpp\"\n\n#include \"ds/unionfind.hpp\"\n\nvoid solve() {\n  LL(N,\
+    \ Q);\n  UnionFind uf(N);\n  FOR(_, Q) {\n    LL(t, a, b);\n    if (t == 0) {\n\
+    \      uf.merge(a, b);\n    } else {\n      print(uf[a] == uf[b]);\n    }\n  }\n\
+    }\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout\
+    \ << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
+  - ds/unionfind.hpp
   isVerificationFile: true
-  path: test/library_checker/associative_array.test.cpp
+  path: test/library_checker/datastructure/unionfind.test.cpp
   requiredBy: []
-  timestamp: '2021-12-26 01:16:10+09:00'
+  timestamp: '2021-12-26 03:01:43+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/library_checker/associative_array.test.cpp
+documentation_of: test/library_checker/datastructure/unionfind.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/associative_array.test.cpp
-- /verify/test/library_checker/associative_array.test.cpp.html
-title: test/library_checker/associative_array.test.cpp
+- /verify/test/library_checker/datastructure/unionfind.test.cpp
+- /verify/test/library_checker/datastructure/unionfind.test.cpp.html
+title: test/library_checker/datastructure/unionfind.test.cpp
 ---

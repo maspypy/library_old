@@ -79,7 +79,7 @@ data:
       title: geometry/geometry.hpp
   - name: graph
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: graph/base.hpp
       title: graph/base.hpp
     - icon: ':warning:'
@@ -109,7 +109,7 @@ data:
     - icon: ':warning:'
       path: graph/eulerwalk.hpp
       title: graph/eulerwalk.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: graph/hld.hpp
       title: graph/hld.hpp
     - icon: ':warning:'
@@ -210,25 +210,30 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/example.test.cpp
       title: test/example.test.cpp
-  - name: test/library_checker
+  - name: test/library_checker/datastructure
     pages:
     - icon: ':heavy_check_mark:'
-      path: test/library_checker/associative_array.test.cpp
-      title: test/library_checker/associative_array.test.cpp
+      path: test/library_checker/datastructure/associative_array.test.cpp
+      title: test/library_checker/datastructure/associative_array.test.cpp
     - icon: ':heavy_check_mark:'
-      path: test/library_checker/point_add_range_sum.test.cpp
-      title: test/library_checker/point_add_range_sum.test.cpp
+      path: test/library_checker/datastructure/point_add_range_sum.test.cpp
+      title: test/library_checker/datastructure/point_add_range_sum.test.cpp
     - icon: ':heavy_check_mark:'
-      path: test/library_checker/point_set_range_composite.test.cpp
-      title: test/library_checker/point_set_range_composite.test.cpp
+      path: test/library_checker/datastructure/point_set_range_composite.test.cpp
+      title: test/library_checker/datastructure/point_set_range_composite.test.cpp
     - icon: ':heavy_check_mark:'
-      path: test/library_checker/predecessor_problem.test..cpp
-      title: test/library_checker/predecessor_problem.test..cpp
+      path: test/library_checker/datastructure/predecessor_problem.test..cpp
+      title: test/library_checker/datastructure/predecessor_problem.test..cpp
     - icon: ':heavy_check_mark:'
-      path: test/library_checker/range_affine_range_sum.test.cpp
-      title: test/library_checker/range_affine_range_sum.test.cpp
+      path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
+      title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
     - icon: ':heavy_check_mark:'
-      path: test/library_checker/unionfind.test.cpp
-      title: test/library_checker/unionfind.test.cpp
+      path: test/library_checker/datastructure/unionfind.test.cpp
+      title: test/library_checker/datastructure/unionfind.test.cpp
+  - name: test/library_checker/tree
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/tree/lca.test.cpp
+      title: test/library_checker/tree/lca.test.cpp
 layout: toppage
 ---

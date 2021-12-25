@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: ds/unionfind.hpp
-    title: ds/unionfind.hpp
+    path: ds/fastset.hpp
+    title: ds/fastset.hpp
   - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
@@ -14,24 +14,24 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/unionfind
+    PROBLEM: https://judge.yosupo.jp/problem/predecessor_problem
     links:
-    - https://judge.yosupo.jp/problem/unionfind
-  bundledCode: "#line 1 \"test/library_checker/unionfind.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/unionfind\"\n#line 2 \"my_template.hpp\"\n\
-    #include <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\nusing\
-    \ ll8 = __int128;\nusing ld = long double;\nusing pi = pair<ll, ll>;\nusing vi\
-    \ = vector<ll>;\ntemplate <class T> using vc = vector<T>;\ntemplate <class T>\
-    \ using vvc = vector<vc<T>>;\ntemplate <class T> using vvvc = vector<vvc<T>>;\n\
-    template <class T> using vvvvc = vector<vvvc<T>>;\ntemplate <class T> using vvvvvc\
-    \ = vector<vvvvc<T>>;\ntemplate <class T> using pq = priority_queue<T>;\ntemplate\
-    \ <class T> using pqg = priority_queue<T, vector<T>, greater<T>>;\n\n#define vec(type,\
-    \ name, ...) vector<type> name(__VA_ARGS__)\n#define VEC(type, name, size)   \
-    \                                                                            \
-    \                                                   \\\n    vector<type> name(size);\
-    \                                                                            \
-    \                                                       \\\n    IN(name)\n#define\
-    \ vv(type, name, h, ...) vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n\
+    - https://judge.yosupo.jp/problem/predecessor_problem
+  bundledCode: "#line 1 \"test/library_checker/datastructure/predecessor_problem.test..cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/predecessor_problem\"\n#line\
+    \ 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\n\
+    using ll = long long;\nusing ll8 = __int128;\nusing ld = long double;\nusing pi\
+    \ = pair<ll, ll>;\nusing vi = vector<ll>;\ntemplate <class T> using vc = vector<T>;\n\
+    template <class T> using vvc = vector<vc<T>>;\ntemplate <class T> using vvvc =\
+    \ vector<vvc<T>>;\ntemplate <class T> using vvvvc = vector<vvvc<T>>;\ntemplate\
+    \ <class T> using vvvvvc = vector<vvvvc<T>>;\ntemplate <class T> using pq = priority_queue<T>;\n\
+    template <class T> using pqg = priority_queue<T, vector<T>, greater<T>>;\n\n#define\
+    \ vec(type, name, ...) vector<type> name(__VA_ARGS__)\n#define VEC(type, name,\
+    \ size)                                                                      \
+    \                                                            \\\n    vector<type>\
+    \ name(size);                                                                \
+    \                                                                   \\\n    IN(name)\n\
+    #define vv(type, name, h, ...) vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n\
     #define VV(type, name, h, w)                                                 \
     \                                                                            \
     \      \\\n    vector<vector<type>> name(h, vector<type>(w));                \
@@ -103,39 +103,62 @@ data:
     \ (a < b ? a = b, 1 : 0); }\ntemplate <class T, class S> inline bool chmin(T &a,\
     \ const S &b) { return (a > b ? a = b, 1 : 0); }\n\ntemplate <typename T>\nvc<T>\
     \ merge_sort(vc<T>& A, vc<T>& B) {\n  vc<T> C;\n  C.reserve(A.size() + B.size());\n\
-    \  merge(all(A), all(B), back_inserter(C));\n  return C;\n}\n#line 3 \"test/library_checker/unionfind.test.cpp\"\
-    \n\n#line 3 \"ds/unionfind.hpp\"\n\nstruct UnionFind {\n  int num;\n  int comp;\n\
-    \  vi size, par;\n  UnionFind(int n) : num(n), comp(n), size(n, 1), par(n) { iota(par.begin(),\
-    \ par.end(), 0); }\n  int find(int x) {\n    while (par[x] != x) {\n      par[x]\
-    \ = par[par[x]];\n      x = par[x];\n    }\n    return x;\n  }\n\n  int operator[](int\
-    \ x) {\n    return find(x);\n  }\n\n\n  bool merge(ll x, ll y) {\n    x = find(x);\n\
-    \    y = find(y);\n    if (x == y) {\n      return false;\n    }\n    comp--;\n\
-    \    if (size[x] < size[y]) swap(x, y);\n    size[x] += size[y];\n    size[y]\
-    \ = 0;\n    par[y] = x;\n    return true;\n  }\n\n  vi find_all() {\n    vi A(num);\n\
-    \    FOR(i, num) A[i] = find(i);\n    return A;\n  }\n};\n#line 5 \"test/library_checker/unionfind.test.cpp\"\
-    \n\nvoid solve() {\n  LL(N, Q);\n  UnionFind uf(N);\n  FOR(_, Q) {\n    LL(t,\
-    \ a, b);\n    if (t == 0) {\n      uf.merge(a, b);\n    } else {\n      print(uf[a]\
-    \ == uf[b]);\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
+    \  merge(all(A), all(B), back_inserter(C));\n  return C;\n}\n#line 1 \"ds/fastset.hpp\"\
+    \nstruct FastSet {\r\n  using uint = unsigned;\r\n  using ull = unsigned long\
+    \ long;\r\n\r\n  int bsr(ull x) { return 63 - __builtin_clzll(x); }\r\n  int bsf(ull\
+    \ x) { return __builtin_ctzll(x); }\r\n\r\n  static constexpr uint B = 64;\r\n\
+    \  int n, lg;\r\n  vc<vc<ull>> seg;\r\n  FastSet(int _n) : n(_n) {\r\n    do {\r\
+    \n      seg.push_back(vc<ull>((_n + B - 1) / B));\r\n      _n = (_n + B - 1) /\
+    \ B;\r\n    } while (_n > 1);\r\n    lg = int(seg.size());\r\n  }\r\n  bool operator[](int\
+    \ i) const { return (seg[0][i / B] >> (i % B) & 1) != 0; }\r\n  void insert(int\
+    \ i) {\r\n    for (int h = 0; h < lg; h++) {\r\n      seg[h][i / B] |= 1ULL <<\
+    \ (i % B);\r\n      i /= B;\r\n    }\r\n  }\r\n  void erase(int i) {\r\n    for\
+    \ (int h = 0; h < lg; h++) {\r\n      seg[h][i / B] &= ~(1ULL << (i % B));\r\n\
+    \      if (seg[h][i / B])\r\n        break;\r\n      i /= B;\r\n    }\r\n  }\r\
+    \n  // x\u4EE5\u4E0A\u6700\u5C0F\u306E\u8981\u7D20\r\n  int next(int i) {\r\n\
+    \    for (int h = 0; h < lg; h++) {\r\n      if (i / B == seg[h].size())\r\n \
+    \       break;\r\n      ull d = seg[h][i / B] >> (i % B);\r\n      if (!d) {\r\
+    \n        i = i / B + 1;\r\n        continue;\r\n      }\r\n      // find\r\n\
+    \      i += bsf(d);\r\n      for (int g = h - 1; g >= 0; g--) {\r\n        i *=\
+    \ B;\r\n        i += bsf(seg[g][i / B]);\r\n      }\r\n      return i;\r\n   \
+    \ }\r\n    return n;\r\n  }\r\n  // x\u4EE5\u4E0B\u6700\u5927\u306E\u8981\u7D20\
+    \r\n  int prev(int i) {\r\n    if(i < 0) return -1;\r\n    chmin(i, n - 1);\r\n\
+    \    for (int h = 0; h < lg; h++) {\r\n      if (i == -1)\r\n        break;\r\n\
+    \      ull d = seg[h][i / B] << (63 - i % 64);\r\n      if (!d) {\r\n        i\
+    \ = i / B - 1;\r\n        continue;\r\n      }\r\n      // find\r\n      i +=\
+    \ bsr(d) - (B - 1);\r\n      for (int g = h - 1; g >= 0; g--) {\r\n        i *=\
+    \ B;\r\n        i += bsr(seg[g][i / B]);\r\n      }\r\n      return i;\r\n   \
+    \ }\r\n    return -1;\r\n  }\r\n  void print(){\r\n    for(int i=0;i<n;++i) cout\
+    \ << (*this)[i];\r\n    cout << endl;\r\n  }\r\n};\n#line 4 \"test/library_checker/datastructure/predecessor_problem.test..cpp\"\
+    \n\nvoid solve() {\n  LL(N, Q);\n  FastSet ss(N);\n  STR(S);\n  FOR(x, N) {\n\
+    \    if (S[x] == '1') ss.insert(x);\n  }\n\n  FOR(_, Q) {\n    LL(t, k);\n   \
+    \ if (t == 0) { ss.insert(k); }\n    elif (t == 1) { ss.erase(k); }\n    elif\
+    \ (t == 2) { print(ss[k]); }\n    elif (t == 3) {\n      ll x = ss.next(k);\n\
+    \      if (x == N) x = -1;\n      print(x);\n    }\n    elif (t == 4) { print(ss.prev(k));\
+    \ }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
     \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind\"\n#include \"\
-    my_template.hpp\"\n\n#include \"ds/unionfind.hpp\"\n\nvoid solve() {\n  LL(N,\
-    \ Q);\n  UnionFind uf(N);\n  FOR(_, Q) {\n    LL(t, a, b);\n    if (t == 0) {\n\
-    \      uf.merge(a, b);\n    } else {\n      print(uf[a] == uf[b]);\n    }\n  }\n\
-    }\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout\
-    \ << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/predecessor_problem\"\n\
+    #include \"my_template.hpp\"\n#include \"ds/fastset.hpp\"\n\nvoid solve() {\n\
+    \  LL(N, Q);\n  FastSet ss(N);\n  STR(S);\n  FOR(x, N) {\n    if (S[x] == '1')\
+    \ ss.insert(x);\n  }\n\n  FOR(_, Q) {\n    LL(t, k);\n    if (t == 0) { ss.insert(k);\
+    \ }\n    elif (t == 1) { ss.erase(k); }\n    elif (t == 2) { print(ss[k]); }\n\
+    \    elif (t == 3) {\n      ll x = ss.next(k);\n      if (x == N) x = -1;\n  \
+    \    print(x);\n    }\n    elif (t == 4) { print(ss.prev(k)); }\n  }\n}\n\nsigned\
+    \ main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\
+    \n  solve();\n\n  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
-  - ds/unionfind.hpp
+  - ds/fastset.hpp
   isVerificationFile: true
-  path: test/library_checker/unionfind.test.cpp
+  path: test/library_checker/datastructure/predecessor_problem.test..cpp
   requiredBy: []
-  timestamp: '2021-12-26 01:16:10+09:00'
+  timestamp: '2021-12-26 03:01:43+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/library_checker/unionfind.test.cpp
+documentation_of: test/library_checker/datastructure/predecessor_problem.test..cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/unionfind.test.cpp
-- /verify/test/library_checker/unionfind.test.cpp.html
-title: test/library_checker/unionfind.test.cpp
+- /verify/test/library_checker/datastructure/predecessor_problem.test..cpp
+- /verify/test/library_checker/datastructure/predecessor_problem.test..cpp.html
+title: test/library_checker/datastructure/predecessor_problem.test..cpp
 ---

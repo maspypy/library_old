@@ -5,35 +5,26 @@ data:
     path: graph/base.hpp
     title: graph/base.hpp
   - icon: ':heavy_check_mark:'
+    path: graph/hld.hpp
+    title: graph/hld.hpp
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _pathExtension: cpp
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
-    links: []
-  bundledCode: "#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n\
-    \  int frm, to;\n  T cost;\n  int id;\n  Edge(int a, int b, T c, int d) : frm(a),\
-    \ to(b), cost(c), id(d) {}\n};\n\ntemplate <typename T>\nstruct Graph {\n  int\
-    \ N, M;\n  using edge_t = Edge<T>;\n  vector<edge_t> edges;\n  vector<vector<edge_t>>\
-    \ G;\n  bool directed;\n  Graph() {}\n  Graph(int N, bool bl = false) : N(N),\
-    \ M(0), G(N), directed(bl) {}\n\n  void add(int frm, int to, T cost = 1, int i\
-    \ = -1) {\n    if (i == -1) i = M;\n    auto e = edge_t(frm, to, cost, i);\n \
-    \   edges.eb(e);\n    G[frm].eb(e);\n    if (!directed) {\n      auto e_rev =\
-    \ edge_t(to, frm, cost, i);\n      G[to].eb(e_rev);\n    }\n    ++M;\n  }\n\n\
-    \  void debug(bool detail = false) {\n    FOR(v, N) {\n      cout << v << \" :\"\
-    ;\n      for (auto e : G[v]) {\n        if (detail)\n          cout << \" (\"\
-    \ << e.frm << \",\" << e.to << \",\" << e.cost << \",\" << e.id\n            \
-    \   << \")\";\n        else\n          cout << \" \" << e.to;\n      }\n     \
-    \ cout << \"\\n\";\n    }\n  }\n\n  vector<int> degrees() {\n    vector<int> deg(N);\n\
-    \    FORIN(e, edges) {\n      deg[e.frm]++;\n      deg[e.to]++;\n    }\n    return\
-    \ deg;\n  }\n\n  int size() { return N; }\n\n  vector<edge_t>& operator[](int\
-    \ v) { return G[v]; }\n};\n#line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\
-    \nusing namespace std;\n\nusing ll = long long;\nusing ll8 = __int128;\nusing\
-    \ ld = long double;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\ntemplate\
-    \ <class T> using vc = vector<T>;\ntemplate <class T> using vvc = vector<vc<T>>;\n\
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/lca
+    links:
+    - https://judge.yosupo.jp/problem/lca
+  bundledCode: "#line 1 \"test/library_checker/tree/lca.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/lca\"\n#line 2 \"my_template.hpp\"\n#include\
+    \ <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\nusing ll8\
+    \ = __int128;\nusing ld = long double;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\n\
+    template <class T> using vc = vector<T>;\ntemplate <class T> using vvc = vector<vc<T>>;\n\
     template <class T> using vvvc = vector<vvc<T>>;\ntemplate <class T> using vvvvc\
     \ = vector<vvvc<T>>;\ntemplate <class T> using vvvvvc = vector<vvvvc<T>>;\ntemplate\
     \ <class T> using pq = priority_queue<T>;\ntemplate <class T> using pqg = priority_queue<T,\
@@ -115,51 +106,81 @@ data:
     \ (a < b ? a = b, 1 : 0); }\ntemplate <class T, class S> inline bool chmin(T &a,\
     \ const S &b) { return (a > b ? a = b, 1 : 0); }\n\ntemplate <typename T>\nvc<T>\
     \ merge_sort(vc<T>& A, vc<T>& B) {\n  vc<T> C;\n  C.reserve(A.size() + B.size());\n\
-    \  merge(all(A), all(B), back_inserter(C));\n  return C;\n}\n#line 4 \"graph/bipartite_coloring.hpp\"\
-    \n\npair<int, vi> bipartite_edge_coloring(Graph<ll>& G) {\n  auto N = G.N;\n \
-    \ vi deg(N);\n  vi ANS(G.M, -1);\n  FORIN(e, G.edges) {\n    ++deg[e.frm];\n \
-    \   ++deg[e.to];\n  }\n  ll C = MAX(deg);\n  // \u9802\u70B9, \u8272 -> \u8FBA\
-    \u756A\u53F7\n  vv(int, TO, N, C, -1);\n\n  FOR(id, G.M) {\n    auto const a =\
-    \ G.edges[id].frm, b = G.edges[id].to;\n    [&] {\n      // a \u3067\u5B9F\u73FE\
-    \u3057\u3066\u3044\u306A\u3044\u8272 ca \u3068 b \u3067\u5B9F\u73FE\u3057\u3066\
-    \u3044\u306A\u3044\u8272 cb \u3092\u3072\u3068\u3064\u3068\u308B\u3002\n     \
-    \ int ca = -1, cb = -1;\n      FOR(c, C) if (TO[a][c] == -1) {\n        ca = c;\n\
-    \        break;\n      }\n      FOR(c, C) if (TO[b][c] == -1) {\n        cb =\
-    \ c;\n        break;\n      }\n      int v = a, w = b, eid = id, cv = ca, cw =\
-    \ cb;\n      while (1) {\n        ANS[eid] = cv;\n        TO[v][cv] = eid;\n \
-    \       TO[w][cw] = -1;\n        if (TO[w][cv] == -1) {\n          TO[w][cv] =\
-    \ eid;\n          break;\n        }\n        swap(eid, TO[w][cv]);\n        auto\
-    \ const& e = G.edges[eid];\n        v = w;\n        w ^= e.frm ^ e.to;\n     \
-    \   swap(cv, cw);\n      }\n    }();\n  }\n  return {C, ANS};\n}\n"
-  code: "#pragma once\n#include \"graph/base.hpp\"\n#include \"my_template.hpp\"\n\
-    \npair<int, vi> bipartite_edge_coloring(Graph<ll>& G) {\n  auto N = G.N;\n  vi\
-    \ deg(N);\n  vi ANS(G.M, -1);\n  FORIN(e, G.edges) {\n    ++deg[e.frm];\n    ++deg[e.to];\n\
-    \  }\n  ll C = MAX(deg);\n  // \u9802\u70B9, \u8272 -> \u8FBA\u756A\u53F7\n  vv(int,\
-    \ TO, N, C, -1);\n\n  FOR(id, G.M) {\n    auto const a = G.edges[id].frm, b =\
-    \ G.edges[id].to;\n    [&] {\n      // a \u3067\u5B9F\u73FE\u3057\u3066\u3044\u306A\
-    \u3044\u8272 ca \u3068 b \u3067\u5B9F\u73FE\u3057\u3066\u3044\u306A\u3044\u8272\
-    \ cb \u3092\u3072\u3068\u3064\u3068\u308B\u3002\n      int ca = -1, cb = -1;\n\
-    \      FOR(c, C) if (TO[a][c] == -1) {\n        ca = c;\n        break;\n    \
-    \  }\n      FOR(c, C) if (TO[b][c] == -1) {\n        cb = c;\n        break;\n\
-    \      }\n      int v = a, w = b, eid = id, cv = ca, cw = cb;\n      while (1)\
-    \ {\n        ANS[eid] = cv;\n        TO[v][cv] = eid;\n        TO[w][cw] = -1;\n\
-    \        if (TO[w][cv] == -1) {\n          TO[w][cv] = eid;\n          break;\n\
-    \        }\n        swap(eid, TO[w][cv]);\n        auto const& e = G.edges[eid];\n\
-    \        v = w;\n        w ^= e.frm ^ e.to;\n        swap(cv, cw);\n      }\n\
-    \    }();\n  }\n  return {C, ANS};\n}"
+    \  merge(all(A), all(B), back_inserter(C));\n  return C;\n}\n#line 3 \"test/library_checker/tree/lca.test.cpp\"\
+    \n\n#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n  int\
+    \ frm, to;\n  T cost;\n  int id;\n  Edge(int a, int b, T c, int d) : frm(a), to(b),\
+    \ cost(c), id(d) {}\n};\n\ntemplate <typename T>\nstruct Graph {\n  int N, M;\n\
+    \  using edge_t = Edge<T>;\n  vector<edge_t> edges;\n  vector<vector<edge_t>>\
+    \ G;\n  bool directed;\n  Graph() {}\n  Graph(int N, bool bl = false) : N(N),\
+    \ M(0), G(N), directed(bl) {}\n\n  void add(int frm, int to, T cost = 1, int i\
+    \ = -1) {\n    if (i == -1) i = M;\n    auto e = edge_t(frm, to, cost, i);\n \
+    \   edges.eb(e);\n    G[frm].eb(e);\n    if (!directed) {\n      auto e_rev =\
+    \ edge_t(to, frm, cost, i);\n      G[to].eb(e_rev);\n    }\n    ++M;\n  }\n\n\
+    \  void debug(bool detail = false) {\n    FOR(v, N) {\n      cout << v << \" :\"\
+    ;\n      for (auto e : G[v]) {\n        if (detail)\n          cout << \" (\"\
+    \ << e.frm << \",\" << e.to << \",\" << e.cost << \",\" << e.id\n            \
+    \   << \")\";\n        else\n          cout << \" \" << e.to;\n      }\n     \
+    \ cout << \"\\n\";\n    }\n  }\n\n  vector<int> degrees() {\n    vector<int> deg(N);\n\
+    \    FORIN(e, edges) {\n      deg[e.frm]++;\n      deg[e.to]++;\n    }\n    return\
+    \ deg;\n  }\n\n  int size() { return N; }\n\n  vector<edge_t>& operator[](int\
+    \ v) { return G[v]; }\n};\n#line 1 \"graph/hld.hpp\"\ntemplate <typename Graph>\r\
+    \nstruct HLD {\r\n  Graph &G;\r\n  int N;\r\n  vector<int> sz, LID, RID, head,\
+    \ V, parent, depth, e_to_v;\r\n\r\n  HLD(Graph &G, int root = 0)\r\n      : G(G)\r\
+    \n      , N(G.N)\r\n      , sz(G.N)\r\n      , LID(G.N)\r\n      , RID(G.N)\r\n\
+    \      , head(G.N, root)\r\n      , V(G.N)\r\n      , parent(G.N, -1)\r\n    \
+    \  , depth(G.N)\r\n      , e_to_v(G.N) {\r\n    int t = 0;\r\n    dfs_sz(root,\
+    \ -1);\r\n    dfs_hld(root, -1, t);\r\n  }\r\n\r\n  void dfs_sz(int idx, int p)\
+    \ {\r\n    parent[idx] = p;\r\n    depth[idx] = (p == -1 ? 0 : depth[p] + 1);\r\
+    \n    sz[idx] = 1;\r\n    if (G[idx].size() && G[idx][0].to == p) swap(G[idx][0],\
+    \ G[idx].back());\r\n    for (auto &e : G[idx]) {\r\n      if (e.to == p) continue;\r\
+    \n      e_to_v[e.id] = e.to;\r\n      dfs_sz(e.to, idx);\r\n      sz[idx] += sz[e.to];\r\
+    \n      if (sz[G[idx][0].to] < sz[e.to]) swap(G[idx][0], e);\r\n    }\r\n  }\r\
+    \n\r\n  void dfs_hld(int idx, int par, int &times) {\r\n    LID[idx] = times++;\r\
+    \n    V[LID[idx]] = idx;\r\n    for (auto &e : G[idx]) {\r\n      if (e.to ==\
+    \ par) continue;\r\n      head[e.to] = (G[idx][0].to == e.to ? head[idx] : e.to);\r\
+    \n      dfs_hld(e.to, idx, times);\r\n    }\r\n    RID[idx] = times;\r\n  }\r\n\
+    \r\n  /* k: 0-indexed */\r\n  int LA(int v, int k) {\r\n    while (1) {\r\n  \
+    \    int u = head[v];\r\n      if (LID[v] - k >= LID[u]) return V[LID[v] - k];\r\
+    \n      k -= LID[v] - LID[u] + 1;\r\n      v = parent[u];\r\n    }\r\n  }\r\n\r\
+    \n  int LCA(int u, int v) {\r\n    for (;; v = parent[head[v]]) {\r\n      if\
+    \ (LID[u] > LID[v]) swap(u, v);\r\n      if (head[u] == head[v]) return u;\r\n\
+    \    }\r\n  }\r\n\r\n  int dist(int a, int b) {\r\n    int c = LCA(a, b);\r\n\
+    \    return depth[a] + depth[b] - 2 * depth[c];\r\n  }\r\n\r\n  bool in_subtree(int\
+    \ a, int b) { return LID[b] <= LID[a] && LID[a] < RID[b]; }\r\n\r\n  int move(int\
+    \ a, int b) {\r\n    assert(a != b);\r\n    return (in_subtree(b, a) ? LA(b, depth[b]\
+    \ - depth[a] - 1) : parent[a]);\r\n  }\r\n\r\n  void debug() {\r\n    print(\"\
+    V\", V);\r\n    print(\"parent\", parent);\r\n    print(\"depth\", depth);\r\n\
+    \    print(\"head\", head);\r\n    print(\"LID\", LID);\r\n    print(\"RID\",\
+    \ RID);\r\n  }\r\n\r\n  void doc() {\r\n    print(\"HL\u5206\u89E3\u3002O(N) \u6642\
+    \u9593\u69CB\u7BC9\u3002\");\r\n    print(\"LCA, LA \u306A\u3069\u306F O(logN)\
+    \ \u6642\u9593\u3002\");\r\n    print(\"\u6728\u306E\u554F\u984C\u3067\u306F\u771F\
+    \u3063\u5148\u306B\u3053\u308C\u3092\u4F5C\u308B\u3002\");\r\n    print(\"\u2192\
+    \ \u6728DP\u3084\u6728\u30AF\u30A8\u30EA\u306B\u6D3E\u751F\u3002\");\r\n  }\r\n\
+    };\r\n#line 6 \"test/library_checker/tree/lca.test.cpp\"\n\nvoid solve() {\n \
+    \ LL(N, Q);\n  Graph<int> G(N);\n  FOR3(v, 1, N) {\n    LL(p);\n    G.add(p, v);\n\
+    \  }\n  HLD<Graph<int>> hld(G);\n\n  FOR(_, Q) {\n    LL(a, b);\n    print(hld.LCA(a,\
+    \ b));\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
+    \  cout << setprecision(15);\n\n  solve();\n  return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\n#include \"my_template.hpp\"\
+    \n\n#include \"graph/base.hpp\"\n#include \"graph/hld.hpp\"\n\nvoid solve() {\n\
+    \  LL(N, Q);\n  Graph<int> G(N);\n  FOR3(v, 1, N) {\n    LL(p);\n    G.add(p,\
+    \ v);\n  }\n  HLD<Graph<int>> hld(G);\n\n  FOR(_, Q) {\n    LL(a, b);\n    print(hld.LCA(a,\
+    \ b));\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
+    \  cout << setprecision(15);\n\n  solve();\n  return 0;\n}\n"
   dependsOn:
-  - graph/base.hpp
   - my_template.hpp
-  isVerificationFile: false
-  path: graph/bipartite_coloring.hpp
+  - graph/base.hpp
+  - graph/hld.hpp
+  isVerificationFile: true
+  path: test/library_checker/tree/lca.test.cpp
   requiredBy: []
-  timestamp: '2021-12-25 22:40:58+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
+  timestamp: '2021-12-26 03:01:43+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: graph/bipartite_coloring.hpp
+documentation_of: test/library_checker/tree/lca.test.cpp
 layout: document
 redirect_from:
-- /library/graph/bipartite_coloring.hpp
-- /library/graph/bipartite_coloring.hpp.html
-title: graph/bipartite_coloring.hpp
+- /verify/test/library_checker/tree/lca.test.cpp
+- /verify/test/library_checker/tree/lca.test.cpp.html
+title: test/library_checker/tree/lca.test.cpp
 ---

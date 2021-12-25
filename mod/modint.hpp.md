@@ -4,11 +4,11 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/point_set_range_composite.test.cpp
-    title: test/library_checker/point_set_range_composite.test.cpp
+    path: test/library_checker/datastructure/point_set_range_composite.test.cpp
+    title: test/library_checker/datastructure/point_set_range_composite.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/range_affine_range_sum.test.cpp
-    title: test/library_checker/range_affine_range_sum.test.cpp
+    path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
+    title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -95,8 +95,8 @@ data:
   timestamp: '2021-12-25 22:40:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/point_set_range_composite.test.cpp
-  - test/library_checker/range_affine_range_sum.test.cpp
+  - test/library_checker/datastructure/point_set_range_composite.test.cpp
+  - test/library_checker/datastructure/range_affine_range_sum.test.cpp
 documentation_of: mod/modint.hpp
 layout: document
 redirect_from:

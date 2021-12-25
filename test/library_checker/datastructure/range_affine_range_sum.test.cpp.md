@@ -20,9 +20,9 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/range_affine_range_sum
     links:
     - https://judge.yosupo.jp/problem/range_affine_range_sum
-  bundledCode: "#line 1 \"test/library_checker/range_affine_range_sum.test.cpp\"\n\
-    #define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\n\n\
-    #line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
+  bundledCode: "#line 1 \"test/library_checker/datastructure/range_affine_range_sum.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\n\
+    \n#line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
     \nusing ll = long long;\nusing ll8 = __int128;\nusing ld = long double;\nusing\
     \ pi = pair<ll, ll>;\nusing vi = vector<ll>;\ntemplate <class T> using vc = vector<T>;\n\
     template <class T> using vvc = vector<vc<T>>;\ntemplate <class T> using vvvc =\
@@ -106,7 +106,7 @@ data:
     \ (a < b ? a = b, 1 : 0); }\ntemplate <class T, class S> inline bool chmin(T &a,\
     \ const S &b) { return (a > b ? a = b, 1 : 0); }\n\ntemplate <typename T>\nvc<T>\
     \ merge_sort(vc<T>& A, vc<T>& B) {\n  vc<T> C;\n  C.reserve(A.size() + B.size());\n\
-    \  merge(all(A), all(B), back_inserter(C));\n  return C;\n}\n#line 4 \"test/library_checker/range_affine_range_sum.test.cpp\"\
+    \  merge(all(A), all(B), back_inserter(C));\n  return C;\n}\n#line 4 \"test/library_checker/datastructure/range_affine_range_sum.test.cpp\"\
     \n\n#line 2 \"ds/lazysegtree.hpp\"\ntemplate <typename T, typename OP, bool OP_commute\
     \ = false>\nstruct LazySegTree {\n  using F = function<T(T, T)>;\n  using G =\
     \ function<T(T, OP)>;\n  using H = function<OP(OP, OP)>;\n  int sz, n, height;\n\
@@ -179,7 +179,7 @@ data:
     \ < 0 || n < k) return 0;\n    if (!large) return fact(n) * fact_inv(k) * fact_inv(n-k);\n\
     \    k = min(k, n-k);\n    T x(1);\n    FOR(i, k){\n      x *= n - i;\n      x\
     \ *= inv(i + 1);\n    }\n    return x;\n  }\n};\n\nusing modint107 = modint<1'000'000'007>;\n\
-    using modint998 = modint<998'244'353>;\n#line 7 \"test/library_checker/range_affine_range_sum.test.cpp\"\
+    using modint998 = modint<998'244'353>;\n#line 7 \"test/library_checker/datastructure/range_affine_range_sum.test.cpp\"\
     \n\nusing mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n\n  using E = pair<mint,\
     \ mint>;  // cnt, sum\n  using OP = pair<mint, mint>; // (a,b) of ax + b\n  const\
     \ bool OP_commute = false;\n  LazySegTree<E, OP, OP_commute> seg(\n    [&](E x,\
@@ -213,15 +213,15 @@ data:
   - ds/lazysegtree.hpp
   - mod/modint.hpp
   isVerificationFile: true
-  path: test/library_checker/range_affine_range_sum.test.cpp
+  path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2021-12-26 01:31:57+09:00'
+  timestamp: '2021-12-26 03:01:43+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/library_checker/range_affine_range_sum.test.cpp
+documentation_of: test/library_checker/datastructure/range_affine_range_sum.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/range_affine_range_sum.test.cpp
-- /verify/test/library_checker/range_affine_range_sum.test.cpp.html
-title: test/library_checker/range_affine_range_sum.test.cpp
+- /verify/test/library_checker/datastructure/range_affine_range_sum.test.cpp
+- /verify/test/library_checker/datastructure/range_affine_range_sum.test.cpp.html
+title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
 ---

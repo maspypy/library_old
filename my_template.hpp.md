@@ -22,23 +22,26 @@ data:
     title: test/template.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/associative_array.test.cpp
-    title: test/library_checker/associative_array.test.cpp
+    path: test/library_checker/datastructure/associative_array.test.cpp
+    title: test/library_checker/datastructure/associative_array.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/point_add_range_sum.test.cpp
-    title: test/library_checker/point_add_range_sum.test.cpp
+    path: test/library_checker/datastructure/point_add_range_sum.test.cpp
+    title: test/library_checker/datastructure/point_add_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/point_set_range_composite.test.cpp
-    title: test/library_checker/point_set_range_composite.test.cpp
+    path: test/library_checker/datastructure/point_set_range_composite.test.cpp
+    title: test/library_checker/datastructure/point_set_range_composite.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/predecessor_problem.test..cpp
-    title: test/library_checker/predecessor_problem.test..cpp
+    path: test/library_checker/datastructure/predecessor_problem.test..cpp
+    title: test/library_checker/datastructure/predecessor_problem.test..cpp
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/range_affine_range_sum.test.cpp
-    title: test/library_checker/range_affine_range_sum.test.cpp
+    path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
+    title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/unionfind.test.cpp
-    title: test/library_checker/unionfind.test.cpp
+    path: test/library_checker/datastructure/unionfind.test.cpp
+    title: test/library_checker/datastructure/unionfind.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/tree/lca.test.cpp
+    title: test/library_checker/tree/lca.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -228,12 +231,13 @@ data:
   timestamp: '2021-12-25 22:40:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/unionfind.test.cpp
-  - test/library_checker/point_add_range_sum.test.cpp
-  - test/library_checker/predecessor_problem.test..cpp
-  - test/library_checker/point_set_range_composite.test.cpp
-  - test/library_checker/associative_array.test.cpp
-  - test/library_checker/range_affine_range_sum.test.cpp
+  - test/library_checker/tree/lca.test.cpp
+  - test/library_checker/datastructure/unionfind.test.cpp
+  - test/library_checker/datastructure/point_add_range_sum.test.cpp
+  - test/library_checker/datastructure/predecessor_problem.test..cpp
+  - test/library_checker/datastructure/point_set_range_composite.test.cpp
+  - test/library_checker/datastructure/associative_array.test.cpp
+  - test/library_checker/datastructure/range_affine_range_sum.test.cpp
 documentation_of: my_template.hpp
 layout: document
 redirect_from:

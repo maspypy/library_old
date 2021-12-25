@@ -7,8 +7,8 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/unionfind.test.cpp
-    title: test/library_checker/unionfind.test.cpp
+    path: test/library_checker/datastructure/unionfind.test.cpp
+    title: test/library_checker/datastructure/unionfind.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -127,7 +127,7 @@ data:
   timestamp: '2021-12-25 22:40:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/unionfind.test.cpp
+  - test/library_checker/datastructure/unionfind.test.cpp
 documentation_of: ds/unionfind.hpp
 layout: document
 redirect_from:
