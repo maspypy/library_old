@@ -1,0 +1,1 @@
+ [![Actions Status](https://github.com/maspypy/library/workflows/verify/badge.svg)](https://github.com/maspypy/library/actions)

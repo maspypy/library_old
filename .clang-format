@@ -1,0 +1,32 @@
+---
+BasedOnStyle: 'Google'
+AccessModifierOffset: -2
+AlignTrailingComments: true 
+AllowShortBlocksOnASingleLine: true
+AllowShortCaseLabelsOnASingleLine: true
+AllowShortFunctionsOnASingleLine: 'Inline'
+AllowShortIfStatementsOnASingleLine: true
+AllowShortLoopsOnASingleLine: true
+AlwaysBreakAfterDefinitionReturnType: false
+AlwaysBreakBeforeMultilineStrings: true
+AlwaysBreakTemplateDeclarations: true
+BreakBeforeBinaryOperators: 'None'
+BreakConstructorInitializersBeforeComma: true
+ContinuationIndentWidth: 2
+IndentCaseLabels: true
+IndentWidth: 2
+IndentWrappedFunctionNames: false
+KeepEmptyLinesAtTheStartOfBlocks: true
+MaxEmptyLinesToKeep: 1
+NamespaceIndentation: 'None'
+PointerAlignment: 'Left'
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeParens: 'ControlStatements'
+SpaceInEmptyParentheses: false
+SpacesBeforeTrailingComments: 1
+SpacesInAngles: false
+SpacesInCStyleCastParentheses: false
+SpacesInParentheses: false
+IncludeCategories:
+  - Regex:           '"my_template.hpp"'
+    Priority:        -1
