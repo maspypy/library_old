@@ -1,11 +1,17 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: other/rectanglesums.hpp
+    title: other/rectanglesums.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/point_add_range_sum.test.cpp
     title: test/library_checker/datastructure/point_add_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/rectangle_sum.test.cpp
+    title: test/library_checker/datastructure/rectangle_sum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -60,10 +66,12 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: ds/fenwick.hpp
-  requiredBy: []
+  requiredBy:
+  - other/rectanglesums.hpp
   timestamp: '2021-12-25 22:40:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/library_checker/datastructure/rectangle_sum.test.cpp
   - test/library_checker/datastructure/point_add_range_sum.test.cpp
 documentation_of: ds/fenwick.hpp
 layout: document

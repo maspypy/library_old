@@ -182,6 +182,9 @@ data:
     - icon: ':warning:'
       path: other/random.hpp
       title: other/random.hpp
+    - icon: ':heavy_check_mark:'
+      path: other/rectanglesums.hpp
+      title: other/rectanglesums.hpp
   - name: string
     pages:
     - icon: ':warning:'
@@ -227,6 +230,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
       title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/datastructure/rectangle_sum.test.cpp
+      title: test/library_checker/datastructure/rectangle_sum.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/unionfind.test.cpp
       title: test/library_checker/datastructure/unionfind.test.cpp
