@@ -34,6 +34,9 @@ data:
     path: test/library_checker/datastructure/predecessor_problem.test..cpp
     title: test/library_checker/datastructure/predecessor_problem.test..cpp
   - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
+    title: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
     title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -258,6 +261,7 @@ data:
   - test/library_checker/datastructure/predecessor_problem.test..cpp
   - test/library_checker/datastructure/point_set_range_composite.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite.test.cpp
+  - test/library_checker/datastructure/queue_operate_all_composite.test.cpp
   - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
   - test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
   - test/library_checker/datastructure/associative_array.test.cpp

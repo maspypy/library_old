@@ -7,6 +7,9 @@ data:
     path: test/library_checker/datastructure/point_set_range_composite.test.cpp
     title: test/library_checker/datastructure/point_set_range_composite.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
+    title: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
     title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -100,6 +103,7 @@ data:
   verifiedWith:
   - test/library_checker/datastructure/point_set_range_composite.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite.test.cpp
+  - test/library_checker/datastructure/queue_operate_all_composite.test.cpp
   - test/library_checker/datastructure/range_affine_range_sum.test.cpp
 documentation_of: mod/modint.hpp
 layout: document
