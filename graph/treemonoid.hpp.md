@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
   _extendedRequiredBy: []
@@ -12,9 +12,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
     title: test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
+    title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"ds/segtree.hpp\"\n\ntemplate <typename T>\nstruct SegTree\
@@ -71,17 +74,18 @@ data:
     \ swap(u, v);\r\n      if (hld.head[u] == hld.head[v]) break;\r\n      val = seg_f(seg.fold(hld.LID[hld.head[v]],\
     \ hld.LID[v] + 1), val);\r\n      v = hld.parent[hld.head[v]];\r\n    }\r\n  \
     \  return seg_f(seg.fold(hld.LID[u] + edge, hld.LID[v] + 1), val);\r\n  }\r\n\r\
-    \n  void debug() {\r\n    print(\"hld\");\r\n    hld.debug();\r\n    print(\"\
-    seg\");\r\n    seg.debug();\r\n    print(\"seg_r\");\r\n    seg_r.debug();\r\n\
-    \  }\r\n\r\n  void doc() {\r\n    print(\"HL\u5206\u89E3 + \u30BB\u30B0\u6728\u3002\
-    \");\r\n    print(\"\u90E8\u5206\u6728\u30AF\u30A8\u30EA O(logN) \u6642\u9593\u3001\
-    \u30D1\u30B9\u30AF\u30A8\u30EA O(log^2N) \u6642\u9593\u3002\");\r\n    print(\"\
-    \u30D1\u30B9\u9806\u3092\u6C17\u306B\u3059\u308B\u5834\u5408\u306F\u3001commute=false\u3068\
-    \u3059\u308B\u3002\");\r\n    print(\"\u95A2\u9023\");\r\n    print(\"- \u7FA4\
-    \u306A\u3089\u30D1\u30B9\u30AF\u30A8\u30EA\u306F TreeGrp \u3067 O(logN) \u6642\
-    \u9593\");\r\n    print(\"- \u5909\u66F4\u306A\u3057\u306A\u3089\u30D1\u30B9\u30AF\
-    \u30A8\u30EA\u306F TreeMonoid_static \u3067 O(logN) \u6642\u9593\");\r\n  }\r\n\
-    };\r\n"
+    \n  E fold_subtree(int u) {\r\n    int l = hld.LID[u], r = hld.RID[u];\r\n   \
+    \ return seg.fold(l + edge, r);\r\n  }\r\n\r\n  void debug() {\r\n    print(\"\
+    hld\");\r\n    hld.debug();\r\n    print(\"seg\");\r\n    seg.debug();\r\n   \
+    \ print(\"seg_r\");\r\n    seg_r.debug();\r\n  }\r\n\r\n  void doc() {\r\n   \
+    \ print(\"HL\u5206\u89E3 + \u30BB\u30B0\u6728\u3002\");\r\n    print(\"\u90E8\u5206\
+    \u6728\u30AF\u30A8\u30EA O(logN) \u6642\u9593\u3001\u30D1\u30B9\u30AF\u30A8\u30EA\
+    \ O(log^2N) \u6642\u9593\u3002\");\r\n    print(\"\u30D1\u30B9\u9806\u3092\u6C17\
+    \u306B\u3059\u308B\u5834\u5408\u306F\u3001commute=false\u3068\u3059\u308B\u3002\
+    \");\r\n    print(\"\u95A2\u9023\");\r\n    print(\"- \u7FA4\u306A\u3089\u30D1\
+    \u30B9\u30AF\u30A8\u30EA\u306F TreeGrp \u3067 O(logN) \u6642\u9593\");\r\n   \
+    \ print(\"- \u5909\u66F4\u306A\u3057\u306A\u3089\u30D1\u30B9\u30AF\u30A8\u30EA\
+    \u306F TreeMonoid_static \u3067 O(logN) \u6642\u9593\");\r\n  }\r\n};\r\n"
   code: "#include \"ds/segtree.hpp\"\r\n\r\ntemplate <typename HLD, typename E, bool\
     \ edge = false, bool commute = true>\r\nstruct TreeMonoid {\r\n  using F = function<E(E,\
     \ E)>;\r\n  HLD &hld;\r\n  int N;\r\n  F seg_f;\r\n  E E_unit;\r\n  SegTree<E>\
@@ -109,27 +113,29 @@ data:
     \ swap(u, v);\r\n      if (hld.head[u] == hld.head[v]) break;\r\n      val = seg_f(seg.fold(hld.LID[hld.head[v]],\
     \ hld.LID[v] + 1), val);\r\n      v = hld.parent[hld.head[v]];\r\n    }\r\n  \
     \  return seg_f(seg.fold(hld.LID[u] + edge, hld.LID[v] + 1), val);\r\n  }\r\n\r\
-    \n  void debug() {\r\n    print(\"hld\");\r\n    hld.debug();\r\n    print(\"\
-    seg\");\r\n    seg.debug();\r\n    print(\"seg_r\");\r\n    seg_r.debug();\r\n\
-    \  }\r\n\r\n  void doc() {\r\n    print(\"HL\u5206\u89E3 + \u30BB\u30B0\u6728\u3002\
-    \");\r\n    print(\"\u90E8\u5206\u6728\u30AF\u30A8\u30EA O(logN) \u6642\u9593\u3001\
-    \u30D1\u30B9\u30AF\u30A8\u30EA O(log^2N) \u6642\u9593\u3002\");\r\n    print(\"\
-    \u30D1\u30B9\u9806\u3092\u6C17\u306B\u3059\u308B\u5834\u5408\u306F\u3001commute=false\u3068\
-    \u3059\u308B\u3002\");\r\n    print(\"\u95A2\u9023\");\r\n    print(\"- \u7FA4\
-    \u306A\u3089\u30D1\u30B9\u30AF\u30A8\u30EA\u306F TreeGrp \u3067 O(logN) \u6642\
-    \u9593\");\r\n    print(\"- \u5909\u66F4\u306A\u3057\u306A\u3089\u30D1\u30B9\u30AF\
-    \u30A8\u30EA\u306F TreeMonoid_static \u3067 O(logN) \u6642\u9593\");\r\n  }\r\n\
-    };\r\n"
+    \n  E fold_subtree(int u) {\r\n    int l = hld.LID[u], r = hld.RID[u];\r\n   \
+    \ return seg.fold(l + edge, r);\r\n  }\r\n\r\n  void debug() {\r\n    print(\"\
+    hld\");\r\n    hld.debug();\r\n    print(\"seg\");\r\n    seg.debug();\r\n   \
+    \ print(\"seg_r\");\r\n    seg_r.debug();\r\n  }\r\n\r\n  void doc() {\r\n   \
+    \ print(\"HL\u5206\u89E3 + \u30BB\u30B0\u6728\u3002\");\r\n    print(\"\u90E8\u5206\
+    \u6728\u30AF\u30A8\u30EA O(logN) \u6642\u9593\u3001\u30D1\u30B9\u30AF\u30A8\u30EA\
+    \ O(log^2N) \u6642\u9593\u3002\");\r\n    print(\"\u30D1\u30B9\u9806\u3092\u6C17\
+    \u306B\u3059\u308B\u5834\u5408\u306F\u3001commute=false\u3068\u3059\u308B\u3002\
+    \");\r\n    print(\"\u95A2\u9023\");\r\n    print(\"- \u7FA4\u306A\u3089\u30D1\
+    \u30B9\u30AF\u30A8\u30EA\u306F TreeGrp \u3067 O(logN) \u6642\u9593\");\r\n   \
+    \ print(\"- \u5909\u66F4\u306A\u3057\u306A\u3089\u30D1\u30B9\u30AF\u30A8\u30EA\
+    \u306F TreeMonoid_static \u3067 O(logN) \u6642\u9593\");\r\n  }\r\n};\r\n"
   dependsOn:
   - ds/segtree.hpp
   isVerificationFile: false
   path: graph/treemonoid.hpp
   requiredBy: []
-  timestamp: '2021-12-25 22:40:58+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-12-26 04:58:43+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
+  - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
 documentation_of: graph/treemonoid.hpp
 layout: document
 redirect_from:

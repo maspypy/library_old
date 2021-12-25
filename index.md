@@ -43,7 +43,7 @@ data:
     - icon: ':warning:'
       path: ds/lichao.hpp
       title: ds/lichao.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: ds/segtree.hpp
       title: ds/segtree.hpp
     - icon: ':warning:'
@@ -79,7 +79,7 @@ data:
       title: geometry/geometry.hpp
   - name: graph
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: graph/base.hpp
       title: graph/base.hpp
     - icon: ':warning:'
@@ -109,7 +109,7 @@ data:
     - icon: ':warning:'
       path: graph/eulerwalk.hpp
       title: graph/eulerwalk.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: graph/hld.hpp
       title: graph/hld.hpp
     - icon: ':warning:'
@@ -124,7 +124,7 @@ data:
     - icon: ':warning:'
       path: graph/treedoubling.hpp
       title: graph/treedoubling.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: graph/treemonoid.hpp
       title: graph/treemonoid.hpp
     - icon: ':warning:'
@@ -148,7 +148,7 @@ data:
       title: mod/modint.hpp
   - name: .
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: my_template.hpp
       title: my_template.hpp
   - name: nt
@@ -254,7 +254,7 @@ data:
     - icon: ':x:'
       path: test/library_checker/datastructure/static_range_inversion_query.test.cpp
       title: test/library_checker/datastructure/static_range_inversion_query.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/static_range_sum.test.cpp
       title: test/library_checker/datastructure/static_range_sum.test.cpp
     - icon: ':x:'
@@ -276,8 +276,11 @@ data:
       path: test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
       title: test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
     - icon: ':x:'
-      path: test/library_checker/datastructure/vertex_add_subtree_sum.test.cpp
-      title: test/library_checker/datastructure/vertex_add_subtree_sum.test.cpp
+      path: test/library_checker/datastructure/vertex_add_subtree_sum_group.test.cpp
+      title: test/library_checker/datastructure/vertex_add_subtree_sum_group.test.cpp
+    - icon: ':x:'
+      path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
+      title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
     - icon: ':x:'
       path: test/library_checker/datastructure/vertex_set_path_composite.test.cpp
       title: test/library_checker/datastructure/vertex_set_path_composite.test.cpp

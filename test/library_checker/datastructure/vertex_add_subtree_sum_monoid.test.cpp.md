@@ -18,37 +18,34 @@ data:
     title: my_template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/vertex_add_path_sum
-    links:
-    - https://judge.yosupo.jp/problem/vertex_add_path_sum
-  bundledCode: "#line 1 \"test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_path_sum\"\r\n\r\
-    \n#line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
-    \nusing ll = long long;\nusing ll8 = __int128;\nusing ld = long double;\nusing\
-    \ pi = pair<ll, ll>;\nusing vi = vector<ll>;\ntemplate <class T> using vc = vector<T>;\n\
-    template <class T> using vvc = vector<vc<T>>;\ntemplate <class T> using vvvc =\
-    \ vector<vvc<T>>;\ntemplate <class T> using vvvvc = vector<vvvc<T>>;\ntemplate\
-    \ <class T> using vvvvvc = vector<vvvvc<T>>;\ntemplate <class T> using pq = priority_queue<T>;\n\
-    template <class T> using pqg = priority_queue<T, vector<T>, greater<T>>;\n\n#define\
-    \ vec(type, name, ...) vector<type> name(__VA_ARGS__)\n#define VEC(type, name,\
-    \ size)                                                                      \
-    \                                                            \\\n    vector<type>\
-    \ name(size);                                                                \
-    \                                                                   \\\n    IN(name)\n\
-    #define vv(type, name, h, ...) vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n\
-    #define VV(type, name, h, w)                                                 \
+    links: []
+  bundledCode: "#line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace\
+    \ std;\n\nusing ll = long long;\nusing ll8 = __int128;\nusing ld = long double;\n\
+    using pi = pair<ll, ll>;\nusing vi = vector<ll>;\ntemplate <class T> using vc\
+    \ = vector<T>;\ntemplate <class T> using vvc = vector<vc<T>>;\ntemplate <class\
+    \ T> using vvvc = vector<vvc<T>>;\ntemplate <class T> using vvvvc = vector<vvvc<T>>;\n\
+    template <class T> using vvvvvc = vector<vvvvc<T>>;\ntemplate <class T> using\
+    \ pq = priority_queue<T>;\ntemplate <class T> using pqg = priority_queue<T, vector<T>,\
+    \ greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
+    #define VEC(type, name, size)                                                \
     \                                                                            \
-    \      \\\n    vector<vector<type>> name(h, vector<type>(w));                \
+    \      \\\n    vector<type> name(size);                                      \
     \                                                                            \
-    \                 \\\n    IN(name)\n#define vvv(type, name, h, w, ...) vector<vector<vector<type>>>\
-    \ name(h, vector<vector<type>>(w, vector<type>(__VA_ARGS__)))\n#define vvvv(type,\
-    \ name, a, b, c, ...)                                                        \
-    \                                                                 \\\n    vector<vector<vector<vector<type>>>>\
+    \                 \\\n    IN(name)\n#define vv(type, name, h, ...) vector<vector<type>>\
+    \ name(h, vector<type>(__VA_ARGS__))\n#define VV(type, name, h, w)           \
+    \                                                                            \
+    \                                            \\\n    vector<vector<type>> name(h,\
+    \ vector<type>(w));                                                          \
+    \                                                   \\\n    IN(name)\n#define\
+    \ vvv(type, name, h, w, ...) vector<vector<vector<type>>> name(h, vector<vector<type>>(w,\
+    \ vector<type>(__VA_ARGS__)))\n#define vvvv(type, name, a, b, c, ...)        \
+    \                                                                            \
+    \                                     \\\n    vector<vector<vector<vector<type>>>>\
     \ name(a, vector<vector<vector<type>>>(b, vector<vector<type>>(c, vector<type>(__VA_ARGS__))))\n\
     \n#define FOR(i, n) for (ll i = 0; (i) < (ll)(n); ++(i))\n#define FOR3(i, m, n)\
     \ for (ll i = (m); (i) < (ll)(n); ++(i))\n#define FOR_R(i, n) for (ll i = (ll)(n)-1;\
@@ -112,7 +109,7 @@ data:
     \ (a < b ? a = b, 1 : 0); }\ntemplate <class T, class S> inline bool chmin(T &a,\
     \ const S &b) { return (a > b ? a = b, 1 : 0); }\n\ntemplate <typename T>\nvc<T>\
     \ merge_sort(vc<T>& A, vc<T>& B) {\n  vc<T> C;\n  C.reserve(A.size() + B.size());\n\
-    \  merge(all(A), all(B), back_inserter(C));\n  return C;\n}\n#line 4 \"test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp\"\
+    \  merge(all(A), all(B), back_inserter(C));\n  return C;\n}\n#line 2 \"test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp\"\
     \n\r\n#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n  int\
     \ frm, to;\n  T cost;\n  int id;\n  Edge(int a, int b, T c, int d) : frm(a), to(b),\
     \ cost(c), id(d) {}\n};\n\ntemplate <typename T>\nstruct Graph {\n  int N, M;\n\
@@ -228,30 +225,29 @@ data:
     \u30B9\u30AF\u30A8\u30EA\u306F TreeGrp \u3067 O(logN) \u6642\u9593\");\r\n   \
     \ print(\"- \u5909\u66F4\u306A\u3057\u306A\u3089\u30D1\u30B9\u30AF\u30A8\u30EA\
     \u306F TreeMonoid_static \u3067 O(logN) \u6642\u9593\");\r\n  }\r\n};\r\n#line\
-    \ 8 \"test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp\"\
+    \ 6 \"test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp\"\
     \n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  VEC(ll, A, N);\r\n  Graph<int> G(N);\r\
-    \n  FOR(_, N - 1) {\r\n    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n\r\n  HLD<Graph<int>>\
-    \ hld(G);\r\n  using E = ll;\r\n  const bool is_edge = false;\r\n  const bool\
-    \ commute = true;\r\n  TreeMonoid<HLD<Graph<int>>, E, is_edge, commute> TM(\r\n\
-    \    hld, [&](E x, E y) -> E { return x + y; }, E(0));\r\n\r\n  TM.init(A);\r\n\
-    \r\n  FOR(_, Q) {\r\n    LL(t);\r\n    if (t == 0) {\r\n      LL(v, x);\r\n  \
-    \    A[v] += x;\r\n      TM.set(v, A[v]);\r\n    } else {\r\n      LL(u, v);\r\
-    \n      print(TM.fold_path(u, v));\r\n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\
-    \n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
-    \n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_path_sum\"\r\
-    \n\r\n#include \"my_template.hpp\"\r\n\r\n#include \"graph/base.hpp\"\r\n#include\
+    \n  FOR3(v, 1, N) {\r\n    LL(p);\r\n    G.add(p, v);\r\n  }\r\n  HLD<Graph<int>>\
+    \ hld(G);\r\n\r\n  // [ tree monoid template\r\n  using E = ll;\r\n  const bool\
+    \ is_edge = false;\r\n  const bool commute = true;\r\n  TreeMonoid<HLD<Graph<int>>,\
+    \ E, is_edge, commute> TM(\r\n    hld, [&](E x, E y) -> E { return x + y; }, E(0));\r\
+    \n  TM.init(A);\r\n  // tree monoid template]\r\n\r\n  FOR(_, Q) {\r\n    LL(t);\r\
+    \n    if (t == 0) {\r\n      LL(v, x);\r\n      A[v] += x;\r\n      TM.set(v,\
+    \ A[v]);\r\n    } else {\r\n      LL(u);\r\n      print(TM.fold_subtree(u));\r\
+    \n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+  code: "#include \"my_template.hpp\"\r\n\r\n#include \"graph/base.hpp\"\r\n#include\
     \ \"graph/hld.hpp\"\r\n#include \"graph/treemonoid.hpp\"\r\n\r\nvoid solve() {\r\
-    \n  LL(N, Q);\r\n  VEC(ll, A, N);\r\n  Graph<int> G(N);\r\n  FOR(_, N - 1) {\r\
-    \n    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n\r\n  HLD<Graph<int>> hld(G);\r\n\
-    \  using E = ll;\r\n  const bool is_edge = false;\r\n  const bool commute = true;\r\
-    \n  TreeMonoid<HLD<Graph<int>>, E, is_edge, commute> TM(\r\n    hld, [&](E x,\
-    \ E y) -> E { return x + y; }, E(0));\r\n\r\n  TM.init(A);\r\n\r\n  FOR(_, Q)\
-    \ {\r\n    LL(t);\r\n    if (t == 0) {\r\n      LL(v, x);\r\n      A[v] += x;\r\
-    \n      TM.set(v, A[v]);\r\n    } else {\r\n      LL(u, v);\r\n      print(TM.fold_path(u,\
-    \ v));\r\n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n\
-    \  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
-    \n\r\n  return 0;\r\n}\r\n"
+    \n  LL(N, Q);\r\n  VEC(ll, A, N);\r\n  Graph<int> G(N);\r\n  FOR3(v, 1, N) {\r\
+    \n    LL(p);\r\n    G.add(p, v);\r\n  }\r\n  HLD<Graph<int>> hld(G);\r\n\r\n \
+    \ // [ tree monoid template\r\n  using E = ll;\r\n  const bool is_edge = false;\r\
+    \n  const bool commute = true;\r\n  TreeMonoid<HLD<Graph<int>>, E, is_edge, commute>\
+    \ TM(\r\n    hld, [&](E x, E y) -> E { return x + y; }, E(0));\r\n  TM.init(A);\r\
+    \n  // tree monoid template]\r\n\r\n  FOR(_, Q) {\r\n    LL(t);\r\n    if (t ==\
+    \ 0) {\r\n      LL(v, x);\r\n      A[v] += x;\r\n      TM.set(v, A[v]);\r\n  \
+    \  } else {\r\n      LL(u);\r\n      print(TM.fold_subtree(u));\r\n    }\r\n \
+    \ }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
   - graph/base.hpp
@@ -259,15 +255,15 @@ data:
   - graph/treemonoid.hpp
   - ds/segtree.hpp
   isVerificationFile: true
-  path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
+  path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
   requiredBy: []
   timestamp: '2021-12-26 04:58:43+09:00'
-  verificationStatus: TEST_ACCEPTED
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
+documentation_of: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-- /verify/test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp.html
-title: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
+- /verify/test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
+- /verify/test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp.html
+title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
 ---
