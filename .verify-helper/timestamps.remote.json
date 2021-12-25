@@ -4,5 +4,6 @@
 "test/library_checker/point_add_range_sum.test.cpp": "2021-12-26 01:16:10 +0900",
 "test/library_checker/point_set_range_composite.test.cpp": "2021-12-26 01:16:10 +0900",
 "test/library_checker/predecessor_problem.test..cpp": "2021-12-26 01:16:10 +0900",
+"test/library_checker/range_affine_range_sum.test.cpp": "2021-12-26 01:31:57 +0900",
 "test/library_checker/unionfind.test.cpp": "2021-12-26 01:16:10 +0900"
 }
