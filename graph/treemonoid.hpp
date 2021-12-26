@@ -92,6 +92,5 @@ struct TreeMonoid {
   void doc() {
     print("HL分解 + セグ木。");
     print("部分木クエリ O(logN) 時間、パスクエリ O(log^2N) 時間。");
-    print("関連");
   }
 };
