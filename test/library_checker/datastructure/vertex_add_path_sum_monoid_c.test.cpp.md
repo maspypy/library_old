@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/algebra.hpp
     title: ds/algebra.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/hld.hpp
     title: graph/hld.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/treemonoid.hpp
     title: graph/treemonoid.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
@@ -174,7 +174,7 @@ data:
     \ {\r\n  using F = function<E(E, E)>;\r\n  using G = function<E(E)>;\r\n  F f;\r\
     \n  E E_unit;\r\n  G inv;\r\n  bool commute;\r\n};\r\n\r\ntemplate <typename E>\r\
     \nMonoid<E> Monoid_reverse(Monoid<E> Mono) {\r\n  auto rev_f = [=](E x, E y) ->\
-    \ E { return Mono.f(x, y); };\r\n  return Monoid<E>({rev_f, Mono.unit, Mono.commute});\r\
+    \ E { return Mono.f(y, x); };\r\n  return Monoid<E>({rev_f, Mono.unit, Mono.commute});\r\
     \n}\r\n\r\ntemplate <typename E>\r\nMonoid<E> Monoid_add() {\r\n  auto f = [](E\
     \ x, E y) -> E { return x + y; };\r\n  return Monoid<E>({f, 0, true});\r\n}\r\n\
     \r\ntemplate <typename E>\r\nMonoid<E> Monoid_min(E INF) {\r\n  auto f = [](E\
@@ -274,7 +274,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
   requiredBy: []
-  timestamp: '2021-12-26 21:10:19+09:00'
+  timestamp: '2021-12-26 21:36:03+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp

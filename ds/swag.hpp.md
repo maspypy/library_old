@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/algebra.hpp
     title: ds/algebra.hpp
   _extendedRequiredBy: []
@@ -23,7 +23,7 @@ data:
     \ {\r\n  using F = function<E(E, E)>;\r\n  using G = function<E(E)>;\r\n  F f;\r\
     \n  E E_unit;\r\n  G inv;\r\n  bool commute;\r\n};\r\n\r\ntemplate <typename E>\r\
     \nMonoid<E> Monoid_reverse(Monoid<E> Mono) {\r\n  auto rev_f = [=](E x, E y) ->\
-    \ E { return Mono.f(x, y); };\r\n  return Monoid<E>({rev_f, Mono.unit, Mono.commute});\r\
+    \ E { return Mono.f(y, x); };\r\n  return Monoid<E>({rev_f, Mono.unit, Mono.commute});\r\
     \n}\r\n\r\ntemplate <typename E>\r\nMonoid<E> Monoid_add() {\r\n  auto f = [](E\
     \ x, E y) -> E { return x + y; };\r\n  return Monoid<E>({f, 0, true});\r\n}\r\n\
     \r\ntemplate <typename E>\r\nMonoid<E> Monoid_min(E INF) {\r\n  auto f = [](E\
@@ -58,7 +58,7 @@ data:
   isVerificationFile: false
   path: ds/swag.hpp
   requiredBy: []
-  timestamp: '2021-12-26 21:10:19+09:00'
+  timestamp: '2021-12-26 21:36:03+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/datastructure/queue_operate_all_composite.test.cpp

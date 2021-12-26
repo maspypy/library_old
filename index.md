@@ -22,7 +22,7 @@ data:
       title: densegraph/twosat.hpp
   - name: ds
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: ds/algebra.hpp
       title: ds/algebra.hpp
     - icon: ':warning:'
@@ -52,7 +52,7 @@ data:
     - icon: ':warning:'
       path: ds/lichao.hpp
       title: ds/lichao.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: ds/segtree.hpp
       title: ds/segtree.hpp
     - icon: ':heavy_check_mark:'
@@ -91,7 +91,7 @@ data:
       title: geometry/geometry.hpp
   - name: graph
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/base.hpp
       title: graph/base.hpp
     - icon: ':warning:'
@@ -121,7 +121,7 @@ data:
     - icon: ':warning:'
       path: graph/eulerwalk.hpp
       title: graph/eulerwalk.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/hld.hpp
       title: graph/hld.hpp
     - icon: ':warning:'
@@ -136,7 +136,7 @@ data:
     - icon: ':warning:'
       path: graph/treedoubling.hpp
       title: graph/treedoubling.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/treemonoid.hpp
       title: graph/treemonoid.hpp
     - icon: ':warning:'
@@ -155,12 +155,12 @@ data:
     - icon: ':warning:'
       path: mod/amodint.hpp
       title: mod/amodint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: mod/modint.hpp
       title: mod/modint.hpp
   - name: .
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: my_template.hpp
       title: my_template.hpp
     - icon: ':warning:'
@@ -308,7 +308,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
       title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/vertex_set_path_composite.test.cpp
       title: test/library_checker/datastructure/vertex_set_path_composite.test.cpp
   - name: test/library_checker/tree

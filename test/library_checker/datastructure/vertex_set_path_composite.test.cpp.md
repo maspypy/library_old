@@ -1,32 +1,32 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/algebra.hpp
     title: ds/algebra.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/hld.hpp
     title: graph/hld.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/treemonoid.hpp
     title: graph/treemonoid.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_set_path_composite
@@ -177,7 +177,7 @@ data:
     \ {\r\n  using F = function<E(E, E)>;\r\n  using G = function<E(E)>;\r\n  F f;\r\
     \n  E E_unit;\r\n  G inv;\r\n  bool commute;\r\n};\r\n\r\ntemplate <typename E>\r\
     \nMonoid<E> Monoid_reverse(Monoid<E> Mono) {\r\n  auto rev_f = [=](E x, E y) ->\
-    \ E { return Mono.f(x, y); };\r\n  return Monoid<E>({rev_f, Mono.unit, Mono.commute});\r\
+    \ E { return Mono.f(y, x); };\r\n  return Monoid<E>({rev_f, Mono.unit, Mono.commute});\r\
     \n}\r\n\r\ntemplate <typename E>\r\nMonoid<E> Monoid_add() {\r\n  auto f = [](E\
     \ x, E y) -> E { return x + y; };\r\n  return Monoid<E>({f, 0, true});\r\n}\r\n\
     \r\ntemplate <typename E>\r\nMonoid<E> Monoid_min(E INF) {\r\n  auto f = [](E\
@@ -288,30 +288,26 @@ data:
     \nusing mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using E = pair<mint,\
     \ mint>;\n  vc<E> A(N);\n  FOR(i, N) {\n    LL(a, b);\n    A[i] = {mint(a), mint(b)};\n\
     \  }\n  Graph<int> G(N);\n  FOR(_, N - 1) {\n    LL(a, b);\n    G.add(a, b);\n\
-    \  }\n\n  HLD<Graph<int>> hld(G);\n\n  // [ tree monoid template\n  const bool\
-    \ is_edge = false;\n  const bool commute = false;\n  TreeMonoid<HLD<Graph<int>>,\
-    \ E, is_edge, commute> TM(\n    hld, [&](E x, E y) -> E { return mp(x.fi * y.fi,\
-    \ x.se * y.fi + y.se); },\n    E({mint(1), mint(0)}));\n  TM.init(A);\n  // tree\
-    \ monoid template]\n\n  FOR(_, Q) {\n    LL(t);\n    if (t == 0) {\n      LL(p,\
-    \ c, d);\n      TM.set(p, E({mint(c), mint(d)}));\n\n    } else {\n      LL(u,\
-    \ v, x);\n      auto e = TM.fold_path(u, v);\n      print(e.fi * mint(x) + e.se);\n\
-    \    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
-    \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
+    \  }\n\n  HLD<Graph<int>> hld(G);\n  TreeMonoid<Graph<int>, E, false> TM(hld,\
+    \ Monoid_affine<mint>());\n  TM.init(A);\n\n  FOR(_, Q) {\n    LL(t);\n    if\
+    \ (t == 0) {\n      LL(p, c, d);\n      TM.set(p, E({mint(c), mint(d)}));\n\n\
+    \    } else {\n      LL(u, v, x);\n      auto e = TM.prod_path(u, v);\n      print(e.fi\
+    \ * mint(x) + e.se);\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
+    \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  solve();\n\n\
+    \  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_set_path_composite\"\
     \n#include \"my_template.hpp\"\n\n#include \"graph/base.hpp\"\n#include \"graph/hld.hpp\"\
     \n#include \"graph/treemonoid.hpp\"\n#include \"mod/modint.hpp\"\nusing mint =\
     \ modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using E = pair<mint, mint>;\n \
     \ vc<E> A(N);\n  FOR(i, N) {\n    LL(a, b);\n    A[i] = {mint(a), mint(b)};\n\
     \  }\n  Graph<int> G(N);\n  FOR(_, N - 1) {\n    LL(a, b);\n    G.add(a, b);\n\
-    \  }\n\n  HLD<Graph<int>> hld(G);\n\n  // [ tree monoid template\n  const bool\
-    \ is_edge = false;\n  const bool commute = false;\n  TreeMonoid<HLD<Graph<int>>,\
-    \ E, is_edge, commute> TM(\n    hld, [&](E x, E y) -> E { return mp(x.fi * y.fi,\
-    \ x.se * y.fi + y.se); },\n    E({mint(1), mint(0)}));\n  TM.init(A);\n  // tree\
-    \ monoid template]\n\n  FOR(_, Q) {\n    LL(t);\n    if (t == 0) {\n      LL(p,\
-    \ c, d);\n      TM.set(p, E({mint(c), mint(d)}));\n\n    } else {\n      LL(u,\
-    \ v, x);\n      auto e = TM.fold_path(u, v);\n      print(e.fi * mint(x) + e.se);\n\
-    \    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
-    \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
+    \  }\n\n  HLD<Graph<int>> hld(G);\n  TreeMonoid<Graph<int>, E, false> TM(hld,\
+    \ Monoid_affine<mint>());\n  TM.init(A);\n\n  FOR(_, Q) {\n    LL(t);\n    if\
+    \ (t == 0) {\n      LL(p, c, d);\n      TM.set(p, E({mint(c), mint(d)}));\n\n\
+    \    } else {\n      LL(u, v, x);\n      auto e = TM.prod_path(u, v);\n      print(e.fi\
+    \ * mint(x) + e.se);\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
+    \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  solve();\n\n\
+    \  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
   - graph/base.hpp
@@ -323,8 +319,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_set_path_composite.test.cpp
   requiredBy: []
-  timestamp: '2021-12-26 21:10:19+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-12-26 21:36:03+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_set_path_composite.test.cpp
 layout: document
