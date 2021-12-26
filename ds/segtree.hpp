@@ -31,7 +31,7 @@ struct SegTree {
     while (i >>= 1) { dat[i] = seg_f(dat[i << 1 | 0], dat[i << 1 | 1]); }
   }
 
-  E fold(int L, int R) {
+  E prod(int L, int R) {
     assert(L <= R);
     assert(R <= N_);
     E vl = unit, vr = unit;
