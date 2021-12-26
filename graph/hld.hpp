@@ -1,4 +1,6 @@
 #pragma once
+#include "graph/base.hpp"
+
 template <typename Graph>
 struct HLD {
   Graph &G;
@@ -37,7 +39,7 @@ struct HLD {
     }
   }
 
-  void dfs_hld(int idx, int par, int &times, int&etimes) {
+  void dfs_hld(int idx, int par, int &times, int &etimes) {
     LID[idx] = times++;
     ELID[idx] = etimes++;
     V[LID[idx]] = idx;
