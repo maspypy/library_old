@@ -1,5 +1,4 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_add_path_sum"
-
 #include "my_template.hpp"
 
 #include "graph/base.hpp"
@@ -16,12 +15,8 @@ void solve() {
   }
 
   HLD<Graph<int>> hld(G);
-  using E = ll;
   const bool is_edge = false;
-  const bool commute = true;
-  TreeMonoid<HLD<Graph<int>>, E, is_edge, commute> TM(
-    hld, [&](E x, E y) -> E { return x + y; }, E(0));
-
+  TreeMonoid<Graph<int>, ll, is_edge> TM(hld, Monoid_add<ll>());
   TM.init(A);
 
   FOR(_, Q) {
@@ -32,7 +27,7 @@ void solve() {
       TM.set(v, A[v]);
     } else {
       LL(u, v);
-      print(TM.fold_path(u, v));
+      print(TM.prod_path(u, v));
     }
   }
 }

@@ -1,28 +1,31 @@
 #include "ds/segtree.hpp"
+#include "graph/hld.hpp"
 
-template <typename HLD, typename E, bool edge = false, bool commute = true>
+template <typename Graph, typename E, bool edge = false>
 struct TreeMonoid {
   using F = function<E(E, E)>;
-  HLD &hld;
+  HLD<Graph> &hld;
   int N;
-  F seg_f;
-  E E_unit;
+  F f;
+  E unit;
+  bool commute;
   SegTree<E> seg, seg_r;
 
-  TreeMonoid(HLD &hld, F seg_f, E E_unit)
+  TreeMonoid(HLD<Graph> &hld, Monoid<E> Mono)
       : hld(hld)
       , N(hld.N)
-      , seg_f(seg_f)
-      , E_unit(E_unit)
-      , seg(seg_f, E_unit)
-      , seg_r([&](E x, E y) -> E { return seg_f(y, x); }, E_unit) {
+      , f(Mono.f)
+      , unit(Mono.unit)
+      , commute(Mono.commute)
+      , seg(Mono)
+      , seg_r(Monoid_reverse<E>(Mono)) {
     seg.init(N);
     if (!commute) seg_r.init(N);
   };
 
   void init(vc<E> &dat) {
     // vertex index OR edge index
-    vc<E> seg_raw(N, E_unit);
+    vc<E> seg_raw(N, unit);
     if (!edge) {
       FOR(v, N) seg_raw[hld.LID[v]] = dat[v];
     } else {
@@ -42,39 +45,39 @@ struct TreeMonoid {
     if (!commute) seg_r.set(i, x);
   }
 
-  E fold_path_nc(int u, int v) {
-    E vl = E_unit, vr = E_unit;
+  E prod_path_nc(int u, int v) {
+    E vl = unit, vr = unit;
     while (1) {
       if (hld.head[u] == hld.head[v]) break;
       if (hld.LID[u] < hld.LID[v]) {
-        vr = seg_f(seg.fold(hld.LID[hld.head[v]], hld.LID[v] + 1), vr);
+        vr = f(seg.prod(hld.LID[hld.head[v]], hld.LID[v] + 1), vr);
         v = hld.parent[hld.head[v]];
       } else {
-        vl = seg_f(vl, seg_r.fold(hld.LID[hld.head[u]], hld.LID[u] + 1));
+        vl = f(vl, seg_r.prod(hld.LID[hld.head[u]], hld.LID[u] + 1));
         u = hld.parent[hld.head[u]];
       }
     }
     E vm =
-      (hld.LID[u] < hld.LID[v] ? seg.fold(hld.LID[u] + edge, hld.LID[v] + 1)
-                               : seg_r.fold(hld.LID[v] + edge, hld.LID[u] + 1));
-    return seg_f(vl, seg_f(vm, vr));
+      (hld.LID[u] < hld.LID[v] ? seg.prod(hld.LID[u] + edge, hld.LID[v] + 1)
+                               : seg_r.prod(hld.LID[v] + edge, hld.LID[u] + 1));
+    return f(vl, f(vm, vr));
   }
 
-  E fold_path(int u, int v) {
-    if (!commute) return fold_path_nc(u, v);
-    E val = E_unit;
+  E prod_path(int u, int v) {
+    if (!commute) return prod_path_nc(u, v);
+    E val = unit;
     while (1) {
       if (hld.LID[u] > hld.LID[v]) swap(u, v);
       if (hld.head[u] == hld.head[v]) break;
-      val = seg_f(seg.fold(hld.LID[hld.head[v]], hld.LID[v] + 1), val);
+      val = f(seg.prod(hld.LID[hld.head[v]], hld.LID[v] + 1), val);
       v = hld.parent[hld.head[v]];
     }
-    return seg_f(seg.fold(hld.LID[u] + edge, hld.LID[v] + 1), val);
+    return f(seg.prod(hld.LID[u] + edge, hld.LID[v] + 1), val);
   }
 
-  E fold_subtree(int u) {
+  E prod_subtree(int u) {
     int l = hld.LID[u], r = hld.RID[u];
-    return seg.fold(l + edge, r);
+    return seg.prod(l + edge, r);
   }
 
   void debug() {
@@ -89,9 +92,6 @@ struct TreeMonoid {
   void doc() {
     print("HL分解 + セグ木。");
     print("部分木クエリ O(logN) 時間、パスクエリ O(log^2N) 時間。");
-    print("パス順を気にする場合は、commute=falseとする。");
     print("関連");
-    print("- 群ならパスクエリは TreeGrp で O(logN) 時間");
-    print("- 変更なしならパスクエリは TreeMonoid_static で O(logN) 時間");
   }
 };
