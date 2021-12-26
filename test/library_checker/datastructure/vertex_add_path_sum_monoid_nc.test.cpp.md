@@ -173,7 +173,7 @@ data:
     \  E unit;\r\n  OP OP_unit;\r\n};\r\n\r\ntemplate <typename E>\r\nstruct Group\
     \ {\r\n  using F = function<E(E, E)>;\r\n  using G = function<E(E)>;\r\n  F f;\r\
     \n  E E_unit;\r\n  G inv;\r\n  bool commute;\r\n};\r\n\r\ntemplate <typename E>\r\
-    \nMonoid<E> Monoid_reverse(Monoid<E> Mono) {\r\n  auto rev_f = [&](E x, E y) ->\
+    \nMonoid<E> Monoid_reverse(Monoid<E> Mono) {\r\n  auto rev_f = [=](E x, E y) ->\
     \ E { return Mono.f(x, y); };\r\n  return Monoid<E>({rev_f, Mono.unit, Mono.commute});\r\
     \n}\r\n\r\ntemplate <typename E>\r\nMonoid<E> Monoid_add() {\r\n  auto f = [](E\
     \ x, E y) -> E { return x + y; };\r\n  return Monoid<E>({f, 0, true});\r\n}\r\n\
@@ -275,7 +275,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
   requiredBy: []
-  timestamp: '2021-12-26 20:35:37+09:00'
+  timestamp: '2021-12-26 21:10:19+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
