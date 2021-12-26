@@ -52,6 +52,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: ds/segtree.hpp
       title: ds/segtree.hpp
+    - icon: ':x:'
+      path: ds/segtree2d.hpp
+      title: ds/segtree2d.hpp
     - icon: ':warning:'
       path: ds/slope.hpp
       title: ds/slope.hpp
