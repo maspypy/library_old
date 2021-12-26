@@ -31,6 +31,18 @@ struct Group {
 };
 
 template <typename E>
+Monoid<E> Monoid_reverse(Monoid<E> Mono) {
+  auto rev_f = [&](E x, E y) -> E { return Mono.f(x, y); };
+  return Monoid<E>({rev_f, Mono.unit, Mono.commute});
+}
+
+template <typename E>
+Monoid<E> Monoid_add() {
+  auto f = [](E x, E y) -> E { return x + y; };
+  return Monoid<E>({f, 0, true});
+}
+
+template <typename E>
 Monoid<E> Monoid_min(E INF) {
   auto f = [](E x, E y) -> E { return min(x, y); };
   return Monoid<E>({f, INF, true});
