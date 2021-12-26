@@ -1,8 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_rectangle_sum"
 
 #include "my_template.hpp"
-#include "ds/segtree2d.hpp"
 
+#include "ds/segtree2d.hpp"
 
 void solve() {
   LL(N, Q);
@@ -27,7 +27,7 @@ void solve() {
     }
   }
 
-  SegTree2D<ll, false> seg([&](ll x, ll y) -> ll { return x + y; }, 0, X, Y, W);
+  SegTree2D<ll, false> seg(Monoid_add<ll>(), X, Y, W);
 
   FOR(q, Q) {
     auto [a, b, c, d] = query[q];

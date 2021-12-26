@@ -1,8 +1,10 @@
+#include "ds/algebra.hpp"
+
 template <typename E, bool SMALL = false>
 struct SegTree2D {
   using F = function<E(E, E)>;
-  E E_unit;
-  F seg_f;
+  E unit;
+  F f;
   int N;
   int full_N;
   vi keyX;
@@ -11,12 +13,15 @@ struct SegTree2D {
   vi keyY;
   vc<E> dat;
 
-  SegTree2D(F f, E E_unit, vi& X, vi& Y, vc<E>& wt) : seg_f(f), E_unit(E_unit) {
+  SegTree2D(Monoid<E> Mono, vi& X, vi& Y, vc<E>& wt)
+      : f(Mono.f), unit(Mono.unit) {
+    assert(Mono.commute); // 可換モノイドのみ
     build(X, Y, wt);
   }
 
-  SegTree2D(vi& X, vi& Y) {
-    vc<E> wt(len(X), E_unit);
+  SegTree2D(Monoid<E> Mono, vi& X, vi& Y) : f(Mono.f), unit(Mono.unit) {
+    assert(Mono.commute); // 可換モノイドのみ
+    vc<E> wt(len(X), unit);
     build(X, Y, wt);
   }
 
@@ -49,7 +54,7 @@ struct SegTree2D {
           KY.eb(y);
           dat_raw[ix].eb(wt[i]);
         } else {
-          dat_raw[ix].back() = seg_f(dat_raw[ix].back(), wt[i]);
+          dat_raw[ix].back() = f(dat_raw[ix].back(), wt[i]);
         }
         ix >>= 1;
       }
@@ -59,7 +64,7 @@ struct SegTree2D {
     FOR(i, N + N) indptr[i + 1] = indptr[i] + len(keyY_raw[i]);
     int full_N = indptr.back();
     keyY.resize(full_N);
-    dat.assign(2 * full_N, E_unit);
+    dat.assign(2 * full_N, unit);
     FOR(i, N + N) {
       int off = 2 * indptr[i], n = indptr[i + 1] - indptr[i];
       FOR(j, n) {
@@ -67,7 +72,7 @@ struct SegTree2D {
         dat[off + n + j] = dat_raw[i][j];
       }
       FOR3_R(j, 1, n)
-      dat[off + j] = seg_f(dat[off + 2 * j + 0], dat[off + 2 * j + 1]);
+      dat[off + j] = f(dat[off + 2 * j + 0], dat[off + 2 * j + 1]);
     }
   }
 
@@ -80,7 +85,7 @@ struct SegTree2D {
     j += n;
 
     while (j) {
-      dat[off + j] = seg_f(dat[off + j], val);
+      dat[off + j] = f(dat[off + j], val);
       j >>= 1;
     }
   }
@@ -104,10 +109,10 @@ struct SegTree2D {
     int off = 2 * LID;
     L += n;
     R += n;
-    E val = E_unit;
+    E val = unit;
     while (L < R) {
-      if (L & 1) val = seg_f(val, dat[off + (L++)]);
-      if (R & 1) val = seg_f(dat[off + (--R)], val);
+      if (L & 1) val = f(val, dat[off + (L++)]);
+      if (R & 1) val = f(dat[off + (--R)], val);
       L >>= 1;
       R >>= 1;
     }
@@ -119,10 +124,10 @@ struct SegTree2D {
     int R = xtoi(rx);
     L += N;
     R += N;
-    E val = E_unit;
+    E val = unit;
     while (L < R) {
-      if (L & 1) val = seg_f(val, prod_i(L++, ly, ry));
-      if (R & 1) val = seg_f(prod_i(--R, ly, ry), val);
+      if (L & 1) val = f(val, prod_i(L++, ly, ry));
+      if (R & 1) val = f(prod_i(--R, ly, ry), val);
       L >>= 1;
       R >>= 1;
     }
