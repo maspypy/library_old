@@ -20,5 +20,7 @@
 "test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp": "2021-12-27 03:56:21 +0900",
 "test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp": "2021-12-27 03:56:21 +0900",
 "test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp": "2021-12-27 03:56:21 +0900",
-"test/library_checker/tree/lca.test.cpp": "2021-12-27 03:56:21 +0900"
+"test/library_checker/graph/lca.test.cpp": "2021-12-27 04:19:28 +0900",
+"test/library_checker/graph/maximum_independent_set.test.cpp": "2021-12-27 04:19:28 +0900",
+"test/library_checker/graph/maximum_independent_set_dense.test.cpp": "2021-12-27 04:19:28 +0900"
 }
