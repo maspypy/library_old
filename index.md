@@ -9,6 +9,9 @@ data:
     - icon: ':warning:'
       path: algebra/linearrecurrence.hpp
       title: algebra/linearrecurrence.hpp
+    - icon: ':question:'
+      path: algebra/monoid.hpp
+      title: algebra/monoid.hpp
   - name: densegraph
     pages:
     - icon: ':warning:'
@@ -22,9 +25,6 @@ data:
       title: densegraph/twosat.hpp
   - name: ds
     pages:
-    - icon: ':heavy_check_mark:'
-      path: ds/algebra.hpp
-      title: ds/algebra.hpp
     - icon: ':warning:'
       path: ds/binarytrie.hpp
       title: ds/binarytrie.hpp
@@ -52,7 +52,7 @@ data:
     - icon: ':warning:'
       path: ds/lichao.hpp
       title: ds/lichao.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: ds/segtree.hpp
       title: ds/segtree.hpp
     - icon: ':heavy_check_mark:'
@@ -91,7 +91,7 @@ data:
       title: geometry/geometry.hpp
   - name: graph
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: graph/base.hpp
       title: graph/base.hpp
     - icon: ':warning:'
@@ -121,7 +121,7 @@ data:
     - icon: ':warning:'
       path: graph/eulerwalk.hpp
       title: graph/eulerwalk.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: graph/hld.hpp
       title: graph/hld.hpp
     - icon: ':warning:'
@@ -133,6 +133,9 @@ data:
     - icon: ':warning:'
       path: graph/tree_dp.hpp
       title: graph/tree_dp.hpp
+    - icon: ':warning:'
+      path: graph/tree_group.hpp
+      title: graph/tree_group.hpp
     - icon: ':warning:'
       path: graph/treedoubling.hpp
       title: graph/treedoubling.hpp
@@ -155,12 +158,12 @@ data:
     - icon: ':warning:'
       path: mod/amodint.hpp
       title: mod/amodint.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: mod/modint.hpp
       title: mod/modint.hpp
   - name: .
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: my_template.hpp
       title: my_template.hpp
     - icon: ':warning:'
@@ -242,9 +245,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
       title: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
-    - icon: ':x:'
-      path: test/library_checker/datastructure/point_set_range_composite_group.test.cpp
-      title: test/library_checker/datastructure/point_set_range_composite_group.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
       title: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
@@ -291,11 +291,11 @@ data:
       path: test/library_checker/datastructure/unionfind.test.cpp
       title: test/library_checker/datastructure/unionfind.test.cpp
     - icon: ':x:'
-      path: test/library_checker/datastructure/vertex_add_path_sum_group_c.test.cpp
-      title: test/library_checker/datastructure/vertex_add_path_sum_group_c.test.cpp
+      path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
+      title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
     - icon: ':x:'
-      path: test/library_checker/datastructure/vertex_add_path_sum_group_nc.test.cpp
-      title: test/library_checker/datastructure/vertex_add_path_sum_group_nc.test.cpp
+      path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
+      title: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
       title: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
@@ -309,8 +309,11 @@ data:
       path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
       title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
     - icon: ':heavy_check_mark:'
-      path: test/library_checker/datastructure/vertex_set_path_composite.test.cpp
-      title: test/library_checker/datastructure/vertex_set_path_composite.test.cpp
+      path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
+      title: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
+      title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   - name: test/library_checker/tree
     pages:
     - icon: ':heavy_check_mark:'
