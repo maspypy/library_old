@@ -1,3 +1,5 @@
+#include "ds/algebra.hpp"
+
 template <typename E>
 struct DisjointSparse {
   using F = function<E(E, E)>;
@@ -5,7 +7,7 @@ struct DisjointSparse {
   int N, log;
   vc<vc<E>> dat;
 
-  DisjointSparse(F f, vc<E> A) : f(f), N(len(A)) {
+  DisjointSparse(Monoid<E> Mono, vc<E> A) : f(Mono.f), N(len(A)) {
     log = 1;
     while ((1 << log) < N) ++log;
     dat.assign(log, A);

@@ -8,7 +8,7 @@ void solve() {
   VEC(int, A, N);
   // [ disjoint sparse table template
   using E = int;
-  DisjointSparse<E> DS([&](E x, E y) -> E { return min(x, y); }, A);
+  DisjointSparse<E> DS(Monoid_min<E>(1 << 30), A);
   // disjoint sparse table template ]
 
   FOR(_, Q) {
