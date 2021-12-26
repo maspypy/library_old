@@ -9,11 +9,7 @@ using mint = modint998;
 void solve() {
   LL(N, Q);
   using E = pair<mint, mint>;
-  SegTree<E> seg(
-    [&](E x, E y) {
-      return E({x.fi * y.fi, x.se * y.fi + y.se});
-    },
-    E({1, 0}));
+  SegTree<E> seg(Monoid_affine<mint>());
   seg.init(N);
   vc<E> seg_raw(N);
   FOR(i, N) {

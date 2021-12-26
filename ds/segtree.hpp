@@ -1,39 +1,40 @@
 #pragma once
+#include "ds/algebra.hpp"
 
-template <typename T>
+template <typename E>
 struct SegTree {
-  using F = function<T(T, T)>;
+  using F = function<E(E, E)>;
   int N_;
   int N;
   F seg_f;
-  T T_unit;
-  vector<T> dat;
+  E unit;
+  vector<E> dat;
 
-  SegTree(F f, T T_unit) : seg_f(f), T_unit(T_unit) {}
+  SegTree(Monoid<E> Mono) : seg_f(Mono.f), unit(Mono.unit) {}
 
   void init(int n_) {
     N_ = n_;
     N = 1;
     while (N < n_) N <<= 1;
-    dat.assign(N << 1, T_unit);
+    dat.assign(N << 1, unit);
   }
 
-  void build(const vector<T> &v) {
+  void build(const vector<E> &v) {
     assert(v.size() == N_);
     FOR(i, v.size()) { dat[N + i] = v[i]; }
     FOR3_R(i, 1, N) { dat[i] = seg_f(dat[i << 1 | 0], dat[i << 1 | 1]); }
   }
 
-  void set(int i, T x) {
+  void set(int i, E x) {
     assert(i < N_);
     dat[i += N] = x;
     while (i >>= 1) { dat[i] = seg_f(dat[i << 1 | 0], dat[i << 1 | 1]); }
   }
 
-  T fold(int L, int R) {
+  E fold(int L, int R) {
     assert(L <= R);
     assert(R <= N_);
-    T vl = T_unit, vr = T_unit;
+    E vl = unit, vr = unit;
     L += N;
     R += N;
     while (L < R) {
@@ -47,10 +48,10 @@ struct SegTree {
 
   template <class F>
   int max_right(F &check, int L) {
-    assert(0 <= L && L <= N_ && check(T_unit));
+    assert(0 <= L && L <= N_ && check(unit));
     if (L == N_) return N_;
     L += N;
-    T sm = T_unit;
+    E sm = unit;
     do {
       while (L % 2 == 0) L >>= 1;
       if (!check(seg_f(sm, dat[L]))) {
@@ -71,10 +72,10 @@ struct SegTree {
 
   template <class F>
   int min_left(F &check, int R) {
-    assert(0 <= R && R <= N_ && check(T_unit));
+    assert(0 <= R && R <= N_ && check(unit));
     if (R == 0) return 0;
     R += N;
-    T sm = T_unit;
+    E sm = unit;
     do {
       --R;
       while (R > 1 && (R % 2)) R >>= 1;
