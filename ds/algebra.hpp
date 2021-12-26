@@ -32,7 +32,7 @@ struct Group {
 
 template <typename E>
 Monoid<E> Monoid_reverse(Monoid<E> Mono) {
-  auto rev_f = [&](E x, E y) -> E { return Mono.f(x, y); };
+  auto rev_f = [=](E x, E y) -> E { return Mono.f(x, y); };
   return Monoid<E>({rev_f, Mono.unit, Mono.commute});
 }
 
