@@ -20,7 +20,7 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/lca
     links:
     - https://judge.yosupo.jp/problem/lca
-  bundledCode: "#line 1 \"test/library_checker/tree/lca.test.cpp\"\n#define PROBLEM\
+  bundledCode: "#line 1 \"test/library_checker/graph/lca.test.cpp\"\n#define PROBLEM\
     \ \"https://judge.yosupo.jp/problem/lca\"\n#line 2 \"my_template.hpp\"\n#include\
     \ <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\nusing ll8\
     \ = __int128;\nusing ld = long double;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\n\
@@ -106,7 +106,7 @@ data:
     \ (a < b ? a = b, 1 : 0); }\ntemplate <class T, class S> inline bool chmin(T &a,\
     \ const S &b) { return (a > b ? a = b, 1 : 0); }\n\ntemplate <typename T>\nvc<T>\
     \ merge_sort(vc<T>& A, vc<T>& B) {\n  vc<T> C;\n  C.reserve(A.size() + B.size());\n\
-    \  merge(all(A), all(B), back_inserter(C));\n  return C;\n}\n#line 3 \"test/library_checker/tree/lca.test.cpp\"\
+    \  merge(all(A), all(B), back_inserter(C));\n  return C;\n}\n#line 3 \"test/library_checker/graph/lca.test.cpp\"\
     \n\n#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n  int\
     \ frm, to;\n  T cost;\n  int id;\n  Edge(int a, int b, T c, int d) : frm(a), to(b),\
     \ cost(c), id(d) {}\n};\n\ntemplate <typename T>\nstruct Graph {\n  int N, M;\n\
@@ -158,7 +158,7 @@ data:
     \u3002\");\r\n    print(\"LCA, LA \u306A\u3069\u306F O(logN) \u6642\u9593\u3002\
     \");\r\n    print(\"\u6728\u306E\u554F\u984C\u3067\u306F\u771F\u3063\u5148\u306B\
     \u3053\u308C\u3092\u4F5C\u308B\u3002\");\r\n    print(\"\u2192 \u6728DP\u3084\u6728\
-    \u30AF\u30A8\u30EA\u306B\u6D3E\u751F\u3002\");\r\n  }\r\n};\r\n#line 6 \"test/library_checker/tree/lca.test.cpp\"\
+    \u30AF\u30A8\u30EA\u306B\u6D3E\u751F\u3002\");\r\n  }\r\n};\r\n#line 6 \"test/library_checker/graph/lca.test.cpp\"\
     \n\nvoid solve() {\n  LL(N, Q);\n  Graph<int> G(N);\n  FOR3(v, 1, N) {\n    LL(p);\n\
     \    G.add(p, v);\n  }\n  HLD<Graph<int>> hld(G);\n\n  FOR(_, Q) {\n    LL(a,\
     \ b);\n    print(hld.LCA(a, b));\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
@@ -175,15 +175,15 @@ data:
   - graph/base.hpp
   - graph/hld.hpp
   isVerificationFile: true
-  path: test/library_checker/tree/lca.test.cpp
+  path: test/library_checker/graph/lca.test.cpp
   requiredBy: []
-  timestamp: '2021-12-27 03:56:21+09:00'
+  timestamp: '2021-12-27 04:19:28+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/library_checker/tree/lca.test.cpp
+documentation_of: test/library_checker/graph/lca.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/tree/lca.test.cpp
-- /verify/test/library_checker/tree/lca.test.cpp.html
-title: test/library_checker/tree/lca.test.cpp
+- /verify/test/library_checker/graph/lca.test.cpp
+- /verify/test/library_checker/graph/lca.test.cpp.html
+title: test/library_checker/graph/lca.test.cpp
 ---

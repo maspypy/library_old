@@ -14,9 +14,12 @@ data:
       title: algebra/monoid.hpp
   - name: densegraph
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: densegraph/base.hpp
       title: densegraph/base.hpp
+    - icon: ':heavy_check_mark:'
+      path: densegraph/mis.hpp
+      title: densegraph/mis.hpp
     - icon: ':warning:'
       path: densegraph/scc.hpp
       title: densegraph/scc.hpp
@@ -118,7 +121,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/hld.hpp
       title: graph/hld.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: graph/mis.hpp
       title: graph/mis.hpp
     - icon: ':warning:'
@@ -308,10 +311,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
       title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
-  - name: test/library_checker/tree
+  - name: test/library_checker/graph
     pages:
     - icon: ':heavy_check_mark:'
-      path: test/library_checker/tree/lca.test.cpp
-      title: test/library_checker/tree/lca.test.cpp
+      path: test/library_checker/graph/lca.test.cpp
+      title: test/library_checker/graph/lca.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/graph/maximum_independent_set.test.cpp
+      title: test/library_checker/graph/maximum_independent_set.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/graph/maximum_independent_set_dense.test.cpp
+      title: test/library_checker/graph/maximum_independent_set_dense.test.cpp
 layout: toppage
 ---

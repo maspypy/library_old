@@ -82,8 +82,14 @@ data:
     path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
     title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/tree/lca.test.cpp
-    title: test/library_checker/tree/lca.test.cpp
+    path: test/library_checker/graph/lca.test.cpp
+    title: test/library_checker/graph/lca.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/graph/maximum_independent_set.test.cpp
+    title: test/library_checker/graph/maximum_independent_set.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/graph/maximum_independent_set_dense.test.cpp
+    title: test/library_checker/graph/maximum_independent_set_dense.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -273,7 +279,9 @@ data:
   timestamp: '2021-12-25 22:40:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/tree/lca.test.cpp
+  - test/library_checker/graph/maximum_independent_set_dense.test.cpp
+  - test/library_checker/graph/maximum_independent_set.test.cpp
+  - test/library_checker/graph/lca.test.cpp
   - test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
   - test/library_checker/datastructure/staticrmq_sparse.test.cpp
   - test/library_checker/datastructure/static_range_sum.test.cpp

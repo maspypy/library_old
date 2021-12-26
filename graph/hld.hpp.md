@@ -31,8 +31,8 @@ data:
     path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
     title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/tree/lca.test.cpp
-    title: test/library_checker/tree/lca.test.cpp
+    path: test/library_checker/graph/lca.test.cpp
+    title: test/library_checker/graph/lca.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -136,7 +136,7 @@ data:
   timestamp: '2021-12-27 03:56:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/tree/lca.test.cpp
+  - test/library_checker/graph/lca.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp

@@ -17,6 +17,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/hld.hpp
     title: graph/hld.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/mis.hpp
+    title: graph/mis.hpp
   - icon: ':warning:'
     path: graph/scc.hpp
     title: graph/scc.hpp
@@ -46,8 +49,11 @@ data:
     path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
     title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/tree/lca.test.cpp
-    title: test/library_checker/tree/lca.test.cpp
+    path: test/library_checker/graph/lca.test.cpp
+    title: test/library_checker/graph/lca.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/graph/maximum_independent_set.test.cpp
+    title: test/library_checker/graph/maximum_independent_set.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -95,6 +101,7 @@ data:
   - graph/hld.hpp
   - graph/treemonoid.hpp
   - graph/dijkstra.hpp
+  - graph/mis.hpp
   - graph/bfs01.hpp
   - graph/scc.hpp
   - graph/bipartite_coloring.hpp
@@ -102,7 +109,8 @@ data:
   timestamp: '2021-12-25 22:40:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/tree/lca.test.cpp
+  - test/library_checker/graph/maximum_independent_set.test.cpp
+  - test/library_checker/graph/lca.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
