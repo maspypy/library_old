@@ -4,8 +4,11 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/point_set_range_composite.test.cpp
-    title: test/library_checker/datastructure/point_set_range_composite.test.cpp
+    path: test/library_checker/datastructure/point_set_range_composite_group.test.cpp
+    title: test/library_checker/datastructure/point_set_range_composite_group.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
+    title: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
     title: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
@@ -101,7 +104,8 @@ data:
   timestamp: '2021-12-25 22:40:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/datastructure/point_set_range_composite.test.cpp
+  - test/library_checker/datastructure/point_set_range_composite_group.test.cpp
+  - test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite.test.cpp
   - test/library_checker/datastructure/queue_operate_all_composite.test.cpp
   - test/library_checker/datastructure/range_affine_range_sum.test.cpp

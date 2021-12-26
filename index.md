@@ -38,6 +38,9 @@ data:
       path: ds/fenwick.hpp
       title: ds/fenwick.hpp
     - icon: ':warning:'
+      path: ds/fenwick2d.hpp
+      title: ds/fenwick2d.hpp
+    - icon: ':warning:'
       path: ds/intervals.hpp
       title: ds/intervals.hpp
     - icon: ':heavy_check_mark:'
@@ -228,8 +231,11 @@ data:
       path: test/library_checker/datastructure/point_add_rectangle_sum.test.cpp
       title: test/library_checker/datastructure/point_add_rectangle_sum.test.cpp
     - icon: ':heavy_check_mark:'
-      path: test/library_checker/datastructure/point_set_range_composite.test.cpp
-      title: test/library_checker/datastructure/point_set_range_composite.test.cpp
+      path: test/library_checker/datastructure/point_set_range_composite_group.test.cpp
+      title: test/library_checker/datastructure/point_set_range_composite_group.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
+      title: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/predecessor_problem.test..cpp
       title: test/library_checker/datastructure/predecessor_problem.test..cpp
@@ -245,6 +251,9 @@ data:
     - icon: ':x:'
       path: test/library_checker/datastructure/range_kth_smallest.test.cpp
       title: test/library_checker/datastructure/range_kth_smallest.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
+      title: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
       title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp

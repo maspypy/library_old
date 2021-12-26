@@ -20,7 +20,7 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/point_set_range_composite
     links:
     - https://judge.yosupo.jp/problem/point_set_range_composite
-  bundledCode: "#line 1 \"test/library_checker/datastructure/point_set_range_composite.test.cpp\"\
+  bundledCode: "#line 1 \"test/library_checker/datastructure/point_set_range_composite_group.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/point_set_range_composite\"\
     \n#line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
     \nusing ll = long long;\nusing ll8 = __int128;\nusing ld = long double;\nusing\
@@ -106,7 +106,7 @@ data:
     \ (a < b ? a = b, 1 : 0); }\ntemplate <class T, class S> inline bool chmin(T &a,\
     \ const S &b) { return (a > b ? a = b, 1 : 0); }\n\ntemplate <typename T>\nvc<T>\
     \ merge_sort(vc<T>& A, vc<T>& B) {\n  vc<T> C;\n  C.reserve(A.size() + B.size());\n\
-    \  merge(all(A), all(B), back_inserter(C));\n  return C;\n}\n#line 3 \"test/library_checker/datastructure/point_set_range_composite.test.cpp\"\
+    \  merge(all(A), all(B), back_inserter(C));\n  return C;\n}\n#line 3 \"test/library_checker/datastructure/point_set_range_composite_group.test.cpp\"\
     \n\n#line 2 \"ds/segtree.hpp\"\n\ntemplate <typename T>\nstruct SegTree {\n  using\
     \ F = function<T(T, T)>;\n  int N_;\n  int N;\n  F seg_f;\n  T T_unit;\n  vector<T>\
     \ dat;\n\n  SegTree(F f, T T_unit) : seg_f(f), T_unit(T_unit) {}\n\n  void init(int\
@@ -171,7 +171,7 @@ data:
     \ fact_inv(k) * fact_inv(n-k);\n    k = min(k, n-k);\n    T x(1);\n    FOR(i,\
     \ k){\n      x *= n - i;\n      x *= inv(i + 1);\n    }\n    return x;\n  }\n\
     };\n\nusing modint107 = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n\
-    #line 6 \"test/library_checker/datastructure/point_set_range_composite.test.cpp\"\
+    #line 6 \"test/library_checker/datastructure/point_set_range_composite_group.test.cpp\"\
     \n\nusing mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using E = pair<mint,\
     \ mint>;\n  SegTree<E> seg(\n    [&](E x, E y) {\n      return E({x.fi * y.fi,\
     \ x.se * y.fi + y.se});\n    },\n    E({1, 0}));\n  seg.init(N);\n  vc<E> seg_raw(N);\n\
@@ -197,15 +197,15 @@ data:
   - ds/segtree.hpp
   - mod/modint.hpp
   isVerificationFile: true
-  path: test/library_checker/datastructure/point_set_range_composite.test.cpp
+  path: test/library_checker/datastructure/point_set_range_composite_group.test.cpp
   requiredBy: []
-  timestamp: '2021-12-26 03:01:43+09:00'
+  timestamp: '2021-12-26 16:32:01+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/library_checker/datastructure/point_set_range_composite.test.cpp
+documentation_of: test/library_checker/datastructure/point_set_range_composite_group.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/datastructure/point_set_range_composite.test.cpp
-- /verify/test/library_checker/datastructure/point_set_range_composite.test.cpp.html
-title: test/library_checker/datastructure/point_set_range_composite.test.cpp
+- /verify/test/library_checker/datastructure/point_set_range_composite_group.test.cpp
+- /verify/test/library_checker/datastructure/point_set_range_composite_group.test.cpp.html
+title: test/library_checker/datastructure/point_set_range_composite_group.test.cpp
 ---
