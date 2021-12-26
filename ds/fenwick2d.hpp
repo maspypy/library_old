@@ -15,7 +15,7 @@ struct Fenwick2D {
   }
 
   inline int xtoi(int x) {
-    return (SMALL ? clamp(x - min_X, 0, N + 1) : LB(keyX, x));
+    return (SMALL ? clamp(x - min_X, 0, N) : LB(keyX, x));
   }
 
   inline int nxt(int i) {

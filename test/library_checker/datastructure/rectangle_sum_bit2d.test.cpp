@@ -2,22 +2,20 @@
 
 #include "my_template.hpp"
 
-#include "ds/fenwick.hpp"
-#include "other/rectanglesums.hpp"
+#include "ds/fenwick2d.hpp"
 
 void solve() {
   LL(N, Q);
-  RectangleSums RS(N);
-  FOR(_, N) {
+  vi X(N), Y(N), W(N);
+  FOR(i, N) {
     LL(x, y, w);
-    RS.add_pt(x, y, w);
+    X[i] = x, Y[i] = y, W[i] = w;
   }
+  Fenwick2D<ll, false> bit(X, Y, W);
   FOR(_, Q) {
     LL(l, d, r, u);
-    RS.add_rect(l, r, d, u);
+    print(bit.sum(l, r, d, u));
   }
-  auto ANS = RS.calc();
-  FORIN(x, ANS) print(x);
 }
 
 signed main() {
