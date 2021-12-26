@@ -4,7 +4,7 @@ template <typename E>
 struct Monoid {
   using F = function<E(E, E)>;
   F f;
-  E E_unit;
+  E unit;
   bool commute;
 };
 
@@ -16,7 +16,7 @@ struct Monoid_OP {
   F f;
   G g;
   H h;
-  E E_unit;
+  E unit;
   OP OP_unit;
 };
 
@@ -40,4 +40,12 @@ template <typename E>
 Monoid<E> Monoid_max(E MINUS_INF) {
   auto f = [](E x, E y) -> E { return max(x, y); };
   return Monoid<E>({f, MINUS_INF, true});
+}
+
+template <typename E>
+Monoid<pair<E, E>> Monoid_affine() {
+  auto f = [](pair<E, E> x, pair<E, E> y) -> pair<E, E> {
+    return {x.fi * y.fi, x.se * y.fi + y.se};
+  };
+  return Monoid<pair<E, E>>({f, mp(E(1), E(0)), false});
 }
