@@ -1,4 +1,4 @@
-#include "ds/algebra.hpp"
+#include "algebra/monoid.hpp"
 
 template <typename E, bool SMALL = false>
 struct SegTree2D {

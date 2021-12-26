@@ -1,3 +1,4 @@
+#include "algebra/monoid.hpp"
 #include "ds/segtree.hpp"
 #include "graph/hld.hpp"
 

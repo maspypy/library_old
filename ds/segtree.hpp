@@ -1,5 +1,5 @@
 #pragma once
-#include "ds/algebra.hpp"
+#include "algebra/monoid.hpp"
 
 template <typename E>
 struct SegTree {

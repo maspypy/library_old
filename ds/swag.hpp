@@ -1,4 +1,4 @@
-#include "algebra.hpp"
+#include "algebra/monoid.hpp"
 
 template <typename E>
 struct SWAG {
