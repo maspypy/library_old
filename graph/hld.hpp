@@ -1,3 +1,4 @@
+#pragma once
 template <typename Graph>
 struct HLD {
   Graph &G;
