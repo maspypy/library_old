@@ -31,7 +31,13 @@ struct Group {
 };
 
 template <typename E>
-Monoid<E> Monoid_min(E unit) {
+Monoid<E> Monoid_min(E INF) {
   auto f = [](E x, E y) -> E { return min(x, y); };
-  return Monoid<E>({f, unit, true});
+  return Monoid<E>({f, INF, true});
+}
+
+template <typename E>
+Monoid<E> Monoid_max(E MINUS_INF) {
+  auto f = [](E x, E y) -> E { return max(x, y); };
+  return Monoid<E>({f, MINUS_INF, true});
 }

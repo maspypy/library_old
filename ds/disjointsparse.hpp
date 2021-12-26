@@ -23,7 +23,7 @@ struct DisjointSparse {
     }
   }
 
-  E fold(int L, int R) {
+  E prod(int L, int R) {
     assert(L < R);
     --R;
     if (L == R) return dat[0][L];

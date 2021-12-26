@@ -6,14 +6,11 @@
 void solve() {
   LL(N, Q);
   VEC(int, A, N);
-  // [ disjoint sparse table template
-  using E = int;
-  DisjointSparse<E> DS(Monoid_min<E>(1 << 30), A);
-  // disjoint sparse table template ]
+  DisjointSparse<int> DS(Monoid_min<int>(1 << 30), A);
 
   FOR(_, Q) {
     LL(L, R);
-    print(DS.fold(L, R));
+    print(DS.prod(L, R));
   }
 }
 
