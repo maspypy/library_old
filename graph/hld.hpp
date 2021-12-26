@@ -3,7 +3,7 @@ template <typename Graph>
 struct HLD {
   Graph &G;
   int N;
-  vector<int> sz, LID, RID, head, V, parent, depth, e_to_v;
+  vector<int> sz, LID, RID, ELID, ERID, head, V, parent, depth, e_to_v;
 
   HLD(Graph &G, int root = 0)
       : G(G)
@@ -11,14 +11,16 @@ struct HLD {
       , sz(G.N)
       , LID(G.N)
       , RID(G.N)
+      , ELID(G.N)
+      , ERID(G.N)
       , head(G.N, root)
       , V(G.N)
       , parent(G.N, -1)
       , depth(G.N)
       , e_to_v(G.N) {
-    int t = 0;
+    int t1 = 0, t2 = 0;
     dfs_sz(root, -1);
-    dfs_hld(root, -1, t);
+    dfs_hld(root, -1, t1, t2);
   }
 
   void dfs_sz(int idx, int p) {
@@ -35,15 +37,17 @@ struct HLD {
     }
   }
 
-  void dfs_hld(int idx, int par, int &times) {
+  void dfs_hld(int idx, int par, int &times, int&etimes) {
     LID[idx] = times++;
+    ELID[idx] = etimes++;
     V[LID[idx]] = idx;
     for (auto &e : G[idx]) {
       if (e.to == par) continue;
       head[e.to] = (G[idx][0].to == e.to ? head[idx] : e.to);
-      dfs_hld(e.to, idx, times);
+      dfs_hld(e.to, idx, times, etimes);
     }
     RID[idx] = times;
+    ERID[idx] = etimes++;
   }
 
   /* k: 0-indexed */
@@ -82,6 +86,8 @@ struct HLD {
     print("head", head);
     print("LID", LID);
     print("RID", RID);
+    print("ELID", ELID);
+    print("ERID", ERID);
   }
 
   void doc() {
