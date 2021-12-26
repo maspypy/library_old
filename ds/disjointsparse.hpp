@@ -4,10 +4,11 @@ template <typename E>
 struct DisjointSparse {
   using F = function<E(E, E)>;
   F f;
+  E e;
   int N, log;
   vc<vc<E>> dat;
 
-  DisjointSparse(Monoid<E> Mono, vc<E> A) : f(Mono.f), N(len(A)) {
+  DisjointSparse(Monoid<E> Mono, vc<E> A) : f(Mono.f), e(Mono.unit), N(len(A)) {
     log = 1;
     while ((1 << log) < N) ++log;
     dat.assign(log, A);
@@ -24,7 +25,7 @@ struct DisjointSparse {
   }
 
   E prod(int L, int R) {
-    assert(L < R);
+    if (L == R) return e;
     --R;
     if (L == R) return dat[0][L];
     int k = 31 - __builtin_clz(L ^ R);
