@@ -14,11 +14,20 @@ data:
   - icon: ':warning:'
     path: graph/eulerwalk.hpp
     title: graph/eulerwalk.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/hld.hpp
+    title: graph/hld.hpp
   - icon: ':warning:'
     path: graph/scc.hpp
     title: graph/scc.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/treegroup.hpp
+    title: graph/treegroup.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/treemonoid.hpp
+    title: graph/treemonoid.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
     title: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
   - icon: ':heavy_check_mark:'
@@ -39,9 +48,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/tree/lca.test.cpp
     title: test/library_checker/tree/lca.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n\
@@ -82,13 +91,16 @@ data:
   isVerificationFile: false
   path: graph/base.hpp
   requiredBy:
+  - graph/treegroup.hpp
+  - graph/hld.hpp
+  - graph/treemonoid.hpp
   - graph/dijkstra.hpp
   - graph/bfs01.hpp
   - graph/scc.hpp
   - graph/bipartite_coloring.hpp
   - graph/eulerwalk.hpp
   timestamp: '2021-12-25 22:40:58+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/tree/lca.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp

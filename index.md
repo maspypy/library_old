@@ -9,7 +9,7 @@ data:
     - icon: ':warning:'
       path: algebra/linearrecurrence.hpp
       title: algebra/linearrecurrence.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: algebra/monoid.hpp
       title: algebra/monoid.hpp
   - name: densegraph
@@ -52,7 +52,7 @@ data:
     - icon: ':warning:'
       path: ds/lichao.hpp
       title: ds/lichao.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: ds/segtree.hpp
       title: ds/segtree.hpp
     - icon: ':heavy_check_mark:'
@@ -91,7 +91,7 @@ data:
       title: geometry/geometry.hpp
   - name: graph
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/base.hpp
       title: graph/base.hpp
     - icon: ':warning:'
@@ -110,18 +110,12 @@ data:
       path: graph/decompose_complete.hpp
       title: graph/decompose_complete.hpp
     - icon: ':warning:'
-      path: graph/dfstree.hpp
-      title: graph/dfstree.hpp
-    - icon: ':warning:'
       path: graph/dijkstra.hpp
       title: graph/dijkstra.hpp
     - icon: ':warning:'
-      path: graph/eulertour.hpp
-      title: graph/eulertour.hpp
-    - icon: ':warning:'
       path: graph/eulerwalk.hpp
       title: graph/eulerwalk.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/hld.hpp
       title: graph/hld.hpp
     - icon: ':warning:'
@@ -134,11 +128,11 @@ data:
       path: graph/tree_dp.hpp
       title: graph/tree_dp.hpp
     - icon: ':warning:'
-      path: graph/tree_group.hpp
-      title: graph/tree_group.hpp
-    - icon: ':warning:'
       path: graph/treedoubling.hpp
       title: graph/treedoubling.hpp
+    - icon: ':heavy_check_mark:'
+      path: graph/treegroup.hpp
+      title: graph/treegroup.hpp
     - icon: ':heavy_check_mark:'
       path: graph/treemonoid.hpp
       title: graph/treemonoid.hpp
@@ -158,12 +152,12 @@ data:
     - icon: ':warning:'
       path: mod/amodint.hpp
       title: mod/amodint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: mod/modint.hpp
       title: mod/modint.hpp
   - name: .
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: my_template.hpp
       title: my_template.hpp
     - icon: ':warning:'
@@ -293,7 +287,7 @@ data:
     - icon: ':x:'
       path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
       title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
       title: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
     - icon: ':heavy_check_mark:'
