@@ -7,9 +7,6 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
-    title: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
     title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
   _isVerificationFailed: false
@@ -122,7 +119,6 @@ data:
   timestamp: '2021-12-26 04:18:05+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
   - test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
 documentation_of: other/rectanglesums.hpp
 layout: document

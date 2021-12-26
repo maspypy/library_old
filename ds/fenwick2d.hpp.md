@@ -2,10 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
+    title: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"ds/fenwick2d.hpp\"\ntemplate <typename T, bool SMALL=false>\r\
@@ -13,7 +16,7 @@ data:
     \n  vi keyY;\r\n  vc<T> dat;\r\n\r\n  Fenwick2D(vi& X, vi& Y, vc<T>& wt) { build(X,\
     \ Y, wt); }\r\n\r\n  Fenwick2D(vi& X, vi& Y) {\r\n    vc<T> wt(len(X), 0);\r\n\
     \    build(X, Y, wt);\r\n  }\r\n\r\n  inline int xtoi(int x) {\r\n    return (SMALL\
-    \ ? clamp(x - min_X, 0, N + 1) : LB(keyX, x));\r\n  }\r\n\r\n  inline int nxt(int\
+    \ ? clamp(x - min_X, 0, N) : LB(keyX, x));\r\n  }\r\n\r\n  inline int nxt(int\
     \ i) {\r\n    i += 1;\r\n    return i + (i & -i) - 1;\r\n  }\r\n\r\n  inline int\
     \ prev(int i) {\r\n    i += 1;\r\n    return i - (i & -i) - 1;\r\n  }\r\n\r\n\
     \  void build(vi& X, vi& Y, vc<T>& wt) {\r\n    if (!SMALL) {\r\n      keyX =\
@@ -54,12 +57,12 @@ data:
     \n  vi keyX;\r\n  int min_X;\r\n  vc<int> indptr;\r\n  vi keyY;\r\n  vc<T> dat;\r\
     \n\r\n  Fenwick2D(vi& X, vi& Y, vc<T>& wt) { build(X, Y, wt); }\r\n\r\n  Fenwick2D(vi&\
     \ X, vi& Y) {\r\n    vc<T> wt(len(X), 0);\r\n    build(X, Y, wt);\r\n  }\r\n\r\
-    \n  inline int xtoi(int x) {\r\n    return (SMALL ? clamp(x - min_X, 0, N + 1)\
-    \ : LB(keyX, x));\r\n  }\r\n\r\n  inline int nxt(int i) {\r\n    i += 1;\r\n \
-    \   return i + (i & -i) - 1;\r\n  }\r\n\r\n  inline int prev(int i) {\r\n    i\
-    \ += 1;\r\n    return i - (i & -i) - 1;\r\n  }\r\n\r\n  void build(vi& X, vi&\
-    \ Y, vc<T>& wt) {\r\n    if (!SMALL) {\r\n      keyX = X;\r\n      UNIQUE(keyX);\r\
-    \n      N = len(keyX);\r\n    } else {\r\n      min_X = (len(X) == 0 ? 0 : MIN(X));\r\
+    \n  inline int xtoi(int x) {\r\n    return (SMALL ? clamp(x - min_X, 0, N) : LB(keyX,\
+    \ x));\r\n  }\r\n\r\n  inline int nxt(int i) {\r\n    i += 1;\r\n    return i\
+    \ + (i & -i) - 1;\r\n  }\r\n\r\n  inline int prev(int i) {\r\n    i += 1;\r\n\
+    \    return i - (i & -i) - 1;\r\n  }\r\n\r\n  void build(vi& X, vi& Y, vc<T>&\
+    \ wt) {\r\n    if (!SMALL) {\r\n      keyX = X;\r\n      UNIQUE(keyX);\r\n   \
+    \   N = len(keyX);\r\n    } else {\r\n      min_X = (len(X) == 0 ? 0 : MIN(X));\r\
     \n      N = (len(X) == 0 ? 0 : MAX(X)) - min_X + 1;\r\n      keyX.resize(N);\r\
     \n      FOR(i, N) keyX[i] = min_X + i;\r\n    }\r\n\r\n    vc<vi> keyY_raw(N);\r\
     \n    vc<vc<T>> dat_raw(N);\r\n\r\n    auto I = argsort(Y);\r\n    FORIN(i, I)\
@@ -96,9 +99,10 @@ data:
   isVerificationFile: false
   path: ds/fenwick2d.hpp
   requiredBy: []
-  timestamp: '2021-12-26 16:32:01+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2021-12-26 16:47:54+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
 documentation_of: ds/fenwick2d.hpp
 layout: document
 redirect_from:

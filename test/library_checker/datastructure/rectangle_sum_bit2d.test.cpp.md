@@ -2,14 +2,11 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: ds/fenwick.hpp
-    title: ds/fenwick.hpp
+    path: ds/fenwick2d.hpp
+    title: ds/fenwick2d.hpp
   - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
-    path: other/rectanglesums.hpp
-    title: other/rectanglesums.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -107,86 +104,68 @@ data:
     \ const S &b) { return (a > b ? a = b, 1 : 0); }\n\ntemplate <typename T>\nvc<T>\
     \ merge_sort(vc<T>& A, vc<T>& B) {\n  vc<T> C;\n  C.reserve(A.size() + B.size());\n\
     \  merge(all(A), all(B), back_inserter(C));\n  return C;\n}\n#line 4 \"test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp\"\
-    \n\n#line 2 \"ds/fenwick.hpp\"\ntemplate <typename T>\nstruct FenwickTree {\n\
-    \  vector<T> data;\n  T total;\n\n  FenwickTree(int sz) : total(0) { data.assign(++sz,\
-    \ 0); }\n\n  void build(vector<T>& raw_data) {\n    assert(len(data) == len(raw_data)\
-    \ + 1);\n    FOR(i, len(raw_data)) data[i + 1] = raw_data[i];\n    FOR(i, len(data))\
-    \ {\n      int j = i + (i & -i);\n      if (j < len(data)) data[j] += data[i];\n\
-    \    }\n  }\n\n  T sum(int k) {\n    T ret = 0;\n    for (; k > 0; k -= k & -k)\
-    \ ret += data[k];\n    return (ret);\n  }\n\n  T sum(int L, int R) {\n    T ret\
-    \ = 0;\n    while (L < R) {\n      ret += data[R];\n      R -= R & -R;\n    }\n\
-    \    while (R < L) {\n      ret -= data[L];\n      L -= L & -L;\n    }\n    return\
-    \ ret;\n  }\n\n  T sum_all() { return total; }\n\n  void add(int k, T x) {\n \
-    \   total += x;\n    for (++k; k < data.size(); k += k & -k) data[k] += x;\n \
-    \ }\n\n  template <class F>\n  int max_right(F& check) {\n    assert(f(T(0)));\n\
-    \    ll i = 0;\n    T s = 0;\n    int k = 1;\n    int N = len(data);\n    while\
-    \ (2 * k < N) k *= 2;\n    while (k) {\n      if (i + k < N && check(s + data[i\
-    \ + k])) {\n        i += k;\n        s += data[i];\n      }\n      k >>= 1;\n\
-    \    }\n    return i;\n  }\n\n  int find_kth_element(T k) {\n    auto check =\
-    \ [&](T x) -> bool { return x < k; };\n    return max_right(check);\n  }\n};\n\
-    \ntemplate <typename T>\nstruct Fenwick_RAQ {\n  int N;\n  FenwickTree<T> bit0;\n\
-    \  FenwickTree<T> bit1;\n\n  Fenwick_RAQ(int N) : N(N), bit0(N), bit1(N) {}\n\n\
-    \  void add(ll L, ll R, T val) {\n    bit0.add(L, -val * L);\n    bit1.add(L,\
-    \ +val);\n    bit0.add(R, +val * R);\n    bit1.add(R, -val);\n  }\n\n  T sum(ll\
-    \ L, ll R) {\n    T sum_R = R * bit1.sum(R) + bit0.sum(R);\n    T sum_L = L *\
-    \ bit1.sum(L) + bit0.sum(L);\n    return sum_R - sum_L;\n  }\n};\n#line 2 \"other/rectanglesums.hpp\"\
-    \n\r\ntemplate <typename WT = ll, bool SMALL = false>\r\nstruct RectangleSums\
-    \ {\r\n  int N;\r\n  int n, Q;\r\n  vi X, Y;\r\n  vi keyX, keyY;\r\n  ll min_x,\
-    \ max_x, min_y, max_y;\r\n  vc<WT> wt;\r\n  vc<vc<pair<int, WT>>> add;\r\n  vc<vc<tuple<int,\
-    \ int, int>>> query_l;\r\n  vc<vc<tuple<int, int, int>>> query_r;\r\n\r\n  RectangleSums(int\
-    \ N)\r\n      : N(N), n(0), Q(0), X(N), Y(N), keyX(N), keyY(N), wt(N) {}\r\n\r\
-    \n  void add_pt(ll x, ll y, WT w = 1) {\r\n    X[n] = x, Y[n] = y, wt[n] = w,\
-    \ keyX[n] = x, keyY[n] = y;\r\n    ++n;\r\n    if (n == N) { compress(); }\r\n\
-    \  }\r\n\r\n  void compress() {\r\n    if (!SMALL) {\r\n      UNIQUE(keyX), UNIQUE(keyY);\r\
-    \n      add.resize(len(keyX) + 1);\r\n      FOR(i, N) {\r\n        ll x = X[i],\
-    \ y = Y[i], w = wt[i];\r\n        x = LB(keyX, x), y = LB(keyY, y);\r\n      \
-    \  add[x].eb(y, w);\r\n      }\r\n    } else {\r\n      min_x = (N == 0 ? 0 :\
-    \ MIN(X));\r\n      max_x = (N == 0 ? 0 : MAX(X));\r\n      min_y = (N == 0 ?\
-    \ 0 : MIN(Y));\r\n      max_y = (N == 0 ? 0 : MAX(Y));\r\n      add.resize(max_x\
-    \ - min_x + 2);\r\n      FOR(i, N) {\r\n        ll x = X[i], y = Y[i], w = wt[i];\r\
-    \n        x -= min_x, y -= min_y;\r\n        add[x].eb(y, w);\r\n      }\r\n \
-    \   }\r\n    query_l.resize(len(add));\r\n    query_r.resize(len(add));\r\n  }\r\
-    \n\r\n  void add_rect(ll xl, ll xr, ll yl, ll yr) {\r\n    assert(n == N);\r\n\
-    \    if (!SMALL) {\r\n      xl = LB(keyX, xl), xr = LB(keyX, xr);\r\n      yl\
-    \ = LB(keyY, yl), yr = LB(keyY, yr);\r\n    } else {\r\n      xl -= min_x, xr\
-    \ -= min_x;\r\n      yl -= min_y, yr -= min_y;\r\n      xl = clamp(xl, 0LL, max_x\
-    \ - min_x + 1);\r\n      xr = clamp(xr, 0LL, max_x - min_x + 1);\r\n      yl =\
-    \ clamp(yl, 0LL, max_y - min_y + 1);\r\n      yr = clamp(yr, 0LL, max_y - min_y\
-    \ + 1);\r\n    }\r\n    query_l[xl].eb(Q, yl, yr);\r\n    query_r[xr].eb(Q, yl,\
-    \ yr);\r\n    ++Q;\r\n  }\r\n\r\n  vc<WT> calc() {\r\n    assert(n == N);\r\n\
-    \    vc<WT> ANS(Q);\r\n    int k = (SMALL ? max_y - min_y + 2 : len(keyY) + 1);\r\
-    \n    FenwickTree<WT> bit(k);\r\n    FOR(x, len(add)) {\r\n      FORIN(t, query_l[x])\
-    \ {\r\n        auto [q, yl, yr] = t;\r\n        ANS[q] -= bit.sum(yl, yr);\r\n\
-    \      }\r\n      FORIN(t, query_r[x]) {\r\n        auto [q, yl, yr] = t;\r\n\
-    \        ANS[q] += bit.sum(yl, yr);\r\n      }\r\n      FORIN(t, add[x]) {\r\n\
-    \        auto [y, w] = t;\r\n        bit.add(y, w);\r\n      }\r\n      query_l[x].clear();\r\
-    \n      query_r[x].clear();\r\n    }\r\n    Q = 0;\r\n    return ANS;\r\n  }\r\
-    \n\r\n  void doc() {\r\n    print(\"N \u500B\u306E\u70B9\u306F\u6700\u521D\u306B\
-    \u6C7A\u3081\u3066\u3057\u307E\u3046\u3002\");\r\n    print(\"\u540C\u3058\u70B9\
-    \u7FA4\u306B\u5BFE\u3057\u3066\u30AF\u30A8\u30EA\u3092\u3084\u308A\u76F4\u305B\
-    \u308B\u3002\"); // abc233-h\r\n    print(\"SMALL=true \u306B\u3059\u308B\u3068\
-    \u3001\u5EA7\u5727\u3092\u3057\u306A\u3044\u305F\u3081\u5C11\u3057\u9AD8\u901F\
-    \");\r\n  }\r\n};\r\n#line 7 \"test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp\"\
-    \n\nvoid solve() {\n  LL(N, Q);\n  RectangleSums RS(N);\n  FOR(_, N) {\n    LL(x,\
-    \ y, w);\n    RS.add_pt(x, y, w);\n  }\n  FOR(_, Q) {\n    LL(l, d, r, u);\n \
-    \   RS.add_rect(l, r, d, u);\n  }\n  auto ANS = RS.calc();\n  FORIN(x, ANS) print(x);\n\
-    }\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout\
-    \ << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
+    \n\n#line 1 \"ds/fenwick2d.hpp\"\ntemplate <typename T, bool SMALL=false>\r\n\
+    struct Fenwick2D {\r\n  int N;\r\n  vi keyX;\r\n  int min_X;\r\n  vc<int> indptr;\r\
+    \n  vi keyY;\r\n  vc<T> dat;\r\n\r\n  Fenwick2D(vi& X, vi& Y, vc<T>& wt) { build(X,\
+    \ Y, wt); }\r\n\r\n  Fenwick2D(vi& X, vi& Y) {\r\n    vc<T> wt(len(X), 0);\r\n\
+    \    build(X, Y, wt);\r\n  }\r\n\r\n  inline int xtoi(int x) {\r\n    return (SMALL\
+    \ ? clamp(x - min_X, 0, N) : LB(keyX, x));\r\n  }\r\n\r\n  inline int nxt(int\
+    \ i) {\r\n    i += 1;\r\n    return i + (i & -i) - 1;\r\n  }\r\n\r\n  inline int\
+    \ prev(int i) {\r\n    i += 1;\r\n    return i - (i & -i) - 1;\r\n  }\r\n\r\n\
+    \  void build(vi& X, vi& Y, vc<T>& wt) {\r\n    if (!SMALL) {\r\n      keyX =\
+    \ X;\r\n      UNIQUE(keyX);\r\n      N = len(keyX);\r\n    } else {\r\n      min_X\
+    \ = (len(X) == 0 ? 0 : MIN(X));\r\n      N = (len(X) == 0 ? 0 : MAX(X)) - min_X\
+    \ + 1;\r\n      keyX.resize(N);\r\n      FOR(i, N) keyX[i] = min_X + i;\r\n  \
+    \  }\r\n\r\n    vc<vi> keyY_raw(N);\r\n    vc<vc<T>> dat_raw(N);\r\n\r\n    auto\
+    \ I = argsort(Y);\r\n    FORIN(i, I) {\r\n      int ix = xtoi(X[i]), y = Y[i];\r\
+    \n      while (ix < N) {\r\n        auto& KY = keyY_raw[ix];\r\n        if (len(KY)\
+    \ == 0 || KY.back() < y) {\r\n          KY.eb(y);\r\n          dat_raw[ix].eb(wt[i]);\r\
+    \n        } else {\r\n          dat_raw[ix].back() += wt[i];\r\n        }\r\n\
+    \        ix = nxt(ix);\r\n      }\r\n    }\r\n\r\n    indptr.assign(N + 1, 0);\r\
+    \n    FOR(i, N) indptr[i + 1] = indptr[i] + len(keyY_raw[i]);\r\n    keyY.resize(indptr.back());\r\
+    \n    dat.resize(indptr.back());\r\n    FOR(i, N) FOR(j, indptr[i + 1] - indptr[i])\
+    \ {\r\n      keyY[indptr[i] + j] = keyY_raw[i][j];\r\n      dat[indptr[i] + j]\
+    \ = dat_raw[i][j];\r\n    }\r\n    FOR(i, N) {\r\n      int n = indptr[i + 1]\
+    \ - indptr[i];\r\n      FOR(j, n - 1) {\r\n        int k = nxt(j);\r\n       \
+    \ if (k < n) dat[indptr[i] + k] += dat[indptr[i] + j];\r\n      }\r\n    }\r\n\
+    \  }\r\n\r\n  void add_i(int i, ll y, T val) {\r\n    int LID = indptr[i], n =\
+    \ indptr[i + 1] - indptr[i];\r\n    auto it = keyY.begin() + LID;\r\n    int j\
+    \ = lower_bound(it, it + n, y) - it;\r\n    assert(keyY[LID + j] == y);\r\n  \
+    \  while (j < n) {\r\n      dat[LID + j] += val;\r\n      j = nxt(j);\r\n    }\r\
+    \n  }\r\n\r\n  void add(ll x, ll y, T val) {\r\n    int i = xtoi(x);\r\n    assert(keyX[i]\
+    \ == x);\r\n    while (i < N) {\r\n      add_i(i, y, val);\r\n      i = nxt(i);\r\
+    \n    }\r\n  }\r\n\r\n  T sum_i(int i, ll ly, ll ry) {\r\n    T ret = 0;\r\n \
+    \   int LID = indptr[i], n = indptr[i + 1] - indptr[i];\r\n    auto it = keyY.begin()\
+    \ + LID;\r\n    int L = lower_bound(it, it + n, ly) - it - 1;\r\n    int R = lower_bound(it,\
+    \ it + n, ry) - it - 1;\r\n    while (L < R) {\r\n      ret += dat[LID + R];\r\
+    \n      R = prev(R);\r\n    }\r\n    while (R < L) {\r\n      ret -= dat[LID +\
+    \ L];\r\n      L = prev(L);\r\n    }\r\n    return ret;\r\n  }\r\n\r\n  T sum(ll\
+    \ lx, ll rx, ll ly, ll ry) {\r\n    T ret = 0;\r\n    int L = xtoi(lx) - 1;\r\n\
+    \    int R = xtoi(rx) - 1;\r\n    while (L < R) {\r\n      ret += sum_i(R, ly,\
+    \ ry);\r\n      R = prev(R);\r\n    }\r\n    while (R < L) {\r\n      ret -= sum_i(L,\
+    \ ly, ry);\r\n      L = prev(L);\r\n    }\r\n    return ret;\r\n  }\r\n\r\n  void\
+    \ debug() {\r\n    print(\"keyX\", keyX);\r\n    print(\"indptr\", indptr);\r\n\
+    \    print(\"keyY\", keyY);\r\n    print(\"dat\", dat);\r\n  }\r\n};\n#line 6\
+    \ \"test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp\"\n\nvoid\
+    \ solve() {\n  LL(N, Q);\n  vi X(N), Y(N), W(N);\n  FOR(i, N) {\n    LL(x, y,\
+    \ w);\n    X[i] = x, Y[i] = y, W[i] = w;\n  }\n  Fenwick2D<ll, false> bit(X, Y,\
+    \ W);\n  FOR(_, Q) {\n    LL(l, d, r, u);\n    print(bit.sum(l, r, d, u));\n \
+    \ }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
+    \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/rectangle_sum\"\n\n#include\
-    \ \"my_template.hpp\"\n\n#include \"ds/fenwick.hpp\"\n#include \"other/rectanglesums.hpp\"\
-    \n\nvoid solve() {\n  LL(N, Q);\n  RectangleSums RS(N);\n  FOR(_, N) {\n    LL(x,\
-    \ y, w);\n    RS.add_pt(x, y, w);\n  }\n  FOR(_, Q) {\n    LL(l, d, r, u);\n \
-    \   RS.add_rect(l, r, d, u);\n  }\n  auto ANS = RS.calc();\n  FORIN(x, ANS) print(x);\n\
-    }\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout\
-    \ << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
+    \ \"my_template.hpp\"\n\n#include \"ds/fenwick2d.hpp\"\n\nvoid solve() {\n  LL(N,\
+    \ Q);\n  vi X(N), Y(N), W(N);\n  FOR(i, N) {\n    LL(x, y, w);\n    X[i] = x,\
+    \ Y[i] = y, W[i] = w;\n  }\n  Fenwick2D<ll, false> bit(X, Y, W);\n  FOR(_, Q)\
+    \ {\n    LL(l, d, r, u);\n    print(bit.sum(l, r, d, u));\n  }\n}\n\nsigned main()\
+    \ {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\
+    \n  solve();\n\n  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
-  - ds/fenwick.hpp
-  - other/rectanglesums.hpp
+  - ds/fenwick2d.hpp
   isVerificationFile: true
   path: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
   requiredBy: []
-  timestamp: '2021-12-26 16:32:01+09:00'
+  timestamp: '2021-12-26 16:47:54+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
