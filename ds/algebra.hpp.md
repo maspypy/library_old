@@ -9,12 +9,18 @@ data:
     path: ds/segtree.hpp
     title: ds/segtree.hpp
   - icon: ':heavy_check_mark:'
+    path: ds/segtree2d.hpp
+    title: ds/segtree2d.hpp
+  - icon: ':heavy_check_mark:'
     path: ds/swag.hpp
     title: ds/swag.hpp
   - icon: ':heavy_check_mark:'
     path: graph/treemonoid.hpp
     title: graph/treemonoid.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
+    title: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
     title: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
@@ -89,6 +95,7 @@ data:
   path: ds/algebra.hpp
   requiredBy:
   - graph/treemonoid.hpp
+  - ds/segtree2d.hpp
   - ds/disjointsparse.hpp
   - ds/segtree.hpp
   - ds/swag.hpp
@@ -100,6 +107,7 @@ data:
   - test/library_checker/datastructure/staticrmq_seg.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
   - test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
+  - test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite.test.cpp
   - test/library_checker/datastructure/queue_operate_all_composite.test.cpp
   - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
