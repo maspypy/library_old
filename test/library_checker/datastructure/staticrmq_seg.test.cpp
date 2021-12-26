@@ -6,12 +6,7 @@
 void solve() {
   LL(N, Q);
   VEC(int, A, N);
-  using E = int;
-  SegTree<E> seg(
-    [&](E x, E y) -> E {
-      return min(x,y);
-    },
-    E(1<<30));
+  SegTree<int> seg(Monoid_min<int>(1<<30));
   seg.init(N);
   seg.build(A);
 
