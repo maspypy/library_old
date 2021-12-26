@@ -1,5 +1,4 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_add_path_sum"
-
 #include "my_template.hpp"
 
 #include "graph/base.hpp"
@@ -18,7 +17,7 @@ void solve() {
   HLD<Graph<int>> hld(G);
   Monoid<ll> Mono = Monoid_add<ll>();
   Mono.commute = false;
-  TreeMonoid<Graph<int>, E, false> TM(hld, Mono);
+  TreeMonoid<Graph<int>, ll, false> TM(hld, Mono);
 
   TM.init(A);
 
