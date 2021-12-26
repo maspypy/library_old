@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: ds/lazysegtree.hpp
+    title: ds/lazysegtree.hpp
   - icon: ':warning:'
     path: ds/lichao.hpp
     title: ds/lichao.hpp
@@ -14,6 +17,9 @@ data:
   - icon: ':warning:'
     path: graph/bipartite_coloring.hpp
     title: graph/bipartite_coloring.hpp
+  - icon: ':warning:'
+    path: graph/treemonoid_lazy.hpp
+    title: graph/treemonoid_lazy.hpp
   - icon: ':warning:'
     path: matrix/matrix.hpp
     title: matrix/matrix.hpp
@@ -271,8 +277,10 @@ data:
   path: my_template.hpp
   requiredBy:
   - matrix/matrix.hpp
+  - graph/treemonoid_lazy.hpp
   - graph/bipartite_coloring.hpp
   - test/template.cpp
+  - ds/lazysegtree.hpp
   - ds/lichao.hpp
   - ds/unionfind.hpp
   - geometry/geometry.hpp

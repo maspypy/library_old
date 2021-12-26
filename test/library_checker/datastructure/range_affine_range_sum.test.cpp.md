@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: algebra/monoid.hpp
+    title: algebra/monoid.hpp
+  - icon: ':heavy_check_mark:'
     path: ds/lazysegtree.hpp
     title: ds/lazysegtree.hpp
   - icon: ':heavy_check_mark:'
@@ -22,7 +25,7 @@ data:
     - https://judge.yosupo.jp/problem/range_affine_range_sum
   bundledCode: "#line 1 \"test/library_checker/datastructure/range_affine_range_sum.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\n\
-    \n#line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
+    #line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
     \nusing ll = long long;\nusing ll8 = __int128;\nusing ld = long double;\nusing\
     \ pi = pair<ll, ll>;\nusing vi = vector<ll>;\ntemplate <class T> using vc = vector<T>;\n\
     template <class T> using vvc = vector<vc<T>>;\ntemplate <class T> using vvvc =\
@@ -106,116 +109,157 @@ data:
     \ (a < b ? a = b, 1 : 0); }\ntemplate <class T, class S> inline bool chmin(T &a,\
     \ const S &b) { return (a > b ? a = b, 1 : 0); }\n\ntemplate <typename T>\nvc<T>\
     \ merge_sort(vc<T>& A, vc<T>& B) {\n  vc<T> C;\n  C.reserve(A.size() + B.size());\n\
-    \  merge(all(A), all(B), back_inserter(C));\n  return C;\n}\n#line 4 \"test/library_checker/datastructure/range_affine_range_sum.test.cpp\"\
-    \n\n#line 2 \"ds/lazysegtree.hpp\"\ntemplate <typename T, typename OP, bool OP_commute\
-    \ = false>\nstruct LazySegTree {\n  using F = function<T(T, T)>;\n  using G =\
-    \ function<T(T, OP)>;\n  using H = function<OP(OP, OP)>;\n  int sz, n, height;\n\
-    \  F f;\n  G g;\n  H h;\n  T ti;\n  OP ei;\n  vector<T> dat;\n  vector<OP> laz;\n\
-    \  LazySegTree(F f, G g, H h, T ti, OP ei) : f(f), g(g), h(h), ti(ti), ei(ei)\
-    \ {}\n\n  void init(int n_) {\n    sz = n_;\n    n = 1;\n    height = 0;\n   \
-    \ while (n < n_) n <<= 1, height++;\n    dat.assign(2 * n, ti);\n    laz.assign(2\
-    \ * n, ei);\n  }\n\n  void build(const vector<T> &v) {\n    int n_ = v.size();\n\
-    \    init(n_);\n    for (int i = 0; i < n_; i++) dat[n + i] = v[i];\n    for (int\
-    \ i = n - 1; i; i--)\n      dat[i] = f(dat[(i << 1) | 0], dat[(i << 1) | 1]);\n\
-    \  }\n\n  inline T reflect(int k) { return laz[k] == ei ? dat[k] : g(dat[k], laz[k]);\
-    \ }\n\n  inline void propagate(int k) {\n    if (laz[k] == ei) return;\n    laz[(k\
-    \ << 1) | 0] = h(laz[(k << 1) | 0], laz[k]);\n    laz[(k << 1) | 1] = h(laz[(k\
-    \ << 1) | 1], laz[k]);\n    dat[k] = reflect(k);\n    laz[k] = ei;\n  }\n\n  inline\
-    \ void thrust(int k) {\n    for (int i = height; i; i--) propagate(k >> i);\n\
-    \  }\n\n  inline void recalc(int k) {\n    while (k >>= 1) dat[k] = f(reflect((k\
-    \ << 1) | 0), reflect((k << 1) | 1));\n  }\n\n  void operate_range(int a, int\
-    \ b, OP x) {\n    if (a >= b) return;\n    a += n, b += n - 1;\n    if (!OP_commute)\
-    \ {\n      thrust(a);\n      thrust(b);\n    }\n    for (int l = a, r = b + 1;\
-    \ l < r; l >>= 1, r >>= 1) {\n      if (l & 1) laz[l] = h(laz[l], x), l++;\n \
-    \     if (r & 1) --r, laz[r] = h(laz[r], x);\n    }\n    recalc(a);\n    recalc(b);\n\
-    \  }\n\n  void set(int a, T x) {\n    thrust(a += n);\n    dat[a] = x;\n    laz[a]\
-    \ = ei;\n    recalc(a);\n  }\n\n  T fold(int a, int b) {\n    if (a >= b) return\
-    \ ti;\n    thrust(a += n);\n    thrust(b += n - 1);\n    T vl = ti, vr = ti;\n\
-    \    for (int l = a, r = b + 1; l < r; l >>= 1, r >>= 1) {\n      if (l & 1) vl\
-    \ = f(vl, reflect(l++));\n      if (r & 1) vr = f(reflect(--r), vr);\n    }\n\
-    \    return f(vl, vr);\n  }\n\n  template <typename C>\n  int find(int st, C &check,\
-    \ T &acc, int k, int l, int r) {\n    if (l + 1 == r) {\n      acc = f(acc, reflect(k));\n\
-    \      return check(acc) ? k - n : -1;\n    }\n    propagate(k);\n    int m =\
-    \ (l + r) >> 1;\n    if (m <= st) return find(st, check, acc, (k << 1) | 1, m,\
-    \ r);\n    if (st <= l and !check(f(acc, dat[k]))) {\n      acc = f(acc, dat[k]);\n\
-    \      return -1;\n    }\n    int vl = find(st, check, acc, (k << 1) | 0, l, m);\n\
-    \    if (~vl) return vl;\n    return find(st, check, acc, (k << 1) | 1, m, r);\n\
-    \  }\n\n  template <typename C>\n  int find(int st, C &check) {\n    T acc = ti;\n\
-    \    return find(st, check, acc, 1, 0, n);\n  }\n\n  void debug() {\n    vc<T>\
-    \ A(sz);\n    FOR(i, sz) A[i] = fold(i, i + 1);\n    print(A);\n  }\n};\n#line\
-    \ 1 \"mod/modint.hpp\"\ntemplate< int mod >\nstruct modint {\n  int x;\n\n  modint()\
-    \ : x(0) {}\n\n  modint(int64_t y) : x(y >= 0 ? y % mod : (mod - (-y) % mod) %\
-    \ mod) {}\n\n  modint &operator+=(const modint &p) {\n    if((x += p.x) >= mod)\
-    \ x -= mod;\n    return *this;\n  }\n\n  modint &operator-=(const modint &p) {\n\
-    \    if((x += mod - p.x) >= mod) x -= mod;\n    return *this;\n  }\n\n  modint\
-    \ &operator*=(const modint &p) {\n    x = (int) (1LL * x * p.x % mod);\n    return\
-    \ *this;\n  }\n\n  modint &operator/=(const modint &p) {\n    *this *= p.inverse();\n\
-    \    return *this;\n  }\n\n  modint operator-() const { return modint(-x); }\n\
-    \n  modint operator+(const modint &p) const { return modint(*this) += p; }\n\n\
-    \  modint operator-(const modint &p) const { return modint(*this) -= p; }\n\n\
-    \  modint operator*(const modint &p) const { return modint(*this) *= p; }\n\n\
-    \  modint operator/(const modint &p) const { return modint(*this) /= p; }\n\n\
-    \  bool operator==(const modint &p) const { return x == p.x; }\n\n  bool operator!=(const\
-    \ modint &p) const { return x != p.x; }\n\n  modint inverse() const {\n    int\
-    \ a = x, b = mod, u = 1, v = 0, t;\n    while(b > 0) {\n      t = a / b;\n   \
-    \   swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n    return modint(u);\n\
-    \  }\n\n  modint pow(int64_t n) const {\n    modint ret(1), mul(x);\n    while(n\
-    \ > 0) {\n      if(n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n   \
-    \ }\n    return ret;\n  }\n\n  friend ostream &operator<<(ostream &os, const modint\
-    \ &p) {\n    return os << p.x;\n  }\n\n  friend istream &operator>>(istream &is,\
-    \ modint &a) {\n    int64_t t;\n    is >> t;\n    a = modint< mod >(t);\n    return\
-    \ (is);\n  }\n\n  static int get_mod() { return mod; }\n};\n\ntemplate< typename\
-    \ T >\nstruct ModCalc {\n  vector<T> _fact = {1, 1};\n  vector<T> _fact_inv =\
-    \ {1, 1};\n  vector<T> _inv = {0, 1};\n  \n  T pow(T a, int n){\n    T x(1);\n\
-    \    while(n) {\n      if(n & 1) x *= a;\n      a *= a;\n      n >>= 1;\n    }\n\
-    \    return x;\n  }\n  void expand(int n){\n    while(_fact.size() <= n){\n  \
-    \    auto i = _fact.size();\n      _fact.eb(_fact[i-1] * T(i));\n      auto q\
-    \ = T::get_mod() / i, r = T::get_mod() % i;\n      _inv.eb(_inv[r] * T(T::get_mod()-q));\n\
-    \      _fact_inv.eb(_fact_inv[i-1] * _inv[i]);\n    }\n  }\n\n  T fact(int n){\n\
-    \    if(n >= _fact.size()) expand(n);\n    return _fact[n];\n  }\n\n  T fact_inv(int\
-    \ n){\n    if(n >= _fact.size()) expand(n);\n    return _fact_inv[n];\n  }\n \
-    \ \n  T inv(int n){\n    if(n >= _fact.size()) expand(n);\n    return _inv[n];\n\
-    \  }\n  \n  T C(ll n, ll k, bool large=false){\n    assert(n >= 0);\n    if (k\
-    \ < 0 || n < k) return 0;\n    if (!large) return fact(n) * fact_inv(k) * fact_inv(n-k);\n\
-    \    k = min(k, n-k);\n    T x(1);\n    FOR(i, k){\n      x *= n - i;\n      x\
-    \ *= inv(i + 1);\n    }\n    return x;\n  }\n};\n\nusing modint107 = modint<1'000'000'007>;\n\
-    using modint998 = modint<998'244'353>;\n#line 7 \"test/library_checker/datastructure/range_affine_range_sum.test.cpp\"\
-    \n\nusing mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n\n  using E = pair<mint,\
-    \ mint>;  // cnt, sum\n  using OP = pair<mint, mint>; // (a,b) of ax + b\n  const\
-    \ bool OP_commute = false;\n  LazySegTree<E, OP, OP_commute> seg(\n    [&](E x,\
-    \ E y) -> E {\n      return E({x.fi + y.fi, x.se + y.se});\n    },\n    [&](E\
-    \ x, OP y) -> E {\n      return E({x.fi, x.se * y.fi + x.fi * y.se});\n    },\n\
-    \    [&](OP x, OP y) -> OP {\n      return OP({x.fi * y.fi, x.se * y.fi + y.se});\n\
-    \    },\n    E({mint(0), mint(0)}), OP({mint(1), mint(0)}));\n  seg.init(N);\n\
-    \  vc<E> A(N);\n  FOR(i, N) {\n    LL(x);\n    A[i] = {1, x};\n  }\n  seg.build(A);\n\
-    \n  FOR(_, Q) {\n    LL(t, L, R);\n    if (t == 0) {\n      LL(a, b);\n      seg.operate_range(L,\
-    \ R, OP({mint(a), mint(b)}));\n    }\n\n    if (t == 1) {\n      auto [cnt, sum]\
-    \ = seg.fold(L, R);\n      print(sum);\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
+    \  merge(all(A), all(B), back_inserter(C));\n  return C;\n}\n#line 3 \"test/library_checker/datastructure/range_affine_range_sum.test.cpp\"\
+    \n\n#line 3 \"ds/lazysegtree.hpp\"\n\n#line 2 \"algebra/monoid.hpp\"\n\r\ntemplate\
+    \ <typename E>\r\nstruct Monoid {\r\n  using F = function<E(E, E)>;\r\n  using\
+    \ G = function<E(E)>;\r\n  F f;\r\n  E unit;\r\n  bool commute;\r\n  bool has_inverse;\r\
+    \n  G inverse;\r\n};\r\n\r\ntemplate <typename E, typename OP>\r\nstruct Monoid_OP\
+    \ {\r\n  using F = function<E(E, E)>;\r\n  using G = function<E(E, OP)>;\r\n \
+    \ using H = function<OP(OP, OP)>;\r\n  F f;\r\n  G g;\r\n  H h;\r\n  E unit;\r\
+    \n  OP OP_unit;\r\n  bool commute;\r\n  bool OP_commute;\r\n};\r\n\r\ntemplate\
+    \ <typename E>\r\nMonoid<E> Monoid_reverse(Monoid<E> Mono) {\r\n  auto rev_f =\
+    \ [=](E x, E y) -> E { return Mono.f(y, x); };\r\n  return Monoid<E>(\r\n    {rev_f,\
+    \ Mono.unit, Mono.commute, Mono.has_inverse, Mono.inverse});\r\n}\r\n\r\ntemplate\
+    \ <typename E>\r\nMonoid<E> Monoid_add() {\r\n  auto f = [](E x, E y) -> E { return\
+    \ x + y; };\r\n  auto g = [](E x) -> E { return -x; };\r\n  return Monoid<E>({f,\
+    \ 0, true, true, g});\r\n}\r\n\r\ntemplate <typename E>\r\nMonoid<E> Monoid_min(E\
+    \ INF) {\r\n  auto f = [](E x, E y) -> E { return min(x, y); };\r\n  return Monoid<E>({f,\
+    \ INF, true, false});\r\n}\r\n\r\ntemplate <typename E>\r\nMonoid<E> Monoid_max(E\
+    \ MINUS_INF) {\r\n  auto f = [](E x, E y) -> E { return max(x, y); };\r\n  return\
+    \ Monoid<E>({f, MINUS_INF, true, false});\r\n}\r\n\r\ntemplate <typename E>\r\n\
+    Monoid<pair<E, E>> Monoid_affine(bool has_inverse = false) {\r\n  auto f = [](pair<E,\
+    \ E> x, pair<E, E> y) -> pair<E, E> {\r\n    return {x.fi * y.fi, x.se * y.fi\
+    \ + y.se};\r\n  };\r\n  auto inv = [&](pair<E, E> x) -> pair<E, E> {\r\n    //\
+    \ y = ax + b iff x = (1/a) y - (b/a)\r\n    auto [a, b] = x;\r\n    a = E(1) /\
+    \ a;\r\n    return {a, a * (-b)};\r\n  };\r\n  return Monoid<pair<E, E>>({f, mp(E(1),\
+    \ E(0)), false, has_inverse, inv});\r\n}\r\n\r\ntemplate <typename E>\r\nMonoid_OP<pair<E,\
+    \ E>, pair<E, E>> Monoid_cnt_sum_affine() {\r\n  using P = pair<E, E>;\r\n  auto\
+    \ f = [](P x, P y) -> P { return P({x.fi + y.fi, x.se + y.se}); };\r\n  auto g\
+    \ = [](P x, P y) -> P { return P({x.fi, x.fi * y.se + x.se * y.fi}); };\r\n  auto\
+    \ h = [](P x, P y) -> P { return P({x.fi * y.fi, x.se * y.fi + y.se}); };\r\n\
+    \  return Monoid_OP<P, P>({f, g, h, P({0, 0}), P({1, 0}), true, false});\r\n}\r\
+    \n#line 5 \"ds/lazysegtree.hpp\"\n\ntemplate <typename E, typename OP>\nstruct\
+    \ LazySegTree {\n  using F = function<E(E, E)>;\n  using G = function<E(E, OP)>;\n\
+    \  using H = function<OP(OP, OP)>;\n  int _n, size, log;\n  vc<E> dat;\n  vc<OP>\
+    \ laz;\n  F seg_f;\n  G seg_g;\n  H seg_h;\n  E unit;\n  OP OP_unit;\n  bool OP_commute;\n\
+    \n  LazySegTree(Monoid_OP<E, OP> Mono)\n      : seg_f(Mono.f)\n      , seg_g(Mono.g)\n\
+    \      , seg_h(Mono.h)\n      , unit(Mono.unit)\n      , OP_unit(Mono.OP_unit)\n\
+    \      , OP_commute(Mono.OP_commute) {}\n\n  void init(int n) {\n    _n = n;\n\
+    \    log = 1;\n    while ((1 << log) < n) ++log;\n    size = 1 << log;\n    dat.assign(size\
+    \ << 1, unit);\n    laz.assign(size, OP_unit);\n  }\n\n  void build(const vector<E>&\
+    \ v) {\n    assert(v.size() == _n);\n    FOR(i, v.size()) { dat[size + i] = v[i];\
+    \ }\n    FOR3_R(i, 1, size) { update(i); }\n  }\n\n  void update(int k) { dat[k]\
+    \ = seg_f(dat[2 * k], dat[2 * k + 1]); }\n\n  void all_apply(int k, OP a) {\n\
+    \    dat[k] = seg_g(dat[k], a);\n    if (k < size) laz[k] = seg_h(laz[k], a);\n\
+    \  }\n\n  void push(int k) {\n    all_apply(2 * k, laz[k]);\n    all_apply(2 *\
+    \ k + 1, laz[k]);\n    laz[k] = OP_unit;\n  }\n\n  void set(int p, E x) {\n  \
+    \  assert(0 <= p && p < _n);\n    p += size;\n    for (int i = log; i >= 1; i--)\
+    \ push(p >> i);\n    dat[p] = x;\n    for (int i = 1; i <= log; i++) update(p\
+    \ >> i);\n  }\n\n  E get(int p) {\n    assert(0 <= p && p < _n);\n    p += size;\n\
+    \    for (int i = log; i >= 1; i--) push(p >> i);\n    return dat[p];\n  }\n\n\
+    \  E prod(int l, int r) {\n    assert(0 <= l && l <= r && r <= _n);\n    if (l\
+    \ == r) return unit;\n\n    l += size;\n    r += size;\n\n    for (int i = log;\
+    \ i >= 1; i--) {\n      if (((l >> i) << i) != l) push(l >> i);\n      if (((r\
+    \ >> i) << i) != r) push((r - 1) >> i);\n    }\n\n    E sml = unit, smr = unit;\n\
+    \    while (l < r) {\n      if (l & 1) sml = seg_f(sml, dat[l++]);\n      if (r\
+    \ & 1) smr = seg_f(dat[--r], smr);\n      l >>= 1;\n      r >>= 1;\n    }\n\n\
+    \    return seg_f(sml, smr);\n  }\n\n  E all_prod() { return dat[1]; }\n\n  void\
+    \ apply(int p, OP a) {\n    assert(0 <= p && p < _n);\n    p += size;\n    if\
+    \ (!OP_commute)\n      for (int i = log; i >= 1; i--) push(p >> i);\n    dat[p]\
+    \ = seg_g(dat[p], a);\n    for (int i = 1; i <= log; i++) update(p >> i);\n  }\n\
+    \n  void apply(int l, int r, OP a) {\n    assert(0 <= l && l <= r && r <= _n);\n\
+    \    if (l == r) return;\n\n    l += size;\n    r += size;\n\n    for (int i =\
+    \ log; i >= 1; i--) {\n      if (((l >> i) << i) != l) push(l >> i);\n      if\
+    \ (((r >> i) << i) != r) push((r - 1) >> i);\n    }\n\n    {\n      int l2 = l,\
+    \ r2 = r;\n      while (l < r) {\n        if (l & 1) all_apply(l++, a);\n    \
+    \    if (r & 1) all_apply(--r, a);\n        l >>= 1;\n        r >>= 1;\n     \
+    \ }\n      l = l2;\n      r = r2;\n    }\n\n    for (int i = 1; i <= log; i++)\
+    \ {\n      if (((l >> i) << i) != l) update(l >> i);\n      if (((r >> i) << i)\
+    \ != r) update((r - 1) >> i);\n    }\n  }\n\n  template <typename C>\n  int max_right(C&\
+    \ check, int l) {\n    assert(0 <= l && l <= _n);\n    assert(check(unit));\n\
+    \    if (l == _n) return _n;\n    l += size;\n    for (int i = log; i >= 1; i--)\
+    \ push(l >> i);\n    E sm = unit;\n    do {\n      while (l % 2 == 0) l >>= 1;\n\
+    \      if (!check(seg_f(sm, dat[l]))) {\n        while (l < size) {\n        \
+    \  push(l);\n          l = (2 * l);\n          if (check(seg_f(sm, dat[l]))) {\n\
+    \            sm = seg_f(sm, dat[l]);\n            l++;\n          }\n        }\n\
+    \        return l - size;\n      }\n      sm = seg_f(sm, dat[l]);\n      l++;\n\
+    \    } while ((l & -l) != l);\n    return _n;\n  }\n\n  template <typename C>\n\
+    \  int min_left(C& check, int r) {\n    assert(0 <= r && r <= _n);\n    assert(check(unit));\n\
+    \    if (r == 0) return 0;\n    r += size;\n    for (int i = log; i >= 1; i--)\
+    \ push((r - 1) >> i);\n    E sm = unit;\n    do {\n      r--;\n      while (r\
+    \ > 1 && (r % 2)) r >>= 1;\n      if (!check(seg_f(dat[r], sm))) {\n        while\
+    \ (r < size) {\n          push(r);\n          r = (2 * r + 1);\n          if (check(seg_f(dat[r],\
+    \ sm))) {\n            sm = seg_f(dat[r], sm);\n            r--;\n          }\n\
+    \        }\n        return r + 1 - size;\n      }\n      sm = seg_f(dat[r], sm);\n\
+    \    } while ((r & -r) != r);\n    return 0;\n  }\n\n  void debug() {\n    vc<E>\
+    \ v(_n);\n    FOR(i, _n) v[i] = get(i);\n    print(\"lazysegtree getall:\", v);\n\
+    \  }\n};\n#line 1 \"mod/modint.hpp\"\ntemplate< int mod >\nstruct modint {\n \
+    \ int x;\n\n  modint() : x(0) {}\n\n  modint(int64_t y) : x(y >= 0 ? y % mod :\
+    \ (mod - (-y) % mod) % mod) {}\n\n  modint &operator+=(const modint &p) {\n  \
+    \  if((x += p.x) >= mod) x -= mod;\n    return *this;\n  }\n\n  modint &operator-=(const\
+    \ modint &p) {\n    if((x += mod - p.x) >= mod) x -= mod;\n    return *this;\n\
+    \  }\n\n  modint &operator*=(const modint &p) {\n    x = (int) (1LL * x * p.x\
+    \ % mod);\n    return *this;\n  }\n\n  modint &operator/=(const modint &p) {\n\
+    \    *this *= p.inverse();\n    return *this;\n  }\n\n  modint operator-() const\
+    \ { return modint(-x); }\n\n  modint operator+(const modint &p) const { return\
+    \ modint(*this) += p; }\n\n  modint operator-(const modint &p) const { return\
+    \ modint(*this) -= p; }\n\n  modint operator*(const modint &p) const { return\
+    \ modint(*this) *= p; }\n\n  modint operator/(const modint &p) const { return\
+    \ modint(*this) /= p; }\n\n  bool operator==(const modint &p) const { return x\
+    \ == p.x; }\n\n  bool operator!=(const modint &p) const { return x != p.x; }\n\
+    \n  modint inverse() const {\n    int a = x, b = mod, u = 1, v = 0, t;\n    while(b\
+    \ > 0) {\n      t = a / b;\n      swap(a -= t * b, b);\n      swap(u -= t * v,\
+    \ v);\n    }\n    return modint(u);\n  }\n\n  modint pow(int64_t n) const {\n\
+    \    modint ret(1), mul(x);\n    while(n > 0) {\n      if(n & 1) ret *= mul;\n\
+    \      mul *= mul;\n      n >>= 1;\n    }\n    return ret;\n  }\n\n  friend ostream\
+    \ &operator<<(ostream &os, const modint &p) {\n    return os << p.x;\n  }\n\n\
+    \  friend istream &operator>>(istream &is, modint &a) {\n    int64_t t;\n    is\
+    \ >> t;\n    a = modint< mod >(t);\n    return (is);\n  }\n\n  static int get_mod()\
+    \ { return mod; }\n};\n\ntemplate< typename T >\nstruct ModCalc {\n  vector<T>\
+    \ _fact = {1, 1};\n  vector<T> _fact_inv = {1, 1};\n  vector<T> _inv = {0, 1};\n\
+    \  \n  T pow(T a, int n){\n    T x(1);\n    while(n) {\n      if(n & 1) x *= a;\n\
+    \      a *= a;\n      n >>= 1;\n    }\n    return x;\n  }\n  void expand(int n){\n\
+    \    while(_fact.size() <= n){\n      auto i = _fact.size();\n      _fact.eb(_fact[i-1]\
+    \ * T(i));\n      auto q = T::get_mod() / i, r = T::get_mod() % i;\n      _inv.eb(_inv[r]\
+    \ * T(T::get_mod()-q));\n      _fact_inv.eb(_fact_inv[i-1] * _inv[i]);\n    }\n\
+    \  }\n\n  T fact(int n){\n    if(n >= _fact.size()) expand(n);\n    return _fact[n];\n\
+    \  }\n\n  T fact_inv(int n){\n    if(n >= _fact.size()) expand(n);\n    return\
+    \ _fact_inv[n];\n  }\n  \n  T inv(int n){\n    if(n >= _fact.size()) expand(n);\n\
+    \    return _inv[n];\n  }\n  \n  T C(ll n, ll k, bool large=false){\n    assert(n\
+    \ >= 0);\n    if (k < 0 || n < k) return 0;\n    if (!large) return fact(n) *\
+    \ fact_inv(k) * fact_inv(n-k);\n    k = min(k, n-k);\n    T x(1);\n    FOR(i,\
+    \ k){\n      x *= n - i;\n      x *= inv(i + 1);\n    }\n    return x;\n  }\n\
+    };\n\nusing modint107 = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n\
+    #line 6 \"test/library_checker/datastructure/range_affine_range_sum.test.cpp\"\
+    \n\nusing mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using E = pair<mint,\
+    \ mint>;\n  vc<E> seg_raw(N);\n  FOR(i, N) {\n    LL(x);\n    seg_raw[i] = E({mint(1),\
+    \ mint(x)});\n  }\n  LazySegTree<E, E> seg(Monoid_cnt_sum_affine<mint>());\n \
+    \ seg.init(N);\n  seg.build(seg_raw);\n\n  FOR(_, Q) {\n    LL(t);\n    if (t\
+    \ == 0) {\n      LL(l, r, a, b);\n      seg.apply(l, r, E({mint(a), mint(b)}));\n\
+    \    }\n    elif (t == 1) {\n      LL(l, r);\n      auto cs = seg.prod(l, r);\n\
+    \      print(cs.se);\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
     \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  solve();\n\n\
     \  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\
-    \n\n#include \"my_template.hpp\"\n\n#include \"ds/lazysegtree.hpp\"\n#include\
-    \ \"mod/modint.hpp\"\n\nusing mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n\
-    \n  using E = pair<mint, mint>;  // cnt, sum\n  using OP = pair<mint, mint>; //\
-    \ (a,b) of ax + b\n  const bool OP_commute = false;\n  LazySegTree<E, OP, OP_commute>\
-    \ seg(\n    [&](E x, E y) -> E {\n      return E({x.fi + y.fi, x.se + y.se});\n\
-    \    },\n    [&](E x, OP y) -> E {\n      return E({x.fi, x.se * y.fi + x.fi *\
-    \ y.se});\n    },\n    [&](OP x, OP y) -> OP {\n      return OP({x.fi * y.fi,\
-    \ x.se * y.fi + y.se});\n    },\n    E({mint(0), mint(0)}), OP({mint(1), mint(0)}));\n\
-    \  seg.init(N);\n  vc<E> A(N);\n  FOR(i, N) {\n    LL(x);\n    A[i] = {1, x};\n\
-    \  }\n  seg.build(A);\n\n  FOR(_, Q) {\n    LL(t, L, R);\n    if (t == 0) {\n\
-    \      LL(a, b);\n      seg.operate_range(L, R, OP({mint(a), mint(b)}));\n   \
-    \ }\n\n    if (t == 1) {\n      auto [cnt, sum] = seg.fold(L, R);\n      print(sum);\n\
-    \    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
-    \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
+    \n#include \"my_template.hpp\"\n\n#include \"ds/lazysegtree.hpp\"\n#include \"\
+    mod/modint.hpp\"\n\nusing mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n \
+    \ using E = pair<mint, mint>;\n  vc<E> seg_raw(N);\n  FOR(i, N) {\n    LL(x);\n\
+    \    seg_raw[i] = E({mint(1), mint(x)});\n  }\n  LazySegTree<E, E> seg(Monoid_cnt_sum_affine<mint>());\n\
+    \  seg.init(N);\n  seg.build(seg_raw);\n\n  FOR(_, Q) {\n    LL(t);\n    if (t\
+    \ == 0) {\n      LL(l, r, a, b);\n      seg.apply(l, r, E({mint(a), mint(b)}));\n\
+    \    }\n    elif (t == 1) {\n      LL(l, r);\n      auto cs = seg.prod(l, r);\n\
+    \      print(cs.se);\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
+    \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  solve();\n\n\
+    \  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
   - ds/lazysegtree.hpp
+  - algebra/monoid.hpp
   - mod/modint.hpp
   isVerificationFile: true
   path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2021-12-26 03:01:43+09:00'
+  timestamp: '2021-12-27 05:48:28+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/range_affine_range_sum.test.cpp

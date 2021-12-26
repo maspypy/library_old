@@ -119,10 +119,10 @@ data:
     \n\n#line 2 \"algebra/monoid.hpp\"\n\r\ntemplate <typename E>\r\nstruct Monoid\
     \ {\r\n  using F = function<E(E, E)>;\r\n  using G = function<E(E)>;\r\n  F f;\r\
     \n  E unit;\r\n  bool commute;\r\n  bool has_inverse;\r\n  G inverse;\r\n};\r\n\
-    \r\ntemplate <typename E, typename OP, bool commute, bool OP_commute>\r\nstruct\
-    \ Monoid_OP {\r\n  using F = function<E(E, E)>;\r\n  using G = function<E(E, OP)>;\r\
-    \n  using H = function<OP(OP, OP)>;\r\n  F f;\r\n  G g;\r\n  H h;\r\n  E unit;\r\
-    \n  OP OP_unit;\r\n};\r\n\r\ntemplate <typename E>\r\nMonoid<E> Monoid_reverse(Monoid<E>\
+    \r\ntemplate <typename E, typename OP>\r\nstruct Monoid_OP {\r\n  using F = function<E(E,\
+    \ E)>;\r\n  using G = function<E(E, OP)>;\r\n  using H = function<OP(OP, OP)>;\r\
+    \n  F f;\r\n  G g;\r\n  H h;\r\n  E unit;\r\n  OP OP_unit;\r\n  bool commute;\r\
+    \n  bool OP_commute;\r\n};\r\n\r\ntemplate <typename E>\r\nMonoid<E> Monoid_reverse(Monoid<E>\
     \ Mono) {\r\n  auto rev_f = [=](E x, E y) -> E { return Mono.f(y, x); };\r\n \
     \ return Monoid<E>(\r\n    {rev_f, Mono.unit, Mono.commute, Mono.has_inverse,\
     \ Mono.inverse});\r\n}\r\n\r\ntemplate <typename E>\r\nMonoid<E> Monoid_add()\
@@ -138,33 +138,39 @@ data:
     \ = [&](pair<E, E> x) -> pair<E, E> {\r\n    // y = ax + b iff x = (1/a) y - (b/a)\r\
     \n    auto [a, b] = x;\r\n    a = E(1) / a;\r\n    return {a, a * (-b)};\r\n \
     \ };\r\n  return Monoid<pair<E, E>>({f, mp(E(1), E(0)), false, has_inverse, inv});\r\
-    \n}\r\n#line 3 \"ds/segtree.hpp\"\n\ntemplate <typename E>\nstruct SegTree {\n\
-    \  using F = function<E(E, E)>;\n  int N_;\n  int N;\n  F seg_f;\n  E unit;\n\
-    \  vector<E> dat;\n\n  SegTree(Monoid<E> Mono) : seg_f(Mono.f), unit(Mono.unit)\
-    \ {}\n\n  void init(int n_) {\n    N_ = n_;\n    N = 1;\n    while (N < n_) N\
-    \ <<= 1;\n    dat.assign(N << 1, unit);\n  }\n\n  void build(const vector<E> &v)\
-    \ {\n    assert(v.size() == N_);\n    FOR(i, v.size()) { dat[N + i] = v[i]; }\n\
-    \    FOR3_R(i, 1, N) { dat[i] = seg_f(dat[i << 1 | 0], dat[i << 1 | 1]); }\n \
-    \ }\n\n  void set(int i, E x) {\n    assert(i < N_);\n    dat[i += N] = x;\n \
-    \   while (i >>= 1) { dat[i] = seg_f(dat[i << 1 | 0], dat[i << 1 | 1]); }\n  }\n\
-    \n  E prod(int L, int R) {\n    assert(L <= R);\n    assert(R <= N_);\n    E vl\
-    \ = unit, vr = unit;\n    L += N;\n    R += N;\n    while (L < R) {\n      if\
-    \ (L & 1) vl = seg_f(vl, dat[L++]);\n      if (R & 1) vr = seg_f(dat[--R], vr);\n\
-    \      L >>= 1;\n      R >>= 1;\n    }\n    return seg_f(vl, vr);\n  }\n\n  template\
-    \ <class F>\n  int max_right(F &check, int L) {\n    assert(0 <= L && L <= N_\
-    \ && check(unit));\n    if (L == N_) return N_;\n    L += N;\n    E sm = unit;\n\
-    \    do {\n      while (L % 2 == 0) L >>= 1;\n      if (!check(seg_f(sm, dat[L])))\
-    \ {\n        while (L < N) {\n          L = 2 * L;\n          if (check(seg_f(sm,\
-    \ dat[L]))) {\n            sm = seg_f(sm, dat[L]);\n            L++;\n       \
-    \   }\n        }\n        return L - N;\n      }\n      sm = seg_f(sm, dat[L]);\n\
-    \      L++;\n    } while ((L & -L) != L);\n    return N_;\n  }\n\n  template <class\
-    \ F>\n  int min_left(F &check, int R) {\n    assert(0 <= R && R <= N_ && check(unit));\n\
-    \    if (R == 0) return 0;\n    R += N;\n    E sm = unit;\n    do {\n      --R;\n\
-    \      while (R > 1 && (R % 2)) R >>= 1;\n      if (!check(seg_f(dat[R], sm)))\
-    \ {\n        while (R < N) {\n          R = 2 * R + 1;\n          if (check(seg_f(dat[R],\
-    \ sm))) {\n            sm = seg_f(dat[R], sm);\n            R--;\n          }\n\
-    \        }\n        return R + 1 - N;\n      }\n      sm = seg_f(dat[R], sm);\n\
-    \    } while ((R & -R) != R);\n    return 0;\n  }\n\n  void debug() { print(dat);\
+    \n}\r\n\r\ntemplate <typename E>\r\nMonoid_OP<pair<E, E>, pair<E, E>> Monoid_cnt_sum_affine()\
+    \ {\r\n  using P = pair<E, E>;\r\n  auto f = [](P x, P y) -> P { return P({x.fi\
+    \ + y.fi, x.se + y.se}); };\r\n  auto g = [](P x, P y) -> P { return P({x.fi,\
+    \ x.fi * y.se + x.se * y.fi}); };\r\n  auto h = [](P x, P y) -> P { return P({x.fi\
+    \ * y.fi, x.se * y.fi + y.se}); };\r\n  return Monoid_OP<P, P>({f, g, h, P({0,\
+    \ 0}), P({1, 0}), true, false});\r\n}\r\n#line 3 \"ds/segtree.hpp\"\n\ntemplate\
+    \ <typename E>\nstruct SegTree {\n  using F = function<E(E, E)>;\n  int N_;\n\
+    \  int N;\n  F seg_f;\n  E unit;\n  vector<E> dat;\n\n  SegTree(Monoid<E> Mono)\
+    \ : seg_f(Mono.f), unit(Mono.unit) {}\n\n  void init(int n_) {\n    N_ = n_;\n\
+    \    N = 1;\n    while (N < n_) N <<= 1;\n    dat.assign(N << 1, unit);\n  }\n\
+    \n  void build(const vector<E> &v) {\n    assert(v.size() == N_);\n    FOR(i,\
+    \ v.size()) { dat[N + i] = v[i]; }\n    FOR3_R(i, 1, N) { dat[i] = seg_f(dat[i\
+    \ << 1 | 0], dat[i << 1 | 1]); }\n  }\n\n  void set(int i, E x) {\n    assert(i\
+    \ < N_);\n    dat[i += N] = x;\n    while (i >>= 1) { dat[i] = seg_f(dat[i <<\
+    \ 1 | 0], dat[i << 1 | 1]); }\n  }\n\n  E prod(int L, int R) {\n    assert(L <=\
+    \ R);\n    assert(R <= N_);\n    E vl = unit, vr = unit;\n    L += N;\n    R +=\
+    \ N;\n    while (L < R) {\n      if (L & 1) vl = seg_f(vl, dat[L++]);\n      if\
+    \ (R & 1) vr = seg_f(dat[--R], vr);\n      L >>= 1;\n      R >>= 1;\n    }\n \
+    \   return seg_f(vl, vr);\n  }\n\n  template <class F>\n  int max_right(F &check,\
+    \ int L) {\n    assert(0 <= L && L <= N_ && check(unit));\n    if (L == N_) return\
+    \ N_;\n    L += N;\n    E sm = unit;\n    do {\n      while (L % 2 == 0) L >>=\
+    \ 1;\n      if (!check(seg_f(sm, dat[L]))) {\n        while (L < N) {\n      \
+    \    L = 2 * L;\n          if (check(seg_f(sm, dat[L]))) {\n            sm = seg_f(sm,\
+    \ dat[L]);\n            L++;\n          }\n        }\n        return L - N;\n\
+    \      }\n      sm = seg_f(sm, dat[L]);\n      L++;\n    } while ((L & -L) !=\
+    \ L);\n    return N_;\n  }\n\n  template <class F>\n  int min_left(F &check, int\
+    \ R) {\n    assert(0 <= R && R <= N_ && check(unit));\n    if (R == 0) return\
+    \ 0;\n    R += N;\n    E sm = unit;\n    do {\n      --R;\n      while (R > 1\
+    \ && (R % 2)) R >>= 1;\n      if (!check(seg_f(dat[R], sm))) {\n        while\
+    \ (R < N) {\n          R = 2 * R + 1;\n          if (check(seg_f(dat[R], sm)))\
+    \ {\n            sm = seg_f(dat[R], sm);\n            R--;\n          }\n    \
+    \    }\n        return R + 1 - N;\n      }\n      sm = seg_f(dat[R], sm);\n  \
+    \  } while ((R & -R) != R);\n    return 0;\n  }\n\n  void debug() { print(dat);\
     \ }\n};\n#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n\
     \  int frm, to;\n  T cost;\n  int id;\n  Edge(int a, int b, T c, int d) : frm(a),\
     \ to(b), cost(c), id(d) {}\n};\n\ntemplate <typename T>\nstruct Graph {\n  int\
@@ -371,7 +377,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
   requiredBy: []
-  timestamp: '2021-12-27 03:56:21+09:00'
+  timestamp: '2021-12-27 05:46:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp

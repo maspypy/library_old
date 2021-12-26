@@ -110,10 +110,10 @@ data:
     \n\n#line 2 \"algebra/monoid.hpp\"\n\r\ntemplate <typename E>\r\nstruct Monoid\
     \ {\r\n  using F = function<E(E, E)>;\r\n  using G = function<E(E)>;\r\n  F f;\r\
     \n  E unit;\r\n  bool commute;\r\n  bool has_inverse;\r\n  G inverse;\r\n};\r\n\
-    \r\ntemplate <typename E, typename OP, bool commute, bool OP_commute>\r\nstruct\
-    \ Monoid_OP {\r\n  using F = function<E(E, E)>;\r\n  using G = function<E(E, OP)>;\r\
-    \n  using H = function<OP(OP, OP)>;\r\n  F f;\r\n  G g;\r\n  H h;\r\n  E unit;\r\
-    \n  OP OP_unit;\r\n};\r\n\r\ntemplate <typename E>\r\nMonoid<E> Monoid_reverse(Monoid<E>\
+    \r\ntemplate <typename E, typename OP>\r\nstruct Monoid_OP {\r\n  using F = function<E(E,\
+    \ E)>;\r\n  using G = function<E(E, OP)>;\r\n  using H = function<OP(OP, OP)>;\r\
+    \n  F f;\r\n  G g;\r\n  H h;\r\n  E unit;\r\n  OP OP_unit;\r\n  bool commute;\r\
+    \n  bool OP_commute;\r\n};\r\n\r\ntemplate <typename E>\r\nMonoid<E> Monoid_reverse(Monoid<E>\
     \ Mono) {\r\n  auto rev_f = [=](E x, E y) -> E { return Mono.f(y, x); };\r\n \
     \ return Monoid<E>(\r\n    {rev_f, Mono.unit, Mono.commute, Mono.has_inverse,\
     \ Mono.inverse});\r\n}\r\n\r\ntemplate <typename E>\r\nMonoid<E> Monoid_add()\
@@ -129,20 +129,25 @@ data:
     \ = [&](pair<E, E> x) -> pair<E, E> {\r\n    // y = ax + b iff x = (1/a) y - (b/a)\r\
     \n    auto [a, b] = x;\r\n    a = E(1) / a;\r\n    return {a, a * (-b)};\r\n \
     \ };\r\n  return Monoid<pair<E, E>>({f, mp(E(1), E(0)), false, has_inverse, inv});\r\
-    \n}\r\n#line 2 \"ds/disjointsparse.hpp\"\n\r\ntemplate <typename E>\r\nstruct\
-    \ DisjointSparse {\r\n  using F = function<E(E, E)>;\r\n  F f;\r\n  E e;\r\n \
-    \ int N, log;\r\n  vc<vc<E>> dat;\r\n\r\n  DisjointSparse(Monoid<E> Mono, vc<E>\
-    \ A) : f(Mono.f), e(Mono.unit), N(len(A)) {\r\n    log = 1;\r\n    while ((1 <<\
-    \ log) < N) ++log;\r\n    dat.assign(log, A);\r\n\r\n    FOR(i, log) {\r\n   \
-    \   auto& v = dat[i];\r\n      int B = 1 << i;\r\n      for (int M = B; M <= N;\
-    \ M += 2 * B) {\r\n        int L = M - B, R = min(N, M + B);\r\n        FOR3_R(j,\
-    \ L + 1, M) v[j - 1] = f(v[j - 1], v[j]);\r\n        FOR3(j, M, R - 1) v[j + 1]\
-    \ = f(v[j], v[j + 1]);\r\n      }\r\n    }\r\n  }\r\n\r\n  E prod(int L, int R)\
-    \ {\r\n    if (L == R) return e;\r\n    --R;\r\n    if (L == R) return dat[0][L];\r\
-    \n    int k = 31 - __builtin_clz(L ^ R);\r\n    return f(dat[k][L], dat[k][R]);\r\
-    \n  }\r\n\r\n  void debug() { FOR(i, log) print(dat[i]); }\r\n};\r\n#line 5 \"\
-    test/library_checker/datastructure/staticrmq_sparse.test.cpp\"\n\nvoid solve()\
-    \ {\n  LL(N, Q);\n  VEC(int, A, N);\n  DisjointSparse<int> DS(Monoid_min<int>(1\
+    \n}\r\n\r\ntemplate <typename E>\r\nMonoid_OP<pair<E, E>, pair<E, E>> Monoid_cnt_sum_affine()\
+    \ {\r\n  using P = pair<E, E>;\r\n  auto f = [](P x, P y) -> P { return P({x.fi\
+    \ + y.fi, x.se + y.se}); };\r\n  auto g = [](P x, P y) -> P { return P({x.fi,\
+    \ x.fi * y.se + x.se * y.fi}); };\r\n  auto h = [](P x, P y) -> P { return P({x.fi\
+    \ * y.fi, x.se * y.fi + y.se}); };\r\n  return Monoid_OP<P, P>({f, g, h, P({0,\
+    \ 0}), P({1, 0}), true, false});\r\n}\r\n#line 2 \"ds/disjointsparse.hpp\"\n\r\
+    \ntemplate <typename E>\r\nstruct DisjointSparse {\r\n  using F = function<E(E,\
+    \ E)>;\r\n  F f;\r\n  E e;\r\n  int N, log;\r\n  vc<vc<E>> dat;\r\n\r\n  DisjointSparse(Monoid<E>\
+    \ Mono, vc<E> A) : f(Mono.f), e(Mono.unit), N(len(A)) {\r\n    log = 1;\r\n  \
+    \  while ((1 << log) < N) ++log;\r\n    dat.assign(log, A);\r\n\r\n    FOR(i,\
+    \ log) {\r\n      auto& v = dat[i];\r\n      int B = 1 << i;\r\n      for (int\
+    \ M = B; M <= N; M += 2 * B) {\r\n        int L = M - B, R = min(N, M + B);\r\n\
+    \        FOR3_R(j, L + 1, M) v[j - 1] = f(v[j - 1], v[j]);\r\n        FOR3(j,\
+    \ M, R - 1) v[j + 1] = f(v[j], v[j + 1]);\r\n      }\r\n    }\r\n  }\r\n\r\n \
+    \ E prod(int L, int R) {\r\n    if (L == R) return e;\r\n    --R;\r\n    if (L\
+    \ == R) return dat[0][L];\r\n    int k = 31 - __builtin_clz(L ^ R);\r\n    return\
+    \ f(dat[k][L], dat[k][R]);\r\n  }\r\n\r\n  void debug() { FOR(i, log) print(dat[i]);\
+    \ }\r\n};\r\n#line 5 \"test/library_checker/datastructure/staticrmq_sparse.test.cpp\"\
+    \n\nvoid solve() {\n  LL(N, Q);\n  VEC(int, A, N);\n  DisjointSparse<int> DS(Monoid_min<int>(1\
     \ << 30), A);\n\n  FOR(_, Q) {\n    LL(L, R);\n    print(DS.prod(L, R));\n  }\n\
     }\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout\
     \ << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
@@ -159,7 +164,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/staticrmq_sparse.test.cpp
   requiredBy: []
-  timestamp: '2021-12-27 03:31:34+09:00'
+  timestamp: '2021-12-27 05:46:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/staticrmq_sparse.test.cpp
