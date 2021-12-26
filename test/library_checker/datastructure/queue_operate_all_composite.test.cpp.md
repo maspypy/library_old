@@ -118,19 +118,23 @@ data:
     \  E unit;\r\n  OP OP_unit;\r\n};\r\n\r\ntemplate <typename E>\r\nstruct Group\
     \ {\r\n  using F = function<E(E, E)>;\r\n  using G = function<E(E)>;\r\n  F f;\r\
     \n  E E_unit;\r\n  G inv;\r\n  bool commute;\r\n};\r\n\r\ntemplate <typename E>\r\
-    \nMonoid<E> Monoid_min(E INF) {\r\n  auto f = [](E x, E y) -> E { return min(x,\
-    \ y); };\r\n  return Monoid<E>({f, INF, true});\r\n}\r\n\r\ntemplate <typename\
-    \ E>\r\nMonoid<E> Monoid_max(E MINUS_INF) {\r\n  auto f = [](E x, E y) -> E {\
-    \ return max(x, y); };\r\n  return Monoid<E>({f, MINUS_INF, true});\r\n}\r\n\r\
-    \ntemplate <typename E>\r\nMonoid<pair<E, E>> Monoid_affine() {\r\n  auto f =\
-    \ [](pair<E, E> x, pair<E, E> y) -> pair<E, E> {\r\n    return {x.fi * y.fi, x.se\
-    \ * y.fi + y.se};\r\n  };\r\n  return Monoid<pair<E, E>>({f, mp(E(1), E(0)), false});\r\
-    \n}\r\n#line 2 \"ds/swag.hpp\"\n\ntemplate <typename E>\nstruct SWAG {\n  using\
-    \ F = function<E(E, E)>;\n  F f;\n  E e;\n  vc<E> dat;\n  vc<E> cum_l;\n  E cum_r;\n\
-    \  SWAG(Monoid<E> M) : f(M.f), e(M.unit), cum_l({M.unit}), cum_r(M.unit) {}\n\n\
-    \  void push(E x) {\n    cum_r = f(cum_r, x);\n    dat.eb(x);\n  }\n\n  void pop()\
-    \ {\n    cum_l.pop_back();\n    if (len(cum_l) == 0) {\n      cum_l = {e};\n \
-    \     cum_r = e;\n      while (len(dat) > 1) {\n        cum_l.eb(f(dat.back(),\
+    \nMonoid<E> Monoid_reverse(Monoid<E> Mono) {\r\n  auto rev_f = [&](E x, E y) ->\
+    \ E { return Mono.f(x, y); };\r\n  return Monoid<E>({rev_f, Mono.unit, Mono.commute});\r\
+    \n}\r\n\r\ntemplate <typename E>\r\nMonoid<E> Monoid_add() {\r\n  auto f = [](E\
+    \ x, E y) -> E { return x + y; };\r\n  return Monoid<E>({f, 0, true});\r\n}\r\n\
+    \r\ntemplate <typename E>\r\nMonoid<E> Monoid_min(E INF) {\r\n  auto f = [](E\
+    \ x, E y) -> E { return min(x, y); };\r\n  return Monoid<E>({f, INF, true});\r\
+    \n}\r\n\r\ntemplate <typename E>\r\nMonoid<E> Monoid_max(E MINUS_INF) {\r\n  auto\
+    \ f = [](E x, E y) -> E { return max(x, y); };\r\n  return Monoid<E>({f, MINUS_INF,\
+    \ true});\r\n}\r\n\r\ntemplate <typename E>\r\nMonoid<pair<E, E>> Monoid_affine()\
+    \ {\r\n  auto f = [](pair<E, E> x, pair<E, E> y) -> pair<E, E> {\r\n    return\
+    \ {x.fi * y.fi, x.se * y.fi + y.se};\r\n  };\r\n  return Monoid<pair<E, E>>({f,\
+    \ mp(E(1), E(0)), false});\r\n}\r\n#line 2 \"ds/swag.hpp\"\n\ntemplate <typename\
+    \ E>\nstruct SWAG {\n  using F = function<E(E, E)>;\n  F f;\n  E e;\n  vc<E> dat;\n\
+    \  vc<E> cum_l;\n  E cum_r;\n  SWAG(Monoid<E> M) : f(M.f), e(M.unit), cum_l({M.unit}),\
+    \ cum_r(M.unit) {}\n\n  void push(E x) {\n    cum_r = f(cum_r, x);\n    dat.eb(x);\n\
+    \  }\n\n  void pop() {\n    cum_l.pop_back();\n    if (len(cum_l) == 0) {\n  \
+    \    cum_l = {e};\n      cum_r = e;\n      while (len(dat) > 1) {\n        cum_l.eb(f(dat.back(),\
     \ cum_l.back()));\n        dat.pop_back();\n      }\n      dat.pop_back();\n \
     \   }\n  }\n\n  E prod() { return f(cum_l.back(), cum_r); }\n\n  void debug()\
     \ {\n    print(\"dat\", dat);\n    print(\"cum_l\", cum_l);\n    print(\"cum_r\"\
@@ -198,7 +202,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
   requiredBy: []
-  timestamp: '2021-12-26 19:28:41+09:00'
+  timestamp: '2021-12-26 20:21:47+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/queue_operate_all_composite.test.cpp

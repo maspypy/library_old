@@ -136,7 +136,7 @@ data:
     - icon: ':warning:'
       path: graph/treedoubling.hpp
       title: graph/treedoubling.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: graph/treemonoid.hpp
       title: graph/treemonoid.hpp
     - icon: ':warning:'
@@ -245,7 +245,7 @@ data:
     - icon: ':x:'
       path: test/library_checker/datastructure/point_set_range_composite_group.test.cpp
       title: test/library_checker/datastructure/point_set_range_composite_group.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
       title: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
     - icon: ':heavy_check_mark:'
@@ -296,7 +296,7 @@ data:
     - icon: ':x:'
       path: test/library_checker/datastructure/vertex_add_path_sum_group_nc.test.cpp
       title: test/library_checker/datastructure/vertex_add_path_sum_group_nc.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
       title: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
     - icon: ':x:'

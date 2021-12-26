@@ -13,7 +13,7 @@ data:
   - icon: ':question:'
     path: graph/hld.hpp
     title: graph/hld.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: graph/treemonoid.hpp
     title: graph/treemonoid.hpp
   - icon: ':question:'
@@ -135,7 +135,7 @@ data:
     \ cout << \"\\n\";\n    }\n  }\n\n  vector<int> degrees() {\n    vector<int> deg(N);\n\
     \    FORIN(e, edges) {\n      deg[e.frm]++;\n      deg[e.to]++;\n    }\n    return\
     \ deg;\n  }\n\n  int size() { return N; }\n\n  vector<edge_t>& operator[](int\
-    \ v) { return G[v]; }\n};\n#line 1 \"graph/hld.hpp\"\ntemplate <typename Graph>\r\
+    \ v) { return G[v]; }\n};\n#line 2 \"graph/hld.hpp\"\ntemplate <typename Graph>\r\
     \nstruct HLD {\r\n  Graph &G;\r\n  int N;\r\n  vector<int> sz, LID, RID, head,\
     \ V, parent, depth, e_to_v;\r\n\r\n  HLD(Graph &G, int root = 0)\r\n      : G(G)\r\
     \n      , N(G.N)\r\n      , sz(G.N)\r\n      , LID(G.N)\r\n      , RID(G.N)\r\n\
@@ -176,30 +176,34 @@ data:
     \  E unit;\r\n  OP OP_unit;\r\n};\r\n\r\ntemplate <typename E>\r\nstruct Group\
     \ {\r\n  using F = function<E(E, E)>;\r\n  using G = function<E(E)>;\r\n  F f;\r\
     \n  E E_unit;\r\n  G inv;\r\n  bool commute;\r\n};\r\n\r\ntemplate <typename E>\r\
-    \nMonoid<E> Monoid_min(E INF) {\r\n  auto f = [](E x, E y) -> E { return min(x,\
-    \ y); };\r\n  return Monoid<E>({f, INF, true});\r\n}\r\n\r\ntemplate <typename\
-    \ E>\r\nMonoid<E> Monoid_max(E MINUS_INF) {\r\n  auto f = [](E x, E y) -> E {\
-    \ return max(x, y); };\r\n  return Monoid<E>({f, MINUS_INF, true});\r\n}\r\n\r\
-    \ntemplate <typename E>\r\nMonoid<pair<E, E>> Monoid_affine() {\r\n  auto f =\
-    \ [](pair<E, E> x, pair<E, E> y) -> pair<E, E> {\r\n    return {x.fi * y.fi, x.se\
-    \ * y.fi + y.se};\r\n  };\r\n  return Monoid<pair<E, E>>({f, mp(E(1), E(0)), false});\r\
-    \n}\r\n#line 3 \"ds/segtree.hpp\"\n\ntemplate <typename E>\nstruct SegTree {\n\
-    \  using F = function<E(E, E)>;\n  int N_;\n  int N;\n  F seg_f;\n  E unit;\n\
-    \  vector<E> dat;\n\n  SegTree(Monoid<E> Mono) : seg_f(Mono.f), unit(Mono.unit)\
-    \ {}\n\n  void init(int n_) {\n    N_ = n_;\n    N = 1;\n    while (N < n_) N\
-    \ <<= 1;\n    dat.assign(N << 1, unit);\n  }\n\n  void build(const vector<E> &v)\
-    \ {\n    assert(v.size() == N_);\n    FOR(i, v.size()) { dat[N + i] = v[i]; }\n\
-    \    FOR3_R(i, 1, N) { dat[i] = seg_f(dat[i << 1 | 0], dat[i << 1 | 1]); }\n \
-    \ }\n\n  void set(int i, E x) {\n    assert(i < N_);\n    dat[i += N] = x;\n \
-    \   while (i >>= 1) { dat[i] = seg_f(dat[i << 1 | 0], dat[i << 1 | 1]); }\n  }\n\
-    \n  E fold(int L, int R) {\n    assert(L <= R);\n    assert(R <= N_);\n    E vl\
-    \ = unit, vr = unit;\n    L += N;\n    R += N;\n    while (L < R) {\n      if\
-    \ (L & 1) vl = seg_f(vl, dat[L++]);\n      if (R & 1) vr = seg_f(dat[--R], vr);\n\
-    \      L >>= 1;\n      R >>= 1;\n    }\n    return seg_f(vl, vr);\n  }\n\n  template\
-    \ <class F>\n  int max_right(F &check, int L) {\n    assert(0 <= L && L <= N_\
-    \ && check(unit));\n    if (L == N_) return N_;\n    L += N;\n    E sm = unit;\n\
-    \    do {\n      while (L % 2 == 0) L >>= 1;\n      if (!check(seg_f(sm, dat[L])))\
-    \ {\n        while (L < N) {\n          L = 2 * L;\n          if (check(seg_f(sm,\
+    \nMonoid<E> Monoid_reverse(Monoid<E> Mono) {\r\n  auto rev_f = [&](E x, E y) ->\
+    \ E { return Mono.f(x, y); };\r\n  return Monoid<E>({rev_f, Mono.unit, Mono.commute});\r\
+    \n}\r\n\r\ntemplate <typename E>\r\nMonoid<E> Monoid_add() {\r\n  auto f = [](E\
+    \ x, E y) -> E { return x + y; };\r\n  return Monoid<E>({f, 0, true});\r\n}\r\n\
+    \r\ntemplate <typename E>\r\nMonoid<E> Monoid_min(E INF) {\r\n  auto f = [](E\
+    \ x, E y) -> E { return min(x, y); };\r\n  return Monoid<E>({f, INF, true});\r\
+    \n}\r\n\r\ntemplate <typename E>\r\nMonoid<E> Monoid_max(E MINUS_INF) {\r\n  auto\
+    \ f = [](E x, E y) -> E { return max(x, y); };\r\n  return Monoid<E>({f, MINUS_INF,\
+    \ true});\r\n}\r\n\r\ntemplate <typename E>\r\nMonoid<pair<E, E>> Monoid_affine()\
+    \ {\r\n  auto f = [](pair<E, E> x, pair<E, E> y) -> pair<E, E> {\r\n    return\
+    \ {x.fi * y.fi, x.se * y.fi + y.se};\r\n  };\r\n  return Monoid<pair<E, E>>({f,\
+    \ mp(E(1), E(0)), false});\r\n}\r\n#line 3 \"ds/segtree.hpp\"\n\ntemplate <typename\
+    \ E>\nstruct SegTree {\n  using F = function<E(E, E)>;\n  int N_;\n  int N;\n\
+    \  F seg_f;\n  E unit;\n  vector<E> dat;\n\n  SegTree(Monoid<E> Mono) : seg_f(Mono.f),\
+    \ unit(Mono.unit) {}\n\n  void init(int n_) {\n    N_ = n_;\n    N = 1;\n    while\
+    \ (N < n_) N <<= 1;\n    dat.assign(N << 1, unit);\n  }\n\n  void build(const\
+    \ vector<E> &v) {\n    assert(v.size() == N_);\n    FOR(i, v.size()) { dat[N +\
+    \ i] = v[i]; }\n    FOR3_R(i, 1, N) { dat[i] = seg_f(dat[i << 1 | 0], dat[i <<\
+    \ 1 | 1]); }\n  }\n\n  void set(int i, E x) {\n    assert(i < N_);\n    dat[i\
+    \ += N] = x;\n    while (i >>= 1) { dat[i] = seg_f(dat[i << 1 | 0], dat[i << 1\
+    \ | 1]); }\n  }\n\n  E prod(int L, int R) {\n    assert(L <= R);\n    assert(R\
+    \ <= N_);\n    E vl = unit, vr = unit;\n    L += N;\n    R += N;\n    while (L\
+    \ < R) {\n      if (L & 1) vl = seg_f(vl, dat[L++]);\n      if (R & 1) vr = seg_f(dat[--R],\
+    \ vr);\n      L >>= 1;\n      R >>= 1;\n    }\n    return seg_f(vl, vr);\n  }\n\
+    \n  template <class F>\n  int max_right(F &check, int L) {\n    assert(0 <= L\
+    \ && L <= N_ && check(unit));\n    if (L == N_) return N_;\n    L += N;\n    E\
+    \ sm = unit;\n    do {\n      while (L % 2 == 0) L >>= 1;\n      if (!check(seg_f(sm,\
+    \ dat[L]))) {\n        while (L < N) {\n          L = 2 * L;\n          if (check(seg_f(sm,\
     \ dat[L]))) {\n            sm = seg_f(sm, dat[L]);\n            L++;\n       \
     \   }\n        }\n        return L - N;\n      }\n      sm = seg_f(sm, dat[L]);\n\
     \      L++;\n    } while ((L & -L) != L);\n    return N_;\n  }\n\n  template <class\
@@ -210,74 +214,69 @@ data:
     \ sm))) {\n            sm = seg_f(dat[R], sm);\n            R--;\n          }\n\
     \        }\n        return R + 1 - N;\n      }\n      sm = seg_f(dat[R], sm);\n\
     \    } while ((R & -R) != R);\n    return 0;\n  }\n\n  void debug() { print(dat);\
-    \ }\n};\n#line 2 \"graph/treemonoid.hpp\"\n\r\ntemplate <typename HLD, typename\
-    \ E, bool edge = false, bool commute = true>\r\nstruct TreeMonoid {\r\n  using\
-    \ F = function<E(E, E)>;\r\n  HLD &hld;\r\n  int N;\r\n  F seg_f;\r\n  E E_unit;\r\
-    \n  SegTree<E> seg, seg_r;\r\n\r\n  TreeMonoid(HLD &hld, F seg_f, E E_unit)\r\n\
-    \      : hld(hld)\r\n      , N(hld.N)\r\n      , seg_f(seg_f)\r\n      , E_unit(E_unit)\r\
-    \n      , seg(seg_f, E_unit)\r\n      , seg_r([&](E x, E y) -> E { return seg_f(y,\
-    \ x); }, E_unit) {\r\n    seg.init(N);\r\n    if (!commute) seg_r.init(N);\r\n\
-    \  };\r\n\r\n  void init(vc<E> &dat) {\r\n    // vertex index OR edge index\r\n\
-    \    vc<E> seg_raw(N, E_unit);\r\n    if (!edge) {\r\n      FOR(v, N) seg_raw[hld.LID[v]]\
-    \ = dat[v];\r\n    } else {\r\n      FOR(i, N - 1) {\r\n        int v = hld.e_to_v[i];\r\
-    \n        seg_raw[hld.LID[v]] = dat[i];\r\n      }\r\n    }\r\n    seg.build(seg_raw);\r\
+    \ }\n};\n#line 3 \"graph/treemonoid.hpp\"\n\r\ntemplate <typename Graph, typename\
+    \ E, bool edge = false>\r\nstruct TreeMonoid {\r\n  using F = function<E(E, E)>;\r\
+    \n  HLD<Graph> &hld;\r\n  int N;\r\n  F f;\r\n  E unit;\r\n  bool commute;\r\n\
+    \  SegTree<E> seg, seg_r;\r\n\r\n  TreeMonoid(HLD<Graph> &hld, Monoid<E> Mono)\r\
+    \n      : hld(hld)\r\n      , N(hld.N)\r\n      , f(Mono.f)\r\n      , unit(Mono.unit)\r\
+    \n      , commute(Mono.commute)\r\n      , seg(Mono)\r\n      , seg_r(Monoid_reverse<E>(Mono))\
+    \ {\r\n    seg.init(N);\r\n    if (!commute) seg_r.init(N);\r\n  };\r\n\r\n  void\
+    \ init(vc<E> &dat) {\r\n    // vertex index OR edge index\r\n    vc<E> seg_raw(N,\
+    \ unit);\r\n    if (!edge) {\r\n      FOR(v, N) seg_raw[hld.LID[v]] = dat[v];\r\
+    \n    } else {\r\n      FOR(i, N - 1) {\r\n        int v = hld.e_to_v[i];\r\n\
+    \        seg_raw[hld.LID[v]] = dat[i];\r\n      }\r\n    }\r\n    seg.build(seg_raw);\r\
     \n    if (!commute) seg_r.build(seg_raw);\r\n  }\r\n\r\n  void set(int i, E x)\
     \ {\r\n    if (edge) i = hld.e_to_v[i];\r\n    i = hld.LID[i];\r\n    seg.set(i,\
-    \ x);\r\n    if (!commute) seg_r.set(i, x);\r\n  }\r\n\r\n  E fold_path_nc(int\
-    \ u, int v) {\r\n    E vl = E_unit, vr = E_unit;\r\n    while (1) {\r\n      if\
-    \ (hld.head[u] == hld.head[v]) break;\r\n      if (hld.LID[u] < hld.LID[v]) {\r\
-    \n        vr = seg_f(seg.fold(hld.LID[hld.head[v]], hld.LID[v] + 1), vr);\r\n\
-    \        v = hld.parent[hld.head[v]];\r\n      } else {\r\n        vl = seg_f(vl,\
-    \ seg_r.fold(hld.LID[hld.head[u]], hld.LID[u] + 1));\r\n        u = hld.parent[hld.head[u]];\r\
-    \n      }\r\n    }\r\n    E vm =\r\n      (hld.LID[u] < hld.LID[v] ? seg.fold(hld.LID[u]\
-    \ + edge, hld.LID[v] + 1)\r\n                               : seg_r.fold(hld.LID[v]\
-    \ + edge, hld.LID[u] + 1));\r\n    return seg_f(vl, seg_f(vm, vr));\r\n  }\r\n\
-    \r\n  E fold_path(int u, int v) {\r\n    if (!commute) return fold_path_nc(u,\
-    \ v);\r\n    E val = E_unit;\r\n    while (1) {\r\n      if (hld.LID[u] > hld.LID[v])\
-    \ swap(u, v);\r\n      if (hld.head[u] == hld.head[v]) break;\r\n      val = seg_f(seg.fold(hld.LID[hld.head[v]],\
+    \ x);\r\n    if (!commute) seg_r.set(i, x);\r\n  }\r\n\r\n  E prod_path_nc(int\
+    \ u, int v) {\r\n    E vl = unit, vr = unit;\r\n    while (1) {\r\n      if (hld.head[u]\
+    \ == hld.head[v]) break;\r\n      if (hld.LID[u] < hld.LID[v]) {\r\n        vr\
+    \ = f(seg.prod(hld.LID[hld.head[v]], hld.LID[v] + 1), vr);\r\n        v = hld.parent[hld.head[v]];\r\
+    \n      } else {\r\n        vl = f(vl, seg_r.prod(hld.LID[hld.head[u]], hld.LID[u]\
+    \ + 1));\r\n        u = hld.parent[hld.head[u]];\r\n      }\r\n    }\r\n    E\
+    \ vm =\r\n      (hld.LID[u] < hld.LID[v] ? seg.prod(hld.LID[u] + edge, hld.LID[v]\
+    \ + 1)\r\n                               : seg_r.prod(hld.LID[v] + edge, hld.LID[u]\
+    \ + 1));\r\n    return f(vl, f(vm, vr));\r\n  }\r\n\r\n  E prod_path(int u, int\
+    \ v) {\r\n    if (!commute) return prod_path_nc(u, v);\r\n    E val = unit;\r\n\
+    \    while (1) {\r\n      if (hld.LID[u] > hld.LID[v]) swap(u, v);\r\n      if\
+    \ (hld.head[u] == hld.head[v]) break;\r\n      val = f(seg.prod(hld.LID[hld.head[v]],\
     \ hld.LID[v] + 1), val);\r\n      v = hld.parent[hld.head[v]];\r\n    }\r\n  \
-    \  return seg_f(seg.fold(hld.LID[u] + edge, hld.LID[v] + 1), val);\r\n  }\r\n\r\
-    \n  E fold_subtree(int u) {\r\n    int l = hld.LID[u], r = hld.RID[u];\r\n   \
-    \ return seg.fold(l + edge, r);\r\n  }\r\n\r\n  void debug() {\r\n    print(\"\
-    hld\");\r\n    hld.debug();\r\n    print(\"seg\");\r\n    seg.debug();\r\n   \
-    \ print(\"seg_r\");\r\n    seg_r.debug();\r\n  }\r\n\r\n  void doc() {\r\n   \
-    \ print(\"HL\u5206\u89E3 + \u30BB\u30B0\u6728\u3002\");\r\n    print(\"\u90E8\u5206\
-    \u6728\u30AF\u30A8\u30EA O(logN) \u6642\u9593\u3001\u30D1\u30B9\u30AF\u30A8\u30EA\
-    \ O(log^2N) \u6642\u9593\u3002\");\r\n    print(\"\u30D1\u30B9\u9806\u3092\u6C17\
-    \u306B\u3059\u308B\u5834\u5408\u306F\u3001commute=false\u3068\u3059\u308B\u3002\
-    \");\r\n    print(\"\u95A2\u9023\");\r\n    print(\"- \u7FA4\u306A\u3089\u30D1\
-    \u30B9\u30AF\u30A8\u30EA\u306F TreeGrp \u3067 O(logN) \u6642\u9593\");\r\n   \
-    \ print(\"- \u5909\u66F4\u306A\u3057\u306A\u3089\u30D1\u30B9\u30AF\u30A8\u30EA\
-    \u306F TreeMonoid_static \u3067 O(logN) \u6642\u9593\");\r\n  }\r\n};\r\n#line\
-    \ 1 \"mod/modint.hpp\"\ntemplate< int mod >\nstruct modint {\n  int x;\n\n  modint()\
-    \ : x(0) {}\n\n  modint(int64_t y) : x(y >= 0 ? y % mod : (mod - (-y) % mod) %\
-    \ mod) {}\n\n  modint &operator+=(const modint &p) {\n    if((x += p.x) >= mod)\
-    \ x -= mod;\n    return *this;\n  }\n\n  modint &operator-=(const modint &p) {\n\
-    \    if((x += mod - p.x) >= mod) x -= mod;\n    return *this;\n  }\n\n  modint\
-    \ &operator*=(const modint &p) {\n    x = (int) (1LL * x * p.x % mod);\n    return\
-    \ *this;\n  }\n\n  modint &operator/=(const modint &p) {\n    *this *= p.inverse();\n\
-    \    return *this;\n  }\n\n  modint operator-() const { return modint(-x); }\n\
-    \n  modint operator+(const modint &p) const { return modint(*this) += p; }\n\n\
-    \  modint operator-(const modint &p) const { return modint(*this) -= p; }\n\n\
-    \  modint operator*(const modint &p) const { return modint(*this) *= p; }\n\n\
-    \  modint operator/(const modint &p) const { return modint(*this) /= p; }\n\n\
-    \  bool operator==(const modint &p) const { return x == p.x; }\n\n  bool operator!=(const\
-    \ modint &p) const { return x != p.x; }\n\n  modint inverse() const {\n    int\
-    \ a = x, b = mod, u = 1, v = 0, t;\n    while(b > 0) {\n      t = a / b;\n   \
-    \   swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n    return modint(u);\n\
-    \  }\n\n  modint pow(int64_t n) const {\n    modint ret(1), mul(x);\n    while(n\
-    \ > 0) {\n      if(n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n   \
-    \ }\n    return ret;\n  }\n\n  friend ostream &operator<<(ostream &os, const modint\
-    \ &p) {\n    return os << p.x;\n  }\n\n  friend istream &operator>>(istream &is,\
-    \ modint &a) {\n    int64_t t;\n    is >> t;\n    a = modint< mod >(t);\n    return\
-    \ (is);\n  }\n\n  static int get_mod() { return mod; }\n};\n\ntemplate< typename\
-    \ T >\nstruct ModCalc {\n  vector<T> _fact = {1, 1};\n  vector<T> _fact_inv =\
-    \ {1, 1};\n  vector<T> _inv = {0, 1};\n  \n  T pow(T a, int n){\n    T x(1);\n\
-    \    while(n) {\n      if(n & 1) x *= a;\n      a *= a;\n      n >>= 1;\n    }\n\
-    \    return x;\n  }\n  void expand(int n){\n    while(_fact.size() <= n){\n  \
-    \    auto i = _fact.size();\n      _fact.eb(_fact[i-1] * T(i));\n      auto q\
-    \ = T::get_mod() / i, r = T::get_mod() % i;\n      _inv.eb(_inv[r] * T(T::get_mod()-q));\n\
-    \      _fact_inv.eb(_fact_inv[i-1] * _inv[i]);\n    }\n  }\n\n  T fact(int n){\n\
+    \  return f(seg.prod(hld.LID[u] + edge, hld.LID[v] + 1), val);\r\n  }\r\n\r\n\
+    \  E prod_subtree(int u) {\r\n    int l = hld.LID[u], r = hld.RID[u];\r\n    return\
+    \ seg.prod(l + edge, r);\r\n  }\r\n\r\n  void debug() {\r\n    print(\"hld\");\r\
+    \n    hld.debug();\r\n    print(\"seg\");\r\n    seg.debug();\r\n    print(\"\
+    seg_r\");\r\n    seg_r.debug();\r\n  }\r\n\r\n  void doc() {\r\n    print(\"HL\u5206\
+    \u89E3 + \u30BB\u30B0\u6728\u3002\");\r\n    print(\"\u90E8\u5206\u6728\u30AF\u30A8\
+    \u30EA O(logN) \u6642\u9593\u3001\u30D1\u30B9\u30AF\u30A8\u30EA O(log^2N) \u6642\
+    \u9593\u3002\");\r\n    print(\"\u95A2\u9023\");\r\n  }\r\n};\r\n#line 1 \"mod/modint.hpp\"\
+    \ntemplate< int mod >\nstruct modint {\n  int x;\n\n  modint() : x(0) {}\n\n \
+    \ modint(int64_t y) : x(y >= 0 ? y % mod : (mod - (-y) % mod) % mod) {}\n\n  modint\
+    \ &operator+=(const modint &p) {\n    if((x += p.x) >= mod) x -= mod;\n    return\
+    \ *this;\n  }\n\n  modint &operator-=(const modint &p) {\n    if((x += mod - p.x)\
+    \ >= mod) x -= mod;\n    return *this;\n  }\n\n  modint &operator*=(const modint\
+    \ &p) {\n    x = (int) (1LL * x * p.x % mod);\n    return *this;\n  }\n\n  modint\
+    \ &operator/=(const modint &p) {\n    *this *= p.inverse();\n    return *this;\n\
+    \  }\n\n  modint operator-() const { return modint(-x); }\n\n  modint operator+(const\
+    \ modint &p) const { return modint(*this) += p; }\n\n  modint operator-(const\
+    \ modint &p) const { return modint(*this) -= p; }\n\n  modint operator*(const\
+    \ modint &p) const { return modint(*this) *= p; }\n\n  modint operator/(const\
+    \ modint &p) const { return modint(*this) /= p; }\n\n  bool operator==(const modint\
+    \ &p) const { return x == p.x; }\n\n  bool operator!=(const modint &p) const {\
+    \ return x != p.x; }\n\n  modint inverse() const {\n    int a = x, b = mod, u\
+    \ = 1, v = 0, t;\n    while(b > 0) {\n      t = a / b;\n      swap(a -= t * b,\
+    \ b);\n      swap(u -= t * v, v);\n    }\n    return modint(u);\n  }\n\n  modint\
+    \ pow(int64_t n) const {\n    modint ret(1), mul(x);\n    while(n > 0) {\n   \
+    \   if(n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n    return\
+    \ ret;\n  }\n\n  friend ostream &operator<<(ostream &os, const modint &p) {\n\
+    \    return os << p.x;\n  }\n\n  friend istream &operator>>(istream &is, modint\
+    \ &a) {\n    int64_t t;\n    is >> t;\n    a = modint< mod >(t);\n    return (is);\n\
+    \  }\n\n  static int get_mod() { return mod; }\n};\n\ntemplate< typename T >\n\
+    struct ModCalc {\n  vector<T> _fact = {1, 1};\n  vector<T> _fact_inv = {1, 1};\n\
+    \  vector<T> _inv = {0, 1};\n  \n  T pow(T a, int n){\n    T x(1);\n    while(n)\
+    \ {\n      if(n & 1) x *= a;\n      a *= a;\n      n >>= 1;\n    }\n    return\
+    \ x;\n  }\n  void expand(int n){\n    while(_fact.size() <= n){\n      auto i\
+    \ = _fact.size();\n      _fact.eb(_fact[i-1] * T(i));\n      auto q = T::get_mod()\
+    \ / i, r = T::get_mod() % i;\n      _inv.eb(_inv[r] * T(T::get_mod()-q));\n  \
+    \    _fact_inv.eb(_fact_inv[i-1] * _inv[i]);\n    }\n  }\n\n  T fact(int n){\n\
     \    if(n >= _fact.size()) expand(n);\n    return _fact[n];\n  }\n\n  T fact_inv(int\
     \ n){\n    if(n >= _fact.size()) expand(n);\n    return _fact_inv[n];\n  }\n \
     \ \n  T inv(int n){\n    if(n >= _fact.size()) expand(n);\n    return _inv[n];\n\
@@ -324,7 +323,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_set_path_composite.test.cpp
   requiredBy: []
-  timestamp: '2021-12-26 19:45:53+09:00'
+  timestamp: '2021-12-26 20:24:28+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_set_path_composite.test.cpp

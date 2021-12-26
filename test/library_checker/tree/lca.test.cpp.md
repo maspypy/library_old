@@ -123,7 +123,7 @@ data:
     \ cout << \"\\n\";\n    }\n  }\n\n  vector<int> degrees() {\n    vector<int> deg(N);\n\
     \    FORIN(e, edges) {\n      deg[e.frm]++;\n      deg[e.to]++;\n    }\n    return\
     \ deg;\n  }\n\n  int size() { return N; }\n\n  vector<edge_t>& operator[](int\
-    \ v) { return G[v]; }\n};\n#line 1 \"graph/hld.hpp\"\ntemplate <typename Graph>\r\
+    \ v) { return G[v]; }\n};\n#line 2 \"graph/hld.hpp\"\ntemplate <typename Graph>\r\
     \nstruct HLD {\r\n  Graph &G;\r\n  int N;\r\n  vector<int> sz, LID, RID, head,\
     \ V, parent, depth, e_to_v;\r\n\r\n  HLD(Graph &G, int root = 0)\r\n      : G(G)\r\
     \n      , N(G.N)\r\n      , sz(G.N)\r\n      , LID(G.N)\r\n      , RID(G.N)\r\n\
@@ -174,7 +174,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/tree/lca.test.cpp
   requiredBy: []
-  timestamp: '2021-12-26 03:01:43+09:00'
+  timestamp: '2021-12-26 20:23:04+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/tree/lca.test.cpp

@@ -1,9 +1,12 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':question:'
+    path: graph/treemonoid.hpp
+    title: graph/treemonoid.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
     title: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
   - icon: ':x:'
@@ -23,7 +26,7 @@ data:
   _verificationStatusIcon: ':question:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"graph/hld.hpp\"\ntemplate <typename Graph>\r\nstruct HLD\
+  bundledCode: "#line 2 \"graph/hld.hpp\"\ntemplate <typename Graph>\r\nstruct HLD\
     \ {\r\n  Graph &G;\r\n  int N;\r\n  vector<int> sz, LID, RID, head, V, parent,\
     \ depth, e_to_v;\r\n\r\n  HLD(Graph &G, int root = 0)\r\n      : G(G)\r\n    \
     \  , N(G.N)\r\n      , sz(G.N)\r\n      , LID(G.N)\r\n      , RID(G.N)\r\n   \
@@ -57,10 +60,10 @@ data:
     \u3063\u5148\u306B\u3053\u308C\u3092\u4F5C\u308B\u3002\");\r\n    print(\"\u2192\
     \ \u6728DP\u3084\u6728\u30AF\u30A8\u30EA\u306B\u6D3E\u751F\u3002\");\r\n  }\r\n\
     };\r\n"
-  code: "template <typename Graph>\r\nstruct HLD {\r\n  Graph &G;\r\n  int N;\r\n\
-    \  vector<int> sz, LID, RID, head, V, parent, depth, e_to_v;\r\n\r\n  HLD(Graph\
-    \ &G, int root = 0)\r\n      : G(G)\r\n      , N(G.N)\r\n      , sz(G.N)\r\n \
-    \     , LID(G.N)\r\n      , RID(G.N)\r\n      , head(G.N, root)\r\n      , V(G.N)\r\
+  code: "#pragma once\r\ntemplate <typename Graph>\r\nstruct HLD {\r\n  Graph &G;\r\
+    \n  int N;\r\n  vector<int> sz, LID, RID, head, V, parent, depth, e_to_v;\r\n\r\
+    \n  HLD(Graph &G, int root = 0)\r\n      : G(G)\r\n      , N(G.N)\r\n      , sz(G.N)\r\
+    \n      , LID(G.N)\r\n      , RID(G.N)\r\n      , head(G.N, root)\r\n      , V(G.N)\r\
     \n      , parent(G.N, -1)\r\n      , depth(G.N)\r\n      , e_to_v(G.N) {\r\n \
     \   int t = 0;\r\n    dfs_sz(root, -1);\r\n    dfs_hld(root, -1, t);\r\n  }\r\n\
     \r\n  void dfs_sz(int idx, int p) {\r\n    parent[idx] = p;\r\n    depth[idx]\
@@ -93,8 +96,9 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: graph/hld.hpp
-  requiredBy: []
-  timestamp: '2021-12-25 22:40:58+09:00'
+  requiredBy:
+  - graph/treemonoid.hpp
+  timestamp: '2021-12-26 20:23:04+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/library_checker/tree/lca.test.cpp
