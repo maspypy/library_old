@@ -247,12 +247,11 @@ data:
     \u9593\u3002\");\r\n    print(\"\u95A2\u9023\");\r\n  }\r\n};\r\n#line 8 \"test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp\"\
     \n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  VEC(ll, A, N);\r\n  Graph<int> G(N);\r\
     \n  FOR(_, N - 1) {\r\n    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n\r\n  HLD<Graph<int>>\
-    \ hld(G);\r\n  using E = ll;\r\n  const bool is_edge = false;\r\n  const bool\
-    \ commute = false;\r\n  TreeMonoid<HLD<Graph<int>>, E, is_edge, commute> TM(\r\
-    \n    hld, [&](E x, E y) -> E { return x + y; }, E(0));\r\n\r\n  TM.init(A);\r\
-    \n\r\n  FOR(_, Q) {\r\n    LL(t);\r\n    if (t == 0) {\r\n      LL(v, x);\r\n\
-    \      A[v] += x;\r\n      TM.set(v, A[v]);\r\n    } else {\r\n      LL(u, v);\r\
-    \n      print(TM.fold_path(u, v));\r\n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\
+    \ hld(G);\r\n  Monoid<ll> Mono = Monoid_add<ll>();\r\n  Mono.commute = false;\r\
+    \n  TreeMonoid<Graph<int>, E, false> TM(hld, Mono);\r\n\r\n  TM.init(A);\r\n\r\
+    \n  FOR(_, Q) {\r\n    LL(t);\r\n    if (t == 0) {\r\n      LL(v, x);\r\n    \
+    \  A[v] += x;\r\n      TM.set(v, A[v]);\r\n    } else {\r\n      LL(u, v);\r\n\
+    \      print(TM.prod_path(u, v));\r\n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\
     \n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
     \n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_path_sum\"\r\
@@ -260,14 +259,12 @@ data:
     \ \"graph/hld.hpp\"\r\n#include \"graph/treemonoid.hpp\"\r\n\r\nvoid solve() {\r\
     \n  LL(N, Q);\r\n  VEC(ll, A, N);\r\n  Graph<int> G(N);\r\n  FOR(_, N - 1) {\r\
     \n    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n\r\n  HLD<Graph<int>> hld(G);\r\n\
-    \  using E = ll;\r\n  const bool is_edge = false;\r\n  const bool commute = false;\r\
-    \n  TreeMonoid<HLD<Graph<int>>, E, is_edge, commute> TM(\r\n    hld, [&](E x,\
-    \ E y) -> E { return x + y; }, E(0));\r\n\r\n  TM.init(A);\r\n\r\n  FOR(_, Q)\
-    \ {\r\n    LL(t);\r\n    if (t == 0) {\r\n      LL(v, x);\r\n      A[v] += x;\r\
-    \n      TM.set(v, A[v]);\r\n    } else {\r\n      LL(u, v);\r\n      print(TM.fold_path(u,\
-    \ v));\r\n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n\
-    \  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
-    \n\r\n  return 0;\r\n}\r\n"
+    \  Monoid<ll> Mono = Monoid_add<ll>();\r\n  Mono.commute = false;\r\n  TreeMonoid<Graph<int>,\
+    \ E, false> TM(hld, Mono);\r\n\r\n  TM.init(A);\r\n\r\n  FOR(_, Q) {\r\n    LL(t);\r\
+    \n    if (t == 0) {\r\n      LL(v, x);\r\n      A[v] += x;\r\n      TM.set(v,\
+    \ A[v]);\r\n    } else {\r\n      LL(u, v);\r\n      print(TM.prod_path(u, v));\r\
+    \n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
   - graph/base.hpp
@@ -278,7 +275,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
   requiredBy: []
-  timestamp: '2021-12-26 20:24:28+09:00'
+  timestamp: '2021-12-26 20:35:37+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp

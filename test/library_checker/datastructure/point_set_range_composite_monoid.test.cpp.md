@@ -15,9 +15,9 @@ data:
     title: my_template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/point_set_range_composite
@@ -198,7 +198,7 @@ data:
     \ mint>;\n  SegTree<E> seg(Monoid_affine<mint>());\n  seg.init(N);\n  vc<E> seg_raw(N);\n\
     \  FOR(i, N) {\n    LL(a, b);\n    seg_raw[i] = {a, b};\n  }\n  seg.build(seg_raw);\n\
     \n  FOR(q, Q) {\n    LL(t);\n    if (t == 0) {\n      LL(i, a, b);\n      seg.set(i,\
-    \ E({a, b}));\n    } else {\n      LL(L, R, x);\n      auto [a, b] = seg.fold(L,\
+    \ E({a, b}));\n    } else {\n      LL(L, R, x);\n      auto [a, b] = seg.prod(L,\
     \ R);\n      print(a * mint(x) + b);\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
     \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  solve();\n\n\
     \  return 0;\n}\n"
@@ -208,7 +208,7 @@ data:
     \ mint>;\n  SegTree<E> seg(Monoid_affine<mint>());\n  seg.init(N);\n  vc<E> seg_raw(N);\n\
     \  FOR(i, N) {\n    LL(a, b);\n    seg_raw[i] = {a, b};\n  }\n  seg.build(seg_raw);\n\
     \n  FOR(q, Q) {\n    LL(t);\n    if (t == 0) {\n      LL(i, a, b);\n      seg.set(i,\
-    \ E({a, b}));\n    } else {\n      LL(L, R, x);\n      auto [a, b] = seg.fold(L,\
+    \ E({a, b}));\n    } else {\n      LL(L, R, x);\n      auto [a, b] = seg.prod(L,\
     \ R);\n      print(a * mint(x) + b);\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
     \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  solve();\n\n\
     \  return 0;\n}\n"
@@ -220,8 +220,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
   requiredBy: []
-  timestamp: '2021-12-26 20:23:34+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-12-26 20:35:37+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
 layout: document
