@@ -1,5 +1,4 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_affine_range_sum"
-
 #include "my_template.hpp"
 
 #include "ds/lazysegtree.hpp"
@@ -9,39 +8,26 @@ using mint = modint998;
 
 void solve() {
   LL(N, Q);
-
-  using E = pair<mint, mint>;  // cnt, sum
-  using OP = pair<mint, mint>; // (a,b) of ax + b
-  const bool OP_commute = false;
-  LazySegTree<E, OP, OP_commute> seg(
-    [&](E x, E y) -> E {
-      return E({x.fi + y.fi, x.se + y.se});
-    },
-    [&](E x, OP y) -> E {
-      return E({x.fi, x.se * y.fi + x.fi * y.se});
-    },
-    [&](OP x, OP y) -> OP {
-      return OP({x.fi * y.fi, x.se * y.fi + y.se});
-    },
-    E({mint(0), mint(0)}), OP({mint(1), mint(0)}));
-  seg.init(N);
-  vc<E> A(N);
+  using E = pair<mint, mint>;
+  vc<E> seg_raw(N);
   FOR(i, N) {
     LL(x);
-    A[i] = {1, x};
+    seg_raw[i] = E({mint(1), mint(x)});
   }
-  seg.build(A);
+  LazySegTree<E, E> seg(Monoid_cnt_sum_affine<mint>());
+  seg.init(N);
+  seg.build(seg_raw);
 
   FOR(_, Q) {
-    LL(t, L, R);
+    LL(t);
     if (t == 0) {
-      LL(a, b);
-      seg.operate_range(L, R, OP({mint(a), mint(b)}));
+      LL(l, r, a, b);
+      seg.apply(l, r, E({mint(a), mint(b)}));
     }
-
-    if (t == 1) {
-      auto [cnt, sum] = seg.fold(L, R);
-      print(sum);
+    elif (t == 1) {
+      LL(l, r);
+      auto cs = seg.prod(l, r);
+      print(cs.se);
     }
   }
 }
