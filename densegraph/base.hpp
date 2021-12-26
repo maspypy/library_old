@@ -7,7 +7,7 @@ template <typename T> struct Graph {
   T none_val;
   bool directed;
   Graph() {}
-  Graph(int N, bool bl = false, T none_val = -1)
+  Graph(int N, bool bl = false, T none_val = 0)
       : N(N), M(0), G(N, vector<int>(N, none_val)), none_val(none_val),
         directed(bl) {}
 
@@ -18,20 +18,6 @@ template <typename T> struct Graph {
       G[to][frm] = cost;
     }
     ++M;
-  }
-
-  void debug(bool detail = false) {
-    FOR(v, N) {
-      cout << v << " :";
-      for (auto e : G[v]) {
-        if (detail)
-          cout << " (" << e.frm << "," << e.to << "," << e.cost << "," << e.id
-               << ")";
-        else
-          cout << " " << e.to;
-      }
-      cout << "\n";
-    }
   }
 
   int size() { return N; }
