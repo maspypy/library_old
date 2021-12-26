@@ -228,8 +228,11 @@ data:
       path: test/library_checker/datastructure/point_add_range_sum.test.cpp
       title: test/library_checker/datastructure/point_add_range_sum.test.cpp
     - icon: ':x:'
-      path: test/library_checker/datastructure/point_add_rectangle_sum.test.cpp
-      title: test/library_checker/datastructure/point_add_rectangle_sum.test.cpp
+      path: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
+      title: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
+    - icon: ':x:'
+      path: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
+      title: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/point_set_range_composite_group.test.cpp
       title: test/library_checker/datastructure/point_set_range_composite_group.test.cpp

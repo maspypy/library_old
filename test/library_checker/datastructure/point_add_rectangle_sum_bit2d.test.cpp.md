@@ -16,7 +16,7 @@ data:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: point_add_rectangle_sum
     links: []
-  bundledCode: "#line 1 \"test/library_checker/datastructure/point_add_rectangle_sum.test.cpp\"\
+  bundledCode: "#line 1 \"test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp\"\
     \n#define PROBLEM \"point_add_rectangle_sum\"\r\n\r\n#line 2 \"my_template.hpp\"\
     \n#include <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\n\
     using ll8 = __int128;\nusing ld = long double;\nusing pi = pair<ll, ll>;\nusing\
@@ -102,7 +102,7 @@ data:
     \ (a < b ? a = b, 1 : 0); }\ntemplate <class T, class S> inline bool chmin(T &a,\
     \ const S &b) { return (a > b ? a = b, 1 : 0); }\n\ntemplate <typename T>\nvc<T>\
     \ merge_sort(vc<T>& A, vc<T>& B) {\n  vc<T> C;\n  C.reserve(A.size() + B.size());\n\
-    \  merge(all(A), all(B), back_inserter(C));\n  return C;\n}\n#line 4 \"test/library_checker/datastructure/point_add_rectangle_sum.test.cpp\"\
+    \  merge(all(A), all(B), back_inserter(C));\n  return C;\n}\n#line 4 \"test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp\"\
     \n\r\n#line 1 \"ds/fenwick2d.hpp\"\ntemplate <typename T, bool SMALL=false>\r\n\
     struct Fenwick2D {\r\n  int N;\r\n  vi keyX;\r\n  int min_X;\r\n  vc<int> indptr;\r\
     \n  vi keyY;\r\n  vc<T> dat;\r\n\r\n  Fenwick2D(vi& X, vi& Y, vc<T>& wt) { build(X,\
@@ -145,18 +145,18 @@ data:
     \ ly, ry);\r\n      L = prev(L);\r\n    }\r\n    return ret;\r\n  }\r\n\r\n  void\
     \ debug() {\r\n    print(\"keyX\", keyX);\r\n    print(\"indptr\", indptr);\r\n\
     \    print(\"keyY\", keyY);\r\n    print(\"dat\", dat);\r\n  }\r\n};\n#line 6\
-    \ \"test/library_checker/datastructure/point_add_rectangle_sum.test.cpp\"\n\r\n\
-    void solve() {\r\n  LL(N, Q);\r\n  vi X(N), Y(N), W(N);\r\n  FOR(i, N) {\r\n \
-    \   LL(x, y, w);\r\n    X[i] = x, Y[i] = y, W[i] = w;\r\n  }\r\n  using QQ = tuple<ll,\
-    \ ll, ll, ll>;\r\n  vc<QQ> query(Q);\r\n  FOR(q, Q) {\r\n    LL(t);\r\n    if\
-    \ (t == 0) {\r\n      LL(x, y, w);\r\n      X.eb(x);\r\n      Y.eb(y);\r\n   \
-    \   W.eb(0);\r\n      query[q] = mt(-1, x, y, w);\r\n    } else {\r\n      LL(a,\
-    \ b, c, d);\r\n      query[q] = mt(a, c, b, d);\r\n    }\r\n  }\r\n\r\n  Fenwick2D<ll,\
-    \ false> bit(X, Y, W);\r\n  FOR(q, Q) {\r\n    auto [a, b, c, d] = query[q];\r\
-    \n    if (a == -1) {\r\n      bit.add(b, c, d);\r\n    } else {\r\n      print(bit.sum(a,\
-    \ b, c, d));\r\n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
-    \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
-    \n\r\n  return 0;\r\n}\r\n"
+    \ \"test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp\"\
+    \n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  vi X(N), Y(N), W(N);\r\n  FOR(i, N) {\r\
+    \n    LL(x, y, w);\r\n    X[i] = x, Y[i] = y, W[i] = w;\r\n  }\r\n  using QQ =\
+    \ tuple<ll, ll, ll, ll>;\r\n  vc<QQ> query(Q);\r\n  FOR(q, Q) {\r\n    LL(t);\r\
+    \n    if (t == 0) {\r\n      LL(x, y, w);\r\n      X.eb(x);\r\n      Y.eb(y);\r\
+    \n      W.eb(0);\r\n      query[q] = mt(-1, x, y, w);\r\n    } else {\r\n    \
+    \  LL(a, b, c, d);\r\n      query[q] = mt(a, c, b, d);\r\n    }\r\n  }\r\n\r\n\
+    \  Fenwick2D<ll, false> bit(X, Y, W);\r\n  FOR(q, Q) {\r\n    auto [a, b, c, d]\
+    \ = query[q];\r\n    if (a == -1) {\r\n      bit.add(b, c, d);\r\n    } else {\r\
+    \n      print(bit.sum(a, b, c, d));\r\n    }\r\n  }\r\n}\r\n\r\nsigned main()\
+    \ {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
+    \n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"point_add_rectangle_sum\"\r\n\r\n#include \"my_template.hpp\"\
     \r\n\r\n#include \"ds/fenwick2d.hpp\"\r\n\r\nvoid solve() {\r\n  LL(N, Q);\r\n\
     \  vi X(N), Y(N), W(N);\r\n  FOR(i, N) {\r\n    LL(x, y, w);\r\n    X[i] = x,\
@@ -173,15 +173,15 @@ data:
   - my_template.hpp
   - ds/fenwick2d.hpp
   isVerificationFile: true
-  path: test/library_checker/datastructure/point_add_rectangle_sum.test.cpp
+  path: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
   requiredBy: []
-  timestamp: '2021-12-26 16:51:53+09:00'
+  timestamp: '2021-12-26 16:58:51+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/library_checker/datastructure/point_add_rectangle_sum.test.cpp
+documentation_of: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/datastructure/point_add_rectangle_sum.test.cpp
-- /verify/test/library_checker/datastructure/point_add_rectangle_sum.test.cpp.html
-title: test/library_checker/datastructure/point_add_rectangle_sum.test.cpp
+- /verify/test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
+- /verify/test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp.html
+title: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
 ---

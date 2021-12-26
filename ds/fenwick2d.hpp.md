@@ -4,8 +4,8 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':x:'
-    path: test/library_checker/datastructure/point_add_rectangle_sum.test.cpp
-    title: test/library_checker/datastructure/point_add_rectangle_sum.test.cpp
+    path: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
+    title: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
     title: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
@@ -106,7 +106,7 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
-  - test/library_checker/datastructure/point_add_rectangle_sum.test.cpp
+  - test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
 documentation_of: ds/fenwick2d.hpp
 layout: document
 redirect_from:
