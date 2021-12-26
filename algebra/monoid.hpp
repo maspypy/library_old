@@ -11,7 +11,7 @@ struct Monoid {
   G inverse;
 };
 
-template <typename E, typename OP, bool commute, bool OP_commute>
+template <typename E, typename OP>
 struct Monoid_OP {
   using F = function<E(E, E)>;
   using G = function<E(E, OP)>;
@@ -21,6 +21,8 @@ struct Monoid_OP {
   H h;
   E unit;
   OP OP_unit;
+  bool commute;
+  bool OP_commute;
 };
 
 template <typename E>
@@ -61,4 +63,13 @@ Monoid<pair<E, E>> Monoid_affine(bool has_inverse = false) {
     return {a, a * (-b)};
   };
   return Monoid<pair<E, E>>({f, mp(E(1), E(0)), false, has_inverse, inv});
+}
+
+template <typename E>
+Monoid_OP<pair<E, E>, pair<E, E>> Monoid_cnt_sum_affine() {
+  using P = pair<E, E>;
+  auto f = [](P x, P y) -> P { return P({x.fi + y.fi, x.se + y.se}); };
+  auto g = [](P x, P y) -> P { return P({x.fi, x.fi * y.se + x.se * y.fi}); };
+  auto h = [](P x, P y) -> P { return P({x.fi * y.fi, x.se * y.fi + y.se}); };
+  return Monoid_OP<P, P>({f, g, h, P({0, 0}), P({1, 0}), true, false});
 }
