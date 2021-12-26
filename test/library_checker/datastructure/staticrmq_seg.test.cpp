@@ -6,13 +6,13 @@
 void solve() {
   LL(N, Q);
   VEC(int, A, N);
-  SegTree<int> seg(Monoid_min<int>(1<<30));
+  SegTree<int> seg(Monoid_min<int>(1 << 30));
   seg.init(N);
   seg.build(A);
 
   FOR(_, Q) {
     LL(L, R);
-    print(seg.fold(L, R));
+    print(seg.prod(L, R));
   }
 }
 

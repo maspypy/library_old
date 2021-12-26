@@ -25,7 +25,7 @@ void solve() {
       seg.set(i, E({a, b}));
     } else {
       LL(L, R, x);
-      auto [a, b] = seg.fold(L, R);
+      auto [a, b] = seg.prod(L, R);
       print(a * mint(x) + b);
     }
   }
