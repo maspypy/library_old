@@ -22,15 +22,8 @@ void solve() {
   }
 
   HLD<Graph<int>> hld(G);
-
-  // [ tree monoid template
-  const bool is_edge = false;
-  const bool commute = false;
-  TreeMonoid<HLD<Graph<int>>, E, is_edge, commute> TM(
-    hld, [&](E x, E y) -> E { return mp(x.fi * y.fi, x.se * y.fi + y.se); },
-    E({mint(1), mint(0)}));
+  TreeMonoid<Graph<int>, E, false> TM(hld, Monoid_affine<mint>());
   TM.init(A);
-  // tree monoid template]
 
   FOR(_, Q) {
     LL(t);
@@ -40,7 +33,7 @@ void solve() {
 
     } else {
       LL(u, v, x);
-      auto e = TM.fold_path(u, v);
+      auto e = TM.prod_path(u, v);
       print(e.fi * mint(x) + e.se);
     }
   }
