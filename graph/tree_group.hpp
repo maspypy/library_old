@@ -1,5 +1,6 @@
+#include "algebra/monoid.hpp"
 #include "graph/hld.hpp"
-#include "ds/algebra.hpp"
+
 
 // 作ってみたものの、HLD(log^2N)より遅いがち？
 template <typename Graph, typename E, bool edge = false>
