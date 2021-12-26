@@ -1,29 +1,32 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: ds/algebra.hpp
+    title: ds/algebra.hpp
+  - icon: ':question:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/hld.hpp
     title: graph/hld.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/treemonoid.hpp
     title: graph/treemonoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_set_path_composite
@@ -165,28 +168,43 @@ data:
     \ \u6642\u9593\u3002\");\r\n    print(\"\u6728\u306E\u554F\u984C\u3067\u306F\u771F\
     \u3063\u5148\u306B\u3053\u308C\u3092\u4F5C\u308B\u3002\");\r\n    print(\"\u2192\
     \ \u6728DP\u3084\u6728\u30AF\u30A8\u30EA\u306B\u6D3E\u751F\u3002\");\r\n  }\r\n\
-    };\r\n#line 2 \"ds/segtree.hpp\"\n\ntemplate <typename T>\nstruct SegTree {\n\
-    \  using F = function<T(T, T)>;\n  int N_;\n  int N;\n  F seg_f;\n  T T_unit;\n\
-    \  vector<T> dat;\n\n  SegTree(F f, T T_unit) : seg_f(f), T_unit(T_unit) {}\n\n\
-    \  void init(int n_) {\n    N_ = n_;\n    N = 1;\n    while (N < n_) N <<= 1;\n\
-    \    dat.assign(N << 1, T_unit);\n  }\n\n  void build(const vector<T> &v) {\n\
-    \    assert(v.size() == N_);\n    FOR(i, v.size()) { dat[N + i] = v[i]; }\n  \
-    \  FOR3_R(i, 1, N) { dat[i] = seg_f(dat[i << 1 | 0], dat[i << 1 | 1]); }\n  }\n\
-    \n  void set(int i, T x) {\n    assert(i < N_);\n    dat[i += N] = x;\n    while\
-    \ (i >>= 1) { dat[i] = seg_f(dat[i << 1 | 0], dat[i << 1 | 1]); }\n  }\n\n  T\
-    \ fold(int L, int R) {\n    assert(L <= R);\n    assert(R <= N_);\n    T vl =\
-    \ T_unit, vr = T_unit;\n    L += N;\n    R += N;\n    while (L < R) {\n      if\
+    };\r\n#line 2 \"ds/algebra.hpp\"\n\r\ntemplate <typename E>\r\nstruct Monoid {\r\
+    \n  using F = function<E(E, E)>;\r\n  F f;\r\n  E unit;\r\n  bool commute;\r\n\
+    };\r\n\r\ntemplate <typename E, typename OP, bool commute, bool OP_commute>\r\n\
+    struct Monoid_OP {\r\n  using F = function<E(E, E)>;\r\n  using G = function<E(E,\
+    \ OP)>;\r\n  using H = function<OP(OP, OP)>;\r\n  F f;\r\n  G g;\r\n  H h;\r\n\
+    \  E unit;\r\n  OP OP_unit;\r\n};\r\n\r\ntemplate <typename E>\r\nstruct Group\
+    \ {\r\n  using F = function<E(E, E)>;\r\n  using G = function<E(E)>;\r\n  F f;\r\
+    \n  E E_unit;\r\n  G inv;\r\n  bool commute;\r\n};\r\n\r\ntemplate <typename E>\r\
+    \nMonoid<E> Monoid_min(E INF) {\r\n  auto f = [](E x, E y) -> E { return min(x,\
+    \ y); };\r\n  return Monoid<E>({f, INF, true});\r\n}\r\n\r\ntemplate <typename\
+    \ E>\r\nMonoid<E> Monoid_max(E MINUS_INF) {\r\n  auto f = [](E x, E y) -> E {\
+    \ return max(x, y); };\r\n  return Monoid<E>({f, MINUS_INF, true});\r\n}\r\n\r\
+    \ntemplate <typename E>\r\nMonoid<pair<E, E>> Monoid_affine() {\r\n  auto f =\
+    \ [](pair<E, E> x, pair<E, E> y) -> pair<E, E> {\r\n    return {x.fi * y.fi, x.se\
+    \ * y.fi + y.se};\r\n  };\r\n  return Monoid<pair<E, E>>({f, mp(E(1), E(0)), false});\r\
+    \n}\r\n#line 3 \"ds/segtree.hpp\"\n\ntemplate <typename E>\nstruct SegTree {\n\
+    \  using F = function<E(E, E)>;\n  int N_;\n  int N;\n  F seg_f;\n  E unit;\n\
+    \  vector<E> dat;\n\n  SegTree(Monoid<E> Mono) : seg_f(Mono.f), unit(Mono.unit)\
+    \ {}\n\n  void init(int n_) {\n    N_ = n_;\n    N = 1;\n    while (N < n_) N\
+    \ <<= 1;\n    dat.assign(N << 1, unit);\n  }\n\n  void build(const vector<E> &v)\
+    \ {\n    assert(v.size() == N_);\n    FOR(i, v.size()) { dat[N + i] = v[i]; }\n\
+    \    FOR3_R(i, 1, N) { dat[i] = seg_f(dat[i << 1 | 0], dat[i << 1 | 1]); }\n \
+    \ }\n\n  void set(int i, E x) {\n    assert(i < N_);\n    dat[i += N] = x;\n \
+    \   while (i >>= 1) { dat[i] = seg_f(dat[i << 1 | 0], dat[i << 1 | 1]); }\n  }\n\
+    \n  E fold(int L, int R) {\n    assert(L <= R);\n    assert(R <= N_);\n    E vl\
+    \ = unit, vr = unit;\n    L += N;\n    R += N;\n    while (L < R) {\n      if\
     \ (L & 1) vl = seg_f(vl, dat[L++]);\n      if (R & 1) vr = seg_f(dat[--R], vr);\n\
     \      L >>= 1;\n      R >>= 1;\n    }\n    return seg_f(vl, vr);\n  }\n\n  template\
     \ <class F>\n  int max_right(F &check, int L) {\n    assert(0 <= L && L <= N_\
-    \ && check(T_unit));\n    if (L == N_) return N_;\n    L += N;\n    T sm = T_unit;\n\
+    \ && check(unit));\n    if (L == N_) return N_;\n    L += N;\n    E sm = unit;\n\
     \    do {\n      while (L % 2 == 0) L >>= 1;\n      if (!check(seg_f(sm, dat[L])))\
     \ {\n        while (L < N) {\n          L = 2 * L;\n          if (check(seg_f(sm,\
     \ dat[L]))) {\n            sm = seg_f(sm, dat[L]);\n            L++;\n       \
     \   }\n        }\n        return L - N;\n      }\n      sm = seg_f(sm, dat[L]);\n\
     \      L++;\n    } while ((L & -L) != L);\n    return N_;\n  }\n\n  template <class\
-    \ F>\n  int min_left(F &check, int R) {\n    assert(0 <= R && R <= N_ && check(T_unit));\n\
-    \    if (R == 0) return 0;\n    R += N;\n    T sm = T_unit;\n    do {\n      --R;\n\
+    \ F>\n  int min_left(F &check, int R) {\n    assert(0 <= R && R <= N_ && check(unit));\n\
+    \    if (R == 0) return 0;\n    R += N;\n    E sm = unit;\n    do {\n      --R;\n\
     \      while (R > 1 && (R % 2)) R >>= 1;\n      if (!check(seg_f(dat[R], sm)))\
     \ {\n        while (R < N) {\n          R = 2 * R + 1;\n          if (check(seg_f(dat[R],\
     \ sm))) {\n            sm = seg_f(dat[R], sm);\n            R--;\n          }\n\
@@ -301,12 +319,13 @@ data:
   - graph/hld.hpp
   - graph/treemonoid.hpp
   - ds/segtree.hpp
+  - ds/algebra.hpp
   - mod/modint.hpp
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_set_path_composite.test.cpp
   requiredBy: []
-  timestamp: '2021-12-26 05:06:49+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-12-26 19:45:53+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_set_path_composite.test.cpp
 layout: document
