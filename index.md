@@ -22,6 +22,9 @@ data:
       title: densegraph/twosat.hpp
   - name: ds
     pages:
+    - icon: ':heavy_check_mark:'
+      path: ds/algebra.hpp
+      title: ds/algebra.hpp
     - icon: ':warning:'
       path: ds/binarytrie.hpp
       title: ds/binarytrie.hpp
@@ -160,6 +163,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: my_template.hpp
       title: my_template.hpp
+    - icon: ':warning:'
+      path: temp.cpp
+      title: temp.cpp
   - name: nt
     pages:
     - icon: ':warning:'
