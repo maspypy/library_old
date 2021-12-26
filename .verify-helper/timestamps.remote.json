@@ -4,14 +4,17 @@
 "test/library_checker/datastructure/point_add_range_sum.test.cpp": "2021-12-26 03:01:43 +0900",
 "test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp": "2021-12-26 17:56:17 +0900",
 "test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp": "2021-12-26 17:51:27 +0900",
+"test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp": "2021-12-26 20:35:37 +0900",
 "test/library_checker/datastructure/predecessor_problem.test..cpp": "2021-12-26 03:01:43 +0900",
 "test/library_checker/datastructure/queue_operate_all_composite.test.cpp": "2021-12-26 20:21:47 +0900",
 "test/library_checker/datastructure/range_affine_range_sum.test.cpp": "2021-12-26 03:01:43 +0900",
 "test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp": "2021-12-26 16:47:54 +0900",
 "test/library_checker/datastructure/rectangle_sum_sweep.test.cpp": "2021-12-26 04:31:05 +0900",
 "test/library_checker/datastructure/static_range_sum.test.cpp": "2021-12-26 04:58:43 +0900",
+"test/library_checker/datastructure/staticrmq_seg.test.cpp": "2021-12-26 20:35:37 +0900",
 "test/library_checker/datastructure/staticrmq_sparse.test.cpp": "2021-12-26 20:21:47 +0900",
 "test/library_checker/datastructure/unionfind.test.cpp": "2021-12-26 03:01:43 +0900",
 "test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp": "2021-12-26 20:24:28 +0900",
+"test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp": "2021-12-26 20:37:53 +0900",
 "test/library_checker/tree/lca.test.cpp": "2021-12-26 20:23:04 +0900"
 }
