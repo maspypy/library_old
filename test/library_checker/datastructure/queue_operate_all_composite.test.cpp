@@ -9,28 +9,18 @@ using mint = modint998;
 void solve() {
   LL(Q);
   using E = pair<mint, mint>;
-  vc<E> dat;
-  dat.reserve(Q);
-
-  SWAG<E> swag(
-    [&](E x, E y) -> E {
-      return E({x.fi * y.fi, x.se * y.fi + y.se});
-    },
-    E({mint(1), mint(0)}), dat);
-
-  ll L = 0, R = 0;
+  SWAG<E> swag(Monoid_affine<mint>());
 
   FOR(_, Q) {
     LL(t);
     if (t == 0) {
       LL(a, b);
-      dat.eb(E({mint(a), mint(b)}));
-      ++R;
+      swag.push(E({a, b}));
     }
-    elif (t == 1) { ++L; }
+    elif (t == 1) { swag.pop(); }
     elif (t == 2) {
       LL(x);
-      auto e = swag.fold(L, R);
+      auto e = swag.prod();
       print(e.fi * mint(x) + e.se);
     }
   }

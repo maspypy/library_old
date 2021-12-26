@@ -1,30 +1,38 @@
-template <typename T>
-struct SWAG {
-  using F = function<T(T, T)>;
-  int L, R;
-  F f;
-  T e;
-  vc<T>& dat;
-  vc<T> cum_l;
-  T cum_r;
-  SWAG(F f, T e, vc<T>& dat)
-      : L(0), R(0), f(f), e(e), dat(dat), cum_l({e}), cum_r(e) {}
+#include "algebra.hpp"
 
-  void push() { cum_r = f(cum_r, dat[R++]); }
+template <typename E>
+struct SWAG {
+  using F = function<E(E, E)>;
+  F f;
+  E e;
+  vc<E> dat;
+  vc<E> cum_l;
+  E cum_r;
+  SWAG(Monoid<E> M) : f(M.f), e(M.unit), cum_l({M.unit}), cum_r(M.unit) {}
+
+  void push(E x) {
+    cum_r = f(cum_r, x);
+    dat.eb(x);
+  }
+
   void pop() {
     cum_l.pop_back();
-    ++L;
     if (len(cum_l) == 0) {
       cum_l = {e};
-      FOR3_R(i, L, R) cum_l.eb(f(dat[i], cum_l.back()));
       cum_r = e;
+      while (len(dat) > 1) {
+        cum_l.eb(f(dat.back(), cum_l.back()));
+        dat.pop_back();
+      }
+      dat.pop_back();
     }
   }
-  T fold(int l, int r) {
-    assert(L <= l);
-    assert(R <= r);
-    while (R < r) push();
-    while (L < l) pop();
-    return f(cum_l.back(), cum_r);
+
+  E prod() { return f(cum_l.back(), cum_r); }
+
+  void debug() {
+    print("dat", dat);
+    print("cum_l", cum_l);
+    print("cum_r", cum_r);
   }
 };
