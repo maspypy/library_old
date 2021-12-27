@@ -1,32 +1,47 @@
----
-BasedOnStyle: 'Google'
-AccessModifierOffset: -2
-AlignTrailingComments: true 
-AllowShortBlocksOnASingleLine: true
+BasedOnStyle: Google
+AccessModifierOffset: 0
+AlignAfterOpenBracket: true
+AlignOperands: true
+AlignTrailingComments: true
+AllowAllArgumentsOnNextLine: true
+AllowAllParametersOfDeclarationOnNextLine: true
+AllowShortBlocksOnASingleLine: Always
 AllowShortCaseLabelsOnASingleLine: true
-AllowShortFunctionsOnASingleLine: 'Inline'
+AllowShortFunctionsOnASingleLine: All
 AllowShortIfStatementsOnASingleLine: true
+AllowShortLambdasOnASingleLine: All
 AllowShortLoopsOnASingleLine: true
-AlwaysBreakAfterDefinitionReturnType: false
-AlwaysBreakBeforeMultilineStrings: true
-AlwaysBreakTemplateDeclarations: true
-BreakBeforeBinaryOperators: 'None'
-BreakConstructorInitializersBeforeComma: true
-ContinuationIndentWidth: 2
-IndentCaseLabels: true
+AlwaysBreakAfterReturnType: None
+AlwaysBreakTemplateDeclarations: Yes
+BinPackArguments: true
+BinPackParameters: true
+BreakBeforeBinaryOperators: All
+BreakBeforeTernaryOperators: true
+BreakStringLiterals: false
+ColumnLimit: 120
+IncludeBlocks: Preserve
 IndentWidth: 2
-IndentWrappedFunctionNames: false
-KeepEmptyLinesAtTheStartOfBlocks: true
-MaxEmptyLinesToKeep: 1
-NamespaceIndentation: 'None'
-PointerAlignment: 'Left'
+IndentWrappedFunctionNames: true
+PointerAlignment: Left
+SortIncludes: false
+SortUsingDeclarations: false
+SpaceAfterCStyleCast: false
 SpaceBeforeAssignmentOperators: true
-SpaceBeforeParens: 'ControlStatements'
+SpaceBeforeParens: ControlStatements
+SpaceBeforeRangeBasedForLoopColon: false
+SpaceBeforeSquareBrackets: false
+SpaceInEmptyBlock: false
 SpaceInEmptyParentheses: false
 SpacesBeforeTrailingComments: 1
-SpacesInAngles: false
 SpacesInCStyleCastParentheses: false
+SpacesInConditionalStatement: false
 SpacesInParentheses: false
-IncludeCategories:
-  - Regex:           '"my_template.hpp"'
-    Priority:        -1
+SpacesInSquareBrackets: false
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterCaseLabel: false
+  AfterControlStatement: Never
+  AfterFunction: false
+  AfterNamespace: false
+  AfterStruct: false
+  BeforeElse: false
