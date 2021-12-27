@@ -19,12 +19,12 @@ struct LazySegTree {
   bool OP_commute;
 
   LazySegTree(Monoid_OP<E, OP> Mono)
-      : seg_f(Mono.f)
-      , seg_g(Mono.g)
-      , seg_h(Mono.h)
-      , unit(Mono.unit)
-      , OP_unit(Mono.OP_unit)
-      , OP_commute(Mono.OP_commute) {}
+      : seg_f(Mono.f),
+        seg_g(Mono.g),
+        seg_h(Mono.h),
+        unit(Mono.unit),
+        OP_unit(Mono.OP_unit),
+        OP_commute(Mono.OP_commute) {}
 
   void init(int n) {
     _n = n;
@@ -36,8 +36,8 @@ struct LazySegTree {
   }
 
   void build(const vector<E>& v) {
-    assert(v.size() == _n);
-    FOR(i, v.size()) { dat[size + i] = v[i]; }
+    assert(len(v) == _n);
+    FOR(i, len(v)) { dat[size + i] = v[i]; }
     FOR3_R(i, 1, size) { update(i); }
   }
 
