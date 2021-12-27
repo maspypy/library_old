@@ -10,7 +10,7 @@ vi euler_walk(Graph<T>& G) {
   ll N = G.N, M = G.M;
   if (M == 0) return {0};
   vi deg(N);
-  FORIN(e, G.edges) {
+  for (auto&& e: G.edges) {
     if (G.directed) {
       deg[e.frm]++, deg[e.to]--;
     } else {
@@ -38,7 +38,8 @@ vi euler_walk(Graph<T>& G) {
       st.eb(y);
     }
   }
-  FORIN(x, D) if (x < 0) return {};
+  for (auto&& x: D)
+    if (x < 0) return {};
   if (len(ret) != M + 1) return {};
   reverse(all(ret));
   return ret;
