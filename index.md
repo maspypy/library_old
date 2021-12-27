@@ -163,7 +163,7 @@ data:
       title: mod/modint.hpp
   - name: .
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: my_template.hpp
       title: my_template.hpp
     - icon: ':warning:'
@@ -177,7 +177,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: nt/factor.hpp
       title: nt/factor.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: nt/primetable.hpp
       title: nt/primetable.hpp
     - icon: ':heavy_check_mark:'
@@ -333,6 +333,9 @@ data:
       title: test/library_checker/graph/maximum_independent_set_dense.test.cpp
   - name: test/library_checker/math
     pages:
+    - icon: ':x:'
+      path: test/library_checker/math/enumerate_primes.test.cpp
+      title: test/library_checker/math/enumerate_primes.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/math/factorize.test.cpp
       title: test/library_checker/math/factorize.test.cpp

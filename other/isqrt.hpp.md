@@ -1,10 +1,7 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: nt/primetable.hpp
-    title: nt/primetable.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -19,8 +16,7 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: other/isqrt.hpp
-  requiredBy:
-  - nt/primetable.hpp
+  requiredBy: []
   timestamp: '2021-12-27 17:43:05+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

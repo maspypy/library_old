@@ -4,21 +4,24 @@ data:
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
+  - icon: ':x:'
+    path: nt/primetable.hpp
+    title: nt/primetable.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/associative_array
+    PROBLEM: https://judge.yosupo.jp/problem/enumerate_primes
     links:
-    - https://judge.yosupo.jp/problem/associative_array
-  bundledCode: "#line 1 \"test/library_checker/datastructure/associative_array.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/associative_array\"\n#line\
-    \ 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\n\
-    using ll = long long;\nusing ll8 = __int128;\nusing ld = long double;\nusing pi\
-    \ = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint = unsigned int;\nusing ull\
+    - https://judge.yosupo.jp/problem/enumerate_primes
+  bundledCode: "#line 1 \"test/library_checker/math/enumerate_primes.test.cpp\"\n\
+    #define PROBLEM \"https://judge.yosupo.jp/problem/enumerate_primes\"\n#line 2\
+    \ \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\nusing\
+    \ ll = long long;\nusing ll8 = __int128;\nusing ld = long double;\nusing pi =\
+    \ pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint = unsigned int;\nusing ull\
     \ = unsigned long long;\n\ntemplate <class T>\nusing vc = vector<T>;\ntemplate\
     \ <class T>\nusing vvc = vector<vc<T>>;\ntemplate <class T>\nusing vvvc = vector<vvc<T>>;\n\
     template <class T>\nusing vvvvc = vector<vvvc<T>>;\ntemplate <class T>\nusing\
@@ -94,48 +97,44 @@ data:
     }\n\n#define SUM(v) accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n\
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
-    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/datastructure/associative_array.test.cpp\"\
-    \n\nvoid sol_1() {\n  LL(Q);\n  map<ll, ll> A;\n  FOR(_, Q) {\n    LL(t);\n  \
-    \  if (t == 0) {\n      LL(k, v);\n      A[k] = v;\n    } else {\n      LL(k);\n\
-    \      print(A[k]);\n    }\n  }\n}\n\nvoid sol_2() {\n  LL(Q);\n  unordered_map<ll,\
-    \ ll> A;\n  A.reserve(Q);\n  FOR(_, Q) {\n    LL(t);\n    if (t == 0) {\n    \
-    \  LL(k, v);\n      A[k] = v;\n    } else {\n      LL(k);\n      print(A[k]);\n\
-    \    }\n  }\n}\n\nvoid sol_3() {\n  LL(Q);\n  using T = tuple<ll, ll, ll>;\n \
-    \ vc<T> query(Q);\n  vi key;\n  key.reserve(Q);\n  FOR(q, Q) {\n    LL(t);\n \
-    \   if (t == 0) {\n      LL(k, v);\n      query[q] = {t, k, v};\n      key.eb(k);\n\
-    \    } else {\n      LL(k);\n      query[q] = {t, k, 0};\n      key.eb(k);\n \
-    \   }\n  }\n  UNIQUE(key);\n  vi A(len(key));\n  FOR(q, Q) {\n    auto [t, k,\
-    \ v] = query[q];\n    k = LB(key, k);\n    if (t == 0) {\n      A[k] = v;\n  \
-    \  } else {\n      print(A[k]);\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
-    \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  // sol_1();\n\
-    \  // sol_2();\n  sol_3();\n\n  return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/associative_array\"\n#include\
-    \ \"my_template.hpp\"\n\nvoid sol_1() {\n  LL(Q);\n  map<ll, ll> A;\n  FOR(_,\
-    \ Q) {\n    LL(t);\n    if (t == 0) {\n      LL(k, v);\n      A[k] = v;\n    }\
-    \ else {\n      LL(k);\n      print(A[k]);\n    }\n  }\n}\n\nvoid sol_2() {\n\
-    \  LL(Q);\n  unordered_map<ll, ll> A;\n  A.reserve(Q);\n  FOR(_, Q) {\n    LL(t);\n\
-    \    if (t == 0) {\n      LL(k, v);\n      A[k] = v;\n    } else {\n      LL(k);\n\
-    \      print(A[k]);\n    }\n  }\n}\n\nvoid sol_3() {\n  LL(Q);\n  using T = tuple<ll,\
-    \ ll, ll>;\n  vc<T> query(Q);\n  vi key;\n  key.reserve(Q);\n  FOR(q, Q) {\n \
-    \   LL(t);\n    if (t == 0) {\n      LL(k, v);\n      query[q] = {t, k, v};\n\
-    \      key.eb(k);\n    } else {\n      LL(k);\n      query[q] = {t, k, 0};\n \
-    \     key.eb(k);\n    }\n  }\n  UNIQUE(key);\n  vi A(len(key));\n  FOR(q, Q) {\n\
-    \    auto [t, k, v] = query[q];\n    k = LB(key, k);\n    if (t == 0) {\n    \
-    \  A[k] = v;\n    } else {\n      print(A[k]);\n    }\n  }\n}\n\nsigned main()\
-    \ {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\
-    \n  // sol_1();\n  // sol_2();\n  sol_3();\n\n  return 0;\n}\n"
+    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/math/enumerate_primes.test.cpp\"\
+    \n\n#line 1 \"nt/primetable.hpp\"\nconstexpr ll isqrt(ll n) {\n  ll x = n, y =\
+    \ (n + 1) / 2;\n  while (y < x) { tie(x, y) = mp(y, (y + n / y) / 2); }\n  return\
+    \ x;\n}\n\ntemplate <int LIM = (1 << 20)>\npair<bitset<LIM>, vc<int>> primetable()\
+    \ {\n  bitset<LIM> is_prime;\n  const int S = (int)round(sqrt(LIM)), R = LIM /\
+    \ 2;\n  vc<int> primes = {2}, sieve(S + 1);\n  primes.reserve(int(LIM / log(LIM)\
+    \ * 1.1));\n  vc<pi> cp;\n  for (int i = 3; i <= S; i += 2) {\n    if (!sieve[i])\
+    \ {\n      cp.eb(i, i * i / 2);\n      for (int j = i * i; j <= S; j += 2 * i)\
+    \ sieve[j] = 1;\n    }\n  }\n  for (int L = 1; L <= R; L += S) {\n    array<bool,\
+    \ S> block{};\n    for (auto& [p, idx]: cp)\n      for (int i = idx; i < S + L;\
+    \ idx = (i += p)) block[i - L] = 1;\n    FOR(i, min(S, R - L)) if (!block[i])\
+    \ primes.eb((L + i) * 2 + 1);\n  }\n  for (auto&& i :primes) is_prime[i] = 1;\n\
+    \  return {is_prime, primes};\n}\n#line 5 \"test/library_checker/math/enumerate_primes.test.cpp\"\
+    \n\nvoid solve() {\n  const int LIM = 500'000'000;\n  auto [is_prime, primes]\
+    \ = primetable<LIM>();\n\n  LL(N, A, B);\n  int pi_N = UB(primes, N);\n\n  vc<int>\
+    \ ANS;\n  while (B < pi_N) {\n    ANS.eb(primes[B]);\n    B += A;\n  }\n  print(pi_N,\
+    \ len(ANS));\n  print(ANS);\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
+    \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/enumerate_primes\"\n#include\
+    \ \"my_template.hpp\"\n\n#include \"nt/primetable.hpp\"\n\nvoid solve() {\n  const\
+    \ int LIM = 500'000'000;\n  auto [is_prime, primes] = primetable<LIM>();\n\n \
+    \ LL(N, A, B);\n  int pi_N = UB(primes, N);\n\n  vc<int> ANS;\n  while (B < pi_N)\
+    \ {\n    ANS.eb(primes[B]);\n    B += A;\n  }\n  print(pi_N, len(ANS));\n  print(ANS);\n\
+    }\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout\
+    \ << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
+  - nt/primetable.hpp
   isVerificationFile: true
-  path: test/library_checker/datastructure/associative_array.test.cpp
+  path: test/library_checker/math/enumerate_primes.test.cpp
   requiredBy: []
-  timestamp: '2021-12-27 17:06:22+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-12-28 03:02:33+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/library_checker/datastructure/associative_array.test.cpp
+documentation_of: test/library_checker/math/enumerate_primes.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/datastructure/associative_array.test.cpp
-- /verify/test/library_checker/datastructure/associative_array.test.cpp.html
-title: test/library_checker/datastructure/associative_array.test.cpp
+- /verify/test/library_checker/math/enumerate_primes.test.cpp
+- /verify/test/library_checker/math/enumerate_primes.test.cpp.html
+title: test/library_checker/math/enumerate_primes.test.cpp
 ---

@@ -16,7 +16,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/treeabel.hpp
     title: graph/treeabel.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
