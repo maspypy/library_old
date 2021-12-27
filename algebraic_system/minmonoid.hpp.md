@@ -6,6 +6,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/staticrmq_seg.test.cpp
     title: test/library_checker/datastructure/staticrmq_seg.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/staticrmq_sparse.test.cpp
+    title: test/library_checker/datastructure/staticrmq_sparse.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -25,6 +28,7 @@ data:
   timestamp: '2021-12-28 05:37:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/library_checker/datastructure/staticrmq_sparse.test.cpp
   - test/library_checker/datastructure/staticrmq_seg.test.cpp
 documentation_of: algebraic_system/minmonoid.hpp
 layout: document
