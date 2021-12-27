@@ -166,9 +166,6 @@ data:
     - icon: ':question:'
       path: my_template.hpp
       title: my_template.hpp
-    - icon: ':warning:'
-      path: temp.cpp
-      title: temp.cpp
   - name: nt
     pages:
     - icon: ':warning:'
