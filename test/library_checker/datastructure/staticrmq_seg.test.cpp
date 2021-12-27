@@ -1,15 +1,13 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"
 #include "my_template.hpp"
-
 #include "ds/segtree.hpp"
+#include "algebraic_system/minmonoid.hpp"
 
 void solve() {
   LL(N, Q);
   VEC(int, A, N);
-  SegTree<int> seg(Monoid_min<int>(1 << 30));
-  seg.init(N);
-  seg.build(A);
-
+  using Mono = MinMonoid<int, 1 << 30>;
+  SegTree<Mono> seg(A);
   FOR(_, Q) {
     LL(L, R);
     print(seg.prod(L, R));
