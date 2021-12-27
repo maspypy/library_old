@@ -1,12 +1,14 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"
 #include "my_template.hpp"
 
+#include "algebraic_system/minmonoid.hpp"
 #include "ds/disjointsparse.hpp"
 
 void solve() {
   LL(N, Q);
   VEC(int, A, N);
-  DisjointSparse<int> DS(Monoid_min<int>(1 << 30), A);
+  using Mono = MinMonoid<int, 1 << 30>;
+  DisjointSparse<Mono> DS(A);
 
   FOR(_, Q) {
     LL(L, R);
