@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algebra/monoid.hpp
     title: algebra/monoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/hld.hpp
     title: graph/hld.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/treemonoid.hpp
     title: graph/treemonoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
   - icon: ':question:'
@@ -24,9 +24,9 @@ data:
     title: my_template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_set_path_composite
@@ -192,37 +192,37 @@ data:
     \ + y.fi, x.se + y.se}); };\r\n  auto g = [](P x, P y) -> P { return P({x.fi,\
     \ x.fi * y.se + x.se * y.fi}); };\r\n  auto h = [](P x, P y) -> P { return P({x.fi\
     \ * y.fi, x.se * y.fi + y.se}); };\r\n  return Monoid_OP<P, P>({f, g, h, P({0,\
-    \ 0}), P({1, 0}), true, false});\r\n}\r\n#line 3 \"ds/segtree.hpp\"\n\ntemplate\
-    \ <typename E>\nstruct SegTree {\n  using F = function<E(E, E)>;\n  int N_;\n\
-    \  int N;\n  F seg_f;\n  E unit;\n  vector<E> dat;\n\n  SegTree(Monoid<E> Mono)\
-    \ : seg_f(Mono.f), unit(Mono.unit) {}\n\n  void init(int n_) {\n    N_ = n_;\n\
-    \    N = 1;\n    while (N < n_) N <<= 1;\n    dat.assign(N << 1, unit);\n  }\n\
-    \n  void build(const vector<E> &v) {\n    assert(len(v) == N_);\n    FOR(i, len(v))\
-    \ { dat[N + i] = v[i]; }\n    FOR3_R(i, 1, N) { dat[i] = seg_f(dat[i << 1 | 0],\
-    \ dat[i << 1 | 1]); }\n  }\n\n  void set(int i, E x) {\n    assert(i < N_);\n\
-    \    dat[i += N] = x;\n    while (i >>= 1) { dat[i] = seg_f(dat[i << 1 | 0], dat[i\
-    \ << 1 | 1]); }\n  }\n\n  E prod(int L, int R) {\n    assert(L <= R);\n    assert(R\
-    \ <= N_);\n    E vl = unit, vr = unit;\n    L += N;\n    R += N;\n    while (L\
-    \ < R) {\n      if (L & 1) vl = seg_f(vl, dat[L++]);\n      if (R & 1) vr = seg_f(dat[--R],\
-    \ vr);\n      L >>= 1;\n      R >>= 1;\n    }\n    return seg_f(vl, vr);\n  }\n\
-    \n  template <class F>\n  int max_right(F &check, int L) {\n    assert(0 <= L\
-    \ && L <= N_ && check(unit));\n    if (L == N_) return N_;\n    L += N;\n    E\
-    \ sm = unit;\n    do {\n      while (L % 2 == 0) L >>= 1;\n      if (!check(seg_f(sm,\
-    \ dat[L]))) {\n        while (L < N) {\n          L = 2 * L;\n          if (check(seg_f(sm,\
-    \ dat[L]))) {\n            sm = seg_f(sm, dat[L]);\n            L++;\n       \
-    \   }\n        }\n        return L - N;\n      }\n      sm = seg_f(sm, dat[L]);\n\
-    \      L++;\n    } while ((L & -L) != L);\n    return N_;\n  }\n\n  template <class\
-    \ F>\n  int min_left(F &check, int R) {\n    assert(0 <= R && R <= N_ && check(unit));\n\
-    \    if (R == 0) return 0;\n    R += N;\n    E sm = unit;\n    do {\n      --R;\n\
-    \      while (R > 1 && (R % 2)) R >>= 1;\n      if (!check(seg_f(dat[R], sm)))\
-    \ {\n        while (R < N) {\n          R = 2 * R + 1;\n          if (check(seg_f(dat[R],\
-    \ sm))) {\n            sm = seg_f(dat[R], sm);\n            R--;\n          }\n\
-    \        }\n        return R + 1 - N;\n      }\n      sm = seg_f(dat[R], sm);\n\
-    \    } while ((R & -R) != R);\n    return 0;\n  }\n\n  void debug() { print(dat);\
-    \ }\n};\n#line 4 \"graph/treemonoid.hpp\"\n\r\ntemplate <typename Graph, typename\
-    \ E, bool edge = false>\r\nstruct TreeMonoid {\r\n  using F = function<E(E, E)>;\r\
-    \n  HLD<Graph> &hld;\r\n  int N;\r\n  F f;\r\n  E unit;\r\n  bool commute;\r\n\
-    \  SegTree<E> seg, seg_r;\r\n\r\n  TreeMonoid(HLD<Graph> &hld, Monoid<E> Mono)\r\
+    \ 0}), P({1, 0}), true, false});\r\n}\r\n#line 2 \"ds/segtree.hpp\"\ntemplate\
+    \ <class M>\nstruct SegTree {\n  using X = typename M::value_type;\n  using value_type\
+    \ = X;\n  vc<X> dat;\n  int n, log, size;\n\n  SegTree() : SegTree(0) {}\n  SegTree(int\
+    \ n) : SegTree(vc<X>(n, M::unit)) {}\n  SegTree(vc<X> &v) : n(len(v)) {\n    log\
+    \ = 1;\n    while ((1 << log) < n) ++log;\n    size = 1 << log;\n    dat.assign(size\
+    \ << 1, M::unit);\n    FOR(i, n) dat[size + i] = v[i];\n    FOR3_R(i, 1, size)\
+    \ update(i);\n  }\n\n  void update(int i) { dat[i] = M::op(dat[2 * i], dat[2 *\
+    \ i + 1]); }\n\n  void set(int i, X x) {\n    assert(i < n);\n    dat[i += size]\
+    \ = x;\n    while (i >>= 1) update(i);\n  }\n\n  X prod(int L, int R) {\n    assert(L\
+    \ <= R);\n    assert(R <= n);\n    X vl = M::unit, vr = M::unit;\n    L += size,\
+    \ R += size;\n    while (L < R) {\n      if (L & 1) vl = M::op(vl, dat[L++]);\n\
+    \      if (R & 1) vr = M::op(dat[--R], vr);\n      L >>= 1, R >>= 1;\n    }\n\
+    \    return M::op(vl, vr);\n  }\n\n  template <class F>\n  int max_right(F &check,\
+    \ int L) {\n    assert(0 <= L && L <= n && check(M::unit));\n    if (L == n) return\
+    \ n;\n    L += size;\n    X sm = M::unit;\n    do {\n      while (L % 2 == 0)\
+    \ L >>= 1;\n      if (!check(M::op(sm, dat[L]))) {\n        while (L < n) {\n\
+    \          L = 2 * L;\n          if (check(M::op(sm, dat[L]))) {\n           \
+    \ sm = M::op(sm, dat[L]);\n            L++;\n          }\n        }\n        return\
+    \ L - n;\n      }\n      sm = M::op(sm, dat[L]);\n      L++;\n    } while ((L\
+    \ & -L) != L);\n    return n;\n  }\n\n  template <class F>\n  int min_left(F &check,\
+    \ int R) {\n    assert(0 <= R && R <= n && check(M::unit));\n    if (R == 0) return\
+    \ 0;\n    R += n;\n    X sm = M::unit;\n    do {\n      --R;\n      while (R >\
+    \ 1 && (R % 2)) R >>= 1;\n      if (!check(M::op(dat[R], sm))) {\n        while\
+    \ (R < n) {\n          R = 2 * R + 1;\n          if (check(M::op(dat[R], sm)))\
+    \ {\n            sm = M::op(dat[R], sm);\n            R--;\n          }\n    \
+    \    }\n        return R + 1 - n;\n      }\n      sm = M::op(dat[R], sm);\n  \
+    \  } while ((R & -R) != R);\n    return 0;\n  }\n\n  void debug() { print(\"segtree\"\
+    , dat); }\n};\n#line 4 \"graph/treemonoid.hpp\"\n\r\ntemplate <typename Graph,\
+    \ typename E, bool edge = false>\r\nstruct TreeMonoid {\r\n  using F = function<E(E,\
+    \ E)>;\r\n  HLD<Graph> &hld;\r\n  int N;\r\n  F f;\r\n  E unit;\r\n  bool commute;\r\
+    \n  SegTree<E> seg, seg_r;\r\n\r\n  TreeMonoid(HLD<Graph> &hld, Monoid<E> Mono)\r\
     \n      : hld(hld)\r\n      , N(hld.N)\r\n      , f(Mono.f)\r\n      , unit(Mono.unit)\r\
     \n      , commute(Mono.commute)\r\n      , seg(Mono)\r\n      , seg_r(Monoid_reverse<E>(Mono))\
     \ {\r\n    seg.init(N);\r\n    if (!commute) seg_r.init(N);\r\n  };\r\n\r\n  void\
@@ -324,8 +324,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   requiredBy: []
-  timestamp: '2021-12-27 18:35:27+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-12-28 05:37:31+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
 layout: document

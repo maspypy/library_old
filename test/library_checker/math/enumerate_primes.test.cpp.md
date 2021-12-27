@@ -98,18 +98,16 @@ data:
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
     \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/math/enumerate_primes.test.cpp\"\
-    \n\n#line 1 \"nt/primetable.hpp\"\nconstexpr ll isqrt(ll n) {\n  ll x = n, y =\
-    \ (n + 1) / 2;\n  while (y < x) { tie(x, y) = mp(y, (y + n / y) / 2); }\n  return\
-    \ x;\n}\n\ntemplate <int LIM = (1 << 20)>\npair<bitset<LIM>, vc<int>> primetable()\
-    \ {\n  bitset<LIM> is_prime;\n  const int S = (int)round(sqrt(LIM)), R = LIM /\
-    \ 2;\n  vc<int> primes = {2}, sieve(S + 1);\n  primes.reserve(int(LIM / log(LIM)\
-    \ * 1.1));\n  vc<pi> cp;\n  for (int i = 3; i <= S; i += 2) {\n    if (!sieve[i])\
-    \ {\n      cp.eb(i, i * i / 2);\n      for (int j = i * i; j <= S; j += 2 * i)\
-    \ sieve[j] = 1;\n    }\n  }\n  for (int L = 1; L <= R; L += S) {\n    array<bool,\
-    \ S> block{};\n    for (auto& [p, idx]: cp)\n      for (int i = idx; i < S + L;\
-    \ idx = (i += p)) block[i - L] = 1;\n    FOR(i, min(S, R - L)) if (!block[i])\
-    \ primes.eb((L + i) * 2 + 1);\n  }\n  for (auto&& i :primes) is_prime[i] = 1;\n\
-    \  return {is_prime, primes};\n}\n#line 5 \"test/library_checker/math/enumerate_primes.test.cpp\"\
+    \n\n#line 1 \"nt/primetable.hpp\"\ntemplate <int LIM = (1 << 20)>\npair<bitset<LIM>,\
+    \ vc<int>> primetable() {\n  bitset<LIM> is_prime;\n  const int S = (int)round(sqrt(LIM)),\
+    \ R = LIM / 2;\n  vc<int> primes = {2}, sieve(S + 1);\n  primes.reserve(int(LIM\
+    \ / log(LIM) * 1.1));\n  vc<pi> cp;\n  for (int i = 3; i <= S; i += 2) {\n   \
+    \ if (!sieve[i]) {\n      cp.eb(i, i * i / 2);\n      for (int j = i * i; j <=\
+    \ S; j += 2 * i) sieve[j] = 1;\n    }\n  }\n  for (int L = 1; L <= R; L += S)\
+    \ {\n    array<bool, S> block{};\n    for (auto& [p, idx]: cp)\n      for (int\
+    \ i = idx; i < S + L; idx = (i += p)) block[i - L] = 1;\n    FOR(i, min(S, R -\
+    \ L)) if (!block[i]) primes.eb((L + i) * 2 + 1);\n  }\n  for (auto&& i :primes)\
+    \ is_prime[i] = 1;\n  return {is_prime, primes};\n}\n#line 5 \"test/library_checker/math/enumerate_primes.test.cpp\"\
     \n\nvoid solve() {\n  const int LIM = 500'000'000;\n  auto [is_prime, primes]\
     \ = primetable<LIM>();\n\n  LL(N, A, B);\n  int pi_N = UB(primes, N);\n\n  vc<int>\
     \ ANS;\n  while (B < pi_N) {\n    ANS.eb(primes[B]);\n    B += A;\n  }\n  print(pi_N,\
@@ -128,7 +126,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/math/enumerate_primes.test.cpp
   requiredBy: []
-  timestamp: '2021-12-28 03:02:33+09:00'
+  timestamp: '2021-12-28 05:37:31+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/math/enumerate_primes.test.cpp
