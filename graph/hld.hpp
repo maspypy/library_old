@@ -8,18 +8,18 @@ struct HLD {
   vector<int> sz, LID, RID, ELID, ERID, head, V, parent, depth, e_to_v;
 
   HLD(Graph &G, int root = 0)
-      : G(G)
-      , N(G.N)
-      , sz(G.N)
-      , LID(G.N)
-      , RID(G.N)
-      , ELID(G.N)
-      , ERID(G.N)
-      , head(G.N, root)
-      , V(G.N)
-      , parent(G.N, -1)
-      , depth(G.N)
-      , e_to_v(G.N) {
+      : G(G),
+        N(G.N),
+        sz(G.N),
+        LID(G.N),
+        RID(G.N),
+        ELID(G.N),
+        ERID(G.N),
+        head(G.N, root),
+        V(G.N),
+        parent(G.N, -1),
+        depth(G.N),
+        e_to_v(G.N) {
     int t1 = 0, t2 = 0;
     dfs_sz(root, -1);
     dfs_hld(root, -1, t1, t2);
@@ -30,7 +30,7 @@ struct HLD {
     depth[idx] = (p == -1 ? 0 : depth[p] + 1);
     sz[idx] = 1;
     if (G[idx].size() && G[idx][0].to == p) swap(G[idx][0], G[idx].back());
-    for (auto &e : G[idx]) {
+    for (auto &e: G[idx]) {
       if (e.to == p) continue;
       e_to_v[e.id] = e.to;
       dfs_sz(e.to, idx);
@@ -43,7 +43,7 @@ struct HLD {
     LID[idx] = times++;
     ELID[idx] = etimes++;
     V[LID[idx]] = idx;
-    for (auto &e : G[idx]) {
+    for (auto &e: G[idx]) {
       if (e.to == par) continue;
       head[e.to] = (G[idx][0].to == e.to ? head[idx] : e.to);
       dfs_hld(e.to, idx, times, etimes);

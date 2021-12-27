@@ -13,8 +13,7 @@ struct SegTree2D {
   vi keyY;
   vc<E> dat;
 
-  SegTree2D(Monoid<E> Mono, vi& X, vi& Y, vc<E>& wt)
-      : f(Mono.f), unit(Mono.unit) {
+  SegTree2D(Monoid<E> Mono, vi& X, vi& Y, vc<E>& wt) : f(Mono.f), unit(Mono.unit) {
     assert(Mono.commute); // 可換モノイドのみ
     build(X, Y, wt);
   }
@@ -25,9 +24,7 @@ struct SegTree2D {
     build(X, Y, wt);
   }
 
-  inline int xtoi(int x) {
-    return (SMALL ? clamp(x - min_X, 0, N) : LB(keyX, x));
-  }
+  inline int xtoi(int x) { return (SMALL ? clamp(x - min_X, 0, N) : LB(keyX, x)); }
 
   void build(vi& X, vi& Y, vc<E>& wt) {
     if (!SMALL) {
@@ -45,7 +42,7 @@ struct SegTree2D {
     vc<vc<E>> dat_raw(N + N);
 
     auto I = argsort(Y);
-    FORIN(i, I) {
+    for (auto&& i: I) {
       int ix = xtoi(X[i]), y = Y[i];
       ix += N;
       while (ix) {

@@ -17,7 +17,7 @@ void solve() {
     RS.add_rect(l, r, d, u);
   }
   auto ANS = RS.calc();
-  FORIN(x, ANS) print(x);
+  for (auto&& x: ANS) print(x);
 }
 
 signed main() {

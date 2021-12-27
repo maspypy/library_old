@@ -1,4 +1,4 @@
-template <typename T, bool SMALL=false>
+template <typename T, bool SMALL = false>
 struct Fenwick2D {
   int N;
   vi keyX;
@@ -14,9 +14,7 @@ struct Fenwick2D {
     build(X, Y, wt);
   }
 
-  inline int xtoi(int x) {
-    return (SMALL ? clamp(x - min_X, 0, N) : LB(keyX, x));
-  }
+  inline int xtoi(int x) { return (SMALL ? clamp(x - min_X, 0, N) : LB(keyX, x)); }
 
   inline int nxt(int i) {
     i += 1;
@@ -44,7 +42,7 @@ struct Fenwick2D {
     vc<vc<T>> dat_raw(N);
 
     auto I = argsort(Y);
-    FORIN(i, I) {
+    for (auto&& i: I) {
       int ix = xtoi(X[i]), y = Y[i];
       while (ix < N) {
         auto& KY = keyY_raw[ix];
