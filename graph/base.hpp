@@ -33,10 +33,9 @@ struct Graph {
   void debug(bool detail = false) {
     FOR(v, N) {
       cout << v << " :";
-      for (auto e : G[v]) {
+      for (auto e: G[v]) {
         if (detail)
-          cout << " (" << e.frm << "," << e.to << "," << e.cost << "," << e.id
-               << ")";
+          cout << " (" << e.frm << "," << e.to << "," << e.cost << "," << e.id << ")";
         else
           cout << " " << e.to;
       }
@@ -46,7 +45,7 @@ struct Graph {
 
   vector<int> degrees() {
     vector<int> deg(N);
-    FORIN(e, edges) {
+    for (auto&& e: edges) {
       deg[e.frm]++;
       deg[e.to]++;
     }

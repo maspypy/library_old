@@ -12,8 +12,7 @@ struct RectangleSums {
   vc<vc<tuple<int, int, int>>> query_l;
   vc<vc<tuple<int, int, int>>> query_r;
 
-  RectangleSums(int N)
-      : N(N), n(0), Q(0), X(N), Y(N), keyX(N), keyY(N), wt(N) {}
+  RectangleSums(int N) : N(N), n(0), Q(0), X(N), Y(N), keyX(N), keyY(N), wt(N) {}
 
   void add_pt(ll x, ll y, WT w = 1) {
     X[n] = x, Y[n] = y, wt[n] = w, keyX[n] = x, keyY[n] = y;
@@ -70,15 +69,15 @@ struct RectangleSums {
     int k = (SMALL ? max_y - min_y + 2 : len(keyY) + 1);
     FenwickTree<WT> bit(k);
     FOR(x, len(add)) {
-      FORIN(t, query_l[x]) {
+      for (auto&& t: query_l[x]) {
         auto [q, yl, yr] = t;
         ANS[q] -= bit.sum(yl, yr);
       }
-      FORIN(t, query_r[x]) {
+      for (auto&& t: query_r[x]) {
         auto [q, yl, yr] = t;
         ANS[q] += bit.sum(yl, yr);
       }
-      FORIN(t, add[x]) {
+      for (auto&& t: add[x]) {
         auto [y, w] = t;
         bit.add(y, w);
       }
