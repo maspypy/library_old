@@ -2,9 +2,7 @@ template< int mod >
 struct modint {
   int x;
 
-  modint() : x(0) {}
-
-  modint(int64_t y) : x(y >= 0 ? y % mod : (mod - (-y) % mod) % mod) {}
+  constexpr modint(const ll x = 0) noexcept : x(x >= 0 ? x % mod : (mod - (-x) % mod) % mod) {}
 
   modint &operator+=(const modint &p) {
     if((x += p.x) >= mod) x -= mod;
