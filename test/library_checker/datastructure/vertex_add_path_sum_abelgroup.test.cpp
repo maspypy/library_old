@@ -1,6 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_add_path_sum"
 #include "my_template.hpp"
 
+#include "graph/treeabel.hpp"
+
 void solve() {
   LL(N, Q);
   VEC(ll, A, N);

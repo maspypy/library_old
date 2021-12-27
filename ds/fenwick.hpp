@@ -41,7 +41,7 @@ struct FenwickTree {
 
   void add(int k, T x) {
     total += x;
-    for (++k; k < data.size(); k += k & -k) data[k] += x;
+    for (++k; k < len(data); k += k & -k) data[k] += x;
   }
 
   template <class F>
