@@ -1,36 +1,35 @@
-#include "algebra/monoid.hpp"
-
-template <typename E>
+template <class Monoid>
 struct SWAG {
-  using F = function<E(E, E)>;
-  F f;
-  E e;
-  vc<E> dat;
-  vc<E> cum_l;
-  E cum_r;
-  SWAG(Monoid<E> M) : f(M.f), e(M.unit), cum_l({M.unit}), cum_r(M.unit) {}
+  using X = typename Monoid::value_type;
+  using value_type = X;
+  vc<X> dat;
+  vc<X> cum_l;
+  X cum_r;
 
-  void push(E x) {
-    cum_r = f(cum_r, x);
+  SWAG() : cum_l({Monoid::unit}), cum_r(Monoid::unit) {}
+
+  void push(X x) {
+    cum_r = Monoid::op(cum_r, x);
     dat.eb(x);
   }
 
   void pop() {
     cum_l.pop_back();
     if (len(cum_l) == 0) {
-      cum_l = {e};
-      cum_r = e;
+      cum_l = {Monoid::unit};
+      cum_r = Monoid::unit;
       while (len(dat) > 1) {
-        cum_l.eb(f(dat.back(), cum_l.back()));
+        cum_l.eb(Monoid::op(dat.back(), cum_l.back()));
         dat.pop_back();
       }
       dat.pop_back();
     }
   }
 
-  E prod() { return f(cum_l.back(), cum_r); }
+  X prod() { return Monoid::op(cum_l.back(), cum_r); }
 
   void debug() {
+    print("swag");
     print("dat", dat);
     print("cum_l", cum_l);
     print("cum_r", cum_r);

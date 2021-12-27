@@ -1,6 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/queue_operate_all_composite"
 #include "my_template.hpp"
 
+#include "algebra/affinegroup.hpp"
 #include "ds/swag.hpp"
 #include "mod/modint.hpp"
 
@@ -8,20 +9,22 @@ using mint = modint998;
 
 void solve() {
   LL(Q);
-  using E = pair<mint, mint>;
-  SWAG<E> swag(Monoid_affine<mint>());
+  using Mono = AffineGroup<mint>;
+  using F = Mono::value_type;
+
+  SWAG<Mono> swag;
 
   FOR(_, Q) {
     LL(t);
     if (t == 0) {
       LL(a, b);
-      swag.push(E({a, b}));
+      swag.push(F({a, b}));
     }
     elif (t == 1) { swag.pop(); }
     elif (t == 2) {
       LL(x);
-      auto e = swag.prod();
-      print(e.fi * mint(x) + e.se);
+      F f = swag.prod();
+      print(Mono::eval(f, x));
     }
   }
 }

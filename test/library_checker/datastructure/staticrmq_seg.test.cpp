@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"
 #include "my_template.hpp"
 #include "ds/segtree.hpp"
-#include "algebraic_system/minmonoid.hpp"
+#include "algebra/minmonoid.hpp"
 
 void solve() {
   LL(N, Q);
