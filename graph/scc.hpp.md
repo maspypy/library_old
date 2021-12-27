@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
   _extendedRequiredBy: []
@@ -21,16 +21,16 @@ data:
     \   edges.eb(e);\n    G[frm].eb(e);\n    if (!directed) {\n      auto e_rev =\
     \ edge_t(to, frm, cost, i);\n      G[to].eb(e_rev);\n    }\n    ++M;\n  }\n\n\
     \  void debug(bool detail = false) {\n    FOR(v, N) {\n      cout << v << \" :\"\
-    ;\n      for (auto e : G[v]) {\n        if (detail)\n          cout << \" (\"\
-    \ << e.frm << \",\" << e.to << \",\" << e.cost << \",\" << e.id\n            \
-    \   << \")\";\n        else\n          cout << \" \" << e.to;\n      }\n     \
-    \ cout << \"\\n\";\n    }\n  }\n\n  vector<int> degrees() {\n    vector<int> deg(N);\n\
-    \    FORIN(e, edges) {\n      deg[e.frm]++;\n      deg[e.to]++;\n    }\n    return\
-    \ deg;\n  }\n\n  int size() { return N; }\n\n  vector<edge_t>& operator[](int\
-    \ v) { return G[v]; }\n};\n#line 3 \"graph/scc.hpp\"\n\ntemplate <class T> struct\
-    \ SCC {\n  T &G;\n  ll N;\n  ll n_comp;\n  vc<int> comp_id;\n  vc<int> low;\n\
-    \  vc<int> ord;\n  vc<int> visited;\n  ll now = 0;\n\n  SCC(T &G)\n      : G(G),\
-    \ N(G.N), n_comp(0), comp_id(G.N, 0), low(G.N, 0), ord(G.N, -1) {\n    assert(G.directed);\n\
+    ;\n      for (auto e: G[v]) {\n        if (detail)\n          cout << \" (\" <<\
+    \ e.frm << \",\" << e.to << \",\" << e.cost << \",\" << e.id << \")\";\n     \
+    \   else\n          cout << \" \" << e.to;\n      }\n      cout << \"\\n\";\n\
+    \    }\n  }\n\n  vector<int> degrees() {\n    vector<int> deg(N);\n    for (auto&&\
+    \ e: edges) {\n      deg[e.frm]++;\n      deg[e.to]++;\n    }\n    return deg;\n\
+    \  }\n\n  int size() { return N; }\n\n  vector<edge_t>& operator[](int v) { return\
+    \ G[v]; }\n};\n#line 3 \"graph/scc.hpp\"\n\ntemplate <class T> struct SCC {\n\
+    \  T &G;\n  ll N;\n  ll n_comp;\n  vc<int> comp_id;\n  vc<int> low;\n  vc<int>\
+    \ ord;\n  vc<int> visited;\n  ll now = 0;\n\n  SCC(T &G)\n      : G(G), N(G.N),\
+    \ n_comp(0), comp_id(G.N, 0), low(G.N, 0), ord(G.N, -1) {\n    assert(G.directed);\n\
     \    build();\n  }\n\n  ll operator[](ll v) { return comp_id[v]; }\n\n  void dfs(int\
     \ v) {\n    low[v] = now;\n    ord[v] = now;\n    ++now;\n    visited.eb(v);\n\
     \    for (auto e : G[v]) {\n      if (ord[e.to] == -1) {\n        dfs(e.to);\n\
@@ -64,7 +64,7 @@ data:
   isVerificationFile: false
   path: graph/scc.hpp
   requiredBy: []
-  timestamp: '2021-12-25 22:40:58+09:00'
+  timestamp: '2021-12-27 18:35:27+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph/scc.hpp

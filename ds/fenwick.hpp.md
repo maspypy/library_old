@@ -2,19 +2,22 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: graph/treeabel.hpp
     title: graph/treeabel.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: other/rectanglesums.hpp
     title: other/rectanglesums.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/datastructure/point_add_range_sum.test.cpp
     title: test/library_checker/datastructure/point_add_range_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
     title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
+    title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -31,9 +34,9 @@ data:
     \ = 0;\n    while (L < R) {\n      ret += data[R];\n      R -= R & -R;\n    }\n\
     \    while (R < L) {\n      ret -= data[L];\n      L -= L & -L;\n    }\n    return\
     \ ret;\n  }\n\n  T sum_all() { return total; }\n\n  void add(int k, T x) {\n \
-    \   total += x;\n    for (++k; k < data.size(); k += k & -k) data[k] += x;\n \
-    \ }\n\n  template <class F>\n  int max_right(F& check) {\n    assert(f(T(0)));\n\
-    \    ll i = 0;\n    T s = 0;\n    int k = 1;\n    int N = len(data);\n    while\
+    \   total += x;\n    for (++k; k < len(data); k += k & -k) data[k] += x;\n  }\n\
+    \n  template <class F>\n  int max_right(F& check) {\n    assert(f(T(0)));\n  \
+    \  ll i = 0;\n    T s = 0;\n    int k = 1;\n    int N = len(data);\n    while\
     \ (2 * k < N) k *= 2;\n    while (k) {\n      if (i + k < N && check(s + data[i\
     \ + k])) {\n        i += k;\n        s += data[i];\n      }\n      k >>= 1;\n\
     \    }\n    return i;\n  }\n\n  int find_kth_element(T k) {\n    auto check =\
@@ -58,9 +61,9 @@ data:
     \ = 0;\n    while (L < R) {\n      ret += data[R];\n      R -= R & -R;\n    }\n\
     \    while (R < L) {\n      ret -= data[L];\n      L -= L & -L;\n    }\n    return\
     \ ret;\n  }\n\n  T sum_all() { return total; }\n\n  void add(int k, T x) {\n \
-    \   total += x;\n    for (++k; k < data.size(); k += k & -k) data[k] += x;\n \
-    \ }\n\n  template <class F>\n  int max_right(F& check) {\n    assert(f(T(0)));\n\
-    \    ll i = 0;\n    T s = 0;\n    int k = 1;\n    int N = len(data);\n    while\
+    \   total += x;\n    for (++k; k < len(data); k += k & -k) data[k] += x;\n  }\n\
+    \n  template <class F>\n  int max_right(F& check) {\n    assert(f(T(0)));\n  \
+    \  ll i = 0;\n    T s = 0;\n    int k = 1;\n    int N = len(data);\n    while\
     \ (2 * k < N) k *= 2;\n    while (k) {\n      if (i + k < N && check(s + data[i\
     \ + k])) {\n        i += k;\n        s += data[i];\n      }\n      k >>= 1;\n\
     \    }\n    return i;\n  }\n\n  int find_kth_element(T k) {\n    auto check =\
@@ -80,10 +83,11 @@ data:
   requiredBy:
   - graph/treeabel.hpp
   - other/rectanglesums.hpp
-  timestamp: '2021-12-27 09:12:02+09:00'
+  timestamp: '2021-12-27 18:40:42+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/library_checker/datastructure/point_add_range_sum.test.cpp
+  - test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
   - test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
 documentation_of: ds/fenwick.hpp
 layout: document

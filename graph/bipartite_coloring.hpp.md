@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
   - icon: ':question:'
@@ -24,20 +24,20 @@ data:
     \   edges.eb(e);\n    G[frm].eb(e);\n    if (!directed) {\n      auto e_rev =\
     \ edge_t(to, frm, cost, i);\n      G[to].eb(e_rev);\n    }\n    ++M;\n  }\n\n\
     \  void debug(bool detail = false) {\n    FOR(v, N) {\n      cout << v << \" :\"\
-    ;\n      for (auto e : G[v]) {\n        if (detail)\n          cout << \" (\"\
-    \ << e.frm << \",\" << e.to << \",\" << e.cost << \",\" << e.id\n            \
-    \   << \")\";\n        else\n          cout << \" \" << e.to;\n      }\n     \
-    \ cout << \"\\n\";\n    }\n  }\n\n  vector<int> degrees() {\n    vector<int> deg(N);\n\
-    \    FORIN(e, edges) {\n      deg[e.frm]++;\n      deg[e.to]++;\n    }\n    return\
-    \ deg;\n  }\n\n  int size() { return N; }\n\n  vector<edge_t>& operator[](int\
-    \ v) { return G[v]; }\n};\n#line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\
-    \nusing namespace std;\n\nusing ll = long long;\nusing ll8 = __int128;\nusing\
-    \ ld = long double;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint\
-    \ = unsigned int;\nusing ull = unsigned long long;\n\ntemplate <class T>\nusing\
-    \ vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\ntemplate <class\
-    \ T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc = vector<vvvc<T>>;\n\
-    template <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate <class T>\nusing\
-    \ pq = priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T, vector<T>,\
+    ;\n      for (auto e: G[v]) {\n        if (detail)\n          cout << \" (\" <<\
+    \ e.frm << \",\" << e.to << \",\" << e.cost << \",\" << e.id << \")\";\n     \
+    \   else\n          cout << \" \" << e.to;\n      }\n      cout << \"\\n\";\n\
+    \    }\n  }\n\n  vector<int> degrees() {\n    vector<int> deg(N);\n    for (auto&&\
+    \ e: edges) {\n      deg[e.frm]++;\n      deg[e.to]++;\n    }\n    return deg;\n\
+    \  }\n\n  int size() { return N; }\n\n  vector<edge_t>& operator[](int v) { return\
+    \ G[v]; }\n};\n#line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing\
+    \ namespace std;\n\nusing ll = long long;\nusing ll8 = __int128;\nusing ld = long\
+    \ double;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint = unsigned\
+    \ int;\nusing ull = unsigned long long;\n\ntemplate <class T>\nusing vc = vector<T>;\n\
+    template <class T>\nusing vvc = vector<vc<T>>;\ntemplate <class T>\nusing vvvc\
+    \ = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc = vector<vvvc<T>>;\ntemplate\
+    \ <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate <class T>\nusing pq =\
+    \ priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T, vector<T>,\
     \ greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
     #define VEC(type, name, size) \\\n  vector<type> name(size);    \\\n  IN(name)\n\
     #define vv(type, name, h, ...) vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n\
@@ -146,7 +146,7 @@ data:
   isVerificationFile: false
   path: graph/bipartite_coloring.hpp
   requiredBy: []
-  timestamp: '2021-12-27 17:06:22+09:00'
+  timestamp: '2021-12-27 18:35:27+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph/bipartite_coloring.hpp

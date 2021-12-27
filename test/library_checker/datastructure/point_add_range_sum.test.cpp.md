@@ -9,9 +9,9 @@ data:
     title: my_template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/point_add_range_sum
@@ -109,9 +109,9 @@ data:
     \ = 0;\n    while (L < R) {\n      ret += data[R];\n      R -= R & -R;\n    }\n\
     \    while (R < L) {\n      ret -= data[L];\n      L -= L & -L;\n    }\n    return\
     \ ret;\n  }\n\n  T sum_all() { return total; }\n\n  void add(int k, T x) {\n \
-    \   total += x;\n    for (++k; k < data.size(); k += k & -k) data[k] += x;\n \
-    \ }\n\n  template <class F>\n  int max_right(F& check) {\n    assert(f(T(0)));\n\
-    \    ll i = 0;\n    T s = 0;\n    int k = 1;\n    int N = len(data);\n    while\
+    \   total += x;\n    for (++k; k < len(data); k += k & -k) data[k] += x;\n  }\n\
+    \n  template <class F>\n  int max_right(F& check) {\n    assert(f(T(0)));\n  \
+    \  ll i = 0;\n    T s = 0;\n    int k = 1;\n    int N = len(data);\n    while\
     \ (2 * k < N) k *= 2;\n    while (k) {\n      if (i + k < N && check(s + data[i\
     \ + k])) {\n        i += k;\n        s += data[i];\n      }\n      k >>= 1;\n\
     \    }\n    return i;\n  }\n\n  int find_kth_element(T k) {\n    auto check =\
@@ -143,8 +143,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/point_add_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2021-12-27 17:06:22+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-12-27 18:40:42+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/point_add_range_sum.test.cpp
 layout: document

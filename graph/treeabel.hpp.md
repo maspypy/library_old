@@ -1,23 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algebra/monoid.hpp
     title: algebra/monoid.hpp
   - icon: ':question:'
     path: ds/fenwick.hpp
     title: ds/fenwick.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/hld.hpp
     title: graph/hld.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
+    title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"algebra/monoid.hpp\"\n\r\ntemplate <typename E>\r\nstruct\
@@ -59,9 +62,9 @@ data:
     \ = 0;\n    while (L < R) {\n      ret += data[R];\n      R -= R & -R;\n    }\n\
     \    while (R < L) {\n      ret -= data[L];\n      L -= L & -L;\n    }\n    return\
     \ ret;\n  }\n\n  T sum_all() { return total; }\n\n  void add(int k, T x) {\n \
-    \   total += x;\n    for (++k; k < data.size(); k += k & -k) data[k] += x;\n \
-    \ }\n\n  template <class F>\n  int max_right(F& check) {\n    assert(f(T(0)));\n\
-    \    ll i = 0;\n    T s = 0;\n    int k = 1;\n    int N = len(data);\n    while\
+    \   total += x;\n    for (++k; k < len(data); k += k & -k) data[k] += x;\n  }\n\
+    \n  template <class F>\n  int max_right(F& check) {\n    assert(f(T(0)));\n  \
+    \  ll i = 0;\n    T s = 0;\n    int k = 1;\n    int N = len(data);\n    while\
     \ (2 * k < N) k *= 2;\n    while (k) {\n      if (i + k < N && check(s + data[i\
     \ + k])) {\n        i += k;\n        s += data[i];\n      }\n      k >>= 1;\n\
     \    }\n    return i;\n  }\n\n  int find_kth_element(T k) {\n    auto check =\
@@ -84,11 +87,11 @@ data:
     \ to, cost, i);\n    edges.eb(e);\n    G[frm].eb(e);\n    if (!directed) {\n \
     \     auto e_rev = edge_t(to, frm, cost, i);\n      G[to].eb(e_rev);\n    }\n\
     \    ++M;\n  }\n\n  void debug(bool detail = false) {\n    FOR(v, N) {\n     \
-    \ cout << v << \" :\";\n      for (auto e : G[v]) {\n        if (detail)\n   \
-    \       cout << \" (\" << e.frm << \",\" << e.to << \",\" << e.cost << \",\" <<\
-    \ e.id\n               << \")\";\n        else\n          cout << \" \" << e.to;\n\
-    \      }\n      cout << \"\\n\";\n    }\n  }\n\n  vector<int> degrees() {\n  \
-    \  vector<int> deg(N);\n    FORIN(e, edges) {\n      deg[e.frm]++;\n      deg[e.to]++;\n\
+    \ cout << v << \" :\";\n      for (auto e: G[v]) {\n        if (detail)\n    \
+    \      cout << \" (\" << e.frm << \",\" << e.to << \",\" << e.cost << \",\" <<\
+    \ e.id << \")\";\n        else\n          cout << \" \" << e.to;\n      }\n  \
+    \    cout << \"\\n\";\n    }\n  }\n\n  vector<int> degrees() {\n    vector<int>\
+    \ deg(N);\n    for (auto&& e: edges) {\n      deg[e.frm]++;\n      deg[e.to]++;\n\
     \    }\n    return deg;\n  }\n\n  int size() { return N; }\n\n  vector<edge_t>&\
     \ operator[](int v) { return G[v]; }\n};\n#line 3 \"graph/hld.hpp\"\n\r\ntemplate\
     \ <typename Graph>\r\nstruct HLD {\r\n  Graph &G;\r\n  int N;\r\n  vector<int>\
@@ -202,9 +205,10 @@ data:
   isVerificationFile: false
   path: graph/treeabel.hpp
   requiredBy: []
-  timestamp: '2021-12-27 17:43:05+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2021-12-27 18:40:42+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
 documentation_of: graph/treeabel.hpp
 layout: document
 redirect_from:

@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algebra/monoid.hpp
     title: algebra/monoid.hpp
   - icon: ':heavy_check_mark:'
     path: ds/lazysegtree.hpp
     title: ds/lazysegtree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: mod/modint.hpp
     title: mod/modint.hpp
   - icon: ':question:'
@@ -136,12 +136,12 @@ data:
     \ LazySegTree {\n  using F = function<E(E, E)>;\n  using G = function<E(E, OP)>;\n\
     \  using H = function<OP(OP, OP)>;\n  int _n, size, log;\n  vc<E> dat;\n  vc<OP>\
     \ laz;\n  F seg_f;\n  G seg_g;\n  H seg_h;\n  E unit;\n  OP OP_unit;\n  bool OP_commute;\n\
-    \n  LazySegTree(Monoid_OP<E, OP> Mono)\n      : seg_f(Mono.f)\n      , seg_g(Mono.g)\n\
-    \      , seg_h(Mono.h)\n      , unit(Mono.unit)\n      , OP_unit(Mono.OP_unit)\n\
-    \      , OP_commute(Mono.OP_commute) {}\n\n  void init(int n) {\n    _n = n;\n\
+    \n  LazySegTree(Monoid_OP<E, OP> Mono)\n      : seg_f(Mono.f),\n        seg_g(Mono.g),\n\
+    \        seg_h(Mono.h),\n        unit(Mono.unit),\n        OP_unit(Mono.OP_unit),\n\
+    \        OP_commute(Mono.OP_commute) {}\n\n  void init(int n) {\n    _n = n;\n\
     \    log = 1;\n    while ((1 << log) < n) ++log;\n    size = 1 << log;\n    dat.assign(size\
     \ << 1, unit);\n    laz.assign(size, OP_unit);\n  }\n\n  void build(const vector<E>&\
-    \ v) {\n    assert(v.size() == _n);\n    FOR(i, v.size()) { dat[size + i] = v[i];\
+    \ v) {\n    assert(len(v) == _n);\n    FOR(i, len(v)) { dat[size + i] = v[i];\
     \ }\n    FOR3_R(i, 1, size) { update(i); }\n  }\n\n  void update(int k) { dat[k]\
     \ = seg_f(dat[2 * k], dat[2 * k + 1]); }\n\n  void all_apply(int k, OP a) {\n\
     \    dat[k] = seg_g(dat[k], a);\n    if (k < size) laz[k] = seg_h(laz[k], a);\n\
@@ -253,7 +253,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2021-12-27 17:06:22+09:00'
+  timestamp: '2021-12-27 18:32:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/range_affine_range_sum.test.cpp

@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algebra/monoid.hpp
     title: algebra/monoid.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/hld.hpp
     title: graph/hld.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/treegroup.hpp
     title: graph/treegroup.hpp
   - icon: ':question:'
@@ -21,9 +21,9 @@ data:
     title: my_template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_add_path_sum
@@ -174,17 +174,17 @@ data:
     \   edges.eb(e);\n    G[frm].eb(e);\n    if (!directed) {\n      auto e_rev =\
     \ edge_t(to, frm, cost, i);\n      G[to].eb(e_rev);\n    }\n    ++M;\n  }\n\n\
     \  void debug(bool detail = false) {\n    FOR(v, N) {\n      cout << v << \" :\"\
-    ;\n      for (auto e : G[v]) {\n        if (detail)\n          cout << \" (\"\
-    \ << e.frm << \",\" << e.to << \",\" << e.cost << \",\" << e.id\n            \
-    \   << \")\";\n        else\n          cout << \" \" << e.to;\n      }\n     \
-    \ cout << \"\\n\";\n    }\n  }\n\n  vector<int> degrees() {\n    vector<int> deg(N);\n\
-    \    FORIN(e, edges) {\n      deg[e.frm]++;\n      deg[e.to]++;\n    }\n    return\
-    \ deg;\n  }\n\n  int size() { return N; }\n\n  vector<edge_t>& operator[](int\
-    \ v) { return G[v]; }\n};\n#line 3 \"graph/hld.hpp\"\n\r\ntemplate <typename Graph>\r\
-    \nstruct HLD {\r\n  Graph &G;\r\n  int N;\r\n  vector<int> sz, LID, RID, ELID,\
-    \ ERID, head, V, parent, depth, e_to_v;\r\n\r\n  HLD(Graph &G, int root = 0)\r\
-    \n      : G(G),\r\n        N(G.N),\r\n        sz(G.N),\r\n        LID(G.N),\r\n\
-    \        RID(G.N),\r\n        ELID(G.N),\r\n        ERID(G.N),\r\n        head(G.N,\
+    ;\n      for (auto e: G[v]) {\n        if (detail)\n          cout << \" (\" <<\
+    \ e.frm << \",\" << e.to << \",\" << e.cost << \",\" << e.id << \")\";\n     \
+    \   else\n          cout << \" \" << e.to;\n      }\n      cout << \"\\n\";\n\
+    \    }\n  }\n\n  vector<int> degrees() {\n    vector<int> deg(N);\n    for (auto&&\
+    \ e: edges) {\n      deg[e.frm]++;\n      deg[e.to]++;\n    }\n    return deg;\n\
+    \  }\n\n  int size() { return N; }\n\n  vector<edge_t>& operator[](int v) { return\
+    \ G[v]; }\n};\n#line 3 \"graph/hld.hpp\"\n\r\ntemplate <typename Graph>\r\nstruct\
+    \ HLD {\r\n  Graph &G;\r\n  int N;\r\n  vector<int> sz, LID, RID, ELID, ERID,\
+    \ head, V, parent, depth, e_to_v;\r\n\r\n  HLD(Graph &G, int root = 0)\r\n   \
+    \   : G(G),\r\n        N(G.N),\r\n        sz(G.N),\r\n        LID(G.N),\r\n  \
+    \      RID(G.N),\r\n        ELID(G.N),\r\n        ERID(G.N),\r\n        head(G.N,\
     \ root),\r\n        V(G.N),\r\n        parent(G.N, -1),\r\n        depth(G.N),\r\
     \n        e_to_v(G.N) {\r\n    int t1 = 0, t2 = 0;\r\n    dfs_sz(root, -1);\r\n\
     \    dfs_hld(root, -1, t1, t2);\r\n  }\r\n\r\n  void dfs_sz(int idx, int p) {\r\
@@ -293,8 +293,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
   requiredBy: []
-  timestamp: '2021-12-27 17:43:05+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-12-27 18:35:27+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
 layout: document

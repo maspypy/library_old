@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algebra/monoid.hpp
     title: algebra/monoid.hpp
   - icon: ':heavy_check_mark:'
@@ -128,38 +128,38 @@ data:
     \  using G = function<E(E, OP)>;\n  using H = function<OP(OP, OP)>;\n  int _n,\
     \ size, log;\n  vc<E> dat;\n  vc<OP> laz;\n  F seg_f;\n  G seg_g;\n  H seg_h;\n\
     \  E unit;\n  OP OP_unit;\n  bool OP_commute;\n\n  LazySegTree(Monoid_OP<E, OP>\
-    \ Mono)\n      : seg_f(Mono.f)\n      , seg_g(Mono.g)\n      , seg_h(Mono.h)\n\
-    \      , unit(Mono.unit)\n      , OP_unit(Mono.OP_unit)\n      , OP_commute(Mono.OP_commute)\
+    \ Mono)\n      : seg_f(Mono.f),\n        seg_g(Mono.g),\n        seg_h(Mono.h),\n\
+    \        unit(Mono.unit),\n        OP_unit(Mono.OP_unit),\n        OP_commute(Mono.OP_commute)\
     \ {}\n\n  void init(int n) {\n    _n = n;\n    log = 1;\n    while ((1 << log)\
     \ < n) ++log;\n    size = 1 << log;\n    dat.assign(size << 1, unit);\n    laz.assign(size,\
-    \ OP_unit);\n  }\n\n  void build(const vector<E>& v) {\n    assert(v.size() ==\
-    \ _n);\n    FOR(i, v.size()) { dat[size + i] = v[i]; }\n    FOR3_R(i, 1, size)\
-    \ { update(i); }\n  }\n\n  void update(int k) { dat[k] = seg_f(dat[2 * k], dat[2\
-    \ * k + 1]); }\n\n  void all_apply(int k, OP a) {\n    dat[k] = seg_g(dat[k],\
-    \ a);\n    if (k < size) laz[k] = seg_h(laz[k], a);\n  }\n\n  void push(int k)\
-    \ {\n    all_apply(2 * k, laz[k]);\n    all_apply(2 * k + 1, laz[k]);\n    laz[k]\
-    \ = OP_unit;\n  }\n\n  void set(int p, E x) {\n    assert(0 <= p && p < _n);\n\
-    \    p += size;\n    for (int i = log; i >= 1; i--) push(p >> i);\n    dat[p]\
-    \ = x;\n    for (int i = 1; i <= log; i++) update(p >> i);\n  }\n\n  E get(int\
-    \ p) {\n    assert(0 <= p && p < _n);\n    p += size;\n    for (int i = log; i\
-    \ >= 1; i--) push(p >> i);\n    return dat[p];\n  }\n\n  E prod(int l, int r)\
-    \ {\n    assert(0 <= l && l <= r && r <= _n);\n    if (l == r) return unit;\n\n\
-    \    l += size;\n    r += size;\n\n    for (int i = log; i >= 1; i--) {\n    \
-    \  if (((l >> i) << i) != l) push(l >> i);\n      if (((r >> i) << i) != r) push((r\
-    \ - 1) >> i);\n    }\n\n    E sml = unit, smr = unit;\n    while (l < r) {\n \
-    \     if (l & 1) sml = seg_f(sml, dat[l++]);\n      if (r & 1) smr = seg_f(dat[--r],\
-    \ smr);\n      l >>= 1;\n      r >>= 1;\n    }\n\n    return seg_f(sml, smr);\n\
-    \  }\n\n  E all_prod() { return dat[1]; }\n\n  void apply(int p, OP a) {\n   \
-    \ assert(0 <= p && p < _n);\n    p += size;\n    if (!OP_commute)\n      for (int\
-    \ i = log; i >= 1; i--) push(p >> i);\n    dat[p] = seg_g(dat[p], a);\n    for\
-    \ (int i = 1; i <= log; i++) update(p >> i);\n  }\n\n  void apply(int l, int r,\
-    \ OP a) {\n    assert(0 <= l && l <= r && r <= _n);\n    if (l == r) return;\n\
-    \n    l += size;\n    r += size;\n\n    for (int i = log; i >= 1; i--) {\n   \
-    \   if (((l >> i) << i) != l) push(l >> i);\n      if (((r >> i) << i) != r) push((r\
-    \ - 1) >> i);\n    }\n\n    {\n      int l2 = l, r2 = r;\n      while (l < r)\
-    \ {\n        if (l & 1) all_apply(l++, a);\n        if (r & 1) all_apply(--r,\
-    \ a);\n        l >>= 1;\n        r >>= 1;\n      }\n      l = l2;\n      r = r2;\n\
-    \    }\n\n    for (int i = 1; i <= log; i++) {\n      if (((l >> i) << i) != l)\
+    \ OP_unit);\n  }\n\n  void build(const vector<E>& v) {\n    assert(len(v) == _n);\n\
+    \    FOR(i, len(v)) { dat[size + i] = v[i]; }\n    FOR3_R(i, 1, size) { update(i);\
+    \ }\n  }\n\n  void update(int k) { dat[k] = seg_f(dat[2 * k], dat[2 * k + 1]);\
+    \ }\n\n  void all_apply(int k, OP a) {\n    dat[k] = seg_g(dat[k], a);\n    if\
+    \ (k < size) laz[k] = seg_h(laz[k], a);\n  }\n\n  void push(int k) {\n    all_apply(2\
+    \ * k, laz[k]);\n    all_apply(2 * k + 1, laz[k]);\n    laz[k] = OP_unit;\n  }\n\
+    \n  void set(int p, E x) {\n    assert(0 <= p && p < _n);\n    p += size;\n  \
+    \  for (int i = log; i >= 1; i--) push(p >> i);\n    dat[p] = x;\n    for (int\
+    \ i = 1; i <= log; i++) update(p >> i);\n  }\n\n  E get(int p) {\n    assert(0\
+    \ <= p && p < _n);\n    p += size;\n    for (int i = log; i >= 1; i--) push(p\
+    \ >> i);\n    return dat[p];\n  }\n\n  E prod(int l, int r) {\n    assert(0 <=\
+    \ l && l <= r && r <= _n);\n    if (l == r) return unit;\n\n    l += size;\n \
+    \   r += size;\n\n    for (int i = log; i >= 1; i--) {\n      if (((l >> i) <<\
+    \ i) != l) push(l >> i);\n      if (((r >> i) << i) != r) push((r - 1) >> i);\n\
+    \    }\n\n    E sml = unit, smr = unit;\n    while (l < r) {\n      if (l & 1)\
+    \ sml = seg_f(sml, dat[l++]);\n      if (r & 1) smr = seg_f(dat[--r], smr);\n\
+    \      l >>= 1;\n      r >>= 1;\n    }\n\n    return seg_f(sml, smr);\n  }\n\n\
+    \  E all_prod() { return dat[1]; }\n\n  void apply(int p, OP a) {\n    assert(0\
+    \ <= p && p < _n);\n    p += size;\n    if (!OP_commute)\n      for (int i = log;\
+    \ i >= 1; i--) push(p >> i);\n    dat[p] = seg_g(dat[p], a);\n    for (int i =\
+    \ 1; i <= log; i++) update(p >> i);\n  }\n\n  void apply(int l, int r, OP a) {\n\
+    \    assert(0 <= l && l <= r && r <= _n);\n    if (l == r) return;\n\n    l +=\
+    \ size;\n    r += size;\n\n    for (int i = log; i >= 1; i--) {\n      if (((l\
+    \ >> i) << i) != l) push(l >> i);\n      if (((r >> i) << i) != r) push((r - 1)\
+    \ >> i);\n    }\n\n    {\n      int l2 = l, r2 = r;\n      while (l < r) {\n \
+    \       if (l & 1) all_apply(l++, a);\n        if (r & 1) all_apply(--r, a);\n\
+    \        l >>= 1;\n        r >>= 1;\n      }\n      l = l2;\n      r = r2;\n \
+    \   }\n\n    for (int i = 1; i <= log; i++) {\n      if (((l >> i) << i) != l)\
     \ update(l >> i);\n      if (((r >> i) << i) != r) update((r - 1) >> i);\n   \
     \ }\n  }\n\n  template <typename C>\n  int max_right(C& check, int l) {\n    assert(0\
     \ <= l && l <= _n);\n    assert(check(unit));\n    if (l == _n) return _n;\n \
@@ -268,7 +268,7 @@ data:
   isVerificationFile: false
   path: graph/treemonoid_lazy.hpp
   requiredBy: []
-  timestamp: '2021-12-27 17:06:22+09:00'
+  timestamp: '2021-12-27 18:32:46+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph/treemonoid_lazy.hpp
