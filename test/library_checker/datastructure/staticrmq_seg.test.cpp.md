@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
@@ -139,29 +139,28 @@ data:
     \  int N;\n  F seg_f;\n  E unit;\n  vector<E> dat;\n\n  SegTree(Monoid<E> Mono)\
     \ : seg_f(Mono.f), unit(Mono.unit) {}\n\n  void init(int n_) {\n    N_ = n_;\n\
     \    N = 1;\n    while (N < n_) N <<= 1;\n    dat.assign(N << 1, unit);\n  }\n\
-    \n  void build(const vector<E> &v) {\n    assert(v.size() == N_);\n    FOR(i,\
-    \ v.size()) { dat[N + i] = v[i]; }\n    FOR3_R(i, 1, N) { dat[i] = seg_f(dat[i\
-    \ << 1 | 0], dat[i << 1 | 1]); }\n  }\n\n  void set(int i, E x) {\n    assert(i\
-    \ < N_);\n    dat[i += N] = x;\n    while (i >>= 1) { dat[i] = seg_f(dat[i <<\
-    \ 1 | 0], dat[i << 1 | 1]); }\n  }\n\n  E prod(int L, int R) {\n    assert(L <=\
-    \ R);\n    assert(R <= N_);\n    E vl = unit, vr = unit;\n    L += N;\n    R +=\
-    \ N;\n    while (L < R) {\n      if (L & 1) vl = seg_f(vl, dat[L++]);\n      if\
-    \ (R & 1) vr = seg_f(dat[--R], vr);\n      L >>= 1;\n      R >>= 1;\n    }\n \
-    \   return seg_f(vl, vr);\n  }\n\n  template <class F>\n  int max_right(F &check,\
-    \ int L) {\n    assert(0 <= L && L <= N_ && check(unit));\n    if (L == N_) return\
-    \ N_;\n    L += N;\n    E sm = unit;\n    do {\n      while (L % 2 == 0) L >>=\
-    \ 1;\n      if (!check(seg_f(sm, dat[L]))) {\n        while (L < N) {\n      \
-    \    L = 2 * L;\n          if (check(seg_f(sm, dat[L]))) {\n            sm = seg_f(sm,\
-    \ dat[L]);\n            L++;\n          }\n        }\n        return L - N;\n\
-    \      }\n      sm = seg_f(sm, dat[L]);\n      L++;\n    } while ((L & -L) !=\
-    \ L);\n    return N_;\n  }\n\n  template <class F>\n  int min_left(F &check, int\
-    \ R) {\n    assert(0 <= R && R <= N_ && check(unit));\n    if (R == 0) return\
-    \ 0;\n    R += N;\n    E sm = unit;\n    do {\n      --R;\n      while (R > 1\
-    \ && (R % 2)) R >>= 1;\n      if (!check(seg_f(dat[R], sm))) {\n        while\
-    \ (R < N) {\n          R = 2 * R + 1;\n          if (check(seg_f(dat[R], sm)))\
-    \ {\n            sm = seg_f(dat[R], sm);\n            R--;\n          }\n    \
-    \    }\n        return R + 1 - N;\n      }\n      sm = seg_f(dat[R], sm);\n  \
-    \  } while ((R & -R) != R);\n    return 0;\n  }\n\n  void debug() { print(dat);\
+    \n  void build(const vector<E> &v) {\n    assert(len(v) == N_);\n    FOR(i, len(v))\
+    \ { dat[N + i] = v[i]; }\n    FOR3_R(i, 1, N) { dat[i] = seg_f(dat[i << 1 | 0],\
+    \ dat[i << 1 | 1]); }\n  }\n\n  void set(int i, E x) {\n    assert(i < N_);\n\
+    \    dat[i += N] = x;\n    while (i >>= 1) { dat[i] = seg_f(dat[i << 1 | 0], dat[i\
+    \ << 1 | 1]); }\n  }\n\n  E prod(int L, int R) {\n    assert(L <= R);\n    assert(R\
+    \ <= N_);\n    E vl = unit, vr = unit;\n    L += N;\n    R += N;\n    while (L\
+    \ < R) {\n      if (L & 1) vl = seg_f(vl, dat[L++]);\n      if (R & 1) vr = seg_f(dat[--R],\
+    \ vr);\n      L >>= 1;\n      R >>= 1;\n    }\n    return seg_f(vl, vr);\n  }\n\
+    \n  template <class F>\n  int max_right(F &check, int L) {\n    assert(0 <= L\
+    \ && L <= N_ && check(unit));\n    if (L == N_) return N_;\n    L += N;\n    E\
+    \ sm = unit;\n    do {\n      while (L % 2 == 0) L >>= 1;\n      if (!check(seg_f(sm,\
+    \ dat[L]))) {\n        while (L < N) {\n          L = 2 * L;\n          if (check(seg_f(sm,\
+    \ dat[L]))) {\n            sm = seg_f(sm, dat[L]);\n            L++;\n       \
+    \   }\n        }\n        return L - N;\n      }\n      sm = seg_f(sm, dat[L]);\n\
+    \      L++;\n    } while ((L & -L) != L);\n    return N_;\n  }\n\n  template <class\
+    \ F>\n  int min_left(F &check, int R) {\n    assert(0 <= R && R <= N_ && check(unit));\n\
+    \    if (R == 0) return 0;\n    R += N;\n    E sm = unit;\n    do {\n      --R;\n\
+    \      while (R > 1 && (R % 2)) R >>= 1;\n      if (!check(seg_f(dat[R], sm)))\
+    \ {\n        while (R < N) {\n          R = 2 * R + 1;\n          if (check(seg_f(dat[R],\
+    \ sm))) {\n            sm = seg_f(dat[R], sm);\n            R--;\n          }\n\
+    \        }\n        return R + 1 - N;\n      }\n      sm = seg_f(dat[R], sm);\n\
+    \    } while ((R & -R) != R);\n    return 0;\n  }\n\n  void debug() { print(dat);\
     \ }\n};\n#line 5 \"test/library_checker/datastructure/staticrmq_seg.test.cpp\"\
     \n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  VEC(int, A, N);\r\n  SegTree<int> seg(Monoid_min<int>(1\
     \ << 30));\r\n  seg.init(N);\r\n  seg.build(A);\r\n\r\n  FOR(_, Q) {\r\n    LL(L,\
@@ -182,7 +181,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/staticrmq_seg.test.cpp
   requiredBy: []
-  timestamp: '2021-12-27 05:46:16+09:00'
+  timestamp: '2021-12-27 09:14:58+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/staticrmq_seg.test.cpp

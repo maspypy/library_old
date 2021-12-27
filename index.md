@@ -131,6 +131,9 @@ data:
       path: graph/tree_dp.hpp
       title: graph/tree_dp.hpp
     - icon: ':warning:'
+      path: graph/treeabel.hpp
+      title: graph/treeabel.hpp
+    - icon: ':warning:'
       path: graph/treedoubling.hpp
       title: graph/treedoubling.hpp
     - icon: ':heavy_check_mark:'
@@ -160,7 +163,7 @@ data:
       title: mod/modint.hpp
   - name: .
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: my_template.hpp
       title: my_template.hpp
     - icon: ':warning:'

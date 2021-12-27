@@ -17,6 +17,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: ds/swag.hpp
     title: ds/swag.hpp
+  - icon: ':warning:'
+    path: graph/treeabel.hpp
+    title: graph/treeabel.hpp
   - icon: ':heavy_check_mark:'
     path: graph/treegroup.hpp
     title: graph/treegroup.hpp
@@ -132,6 +135,7 @@ data:
   - graph/treegroup.hpp
   - graph/treemonoid.hpp
   - graph/treemonoid_lazy.hpp
+  - graph/treeabel.hpp
   - ds/lazysegtree.hpp
   - ds/segtree2d.hpp
   - ds/disjointsparse.hpp

@@ -5,6 +5,9 @@ data:
     path: graph/base.hpp
     title: graph/base.hpp
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: graph/treeabel.hpp
+    title: graph/treeabel.hpp
   - icon: ':heavy_check_mark:'
     path: graph/treegroup.hpp
     title: graph/treegroup.hpp
@@ -133,6 +136,7 @@ data:
   requiredBy:
   - graph/treegroup.hpp
   - graph/treemonoid.hpp
+  - graph/treeabel.hpp
   timestamp: '2021-12-27 03:56:21+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

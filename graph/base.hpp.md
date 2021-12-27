@@ -23,6 +23,9 @@ data:
   - icon: ':warning:'
     path: graph/scc.hpp
     title: graph/scc.hpp
+  - icon: ':warning:'
+    path: graph/treeabel.hpp
+    title: graph/treeabel.hpp
   - icon: ':heavy_check_mark:'
     path: graph/treegroup.hpp
     title: graph/treegroup.hpp
@@ -104,6 +107,7 @@ data:
   - graph/mis.hpp
   - graph/bfs01.hpp
   - graph/scc.hpp
+  - graph/treeabel.hpp
   - graph/bipartite_coloring.hpp
   - graph/eulerwalk.hpp
   timestamp: '2021-12-25 22:40:58+09:00'
