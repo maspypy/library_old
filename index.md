@@ -9,7 +9,7 @@ data:
     - icon: ':warning:'
       path: algebra/linearrecurrence.hpp
       title: algebra/linearrecurrence.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: algebra/monoid.hpp
       title: algebra/monoid.hpp
   - name: densegraph
@@ -40,10 +40,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: ds/fastset.hpp
       title: ds/fastset.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: ds/fenwick.hpp
       title: ds/fenwick.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: ds/fenwick2d.hpp
       title: ds/fenwick2d.hpp
     - icon: ':warning:'
@@ -55,10 +55,10 @@ data:
     - icon: ':warning:'
       path: ds/lichao.hpp
       title: ds/lichao.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: ds/segtree.hpp
       title: ds/segtree.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: ds/segtree2d.hpp
       title: ds/segtree2d.hpp
     - icon: ':warning:'
@@ -94,7 +94,7 @@ data:
       title: geometry/geometry.hpp
   - name: graph
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/base.hpp
       title: graph/base.hpp
     - icon: ':warning:'
@@ -118,10 +118,10 @@ data:
     - icon: ':warning:'
       path: graph/eulerwalk.hpp
       title: graph/eulerwalk.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/hld.hpp
       title: graph/hld.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/mis.hpp
       title: graph/mis.hpp
     - icon: ':warning:'
@@ -136,10 +136,10 @@ data:
     - icon: ':warning:'
       path: graph/treedoubling.hpp
       title: graph/treedoubling.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/treegroup.hpp
       title: graph/treegroup.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/treemonoid.hpp
       title: graph/treemonoid.hpp
     - icon: ':warning:'
@@ -158,7 +158,7 @@ data:
     - icon: ':warning:'
       path: mod/amodint.hpp
       title: mod/amodint.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: mod/modint.hpp
       title: mod/modint.hpp
   - name: .
@@ -186,6 +186,15 @@ data:
   - name: other
     pages:
     - icon: ':warning:'
+      path: other/for_nck.hpp
+      title: other/for_nck.hpp
+    - icon: ':warning:'
+      path: other/for_quotient.hpp
+      title: other/for_quotient.hpp
+    - icon: ':warning:'
+      path: other/isqrt.hpp
+      title: other/isqrt.hpp
+    - icon: ':warning:'
       path: other/maximal_rectangles.hpp
       title: other/maximal_rectangles.hpp
     - icon: ':warning:'
@@ -195,12 +204,9 @@ data:
       path: other/monge_shortest_path.hpp
       title: other/monge_shortest_path.hpp
     - icon: ':warning:'
-      path: other/quotient.hpp
-      title: other/quotient.hpp
-    - icon: ':warning:'
       path: other/random.hpp
       title: other/random.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: other/rectanglesums.hpp
       title: other/rectanglesums.hpp
   - name: string
@@ -239,10 +245,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/point_add_range_sum.test.cpp
       title: test/library_checker/datastructure/point_add_range_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
       title: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
       title: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
     - icon: ':heavy_check_mark:'
@@ -263,10 +269,10 @@ data:
     - icon: ':x:'
       path: test/library_checker/datastructure/range_kth_smallest.test.cpp
       title: test/library_checker/datastructure/range_kth_smallest.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
       title: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
       title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
     - icon: ':x:'
@@ -293,33 +299,33 @@ data:
     - icon: ':x:'
       path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
       title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
       title: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
       title: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
       title: test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
     - icon: ':x:'
       path: test/library_checker/datastructure/vertex_add_subtree_sum_group.test.cpp
       title: test/library_checker/datastructure/vertex_add_subtree_sum_group.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
       title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
       title: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
       title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   - name: test/library_checker/graph
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/graph/lca.test.cpp
       title: test/library_checker/graph/lca.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/graph/maximum_independent_set.test.cpp
       title: test/library_checker/graph/maximum_independent_set.test.cpp
     - icon: ':heavy_check_mark:'
