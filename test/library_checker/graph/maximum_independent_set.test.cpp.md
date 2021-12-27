@@ -120,14 +120,14 @@ data:
     \ v) { return G[v]; }\n};\n#line 2 \"graph/mis.hpp\"\n\r\ntemplate <typename Graph>\r\
     \nvector<int> maximum_independent_set(Graph& G, int trial = 1000000) {\r\n  int\
     \ N = G.N;\r\n  vector<uint64_t> bit(N);\r\n  assert(N <= 64);\r\n  FOR(a, N)\
-    \ FORIN(e, G[a]) bit[a] |= uint64_t(1) << e.to;\r\n  vector<int> ord(N);\r\n \
-    \ iota(begin(ord), end(ord), 0);\r\n  mt19937 mt(chrono::steady_clock::now().time_since_epoch().count());\r\
+    \ for (auto&& e: G[a]) bit[a] |= uint64_t(1) << e.to;\r\n  vector<int> ord(N);\r\
+    \n  iota(begin(ord), end(ord), 0);\r\n  mt19937 mt(chrono::steady_clock::now().time_since_epoch().count());\r\
     \n  int ret = 0;\r\n  uint64_t ver;\r\n  for (int i = 0; i < trial; i++) {\r\n\
     \    shuffle(begin(ord), end(ord), mt);\r\n    uint64_t used = 0;\r\n    int add\
-    \ = 0;\r\n    for (int j : ord) {\r\n      if (used & bit[j]) continue;\r\n  \
-    \    used |= uint64_t(1) << j;\r\n      ++add;\r\n    }\r\n    if (ret < add)\
-    \ {\r\n      ret = add;\r\n      ver = used;\r\n    }\r\n  }\r\n  vector<int>\
-    \ ans;\r\n  for (int i = 0; i < N; i++) {\r\n    if ((ver >> i) & 1) ans.emplace_back(i);\r\
+    \ = 0;\r\n    for (int j: ord) {\r\n      if (used & bit[j]) continue;\r\n   \
+    \   used |= uint64_t(1) << j;\r\n      ++add;\r\n    }\r\n    if (ret < add) {\r\
+    \n      ret = add;\r\n      ver = used;\r\n    }\r\n  }\r\n  vector<int> ans;\r\
+    \n  for (int i = 0; i < N; i++) {\r\n    if ((ver >> i) & 1) ans.emplace_back(i);\r\
     \n  }\r\n  return ans;\r\n}\r\n#line 5 \"test/library_checker/graph/maximum_independent_set.test.cpp\"\
     \n\r\nvoid solve() {\r\n  LL(N, M);\r\n  Graph<int> G(N);\r\n  FOR(_, M) {\r\n\
     \    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n  auto mis = maximum_independent_set(G);\r\
@@ -148,7 +148,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/graph/maximum_independent_set.test.cpp
   requiredBy: []
-  timestamp: '2021-12-27 17:06:22+09:00'
+  timestamp: '2021-12-27 17:46:49+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/graph/maximum_independent_set.test.cpp

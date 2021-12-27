@@ -11,7 +11,7 @@ data:
   - icon: ':question:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: ds/segtree2d.hpp
     title: ds/segtree2d.hpp
   - icon: ':heavy_check_mark:'
@@ -30,7 +30,7 @@ data:
     path: graph/treemonoid_lazy.hpp
     title: graph/treemonoid_lazy.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
     title: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
   - icon: ':heavy_check_mark:'

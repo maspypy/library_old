@@ -129,19 +129,19 @@ data:
     \ v) { return G[v]; }\n};\n#line 3 \"graph/hld.hpp\"\n\r\ntemplate <typename Graph>\r\
     \nstruct HLD {\r\n  Graph &G;\r\n  int N;\r\n  vector<int> sz, LID, RID, ELID,\
     \ ERID, head, V, parent, depth, e_to_v;\r\n\r\n  HLD(Graph &G, int root = 0)\r\
-    \n      : G(G)\r\n      , N(G.N)\r\n      , sz(G.N)\r\n      , LID(G.N)\r\n  \
-    \    , RID(G.N)\r\n      , ELID(G.N)\r\n      , ERID(G.N)\r\n      , head(G.N,\
-    \ root)\r\n      , V(G.N)\r\n      , parent(G.N, -1)\r\n      , depth(G.N)\r\n\
-    \      , e_to_v(G.N) {\r\n    int t1 = 0, t2 = 0;\r\n    dfs_sz(root, -1);\r\n\
+    \n      : G(G),\r\n        N(G.N),\r\n        sz(G.N),\r\n        LID(G.N),\r\n\
+    \        RID(G.N),\r\n        ELID(G.N),\r\n        ERID(G.N),\r\n        head(G.N,\
+    \ root),\r\n        V(G.N),\r\n        parent(G.N, -1),\r\n        depth(G.N),\r\
+    \n        e_to_v(G.N) {\r\n    int t1 = 0, t2 = 0;\r\n    dfs_sz(root, -1);\r\n\
     \    dfs_hld(root, -1, t1, t2);\r\n  }\r\n\r\n  void dfs_sz(int idx, int p) {\r\
     \n    parent[idx] = p;\r\n    depth[idx] = (p == -1 ? 0 : depth[p] + 1);\r\n \
     \   sz[idx] = 1;\r\n    if (G[idx].size() && G[idx][0].to == p) swap(G[idx][0],\
-    \ G[idx].back());\r\n    for (auto &e : G[idx]) {\r\n      if (e.to == p) continue;\r\
+    \ G[idx].back());\r\n    for (auto &e: G[idx]) {\r\n      if (e.to == p) continue;\r\
     \n      e_to_v[e.id] = e.to;\r\n      dfs_sz(e.to, idx);\r\n      sz[idx] += sz[e.to];\r\
     \n      if (sz[G[idx][0].to] < sz[e.to]) swap(G[idx][0], e);\r\n    }\r\n  }\r\
     \n\r\n  void dfs_hld(int idx, int par, int &times, int &etimes) {\r\n    LID[idx]\
     \ = times++;\r\n    ELID[idx] = etimes++;\r\n    V[LID[idx]] = idx;\r\n    for\
-    \ (auto &e : G[idx]) {\r\n      if (e.to == par) continue;\r\n      head[e.to]\
+    \ (auto &e: G[idx]) {\r\n      if (e.to == par) continue;\r\n      head[e.to]\
     \ = (G[idx][0].to == e.to ? head[idx] : e.to);\r\n      dfs_hld(e.to, idx, times,\
     \ etimes);\r\n    }\r\n    RID[idx] = times;\r\n    ERID[idx] = etimes++;\r\n\
     \  }\r\n\r\n  /* k: 0-indexed */\r\n  int LA(int v, int k) {\r\n    while (1)\
@@ -279,7 +279,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
   requiredBy: []
-  timestamp: '2021-12-27 17:06:22+09:00'
+  timestamp: '2021-12-27 17:43:05+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: ds/fenwick2d.hpp
     title: ds/fenwick2d.hpp
   - icon: ':question:'
@@ -9,9 +9,9 @@ data:
     title: my_template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/point_add_rectangle_sum
@@ -98,26 +98,26 @@ data:
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
     \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 4 \"test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp\"\
-    \n\r\n#line 1 \"ds/fenwick2d.hpp\"\ntemplate <typename T, bool SMALL=false>\r\n\
-    struct Fenwick2D {\r\n  int N;\r\n  vi keyX;\r\n  int min_X;\r\n  vc<int> indptr;\r\
+    \n\r\n#line 1 \"ds/fenwick2d.hpp\"\ntemplate <typename T, bool SMALL = false>\r\
+    \nstruct Fenwick2D {\r\n  int N;\r\n  vi keyX;\r\n  int min_X;\r\n  vc<int> indptr;\r\
     \n  vi keyY;\r\n  vc<T> dat;\r\n\r\n  Fenwick2D(vi& X, vi& Y, vc<T>& wt) { build(X,\
     \ Y, wt); }\r\n\r\n  Fenwick2D(vi& X, vi& Y) {\r\n    vc<T> wt(len(X), 0);\r\n\
-    \    build(X, Y, wt);\r\n  }\r\n\r\n  inline int xtoi(int x) {\r\n    return (SMALL\
-    \ ? clamp(x - min_X, 0, N) : LB(keyX, x));\r\n  }\r\n\r\n  inline int nxt(int\
-    \ i) {\r\n    i += 1;\r\n    return i + (i & -i) - 1;\r\n  }\r\n\r\n  inline int\
-    \ prev(int i) {\r\n    i += 1;\r\n    return i - (i & -i) - 1;\r\n  }\r\n\r\n\
-    \  void build(vi& X, vi& Y, vc<T>& wt) {\r\n    if (!SMALL) {\r\n      keyX =\
-    \ X;\r\n      UNIQUE(keyX);\r\n      N = len(keyX);\r\n    } else {\r\n      min_X\
-    \ = (len(X) == 0 ? 0 : MIN(X));\r\n      N = (len(X) == 0 ? 0 : MAX(X)) - min_X\
-    \ + 1;\r\n      keyX.resize(N);\r\n      FOR(i, N) keyX[i] = min_X + i;\r\n  \
-    \  }\r\n\r\n    vc<vi> keyY_raw(N);\r\n    vc<vc<T>> dat_raw(N);\r\n\r\n    auto\
-    \ I = argsort(Y);\r\n    FORIN(i, I) {\r\n      int ix = xtoi(X[i]), y = Y[i];\r\
-    \n      while (ix < N) {\r\n        auto& KY = keyY_raw[ix];\r\n        if (len(KY)\
-    \ == 0 || KY.back() < y) {\r\n          KY.eb(y);\r\n          dat_raw[ix].eb(wt[i]);\r\
-    \n        } else {\r\n          dat_raw[ix].back() += wt[i];\r\n        }\r\n\
-    \        ix = nxt(ix);\r\n      }\r\n    }\r\n\r\n    indptr.assign(N + 1, 0);\r\
-    \n    FOR(i, N) indptr[i + 1] = indptr[i] + len(keyY_raw[i]);\r\n    keyY.resize(indptr.back());\r\
-    \n    dat.resize(indptr.back());\r\n    FOR(i, N) FOR(j, indptr[i + 1] - indptr[i])\
+    \    build(X, Y, wt);\r\n  }\r\n\r\n  inline int xtoi(int x) { return (SMALL ?\
+    \ clamp(x - min_X, 0, N) : LB(keyX, x)); }\r\n\r\n  inline int nxt(int i) {\r\n\
+    \    i += 1;\r\n    return i + (i & -i) - 1;\r\n  }\r\n\r\n  inline int prev(int\
+    \ i) {\r\n    i += 1;\r\n    return i - (i & -i) - 1;\r\n  }\r\n\r\n  void build(vi&\
+    \ X, vi& Y, vc<T>& wt) {\r\n    if (!SMALL) {\r\n      keyX = X;\r\n      UNIQUE(keyX);\r\
+    \n      N = len(keyX);\r\n    } else {\r\n      min_X = (len(X) == 0 ? 0 : MIN(X));\r\
+    \n      N = (len(X) == 0 ? 0 : MAX(X)) - min_X + 1;\r\n      keyX.resize(N);\r\
+    \n      FOR(i, N) keyX[i] = min_X + i;\r\n    }\r\n\r\n    vc<vi> keyY_raw(N);\r\
+    \n    vc<vc<T>> dat_raw(N);\r\n\r\n    auto I = argsort(Y);\r\n    for (auto&&\
+    \ i: I) {\r\n      int ix = xtoi(X[i]), y = Y[i];\r\n      while (ix < N) {\r\n\
+    \        auto& KY = keyY_raw[ix];\r\n        if (len(KY) == 0 || KY.back() < y)\
+    \ {\r\n          KY.eb(y);\r\n          dat_raw[ix].eb(wt[i]);\r\n        } else\
+    \ {\r\n          dat_raw[ix].back() += wt[i];\r\n        }\r\n        ix = nxt(ix);\r\
+    \n      }\r\n    }\r\n\r\n    indptr.assign(N + 1, 0);\r\n    FOR(i, N) indptr[i\
+    \ + 1] = indptr[i] + len(keyY_raw[i]);\r\n    keyY.resize(indptr.back());\r\n\
+    \    dat.resize(indptr.back());\r\n    FOR(i, N) FOR(j, indptr[i + 1] - indptr[i])\
     \ {\r\n      keyY[indptr[i] + j] = keyY_raw[i][j];\r\n      dat[indptr[i] + j]\
     \ = dat_raw[i][j];\r\n    }\r\n    FOR(i, N) {\r\n      int n = indptr[i + 1]\
     \ - indptr[i];\r\n      FOR(j, n - 1) {\r\n        int k = nxt(j);\r\n       \
@@ -171,8 +171,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
   requiredBy: []
-  timestamp: '2021-12-27 17:06:22+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-12-27 17:43:05+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
 layout: document

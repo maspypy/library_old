@@ -167,16 +167,16 @@ data:
     \");\r\n  }\r\n};\r\n#line 7 \"test/library_checker/datastructure/rectangle_sum_sweep.test.cpp\"\
     \n\nvoid solve() {\n  LL(N, Q);\n  RectangleSums RS(N);\n  FOR(_, N) {\n    LL(x,\
     \ y, w);\n    RS.add_pt(x, y, w);\n  }\n  FOR(_, Q) {\n    LL(l, d, r, u);\n \
-    \   RS.add_rect(l, r, d, u);\n  }\n  auto ANS = RS.calc();\n  FORIN(x, ANS) print(x);\n\
-    }\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout\
-    \ << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
+    \   RS.add_rect(l, r, d, u);\n  }\n  auto ANS = RS.calc();\n  for (auto&& x: ANS)\
+    \ print(x);\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
+    \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/rectangle_sum\"\n\n#include\
     \ \"my_template.hpp\"\n\n#include \"ds/fenwick.hpp\"\n#include \"other/rectanglesums.hpp\"\
     \n\nvoid solve() {\n  LL(N, Q);\n  RectangleSums RS(N);\n  FOR(_, N) {\n    LL(x,\
     \ y, w);\n    RS.add_pt(x, y, w);\n  }\n  FOR(_, Q) {\n    LL(l, d, r, u);\n \
-    \   RS.add_rect(l, r, d, u);\n  }\n  auto ANS = RS.calc();\n  FORIN(x, ANS) print(x);\n\
-    }\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout\
-    \ << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
+    \   RS.add_rect(l, r, d, u);\n  }\n  auto ANS = RS.calc();\n  for (auto&& x: ANS)\
+    \ print(x);\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
+    \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
   - ds/fenwick.hpp
@@ -184,7 +184,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
   requiredBy: []
-  timestamp: '2021-12-27 17:06:22+09:00'
+  timestamp: '2021-12-27 17:43:05+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
