@@ -4,7 +4,10 @@ struct FenwickTree {
   vector<T> data;
   T total;
 
+  FenwickTree() : total(0) {}
   FenwickTree(int sz) : total(0) { data.assign(++sz, 0); }
+
+  void init(int n) { data.assign(++n, 0); }
 
   void build(vector<T>& raw_data) {
     assert(len(data) == len(raw_data) + 1);
@@ -63,6 +66,8 @@ struct FenwickTree {
     auto check = [&](T x) -> bool { return x < k; };
     return max_right(check);
   }
+
+  void debug() { print(data); }
 };
 
 template <typename T>
@@ -72,8 +77,19 @@ struct Fenwick_RAQ {
   FenwickTree<T> bit1;
 
   Fenwick_RAQ(int N) : N(N), bit0(N), bit1(N) {}
+  Fenwick_RAQ() {}
 
-  void add(ll L, ll R, T val) {
+  void init(int n) {
+    N = n;
+    bit0.init(n);
+    bit1.init(n);
+  }
+
+  void build(vc<T>& v) { bit0.build(v); }
+
+  void add_at(ll i, T val) { bit0.add(i, val); }
+
+  void add_range(ll L, ll R, T val) {
     bit0.add(L, -val * L);
     bit1.add(L, +val);
     bit0.add(R, +val * R);
