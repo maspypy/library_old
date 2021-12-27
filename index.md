@@ -40,7 +40,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: ds/fastset.hpp
       title: ds/fastset.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: ds/fenwick.hpp
       title: ds/fenwick.hpp
     - icon: ':heavy_check_mark:'
@@ -94,7 +94,7 @@ data:
       title: geometry/geometry.hpp
   - name: graph
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/base.hpp
       title: graph/base.hpp
     - icon: ':warning:'
@@ -121,7 +121,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/hld.hpp
       title: graph/hld.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/mis.hpp
       title: graph/mis.hpp
     - icon: ':warning:'
@@ -163,7 +163,7 @@ data:
       title: mod/modint.hpp
   - name: .
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: my_template.hpp
       title: my_template.hpp
     - icon: ':warning:'
@@ -174,13 +174,13 @@ data:
     - icon: ':warning:'
       path: nt/extgcd.hpp
       title: nt/extgcd.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: nt/factor.hpp
       title: nt/factor.hpp
     - icon: ':warning:'
       path: nt/primetable.hpp
       title: nt/primetable.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: nt/primetest.hpp
       title: nt/primetest.hpp
   - name: other
@@ -242,7 +242,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/associative_array.test.cpp
       title: test/library_checker/datastructure/associative_array.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/point_add_range_sum.test.cpp
       title: test/library_checker/datastructure/point_add_range_sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -325,11 +325,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/graph/lca.test.cpp
       title: test/library_checker/graph/lca.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/graph/maximum_independent_set.test.cpp
       title: test/library_checker/graph/maximum_independent_set.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/graph/maximum_independent_set_dense.test.cpp
       title: test/library_checker/graph/maximum_independent_set_dense.test.cpp
+  - name: test/library_checker/math
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/math/factorize.test.cpp
+      title: test/library_checker/math/factorize.test.cpp
 layout: toppage
 ---
