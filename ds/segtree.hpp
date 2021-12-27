@@ -20,8 +20,8 @@ struct SegTree {
   }
 
   void build(const vector<E> &v) {
-    assert(v.size() == N_);
-    FOR(i, v.size()) { dat[N + i] = v[i]; }
+    assert(len(v) == N_);
+    FOR(i, len(v)) { dat[N + i] = v[i]; }
     FOR3_R(i, 1, N) { dat[i] = seg_f(dat[i << 1 | 0], dat[i << 1 | 1]); }
   }
 
