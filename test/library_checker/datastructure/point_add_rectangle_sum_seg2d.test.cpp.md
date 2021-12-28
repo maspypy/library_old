@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algebra/addgroup.hpp
     title: algebra/addgroup.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: ds/segtree2d.hpp
     title: ds/segtree2d.hpp
   - icon: ':question:'
@@ -12,23 +12,25 @@ data:
     title: my_template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: point_add_rectangle_sum
-    links: []
+    PROBLEM: https://judge.yosupo.jp/problem/point_add_rectangle_sum
+    links:
+    - https://judge.yosupo.jp/problem/point_add_rectangle_sum
   bundledCode: "#line 1 \"test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp\"\
-    \n#define PROBLEM \"point_add_rectangle_sum\"\r\n\r\n#line 2 \"my_template.hpp\"\
-    \n#include <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\n\
-    using ll8 = __int128;\nusing ld = long double;\nusing pi = pair<ll, ll>;\nusing\
-    \ vi = vector<ll>;\nusing uint = unsigned int;\nusing ull = unsigned long long;\n\
-    \ntemplate <class T>\nusing vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\n\
-    template <class T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc\
-    \ = vector<vvvc<T>>;\ntemplate <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate\
-    \ <class T>\nusing pq = priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T,\
-    \ vector<T>, greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_rectangle_sum\"\r\
+    \n\r\n#line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace\
+    \ std;\n\nusing ll = long long;\nusing ll8 = __int128;\nusing ld = long double;\n\
+    using pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint = unsigned int;\n\
+    using ull = unsigned long long;\n\ntemplate <class T>\nusing vc = vector<T>;\n\
+    template <class T>\nusing vvc = vector<vc<T>>;\ntemplate <class T>\nusing vvvc\
+    \ = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc = vector<vvvc<T>>;\ntemplate\
+    \ <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate <class T>\nusing pq =\
+    \ priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T, vector<T>,\
+    \ greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
     #define VEC(type, name, size) \\\n  vector<type> name(size);    \\\n  IN(name)\n\
     #define vv(type, name, h, ...) vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n\
     #define VV(type, name, h, w)                     \\\n  vector<vector<type>> name(h,\
@@ -162,20 +164,20 @@ data:
     \ print(seg.prod(a, b, c, d));\r\n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n\
     \  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
     \n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"point_add_rectangle_sum\"\r\n\r\n#include \"my_template.hpp\"\
-    \r\n\r\n#include \"algebra/addgroup.hpp\"\r\n#include \"ds/segtree2d.hpp\"\r\n\
-    \r\nvoid solve() {\r\n  LL(N, Q);\r\n  vc<int> X(N), Y(N);\r\n  vi W(N);\r\n \
-    \ FOR(i, N) {\r\n    LL(x, y, w);\r\n    X[i] = x, Y[i] = y, W[i] = w;\r\n  }\r\
-    \n  using QQ = tuple<ll, ll, ll, ll>;\r\n  vc<QQ> query(Q);\r\n  FOR(q, Q) {\r\
-    \n    LL(t);\r\n    if (t == 0) {\r\n      LL(x, y, w);\r\n      X.eb(x);\r\n\
-    \      Y.eb(y);\r\n      W.eb(0);\r\n      query[q] = mt(-1, x, y, w);\r\n   \
-    \ } else {\r\n      LL(a, b, c, d);\r\n      query[q] = mt(a, c, b, d);\r\n  \
-    \  }\r\n  }\r\n\r\n  using Mono = AddGroup<ll>;\r\n\r\n  SegTree2D<Mono, int,\
-    \ false> seg(X, Y, W);\r\n\r\n  FOR(q, Q) {\r\n    auto [a, b, c, d] = query[q];\r\
-    \n    if (a == -1) {\r\n      seg.multiply(b, c, d);\r\n    } else {\r\n     \
-    \ print(seg.prod(a, b, c, d));\r\n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n\
-    \  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
-    \n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_rectangle_sum\"\
+    \r\n\r\n#include \"my_template.hpp\"\r\n\r\n#include \"algebra/addgroup.hpp\"\r\
+    \n#include \"ds/segtree2d.hpp\"\r\n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  vc<int>\
+    \ X(N), Y(N);\r\n  vi W(N);\r\n  FOR(i, N) {\r\n    LL(x, y, w);\r\n    X[i] =\
+    \ x, Y[i] = y, W[i] = w;\r\n  }\r\n  using QQ = tuple<ll, ll, ll, ll>;\r\n  vc<QQ>\
+    \ query(Q);\r\n  FOR(q, Q) {\r\n    LL(t);\r\n    if (t == 0) {\r\n      LL(x,\
+    \ y, w);\r\n      X.eb(x);\r\n      Y.eb(y);\r\n      W.eb(0);\r\n      query[q]\
+    \ = mt(-1, x, y, w);\r\n    } else {\r\n      LL(a, b, c, d);\r\n      query[q]\
+    \ = mt(a, c, b, d);\r\n    }\r\n  }\r\n\r\n  using Mono = AddGroup<ll>;\r\n\r\n\
+    \  SegTree2D<Mono, int, false> seg(X, Y, W);\r\n\r\n  FOR(q, Q) {\r\n    auto\
+    \ [a, b, c, d] = query[q];\r\n    if (a == -1) {\r\n      seg.multiply(b, c, d);\r\
+    \n    } else {\r\n      print(seg.prod(a, b, c, d));\r\n    }\r\n  }\r\n}\r\n\r\
+    \nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n\
+    \  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
   - algebra/addgroup.hpp
@@ -183,8 +185,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
   requiredBy: []
-  timestamp: '2021-12-28 17:04:46+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-12-28 17:15:05+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
 layout: document
