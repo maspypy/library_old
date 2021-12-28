@@ -86,7 +86,7 @@ data:
       title: geometry/geometry.hpp
   - name: graph
     pages:
-    - icon: ':x:'
+    - icon: ':question:'
       path: graph/base.hpp
       title: graph/base.hpp
     - icon: ':warning:'
@@ -119,7 +119,7 @@ data:
     - icon: ':x:'
       path: graph/mis.hpp
       title: graph/mis.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/scc.hpp
       title: graph/scc.hpp
     - icon: ':warning:'
@@ -347,7 +347,7 @@ data:
     - icon: ':x:'
       path: test/library_checker/graph/maximum_independent_set_dense.test.cpp
       title: test/library_checker/graph/maximum_independent_set_dense.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/graph/scc.test.cpp
       title: test/library_checker/graph/scc.test.cpp
   - name: test/library_checker/math

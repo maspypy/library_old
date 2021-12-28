@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/scc.hpp
     title: graph/scc.hpp
   - icon: ':question:'
@@ -12,21 +12,24 @@ data:
     title: my_template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    links: []
-  bundledCode: "#line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace\
-    \ std;\n\nusing ll = long long;\nusing ll8 = __int128;\nusing ld = long double;\n\
-    using pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint = unsigned int;\n\
-    using ull = unsigned long long;\n\ntemplate <class T>\nusing vc = vector<T>;\n\
-    template <class T>\nusing vvc = vector<vc<T>>;\ntemplate <class T>\nusing vvvc\
-    \ = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc = vector<vvvc<T>>;\ntemplate\
-    \ <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate <class T>\nusing pq =\
-    \ priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T, vector<T>,\
-    \ greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
+    PROBLEM: https://judge.yosupo.jp/problem/scc
+    links:
+    - https://judge.yosupo.jp/problem/scc
+  bundledCode: "#line 1 \"test/library_checker/graph/scc.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/scc\"\n#line 2 \"my_template.hpp\"\n#include\
+    \ <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\nusing ll8\
+    \ = __int128;\nusing ld = long double;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\n\
+    using uint = unsigned int;\nusing ull = unsigned long long;\n\ntemplate <class\
+    \ T>\nusing vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\n\
+    template <class T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc\
+    \ = vector<vvvc<T>>;\ntemplate <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate\
+    \ <class T>\nusing pq = priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T,\
+    \ vector<T>, greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
     #define VEC(type, name, size) \\\n  vector<type> name(size);    \\\n  IN(name)\n\
     #define vv(type, name, h, ...) \\\n  vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n\
     #define VV(type, name, h, w)                     \\\n  vector<vector<type>> name(h,\
@@ -100,7 +103,7 @@ data:
     }\n\n#define SUM(v) accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n\
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
-    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 2 \"test/library_checker/graph/scc.test.cpp\"\
+    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/graph/scc.test.cpp\"\
     \n\n#line 2 \"graph/base.hpp\"\n\n// frm, to, cap, cost\ntemplate <typename T>\n\
     using Edge = tuple<int, int, T, int>;\n\ntemplate <typename T, bool directed =\
     \ false>\nstruct Graph {\n  int N, M;\n  using cost_type = T;\n  using edge_type\
@@ -139,20 +142,20 @@ data:
     \ = visited.back();\n        visited.pop_back();\n        ord[u] = N;\n      \
     \  comp[u] = cnt;\n        if (u == v) break;\n      }\n      ++cnt;\n    }\n\
     \  }\n\n  void build() {\n    FOR(v, N) {\n      if (ord[v] == -1) dfs(v);\n \
-    \   }\n    FOR(v, N) comp[v] = cnt - 1 - comp[v];\n  }\n};\n#line 5 \"test/library_checker/graph/scc.test.cpp\"\
+    \   }\n    FOR(v, N) comp[v] = cnt - 1 - comp[v];\n  }\n};\n#line 6 \"test/library_checker/graph/scc.test.cpp\"\
     \n\nvoid solve() {\n  LL(N, M);\n  Graph<int, 1> G(N);\n  FOR(_, M) {\n    LL(a,\
     \ b);\n    G.add(a, b);\n  }\n  G.prepare();\n\n  SCC scc(G);\n  auto C = scc.cnt;\n\
     \  vc<vc<int>> ANS(C);\n  FOR(v, N) ANS[scc[v]].eb(v);\n  print(len(ANS));\n \
-    \ for (auto&& C: ANS) print(len(C), C);\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
+    \ for (auto&& C : ANS) print(len(C), C);\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
     \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  solve();\n\n\
     \  return 0;\n}\n"
-  code: "#include \"my_template.hpp\"\n\n#include \"graph/base.hpp\"\n#include \"\
-    graph/scc.hpp\"\n\nvoid solve() {\n  LL(N, M);\n  Graph<int, 1> G(N);\n  FOR(_,\
-    \ M) {\n    LL(a, b);\n    G.add(a, b);\n  }\n  G.prepare();\n\n  SCC scc(G);\n\
-    \  auto C = scc.cnt;\n  vc<vc<int>> ANS(C);\n  FOR(v, N) ANS[scc[v]].eb(v);\n\
-    \  print(len(ANS));\n  for (auto&& C: ANS) print(len(C), C);\n}\n\nsigned main()\
-    \ {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\
-    \n  solve();\n\n  return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/scc\"\n#include \"my_template.hpp\"\
+    \n\n#include \"graph/base.hpp\"\n#include \"graph/scc.hpp\"\n\nvoid solve() {\n\
+    \  LL(N, M);\n  Graph<int, 1> G(N);\n  FOR(_, M) {\n    LL(a, b);\n    G.add(a,\
+    \ b);\n  }\n  G.prepare();\n\n  SCC scc(G);\n  auto C = scc.cnt;\n  vc<vc<int>>\
+    \ ANS(C);\n  FOR(v, N) ANS[scc[v]].eb(v);\n  print(len(ANS));\n  for (auto&& C\
+    \ : ANS) print(len(C), C);\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
+    \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
   - graph/base.hpp
@@ -160,8 +163,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/graph/scc.test.cpp
   requiredBy: []
-  timestamp: '2021-12-29 03:03:07+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-12-29 03:11:12+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/graph/scc.test.cpp
 layout: document
