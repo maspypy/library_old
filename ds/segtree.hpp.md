@@ -1,13 +1,7 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':x:'
-    path: graph/treegroup.hpp
-    title: graph/treegroup.hpp
-  - icon: ':x:'
-    path: graph/treemonoid.hpp
-    title: graph/treemonoid.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':x:'
     path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
@@ -16,23 +10,8 @@ data:
     path: test/library_checker/datastructure/staticrmq_seg.test.cpp
     title: test/library_checker/datastructure/staticrmq_seg.test.cpp
   - icon: ':x:'
-    path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-    title: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-    title: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
-    title: test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-    title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-  - icon: ':x:'
     path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
     title: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
-    title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -99,20 +78,13 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: ds/segtree.hpp
-  requiredBy:
-  - graph/treegroup.hpp
-  - graph/treemonoid.hpp
+  requiredBy: []
   timestamp: '2021-12-28 06:02:16+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
   - test/library_checker/datastructure/staticrmq_seg.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
   - test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
-  - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-  - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
 documentation_of: ds/segtree.hpp
 layout: document
 redirect_from:

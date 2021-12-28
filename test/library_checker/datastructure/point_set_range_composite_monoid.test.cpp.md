@@ -130,8 +130,8 @@ data:
     \     }\n        return R + 1 - n;\n      }\n      sm = Monoid::op(dat[R], sm);\n\
     \    } while ((R & -R) != R);\n    return 0;\n  }\n\n  void debug() { print(\"\
     segtree\", dat); }\n};\n#line 1 \"mod/modint.hpp\"\ntemplate< int mod >\nstruct\
-    \ modint {\n  int x;\n\n  modint() : x(0) {}\n\n  modint(int64_t y) : x(y >= 0\
-    \ ? y % mod : (mod - (-y) % mod) % mod) {}\n\n  modint &operator+=(const modint\
+    \ modint {\n  int x;\n\n  constexpr modint(const ll x = 0) noexcept : x(x >= 0\
+    \ ? x % mod : (mod - (-x) % mod) % mod) {}\n\n  modint &operator+=(const modint\
     \ &p) {\n    if((x += p.x) >= mod) x -= mod;\n    return *this;\n  }\n\n  modint\
     \ &operator-=(const modint &p) {\n    if((x += mod - p.x) >= mod) x -= mod;\n\
     \    return *this;\n  }\n\n  modint &operator*=(const modint &p) {\n    x = (int)\
@@ -192,7 +192,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
   requiredBy: []
-  timestamp: '2021-12-28 06:02:16+09:00'
+  timestamp: '2021-12-28 08:10:59+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp

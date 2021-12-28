@@ -1,64 +1,16 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: ds/lazysegtree.hpp
-    title: ds/lazysegtree.hpp
-  - icon: ':heavy_check_mark:'
-    path: ds/segtree2d.hpp
-    title: ds/segtree2d.hpp
-  - icon: ':heavy_check_mark:'
-    path: ds/swag.hpp
-    title: ds/swag.hpp
-  - icon: ':heavy_check_mark:'
-    path: graph/treeabel.hpp
-    title: graph/treeabel.hpp
-  - icon: ':x:'
-    path: graph/treegroup.hpp
-    title: graph/treegroup.hpp
-  - icon: ':x:'
-    path: graph/treemonoid.hpp
-    title: graph/treemonoid.hpp
-  - icon: ':warning:'
-    path: graph/treemonoid_lazy.hpp
-    title: graph/treemonoid_lazy.hpp
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
-    title: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
-    title: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
-    title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-    title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-    title: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-    title: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
-    title: test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-    title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
-    title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
-  _isVerificationFailed: true
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"algebra/monoid.hpp\"\n\r\ntemplate <typename E>\r\nstruct\
-    \ Monoid {\r\n  using F = function<E(E, E)>;\r\n  using G = function<E(E)>;\r\n\
-    \  F f;\r\n  E unit;\r\n  bool commute;\r\n  bool has_inverse;\r\n  G inverse;\r\
+  bundledCode: "#line 2 \"algebra/monoid__old.hpp\"\n\r\ntemplate <typename E>\r\n\
+    struct Monoid {\r\n  using F = function<E(E, E)>;\r\n  using G = function<E(E)>;\r\
+    \n  F f;\r\n  E unit;\r\n  bool commute;\r\n  bool has_inverse;\r\n  G inverse;\r\
     \n};\r\n\r\ntemplate <typename E, typename OP>\r\nstruct Monoid_OP {\r\n  using\
     \ F = function<E(E, E)>;\r\n  using G = function<E(E, OP)>;\r\n  using H = function<OP(OP,\
     \ OP)>;\r\n  F f;\r\n  G g;\r\n  H h;\r\n  E unit;\r\n  OP OP_unit;\r\n  bool\
@@ -115,31 +67,15 @@ data:
     \ 0}), P({1, 0}), true, false});\r\n}\r\n"
   dependsOn: []
   isVerificationFile: false
-  path: algebra/monoid.hpp
-  requiredBy:
-  - graph/treegroup.hpp
-  - graph/treemonoid.hpp
-  - graph/treemonoid_lazy.hpp
-  - graph/treeabel.hpp
-  - ds/lazysegtree.hpp
-  - ds/segtree2d.hpp
-  - ds/swag.hpp
-  timestamp: '2021-12-27 05:46:16+09:00'
-  verificationStatus: LIBRARY_SOME_WA
-  verifiedWith:
-  - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
-  - test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
-  - test/library_checker/datastructure/queue_operate_all_composite.test.cpp
-  - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-  - test/library_checker/datastructure/range_affine_range_sum.test.cpp
-  - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
-documentation_of: algebra/monoid.hpp
+  path: algebra/monoid__old.hpp
+  requiredBy: []
+  timestamp: '2021-12-28 08:10:22+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: algebra/monoid__old.hpp
 layout: document
 redirect_from:
-- /library/algebra/monoid.hpp
-- /library/algebra/monoid.hpp.html
-title: algebra/monoid.hpp
+- /library/algebra/monoid__old.hpp
+- /library/algebra/monoid__old.hpp.html
+title: algebra/monoid__old.hpp
 ---

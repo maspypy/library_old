@@ -23,37 +23,10 @@ data:
   - icon: ':warning:'
     path: graph/scc.hpp
     title: graph/scc.hpp
-  - icon: ':heavy_check_mark:'
-    path: graph/treeabel.hpp
-    title: graph/treeabel.hpp
-  - icon: ':x:'
-    path: graph/treegroup.hpp
-    title: graph/treegroup.hpp
-  - icon: ':x:'
-    path: graph/treemonoid.hpp
-    title: graph/treemonoid.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-    title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-    title: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-    title: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
-    title: test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-    title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
   - icon: ':x:'
     path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
     title: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
-    title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/lca.test.cpp
     title: test/library_checker/graph/lca.test.cpp
@@ -102,14 +75,11 @@ data:
   isVerificationFile: false
   path: graph/base.hpp
   requiredBy:
-  - graph/treegroup.hpp
   - graph/hld.hpp
-  - graph/treemonoid.hpp
   - graph/dijkstra.hpp
   - graph/mis.hpp
   - graph/bfs01.hpp
   - graph/scc.hpp
-  - graph/treeabel.hpp
   - graph/bipartite_coloring.hpp
   - graph/eulerwalk.hpp
   timestamp: '2021-12-27 18:35:27+09:00'
@@ -117,13 +87,7 @@ data:
   verifiedWith:
   - test/library_checker/graph/maximum_independent_set.test.cpp
   - test/library_checker/graph/lca.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-  - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-  - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
 documentation_of: graph/base.hpp
 layout: document
 redirect_from:

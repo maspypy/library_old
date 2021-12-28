@@ -2,9 +2,6 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: ds/lazysegtree.hpp
-    title: ds/lazysegtree.hpp
   - icon: ':warning:'
     path: ds/lichao.hpp
     title: ds/lichao.hpp
@@ -18,9 +15,6 @@ data:
     path: graph/bipartite_coloring.hpp
     title: graph/bipartite_coloring.hpp
   - icon: ':warning:'
-    path: graph/treemonoid_lazy.hpp
-    title: graph/treemonoid_lazy.hpp
-  - icon: ':warning:'
     path: test/template.cpp
     title: test/template.cpp
   _extendedVerifiedWith:
@@ -33,9 +27,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
     title: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
-    title: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
   - icon: ':x:'
     path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
     title: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
@@ -45,9 +36,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
     title: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
-    title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
     title: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
@@ -66,27 +54,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/unionfind.test.cpp
     title: test/library_checker/datastructure/unionfind.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-    title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-    title: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-    title: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
-    title: test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-    title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
   - icon: ':x:'
     path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
     title: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
-    title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/lca.test.cpp
     title: test/library_checker/graph/lca.test.cpp
@@ -269,10 +239,8 @@ data:
   isVerificationFile: false
   path: my_template.hpp
   requiredBy:
-  - graph/treemonoid_lazy.hpp
   - graph/bipartite_coloring.hpp
   - test/template.cpp
-  - ds/lazysegtree.hpp
   - ds/lichao.hpp
   - ds/unionfind.hpp
   - geometry/geometry.hpp
@@ -288,23 +256,15 @@ data:
   - test/library_checker/datastructure/staticrmq_sparse.test.cpp
   - test/library_checker/datastructure/static_range_sum.test.cpp
   - test/library_checker/datastructure/unionfind.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
   - test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
   - test/library_checker/datastructure/staticrmq_seg.test.cpp
   - test/library_checker/datastructure/point_add_range_sum.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
   - test/library_checker/datastructure/predecessor_problem.test..cpp
   - test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
-  - test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
   - test/library_checker/datastructure/queue_operate_all_composite.test.cpp
-  - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
   - test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
   - test/library_checker/datastructure/associative_array.test.cpp
-  - test/library_checker/datastructure/range_affine_range_sum.test.cpp
-  - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
 documentation_of: my_template.hpp
 layout: document
 redirect_from:

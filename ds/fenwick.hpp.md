@@ -3,9 +3,6 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: graph/treeabel.hpp
-    title: graph/treeabel.hpp
-  - icon: ':heavy_check_mark:'
     path: other/rectanglesums.hpp
     title: other/rectanglesums.hpp
   _extendedVerifiedWith:
@@ -15,9 +12,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
     title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-    title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -81,13 +75,11 @@ data:
   isVerificationFile: false
   path: ds/fenwick.hpp
   requiredBy:
-  - graph/treeabel.hpp
   - other/rectanglesums.hpp
   timestamp: '2021-12-27 18:40:42+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/datastructure/point_add_range_sum.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
   - test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
 documentation_of: ds/fenwick.hpp
 layout: document

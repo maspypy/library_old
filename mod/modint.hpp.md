@@ -9,23 +9,17 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
     title: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
-    title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
   - icon: ':x:'
     path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
     title: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
-    title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 1 \"mod/modint.hpp\"\ntemplate< int mod >\nstruct modint {\n\
-    \  int x;\n\n  modint() : x(0) {}\n\n  modint(int64_t y) : x(y >= 0 ? y % mod\
-    \ : (mod - (-y) % mod) % mod) {}\n\n  modint &operator+=(const modint &p) {\n\
+    \  int x;\n\n  constexpr modint(const ll x = 0) noexcept : x(x >= 0 ? x % mod\
+    \ : (mod - (-x) % mod) % mod) {}\n\n  modint &operator+=(const modint &p) {\n\
     \    if((x += p.x) >= mod) x -= mod;\n    return *this;\n  }\n\n  modint &operator-=(const\
     \ modint &p) {\n    if((x += mod - p.x) >= mod) x -= mod;\n    return *this;\n\
     \  }\n\n  modint &operator*=(const modint &p) {\n    x = (int) (1LL * x * p.x\
@@ -60,8 +54,8 @@ data:
     \ fact_inv(k) * fact_inv(n-k);\n    k = min(k, n-k);\n    T x(1);\n    FOR(i,\
     \ k){\n      x *= n - i;\n      x *= inv(i + 1);\n    }\n    return x;\n  }\n\
     };\n\nusing modint107 = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n"
-  code: "template< int mod >\nstruct modint {\n  int x;\n\n  modint() : x(0) {}\n\n\
-    \  modint(int64_t y) : x(y >= 0 ? y % mod : (mod - (-y) % mod) % mod) {}\n\n \
+  code: "template< int mod >\nstruct modint {\n  int x;\n\n  constexpr modint(const\
+    \ ll x = 0) noexcept : x(x >= 0 ? x % mod : (mod - (-x) % mod) % mod) {}\n\n \
     \ modint &operator+=(const modint &p) {\n    if((x += p.x) >= mod) x -= mod;\n\
     \    return *this;\n  }\n\n  modint &operator-=(const modint &p) {\n    if((x\
     \ += mod - p.x) >= mod) x -= mod;\n    return *this;\n  }\n\n  modint &operator*=(const\
@@ -101,14 +95,12 @@ data:
   isVerificationFile: false
   path: mod/modint.hpp
   requiredBy: []
-  timestamp: '2021-12-25 22:40:58+09:00'
+  timestamp: '2021-12-28 08:10:59+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
   - test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
   - test/library_checker/datastructure/queue_operate_all_composite.test.cpp
-  - test/library_checker/datastructure/range_affine_range_sum.test.cpp
-  - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
 documentation_of: mod/modint.hpp
 layout: document
 redirect_from:

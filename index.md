@@ -3,23 +3,18 @@ data:
   libraryCategories:
   - name: algebra
     pages:
-    - icon: ':warning:'
-      path: algebra/convolution.hpp
-      title: algebra/convolution.hpp
-    - icon: ':warning:'
-      path: algebra/linearrecurrence.hpp
-      title: algebra/linearrecurrence.hpp
-    - icon: ':question:'
-      path: algebra/monoid.hpp
-      title: algebra/monoid.hpp
-  - name: algebraic_system
-    pages:
-    - icon: ':warning:'
-      path: algebraic_system/maxmonoid.hpp
-      title: algebraic_system/maxmonoid.hpp
     - icon: ':heavy_check_mark:'
-      path: algebraic_system/minmonoid.hpp
-      title: algebraic_system/minmonoid.hpp
+      path: algebra/affinegroup.hpp
+      title: algebra/affinegroup.hpp
+    - icon: ':warning:'
+      path: algebra/maxmonoid.hpp
+      title: algebra/maxmonoid.hpp
+    - icon: ':heavy_check_mark:'
+      path: algebra/minmonoid.hpp
+      title: algebra/minmonoid.hpp
+    - icon: ':warning:'
+      path: algebra/monoid__old.hpp
+      title: algebra/monoid__old.hpp
   - name: densegraph
     pages:
     - icon: ':heavy_check_mark:'
@@ -57,7 +52,7 @@ data:
     - icon: ':warning:'
       path: ds/intervals.hpp
       title: ds/intervals.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: ds/lazysegtree.hpp
       title: ds/lazysegtree.hpp
     - icon: ':warning:'
@@ -66,7 +61,7 @@ data:
     - icon: ':question:'
       path: ds/segtree.hpp
       title: ds/segtree.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: ds/segtree2d.hpp
       title: ds/segtree2d.hpp
     - icon: ':warning:'
@@ -138,16 +133,16 @@ data:
     - icon: ':warning:'
       path: graph/tree_dp.hpp
       title: graph/tree_dp.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: graph/treeabel.hpp
       title: graph/treeabel.hpp
     - icon: ':warning:'
       path: graph/treedoubling.hpp
       title: graph/treedoubling.hpp
-    - icon: ':x:'
+    - icon: ':warning:'
       path: graph/treegroup.hpp
       title: graph/treegroup.hpp
-    - icon: ':x:'
+    - icon: ':warning:'
       path: graph/treemonoid.hpp
       title: graph/treemonoid.hpp
     - icon: ':warning:'
@@ -214,6 +209,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: other/rectanglesums.hpp
       title: other/rectanglesums.hpp
+  - name: polynomial
+    pages:
+    - icon: ':warning:'
+      path: polynomial/convolution.hpp
+      title: polynomial/convolution.hpp
+  - name: sequence
+    pages:
+    - icon: ':warning:'
+      path: sequence/linearrecurrence.hpp
+      title: sequence/linearrecurrence.hpp
   - name: string
     pages:
     - icon: ':warning:'
@@ -253,7 +258,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
       title: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
       title: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
     - icon: ':x:'
@@ -265,7 +270,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
       title: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
       title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
     - icon: ':x:'
@@ -301,7 +306,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/unionfind.test.cpp
       title: test/library_checker/datastructure/unionfind.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
       title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
     - icon: ':x:'

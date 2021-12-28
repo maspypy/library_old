@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: algebraic_system/minmonoid.hpp
-    title: algebraic_system/minmonoid.hpp
+    path: algebra/minmonoid.hpp
+    title: algebra/minmonoid.hpp
   - icon: ':question:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
@@ -128,8 +128,8 @@ data:
     \ sm))) {\n            sm = Monoid::op(dat[R], sm);\n            R--;\n      \
     \    }\n        }\n        return R + 1 - n;\n      }\n      sm = Monoid::op(dat[R],\
     \ sm);\n    } while ((R & -R) != R);\n    return 0;\n  }\n\n  void debug() { print(\"\
-    segtree\", dat); }\n};\n#line 1 \"algebraic_system/minmonoid.hpp\"\ntemplate <class\
-    \ X, X INF>\r\nstruct MinMonoid {\r\n  using value_type = X;\r\n  static constexpr\
+    segtree\", dat); }\n};\n#line 1 \"algebra/minmonoid.hpp\"\ntemplate <class X,\
+    \ X INF>\r\nstruct MinMonoid {\r\n  using value_type = X;\r\n  static constexpr\
     \ X op(const X &x, const X &y) noexcept { return min(x, y); }\r\n  static constexpr\
     \ X unit = INF;\r\n};\r\n#line 5 \"test/library_checker/datastructure/staticrmq_seg.test.cpp\"\
     \n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  VEC(int, A, N);\r\n  using Mono = MinMonoid<int,\
@@ -138,7 +138,7 @@ data:
     \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
     \n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/staticrmq\"\r\n#include\
-    \ \"my_template.hpp\"\r\n#include \"ds/segtree.hpp\"\r\n#include \"algebraic_system/minmonoid.hpp\"\
+    \ \"my_template.hpp\"\r\n#include \"ds/segtree.hpp\"\r\n#include \"algebra/minmonoid.hpp\"\
     \r\n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  VEC(int, A, N);\r\n  using Mono = MinMonoid<int,\
     \ 1 << 30>;\r\n  SegTree<Mono> seg(A);\r\n  FOR(_, Q) {\r\n    LL(L, R);\r\n \
     \   print(seg.prod(L, R));\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
@@ -147,11 +147,11 @@ data:
   dependsOn:
   - my_template.hpp
   - ds/segtree.hpp
-  - algebraic_system/minmonoid.hpp
+  - algebra/minmonoid.hpp
   isVerificationFile: true
   path: test/library_checker/datastructure/staticrmq_seg.test.cpp
   requiredBy: []
-  timestamp: '2021-12-28 06:02:16+09:00'
+  timestamp: '2021-12-28 08:12:08+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/staticrmq_seg.test.cpp

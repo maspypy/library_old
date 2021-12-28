@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: algebraic_system/minmonoid.hpp
-    title: algebraic_system/minmonoid.hpp
+    path: algebra/minmonoid.hpp
+    title: algebra/minmonoid.hpp
   - icon: ':heavy_check_mark:'
     path: ds/disjointsparse.hpp
     title: ds/disjointsparse.hpp
@@ -100,19 +100,19 @@ data:
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
     \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/datastructure/staticrmq_sparse.test.cpp\"\
-    \n\n#line 1 \"algebraic_system/minmonoid.hpp\"\ntemplate <class X, X INF>\r\n\
-    struct MinMonoid {\r\n  using value_type = X;\r\n  static constexpr X op(const\
-    \ X &x, const X &y) noexcept { return min(x, y); }\r\n  static constexpr X unit\
-    \ = INF;\r\n};\r\n#line 1 \"ds/disjointsparse.hpp\"\ntemplate <class Monoid>\r\
-    \nstruct DisjointSparse {\r\n  using X = typename Monoid::value_type;\r\n  using\
-    \ value_type = X;\r\n  int n, log;\r\n  vc<vc<X>> dat;\r\n\r\n  DisjointSparse(vc<X>&\
-    \ A) : n(len(A)) {\r\n    log = 1;\r\n    while ((1 << log) < n) ++log;\r\n  \
-    \  dat.assign(log, A);\r\n\r\n    FOR(i, log) {\r\n      auto& v = dat[i];\r\n\
-    \      int b = 1 << i;\r\n      for (int m = b; m <= n; m += 2 * b) {\r\n    \
-    \    int L = m - b, R = min(n, m + b);\r\n        FOR3_R(j, L + 1, m) v[j - 1]\
-    \ = Monoid::op(v[j - 1], v[j]);\r\n        FOR3(j, m, R - 1) v[j + 1] = Monoid::op(v[j],\
-    \ v[j + 1]);\r\n      }\r\n    }\r\n  }\r\n\r\n  X prod(int L, int R) {\r\n  \
-    \  if (L == R) return Monoid::unit;\r\n    --R;\r\n    if (L == R) return dat[0][L];\r\
+    \n\n#line 1 \"algebra/minmonoid.hpp\"\ntemplate <class X, X INF>\r\nstruct MinMonoid\
+    \ {\r\n  using value_type = X;\r\n  static constexpr X op(const X &x, const X\
+    \ &y) noexcept { return min(x, y); }\r\n  static constexpr X unit = INF;\r\n};\r\
+    \n#line 1 \"ds/disjointsparse.hpp\"\ntemplate <class Monoid>\r\nstruct DisjointSparse\
+    \ {\r\n  using X = typename Monoid::value_type;\r\n  using value_type = X;\r\n\
+    \  int n, log;\r\n  vc<vc<X>> dat;\r\n\r\n  DisjointSparse(vc<X>& A) : n(len(A))\
+    \ {\r\n    log = 1;\r\n    while ((1 << log) < n) ++log;\r\n    dat.assign(log,\
+    \ A);\r\n\r\n    FOR(i, log) {\r\n      auto& v = dat[i];\r\n      int b = 1 <<\
+    \ i;\r\n      for (int m = b; m <= n; m += 2 * b) {\r\n        int L = m - b,\
+    \ R = min(n, m + b);\r\n        FOR3_R(j, L + 1, m) v[j - 1] = Monoid::op(v[j\
+    \ - 1], v[j]);\r\n        FOR3(j, m, R - 1) v[j + 1] = Monoid::op(v[j], v[j +\
+    \ 1]);\r\n      }\r\n    }\r\n  }\r\n\r\n  X prod(int L, int R) {\r\n    if (L\
+    \ == R) return Monoid::unit;\r\n    --R;\r\n    if (L == R) return dat[0][L];\r\
     \n    int k = 31 - __builtin_clz(L ^ R);\r\n    return Monoid::op(dat[k][L], dat[k][R]);\r\
     \n  }\r\n\r\n  void debug() {\r\n    print(\"disjoint sparse table\");\r\n   \
     \ FOR(i, log) print(dat[i]);\r\n  }\r\n};\r\n#line 6 \"test/library_checker/datastructure/staticrmq_sparse.test.cpp\"\
@@ -121,20 +121,19 @@ data:
     \   print(DS.prod(L, R));\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
     \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/staticrmq\"\n#include \"\
-    my_template.hpp\"\n\n#include \"algebraic_system/minmonoid.hpp\"\n#include \"\
-    ds/disjointsparse.hpp\"\n\nvoid solve() {\n  LL(N, Q);\n  VEC(int, A, N);\n  using\
-    \ Mono = MinMonoid<int, 1 << 30>;\n  DisjointSparse<Mono> DS(A);\n\n  FOR(_, Q)\
-    \ {\n    LL(L, R);\n    print(DS.prod(L, R));\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
-    \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  solve();\n\n\
-    \  return 0;\n}\n"
+    my_template.hpp\"\n\n#include \"algebra/minmonoid.hpp\"\n#include \"ds/disjointsparse.hpp\"\
+    \n\nvoid solve() {\n  LL(N, Q);\n  VEC(int, A, N);\n  using Mono = MinMonoid<int,\
+    \ 1 << 30>;\n  DisjointSparse<Mono> DS(A);\n\n  FOR(_, Q) {\n    LL(L, R);\n \
+    \   print(DS.prod(L, R));\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
+    \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
-  - algebraic_system/minmonoid.hpp
+  - algebra/minmonoid.hpp
   - ds/disjointsparse.hpp
   isVerificationFile: true
   path: test/library_checker/datastructure/staticrmq_sparse.test.cpp
   requiredBy: []
-  timestamp: '2021-12-28 06:02:16+09:00'
+  timestamp: '2021-12-28 08:12:08+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/staticrmq_sparse.test.cpp

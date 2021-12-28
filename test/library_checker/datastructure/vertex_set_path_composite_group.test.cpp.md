@@ -187,8 +187,8 @@ data:
     \");\r\n    print(\"\u6728\u306E\u554F\u984C\u3067\u306F\u771F\u3063\u5148\u306B\
     \u3053\u308C\u3092\u4F5C\u308B\u3002\");\r\n    print(\"\u2192 \u6728DP\u3084\u6728\
     \u30AF\u30A8\u30EA\u306B\u6D3E\u751F\u3002\");\r\n  }\r\n};\r\n#line 1 \"mod/modint.hpp\"\
-    \ntemplate< int mod >\nstruct modint {\n  int x;\n\n  modint() : x(0) {}\n\n \
-    \ modint(int64_t y) : x(y >= 0 ? y % mod : (mod - (-y) % mod) % mod) {}\n\n  modint\
+    \ntemplate< int mod >\nstruct modint {\n  int x;\n\n  constexpr modint(const ll\
+    \ x = 0) noexcept : x(x >= 0 ? x % mod : (mod - (-x) % mod) % mod) {}\n\n  modint\
     \ &operator+=(const modint &p) {\n    if((x += p.x) >= mod) x -= mod;\n    return\
     \ *this;\n  }\n\n  modint &operator-=(const modint &p) {\n    if((x += mod - p.x)\
     \ >= mod) x -= mod;\n    return *this;\n  }\n\n  modint &operator*=(const modint\
@@ -340,7 +340,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
   requiredBy: []
-  timestamp: '2021-12-28 06:02:16+09:00'
+  timestamp: '2021-12-28 08:10:59+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
