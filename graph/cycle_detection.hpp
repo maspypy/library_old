@@ -1,7 +1,7 @@
 template <typename Graph>
 vc<int> cycle_detection(Graph& G, bool is_edge) {
-  assert(G.prepared);
-  assert(G::directed);
+  assert(G.is_directed());
+  assert(G.is_prepared());
   if (!is_edge) {
     auto C = cycle_detection(G, true);
     if (len(C) == 0) return C;
