@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':x:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':question:'
+  - icon: ':x:'
     path: graph/hld.hpp
     title: graph/hld.hpp
   - icon: ':question:'
@@ -12,9 +12,9 @@ data:
     title: my_template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/lca
@@ -102,30 +102,28 @@ data:
     \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/graph/lca.test.cpp\"\
     \n\n#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n  int\
     \ frm, to;\n  T cost;\n  int id;\n  Edge(int a, int b, T c, int d) : frm(a), to(b),\
-    \ cost(c), id(d) {}\n};\n\ntemplate <typename T>\nstruct Graph {\n  int N, M;\n\
-    \  using edge_t = Edge<T>;\n  vector<edge_t> edges;\n  vector<vector<edge_t>>\
-    \ G;\n  bool directed;\n  Graph() {}\n  Graph(int N, bool bl = false) : N(N),\
-    \ M(0), G(N), directed(bl) {}\n\n  void add(int frm, int to, T cost = 1, int i\
-    \ = -1) {\n    if (i == -1) i = M;\n    auto e = edge_t(frm, to, cost, i);\n \
-    \   edges.eb(e);\n    G[frm].eb(e);\n    if (!directed) {\n      auto e_rev =\
-    \ edge_t(to, frm, cost, i);\n      G[to].eb(e_rev);\n    }\n    ++M;\n  }\n\n\
-    \  void debug(bool detail = false) {\n    FOR(v, N) {\n      cout << v << \" :\"\
-    ;\n      for (auto e: G[v]) {\n        if (detail)\n          cout << \" (\" <<\
-    \ e.frm << \",\" << e.to << \",\" << e.cost << \",\" << e.id << \")\";\n     \
-    \   else\n          cout << \" \" << e.to;\n      }\n      cout << \"\\n\";\n\
-    \    }\n  }\n\n  vector<int> degrees() {\n    vector<int> deg(N);\n    for (auto&&\
-    \ e: edges) {\n      deg[e.frm]++;\n      deg[e.to]++;\n    }\n    return deg;\n\
-    \  }\n\n  int size() { return N; }\n\n  vector<edge_t>& operator[](int v) { return\
-    \ G[v]; }\n};\n#line 3 \"graph/hld.hpp\"\n\r\ntemplate <typename Graph>\r\nstruct\
-    \ HLD {\r\n  Graph &G;\r\n  int N;\r\n  vector<int> sz, LID, RID, ELID, ERID,\
-    \ head, V, parent, depth, e_to_v;\r\n\r\n  HLD(Graph &G, int root = 0)\r\n   \
-    \   : G(G),\r\n        N(G.N),\r\n        sz(G.N),\r\n        LID(G.N),\r\n  \
-    \      RID(G.N),\r\n        ELID(G.N),\r\n        ERID(G.N),\r\n        head(G.N,\
-    \ root),\r\n        V(G.N),\r\n        parent(G.N, -1),\r\n        depth(G.N),\r\
-    \n        e_to_v(G.N) {\r\n    int t1 = 0, t2 = 0;\r\n    dfs_sz(root, -1);\r\n\
-    \    dfs_hld(root, -1, t1, t2);\r\n  }\r\n\r\n  void dfs_sz(int idx, int p) {\r\
-    \n    parent[idx] = p;\r\n    depth[idx] = (p == -1 ? 0 : depth[p] + 1);\r\n \
-    \   sz[idx] = 1;\r\n    if (G[idx].size() && G[idx][0].to == p) swap(G[idx][0],\
+    \ cost(c), id(d) {}\n};\n\ntemplate <typename T, bool directed = false>\nstruct\
+    \ Graph {\n  int N, M;\n  using value_type = T;\n  using edge_type = Edge<T>;\n\
+    \  vector<edge_type> edges;\n  vector<vector<edge_type>> G;\n  Graph() {}\n  Graph(int\
+    \ N) : N(N), M(0), G(N), directed(bl) {}\n\n  void add(int frm, int to, T cost\
+    \ = 1, int i = -1) {\n    if (i == -1) i = M;\n    auto e = edge_type(frm, to,\
+    \ cost, i);\n    edges.eb(e);\n    G[frm].eb(e);\n    if (!directed) {\n     \
+    \ auto e_rev = edge_type(to, frm, cost, i);\n      G[to].eb(e_rev);\n    }\n \
+    \   ++M;\n  }\n\n  void debug(bool detail = false) {\n    FOR(v, N) {\n      cout\
+    \ << v << \" :\";\n      for (auto e: G[v]) {\n        if (detail)\n         \
+    \ cout << \" (\" << e.frm << \",\" << e.to << \",\" << e.cost << \",\" << e.id\n\
+    \               << \")\";\n        else\n          cout << \" \" << e.to;\n  \
+    \    }\n      cout << \"\\n\";\n    }\n  }\n  int size() { return N; }\n\n  vector<edge_type>&\
+    \ operator[](int v) { return G[v]; }\n};\n#line 3 \"graph/hld.hpp\"\n\r\ntemplate\
+    \ <typename Graph>\r\nstruct HLD {\r\n  Graph &G;\r\n  int N;\r\n  vector<int>\
+    \ sz, LID, RID, ELID, ERID, head, V, parent, depth, e_to_v;\r\n\r\n  HLD(Graph\
+    \ &G, int root = 0)\r\n      : G(G),\r\n        N(G.N),\r\n        sz(G.N),\r\n\
+    \        LID(G.N),\r\n        RID(G.N),\r\n        ELID(G.N),\r\n        ERID(G.N),\r\
+    \n        head(G.N, root),\r\n        V(G.N),\r\n        parent(G.N, -1),\r\n\
+    \        depth(G.N),\r\n        e_to_v(G.N) {\r\n    int t1 = 0, t2 = 0;\r\n \
+    \   dfs_sz(root, -1);\r\n    dfs_hld(root, -1, t1, t2);\r\n  }\r\n\r\n  void dfs_sz(int\
+    \ idx, int p) {\r\n    parent[idx] = p;\r\n    depth[idx] = (p == -1 ? 0 : depth[p]\
+    \ + 1);\r\n    sz[idx] = 1;\r\n    if (G[idx].size() && G[idx][0].to == p) swap(G[idx][0],\
     \ G[idx].back());\r\n    for (auto &e: G[idx]) {\r\n      if (e.to == p) continue;\r\
     \n      e_to_v[e.id] = e.to;\r\n      dfs_sz(e.to, idx);\r\n      sz[idx] += sz[e.to];\r\
     \n      if (sz[G[idx][0].to] < sz[e.to]) swap(G[idx][0], e);\r\n    }\r\n  }\r\
@@ -170,8 +168,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/graph/lca.test.cpp
   requiredBy: []
-  timestamp: '2021-12-27 18:35:27+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-12-29 00:40:28+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/graph/lca.test.cpp
 layout: document

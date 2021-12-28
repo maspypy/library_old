@@ -25,35 +25,30 @@ data:
     \ cout << \" (\" << e.frm << \",\" << e.to << \",\" << e.cost << \",\" << e.id\n\
     \               << \")\";\n        else\n          cout << \" \" << e.to;\n  \
     \    }\n      cout << \"\\n\";\n    }\n  }\n  int size() { return N; }\n\n  vector<edge_type>&\
-    \ operator[](int v) { return G[v]; }\n};\n#line 3 \"graph/dijkstra.hpp\"\n\ntemplate\
-    \ <typename T>\npair<vi, vi> dijkstra(Graph<T>& G, ll v) {\n  const ll INF = 1LL\
-    \ << 60;\n  auto N = G.N;\n  vi dist(N, INF);\n  vi par(N, -1);\n  using P = pair<T,\
-    \ ll>;\n\n  priority_queue<P, vector<P>, greater<P>> que;\n\n  dist[v] = 0;\n\
-    \  que.push(mp(T(0), v));\n  while (!que.empty()) {\n    auto [dv, v] = que.top();\n\
-    \    que.pop();\n    if(dv > dist[v]) continue;\n    for (auto&& e : G[v]) {\n\
-    \      if (chmin(dist[e.to], dist[e.frm] + e.cost)) {\n        par[e.to] = e.frm;\n\
-    \        que.push(mp(dist[e.to], e.to));\n      }\n    }\n  }\n  return mp(dist,\
-    \ par);\n}\n"
-  code: "#pragma once\n#include \"graph/base.hpp\"\n\ntemplate <typename T>\npair<vi,\
-    \ vi> dijkstra(Graph<T>& G, ll v) {\n  const ll INF = 1LL << 60;\n  auto N = G.N;\n\
-    \  vi dist(N, INF);\n  vi par(N, -1);\n  using P = pair<T, ll>;\n\n  priority_queue<P,\
-    \ vector<P>, greater<P>> que;\n\n  dist[v] = 0;\n  que.push(mp(T(0), v));\n  while\
-    \ (!que.empty()) {\n    auto [dv, v] = que.top();\n    que.pop();\n    if(dv >\
-    \ dist[v]) continue;\n    for (auto&& e : G[v]) {\n      if (chmin(dist[e.to],\
-    \ dist[e.frm] + e.cost)) {\n        par[e.to] = e.frm;\n        que.push(mp(dist[e.to],\
-    \ e.to));\n      }\n    }\n  }\n  return mp(dist, par);\n}\n"
+    \ operator[](int v) { return G[v]; }\n};\n#line 2 \"graph/degree.hpp\"\n\r\ntemplate\
+    \ <typename Graph>\r\nvector<int> degree(Graph& G) {\r\n  vector<int> deg(N);\r\
+    \n  FOR(v, N) deg[v] = len(G[v]);\r\n  return deg;\r\n}\r\n\r\ntemplate <typename\
+    \ Graph>\r\npair<vector<int>, vector<int>> degree_inout(Graph& G) {\r\n  vector<int>\
+    \ indeg(N), outdeg(N);\r\n  for (auto&& e: G.edges) { indeg[e.to]++, outdeg[e.frm]++;\
+    \ }\r\n  return {indeg, outdeg};\r\n}\r\n"
+  code: "#include \"graph/base.hpp\"\r\n\r\ntemplate <typename Graph>\r\nvector<int>\
+    \ degree(Graph& G) {\r\n  vector<int> deg(N);\r\n  FOR(v, N) deg[v] = len(G[v]);\r\
+    \n  return deg;\r\n}\r\n\r\ntemplate <typename Graph>\r\npair<vector<int>, vector<int>>\
+    \ degree_inout(Graph& G) {\r\n  vector<int> indeg(N), outdeg(N);\r\n  for (auto&&\
+    \ e: G.edges) { indeg[e.to]++, outdeg[e.frm]++; }\r\n  return {indeg, outdeg};\r\
+    \n}\r\n"
   dependsOn:
   - graph/base.hpp
   isVerificationFile: false
-  path: graph/dijkstra.hpp
+  path: graph/degree.hpp
   requiredBy: []
-  timestamp: '2021-12-29 00:40:28+09:00'
+  timestamp: '2021-12-29 00:40:38+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: graph/dijkstra.hpp
+documentation_of: graph/degree.hpp
 layout: document
 redirect_from:
-- /library/graph/dijkstra.hpp
-- /library/graph/dijkstra.hpp.html
-title: graph/dijkstra.hpp
+- /library/graph/degree.hpp
+- /library/graph/degree.hpp.html
+title: graph/degree.hpp
 ---

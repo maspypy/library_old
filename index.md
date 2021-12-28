@@ -100,7 +100,7 @@ data:
       title: geometry/geometry.hpp
   - name: graph
     pages:
-    - icon: ':question:'
+    - icon: ':x:'
       path: graph/base.hpp
       title: graph/base.hpp
     - icon: ':warning:'
@@ -119,15 +119,18 @@ data:
       path: graph/decompose_complete.hpp
       title: graph/decompose_complete.hpp
     - icon: ':warning:'
+      path: graph/degree.hpp
+      title: graph/degree.hpp
+    - icon: ':warning:'
       path: graph/dijkstra.hpp
       title: graph/dijkstra.hpp
     - icon: ':warning:'
       path: graph/eulerwalk.hpp
       title: graph/eulerwalk.hpp
-    - icon: ':question:'
+    - icon: ':x:'
       path: graph/hld.hpp
       title: graph/hld.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/mis.hpp
       title: graph/mis.hpp
     - icon: ':warning:'
@@ -346,10 +349,10 @@ data:
       title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   - name: test/library_checker/graph
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/graph/lca.test.cpp
       title: test/library_checker/graph/lca.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/graph/maximum_independent_set.test.cpp
       title: test/library_checker/graph/maximum_independent_set.test.cpp
     - icon: ':heavy_check_mark:'

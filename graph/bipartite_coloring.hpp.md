@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':x:'
     path: graph/base.hpp
     title: graph/base.hpp
   - icon: ':question:'
@@ -16,29 +16,27 @@ data:
     links: []
   bundledCode: "#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n\
     \  int frm, to;\n  T cost;\n  int id;\n  Edge(int a, int b, T c, int d) : frm(a),\
-    \ to(b), cost(c), id(d) {}\n};\n\ntemplate <typename T>\nstruct Graph {\n  int\
-    \ N, M;\n  using edge_t = Edge<T>;\n  vector<edge_t> edges;\n  vector<vector<edge_t>>\
-    \ G;\n  bool directed;\n  Graph() {}\n  Graph(int N, bool bl = false) : N(N),\
-    \ M(0), G(N), directed(bl) {}\n\n  void add(int frm, int to, T cost = 1, int i\
-    \ = -1) {\n    if (i == -1) i = M;\n    auto e = edge_t(frm, to, cost, i);\n \
-    \   edges.eb(e);\n    G[frm].eb(e);\n    if (!directed) {\n      auto e_rev =\
-    \ edge_t(to, frm, cost, i);\n      G[to].eb(e_rev);\n    }\n    ++M;\n  }\n\n\
-    \  void debug(bool detail = false) {\n    FOR(v, N) {\n      cout << v << \" :\"\
-    ;\n      for (auto e: G[v]) {\n        if (detail)\n          cout << \" (\" <<\
-    \ e.frm << \",\" << e.to << \",\" << e.cost << \",\" << e.id << \")\";\n     \
-    \   else\n          cout << \" \" << e.to;\n      }\n      cout << \"\\n\";\n\
-    \    }\n  }\n\n  vector<int> degrees() {\n    vector<int> deg(N);\n    for (auto&&\
-    \ e: edges) {\n      deg[e.frm]++;\n      deg[e.to]++;\n    }\n    return deg;\n\
-    \  }\n\n  int size() { return N; }\n\n  vector<edge_t>& operator[](int v) { return\
-    \ G[v]; }\n};\n#line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing\
-    \ namespace std;\n\nusing ll = long long;\nusing ll8 = __int128;\nusing ld = long\
-    \ double;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint = unsigned\
-    \ int;\nusing ull = unsigned long long;\n\ntemplate <class T>\nusing vc = vector<T>;\n\
-    template <class T>\nusing vvc = vector<vc<T>>;\ntemplate <class T>\nusing vvvc\
-    \ = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc = vector<vvvc<T>>;\ntemplate\
-    \ <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate <class T>\nusing pq =\
-    \ priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T, vector<T>,\
-    \ greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
+    \ to(b), cost(c), id(d) {}\n};\n\ntemplate <typename T, bool directed = false>\n\
+    struct Graph {\n  int N, M;\n  using value_type = T;\n  using edge_type = Edge<T>;\n\
+    \  vector<edge_type> edges;\n  vector<vector<edge_type>> G;\n  Graph() {}\n  Graph(int\
+    \ N) : N(N), M(0), G(N), directed(bl) {}\n\n  void add(int frm, int to, T cost\
+    \ = 1, int i = -1) {\n    if (i == -1) i = M;\n    auto e = edge_type(frm, to,\
+    \ cost, i);\n    edges.eb(e);\n    G[frm].eb(e);\n    if (!directed) {\n     \
+    \ auto e_rev = edge_type(to, frm, cost, i);\n      G[to].eb(e_rev);\n    }\n \
+    \   ++M;\n  }\n\n  void debug(bool detail = false) {\n    FOR(v, N) {\n      cout\
+    \ << v << \" :\";\n      for (auto e: G[v]) {\n        if (detail)\n         \
+    \ cout << \" (\" << e.frm << \",\" << e.to << \",\" << e.cost << \",\" << e.id\n\
+    \               << \")\";\n        else\n          cout << \" \" << e.to;\n  \
+    \    }\n      cout << \"\\n\";\n    }\n  }\n  int size() { return N; }\n\n  vector<edge_type>&\
+    \ operator[](int v) { return G[v]; }\n};\n#line 2 \"my_template.hpp\"\n#include\
+    \ <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\nusing ll8\
+    \ = __int128;\nusing ld = long double;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\n\
+    using uint = unsigned int;\nusing ull = unsigned long long;\n\ntemplate <class\
+    \ T>\nusing vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\n\
+    template <class T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc\
+    \ = vector<vvvc<T>>;\ntemplate <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate\
+    \ <class T>\nusing pq = priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T,\
+    \ vector<T>, greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
     #define VEC(type, name, size) \\\n  vector<type> name(size);    \\\n  IN(name)\n\
     #define vv(type, name, h, ...) vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n\
     #define VV(type, name, h, w)                     \\\n  vector<vector<type>> name(h,\
@@ -146,7 +144,7 @@ data:
   isVerificationFile: false
   path: graph/bipartite_coloring.hpp
   requiredBy: []
-  timestamp: '2021-12-27 18:35:27+09:00'
+  timestamp: '2021-12-29 00:40:28+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph/bipartite_coloring.hpp
