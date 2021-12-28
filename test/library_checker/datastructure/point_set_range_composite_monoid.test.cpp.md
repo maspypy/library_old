@@ -1,6 +1,9 @@
 ---
 data:
   _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: algebra/affinegroup.hpp
+    title: algebra/affinegroup.hpp
   - icon: ':question:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
@@ -12,9 +15,9 @@ data:
     title: my_template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/point_set_range_composite
@@ -166,34 +169,41 @@ data:
     \ (!large) return fact(n) * fact_inv(k) * fact_inv(n-k);\n    k = min(k, n-k);\n\
     \    T x(1);\n    FOR(i, k){\n      x *= n - i;\n      x *= inv(i + 1);\n    }\n\
     \    return x;\n  }\n};\n\nusing modint107 = modint<1'000'000'007>;\nusing modint998\
-    \ = modint<998'244'353>;\n#line 6 \"test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp\"\
-    \n\nusing mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using E = pair<mint,\
-    \ mint>;\n  SegTree<E> seg(Monoid_affine<mint>());\n  seg.init(N);\n  vc<E> seg_raw(N);\n\
-    \  FOR(i, N) {\n    LL(a, b);\n    seg_raw[i] = {a, b};\n  }\n  seg.build(seg_raw);\n\
-    \n  FOR(q, Q) {\n    LL(t);\n    if (t == 0) {\n      LL(i, a, b);\n      seg.set(i,\
-    \ E({a, b}));\n    } else {\n      LL(L, R, x);\n      auto [a, b] = seg.prod(L,\
-    \ R);\n      print(a * mint(x) + b);\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
+    \ = modint<998'244'353>;\n#line 1 \"algebra/affinegroup.hpp\"\ntemplate <typename\
+    \ K>\nstruct AffineGroup {\n  using F = pair<K, K>;\n  using value_type = F;\n\
+    \  static constexpr F op(const F &x, const F &y) noexcept {\n    return F({x.fi\
+    \ * y.fi, x.se * y.fi + y.se});\n  }\n  static constexpr F inverse(const F &x)\
+    \ {\n    auto [a, b] = x;\n    a = K(1) / a;\n    return {a, a * (-b)};\n  }\n\
+    \  static constexpr K eval(const F &f, K x) noexcept { return f.fi * x + f.se;\
+    \ }\n  static constexpr F unit = {K(1), K(0)};\n};\n#line 7 \"test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp\"\
+    \n\nusing mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using Mono = AffineGroup<mint>;\n\
+    \  using F = Mono::value_type;\n\n  vc<F> seg_raw(N);\n  FOR(i, N) {\n    LL(a,\
+    \ b);\n    seg_raw[i] = {a, b};\n  }\n\n  SegTree<Mono> seg(seg_raw);\n\n  FOR(q,\
+    \ Q) {\n    LL(t);\n    if (t == 0) {\n      LL(i, a, b);\n      seg.set(i, F({a,\
+    \ b}));\n    } else {\n      LL(L, R, x);\n      auto f = seg.prod(L, R);\n  \
+    \    print(Mono::eval(f, x));\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
     \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  solve();\n\n\
     \  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_set_range_composite\"\
     \n#include \"my_template.hpp\"\n\n#include \"ds/segtree.hpp\"\n#include \"mod/modint.hpp\"\
-    \n\nusing mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using E = pair<mint,\
-    \ mint>;\n  SegTree<E> seg(Monoid_affine<mint>());\n  seg.init(N);\n  vc<E> seg_raw(N);\n\
-    \  FOR(i, N) {\n    LL(a, b);\n    seg_raw[i] = {a, b};\n  }\n  seg.build(seg_raw);\n\
-    \n  FOR(q, Q) {\n    LL(t);\n    if (t == 0) {\n      LL(i, a, b);\n      seg.set(i,\
-    \ E({a, b}));\n    } else {\n      LL(L, R, x);\n      auto [a, b] = seg.prod(L,\
-    \ R);\n      print(a * mint(x) + b);\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
-    \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  solve();\n\n\
-    \  return 0;\n}\n"
+    \n#include \"algebra/affinegroup.hpp\"\n\nusing mint = modint998;\n\nvoid solve()\
+    \ {\n  LL(N, Q);\n  using Mono = AffineGroup<mint>;\n  using F = Mono::value_type;\n\
+    \n  vc<F> seg_raw(N);\n  FOR(i, N) {\n    LL(a, b);\n    seg_raw[i] = {a, b};\n\
+    \  }\n\n  SegTree<Mono> seg(seg_raw);\n\n  FOR(q, Q) {\n    LL(t);\n    if (t\
+    \ == 0) {\n      LL(i, a, b);\n      seg.set(i, F({a, b}));\n    } else {\n  \
+    \    LL(L, R, x);\n      auto f = seg.prod(L, R);\n      print(Mono::eval(f, x));\n\
+    \    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
+    \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
   - ds/segtree.hpp
   - mod/modint.hpp
+  - algebra/affinegroup.hpp
   isVerificationFile: true
   path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
   requiredBy: []
-  timestamp: '2021-12-28 08:10:59+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-12-28 23:14:08+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
 layout: document
