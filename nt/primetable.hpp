@@ -1,8 +1,8 @@
 template <int LIM = (1 << 20)>
 pair<bitset<LIM>, vc<int>> primetable() {
   static bitset<LIM> is_prime;
-  const int S = (int)round(sqrt(LIM)), R = LIM / 2;
-  vc<int> primes = {2}, sieve(S + 1);
+  constexpr int S = (int)round(sqrt(LIM)), R = LIM / 2;
+  static vc<int> primes = {2}, sieve(S + 1);
   primes.reserve(int(LIM / log(LIM) * 1.1));
   vc<pi> cp;
   for (int i = 3; i <= S; i += 2) {
