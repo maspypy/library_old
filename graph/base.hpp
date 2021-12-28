@@ -40,6 +40,7 @@ struct Graph {
   Graph(int N) : N(N), M(0), prepared(0) {}
 
   void add(int frm, int to, T cost = 1, int i = -1) {
+    assert(!prepared);
     if (i == -1) i = M;
     auto e = edge_type({frm, to, cost, i});
     edges.eb(e);
