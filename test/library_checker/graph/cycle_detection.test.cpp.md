@@ -114,22 +114,22 @@ data:
     \ Graph* G;\n  };\n\n  bool is_prepared() { return prepared; }\n  constexpr bool\
     \ is_directed() { return directed; }\n\n  Graph() {}\n  Graph(int N) : N(N), M(0),\
     \ prepared(0) {}\n\n  void add(int frm, int to, T cost = 1, int i = -1) {\n  \
-    \  if (i == -1) i = M;\n    auto e = edge_type({frm, to, cost, i});\n    edges.eb(e);\n\
-    \    ++M;\n  }\n\n  void prepare() {\n    assert(!prepared);\n    prepared = true;\n\
-    \    indptr.assign(N + 1, 0);\n    for (auto&& [frm, to, cost, id]: edges) {\n\
-    \      indptr[frm + 1]++;\n      if (!directed) indptr[to + 1]++;\n    }\n   \
-    \ FOR(v, N) indptr[v + 1] += indptr[v];\n    auto counter = indptr;\n    csr_edges.resize(indptr.back()\
-    \ + 1);\n    for (auto&& [frm, to, cost, id]: edges) {\n      csr_edges[counter[frm]++]\
-    \ = {frm, to, cost, id};\n      if (!directed) csr_edges[counter[to]++] = {to,\
-    \ frm, cost, id};\n    }\n  }\n\n  OutgoingEdges operator[](int v) const {\n \
-    \   assert(prepared);\n    return {this, indptr[v], indptr[v + 1]};\n  }\n\n \
-    \ void debug() {\n    print(\"Graph\");\n    if (!prepared) {\n      print(\"\
-    frm to cost id\");\n      for (auto&& e: edges) print(e);\n    } else {\n    \
-    \  print(\"indptr\", indptr);\n      print(\"frm to cost id\");\n      FOR(v,\
-    \ N) for (auto&& e: (*this)[v]) print(e);\n    }\n  }\n\n  int size() { return\
-    \ N; }\n};\n#line 6 \"test/library_checker/graph/cycle_detection.test.cpp\"\n\r\
-    \nvoid solve() {\r\n  LL(N, M);\r\n  Graph<int, 1> G(N);\r\n  FOR(_, M) {\r\n\
-    \    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n  G.prepare();\r\n\r\n  auto C =\
+    \  assert(!prepared);\n    if (i == -1) i = M;\n    auto e = edge_type({frm, to,\
+    \ cost, i});\n    edges.eb(e);\n    ++M;\n  }\n\n  void prepare() {\n    assert(!prepared);\n\
+    \    prepared = true;\n    indptr.assign(N + 1, 0);\n    for (auto&& [frm, to,\
+    \ cost, id]: edges) {\n      indptr[frm + 1]++;\n      if (!directed) indptr[to\
+    \ + 1]++;\n    }\n    FOR(v, N) indptr[v + 1] += indptr[v];\n    auto counter\
+    \ = indptr;\n    csr_edges.resize(indptr.back() + 1);\n    for (auto&& [frm, to,\
+    \ cost, id]: edges) {\n      csr_edges[counter[frm]++] = {frm, to, cost, id};\n\
+    \      if (!directed) csr_edges[counter[to]++] = {to, frm, cost, id};\n    }\n\
+    \  }\n\n  OutgoingEdges operator[](int v) const {\n    assert(prepared);\n   \
+    \ return {this, indptr[v], indptr[v + 1]};\n  }\n\n  void debug() {\n    print(\"\
+    Graph\");\n    if (!prepared) {\n      print(\"frm to cost id\");\n      for (auto&&\
+    \ e: edges) print(e);\n    } else {\n      print(\"indptr\", indptr);\n      print(\"\
+    frm to cost id\");\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e);\n   \
+    \ }\n  }\n\n  int size() { return N; }\n};\n#line 6 \"test/library_checker/graph/cycle_detection.test.cpp\"\
+    \n\r\nvoid solve() {\r\n  LL(N, M);\r\n  Graph<int, 1> G(N);\r\n  FOR(_, M) {\r\
+    \n    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n  G.prepare();\r\n\r\n  auto C =\
     \ cycle_detection(G, true);\r\n  if (len(C) == 0) {\r\n    print(-1);\r\n  } else\
     \ {\r\n    print(len(C));\r\n    for (auto&& i : C) print(i);\r\n  }\r\n}\r\n\r\
     \nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n\
@@ -148,7 +148,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/graph/cycle_detection.test.cpp
   requiredBy: []
-  timestamp: '2021-12-29 02:58:22+09:00'
+  timestamp: '2021-12-29 03:03:07+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/graph/cycle_detection.test.cpp
