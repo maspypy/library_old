@@ -103,7 +103,7 @@ data:
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
     \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/math/enumerate_primes.test.cpp\"\
     \n\n#line 1 \"nt/primetable.hpp\"\ntemplate <int LIM = (1 << 20)>\npair<bitset<LIM>,\
-    \ vc<int>> primetable() {\n  bitset<LIM> is_prime;\n  const int S = (int)round(sqrt(LIM)),\
+    \ vc<int>> primetable() {\n  static bitset<LIM> is_prime;\n  const int S = (int)round(sqrt(LIM)),\
     \ R = LIM / 2;\n  vc<int> primes = {2}, sieve(S + 1);\n  primes.reserve(int(LIM\
     \ / log(LIM) * 1.1));\n  vc<pi> cp;\n  for (int i = 3; i <= S; i += 2) {\n   \
     \ if (!sieve[i]) {\n      cp.eb(i, i * i / 2);\n      for (int j = i * i; j <=\
@@ -130,7 +130,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/math/enumerate_primes.test.cpp
   requiredBy: []
-  timestamp: '2021-12-29 02:24:08+09:00'
+  timestamp: '2021-12-29 03:24:11+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/math/enumerate_primes.test.cpp
