@@ -3,6 +3,7 @@
 #include "my_template.hpp"
 
 #include "graph/base.hpp"
+#include "graph/cycle_detection.hpp"
 
 void solve() {
   LL(N, M);
@@ -18,7 +19,7 @@ void solve() {
     print(-1);
   } else {
     print(len(C));
-    for (auto&& i : C) print(i);
+    for (auto&& i: C) print(i);
   }
 }
 
