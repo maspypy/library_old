@@ -10,6 +10,7 @@ void solve() {
     LL(a, b);
     G.add(a, b);
   }
+  G.prepare();
   auto mis = maximum_independent_set(G);
   print(len(mis));
   print(mis);
