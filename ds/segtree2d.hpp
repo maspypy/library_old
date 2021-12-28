@@ -1,32 +1,23 @@
-#include "algebra/monoid.hpp"
-
-template <typename E, bool SMALL = false>
+template <typename Monoid, typename XY, bool SMALL = false>
 struct SegTree2D {
-  using F = function<E(E, E)>;
-  E unit;
-  F f;
+  using S = typename Monoid::value_type;
   int N;
   int full_N;
-  vi keyX;
+  vc<XY> keyX;
   int min_X;
   vc<int> indptr;
-  vi keyY;
-  vc<E> dat;
+  vc<XY> keyY;
+  vc<S> dat;
 
-  SegTree2D(Monoid<E> Mono, vi& X, vi& Y, vc<E>& wt) : f(Mono.f), unit(Mono.unit) {
-    assert(Mono.commute); // 可換モノイドのみ
-    build(X, Y, wt);
+  inline int xtoi(int x) {
+    return (SMALL ? clamp(x - min_X, 0, N) : LB(keyX, x));
   }
 
-  SegTree2D(Monoid<E> Mono, vi& X, vi& Y) : f(Mono.f), unit(Mono.unit) {
-    assert(Mono.commute); // 可換モノイドのみ
-    vc<E> wt(len(X), unit);
-    build(X, Y, wt);
-  }
+  SegTree2D(vc<XY>& X, vc<XY>& Y, vc<S>& wt = vc<S>()) {
+    if (len(wt) == 0) wt = vc<S>(len(X), S(0));
+    assert(Monoid::commute); // 可換モノイドのみ
+    assert(len(X) == len(Y) && len(X) == len(wt));
 
-  inline int xtoi(int x) { return (SMALL ? clamp(x - min_X, 0, N) : LB(keyX, x)); }
-
-  void build(vi& X, vi& Y, vc<E>& wt) {
     if (!SMALL) {
       keyX = X;
       UNIQUE(keyX);
@@ -38,8 +29,8 @@ struct SegTree2D {
       FOR(i, N) keyX[i] = min_X + i;
     }
 
-    vc<vi> keyY_raw(N + N);
-    vc<vc<E>> dat_raw(N + N);
+    vc<vc<XY>> keyY_raw(N + N);
+    vc<vc<S>> dat_raw(N + N);
 
     auto I = argsort(Y);
     for (auto&& i: I) {
@@ -51,7 +42,7 @@ struct SegTree2D {
           KY.eb(y);
           dat_raw[ix].eb(wt[i]);
         } else {
-          dat_raw[ix].back() = f(dat_raw[ix].back(), wt[i]);
+          dat_raw[ix].back() = Monoid::op(dat_raw[ix].back(), wt[i]);
         }
         ix >>= 1;
       }
@@ -61,7 +52,7 @@ struct SegTree2D {
     FOR(i, N + N) indptr[i + 1] = indptr[i] + len(keyY_raw[i]);
     int full_N = indptr.back();
     keyY.resize(full_N);
-    dat.assign(2 * full_N, unit);
+    dat.assign(2 * full_N, Monoid::unit);
     FOR(i, N + N) {
       int off = 2 * indptr[i], n = indptr[i + 1] - indptr[i];
       FOR(j, n) {
@@ -69,11 +60,11 @@ struct SegTree2D {
         dat[off + n + j] = dat_raw[i][j];
       }
       FOR3_R(j, 1, n)
-      dat[off + j] = f(dat[off + 2 * j + 0], dat[off + 2 * j + 1]);
+      dat[off + j] = Monoid::op(dat[off + 2 * j + 0], dat[off + 2 * j + 1]);
     }
   }
 
-  void multiply_i(int i, ll y, E val) {
+  void multiply_i(int i, XY y, S val) {
     int LID = indptr[i], n = indptr[i + 1] - indptr[i];
     auto it = keyY.begin() + LID;
     int j = lower_bound(it, it + n, y) - it;
@@ -82,12 +73,12 @@ struct SegTree2D {
     j += n;
 
     while (j) {
-      dat[off + j] = f(dat[off + j], val);
+      dat[off + j] = Monoid::op(dat[off + j], val);
       j >>= 1;
     }
   }
 
-  void multiply(ll x, ll y, E val) {
+  void multiply(XY x, XY y, S val) {
     int i = xtoi(x);
     assert(keyX[i] == x);
     i += N;
@@ -97,8 +88,7 @@ struct SegTree2D {
     }
   }
 
-  E prod_i(int i, ll ly, ll ry) {
-    E ret = 0;
+  S prod_i(int i, XY ly, XY ry) {
     int LID = indptr[i], n = indptr[i + 1] - indptr[i];
     auto it = keyY.begin() + LID;
     int L = lower_bound(it, it + n, ly) - it;
@@ -106,25 +96,25 @@ struct SegTree2D {
     int off = 2 * LID;
     L += n;
     R += n;
-    E val = unit;
+    S val = Monoid::unit;
     while (L < R) {
-      if (L & 1) val = f(val, dat[off + (L++)]);
-      if (R & 1) val = f(dat[off + (--R)], val);
+      if (L & 1) val = Monoid::op(val, dat[off + (L++)]);
+      if (R & 1) val = Monoid::op(dat[off + (--R)], val);
       L >>= 1;
       R >>= 1;
     }
     return val;
   }
 
-  E prod(ll lx, ll rx, ll ly, ll ry) {
+  S prod(XY lx, XY rx, XY ly, XY ry) {
     int L = xtoi(lx);
     int R = xtoi(rx);
     L += N;
     R += N;
-    E val = unit;
+    S val = Monoid::unit;
     while (L < R) {
-      if (L & 1) val = f(val, prod_i(L++, ly, ry));
-      if (R & 1) val = f(prod_i(--R, ly, ry), val);
+      if (L & 1) val = Monoid::op(val, prod_i(L++, ly, ry));
+      if (R & 1) val = Monoid::op(prod_i(--R, ly, ry), val);
       L >>= 1;
       R >>= 1;
     }

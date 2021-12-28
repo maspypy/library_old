@@ -1,12 +1,14 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/point_add_rectangle_sum"
+#define PROBLEM "point_add_rectangle_sum"
 
 #include "my_template.hpp"
 
+#include "algebra/addgroup.hpp"
 #include "ds/segtree2d.hpp"
 
 void solve() {
   LL(N, Q);
-  vi X(N), Y(N), W(N);
+  vc<int> X(N), Y(N);
+  vi W(N);
   FOR(i, N) {
     LL(x, y, w);
     X[i] = x, Y[i] = y, W[i] = w;
@@ -27,7 +29,9 @@ void solve() {
     }
   }
 
-  SegTree2D<ll, false> seg(Monoid_add<ll>(), X, Y, W);
+  using Mono = AddGroup<ll>;
+
+  SegTree2D<Mono, int, false> seg(X, Y, W);
 
   FOR(q, Q) {
     auto [a, b, c, d] = query[q];
