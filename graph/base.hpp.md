@@ -17,7 +17,7 @@ data:
   - icon: ':warning:'
     path: graph/eulerwalk.hpp
     title: graph/eulerwalk.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/mis.hpp
     title: graph/mis.hpp
   - icon: ':heavy_check_mark:'
@@ -30,7 +30,7 @@ data:
   - icon: ':x:'
     path: test/library_checker/graph/cycle_detection.test.cpp
     title: test/library_checker/graph/cycle_detection.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/maximum_independent_set.test.cpp
     title: test/library_checker/graph/maximum_independent_set.test.cpp
   - icon: ':heavy_check_mark:'
