@@ -3,6 +3,9 @@ data:
   libraryCategories:
   - name: algebra
     pages:
+    - icon: ':x:'
+      path: algebra/addgroup.hpp
+      title: algebra/addgroup.hpp
     - icon: ':heavy_check_mark:'
       path: algebra/affinegroup.hpp
       title: algebra/affinegroup.hpp
@@ -61,7 +64,7 @@ data:
     - icon: ':question:'
       path: ds/segtree.hpp
       title: ds/segtree.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: ds/segtree2d.hpp
       title: ds/segtree2d.hpp
     - icon: ':warning:'
