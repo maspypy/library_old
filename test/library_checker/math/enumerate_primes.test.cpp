@@ -5,7 +5,7 @@
 
 void solve() {
   const int LIM = 500'000'000;
-  auto [is_prime, primes] = primetable<LIM>();
+  auto primes = primetable<LIM>();
 
   LL(N, A, B);
   int pi_N = UB(primes, N);
