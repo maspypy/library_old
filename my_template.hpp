@@ -30,15 +30,18 @@ using pqg = priority_queue<T, vector<T>, greater<T>>;
 #define VEC(type, name, size) \
   vector<type> name(size);    \
   IN(name)
-#define vv(type, name, h, ...) vector<vector<type>> name(h, vector<type>(__VA_ARGS__))
+#define vv(type, name, h, ...) \
+  vector<vector<type>> name(h, vector<type>(__VA_ARGS__))
 #define VV(type, name, h, w)                     \
   vector<vector<type>> name(h, vector<type>(w)); \
   IN(name)
-#define vvv(type, name, h, w, ...) \
-  vector<vector<vector<type>>> name(h, vector<vector<type>>(w, vector<type>(__VA_ARGS__)))
+#define vvv(type, name, h, w, ...)   \
+  vector<vector<vector<type>>> name( \
+      h, vector<vector<type>>(w, vector<type>(__VA_ARGS__)))
 #define vvvv(type, name, a, b, c, ...)       \
   vector<vector<vector<vector<type>>>> name( \
-      a, vector<vector<vector<type>>>(b, vector<vector<type>>(c, vector<type>(__VA_ARGS__))))
+      a, vector<vector<vector<type>>>(       \
+             b, vector<vector<type>>(c, vector<type>(__VA_ARGS__))))
 
 #define FOR(i, n) for (ll i = 0; (i) < (ll)(n); ++(i))
 #define FOR3(i, m, n) for (ll i = (m); (i) < (ll)(n); ++(i))
@@ -141,6 +144,11 @@ ostream &operator<<(ostream &os, const tuple<T1, T2, T3> &t) {
   os << get<0>(t) << " " << get<1>(t) << " " << get<2>(t);
   return os;
 }
+template <typename T1, typename T2, typename T3, typename T4>
+ostream &operator<<(ostream &os, const tuple<T1, T2, T3, T4> &t) {
+  os << get<0>(t) << " " << get<1>(t) << " " << get<2>(t) << " " << get<3>(t);
+  return os;
+}
 template <typename T>
 ostream &operator<<(ostream &os, const vector<T> &A) {
   for (size_t i = 0; i < A.size(); i++) {
@@ -184,7 +192,8 @@ template <typename T>
 vector<int> argsort(vector<T> &A) {
   vector<int> ids(A.size());
   iota(all(ids), 0);
-  sort(all(ids), [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j] && i < j); });
+  sort(all(ids),
+       [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j] && i < j); });
   return ids;
 }
 

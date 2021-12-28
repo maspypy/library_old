@@ -1,5 +1,5 @@
 BasedOnStyle: Google
-AccessModifierOffset: 0
+AccessModifierOffset: -2
 AlignAfterOpenBracket: true
 AlignOperands: true
 AlignTrailingComments: true
