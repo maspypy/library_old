@@ -3,30 +3,32 @@
 
 #include "ds/segtree.hpp"
 #include "mod/modint.hpp"
+#include "algebra/affinegroup.hpp"
 
 using mint = modint998;
 
 void solve() {
   LL(N, Q);
-  using E = pair<mint, mint>;
-  SegTree<E> seg(Monoid_affine<mint>());
-  seg.init(N);
-  vc<E> seg_raw(N);
+  using Mono = AffineGroup<mint>;
+  using F = Mono::value_type;
+
+  vc<F> seg_raw(N);
   FOR(i, N) {
     LL(a, b);
     seg_raw[i] = {a, b};
   }
-  seg.build(seg_raw);
+
+  SegTree<Mono> seg(seg_raw);
 
   FOR(q, Q) {
     LL(t);
     if (t == 0) {
       LL(i, a, b);
-      seg.set(i, E({a, b}));
+      seg.set(i, F({a, b}));
     } else {
       LL(L, R, x);
-      auto [a, b] = seg.prod(L, R);
-      print(a * mint(x) + b);
+      auto f = seg.prod(L, R);
+      print(Mono::eval(f, x));
     }
   }
 }
