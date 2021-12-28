@@ -33,6 +33,9 @@ struct Graph {
     const Graph* G;
   };
 
+  bool is_prepared() { return prepared; }
+  constexpr bool is_directed() { return directed; }
+
   Graph() {}
   Graph(int N) : N(N), M(0), prepared(0) {}
 
