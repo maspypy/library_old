@@ -212,6 +212,14 @@ data:
     - icon: ':heavy_check_mark:'
       path: other/rectanglesums.hpp
       title: other/rectanglesums.hpp
+  - name: persistent_ds
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: persistent_ds/array.hpp
+      title: persistent_ds/array.hpp
+    - icon: ':heavy_check_mark:'
+      path: persistent_ds/unionfind.hpp
+      title: persistent_ds/unionfind.hpp
   - name: polynomial
     pages:
     - icon: ':warning:'
@@ -255,6 +263,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/associative_array.test.cpp
       title: test/library_checker/datastructure/associative_array.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/datastructure/persistent_unionfind.test.cpp
+      title: test/library_checker/datastructure/persistent_unionfind.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/point_add_range_sum.test.cpp
       title: test/library_checker/datastructure/point_add_range_sum.test.cpp
