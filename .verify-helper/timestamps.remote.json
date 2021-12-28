@@ -14,8 +14,6 @@
 "test/library_checker/datastructure/staticrmq_seg.test.cpp": "2021-12-28 08:12:08 +0900",
 "test/library_checker/datastructure/staticrmq_sparse.test.cpp": "2021-12-28 08:12:08 +0900",
 "test/library_checker/datastructure/unionfind.test.cpp": "2021-12-27 17:06:22 +0900",
-"test/library_checker/graph/lca.test.cpp": "2021-12-27 18:35:27 +0900",
-"test/library_checker/graph/maximum_independent_set.test.cpp": "2021-12-27 18:35:27 +0900",
 "test/library_checker/graph/maximum_independent_set_dense.test.cpp": "2021-12-27 17:06:22 +0900",
 "test/library_checker/math/factorize.test.cpp": "2021-12-27 19:38:18 +0900"
 }
