@@ -67,15 +67,15 @@ data:
     \ O(logN) \u6642\u9593\u3002\");\r\n  }\r\n};"
   dependsOn: []
   isVerificationFile: false
-  path: graph/treegroup.hpp
+  path: tree/treegroup.hpp
   requiredBy: []
   timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: graph/treegroup.hpp
+documentation_of: tree/treegroup.hpp
 layout: document
 redirect_from:
-- /library/graph/treegroup.hpp
-- /library/graph/treegroup.hpp.html
-title: graph/treegroup.hpp
+- /library/tree/treegroup.hpp
+- /library/tree/treegroup.hpp.html
+title: tree/treegroup.hpp
 ---

@@ -54,15 +54,15 @@ data:
     \u9593\u3002\");\r\n  }\r\n};\r\n"
   dependsOn: []
   isVerificationFile: false
-  path: graph/treemonoid.hpp
+  path: tree/treemonoid.hpp
   requiredBy: []
   timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: graph/treemonoid.hpp
+documentation_of: tree/treemonoid.hpp
 layout: document
 redirect_from:
-- /library/graph/treemonoid.hpp
-- /library/graph/treemonoid.hpp.html
-title: graph/treemonoid.hpp
+- /library/tree/treemonoid.hpp
+- /library/tree/treemonoid.hpp.html
+title: tree/treemonoid.hpp
 ---

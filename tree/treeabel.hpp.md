@@ -54,15 +54,15 @@ data:
     \u3069\u304C\u3042\u308B\");\r\n  }\r\n};\r\n"
   dependsOn: []
   isVerificationFile: false
-  path: graph/treeabel.hpp
+  path: tree/treeabel.hpp
   requiredBy: []
   timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: graph/treeabel.hpp
+documentation_of: tree/treeabel.hpp
 layout: document
 redirect_from:
-- /library/graph/treeabel.hpp
-- /library/graph/treeabel.hpp.html
-title: graph/treeabel.hpp
+- /library/tree/treeabel.hpp
+- /library/tree/treeabel.hpp.html
+title: tree/treeabel.hpp
 ---

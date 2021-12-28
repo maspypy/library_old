@@ -8,7 +8,7 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"graph/treedoubling.hpp\"\ntemplate <typename GT, typename\
+  bundledCode: "#line 2 \"tree/treedoubling.hpp\"\ntemplate <typename GT, typename\
     \ T>\nstruct TreeDoubling {\n  using F = function<T(T, T)>;\n  const int K = 20;\n\
     \  EulerTour<GT>& ET;\n  F f;\n  T T_unit;\n  bool edge;\n  vector<vector<T>>\
     \ dp;\n  bool done;\n\n  TreeDoubling(){}\n  TreeDoubling(EulerTour<GT>& ET, F\
@@ -63,15 +63,15 @@ data:
     \        x = new_x;\n      };\n    }\n    return s;\n  }\n};"
   dependsOn: []
   isVerificationFile: false
-  path: graph/treedoubling.hpp
+  path: tree/treedoubling.hpp
   requiredBy: []
-  timestamp: '2021-12-25 22:40:58+09:00'
+  timestamp: '2021-12-29 02:23:45+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: graph/treedoubling.hpp
+documentation_of: tree/treedoubling.hpp
 layout: document
 redirect_from:
-- /library/graph/treedoubling.hpp
-- /library/graph/treedoubling.hpp.html
-title: graph/treedoubling.hpp
+- /library/tree/treedoubling.hpp
+- /library/tree/treedoubling.hpp.html
+title: tree/treedoubling.hpp
 ---

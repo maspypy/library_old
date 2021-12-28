@@ -1,21 +1,24 @@
 ---
 data:
   _extendedDependsOn:
+  - icon: ':x:'
+    path: graph/base.hpp
+    title: graph/base.hpp
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/associative_array
+    PROBLEM: https://judge.yosupo.jp/problem/cycle_detection
     links:
-    - https://judge.yosupo.jp/problem/associative_array
-  bundledCode: "#line 1 \"test/library_checker/datastructure/associative_array.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/associative_array\"\n#line\
+    - https://judge.yosupo.jp/problem/cycle_detection
+  bundledCode: "#line 1 \"test/library_checker/graph/cycle_detection.test.cpp\"\n\
+    #define PROBLEM \"https://judge.yosupo.jp/problem/cycle_detection\"\r\n\r\n#line\
     \ 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\n\
     using ll = long long;\nusing ll8 = __int128;\nusing ld = long double;\nusing pi\
     \ = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint = unsigned int;\nusing ull\
@@ -98,48 +101,59 @@ data:
     }\n\n#define SUM(v) accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n\
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
-    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/datastructure/associative_array.test.cpp\"\
-    \n\nvoid sol_1() {\n  LL(Q);\n  map<ll, ll> A;\n  FOR(_, Q) {\n    LL(t);\n  \
-    \  if (t == 0) {\n      LL(k, v);\n      A[k] = v;\n    } else {\n      LL(k);\n\
-    \      print(A[k]);\n    }\n  }\n}\n\nvoid sol_2() {\n  LL(Q);\n  unordered_map<ll,\
-    \ ll> A;\n  A.reserve(Q);\n  FOR(_, Q) {\n    LL(t);\n    if (t == 0) {\n    \
-    \  LL(k, v);\n      A[k] = v;\n    } else {\n      LL(k);\n      print(A[k]);\n\
-    \    }\n  }\n}\n\nvoid sol_3() {\n  LL(Q);\n  using T = tuple<ll, ll, ll>;\n \
-    \ vc<T> query(Q);\n  vi key;\n  key.reserve(Q);\n  FOR(q, Q) {\n    LL(t);\n \
-    \   if (t == 0) {\n      LL(k, v);\n      query[q] = {t, k, v};\n      key.eb(k);\n\
-    \    } else {\n      LL(k);\n      query[q] = {t, k, 0};\n      key.eb(k);\n \
-    \   }\n  }\n  UNIQUE(key);\n  vi A(len(key));\n  FOR(q, Q) {\n    auto [t, k,\
-    \ v] = query[q];\n    k = LB(key, k);\n    if (t == 0) {\n      A[k] = v;\n  \
-    \  } else {\n      print(A[k]);\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
-    \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  // sol_1();\n\
-    \  // sol_2();\n  sol_3();\n\n  return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/associative_array\"\n#include\
-    \ \"my_template.hpp\"\n\nvoid sol_1() {\n  LL(Q);\n  map<ll, ll> A;\n  FOR(_,\
-    \ Q) {\n    LL(t);\n    if (t == 0) {\n      LL(k, v);\n      A[k] = v;\n    }\
-    \ else {\n      LL(k);\n      print(A[k]);\n    }\n  }\n}\n\nvoid sol_2() {\n\
-    \  LL(Q);\n  unordered_map<ll, ll> A;\n  A.reserve(Q);\n  FOR(_, Q) {\n    LL(t);\n\
-    \    if (t == 0) {\n      LL(k, v);\n      A[k] = v;\n    } else {\n      LL(k);\n\
-    \      print(A[k]);\n    }\n  }\n}\n\nvoid sol_3() {\n  LL(Q);\n  using T = tuple<ll,\
-    \ ll, ll>;\n  vc<T> query(Q);\n  vi key;\n  key.reserve(Q);\n  FOR(q, Q) {\n \
-    \   LL(t);\n    if (t == 0) {\n      LL(k, v);\n      query[q] = {t, k, v};\n\
-    \      key.eb(k);\n    } else {\n      LL(k);\n      query[q] = {t, k, 0};\n \
-    \     key.eb(k);\n    }\n  }\n  UNIQUE(key);\n  vi A(len(key));\n  FOR(q, Q) {\n\
-    \    auto [t, k, v] = query[q];\n    k = LB(key, k);\n    if (t == 0) {\n    \
-    \  A[k] = v;\n    } else {\n      print(A[k]);\n    }\n  }\n}\n\nsigned main()\
-    \ {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\
-    \n  // sol_1();\n  // sol_2();\n  sol_3();\n\n  return 0;\n}\n"
+    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 4 \"test/library_checker/graph/cycle_detection.test.cpp\"\
+    \n\r\n#line 2 \"graph/base.hpp\"\n\n// frm, to, cap, cost\ntemplate <typename\
+    \ T>\nusing Edge = tuple<int, int, T, int>;\n\ntemplate <typename T, bool directed\
+    \ = false>\nstruct Graph {\n  int N, M;\n  using cost_type = T;\n  using edge_type\
+    \ = Edge<T>;\n  vector<edge_type> edges;\n  vector<int> indptr;\n  vector<edge_type>\
+    \ csr_edges;\n  bool prepared;\n\n  class OutgoingEdges {\n  public:\n    OutgoingEdges(const\
+    \ Graph* G, int l, int r) : G(G), l(l), r(r) {}\n\n    const edge_type* begin()\
+    \ const {\n      if (l == r) { return 0; }\n      return &G->csr_edges[l];\n \
+    \   }\n\n    const edge_type* end() const {\n      if (l == r) { return 0; }\n\
+    \      return &G->csr_edges[r];\n    }\n\n  private:\n    int l, r;\n    const\
+    \ Graph* G;\n  };\n\n  Graph() {}\n  Graph(int N) : N(N), M(0), prepared(0) {}\n\
+    \n  void add(int frm, int to, T cost = 1, int i = -1) {\n    if (i == -1) i =\
+    \ M;\n    auto e = edge_type({frm, to, cost, i});\n    edges.eb(e);\n    ++M;\n\
+    \  }\n\n  void prepare() {\n    assert(!prepared);\n    prepared = true;\n   \
+    \ indptr.assign(N + 1, 0);\n    for (auto&& [frm, to, cost, id]: edges) {\n  \
+    \    indptr[frm + 1]++;\n      if (!directed) indptr[to + 1]++;\n    }\n    FOR(v,\
+    \ N) indptr[v + 1] += indptr[v];\n    auto counter = indptr;\n    csr_edges.resize(indptr.back()\
+    \ + 1);\n    for (auto&& [frm, to, cost, id]: edges) {\n      csr_edges[counter[frm]++]\
+    \ = {frm, to, cost, id};\n      if (!directed) csr_edges[counter[to]++] = {to,\
+    \ frm, cost, id};\n    }\n  }\n\n  OutgoingEdges operator[](int v) const {\n \
+    \   assert(prepared);\n    return {this, indptr[v], indptr[v + 1]};\n  }\n\n \
+    \ void debug() {\n    print(\"Graph\");\n    if (!prepared) {\n      print(\"\
+    frm to cost id\");\n      for (auto&& e: edges) print(e);\n    } else {\n    \
+    \  print(\"indptr\", indptr);\n      print(\"frm to cost id\");\n      FOR(v,\
+    \ N) for (auto&& e: (*this)[v]) print(e);\n    }\n  }\n\n  int size() { return\
+    \ N; }\n};\n#line 6 \"test/library_checker/graph/cycle_detection.test.cpp\"\n\r\
+    \nvoid solve() {\r\n  LL(N, M);\r\n  Graph<int, 1> G(N);\r\n  FOR(_, M) {\r\n\
+    \    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n  G.prepare();\r\n\r\n  auto C =\
+    \ cycle_detection(G, true);\r\n  if (len(C) == 0) {\r\n    print(-1);\r\n  } else\
+    \ {\r\n    print(len(C));\r\n    for (auto&& i : C) print(i);\r\n  }\r\n}\r\n\r\
+    \nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n\
+    \  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/cycle_detection\"\r\n\r\
+    \n#include \"my_template.hpp\"\r\n\r\n#include \"graph/base.hpp\"\r\n\r\nvoid\
+    \ solve() {\r\n  LL(N, M);\r\n  Graph<int, 1> G(N);\r\n  FOR(_, M) {\r\n    LL(a,\
+    \ b);\r\n    G.add(a, b);\r\n  }\r\n  G.prepare();\r\n\r\n  auto C = cycle_detection(G,\
+    \ true);\r\n  if (len(C) == 0) {\r\n    print(-1);\r\n  } else {\r\n    print(len(C));\r\
+    \n    for (auto&& i : C) print(i);\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
+    \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
+    \n\r\n  return 0;\r\n}"
   dependsOn:
   - my_template.hpp
+  - graph/base.hpp
   isVerificationFile: true
-  path: test/library_checker/datastructure/associative_array.test.cpp
+  path: test/library_checker/graph/cycle_detection.test.cpp
   requiredBy: []
-  timestamp: '2021-12-29 02:24:08+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2021-12-29 02:24:47+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/library_checker/datastructure/associative_array.test.cpp
+documentation_of: test/library_checker/graph/cycle_detection.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/datastructure/associative_array.test.cpp
-- /verify/test/library_checker/datastructure/associative_array.test.cpp.html
-title: test/library_checker/datastructure/associative_array.test.cpp
+- /verify/test/library_checker/graph/cycle_detection.test.cpp
+- /verify/test/library_checker/graph/cycle_detection.test.cpp.html
+title: test/library_checker/graph/cycle_detection.test.cpp
 ---

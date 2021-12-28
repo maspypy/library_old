@@ -61,7 +61,7 @@ data:
     - icon: ':warning:'
       path: ds/lichao.hpp
       title: ds/lichao.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: ds/segtree.hpp
       title: ds/segtree.hpp
     - icon: ':heavy_check_mark:'
@@ -116,6 +116,9 @@ data:
       path: graph/centroiddecomp.hpp
       title: graph/centroiddecomp.hpp
     - icon: ':warning:'
+      path: graph/cycle_detection.hpp
+      title: graph/cycle_detection.hpp
+    - icon: ':warning:'
       path: graph/decompose_complete.hpp
       title: graph/decompose_complete.hpp
     - icon: ':warning:'
@@ -128,32 +131,11 @@ data:
       path: graph/eulerwalk.hpp
       title: graph/eulerwalk.hpp
     - icon: ':x:'
-      path: graph/hld.hpp
-      title: graph/hld.hpp
-    - icon: ':x:'
       path: graph/mis.hpp
       title: graph/mis.hpp
     - icon: ':warning:'
       path: graph/scc.hpp
       title: graph/scc.hpp
-    - icon: ':warning:'
-      path: graph/tree_dp.hpp
-      title: graph/tree_dp.hpp
-    - icon: ':warning:'
-      path: graph/treeabel.hpp
-      title: graph/treeabel.hpp
-    - icon: ':warning:'
-      path: graph/treedoubling.hpp
-      title: graph/treedoubling.hpp
-    - icon: ':warning:'
-      path: graph/treegroup.hpp
-      title: graph/treegroup.hpp
-    - icon: ':warning:'
-      path: graph/treemonoid.hpp
-      title: graph/treemonoid.hpp
-    - icon: ':warning:'
-      path: graph/treemonoid_lazy.hpp
-      title: graph/treemonoid_lazy.hpp
     - icon: ':warning:'
       path: graph/twosat.hpp
       title: graph/twosat.hpp
@@ -167,7 +149,7 @@ data:
     - icon: ':warning:'
       path: mod/amodint.hpp
       title: mod/amodint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: mod/modint.hpp
       title: mod/modint.hpp
   - name: .
@@ -255,6 +237,29 @@ data:
     - icon: ':warning:'
       path: test/template.cpp
       title: test/template.cpp
+  - name: tree
+    pages:
+    - icon: ':warning:'
+      path: tree/hld.hpp
+      title: tree/hld.hpp
+    - icon: ':warning:'
+      path: tree/tree_dp.hpp
+      title: tree/tree_dp.hpp
+    - icon: ':warning:'
+      path: tree/treeabel.hpp
+      title: tree/treeabel.hpp
+    - icon: ':warning:'
+      path: tree/treedoubling.hpp
+      title: tree/treedoubling.hpp
+    - icon: ':warning:'
+      path: tree/treegroup.hpp
+      title: tree/treegroup.hpp
+    - icon: ':warning:'
+      path: tree/treemonoid.hpp
+      title: tree/treemonoid.hpp
+    - icon: ':warning:'
+      path: tree/treemonoid_lazy.hpp
+      title: tree/treemonoid_lazy.hpp
   verificationCategories:
   - name: test
     pages:
@@ -349,6 +354,9 @@ data:
       title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   - name: test/library_checker/graph
     pages:
+    - icon: ':x:'
+      path: test/library_checker/graph/cycle_detection.test.cpp
+      title: test/library_checker/graph/cycle_detection.test.cpp
     - icon: ':x:'
       path: test/library_checker/graph/lca.test.cpp
       title: test/library_checker/graph/lca.test.cpp

@@ -62,15 +62,15 @@ data:
     };\r\n"
   dependsOn: []
   isVerificationFile: false
-  path: graph/treemonoid_lazy.hpp
+  path: tree/treemonoid_lazy.hpp
   requiredBy: []
   timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: graph/treemonoid_lazy.hpp
+documentation_of: tree/treemonoid_lazy.hpp
 layout: document
 redirect_from:
-- /library/graph/treemonoid_lazy.hpp
-- /library/graph/treemonoid_lazy.hpp.html
-title: graph/treemonoid_lazy.hpp
+- /library/tree/treemonoid_lazy.hpp
+- /library/tree/treemonoid_lazy.hpp.html
+title: tree/treemonoid_lazy.hpp
 ---
