@@ -4,14 +4,14 @@ data:
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: nt/primetable.hpp
     title: nt/primetable.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/enumerate_primes
@@ -102,37 +102,35 @@ data:
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
     \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/math/enumerate_primes.test.cpp\"\
-    \n\n#line 1 \"nt/primetable.hpp\"\ntemplate <int LIM = (1 << 20)>\npair<bitset<LIM>,\
-    \ vc<int>> primetable() {\n  static bitset<LIM> is_prime;\n  constexpr int S =\
-    \ (int)round(sqrt(LIM)), R = LIM / 2;\n  static vc<int> primes = {2}, sieve(S\
+    \n\n#line 1 \"nt/primetable.hpp\"\ntemplate <int LIM = (1 << 20)>\nvc<int> primetable()\
+    \ {\n  const int S = 32768, R = LIM / 2;\n  static vc<int> primes = {2}, sieve(S\
     \ + 1);\n  primes.reserve(int(LIM / log(LIM) * 1.1));\n  vc<pi> cp;\n  for (int\
     \ i = 3; i <= S; i += 2) {\n    if (!sieve[i]) {\n      cp.eb(i, i * i / 2);\n\
     \      for (int j = i * i; j <= S; j += 2 * i) sieve[j] = 1;\n    }\n  }\n  for\
     \ (int L = 1; L <= R; L += S) {\n    array<bool, S> block{};\n    for (auto& [p,\
     \ idx]: cp)\n      for (int i = idx; i < S + L; idx = (i += p)) block[i - L] =\
     \ 1;\n    FOR(i, min(S, R - L)) if (!block[i]) primes.eb((L + i) * 2 + 1);\n \
-    \ }\n  for (auto&& i :primes) is_prime[i] = 1;\n  return {is_prime, primes};\n\
-    }\n#line 5 \"test/library_checker/math/enumerate_primes.test.cpp\"\n\nvoid solve()\
-    \ {\n  const int LIM = 500'000'000;\n  auto [is_prime, primes] = primetable<LIM>();\n\
+    \ }\n  return primes;\n}\n#line 5 \"test/library_checker/math/enumerate_primes.test.cpp\"\
+    \n\nvoid solve() {\n  const int LIM = 500'000'000;\n  auto primes = primetable<LIM>();\n\
     \n  LL(N, A, B);\n  int pi_N = UB(primes, N);\n\n  vc<int> ANS;\n  while (B <\
     \ pi_N) {\n    ANS.eb(primes[B]);\n    B += A;\n  }\n  print(pi_N, len(ANS));\n\
     \  print(ANS);\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
     \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/enumerate_primes\"\n#include\
     \ \"my_template.hpp\"\n\n#include \"nt/primetable.hpp\"\n\nvoid solve() {\n  const\
-    \ int LIM = 500'000'000;\n  auto [is_prime, primes] = primetable<LIM>();\n\n \
-    \ LL(N, A, B);\n  int pi_N = UB(primes, N);\n\n  vc<int> ANS;\n  while (B < pi_N)\
-    \ {\n    ANS.eb(primes[B]);\n    B += A;\n  }\n  print(pi_N, len(ANS));\n  print(ANS);\n\
-    }\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout\
-    \ << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
+    \ int LIM = 500'000'000;\n  auto primes = primetable<LIM>();\n\n  LL(N, A, B);\n\
+    \  int pi_N = UB(primes, N);\n\n  vc<int> ANS;\n  while (B < pi_N) {\n    ANS.eb(primes[B]);\n\
+    \    B += A;\n  }\n  print(pi_N, len(ANS));\n  print(ANS);\n}\n\nsigned main()\
+    \ {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\
+    \n  solve();\n\n  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
   - nt/primetable.hpp
   isVerificationFile: true
   path: test/library_checker/math/enumerate_primes.test.cpp
   requiredBy: []
-  timestamp: '2021-12-29 03:32:53+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-12-29 04:00:18+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/math/enumerate_primes.test.cpp
 layout: document

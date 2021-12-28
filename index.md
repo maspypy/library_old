@@ -151,7 +151,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: nt/factor.hpp
       title: nt/factor.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: nt/primetable.hpp
       title: nt/primetable.hpp
     - icon: ':heavy_check_mark:'
@@ -352,7 +352,7 @@ data:
       title: test/library_checker/graph/scc.test.cpp
   - name: test/library_checker/math
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/math/enumerate_primes.test.cpp
       title: test/library_checker/math/enumerate_primes.test.cpp
     - icon: ':heavy_check_mark:'
