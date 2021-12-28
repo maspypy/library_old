@@ -14,9 +14,6 @@ data:
   - icon: ':warning:'
     path: graph/bipartite_coloring.hpp
     title: graph/bipartite_coloring.hpp
-  - icon: ':warning:'
-    path: test/template.cpp
-    title: test/template.cpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/associative_array.test.cpp
@@ -66,9 +63,9 @@ data:
   - icon: ':x:'
     path: test/library_checker/graph/maximum_independent_set.test.cpp
     title: test/library_checker/graph/maximum_independent_set.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/graph/maximum_independent_set_dense.test.cpp
-    title: test/library_checker/graph/maximum_independent_set_dense.test.cpp
+  - icon: ':x:'
+    path: test/library_checker/graph/scc.test.cpp
+    title: test/library_checker/graph/scc.test.cpp
   - icon: ':x:'
     path: test/library_checker/math/enumerate_primes.test.cpp
     title: test/library_checker/math/enumerate_primes.test.cpp
@@ -251,16 +248,15 @@ data:
   path: my_template.hpp
   requiredBy:
   - graph/bipartite_coloring.hpp
-  - test/template.cpp
   - ds/lichao.hpp
   - ds/unionfind.hpp
   - geometry/geometry.hpp
   timestamp: '2021-12-29 02:24:08+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/library_checker/graph/maximum_independent_set_dense.test.cpp
   - test/library_checker/graph/cycle_detection.test.cpp
   - test/library_checker/graph/maximum_independent_set.test.cpp
+  - test/library_checker/graph/scc.test.cpp
   - test/library_checker/math/enumerate_primes.test.cpp
   - test/library_checker/math/factorize.test.cpp
   - test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp

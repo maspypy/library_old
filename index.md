@@ -18,20 +18,6 @@ data:
     - icon: ':warning:'
       path: algebra/monoid__old.hpp
       title: algebra/monoid__old.hpp
-  - name: densegraph
-    pages:
-    - icon: ':heavy_check_mark:'
-      path: densegraph/base.hpp
-      title: densegraph/base.hpp
-    - icon: ':heavy_check_mark:'
-      path: densegraph/mis.hpp
-      title: densegraph/mis.hpp
-    - icon: ':warning:'
-      path: densegraph/scc.hpp
-      title: densegraph/scc.hpp
-    - icon: ':warning:'
-      path: densegraph/twosat.hpp
-      title: densegraph/twosat.hpp
   - name: ds
     pages:
     - icon: ':warning:'
@@ -133,7 +119,7 @@ data:
     - icon: ':x:'
       path: graph/mis.hpp
       title: graph/mis.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: graph/scc.hpp
       title: graph/scc.hpp
     - icon: ':warning:'
@@ -232,11 +218,6 @@ data:
     - icon: ':warning:'
       path: string/zalgorithm.hpp
       title: string/zalgorithm.hpp
-  - name: test
-    pages:
-    - icon: ':warning:'
-      path: test/template.cpp
-      title: test/template.cpp
   - name: tree
     pages:
     - icon: ':warning:'
@@ -363,9 +344,12 @@ data:
     - icon: ':x:'
       path: test/library_checker/graph/maximum_independent_set.test.cpp
       title: test/library_checker/graph/maximum_independent_set.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/graph/maximum_independent_set_dense.test.cpp
       title: test/library_checker/graph/maximum_independent_set_dense.test.cpp
+    - icon: ':x:'
+      path: test/library_checker/graph/scc.test.cpp
+      title: test/library_checker/graph/scc.test.cpp
   - name: test/library_checker/math
     pages:
     - icon: ':x:'

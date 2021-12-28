@@ -5,8 +5,8 @@ data:
     path: graph/base.hpp
     title: graph/base.hpp
   - icon: ':x:'
-    path: graph/mis.hpp
-    title: graph/mis.hpp
+    path: graph/scc.hpp
+    title: graph/scc.hpp
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
@@ -17,22 +17,18 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/maximum_independent_set
-    links:
-    - https://judge.yosupo.jp/problem/maximum_independent_set
-  bundledCode: "#line 1 \"test/library_checker/graph/maximum_independent_set.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/maximum_independent_set\"\r\
-    \n#line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
-    \nusing ll = long long;\nusing ll8 = __int128;\nusing ld = long double;\nusing\
-    \ pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint = unsigned int;\nusing\
-    \ ull = unsigned long long;\n\ntemplate <class T>\nusing vc = vector<T>;\ntemplate\
-    \ <class T>\nusing vvc = vector<vc<T>>;\ntemplate <class T>\nusing vvvc = vector<vvc<T>>;\n\
-    template <class T>\nusing vvvvc = vector<vvvc<T>>;\ntemplate <class T>\nusing\
-    \ vvvvvc = vector<vvvvc<T>>;\ntemplate <class T>\nusing pq = priority_queue<T>;\n\
-    template <class T>\nusing pqg = priority_queue<T, vector<T>, greater<T>>;\n\n\
-    #define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n#define VEC(type,\
-    \ name, size) \\\n  vector<type> name(size);    \\\n  IN(name)\n#define vv(type,\
-    \ name, h, ...) \\\n  vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n\
+    links: []
+  bundledCode: "#line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace\
+    \ std;\n\nusing ll = long long;\nusing ll8 = __int128;\nusing ld = long double;\n\
+    using pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint = unsigned int;\n\
+    using ull = unsigned long long;\n\ntemplate <class T>\nusing vc = vector<T>;\n\
+    template <class T>\nusing vvc = vector<vc<T>>;\ntemplate <class T>\nusing vvvc\
+    \ = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc = vector<vvvc<T>>;\ntemplate\
+    \ <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate <class T>\nusing pq =\
+    \ priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T, vector<T>,\
+    \ greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
+    #define VEC(type, name, size) \\\n  vector<type> name(size);    \\\n  IN(name)\n\
+    #define vv(type, name, h, ...) \\\n  vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n\
     #define VV(type, name, h, w)                     \\\n  vector<vector<type>> name(h,\
     \ vector<type>(w)); \\\n  IN(name)\n#define vvv(type, name, h, w, ...)   \\\n\
     \  vector<vector<vector<type>>> name( \\\n      h, vector<vector<type>>(w, vector<type>(__VA_ARGS__)))\n\
@@ -104,10 +100,10 @@ data:
     }\n\n#define SUM(v) accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n\
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
-    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/graph/maximum_independent_set.test.cpp\"\
-    \n\r\n#line 2 \"graph/base.hpp\"\n\n// frm, to, cap, cost\ntemplate <typename\
-    \ T>\nusing Edge = tuple<int, int, T, int>;\n\ntemplate <typename T, bool directed\
-    \ = false>\nstruct Graph {\n  int N, M;\n  using cost_type = T;\n  using edge_type\
+    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 2 \"test/library_checker/graph/scc.test.cpp\"\
+    \n\n#line 2 \"graph/base.hpp\"\n\n// frm, to, cap, cost\ntemplate <typename T>\n\
+    using Edge = tuple<int, int, T, int>;\n\ntemplate <typename T, bool directed =\
+    \ false>\nstruct Graph {\n  int N, M;\n  using cost_type = T;\n  using edge_type\
     \ = Edge<T>;\n  vector<edge_type> edges;\n  vector<int> indptr;\n  vector<edge_type>\
     \ csr_edges;\n  bool prepared;\n\n  class OutgoingEdges {\n  public:\n    OutgoingEdges(const\
     \ Graph* G, int l, int r) : G(G), l(l), r(r) {}\n\n    const edge_type* begin()\
@@ -130,44 +126,46 @@ data:
     frm to cost id\");\n      for (auto&& e: edges) print(e);\n    } else {\n    \
     \  print(\"indptr\", indptr);\n      print(\"frm to cost id\");\n      FOR(v,\
     \ N) for (auto&& e: (*this)[v]) print(e);\n    }\n  }\n\n  int size() { return\
-    \ N; }\n};\n#line 2 \"graph/mis.hpp\"\n\r\ntemplate <typename Graph>\r\nvector<int>\
-    \ maximum_independent_set(Graph& G, int trial = 1000000) {\r\n  int N = G.N;\r\
-    \n  vector<uint64_t> bit(N);\r\n  assert(N <= 64);\r\n  FOR(a, N) for (auto&&\
-    \ e: G[a]) bit[a] |= uint64_t(1) << e.to;\r\n  vector<int> ord(N);\r\n  iota(begin(ord),\
-    \ end(ord), 0);\r\n  mt19937 mt(chrono::steady_clock::now().time_since_epoch().count());\r\
-    \n  int ret = 0;\r\n  uint64_t ver;\r\n  for (int i = 0; i < trial; i++) {\r\n\
-    \    shuffle(begin(ord), end(ord), mt);\r\n    uint64_t used = 0;\r\n    int add\
-    \ = 0;\r\n    for (int j: ord) {\r\n      if (used & bit[j]) continue;\r\n   \
-    \   used |= uint64_t(1) << j;\r\n      ++add;\r\n    }\r\n    if (ret < add) {\r\
-    \n      ret = add;\r\n      ver = used;\r\n    }\r\n  }\r\n  vector<int> ans;\r\
-    \n  for (int i = 0; i < N; i++) {\r\n    if ((ver >> i) & 1) ans.emplace_back(i);\r\
-    \n  }\r\n  return ans;\r\n}\r\n#line 5 \"test/library_checker/graph/maximum_independent_set.test.cpp\"\
-    \n\r\nvoid solve() {\r\n  LL(N, M);\r\n  Graph<int> G(N);\r\n  FOR(_, M) {\r\n\
-    \    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n  auto mis = maximum_independent_set(G);\r\
-    \n  print(len(mis));\r\n  print(mis);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
-    \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
-    \n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/maximum_independent_set\"\
-    \r\n#include \"my_template.hpp\"\r\n\r\n#include \"graph/mis.hpp\"\r\n\r\nvoid\
-    \ solve() {\r\n  LL(N, M);\r\n  Graph<int> G(N);\r\n  FOR(_, M) {\r\n    LL(a,\
-    \ b);\r\n    G.add(a, b);\r\n  }\r\n  auto mis = maximum_independent_set(G);\r\
-    \n  print(len(mis));\r\n  print(mis);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
-    \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
-    \n\r\n  return 0;\r\n}\r\n"
+    \ N; }\n};\n#line 3 \"graph/scc.hpp\"\n\ntemplate <typename Graph>\nstruct SCC\
+    \ {\n  Graph &G;\n  int N;\n  int cnt;\n  vc<int> comp;\n  vc<int> low;\n  vc<int>\
+    \ ord;\n  vc<int> visited;\n  int now = 0;\n\n  SCC(Graph &G)\n      : G(G), N(G.N),\
+    \ cnt(0), comp(G.N, 0), low(G.N, 0), ord(G.N, -1) {\n    assert(G.is_directed());\n\
+    \    assert(G.is_prepared());\n    build();\n  }\n\n  int operator[](int v) {\
+    \ return comp[v]; }\n\n  void dfs(int v) {\n    low[v] = now;\n    ord[v] = now;\n\
+    \    ++now;\n    visited.eb(v);\n    for (auto &&[frm, to, cost, id]: G[v]) {\n\
+    \      if (ord[to] == -1) {\n        dfs(to);\n        chmin(low[v], low[to]);\n\
+    \      } else {\n        chmin(low[v], ord[to]);\n      }\n    }\n    if (low[v]\
+    \ == ord[v]) {\n      while (1) {\n        int u = visited.back();\n        visited.pop_back();\n\
+    \        ord[u] = N;\n        comp[u] = cnt;\n        if (u == v) break;\n   \
+    \   }\n      ++cnt;\n    }\n  }\n\n  void build() {\n    FOR(v, N) {\n      if\
+    \ (ord[v] == -1) dfs(v);\n    }\n    FOR(v, N) comp[v] = cnt - 1 - comp[v];\n\
+    \  }\n};\n#line 5 \"test/library_checker/graph/scc.test.cpp\"\n\nvoid solve()\
+    \ {\n  LL(N, M);\n  Graph<int, 1> G(N);\n  FOR(_, M) {\n    LL(a, b);\n    G.add(a,\
+    \ b);\n  }\n  G.prepare();\n\n  SCC scc(G);\n  auto C = scc.cnt;\n  vc<vc<int>>\
+    \ ANS(C);\n  FOR(v, N) ANS[scc[v]].eb(v);\n  print(len(ANS));\n  for (auto&& C:\
+    \ ANS) print(len(C), C);\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
+    \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
+  code: "#include \"my_template.hpp\"\n\n#include \"graph/base.hpp\"\n#include \"\
+    graph/scc.hpp\"\n\nvoid solve() {\n  LL(N, M);\n  Graph<int, 1> G(N);\n  FOR(_,\
+    \ M) {\n    LL(a, b);\n    G.add(a, b);\n  }\n  G.prepare();\n\n  SCC scc(G);\n\
+    \  auto C = scc.cnt;\n  vc<vc<int>> ANS(C);\n  FOR(v, N) ANS[scc[v]].eb(v);\n\
+    \  print(len(ANS));\n  for (auto&& C: ANS) print(len(C), C);\n}\n\nsigned main()\
+    \ {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\
+    \n  solve();\n\n  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
-  - graph/mis.hpp
   - graph/base.hpp
+  - graph/scc.hpp
   isVerificationFile: true
-  path: test/library_checker/graph/maximum_independent_set.test.cpp
+  path: test/library_checker/graph/scc.test.cpp
   requiredBy: []
-  timestamp: '2021-12-29 02:58:22+09:00'
+  timestamp: '2021-12-29 02:58:52+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/library_checker/graph/maximum_independent_set.test.cpp
+documentation_of: test/library_checker/graph/scc.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/graph/maximum_independent_set.test.cpp
-- /verify/test/library_checker/graph/maximum_independent_set.test.cpp.html
-title: test/library_checker/graph/maximum_independent_set.test.cpp
+- /verify/test/library_checker/graph/scc.test.cpp
+- /verify/test/library_checker/graph/scc.test.cpp.html
+title: test/library_checker/graph/scc.test.cpp
 ---

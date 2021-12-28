@@ -9,8 +9,8 @@ data:
   attributes:
     links: []
   bundledCode: "#line 1 \"graph/cycle_detection.hpp\"\ntemplate <typename Graph>\r\
-    \nvc<int> cycle_detection(Graph& G, bool is_edge) {\r\n  assert(G.prepared);\r\
-    \n  assert(G::directed);\r\n  if (!is_edge) {\r\n    auto C = cycle_detection(G,\
+    \nvc<int> cycle_detection(Graph& G, bool is_edge) {\r\n  assert(G.is_directed());\r\
+    \n  assert(G.is_prepared());\r\n  if (!is_edge) {\r\n    auto C = cycle_detection(G,\
     \ true);\r\n    if (len(C) == 0) return C;\r\n    vc<int> ANS(len(C) + 1);\r\n\
     \    FOR(i, len(C)) {\r\n      auto e = G.edges[C[i]];\r\n      ANS[i + 0] = get<0>(e);\r\
     \n      ANS[i + 1] = get<1>(e);\r\n    }\r\n    return ANS;\r\n  }\r\n\r\n  int\
@@ -25,9 +25,9 @@ data:
     \ }\r\n    used[v] = 2;\r\n  };\r\n  FOR(v, N) if (!used[v]) dfs(dfs, v);\r\n\
     \  return ANS;\r\n}\n"
   code: "template <typename Graph>\r\nvc<int> cycle_detection(Graph& G, bool is_edge)\
-    \ {\r\n  assert(G.prepared);\r\n  assert(G::directed);\r\n  if (!is_edge) {\r\n\
-    \    auto C = cycle_detection(G, true);\r\n    if (len(C) == 0) return C;\r\n\
-    \    vc<int> ANS(len(C) + 1);\r\n    FOR(i, len(C)) {\r\n      auto e = G.edges[C[i]];\r\
+    \ {\r\n  assert(G.is_directed());\r\n  assert(G.is_prepared());\r\n  if (!is_edge)\
+    \ {\r\n    auto C = cycle_detection(G, true);\r\n    if (len(C) == 0) return C;\r\
+    \n    vc<int> ANS(len(C) + 1);\r\n    FOR(i, len(C)) {\r\n      auto e = G.edges[C[i]];\r\
     \n      ANS[i + 0] = get<0>(e);\r\n      ANS[i + 1] = get<1>(e);\r\n    }\r\n\
     \    return ANS;\r\n  }\r\n\r\n  int N = G.N;\r\n  vc<int> used(N);\r\n  vc<int>\
     \ path; // edge\r\n  vc<pair<int, int>> par(N);\r\n  vector<int> ANS;\r\n\r\n\
@@ -43,7 +43,7 @@ data:
   isVerificationFile: false
   path: graph/cycle_detection.hpp
   requiredBy: []
-  timestamp: '2021-12-29 02:24:47+09:00'
+  timestamp: '2021-12-29 02:58:43+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph/cycle_detection.hpp
