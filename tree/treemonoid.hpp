@@ -1,92 +1,80 @@
-#include "algebra/monoid.hpp"
 #include "ds/segtree.hpp"
-#include "graph/hld.hpp"
+#include "tree/hld.hpp"
+#include "algebra/reversemonoid.hpp"
 
-template <typename Graph, typename E, bool edge = false>
+template <typename HLD, typename Monoid, bool edge = false>
 struct TreeMonoid {
-  using F = function<E(E, E)>;
-  HLD<Graph> &hld;
+  using RevMonoid = ReverseMonoid<Monoid>;
+  using X = typename Monoid::value_type;
+  HLD &hld;
   int N;
-  F f;
-  E unit;
-  bool commute;
-  SegTree<E> seg, seg_r;
+  SegTree<Monoid> seg;
+  SegTree<RevMonoid> seg_r;
 
-  TreeMonoid(HLD<Graph> &hld, Monoid<E> Mono)
-      : hld(hld)
-      , N(hld.N)
-      , f(Mono.f)
-      , unit(Mono.unit)
-      , commute(Mono.commute)
-      , seg(Mono)
-      , seg_r(Monoid_reverse<E>(Mono)) {
-    seg.init(N);
-    if (!commute) seg_r.init(N);
-  };
+  TreeMonoid(HLD &hld) : hld(hld), N(hld.N), seg(hld.N) {
+    if (!Monoid::commute) seg_r = SegTree<RevMonoid>(hld.N);
+  }
 
-  void init(vc<E> &dat) {
-    // vertex index OR edge index
-    vc<E> seg_raw(N, unit);
+  TreeMonoid(HLD &hld, vc<X> &dat) : hld(hld), N(hld.N) {
+    vc<X> seg_raw(N, Monoid::unit);
     if (!edge) {
       FOR(v, N) seg_raw[hld.LID[v]] = dat[v];
     } else {
-      FOR(i, N - 1) {
-        int v = hld.e_to_v[i];
-        seg_raw[hld.LID[v]] = dat[i];
+      FOR(e, N - 1) {
+        int v = hld.e_to_v(e);
+        seg_raw[hld.LID[v]] = dat[e];
       }
     }
-    seg.build(seg_raw);
-    if (!commute) seg_r.build(seg_raw);
+    seg = SegTree<Monoid>(seg_raw);
+    if (!Monoid::commute) seg_r = SegTree<RevMonoid>(seg_raw);
   }
 
-  void set(int i, E x) {
-    if (edge) i = hld.e_to_v[i];
+  void set(int i, X x) {
+    if (edge) i = hld.e_to_v(i);
     i = hld.LID[i];
     seg.set(i, x);
-    if (!commute) seg_r.set(i, x);
+    if (!Monoid::commute) seg_r.set(i, x);
   }
 
-  E prod_path_nc(int u, int v) {
-    E vl = unit, vr = unit;
+  X prod_path_nc(int u, int v) {
+    X xl = Monoid::unit, xr = Monoid::unit;
     while (1) {
       if (hld.head[u] == hld.head[v]) break;
       if (hld.LID[u] < hld.LID[v]) {
-        vr = f(seg.prod(hld.LID[hld.head[v]], hld.LID[v] + 1), vr);
+        xr = Monoid::op(seg.prod(hld.LID[hld.head[v]], hld.LID[v] + 1), xr);
         v = hld.parent[hld.head[v]];
       } else {
-        vl = f(vl, seg_r.prod(hld.LID[hld.head[u]], hld.LID[u] + 1));
+        xl = Monoid::op(xl, seg_r.prod(hld.LID[hld.head[u]], hld.LID[u] + 1));
         u = hld.parent[hld.head[u]];
       }
     }
-    E vm =
-      (hld.LID[u] < hld.LID[v] ? seg.prod(hld.LID[u] + edge, hld.LID[v] + 1)
-                               : seg_r.prod(hld.LID[v] + edge, hld.LID[u] + 1));
-    return f(vl, f(vm, vr));
+    X xm = (hld.LID[u] < hld.LID[v]
+                ? seg.prod(hld.LID[u] + edge, hld.LID[v] + 1)
+                : seg_r.prod(hld.LID[v] + edge, hld.LID[u] + 1));
+    return Monoid::op(xl, Monoid::op(xm, xr));
   }
 
-  E prod_path(int u, int v) {
-    if (!commute) return prod_path_nc(u, v);
-    E val = unit;
+  X prod_path(int u, int v) {
+    if (!Monoid::commute) return prod_path_nc(u, v);
+    X val = Monoid::unit;
     while (1) {
       if (hld.LID[u] > hld.LID[v]) swap(u, v);
       if (hld.head[u] == hld.head[v]) break;
-      val = f(seg.prod(hld.LID[hld.head[v]], hld.LID[v] + 1), val);
+      val = Monoid::op(seg.prod(hld.LID[hld.head[v]], hld.LID[v] + 1), val);
       v = hld.parent[hld.head[v]];
     }
-    return f(seg.prod(hld.LID[u] + edge, hld.LID[v] + 1), val);
+    return Monoid::op(seg.prod(hld.LID[u] + edge, hld.LID[v] + 1), val);
   }
 
-  E prod_subtree(int u) {
+  X prod_subtree(int u) {
     int l = hld.LID[u], r = hld.RID[u];
     return seg.prod(l + edge, r);
   }
 
   void debug() {
-    print("hld");
+    print("tree_monoid");
     hld.debug();
-    print("seg");
     seg.debug();
-    print("seg_r");
     seg_r.debug();
   }
 

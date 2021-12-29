@@ -56,6 +56,11 @@ struct HLD {
     }
   }
 
+  int e_to_v(int e) {
+    auto [frm, to, cost, id] = G.edges[e];
+    return (parent[frm] == to ? frm : to);
+  }
+
   /* k: 0-indexed */
   int LA(int v, int k) {
     while (1) {

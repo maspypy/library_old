@@ -1,40 +1,42 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_set_path_composite"
+
 #include "my_template.hpp"
 
-#include "graph/base.hpp"
-#include "graph/hld.hpp"
-#include "graph/treemonoid.hpp"
+#include "algebra/affinegroup.hpp"
 #include "mod/modint.hpp"
+#include "tree/treemonoid.hpp"
+
 using mint = modint998;
 
 void solve() {
   LL(N, Q);
+  using Mono = AffineGroup<mint>;
   using E = pair<mint, mint>;
   vc<E> A(N);
   FOR(i, N) {
     LL(a, b);
-    A[i] = {mint(a), mint(b)};
+    A[i] = E({a, b});
   }
+
   Graph<int> G(N);
   FOR(_, N - 1) {
     LL(a, b);
     G.add(a, b);
   }
+  G.prepare();
 
-  HLD<Graph<int>> hld(G);
-  TreeMonoid<Graph<int>, E, false> TM(hld, Monoid_affine<mint>());
-  TM.init(A);
+  HLD hld(G);
+  TreeMonoid<decltype(hld), Mono, false> TM(hld, A);
 
   FOR(_, Q) {
     LL(t);
     if (t == 0) {
-      LL(p, c, d);
-      TM.set(p, E({mint(c), mint(d)}));
-
+      LL(v, c, d);
+      TM.set(v, E({mint(c), mint(d)}));
     } else {
       LL(u, v, x);
       auto e = TM.prod_path(u, v);
-      print(e.fi * mint(x) + e.se);
+      print(Mono::eval(e, mint(x)));
     }
   }
 }

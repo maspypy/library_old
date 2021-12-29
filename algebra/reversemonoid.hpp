@@ -1,0 +1,8 @@
+template <class Monoid>
+struct ReverseMonoid {
+  using value_type = typename Monoid::value_type;
+  using X = value_type;
+  static constexpr X op(const X &x, const X &y) { return Monoid::op(y, x); }
+  static constexpr X unit = Monoid::unit;
+  static const bool commute = Monoid::commute;
+};

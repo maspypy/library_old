@@ -8,7 +8,7 @@ struct SegTree {
 
   SegTree() : SegTree(0) {}
   SegTree(int n) : SegTree(vc<X>(n, Monoid::unit)) {}
-  SegTree(vc<X> &v) : n(len(v)) {
+  SegTree(vc<X> v) : n(len(v)) {
     log = 1;
     while ((1 << log) < n) ++log;
     size = 1 << log;
