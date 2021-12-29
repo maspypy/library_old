@@ -20,12 +20,12 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/lca
     links:
     - https://judge.yosupo.jp/problem/lca
-  bundledCode: "#line 1 \"test/library_checker/graph/lca.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/lca\"\n#line 2 \"my_template.hpp\"\n#include\
-    \ <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\nusing ll8\
-    \ = __int128;\nusing ld = long double;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\n\
-    using uint = unsigned int;\nusing ull = unsigned long long;\n\ntemplate <class\
-    \ T>\nusing vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\n\
+  bundledCode: "#line 1 \"test/library_checker/graph/lca_directed.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/lca\"\n#line 2 \"my_template.hpp\"\
+    \n#include <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\n\
+    using ll8 = __int128;\nusing ld = long double;\nusing pi = pair<ll, ll>;\nusing\
+    \ vi = vector<ll>;\nusing uint = unsigned int;\nusing ull = unsigned long long;\n\
+    \ntemplate <class T>\nusing vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\n\
     template <class T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc\
     \ = vector<vvvc<T>>;\ntemplate <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate\
     \ <class T>\nusing pq = priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T,\
@@ -103,7 +103,7 @@ data:
     }\n\n#define SUM(v) accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n\
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
-    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/graph/lca.test.cpp\"\
+    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/graph/lca_directed.test.cpp\"\
     \n\n#line 2 \"graph/base.hpp\"\n\n// frm, to, cap, cost\ntemplate <typename T>\n\
     using Edge = tuple<int, int, T, int>;\n\ntemplate <typename T, bool directed =\
     \ false>\nstruct Graph {\n  int N, M;\n  using cost_type = T;\n  using edge_type\
@@ -165,13 +165,13 @@ data:
     \u9593\u3002\");\r\n    print(\"\u6728\u306E\u554F\u984C\u3067\u306F\u771F\u3063\
     \u5148\u306B\u3053\u308C\u3092\u4F5C\u308B\u3002\");\r\n    print(\"\u2192 \u6728\
     DP\u3084\u6728\u30AF\u30A8\u30EA\u306B\u6D3E\u751F\u3002\");\r\n  }\r\n};\r\n\
-    #line 5 \"test/library_checker/graph/lca.test.cpp\"\n\nvoid solve() {\n  LL(N,\
-    \ Q);\n  Graph<int, 0> G(N);\n  FOR3(v, 1, N) {\n    LL(p);\n    G.add(p, v);\n\
-    \  }\n  G.prepare();\n  HLD hld(G);\n\n  FOR(_, Q) {\n    LL(a, b);\n    print(hld.LCA(a,\
-    \ b));\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
+    #line 5 \"test/library_checker/graph/lca_directed.test.cpp\"\n\nvoid solve() {\n\
+    \  LL(N, Q);\n  Graph<int, 1> G(N);\n  FOR3(v, 1, N) {\n    LL(p);\n    G.add(p,\
+    \ v);\n  }\n  G.prepare();\n  HLD hld(G);\n\n  FOR(_, Q) {\n    LL(a, b);\n  \
+    \  print(hld.LCA(a, b));\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
     \  cout << setprecision(15);\n\n  solve();\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\n#include \"my_template.hpp\"\
-    \n\n#include \"tree/hld.hpp\"\n\nvoid solve() {\n  LL(N, Q);\n  Graph<int, 0>\
+    \n\n#include \"tree/hld.hpp\"\n\nvoid solve() {\n  LL(N, Q);\n  Graph<int, 1>\
     \ G(N);\n  FOR3(v, 1, N) {\n    LL(p);\n    G.add(p, v);\n  }\n  G.prepare();\n\
     \  HLD hld(G);\n\n  FOR(_, Q) {\n    LL(a, b);\n    print(hld.LCA(a, b));\n  }\n\
     }\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout\
@@ -181,15 +181,15 @@ data:
   - tree/hld.hpp
   - graph/base.hpp
   isVerificationFile: true
-  path: test/library_checker/graph/lca.test.cpp
+  path: test/library_checker/graph/lca_directed.test.cpp
   requiredBy: []
   timestamp: '2021-12-30 03:01:27+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/library_checker/graph/lca.test.cpp
+documentation_of: test/library_checker/graph/lca_directed.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/graph/lca.test.cpp
-- /verify/test/library_checker/graph/lca.test.cpp.html
-title: test/library_checker/graph/lca.test.cpp
+- /verify/test/library_checker/graph/lca_directed.test.cpp
+- /verify/test/library_checker/graph/lca_directed.test.cpp.html
+title: test/library_checker/graph/lca_directed.test.cpp
 ---

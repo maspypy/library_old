@@ -23,13 +23,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/scc.hpp
     title: graph/scc.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: tree/hld.hpp
     title: tree/hld.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/cycle_detection.test.cpp
     title: test/library_checker/graph/cycle_detection.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/graph/lca.test.cpp
+    title: test/library_checker/graph/lca.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/graph/lca_directed.test.cpp
+    title: test/library_checker/graph/lca_directed.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/maximum_independent_set.test.cpp
     title: test/library_checker/graph/maximum_independent_set.test.cpp
@@ -110,7 +116,9 @@ data:
   verifiedWith:
   - test/library_checker/graph/cycle_detection.test.cpp
   - test/library_checker/graph/maximum_independent_set.test.cpp
+  - test/library_checker/graph/lca.test.cpp
   - test/library_checker/graph/scc.test.cpp
+  - test/library_checker/graph/lca_directed.test.cpp
 documentation_of: graph/base.hpp
 layout: document
 redirect_from:

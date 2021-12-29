@@ -61,6 +61,12 @@ data:
     path: test/library_checker/graph/cycle_detection.test.cpp
     title: test/library_checker/graph/cycle_detection.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/library_checker/graph/lca.test.cpp
+    title: test/library_checker/graph/lca.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/graph/lca_directed.test.cpp
+    title: test/library_checker/graph/lca_directed.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/maximum_independent_set.test.cpp
     title: test/library_checker/graph/maximum_independent_set.test.cpp
   - icon: ':heavy_check_mark:'
@@ -256,7 +262,9 @@ data:
   verifiedWith:
   - test/library_checker/graph/cycle_detection.test.cpp
   - test/library_checker/graph/maximum_independent_set.test.cpp
+  - test/library_checker/graph/lca.test.cpp
   - test/library_checker/graph/scc.test.cpp
+  - test/library_checker/graph/lca_directed.test.cpp
   - test/library_checker/math/enumerate_primes.test.cpp
   - test/library_checker/math/factorize.test.cpp
   - test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp

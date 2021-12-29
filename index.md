@@ -143,6 +143,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: my_template.hpp
       title: my_template.hpp
+    - icon: ':warning:'
+      path: temp.cpp
+      title: temp.cpp
   - name: nt
     pages:
     - icon: ':warning:'
@@ -220,7 +223,7 @@ data:
       title: string/zalgorithm.hpp
   - name: tree
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: tree/hld.hpp
       title: tree/hld.hpp
     - icon: ':warning:'
@@ -276,21 +279,12 @@ data:
     - icon: ':x:'
       path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
       title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
-    - icon: ':x:'
-      path: test/library_checker/datastructure/range_chmin_chmax_add_range_sum.test.cpp
-      title: test/library_checker/datastructure/range_chmin_chmax_add_range_sum.test.cpp
-    - icon: ':x:'
-      path: test/library_checker/datastructure/range_kth_smallest.test.cpp
-      title: test/library_checker/datastructure/range_kth_smallest.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
       title: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
       title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
-    - icon: ':x:'
-      path: test/library_checker/datastructure/rectangle_sum_wave.test.cpp
-      title: test/library_checker/datastructure/rectangle_sum_wave.test.cpp
     - icon: ':x:'
       path: test/library_checker/datastructure/static_range_frequency.test.cpp
       title: test/library_checker/datastructure/static_range_frequency.test.cpp
@@ -338,9 +332,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/graph/cycle_detection.test.cpp
       title: test/library_checker/graph/cycle_detection.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/graph/lca.test.cpp
       title: test/library_checker/graph/lca.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/graph/lca_directed.test.cpp
+      title: test/library_checker/graph/lca_directed.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/graph/maximum_independent_set.test.cpp
       title: test/library_checker/graph/maximum_independent_set.test.cpp
