@@ -5,7 +5,7 @@
 
 void solve() {
   LL(N, Q);
-  Graph<int, 0> G(N);
+  Graph<int, 1> G(N);
   FOR3(v, 1, N) {
     LL(p);
     G.add(p, v);

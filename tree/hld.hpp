@@ -5,51 +5,55 @@ template <typename Graph>
 struct HLD {
   Graph &G;
   int N;
-  vector<int> sz, LID, RID, ELID, ERID, head, V, parent, depth, e_to_v;
+  vector<int> LID, RID, head, V, parent, depth;
 
   HLD(Graph &G, int root = 0)
       : G(G),
         N(G.N),
-        sz(G.N),
         LID(G.N),
         RID(G.N),
-        ELID(G.N),
-        ERID(G.N),
         head(G.N, root),
         V(G.N),
         parent(G.N, -1),
-        depth(G.N),
-        e_to_v(G.N) {
-    int t1 = 0, t2 = 0;
+        depth(G.N) {
+    assert(G.is_prepared());
+    int t1 = 0;
     dfs_sz(root, -1);
-    dfs_hld(root, -1, t1, t2);
+    dfs_hld(root, -1, t1);
   }
 
-  void dfs_sz(int idx, int p) {
-    parent[idx] = p;
-    depth[idx] = (p == -1 ? 0 : depth[p] + 1);
-    sz[idx] = 1;
-    if (G[idx].size() && G[idx][0].to == p) swap(G[idx][0], G[idx].back());
-    for (auto &e: G[idx]) {
-      if (e.to == p) continue;
-      e_to_v[e.id] = e.to;
-      dfs_sz(e.to, idx);
-      sz[idx] += sz[e.to];
-      if (sz[G[idx][0].to] < sz[e.to]) swap(G[idx][0], e);
+  void dfs_sz(int v, int p) {
+    auto &sz = RID;
+    parent[v] = p;
+    depth[v] = (p == -1 ? 0 : depth[p] + 1);
+    sz[v] = 1;
+    int l = G.indptr[v], r = G.indptr[v + 1];
+    auto &csr = G.csr_edges;
+    if (l + 1 < r && get<1>(csr[l]) == p) swap(csr[l], csr[l + 1]);
+    int hld_sz = 0;
+    for (int i = l; i < r; ++i) {
+      auto [frm, to, cost, id] = csr[i];
+      if (to == p) {
+        assert(!G.is_directed());
+        continue;
+      }
+      dfs_sz(to, v);
+      sz[v] += sz[to];
+      if (chmax(hld_sz, sz[to]) && l < i) { swap(csr[l], csr[i]); }
     }
   }
 
-  void dfs_hld(int idx, int par, int &times, int &etimes) {
-    LID[idx] = times++;
-    ELID[idx] = etimes++;
-    V[LID[idx]] = idx;
-    for (auto &e: G[idx]) {
-      if (e.to == par) continue;
-      head[e.to] = (G[idx][0].to == e.to ? head[idx] : e.to);
-      dfs_hld(e.to, idx, times, etimes);
+  void dfs_hld(int v, int p, int &times) {
+    LID[v] = times++;
+    RID[v] += LID[v];
+    V[LID[v]] = v;
+    bool heavy = true;
+    for (auto &&[frm, to, cost, id]: G[v]) {
+      if (to == p) continue;
+      head[to] = (heavy ? head[v] : to);
+      heavy = false;
+      dfs_hld(to, v, times);
     }
-    RID[idx] = times;
-    ERID[idx] = etimes++;
   }
 
   /* k: 0-indexed */
@@ -83,13 +87,11 @@ struct HLD {
 
   void debug() {
     print("V", V);
+    print("LID", LID);
+    print("RID", RID);
     print("parent", parent);
     print("depth", depth);
     print("head", head);
-    print("LID", LID);
-    print("RID", RID);
-    print("ELID", ELID);
-    print("ERID", ERID);
   }
 
   void doc() {
