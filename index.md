@@ -9,6 +9,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: algebra/affinegroup.hpp
       title: algebra/affinegroup.hpp
+    - icon: ':heavy_check_mark:'
+      path: algebra/cntsum.hpp
+      title: algebra/cntsum.hpp
+    - icon: ':heavy_check_mark:'
+      path: algebra/lazy_cntsum_affine.hpp
+      title: algebra/lazy_cntsum_affine.hpp
     - icon: ':warning:'
       path: algebra/maxmonoid.hpp
       title: algebra/maxmonoid.hpp
@@ -44,7 +50,7 @@ data:
     - icon: ':warning:'
       path: ds/intervals.hpp
       title: ds/intervals.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: ds/lazysegtree.hpp
       title: ds/lazysegtree.hpp
     - icon: ':warning:'
@@ -279,7 +285,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
       title: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
       title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
     - icon: ':heavy_check_mark:'
