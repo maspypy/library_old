@@ -18,6 +18,9 @@ data:
     - icon: ':warning:'
       path: algebra/monoid__old.hpp
       title: algebra/monoid__old.hpp
+    - icon: ':heavy_check_mark:'
+      path: algebra/reversemonoid.hpp
+      title: algebra/reversemonoid.hpp
   - name: ds
     pages:
     - icon: ':warning:'
@@ -238,7 +241,7 @@ data:
     - icon: ':warning:'
       path: tree/treegroup.hpp
       title: tree/treegroup.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: tree/treemonoid.hpp
       title: tree/treemonoid.hpp
     - icon: ':warning:'
@@ -324,7 +327,7 @@ data:
     - icon: ':x:'
       path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
       title: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
       title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   - name: test/library_checker/graph

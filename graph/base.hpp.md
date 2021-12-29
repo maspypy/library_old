@@ -26,7 +26,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: tree/hld.hpp
     title: tree/hld.hpp
+  - icon: ':heavy_check_mark:'
+    path: tree/treemonoid.hpp
+    title: tree/treemonoid.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
+    title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/cycle_detection.test.cpp
     title: test/library_checker/graph/cycle_detection.test.cpp
@@ -111,6 +117,7 @@ data:
   - graph/bipartite_coloring.hpp
   - graph/eulerwalk.hpp
   - tree/hld.hpp
+  - tree/treemonoid.hpp
   timestamp: '2021-12-29 03:03:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
@@ -119,6 +126,7 @@ data:
   - test/library_checker/graph/lca.test.cpp
   - test/library_checker/graph/scc.test.cpp
   - test/library_checker/graph/lca_directed.test.cpp
+  - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
 documentation_of: graph/base.hpp
 layout: document
 redirect_from:

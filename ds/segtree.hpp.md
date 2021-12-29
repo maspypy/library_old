@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: tree/treemonoid.hpp
+    title: tree/treemonoid.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
@@ -9,6 +12,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/staticrmq_seg.test.cpp
     title: test/library_checker/datastructure/staticrmq_seg.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
+    title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -17,7 +23,7 @@ data:
   bundledCode: "#line 2 \"ds/segtree.hpp\"\ntemplate <class Monoid>\nstruct SegTree\
     \ {\n  using X = typename Monoid::value_type;\n  using value_type = X;\n  vc<X>\
     \ dat;\n  int n, log, size;\n\n  SegTree() : SegTree(0) {}\n  SegTree(int n) :\
-    \ SegTree(vc<X>(n, Monoid::unit)) {}\n  SegTree(vc<X> &v) : n(len(v)) {\n    log\
+    \ SegTree(vc<X>(n, Monoid::unit)) {}\n  SegTree(vc<X> v) : n(len(v)) {\n    log\
     \ = 1;\n    while ((1 << log) < n) ++log;\n    size = 1 << log;\n    dat.assign(size\
     \ << 1, Monoid::unit);\n    FOR(i, n) dat[size + i] = v[i];\n    FOR3_R(i, 1,\
     \ size) update(i);\n  }\n\n  void update(int i) { dat[i] = Monoid::op(dat[2 *\
@@ -46,7 +52,7 @@ data:
   code: "#pragma once\ntemplate <class Monoid>\nstruct SegTree {\n  using X = typename\
     \ Monoid::value_type;\n  using value_type = X;\n  vc<X> dat;\n  int n, log, size;\n\
     \n  SegTree() : SegTree(0) {}\n  SegTree(int n) : SegTree(vc<X>(n, Monoid::unit))\
-    \ {}\n  SegTree(vc<X> &v) : n(len(v)) {\n    log = 1;\n    while ((1 << log) <\
+    \ {}\n  SegTree(vc<X> v) : n(len(v)) {\n    log = 1;\n    while ((1 << log) <\
     \ n) ++log;\n    size = 1 << log;\n    dat.assign(size << 1, Monoid::unit);\n\
     \    FOR(i, n) dat[size + i] = v[i];\n    FOR3_R(i, 1, size) update(i);\n  }\n\
     \n  void update(int i) { dat[i] = Monoid::op(dat[2 * i], dat[2 * i + 1]); }\n\n\
@@ -75,12 +81,14 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: ds/segtree.hpp
-  requiredBy: []
-  timestamp: '2021-12-28 06:02:16+09:00'
+  requiredBy:
+  - tree/treemonoid.hpp
+  timestamp: '2021-12-30 04:14:57+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/datastructure/staticrmq_seg.test.cpp
   - test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
+  - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
 documentation_of: ds/segtree.hpp
 layout: document
 redirect_from:

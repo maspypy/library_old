@@ -9,6 +9,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
     title: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
+    title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -20,22 +23,24 @@ data:
     \ + y.se});\n  }\n  static constexpr F inverse(const F &x) {\n    auto [a, b]\
     \ = x;\n    a = K(1) / a;\n    return {a, a * (-b)};\n  }\n  static constexpr\
     \ K eval(const F &f, K x) noexcept { return f.fi * x + f.se; }\n  static constexpr\
-    \ F unit = {K(1), K(0)};\n};\n"
+    \ F unit = {K(1), K(0)};\n  static constexpr bool commute = false;\n};\n"
   code: "template <typename K>\nstruct AffineGroup {\n  using F = pair<K, K>;\n  using\
     \ value_type = F;\n  static constexpr F op(const F &x, const F &y) noexcept {\n\
     \    return F({x.fi * y.fi, x.se * y.fi + y.se});\n  }\n  static constexpr F inverse(const\
     \ F &x) {\n    auto [a, b] = x;\n    a = K(1) / a;\n    return {a, a * (-b)};\n\
     \  }\n  static constexpr K eval(const F &f, K x) noexcept { return f.fi * x +\
-    \ f.se; }\n  static constexpr F unit = {K(1), K(0)};\n};"
+    \ f.se; }\n  static constexpr F unit = {K(1), K(0)};\n  static constexpr bool\
+    \ commute = false;\n};"
   dependsOn: []
   isVerificationFile: false
   path: algebra/affinegroup.hpp
   requiredBy: []
-  timestamp: '2021-12-28 08:11:16+09:00'
+  timestamp: '2021-12-30 04:14:57+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
   - test/library_checker/datastructure/queue_operate_all_composite.test.cpp
+  - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
 documentation_of: algebra/affinegroup.hpp
 layout: document
 redirect_from:

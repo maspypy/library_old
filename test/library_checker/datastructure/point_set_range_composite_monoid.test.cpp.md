@@ -111,7 +111,7 @@ data:
     \n\n#line 2 \"ds/segtree.hpp\"\ntemplate <class Monoid>\nstruct SegTree {\n  using\
     \ X = typename Monoid::value_type;\n  using value_type = X;\n  vc<X> dat;\n  int\
     \ n, log, size;\n\n  SegTree() : SegTree(0) {}\n  SegTree(int n) : SegTree(vc<X>(n,\
-    \ Monoid::unit)) {}\n  SegTree(vc<X> &v) : n(len(v)) {\n    log = 1;\n    while\
+    \ Monoid::unit)) {}\n  SegTree(vc<X> v) : n(len(v)) {\n    log = 1;\n    while\
     \ ((1 << log) < n) ++log;\n    size = 1 << log;\n    dat.assign(size << 1, Monoid::unit);\n\
     \    FOR(i, n) dat[size + i] = v[i];\n    FOR3_R(i, 1, size) update(i);\n  }\n\
     \n  void update(int i) { dat[i] = Monoid::op(dat[2 * i], dat[2 * i + 1]); }\n\n\
@@ -179,7 +179,8 @@ data:
     \ * y.fi, x.se * y.fi + y.se});\n  }\n  static constexpr F inverse(const F &x)\
     \ {\n    auto [a, b] = x;\n    a = K(1) / a;\n    return {a, a * (-b)};\n  }\n\
     \  static constexpr K eval(const F &f, K x) noexcept { return f.fi * x + f.se;\
-    \ }\n  static constexpr F unit = {K(1), K(0)};\n};\n#line 7 \"test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp\"\
+    \ }\n  static constexpr F unit = {K(1), K(0)};\n  static constexpr bool commute\
+    \ = false;\n};\n#line 7 \"test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp\"\
     \n\nusing mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using Mono = AffineGroup<mint>;\n\
     \  using F = Mono::value_type;\n\n  vc<F> seg_raw(N);\n  FOR(i, N) {\n    LL(a,\
     \ b);\n    seg_raw[i] = {a, b};\n  }\n\n  SegTree<Mono> seg(seg_raw);\n\n  FOR(q,\
@@ -206,7 +207,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
   requiredBy: []
-  timestamp: '2021-12-29 02:24:08+09:00'
+  timestamp: '2021-12-30 04:14:57+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp

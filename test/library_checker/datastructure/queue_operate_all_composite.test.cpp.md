@@ -114,13 +114,13 @@ data:
     \  }\n  static constexpr F inverse(const F &x) {\n    auto [a, b] = x;\n    a\
     \ = K(1) / a;\n    return {a, a * (-b)};\n  }\n  static constexpr K eval(const\
     \ F &f, K x) noexcept { return f.fi * x + f.se; }\n  static constexpr F unit =\
-    \ {K(1), K(0)};\n};\n#line 1 \"ds/swag.hpp\"\ntemplate <class Monoid>\nstruct\
-    \ SWAG {\n  using X = typename Monoid::value_type;\n  using value_type = X;\n\
-    \  vc<X> dat;\n  vc<X> cum_l;\n  X cum_r;\n\n  SWAG() : cum_l({Monoid::unit}),\
-    \ cum_r(Monoid::unit) {}\n\n  void push(X x) {\n    cum_r = Monoid::op(cum_r,\
-    \ x);\n    dat.eb(x);\n  }\n\n  void pop() {\n    cum_l.pop_back();\n    if (len(cum_l)\
-    \ == 0) {\n      cum_l = {Monoid::unit};\n      cum_r = Monoid::unit;\n      while\
-    \ (len(dat) > 1) {\n        cum_l.eb(Monoid::op(dat.back(), cum_l.back()));\n\
+    \ {K(1), K(0)};\n  static constexpr bool commute = false;\n};\n#line 1 \"ds/swag.hpp\"\
+    \ntemplate <class Monoid>\nstruct SWAG {\n  using X = typename Monoid::value_type;\n\
+    \  using value_type = X;\n  vc<X> dat;\n  vc<X> cum_l;\n  X cum_r;\n\n  SWAG()\
+    \ : cum_l({Monoid::unit}), cum_r(Monoid::unit) {}\n\n  void push(X x) {\n    cum_r\
+    \ = Monoid::op(cum_r, x);\n    dat.eb(x);\n  }\n\n  void pop() {\n    cum_l.pop_back();\n\
+    \    if (len(cum_l) == 0) {\n      cum_l = {Monoid::unit};\n      cum_r = Monoid::unit;\n\
+    \      while (len(dat) > 1) {\n        cum_l.eb(Monoid::op(dat.back(), cum_l.back()));\n\
     \        dat.pop_back();\n      }\n      dat.pop_back();\n    }\n  }\n\n  X prod()\
     \ { return Monoid::op(cum_l.back(), cum_r); }\n\n  void debug() {\n    print(\"\
     swag\");\n    print(\"dat\", dat);\n    print(\"cum_l\", cum_l);\n    print(\"\
@@ -188,7 +188,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
   requiredBy: []
-  timestamp: '2021-12-29 02:24:08+09:00'
+  timestamp: '2021-12-30 04:14:57+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
