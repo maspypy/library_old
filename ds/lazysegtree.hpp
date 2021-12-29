@@ -1,77 +1,63 @@
 #pragma once
-#include "my_template.hpp"
 
-#include "algebra/monoid.hpp"
-
-template <typename E, typename OP>
+template <typename Lazy>
 struct LazySegTree {
-  using F = function<E(E, E)>;
-  using G = function<E(E, OP)>;
-  using H = function<OP(OP, OP)>;
-  int _n, size, log;
-  vc<E> dat;
-  vc<OP> laz;
-  F seg_f;
-  G seg_g;
-  H seg_h;
-  E unit;
-  OP OP_unit;
-  bool OP_commute;
+  using Monoid_X = typename Lazy::X_structure;
+  using Monoid_A = typename Lazy::A_structure;
+  using X = typename Monoid_X::value_type;
+  using A = typename Monoid_A::value_type;
+  int n, log, size;
+  vc<X> dat;
+  vc<A> laz;
 
-  LazySegTree(Monoid_OP<E, OP> Mono)
-      : seg_f(Mono.f),
-        seg_g(Mono.g),
-        seg_h(Mono.h),
-        unit(Mono.unit),
-        OP_unit(Mono.OP_unit),
-        OP_commute(Mono.OP_commute) {}
-
-  void init(int n) {
-    _n = n;
+  LazySegTree() : LazySegTree(0) {}
+  LazySegTree(int n) : LazySegTree(vc<X>(n, Monoid_X::unit)) {}
+  LazySegTree(vc<X> v) : n(len(v)) {
     log = 1;
     while ((1 << log) < n) ++log;
     size = 1 << log;
-    dat.assign(size << 1, unit);
-    laz.assign(size, OP_unit);
+    dat.assign(size << 1, Monoid_X::unit);
+    laz.assign(size, Monoid_A::unit);
+    FOR(i, n) dat[size + i] = v[i];
+    FOR3_R(i, 1, size) update(i);
   }
 
-  void build(const vector<E>& v) {
-    assert(len(v) == _n);
-    FOR(i, len(v)) { dat[size + i] = v[i]; }
-    FOR3_R(i, 1, size) { update(i); }
-  }
+  void update(int k) { dat[k] = Monoid_X::op(dat[2 * k], dat[2 * k + 1]); }
 
-  void update(int k) { dat[k] = seg_f(dat[2 * k], dat[2 * k + 1]); }
-
-  void all_apply(int k, OP a) {
-    dat[k] = seg_g(dat[k], a);
-    if (k < size) laz[k] = seg_h(laz[k], a);
+  void all_apply(int k, A a) {
+    dat[k] = Lazy::act(dat[k], a);
+    if (k < size) laz[k] = Monoid_A::op(laz[k], a);
   }
 
   void push(int k) {
     all_apply(2 * k, laz[k]);
     all_apply(2 * k + 1, laz[k]);
-    laz[k] = OP_unit;
+    laz[k] = Monoid_A::unit;
   }
 
-  void set(int p, E x) {
-    assert(0 <= p && p < _n);
+  void set(int p, X x) {
+    assert(0 <= p && p < n);
     p += size;
     for (int i = log; i >= 1; i--) push(p >> i);
     dat[p] = x;
     for (int i = 1; i <= log; i++) update(p >> i);
   }
 
-  E get(int p) {
-    assert(0 <= p && p < _n);
+  X get(int p) {
+    assert(0 <= p && p < n);
     p += size;
     for (int i = log; i >= 1; i--) push(p >> i);
     return dat[p];
   }
 
-  E prod(int l, int r) {
-    assert(0 <= l && l <= r && r <= _n);
-    if (l == r) return unit;
+  vc<X> get_all() {
+    FOR(i, size) push(i);
+    return {dat.begin() + size, dat.begin() + size + n};
+  }
+
+  X prod(int l, int r) {
+    assert(0 <= l && l <= r && r <= n);
+    if (l == r) return Monoid_X::unit;
 
     l += size;
     r += size;
@@ -81,30 +67,30 @@ struct LazySegTree {
       if (((r >> i) << i) != r) push((r - 1) >> i);
     }
 
-    E sml = unit, smr = unit;
+    X xl = Monoid_X::unit, xr = Monoid_X::unit;
     while (l < r) {
-      if (l & 1) sml = seg_f(sml, dat[l++]);
-      if (r & 1) smr = seg_f(dat[--r], smr);
+      if (l & 1) xl = Monoid_X::op(xl, dat[l++]);
+      if (r & 1) xr = Monoid_X::op(dat[--r], xr);
       l >>= 1;
       r >>= 1;
     }
 
-    return seg_f(sml, smr);
+    return Monoid_X::op(xl, xr);
   }
 
-  E all_prod() { return dat[1]; }
+  X all_prod() { return dat[1]; }
 
-  void apply(int p, OP a) {
-    assert(0 <= p && p < _n);
+  void apply(int p, A a) {
+    assert(0 <= p && p < n);
     p += size;
-    if (!OP_commute)
+    if (!Monoid_A::commute)
       for (int i = log; i >= 1; i--) push(p >> i);
-    dat[p] = seg_g(dat[p], a);
+    dat[p] = Lazy::act(dat[p], a);
     for (int i = 1; i <= log; i++) update(p >> i);
   }
 
-  void apply(int l, int r, OP a) {
-    assert(0 <= l && l <= r && r <= _n);
+  void apply(int l, int r, A a) {
+    assert(0 <= l && l <= r && r <= n);
     if (l == r) return;
 
     l += size;
@@ -135,61 +121,57 @@ struct LazySegTree {
 
   template <typename C>
   int max_right(C& check, int l) {
-    assert(0 <= l && l <= _n);
-    assert(check(unit));
-    if (l == _n) return _n;
+    assert(0 <= l && l <= n);
+    assert(check(Monoid_X::unit));
+    if (l == n) return n;
     l += size;
     for (int i = log; i >= 1; i--) push(l >> i);
-    E sm = unit;
+    X sm = Monoid_X::unit;
     do {
       while (l % 2 == 0) l >>= 1;
-      if (!check(seg_f(sm, dat[l]))) {
+      if (!check(Monoid_X::op(sm, dat[l]))) {
         while (l < size) {
           push(l);
           l = (2 * l);
-          if (check(seg_f(sm, dat[l]))) {
-            sm = seg_f(sm, dat[l]);
+          if (check(Monoid_X::op(sm, dat[l]))) {
+            sm = Monoid_X::op(sm, dat[l]);
             l++;
           }
         }
         return l - size;
       }
-      sm = seg_f(sm, dat[l]);
+      sm = Monoid_X::op(sm, dat[l]);
       l++;
     } while ((l & -l) != l);
-    return _n;
+    return n;
   }
 
   template <typename C>
   int min_left(C& check, int r) {
-    assert(0 <= r && r <= _n);
-    assert(check(unit));
+    assert(0 <= r && r <= n);
+    assert(check(Monoid_X::unit));
     if (r == 0) return 0;
     r += size;
     for (int i = log; i >= 1; i--) push((r - 1) >> i);
-    E sm = unit;
+    X sm = Monoid_X::unit;
     do {
       r--;
       while (r > 1 && (r % 2)) r >>= 1;
-      if (!check(seg_f(dat[r], sm))) {
+      if (!check(Monoid_X::op(dat[r], sm))) {
         while (r < size) {
           push(r);
           r = (2 * r + 1);
-          if (check(seg_f(dat[r], sm))) {
-            sm = seg_f(dat[r], sm);
+          if (check(Monoid_X::op(dat[r], sm))) {
+            sm = Monoid_X::op(dat[r], sm);
             r--;
           }
         }
         return r + 1 - size;
       }
-      sm = seg_f(dat[r], sm);
+      sm = Monoid_X::op(dat[r], sm);
     } while ((r & -r) != r);
     return 0;
   }
 
-  void debug() {
-    vc<E> v(_n);
-    FOR(i, _n) v[i] = get(i);
-    print("lazysegtree getall:", v);
-  }
+  void debug() { print("lazysegtree getall:", get_all()); }
 };

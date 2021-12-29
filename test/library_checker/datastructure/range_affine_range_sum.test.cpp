@@ -1,6 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_affine_range_sum"
 #include "my_template.hpp"
 
+#include "algebra/lazy_cntsum_affine.hpp"
 #include "ds/lazysegtree.hpp"
 #include "mod/modint.hpp"
 
@@ -8,21 +9,20 @@ using mint = modint998;
 
 void solve() {
   LL(N, Q);
+  using S = CntSum_Affine<mint>;
   using E = pair<mint, mint>;
   vc<E> seg_raw(N);
   FOR(i, N) {
     LL(x);
     seg_raw[i] = E({mint(1), mint(x)});
   }
-  LazySegTree<E, E> seg(Monoid_cnt_sum_affine<mint>());
-  seg.init(N);
-  seg.build(seg_raw);
+  LazySegTree<S> seg(seg_raw);
 
   FOR(_, Q) {
     LL(t);
     if (t == 0) {
       LL(l, r, a, b);
-      seg.apply(l, r, E({mint(a), mint(b)}));
+      seg.apply(l, r, E({a, b}));
     }
     elif (t == 1) {
       LL(l, r);
