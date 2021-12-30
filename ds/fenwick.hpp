@@ -9,33 +9,32 @@ struct FenwickTree {
   FenwickTree() : FenwickTree(0) {}
   FenwickTree(int n) : n(n), total(AbelGroup::unit) {
     assert(AbelGroup::commute);
-    dat.assign(n + 1, AbelGroup::unit);
+    dat.assign(n, AbelGroup::unit);
   }
   FenwickTree(vc<E> v) : n(len(v)), total(AbelGroup::unit) {
     assert(AbelGroup::commute);
-    dat.assign(n + 1, AbelGroup::unit);
-    FOR(i, n) dat[i + 1] = v[i];
+    dat = v;
     FOR3(i, 1, n + 1) {
       int j = i + (i & -i);
-      if (j <= n) dat[j] = AbelGroup::op(dat[i], dat[j]);
+      if (j <= n) dat[j - 1] = AbelGroup::op(dat[i - 1], dat[j - 1]);
     }
   }
 
   E sum(int k) {
     E ret = AbelGroup::unit;
-    for (; k > 0; k -= k & -k) ret = AbelGroup::op(ret, dat[k]);
+    for (; k > 0; k -= k & -k) ret = AbelGroup::op(ret, dat[k - 1]);
     return ret;
   }
 
   E sum(int L, int R) {
     E pos = AbelGroup::unit;
     while (L < R) {
-      pos = AbelGroup::op(pos, dat[R]);
+      pos = AbelGroup::op(pos, dat[R - 1]);
       R -= R & -R;
     }
     E neg = AbelGroup::unit;
     while (R < L) {
-      neg = AbelGroup::op(neg, dat[L]);
+      neg = AbelGroup::op(neg, dat[L - 1]);
       L -= L & -L;
     }
     return AbelGroup::op(pos, AbelGroup::inverse(neg));
@@ -45,7 +44,7 @@ struct FenwickTree {
 
   void add(int k, E x) {
     total = AbelGroup::op(total, x);
-    for (++k; k < len(dat); k += k & -k) dat[k] = AbelGroup::op(dat[k], x);
+    for (++k; k <= n; k += k & -k) dat[k - 1] = AbelGroup::op(dat[k - 1], x);
   }
 
   template <class F>
@@ -54,12 +53,12 @@ struct FenwickTree {
     ll i = 0;
     E s = AbelGroup::unit;
     int k = 1;
-    int N = len(dat);
+    int N = len(dat) + 1;
     while (2 * k < N) k *= 2;
     while (k) {
-      if (i + k < N && check(AbelGroup::op(s, dat[i + k]))) {
+      if (i + k < N && check(AbelGroup::op(s, dat[i + k - 1]))) {
         i += k;
-        s = AbelGroup::op(s, dat[i]);
+        s = AbelGroup::op(s, dat[i - 1]);
       }
       k >>= 1;
     }
