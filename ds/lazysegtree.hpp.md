@@ -9,6 +9,9 @@ data:
   - icon: ':x:'
     path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
     title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/899_bfsnumbering.test.cpp
+    title: test/yukicoder/899_bfsnumbering.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':x:'
@@ -135,6 +138,7 @@ data:
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/datastructure/range_affine_range_sum.test.cpp
+  - test/yukicoder/899_bfsnumbering.test.cpp
 documentation_of: ds/lazysegtree.hpp
 layout: document
 redirect_from:

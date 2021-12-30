@@ -3,10 +3,10 @@ data:
   libraryCategories:
   - name: algebra
     pages:
-    - icon: ':warning:'
+    - icon: ':x:'
       path: algebra/add_mul_lazy.hpp
       title: algebra/add_mul_lazy.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: algebra/addgroup.hpp
       title: algebra/addgroup.hpp
     - icon: ':question:'
@@ -33,7 +33,7 @@ data:
     - icon: ':warning:'
       path: algebra/monoid__old.hpp
       title: algebra/monoid__old.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: algebra/mulgroup.hpp
       title: algebra/mulgroup.hpp
     - icon: ':heavy_check_mark:'
@@ -119,13 +119,13 @@ data:
       title: geometry/geometry.hpp
   - name: graph
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: graph/base.hpp
       title: graph/base.hpp
     - icon: ':warning:'
       path: graph/bfs01.hpp
       title: graph/bfs01.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: graph/bfsnumbering.hpp
       title: graph/bfsnumbering.hpp
     - icon: ':warning:'
