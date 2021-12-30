@@ -22,7 +22,7 @@ void solve() {
     seg_raw[ID[v]] = a;
   }
 
-  using Lazy = Add_Mul<ll>;
+  using Lazy = Add_Mul_Lazy<ll>;
   LazySegTree<Lazy> seg(seg_raw);
 
   LL(Q);
