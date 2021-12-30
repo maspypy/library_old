@@ -1,6 +1,9 @@
 ---
 data:
   _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: algebra/addgroup.hpp
+    title: algebra/addgroup.hpp
   - icon: ':question:'
     path: algebra/reversemonoid.hpp
     title: algebra/reversemonoid.hpp
@@ -21,9 +24,9 @@ data:
     title: my_template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_add_path_sum
@@ -242,26 +245,32 @@ data:
     \n  }\r\n\r\n  void doc() {\r\n    print(\"HL\u5206\u89E3 + \u30BB\u30B0\u6728\
     \u3002\");\r\n    print(\"\u90E8\u5206\u6728\u30AF\u30A8\u30EA O(logN) \u6642\u9593\
     \u3001\u30D1\u30B9\u30AF\u30A8\u30EA O(log^2N) \u6642\u9593\u3002\");\r\n  }\r\
-    \n};\r\n#line 7 \"test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp\"\
+    \n};\r\n#line 1 \"algebra/addgroup.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\n\
+    struct AddGroup {\r\n  using value_type = X;\r\n  static constexpr X op(const\
+    \ X &x, const X &y) noexcept { return x + y; }\r\n  static constexpr X inverse(const\
+    \ X &x) noexcept { return -x; }\r\n  static constexpr X unit = ZERO;\r\n  static\
+    \ constexpr bool commute = true;\r\n};\r\n#line 8 \"test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp\"\
     \n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  VEC(ll, A, N);\r\n  Graph<int> G(N);\r\
-    \n  FOR(_, N - 1) {\r\n    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n\r\n  HLD<Graph<int>>\
-    \ hld(G);\r\n  const bool is_edge = false;\r\n  TreeMonoid<Graph<int>, ll, is_edge>\
-    \ TM(hld, Monoid_add<ll>());\r\n  TM.init(A);\r\n\r\n  FOR(_, Q) {\r\n    LL(t);\r\
-    \n    if (t == 0) {\r\n      LL(v, x);\r\n      A[v] += x;\r\n      TM.set(v,\
-    \ A[v]);\r\n    } else {\r\n      LL(u, v);\r\n      print(TM.prod_path(u, v));\r\
-    \n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \n  FOR(_, N - 1) {\r\n    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n  G.prepare();\r\
+    \n\r\n  HLD hld(G);\r\n  const bool is_edge = false;\r\n  using Mono = AddGroup<ll>;\r\
+    \n  TreeMonoid<decltype(hld), Mono, is_edge> TM(hld, A);\r\n\r\n  FOR(_, Q) {\r\
+    \n    LL(t);\r\n    if (t == 0) {\r\n      LL(v, x);\r\n      A[v] += x;\r\n \
+    \     TM.set(v, A[v]);\r\n    } else {\r\n      LL(u, v);\r\n      print(TM.prod_path(u,\
+    \ v));\r\n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n\
+    \  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
+    \n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_path_sum\"\r\
     \n#include \"my_template.hpp\"\r\n\r\n#include \"graph/base.hpp\"\r\n#include\
-    \ \"graph/hld.hpp\"\r\n#include \"graph/treemonoid.hpp\"\r\n\r\nvoid solve() {\r\
-    \n  LL(N, Q);\r\n  VEC(ll, A, N);\r\n  Graph<int> G(N);\r\n  FOR(_, N - 1) {\r\
-    \n    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n\r\n  HLD<Graph<int>> hld(G);\r\n\
-    \  const bool is_edge = false;\r\n  TreeMonoid<Graph<int>, ll, is_edge> TM(hld,\
-    \ Monoid_add<ll>());\r\n  TM.init(A);\r\n\r\n  FOR(_, Q) {\r\n    LL(t);\r\n \
-    \   if (t == 0) {\r\n      LL(v, x);\r\n      A[v] += x;\r\n      TM.set(v, A[v]);\r\
-    \n    } else {\r\n      LL(u, v);\r\n      print(TM.prod_path(u, v));\r\n    }\r\
-    \n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \ \"graph/hld.hpp\"\r\n#include \"graph/treemonoid.hpp\"\r\n#include \"algebra/addgroup.hpp\"\
+    \r\n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  VEC(ll, A, N);\r\n  Graph<int> G(N);\r\
+    \n  FOR(_, N - 1) {\r\n    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n  G.prepare();\r\
+    \n\r\n  HLD hld(G);\r\n  const bool is_edge = false;\r\n  using Mono = AddGroup<ll>;\r\
+    \n  TreeMonoid<decltype(hld), Mono, is_edge> TM(hld, A);\r\n\r\n  FOR(_, Q) {\r\
+    \n    LL(t);\r\n    if (t == 0) {\r\n      LL(v, x);\r\n      A[v] += x;\r\n \
+    \     TM.set(v, A[v]);\r\n    } else {\r\n      LL(u, v);\r\n      print(TM.prod_path(u,\
+    \ v));\r\n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n\
+    \  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
+    \n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
   - graph/base.hpp
@@ -269,11 +278,12 @@ data:
   - graph/treemonoid.hpp
   - ds/segtree.hpp
   - algebra/reversemonoid.hpp
+  - algebra/addgroup.hpp
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
   requiredBy: []
-  timestamp: '2021-12-30 20:03:25+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-12-30 20:17:18+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
 layout: document
