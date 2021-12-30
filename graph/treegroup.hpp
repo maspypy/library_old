@@ -4,7 +4,7 @@
 
 // 作ってみたものの、HLD(log^2N)より遅いがち？
 template <typename HLD, typename Group, bool edge = false,
-          bool path_query = true, bool subtree_query = true>
+          bool path_query = true, bool subtree_query = false>
 struct TreeGroup {
   using RevGroup = ReverseGroup<Group>;
   using X = typename Group::value_type;
