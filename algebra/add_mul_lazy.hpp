@@ -2,7 +2,7 @@
 #include "algebra/mulgroup.hpp"
 
 template <typename E>
-struct Add_Mul {
+struct Add_Mul_Lazy {
   using MX = AddGroup<E>;
   using MA = MulGroup<E>;
   using X_structure = MX;
