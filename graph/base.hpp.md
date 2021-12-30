@@ -30,12 +30,18 @@ data:
     path: graph/scc.hpp
     title: graph/scc.hpp
   - icon: ':heavy_check_mark:'
+    path: graph/treeabelgroup.hpp
+    title: graph/treeabelgroup.hpp
+  - icon: ':heavy_check_mark:'
     path: graph/treegroup.hpp
     title: graph/treegroup.hpp
   - icon: ':heavy_check_mark:'
     path: graph/treemonoid.hpp
     title: graph/treemonoid.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
+    title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
     title: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
@@ -138,6 +144,7 @@ data:
   - graph/degree.hpp
   - graph/dijkstra.hpp
   - graph/mis.hpp
+  - graph/treeabelgroup.hpp
   - graph/bfs01.hpp
   - graph/scc.hpp
   - graph/bipartite_coloring.hpp
@@ -153,6 +160,7 @@ data:
   - test/library_checker/graph/lca_directed.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
+  - test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
   - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp

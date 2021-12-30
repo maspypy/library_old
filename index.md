@@ -155,9 +155,9 @@ data:
     - icon: ':warning:'
       path: graph/tree_dp.hpp
       title: graph/tree_dp.hpp
-    - icon: ':warning:'
-      path: graph/treeabel.hpp
-      title: graph/treeabel.hpp
+    - icon: ':heavy_check_mark:'
+      path: graph/treeabelgroup.hpp
+      title: graph/treeabelgroup.hpp
     - icon: ':warning:'
       path: graph/treedoubling.hpp
       title: graph/treedoubling.hpp
@@ -167,9 +167,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/treemonoid.hpp
       title: graph/treemonoid.hpp
-    - icon: ':warning:'
-      path: graph/treemonoid_lazy.hpp
-      title: graph/treemonoid_lazy.hpp
     - icon: ':warning:'
       path: graph/twosat.hpp
       title: graph/twosat.hpp
@@ -331,7 +328,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/unionfind.test.cpp
       title: test/library_checker/datastructure/unionfind.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
       title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
     - icon: ':heavy_check_mark:'
