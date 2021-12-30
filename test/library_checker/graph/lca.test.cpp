@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/lca"
 #include "my_template.hpp"
 
-#include "tree/hld.hpp"
+#include "graph/hld.hpp"
 
 void solve() {
   LL(N, Q);

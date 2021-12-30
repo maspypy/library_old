@@ -1,5 +1,5 @@
 #include "ds/segtree.hpp"
-#include "tree/hld.hpp"
+#include "graph/hld.hpp"
 #include "algebra/reversemonoid.hpp"
 
 template <typename HLD, typename Monoid, bool edge = false>

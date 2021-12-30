@@ -4,7 +4,7 @@
 
 #include "algebra/affinegroup.hpp"
 #include "mod/modint.hpp"
-#include "tree/treemonoid.hpp"
+#include "graph/treemonoid.hpp"
 
 using mint = modint998;
 
