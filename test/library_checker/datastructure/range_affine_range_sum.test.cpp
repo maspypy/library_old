@@ -9,7 +9,7 @@ using mint = modint998;
 
 void solve() {
   LL(N, Q);
-  using S = CntSum_Affine<mint>;
+  using S = CntSum_Affine_Lazy<mint>;
   using E = pair<mint, mint>;
   vc<E> seg_raw(N);
   FOR(i, N) {
