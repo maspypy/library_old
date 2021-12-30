@@ -1,6 +1,8 @@
-template <typename T>
+#include "graph/base.hpp"
+
+template <typename Graph>
 struct BFSNumbering {
-  T& G;
+  Graph& G;
   int root;
   vector<int> V;
   vector<int> ID;
@@ -11,7 +13,7 @@ struct BFSNumbering {
   vector<int> dep_ids;
   int cnt;
 
-  BFSNumbering(T& G, int root = 0) : G(G), root(root), cnt(0) { build(); }
+  BFSNumbering(Graph& G, int root = 0) : G(G), root(root), cnt(0) { build(); }
 
   void bfs() {
     deque<int> que = {root};
@@ -20,8 +22,7 @@ struct BFSNumbering {
       que.pop_front();
       ID[v] = V.size();
       V.eb(v);
-      FORIN(e, G[v]) {
-        int to = e.to;
+      for(auto&& [frm,to,cost,id] : G[v]) {
         if (to == parent[v]) continue;
         que.emplace_back(to);
         parent[to] = v;
@@ -32,8 +33,7 @@ struct BFSNumbering {
 
   void dfs(int v) {
     LID[v] = cnt++;
-    FORIN(e, G[v]) {
-      int to = e.to;
+    for(auto&& [frm,to,cost,id] : G[v]) {
       if (to == parent[v]) continue;
       dfs(to);
     }
@@ -70,7 +70,7 @@ struct BFSNumbering {
   }
 
   pair<int, int> calc_range(int v, int dep) {
-    if (dep < depth[v]) return {0, 0};
+    assert(dep >= depth[v]);
     if (dep >= len(dep_ids) - 1) return {0, 0};
     int l = LID[v], r = RID[v];
     int L = dep_ids[dep], R = dep_ids[dep + 1];
