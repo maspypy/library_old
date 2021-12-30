@@ -3,6 +3,7 @@
 #include "my_template.hpp"
 
 #include "ds/fenwick2d.hpp"
+#include "algebra/addgroup.hpp"
 
 void solve() {
   LL(N, Q);
@@ -11,7 +12,7 @@ void solve() {
     LL(x, y, w);
     X[i] = x, Y[i] = y, W[i] = w;
   }
-  Fenwick2D<ll, false> bit(X, Y, W);
+  Fenwick2D<AddGroup<ll>, false> bit(X, Y, W);
   FOR(_, Q) {
     LL(l, d, r, u);
     print(bit.sum(l, r, d, u));
