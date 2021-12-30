@@ -163,51 +163,52 @@ data:
     \      head[to] = (heavy ? head[v] : to);\r\n      heavy = false;\r\n      dfs_hld(to,\
     \ v, times);\r\n    }\r\n  }\r\n\r\n  int e_to_v(int e) {\r\n    auto [frm, to,\
     \ cost, id] = G.edges[e];\r\n    return (parent[frm] == to ? frm : to);\r\n  }\r\
-    \n\r\n  /* k: 0-indexed */\r\n  int LA(int v, int k) {\r\n    while (1) {\r\n\
-    \      int u = head[v];\r\n      if (LID[v] - k >= LID[u]) return V[LID[v] - k];\r\
-    \n      k -= LID[v] - LID[u] + 1;\r\n      v = parent[u];\r\n    }\r\n  }\r\n\r\
-    \n  int LCA(int u, int v) {\r\n    for (;; v = parent[head[v]]) {\r\n      if\
-    \ (LID[u] > LID[v]) swap(u, v);\r\n      if (head[u] == head[v]) return u;\r\n\
-    \    }\r\n  }\r\n\r\n  int dist(int a, int b) {\r\n    int c = LCA(a, b);\r\n\
-    \    return depth[a] + depth[b] - 2 * depth[c];\r\n  }\r\n\r\n  bool in_subtree(int\
-    \ a, int b) { return LID[b] <= LID[a] && LID[a] < RID[b]; }\r\n\r\n  int move(int\
-    \ a, int b) {\r\n    assert(a != b);\r\n    return (in_subtree(b, a) ? LA(b, depth[b]\
-    \ - depth[a] - 1) : parent[a]);\r\n  }\r\n\r\n  void debug() {\r\n    print(\"\
-    V\", V);\r\n    print(\"LID\", LID);\r\n    print(\"RID\", RID);\r\n    print(\"\
-    parent\", parent);\r\n    print(\"depth\", depth);\r\n    print(\"head\", head);\r\
-    \n  }\r\n\r\n  void doc() {\r\n    print(\"HL\u5206\u89E3\u3002O(N) \u6642\u9593\
-    \u69CB\u7BC9\u3002\");\r\n    print(\"LCA, LA \u306A\u3069\u306F O(logN) \u6642\
-    \u9593\u3002\");\r\n    print(\"\u6728\u306E\u554F\u984C\u3067\u306F\u771F\u3063\
-    \u5148\u306B\u3053\u308C\u3092\u4F5C\u308B\u3002\");\r\n    print(\"\u2192 \u6728\
-    DP\u3084\u6728\u30AF\u30A8\u30EA\u306B\u6D3E\u751F\u3002\");\r\n  }\r\n};\r\n\
-    #line 2 \"ds/segtree.hpp\"\ntemplate <class Monoid>\nstruct SegTree {\n  using\
-    \ X = typename Monoid::value_type;\n  using value_type = X;\n  vc<X> dat;\n  int\
-    \ n, log, size;\n\n  SegTree() : SegTree(0) {}\n  SegTree(int n) : SegTree(vc<X>(n,\
-    \ Monoid::unit)) {}\n  SegTree(vc<X> v) : n(len(v)) {\n    log = 1;\n    while\
-    \ ((1 << log) < n) ++log;\n    size = 1 << log;\n    dat.assign(size << 1, Monoid::unit);\n\
-    \    FOR(i, n) dat[size + i] = v[i];\n    FOR3_R(i, 1, size) update(i);\n  }\n\
-    \n  void update(int i) { dat[i] = Monoid::op(dat[2 * i], dat[2 * i + 1]); }\n\n\
-    \  void set(int i, X x) {\n    assert(i < n);\n    dat[i += size] = x;\n    while\
-    \ (i >>= 1) update(i);\n  }\n\n  X prod(int L, int R) {\n    assert(L <= R);\n\
-    \    assert(R <= n);\n    X vl = Monoid::unit, vr = Monoid::unit;\n    L += size,\
-    \ R += size;\n    while (L < R) {\n      if (L & 1) vl = Monoid::op(vl, dat[L++]);\n\
-    \      if (R & 1) vr = Monoid::op(dat[--R], vr);\n      L >>= 1, R >>= 1;\n  \
-    \  }\n    return Monoid::op(vl, vr);\n  }\n\n  template <class F>\n  int max_right(F\
-    \ &check, int L) {\n    assert(0 <= L && L <= n && check(Monoid::unit));\n   \
-    \ if (L == n) return n;\n    L += size;\n    X sm = Monoid::unit;\n    do {\n\
-    \      while (L % 2 == 0) L >>= 1;\n      if (!check(Monoid::op(sm, dat[L])))\
-    \ {\n        while (L < n) {\n          L = 2 * L;\n          if (check(Monoid::op(sm,\
-    \ dat[L]))) {\n            sm = Monoid::op(sm, dat[L]);\n            L++;\n  \
-    \        }\n        }\n        return L - n;\n      }\n      sm = Monoid::op(sm,\
-    \ dat[L]);\n      L++;\n    } while ((L & -L) != L);\n    return n;\n  }\n\n \
-    \ template <class F>\n  int min_left(F &check, int R) {\n    assert(0 <= R &&\
-    \ R <= n && check(Monoid::unit));\n    if (R == 0) return 0;\n    R += n;\n  \
-    \  X sm = Monoid::unit;\n    do {\n      --R;\n      while (R > 1 && (R % 2))\
-    \ R >>= 1;\n      if (!check(Monoid::op(dat[R], sm))) {\n        while (R < n)\
-    \ {\n          R = 2 * R + 1;\n          if (check(Monoid::op(dat[R], sm))) {\n\
-    \            sm = Monoid::op(dat[R], sm);\n            R--;\n          }\n   \
-    \     }\n        return R + 1 - n;\n      }\n      sm = Monoid::op(dat[R], sm);\n\
-    \    } while ((R & -R) != R);\n    return 0;\n  }\n\n  void debug() { print(\"\
+    \n\r\n  int ELID(int v) { return 2 * LID[v] - depth[v]; }\r\n  int ERID(int v)\
+    \ { return 2 * RID[v] - depth[v] - 1; }\r\n\r\n  /* k: 0-indexed */\r\n  int LA(int\
+    \ v, int k) {\r\n    while (1) {\r\n      int u = head[v];\r\n      if (LID[v]\
+    \ - k >= LID[u]) return V[LID[v] - k];\r\n      k -= LID[v] - LID[u] + 1;\r\n\
+    \      v = parent[u];\r\n    }\r\n  }\r\n\r\n  int LCA(int u, int v) {\r\n   \
+    \ for (;; v = parent[head[v]]) {\r\n      if (LID[u] > LID[v]) swap(u, v);\r\n\
+    \      if (head[u] == head[v]) return u;\r\n    }\r\n  }\r\n\r\n  int dist(int\
+    \ a, int b) {\r\n    int c = LCA(a, b);\r\n    return depth[a] + depth[b] - 2\
+    \ * depth[c];\r\n  }\r\n\r\n  bool in_subtree(int a, int b) { return LID[b] <=\
+    \ LID[a] && LID[a] < RID[b]; }\r\n\r\n  int move(int a, int b) {\r\n    assert(a\
+    \ != b);\r\n    return (in_subtree(b, a) ? LA(b, depth[b] - depth[a] - 1) : parent[a]);\r\
+    \n  }\r\n\r\n  void debug() {\r\n    print(\"V\", V);\r\n    print(\"LID\", LID);\r\
+    \n    print(\"RID\", RID);\r\n    print(\"parent\", parent);\r\n    print(\"depth\"\
+    , depth);\r\n    print(\"head\", head);\r\n  }\r\n\r\n  void doc() {\r\n    print(\"\
+    HL\u5206\u89E3\u3002O(N) \u6642\u9593\u69CB\u7BC9\u3002\");\r\n    print(\"LCA,\
+    \ LA \u306A\u3069\u306F O(logN) \u6642\u9593\u3002\");\r\n    print(\"\u6728\u306E\
+    \u554F\u984C\u3067\u306F\u771F\u3063\u5148\u306B\u3053\u308C\u3092\u4F5C\u308B\
+    \u3002\");\r\n    print(\"\u2192 \u6728DP\u3084\u6728\u30AF\u30A8\u30EA\u306B\u6D3E\
+    \u751F\u3002\");\r\n  }\r\n};\r\n#line 2 \"ds/segtree.hpp\"\ntemplate <class Monoid>\n\
+    struct SegTree {\n  using X = typename Monoid::value_type;\n  using value_type\
+    \ = X;\n  vc<X> dat;\n  int n, log, size;\n\n  SegTree() : SegTree(0) {}\n  SegTree(int\
+    \ n) : SegTree(vc<X>(n, Monoid::unit)) {}\n  SegTree(vc<X> v) : n(len(v)) {\n\
+    \    log = 1;\n    while ((1 << log) < n) ++log;\n    size = 1 << log;\n    dat.assign(size\
+    \ << 1, Monoid::unit);\n    FOR(i, n) dat[size + i] = v[i];\n    FOR3_R(i, 1,\
+    \ size) update(i);\n  }\n\n  void update(int i) { dat[i] = Monoid::op(dat[2 *\
+    \ i], dat[2 * i + 1]); }\n\n  void set(int i, X x) {\n    assert(i < n);\n   \
+    \ dat[i += size] = x;\n    while (i >>= 1) update(i);\n  }\n\n  X prod(int L,\
+    \ int R) {\n    assert(L <= R);\n    assert(R <= n);\n    X vl = Monoid::unit,\
+    \ vr = Monoid::unit;\n    L += size, R += size;\n    while (L < R) {\n      if\
+    \ (L & 1) vl = Monoid::op(vl, dat[L++]);\n      if (R & 1) vr = Monoid::op(dat[--R],\
+    \ vr);\n      L >>= 1, R >>= 1;\n    }\n    return Monoid::op(vl, vr);\n  }\n\n\
+    \  template <class F>\n  int max_right(F &check, int L) {\n    assert(0 <= L &&\
+    \ L <= n && check(Monoid::unit));\n    if (L == n) return n;\n    L += size;\n\
+    \    X sm = Monoid::unit;\n    do {\n      while (L % 2 == 0) L >>= 1;\n     \
+    \ if (!check(Monoid::op(sm, dat[L]))) {\n        while (L < n) {\n          L\
+    \ = 2 * L;\n          if (check(Monoid::op(sm, dat[L]))) {\n            sm = Monoid::op(sm,\
+    \ dat[L]);\n            L++;\n          }\n        }\n        return L - n;\n\
+    \      }\n      sm = Monoid::op(sm, dat[L]);\n      L++;\n    } while ((L & -L)\
+    \ != L);\n    return n;\n  }\n\n  template <class F>\n  int min_left(F &check,\
+    \ int R) {\n    assert(0 <= R && R <= n && check(Monoid::unit));\n    if (R ==\
+    \ 0) return 0;\n    R += n;\n    X sm = Monoid::unit;\n    do {\n      --R;\n\
+    \      while (R > 1 && (R % 2)) R >>= 1;\n      if (!check(Monoid::op(dat[R],\
+    \ sm))) {\n        while (R < n) {\n          R = 2 * R + 1;\n          if (check(Monoid::op(dat[R],\
+    \ sm))) {\n            sm = Monoid::op(dat[R], sm);\n            R--;\n      \
+    \    }\n        }\n        return R + 1 - n;\n      }\n      sm = Monoid::op(dat[R],\
+    \ sm);\n    } while ((R & -R) != R);\n    return 0;\n  }\n\n  void debug() { print(\"\
     segtree\", dat); }\n};\n#line 1 \"algebra/reversemonoid.hpp\"\ntemplate <class\
     \ Monoid>\r\nstruct ReverseMonoid {\r\n  using value_type = typename Monoid::value_type;\r\
     \n  using X = value_type;\r\n  static constexpr X op(const X &x, const X &y) {\
@@ -282,7 +283,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
   requiredBy: []
-  timestamp: '2021-12-30 20:17:18+09:00'
+  timestamp: '2021-12-30 21:20:07+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp

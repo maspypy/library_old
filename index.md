@@ -34,6 +34,9 @@ data:
       path: algebra/mulgroup.hpp
       title: algebra/mulgroup.hpp
     - icon: ':heavy_check_mark:'
+      path: algebra/reversegroup.hpp
+      title: algebra/reversegroup.hpp
+    - icon: ':heavy_check_mark:'
       path: algebra/reversemonoid.hpp
       title: algebra/reversemonoid.hpp
   - name: ds
@@ -155,7 +158,7 @@ data:
     - icon: ':warning:'
       path: graph/treedoubling.hpp
       title: graph/treedoubling.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: graph/treegroup.hpp
       title: graph/treegroup.hpp
     - icon: ':heavy_check_mark:'
@@ -328,7 +331,7 @@ data:
     - icon: ':x:'
       path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
       title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
       title: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
     - icon: ':heavy_check_mark:'
