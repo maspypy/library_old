@@ -39,6 +39,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
     title: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
+  - icon: ':x:'
+    path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
+    title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/range_chmin_chmax_add_range_sum.test.cpp
     title: test/library_checker/datastructure/range_chmin_chmax_add_range_sum.test.cpp
@@ -99,9 +102,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/factorize.test.cpp
     title: test/library_checker/math/factorize.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace\
@@ -279,7 +282,7 @@ data:
   - ds/unionfind.hpp
   - geometry/geometry.hpp
   timestamp: '2021-12-29 02:24:08+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/library_checker/graph/cycle_detection.test.cpp
   - test/library_checker/graph/maximum_independent_set.test.cpp
@@ -308,6 +311,7 @@ data:
   - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
   - test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
   - test/library_checker/datastructure/associative_array.test.cpp
+  - test/library_checker/datastructure/range_affine_range_sum.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
 documentation_of: my_template.hpp
 layout: document

@@ -1,17 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algebra/affinegroup.hpp
     title: algebra/affinegroup.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: algebra/cntsum.hpp
     title: algebra/cntsum.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
+    title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 1 \"algebra/cntsum.hpp\"\ntemplate <typename E = long long>\r\
@@ -44,8 +47,9 @@ data:
   path: algebra/cntsum_affine_lazy.hpp
   requiredBy: []
   timestamp: '2021-12-31 00:37:11+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - test/library_checker/datastructure/range_affine_range_sum.test.cpp
 documentation_of: algebra/cntsum_affine_lazy.hpp
 layout: document
 redirect_from:

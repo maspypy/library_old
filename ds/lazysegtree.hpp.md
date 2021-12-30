@@ -5,10 +5,13 @@ data:
   - icon: ':warning:'
     path: graph/lazytreemonoid.hpp
     title: graph/lazytreemonoid.hpp
-  _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
+    title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"ds/lazysegtree.hpp\"\n\ntemplate <typename Lazy>\nstruct\
@@ -129,8 +132,9 @@ data:
   requiredBy:
   - graph/lazytreemonoid.hpp
   timestamp: '2021-12-30 04:54:02+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - test/library_checker/datastructure/range_affine_range_sum.test.cpp
 documentation_of: ds/lazysegtree.hpp
 layout: document
 redirect_from:

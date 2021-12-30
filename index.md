@@ -9,16 +9,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: algebra/addgroup.hpp
       title: algebra/addgroup.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: algebra/affinegroup.hpp
       title: algebra/affinegroup.hpp
     - icon: ':heavy_check_mark:'
       path: algebra/beats_sample.hpp
       title: algebra/beats_sample.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: algebra/cntsum.hpp
       title: algebra/cntsum.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: algebra/cntsum_affine_lazy.hpp
       title: algebra/cntsum_affine_lazy.hpp
     - icon: ':warning:'
@@ -71,7 +71,7 @@ data:
     - icon: ':warning:'
       path: ds/intervals.hpp
       title: ds/intervals.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: ds/lazysegtree.hpp
       title: ds/lazysegtree.hpp
     - icon: ':heavy_check_mark:'
@@ -189,12 +189,12 @@ data:
     - icon: ':warning:'
       path: mod/amodint.hpp
       title: mod/amodint.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: mod/modint.hpp
       title: mod/modint.hpp
   - name: .
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: my_template.hpp
       title: my_template.hpp
     - icon: ':warning:'

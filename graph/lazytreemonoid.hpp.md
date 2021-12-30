@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: algebra/reversemonoid.hpp
     title: algebra/reversemonoid.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: ds/lazysegtree.hpp
     title: ds/lazysegtree.hpp
   - icon: ':heavy_check_mark:'
