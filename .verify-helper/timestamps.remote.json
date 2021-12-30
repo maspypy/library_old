@@ -11,6 +11,7 @@
 "test/library_checker/datastructure/range_affine_range_sum.test.cpp": "2021-12-30 04:54:02 +0900",
 "test/library_checker/datastructure/range_chmin_chmax_add_range_sum.test.cpp": "2021-12-30 18:58:14 +0900",
 "test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp": "2021-12-29 02:24:08 +0900",
+"test/library_checker/datastructure/rectangle_sum_sweep.test.cpp": "2021-12-30 22:13:33 +0900",
 "test/library_checker/datastructure/static_range_sum.test.cpp": "2021-12-29 02:24:08 +0900",
 "test/library_checker/datastructure/staticrmq_seg.test.cpp": "2021-12-30 04:14:57 +0900",
 "test/library_checker/datastructure/staticrmq_sparse.test.cpp": "2021-12-29 02:24:08 +0900",
