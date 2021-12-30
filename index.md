@@ -27,7 +27,7 @@ data:
     - icon: ':warning:'
       path: algebra/monoid__old.hpp
       title: algebra/monoid__old.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: algebra/reversemonoid.hpp
       title: algebra/reversemonoid.hpp
   - name: ds
@@ -62,7 +62,7 @@ data:
     - icon: ':warning:'
       path: ds/lichao.hpp
       title: ds/lichao.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: ds/segtree.hpp
       title: ds/segtree.hpp
     - icon: ':heavy_check_mark:'
@@ -101,7 +101,7 @@ data:
       title: geometry/geometry.hpp
   - name: graph
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: graph/base.hpp
       title: graph/base.hpp
     - icon: ':warning:'
@@ -131,12 +131,33 @@ data:
     - icon: ':warning:'
       path: graph/eulerwalk.hpp
       title: graph/eulerwalk.hpp
+    - icon: ':question:'
+      path: graph/hld.hpp
+      title: graph/hld.hpp
     - icon: ':heavy_check_mark:'
       path: graph/mis.hpp
       title: graph/mis.hpp
     - icon: ':heavy_check_mark:'
       path: graph/scc.hpp
       title: graph/scc.hpp
+    - icon: ':warning:'
+      path: graph/tree_dp.hpp
+      title: graph/tree_dp.hpp
+    - icon: ':warning:'
+      path: graph/treeabel.hpp
+      title: graph/treeabel.hpp
+    - icon: ':warning:'
+      path: graph/treedoubling.hpp
+      title: graph/treedoubling.hpp
+    - icon: ':warning:'
+      path: graph/treegroup.hpp
+      title: graph/treegroup.hpp
+    - icon: ':question:'
+      path: graph/treemonoid.hpp
+      title: graph/treemonoid.hpp
+    - icon: ':warning:'
+      path: graph/treemonoid_lazy.hpp
+      title: graph/treemonoid_lazy.hpp
     - icon: ':warning:'
       path: graph/twosat.hpp
       title: graph/twosat.hpp
@@ -150,12 +171,12 @@ data:
     - icon: ':warning:'
       path: mod/amodint.hpp
       title: mod/amodint.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: mod/modint.hpp
       title: mod/modint.hpp
   - name: .
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: my_template.hpp
       title: my_template.hpp
     - icon: ':warning:'
@@ -236,29 +257,6 @@ data:
     - icon: ':warning:'
       path: string/zalgorithm.hpp
       title: string/zalgorithm.hpp
-  - name: tree
-    pages:
-    - icon: ':heavy_check_mark:'
-      path: tree/hld.hpp
-      title: tree/hld.hpp
-    - icon: ':warning:'
-      path: tree/tree_dp.hpp
-      title: tree/tree_dp.hpp
-    - icon: ':warning:'
-      path: tree/treeabel.hpp
-      title: tree/treeabel.hpp
-    - icon: ':warning:'
-      path: tree/treedoubling.hpp
-      title: tree/treedoubling.hpp
-    - icon: ':warning:'
-      path: tree/treegroup.hpp
-      title: tree/treegroup.hpp
-    - icon: ':heavy_check_mark:'
-      path: tree/treemonoid.hpp
-      title: tree/treemonoid.hpp
-    - icon: ':warning:'
-      path: tree/treemonoid_lazy.hpp
-      title: tree/treemonoid_lazy.hpp
   verificationCategories:
   - name: test
     pages:

@@ -3,8 +3,8 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: tree/treemonoid_lazy.hpp
-    title: tree/treemonoid_lazy.hpp
+    path: graph/treemonoid_lazy.hpp
+    title: graph/treemonoid_lazy.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
@@ -130,7 +130,7 @@ data:
   isVerificationFile: false
   path: ds/lazysegtree.hpp
   requiredBy:
-  - tree/treemonoid_lazy.hpp
+  - graph/treemonoid_lazy.hpp
   timestamp: '2021-12-30 04:54:02+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

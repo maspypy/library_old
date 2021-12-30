@@ -1,26 +1,35 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algebra/reversemonoid.hpp
     title: algebra/reversemonoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':heavy_check_mark:'
-    path: tree/hld.hpp
-    title: tree/hld.hpp
+  - icon: ':question:'
+    path: graph/hld.hpp
+    title: graph/hld.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
+    title: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
+  - icon: ':x:'
+    path: test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
+    title: test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
+  - icon: ':x:'
+    path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
+    title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
     title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"ds/segtree.hpp\"\ntemplate <class Monoid>\nstruct SegTree\
@@ -77,7 +86,7 @@ data:
     frm to cost id\");\n      for (auto&& e: edges) print(e);\n    } else {\n    \
     \  print(\"indptr\", indptr);\n      print(\"frm to cost id\");\n      FOR(v,\
     \ N) for (auto&& e: (*this)[v]) print(e);\n    }\n  }\n\n  int size() { return\
-    \ N; }\n};\n#line 3 \"tree/hld.hpp\"\n\r\ntemplate <typename Graph>\r\nstruct\
+    \ N; }\n};\n#line 3 \"graph/hld.hpp\"\n\r\ntemplate <typename Graph>\r\nstruct\
     \ HLD {\r\n  Graph &G;\r\n  int N;\r\n  vector<int> LID, RID, head, V, parent,\
     \ depth;\r\n\r\n  HLD(Graph &G, int root = 0)\r\n      : G(G),\r\n        N(G.N),\r\
     \n        LID(G.N),\r\n        RID(G.N),\r\n        head(G.N, root),\r\n     \
@@ -118,7 +127,7 @@ data:
     \ {\r\n  using value_type = typename Monoid::value_type;\r\n  using X = value_type;\r\
     \n  static constexpr X op(const X &x, const X &y) { return Monoid::op(y, x); }\r\
     \n  static constexpr X unit = Monoid::unit;\r\n  static const bool commute = Monoid::commute;\r\
-    \n};\r\n#line 4 \"tree/treemonoid.hpp\"\n\r\ntemplate <typename HLD, typename\
+    \n};\r\n#line 4 \"graph/treemonoid.hpp\"\n\r\ntemplate <typename HLD, typename\
     \ Monoid, bool edge = false>\r\nstruct TreeMonoid {\r\n  using RevMonoid = ReverseMonoid<Monoid>;\r\
     \n  using X = typename Monoid::value_type;\r\n  HLD &hld;\r\n  int N;\r\n  SegTree<Monoid>\
     \ seg;\r\n  SegTree<RevMonoid> seg_r;\r\n\r\n  TreeMonoid(HLD &hld) : hld(hld),\
@@ -151,12 +160,12 @@ data:
     \u3002\");\r\n    print(\"\u90E8\u5206\u6728\u30AF\u30A8\u30EA O(logN) \u6642\u9593\
     \u3001\u30D1\u30B9\u30AF\u30A8\u30EA O(log^2N) \u6642\u9593\u3002\");\r\n  }\r\
     \n};\r\n"
-  code: "#include \"ds/segtree.hpp\"\r\n#include \"tree/hld.hpp\"\r\n#include \"algebra/reversemonoid.hpp\"\
-    \r\n\r\ntemplate <typename HLD, typename Monoid, bool edge = false>\r\nstruct\
-    \ TreeMonoid {\r\n  using RevMonoid = ReverseMonoid<Monoid>;\r\n  using X = typename\
-    \ Monoid::value_type;\r\n  HLD &hld;\r\n  int N;\r\n  SegTree<Monoid> seg;\r\n\
-    \  SegTree<RevMonoid> seg_r;\r\n\r\n  TreeMonoid(HLD &hld) : hld(hld), N(hld.N),\
-    \ seg(hld.N) {\r\n    if (!Monoid::commute) seg_r = SegTree<RevMonoid>(hld.N);\r\
+  code: "#include \"ds/segtree.hpp\"\r\n#include \"graph/hld.hpp\"\r\n#include \"\
+    algebra/reversemonoid.hpp\"\r\n\r\ntemplate <typename HLD, typename Monoid, bool\
+    \ edge = false>\r\nstruct TreeMonoid {\r\n  using RevMonoid = ReverseMonoid<Monoid>;\r\
+    \n  using X = typename Monoid::value_type;\r\n  HLD &hld;\r\n  int N;\r\n  SegTree<Monoid>\
+    \ seg;\r\n  SegTree<RevMonoid> seg_r;\r\n\r\n  TreeMonoid(HLD &hld) : hld(hld),\
+    \ N(hld.N), seg(hld.N) {\r\n    if (!Monoid::commute) seg_r = SegTree<RevMonoid>(hld.N);\r\
     \n  }\r\n\r\n  TreeMonoid(HLD &hld, vc<X> &dat) : hld(hld), N(hld.N) {\r\n   \
     \ vc<X> seg_raw(N, Monoid::unit);\r\n    if (!edge) {\r\n      FOR(v, N) seg_raw[hld.LID[v]]\
     \ = dat[v];\r\n    } else {\r\n      FOR(e, N - 1) {\r\n        int v = hld.e_to_v(e);\r\
@@ -187,20 +196,23 @@ data:
     \n};\r\n"
   dependsOn:
   - ds/segtree.hpp
-  - tree/hld.hpp
+  - graph/hld.hpp
   - graph/base.hpp
   - algebra/reversemonoid.hpp
   isVerificationFile: false
-  path: tree/treemonoid.hpp
+  path: graph/treemonoid.hpp
   requiredBy: []
-  timestamp: '2021-12-30 04:14:57+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-12-30 19:16:29+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
+  - test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
+  - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
-documentation_of: tree/treemonoid.hpp
+documentation_of: graph/treemonoid.hpp
 layout: document
 redirect_from:
-- /library/tree/treemonoid.hpp
-- /library/tree/treemonoid.hpp.html
-title: tree/treemonoid.hpp
+- /library/graph/treemonoid.hpp
+- /library/graph/treemonoid.hpp.html
+title: graph/treemonoid.hpp
 ---

@@ -66,7 +66,7 @@ data:
     \ sm))) {\n            sm = Monoid_X::op(dat[r], sm);\n            r--;\n    \
     \      }\n        }\n        return r + 1 - size;\n      }\n      sm = Monoid_X::op(dat[r],\
     \ sm);\n    } while ((r & -r) != r);\n    return 0;\n  }\n\n  void debug() { print(\"\
-    lazysegtree getall:\", get_all()); }\n};\n#line 2 \"tree/treemonoid_lazy.hpp\"\
+    lazysegtree getall:\", get_all()); }\n};\n#line 2 \"graph/treemonoid_lazy.hpp\"\
     \n\r\ntemplate <typename HLD, typename E, typename OP, bool edge = false,\r\n\
     \          bool commute = true, bool OP_commute = false>\r\nstruct TreeMonoidLazy\
     \ {\r\n  using F = function<E(E, E)>;\r\n  using G = function<E(E, OP)>;\r\n \
@@ -152,15 +152,15 @@ data:
   dependsOn:
   - ds/lazysegtree.hpp
   isVerificationFile: false
-  path: tree/treemonoid_lazy.hpp
+  path: graph/treemonoid_lazy.hpp
   requiredBy: []
-  timestamp: '2021-12-30 04:54:02+09:00'
+  timestamp: '2021-12-30 19:16:29+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: tree/treemonoid_lazy.hpp
+documentation_of: graph/treemonoid_lazy.hpp
 layout: document
 redirect_from:
-- /library/tree/treemonoid_lazy.hpp
-- /library/tree/treemonoid_lazy.hpp.html
-title: tree/treemonoid_lazy.hpp
+- /library/graph/treemonoid_lazy.hpp
+- /library/graph/treemonoid_lazy.hpp.html
+title: graph/treemonoid_lazy.hpp
 ---

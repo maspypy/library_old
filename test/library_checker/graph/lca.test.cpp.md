@@ -1,15 +1,15 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
+    path: graph/hld.hpp
+    title: graph/hld.hpp
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
-    path: tree/hld.hpp
-    title: tree/hld.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -129,7 +129,7 @@ data:
     Graph\");\n    if (!prepared) {\n      print(\"frm to cost id\");\n      for (auto&&\
     \ e: edges) print(e);\n    } else {\n      print(\"indptr\", indptr);\n      print(\"\
     frm to cost id\");\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e);\n   \
-    \ }\n  }\n\n  int size() { return N; }\n};\n#line 3 \"tree/hld.hpp\"\n\r\ntemplate\
+    \ }\n  }\n\n  int size() { return N; }\n};\n#line 3 \"graph/hld.hpp\"\n\r\ntemplate\
     \ <typename Graph>\r\nstruct HLD {\r\n  Graph &G;\r\n  int N;\r\n  vector<int>\
     \ LID, RID, head, V, parent, depth;\r\n\r\n  HLD(Graph &G, int root = 0)\r\n \
     \     : G(G),\r\n        N(G.N),\r\n        LID(G.N),\r\n        RID(G.N),\r\n\
@@ -173,19 +173,19 @@ data:
     \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  solve();\n \
     \ return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\n#include \"my_template.hpp\"\
-    \n\n#include \"tree/hld.hpp\"\n\nvoid solve() {\n  LL(N, Q);\n  Graph<int, 0>\
+    \n\n#include \"graph/hld.hpp\"\n\nvoid solve() {\n  LL(N, Q);\n  Graph<int, 0>\
     \ G(N);\n  FOR3(v, 1, N) {\n    LL(p);\n    G.add(p, v);\n  }\n  G.prepare();\n\
     \  HLD hld(G);\n\n  FOR(_, Q) {\n    LL(a, b);\n    print(hld.LCA(a, b));\n  }\n\
     }\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout\
     \ << setprecision(15);\n\n  solve();\n  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
-  - tree/hld.hpp
+  - graph/hld.hpp
   - graph/base.hpp
   isVerificationFile: true
   path: test/library_checker/graph/lca.test.cpp
   requiredBy: []
-  timestamp: '2021-12-30 04:14:57+09:00'
+  timestamp: '2021-12-30 19:16:29+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/graph/lca.test.cpp

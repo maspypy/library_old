@@ -1,14 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: tree/treemonoid.hpp
-    title: tree/treemonoid.hpp
+  - icon: ':question:'
+    path: graph/treemonoid.hpp
+    title: graph/treemonoid.hpp
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
+    title: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
+  - icon: ':x:'
+    path: test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
+    title: test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
+  - icon: ':x:'
+    path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
+    title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
+  - icon: ':x:'
+    path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
+    title: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
     title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
@@ -18,9 +30,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/lca_directed.test.cpp
     title: test/library_checker/graph/lca_directed.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/base.hpp\"\n\n// frm, to, cap, cost\ntemplate <typename\
@@ -48,7 +60,7 @@ data:
     Graph\");\n    if (!prepared) {\n      print(\"frm to cost id\");\n      for (auto&&\
     \ e: edges) print(e);\n    } else {\n      print(\"indptr\", indptr);\n      print(\"\
     frm to cost id\");\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e);\n   \
-    \ }\n  }\n\n  int size() { return N; }\n};\n#line 3 \"tree/hld.hpp\"\n\r\ntemplate\
+    \ }\n  }\n\n  int size() { return N; }\n};\n#line 3 \"graph/hld.hpp\"\n\r\ntemplate\
     \ <typename Graph>\r\nstruct HLD {\r\n  Graph &G;\r\n  int N;\r\n  vector<int>\
     \ LID, RID, head, V, parent, depth;\r\n\r\n  HLD(Graph &G, int root = 0)\r\n \
     \     : G(G),\r\n        N(G.N),\r\n        LID(G.N),\r\n        RID(G.N),\r\n\
@@ -126,19 +138,23 @@ data:
   dependsOn:
   - graph/base.hpp
   isVerificationFile: false
-  path: tree/hld.hpp
+  path: graph/hld.hpp
   requiredBy:
-  - tree/treemonoid.hpp
-  timestamp: '2021-12-30 04:14:57+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  - graph/treemonoid.hpp
+  timestamp: '2021-12-30 19:16:29+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/library_checker/graph/lca.test.cpp
   - test/library_checker/graph/lca_directed.test.cpp
+  - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
+  - test/library_checker/datastructure/vertex_add_path_sum_monoid_nc.test.cpp
+  - test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
+  - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
-documentation_of: tree/hld.hpp
+documentation_of: graph/hld.hpp
 layout: document
 redirect_from:
-- /library/tree/hld.hpp
-- /library/tree/hld.hpp.html
-title: tree/hld.hpp
+- /library/graph/hld.hpp
+- /library/graph/hld.hpp.html
+title: graph/hld.hpp
 ---
