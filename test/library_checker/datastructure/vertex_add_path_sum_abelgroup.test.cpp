@@ -1,7 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_add_path_sum"
 #include "my_template.hpp"
 
-#include "graph/treeabel.hpp"
+#include "graph/treeabelgroup.hpp"
+#include "algebra/addgroup.hpp"
 
 void solve() {
   LL(N, Q);
@@ -11,19 +12,19 @@ void solve() {
     LL(a, b);
     G.add(a, b);
   }
+  G.prepare();
 
-  HLD<Graph<int>> hld(G);
-  TreeAbelGroup<Graph<int>, ll, false> TG(hld, true, false);
-  TG.init(A);
+  HLD hld(G);
+  TreeAbelGroup<decltype(hld), AddGroup<ll>, false, true, false> TA(hld, A);
 
   FOR(_, Q) {
     LL(t);
     if (t == 0) {
       LL(v, x);
-      TG.add(v, x);
+      TA.add(v, x);
     } else {
       LL(u, v);
-      print(TG.sum_path(u, v));
+      print(TA.sum_path(u, v));
     }
   }
 }
