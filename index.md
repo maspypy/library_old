@@ -33,7 +33,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: algebra/mulgroup.hpp
       title: algebra/mulgroup.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: algebra/reversemonoid.hpp
       title: algebra/reversemonoid.hpp
   - name: ds
@@ -158,7 +158,7 @@ data:
     - icon: ':warning:'
       path: graph/treegroup.hpp
       title: graph/treegroup.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/treemonoid.hpp
       title: graph/treemonoid.hpp
     - icon: ':warning:'
@@ -337,7 +337,7 @@ data:
     - icon: ':x:'
       path: test/library_checker/datastructure/vertex_add_subtree_sum_group.test.cpp
       title: test/library_checker/datastructure/vertex_add_subtree_sum_group.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
       title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
     - icon: ':x:'
