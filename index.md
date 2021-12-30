@@ -16,6 +16,9 @@ data:
       path: algebra/cntsum.hpp
       title: algebra/cntsum.hpp
     - icon: ':heavy_check_mark:'
+      path: algebra/lazy_add_mul.hpp
+      title: algebra/lazy_add_mul.hpp
+    - icon: ':heavy_check_mark:'
       path: algebra/lazy_cntsum_affine.hpp
       title: algebra/lazy_cntsum_affine.hpp
     - icon: ':warning:'
@@ -27,6 +30,9 @@ data:
     - icon: ':warning:'
       path: algebra/monoid__old.hpp
       title: algebra/monoid__old.hpp
+    - icon: ':heavy_check_mark:'
+      path: algebra/mulgroup.hpp
+      title: algebra/mulgroup.hpp
     - icon: ':question:'
       path: algebra/reversemonoid.hpp
       title: algebra/reversemonoid.hpp
@@ -107,7 +113,7 @@ data:
     - icon: ':warning:'
       path: graph/bfs01.hpp
       title: graph/bfs01.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: graph/bfsnumbering.hpp
       title: graph/bfsnumbering.hpp
     - icon: ':warning:'
@@ -368,5 +374,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/math/factorize.test.cpp
       title: test/library_checker/math/factorize.test.cpp
+  - name: test/yukicoder
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: test/yukicoder/899_bfsnumbering.test.cpp
+      title: test/yukicoder/899_bfsnumbering.test.cpp
 layout: toppage
 ---

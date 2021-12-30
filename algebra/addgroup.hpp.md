@@ -1,11 +1,17 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: algebra/lazy_add_mul.hpp
+    title: algebra/lazy_add_mul.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
     title: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yukicoder/899_bfsnumbering.test.cpp
+    title: test/yukicoder/899_bfsnumbering.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -24,11 +30,13 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: algebra/addgroup.hpp
-  requiredBy: []
+  requiredBy:
+  - algebra/lazy_add_mul.hpp
   timestamp: '2021-12-28 17:04:46+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
+  - test/yukicoder/899_bfsnumbering.test.cpp
 documentation_of: algebra/addgroup.hpp
 layout: document
 redirect_from:

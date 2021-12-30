@@ -99,6 +99,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/factorize.test.cpp
     title: test/library_checker/math/factorize.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yukicoder/899_bfsnumbering.test.cpp
+    title: test/yukicoder/899_bfsnumbering.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -309,6 +312,7 @@ data:
   - test/library_checker/datastructure/associative_array.test.cpp
   - test/library_checker/datastructure/range_affine_range_sum.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
+  - test/yukicoder/899_bfsnumbering.test.cpp
 documentation_of: my_template.hpp
 layout: document
 redirect_from:

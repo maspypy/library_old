@@ -26,28 +26,29 @@ data:
     \ Graph* G;\n  };\n\n  bool is_prepared() { return prepared; }\n  constexpr bool\
     \ is_directed() { return directed; }\n\n  Graph() {}\n  Graph(int N) : N(N), M(0),\
     \ prepared(0) {}\n\n  void add(int frm, int to, T cost = 1, int i = -1) {\n  \
-    \  assert(!prepared);\n    if (i == -1) i = M;\n    auto e = edge_type({frm, to,\
-    \ cost, i});\n    edges.eb(e);\n    ++M;\n  }\n\n  void prepare() {\n    assert(!prepared);\n\
-    \    prepared = true;\n    indptr.assign(N + 1, 0);\n    for (auto&& [frm, to,\
-    \ cost, id]: edges) {\n      indptr[frm + 1]++;\n      if (!directed) indptr[to\
-    \ + 1]++;\n    }\n    FOR(v, N) indptr[v + 1] += indptr[v];\n    auto counter\
-    \ = indptr;\n    csr_edges.resize(indptr.back() + 1);\n    for (auto&& [frm, to,\
-    \ cost, id]: edges) {\n      csr_edges[counter[frm]++] = {frm, to, cost, id};\n\
-    \      if (!directed) csr_edges[counter[to]++] = {to, frm, cost, id};\n    }\n\
-    \  }\n\n  OutgoingEdges operator[](int v) const {\n    assert(prepared);\n   \
-    \ return {this, indptr[v], indptr[v + 1]};\n  }\n\n  void debug() {\n    print(\"\
-    Graph\");\n    if (!prepared) {\n      print(\"frm to cost id\");\n      for (auto&&\
-    \ e: edges) print(e);\n    } else {\n      print(\"indptr\", indptr);\n      print(\"\
-    frm to cost id\");\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e);\n   \
-    \ }\n  }\n\n  int size() { return N; }\n};\n#line 2 \"my_template.hpp\"\n#include\
-    \ <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\nusing ll8\
-    \ = __int128;\nusing ld = long double;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\n\
-    using uint = unsigned int;\nusing ull = unsigned long long;\n\ntemplate <class\
-    \ T>\nusing vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\n\
-    template <class T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc\
-    \ = vector<vvvc<T>>;\ntemplate <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate\
-    \ <class T>\nusing pq = priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T,\
-    \ vector<T>, greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
+    \  assert(!prepared);\n    assert(0 <= frm && frm < N && 0 <= to && to < N);\n\
+    \    if (i == -1) i = M;\n    auto e = edge_type({frm, to, cost, i});\n    edges.eb(e);\n\
+    \    ++M;\n  }\n\n  void prepare() {\n    assert(!prepared);\n    prepared = true;\n\
+    \    indptr.assign(N + 1, 0);\n    for (auto&& [frm, to, cost, id]: edges) {\n\
+    \      indptr[frm + 1]++;\n      if (!directed) indptr[to + 1]++;\n    }\n   \
+    \ FOR(v, N) indptr[v + 1] += indptr[v];\n    auto counter = indptr;\n    csr_edges.resize(indptr.back()\
+    \ + 1);\n    for (auto&& [frm, to, cost, id]: edges) {\n      csr_edges[counter[frm]++]\
+    \ = {frm, to, cost, id};\n      if (!directed) csr_edges[counter[to]++] = {to,\
+    \ frm, cost, id};\n    }\n  }\n\n  OutgoingEdges operator[](int v) const {\n \
+    \   assert(prepared);\n    return {this, indptr[v], indptr[v + 1]};\n  }\n\n \
+    \ void debug() {\n    print(\"Graph\");\n    if (!prepared) {\n      print(\"\
+    frm to cost id\");\n      for (auto&& e: edges) print(e);\n    } else {\n    \
+    \  print(\"indptr\", indptr);\n      print(\"frm to cost id\");\n      FOR(v,\
+    \ N) for (auto&& e: (*this)[v]) print(e);\n    }\n  }\n\n  int size() { return\
+    \ N; }\n};\n#line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace\
+    \ std;\n\nusing ll = long long;\nusing ll8 = __int128;\nusing ld = long double;\n\
+    using pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint = unsigned int;\n\
+    using ull = unsigned long long;\n\ntemplate <class T>\nusing vc = vector<T>;\n\
+    template <class T>\nusing vvc = vector<vc<T>>;\ntemplate <class T>\nusing vvvc\
+    \ = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc = vector<vvvc<T>>;\ntemplate\
+    \ <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate <class T>\nusing pq =\
+    \ priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T, vector<T>,\
+    \ greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
     #define VEC(type, name, size) \\\n  vector<type> name(size);    \\\n  IN(name)\n\
     #define vv(type, name, h, ...) \\\n  vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n\
     #define VV(type, name, h, w)                     \\\n  vector<vector<type>> name(h,\
@@ -159,7 +160,7 @@ data:
   isVerificationFile: false
   path: graph/bipartite_coloring.hpp
   requiredBy: []
-  timestamp: '2021-12-29 03:03:07+09:00'
+  timestamp: '2021-12-30 20:03:25+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph/bipartite_coloring.hpp
