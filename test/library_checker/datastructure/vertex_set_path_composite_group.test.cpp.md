@@ -1,26 +1,35 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
+    path: algebra/affinegroup.hpp
+    title: algebra/affinegroup.hpp
+  - icon: ':heavy_check_mark:'
+    path: algebra/reversegroup.hpp
+    title: algebra/reversegroup.hpp
+  - icon: ':heavy_check_mark:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/hld.hpp
     title: graph/hld.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
+    path: graph/treegroup.hpp
+    title: graph/treegroup.hpp
+  - icon: ':heavy_check_mark:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_set_path_composite
@@ -111,34 +120,70 @@ data:
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
     \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp\"\
-    \n\n#line 2 \"ds/segtree.hpp\"\ntemplate <class Monoid>\nstruct SegTree {\n  using\
-    \ X = typename Monoid::value_type;\n  using value_type = X;\n  vc<X> dat;\n  int\
-    \ n, log, size;\n\n  SegTree() : SegTree(0) {}\n  SegTree(int n) : SegTree(vc<X>(n,\
-    \ Monoid::unit)) {}\n  SegTree(vc<X> v) : n(len(v)) {\n    log = 1;\n    while\
-    \ ((1 << log) < n) ++log;\n    size = 1 << log;\n    dat.assign(size << 1, Monoid::unit);\n\
-    \    FOR(i, n) dat[size + i] = v[i];\n    FOR3_R(i, 1, size) update(i);\n  }\n\
-    \n  void update(int i) { dat[i] = Monoid::op(dat[2 * i], dat[2 * i + 1]); }\n\n\
-    \  void set(int i, X x) {\n    assert(i < n);\n    dat[i += size] = x;\n    while\
-    \ (i >>= 1) update(i);\n  }\n\n  X prod(int L, int R) {\n    assert(L <= R);\n\
-    \    assert(R <= n);\n    X vl = Monoid::unit, vr = Monoid::unit;\n    L += size,\
-    \ R += size;\n    while (L < R) {\n      if (L & 1) vl = Monoid::op(vl, dat[L++]);\n\
-    \      if (R & 1) vr = Monoid::op(dat[--R], vr);\n      L >>= 1, R >>= 1;\n  \
-    \  }\n    return Monoid::op(vl, vr);\n  }\n\n  template <class F>\n  int max_right(F\
-    \ &check, int L) {\n    assert(0 <= L && L <= n && check(Monoid::unit));\n   \
-    \ if (L == n) return n;\n    L += size;\n    X sm = Monoid::unit;\n    do {\n\
-    \      while (L % 2 == 0) L >>= 1;\n      if (!check(Monoid::op(sm, dat[L])))\
-    \ {\n        while (L < n) {\n          L = 2 * L;\n          if (check(Monoid::op(sm,\
-    \ dat[L]))) {\n            sm = Monoid::op(sm, dat[L]);\n            L++;\n  \
-    \        }\n        }\n        return L - n;\n      }\n      sm = Monoid::op(sm,\
-    \ dat[L]);\n      L++;\n    } while ((L & -L) != L);\n    return n;\n  }\n\n \
-    \ template <class F>\n  int min_left(F &check, int R) {\n    assert(0 <= R &&\
-    \ R <= n && check(Monoid::unit));\n    if (R == 0) return 0;\n    R += n;\n  \
-    \  X sm = Monoid::unit;\n    do {\n      --R;\n      while (R > 1 && (R % 2))\
-    \ R >>= 1;\n      if (!check(Monoid::op(dat[R], sm))) {\n        while (R < n)\
-    \ {\n          R = 2 * R + 1;\n          if (check(Monoid::op(dat[R], sm))) {\n\
-    \            sm = Monoid::op(dat[R], sm);\n            R--;\n          }\n   \
-    \     }\n        return R + 1 - n;\n      }\n      sm = Monoid::op(dat[R], sm);\n\
-    \    } while ((R & -R) != R);\n    return 0;\n  }\n\n  void debug() { print(\"\
+    \n\n#line 1 \"mod/modint.hpp\"\ntemplate< int mod >\nstruct modint {\n  int x;\n\
+    \n  constexpr modint(const ll x = 0) noexcept : x(x >= 0 ? x % mod : (mod - (-x)\
+    \ % mod) % mod) {}\n\n  modint &operator+=(const modint &p) {\n    if((x += p.x)\
+    \ >= mod) x -= mod;\n    return *this;\n  }\n\n  modint &operator-=(const modint\
+    \ &p) {\n    if((x += mod - p.x) >= mod) x -= mod;\n    return *this;\n  }\n\n\
+    \  modint &operator*=(const modint &p) {\n    x = (int) (1LL * x * p.x % mod);\n\
+    \    return *this;\n  }\n\n  modint &operator/=(const modint &p) {\n    *this\
+    \ *= p.inverse();\n    return *this;\n  }\n\n  modint operator-() const { return\
+    \ modint(-x); }\n\n  modint operator+(const modint &p) const { return modint(*this)\
+    \ += p; }\n\n  modint operator-(const modint &p) const { return modint(*this)\
+    \ -= p; }\n\n  modint operator*(const modint &p) const { return modint(*this)\
+    \ *= p; }\n\n  modint operator/(const modint &p) const { return modint(*this)\
+    \ /= p; }\n\n  bool operator==(const modint &p) const { return x == p.x; }\n\n\
+    \  bool operator!=(const modint &p) const { return x != p.x; }\n\n  modint inverse()\
+    \ const {\n    int a = x, b = mod, u = 1, v = 0, t;\n    while(b > 0) {\n    \
+    \  t = a / b;\n      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n\
+    \    return modint(u);\n  }\n\n  modint pow(int64_t n) const {\n    modint ret(1),\
+    \ mul(x);\n    while(n > 0) {\n      if(n & 1) ret *= mul;\n      mul *= mul;\n\
+    \      n >>= 1;\n    }\n    return ret;\n  }\n\n  friend ostream &operator<<(ostream\
+    \ &os, const modint &p) {\n    return os << p.x;\n  }\n\n  friend istream &operator>>(istream\
+    \ &is, modint &a) {\n    int64_t t;\n    is >> t;\n    a = modint< mod >(t);\n\
+    \    return (is);\n  }\n\n  static int get_mod() { return mod; }\n};\n\ntemplate<\
+    \ typename T >\nstruct ModCalc {\n  vector<T> _fact = {1, 1};\n  vector<T> _fact_inv\
+    \ = {1, 1};\n  vector<T> _inv = {0, 1};\n  \n  T pow(T a, int n){\n    T x(1);\n\
+    \    while(n) {\n      if(n & 1) x *= a;\n      a *= a;\n      n >>= 1;\n    }\n\
+    \    return x;\n  }\n  void expand(int n){\n    while(_fact.size() <= n){\n  \
+    \    auto i = _fact.size();\n      _fact.eb(_fact[i-1] * T(i));\n      auto q\
+    \ = T::get_mod() / i, r = T::get_mod() % i;\n      _inv.eb(_inv[r] * T(T::get_mod()-q));\n\
+    \      _fact_inv.eb(_fact_inv[i-1] * _inv[i]);\n    }\n  }\n\n  T fact(int n){\n\
+    \    if(n >= _fact.size()) expand(n);\n    return _fact[n];\n  }\n\n  T fact_inv(int\
+    \ n){\n    if(n >= _fact.size()) expand(n);\n    return _fact_inv[n];\n  }\n \
+    \ \n  T inv(int n){\n    if(n >= _fact.size()) expand(n);\n    return _inv[n];\n\
+    \  }\n  \n  T C(ll n, ll k, bool large=false){\n    assert(n >= 0);\n    if (k\
+    \ < 0 || n < k) return 0;\n    if (!large) return fact(n) * fact_inv(k) * fact_inv(n-k);\n\
+    \    k = min(k, n-k);\n    T x(1);\n    FOR(i, k){\n      x *= n - i;\n      x\
+    \ *= inv(i + 1);\n    }\n    return x;\n  }\n};\n\nusing modint107 = modint<1'000'000'007>;\n\
+    using modint998 = modint<998'244'353>;\n#line 2 \"ds/segtree.hpp\"\ntemplate <class\
+    \ Monoid>\nstruct SegTree {\n  using X = typename Monoid::value_type;\n  using\
+    \ value_type = X;\n  vc<X> dat;\n  int n, log, size;\n\n  SegTree() : SegTree(0)\
+    \ {}\n  SegTree(int n) : SegTree(vc<X>(n, Monoid::unit)) {}\n  SegTree(vc<X> v)\
+    \ : n(len(v)) {\n    log = 1;\n    while ((1 << log) < n) ++log;\n    size = 1\
+    \ << log;\n    dat.assign(size << 1, Monoid::unit);\n    FOR(i, n) dat[size +\
+    \ i] = v[i];\n    FOR3_R(i, 1, size) update(i);\n  }\n\n  void update(int i) {\
+    \ dat[i] = Monoid::op(dat[2 * i], dat[2 * i + 1]); }\n\n  void set(int i, X x)\
+    \ {\n    assert(i < n);\n    dat[i += size] = x;\n    while (i >>= 1) update(i);\n\
+    \  }\n\n  X prod(int L, int R) {\n    assert(L <= R);\n    assert(R <= n);\n \
+    \   X vl = Monoid::unit, vr = Monoid::unit;\n    L += size, R += size;\n    while\
+    \ (L < R) {\n      if (L & 1) vl = Monoid::op(vl, dat[L++]);\n      if (R & 1)\
+    \ vr = Monoid::op(dat[--R], vr);\n      L >>= 1, R >>= 1;\n    }\n    return Monoid::op(vl,\
+    \ vr);\n  }\n\n  template <class F>\n  int max_right(F &check, int L) {\n    assert(0\
+    \ <= L && L <= n && check(Monoid::unit));\n    if (L == n) return n;\n    L +=\
+    \ size;\n    X sm = Monoid::unit;\n    do {\n      while (L % 2 == 0) L >>= 1;\n\
+    \      if (!check(Monoid::op(sm, dat[L]))) {\n        while (L < n) {\n      \
+    \    L = 2 * L;\n          if (check(Monoid::op(sm, dat[L]))) {\n            sm\
+    \ = Monoid::op(sm, dat[L]);\n            L++;\n          }\n        }\n      \
+    \  return L - n;\n      }\n      sm = Monoid::op(sm, dat[L]);\n      L++;\n  \
+    \  } while ((L & -L) != L);\n    return n;\n  }\n\n  template <class F>\n  int\
+    \ min_left(F &check, int R) {\n    assert(0 <= R && R <= n && check(Monoid::unit));\n\
+    \    if (R == 0) return 0;\n    R += n;\n    X sm = Monoid::unit;\n    do {\n\
+    \      --R;\n      while (R > 1 && (R % 2)) R >>= 1;\n      if (!check(Monoid::op(dat[R],\
+    \ sm))) {\n        while (R < n) {\n          R = 2 * R + 1;\n          if (check(Monoid::op(dat[R],\
+    \ sm))) {\n            sm = Monoid::op(dat[R], sm);\n            R--;\n      \
+    \    }\n        }\n        return R + 1 - n;\n      }\n      sm = Monoid::op(dat[R],\
+    \ sm);\n    } while ((R & -R) != R);\n    return 0;\n  }\n\n  void debug() { print(\"\
     segtree\", dat); }\n};\n#line 2 \"graph/base.hpp\"\n\n// frm, to, cap, cost\n\
     template <typename T>\nusing Edge = tuple<int, int, T, int>;\n\ntemplate <typename\
     \ T, bool directed = false>\nstruct Graph {\n  int N, M;\n  using cost_type =\
@@ -204,161 +249,100 @@ data:
     \u9593\u3002\");\r\n    print(\"\u6728\u306E\u554F\u984C\u3067\u306F\u771F\u3063\
     \u5148\u306B\u3053\u308C\u3092\u4F5C\u308B\u3002\");\r\n    print(\"\u2192 \u6728\
     DP\u3084\u6728\u30AF\u30A8\u30EA\u306B\u6D3E\u751F\u3002\");\r\n  }\r\n};\r\n\
-    #line 1 \"mod/modint.hpp\"\ntemplate< int mod >\nstruct modint {\n  int x;\n\n\
-    \  constexpr modint(const ll x = 0) noexcept : x(x >= 0 ? x % mod : (mod - (-x)\
-    \ % mod) % mod) {}\n\n  modint &operator+=(const modint &p) {\n    if((x += p.x)\
-    \ >= mod) x -= mod;\n    return *this;\n  }\n\n  modint &operator-=(const modint\
-    \ &p) {\n    if((x += mod - p.x) >= mod) x -= mod;\n    return *this;\n  }\n\n\
-    \  modint &operator*=(const modint &p) {\n    x = (int) (1LL * x * p.x % mod);\n\
-    \    return *this;\n  }\n\n  modint &operator/=(const modint &p) {\n    *this\
-    \ *= p.inverse();\n    return *this;\n  }\n\n  modint operator-() const { return\
-    \ modint(-x); }\n\n  modint operator+(const modint &p) const { return modint(*this)\
-    \ += p; }\n\n  modint operator-(const modint &p) const { return modint(*this)\
-    \ -= p; }\n\n  modint operator*(const modint &p) const { return modint(*this)\
-    \ *= p; }\n\n  modint operator/(const modint &p) const { return modint(*this)\
-    \ /= p; }\n\n  bool operator==(const modint &p) const { return x == p.x; }\n\n\
-    \  bool operator!=(const modint &p) const { return x != p.x; }\n\n  modint inverse()\
-    \ const {\n    int a = x, b = mod, u = 1, v = 0, t;\n    while(b > 0) {\n    \
-    \  t = a / b;\n      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n\
-    \    return modint(u);\n  }\n\n  modint pow(int64_t n) const {\n    modint ret(1),\
-    \ mul(x);\n    while(n > 0) {\n      if(n & 1) ret *= mul;\n      mul *= mul;\n\
-    \      n >>= 1;\n    }\n    return ret;\n  }\n\n  friend ostream &operator<<(ostream\
-    \ &os, const modint &p) {\n    return os << p.x;\n  }\n\n  friend istream &operator>>(istream\
-    \ &is, modint &a) {\n    int64_t t;\n    is >> t;\n    a = modint< mod >(t);\n\
-    \    return (is);\n  }\n\n  static int get_mod() { return mod; }\n};\n\ntemplate<\
-    \ typename T >\nstruct ModCalc {\n  vector<T> _fact = {1, 1};\n  vector<T> _fact_inv\
-    \ = {1, 1};\n  vector<T> _inv = {0, 1};\n  \n  T pow(T a, int n){\n    T x(1);\n\
-    \    while(n) {\n      if(n & 1) x *= a;\n      a *= a;\n      n >>= 1;\n    }\n\
-    \    return x;\n  }\n  void expand(int n){\n    while(_fact.size() <= n){\n  \
-    \    auto i = _fact.size();\n      _fact.eb(_fact[i-1] * T(i));\n      auto q\
-    \ = T::get_mod() / i, r = T::get_mod() % i;\n      _inv.eb(_inv[r] * T(T::get_mod()-q));\n\
-    \      _fact_inv.eb(_fact_inv[i-1] * _inv[i]);\n    }\n  }\n\n  T fact(int n){\n\
-    \    if(n >= _fact.size()) expand(n);\n    return _fact[n];\n  }\n\n  T fact_inv(int\
-    \ n){\n    if(n >= _fact.size()) expand(n);\n    return _fact_inv[n];\n  }\n \
-    \ \n  T inv(int n){\n    if(n >= _fact.size()) expand(n);\n    return _inv[n];\n\
-    \  }\n  \n  T C(ll n, ll k, bool large=false){\n    assert(n >= 0);\n    if (k\
-    \ < 0 || n < k) return 0;\n    if (!large) return fact(n) * fact_inv(k) * fact_inv(n-k);\n\
-    \    k = min(k, n-k);\n    T x(1);\n    FOR(i, k){\n      x *= n - i;\n      x\
-    \ *= inv(i + 1);\n    }\n    return x;\n  }\n};\n\nusing modint107 = modint<1'000'000'007>;\n\
-    using modint998 = modint<998'244'353>;\n#line 8 \"test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp\"\
-    \n\nusing mint = modint998;\n\ntemplate <typename Graph, typename E, bool edge\
-    \ = false>\nstruct TreeGroup {\n  using F = function<E(E, E)>;\n  using G = function<E(E)>;\n\
-    \n  HLD<Graph> &hld;\n  int N;\n  F f;\n  G inverse;\n  E unit;\n  const bool\
-    \ commute;\n  const bool path_query;\n  const bool subtree_query;\n  SegTree<E>\
-    \ seg, seg_r, seg_subtree;\n\n  TreeGroup(HLD<Graph> &hld, Monoid<E> Mono, bool\
-    \ path_query,\n            bool subtree_query)\n      : hld(hld)\n      , N(hld.N)\n\
-    \      , f(Mono.f)\n      , inverse(Mono.inverse)\n      , unit(Mono.unit)\n \
-    \     , commute(Mono.commute)\n      , path_query(path_query)\n      , subtree_query(subtree_query)\n\
-    \      , seg(Mono)\n      , seg_r(Monoid_reverse<E>(Mono))\n      , seg_subtree(Mono)\
-    \ {\n    assert(Mono.has_inverse);\n    if (path_query) {\n      seg.init(N +\
-    \ N);\n      if (!commute) seg_r.init(N + N);\n    }\n    if (subtree_query) {\n\
-    \      assert(Mono.commute);\n      seg_subtree.init(N);\n    }\n  };\n\n  void\
-    \ init_path(vc<E> &dat) {\n    vc<E> seg_raw(N + N, unit);\n    if (!edge) {\n\
-    \      FOR(v, N) {\n        seg_raw[hld.ELID[v]] = dat[v];\n        seg_raw[hld.ERID[v]]\
-    \ = inverse(dat[v]);\n      }\n    } else {\n      FOR(i, N - 1) {\n        int\
-    \ v = hld.e_to_v[i];\n        seg_raw[hld.ELID[v]] = dat[i];\n        seg_raw[hld.ERID[v]]\
-    \ = inverse(dat[i]);\n      }\n    }\n    seg.build(seg_raw);\n    if (!commute)\
-    \ seg_r.build(seg_raw);\n  }\n\n  void init_subtree(vc<E> &dat) {\n    vc<E> seg_raw(N,\
-    \ unit);\n    if (!edge) {\n      FOR(v, N) { seg_raw[hld.LID[v]] = dat[v]; }\n\
-    \    } else {\n      FOR(i, N - 1) {\n        int v = hld.e_to_v[i];\n       \
-    \ seg_raw[hld.LID[v]] = dat[i];\n      }\n    }\n    seg_subtree.build(seg_raw);\n\
-    \  }\n\n  void init(vc<E> &dat) {\n    // vertex index OR edge index\n    if (path_query)\
-    \ init_path(dat);\n    if (subtree_query) init_subtree(dat);\n  }\n\n  void set_path(int\
-    \ v, E x) {\n    seg.set(hld.ELID[v], x);\n    seg.set(hld.ERID[v], inverse(x));\n\
-    \    if (!commute) {\n      seg_r.set(hld.ELID[v], x);\n      seg_r.set(hld.ERID[v],\
-    \ inverse(x));\n    }\n  }\n\n  void set_subtree(int v, E x) { seg_subtree.set(hld.LID[v],\
-    \ x); }\n\n  void set(int i, E x) {\n    int v = (edge ? hld.e_to_v[i] : i);\n\
-    \    if (path_query) set_path(v, x);\n    if (subtree_query) set_subtree(v, x);\n\
-    \  }\n\n  E prod_path(int frm, int to) {\n    int lca = hld.LCA(frm, to);\n  \
-    \  // [frm, lca)\n    E x1 = (commute ? seg.prod(hld.ELID[lca] + 1, hld.ELID[frm]\
-    \ + 1)\n                    : seg_r.prod(hld.ELID[lca] + 1, hld.ELID[frm] + 1));\n\
-    \    // edge \u306A\u3089 (lca, to]\u3001vertex \u306A\u3089 [lca, to]\n    E\
-    \ x2 = seg.prod(hld.ELID[lca] + edge, hld.ELID[to] + 1);\n    return f(x1, x2);\n\
-    \  }\n\n  E prod_subtree(int u) {\n    assert(subtree_query);\n    int l = hld.LID[u],\
-    \ r = hld.RID[u];\n    return seg_subtree.prod(l + edge, r);\n  }\n\n  void debug()\
-    \ {\n    print(\"hld\");\n    hld.debug();\n    print(\"seg\");\n    seg.debug();\n\
-    \    print(\"seg_r\");\n    seg_r.debug();\n    print(\"seg_subtree\");\n    seg_subtree.debug();\n\
-    \  }\n\n  void doc() {\n    print(\"EulerTour + \u30BB\u30B0\u6728\u3002\");\n\
-    \    print(\"\u9006\u5143\u3092\u5229\u7528\u3057\u3066\u3001\u30D1\u30B9\u30AF\
-    \u30A8\u30EA\u3092 O(logN) \u6642\u9593\u3067\u884C\u3046\u3002\");\n    print(\"\
-    \u90E8\u5206\u6728\u30AF\u30A8\u30EA O(logN) \u6642\u9593\u3001\u30D1\u30B9\u30AF\
-    \u30A8\u30EA O(logN) \u6642\u9593\u3002\");\n  }\n};\n\nvoid solve() {\n  LL(N,\
-    \ Q);\n  using E = pair<mint, mint>;\n  vc<E> A(N);\n  FOR(i, N) {\n    LL(a,\
-    \ b);\n    A[i] = mp(mint(a), mint(b));\n  }\n\n  Graph<int> G(N);\n  FOR(_, N\
-    \ - 1) {\n    LL(a, b);\n    G.add(a, b);\n  }\n\n  HLD<Graph<int>> hld(G);\n\
-    \  TreeGroup<Graph<int>, E, false> TG(hld, Monoid_affine<mint>(true), true,\n\
-    \                                     false);\n  TG.init(A);\n\n  FOR(_, Q) {\n\
-    \    LL(t);\n    if (t == 0) {\n      LL(v, c, d);\n      TG.set(v, E({mint(c),\
+    #line 1 \"algebra/reversegroup.hpp\"\ntemplate <class Group>\r\nstruct ReverseGroup\
+    \ {\r\n  using value_type = typename Group::value_type;\r\n  using X = value_type;\r\
+    \n  static constexpr X op(const X &x, const X &y) { return Group::op(y, x); }\r\
+    \n  static constexpr X inverse(const X &x) { return Group::inverse(x); }\r\n \
+    \ static constexpr X unit = Group::unit;\r\n  static const bool commute = Group::commute;\r\
+    \n};\r\n#line 4 \"graph/treegroup.hpp\"\n\r\n// \u4F5C\u3063\u3066\u307F\u305F\
+    \u3082\u306E\u306E\u3001HLD(log^2N)\u3088\u308A\u9045\u3044\u304C\u3061\uFF1F\r\
+    \ntemplate <typename HLD, typename Group, bool edge = false,\r\n          bool\
+    \ path_query = true, bool subtree_query = false>\r\nstruct TreeGroup {\r\n  using\
+    \ RevGroup = ReverseGroup<Group>;\r\n  using X = typename Group::value_type;\r\
+    \n  HLD &hld;\r\n  int N;\r\n  SegTree<Group> seg, seg_subtree;\r\n  SegTree<RevGroup>\
+    \ seg_r;\r\n\r\n  TreeGroup(HLD &hld) : hld(hld), N(hld.N) {\r\n    if (path_query)\
+    \ {\r\n      seg = SegTree<Group>(2 * N);\r\n      if (!Group::commute) seg_r\
+    \ = SegTree<RevGroup>(2 * N);\r\n    }\r\n    if (subtree_query) {\r\n      assert(Group::commute);\r\
+    \n      seg_subtree = SegTree<Group>(N);\r\n    }\r\n  }\r\n\r\n  TreeGroup(HLD\
+    \ &hld, vc<X> dat) : hld(hld), N(hld.N) {\r\n    if (path_query) {\r\n      vc<X>\
+    \ seg_raw(2 * N);\r\n      if (!edge) {\r\n        assert(len(dat) == N);\r\n\
+    \        FOR(v, N) {\r\n          seg_raw[hld.ELID(v)] = dat[v];\r\n         \
+    \ seg_raw[hld.ERID(v)] = Group::inverse(dat[v]);\r\n        }\r\n      } else\
+    \ {\r\n        assert(len(dat) == N - 1);\r\n        FOR(e, N - 1) {\r\n     \
+    \     int v = hld.e_to_v(e);\r\n          seg_raw[hld.ELID(v)] = dat[e];\r\n \
+    \         seg_raw[hld.ERID(v)] = Group::inverse(dat[e]);\r\n        }\r\n    \
+    \  }\r\n      seg = SegTree<Group>(seg_raw);\r\n      if (!Group::commute) seg_r\
+    \ = SegTree<RevGroup>(seg_raw);\r\n    }\r\n    if (subtree_query) {\r\n     \
+    \ assert(Group::commute);\r\n      vc<X> seg_raw(N);\r\n      if (!edge) {\r\n\
+    \        assert(len(dat) == N);\r\n        FOR(v, N) seg_raw[hld.LID[v]] = dat[v];\r\
+    \n      } else {\r\n        assert(len(dat) == N - 1);\r\n        FOR(e, N - 1)\
+    \ {\r\n          int v = hld.e_to_v(e);\r\n          seg_raw[hld.LID[v]] = dat[e];\r\
+    \n        }\r\n      }\r\n      seg_subtree = SegTree<Group>(seg_raw);\r\n   \
+    \ }\r\n  }\r\n\r\n  void set_path(int v, X x) {\r\n    X inv_x = Group::inverse(x);\r\
+    \n    seg.set(hld.ELID(v), x);\r\n    seg.set(hld.ERID(v), inv_x);\r\n    if (!Group::commute)\
+    \ {\r\n      seg_r.set(hld.ELID(v), x);\r\n      seg_r.set(hld.ERID(v), inv_x);\r\
+    \n    }\r\n  }\r\n\r\n  void set_subtree(int v, X x) { seg_subtree.set(hld.LID[v],\
+    \ x); }\r\n\r\n  void set(int i, X x) {\r\n    int v = (edge ? hld.e_to_v(i) :\
+    \ i);\r\n    if (path_query) set_path(v, x);\r\n    if (subtree_query) set_subtree(v,\
+    \ x);\r\n  }\r\n\r\n  X prod_path(int frm, int to) {\r\n    assert(path_query);\r\
+    \n    int lca = hld.LCA(frm, to);\r\n    // [frm, lca)\r\n    X x1 = (Group::commute\
+    \ ? seg.prod(hld.ELID(lca) + 1, hld.ELID(frm) + 1)\r\n                       \
+    \    : seg_r.prod(hld.ELID(lca) + 1, hld.ELID(frm) + 1));\r\n    // edge \u306A\
+    \u3089 (lca, to]\u3001vertex \u306A\u3089 [lca, to]\r\n    X x2 = seg.prod(hld.ELID(lca)\
+    \ + edge, hld.ELID(to) + 1);\r\n    return Group::op(x1, x2);\r\n  }\r\n\r\n \
+    \ X prod_subtree(int u) {\r\n    assert(subtree_query);\r\n    int l = hld.LID[u],\
+    \ r = hld.RID[u];\r\n    return seg_subtree.prod(l + edge, r);\r\n  }\r\n\r\n\
+    \  void debug() {\r\n    print(\"hld\");\r\n    hld.debug();\r\n    print(\"seg\"\
+    );\r\n    seg.debug();\r\n    print(\"seg_r\");\r\n    seg_r.debug();\r\n    print(\"\
+    seg_subtree\");\r\n    seg_subtree.debug();\r\n  }\r\n\r\n  void doc() {\r\n \
+    \   print(\"EulerTour + \u30BB\u30B0\u6728\u3002\");\r\n    print(\"\u9006\u5143\
+    \u3092\u5229\u7528\u3057\u3066\u3001\u30D1\u30B9\u30AF\u30A8\u30EA\u3092 O(logN)\
+    \ \u6642\u9593\u3067\u884C\u3046\u3002\");\r\n    print(\"\u90E8\u5206\u6728\u30AF\
+    \u30A8\u30EA O(logN) \u6642\u9593\u3001\u30D1\u30B9\u30AF\u30A8\u30EA O(logN)\
+    \ \u6642\u9593\u3002\");\r\n  }\r\n};\n#line 1 \"algebra/affinegroup.hpp\"\ntemplate\
+    \ <typename K>\nstruct AffineGroup {\n  using F = pair<K, K>;\n  using value_type\
+    \ = F;\n  static constexpr F op(const F &x, const F &y) noexcept {\n    return\
+    \ F({x.fi * y.fi, x.se * y.fi + y.se});\n  }\n  static constexpr F inverse(const\
+    \ F &x) {\n    auto [a, b] = x;\n    a = K(1) / a;\n    return {a, a * (-b)};\n\
+    \  }\n  static constexpr K eval(const F &f, K x) noexcept { return f.fi * x +\
+    \ f.se; }\n  static constexpr F unit = {K(1), K(0)};\n  static constexpr bool\
+    \ commute = false;\n};\n#line 7 \"test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp\"\
+    \n\nusing mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using Mono = AffineGroup<mint>;\n\
+    \  using E = Mono::value_type;\n  vc<E> A(N);\n  FOR(i, N) {\n    LL(a, b);\n\
+    \    A[i] = mp(mint(a), mint(b));\n  }\n\n  Graph<int> G(N);\n  FOR(_, N - 1)\
+    \ {\n    LL(a, b);\n    G.add(a, b);\n  }\n  G.prepare();\n\n  HLD hld(G);\n \
+    \ TreeGroup<decltype(hld), Mono, false, true, false> TG(hld, A);\n\n  FOR(_, Q)\
+    \ {\n    LL(t);\n    if (t == 0) {\n      LL(v, c, d);\n      TG.set(v, E({mint(c),\
     \ mint(d)}));\n    } else {\n      LL(u, v, x);\n      auto e = TG.prod_path(u,\
     \ v);\n      print(e.fi * mint(x) + e.se);\n    }\n  }\n}\n\nsigned main() {\n\
     \  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\
     \n  solve();\n\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_set_path_composite\"\
-    \n#include \"my_template.hpp\"\n\n#include \"ds/segtree.hpp\"\n#include \"graph/base.hpp\"\
-    \n#include \"graph/hld.hpp\"\n#include \"mod/modint.hpp\"\n\nusing mint = modint998;\n\
-    \ntemplate <typename Graph, typename E, bool edge = false>\nstruct TreeGroup {\n\
-    \  using F = function<E(E, E)>;\n  using G = function<E(E)>;\n\n  HLD<Graph> &hld;\n\
-    \  int N;\n  F f;\n  G inverse;\n  E unit;\n  const bool commute;\n  const bool\
-    \ path_query;\n  const bool subtree_query;\n  SegTree<E> seg, seg_r, seg_subtree;\n\
-    \n  TreeGroup(HLD<Graph> &hld, Monoid<E> Mono, bool path_query,\n            bool\
-    \ subtree_query)\n      : hld(hld)\n      , N(hld.N)\n      , f(Mono.f)\n    \
-    \  , inverse(Mono.inverse)\n      , unit(Mono.unit)\n      , commute(Mono.commute)\n\
-    \      , path_query(path_query)\n      , subtree_query(subtree_query)\n      ,\
-    \ seg(Mono)\n      , seg_r(Monoid_reverse<E>(Mono))\n      , seg_subtree(Mono)\
-    \ {\n    assert(Mono.has_inverse);\n    if (path_query) {\n      seg.init(N +\
-    \ N);\n      if (!commute) seg_r.init(N + N);\n    }\n    if (subtree_query) {\n\
-    \      assert(Mono.commute);\n      seg_subtree.init(N);\n    }\n  };\n\n  void\
-    \ init_path(vc<E> &dat) {\n    vc<E> seg_raw(N + N, unit);\n    if (!edge) {\n\
-    \      FOR(v, N) {\n        seg_raw[hld.ELID[v]] = dat[v];\n        seg_raw[hld.ERID[v]]\
-    \ = inverse(dat[v]);\n      }\n    } else {\n      FOR(i, N - 1) {\n        int\
-    \ v = hld.e_to_v[i];\n        seg_raw[hld.ELID[v]] = dat[i];\n        seg_raw[hld.ERID[v]]\
-    \ = inverse(dat[i]);\n      }\n    }\n    seg.build(seg_raw);\n    if (!commute)\
-    \ seg_r.build(seg_raw);\n  }\n\n  void init_subtree(vc<E> &dat) {\n    vc<E> seg_raw(N,\
-    \ unit);\n    if (!edge) {\n      FOR(v, N) { seg_raw[hld.LID[v]] = dat[v]; }\n\
-    \    } else {\n      FOR(i, N - 1) {\n        int v = hld.e_to_v[i];\n       \
-    \ seg_raw[hld.LID[v]] = dat[i];\n      }\n    }\n    seg_subtree.build(seg_raw);\n\
-    \  }\n\n  void init(vc<E> &dat) {\n    // vertex index OR edge index\n    if (path_query)\
-    \ init_path(dat);\n    if (subtree_query) init_subtree(dat);\n  }\n\n  void set_path(int\
-    \ v, E x) {\n    seg.set(hld.ELID[v], x);\n    seg.set(hld.ERID[v], inverse(x));\n\
-    \    if (!commute) {\n      seg_r.set(hld.ELID[v], x);\n      seg_r.set(hld.ERID[v],\
-    \ inverse(x));\n    }\n  }\n\n  void set_subtree(int v, E x) { seg_subtree.set(hld.LID[v],\
-    \ x); }\n\n  void set(int i, E x) {\n    int v = (edge ? hld.e_to_v[i] : i);\n\
-    \    if (path_query) set_path(v, x);\n    if (subtree_query) set_subtree(v, x);\n\
-    \  }\n\n  E prod_path(int frm, int to) {\n    int lca = hld.LCA(frm, to);\n  \
-    \  // [frm, lca)\n    E x1 = (commute ? seg.prod(hld.ELID[lca] + 1, hld.ELID[frm]\
-    \ + 1)\n                    : seg_r.prod(hld.ELID[lca] + 1, hld.ELID[frm] + 1));\n\
-    \    // edge \u306A\u3089 (lca, to]\u3001vertex \u306A\u3089 [lca, to]\n    E\
-    \ x2 = seg.prod(hld.ELID[lca] + edge, hld.ELID[to] + 1);\n    return f(x1, x2);\n\
-    \  }\n\n  E prod_subtree(int u) {\n    assert(subtree_query);\n    int l = hld.LID[u],\
-    \ r = hld.RID[u];\n    return seg_subtree.prod(l + edge, r);\n  }\n\n  void debug()\
-    \ {\n    print(\"hld\");\n    hld.debug();\n    print(\"seg\");\n    seg.debug();\n\
-    \    print(\"seg_r\");\n    seg_r.debug();\n    print(\"seg_subtree\");\n    seg_subtree.debug();\n\
-    \  }\n\n  void doc() {\n    print(\"EulerTour + \u30BB\u30B0\u6728\u3002\");\n\
-    \    print(\"\u9006\u5143\u3092\u5229\u7528\u3057\u3066\u3001\u30D1\u30B9\u30AF\
-    \u30A8\u30EA\u3092 O(logN) \u6642\u9593\u3067\u884C\u3046\u3002\");\n    print(\"\
-    \u90E8\u5206\u6728\u30AF\u30A8\u30EA O(logN) \u6642\u9593\u3001\u30D1\u30B9\u30AF\
-    \u30A8\u30EA O(logN) \u6642\u9593\u3002\");\n  }\n};\n\nvoid solve() {\n  LL(N,\
-    \ Q);\n  using E = pair<mint, mint>;\n  vc<E> A(N);\n  FOR(i, N) {\n    LL(a,\
-    \ b);\n    A[i] = mp(mint(a), mint(b));\n  }\n\n  Graph<int> G(N);\n  FOR(_, N\
-    \ - 1) {\n    LL(a, b);\n    G.add(a, b);\n  }\n\n  HLD<Graph<int>> hld(G);\n\
-    \  TreeGroup<Graph<int>, E, false> TG(hld, Monoid_affine<mint>(true), true,\n\
-    \                                     false);\n  TG.init(A);\n\n  FOR(_, Q) {\n\
-    \    LL(t);\n    if (t == 0) {\n      LL(v, c, d);\n      TG.set(v, E({mint(c),\
-    \ mint(d)}));\n    } else {\n      LL(u, v, x);\n      auto e = TG.prod_path(u,\
-    \ v);\n      print(e.fi * mint(x) + e.se);\n    }\n  }\n}\n\nsigned main() {\n\
-    \  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\
-    \n  solve();\n\n  return 0;\n}\n"
+    \n#include \"my_template.hpp\"\n\n#include \"mod/modint.hpp\"\n#include \"graph/treegroup.hpp\"\
+    \n#include \"algebra/affinegroup.hpp\"\n\nusing mint = modint998;\n\nvoid solve()\
+    \ {\n  LL(N, Q);\n  using Mono = AffineGroup<mint>;\n  using E = Mono::value_type;\n\
+    \  vc<E> A(N);\n  FOR(i, N) {\n    LL(a, b);\n    A[i] = mp(mint(a), mint(b));\n\
+    \  }\n\n  Graph<int> G(N);\n  FOR(_, N - 1) {\n    LL(a, b);\n    G.add(a, b);\n\
+    \  }\n  G.prepare();\n\n  HLD hld(G);\n  TreeGroup<decltype(hld), Mono, false,\
+    \ true, false> TG(hld, A);\n\n  FOR(_, Q) {\n    LL(t);\n    if (t == 0) {\n \
+    \     LL(v, c, d);\n      TG.set(v, E({mint(c), mint(d)}));\n    } else {\n  \
+    \    LL(u, v, x);\n      auto e = TG.prod_path(u, v);\n      print(e.fi * mint(x)\
+    \ + e.se);\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
+    \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
-  - ds/segtree.hpp
-  - graph/base.hpp
-  - graph/hld.hpp
   - mod/modint.hpp
+  - graph/treegroup.hpp
+  - ds/segtree.hpp
+  - graph/hld.hpp
+  - graph/base.hpp
+  - algebra/reversegroup.hpp
+  - algebra/affinegroup.hpp
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
   requiredBy: []
-  timestamp: '2021-12-30 21:20:07+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-12-30 21:29:44+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
 layout: document

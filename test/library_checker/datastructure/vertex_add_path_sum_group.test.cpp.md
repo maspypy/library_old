@@ -7,19 +7,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: algebra/reversegroup.hpp
     title: algebra/reversegroup.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/hld.hpp
     title: graph/hld.hpp
   - icon: ':heavy_check_mark:'
     path: graph/treegroup.hpp
     title: graph/treegroup.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
@@ -222,7 +222,7 @@ data:
     \n};\r\n#line 4 \"graph/treegroup.hpp\"\n\r\n// \u4F5C\u3063\u3066\u307F\u305F\
     \u3082\u306E\u306E\u3001HLD(log^2N)\u3088\u308A\u9045\u3044\u304C\u3061\uFF1F\r\
     \ntemplate <typename HLD, typename Group, bool edge = false,\r\n          bool\
-    \ path_query = true, bool subtree_query = true>\r\nstruct TreeGroup {\r\n  using\
+    \ path_query = true, bool subtree_query = false>\r\nstruct TreeGroup {\r\n  using\
     \ RevGroup = ReverseGroup<Group>;\r\n  using X = typename Group::value_type;\r\
     \n  HLD &hld;\r\n  int N;\r\n  SegTree<Group> seg, seg_subtree;\r\n  SegTree<RevGroup>\
     \ seg_r;\r\n\r\n  TreeGroup(HLD &hld) : hld(hld), N(hld.N) {\r\n    if (path_query)\
@@ -295,7 +295,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
   requiredBy: []
-  timestamp: '2021-12-30 21:20:07+09:00'
+  timestamp: '2021-12-30 21:29:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp

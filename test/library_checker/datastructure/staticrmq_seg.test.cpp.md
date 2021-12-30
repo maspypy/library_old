@@ -4,10 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: algebra/minmonoid.hpp
     title: algebra/minmonoid.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
