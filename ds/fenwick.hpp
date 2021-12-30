@@ -1,104 +1,75 @@
 #pragma once
-template <typename T>
+template <typename AbelGroup>
 struct FenwickTree {
-  vector<T> data;
-  T total;
+  using E = typename AbelGroup::value_type;
+  int n;
+  vector<E> dat;
+  E total;
 
-  FenwickTree() : total(0) {}
-  FenwickTree(int sz) : total(0) { data.assign(++sz, 0); }
-
-  void init(int n) { data.assign(++n, 0); }
-
-  void build(vector<T>& raw_data) {
-    assert(len(data) == len(raw_data) + 1);
-    FOR(i, len(raw_data)) data[i + 1] = raw_data[i];
-    FOR(i, len(data)) {
+  FenwickTree() : FenwickTree(0) {}
+  FenwickTree(int n) : n(n), total(AbelGroup::unit) {
+    assert(AbelGroup::commute);
+    dat.assign(n + 1, AbelGroup::unit);
+  }
+  FenwickTree(vc<E> v) : n(len(v)), total(AbelGroup::unit) {
+    assert(AbelGroup::commute);
+    dat.assign(n + 1, AbelGroup::unit);
+    FOR(i, n) dat[i + 1] = v[i];
+    FOR3(i, 1, n + 1) {
       int j = i + (i & -i);
-      if (j < len(data)) data[j] += data[i];
+      if (j <= n) dat[j] = AbelGroup::op(dat[i], dat[j]);
     }
   }
 
-  T sum(int k) {
-    T ret = 0;
-    for (; k > 0; k -= k & -k) ret += data[k];
-    return (ret);
-  }
-
-  T sum(int L, int R) {
-    T ret = 0;
-    while (L < R) {
-      ret += data[R];
-      R -= R & -R;
-    }
-    while (R < L) {
-      ret -= data[L];
-      L -= L & -L;
-    }
+  E sum(int k) {
+    E ret = AbelGroup::unit;
+    for (; k > 0; k -= k & -k) ret = AbelGroup::op(ret, dat[k]);
     return ret;
   }
 
-  T sum_all() { return total; }
+  E sum(int L, int R) {
+    E pos = AbelGroup::unit;
+    while (L < R) {
+      pos = AbelGroup::op(pos, dat[R]);
+      R -= R & -R;
+    }
+    E neg = AbelGroup::unit;
+    while (R < L) {
+      neg = AbelGroup::op(neg, dat[L]);
+      L -= L & -L;
+    }
+    return AbelGroup::op(pos, AbelGroup::inverse(neg));
+  }
 
-  void add(int k, T x) {
-    total += x;
-    for (++k; k < len(data); k += k & -k) data[k] += x;
+  E sum_all() { return total; }
+
+  void add(int k, E x) {
+    total = AbelGroup::op(total, x);
+    for (++k; k < len(dat); k += k & -k) dat[k] = AbelGroup::op(dat[k], x);
   }
 
   template <class F>
   int max_right(F& check) {
-    assert(f(T(0)));
+    assert(f(E(0)));
     ll i = 0;
-    T s = 0;
+    E s = AbelGroup::unit;
     int k = 1;
-    int N = len(data);
+    int N = len(dat);
     while (2 * k < N) k *= 2;
     while (k) {
-      if (i + k < N && check(s + data[i + k])) {
+      if (i + k < N && check(AbelGroup::op(s, dat[i + k]))) {
         i += k;
-        s += data[i];
+        s = AbelGroup::op(s, dat[i]);
       }
       k >>= 1;
     }
     return i;
   }
 
-  int find_kth_element(T k) {
-    auto check = [&](T x) -> bool { return x < k; };
+  int find_kth_element(E k) {
+    auto check = [&](E x) -> bool { return x < k; };
     return max_right(check);
   }
 
-  void debug() { print(data); }
-};
-
-template <typename T>
-struct Fenwick_RAQ {
-  int N;
-  FenwickTree<T> bit0;
-  FenwickTree<T> bit1;
-
-  Fenwick_RAQ(int N) : N(N), bit0(N), bit1(N) {}
-  Fenwick_RAQ() {}
-
-  void init(int n) {
-    N = n;
-    bit0.init(n);
-    bit1.init(n);
-  }
-
-  void build(vc<T>& v) { bit0.build(v); }
-
-  void add_at(ll i, T val) { bit0.add(i, val); }
-
-  void add_range(ll L, ll R, T val) {
-    bit0.add(L, -val * L);
-    bit1.add(L, +val);
-    bit0.add(R, +val * R);
-    bit1.add(R, -val);
-  }
-
-  T sum(ll L, ll R) {
-    T sum_R = R * bit1.sum(R) + bit0.sum(R);
-    T sum_L = L * bit1.sum(L) + bit0.sum(L);
-    return sum_R - sum_L;
-  }
+  void debug() { print("fenwick", dat); }
 };
