@@ -1,112 +1,96 @@
-#include "algebra/monoid.hpp"
 #include "ds/segtree.hpp"
 #include "graph/hld.hpp"
+#include "algebra/reversegroup.hpp"
 
 // 作ってみたものの、HLD(log^2N)より遅いがち？
-template <typename Graph, typename E, bool edge = false>
+template <typename HLD, typename Group, bool edge = false,
+          bool path_query = true, bool subtree_query = true>
 struct TreeGroup {
-  using F = function<E(E, E)>;
-  using G = function<E(E)>;
-
-  HLD<Graph> &hld;
+  using RevGroup = ReverseGroup<Group>;
+  using X = typename Group::value_type;
+  HLD &hld;
   int N;
-  F f;
-  G inverse;
-  E unit;
-  const bool commute;
-  const bool path_query;
-  const bool subtree_query;
-  SegTree<E> seg, seg_r, seg_subtree;
+  SegTree<Group> seg, seg_subtree;
+  SegTree<RevGroup> seg_r;
 
-  TreeGroup(HLD<Graph> &hld, Monoid<E> Mono, bool path_query,
-            bool subtree_query)
-      : hld(hld)
-      , N(hld.N)
-      , f(Mono.f)
-      , inverse(Mono.inverse)
-      , unit(Mono.unit)
-      , commute(Mono.commute)
-      , path_query(path_query)
-      , subtree_query(subtree_query)
-      , seg(Mono)
-      , seg_r(Monoid_reverse<E>(Mono))
-      , seg_subtree(Mono) {
-    assert(Mono.has_inverse);
+  TreeGroup(HLD &hld) : hld(hld), N(hld.N) {
     if (path_query) {
-      seg.init(N + N);
-      if (!commute) seg_r.init(N + N);
+      seg = SegTree<Group>(2 * N);
+      if (!Group::commute) seg_r = SegTree<RevGroup>(2 * N);
     }
     if (subtree_query) {
-      assert(Mono.commute);
-      seg_subtree.init(N);
+      assert(Group::commute);
+      seg_subtree = SegTree<Group>(N);
     }
-  };
+  }
 
-  void init_path(vc<E> &dat) {
-    vc<E> seg_raw(N + N, unit);
-    if (!edge) {
-      FOR(v, N) {
-        seg_raw[hld.ELID[v]] = dat[v];
-        seg_raw[hld.ERID[v]] = inverse(dat[v]);
+  TreeGroup(HLD &hld, vc<X> dat) : hld(hld), N(hld.N) {
+    if (path_query) {
+      vc<X> seg_raw(2 * N);
+      if (!edge) {
+        assert(len(dat) == N);
+        FOR(v, N) {
+          seg_raw[hld.ELID(v)] = dat[v];
+          seg_raw[hld.ERID(v)] = Group::inverse(dat[v]);
+        }
+      } else {
+        assert(len(dat) == N - 1);
+        FOR(e, N - 1) {
+          int v = hld.e_to_v(e);
+          seg_raw[hld.ELID(v)] = dat[e];
+          seg_raw[hld.ERID(v)] = Group::inverse(dat[e]);
+        }
       }
-    } else {
-      FOR(i, N - 1) {
-        int v = hld.e_to_v[i];
-        seg_raw[hld.ELID[v]] = dat[i];
-        seg_raw[hld.ERID[v]] = inverse(dat[i]);
+      seg = SegTree<Group>(seg_raw);
+      if (!Group::commute) seg_r = SegTree<RevGroup>(seg_raw);
+    }
+    if (subtree_query) {
+      assert(Group::commute);
+      vc<X> seg_raw(N);
+      if (!edge) {
+        assert(len(dat) == N);
+        FOR(v, N) seg_raw[hld.LID[v]] = dat[v];
+      } else {
+        assert(len(dat) == N - 1);
+        FOR(e, N - 1) {
+          int v = hld.e_to_v(e);
+          seg_raw[hld.LID[v]] = dat[e];
+        }
       }
-    }
-    seg.build(seg_raw);
-    if (!commute) seg_r.build(seg_raw);
-  }
-
-  void init_subtree(vc<E> &dat) {
-    vc<E> seg_raw(N, unit);
-    if (!edge) {
-      FOR(v, N) { seg_raw[hld.LID[v]] = dat[v]; }
-    } else {
-      FOR(i, N - 1) {
-        int v = hld.e_to_v[i];
-        seg_raw[hld.LID[v]] = dat[i];
-      }
-    }
-    seg_subtree.build(seg_raw);
-  }
-
-  void init(vc<E> &dat) {
-    // vertex index OR edge index
-    if (path_query) init_path(dat);
-    if (subtree_query) init_subtree(dat);
-  }
-
-  void set_path(int v, E x) {
-    seg.set(hld.ELID[v], x);
-    seg.set(hld.ERID[v], inverse(x));
-    if (!commute) {
-      seg_r.set(hld.ELID[v], x);
-      seg_r.set(hld.ERID[v], inverse(x));
+      seg_subtree = SegTree<Group>(seg_raw);
     }
   }
 
-  void set_subtree(int v, E x) { seg_subtree.set(hld.LID[v], x); }
+  void set_path(int v, X x) {
+    X inv_x = Group::inverse(x);
+    seg.set(hld.ELID(v), x);
+    seg.set(hld.ERID(v), inv_x);
+    if (!Group::commute) {
+      seg_r.set(hld.ELID(v), x);
+      seg_r.set(hld.ERID(v), inv_x);
+    }
+  }
 
-  void set(int i, E x) {
-    int v = (edge ? hld.e_to_v[i] : i);
+  void set_subtree(int v, X x) { seg_subtree.set(hld.LID[v], x); }
+
+  void set(int i, X x) {
+    int v = (edge ? hld.e_to_v(i) : i);
     if (path_query) set_path(v, x);
     if (subtree_query) set_subtree(v, x);
   }
 
-  E prod_path(int frm, int to) {
+  X prod_path(int frm, int to) {
+    assert(path_query);
     int lca = hld.LCA(frm, to);
     // [frm, lca)
-    E x1 = (commute ? seg.prod(hld.ELID[lca] + 1, hld.ELID[frm] + 1)
-                    : seg_r.prod(hld.ELID[lca] + 1, hld.ELID[frm] + 1));
+    X x1 = (Group::commute ? seg.prod(hld.ELID(lca) + 1, hld.ELID(frm) + 1)
+                           : seg_r.prod(hld.ELID(lca) + 1, hld.ELID(frm) + 1));
     // edge なら (lca, to]、vertex なら [lca, to]
-    E x2 = seg.prod(hld.ELID[lca] + edge, hld.ELID[to] + 1);
-    return f(x1, x2);
+    X x2 = seg.prod(hld.ELID(lca) + edge, hld.ELID(to) + 1);
+    return Group::op(x1, x2);
   }
 
-  E prod_subtree(int u) {
+  X prod_subtree(int u) {
     assert(subtree_query);
     int l = hld.LID[u], r = hld.RID[u];
     return seg_subtree.prod(l + edge, r);

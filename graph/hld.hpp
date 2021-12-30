@@ -61,6 +61,9 @@ struct HLD {
     return (parent[frm] == to ? frm : to);
   }
 
+  int ELID(int v) { return 2 * LID[v] - depth[v]; }
+  int ERID(int v) { return 2 * RID[v] - depth[v] - 1; }
+
   /* k: 0-indexed */
   int LA(int v, int k) {
     while (1) {

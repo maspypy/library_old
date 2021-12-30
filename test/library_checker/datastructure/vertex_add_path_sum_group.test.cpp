@@ -1,22 +1,24 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_add_path_sum"
 #include "my_template.hpp"
 
+#include "algebra/addgroup.hpp"
+#include "ds/segtree.hpp"
+#include "graph/hld.hpp"
 #include "graph/treegroup.hpp"
 
 void solve() {
   LL(N, Q);
   VEC(ll, A, N);
-
   Graph<int> G(N);
   FOR(_, N - 1) {
     LL(a, b);
     G.add(a, b);
   }
+  G.prepare();
 
   HLD<Graph<int>> hld(G);
-  TreeGroup<Graph<int>, ll, false> TG(hld, Monoid_add<ll>(), true,
-                                     false);
-  TG.init(A);
+  using Group = AddGroup<ll>;
+  TreeGroup<decltype(hld), Group, false, true, false> TG(hld, A);
 
   FOR(_, Q) {
     LL(t);
