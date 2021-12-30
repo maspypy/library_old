@@ -4,6 +4,7 @@
 #include "graph/base.hpp"
 #include "graph/hld.hpp"
 #include "graph/treemonoid.hpp"
+#include "algebra/addgroup.hpp"
 
 void solve() {
   LL(N, Q);
@@ -13,11 +14,12 @@ void solve() {
     LL(a, b);
     G.add(a, b);
   }
+  G.prepare();
 
-  HLD<Graph<int>> hld(G);
+  HLD hld(G);
   const bool is_edge = false;
-  TreeMonoid<Graph<int>, ll, is_edge> TM(hld, Monoid_add<ll>());
-  TM.init(A);
+  using Mono = AddGroup<ll>;
+  TreeMonoid<decltype(hld), Mono, is_edge> TM(hld, A);
 
   FOR(_, Q) {
     LL(t);
