@@ -10,7 +10,7 @@ data:
   - icon: ':x:'
     path: algebra/mulgroup.hpp
     title: algebra/mulgroup.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: ds/lazysegtree.hpp
     title: ds/lazysegtree.hpp
   - icon: ':question:'

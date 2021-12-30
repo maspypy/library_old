@@ -9,16 +9,16 @@ data:
     - icon: ':question:'
       path: algebra/addgroup.hpp
       title: algebra/addgroup.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: algebra/affinegroup.hpp
       title: algebra/affinegroup.hpp
     - icon: ':heavy_check_mark:'
       path: algebra/beats_sample.hpp
       title: algebra/beats_sample.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: algebra/cntsum.hpp
       title: algebra/cntsum.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: algebra/cntsum_affine_lazy.hpp
       title: algebra/cntsum_affine_lazy.hpp
     - icon: ':warning:'
@@ -71,7 +71,7 @@ data:
     - icon: ':warning:'
       path: ds/intervals.hpp
       title: ds/intervals.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: ds/lazysegtree.hpp
       title: ds/lazysegtree.hpp
     - icon: ':heavy_check_mark:'
@@ -189,7 +189,7 @@ data:
     - icon: ':warning:'
       path: mod/amodint.hpp
       title: mod/amodint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: mod/modint.hpp
       title: mod/modint.hpp
   - name: .
@@ -307,7 +307,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
       title: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
       title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
     - icon: ':heavy_check_mark:'

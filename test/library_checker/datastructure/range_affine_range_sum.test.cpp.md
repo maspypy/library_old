@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algebra/affinegroup.hpp
     title: algebra/affinegroup.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algebra/cntsum.hpp
     title: algebra/cntsum.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algebra/cntsum_affine_lazy.hpp
     title: algebra/cntsum_affine_lazy.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: ds/lazysegtree.hpp
     title: ds/lazysegtree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: mod/modint.hpp
     title: mod/modint.hpp
   - icon: ':question:'
@@ -21,9 +21,9 @@ data:
     title: my_template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/range_affine_range_sum
@@ -224,7 +224,7 @@ data:
     \    T x(1);\n    FOR(i, k){\n      x *= n - i;\n      x *= inv(i + 1);\n    }\n\
     \    return x;\n  }\n};\n\nusing modint107 = modint<1'000'000'007>;\nusing modint998\
     \ = modint<998'244'353>;\n#line 7 \"test/library_checker/datastructure/range_affine_range_sum.test.cpp\"\
-    \n\nusing mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using S = CntSum_Affine<mint>;\n\
+    \n\nusing mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using S = CntSum_Affine_Lazy<mint>;\n\
     \  using E = pair<mint, mint>;\n  vc<E> seg_raw(N);\n  FOR(i, N) {\n    LL(x);\n\
     \    seg_raw[i] = E({mint(1), mint(x)});\n  }\n  LazySegTree<S> seg(seg_raw);\n\
     \n  FOR(_, Q) {\n    LL(t);\n    if (t == 0) {\n      LL(l, r, a, b);\n      seg.apply(l,\
@@ -235,12 +235,12 @@ data:
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\
     \n#include \"my_template.hpp\"\n\n#include \"algebra/cntsum_affine_lazy.hpp\"\n\
     #include \"ds/lazysegtree.hpp\"\n#include \"mod/modint.hpp\"\n\nusing mint = modint998;\n\
-    \nvoid solve() {\n  LL(N, Q);\n  using S = CntSum_Affine<mint>;\n  using E = pair<mint,\
-    \ mint>;\n  vc<E> seg_raw(N);\n  FOR(i, N) {\n    LL(x);\n    seg_raw[i] = E({mint(1),\
-    \ mint(x)});\n  }\n  LazySegTree<S> seg(seg_raw);\n\n  FOR(_, Q) {\n    LL(t);\n\
-    \    if (t == 0) {\n      LL(l, r, a, b);\n      seg.apply(l, r, E({a, b}));\n\
-    \    }\n    elif (t == 1) {\n      LL(l, r);\n      auto cs = seg.prod(l, r);\n\
-    \      print(cs.se);\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
+    \nvoid solve() {\n  LL(N, Q);\n  using S = CntSum_Affine_Lazy<mint>;\n  using\
+    \ E = pair<mint, mint>;\n  vc<E> seg_raw(N);\n  FOR(i, N) {\n    LL(x);\n    seg_raw[i]\
+    \ = E({mint(1), mint(x)});\n  }\n  LazySegTree<S> seg(seg_raw);\n\n  FOR(_, Q)\
+    \ {\n    LL(t);\n    if (t == 0) {\n      LL(l, r, a, b);\n      seg.apply(l,\
+    \ r, E({a, b}));\n    }\n    elif (t == 1) {\n      LL(l, r);\n      auto cs =\
+    \ seg.prod(l, r);\n      print(cs.se);\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
     \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  solve();\n\n\
     \  return 0;\n}\n"
   dependsOn:
@@ -253,8 +253,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2021-12-31 00:40:29+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-12-31 00:48:17+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/range_affine_range_sum.test.cpp
 layout: document
