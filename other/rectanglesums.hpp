@@ -1,4 +1,5 @@
 #include "ds/fenwick.hpp"
+#include "algebra/addgroup.hpp"
 
 template <typename WT = ll, bool SMALL = false>
 struct RectangleSums {
@@ -12,7 +13,8 @@ struct RectangleSums {
   vc<vc<tuple<int, int, int>>> query_l;
   vc<vc<tuple<int, int, int>>> query_r;
 
-  RectangleSums(int N) : N(N), n(0), Q(0), X(N), Y(N), keyX(N), keyY(N), wt(N) {}
+  RectangleSums(int N)
+      : N(N), n(0), Q(0), X(N), Y(N), keyX(N), keyY(N), wt(N) {}
 
   void add_pt(ll x, ll y, WT w = 1) {
     X[n] = x, Y[n] = y, wt[n] = w, keyX[n] = x, keyY[n] = y;
@@ -67,7 +69,7 @@ struct RectangleSums {
     assert(n == N);
     vc<WT> ANS(Q);
     int k = (SMALL ? max_y - min_y + 2 : len(keyY) + 1);
-    FenwickTree<WT> bit(k);
+    FenwickTree<AddGroup<WT>> bit(k);
     FOR(x, len(add)) {
       for (auto&& t: query_l[x]) {
         auto [q, yl, yr] = t;
