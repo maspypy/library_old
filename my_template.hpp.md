@@ -43,6 +43,9 @@ data:
     path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
     title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/range_chmin_chmax_add_range_sum.test.cpp
+    title: test/library_checker/datastructure/range_chmin_chmax_add_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
     title: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
   - icon: ':heavy_check_mark:'
@@ -283,6 +286,7 @@ data:
   - test/library_checker/datastructure/point_add_range_sum.test.cpp
   - test/library_checker/datastructure/predecessor_problem.test..cpp
   - test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
+  - test/library_checker/datastructure/range_chmin_chmax_add_range_sum.test.cpp
   - test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
   - test/library_checker/datastructure/queue_operate_all_composite.test.cpp
   - test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
