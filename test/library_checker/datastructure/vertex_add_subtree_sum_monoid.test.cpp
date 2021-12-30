@@ -1,22 +1,23 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_add_subtree_sum"
 #include "my_template.hpp"
 
-#include "graph/base.hpp"
-#include "graph/hld.hpp"
 #include "graph/treemonoid.hpp"
+#include "algebra/addgroup.hpp"
 
 void solve() {
   LL(N, Q);
   VEC(ll, A, N);
-  Graph<int> G(N);
+  Graph<int, 1> G(N);
   FOR3(v, 1, N) {
     LL(p);
     G.add(p, v);
   }
-  HLD<Graph<int>> hld(G);
+  G.prepare();
 
-  TreeMonoid<Graph<int>, ll, false> TM(hld, Monoid_add<ll>());
-  TM.init(A);
+  HLD hld(G);
+  using Mono = AddGroup<ll>;
+
+  TreeMonoid<decltype(hld), Mono, false> TM(hld, A);
 
   FOR(_, Q) {
     LL(t);
