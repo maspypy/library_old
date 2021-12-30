@@ -2,7 +2,7 @@
 #include "my_template.hpp"
 #include "graph/bfsnumbering.hpp"
 #include "ds/lazysegtree.hpp"
-#include "algebra/lazy_add_mul.hpp"
+#include "algebra/add_mul_lazy.hpp"
 
 void solve() {
   LL(N);
