@@ -3,6 +3,7 @@
 #include "my_template.hpp"
 
 #include "ds/fenwick2d.hpp"
+#include "algebra/addgroup.hpp"
 
 void solve() {
   LL(N, Q);
@@ -27,7 +28,7 @@ void solve() {
     }
   }
 
-  Fenwick2D<ll, false> bit(X, Y, W);
+  Fenwick2D<AddGroup<ll>, false> bit(X, Y, W);
   FOR(q, Q) {
     auto [a, b, c, d] = query[q];
     if (a == -1) {
