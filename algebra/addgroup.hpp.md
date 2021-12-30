@@ -5,6 +5,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: algebra/lazy_add_mul.hpp
     title: algebra/lazy_add_mul.hpp
+  - icon: ':heavy_check_mark:'
+    path: other/rectanglesums.hpp
+    title: other/rectanglesums.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/point_add_range_sum.test.cpp
@@ -12,6 +15,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
     title: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
+    title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
     title: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
@@ -46,6 +52,7 @@ data:
   path: algebra/addgroup.hpp
   requiredBy:
   - algebra/lazy_add_mul.hpp
+  - other/rectanglesums.hpp
   timestamp: '2021-12-30 22:02:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
@@ -54,6 +61,7 @@ data:
   - test/library_checker/datastructure/point_add_range_sum.test.cpp
   - test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
   - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
+  - test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
   - test/yukicoder/899_bfsnumbering.test.cpp
 documentation_of: algebra/addgroup.hpp
 layout: document
