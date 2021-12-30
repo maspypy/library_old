@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algebra/addgroup.hpp
     title: algebra/addgroup.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algebra/mulgroup.hpp
     title: algebra/mulgroup.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/899_bfsnumbering.test.cpp
     title: test/yukicoder/899_bfsnumbering.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"algebra/addgroup.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\
@@ -44,7 +44,7 @@ data:
   path: algebra/add_mul_lazy.hpp
   requiredBy: []
   timestamp: '2021-12-31 00:37:11+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/899_bfsnumbering.test.cpp
 documentation_of: algebra/add_mul_lazy.hpp

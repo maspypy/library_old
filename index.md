@@ -3,10 +3,10 @@ data:
   libraryCategories:
   - name: algebra
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: algebra/add_mul_lazy.hpp
       title: algebra/add_mul_lazy.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: algebra/addgroup.hpp
       title: algebra/addgroup.hpp
     - icon: ':heavy_check_mark:'
@@ -33,7 +33,7 @@ data:
     - icon: ':warning:'
       path: algebra/monoid__old.hpp
       title: algebra/monoid__old.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: algebra/mulgroup.hpp
       title: algebra/mulgroup.hpp
     - icon: ':heavy_check_mark:'
@@ -71,7 +71,7 @@ data:
     - icon: ':warning:'
       path: ds/intervals.hpp
       title: ds/intervals.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: ds/lazysegtree.hpp
       title: ds/lazysegtree.hpp
     - icon: ':heavy_check_mark:'
@@ -119,13 +119,13 @@ data:
       title: geometry/geometry.hpp
   - name: graph
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/base.hpp
       title: graph/base.hpp
     - icon: ':warning:'
       path: graph/bfs01.hpp
       title: graph/bfs01.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/bfsnumbering.hpp
       title: graph/bfsnumbering.hpp
     - icon: ':warning:'
@@ -194,7 +194,7 @@ data:
       title: mod/modint.hpp
   - name: .
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: my_template.hpp
       title: my_template.hpp
     - icon: ':warning:'
@@ -376,7 +376,7 @@ data:
       title: test/library_checker/math/factorize.test.cpp
   - name: test/yukicoder
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/899_bfsnumbering.test.cpp
       title: test/yukicoder/899_bfsnumbering.test.cpp
 layout: toppage

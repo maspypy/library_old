@@ -1,32 +1,32 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algebra/add_mul_lazy.hpp
     title: algebra/add_mul_lazy.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algebra/addgroup.hpp
     title: algebra/addgroup.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algebra/mulgroup.hpp
     title: algebra/mulgroup.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/lazysegtree.hpp
     title: ds/lazysegtree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/bfsnumbering.hpp
     title: graph/bfsnumbering.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/899
@@ -239,7 +239,7 @@ data:
     \n\r\nvoid solve() {\r\n  LL(N);\r\n  Graph<int> G(N);\r\n  FOR(_, N - 1) {\r\n\
     \    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n  G.prepare();\r\n\r\n  BFSNumbering\
     \ BFS(G);\r\n  auto &ID = BFS.ID;\r\n  vi seg_raw(N);\r\n\r\n  FOR(v, N) {\r\n\
-    \    LL(a);\r\n    seg_raw[ID[v]] = a;\r\n  }\r\n\r\n  using Lazy = Add_Mul<ll>;\r\
+    \    LL(a);\r\n    seg_raw[ID[v]] = a;\r\n  }\r\n\r\n  using Lazy = Add_Mul_Lazy<ll>;\r\
     \n  LazySegTree<Lazy> seg(seg_raw);\r\n\r\n  LL(Q);\r\n  FOR(_, Q) {\r\n    LL(v);\r\
     \n    ll p = BFS.parent[v];\r\n    ll pp = (p == -1 ? -1 : BFS.parent[p]);\r\n\
     \    ll x = 0;\r\n    if (pp >= 0) x += seg.get(ID[pp]), seg.set(ID[pp], 0);\r\
@@ -257,8 +257,8 @@ data:
     \ G(N);\r\n  FOR(_, N - 1) {\r\n    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n \
     \ G.prepare();\r\n\r\n  BFSNumbering BFS(G);\r\n  auto &ID = BFS.ID;\r\n  vi seg_raw(N);\r\
     \n\r\n  FOR(v, N) {\r\n    LL(a);\r\n    seg_raw[ID[v]] = a;\r\n  }\r\n\r\n  using\
-    \ Lazy = Add_Mul<ll>;\r\n  LazySegTree<Lazy> seg(seg_raw);\r\n\r\n  LL(Q);\r\n\
-    \  FOR(_, Q) {\r\n    LL(v);\r\n    ll p = BFS.parent[v];\r\n    ll pp = (p ==\
+    \ Lazy = Add_Mul_Lazy<ll>;\r\n  LazySegTree<Lazy> seg(seg_raw);\r\n\r\n  LL(Q);\r\
+    \n  FOR(_, Q) {\r\n    LL(v);\r\n    ll p = BFS.parent[v];\r\n    ll pp = (p ==\
     \ -1 ? -1 : BFS.parent[p]);\r\n    ll x = 0;\r\n    if (pp >= 0) x += seg.get(ID[pp]),\
     \ seg.set(ID[pp], 0);\r\n    if (p >= 0) {\r\n      x += seg.get(ID[p]), seg.set(ID[p],\
     \ 0);\r\n      auto [l, r] = BFS.calc_range(p, BFS.depth[p] + 1);\r\n      x +=\
@@ -279,8 +279,8 @@ data:
   isVerificationFile: true
   path: test/yukicoder/899_bfsnumbering.test.cpp
   requiredBy: []
-  timestamp: '2021-12-31 00:41:46+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-12-31 00:52:32+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yukicoder/899_bfsnumbering.test.cpp
 layout: document
