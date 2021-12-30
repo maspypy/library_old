@@ -13,6 +13,9 @@ data:
     path: test/library_checker/datastructure/point_add_range_sum.test.cpp
     title: test/library_checker/datastructure/point_add_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
+    title: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
     title: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
   - icon: ':heavy_check_mark:'
@@ -61,6 +64,7 @@ data:
   verifiedWith:
   - test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
+  - test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
   - test/library_checker/datastructure/point_add_range_sum.test.cpp
   - test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
