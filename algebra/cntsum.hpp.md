@@ -2,16 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: algebra/lazy_cntsum_affine.hpp
-    title: algebra/lazy_cntsum_affine.hpp
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
-    title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
+  - icon: ':warning:'
+    path: algebra/cntsum_affine_lazy.hpp
+    title: algebra/cntsum_affine_lazy.hpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 1 \"algebra/cntsum.hpp\"\ntemplate <typename E = long long>\r\
@@ -29,11 +26,10 @@ data:
   isVerificationFile: false
   path: algebra/cntsum.hpp
   requiredBy:
-  - algebra/lazy_cntsum_affine.hpp
+  - algebra/cntsum_affine_lazy.hpp
   timestamp: '2021-12-30 04:54:02+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/library_checker/datastructure/range_affine_range_sum.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: algebra/cntsum.hpp
 layout: document
 redirect_from:

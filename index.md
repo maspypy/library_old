@@ -3,6 +3,9 @@ data:
   libraryCategories:
   - name: algebra
     pages:
+    - icon: ':warning:'
+      path: algebra/add_mul_lazy.hpp
+      title: algebra/add_mul_lazy.hpp
     - icon: ':heavy_check_mark:'
       path: algebra/addgroup.hpp
       title: algebra/addgroup.hpp
@@ -12,15 +15,15 @@ data:
     - icon: ':heavy_check_mark:'
       path: algebra/beats_sample.hpp
       title: algebra/beats_sample.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: algebra/cntsum.hpp
       title: algebra/cntsum.hpp
-    - icon: ':heavy_check_mark:'
-      path: algebra/lazy_add_mul.hpp
-      title: algebra/lazy_add_mul.hpp
-    - icon: ':heavy_check_mark:'
-      path: algebra/lazy_cntsum_affine.hpp
-      title: algebra/lazy_cntsum_affine.hpp
+    - icon: ':warning:'
+      path: algebra/cntsum_affine_lazy.hpp
+      title: algebra/cntsum_affine_lazy.hpp
+    - icon: ':warning:'
+      path: algebra/max_max_lazy.hpp
+      title: algebra/max_max_lazy.hpp
     - icon: ':warning:'
       path: algebra/maxmonoid.hpp
       title: algebra/maxmonoid.hpp
@@ -30,12 +33,15 @@ data:
     - icon: ':warning:'
       path: algebra/monoid__old.hpp
       title: algebra/monoid__old.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: algebra/mulgroup.hpp
       title: algebra/mulgroup.hpp
     - icon: ':heavy_check_mark:'
       path: algebra/reversegroup.hpp
       title: algebra/reversegroup.hpp
+    - icon: ':warning:'
+      path: algebra/reverselazy.hpp
+      title: algebra/reverselazy.hpp
     - icon: ':heavy_check_mark:'
       path: algebra/reversemonoid.hpp
       title: algebra/reversemonoid.hpp
@@ -65,7 +71,7 @@ data:
     - icon: ':warning:'
       path: ds/intervals.hpp
       title: ds/intervals.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: ds/lazysegtree.hpp
       title: ds/lazysegtree.hpp
     - icon: ':heavy_check_mark:'
@@ -119,7 +125,7 @@ data:
     - icon: ':warning:'
       path: graph/bfs01.hpp
       title: graph/bfs01.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: graph/bfsnumbering.hpp
       title: graph/bfsnumbering.hpp
     - icon: ':warning:'
@@ -146,6 +152,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/hld.hpp
       title: graph/hld.hpp
+    - icon: ':warning:'
+      path: graph/lazytreemonoid.hpp
+      title: graph/lazytreemonoid.hpp
     - icon: ':heavy_check_mark:'
       path: graph/mis.hpp
       title: graph/mis.hpp
@@ -298,7 +307,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
       title: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
       title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -310,12 +319,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
       title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
-    - icon: ':x:'
-      path: test/library_checker/datastructure/static_range_frequency.test.cpp
-      title: test/library_checker/datastructure/static_range_frequency.test.cpp
-    - icon: ':x:'
-      path: test/library_checker/datastructure/static_range_inversion_query.test.cpp
-      title: test/library_checker/datastructure/static_range_inversion_query.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/static_range_sum.test.cpp
       title: test/library_checker/datastructure/static_range_sum.test.cpp
@@ -373,7 +376,7 @@ data:
       title: test/library_checker/math/factorize.test.cpp
   - name: test/yukicoder
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/899_bfsnumbering.test.cpp
       title: test/yukicoder/899_bfsnumbering.test.cpp
 layout: toppage

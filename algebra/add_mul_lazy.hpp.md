@@ -4,17 +4,14 @@ data:
   - icon: ':heavy_check_mark:'
     path: algebra/addgroup.hpp
     title: algebra/addgroup.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: algebra/mulgroup.hpp
     title: algebra/mulgroup.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/899_bfsnumbering.test.cpp
-    title: test/yukicoder/899_bfsnumbering.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 1 \"algebra/addgroup.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\
@@ -27,30 +24,29 @@ data:
     \  static constexpr X op(const X &x, const X &y) noexcept { return x * y; }\r\n\
     \  static constexpr X inverse(const X &x) noexcept { return X(1) / x; }\r\n  static\
     \ constexpr X unit = ONE;\r\n  static constexpr bool commute = true;\r\n};\r\n\
-    #line 3 \"algebra/lazy_add_mul.hpp\"\n\r\ntemplate <typename E>\r\nstruct Add_Mul\
+    #line 3 \"algebra/add_mul_lazy.hpp\"\n\r\ntemplate <typename E>\r\nstruct Add_Mul_Lazy\
     \ {\r\n  using MX = AddGroup<E>;\r\n  using MA = MulGroup<E>;\r\n  using X_structure\
     \ = MX;\r\n  using A_structure = MA;\r\n  using X = typename MX::value_type;\r\
     \n  using A = typename MA::value_type;\r\n  static constexpr X act(const X &x,\
     \ const A &a) { return x * a; }\r\n};\r\n"
   code: "#include \"algebra/addgroup.hpp\"\r\n#include \"algebra/mulgroup.hpp\"\r\n\
-    \r\ntemplate <typename E>\r\nstruct Add_Mul {\r\n  using MX = AddGroup<E>;\r\n\
-    \  using MA = MulGroup<E>;\r\n  using X_structure = MX;\r\n  using A_structure\
+    \r\ntemplate <typename E>\r\nstruct Add_Mul_Lazy {\r\n  using MX = AddGroup<E>;\r\
+    \n  using MA = MulGroup<E>;\r\n  using X_structure = MX;\r\n  using A_structure\
     \ = MA;\r\n  using X = typename MX::value_type;\r\n  using A = typename MA::value_type;\r\
     \n  static constexpr X act(const X &x, const A &a) { return x * a; }\r\n};\r\n"
   dependsOn:
   - algebra/addgroup.hpp
   - algebra/mulgroup.hpp
   isVerificationFile: false
-  path: algebra/lazy_add_mul.hpp
+  path: algebra/add_mul_lazy.hpp
   requiredBy: []
-  timestamp: '2021-12-30 22:02:41+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/yukicoder/899_bfsnumbering.test.cpp
-documentation_of: algebra/lazy_add_mul.hpp
+  timestamp: '2021-12-31 00:37:11+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: algebra/add_mul_lazy.hpp
 layout: document
 redirect_from:
-- /library/algebra/lazy_add_mul.hpp
-- /library/algebra/lazy_add_mul.hpp.html
-title: algebra/lazy_add_mul.hpp
+- /library/algebra/add_mul_lazy.hpp
+- /library/algebra/add_mul_lazy.hpp.html
+title: algebra/add_mul_lazy.hpp
 ---

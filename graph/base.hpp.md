@@ -5,7 +5,7 @@ data:
   - icon: ':warning:'
     path: graph/bfs01.hpp
     title: graph/bfs01.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: graph/bfsnumbering.hpp
     title: graph/bfsnumbering.hpp
   - icon: ':warning:'
@@ -23,6 +23,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/hld.hpp
     title: graph/hld.hpp
+  - icon: ':warning:'
+    path: graph/lazytreemonoid.hpp
+    title: graph/lazytreemonoid.hpp
   - icon: ':heavy_check_mark:'
     path: graph/mis.hpp
     title: graph/mis.hpp
@@ -72,9 +75,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/scc.test.cpp
     title: test/library_checker/graph/scc.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/899_bfsnumbering.test.cpp
-    title: test/yukicoder/899_bfsnumbering.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -148,6 +148,7 @@ data:
   - graph/bfs01.hpp
   - graph/scc.hpp
   - graph/bipartite_coloring.hpp
+  - graph/lazytreemonoid.hpp
   - graph/eulerwalk.hpp
   - graph/bfsnumbering.hpp
   timestamp: '2021-12-30 20:03:25+09:00'
@@ -164,7 +165,6 @@ data:
   - test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
   - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
-  - test/yukicoder/899_bfsnumbering.test.cpp
 documentation_of: graph/base.hpp
 layout: document
 redirect_from:

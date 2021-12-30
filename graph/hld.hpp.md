@@ -5,6 +5,9 @@ data:
     path: graph/base.hpp
     title: graph/base.hpp
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: graph/lazytreemonoid.hpp
+    title: graph/lazytreemonoid.hpp
   - icon: ':heavy_check_mark:'
     path: graph/treeabelgroup.hpp
     title: graph/treeabelgroup.hpp
@@ -156,6 +159,7 @@ data:
   - graph/treegroup.hpp
   - graph/treemonoid.hpp
   - graph/treeabelgroup.hpp
+  - graph/lazytreemonoid.hpp
   timestamp: '2021-12-30 21:20:07+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

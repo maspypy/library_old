@@ -4,17 +4,14 @@ data:
   - icon: ':heavy_check_mark:'
     path: algebra/affinegroup.hpp
     title: algebra/affinegroup.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: algebra/cntsum.hpp
     title: algebra/cntsum.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
-    title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 1 \"algebra/cntsum.hpp\"\ntemplate <typename E = long long>\r\
@@ -29,14 +26,14 @@ data:
     \ auto [a, b] = x;\n    a = K(1) / a;\n    return {a, a * (-b)};\n  }\n  static\
     \ constexpr K eval(const F &f, K x) noexcept { return f.fi * x + f.se; }\n  static\
     \ constexpr F unit = {K(1), K(0)};\n  static constexpr bool commute = false;\n\
-    };\n#line 3 \"algebra/lazy_cntsum_affine.hpp\"\n\r\ntemplate <typename E>\r\n\
-    struct CntSum_Affine {\r\n  using X_structure = CntSum<E>;\r\n  using A_structure\
+    };\n#line 3 \"algebra/cntsum_affine_lazy.hpp\"\n\r\ntemplate <typename E>\r\n\
+    struct CntSum_Affine_Lazy {\r\n  using X_structure = CntSum<E>;\r\n  using A_structure\
     \ = AffineGroup<E>;\r\n  using X = typename X_structure::value_type;\r\n  using\
     \ A = typename A_structure::value_type;\r\n  static constexpr X act(const X &x,\
     \ const A &a) {\r\n    return {x.fi, x.fi * a.se + x.se * a.fi};\r\n  }\r\n};\n"
   code: "#include \"algebra/cntsum.hpp\"\r\n#include \"algebra/affinegroup.hpp\"\r\
-    \n\r\ntemplate <typename E>\r\nstruct CntSum_Affine {\r\n  using X_structure =\
-    \ CntSum<E>;\r\n  using A_structure = AffineGroup<E>;\r\n  using X = typename\
+    \n\r\ntemplate <typename E>\r\nstruct CntSum_Affine_Lazy {\r\n  using X_structure\
+    \ = CntSum<E>;\r\n  using A_structure = AffineGroup<E>;\r\n  using X = typename\
     \ X_structure::value_type;\r\n  using A = typename A_structure::value_type;\r\n\
     \  static constexpr X act(const X &x, const A &a) {\r\n    return {x.fi, x.fi\
     \ * a.se + x.se * a.fi};\r\n  }\r\n};"
@@ -44,16 +41,15 @@ data:
   - algebra/cntsum.hpp
   - algebra/affinegroup.hpp
   isVerificationFile: false
-  path: algebra/lazy_cntsum_affine.hpp
+  path: algebra/cntsum_affine_lazy.hpp
   requiredBy: []
-  timestamp: '2021-12-30 04:54:02+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/library_checker/datastructure/range_affine_range_sum.test.cpp
-documentation_of: algebra/lazy_cntsum_affine.hpp
+  timestamp: '2021-12-31 00:37:11+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: algebra/cntsum_affine_lazy.hpp
 layout: document
 redirect_from:
-- /library/algebra/lazy_cntsum_affine.hpp
-- /library/algebra/lazy_cntsum_affine.hpp.html
-title: algebra/lazy_cntsum_affine.hpp
+- /library/algebra/cntsum_affine_lazy.hpp
+- /library/algebra/cntsum_affine_lazy.hpp.html
+title: algebra/cntsum_affine_lazy.hpp
 ---

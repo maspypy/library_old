@@ -1,17 +1,14 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
-    title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/899_bfsnumbering.test.cpp
-    title: test/yukicoder/899_bfsnumbering.test.cpp
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: graph/lazytreemonoid.hpp
+    title: graph/lazytreemonoid.hpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"ds/lazysegtree.hpp\"\n\ntemplate <typename Lazy>\nstruct\
@@ -129,12 +126,11 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: ds/lazysegtree.hpp
-  requiredBy: []
+  requiredBy:
+  - graph/lazytreemonoid.hpp
   timestamp: '2021-12-30 04:54:02+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/library_checker/datastructure/range_affine_range_sum.test.cpp
-  - test/yukicoder/899_bfsnumbering.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: ds/lazysegtree.hpp
 layout: document
 redirect_from:

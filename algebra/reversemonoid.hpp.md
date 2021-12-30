@@ -2,6 +2,12 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: algebra/reverselazy.hpp
+    title: algebra/reverselazy.hpp
+  - icon: ':warning:'
+    path: graph/lazytreemonoid.hpp
+    title: graph/lazytreemonoid.hpp
   - icon: ':heavy_check_mark:'
     path: graph/treemonoid.hpp
     title: graph/treemonoid.hpp
@@ -35,6 +41,8 @@ data:
   path: algebra/reversemonoid.hpp
   requiredBy:
   - graph/treemonoid.hpp
+  - graph/lazytreemonoid.hpp
+  - algebra/reverselazy.hpp
   timestamp: '2021-12-30 04:14:57+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
