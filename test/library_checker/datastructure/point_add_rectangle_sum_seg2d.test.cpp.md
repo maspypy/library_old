@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: ds/segtree2d.hpp
     title: ds/segtree2d.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
@@ -108,7 +108,8 @@ data:
     \n\r\n#line 1 \"algebra/addgroup.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\n\
     struct AddGroup {\r\n  using value_type = X;\r\n  static constexpr X op(const\
     \ X &x, const X &y) noexcept { return x + y; }\r\n  static constexpr X inverse(const\
-    \ X &x) noexcept { return -x; }\r\n  static constexpr X unit = ZERO;\r\n  static\
+    \ X &x) noexcept { return -x; }\r\n  static constexpr X power(const X &x, ll n)\
+    \ noexcept { return n * x; }\r\n  static constexpr X unit = ZERO;\r\n  static\
     \ constexpr bool commute = true;\r\n};\r\n#line 1 \"ds/segtree2d.hpp\"\ntemplate\
     \ <typename Monoid, typename XY, bool SMALL = false>\r\nstruct SegTree2D {\r\n\
     \  using S = typename Monoid::value_type;\r\n  int N;\r\n  int full_N;\r\n  vc<XY>\
@@ -189,7 +190,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
   requiredBy: []
-  timestamp: '2021-12-29 02:24:08+09:00'
+  timestamp: '2021-12-30 22:02:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp

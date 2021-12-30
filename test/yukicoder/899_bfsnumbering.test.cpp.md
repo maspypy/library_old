@@ -19,7 +19,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/bfsnumbering.hpp
     title: graph/bfsnumbering.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
@@ -225,31 +225,32 @@ data:
     \ <class X, X ZERO = X(0)>\r\nstruct AddGroup {\r\n  using value_type = X;\r\n\
     \  static constexpr X op(const X &x, const X &y) noexcept { return x + y; }\r\n\
     \  static constexpr X inverse(const X &x) noexcept { return -x; }\r\n  static\
-    \ constexpr X unit = ZERO;\r\n  static constexpr bool commute = true;\r\n};\r\n\
-    #line 1 \"algebra/mulgroup.hpp\"\ntemplate <class X, X ONE = X(1)>\r\nstruct MulGroup\
-    \ {\r\n  using value_type = X;\r\n  static constexpr X op(const X &x, const X\
-    \ &y) noexcept { return x * y; }\r\n  static constexpr X inverse(const X &x) noexcept\
-    \ { return X(1) / x; }\r\n  static constexpr X unit = ONE;\r\n  static constexpr\
-    \ bool commute = true;\r\n};\r\n#line 3 \"algebra/lazy_add_mul.hpp\"\n\r\ntemplate\
-    \ <typename E>\r\nstruct Add_Mul {\r\n  using MX = AddGroup<E>;\r\n  using MA\
-    \ = MulGroup<E>;\r\n  using X_structure = MX;\r\n  using A_structure = MA;\r\n\
-    \  using X = typename MX::value_type;\r\n  using A = typename MA::value_type;\r\
-    \n  static constexpr X act(const X &x, const A &a) { return x * a; }\r\n};\r\n\
-    #line 6 \"test/yukicoder/899_bfsnumbering.test.cpp\"\n\r\nvoid solve() {\r\n \
-    \ LL(N);\r\n  Graph<int> G(N);\r\n  FOR(_, N - 1) {\r\n    LL(a, b);\r\n    G.add(a,\
-    \ b);\r\n  }\r\n  G.prepare();\r\n\r\n  BFSNumbering BFS(G);\r\n  auto &ID = BFS.ID;\r\
-    \n  vi seg_raw(N);\r\n\r\n  FOR(v, N) {\r\n    LL(a);\r\n    seg_raw[ID[v]] =\
-    \ a;\r\n  }\r\n\r\n  using Lazy = Add_Mul<ll>;\r\n  LazySegTree<Lazy> seg(seg_raw);\r\
-    \n\r\n  LL(Q);\r\n  FOR(_, Q) {\r\n    LL(v);\r\n    ll p = BFS.parent[v];\r\n\
-    \    ll pp = (p == -1 ? -1 : BFS.parent[p]);\r\n    ll x = 0;\r\n    if (pp >=\
-    \ 0) x += seg.get(ID[pp]), seg.set(ID[pp], 0);\r\n    if (p >= 0) {\r\n      x\
-    \ += seg.get(ID[p]), seg.set(ID[p], 0);\r\n      auto [l, r] = BFS.calc_range(p,\
-    \ BFS.depth[p] + 1);\r\n      x += seg.prod(l, r), seg.apply(l, r, 0);\r\n   \
-    \ }\r\n    FOR(d, 3) {\r\n      auto [l, r] = BFS.calc_range(v, BFS.depth[v] +\
-    \ d);\r\n      x += seg.prod(l, r), seg.apply(l, r, 0);\r\n    }\r\n    print(x);\r\
-    \n    seg.set(ID[v], x);\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
-    \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  ll T\
-    \ = 1;\r\n  // LL(T);\r\n  FOR(_, T) solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \ constexpr X power(const X &x, ll n) noexcept { return n * x; }\r\n  static constexpr\
+    \ X unit = ZERO;\r\n  static constexpr bool commute = true;\r\n};\r\n#line 1 \"\
+    algebra/mulgroup.hpp\"\ntemplate <class X, X ONE = X(1)>\r\nstruct MulGroup {\r\
+    \n  using value_type = X;\r\n  static constexpr X op(const X &x, const X &y) noexcept\
+    \ { return x * y; }\r\n  static constexpr X inverse(const X &x) noexcept { return\
+    \ X(1) / x; }\r\n  static constexpr X unit = ONE;\r\n  static constexpr bool commute\
+    \ = true;\r\n};\r\n#line 3 \"algebra/lazy_add_mul.hpp\"\n\r\ntemplate <typename\
+    \ E>\r\nstruct Add_Mul {\r\n  using MX = AddGroup<E>;\r\n  using MA = MulGroup<E>;\r\
+    \n  using X_structure = MX;\r\n  using A_structure = MA;\r\n  using X = typename\
+    \ MX::value_type;\r\n  using A = typename MA::value_type;\r\n  static constexpr\
+    \ X act(const X &x, const A &a) { return x * a; }\r\n};\r\n#line 6 \"test/yukicoder/899_bfsnumbering.test.cpp\"\
+    \n\r\nvoid solve() {\r\n  LL(N);\r\n  Graph<int> G(N);\r\n  FOR(_, N - 1) {\r\n\
+    \    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n  G.prepare();\r\n\r\n  BFSNumbering\
+    \ BFS(G);\r\n  auto &ID = BFS.ID;\r\n  vi seg_raw(N);\r\n\r\n  FOR(v, N) {\r\n\
+    \    LL(a);\r\n    seg_raw[ID[v]] = a;\r\n  }\r\n\r\n  using Lazy = Add_Mul<ll>;\r\
+    \n  LazySegTree<Lazy> seg(seg_raw);\r\n\r\n  LL(Q);\r\n  FOR(_, Q) {\r\n    LL(v);\r\
+    \n    ll p = BFS.parent[v];\r\n    ll pp = (p == -1 ? -1 : BFS.parent[p]);\r\n\
+    \    ll x = 0;\r\n    if (pp >= 0) x += seg.get(ID[pp]), seg.set(ID[pp], 0);\r\
+    \n    if (p >= 0) {\r\n      x += seg.get(ID[p]), seg.set(ID[p], 0);\r\n     \
+    \ auto [l, r] = BFS.calc_range(p, BFS.depth[p] + 1);\r\n      x += seg.prod(l,\
+    \ r), seg.apply(l, r, 0);\r\n    }\r\n    FOR(d, 3) {\r\n      auto [l, r] = BFS.calc_range(v,\
+    \ BFS.depth[v] + d);\r\n      x += seg.prod(l, r), seg.apply(l, r, 0);\r\n   \
+    \ }\r\n    print(x);\r\n    seg.set(ID[v], x);\r\n  }\r\n}\r\n\r\nsigned main()\
+    \ {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
+    \n\r\n  ll T = 1;\r\n  // LL(T);\r\n  FOR(_, T) solve();\r\n\r\n  return 0;\r\n\
+    }\r\n"
   code: "#define PROBLEM \"https://yukicoder.me/problems/no/899\"\r\n#include \"my_template.hpp\"\
     \r\n#include \"graph/bfsnumbering.hpp\"\r\n#include \"ds/lazysegtree.hpp\"\r\n\
     #include \"algebra/lazy_add_mul.hpp\"\r\n\r\nvoid solve() {\r\n  LL(N);\r\n  Graph<int>\
@@ -278,7 +279,7 @@ data:
   isVerificationFile: true
   path: test/yukicoder/899_bfsnumbering.test.cpp
   requiredBy: []
-  timestamp: '2021-12-30 20:03:25+09:00'
+  timestamp: '2021-12-30 22:02:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yukicoder/899_bfsnumbering.test.cpp

@@ -20,7 +20,8 @@ data:
   bundledCode: "#line 1 \"algebra/addgroup.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\
     \nstruct AddGroup {\r\n  using value_type = X;\r\n  static constexpr X op(const\
     \ X &x, const X &y) noexcept { return x + y; }\r\n  static constexpr X inverse(const\
-    \ X &x) noexcept { return -x; }\r\n  static constexpr X unit = ZERO;\r\n  static\
+    \ X &x) noexcept { return -x; }\r\n  static constexpr X power(const X &x, ll n)\
+    \ noexcept { return n * x; }\r\n  static constexpr X unit = ZERO;\r\n  static\
     \ constexpr bool commute = true;\r\n};\r\n#line 1 \"algebra/mulgroup.hpp\"\ntemplate\
     \ <class X, X ONE = X(1)>\r\nstruct MulGroup {\r\n  using value_type = X;\r\n\
     \  static constexpr X op(const X &x, const X &y) noexcept { return x * y; }\r\n\
@@ -42,7 +43,7 @@ data:
   isVerificationFile: false
   path: algebra/lazy_add_mul.hpp
   requiredBy: []
-  timestamp: '2021-12-30 20:02:33+09:00'
+  timestamp: '2021-12-30 22:02:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/899_bfsnumbering.test.cpp
