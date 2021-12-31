@@ -1,58 +1,46 @@
-template <typename T>
-void centroid_decomposition(Graph<T>& G, function<void(vi&, vi&, vi&)> calc) {
-  // V, par, dep に対する計算関数を渡す。
+#include "graph/base.hpp"
+template <typename Graph>
+vector<int> centroid_decomposition(Graph& G) {
+  // 重心分解木における depth 配列を返す。
+  assert(G.is_prepared());
+  assert(!G.is_directed());
+  int N = G.N;
+  vc<int> dep(N, -1);
+  vc<int> sz(N);
+  vc<int> par(N, -1);
 
-  ll N = G.N;
-  vc<bool> DONE(N);
-  vi sz(N);
-  vi par(N);
-  vi dep(N);
-
-  auto find_centroid = [&](ll root) -> ll {
-    vi V = {root};
-    par[root] = -1;
-    ll l = 0;
-    while (l < V.size()) {
-      ll v = V[l++];
-      FORIN(e, G[v]) {
-        ll to = e.to;
-        if (to == par[v] || DONE[to]) continue;
-        V.eb(to);
+  auto find = [&](int v) -> int {
+    vc<int> V = {v};
+    par[v] = -1;
+    int p = 0;
+    while (p < len(V)) {
+      int v = V[p++];
+      sz[v] = 0;
+      for (auto&& [frm, to, cost, id]: G[v]) {
+        if (to == par[v] || dep[to] != -1) continue;
         par[to] = v;
+        V.eb(to);
       }
     }
-    ll n = V.size();
-    reverse(all(V));
-    FORIN(v, V) sz[v] = 0;
-    FORIN(v, V) {
+    while (len(V)) {
+      int v = V.back();
+      V.pop_back();
       sz[v] += 1;
-      if (n - sz[v] <= n / 2) return v;
+      if (p - sz[v] <= p / 2) return v;
       sz[par[v]] += sz[v];
     }
-    assert(false);
-    return root;
+    return -1;
   };
 
-  FOR(root, N) {
-    while (!DONE[root]) {
-      ll cent = find_centroid(root);
-      vi V = {cent};
-      par[cent] = -1;
-      dep[cent] = 0;
-      ll l = 0;
-      while (l < V.size()) {
-        ll v = V[l++];
-        FORIN(e, G[v]) {
-          ll to = e.to;
-          if (to == par[v] || DONE[to]) continue;
-          V.eb(to);
-          par[to] = v;
-          dep[to] = dep[v] + 1;
-        }
-      }
-      DONE[cent] = true;
-      calc(V, par, dep);
+  vc<pair<int, int>> st = {{0, 0}};
+  while (len(st)) {
+    auto [lv, v] = st.back();
+    st.pop_back();
+    auto c = find(v);
+    dep[c] = lv;
+    for (auto&& [frm, to, cost, id]: G[c]) {
+      if (dep[to] == -1) st.eb(lv + 1, to);
     }
   }
-  return;
+  return dep;
 }

@@ -2,7 +2,11 @@
 
 // frm, to, cap, cost
 template <typename T>
-using Edge = tuple<int, int, T, int>;
+struct Edge{
+  int frm, to;
+  T cost;
+  int id;
+};
 
 template <typename T, bool directed = false>
 struct Graph {
@@ -78,7 +82,7 @@ struct Graph {
     } else {
       print("indptr", indptr);
       print("frm to cost id");
-      FOR(v, N) for (auto&& e: (*this)[v]) print(e);
+      FOR(v, N) for (auto&& e: (*this)[v]) print(e.frm, e.to, e.cost, e.id);
     }
   }
 

@@ -1,21 +1,25 @@
-template< int mod >
+template <int mod>
 struct modint {
   int x;
 
-  constexpr modint(const ll x = 0) noexcept : x(x >= 0 ? x % mod : (mod - (-x) % mod) % mod) {}
+  constexpr modint(const ll x = 0) noexcept
+      : x(x >= 0 ? x % mod : (mod - (-x) % mod) % mod) {}
 
+  bool operator<(const ModIntRuntime &x) const {
+    return val < x.val;
+  } // To use std::map<ModIntRuntime, T>
   modint &operator+=(const modint &p) {
-    if((x += p.x) >= mod) x -= mod;
+    if ((x += p.x) >= mod) x -= mod;
     return *this;
   }
 
   modint &operator-=(const modint &p) {
-    if((x += mod - p.x) >= mod) x -= mod;
+    if ((x += mod - p.x) >= mod) x -= mod;
     return *this;
   }
 
   modint &operator*=(const modint &p) {
-    x = (int) (1LL * x * p.x % mod);
+    x = (int)(1LL * x * p.x % mod);
     return *this;
   }
 
@@ -40,7 +44,7 @@ struct modint {
 
   modint inverse() const {
     int a = x, b = mod, u = 1, v = 0, t;
-    while(b > 0) {
+    while (b > 0) {
       t = a / b;
       swap(a -= t * b, b);
       swap(u -= t * v, v);
@@ -50,75 +54,73 @@ struct modint {
 
   modint pow(int64_t n) const {
     modint ret(1), mul(x);
-    while(n > 0) {
-      if(n & 1) ret *= mul;
+    while (n > 0) {
+      if (n & 1) ret *= mul;
       mul *= mul;
       n >>= 1;
     }
     return ret;
   }
 
-  friend ostream &operator<<(ostream &os, const modint &p) {
-    return os << p.x;
-  }
+  friend ostream &operator<<(ostream &os, const modint &p) { return os << p.x; }
 
   friend istream &operator>>(istream &is, modint &a) {
     int64_t t;
     is >> t;
-    a = modint< mod >(t);
+    a = modint<mod>(t);
     return (is);
   }
 
   static int get_mod() { return mod; }
 };
 
-template< typename T >
+template <typename T>
 struct ModCalc {
   vector<T> _fact = {1, 1};
   vector<T> _fact_inv = {1, 1};
   vector<T> _inv = {0, 1};
-  
-  T pow(T a, int n){
+
+  T pow(T a, int n) {
     T x(1);
-    while(n) {
-      if(n & 1) x *= a;
+    while (n) {
+      if (n & 1) x *= a;
       a *= a;
       n >>= 1;
     }
     return x;
   }
-  void expand(int n){
-    while(_fact.size() <= n){
+  void expand(int n) {
+    while (_fact.size() <= n) {
       auto i = _fact.size();
-      _fact.eb(_fact[i-1] * T(i));
+      _fact.eb(_fact[i - 1] * T(i));
       auto q = T::get_mod() / i, r = T::get_mod() % i;
-      _inv.eb(_inv[r] * T(T::get_mod()-q));
-      _fact_inv.eb(_fact_inv[i-1] * _inv[i]);
+      _inv.eb(_inv[r] * T(T::get_mod() - q));
+      _fact_inv.eb(_fact_inv[i - 1] * _inv[i]);
     }
   }
 
-  T fact(int n){
-    if(n >= _fact.size()) expand(n);
+  T fact(int n) {
+    if (n >= _fact.size()) expand(n);
     return _fact[n];
   }
 
-  T fact_inv(int n){
-    if(n >= _fact.size()) expand(n);
+  T fact_inv(int n) {
+    if (n >= _fact.size()) expand(n);
     return _fact_inv[n];
   }
-  
-  T inv(int n){
-    if(n >= _fact.size()) expand(n);
+
+  T inv(int n) {
+    if (n >= _fact.size()) expand(n);
     return _inv[n];
   }
-  
-  T C(ll n, ll k, bool large=false){
+
+  T C(ll n, ll k, bool large = false) {
     assert(n >= 0);
     if (k < 0 || n < k) return 0;
-    if (!large) return fact(n) * fact_inv(k) * fact_inv(n-k);
-    k = min(k, n-k);
+    if (!large) return fact(n) * fact_inv(k) * fact_inv(n - k);
+    k = min(k, n - k);
     T x(1);
-    FOR(i, k){
+    FOR(i, k) {
       x *= n - i;
       x *= inv(i + 1);
     }
