@@ -23,6 +23,7 @@
 "test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp": "2021-12-31 12:24:19 +0900",
 "test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp": "2021-12-31 12:24:19 +0900",
 "test/library_checker/graph/cycle_detection.test.cpp": "2021-12-31 12:29:31 +0900",
+"test/library_checker/graph/frequency_table_of_tree_distance.test.cpp": "2021-12-31 19:25:48 +0900",
 "test/library_checker/graph/lca.test.cpp": "2021-12-31 12:24:19 +0900",
 "test/library_checker/graph/lca_directed.test.cpp": "2021-12-31 12:24:19 +0900",
 "test/library_checker/graph/maximum_independent_set.test.cpp": "2021-12-31 12:24:19 +0900",
