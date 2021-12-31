@@ -11,9 +11,9 @@ data:
   - icon: ':warning:'
     path: graph/bipartite_coloring.hpp
     title: graph/bipartite_coloring.hpp
-  - icon: ':warning:'
-    path: graph/centroiddecomp.hpp
-    title: graph/centroiddecomp.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/centroid.hpp
+    title: graph/centroid.hpp
   - icon: ':warning:'
     path: graph/degree.hpp
     title: graph/degree.hpp
@@ -78,6 +78,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/scc.test.cpp
     title: test/library_checker/graph/scc.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yukicoder/1038_centroid.test.cpp
+    title: test/yukicoder/1038_centroid.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/899_bfsnumbering.test.cpp
     title: test/yukicoder/899_bfsnumbering.test.cpp
@@ -147,6 +150,7 @@ data:
   - graph/treegroup.hpp
   - graph/hld.hpp
   - graph/treemonoid.hpp
+  - graph/centroid.hpp
   - graph/degree.hpp
   - graph/dijkstra.hpp
   - graph/mis.hpp
@@ -155,7 +159,6 @@ data:
   - graph/scc.hpp
   - graph/bipartite_coloring.hpp
   - graph/lazytreemonoid.hpp
-  - graph/centroiddecomp.hpp
   - graph/eulerwalk.hpp
   - graph/bfsnumbering.hpp
   timestamp: '2021-12-31 12:24:19+09:00'
@@ -173,6 +176,7 @@ data:
   - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   - test/yukicoder/899_bfsnumbering.test.cpp
+  - test/yukicoder/1038_centroid.test.cpp
 documentation_of: graph/base.hpp
 layout: document
 redirect_from:

@@ -128,9 +128,9 @@ data:
     - icon: ':warning:'
       path: graph/bipartite_coloring.hpp
       title: graph/bipartite_coloring.hpp
-    - icon: ':warning:'
-      path: graph/centroiddecomp.hpp
-      title: graph/centroiddecomp.hpp
+    - icon: ':heavy_check_mark:'
+      path: graph/centroid.hpp
+      title: graph/centroid.hpp
     - icon: ':heavy_check_mark:'
       path: graph/cycle_detection.hpp
       title: graph/cycle_detection.hpp
@@ -373,6 +373,9 @@ data:
       title: test/library_checker/math/factorize.test.cpp
   - name: test/yukicoder
     pages:
+    - icon: ':heavy_check_mark:'
+      path: test/yukicoder/1038_centroid.test.cpp
+      title: test/yukicoder/1038_centroid.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/899_bfsnumbering.test.cpp
       title: test/yukicoder/899_bfsnumbering.test.cpp
