@@ -36,6 +36,9 @@ data:
     path: graph/scc.hpp
     title: graph/scc.hpp
   - icon: ':heavy_check_mark:'
+    path: graph/tree_all_distances.hpp
+    title: graph/tree_all_distances.hpp
+  - icon: ':heavy_check_mark:'
     path: graph/treeabelgroup.hpp
     title: graph/treeabelgroup.hpp
   - icon: ':heavy_check_mark:'
@@ -158,6 +161,7 @@ data:
   - graph/treemonoid.hpp
   - graph/centroid.hpp
   - graph/degree.hpp
+  - graph/tree_all_distances.hpp
   - graph/dijkstra.hpp
   - graph/mis.hpp
   - graph/treeabelgroup.hpp

@@ -158,6 +158,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/scc.hpp
       title: graph/scc.hpp
+    - icon: ':heavy_check_mark:'
+      path: graph/tree_all_distances.hpp
+      title: graph/tree_all_distances.hpp
     - icon: ':warning:'
       path: graph/tree_dp.hpp
       title: graph/tree_dp.hpp
