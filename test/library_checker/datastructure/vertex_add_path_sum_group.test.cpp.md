@@ -138,17 +138,17 @@ data:
     \ vr);\n  }\n\n  template <class F>\n  int max_right(F &check, int L) {\n    assert(0\
     \ <= L && L <= n && check(Monoid::unit));\n    if (L == n) return n;\n    L +=\
     \ size;\n    X sm = Monoid::unit;\n    do {\n      while (L % 2 == 0) L >>= 1;\n\
-    \      if (!check(Monoid::op(sm, dat[L]))) {\n        while (L < n) {\n      \
-    \    L = 2 * L;\n          if (check(Monoid::op(sm, dat[L]))) {\n            sm\
-    \ = Monoid::op(sm, dat[L]);\n            L++;\n          }\n        }\n      \
-    \  return L - n;\n      }\n      sm = Monoid::op(sm, dat[L]);\n      L++;\n  \
-    \  } while ((L & -L) != L);\n    return n;\n  }\n\n  template <class F>\n  int\
+    \      if (!check(Monoid::op(sm, dat[L]))) {\n        while (L < size) {\n   \
+    \       L = 2 * L;\n          if (check(Monoid::op(sm, dat[L]))) {\n         \
+    \   sm = Monoid::op(sm, dat[L]);\n            L++;\n          }\n        }\n \
+    \       return L - size;\n      }\n      sm = Monoid::op(sm, dat[L]);\n      L++;\n\
+    \    } while ((L & -L) != L);\n    return n;\n  }\n\n  template <class F>\n  int\
     \ min_left(F &check, int R) {\n    assert(0 <= R && R <= n && check(Monoid::unit));\n\
-    \    if (R == 0) return 0;\n    R += n;\n    X sm = Monoid::unit;\n    do {\n\
+    \    if (R == 0) return 0;\n    R += size;\n    X sm = Monoid::unit;\n    do {\n\
     \      --R;\n      while (R > 1 && (R % 2)) R >>= 1;\n      if (!check(Monoid::op(dat[R],\
     \ sm))) {\n        while (R < n) {\n          R = 2 * R + 1;\n          if (check(Monoid::op(dat[R],\
     \ sm))) {\n            sm = Monoid::op(dat[R], sm);\n            R--;\n      \
-    \    }\n        }\n        return R + 1 - n;\n      }\n      sm = Monoid::op(dat[R],\
+    \    }\n        }\n        return R + 1 - size;\n      }\n      sm = Monoid::op(dat[R],\
     \ sm);\n    } while ((R & -R) != R);\n    return 0;\n  }\n\n  void debug() { print(\"\
     segtree\", dat); }\n};\n#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\n\
     struct Edge {\n  int frm, to;\n  T cost;\n  int id;\n};\n\ntemplate <typename\
@@ -296,7 +296,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
   requiredBy: []
-  timestamp: '2021-12-31 12:24:19+09:00'
+  timestamp: '2021-12-31 23:31:00+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
