@@ -79,6 +79,9 @@ data:
     path: test/library_checker/graph/scc.test.cpp
     title: test/library_checker/graph/scc.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/yukicoder/1002_centroid.test.cpp
+    title: test/yukicoder/1002_centroid.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1038_centroid.test.cpp
     title: test/yukicoder/1038_centroid.test.cpp
   - icon: ':heavy_check_mark:'
@@ -176,6 +179,7 @@ data:
   - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   - test/yukicoder/899_bfsnumbering.test.cpp
+  - test/yukicoder/1002_centroid.test.cpp
   - test/yukicoder/1038_centroid.test.cpp
 documentation_of: graph/base.hpp
 layout: document

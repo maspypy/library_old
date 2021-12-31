@@ -7,6 +7,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/yukicoder/1002_centroid.test.cpp
+    title: test/yukicoder/1002_centroid.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1038_centroid.test.cpp
     title: test/yukicoder/1038_centroid.test.cpp
   _isVerificationFailed: false
@@ -117,6 +120,7 @@ data:
   timestamp: '2021-12-31 14:21:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/yukicoder/1002_centroid.test.cpp
   - test/yukicoder/1038_centroid.test.cpp
 documentation_of: graph/centroid.hpp
 layout: document

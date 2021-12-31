@@ -374,6 +374,9 @@ data:
   - name: test/yukicoder
     pages:
     - icon: ':heavy_check_mark:'
+      path: test/yukicoder/1002_centroid.test.cpp
+      title: test/yukicoder/1002_centroid.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1038_centroid.test.cpp
       title: test/yukicoder/1038_centroid.test.cpp
     - icon: ':heavy_check_mark:'
