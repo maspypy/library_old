@@ -8,8 +8,8 @@ vc<int> cycle_detection(Graph& G, bool is_edge) {
     vc<int> ANS(len(C) + 1);
     FOR(i, len(C)) {
       auto e = G.edges[C[i]];
-      ANS[i + 0] = get<0>(e);
-      ANS[i + 1] = get<1>(e);
+      ANS[i + 0] = e.frm;
+      ANS[i + 1] = e.to;
     }
     return ANS;
   }
@@ -22,16 +22,16 @@ vc<int> cycle_detection(Graph& G, bool is_edge) {
 
   auto dfs = [&](auto self, int v) -> void {
     used[v] = 1;
-    for (auto&& [frm, to, cost, id] : G[v]) {
+    for (auto&& e: G[v]) {
       if (len(ANS)) return;
-      if (!used[to]) {
-        par[to] = {v, id};
-        self(self, to);
+      if (!used[e.to]) {
+        par[e.to] = {v, e.id};
+        self(self, e.to);
       }
-      elif (used[to] == 1) {
-        ANS = {id};
+      elif (used[e.to] == 1) {
+        ANS = {e.id};
         int cur = v;
-        while (cur != to) {
+        while (cur != e.to) {
           ANS.eb(par[cur].se);
           cur = par[cur].fi;
         }
