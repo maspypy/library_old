@@ -47,14 +47,14 @@ struct SegTree {
     do {
       while (L % 2 == 0) L >>= 1;
       if (!check(Monoid::op(sm, dat[L]))) {
-        while (L < n) {
+        while (L < size) {
           L = 2 * L;
           if (check(Monoid::op(sm, dat[L]))) {
             sm = Monoid::op(sm, dat[L]);
             L++;
           }
         }
-        return L - n;
+        return L - size;
       }
       sm = Monoid::op(sm, dat[L]);
       L++;
@@ -66,7 +66,7 @@ struct SegTree {
   int min_left(F &check, int R) {
     assert(0 <= R && R <= n && check(Monoid::unit));
     if (R == 0) return 0;
-    R += n;
+    R += size;
     X sm = Monoid::unit;
     do {
       --R;
@@ -79,7 +79,7 @@ struct SegTree {
             R--;
           }
         }
-        return R + 1 - n;
+        return R + 1 - size;
       }
       sm = Monoid::op(dat[R], sm);
     } while ((R & -R) != R);
