@@ -9,16 +9,16 @@ data:
     - icon: ':question:'
       path: algebra/addgroup.hpp
       title: algebra/addgroup.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: algebra/affinegroup.hpp
       title: algebra/affinegroup.hpp
     - icon: ':heavy_check_mark:'
       path: algebra/beats_sample.hpp
       title: algebra/beats_sample.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: algebra/cntsum.hpp
       title: algebra/cntsum.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: algebra/cntsum_affine_lazy.hpp
       title: algebra/cntsum_affine_lazy.hpp
     - icon: ':warning:'
@@ -68,7 +68,7 @@ data:
     - icon: ':warning:'
       path: ds/intervals.hpp
       title: ds/intervals.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: ds/lazysegtree.hpp
       title: ds/lazysegtree.hpp
     - icon: ':heavy_check_mark:'
@@ -86,7 +86,7 @@ data:
     - icon: ':warning:'
       path: ds/slope.hpp
       title: ds/slope.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: ds/swag.hpp
       title: ds/swag.hpp
     - icon: ':heavy_check_mark:'
@@ -186,7 +186,7 @@ data:
     - icon: ':warning:'
       path: mod/amodint.hpp
       title: mod/amodint.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: mod/modint.hpp
       title: mod/modint.hpp
   - name: .
@@ -295,16 +295,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
       title: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
       title: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/predecessor_problem.test..cpp
       title: test/library_checker/datastructure/predecessor_problem.test..cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
       title: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
       title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
     - icon: ':heavy_check_mark:'

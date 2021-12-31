@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: algebra/affinegroup.hpp
     title: algebra/affinegroup.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: ds/swag.hpp
     title: ds/swag.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: my_template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/queue_operate_all_composite
@@ -126,31 +126,31 @@ data:
     swag\");\n    print(\"dat\", dat);\n    print(\"cum_l\", cum_l);\n    print(\"\
     cum_r\", cum_r);\n  }\n};\n#line 1 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct\
     \ modint {\n  int x;\n\n  constexpr modint(const ll x = 0) noexcept\n      : x(x\
-    \ >= 0 ? x % mod : (mod - (-x) % mod) % mod) {}\n\n  bool operator<(const ModIntRuntime\
-    \ &x) const {\n    return val < x.val;\n  } // To use std::map<ModIntRuntime,\
-    \ T>\n  modint &operator+=(const modint &p) {\n    if ((x += p.x) >= mod) x -=\
-    \ mod;\n    return *this;\n  }\n\n  modint &operator-=(const modint &p) {\n  \
-    \  if ((x += mod - p.x) >= mod) x -= mod;\n    return *this;\n  }\n\n  modint\
-    \ &operator*=(const modint &p) {\n    x = (int)(1LL * x * p.x % mod);\n    return\
-    \ *this;\n  }\n\n  modint &operator/=(const modint &p) {\n    *this *= p.inverse();\n\
-    \    return *this;\n  }\n\n  modint operator-() const { return modint(-x); }\n\
-    \n  modint operator+(const modint &p) const { return modint(*this) += p; }\n\n\
-    \  modint operator-(const modint &p) const { return modint(*this) -= p; }\n\n\
-    \  modint operator*(const modint &p) const { return modint(*this) *= p; }\n\n\
-    \  modint operator/(const modint &p) const { return modint(*this) /= p; }\n\n\
-    \  bool operator==(const modint &p) const { return x == p.x; }\n\n  bool operator!=(const\
-    \ modint &p) const { return x != p.x; }\n\n  modint inverse() const {\n    int\
-    \ a = x, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n  \
-    \    swap(a -= t * b, b);\n      swap(u -= t * v, v);\n    }\n    return modint(u);\n\
-    \  }\n\n  modint pow(int64_t n) const {\n    modint ret(1), mul(x);\n    while\
-    \ (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n\
-    \    }\n    return ret;\n  }\n\n  friend ostream &operator<<(ostream &os, const\
-    \ modint &p) { return os << p.x; }\n\n  friend istream &operator>>(istream &is,\
-    \ modint &a) {\n    int64_t t;\n    is >> t;\n    a = modint<mod>(t);\n    return\
-    \ (is);\n  }\n\n  static int get_mod() { return mod; }\n};\n\ntemplate <typename\
-    \ T>\nstruct ModCalc {\n  vector<T> _fact = {1, 1};\n  vector<T> _fact_inv = {1,\
-    \ 1};\n  vector<T> _inv = {0, 1};\n\n  T pow(T a, int n) {\n    T x(1);\n    while\
-    \ (n) {\n      if (n & 1) x *= a;\n      a *= a;\n      n >>= 1;\n    }\n    return\
+    \ >= 0 ? x % mod : (mod - (-x) % mod) % mod) {}\n\n  bool operator<(const modint\
+    \ &other) const {\n    return x < other.x;\n  } // To use std::map\n\n  modint\
+    \ &operator+=(const modint &p) {\n    if ((x += p.x) >= mod) x -= mod;\n    return\
+    \ *this;\n  }\n\n  modint &operator-=(const modint &p) {\n    if ((x += mod -\
+    \ p.x) >= mod) x -= mod;\n    return *this;\n  }\n\n  modint &operator*=(const\
+    \ modint &p) {\n    x = (int)(1LL * x * p.x % mod);\n    return *this;\n  }\n\n\
+    \  modint &operator/=(const modint &p) {\n    *this *= p.inverse();\n    return\
+    \ *this;\n  }\n\n  modint operator-() const { return modint(-x); }\n\n  modint\
+    \ operator+(const modint &p) const { return modint(*this) += p; }\n\n  modint\
+    \ operator-(const modint &p) const { return modint(*this) -= p; }\n\n  modint\
+    \ operator*(const modint &p) const { return modint(*this) *= p; }\n\n  modint\
+    \ operator/(const modint &p) const { return modint(*this) /= p; }\n\n  bool operator==(const\
+    \ modint &p) const { return x == p.x; }\n\n  bool operator!=(const modint &p)\
+    \ const { return x != p.x; }\n\n  modint inverse() const {\n    int a = x, b =\
+    \ mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -=\
+    \ t * b, b);\n      swap(u -= t * v, v);\n    }\n    return modint(u);\n  }\n\n\
+    \  modint pow(int64_t n) const {\n    modint ret(1), mul(x);\n    while (n > 0)\
+    \ {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n\
+    \    return ret;\n  }\n\n  friend ostream &operator<<(ostream &os, const modint\
+    \ &p) { return os << p.x; }\n\n  friend istream &operator>>(istream &is, modint\
+    \ &a) {\n    int64_t t;\n    is >> t;\n    a = modint<mod>(t);\n    return (is);\n\
+    \  }\n\n  static int get_mod() { return mod; }\n};\n\ntemplate <typename T>\n\
+    struct ModCalc {\n  vector<T> _fact = {1, 1};\n  vector<T> _fact_inv = {1, 1};\n\
+    \  vector<T> _inv = {0, 1};\n\n  T pow(T a, int n) {\n    T x(1);\n    while (n)\
+    \ {\n      if (n & 1) x *= a;\n      a *= a;\n      n >>= 1;\n    }\n    return\
     \ x;\n  }\n  void expand(int n) {\n    while (_fact.size() <= n) {\n      auto\
     \ i = _fact.size();\n      _fact.eb(_fact[i - 1] * T(i));\n      auto q = T::get_mod()\
     \ / i, r = T::get_mod() % i;\n      _inv.eb(_inv[r] * T(T::get_mod() - q));\n\
@@ -189,8 +189,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
   requiredBy: []
-  timestamp: '2021-12-31 11:57:33+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2021-12-31 12:05:58+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
 layout: document

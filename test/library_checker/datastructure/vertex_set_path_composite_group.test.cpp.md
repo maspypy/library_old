@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: algebra/affinegroup.hpp
     title: algebra/affinegroup.hpp
   - icon: ':x:'
@@ -19,7 +19,7 @@ data:
   - icon: ':x:'
     path: graph/treegroup.hpp
     title: graph/treegroup.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
   - icon: ':question:'
@@ -122,8 +122,8 @@ data:
     \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp\"\
     \n\n#line 1 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n  int x;\n\
     \n  constexpr modint(const ll x = 0) noexcept\n      : x(x >= 0 ? x % mod : (mod\
-    \ - (-x) % mod) % mod) {}\n\n  bool operator<(const ModIntRuntime &x) const {\n\
-    \    return val < x.val;\n  } // To use std::map<ModIntRuntime, T>\n  modint &operator+=(const\
+    \ - (-x) % mod) % mod) {}\n\n  bool operator<(const modint &other) const {\n \
+    \   return x < other.x;\n  } // To use std::map\n\n  modint &operator+=(const\
     \ modint &p) {\n    if ((x += p.x) >= mod) x -= mod;\n    return *this;\n  }\n\
     \n  modint &operator-=(const modint &p) {\n    if ((x += mod - p.x) >= mod) x\
     \ -= mod;\n    return *this;\n  }\n\n  modint &operator*=(const modint &p) {\n\
@@ -343,7 +343,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
   requiredBy: []
-  timestamp: '2021-12-31 11:57:33+09:00'
+  timestamp: '2021-12-31 12:05:58+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp

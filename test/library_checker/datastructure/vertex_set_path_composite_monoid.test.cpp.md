@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: algebra/affinegroup.hpp
     title: algebra/affinegroup.hpp
   - icon: ':x:'
@@ -19,7 +19,7 @@ data:
   - icon: ':x:'
     path: graph/treemonoid.hpp
     title: graph/treemonoid.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
   - icon: ':question:'
@@ -129,19 +129,19 @@ data:
     \ {K(1), K(0)};\n  static constexpr bool commute = false;\n};\n#line 1 \"mod/modint.hpp\"\
     \ntemplate <int mod>\nstruct modint {\n  int x;\n\n  constexpr modint(const ll\
     \ x = 0) noexcept\n      : x(x >= 0 ? x % mod : (mod - (-x) % mod) % mod) {}\n\
-    \n  bool operator<(const ModIntRuntime &x) const {\n    return val < x.val;\n\
-    \  } // To use std::map<ModIntRuntime, T>\n  modint &operator+=(const modint &p)\
-    \ {\n    if ((x += p.x) >= mod) x -= mod;\n    return *this;\n  }\n\n  modint\
-    \ &operator-=(const modint &p) {\n    if ((x += mod - p.x) >= mod) x -= mod;\n\
-    \    return *this;\n  }\n\n  modint &operator*=(const modint &p) {\n    x = (int)(1LL\
-    \ * x * p.x % mod);\n    return *this;\n  }\n\n  modint &operator/=(const modint\
-    \ &p) {\n    *this *= p.inverse();\n    return *this;\n  }\n\n  modint operator-()\
-    \ const { return modint(-x); }\n\n  modint operator+(const modint &p) const {\
-    \ return modint(*this) += p; }\n\n  modint operator-(const modint &p) const {\
-    \ return modint(*this) -= p; }\n\n  modint operator*(const modint &p) const {\
-    \ return modint(*this) *= p; }\n\n  modint operator/(const modint &p) const {\
-    \ return modint(*this) /= p; }\n\n  bool operator==(const modint &p) const { return\
-    \ x == p.x; }\n\n  bool operator!=(const modint &p) const { return x != p.x; }\n\
+    \n  bool operator<(const modint &other) const {\n    return x < other.x;\n  }\
+    \ // To use std::map\n\n  modint &operator+=(const modint &p) {\n    if ((x +=\
+    \ p.x) >= mod) x -= mod;\n    return *this;\n  }\n\n  modint &operator-=(const\
+    \ modint &p) {\n    if ((x += mod - p.x) >= mod) x -= mod;\n    return *this;\n\
+    \  }\n\n  modint &operator*=(const modint &p) {\n    x = (int)(1LL * x * p.x %\
+    \ mod);\n    return *this;\n  }\n\n  modint &operator/=(const modint &p) {\n \
+    \   *this *= p.inverse();\n    return *this;\n  }\n\n  modint operator-() const\
+    \ { return modint(-x); }\n\n  modint operator+(const modint &p) const { return\
+    \ modint(*this) += p; }\n\n  modint operator-(const modint &p) const { return\
+    \ modint(*this) -= p; }\n\n  modint operator*(const modint &p) const { return\
+    \ modint(*this) *= p; }\n\n  modint operator/(const modint &p) const { return\
+    \ modint(*this) /= p; }\n\n  bool operator==(const modint &p) const { return x\
+    \ == p.x; }\n\n  bool operator!=(const modint &p) const { return x != p.x; }\n\
     \n  modint inverse() const {\n    int a = x, b = mod, u = 1, v = 0, t;\n    while\
     \ (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b);\n      swap(u -= t *\
     \ v, v);\n    }\n    return modint(u);\n  }\n\n  modint pow(int64_t n) const {\n\
@@ -328,7 +328,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   requiredBy: []
-  timestamp: '2021-12-31 11:57:33+09:00'
+  timestamp: '2021-12-31 12:05:58+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
