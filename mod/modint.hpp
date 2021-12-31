@@ -5,9 +5,10 @@ struct modint {
   constexpr modint(const ll x = 0) noexcept
       : x(x >= 0 ? x % mod : (mod - (-x) % mod) % mod) {}
 
-  bool operator<(const ModIntRuntime &x) const {
-    return val < x.val;
-  } // To use std::map<ModIntRuntime, T>
+  bool operator<(const modint &other) const {
+    return x < other.x;
+  } // To use std::map
+
   modint &operator+=(const modint &p) {
     if ((x += p.x) >= mod) x -= mod;
     return *this;
