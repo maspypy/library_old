@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algebra/addgroup.hpp
     title: algebra/addgroup.hpp
   - icon: ':heavy_check_mark:'

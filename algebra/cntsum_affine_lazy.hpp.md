@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algebra/affinegroup.hpp
     title: algebra/affinegroup.hpp
   - icon: ':heavy_check_mark:'

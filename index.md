@@ -6,10 +6,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: algebra/add_mul_lazy.hpp
       title: algebra/add_mul_lazy.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: algebra/addgroup.hpp
       title: algebra/addgroup.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: algebra/affinegroup.hpp
       title: algebra/affinegroup.hpp
     - icon: ':heavy_check_mark:'
@@ -33,13 +33,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: algebra/mulgroup.hpp
       title: algebra/mulgroup.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: algebra/reversegroup.hpp
       title: algebra/reversegroup.hpp
     - icon: ':warning:'
       path: algebra/reverselazy.hpp
       title: algebra/reverselazy.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: algebra/reversemonoid.hpp
       title: algebra/reversemonoid.hpp
   - name: ds
@@ -56,7 +56,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: ds/fastset.hpp
       title: ds/fastset.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: ds/fenwick.hpp
       title: ds/fenwick.hpp
     - icon: ':heavy_check_mark:'
@@ -77,7 +77,7 @@ data:
     - icon: ':warning:'
       path: ds/lichao.hpp
       title: ds/lichao.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: ds/segtree.hpp
       title: ds/segtree.hpp
     - icon: ':heavy_check_mark:'
@@ -116,7 +116,7 @@ data:
       title: geometry/geometry.hpp
   - name: graph
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/base.hpp
       title: graph/base.hpp
     - icon: ':warning:'
@@ -131,7 +131,7 @@ data:
     - icon: ':warning:'
       path: graph/centroiddecomp.hpp
       title: graph/centroiddecomp.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/cycle_detection.hpp
       title: graph/cycle_detection.hpp
     - icon: ':warning:'
@@ -146,7 +146,7 @@ data:
     - icon: ':warning:'
       path: graph/eulerwalk.hpp
       title: graph/eulerwalk.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/hld.hpp
       title: graph/hld.hpp
     - icon: ':warning:'
@@ -161,16 +161,16 @@ data:
     - icon: ':warning:'
       path: graph/tree_dp.hpp
       title: graph/tree_dp.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/treeabelgroup.hpp
       title: graph/treeabelgroup.hpp
     - icon: ':warning:'
       path: graph/treedoubling.hpp
       title: graph/treedoubling.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/treegroup.hpp
       title: graph/treegroup.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/treemonoid.hpp
       title: graph/treemonoid.hpp
     - icon: ':warning:'
@@ -186,12 +186,12 @@ data:
     - icon: ':warning:'
       path: mod/amodint.hpp
       title: mod/amodint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: mod/modint.hpp
       title: mod/modint.hpp
   - name: .
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: my_template.hpp
       title: my_template.hpp
     - icon: ':warning:'
@@ -328,33 +328,33 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/unionfind.test.cpp
       title: test/library_checker/datastructure/unionfind.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
       title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
       title: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
       title: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
       title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
       title: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
       title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   - name: test/library_checker/graph
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/graph/cycle_detection.test.cpp
       title: test/library_checker/graph/cycle_detection.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/graph/lca.test.cpp
       title: test/library_checker/graph/lca.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/graph/lca_directed.test.cpp
       title: test/library_checker/graph/lca_directed.test.cpp
     - icon: ':heavy_check_mark:'
