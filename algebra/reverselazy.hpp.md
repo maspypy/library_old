@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: algebra/reversemonoid.hpp
     title: algebra/reversemonoid.hpp
   _extendedRequiredBy:

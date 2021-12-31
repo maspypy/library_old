@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: algebra/reversegroup.hpp
     title: algebra/reversegroup.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/hld.hpp
     title: graph/hld.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
     title: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
     title: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"ds/segtree.hpp\"\ntemplate <class Monoid>\nstruct SegTree\
@@ -55,15 +55,15 @@ data:
     \    }\n        }\n        return R + 1 - n;\n      }\n      sm = Monoid::op(dat[R],\
     \ sm);\n    } while ((R & -R) != R);\n    return 0;\n  }\n\n  void debug() { print(\"\
     segtree\", dat); }\n};\n#line 2 \"graph/base.hpp\"\n\n// frm, to, cap, cost\n\
-    template <typename T>\nusing Edge = tuple<int, int, T, int>;\n\ntemplate <typename\
-    \ T, bool directed = false>\nstruct Graph {\n  int N, M;\n  using cost_type =\
-    \ T;\n  using edge_type = Edge<T>;\n  vector<edge_type> edges;\n  vector<int>\
-    \ indptr;\n  vector<edge_type> csr_edges;\n  bool prepared;\n\n  class OutgoingEdges\
-    \ {\n  public:\n    OutgoingEdges(const Graph* G, int l, int r) : G(G), l(l),\
-    \ r(r) {}\n\n    const edge_type* begin() const {\n      if (l == r) { return\
-    \ 0; }\n      return &G->csr_edges[l];\n    }\n\n    const edge_type* end() const\
-    \ {\n      if (l == r) { return 0; }\n      return &G->csr_edges[r];\n    }\n\n\
-    \  private:\n    int l, r;\n    const Graph* G;\n  };\n\n  bool is_prepared()\
+    template <typename T>\nstruct Edge{\n  int frm, to;\n  T cost;\n  int id;\n};\n\
+    \ntemplate <typename T, bool directed = false>\nstruct Graph {\n  int N, M;\n\
+    \  using cost_type = T;\n  using edge_type = Edge<T>;\n  vector<edge_type> edges;\n\
+    \  vector<int> indptr;\n  vector<edge_type> csr_edges;\n  bool prepared;\n\n \
+    \ class OutgoingEdges {\n  public:\n    OutgoingEdges(const Graph* G, int l, int\
+    \ r) : G(G), l(l), r(r) {}\n\n    const edge_type* begin() const {\n      if (l\
+    \ == r) { return 0; }\n      return &G->csr_edges[l];\n    }\n\n    const edge_type*\
+    \ end() const {\n      if (l == r) { return 0; }\n      return &G->csr_edges[r];\n\
+    \    }\n\n  private:\n    int l, r;\n    const Graph* G;\n  };\n\n  bool is_prepared()\
     \ { return prepared; }\n  constexpr bool is_directed() { return directed; }\n\n\
     \  Graph() {}\n  Graph(int N) : N(N), M(0), prepared(0) {}\n\n  void add(int frm,\
     \ int to, T cost = 1, int i = -1) {\n    assert(!prepared);\n    assert(0 <= frm\
@@ -79,14 +79,14 @@ data:
     \ return {this, indptr[v], indptr[v + 1]};\n  }\n\n  void debug() {\n    print(\"\
     Graph\");\n    if (!prepared) {\n      print(\"frm to cost id\");\n      for (auto&&\
     \ e: edges) print(e);\n    } else {\n      print(\"indptr\", indptr);\n      print(\"\
-    frm to cost id\");\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e);\n   \
-    \ }\n  }\n\n  int size() { return N; }\n};\n#line 3 \"graph/hld.hpp\"\n\r\ntemplate\
-    \ <typename Graph>\r\nstruct HLD {\r\n  Graph &G;\r\n  int N;\r\n  vector<int>\
-    \ LID, RID, head, V, parent, depth;\r\n\r\n  HLD(Graph &G, int root = 0)\r\n \
-    \     : G(G),\r\n        N(G.N),\r\n        LID(G.N),\r\n        RID(G.N),\r\n\
-    \        head(G.N, root),\r\n        V(G.N),\r\n        parent(G.N, -1),\r\n \
-    \       depth(G.N) {\r\n    assert(G.is_prepared());\r\n    int t1 = 0;\r\n  \
-    \  dfs_sz(root, -1);\r\n    dfs_hld(root, -1, t1);\r\n  }\r\n\r\n  void dfs_sz(int\
+    frm to cost id\");\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e.frm, e.to,\
+    \ e.cost, e.id);\n    }\n  }\n\n  int size() { return N; }\n};\n#line 3 \"graph/hld.hpp\"\
+    \n\r\ntemplate <typename Graph>\r\nstruct HLD {\r\n  Graph &G;\r\n  int N;\r\n\
+    \  vector<int> LID, RID, head, V, parent, depth;\r\n\r\n  HLD(Graph &G, int root\
+    \ = 0)\r\n      : G(G),\r\n        N(G.N),\r\n        LID(G.N),\r\n        RID(G.N),\r\
+    \n        head(G.N, root),\r\n        V(G.N),\r\n        parent(G.N, -1),\r\n\
+    \        depth(G.N) {\r\n    assert(G.is_prepared());\r\n    int t1 = 0;\r\n \
+    \   dfs_sz(root, -1);\r\n    dfs_hld(root, -1, t1);\r\n  }\r\n\r\n  void dfs_sz(int\
     \ v, int p) {\r\n    auto &sz = RID;\r\n    parent[v] = p;\r\n    depth[v] = (p\
     \ == -1 ? 0 : depth[p] + 1);\r\n    sz[v] = 1;\r\n    int l = G.indptr[v], r =\
     \ G.indptr[v + 1];\r\n    auto &csr = G.csr_edges;\r\n    if (l + 1 < r && get<1>(csr[l])\
@@ -225,8 +225,8 @@ data:
   isVerificationFile: false
   path: graph/treegroup.hpp
   requiredBy: []
-  timestamp: '2021-12-30 21:29:44+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2021-12-31 11:57:33+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp

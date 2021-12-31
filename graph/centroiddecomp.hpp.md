@@ -1,6 +1,9 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':question:'
+    path: graph/base.hpp
+    title: graph/base.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -8,48 +11,69 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"graph/centroiddecomp.hpp\"\ntemplate <typename T>\r\nvoid\
-    \ centroid_decomposition(Graph<T>& G, function<void(vi&, vi&, vi&)> calc) {\r\n\
-    \  // V, par, dep \u306B\u5BFE\u3059\u308B\u8A08\u7B97\u95A2\u6570\u3092\u6E21\
-    \u3059\u3002\r\n\r\n  ll N = G.N;\r\n  vc<bool> DONE(N);\r\n  vi sz(N);\r\n  vi\
-    \ par(N);\r\n  vi dep(N);\r\n\r\n  auto find_centroid = [&](ll root) -> ll {\r\
-    \n    vi V = {root};\r\n    par[root] = -1;\r\n    ll l = 0;\r\n    while (l <\
-    \ V.size()) {\r\n      ll v = V[l++];\r\n      FORIN(e, G[v]) {\r\n        ll\
-    \ to = e.to;\r\n        if (to == par[v] || DONE[to]) continue;\r\n        V.eb(to);\r\
-    \n        par[to] = v;\r\n      }\r\n    }\r\n    ll n = V.size();\r\n    reverse(all(V));\r\
-    \n    FORIN(v, V) sz[v] = 0;\r\n    FORIN(v, V) {\r\n      sz[v] += 1;\r\n   \
-    \   if (n - sz[v] <= n / 2) return v;\r\n      sz[par[v]] += sz[v];\r\n    }\r\
-    \n    assert(false);\r\n    return root;\r\n  };\r\n\r\n  FOR(root, N) {\r\n \
-    \   while (!DONE[root]) {\r\n      ll cent = find_centroid(root);\r\n      vi\
-    \ V = {cent};\r\n      par[cent] = -1;\r\n      dep[cent] = 0;\r\n      ll l =\
-    \ 0;\r\n      while (l < V.size()) {\r\n        ll v = V[l++];\r\n        FORIN(e,\
-    \ G[v]) {\r\n          ll to = e.to;\r\n          if (to == par[v] || DONE[to])\
-    \ continue;\r\n          V.eb(to);\r\n          par[to] = v;\r\n          dep[to]\
-    \ = dep[v] + 1;\r\n        }\r\n      }\r\n      DONE[cent] = true;\r\n      calc(V,\
-    \ par, dep);\r\n    }\r\n  }\r\n  return;\r\n}\r\n"
-  code: "template <typename T>\r\nvoid centroid_decomposition(Graph<T>& G, function<void(vi&,\
-    \ vi&, vi&)> calc) {\r\n  // V, par, dep \u306B\u5BFE\u3059\u308B\u8A08\u7B97\u95A2\
-    \u6570\u3092\u6E21\u3059\u3002\r\n\r\n  ll N = G.N;\r\n  vc<bool> DONE(N);\r\n\
-    \  vi sz(N);\r\n  vi par(N);\r\n  vi dep(N);\r\n\r\n  auto find_centroid = [&](ll\
-    \ root) -> ll {\r\n    vi V = {root};\r\n    par[root] = -1;\r\n    ll l = 0;\r\
-    \n    while (l < V.size()) {\r\n      ll v = V[l++];\r\n      FORIN(e, G[v]) {\r\
-    \n        ll to = e.to;\r\n        if (to == par[v] || DONE[to]) continue;\r\n\
-    \        V.eb(to);\r\n        par[to] = v;\r\n      }\r\n    }\r\n    ll n = V.size();\r\
-    \n    reverse(all(V));\r\n    FORIN(v, V) sz[v] = 0;\r\n    FORIN(v, V) {\r\n\
-    \      sz[v] += 1;\r\n      if (n - sz[v] <= n / 2) return v;\r\n      sz[par[v]]\
-    \ += sz[v];\r\n    }\r\n    assert(false);\r\n    return root;\r\n  };\r\n\r\n\
-    \  FOR(root, N) {\r\n    while (!DONE[root]) {\r\n      ll cent = find_centroid(root);\r\
-    \n      vi V = {cent};\r\n      par[cent] = -1;\r\n      dep[cent] = 0;\r\n  \
-    \    ll l = 0;\r\n      while (l < V.size()) {\r\n        ll v = V[l++];\r\n \
-    \       FORIN(e, G[v]) {\r\n          ll to = e.to;\r\n          if (to == par[v]\
-    \ || DONE[to]) continue;\r\n          V.eb(to);\r\n          par[to] = v;\r\n\
-    \          dep[to] = dep[v] + 1;\r\n        }\r\n      }\r\n      DONE[cent] =\
-    \ true;\r\n      calc(V, par, dep);\r\n    }\r\n  }\r\n  return;\r\n}\r\n"
-  dependsOn: []
+  bundledCode: "#line 2 \"graph/base.hpp\"\n\n// frm, to, cap, cost\ntemplate <typename\
+    \ T>\nstruct Edge{\n  int frm, to;\n  T cost;\n  int id;\n};\n\ntemplate <typename\
+    \ T, bool directed = false>\nstruct Graph {\n  int N, M;\n  using cost_type =\
+    \ T;\n  using edge_type = Edge<T>;\n  vector<edge_type> edges;\n  vector<int>\
+    \ indptr;\n  vector<edge_type> csr_edges;\n  bool prepared;\n\n  class OutgoingEdges\
+    \ {\n  public:\n    OutgoingEdges(const Graph* G, int l, int r) : G(G), l(l),\
+    \ r(r) {}\n\n    const edge_type* begin() const {\n      if (l == r) { return\
+    \ 0; }\n      return &G->csr_edges[l];\n    }\n\n    const edge_type* end() const\
+    \ {\n      if (l == r) { return 0; }\n      return &G->csr_edges[r];\n    }\n\n\
+    \  private:\n    int l, r;\n    const Graph* G;\n  };\n\n  bool is_prepared()\
+    \ { return prepared; }\n  constexpr bool is_directed() { return directed; }\n\n\
+    \  Graph() {}\n  Graph(int N) : N(N), M(0), prepared(0) {}\n\n  void add(int frm,\
+    \ int to, T cost = 1, int i = -1) {\n    assert(!prepared);\n    assert(0 <= frm\
+    \ && frm < N && 0 <= to && to < N);\n    if (i == -1) i = M;\n    auto e = edge_type({frm,\
+    \ to, cost, i});\n    edges.eb(e);\n    ++M;\n  }\n\n  void prepare() {\n    assert(!prepared);\n\
+    \    prepared = true;\n    indptr.assign(N + 1, 0);\n    for (auto&& [frm, to,\
+    \ cost, id]: edges) {\n      indptr[frm + 1]++;\n      if (!directed) indptr[to\
+    \ + 1]++;\n    }\n    FOR(v, N) indptr[v + 1] += indptr[v];\n    auto counter\
+    \ = indptr;\n    csr_edges.resize(indptr.back() + 1);\n    for (auto&& [frm, to,\
+    \ cost, id]: edges) {\n      csr_edges[counter[frm]++] = {frm, to, cost, id};\n\
+    \      if (!directed) csr_edges[counter[to]++] = {to, frm, cost, id};\n    }\n\
+    \  }\n\n  OutgoingEdges operator[](int v) const {\n    assert(prepared);\n   \
+    \ return {this, indptr[v], indptr[v + 1]};\n  }\n\n  void debug() {\n    print(\"\
+    Graph\");\n    if (!prepared) {\n      print(\"frm to cost id\");\n      for (auto&&\
+    \ e: edges) print(e);\n    } else {\n      print(\"indptr\", indptr);\n      print(\"\
+    frm to cost id\");\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e.frm, e.to,\
+    \ e.cost, e.id);\n    }\n  }\n\n  int size() { return N; }\n};\n#line 2 \"graph/centroiddecomp.hpp\"\
+    \ntemplate <typename Graph>\r\nvector<int> centroid_decomposition(Graph& G) {\r\
+    \n  // \u91CD\u5FC3\u5206\u89E3\u6728\u306B\u304A\u3051\u308B depth \u914D\u5217\
+    \u3092\u8FD4\u3059\u3002\r\n  assert(G.is_prepared());\r\n  assert(!G.is_directed());\r\
+    \n  int N = G.N;\r\n  vc<int> dep(N, -1);\r\n  vc<int> sz(N);\r\n  vc<int> par(N,\
+    \ -1);\r\n\r\n  auto find = [&](int v) -> int {\r\n    vc<int> V = {v};\r\n  \
+    \  par[v] = -1;\r\n    int p = 0;\r\n    while (p < len(V)) {\r\n      int v =\
+    \ V[p++];\r\n      sz[v] = 0;\r\n      for (auto&& [frm, to, cost, id]: G[v])\
+    \ {\r\n        if (to == par[v] || dep[to] != -1) continue;\r\n        par[to]\
+    \ = v;\r\n        V.eb(to);\r\n      }\r\n    }\r\n    while (len(V)) {\r\n  \
+    \    int v = V.back();\r\n      V.pop_back();\r\n      sz[v] += 1;\r\n      if\
+    \ (p - sz[v] <= p / 2) return v;\r\n      sz[par[v]] += sz[v];\r\n    }\r\n  \
+    \  return -1;\r\n  };\r\n\r\n  vc<pair<int, int>> st = {{0, 0}};\r\n  while (len(st))\
+    \ {\r\n    auto [lv, v] = st.back();\r\n    st.pop_back();\r\n    auto c = find(v);\r\
+    \n    dep[c] = lv;\r\n    for (auto&& [frm, to, cost, id]: G[c]) {\r\n      if\
+    \ (dep[to] == -1) st.eb(lv + 1, to);\r\n    }\r\n  }\r\n  return dep;\r\n}\n"
+  code: "#include \"graph/base.hpp\"\r\ntemplate <typename Graph>\r\nvector<int> centroid_decomposition(Graph&\
+    \ G) {\r\n  // \u91CD\u5FC3\u5206\u89E3\u6728\u306B\u304A\u3051\u308B depth \u914D\
+    \u5217\u3092\u8FD4\u3059\u3002\r\n  assert(G.is_prepared());\r\n  assert(!G.is_directed());\r\
+    \n  int N = G.N;\r\n  vc<int> dep(N, -1);\r\n  vc<int> sz(N);\r\n  vc<int> par(N,\
+    \ -1);\r\n\r\n  auto find = [&](int v) -> int {\r\n    vc<int> V = {v};\r\n  \
+    \  par[v] = -1;\r\n    int p = 0;\r\n    while (p < len(V)) {\r\n      int v =\
+    \ V[p++];\r\n      sz[v] = 0;\r\n      for (auto&& [frm, to, cost, id]: G[v])\
+    \ {\r\n        if (to == par[v] || dep[to] != -1) continue;\r\n        par[to]\
+    \ = v;\r\n        V.eb(to);\r\n      }\r\n    }\r\n    while (len(V)) {\r\n  \
+    \    int v = V.back();\r\n      V.pop_back();\r\n      sz[v] += 1;\r\n      if\
+    \ (p - sz[v] <= p / 2) return v;\r\n      sz[par[v]] += sz[v];\r\n    }\r\n  \
+    \  return -1;\r\n  };\r\n\r\n  vc<pair<int, int>> st = {{0, 0}};\r\n  while (len(st))\
+    \ {\r\n    auto [lv, v] = st.back();\r\n    st.pop_back();\r\n    auto c = find(v);\r\
+    \n    dep[c] = lv;\r\n    for (auto&& [frm, to, cost, id]: G[c]) {\r\n      if\
+    \ (dep[to] == -1) st.eb(lv + 1, to);\r\n    }\r\n  }\r\n  return dep;\r\n}"
+  dependsOn:
+  - graph/base.hpp
   isVerificationFile: false
   path: graph/centroiddecomp.hpp
   requiredBy: []
-  timestamp: '2021-12-25 22:40:58+09:00'
+  timestamp: '2021-12-31 11:57:33+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph/centroiddecomp.hpp
