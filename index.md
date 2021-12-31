@@ -279,11 +279,6 @@ data:
       path: string/zalgorithm.hpp
       title: string/zalgorithm.hpp
   verificationCategories:
-  - name: test/atcoder
-    pages:
-    - icon: ':x:'
-      path: test/atcoder/sample_abc100a.test.cpp
-      title: test/atcoder/sample_abc100a.test.cpp
   - name: test
     pages:
     - icon: ':heavy_check_mark:'
