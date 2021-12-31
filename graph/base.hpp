@@ -1,8 +1,7 @@
 #pragma once
 
-// frm, to, cap, cost
 template <typename T>
-struct Edge{
+struct Edge {
   int frm, to;
   T cost;
   int id;
@@ -56,16 +55,17 @@ struct Graph {
     assert(!prepared);
     prepared = true;
     indptr.assign(N + 1, 0);
-    for (auto&& [frm, to, cost, id]: edges) {
-      indptr[frm + 1]++;
-      if (!directed) indptr[to + 1]++;
+    for (auto&& e: edges) {
+      indptr[e.frm + 1]++;
+      if (!directed) indptr[e.to + 1]++;
     }
     FOR(v, N) indptr[v + 1] += indptr[v];
     auto counter = indptr;
     csr_edges.resize(indptr.back() + 1);
-    for (auto&& [frm, to, cost, id]: edges) {
-      csr_edges[counter[frm]++] = {frm, to, cost, id};
-      if (!directed) csr_edges[counter[to]++] = {to, frm, cost, id};
+    for (auto&& e: edges) {
+      csr_edges[counter[e.frm]++] = e;
+      if (!directed)
+        csr_edges[counter[e.to]++] = edge_type({e.to, e.frm, e.cost, e.id});
     }
   }
 
@@ -78,7 +78,7 @@ struct Graph {
     print("Graph");
     if (!prepared) {
       print("frm to cost id");
-      for (auto&& e: edges) print(e);
+      for (auto&& e: edges) print(e.frm, e.to, e.cost, e.id);
     } else {
       print("indptr", indptr);
       print("frm to cost id");

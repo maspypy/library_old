@@ -29,17 +29,17 @@ struct HLD {
     sz[v] = 1;
     int l = G.indptr[v], r = G.indptr[v + 1];
     auto &csr = G.csr_edges;
-    if (l + 1 < r && get<1>(csr[l]) == p) swap(csr[l], csr[l + 1]);
+    if (l + 1 < r && csr[l].to == p) swap(csr[l], csr[l + 1]);
     int hld_sz = 0;
     for (int i = l; i < r; ++i) {
-      auto [frm, to, cost, id] = csr[i];
-      if (to == p) {
+      auto e = csr[i];
+      if (e.to == p) {
         assert(!G.is_directed());
         continue;
       }
-      dfs_sz(to, v);
-      sz[v] += sz[to];
-      if (chmax(hld_sz, sz[to]) && l < i) { swap(csr[l], csr[i]); }
+      dfs_sz(e.to, v);
+      sz[v] += sz[e.to];
+      if (chmax(hld_sz, sz[e.to]) && l < i) { swap(csr[l], csr[i]); }
     }
   }
 
@@ -48,17 +48,17 @@ struct HLD {
     RID[v] += LID[v];
     V[LID[v]] = v;
     bool heavy = true;
-    for (auto &&[frm, to, cost, id]: G[v]) {
-      if (to == p) continue;
-      head[to] = (heavy ? head[v] : to);
+    for (auto &&e: G[v]) {
+      if (e.to == p) continue;
+      head[e.to] = (heavy ? head[v] : e.to);
       heavy = false;
-      dfs_hld(to, v, times);
+      dfs_hld(e.to, v, times);
     }
   }
 
-  int e_to_v(int e) {
-    auto [frm, to, cost, id] = G.edges[e];
-    return (parent[frm] == to ? frm : to);
+  int e_to_v(int eid) {
+    auto e = G.edges[eid];
+    return (parent[e.frm] == e.to ? e.frm : e.to);
   }
 
   int ELID(int v) { return 2 * LID[v] - depth[v]; }
