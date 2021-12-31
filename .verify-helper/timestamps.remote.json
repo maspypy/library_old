@@ -29,5 +29,6 @@
 "test/library_checker/graph/scc.test.cpp": "2021-12-31 12:24:19 +0900",
 "test/library_checker/math/enumerate_primes.test.cpp": "2021-12-29 04:00:18 +0900",
 "test/library_checker/math/factorize.test.cpp": "2021-12-29 02:24:08 +0900",
+"test/yukicoder/1038_centroid.test.cpp": "2021-12-31 14:21:43 +0900",
 "test/yukicoder/899_bfsnumbering.test.cpp": "2021-12-31 12:24:19 +0900"
 }
