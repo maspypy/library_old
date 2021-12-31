@@ -250,6 +250,9 @@ data:
     - icon: ':warning:'
       path: polynomial/convolution.hpp
       title: polynomial/convolution.hpp
+    - icon: ':heavy_check_mark:'
+      path: polynomial/convolution_ll.hpp
+      title: polynomial/convolution_ll.hpp
   - name: sequence
     pages:
     - icon: ':warning:'
@@ -351,6 +354,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/graph/cycle_detection.test.cpp
       title: test/library_checker/graph/cycle_detection.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
+      title: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/graph/lca.test.cpp
       title: test/library_checker/graph/lca.test.cpp

@@ -85,6 +85,9 @@ data:
     path: test/library_checker/graph/cycle_detection.test.cpp
     title: test/library_checker/graph/cycle_detection.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
+    title: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/lca.test.cpp
     title: test/library_checker/graph/lca.test.cpp
   - icon: ':heavy_check_mark:'
@@ -298,6 +301,7 @@ data:
   - test/library_checker/graph/lca.test.cpp
   - test/library_checker/graph/scc.test.cpp
   - test/library_checker/graph/lca_directed.test.cpp
+  - test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
   - test/library_checker/math/enumerate_primes.test.cpp
   - test/library_checker/math/factorize.test.cpp
   - test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
