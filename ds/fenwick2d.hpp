@@ -1,3 +1,4 @@
+#include "algebra/group_add.hpp"
 template <typename AbelGroup, bool SMALL = false>
 struct Fenwick2D {
   using E = typename AbelGroup::value_type;
