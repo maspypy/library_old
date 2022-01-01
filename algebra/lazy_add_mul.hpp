@@ -1,5 +1,5 @@
-#include "algebra/addgroup.hpp"
-#include "algebra/mulgroup.hpp"
+#include "algebra/group_add.hpp"
+#include "algebra/group_mul.hpp"
 
 template <typename E>
 struct Add_Mul_Lazy {

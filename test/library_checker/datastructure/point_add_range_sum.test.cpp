@@ -2,7 +2,7 @@
 #include "my_template.hpp"
 
 #include "ds/fenwick.hpp"
-#include "algebra/addgroup.hpp"
+
 void solve() {
   LL(N, Q);
   VEC(ll, A, N);

@@ -1,6 +1,6 @@
-#include "algebra/maxmonoid.hpp"
+#include "algebra/monoid_max.hpp"
 
-template <typename E, E INF = 1 << 30>
+template <typename E, E INF>
 struct Max_Max_Lazy {
   using MX = MaxMonoid<E, INF>;
   using MA = MaxMonoid<E, INF>;

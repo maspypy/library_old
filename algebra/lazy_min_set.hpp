@@ -1,9 +1,9 @@
-#include "algebra/minmonoid.hpp"
-#include "algebra/setmonoid.hpp"
+#include "algebra/monoid_min.hpp"
+#include "algebra/monoid_set.hpp"
 
-template <typename E, E INF = 1 << 30, E none_val=-1>
-struct Max_Set_Lazy {
-  using MX = MaxMonoid<E, INF>;
+template <typename E, E INF, E none_val=-1>
+struct Min_Set_Lazy {
+  using MX = MinMonoid<E, INF>;
   using MA = SetMonoid<E, none_val>;
   using X_structure = MX;
   using A_structure = MA;
