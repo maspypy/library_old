@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algebra/group_affine.hpp
     title: algebra/group_affine.hpp
   - icon: ':heavy_check_mark:'
@@ -10,13 +10,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: algebra/lazy_cntsum_affine.hpp
     title: algebra/lazy_cntsum_affine.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ds/lazysegtree.hpp
     title: ds/lazysegtree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
@@ -47,36 +47,36 @@ data:
     \  vector<vector<vector<type>>> name( \\\n      h, vector<vector<type>>(w, vector<type>(__VA_ARGS__)))\n\
     #define vvvv(type, name, a, b, c, ...)       \\\n  vector<vector<vector<vector<type>>>>\
     \ name( \\\n      a, vector<vector<vector<type>>>(       \\\n             b, vector<vector<type>>(c,\
-    \ vector<type>(__VA_ARGS__))))\n\n#define FOR(i, n) for (ll i = 0; (i) < (ll)(n);\
-    \ ++(i))\n#define FOR3(i, m, n) for (ll i = (m); (i) < (ll)(n); ++(i))\n#define\
-    \ FOR_R(i, n) for (ll i = (ll)(n)-1; (i) >= 0; --(i))\n#define FOR3_R(i, m, n)\
-    \ for (ll i = (ll)(n)-1; (i) >= (ll)(m); --(i))\n#define FOR_subset(t, s) for\
-    \ (ll t = s; t >= 0; t = (t == 0 ? -1 : (t - 1) & s))\n#define all(x) x.begin(),\
-    \ x.end()\n#define len(x) ll(x.size())\n#define elif else if\n\n#define eb emplace_back\n\
-    #define mp make_pair\n#define mt make_tuple\n#define fi first\n#define se second\n\
-    \nint popcnt(int x) { return __builtin_popcount(x); }\nint popcnt(uint x) { return\
-    \ __builtin_popcount(x); }\nint popcnt(ll x) { return __builtin_popcountll(x);\
-    \ }\nint popcnt(ull x) { return __builtin_popcountll(x); }\n// (0, 1, 2, 3, 4)\
-    \ -> (-1, 0, 1, 1, 2)\nint topbit(int x) { return 31 - __builtin_clz(x); }\nint\
-    \ topbit(uint x) { return 31 - __builtin_clz(x); }\nint topbit(ll x) { return\
-    \ 63 - __builtin_clzll(x); }\nint topbit(ull x) { return 63 - __builtin_clzll(x);\
-    \ }\n// (0, 1, 2, 3, 4) -> (32 or 64, 0, 1, 0, 2)\nint lowbit(int x) { return\
-    \ 31 - __builtin_clz(x); }\nint lowbit(uint x) { return 31 - __builtin_clz(x);\
-    \ }\nint lowbit(ll x) { return 63 - __builtin_clzll(x); }\nint lowbit(ull x) {\
-    \ return 63 - __builtin_clzll(x); }\n\nll ceil(ll x, ll y) { return (x > 0 ? (x\
-    \ + y - 1) / y : x / y); }\nll floor(ll x, ll y) { return (x > 0 ? x / y : (x\
-    \ - y + 1) / y); }\npi divmod(ll x, ll y) {\n  ll q = floor(x, y);\n  return {q,\
-    \ x - q * y};\n}\n\n#define INT(...)   \\\n  int __VA_ARGS__; \\\n  IN(__VA_ARGS__)\n\
-    #define LL(...)   \\\n  ll __VA_ARGS__; \\\n  IN(__VA_ARGS__)\n#define STR(...)\
-    \      \\\n  string __VA_ARGS__; \\\n  IN(__VA_ARGS__)\n#define CHR(...)    \\\
-    \n  char __VA_ARGS__; \\\n  IN(__VA_ARGS__)\n#define DBL(...)           \\\n \
-    \ long double __VA_ARGS__; \\\n  IN(__VA_ARGS__)\nvoid scan(int &a) { cin >> a;\
-    \ }\nvoid scan(long long &a) { cin >> a; }\nvoid scan(char &a) { cin >> a; }\n\
-    void scan(double &a) { cin >> a; }\nvoid scan(long double &a) { cin >> a; }\n\
-    void scan(string &a) { cin >> a; }\ntemplate <class T>\nvoid scan(pair<T, T> &p)\
-    \ {\n  scan(p.first), scan(p.second);\n}\ntemplate <class T>\nvoid scan(tuple<T,\
-    \ T, T> &p) {\n  scan(get<0>(p)), scan(get<1>(p)), scan(get<2>(p));\n}\ntemplate\
-    \ <class T>\nvoid scan(tuple<T, T, T, T> &p) {\n  scan(get<0>(p)), scan(get<1>(p)),\
+    \ vector<type>(__VA_ARGS__))))\n\n#define FOR(n) for (ll _ = 0; (_) < (ll)(n);\
+    \ ++(_))\n#define FOR(i, n) for (ll i = 0; (i) < (ll)(n); ++(i))\n#define FOR3(i,\
+    \ m, n) for (ll i = (m); (i) < (ll)(n); ++(i))\n#define FOR_R(i, n) for (ll i\
+    \ = (ll)(n)-1; (i) >= 0; --(i))\n#define FOR3_R(i, m, n) for (ll i = (ll)(n)-1;\
+    \ (i) >= (ll)(m); --(i))\n#define FOR_subset(t, s) for (ll t = s; t >= 0; t =\
+    \ (t == 0 ? -1 : (t - 1) & s))\n#define all(x) x.begin(), x.end()\n#define len(x)\
+    \ ll(x.size())\n#define elif else if\n\n#define eb emplace_back\n#define mp make_pair\n\
+    #define mt make_tuple\n#define fi first\n#define se second\n\nint popcnt(int x)\
+    \ { return __builtin_popcount(x); }\nint popcnt(uint x) { return __builtin_popcount(x);\
+    \ }\nint popcnt(ll x) { return __builtin_popcountll(x); }\nint popcnt(ull x) {\
+    \ return __builtin_popcountll(x); }\n// (0, 1, 2, 3, 4) -> (-1, 0, 1, 1, 2)\n\
+    int topbit(int x) { return 31 - __builtin_clz(x); }\nint topbit(uint x) { return\
+    \ 31 - __builtin_clz(x); }\nint topbit(ll x) { return 63 - __builtin_clzll(x);\
+    \ }\nint topbit(ull x) { return 63 - __builtin_clzll(x); }\n// (0, 1, 2, 3, 4)\
+    \ -> (32 or 64, 0, 1, 0, 2)\nint lowbit(int x) { return 31 - __builtin_clz(x);\
+    \ }\nint lowbit(uint x) { return 31 - __builtin_clz(x); }\nint lowbit(ll x) {\
+    \ return 63 - __builtin_clzll(x); }\nint lowbit(ull x) { return 63 - __builtin_clzll(x);\
+    \ }\n\nll ceil(ll x, ll y) { return (x > 0 ? (x + y - 1) / y : x / y); }\nll floor(ll\
+    \ x, ll y) { return (x > 0 ? x / y : (x - y + 1) / y); }\npi divmod(ll x, ll y)\
+    \ {\n  ll q = floor(x, y);\n  return {q, x - q * y};\n}\n\n#define INT(...)  \
+    \ \\\n  int __VA_ARGS__; \\\n  IN(__VA_ARGS__)\n#define LL(...)   \\\n  ll __VA_ARGS__;\
+    \ \\\n  IN(__VA_ARGS__)\n#define STR(...)      \\\n  string __VA_ARGS__; \\\n\
+    \  IN(__VA_ARGS__)\n#define CHR(...)    \\\n  char __VA_ARGS__; \\\n  IN(__VA_ARGS__)\n\
+    #define DBL(...)           \\\n  long double __VA_ARGS__; \\\n  IN(__VA_ARGS__)\n\
+    void scan(int &a) { cin >> a; }\nvoid scan(long long &a) { cin >> a; }\nvoid scan(char\
+    \ &a) { cin >> a; }\nvoid scan(double &a) { cin >> a; }\nvoid scan(long double\
+    \ &a) { cin >> a; }\nvoid scan(string &a) { cin >> a; }\ntemplate <class T>\n\
+    void scan(pair<T, T> &p) {\n  scan(p.first), scan(p.second);\n}\ntemplate <class\
+    \ T>\nvoid scan(tuple<T, T, T> &p) {\n  scan(get<0>(p)), scan(get<1>(p)), scan(get<2>(p));\n\
+    }\ntemplate <class T>\nvoid scan(tuple<T, T, T, T> &p) {\n  scan(get<0>(p)), scan(get<1>(p)),\
     \ scan(get<2>(p)), scan(get<3>(p));\n}\ntemplate <class T>\nvoid scan(vector<T>\
     \ &a) {\n  for (auto &i: a) scan(i);\n}\ntemplate <class T>\nvoid scan(T &a) {\n\
     \  cin >> a;\n}\nvoid IN() {}\ntemplate <class Head, class... Tail>\nvoid IN(Head\
@@ -186,46 +186,44 @@ data:
     \      }\n        }\n        return r + 1 - size;\n      }\n      sm = Monoid_X::op(dat[r],\
     \ sm);\n    } while ((r & -r) != r);\n    return 0;\n  }\n\n  void debug() { print(\"\
     lazysegtree getall:\", get_all()); }\n};\n#line 1 \"mod/modint.hpp\"\ntemplate\
-    \ <int mod>\nstruct modint {\n  int x;\n\n  constexpr modint(const ll x = 0) noexcept\n\
-    \      : x(x >= 0 ? x % mod : (mod - (-x) % mod) % mod) {}\n\n  bool operator<(const\
-    \ modint &other) const {\n    return x < other.x;\n  } // To use std::map\n\n\
-    \  modint &operator+=(const modint &p) {\n    if ((x += p.x) >= mod) x -= mod;\n\
-    \    return *this;\n  }\n\n  modint &operator-=(const modint &p) {\n    if ((x\
-    \ += mod - p.x) >= mod) x -= mod;\n    return *this;\n  }\n\n  modint &operator*=(const\
-    \ modint &p) {\n    x = (int)(1LL * x * p.x % mod);\n    return *this;\n  }\n\n\
-    \  modint &operator/=(const modint &p) {\n    *this *= p.inverse();\n    return\
-    \ *this;\n  }\n\n  modint operator-() const { return modint(-x); }\n\n  modint\
-    \ operator+(const modint &p) const { return modint(*this) += p; }\n\n  modint\
-    \ operator-(const modint &p) const { return modint(*this) -= p; }\n\n  modint\
-    \ operator*(const modint &p) const { return modint(*this) *= p; }\n\n  modint\
-    \ operator/(const modint &p) const { return modint(*this) /= p; }\n\n  bool operator==(const\
-    \ modint &p) const { return x == p.x; }\n\n  bool operator!=(const modint &p)\
-    \ const { return x != p.x; }\n\n  modint inverse() const {\n    int a = x, b =\
-    \ mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -=\
-    \ t * b, b);\n      swap(u -= t * v, v);\n    }\n    return modint(u);\n  }\n\n\
-    \  modint pow(int64_t n) const {\n    modint ret(1), mul(x);\n    while (n > 0)\
-    \ {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n\
-    \    return ret;\n  }\n\n  friend ostream &operator<<(ostream &os, const modint\
-    \ &p) { return os << p.x; }\n\n  friend istream &operator>>(istream &is, modint\
-    \ &a) {\n    int64_t t;\n    is >> t;\n    a = modint<mod>(t);\n    return (is);\n\
-    \  }\n\n  static int get_mod() { return mod; }\n};\n\ntemplate <typename T>\n\
-    struct ModCalc {\n  vector<T> _fact = {1, 1};\n  vector<T> _fact_inv = {1, 1};\n\
-    \  vector<T> _inv = {0, 1};\n\n  T pow(T a, int n) {\n    T x(1);\n    while (n)\
-    \ {\n      if (n & 1) x *= a;\n      a *= a;\n      n >>= 1;\n    }\n    return\
-    \ x;\n  }\n  void expand(int n) {\n    while (_fact.size() <= n) {\n      auto\
-    \ i = _fact.size();\n      _fact.eb(_fact[i - 1] * T(i));\n      auto q = T::get_mod()\
-    \ / i, r = T::get_mod() % i;\n      _inv.eb(_inv[r] * T(T::get_mod() - q));\n\
-    \      _fact_inv.eb(_fact_inv[i - 1] * _inv[i]);\n    }\n  }\n\n  T fact(int n)\
-    \ {\n    if (n >= _fact.size()) expand(n);\n    return _fact[n];\n  }\n\n  T fact_inv(int\
-    \ n) {\n    if (n >= _fact.size()) expand(n);\n    return _fact_inv[n];\n  }\n\
-    \n  T inv(int n) {\n    if (n >= _fact.size()) expand(n);\n    return _inv[n];\n\
-    \  }\n\n  T C(ll n, ll k, bool large = false) {\n    assert(n >= 0);\n    if (k\
-    \ < 0 || n < k) return 0;\n    if (!large) return fact(n) * fact_inv(k) * fact_inv(n\
-    \ - k);\n    k = min(k, n - k);\n    T x(1);\n    FOR(i, k) {\n      x *= n -\
-    \ i;\n      x *= inv(i + 1);\n    }\n    return x;\n  }\n};\n\nusing modint107\
-    \ = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n#line 7 \"\
-    test/library_checker/datastructure/range_affine_range_sum.test.cpp\"\n\nusing\
-    \ mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using S = Lazy_CntSum_Affine<mint>;\n\
+    \ <int mod>\nstruct modint {\n  int val;\n\n  constexpr modint(const ll val =\
+    \ 0) noexcept\n      : val(val >= 0 ? val % mod : (mod - (-val) % mod) % mod)\
+    \ {}\n\n  bool operator<(const modint &other) const {\n    return val < other.val;\n\
+    \  } // To use std::map\n\n  modint &operator+=(const modint &p) {\n    if ((val\
+    \ += p.val) >= mod) val -= mod;\n    return *this;\n  }\n  modint &operator-=(const\
+    \ modint &p) {\n    if ((val += mod - p.val) >= mod) val -= mod;\n    return *this;\n\
+    \  }\n  modint &operator*=(const modint &p) {\n    val = (int)(1LL * val * p.val\
+    \ % mod);\n    return *this;\n  }\n  modint &operator/=(const modint &p) {\n \
+    \   *this *= p.inverse();\n    return *this;\n  }\n  modint operator-() const\
+    \ { return modint(-val); }\n  modint operator+(const modint &p) const { return\
+    \ modint(*this) += p; }\n  modint operator-(const modint &p) const { return modint(*this)\
+    \ -= p; }\n  modint operator*(const modint &p) const { return modint(*this) *=\
+    \ p; }\n  modint operator/(const modint &p) const { return modint(*this) /= p;\
+    \ }\n  bool operator==(const modint &p) const { return val == p.val; }\n  bool\
+    \ operator!=(const modint &p) const { return val != p.val; }\n\n  modint inverse()\
+    \ const {\n    int a = val, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n \
+    \     t = a / b;\n      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n   \
+    \ }\n    return modint(u);\n  }\n\n  modint pow(int64_t n) const {\n    modint\
+    \ ret(1), mul(val);\n    while (n > 0) {\n      if (n & 1) ret *= mul;\n     \
+    \ mul *= mul;\n      n >>= 1;\n    }\n    return ret;\n  }\n\n  friend ostream\
+    \ &operator<<(ostream &os, const modint &p) { return os << p.val; }\n  static\
+    \ int get_mod() { return mod; }\n};\n\ntemplate <typename T>\nstruct ModCalc {\n\
+    \  vector<T> _fact = {1, 1};\n  vector<T> _fact_inv = {1, 1};\n  vector<T> _inv\
+    \ = {0, 1};\n\n  T pow(T a, int n) {\n    T x(1);\n    while (n) {\n      if (n\
+    \ & 1) x *= a;\n      a *= a;\n      n >>= 1;\n    }\n    return x;\n  }\n  void\
+    \ expand(int n) {\n    while (_fact.size() <= n) {\n      auto i = _fact.size();\n\
+    \      _fact.eb(_fact[i - 1] * T(i));\n      auto q = T::get_mod() / i, r = T::get_mod()\
+    \ % i;\n      _inv.eb(_inv[r] * T(T::get_mod() - q));\n      _fact_inv.eb(_fact_inv[i\
+    \ - 1] * _inv[i]);\n    }\n  }\n\n  T fact(int n) {\n    if (n >= _fact.size())\
+    \ expand(n);\n    return _fact[n];\n  }\n\n  T fact_inv(int n) {\n    if (n >=\
+    \ _fact.size()) expand(n);\n    return _fact_inv[n];\n  }\n\n  T inv(int n) {\n\
+    \    if (n >= _fact.size()) expand(n);\n    return _inv[n];\n  }\n\n  T C(ll n,\
+    \ ll k, bool large = false) {\n    assert(n >= 0);\n    if (k < 0 || n < k) return\
+    \ 0;\n    if (!large) return fact(n) * fact_inv(k) * fact_inv(n - k);\n    k =\
+    \ min(k, n - k);\n    T x(1);\n    FOR(i, k) {\n      x *= n - i;\n      x *=\
+    \ inv(i + 1);\n    }\n    return x;\n  }\n};\n\nusing modint107 = modint<1'000'000'007>;\n\
+    using modint998 = modint<998'244'353>;\n#line 7 \"test/library_checker/datastructure/range_affine_range_sum.test.cpp\"\
+    \n\nusing mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using S = Lazy_CntSum_Affine<mint>;\n\
     \  using E = pair<mint, mint>;\n  vc<E> seg_raw(N);\n  FOR(i, N) {\n    LL(x);\n\
     \    seg_raw[i] = E({mint(1), mint(x)});\n  }\n  LazySegTree<S> seg(seg_raw);\n\
     \n  FOR(_, Q) {\n    LL(t);\n    if (t == 0) {\n      LL(l, r, a, b);\n      seg.apply(l,\
@@ -254,7 +252,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-01-02 01:47:55+09:00'
+  timestamp: '2022-01-02 02:35:12+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/range_affine_range_sum.test.cpp
