@@ -1,32 +1,32 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algebra/monoid_reverse.hpp
     title: algebra/monoid_reverse.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/hld.hpp
     title: graph/hld.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
     title: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
     title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
     title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"ds/segtree.hpp\"\ntemplate <class Monoid>\nstruct SegTree\
@@ -127,7 +127,7 @@ data:
     \n  static constexpr X op(const X &x, const X &y) { return Monoid::op(y, x); }\r\
     \n  static constexpr X unit = Monoid::unit;\r\n  static const bool commute = Monoid::commute;\r\
     \n};\r\n#line 4 \"graph/treemonoid.hpp\"\n\r\ntemplate <typename HLD, typename\
-    \ Monoid, bool edge = false>\r\nstruct TreeMonoid {\r\n  using RevMonoid = ReverseMonoid<Monoid>;\r\
+    \ Monoid, bool edge = false>\r\nstruct TreeMonoid {\r\n  using RevMonoid = Monoid_Reverse<Monoid>;\r\
     \n  using X = typename Monoid::value_type;\r\n  HLD &hld;\r\n  int N;\r\n  SegTree<Monoid>\
     \ seg;\r\n  SegTree<RevMonoid> seg_r;\r\n\r\n  TreeMonoid(HLD &hld) : hld(hld),\
     \ N(hld.N), seg(hld.N) {\r\n    if (!Monoid::commute) seg_r = SegTree<RevMonoid>(hld.N);\r\
@@ -161,7 +161,7 @@ data:
     \n};\r\n"
   code: "#include \"ds/segtree.hpp\"\r\n#include \"graph/hld.hpp\"\r\n#include \"\
     algebra/monoid_reverse.hpp\"\r\n\r\ntemplate <typename HLD, typename Monoid, bool\
-    \ edge = false>\r\nstruct TreeMonoid {\r\n  using RevMonoid = ReverseMonoid<Monoid>;\r\
+    \ edge = false>\r\nstruct TreeMonoid {\r\n  using RevMonoid = Monoid_Reverse<Monoid>;\r\
     \n  using X = typename Monoid::value_type;\r\n  HLD &hld;\r\n  int N;\r\n  SegTree<Monoid>\
     \ seg;\r\n  SegTree<RevMonoid> seg_r;\r\n\r\n  TreeMonoid(HLD &hld) : hld(hld),\
     \ N(hld.N), seg(hld.N) {\r\n    if (!Monoid::commute) seg_r = SegTree<RevMonoid>(hld.N);\r\
@@ -201,8 +201,8 @@ data:
   isVerificationFile: false
   path: graph/treemonoid.hpp
   requiredBy: []
-  timestamp: '2022-01-01 23:37:45+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-01-01 23:59:12+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
   - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp

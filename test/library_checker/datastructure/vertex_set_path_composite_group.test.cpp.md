@@ -1,25 +1,25 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algebra/group_affine.hpp
     title: algebra/group_affine.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algebra/group_reverse.hpp
     title: algebra/group_reverse.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/hld.hpp
     title: graph/hld.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/treegroup.hpp
     title: graph/treegroup.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: mod/modint.hpp
     title: mod/modint.hpp
   - icon: ':question:'
@@ -27,9 +27,9 @@ data:
     title: my_template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_set_path_composite
@@ -260,7 +260,7 @@ data:
     \u3082\u306E\u306E\u3001HLD(log^2N)\u3088\u308A\u9045\u3044\u304C\u3061\uFF1F\r\
     \ntemplate <typename HLD, typename Group, bool edge = false,\r\n          bool\
     \ path_query = true, bool subtree_query = false>\r\nstruct TreeGroup {\r\n  using\
-    \ RevGroup = ReverseGroup<Group>;\r\n  using X = typename Group::value_type;\r\
+    \ RevGroup = Group_Reverse<Group>;\r\n  using X = typename Group::value_type;\r\
     \n  HLD &hld;\r\n  int N;\r\n  SegTree<Group> seg, seg_subtree;\r\n  SegTree<RevGroup>\
     \ seg_r;\r\n\r\n  TreeGroup(HLD &hld) : hld(hld), N(hld.N) {\r\n    if (path_query)\
     \ {\r\n      seg = SegTree<Group>(2 * N);\r\n      if (!Group::commute) seg_r\
@@ -343,8 +343,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
   requiredBy: []
-  timestamp: '2022-01-01 23:37:45+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-01-01 23:59:12+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
 layout: document

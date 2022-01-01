@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algebra/group_reverse.hpp
     title: algebra/group_reverse.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/hld.hpp
     title: graph/hld.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
     title: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
     title: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"ds/segtree.hpp\"\ntemplate <class Monoid>\nstruct SegTree\
@@ -128,7 +128,7 @@ data:
     \u3082\u306E\u306E\u3001HLD(log^2N)\u3088\u308A\u9045\u3044\u304C\u3061\uFF1F\r\
     \ntemplate <typename HLD, typename Group, bool edge = false,\r\n          bool\
     \ path_query = true, bool subtree_query = false>\r\nstruct TreeGroup {\r\n  using\
-    \ RevGroup = ReverseGroup<Group>;\r\n  using X = typename Group::value_type;\r\
+    \ RevGroup = Group_Reverse<Group>;\r\n  using X = typename Group::value_type;\r\
     \n  HLD &hld;\r\n  int N;\r\n  SegTree<Group> seg, seg_subtree;\r\n  SegTree<RevGroup>\
     \ seg_r;\r\n\r\n  TreeGroup(HLD &hld) : hld(hld), N(hld.N) {\r\n    if (path_query)\
     \ {\r\n      seg = SegTree<Group>(2 * N);\r\n      if (!Group::commute) seg_r\
@@ -175,11 +175,11 @@ data:
     \u306E\u3001HLD(log^2N)\u3088\u308A\u9045\u3044\u304C\u3061\uFF1F\r\ntemplate\
     \ <typename HLD, typename Group, bool edge = false,\r\n          bool path_query\
     \ = true, bool subtree_query = false>\r\nstruct TreeGroup {\r\n  using RevGroup\
-    \ = ReverseGroup<Group>;\r\n  using X = typename Group::value_type;\r\n  HLD &hld;\r\
-    \n  int N;\r\n  SegTree<Group> seg, seg_subtree;\r\n  SegTree<RevGroup> seg_r;\r\
-    \n\r\n  TreeGroup(HLD &hld) : hld(hld), N(hld.N) {\r\n    if (path_query) {\r\n\
-    \      seg = SegTree<Group>(2 * N);\r\n      if (!Group::commute) seg_r = SegTree<RevGroup>(2\
-    \ * N);\r\n    }\r\n    if (subtree_query) {\r\n      assert(Group::commute);\r\
+    \ = Group_Reverse<Group>;\r\n  using X = typename Group::value_type;\r\n  HLD\
+    \ &hld;\r\n  int N;\r\n  SegTree<Group> seg, seg_subtree;\r\n  SegTree<RevGroup>\
+    \ seg_r;\r\n\r\n  TreeGroup(HLD &hld) : hld(hld), N(hld.N) {\r\n    if (path_query)\
+    \ {\r\n      seg = SegTree<Group>(2 * N);\r\n      if (!Group::commute) seg_r\
+    \ = SegTree<RevGroup>(2 * N);\r\n    }\r\n    if (subtree_query) {\r\n      assert(Group::commute);\r\
     \n      seg_subtree = SegTree<Group>(N);\r\n    }\r\n  }\r\n\r\n  TreeGroup(HLD\
     \ &hld, vc<X> dat) : hld(hld), N(hld.N) {\r\n    if (path_query) {\r\n      vc<X>\
     \ seg_raw(2 * N);\r\n      if (!edge) {\r\n        assert(len(dat) == N);\r\n\
@@ -225,8 +225,8 @@ data:
   isVerificationFile: false
   path: graph/treegroup.hpp
   requiredBy: []
-  timestamp: '2022-01-01 23:37:45+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-01-01 23:59:12+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
