@@ -200,9 +200,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: my_template.hpp
       title: my_template.hpp
-    - icon: ':warning:'
-      path: temp.cpp
-      title: temp.cpp
   - name: nt
     pages:
     - icon: ':warning:'
@@ -278,7 +275,7 @@ data:
     - icon: ':warning:'
       path: string/trie.hpp
       title: string/trie.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: string/zalgorithm.hpp
       title: string/zalgorithm.hpp
   verificationCategories:
@@ -386,6 +383,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/math/factorize.test.cpp
       title: test/library_checker/math/factorize.test.cpp
+  - name: test/library_checker/string/zalgorithm
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/string/zalgorithm/zalgorithm.test.cpp
+      title: test/library_checker/string/zalgorithm/zalgorithm.test.cpp
   - name: test/yukicoder
     pages:
     - icon: ':heavy_check_mark:'
