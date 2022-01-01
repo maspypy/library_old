@@ -2,10 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: algebra/lazy_add_mul.hpp
     title: algebra/lazy_add_mul.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: algebra/lazy_min_add.hpp
     title: algebra/lazy_min_add.hpp
   - icon: ':heavy_check_mark:'
@@ -14,7 +14,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: ds/fenwickraq.hpp
     title: ds/fenwickraq.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: graph/treeabelgroup.hpp
     title: graph/treeabelgroup.hpp
   _extendedVerifiedWith:
@@ -25,8 +25,23 @@ data:
     path: test/aoj/DSL_2_G_fenwick_raq.test.cpp
     title: test/aoj/DSL_2_G_fenwick_raq.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/DSL_2_H_min_add_lazy.test.cpp
+    title: test/aoj/DSL_2_H_min_add_lazy.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/point_add_range_sum.test.cpp
     title: test/library_checker/datastructure/point_add_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
+    title: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
+    title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yukicoder/1038_centroid.test.cpp
+    title: test/yukicoder/1038_centroid.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yukicoder/899_bfsnumbering.test.cpp
+    title: test/yukicoder/899_bfsnumbering.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -57,8 +72,13 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DSL_2_E_fenwick_raq.test.cpp
+  - test/aoj/DSL_2_H_min_add_lazy.test.cpp
   - test/aoj/DSL_2_G_fenwick_raq.test.cpp
   - test/library_checker/datastructure/point_add_range_sum.test.cpp
+  - test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
+  - test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
+  - test/yukicoder/899_bfsnumbering.test.cpp
+  - test/yukicoder/1038_centroid.test.cpp
 documentation_of: algebra/group_add.hpp
 layout: document
 redirect_from:

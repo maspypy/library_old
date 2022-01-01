@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: algebra/monoid_min.hpp
     title: algebra/monoid_min.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: algebra/monoid_set.hpp
     title: algebra/monoid_set.hpp
   _extendedRequiredBy: []

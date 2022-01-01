@@ -19,8 +19,14 @@ data:
     path: test/aoj/DSL_2_E_fenwick_raq.test.cpp
     title: test/aoj/DSL_2_E_fenwick_raq.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/DSL_2_F_min_set_lazy.test.cpp
+    title: test/aoj/DSL_2_F_min_set_lazy.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_G_fenwick_raq.test.cpp
     title: test/aoj/DSL_2_G_fenwick_raq.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/DSL_2_H_min_add_lazy.test.cpp
+    title: test/aoj/DSL_2_H_min_add_lazy.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/associative_array.test.cpp
     title: test/library_checker/datastructure/associative_array.test.cpp
@@ -34,17 +40,41 @@ data:
     path: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
     title: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
+    title: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
+    title: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/predecessor_problem.test..cpp
     title: test/library_checker/datastructure/predecessor_problem.test..cpp
   - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
+    title: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
+    title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/range_chmin_chmax_add_range_sum.test.cpp
     title: test/library_checker/datastructure/range_chmin_chmax_add_range_sum.test.cpp
+  - icon: ':x:'
+    path: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
+    title: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/static_range_sum.test.cpp
     title: test/library_checker/datastructure/static_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/staticrmq_seg.test.cpp
+    title: test/library_checker/datastructure/staticrmq_seg.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/staticrmq_sparse.test.cpp
+    title: test/library_checker/datastructure/staticrmq_sparse.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/unionfind.test.cpp
     title: test/library_checker/datastructure/unionfind.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
+    title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/cycle_detection.test.cpp
     title: test/library_checker/graph/cycle_detection.test.cpp
@@ -84,6 +114,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1002_centroid.test.cpp
     title: test/yukicoder/1002_centroid.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yukicoder/1038_centroid.test.cpp
+    title: test/yukicoder/1038_centroid.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yukicoder/899_bfsnumbering.test.cpp
+    title: test/yukicoder/899_bfsnumbering.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':question:'
@@ -267,6 +303,8 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/DSL_2_E_fenwick_raq.test.cpp
+  - test/aoj/DSL_2_H_min_add_lazy.test.cpp
+  - test/aoj/DSL_2_F_min_set_lazy.test.cpp
   - test/aoj/DSL_2_G_fenwick_raq.test.cpp
   - test/library_checker/graph/cycle_detection.test.cpp
   - test/library_checker/graph/maximum_independent_set.test.cpp
@@ -280,15 +318,25 @@ data:
   - test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
   - test/library_checker/math/enumerate_primes.test.cpp
   - test/library_checker/math/factorize.test.cpp
+  - test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
+  - test/library_checker/datastructure/staticrmq_sparse.test.cpp
   - test/library_checker/datastructure/static_range_sum.test.cpp
   - test/library_checker/datastructure/unionfind.test.cpp
   - test/library_checker/datastructure/persistent_unionfind.test.cpp
   - test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
+  - test/library_checker/datastructure/staticrmq_seg.test.cpp
   - test/library_checker/datastructure/point_add_range_sum.test.cpp
+  - test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
   - test/library_checker/datastructure/predecessor_problem.test..cpp
+  - test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
   - test/library_checker/datastructure/range_chmin_chmax_add_range_sum.test.cpp
+  - test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
+  - test/library_checker/datastructure/queue_operate_all_composite.test.cpp
   - test/library_checker/datastructure/associative_array.test.cpp
+  - test/library_checker/datastructure/range_affine_range_sum.test.cpp
+  - test/yukicoder/899_bfsnumbering.test.cpp
   - test/yukicoder/1002_centroid.test.cpp
+  - test/yukicoder/1038_centroid.test.cpp
 documentation_of: my_template.hpp
 layout: document
 redirect_from:

@@ -2,13 +2,16 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: algebra/lazy_cntsum_affine.hpp
     title: algebra/lazy_cntsum_affine.hpp
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
+    title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"algebra/monoid_cntsum.hpp\"\ntemplate <typename E = long\
@@ -28,8 +31,9 @@ data:
   requiredBy:
   - algebra/lazy_cntsum_affine.hpp
   timestamp: '2022-01-01 19:42:01+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/library_checker/datastructure/range_affine_range_sum.test.cpp
 documentation_of: algebra/monoid_cntsum.hpp
 layout: document
 redirect_from:

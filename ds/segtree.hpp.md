@@ -2,10 +2,16 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
+    title: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/staticrmq_seg.test.cpp
+    title: test/library_checker/datastructure/staticrmq_seg.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"ds/segtree.hpp\"\ntemplate <class Monoid>\nstruct SegTree\
@@ -71,8 +77,10 @@ data:
   path: ds/segtree.hpp
   requiredBy: []
   timestamp: '2021-12-31 23:31:00+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/library_checker/datastructure/staticrmq_seg.test.cpp
+  - test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
 documentation_of: ds/segtree.hpp
 layout: document
 redirect_from:

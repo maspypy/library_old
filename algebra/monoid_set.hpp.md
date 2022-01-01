@@ -5,13 +5,16 @@ data:
   - icon: ':warning:'
     path: algebra/lazy_max_set.hpp
     title: algebra/lazy_max_set.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: algebra/lazy_min_set.hpp
     title: algebra/lazy_min_set.hpp
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/DSL_2_F_min_set_lazy.test.cpp
+    title: test/aoj/DSL_2_F_min_set_lazy.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"algebra/monoid_set.hpp\"\ntemplate<typename E, E none_val\
@@ -29,8 +32,9 @@ data:
   - algebra/lazy_max_set.hpp
   - algebra/lazy_min_set.hpp
   timestamp: '2022-01-01 19:42:01+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/aoj/DSL_2_F_min_set_lazy.test.cpp
 documentation_of: algebra/monoid_set.hpp
 layout: document
 redirect_from:

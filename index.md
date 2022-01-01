@@ -9,19 +9,19 @@ data:
     - icon: ':heavy_check_mark:'
       path: algebra/group_add.hpp
       title: algebra/group_add.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: algebra/group_affine.hpp
       title: algebra/group_affine.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: algebra/group_mul.hpp
       title: algebra/group_mul.hpp
     - icon: ':warning:'
       path: algebra/group_reverse.hpp
       title: algebra/group_reverse.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: algebra/lazy_add_mul.hpp
       title: algebra/lazy_add_mul.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: algebra/lazy_cntsum_affine.hpp
       title: algebra/lazy_cntsum_affine.hpp
     - icon: ':warning:'
@@ -33,28 +33,28 @@ data:
     - icon: ':warning:'
       path: algebra/lazy_max_set.hpp
       title: algebra/lazy_max_set.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: algebra/lazy_min_add.hpp
       title: algebra/lazy_min_add.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: algebra/lazy_min_set.hpp
       title: algebra/lazy_min_set.hpp
     - icon: ':warning:'
       path: algebra/lazy_reverse.hpp
       title: algebra/lazy_reverse.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: algebra/monoid_cntsum.hpp
       title: algebra/monoid_cntsum.hpp
     - icon: ':warning:'
       path: algebra/monoid_max.hpp
       title: algebra/monoid_max.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: algebra/monoid_min.hpp
       title: algebra/monoid_min.hpp
     - icon: ':warning:'
       path: algebra/monoid_reverse.hpp
       title: algebra/monoid_reverse.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: algebra/monoid_set.hpp
       title: algebra/monoid_set.hpp
   - name: ds
@@ -65,7 +65,7 @@ data:
     - icon: ':warning:'
       path: ds/cht_monotone.hpp
       title: ds/cht_monotone.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: ds/disjointsparse.hpp
       title: ds/disjointsparse.hpp
     - icon: ':heavy_check_mark:'
@@ -83,7 +83,7 @@ data:
     - icon: ':warning:'
       path: ds/intervals.hpp
       title: ds/intervals.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: ds/lazysegtree.hpp
       title: ds/lazysegtree.hpp
     - icon: ':heavy_check_mark:'
@@ -92,16 +92,16 @@ data:
     - icon: ':warning:'
       path: ds/lichao.hpp
       title: ds/lichao.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: ds/segtree.hpp
       title: ds/segtree.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: ds/segtree2d.hpp
       title: ds/segtree2d.hpp
     - icon: ':warning:'
       path: ds/slope.hpp
       title: ds/slope.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: ds/swag.hpp
       title: ds/swag.hpp
     - icon: ':heavy_check_mark:'
@@ -137,7 +137,7 @@ data:
     - icon: ':warning:'
       path: graph/bfs01.hpp
       title: graph/bfs01.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: graph/bfsnumbering.hpp
       title: graph/bfsnumbering.hpp
     - icon: ':warning:'
@@ -182,7 +182,7 @@ data:
     - icon: ':warning:'
       path: graph/tree_dp.hpp
       title: graph/tree_dp.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: graph/treeabelgroup.hpp
       title: graph/treeabelgroup.hpp
     - icon: ':warning:'
@@ -207,7 +207,7 @@ data:
     - icon: ':warning:'
       path: mod/amodint.hpp
       title: mod/amodint.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: mod/modint.hpp
       title: mod/modint.hpp
   - name: .
@@ -299,13 +299,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_2_E_fenwick_raq.test.cpp
       title: test/aoj/DSL_2_E_fenwick_raq.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_2_F_min_set_lazy.test.cpp
       title: test/aoj/DSL_2_F_min_set_lazy.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_2_G_fenwick_raq.test.cpp
       title: test/aoj/DSL_2_G_fenwick_raq.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_2_H_min_add_lazy.test.cpp
       title: test/aoj/DSL_2_H_min_add_lazy.test.cpp
   - name: test
@@ -327,19 +327,19 @@ data:
     - icon: ':x:'
       path: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
       title: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
       title: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
       title: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/predecessor_problem.test..cpp
       title: test/library_checker/datastructure/predecessor_problem.test..cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
       title: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
       title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -354,16 +354,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/static_range_sum.test.cpp
       title: test/library_checker/datastructure/static_range_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/staticrmq_seg.test.cpp
       title: test/library_checker/datastructure/staticrmq_seg.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/staticrmq_sparse.test.cpp
       title: test/library_checker/datastructure/staticrmq_sparse.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/unionfind.test.cpp
       title: test/library_checker/datastructure/unionfind.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
       title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
     - icon: ':x:'
@@ -428,10 +428,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1002_centroid.test.cpp
       title: test/yukicoder/1002_centroid.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1038_centroid.test.cpp
       title: test/yukicoder/1038_centroid.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/899_bfsnumbering.test.cpp
       title: test/yukicoder/899_bfsnumbering.test.cpp
 layout: toppage

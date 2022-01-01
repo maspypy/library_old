@@ -6,6 +6,9 @@ data:
   - icon: ':x:'
     path: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
     title: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
+  - icon: ':x:'
+    path: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
+    title: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':x:'
@@ -111,6 +114,7 @@ data:
   timestamp: '2021-12-30 22:34:40+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
+  - test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
   - test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
 documentation_of: ds/fenwick2d.hpp
 layout: document

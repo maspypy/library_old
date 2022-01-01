@@ -20,7 +20,7 @@ data:
     \ line -1: no such header\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_set_path_composite\"\
     \n#include \"my_template.hpp\"\n\n#include \"mod/modint.hpp\"\n#include \"graph/treegroup.hpp\"\
-    \n#include \"algebra/affinegroup.hpp\"\n\nusing mint = modint998;\n\nvoid solve()\
+    \n#include \"algebra/group_affine.hpp\"\n\nusing mint = modint998;\n\nvoid solve()\
     \ {\n  LL(N, Q);\n  using Mono = AffineGroup<mint>;\n  using E = Mono::value_type;\n\
     \  vc<E> A(N);\n  FOR(i, N) {\n    LL(a, b);\n    A[i] = mp(mint(a), mint(b));\n\
     \  }\n\n  Graph<int> G(N);\n  FOR(_, N - 1) {\n    LL(a, b);\n    G.add(a, b);\n\
