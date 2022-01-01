@@ -6,7 +6,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: algebra/beats_sample.hpp
       title: algebra/beats_sample.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: algebra/group_add.hpp
       title: algebra/group_add.hpp
     - icon: ':heavy_check_mark:'
@@ -74,7 +74,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: ds/fastset.hpp
       title: ds/fastset.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: ds/fenwick.hpp
       title: ds/fenwick.hpp
     - icon: ':heavy_check_mark:'
@@ -218,7 +218,7 @@ data:
       title: mod/modint.hpp
   - name: .
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: my_template.hpp
       title: my_template.hpp
   - name: nt
@@ -258,7 +258,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: other/random.hpp
       title: other/random.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other/rectanglesums.hpp
       title: other/rectanglesums.hpp
   - name: persistent_ds
@@ -360,7 +360,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
       title: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
       title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
     - icon: ':heavy_check_mark:'

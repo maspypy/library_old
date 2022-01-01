@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algebra/group_add.hpp
     title: algebra/group_add.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/fenwick.hpp
     title: ds/fenwick.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
     title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"algebra/group_add.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\
@@ -70,7 +70,7 @@ data:
     \ + 1);\r\n    }\r\n    query_l[xl].eb(Q, yl, yr);\r\n    query_r[xr].eb(Q, yl,\
     \ yr);\r\n    ++Q;\r\n  }\r\n\r\n  vc<WT> calc() {\r\n    assert(n == N);\r\n\
     \    vc<WT> ANS(Q);\r\n    int k = (SMALL ? max_y - min_y + 2 : len(keyY) + 1);\r\
-    \n    FenwickTree<AddGroup<WT>> bit(k);\r\n    FOR(x, len(add)) {\r\n      for\
+    \n    FenwickTree<Group_Add<WT>> bit(k);\r\n    FOR(x, len(add)) {\r\n      for\
     \ (auto&& t: query_l[x]) {\r\n        auto [q, yl, yr] = t;\r\n        ANS[q]\
     \ -= bit.sum(yl, yr);\r\n      }\r\n      for (auto&& t: query_r[x]) {\r\n   \
     \     auto [q, yl, yr] = t;\r\n        ANS[q] += bit.sum(yl, yr);\r\n      }\r\
@@ -107,7 +107,7 @@ data:
     \ clamp(yr, 0LL, max_y - min_y + 1);\r\n    }\r\n    query_l[xl].eb(Q, yl, yr);\r\
     \n    query_r[xr].eb(Q, yl, yr);\r\n    ++Q;\r\n  }\r\n\r\n  vc<WT> calc() {\r\
     \n    assert(n == N);\r\n    vc<WT> ANS(Q);\r\n    int k = (SMALL ? max_y - min_y\
-    \ + 2 : len(keyY) + 1);\r\n    FenwickTree<AddGroup<WT>> bit(k);\r\n    FOR(x,\
+    \ + 2 : len(keyY) + 1);\r\n    FenwickTree<Group_Add<WT>> bit(k);\r\n    FOR(x,\
     \ len(add)) {\r\n      for (auto&& t: query_l[x]) {\r\n        auto [q, yl, yr]\
     \ = t;\r\n        ANS[q] -= bit.sum(yl, yr);\r\n      }\r\n      for (auto&& t:\
     \ query_r[x]) {\r\n        auto [q, yl, yr] = t;\r\n        ANS[q] += bit.sum(yl,\
@@ -125,8 +125,8 @@ data:
   isVerificationFile: false
   path: other/rectanglesums.hpp
   requiredBy: []
-  timestamp: '2022-01-01 23:37:45+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-01-02 00:04:47+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
 documentation_of: other/rectanglesums.hpp

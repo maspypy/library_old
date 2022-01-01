@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algebra/group_add.hpp
     title: algebra/group_add.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/fenwick.hpp
     title: ds/fenwick.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: other/rectanglesums.hpp
     title: other/rectanglesums.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/rectangle_sum
@@ -161,7 +161,7 @@ data:
     \ + 1);\r\n    }\r\n    query_l[xl].eb(Q, yl, yr);\r\n    query_r[xr].eb(Q, yl,\
     \ yr);\r\n    ++Q;\r\n  }\r\n\r\n  vc<WT> calc() {\r\n    assert(n == N);\r\n\
     \    vc<WT> ANS(Q);\r\n    int k = (SMALL ? max_y - min_y + 2 : len(keyY) + 1);\r\
-    \n    FenwickTree<AddGroup<WT>> bit(k);\r\n    FOR(x, len(add)) {\r\n      for\
+    \n    FenwickTree<Group_Add<WT>> bit(k);\r\n    FOR(x, len(add)) {\r\n      for\
     \ (auto&& t: query_l[x]) {\r\n        auto [q, yl, yr] = t;\r\n        ANS[q]\
     \ -= bit.sum(yl, yr);\r\n      }\r\n      for (auto&& t: query_r[x]) {\r\n   \
     \     auto [q, yl, yr] = t;\r\n        ANS[q] += bit.sum(yl, yr);\r\n      }\r\
@@ -193,8 +193,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
   requiredBy: []
-  timestamp: '2022-01-01 23:37:45+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-01-02 00:04:47+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
 layout: document
