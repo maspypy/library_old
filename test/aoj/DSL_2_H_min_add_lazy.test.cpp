@@ -5,7 +5,7 @@
 #include "ds/lazysegtree.hpp"
 
 void solve() {
-  using Lazy = Min_Add_Lazy<ll, 1LL << 60>;
+  using Lazy = Lazy_Min_Add<ll, 1LL << 60>;
   LL(N, Q);
   vi A(N);
   LazySegTree<Lazy> seg(A);

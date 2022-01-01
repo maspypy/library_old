@@ -4,7 +4,7 @@
 
 void solve() {
   LL(N, Q);
-  FenwickRAQ<AddGroup<ll>> bit(N);
+  FenwickRAQ<Group_Add<ll>> bit(N);
   FOR(_, Q) {
     LL(t);
     if (t == 0) {

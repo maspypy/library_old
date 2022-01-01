@@ -16,7 +16,7 @@ void solve() {
   G.prepare();
 
   HLD<Graph<int>> hld(G);
-  using Group = AddGroup<ll>;
+  using Group = Group_Add<ll>;
   TreeGroup<decltype(hld), Group, false, true, false> TG(hld, A);
 
   FOR(_, Q) {

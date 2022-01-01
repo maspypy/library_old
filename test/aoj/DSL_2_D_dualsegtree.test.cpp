@@ -4,7 +4,7 @@
 #include "algebra/monoid_set.hpp"
 
 void solve() {
-  using Mono = SetMonoid<ll, (1LL << 31) - 1>;
+  using Mono = Monoid_Set<ll, (1LL << 31) - 1>;
   LL(N, Q);
   DualSegTree<Mono> seg(N);
   FOR(_, Q) {

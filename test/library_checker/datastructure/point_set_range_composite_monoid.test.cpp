@@ -9,7 +9,7 @@ using mint = modint998;
 
 void solve() {
   LL(N, Q);
-  using Mono = AffineGroup<mint>;
+  using Mono = Group_Affine<mint>;
   using F = Mono::value_type;
 
   vc<F> seg_raw(N);

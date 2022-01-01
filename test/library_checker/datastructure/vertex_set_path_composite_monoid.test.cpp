@@ -10,7 +10,7 @@ using mint = modint998;
 
 void solve() {
   LL(N, Q);
-  using Mono = AffineGroup<mint>;
+  using Mono = Group_Affine<mint>;
   using E = pair<mint, mint>;
   vc<E> A(N);
   FOR(i, N) {

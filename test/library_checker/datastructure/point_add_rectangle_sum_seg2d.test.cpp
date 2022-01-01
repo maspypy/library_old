@@ -29,7 +29,7 @@ void solve() {
     }
   }
 
-  using Mono = AddGroup<ll>;
+  using Mono = Group_Add<ll>;
 
   SegTree2D<Mono, int, false> seg(X, Y, W);
 

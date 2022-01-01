@@ -16,7 +16,7 @@ void solve() {
 
   HLD hld(G);
   const bool is_edge = false;
-  using Mono = AddGroup<ll>;
+  using Mono = Group_Add<ll>;
   TreeMonoid<decltype(hld), Mono, is_edge> TM(hld, A);
 
   FOR(_, Q) {

@@ -15,7 +15,7 @@ void solve() {
   G.prepare();
 
   HLD hld(G);
-  TreeAbelGroup<decltype(hld), AddGroup<ll>, false, true, false> TA(hld, A);
+  TreeAbelGroup<decltype(hld), Group_Add<ll>, false, true, false> TA(hld, A);
 
   FOR(_, Q) {
     LL(t);

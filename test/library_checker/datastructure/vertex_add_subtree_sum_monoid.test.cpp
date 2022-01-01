@@ -15,7 +15,7 @@ void solve() {
   G.prepare();
 
   HLD hld(G);
-  using Mono = AddGroup<ll>;
+  using Mono = Group_Add<ll>;
 
   TreeMonoid<decltype(hld), Mono, false> TM(hld, A);
 

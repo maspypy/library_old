@@ -1,5 +1,5 @@
 template <class Group>
-struct ReverseGroup {
+struct Group_Reverse {
   using value_type = typename Group::value_type;
   using X = value_type;
   static constexpr X op(const X &x, const X &y) { return Group::op(y, x); }

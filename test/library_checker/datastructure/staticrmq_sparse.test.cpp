@@ -7,7 +7,7 @@
 void solve() {
   LL(N, Q);
   VEC(int, A, N);
-  using Mono = MinMonoid<int, 1 << 30>;
+  using Mono = Monoid_Min<int, 1 << 30>;
   DisjointSparse<Mono> DS(A);
 
   FOR(_, Q) {

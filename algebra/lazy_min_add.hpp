@@ -2,9 +2,9 @@
 #include "algebra/monoid_min.hpp"
 
 template <typename E, E INF>
-struct Min_Add_Lazy {
-  using MX = MinMonoid<E, INF>;
-  using MA = AddGroup<E>;
+struct Lazy_Min_Add {
+  using MX = Monoid_Min<E, INF>;
+  using MA = Group_Add<E>;
   using X_structure = MX;
   using A_structure = MA;
   using X = typename MX::value_type;

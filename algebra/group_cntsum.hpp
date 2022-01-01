@@ -1,5 +1,5 @@
 template <typename E = long long>
-struct CntSum {
+struct Group_CntSum {
   using value_type = pair<E,E>;
   using X = value_type;
   static constexpr X op(const X &x, const X &y) { return {x.fi + y.fi, x.se + y.se}; }

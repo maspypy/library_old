@@ -2,9 +2,9 @@
 #include "algebra/monoid_set.hpp"
 
 template <typename E, E INF, E none_val=-1>
-struct Max_Set_Lazy {
-  using MX = MaxMonoid<E, INF>;
-  using MA = SetMonoid<E, none_val>;
+struct Lazy_Max_Set {
+  using MX = Monoid_Max<E, INF>;
+  using MA = Monoid_Set<E, none_val>;
   using X_structure = MX;
   using A_structure = MA;
   using X = typename MX::value_type;

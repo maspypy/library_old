@@ -1,8 +1,8 @@
 #include "algebra/monoid_reverse.hpp"
 
 template <typename Lazy>
-struct ReverseLazy {
-  using MX = typename Lazy::X_structure;
+struct Lazy_Reverse {
+  using MX = Monoid_Reverse<typename Lazy::X_structure>;
   using MA = typename Lazy::A_structure;
   using X_structure = MX;
   using A_structure = MA;
