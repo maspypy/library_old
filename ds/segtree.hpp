@@ -38,6 +38,8 @@ struct SegTree {
     return Monoid::op(vl, vr);
   }
 
+  X prod_all() { return dat[1];}
+
   template <class F>
   int max_right(F &check, int L) {
     assert(0 <= L && L <= n && check(Monoid::unit));

@@ -81,7 +81,7 @@ struct LazySegTreeFail {
     return Monoid_X::op(xl, xr);
   }
 
-  X all_prod() { return dat[1]; }
+  X prod_all() { return dat[1]; }
 
   void apply(int p, A a) {
     assert(0 <= p && p < n);
