@@ -83,8 +83,6 @@ struct LazySegTree {
   void apply(int p, A a) {
     assert(0 <= p && p < n);
     p += size;
-    if (!Monoid_A::commute)
-      for (int i = log; i >= 1; i--) push(p >> i);
     dat[p] = Lazy::act(dat[p], a);
     for (int i = 1; i <= log; i++) update(p >> i);
   }
