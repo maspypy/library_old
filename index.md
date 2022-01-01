@@ -25,8 +25,14 @@ data:
       path: algebra/max_max_lazy.hpp
       title: algebra/max_max_lazy.hpp
     - icon: ':warning:'
+      path: algebra/max_set_lazy.hpp
+      title: algebra/max_set_lazy.hpp
+    - icon: ':warning:'
       path: algebra/maxmonoid.hpp
       title: algebra/maxmonoid.hpp
+    - icon: ':heavy_check_mark:'
+      path: algebra/min_set_lazy.hpp
+      title: algebra/min_set_lazy.hpp
     - icon: ':heavy_check_mark:'
       path: algebra/minmonoid.hpp
       title: algebra/minmonoid.hpp
@@ -42,6 +48,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: algebra/reversemonoid.hpp
       title: algebra/reversemonoid.hpp
+    - icon: ':heavy_check_mark:'
+      path: algebra/setmonoid.hpp
+      title: algebra/setmonoid.hpp
   - name: ds
     pages:
     - icon: ':warning:'
@@ -284,6 +293,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_2_E_fenwick_raq.test.cpp
       title: test/aoj/DSL_2_E_fenwick_raq.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/DSL_2_F_min_set_lazy.test.cpp
+      title: test/aoj/DSL_2_F_min_set_lazy.test.cpp
   - name: test
     pages:
     - icon: ':heavy_check_mark:'
