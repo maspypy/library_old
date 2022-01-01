@@ -1,7 +1,7 @@
 #include "algebra/minmonoid.hpp"
 #include "algebra/setmonoid.hpp"
 
-template <typename E, E INF = 1 << 30, E none_val=-1>
+template <typename E, E INF, E none_val=-1>
 struct Min_Set_Lazy {
   using MX = MinMonoid<E, INF>;
   using MA = SetMonoid<E, none_val>;
