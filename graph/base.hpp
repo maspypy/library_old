@@ -7,7 +7,7 @@ struct Edge {
   int id;
 };
 
-template <typename T, bool directed = false>
+template <typename T = int, bool directed = false>
 struct Graph {
   int N, M;
   using cost_type = T;

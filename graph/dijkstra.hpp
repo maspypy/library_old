@@ -1,13 +1,13 @@
 #pragma once
 #include "graph/base.hpp"
 
-template <typename T>
-pair<vi, vi> dijkstra(Graph<T>& G, ll v) {
-  const ll INF = 1LL << 60;
+template <typename Graph>
+pair<vector<typename Graph::cost_type>, vector<int>> dijkstra(Graph& G, int v) {
   auto N = G.N;
-  vi dist(N, INF);
-  vi par(N, -1);
-  using P = pair<T, ll>;
+  using T = typename Graph::cost_type;
+  vector<T> dist(N, -1);
+  vector<int> par(N, -1);
+  using P = pair<T, int>;
 
   priority_queue<P, vector<P>, greater<P>> que;
 
@@ -18,7 +18,8 @@ pair<vi, vi> dijkstra(Graph<T>& G, ll v) {
     que.pop();
     if(dv > dist[v]) continue;
     for (auto&& e : G[v]) {
-      if (chmin(dist[e.to], dist[e.frm] + e.cost)) {
+      if (dist[e.to] == -1 || dist[e.to] > dist[e.frm] + e.cost){
+        dist[e.to] = dist[e.frm] + e.cost;
         par[e.to] = e.frm;
         que.push(mp(dist[e.to], e.to));
       }
