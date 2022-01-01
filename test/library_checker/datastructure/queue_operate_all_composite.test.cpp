@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/queue_operate_all_composite"
 #include "my_template.hpp"
 
-#include "algebra/affinegroup.hpp"
+#include "algebra/group_affine.hpp"
 #include "ds/swag.hpp"
 #include "mod/modint.hpp"
 

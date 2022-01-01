@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H"
 
 #include "my_template.hpp"
-#include "algebra/min_add_lazy.hpp"
+#include "algebra/lazy_min_add.hpp"
 #include "ds/lazysegtree.hpp"
 
 void solve() {

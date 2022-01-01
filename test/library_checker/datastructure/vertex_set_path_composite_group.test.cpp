@@ -3,7 +3,7 @@
 
 #include "mod/modint.hpp"
 #include "graph/treegroup.hpp"
-#include "algebra/affinegroup.hpp"
+#include "algebra/group_affine.hpp"
 
 using mint = modint998;
 

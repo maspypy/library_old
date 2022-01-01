@@ -3,7 +3,7 @@
 
 #include "ds/segtree.hpp"
 #include "mod/modint.hpp"
-#include "algebra/affinegroup.hpp"
+#include "algebra/group_affine.hpp"
 
 using mint = modint998;
 

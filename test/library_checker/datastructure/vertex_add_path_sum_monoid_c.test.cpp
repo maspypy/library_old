@@ -1,10 +1,8 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_add_path_sum"
 #include "my_template.hpp"
 
-#include "graph/base.hpp"
-#include "graph/hld.hpp"
 #include "graph/treemonoid.hpp"
-#include "algebra/addgroup.hpp"
+#include "algebra/group_add.hpp"
 
 void solve() {
   LL(N, Q);

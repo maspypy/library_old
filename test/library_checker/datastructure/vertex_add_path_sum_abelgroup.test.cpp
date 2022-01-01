@@ -2,7 +2,7 @@
 #include "my_template.hpp"
 
 #include "graph/treeabelgroup.hpp"
-#include "algebra/addgroup.hpp"
+#include "algebra/group_add.hpp"
 
 void solve() {
   LL(N, Q);

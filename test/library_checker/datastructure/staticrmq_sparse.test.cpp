@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"
 #include "my_template.hpp"
 
-#include "algebra/minmonoid.hpp"
+#include "algebra/monoid_min.hpp"
 #include "ds/disjointsparse.hpp"
 
 void solve() {
