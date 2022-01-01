@@ -6,12 +6,18 @@ data:
     path: algebra/max_set_lazy.hpp
     title: algebra/max_set_lazy.hpp
   - icon: ':heavy_check_mark:'
+    path: algebra/min_add_lazy.hpp
+    title: algebra/min_add_lazy.hpp
+  - icon: ':heavy_check_mark:'
     path: algebra/min_set_lazy.hpp
     title: algebra/min_set_lazy.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_F_min_set_lazy.test.cpp
     title: test/aoj/DSL_2_F_min_set_lazy.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/DSL_2_H_min_add_lazy.test.cpp
+    title: test/aoj/DSL_2_H_min_add_lazy.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/staticrmq_seg.test.cpp
     title: test/library_checker/datastructure/staticrmq_seg.test.cpp
@@ -36,9 +42,11 @@ data:
   requiredBy:
   - algebra/min_set_lazy.hpp
   - algebra/max_set_lazy.hpp
+  - algebra/min_add_lazy.hpp
   timestamp: '2021-12-28 08:10:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/aoj/DSL_2_H_min_add_lazy.test.cpp
   - test/aoj/DSL_2_F_min_set_lazy.test.cpp
   - test/library_checker/datastructure/staticrmq_sparse.test.cpp
   - test/library_checker/datastructure/staticrmq_seg.test.cpp

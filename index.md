@@ -31,6 +31,9 @@ data:
       path: algebra/maxmonoid.hpp
       title: algebra/maxmonoid.hpp
     - icon: ':heavy_check_mark:'
+      path: algebra/min_add_lazy.hpp
+      title: algebra/min_add_lazy.hpp
+    - icon: ':heavy_check_mark:'
       path: algebra/min_set_lazy.hpp
       title: algebra/min_set_lazy.hpp
     - icon: ':heavy_check_mark:'
@@ -296,6 +299,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_2_F_min_set_lazy.test.cpp
       title: test/aoj/DSL_2_F_min_set_lazy.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/DSL_2_G_fenwick_raq.test.cpp
+      title: test/aoj/DSL_2_G_fenwick_raq.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/DSL_2_H_min_add_lazy.test.cpp
+      title: test/aoj/DSL_2_H_min_add_lazy.test.cpp
   - name: test
     pages:
     - icon: ':heavy_check_mark:'

@@ -6,6 +6,9 @@ data:
     path: algebra/add_mul_lazy.hpp
     title: algebra/add_mul_lazy.hpp
   - icon: ':heavy_check_mark:'
+    path: algebra/min_add_lazy.hpp
+    title: algebra/min_add_lazy.hpp
+  - icon: ':heavy_check_mark:'
     path: ds/fenwick.hpp
     title: ds/fenwick.hpp
   - icon: ':heavy_check_mark:'
@@ -21,6 +24,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_E_fenwick_raq.test.cpp
     title: test/aoj/DSL_2_E_fenwick_raq.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/DSL_2_G_fenwick_raq.test.cpp
+    title: test/aoj/DSL_2_G_fenwick_raq.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/DSL_2_H_min_add_lazy.test.cpp
+    title: test/aoj/DSL_2_H_min_add_lazy.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/point_add_range_sum.test.cpp
     title: test/library_checker/datastructure/point_add_range_sum.test.cpp
@@ -77,6 +86,7 @@ data:
   requiredBy:
   - graph/treeabelgroup.hpp
   - algebra/add_mul_lazy.hpp
+  - algebra/min_add_lazy.hpp
   - ds/fenwickraq.hpp
   - ds/fenwick.hpp
   - other/rectanglesums.hpp
@@ -84,6 +94,8 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DSL_2_E_fenwick_raq.test.cpp
+  - test/aoj/DSL_2_H_min_add_lazy.test.cpp
+  - test/aoj/DSL_2_G_fenwick_raq.test.cpp
   - test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
   - test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp

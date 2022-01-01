@@ -2,14 +2,14 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: algebra/min_set_lazy.hpp
-    title: algebra/min_set_lazy.hpp
+    path: algebra/addgroup.hpp
+    title: algebra/addgroup.hpp
+  - icon: ':heavy_check_mark:'
+    path: algebra/min_add_lazy.hpp
+    title: algebra/min_add_lazy.hpp
   - icon: ':heavy_check_mark:'
     path: algebra/minmonoid.hpp
     title: algebra/minmonoid.hpp
-  - icon: ':heavy_check_mark:'
-    path: algebra/setmonoid.hpp
-    title: algebra/setmonoid.hpp
   - icon: ':heavy_check_mark:'
     path: ds/lazysegtree.hpp
     title: ds/lazysegtree.hpp
@@ -23,15 +23,15 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F
+    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H
     links:
-    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F
-  bundledCode: "#line 1 \"test/aoj/DSL_2_F_min_set_lazy.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F\"\r\n#line\
-    \ 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\n\
-    using ll = long long;\nusing ll8 = __int128;\nusing ld = long double;\nusing pi\
-    \ = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint = unsigned int;\nusing ull\
-    \ = unsigned long long;\n\ntemplate <class T>\nusing vc = vector<T>;\ntemplate\
+    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H
+  bundledCode: "#line 1 \"test/aoj/DSL_2_H_min_add_lazy.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H\"\r\n\r\n\
+    #line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
+    \nusing ll = long long;\nusing ll8 = __int128;\nusing ld = long double;\nusing\
+    \ pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint = unsigned int;\nusing\
+    \ ull = unsigned long long;\n\ntemplate <class T>\nusing vc = vector<T>;\ntemplate\
     \ <class T>\nusing vvc = vector<vc<T>>;\ntemplate <class T>\nusing vvvc = vector<vvc<T>>;\n\
     template <class T>\nusing vvvvc = vector<vvvc<T>>;\ntemplate <class T>\nusing\
     \ vvvvvc = vector<vvvvc<T>>;\ntemplate <class T>\nusing pq = priority_queue<T>;\n\
@@ -110,10 +110,23 @@ data:
     }\n\n#define SUM(v) accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n\
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
-    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 2 \"ds/lazysegtree.hpp\"\
-    \n\ntemplate <typename Lazy>\nstruct LazySegTree {\n  using Monoid_X = typename\
-    \ Lazy::X_structure;\n  using Monoid_A = typename Lazy::A_structure;\n  using\
-    \ X = typename Monoid_X::value_type;\n  using A = typename Monoid_A::value_type;\n\
+    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 2 \"algebra/addgroup.hpp\"\
+    \ntemplate <class X, X ZERO = X(0)>\r\nstruct AddGroup {\r\n  using value_type\
+    \ = X;\r\n  static constexpr X op(const X &x, const X &y) noexcept { return x\
+    \ + y; }\r\n  static constexpr X inverse(const X &x) noexcept { return -x; }\r\
+    \n  static constexpr X power(const X &x, ll n) noexcept { return n * x; }\r\n\
+    \  static constexpr X unit = ZERO;\r\n  static constexpr bool commute = true;\r\
+    \n};\r\n#line 1 \"algebra/minmonoid.hpp\"\ntemplate <class X, X INF>\r\nstruct\
+    \ MinMonoid {\r\n  using value_type = X;\r\n  static constexpr X op(const X &x,\
+    \ const X &y) noexcept { return min(x, y); }\r\n  static constexpr X unit = INF;\r\
+    \n};\r\n#line 3 \"algebra/min_add_lazy.hpp\"\n\r\ntemplate <typename E, E INF>\r\
+    \nstruct Min_Add_Lazy {\r\n  using MX = MinMonoid<E, INF>;\r\n  using MA = AddGroup<E>;\r\
+    \n  using X_structure = MX;\r\n  using A_structure = MA;\r\n  using X = typename\
+    \ MX::value_type;\r\n  using A = typename MA::value_type;\r\n  static constexpr\
+    \ X act(const X &x, const A &a) { \r\n    return x + a;\r\n  }\r\n};\n#line 2\
+    \ \"ds/lazysegtree.hpp\"\n\ntemplate <typename Lazy>\nstruct LazySegTree {\n \
+    \ using Monoid_X = typename Lazy::X_structure;\n  using Monoid_A = typename Lazy::A_structure;\n\
+    \  using X = typename Monoid_X::value_type;\n  using A = typename Monoid_A::value_type;\n\
     \  int n, log, size;\n  vc<X> dat;\n  vc<A> laz;\n\n  LazySegTree() : LazySegTree(0)\
     \ {}\n  LazySegTree(int n) : LazySegTree(vc<X>(n, Monoid_X::unit)) {}\n  LazySegTree(vc<X>\
     \ v) : n(len(v)) {\n    log = 1;\n    while ((1 << log) < n) ++log;\n    size\
@@ -166,52 +179,39 @@ data:
     \ sm);\n            r--;\n          }\n        }\n        return r + 1 - size;\n\
     \      }\n      sm = Monoid_X::op(dat[r], sm);\n    } while ((r & -r) != r);\n\
     \    return 0;\n  }\n\n  void debug() { print(\"lazysegtree getall:\", get_all());\
-    \ }\n};\n#line 1 \"algebra/minmonoid.hpp\"\ntemplate <class X, X INF>\r\nstruct\
-    \ MinMonoid {\r\n  using value_type = X;\r\n  static constexpr X op(const X &x,\
-    \ const X &y) noexcept { return min(x, y); }\r\n  static constexpr X unit = INF;\r\
-    \n};\r\n#line 1 \"algebra/setmonoid.hpp\"\ntemplate<typename E, E none_val = E(-1)>\r\
-    \nstruct SetMonoid {\r\n  using value_type = E;\r\n  using X = value_type;\r\n\
-    \  static X op(X x, X y) {\r\n    return (y==none_val ? x : y);\r\n  }\r\n  static\
-    \ constexpr X unit = none_val;\r\n  bool commute = false;\r\n};\n#line 3 \"algebra/min_set_lazy.hpp\"\
-    \n\r\ntemplate <typename E, E INF, E none_val=-1>\r\nstruct Min_Set_Lazy {\r\n\
-    \  using MX = MinMonoid<E, INF>;\r\n  using MA = SetMonoid<E, none_val>;\r\n \
-    \ using X_structure = MX;\r\n  using A_structure = MA;\r\n  using X = typename\
-    \ MX::value_type;\r\n  using A = typename MA::value_type;\r\n  static constexpr\
-    \ X act(const X &x, const A &a) { return (a==none_val ? x : a) ;}\r\n};\r\n#line\
-    \ 5 \"test/aoj/DSL_2_F_min_set_lazy.test.cpp\"\n\r\nvoid solve() {\r\n  LL(N,\
-    \ Q);\r\n  const ll MAX = (1LL << 31) - 1;\r\n  using Lazy = Min_Set_Lazy<ll,\
-    \ MAX, -1>;\r\n  LazySegTree<Lazy> seg(N);\r\n  FOR(_, Q) {\r\n    LL(t);\r\n\
-    \    if (t == 0) {\r\n      LL(L, R, x);\r\n      seg.apply(L, ++R, x);\r\n  \
-    \  } else {\r\n      LL(L, R);\r\n      print(seg.prod(L, ++R));\r\n    }\r\n\
-    \  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \ }\n};\n#line 6 \"test/aoj/DSL_2_H_min_add_lazy.test.cpp\"\n\r\nvoid solve()\
+    \ {\r\n  using Lazy = Min_Add_Lazy<ll, 1LL << 60>;\r\n  LL(N, Q);\r\n  vi A(N);\r\
+    \n  LazySegTree<Lazy> seg(A);\r\n  FOR(_, Q) {\r\n    LL(t, L, R);\r\n    ++R;\r\
+    \n    if (t == 0) {\r\n      LL(x);\r\n      seg.apply(L, R, x);\r\n    } else\
+    \ {\r\n      print(seg.prod(L, R));\r\n    }\r\n  }\r\n}\r\n\r\nsigned main()\
+    \ {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
+    \n\r\n  ll T = 1;\r\n  // LL(T);\r\n  FOR(_, T) solve();\r\n\r\n  return 0;\r\n\
+    }\r\n"
+  code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H\"\
+    \r\n\r\n#include \"my_template.hpp\"\r\n#include \"algebra/min_add_lazy.hpp\"\r\
+    \n#include \"ds/lazysegtree.hpp\"\r\n\r\nvoid solve() {\r\n  using Lazy = Min_Add_Lazy<ll,\
+    \ 1LL << 60>;\r\n  LL(N, Q);\r\n  vi A(N);\r\n  LazySegTree<Lazy> seg(A);\r\n\
+    \  FOR(_, Q) {\r\n    LL(t, L, R);\r\n    ++R;\r\n    if (t == 0) {\r\n      LL(x);\r\
+    \n      seg.apply(L, R, x);\r\n    } else {\r\n      print(seg.prod(L, R));\r\n\
+    \    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
     \n  cout << setprecision(15);\r\n\r\n  ll T = 1;\r\n  // LL(T);\r\n  FOR(_, T)\
     \ solve();\r\n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F\"\
-    \r\n#include \"my_template.hpp\"\r\n#include \"ds/lazysegtree.hpp\"\r\n#include\
-    \ \"algebra/min_set_lazy.hpp\"\r\n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  const\
-    \ ll MAX = (1LL << 31) - 1;\r\n  using Lazy = Min_Set_Lazy<ll, MAX, -1>;\r\n \
-    \ LazySegTree<Lazy> seg(N);\r\n  FOR(_, Q) {\r\n    LL(t);\r\n    if (t == 0)\
-    \ {\r\n      LL(L, R, x);\r\n      seg.apply(L, ++R, x);\r\n    } else {\r\n \
-    \     LL(L, R);\r\n      print(seg.prod(L, ++R));\r\n    }\r\n  }\r\n}\r\n\r\n\
-    signed main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n \
-    \ cout << setprecision(15);\r\n\r\n  ll T = 1;\r\n  // LL(T);\r\n  FOR(_, T) solve();\r\
-    \n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
-  - ds/lazysegtree.hpp
-  - algebra/min_set_lazy.hpp
+  - algebra/min_add_lazy.hpp
+  - algebra/addgroup.hpp
   - algebra/minmonoid.hpp
-  - algebra/setmonoid.hpp
+  - ds/lazysegtree.hpp
   isVerificationFile: true
-  path: test/aoj/DSL_2_F_min_set_lazy.test.cpp
+  path: test/aoj/DSL_2_H_min_add_lazy.test.cpp
   requiredBy: []
   timestamp: '2022-01-01 19:34:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/aoj/DSL_2_F_min_set_lazy.test.cpp
+documentation_of: test/aoj/DSL_2_H_min_add_lazy.test.cpp
 layout: document
 redirect_from:
-- /verify/test/aoj/DSL_2_F_min_set_lazy.test.cpp
-- /verify/test/aoj/DSL_2_F_min_set_lazy.test.cpp.html
-title: test/aoj/DSL_2_F_min_set_lazy.test.cpp
+- /verify/test/aoj/DSL_2_H_min_add_lazy.test.cpp
+- /verify/test/aoj/DSL_2_H_min_add_lazy.test.cpp.html
+title: test/aoj/DSL_2_H_min_add_lazy.test.cpp
 ---

@@ -12,6 +12,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_E_fenwick_raq.test.cpp
     title: test/aoj/DSL_2_E_fenwick_raq.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/DSL_2_G_fenwick_raq.test.cpp
+    title: test/aoj/DSL_2_G_fenwick_raq.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -77,6 +80,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DSL_2_E_fenwick_raq.test.cpp
+  - test/aoj/DSL_2_G_fenwick_raq.test.cpp
 documentation_of: ds/fenwickraq.hpp
 layout: document
 redirect_from:
