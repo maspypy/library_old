@@ -10,6 +10,9 @@ data:
     path: test/aoj/DSL_2_H_min_add_lazy.test.cpp
     title: test/aoj/DSL_2_H_min_add_lazy.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
+    title: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
     title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -137,6 +140,7 @@ data:
   timestamp: '2022-01-01 20:29:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
   - test/aoj/DSL_2_H_min_add_lazy.test.cpp
   - test/aoj/DSL_2_F_min_set_lazy.test.cpp
   - test/library_checker/datastructure/range_affine_range_sum.test.cpp

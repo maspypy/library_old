@@ -122,9 +122,9 @@ data:
     \    while (l < r) {\n        if (l & 1) all_apply(l++, a);\n        if (r & 1)\
     \ all_apply(--r, a);\n        l >>= 1;\n        r >>= 1;\n      }\n      l = l2;\n\
     \      r = r2;\n    }\n  }\n  void debug() { print(\"dualsegtree getall:\", get_all());\
-    \ }\n};\n#line 1 \"algebra/monoid_set.hpp\"\ntemplate <typename E, E none_val\
-    \ = E(-1)>\r\nstruct Monoid_Set {\r\n  using value_type = E;\r\n  using X = value_type;\r\
-    \n  static X op(X x, X y) { return (y == none_val ? x : y); }\r\n  static constexpr\
+    \ }\n};\n#line 1 \"algebra/monoid_set.hpp\"\ntemplate <typename E, E none_val>\r\
+    \nstruct Monoid_Set {\r\n  using value_type = E;\r\n  using X = value_type;\r\n\
+    \  static X op(X x, X y) { return (y == none_val ? x : y); }\r\n  static constexpr\
     \ X unit = none_val;\r\n  static constexpr bool commute = false;\r\n};\n#line\
     \ 5 \"test/aoj/DSL_2_D_dualsegtree.test.cpp\"\n\r\nvoid solve() {\r\n  using Mono\
     \ = Monoid_Set<ll, (1LL << 31) - 1>;\r\n  LL(N, Q);\r\n  DualSegTree<Mono> seg(N);\r\
@@ -149,7 +149,7 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_D_dualsegtree.test.cpp
   requiredBy: []
-  timestamp: '2022-01-01 23:37:45+09:00'
+  timestamp: '2022-01-01 23:47:48+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_D_dualsegtree.test.cpp

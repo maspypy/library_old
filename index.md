@@ -27,7 +27,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: algebra/lazy_cntsum_affine.hpp
       title: algebra/lazy_cntsum_affine.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: algebra/lazy_cntsum_set.hpp
       title: algebra/lazy_cntsum_set.hpp
     - icon: ':warning:'
@@ -317,6 +317,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_2_H_min_add_lazy.test.cpp
       title: test/aoj/DSL_2_H_min_add_lazy.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
+      title: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
   - name: test
     pages:
     - icon: ':heavy_check_mark:'

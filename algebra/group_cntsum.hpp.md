@@ -5,10 +5,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: algebra/lazy_cntsum_affine.hpp
     title: algebra/lazy_cntsum_affine.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: algebra/lazy_cntsum_set.hpp
     title: algebra/lazy_cntsum_set.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
+    title: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
     title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
@@ -37,6 +40,7 @@ data:
   timestamp: '2022-01-01 23:37:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
   - test/library_checker/datastructure/range_affine_range_sum.test.cpp
 documentation_of: algebra/group_cntsum.hpp
 layout: document
