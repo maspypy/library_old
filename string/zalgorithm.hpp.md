@@ -4,8 +4,8 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/string/zalgorithm/zalgorithm.test.cpp
-    title: test/library_checker/string/zalgorithm/zalgorithm.test.cpp
+    path: test/library_checker/string/zalgorithm.test.cpp
+    title: test/library_checker/string/zalgorithm.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -31,7 +31,7 @@ data:
   timestamp: '2022-01-01 16:54:25+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/string/zalgorithm/zalgorithm.test.cpp
+  - test/library_checker/string/zalgorithm.test.cpp
 documentation_of: string/zalgorithm.hpp
 layout: document
 redirect_from:

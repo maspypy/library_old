@@ -1,11 +1,17 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: string/rollinghash.hpp
+    title: string/rollinghash.hpp
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
+    title: test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"other/random.hpp\"\nstruct RandomNumberGenerator {\n  mt19937\
@@ -21,10 +27,12 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: other/random.hpp
-  requiredBy: []
+  requiredBy:
+  - string/rollinghash.hpp
   timestamp: '2021-12-25 22:40:58+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
 documentation_of: other/random.hpp
 layout: document
 redirect_from:

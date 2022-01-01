@@ -109,8 +109,11 @@ data:
     path: test/library_checker/math/factorize.test.cpp
     title: test/library_checker/math/factorize.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/string/zalgorithm/zalgorithm.test.cpp
-    title: test/library_checker/string/zalgorithm/zalgorithm.test.cpp
+    path: test/library_checker/string/zalgorithm.test.cpp
+    title: test/library_checker/string/zalgorithm.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
+    title: test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1002_centroid.test.cpp
     title: test/yukicoder/1002_centroid.test.cpp
@@ -309,7 +312,8 @@ data:
   - test/library_checker/graph/lca_directed.test.cpp
   - test/library_checker/graph/shortest_path.test.cpp
   - test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
-  - test/library_checker/string/zalgorithm/zalgorithm.test.cpp
+  - test/library_checker/string/zalgorithm.test.cpp
+  - test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
   - test/library_checker/math/enumerate_primes.test.cpp
   - test/library_checker/math/factorize.test.cpp
   - test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp

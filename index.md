@@ -234,7 +234,7 @@ data:
     - icon: ':warning:'
       path: other/monge_shortest_path.hpp
       title: other/monge_shortest_path.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: other/random.hpp
       title: other/random.hpp
     - icon: ':heavy_check_mark:'
@@ -266,7 +266,7 @@ data:
     - icon: ':warning:'
       path: string/manacher.hpp
       title: string/manacher.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: string/rollinghash.hpp
       title: string/rollinghash.hpp
     - icon: ':warning:'
@@ -383,11 +383,14 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/math/factorize.test.cpp
       title: test/library_checker/math/factorize.test.cpp
-  - name: test/library_checker/string/zalgorithm
+  - name: test/library_checker/string
     pages:
     - icon: ':heavy_check_mark:'
-      path: test/library_checker/string/zalgorithm/zalgorithm.test.cpp
-      title: test/library_checker/string/zalgorithm/zalgorithm.test.cpp
+      path: test/library_checker/string/zalgorithm.test.cpp
+      title: test/library_checker/string/zalgorithm.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
+      title: test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
   - name: test/yukicoder
     pages:
     - icon: ':heavy_check_mark:'

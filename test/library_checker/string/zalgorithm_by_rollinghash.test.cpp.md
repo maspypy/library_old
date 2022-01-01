@@ -5,8 +5,11 @@ data:
     path: my_template.hpp
     title: my_template.hpp
   - icon: ':heavy_check_mark:'
-    path: string/zalgorithm.hpp
-    title: string/zalgorithm.hpp
+    path: other/random.hpp
+    title: other/random.hpp
+  - icon: ':heavy_check_mark:'
+    path: string/rollinghash.hpp
+    title: string/rollinghash.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -17,7 +20,7 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/zalgorithm
     links:
     - https://judge.yosupo.jp/problem/zalgorithm
-  bundledCode: "#line 1 \"test/library_checker/string/zalgorithm/zalgorithm.test.cpp\"\
+  bundledCode: "#line 1 \"test/library_checker/string/zalgorithm_by_rollinghash.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/zalgorithm\"\r\n#line 2 \"\
     my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll\
     \ = long long;\nusing ll8 = __int128;\nusing ld = long double;\nusing pi = pair<ll,\
@@ -101,35 +104,65 @@ data:
     }\n\n#define SUM(v) accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n\
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
-    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/string/zalgorithm/zalgorithm.test.cpp\"\
-    \n\r\n#line 1 \"string/zalgorithm.hpp\"\ntemplate <typename STRING>  // string,\
-    \ vector \u3069\u3061\u3089\u3067\u3082\nvector<int> z_algorithm(const STRING&\
-    \ s) {\n  int n = int(s.size());\n  if (n == 0) return {};\n  vector<int> z(n);\n\
-    \  z[0] = 0;\n  for (int i = 1, j = 0; i < n; i++) {\n    int& k = z[i];\n   \
-    \ k = (j + z[j] <= i) ? 0 : min(j + z[j] - i, z[i - j]);\n    while (i + k < n\
-    \ && s[k] == s[i + k]) k++;\n    if (j + z[j] < i + z[i]) j = i;\n  }\n  z[0]\
-    \ = n;\n  return z;\n}\n#line 5 \"test/library_checker/string/zalgorithm/zalgorithm.test.cpp\"\
-    \n\r\nvoid solve() {\r\n  STR(S);\r\n  auto Z = z_algorithm(S);\r\n  print(Z);\r\
+    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/string/zalgorithm_by_rollinghash.test.cpp\"\
+    \n\r\n#line 1 \"other/random.hpp\"\nstruct RandomNumberGenerator {\n  mt19937\
+    \ mt;\n\n  RandomNumberGenerator() : mt(chrono::steady_clock::now().time_since_epoch().count())\
+    \ {}\n\n  ll operator()(ll a, ll b) {  // [a, b)\n    uniform_int_distribution<ll>\
+    \ dist(a, b - 1);\n    return dist(mt);\n  }\n\n  ll operator()(ll b) {  // [0,\
+    \ b)\n    return (*this)(0, b);\n  }\n};\n#line 3 \"string/rollinghash.hpp\"\n\
+    \nstruct RollingHash {\n  static const uint64_t mod = (1ull << 61ull) - 1;\n \
+    \ vector<uint64_t> power;\n  const uint64_t base;\n\n  static inline uint64_t\
+    \ add(uint64_t a, uint64_t b) {\n    if ((a += b) >= mod) a -= mod;\n    return\
+    \ a;\n  }\n\n  static inline uint64_t mul(uint64_t a, uint64_t b) {\n    const\
+    \ uint64_t MASK30 = (1LL << 30) - 1;\n    const uint64_t MASK31 = (1LL << 31)\
+    \ - 1;\n    const uint64_t MASK61 = (1LL << 61) - 1;\n    uint64_t au = a >> 31,\
+    \ ad = a & MASK31;\n    uint64_t bu = b >> 31, bd = b & MASK31;\n    uint64_t\
+    \ x = ad * bu + au * bd;\n    uint64_t xu = x >> 30, xd = x & MASK30;\n    x =\
+    \ au * bu * 2 + xu + (xd << 31) + ad * bd;\n    xu = x >> 61, xd = x & MASK61;\n\
+    \    x = xu + xd;\n    if (x >= MASK61) x -= MASK61;\n    return x;\n  }\n\n \
+    \ static inline uint64_t generate_base() {\n    RandomNumberGenerator RNG;\n \
+    \   return RNG(mod);\n  }\n\n  inline void expand(size_t sz) {\n    if (power.size()\
+    \ < sz + 1) {\n      int pre_sz = (int)power.size();\n      power.resize(sz +\
+    \ 1);\n      for (int i = pre_sz - 1; i < sz; i++) {\n        power[i + 1] = mul(power[i],\
+    \ base);\n      }\n    }\n  }\n\n  explicit RollingHash(uint64_t base = generate_base())\n\
+    \      : base(base), power{1} {}\n\n  template<typename STRING>\n  vector<uint64_t>\
+    \ build(const STRING& s) const {\n    int sz = s.size();\n    vector<uint64_t>\
+    \ hashed(sz + 1);\n    for (int i = 0; i < sz; i++) {\n      hashed[i + 1] = add(mul(hashed[i],\
+    \ base), s[i]);\n    }\n    return hashed;\n  }\n\n  uint64_t query(const vector<uint64_t>&\
+    \ s, int l, int r) {\n    expand(r - l);\n    return add(s[r], mod - mul(s[l],\
+    \ power[r - l]));\n  }\n\n  uint64_t combine(uint64_t h1, uint64_t h2, size_t\
+    \ h2len) {\n    expand(h2len);\n    return add(mul(h1, power[h2len]), h2);\n \
+    \ }\n\n  int lcp(const vector<uint64_t>& a, int l1, int r1, const vector<uint64_t>&\
+    \ b,\n          int l2, int r2) {\n    int len = min(r1 - l1, r2 - l2);\n    int\
+    \ low = 0, high = len + 1;\n    while (high - low > 1) {\n      int mid = (low\
+    \ + high) / 2;\n      if (query(a, l1, l1 + mid) == query(b, l2, l2 + mid))\n\
+    \        low = mid;\n      else\n        high = mid;\n    }\n    return low;\n\
+    \  }\n};\n#line 5 \"test/library_checker/string/zalgorithm_by_rollinghash.test.cpp\"\
+    \n\r\nvoid solve() {\r\n  STR(S);\r\n  ll N = len(S);\r\n  RollingHash RH;\r\n\
+    \  auto RS = RH.build(S);\r\n  vi Z(N);\r\n  FOR(i, N) { Z[i] = RH.lcp(RS, 0,\
+    \ N, RS, i, N); }\r\n  print(Z);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
+    \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
+    \n\r\n  return 0;\r\n}\r\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/zalgorithm\"\r\n#include\
+    \ \"my_template.hpp\"\r\n\r\n#include \"string/rollinghash.hpp\"\r\n\r\nvoid solve()\
+    \ {\r\n  STR(S);\r\n  ll N = len(S);\r\n  RollingHash RH;\r\n  auto RS = RH.build(S);\r\
+    \n  vi Z(N);\r\n  FOR(i, N) { Z[i] = RH.lcp(RS, 0, N, RS, i, N); }\r\n  print(Z);\r\
     \n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
     \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/zalgorithm\"\r\n#include\
-    \ \"my_template.hpp\"\r\n\r\n#include \"string/zalgorithm.hpp\"\r\n\r\nvoid solve()\
-    \ {\r\n  STR(S);\r\n  auto Z = z_algorithm(S);\r\n  print(Z);\r\n}\r\n\r\nsigned\
-    \ main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout\
-    \ << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
-  - string/zalgorithm.hpp
+  - string/rollinghash.hpp
+  - other/random.hpp
   isVerificationFile: true
-  path: test/library_checker/string/zalgorithm/zalgorithm.test.cpp
+  path: test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
   requiredBy: []
-  timestamp: '2022-01-01 17:01:47+09:00'
+  timestamp: '2022-01-01 18:12:13+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/library_checker/string/zalgorithm/zalgorithm.test.cpp
+documentation_of: test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/string/zalgorithm/zalgorithm.test.cpp
-- /verify/test/library_checker/string/zalgorithm/zalgorithm.test.cpp.html
-title: test/library_checker/string/zalgorithm/zalgorithm.test.cpp
+- /verify/test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
+- /verify/test/library_checker/string/zalgorithm_by_rollinghash.test.cpp.html
+title: test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
 ---
