@@ -95,10 +95,8 @@ struct LazySegTreeFail {
   void apply(int l, int r, A a) {
     assert(0 <= l && l <= r && r <= n);
     if (l == r) return;
-
     l += size;
     r += size;
-
     for (int i = log; i >= 1; i--) {
       if (((l >> i) << i) != l) push(l >> i);
       if (((r >> i) << i) != r) push((r - 1) >> i);
