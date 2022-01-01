@@ -68,7 +68,7 @@ struct RectangleSums {
     assert(n == N);
     vc<WT> ANS(Q);
     int k = (SMALL ? max_y - min_y + 2 : len(keyY) + 1);
-    FenwickTree<AddGroup<WT>> bit(k);
+    FenwickTree<Group_Add<WT>> bit(k);
     FOR(x, len(add)) {
       for (auto&& t: query_l[x]) {
         auto [q, yl, yr] = t;
