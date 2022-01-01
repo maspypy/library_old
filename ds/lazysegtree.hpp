@@ -96,9 +96,11 @@ struct LazySegTree {
     l += size;
     r += size;
 
-    for (int i = log; i >= 1; i--) {
-      if (((l >> i) << i) != l) push(l >> i);
-      if (((r >> i) << i) != r) push((r - 1) >> i);
+    if (!Monoid_A::commute) {
+      for (int i = log; i >= 1; i--) {
+        if (((l >> i) << i) != l) push(l >> i);
+        if (((r >> i) << i) != r) push((r - 1) >> i);
+      }
     }
 
     {
