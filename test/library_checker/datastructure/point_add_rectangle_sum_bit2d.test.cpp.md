@@ -1,20 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: algebra/addgroup.hpp
-    title: algebra/addgroup.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: ds/fenwick2d.hpp
     title: ds/fenwick2d.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/point_add_rectangle_sum
@@ -151,13 +148,20 @@ data:
     \n    }\r\n    while (R < L) {\r\n      ret -= sum_i(L, ly, ry);\r\n      L =\
     \ prev(L);\r\n    }\r\n    return ret;\r\n  }\r\n\r\n  void debug() {\r\n    print(\"\
     keyX\", keyX);\r\n    print(\"indptr\", indptr);\r\n    print(\"keyY\", keyY);\r\
-    \n    print(\"dat\", dat);\r\n  }\r\n};\n#line 2 \"algebra/addgroup.hpp\"\ntemplate\
-    \ <class X, X ZERO = X(0)>\r\nstruct AddGroup {\r\n  using value_type = X;\r\n\
-    \  static constexpr X op(const X &x, const X &y) noexcept { return x + y; }\r\n\
-    \  static constexpr X inverse(const X &x) noexcept { return -x; }\r\n  static\
-    \ constexpr X power(const X &x, ll n) noexcept { return n * x; }\r\n  static constexpr\
-    \ X unit = ZERO;\r\n  static constexpr bool commute = true;\r\n};\r\n#line 7 \"\
-    test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp\"\n\r\
+    \n    print(\"dat\", dat);\r\n  }\r\n};\n#line 6 \"test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp\"\
+    \n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  vi X(N), Y(N), W(N);\r\n  FOR(i, N) {\r\
+    \n    LL(x, y, w);\r\n    X[i] = x, Y[i] = y, W[i] = w;\r\n  }\r\n  using QQ =\
+    \ tuple<ll, ll, ll, ll>;\r\n  vc<QQ> query(Q);\r\n  FOR(q, Q) {\r\n    LL(t);\r\
+    \n    if (t == 0) {\r\n      LL(x, y, w);\r\n      X.eb(x);\r\n      Y.eb(y);\r\
+    \n      W.eb(0);\r\n      query[q] = mt(-1, x, y, w);\r\n    } else {\r\n    \
+    \  LL(a, b, c, d);\r\n      query[q] = mt(a, c, b, d);\r\n    }\r\n  }\r\n\r\n\
+    \  Fenwick2D<AddGroup<ll>, false> bit(X, Y, W);\r\n  FOR(q, Q) {\r\n    auto [a,\
+    \ b, c, d] = query[q];\r\n    if (a == -1) {\r\n      bit.add(b, c, d);\r\n  \
+    \  } else {\r\n      print(bit.sum(a, b, c, d));\r\n    }\r\n  }\r\n}\r\n\r\n\
+    signed main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n \
+    \ cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_rectangle_sum\"\
+    \r\n\r\n#include \"my_template.hpp\"\r\n\r\n#include \"ds/fenwick2d.hpp\"\r\n\r\
     \nvoid solve() {\r\n  LL(N, Q);\r\n  vi X(N), Y(N), W(N);\r\n  FOR(i, N) {\r\n\
     \    LL(x, y, w);\r\n    X[i] = x, Y[i] = y, W[i] = w;\r\n  }\r\n  using QQ =\
     \ tuple<ll, ll, ll, ll>;\r\n  vc<QQ> query(Q);\r\n  FOR(q, Q) {\r\n    LL(t);\r\
@@ -169,29 +173,14 @@ data:
     \  } else {\r\n      print(bit.sum(a, b, c, d));\r\n    }\r\n  }\r\n}\r\n\r\n\
     signed main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n \
     \ cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_rectangle_sum\"\
-    \r\n\r\n#include \"my_template.hpp\"\r\n\r\n#include \"ds/fenwick2d.hpp\"\r\n\
-    #include \"algebra/addgroup.hpp\"\r\n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  vi\
-    \ X(N), Y(N), W(N);\r\n  FOR(i, N) {\r\n    LL(x, y, w);\r\n    X[i] = x, Y[i]\
-    \ = y, W[i] = w;\r\n  }\r\n  using QQ = tuple<ll, ll, ll, ll>;\r\n  vc<QQ> query(Q);\r\
-    \n  FOR(q, Q) {\r\n    LL(t);\r\n    if (t == 0) {\r\n      LL(x, y, w);\r\n \
-    \     X.eb(x);\r\n      Y.eb(y);\r\n      W.eb(0);\r\n      query[q] = mt(-1,\
-    \ x, y, w);\r\n    } else {\r\n      LL(a, b, c, d);\r\n      query[q] = mt(a,\
-    \ c, b, d);\r\n    }\r\n  }\r\n\r\n  Fenwick2D<AddGroup<ll>, false> bit(X, Y,\
-    \ W);\r\n  FOR(q, Q) {\r\n    auto [a, b, c, d] = query[q];\r\n    if (a == -1)\
-    \ {\r\n      bit.add(b, c, d);\r\n    } else {\r\n      print(bit.sum(a, b, c,\
-    \ d));\r\n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n\
-    \  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
-    \n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
   - ds/fenwick2d.hpp
-  - algebra/addgroup.hpp
   isVerificationFile: true
   path: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
   requiredBy: []
-  timestamp: '2022-01-01 19:12:40+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-01 19:42:01+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
 layout: document

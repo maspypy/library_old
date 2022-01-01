@@ -3,34 +3,34 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: algebra/max_max_lazy.hpp
-    title: algebra/max_max_lazy.hpp
+    path: algebra/lazy_max_max.hpp
+    title: algebra/lazy_max_max.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"algebra/maxmonoid.hpp\"\ntemplate <class X, X INF>\r\nstruct\
-    \ MaxMonoid {\r\n  using value_type = X;\r\n  static constexpr X op(const X &x,\
-    \ const X &y) noexcept { return max(x, y); }\r\n  static constexpr X unit = -INF;\r\
-    \n  static constexpr bool commute = true;\r\n};\r\n"
+  bundledCode: "#line 1 \"algebra/monoid_max.hpp\"\ntemplate <class X, X INF>\r\n\
+    struct MaxMonoid {\r\n  using value_type = X;\r\n  static constexpr X op(const\
+    \ X &x, const X &y) noexcept { return max(x, y); }\r\n  static constexpr X unit\
+    \ = -INF;\r\n  static constexpr bool commute = true;\r\n};\r\n"
   code: "template <class X, X INF>\r\nstruct MaxMonoid {\r\n  using value_type = X;\r\
     \n  static constexpr X op(const X &x, const X &y) noexcept { return max(x, y);\
     \ }\r\n  static constexpr X unit = -INF;\r\n  static constexpr bool commute =\
     \ true;\r\n};\r\n"
   dependsOn: []
   isVerificationFile: false
-  path: algebra/maxmonoid.hpp
+  path: algebra/monoid_max.hpp
   requiredBy:
-  - algebra/max_max_lazy.hpp
-  timestamp: '2021-12-31 00:37:11+09:00'
+  - algebra/lazy_max_max.hpp
+  timestamp: '2022-01-01 19:42:01+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: algebra/maxmonoid.hpp
+documentation_of: algebra/monoid_max.hpp
 layout: document
 redirect_from:
-- /library/algebra/maxmonoid.hpp
-- /library/algebra/maxmonoid.hpp.html
-title: algebra/maxmonoid.hpp
+- /library/algebra/monoid_max.hpp
+- /library/algebra/monoid_max.hpp.html
+title: algebra/monoid_max.hpp
 ---

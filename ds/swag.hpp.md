@@ -2,13 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
-    title: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 1 \"ds/swag.hpp\"\ntemplate <class Monoid>\nstruct SWAG {\n\
@@ -36,9 +33,8 @@ data:
   path: ds/swag.hpp
   requiredBy: []
   timestamp: '2021-12-28 08:12:08+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/library_checker/datastructure/queue_operate_all_composite.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: ds/swag.hpp
 layout: document
 redirect_from:

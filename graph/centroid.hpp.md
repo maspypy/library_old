@@ -15,9 +15,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1002_centroid.test.cpp
     title: test/yukicoder/1002_centroid.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/1038_centroid.test.cpp
-    title: test/yukicoder/1038_centroid.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -129,7 +126,6 @@ data:
   verifiedWith:
   - test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
   - test/yukicoder/1002_centroid.test.cpp
-  - test/yukicoder/1038_centroid.test.cpp
 documentation_of: graph/centroid.hpp
 layout: document
 redirect_from:

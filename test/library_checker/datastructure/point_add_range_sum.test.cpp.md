@@ -2,12 +2,12 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: algebra/addgroup.hpp
-    title: algebra/addgroup.hpp
+    path: algebra/group_add.hpp
+    title: algebra/group_add.hpp
   - icon: ':heavy_check_mark:'
     path: ds/fenwick.hpp
     title: ds/fenwick.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
@@ -105,7 +105,7 @@ data:
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
     \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/datastructure/point_add_range_sum.test.cpp\"\
-    \n\n#line 2 \"algebra/addgroup.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\nstruct\
+    \n\n#line 2 \"algebra/group_add.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\nstruct\
     \ AddGroup {\r\n  using value_type = X;\r\n  static constexpr X op(const X &x,\
     \ const X &y) noexcept { return x + y; }\r\n  static constexpr X inverse(const\
     \ X &x) noexcept { return -x; }\r\n  static constexpr X power(const X &x, ll n)\
@@ -132,27 +132,27 @@ data:
     \ dat[i + k - 1]))) {\n        i += k;\n        s = AbelGroup::op(s, dat[i - 1]);\n\
     \      }\n      k >>= 1;\n    }\n    return i;\n  }\n\n  int find_kth_element(E\
     \ k) {\n    auto check = [&](E x) -> bool { return x < k; };\n    return max_right(check);\n\
-    \  }\n\n  void debug() { print(\"fenwick\", dat); }\n};\n#line 6 \"test/library_checker/datastructure/point_add_range_sum.test.cpp\"\
-    \nvoid solve() {\n  LL(N, Q);\n  VEC(ll, A, N);\n  FenwickTree<AddGroup<ll>> bit(A);\n\
-    \n  FOR(_, Q) {\n    LL(t, a, b);\n    if (t == 0) {\n      bit.add(a, b);\n \
-    \   } else {\n      print(bit.sum(a, b));\n    }\n  }\n}\n\nsigned main() {\n\
-    \  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\
+    \  }\n\n  void debug() { print(\"fenwick\", dat); }\n};\n#line 5 \"test/library_checker/datastructure/point_add_range_sum.test.cpp\"\
+    \n\nvoid solve() {\n  LL(N, Q);\n  VEC(ll, A, N);\n  FenwickTree<AddGroup<ll>>\
+    \ bit(A);\n\n  FOR(_, Q) {\n    LL(t, a, b);\n    if (t == 0) {\n      bit.add(a,\
+    \ b);\n    } else {\n      print(bit.sum(a, b));\n    }\n  }\n}\n\nsigned main()\
+    \ {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\
     \n  solve();\n\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_add_range_sum\"\n\
-    #include \"my_template.hpp\"\n\n#include \"ds/fenwick.hpp\"\n#include \"algebra/addgroup.hpp\"\
-    \nvoid solve() {\n  LL(N, Q);\n  VEC(ll, A, N);\n  FenwickTree<AddGroup<ll>> bit(A);\n\
-    \n  FOR(_, Q) {\n    LL(t, a, b);\n    if (t == 0) {\n      bit.add(a, b);\n \
-    \   } else {\n      print(bit.sum(a, b));\n    }\n  }\n}\n\nsigned main() {\n\
-    \  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\
-    \n  solve();\n\n  return 0;\n}\n"
+    #include \"my_template.hpp\"\n\n#include \"ds/fenwick.hpp\"\n\nvoid solve() {\n\
+    \  LL(N, Q);\n  VEC(ll, A, N);\n  FenwickTree<AddGroup<ll>> bit(A);\n\n  FOR(_,\
+    \ Q) {\n    LL(t, a, b);\n    if (t == 0) {\n      bit.add(a, b);\n    } else\
+    \ {\n      print(bit.sum(a, b));\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
+    \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  solve();\n\n\
+    \  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
   - ds/fenwick.hpp
-  - algebra/addgroup.hpp
+  - algebra/group_add.hpp
   isVerificationFile: true
   path: test/library_checker/datastructure/point_add_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-01-01 19:12:40+09:00'
+  timestamp: '2022-01-01 19:42:01+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/point_add_range_sum.test.cpp

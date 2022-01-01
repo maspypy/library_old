@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: algebra/addgroup.hpp
-    title: algebra/addgroup.hpp
+    path: algebra/group_add.hpp
+    title: algebra/group_add.hpp
   - icon: ':heavy_check_mark:'
     path: ds/fenwick.hpp
     title: ds/fenwick.hpp
@@ -20,7 +20,7 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"algebra/addgroup.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\
+  bundledCode: "#line 2 \"algebra/group_add.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\
     \nstruct AddGroup {\r\n  using value_type = X;\r\n  static constexpr X op(const\
     \ X &x, const X &y) noexcept { return x + y; }\r\n  static constexpr X inverse(const\
     \ X &x) noexcept { return -x; }\r\n  static constexpr X power(const X &x, ll n)\
@@ -72,11 +72,11 @@ data:
     \n    return AbelGroup::op(AbelGroup::inverse(sum_L), sum_R);\r\n  }\r\n};\r\n"
   dependsOn:
   - ds/fenwick.hpp
-  - algebra/addgroup.hpp
+  - algebra/group_add.hpp
   isVerificationFile: false
   path: ds/fenwickraq.hpp
   requiredBy: []
-  timestamp: '2022-01-01 19:12:40+09:00'
+  timestamp: '2022-01-01 19:42:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DSL_2_E_fenwick_raq.test.cpp

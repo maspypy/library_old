@@ -1,38 +1,11 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: graph/treegroup.hpp
-    title: graph/treegroup.hpp
-  - icon: ':heavy_check_mark:'
-    path: graph/treemonoid.hpp
-    title: graph/treemonoid.hpp
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
-    title: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/staticrmq_seg.test.cpp
-    title: test/library_checker/datastructure/staticrmq_seg.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-    title: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-    title: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-    title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-    title: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
-    title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"ds/segtree.hpp\"\ntemplate <class Monoid>\nstruct SegTree\
@@ -96,19 +69,10 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: ds/segtree.hpp
-  requiredBy:
-  - graph/treegroup.hpp
-  - graph/treemonoid.hpp
+  requiredBy: []
   timestamp: '2021-12-31 23:31:00+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-  - test/library_checker/datastructure/staticrmq_seg.test.cpp
-  - test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-  - test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
-  - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-  - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: ds/segtree.hpp
 layout: document
 redirect_from:

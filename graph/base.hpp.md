@@ -5,7 +5,7 @@ data:
   - icon: ':warning:'
     path: graph/bfs01.hpp
     title: graph/bfs01.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: graph/bfsnumbering.hpp
     title: graph/bfsnumbering.hpp
   - icon: ':warning:'
@@ -26,9 +26,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/hld.hpp
     title: graph/hld.hpp
-  - icon: ':warning:'
-    path: graph/lazytreemonoid.hpp
-    title: graph/lazytreemonoid.hpp
   - icon: ':heavy_check_mark:'
     path: graph/mis.hpp
     title: graph/mis.hpp
@@ -38,34 +35,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/tree_all_distances.hpp
     title: graph/tree_all_distances.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: graph/treeabelgroup.hpp
     title: graph/treeabelgroup.hpp
-  - icon: ':heavy_check_mark:'
-    path: graph/treegroup.hpp
-    title: graph/treegroup.hpp
-  - icon: ':heavy_check_mark:'
-    path: graph/treemonoid.hpp
-    title: graph/treemonoid.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-    title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-    title: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-    title: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-    title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-    title: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
-    title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/cycle_detection.test.cpp
     title: test/library_checker/graph/cycle_detection.test.cpp
@@ -90,12 +63,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1002_centroid.test.cpp
     title: test/yukicoder/1002_centroid.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/1038_centroid.test.cpp
-    title: test/yukicoder/1038_centroid.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/899_bfsnumbering.test.cpp
-    title: test/yukicoder/899_bfsnumbering.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -159,9 +126,7 @@ data:
   isVerificationFile: false
   path: graph/base.hpp
   requiredBy:
-  - graph/treegroup.hpp
   - graph/hld.hpp
-  - graph/treemonoid.hpp
   - graph/centroid.hpp
   - graph/degree.hpp
   - graph/tree_all_distances.hpp
@@ -171,7 +136,6 @@ data:
   - graph/bfs01.hpp
   - graph/scc.hpp
   - graph/bipartite_coloring.hpp
-  - graph/lazytreemonoid.hpp
   - graph/eulerwalk.hpp
   - graph/bfsnumbering.hpp
   timestamp: '2022-01-01 12:00:30+09:00'
@@ -184,15 +148,7 @@ data:
   - test/library_checker/graph/lca_directed.test.cpp
   - test/library_checker/graph/shortest_path.test.cpp
   - test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-  - test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-  - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-  - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
-  - test/yukicoder/899_bfsnumbering.test.cpp
   - test/yukicoder/1002_centroid.test.cpp
-  - test/yukicoder/1038_centroid.test.cpp
 documentation_of: graph/base.hpp
 layout: document
 redirect_from:

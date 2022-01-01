@@ -2,18 +2,15 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: algebra/addgroup.hpp
-    title: algebra/addgroup.hpp
+    path: algebra/group_add.hpp
+    title: algebra/group_add.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
     path: ds/fenwickraq.hpp
     title: ds/fenwickraq.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: graph/treeabelgroup.hpp
     title: graph/treeabelgroup.hpp
-  - icon: ':heavy_check_mark:'
-    path: other/rectanglesums.hpp
-    title: other/rectanglesums.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_E_fenwick_raq.test.cpp
@@ -24,21 +21,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/point_add_range_sum.test.cpp
     title: test/library_checker/datastructure/point_add_range_sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
-    title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-    title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/1038_centroid.test.cpp
-    title: test/yukicoder/1038_centroid.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"algebra/addgroup.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\
+  bundledCode: "#line 2 \"algebra/group_add.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\
     \nstruct AddGroup {\r\n  using value_type = X;\r\n  static constexpr X op(const\
     \ X &x, const X &y) noexcept { return x + y; }\r\n  static constexpr X inverse(const\
     \ X &x) noexcept { return -x; }\r\n  static constexpr X power(const X &x, ll n)\
@@ -66,7 +54,7 @@ data:
     \      }\n      k >>= 1;\n    }\n    return i;\n  }\n\n  int find_kth_element(E\
     \ k) {\n    auto check = [&](E x) -> bool { return x < k; };\n    return max_right(check);\n\
     \  }\n\n  void debug() { print(\"fenwick\", dat); }\n};\n"
-  code: "#pragma once\n#include \"algebra/addgroup.hpp\"\n\ntemplate <typename AbelGroup>\n\
+  code: "#pragma once\n#include \"algebra/group_add.hpp\"\n\ntemplate <typename AbelGroup>\n\
     struct FenwickTree {\n  using E = typename AbelGroup::value_type;\n  int n;\n\
     \  vector<E> dat;\n  E total;\n\n  FenwickTree() : FenwickTree(0) {}\n  FenwickTree(int\
     \ n) : n(n), total(AbelGroup::unit) {\n    assert(AbelGroup::commute);\n    dat.assign(n,\
@@ -90,22 +78,18 @@ data:
     \ auto check = [&](E x) -> bool { return x < k; };\n    return max_right(check);\n\
     \  }\n\n  void debug() { print(\"fenwick\", dat); }\n};"
   dependsOn:
-  - algebra/addgroup.hpp
+  - algebra/group_add.hpp
   isVerificationFile: false
   path: ds/fenwick.hpp
   requiredBy:
   - graph/treeabelgroup.hpp
   - ds/fenwickraq.hpp
-  - other/rectanglesums.hpp
-  timestamp: '2022-01-01 19:12:40+09:00'
+  timestamp: '2022-01-01 19:42:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DSL_2_E_fenwick_raq.test.cpp
   - test/aoj/DSL_2_G_fenwick_raq.test.cpp
   - test/library_checker/datastructure/point_add_range_sum.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-  - test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
-  - test/yukicoder/1038_centroid.test.cpp
 documentation_of: ds/fenwick.hpp
 layout: document
 redirect_from:
