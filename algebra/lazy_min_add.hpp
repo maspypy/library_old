@@ -10,6 +10,6 @@ struct Min_Add_Lazy {
   using X = typename MX::value_type;
   using A = typename MA::value_type;
   static constexpr X act(const X &x, const A &a) { 
-    return x + a;
+    return min(MX::unit, x + a);
   }
 };
