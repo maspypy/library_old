@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algebra/group_add.hpp
     title: algebra/group_add.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algebra/monoid_min.hpp
     title: algebra/monoid_min.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_H_min_add_lazy.test.cpp
     title: test/aoj/DSL_2_H_min_add_lazy.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"algebra/group_add.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\
@@ -29,22 +29,22 @@ data:
     \n\r\ntemplate <typename E, E INF>\r\nstruct Min_Add_Lazy {\r\n  using MX = MinMonoid<E,\
     \ INF>;\r\n  using MA = AddGroup<E>;\r\n  using X_structure = MX;\r\n  using A_structure\
     \ = MA;\r\n  using X = typename MX::value_type;\r\n  using A = typename MA::value_type;\r\
-    \n  static constexpr X act(const X &x, const A &a) { \r\n    return x + a;\r\n\
-    \  }\r\n};\n"
+    \n  static constexpr X act(const X &x, const A &a) { \r\n    return min(MX::unit,\
+    \ x + a);\r\n  }\r\n};\n"
   code: "#include \"algebra/group_add.hpp\"\r\n#include \"algebra/monoid_min.hpp\"\
     \r\n\r\ntemplate <typename E, E INF>\r\nstruct Min_Add_Lazy {\r\n  using MX =\
     \ MinMonoid<E, INF>;\r\n  using MA = AddGroup<E>;\r\n  using X_structure = MX;\r\
     \n  using A_structure = MA;\r\n  using X = typename MX::value_type;\r\n  using\
     \ A = typename MA::value_type;\r\n  static constexpr X act(const X &x, const A\
-    \ &a) { \r\n    return x + a;\r\n  }\r\n};"
+    \ &a) { \r\n    return min(MX::unit, x + a);\r\n  }\r\n};"
   dependsOn:
   - algebra/group_add.hpp
   - algebra/monoid_min.hpp
   isVerificationFile: false
   path: algebra/lazy_min_add.hpp
   requiredBy: []
-  timestamp: '2022-01-01 19:42:01+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-01-01 20:22:14+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DSL_2_H_min_add_lazy.test.cpp
 documentation_of: algebra/lazy_min_add.hpp

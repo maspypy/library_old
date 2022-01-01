@@ -4,16 +4,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: algebra/lazy_min_set.hpp
     title: algebra/lazy_min_set.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algebra/monoid_min.hpp
     title: algebra/monoid_min.hpp
   - icon: ':heavy_check_mark:'
     path: algebra/monoid_set.hpp
     title: algebra/monoid_set.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/lazysegtree.hpp
     title: ds/lazysegtree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
@@ -141,51 +141,51 @@ data:
     \ i = log; i >= 1; i--) push(p >> i);\n    dat[p] = Lazy::act(dat[p], a);\n  \
     \  for (int i = 1; i <= log; i++) update(p >> i);\n  }\n\n  void apply(int l,\
     \ int r, A a) {\n    assert(0 <= l && l <= r && r <= n);\n    if (l == r) return;\n\
-    \n    l += size;\n    r += size;\n\n    if (!Monoid_A::commute) {\n      for (int\
-    \ i = log; i >= 1; i--) {\n        if (((l >> i) << i) != l) push(l >> i);\n \
-    \       if (((r >> i) << i) != r) push((r - 1) >> i);\n      }\n    }\n\n    {\n\
-    \      int l2 = l, r2 = r;\n      while (l < r) {\n        if (l & 1) all_apply(l++,\
-    \ a);\n        if (r & 1) all_apply(--r, a);\n        l >>= 1;\n        r >>=\
-    \ 1;\n      }\n      l = l2;\n      r = r2;\n    }\n\n    for (int i = 1; i <=\
-    \ log; i++) {\n      if (((l >> i) << i) != l) update(l >> i);\n      if (((r\
-    \ >> i) << i) != r) update((r - 1) >> i);\n    }\n  }\n\n  template <typename\
-    \ C>\n  int max_right(C& check, int l) {\n    assert(0 <= l && l <= n);\n    assert(check(Monoid_X::unit));\n\
-    \    if (l == n) return n;\n    l += size;\n    for (int i = log; i >= 1; i--)\
-    \ push(l >> i);\n    X sm = Monoid_X::unit;\n    do {\n      while (l % 2 == 0)\
-    \ l >>= 1;\n      if (!check(Monoid_X::op(sm, dat[l]))) {\n        while (l <\
-    \ size) {\n          push(l);\n          l = (2 * l);\n          if (check(Monoid_X::op(sm,\
-    \ dat[l]))) {\n            sm = Monoid_X::op(sm, dat[l]);\n            l++;\n\
-    \          }\n        }\n        return l - size;\n      }\n      sm = Monoid_X::op(sm,\
-    \ dat[l]);\n      l++;\n    } while ((l & -l) != l);\n    return n;\n  }\n\n \
-    \ template <typename C>\n  int min_left(C& check, int r) {\n    assert(0 <= r\
-    \ && r <= n);\n    assert(check(Monoid_X::unit));\n    if (r == 0) return 0;\n\
-    \    r += size;\n    for (int i = log; i >= 1; i--) push((r - 1) >> i);\n    X\
-    \ sm = Monoid_X::unit;\n    do {\n      r--;\n      while (r > 1 && (r % 2)) r\
-    \ >>= 1;\n      if (!check(Monoid_X::op(dat[r], sm))) {\n        while (r < size)\
-    \ {\n          push(r);\n          r = (2 * r + 1);\n          if (check(Monoid_X::op(dat[r],\
-    \ sm))) {\n            sm = Monoid_X::op(dat[r], sm);\n            r--;\n    \
-    \      }\n        }\n        return r + 1 - size;\n      }\n      sm = Monoid_X::op(dat[r],\
-    \ sm);\n    } while ((r & -r) != r);\n    return 0;\n  }\n\n  void debug() { print(\"\
-    lazysegtree getall:\", get_all()); }\n};\n#line 1 \"algebra/monoid_min.hpp\"\n\
-    template <class X, X INF>\r\nstruct MinMonoid {\r\n  using value_type = X;\r\n\
-    \  static constexpr X op(const X &x, const X &y) noexcept { return min(x, y);\
-    \ }\r\n  static constexpr X unit = INF;\r\n};\r\n#line 1 \"algebra/monoid_set.hpp\"\
-    \ntemplate <typename E, E none_val = E(-1)>\r\nstruct SetMonoid {\r\n  using value_type\
-    \ = E;\r\n  using X = value_type;\r\n  static X op(X x, X y) { return (y == none_val\
-    \ ? x : y); }\r\n  static constexpr X unit = none_val;\r\n  static constexpr bool\
-    \ commute = false;\r\n};\n#line 3 \"algebra/lazy_min_set.hpp\"\n\r\ntemplate <typename\
-    \ E, E INF, E none_val=-1>\r\nstruct Min_Set_Lazy {\r\n  using MX = MinMonoid<E,\
-    \ INF>;\r\n  using MA = SetMonoid<E, none_val>;\r\n  using X_structure = MX;\r\
-    \n  using A_structure = MA;\r\n  using X = typename MX::value_type;\r\n  using\
-    \ A = typename MA::value_type;\r\n  static constexpr X act(const X &x, const A\
-    \ &a) { return (a==none_val ? x : a) ;}\r\n};\r\n#line 5 \"test/aoj/DSL_2_F_min_set_lazy.test.cpp\"\
-    \n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  const ll MAX = (1LL << 31) - 1;\r\n \
-    \ using Lazy = Min_Set_Lazy<ll, MAX, -1>;\r\n  LazySegTree<Lazy> seg(N);\r\n \
-    \ FOR(_, Q) {\r\n    LL(t);\r\n    if (t == 0) {\r\n      LL(L, R, x);\r\n   \
-    \   seg.apply(L, ++R, x);\r\n    } else {\r\n      LL(L, R);\r\n      print(seg.prod(L,\
-    \ ++R));\r\n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n\
-    \  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  ll T =\
-    \ 1;\r\n  // LL(T);\r\n  FOR(_, T) solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \n    l += size;\n    r += size;\n\n    for (int i = log; i >= 1; i--) {\n   \
+    \   if (((l >> i) << i) != l) push(l >> i);\n      if (((r >> i) << i) != r) push((r\
+    \ - 1) >> i);\n    }\n\n    {\n      int l2 = l, r2 = r;\n      while (l < r)\
+    \ {\n        if (l & 1) all_apply(l++, a);\n        if (r & 1) all_apply(--r,\
+    \ a);\n        l >>= 1;\n        r >>= 1;\n      }\n      l = l2;\n      r = r2;\n\
+    \    }\n\n    for (int i = 1; i <= log; i++) {\n      if (((l >> i) << i) != l)\
+    \ update(l >> i);\n      if (((r >> i) << i) != r) update((r - 1) >> i);\n   \
+    \ }\n  }\n\n  template <typename C>\n  int max_right(C& check, int l) {\n    assert(0\
+    \ <= l && l <= n);\n    assert(check(Monoid_X::unit));\n    if (l == n) return\
+    \ n;\n    l += size;\n    for (int i = log; i >= 1; i--) push(l >> i);\n    X\
+    \ sm = Monoid_X::unit;\n    do {\n      while (l % 2 == 0) l >>= 1;\n      if\
+    \ (!check(Monoid_X::op(sm, dat[l]))) {\n        while (l < size) {\n         \
+    \ push(l);\n          l = (2 * l);\n          if (check(Monoid_X::op(sm, dat[l])))\
+    \ {\n            sm = Monoid_X::op(sm, dat[l]);\n            l++;\n          }\n\
+    \        }\n        return l - size;\n      }\n      sm = Monoid_X::op(sm, dat[l]);\n\
+    \      l++;\n    } while ((l & -l) != l);\n    return n;\n  }\n\n  template <typename\
+    \ C>\n  int min_left(C& check, int r) {\n    assert(0 <= r && r <= n);\n    assert(check(Monoid_X::unit));\n\
+    \    if (r == 0) return 0;\n    r += size;\n    for (int i = log; i >= 1; i--)\
+    \ push((r - 1) >> i);\n    X sm = Monoid_X::unit;\n    do {\n      r--;\n    \
+    \  while (r > 1 && (r % 2)) r >>= 1;\n      if (!check(Monoid_X::op(dat[r], sm)))\
+    \ {\n        while (r < size) {\n          push(r);\n          r = (2 * r + 1);\n\
+    \          if (check(Monoid_X::op(dat[r], sm))) {\n            sm = Monoid_X::op(dat[r],\
+    \ sm);\n            r--;\n          }\n        }\n        return r + 1 - size;\n\
+    \      }\n      sm = Monoid_X::op(dat[r], sm);\n    } while ((r & -r) != r);\n\
+    \    return 0;\n  }\n\n  void debug() { print(\"lazysegtree getall:\", get_all());\
+    \ }\n};\n#line 1 \"algebra/monoid_min.hpp\"\ntemplate <class X, X INF>\r\nstruct\
+    \ MinMonoid {\r\n  using value_type = X;\r\n  static constexpr X op(const X &x,\
+    \ const X &y) noexcept { return min(x, y); }\r\n  static constexpr X unit = INF;\r\
+    \n};\r\n#line 1 \"algebra/monoid_set.hpp\"\ntemplate <typename E, E none_val =\
+    \ E(-1)>\r\nstruct SetMonoid {\r\n  using value_type = E;\r\n  using X = value_type;\r\
+    \n  static X op(X x, X y) { return (y == none_val ? x : y); }\r\n  static constexpr\
+    \ X unit = none_val;\r\n  static constexpr bool commute = false;\r\n};\n#line\
+    \ 3 \"algebra/lazy_min_set.hpp\"\n\r\ntemplate <typename E, E INF, E none_val=-1>\r\
+    \nstruct Min_Set_Lazy {\r\n  using MX = MinMonoid<E, INF>;\r\n  using MA = SetMonoid<E,\
+    \ none_val>;\r\n  using X_structure = MX;\r\n  using A_structure = MA;\r\n  using\
+    \ X = typename MX::value_type;\r\n  using A = typename MA::value_type;\r\n  static\
+    \ constexpr X act(const X &x, const A &a) { return (a==none_val ? x : a) ;}\r\n\
+    };\r\n#line 5 \"test/aoj/DSL_2_F_min_set_lazy.test.cpp\"\n\r\nvoid solve() {\r\
+    \n  LL(N, Q);\r\n  const ll MAX = (1LL << 31) - 1;\r\n  using Lazy = Min_Set_Lazy<ll,\
+    \ MAX, -1>;\r\n  LazySegTree<Lazy> seg(N);\r\n  FOR(_, Q) {\r\n    LL(t);\r\n\
+    \    if (t == 0) {\r\n      LL(L, R, x);\r\n      seg.apply(L, ++R, x);\r\n  \
+    \  } else {\r\n      LL(L, R);\r\n      print(seg.prod(L, ++R));\r\n    }\r\n\
+    \  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \n  cout << setprecision(15);\r\n\r\n  ll T = 1;\r\n  // LL(T);\r\n  FOR(_, T)\
+    \ solve();\r\n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F\"\
     \r\n#include \"my_template.hpp\"\r\n#include \"ds/lazysegtree.hpp\"\r\n#include\
     \ \"algebra/lazy_min_set.hpp\"\r\n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  const\
@@ -205,7 +205,7 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_F_min_set_lazy.test.cpp
   requiredBy: []
-  timestamp: '2022-01-01 20:04:54+09:00'
+  timestamp: '2022-01-01 20:22:14+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_F_min_set_lazy.test.cpp

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algebra/group_add.hpp
     title: algebra/group_add.hpp
   - icon: ':heavy_check_mark:'
@@ -10,7 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: algebra/lazy_add_mul.hpp
     title: algebra/lazy_add_mul.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/lazysegtree.hpp
     title: ds/lazysegtree.hpp
   - icon: ':heavy_check_mark:'
@@ -19,7 +19,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/bfsnumbering.hpp
     title: graph/bfsnumbering.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
@@ -197,15 +197,14 @@ data:
     \    dat[p] = Lazy::act(dat[p], a);\n    for (int i = 1; i <= log; i++) update(p\
     \ >> i);\n  }\n\n  void apply(int l, int r, A a) {\n    assert(0 <= l && l <=\
     \ r && r <= n);\n    if (l == r) return;\n\n    l += size;\n    r += size;\n\n\
-    \    if (!Monoid_A::commute) {\n      for (int i = log; i >= 1; i--) {\n     \
-    \   if (((l >> i) << i) != l) push(l >> i);\n        if (((r >> i) << i) != r)\
-    \ push((r - 1) >> i);\n      }\n    }\n\n    {\n      int l2 = l, r2 = r;\n  \
-    \    while (l < r) {\n        if (l & 1) all_apply(l++, a);\n        if (r & 1)\
-    \ all_apply(--r, a);\n        l >>= 1;\n        r >>= 1;\n      }\n      l = l2;\n\
-    \      r = r2;\n    }\n\n    for (int i = 1; i <= log; i++) {\n      if (((l >>\
-    \ i) << i) != l) update(l >> i);\n      if (((r >> i) << i) != r) update((r -\
-    \ 1) >> i);\n    }\n  }\n\n  template <typename C>\n  int max_right(C& check,\
-    \ int l) {\n    assert(0 <= l && l <= n);\n    assert(check(Monoid_X::unit));\n\
+    \    for (int i = log; i >= 1; i--) {\n      if (((l >> i) << i) != l) push(l\
+    \ >> i);\n      if (((r >> i) << i) != r) push((r - 1) >> i);\n    }\n\n    {\n\
+    \      int l2 = l, r2 = r;\n      while (l < r) {\n        if (l & 1) all_apply(l++,\
+    \ a);\n        if (r & 1) all_apply(--r, a);\n        l >>= 1;\n        r >>=\
+    \ 1;\n      }\n      l = l2;\n      r = r2;\n    }\n\n    for (int i = 1; i <=\
+    \ log; i++) {\n      if (((l >> i) << i) != l) update(l >> i);\n      if (((r\
+    \ >> i) << i) != r) update((r - 1) >> i);\n    }\n  }\n\n  template <typename\
+    \ C>\n  int max_right(C& check, int l) {\n    assert(0 <= l && l <= n);\n    assert(check(Monoid_X::unit));\n\
     \    if (l == n) return n;\n    l += size;\n    for (int i = log; i >= 1; i--)\
     \ push(l >> i);\n    X sm = Monoid_X::unit;\n    do {\n      while (l % 2 == 0)\
     \ l >>= 1;\n      if (!check(Monoid_X::op(sm, dat[l]))) {\n        while (l <\
@@ -280,7 +279,7 @@ data:
   isVerificationFile: true
   path: test/yukicoder/899_bfsnumbering.test.cpp
   requiredBy: []
-  timestamp: '2022-01-01 20:04:54+09:00'
+  timestamp: '2022-01-01 20:22:14+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yukicoder/899_bfsnumbering.test.cpp

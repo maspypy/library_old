@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algebra/group_add.hpp
     title: algebra/group_add.hpp
   _extendedRequiredBy:
@@ -11,6 +11,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/treeabelgroup.hpp
     title: graph/treeabelgroup.hpp
+  - icon: ':heavy_check_mark:'
+    path: other/rectanglesums.hpp
+    title: other/rectanglesums.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_E_fenwick_raq.test.cpp
@@ -21,6 +24,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/point_add_range_sum.test.cpp
     title: test/library_checker/datastructure/point_add_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
+    title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
     title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
@@ -90,6 +96,7 @@ data:
   requiredBy:
   - graph/treeabelgroup.hpp
   - ds/fenwickraq.hpp
+  - other/rectanglesums.hpp
   timestamp: '2022-01-01 19:42:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
@@ -97,6 +104,7 @@ data:
   - test/aoj/DSL_2_G_fenwick_raq.test.cpp
   - test/library_checker/datastructure/point_add_range_sum.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
+  - test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
   - test/yukicoder/1038_centroid.test.cpp
 documentation_of: ds/fenwick.hpp
 layout: document

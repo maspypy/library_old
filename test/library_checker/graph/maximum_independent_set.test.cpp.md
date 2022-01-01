@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/mis.hpp
     title: graph/mis.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []

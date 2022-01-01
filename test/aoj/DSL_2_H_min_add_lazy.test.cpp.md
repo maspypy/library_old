@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algebra/group_add.hpp
     title: algebra/group_add.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algebra/lazy_min_add.hpp
     title: algebra/lazy_min_add.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algebra/monoid_min.hpp
     title: algebra/monoid_min.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/lazysegtree.hpp
     title: ds/lazysegtree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H
@@ -123,40 +123,40 @@ data:
     \nstruct Min_Add_Lazy {\r\n  using MX = MinMonoid<E, INF>;\r\n  using MA = AddGroup<E>;\r\
     \n  using X_structure = MX;\r\n  using A_structure = MA;\r\n  using X = typename\
     \ MX::value_type;\r\n  using A = typename MA::value_type;\r\n  static constexpr\
-    \ X act(const X &x, const A &a) { \r\n    return x + a;\r\n  }\r\n};\n#line 2\
-    \ \"ds/lazysegtree.hpp\"\n\ntemplate <typename Lazy>\nstruct LazySegTree {\n \
-    \ using Monoid_X = typename Lazy::X_structure;\n  using Monoid_A = typename Lazy::A_structure;\n\
-    \  using X = typename Monoid_X::value_type;\n  using A = typename Monoid_A::value_type;\n\
-    \  int n, log, size;\n  vc<X> dat;\n  vc<A> laz;\n\n  LazySegTree() : LazySegTree(0)\
-    \ {}\n  LazySegTree(int n) : LazySegTree(vc<X>(n, Monoid_X::unit)) {}\n  LazySegTree(vc<X>\
-    \ v) : n(len(v)) {\n    log = 1;\n    while ((1 << log) < n) ++log;\n    size\
-    \ = 1 << log;\n    dat.assign(size << 1, Monoid_X::unit);\n    laz.assign(size,\
-    \ Monoid_A::unit);\n    FOR(i, n) dat[size + i] = v[i];\n    FOR3_R(i, 1, size)\
-    \ update(i);\n  }\n\n  void update(int k) { dat[k] = Monoid_X::op(dat[2 * k],\
-    \ dat[2 * k + 1]); }\n\n  void all_apply(int k, A a) {\n    dat[k] = Lazy::act(dat[k],\
-    \ a);\n    if (k < size) laz[k] = Monoid_A::op(laz[k], a);\n  }\n\n  void push(int\
-    \ k) {\n    all_apply(2 * k, laz[k]);\n    all_apply(2 * k + 1, laz[k]);\n   \
-    \ laz[k] = Monoid_A::unit;\n  }\n\n  void set(int p, X x) {\n    assert(0 <= p\
-    \ && p < n);\n    p += size;\n    for (int i = log; i >= 1; i--) push(p >> i);\n\
-    \    dat[p] = x;\n    for (int i = 1; i <= log; i++) update(p >> i);\n  }\n\n\
-    \  X get(int p) {\n    assert(0 <= p && p < n);\n    p += size;\n    for (int\
-    \ i = log; i >= 1; i--) push(p >> i);\n    return dat[p];\n  }\n\n  vc<X> get_all()\
-    \ {\n    FOR(i, size) push(i);\n    return {dat.begin() + size, dat.begin() +\
-    \ size + n};\n  }\n\n  X prod(int l, int r) {\n    assert(0 <= l && l <= r &&\
-    \ r <= n);\n    if (l == r) return Monoid_X::unit;\n\n    l += size;\n    r +=\
-    \ size;\n\n    for (int i = log; i >= 1; i--) {\n      if (((l >> i) << i) !=\
-    \ l) push(l >> i);\n      if (((r >> i) << i) != r) push((r - 1) >> i);\n    }\n\
-    \n    X xl = Monoid_X::unit, xr = Monoid_X::unit;\n    while (l < r) {\n     \
-    \ if (l & 1) xl = Monoid_X::op(xl, dat[l++]);\n      if (r & 1) xr = Monoid_X::op(dat[--r],\
-    \ xr);\n      l >>= 1;\n      r >>= 1;\n    }\n\n    return Monoid_X::op(xl, xr);\n\
-    \  }\n\n  X all_prod() { return dat[1]; }\n\n  void apply(int p, A a) {\n    assert(0\
-    \ <= p && p < n);\n    p += size;\n    if (!Monoid_A::commute)\n      for (int\
-    \ i = log; i >= 1; i--) push(p >> i);\n    dat[p] = Lazy::act(dat[p], a);\n  \
-    \  for (int i = 1; i <= log; i++) update(p >> i);\n  }\n\n  void apply(int l,\
-    \ int r, A a) {\n    assert(0 <= l && l <= r && r <= n);\n    if (l == r) return;\n\
-    \n    l += size;\n    r += size;\n\n    if (!Monoid_A::commute) {\n      for (int\
-    \ i = log; i >= 1; i--) {\n        if (((l >> i) << i) != l) push(l >> i);\n \
-    \       if (((r >> i) << i) != r) push((r - 1) >> i);\n      }\n    }\n\n    {\n\
+    \ X act(const X &x, const A &a) { \r\n    return min(MX::unit, x + a);\r\n  }\r\
+    \n};\n#line 2 \"ds/lazysegtree.hpp\"\n\ntemplate <typename Lazy>\nstruct LazySegTree\
+    \ {\n  using Monoid_X = typename Lazy::X_structure;\n  using Monoid_A = typename\
+    \ Lazy::A_structure;\n  using X = typename Monoid_X::value_type;\n  using A =\
+    \ typename Monoid_A::value_type;\n  int n, log, size;\n  vc<X> dat;\n  vc<A> laz;\n\
+    \n  LazySegTree() : LazySegTree(0) {}\n  LazySegTree(int n) : LazySegTree(vc<X>(n,\
+    \ Monoid_X::unit)) {}\n  LazySegTree(vc<X> v) : n(len(v)) {\n    log = 1;\n  \
+    \  while ((1 << log) < n) ++log;\n    size = 1 << log;\n    dat.assign(size <<\
+    \ 1, Monoid_X::unit);\n    laz.assign(size, Monoid_A::unit);\n    FOR(i, n) dat[size\
+    \ + i] = v[i];\n    FOR3_R(i, 1, size) update(i);\n  }\n\n  void update(int k)\
+    \ { dat[k] = Monoid_X::op(dat[2 * k], dat[2 * k + 1]); }\n\n  void all_apply(int\
+    \ k, A a) {\n    dat[k] = Lazy::act(dat[k], a);\n    if (k < size) laz[k] = Monoid_A::op(laz[k],\
+    \ a);\n  }\n\n  void push(int k) {\n    all_apply(2 * k, laz[k]);\n    all_apply(2\
+    \ * k + 1, laz[k]);\n    laz[k] = Monoid_A::unit;\n  }\n\n  void set(int p, X\
+    \ x) {\n    assert(0 <= p && p < n);\n    p += size;\n    for (int i = log; i\
+    \ >= 1; i--) push(p >> i);\n    dat[p] = x;\n    for (int i = 1; i <= log; i++)\
+    \ update(p >> i);\n  }\n\n  X get(int p) {\n    assert(0 <= p && p < n);\n   \
+    \ p += size;\n    for (int i = log; i >= 1; i--) push(p >> i);\n    return dat[p];\n\
+    \  }\n\n  vc<X> get_all() {\n    FOR(i, size) push(i);\n    return {dat.begin()\
+    \ + size, dat.begin() + size + n};\n  }\n\n  X prod(int l, int r) {\n    assert(0\
+    \ <= l && l <= r && r <= n);\n    if (l == r) return Monoid_X::unit;\n\n    l\
+    \ += size;\n    r += size;\n\n    for (int i = log; i >= 1; i--) {\n      if (((l\
+    \ >> i) << i) != l) push(l >> i);\n      if (((r >> i) << i) != r) push((r - 1)\
+    \ >> i);\n    }\n\n    X xl = Monoid_X::unit, xr = Monoid_X::unit;\n    while\
+    \ (l < r) {\n      if (l & 1) xl = Monoid_X::op(xl, dat[l++]);\n      if (r &\
+    \ 1) xr = Monoid_X::op(dat[--r], xr);\n      l >>= 1;\n      r >>= 1;\n    }\n\
+    \n    return Monoid_X::op(xl, xr);\n  }\n\n  X all_prod() { return dat[1]; }\n\
+    \n  void apply(int p, A a) {\n    assert(0 <= p && p < n);\n    p += size;\n \
+    \   if (!Monoid_A::commute)\n      for (int i = log; i >= 1; i--) push(p >> i);\n\
+    \    dat[p] = Lazy::act(dat[p], a);\n    for (int i = 1; i <= log; i++) update(p\
+    \ >> i);\n  }\n\n  void apply(int l, int r, A a) {\n    assert(0 <= l && l <=\
+    \ r && r <= n);\n    if (l == r) return;\n\n    l += size;\n    r += size;\n\n\
+    \    for (int i = log; i >= 1; i--) {\n      if (((l >> i) << i) != l) push(l\
+    \ >> i);\n      if (((r >> i) << i) != r) push((r - 1) >> i);\n    }\n\n    {\n\
     \      int l2 = l, r2 = r;\n      while (l < r) {\n        if (l & 1) all_apply(l++,\
     \ a);\n        if (r & 1) all_apply(--r, a);\n        l >>= 1;\n        r >>=\
     \ 1;\n      }\n      l = l2;\n      r = r2;\n    }\n\n    for (int i = 1; i <=\
@@ -205,8 +205,8 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_H_min_add_lazy.test.cpp
   requiredBy: []
-  timestamp: '2022-01-01 20:04:54+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-01-01 20:22:14+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_H_min_add_lazy.test.cpp
 layout: document

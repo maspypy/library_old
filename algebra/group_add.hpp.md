@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: algebra/lazy_add_mul.hpp
     title: algebra/lazy_add_mul.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: algebra/lazy_min_add.hpp
     title: algebra/lazy_min_add.hpp
   - icon: ':heavy_check_mark:'
@@ -20,6 +20,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/treeabelgroup.hpp
     title: graph/treeabelgroup.hpp
+  - icon: ':heavy_check_mark:'
+    path: other/rectanglesums.hpp
+    title: other/rectanglesums.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_E_fenwick_raq.test.cpp
@@ -27,7 +30,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_G_fenwick_raq.test.cpp
     title: test/aoj/DSL_2_G_fenwick_raq.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_H_min_add_lazy.test.cpp
     title: test/aoj/DSL_2_H_min_add_lazy.test.cpp
   - icon: ':heavy_check_mark:'
@@ -43,6 +46,9 @@ data:
     path: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
     title: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
+    title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
     title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
   - icon: ':heavy_check_mark:'
@@ -51,9 +57,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/899_bfsnumbering.test.cpp
     title: test/yukicoder/899_bfsnumbering.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"algebra/group_add.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\
@@ -78,8 +84,9 @@ data:
   - ds/fenwickraq.hpp
   - ds/fenwick.hpp
   - ds/fenwick2d.hpp
+  - other/rectanglesums.hpp
   timestamp: '2022-01-01 19:42:01+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DSL_2_E_fenwick_raq.test.cpp
   - test/aoj/DSL_2_H_min_add_lazy.test.cpp
@@ -89,6 +96,7 @@ data:
   - test/library_checker/datastructure/point_add_range_sum.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
   - test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
+  - test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
   - test/yukicoder/899_bfsnumbering.test.cpp
   - test/yukicoder/1038_centroid.test.cpp
 documentation_of: algebra/group_add.hpp

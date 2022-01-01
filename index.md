@@ -6,7 +6,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: algebra/beats_sample.hpp
       title: algebra/beats_sample.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: algebra/group_add.hpp
       title: algebra/group_add.hpp
     - icon: ':heavy_check_mark:'
@@ -33,7 +33,7 @@ data:
     - icon: ':warning:'
       path: algebra/lazy_max_set.hpp
       title: algebra/lazy_max_set.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: algebra/lazy_min_add.hpp
       title: algebra/lazy_min_add.hpp
     - icon: ':heavy_check_mark:'
@@ -48,7 +48,7 @@ data:
     - icon: ':warning:'
       path: algebra/monoid_max.hpp
       title: algebra/monoid_max.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: algebra/monoid_min.hpp
       title: algebra/monoid_min.hpp
     - icon: ':warning:'
@@ -86,7 +86,7 @@ data:
     - icon: ':warning:'
       path: ds/intervals.hpp
       title: ds/intervals.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: ds/lazysegtree.hpp
       title: ds/lazysegtree.hpp
     - icon: ':heavy_check_mark:'
@@ -215,7 +215,7 @@ data:
       title: mod/modint.hpp
   - name: .
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: my_template.hpp
       title: my_template.hpp
   - name: nt
@@ -255,7 +255,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: other/random.hpp
       title: other/random.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: other/rectanglesums.hpp
       title: other/rectanglesums.hpp
   - name: persistent_ds
@@ -311,7 +311,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_2_G_fenwick_raq.test.cpp
       title: test/aoj/DSL_2_G_fenwick_raq.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_2_H_min_add_lazy.test.cpp
       title: test/aoj/DSL_2_H_min_add_lazy.test.cpp
   - name: test
@@ -354,7 +354,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
       title: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
       title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
     - icon: ':heavy_check_mark:'
