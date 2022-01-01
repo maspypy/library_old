@@ -263,7 +263,7 @@ data:
       title: sequence/linearrecurrence.hpp
   - name: string
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: string/manacher.hpp
       title: string/manacher.hpp
     - icon: ':heavy_check_mark:'
@@ -385,6 +385,9 @@ data:
       title: test/library_checker/math/factorize.test.cpp
   - name: test/library_checker/string
     pages:
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/string/enumerate_palindromes.test.cpp
+      title: test/library_checker/string/enumerate_palindromes.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/string/zalgorithm.test.cpp
       title: test/library_checker/string/zalgorithm.test.cpp
