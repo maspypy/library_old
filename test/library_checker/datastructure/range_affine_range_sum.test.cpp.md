@@ -158,8 +158,7 @@ data:
     \ 1) xr = Monoid_X::op(dat[--r], xr);\n      l >>= 1;\n      r >>= 1;\n    }\n\
     \n    return Monoid_X::op(xl, xr);\n  }\n\n  X all_prod() { return dat[1]; }\n\
     \n  void apply(int p, A a) {\n    assert(0 <= p && p < n);\n    p += size;\n \
-    \   if (!Monoid_A::commute)\n      for (int i = log; i >= 1; i--) push(p >> i);\n\
-    \    dat[p] = Lazy::act(dat[p], a);\n    for (int i = 1; i <= log; i++) update(p\
+    \   dat[p] = Lazy::act(dat[p], a);\n    for (int i = 1; i <= log; i++) update(p\
     \ >> i);\n  }\n\n  void apply(int l, int r, A a) {\n    assert(0 <= l && l <=\
     \ r && r <= n);\n    if (l == r) return;\n\n    l += size;\n    r += size;\n\n\
     \    for (int i = log; i >= 1; i--) {\n      if (((l >> i) << i) != l) push(l\
@@ -255,7 +254,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-01-01 20:22:14+09:00'
+  timestamp: '2022-01-01 20:29:17+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/range_affine_range_sum.test.cpp

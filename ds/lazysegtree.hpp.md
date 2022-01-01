@@ -47,8 +47,7 @@ data:
     \ 1) xr = Monoid_X::op(dat[--r], xr);\n      l >>= 1;\n      r >>= 1;\n    }\n\
     \n    return Monoid_X::op(xl, xr);\n  }\n\n  X all_prod() { return dat[1]; }\n\
     \n  void apply(int p, A a) {\n    assert(0 <= p && p < n);\n    p += size;\n \
-    \   if (!Monoid_A::commute)\n      for (int i = log; i >= 1; i--) push(p >> i);\n\
-    \    dat[p] = Lazy::act(dat[p], a);\n    for (int i = 1; i <= log; i++) update(p\
+    \   dat[p] = Lazy::act(dat[p], a);\n    for (int i = 1; i <= log; i++) update(p\
     \ >> i);\n  }\n\n  void apply(int l, int r, A a) {\n    assert(0 <= l && l <=\
     \ r && r <= n);\n    if (l == r) return;\n\n    l += size;\n    r += size;\n\n\
     \    for (int i = log; i >= 1; i--) {\n      if (((l >> i) << i) != l) push(l\
@@ -102,12 +101,11 @@ data:
     \ if (l & 1) xl = Monoid_X::op(xl, dat[l++]);\n      if (r & 1) xr = Monoid_X::op(dat[--r],\
     \ xr);\n      l >>= 1;\n      r >>= 1;\n    }\n\n    return Monoid_X::op(xl, xr);\n\
     \  }\n\n  X all_prod() { return dat[1]; }\n\n  void apply(int p, A a) {\n    assert(0\
-    \ <= p && p < n);\n    p += size;\n    if (!Monoid_A::commute)\n      for (int\
-    \ i = log; i >= 1; i--) push(p >> i);\n    dat[p] = Lazy::act(dat[p], a);\n  \
-    \  for (int i = 1; i <= log; i++) update(p >> i);\n  }\n\n  void apply(int l,\
-    \ int r, A a) {\n    assert(0 <= l && l <= r && r <= n);\n    if (l == r) return;\n\
-    \n    l += size;\n    r += size;\n\n    for (int i = log; i >= 1; i--) {\n   \
-    \   if (((l >> i) << i) != l) push(l >> i);\n      if (((r >> i) << i) != r) push((r\
+    \ <= p && p < n);\n    p += size;\n    dat[p] = Lazy::act(dat[p], a);\n    for\
+    \ (int i = 1; i <= log; i++) update(p >> i);\n  }\n\n  void apply(int l, int r,\
+    \ A a) {\n    assert(0 <= l && l <= r && r <= n);\n    if (l == r) return;\n\n\
+    \    l += size;\n    r += size;\n\n    for (int i = log; i >= 1; i--) {\n    \
+    \  if (((l >> i) << i) != l) push(l >> i);\n      if (((r >> i) << i) != r) push((r\
     \ - 1) >> i);\n    }\n\n    {\n      int l2 = l, r2 = r;\n      while (l < r)\
     \ {\n        if (l & 1) all_apply(l++, a);\n        if (r & 1) all_apply(--r,\
     \ a);\n        l >>= 1;\n        r >>= 1;\n      }\n      l = l2;\n      r = r2;\n\
@@ -136,7 +134,7 @@ data:
   isVerificationFile: false
   path: ds/lazysegtree.hpp
   requiredBy: []
-  timestamp: '2022-01-01 20:22:14+09:00'
+  timestamp: '2022-01-01 20:29:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DSL_2_H_min_add_lazy.test.cpp

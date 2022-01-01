@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: algebra/monoid_reverse.hpp
     title: algebra/monoid_reverse.hpp
   _extendedRequiredBy: []

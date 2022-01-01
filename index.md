@@ -15,7 +15,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: algebra/group_mul.hpp
       title: algebra/group_mul.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: algebra/group_reverse.hpp
       title: algebra/group_reverse.hpp
     - icon: ':heavy_check_mark:'
@@ -51,7 +51,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: algebra/monoid_min.hpp
       title: algebra/monoid_min.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: algebra/monoid_reverse.hpp
       title: algebra/monoid_reverse.hpp
     - icon: ':heavy_check_mark:'
@@ -191,10 +191,10 @@ data:
     - icon: ':warning:'
       path: graph/treedoubling.hpp
       title: graph/treedoubling.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: graph/treegroup.hpp
       title: graph/treegroup.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: graph/treemonoid.hpp
       title: graph/treemonoid.hpp
     - icon: ':warning:'
@@ -372,19 +372,19 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
       title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
       title: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
       title: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
       title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
       title: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
       title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   - name: test/library_checker/graph

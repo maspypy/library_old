@@ -5,10 +5,22 @@ data:
   - icon: ':warning:'
     path: algebra/lazy_reverse.hpp
     title: algebra/lazy_reverse.hpp
-  _extendedVerifiedWith: []
+  - icon: ':heavy_check_mark:'
+    path: graph/treemonoid.hpp
+    title: graph/treemonoid.hpp
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
+    title: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
+    title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
+    title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"algebra/monoid_reverse.hpp\"\ntemplate <class Monoid>\r\n\
@@ -25,10 +37,14 @@ data:
   isVerificationFile: false
   path: algebra/monoid_reverse.hpp
   requiredBy:
+  - graph/treemonoid.hpp
   - algebra/lazy_reverse.hpp
   timestamp: '2022-01-01 19:42:01+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
+  - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
+  - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
 documentation_of: algebra/monoid_reverse.hpp
 layout: document
 redirect_from:

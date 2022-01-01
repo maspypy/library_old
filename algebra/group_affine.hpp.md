@@ -15,6 +15,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
     title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
+    title: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
+    title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -42,9 +48,11 @@ data:
   timestamp: '2022-01-01 19:42:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
   - test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
   - test/library_checker/datastructure/queue_operate_all_composite.test.cpp
   - test/library_checker/datastructure/range_affine_range_sum.test.cpp
+  - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
 documentation_of: algebra/group_affine.hpp
 layout: document
 redirect_from:

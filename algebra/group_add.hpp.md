@@ -52,6 +52,15 @@ data:
     path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
     title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
+    title: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
+    title: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
+    title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1038_centroid.test.cpp
     title: test/yukicoder/1038_centroid.test.cpp
   - icon: ':heavy_check_mark:'
@@ -92,10 +101,13 @@ data:
   - test/aoj/DSL_2_H_min_add_lazy.test.cpp
   - test/aoj/DSL_2_G_fenwick_raq.test.cpp
   - test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
+  - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
   - test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
+  - test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
   - test/library_checker/datastructure/point_add_range_sum.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
   - test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
+  - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
   - test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
   - test/yukicoder/899_bfsnumbering.test.cpp
   - test/yukicoder/1038_centroid.test.cpp

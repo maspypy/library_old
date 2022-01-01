@@ -38,10 +38,31 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/treeabelgroup.hpp
     title: graph/treeabelgroup.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/treegroup.hpp
+    title: graph/treegroup.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/treemonoid.hpp
+    title: graph/treemonoid.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
     title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
+    title: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
+    title: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
+    title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
+    title: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
+    title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/cycle_detection.test.cpp
     title: test/library_checker/graph/cycle_detection.test.cpp
@@ -135,7 +156,9 @@ data:
   isVerificationFile: false
   path: graph/base.hpp
   requiredBy:
+  - graph/treegroup.hpp
   - graph/hld.hpp
+  - graph/treemonoid.hpp
   - graph/centroid.hpp
   - graph/degree.hpp
   - graph/tree_all_distances.hpp
@@ -157,7 +180,12 @@ data:
   - test/library_checker/graph/lca_directed.test.cpp
   - test/library_checker/graph/shortest_path.test.cpp
   - test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
+  - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
+  - test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
+  - test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
+  - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
+  - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   - test/yukicoder/899_bfsnumbering.test.cpp
   - test/yukicoder/1002_centroid.test.cpp
   - test/yukicoder/1038_centroid.test.cpp

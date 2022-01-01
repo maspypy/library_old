@@ -1,11 +1,20 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: graph/treegroup.hpp
+    title: graph/treegroup.hpp
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
+    title: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
+    title: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"algebra/group_reverse.hpp\"\ntemplate <class Group>\r\n\
@@ -22,10 +31,13 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: algebra/group_reverse.hpp
-  requiredBy: []
+  requiredBy:
+  - graph/treegroup.hpp
   timestamp: '2022-01-01 19:42:01+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
+  - test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
 documentation_of: algebra/group_reverse.hpp
 layout: document
 redirect_from:
