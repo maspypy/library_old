@@ -1,4 +1,5 @@
 #pragma once
+#include "other/random.hpp"
 
 struct RollingHash {
   static const uint64_t mod = (1ull << 61ull) - 1;
@@ -11,9 +12,9 @@ struct RollingHash {
   }
 
   static inline uint64_t mul(uint64_t a, uint64_t b) {
-    const uint64_t MASK30 = (1LL<<30) - 1;
-    const uint64_t MASK31 = (1LL<<31) - 1;
-    const uint64_t MASK61 = (1LL<<61) - 1;
+    const uint64_t MASK30 = (1LL << 30) - 1;
+    const uint64_t MASK31 = (1LL << 31) - 1;
+    const uint64_t MASK61 = (1LL << 61) - 1;
     uint64_t au = a >> 31, ad = a & MASK31;
     uint64_t bu = b >> 31, bd = b & MASK31;
     uint64_t x = ad * bu + au * bd;
@@ -21,14 +22,13 @@ struct RollingHash {
     x = au * bu * 2 + xu + (xd << 31) + ad * bd;
     xu = x >> 61, xd = x & MASK61;
     x = xu + xd;
-    if(x >= MASK61) x -= MASK61;
+    if (x >= MASK61) x -= MASK61;
     return x;
   }
 
   static inline uint64_t generate_base() {
-    mt19937_64 mt(chrono::steady_clock::now().time_since_epoch().count());
-    uniform_int_distribution<uint64_t> rand(1, RollingHash::mod - 1);
-    return rand(mt);
+    RandomNumberGenerator RNG;
+    return RNG(mod);
   }
 
   inline void expand(size_t sz) {
@@ -41,19 +41,11 @@ struct RollingHash {
     }
   }
 
-  explicit RollingHash(uint64_t base = generate_base()) : base(base), power{1} {}
+  explicit RollingHash(uint64_t base = generate_base())
+      : base(base), power{1} {}
 
-  vector<uint64_t> build(const string& s) const {
-    int sz = s.size();
-    vector<uint64_t> hashed(sz + 1);
-    for (int i = 0; i < sz; i++) {
-      hashed[i + 1] = add(mul(hashed[i], base), s[i]);
-    }
-    return hashed;
-  }
-
-  template <typename T>
-  vector<uint64_t> build(const vector<T>& s) const {
+  template<typename STRING>
+  vector<uint64_t> build(const STRING& s) const {
     int sz = s.size();
     vector<uint64_t> hashed(sz + 1);
     for (int i = 0; i < sz; i++) {
@@ -72,7 +64,8 @@ struct RollingHash {
     return add(mul(h1, power[h2len]), h2);
   }
 
-  int lcp(const vector<uint64_t>& a, int l1, int r1, const vector<uint64_t>& b, int l2, int r2) {
+  int lcp(const vector<uint64_t>& a, int l1, int r1, const vector<uint64_t>& b,
+          int l2, int r2) {
     int len = min(r1 - l1, r2 - l2);
     int low = 0, high = len + 1;
     while (high - low > 1) {
