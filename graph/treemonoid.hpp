@@ -4,7 +4,7 @@
 
 template <typename HLD, typename Monoid, bool edge = false>
 struct TreeMonoid {
-  using RevMonoid = ReverseMonoid<Monoid>;
+  using RevMonoid = Monoid_Reverse<Monoid>;
   using X = typename Monoid::value_type;
   HLD &hld;
   int N;
