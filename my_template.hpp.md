@@ -14,6 +14,9 @@ data:
   - icon: ':warning:'
     path: graph/bipartite_coloring.hpp
     title: graph/bipartite_coloring.hpp
+  - icon: ':warning:'
+    path: graph/functional.hpp
+    title: graph/functional.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_D_dualsegtree.test.cpp
@@ -317,6 +320,7 @@ data:
   path: my_template.hpp
   requiredBy:
   - graph/bipartite_coloring.hpp
+  - graph/functional.hpp
   - ds/lichao.hpp
   - ds/unionfind.hpp
   - geometry/geometry.hpp

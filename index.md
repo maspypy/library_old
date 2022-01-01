@@ -164,6 +164,9 @@ data:
     - icon: ':warning:'
       path: graph/eulerwalk.hpp
       title: graph/eulerwalk.hpp
+    - icon: ':warning:'
+      path: graph/functional.hpp
+      title: graph/functional.hpp
     - icon: ':heavy_check_mark:'
       path: graph/hld.hpp
       title: graph/hld.hpp

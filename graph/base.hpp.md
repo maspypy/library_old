@@ -23,6 +23,9 @@ data:
   - icon: ':warning:'
     path: graph/eulerwalk.hpp
     title: graph/eulerwalk.hpp
+  - icon: ':warning:'
+    path: graph/functional.hpp
+    title: graph/functional.hpp
   - icon: ':heavy_check_mark:'
     path: graph/hld.hpp
     title: graph/hld.hpp
@@ -168,6 +171,7 @@ data:
   - graph/bfs01.hpp
   - graph/scc.hpp
   - graph/bipartite_coloring.hpp
+  - graph/functional.hpp
   - graph/eulerwalk.hpp
   - graph/bfsnumbering.hpp
   timestamp: '2022-01-01 12:00:30+09:00'
