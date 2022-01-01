@@ -1,4 +1,4 @@
-template <typename E, E none_val = E(-1)>
+template <typename E, E none_val>
 struct Monoid_Set {
   using value_type = E;
   using X = value_type;

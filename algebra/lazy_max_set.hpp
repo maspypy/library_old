@@ -1,7 +1,7 @@
 #include "algebra/monoid_min.hpp"
 #include "algebra/monoid_set.hpp"
 
-template <typename E, E INF, E none_val=-1>
+template <typename E, E INF, E none_val>
 struct Lazy_Max_Set {
   using MX = Monoid_Max<E, INF>;
   using MA = Monoid_Set<E, none_val>;
