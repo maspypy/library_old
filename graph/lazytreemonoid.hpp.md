@@ -21,7 +21,7 @@ data:
     \ \"algebra/reverselazy.hpp\"\r\n\r\ntemplate <typename HLD, typename Lazy, bool\
     \ edge = false>\r\nstruct LazyTreeMonoid {\r\n  using MonoX = typename Lazy::X_structure;\r\
     \n  using MonoA = typename Lazy::A_structure;\r\n  using X = typename MonoX::value_type;\r\
-    \n  using A = typename MonoA::value_type;\r\n  using RevLazy = ReverseLazy<Lazy>;\r\
+    \n  using A = typename MonoA::value_type;\r\n  using RevLazy = Lazy_Reverse<Lazy>;\r\
     \n  HLD &hld;\r\n  int N;\r\n  LazySegTree<Lazy> seg;\r\n  LazySegTree<RevLazy>\
     \ seg_r;\r\n\r\n  LazyTreeMonoid(HLD &hld) : hld(hld), N(hld.N), seg(hld.N) {\r\
     \n    if (!MonoX::commute) seg_r = LazySegTree<RevLazy>(hld.N);\r\n  }\r\n\r\n\
