@@ -140,8 +140,8 @@ data:
     \  vector<T> dist(N, -1);\n  vector<int> par(N, -1);\n  using P = pair<T, int>;\n\
     \n  priority_queue<P, vector<P>, greater<P>> que;\n\n  dist[v] = 0;\n  que.push(mp(T(0),\
     \ v));\n  while (!que.empty()) {\n    auto [dv, v] = que.top();\n    que.pop();\n\
-    \    if(dv > dist[v]) continue;\n    for (auto&& e : G[v]) {\n      if (dist[e.to]\
-    \ == -1 || dist[e.to] > dist[e.frm] + e.cost){\n        dist[e.to] = dist[e.frm]\
+    \    if (dv > dist[v]) continue;\n    for (auto&& e: G[v]) {\n      if (dist[e.to]\
+    \ == -1 || dist[e.to] > dist[e.frm] + e.cost) {\n        dist[e.to] = dist[e.frm]\
     \ + e.cost;\n        par[e.to] = e.frm;\n        que.push(mp(dist[e.to], e.to));\n\
     \      }\n    }\n  }\n  return mp(dist, par);\n}\n#line 1 \"graph/restore_path.hpp\"\
     \nvector<int> restore_path(vector<int> par, int t){\r\n  vector<int> pth = {t};\r\
@@ -171,7 +171,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/graph/shortest_path.test.cpp
   requiredBy: []
-  timestamp: '2022-01-01 12:00:30+09:00'
+  timestamp: '2022-01-01 16:54:25+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/graph/shortest_path.test.cpp

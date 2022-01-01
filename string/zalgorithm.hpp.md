@@ -8,28 +8,24 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"string/zalgorithm.hpp\"\ntemplate <class T>\nstd::vector<int>\
-    \ z_algorithm(const std::vector<T>& s) {\n  int n = int(s.size());\n  if (n ==\
-    \ 0) return {};\n  std::vector<int> z(n);\n  z[0] = 0;\n  for (int i = 1, j =\
-    \ 0; i < n; i++) {\n    int& k = z[i];\n    k = (j + z[j] <= i) ? 0 : std::min(j\
-    \ + z[j] - i, z[i - j]);\n    while (i + k < n && s[k] == s[i + k]) k++;\n   \
-    \ if (j + z[j] < i + z[i]) j = i;\n  }\n  z[0] = n;\n  return z;\n}\n\nstd::vector<int>\
-    \ z_algorithm(const std::string& s) {\n  int n = int(s.size());\n  std::vector<int>\
-    \ s2(n);\n  for (int i = 0; i < n; i++) {\n    s2[i] = s[i];\n  }\n  return z_algorithm(s2);\n\
-    }\n"
-  code: "template <class T>\nstd::vector<int> z_algorithm(const std::vector<T>& s)\
-    \ {\n  int n = int(s.size());\n  if (n == 0) return {};\n  std::vector<int> z(n);\n\
-    \  z[0] = 0;\n  for (int i = 1, j = 0; i < n; i++) {\n    int& k = z[i];\n   \
-    \ k = (j + z[j] <= i) ? 0 : std::min(j + z[j] - i, z[i - j]);\n    while (i +\
-    \ k < n && s[k] == s[i + k]) k++;\n    if (j + z[j] < i + z[i]) j = i;\n  }\n\
-    \  z[0] = n;\n  return z;\n}\n\nstd::vector<int> z_algorithm(const std::string&\
-    \ s) {\n  int n = int(s.size());\n  std::vector<int> s2(n);\n  for (int i = 0;\
-    \ i < n; i++) {\n    s2[i] = s[i];\n  }\n  return z_algorithm(s2);\n}"
+  bundledCode: "#line 1 \"string/zalgorithm.hpp\"\ntemplate <typename STRING>  //\
+    \ string, vector \u3069\u3061\u3089\u3067\u3082\nvector<int> z_algorithm(const\
+    \ STRING& s) {\n  int n = int(s.size());\n  if (n == 0) return {};\n  vector<int>\
+    \ z(n);\n  z[0] = 0;\n  for (int i = 1, j = 0; i < n; i++) {\n    int& k = z[i];\n\
+    \    k = (j + z[j] <= i) ? 0 : min(j + z[j] - i, z[i - j]);\n    while (i + k\
+    \ < n && s[k] == s[i + k]) k++;\n    if (j + z[j] < i + z[i]) j = i;\n  }\n  z[0]\
+    \ = n;\n  return z;\n}\n"
+  code: "template <typename STRING>  // string, vector \u3069\u3061\u3089\u3067\u3082\
+    \nvector<int> z_algorithm(const STRING& s) {\n  int n = int(s.size());\n  if (n\
+    \ == 0) return {};\n  vector<int> z(n);\n  z[0] = 0;\n  for (int i = 1, j = 0;\
+    \ i < n; i++) {\n    int& k = z[i];\n    k = (j + z[j] <= i) ? 0 : min(j + z[j]\
+    \ - i, z[i - j]);\n    while (i + k < n && s[k] == s[i + k]) k++;\n    if (j +\
+    \ z[j] < i + z[i]) j = i;\n  }\n  z[0] = n;\n  return z;\n}\n"
   dependsOn: []
   isVerificationFile: false
   path: string/zalgorithm.hpp
   requiredBy: []
-  timestamp: '2021-12-25 22:40:58+09:00'
+  timestamp: '2022-01-01 16:54:25+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: string/zalgorithm.hpp
