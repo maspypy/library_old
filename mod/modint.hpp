@@ -1,50 +1,40 @@
 template <int mod>
 struct modint {
-  int x;
+  int val;
 
-  constexpr modint(const ll x = 0) noexcept
-      : x(x >= 0 ? x % mod : (mod - (-x) % mod) % mod) {}
+  constexpr modint(const ll val = 0) noexcept
+      : val(val >= 0 ? val % mod : (mod - (-val) % mod) % mod) {}
 
   bool operator<(const modint &other) const {
-    return x < other.x;
+    return val < other.val;
   } // To use std::map
 
   modint &operator+=(const modint &p) {
-    if ((x += p.x) >= mod) x -= mod;
+    if ((val += p.val) >= mod) val -= mod;
     return *this;
   }
-
   modint &operator-=(const modint &p) {
-    if ((x += mod - p.x) >= mod) x -= mod;
+    if ((val += mod - p.val) >= mod) val -= mod;
     return *this;
   }
-
   modint &operator*=(const modint &p) {
-    x = (int)(1LL * x * p.x % mod);
+    val = (int)(1LL * val * p.val % mod);
     return *this;
   }
-
   modint &operator/=(const modint &p) {
     *this *= p.inverse();
     return *this;
   }
-
-  modint operator-() const { return modint(-x); }
-
+  modint operator-() const { return modint(-val); }
   modint operator+(const modint &p) const { return modint(*this) += p; }
-
   modint operator-(const modint &p) const { return modint(*this) -= p; }
-
   modint operator*(const modint &p) const { return modint(*this) *= p; }
-
   modint operator/(const modint &p) const { return modint(*this) /= p; }
-
-  bool operator==(const modint &p) const { return x == p.x; }
-
-  bool operator!=(const modint &p) const { return x != p.x; }
+  bool operator==(const modint &p) const { return val == p.val; }
+  bool operator!=(const modint &p) const { return val != p.val; }
 
   modint inverse() const {
-    int a = x, b = mod, u = 1, v = 0, t;
+    int a = val, b = mod, u = 1, v = 0, t;
     while (b > 0) {
       t = a / b;
       swap(a -= t * b, b);
@@ -54,7 +44,7 @@ struct modint {
   }
 
   modint pow(int64_t n) const {
-    modint ret(1), mul(x);
+    modint ret(1), mul(val);
     while (n > 0) {
       if (n & 1) ret *= mul;
       mul *= mul;
@@ -63,15 +53,7 @@ struct modint {
     return ret;
   }
 
-  friend ostream &operator<<(ostream &os, const modint &p) { return os << p.x; }
-
-  friend istream &operator>>(istream &is, modint &a) {
-    int64_t t;
-    is >> t;
-    a = modint<mod>(t);
-    return (is);
-  }
-
+  friend ostream &operator<<(ostream &os, const modint &p) { return os << p.val; }
   static int get_mod() { return mod; }
 };
 
