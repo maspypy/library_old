@@ -62,7 +62,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: ds/fenwick2d.hpp
       title: ds/fenwick2d.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: ds/fenwickraq.hpp
       title: ds/fenwickraq.hpp
     - icon: ':warning:'
@@ -279,6 +279,11 @@ data:
       path: string/zalgorithm.hpp
       title: string/zalgorithm.hpp
   verificationCategories:
+  - name: test/aoj
+    pages:
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/DSL_2_E_fenwick_raq.test.cpp
+      title: test/aoj/DSL_2_E_fenwick_raq.test.cpp
   - name: test
     pages:
     - icon: ':heavy_check_mark:'

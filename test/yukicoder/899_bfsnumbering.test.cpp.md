@@ -221,7 +221,7 @@ data:
     \ sm))) {\n            sm = Monoid_X::op(dat[r], sm);\n            r--;\n    \
     \      }\n        }\n        return r + 1 - size;\n      }\n      sm = Monoid_X::op(dat[r],\
     \ sm);\n    } while ((r & -r) != r);\n    return 0;\n  }\n\n  void debug() { print(\"\
-    lazysegtree getall:\", get_all()); }\n};\n#line 1 \"algebra/addgroup.hpp\"\ntemplate\
+    lazysegtree getall:\", get_all()); }\n};\n#line 2 \"algebra/addgroup.hpp\"\ntemplate\
     \ <class X, X ZERO = X(0)>\r\nstruct AddGroup {\r\n  using value_type = X;\r\n\
     \  static constexpr X op(const X &x, const X &y) noexcept { return x + y; }\r\n\
     \  static constexpr X inverse(const X &x) noexcept { return -x; }\r\n  static\
@@ -279,7 +279,7 @@ data:
   isVerificationFile: true
   path: test/yukicoder/899_bfsnumbering.test.cpp
   requiredBy: []
-  timestamp: '2022-01-01 12:00:30+09:00'
+  timestamp: '2022-01-01 19:12:40+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yukicoder/899_bfsnumbering.test.cpp

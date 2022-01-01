@@ -6,9 +6,21 @@ data:
     path: algebra/add_mul_lazy.hpp
     title: algebra/add_mul_lazy.hpp
   - icon: ':heavy_check_mark:'
+    path: ds/fenwick.hpp
+    title: ds/fenwick.hpp
+  - icon: ':heavy_check_mark:'
+    path: ds/fenwickraq.hpp
+    title: ds/fenwickraq.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/treeabelgroup.hpp
+    title: graph/treeabelgroup.hpp
+  - icon: ':heavy_check_mark:'
     path: other/rectanglesums.hpp
     title: other/rectanglesums.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/DSL_2_E_fenwick_raq.test.cpp
+    title: test/aoj/DSL_2_E_fenwick_raq.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/point_add_range_sum.test.cpp
     title: test/library_checker/datastructure/point_add_range_sum.test.cpp
@@ -47,27 +59,31 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"algebra/addgroup.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\
+  bundledCode: "#line 2 \"algebra/addgroup.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\
     \nstruct AddGroup {\r\n  using value_type = X;\r\n  static constexpr X op(const\
     \ X &x, const X &y) noexcept { return x + y; }\r\n  static constexpr X inverse(const\
     \ X &x) noexcept { return -x; }\r\n  static constexpr X power(const X &x, ll n)\
     \ noexcept { return n * x; }\r\n  static constexpr X unit = ZERO;\r\n  static\
     \ constexpr bool commute = true;\r\n};\r\n"
-  code: "template <class X, X ZERO = X(0)>\r\nstruct AddGroup {\r\n  using value_type\
-    \ = X;\r\n  static constexpr X op(const X &x, const X &y) noexcept { return x\
-    \ + y; }\r\n  static constexpr X inverse(const X &x) noexcept { return -x; }\r\
-    \n  static constexpr X power(const X &x, ll n) noexcept { return n * x; }\r\n\
-    \  static constexpr X unit = ZERO;\r\n  static constexpr bool commute = true;\r\
-    \n};\r\n"
+  code: "#pragma once\r\ntemplate <class X, X ZERO = X(0)>\r\nstruct AddGroup {\r\n\
+    \  using value_type = X;\r\n  static constexpr X op(const X &x, const X &y) noexcept\
+    \ { return x + y; }\r\n  static constexpr X inverse(const X &x) noexcept { return\
+    \ -x; }\r\n  static constexpr X power(const X &x, ll n) noexcept { return n *\
+    \ x; }\r\n  static constexpr X unit = ZERO;\r\n  static constexpr bool commute\
+    \ = true;\r\n};\r\n"
   dependsOn: []
   isVerificationFile: false
   path: algebra/addgroup.hpp
   requiredBy:
+  - graph/treeabelgroup.hpp
   - algebra/add_mul_lazy.hpp
+  - ds/fenwickraq.hpp
+  - ds/fenwick.hpp
   - other/rectanglesums.hpp
-  timestamp: '2021-12-30 22:02:41+09:00'
+  timestamp: '2022-01-01 19:12:40+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/aoj/DSL_2_E_fenwick_raq.test.cpp
   - test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
   - test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp

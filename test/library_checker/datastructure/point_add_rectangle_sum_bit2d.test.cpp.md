@@ -151,7 +151,7 @@ data:
     \n    }\r\n    while (R < L) {\r\n      ret -= sum_i(L, ly, ry);\r\n      L =\
     \ prev(L);\r\n    }\r\n    return ret;\r\n  }\r\n\r\n  void debug() {\r\n    print(\"\
     keyX\", keyX);\r\n    print(\"indptr\", indptr);\r\n    print(\"keyY\", keyY);\r\
-    \n    print(\"dat\", dat);\r\n  }\r\n};\n#line 1 \"algebra/addgroup.hpp\"\ntemplate\
+    \n    print(\"dat\", dat);\r\n  }\r\n};\n#line 2 \"algebra/addgroup.hpp\"\ntemplate\
     \ <class X, X ZERO = X(0)>\r\nstruct AddGroup {\r\n  using value_type = X;\r\n\
     \  static constexpr X op(const X &x, const X &y) noexcept { return x + y; }\r\n\
     \  static constexpr X inverse(const X &x) noexcept { return -x; }\r\n  static\
@@ -190,7 +190,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
   requiredBy: []
-  timestamp: '2021-12-30 22:42:15+09:00'
+  timestamp: '2022-01-01 19:12:40+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
