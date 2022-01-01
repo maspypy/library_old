@@ -6,6 +6,9 @@ data:
     path: algebra/lazy_add_mul.hpp
     title: algebra/lazy_add_mul.hpp
   - icon: ':heavy_check_mark:'
+    path: algebra/lazy_cntminmincnt_add.hpp
+    title: algebra/lazy_cntminmincnt_add.hpp
+  - icon: ':heavy_check_mark:'
     path: algebra/lazy_min_add.hpp
     title: algebra/lazy_min_add.hpp
   - icon: ':heavy_check_mark:'
@@ -23,6 +26,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: other/rectanglesums.hpp
     title: other/rectanglesums.hpp
+  - icon: ':heavy_check_mark:'
+    path: other/rectangleunion.hpp
+    title: other/rectangleunion.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_E_fenwick_raq.test.cpp
@@ -33,6 +39,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_H_min_add_lazy.test.cpp
     title: test/aoj/DSL_2_H_min_add_lazy.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/DSL_4_A_rectangle_union.test.cpp
+    title: test/aoj/DSL_4_A_rectangle_union.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/point_add_range_sum.test.cpp
     title: test/library_checker/datastructure/point_add_range_sum.test.cpp
@@ -90,14 +99,17 @@ data:
   - graph/treeabelgroup.hpp
   - algebra/lazy_add_mul.hpp
   - algebra/lazy_min_add.hpp
+  - algebra/lazy_cntminmincnt_add.hpp
   - ds/fenwickraq.hpp
   - ds/fenwick.hpp
   - ds/fenwick2d.hpp
   - other/rectanglesums.hpp
+  - other/rectangleunion.hpp
   timestamp: '2022-01-01 23:37:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DSL_2_E_fenwick_raq.test.cpp
+  - test/aoj/DSL_4_A_rectangle_union.test.cpp
   - test/aoj/DSL_2_H_min_add_lazy.test.cpp
   - test/aoj/DSL_2_G_fenwick_raq.test.cpp
   - test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp

@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: other/rectangleunion.hpp
+    title: other/rectangleunion.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_F_min_set_lazy.test.cpp
@@ -12,6 +15,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
     title: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/DSL_4_A_rectangle_union.test.cpp
+    title: test/aoj/DSL_4_A_rectangle_union.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
     title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
@@ -48,7 +54,7 @@ data:
     \ >> i);\n    }\n\n    X xl = Monoid_X::unit, xr = Monoid_X::unit;\n    while\
     \ (l < r) {\n      if (l & 1) xl = Monoid_X::op(xl, dat[l++]);\n      if (r &\
     \ 1) xr = Monoid_X::op(dat[--r], xr);\n      l >>= 1;\n      r >>= 1;\n    }\n\
-    \n    return Monoid_X::op(xl, xr);\n  }\n\n  X all_prod() { return dat[1]; }\n\
+    \n    return Monoid_X::op(xl, xr);\n  }\n\n  X prod_all() { return dat[1]; }\n\
     \n  void apply(int p, A a) {\n    assert(0 <= p && p < n);\n    p += size;\n \
     \   dat[p] = Lazy::act(dat[p], a);\n    for (int i = 1; i <= log; i++) update(p\
     \ >> i);\n  }\n\n  void apply(int l, int r, A a) {\n    assert(0 <= l && l <=\
@@ -103,7 +109,7 @@ data:
     \n    X xl = Monoid_X::unit, xr = Monoid_X::unit;\n    while (l < r) {\n     \
     \ if (l & 1) xl = Monoid_X::op(xl, dat[l++]);\n      if (r & 1) xr = Monoid_X::op(dat[--r],\
     \ xr);\n      l >>= 1;\n      r >>= 1;\n    }\n\n    return Monoid_X::op(xl, xr);\n\
-    \  }\n\n  X all_prod() { return dat[1]; }\n\n  void apply(int p, A a) {\n    assert(0\
+    \  }\n\n  X prod_all() { return dat[1]; }\n\n  void apply(int p, A a) {\n    assert(0\
     \ <= p && p < n);\n    p += size;\n    dat[p] = Lazy::act(dat[p], a);\n    for\
     \ (int i = 1; i <= log; i++) update(p >> i);\n  }\n\n  void apply(int l, int r,\
     \ A a) {\n    assert(0 <= l && l <= r && r <= n);\n    if (l == r) return;\n\n\
@@ -136,11 +142,13 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: ds/lazysegtree.hpp
-  requiredBy: []
-  timestamp: '2022-01-01 20:29:17+09:00'
+  requiredBy:
+  - other/rectangleunion.hpp
+  timestamp: '2022-01-02 01:47:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
+  - test/aoj/DSL_4_A_rectangle_union.test.cpp
   - test/aoj/DSL_2_H_min_add_lazy.test.cpp
   - test/aoj/DSL_2_F_min_set_lazy.test.cpp
   - test/library_checker/datastructure/range_affine_range_sum.test.cpp

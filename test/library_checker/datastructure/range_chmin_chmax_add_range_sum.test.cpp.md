@@ -170,7 +170,7 @@ data:
     \ >> i);\n    }\n\n    X xl = Monoid_X::unit, xr = Monoid_X::unit;\n    while\
     \ (l < r) {\n      if (l & 1) xl = Monoid_X::op(xl, dat[l++]);\n      if (r &\
     \ 1) xr = Monoid_X::op(dat[--r], xr);\n      l >>= 1;\n      r >>= 1;\n    }\n\
-    \n    return Monoid_X::op(xl, xr);\n  }\n\n  X all_prod() { return dat[1]; }\n\
+    \n    return Monoid_X::op(xl, xr);\n  }\n\n  X prod_all() { return dat[1]; }\n\
     \n  void apply(int p, A a) {\n    assert(0 <= p && p < n);\n    p += size;\n \
     \   if (!Monoid_A::commute)\n      for (int i = log; i >= 1; i--) push(p >> i);\n\
     \    dat[p] = Lazy::act(dat[p], a);\n    for (int i = 1; i <= log; i++) update(p\
@@ -229,7 +229,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/range_chmin_chmax_add_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2021-12-30 18:58:14+09:00'
+  timestamp: '2022-01-02 01:47:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/range_chmin_chmax_add_range_sum.test.cpp

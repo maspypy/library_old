@@ -156,7 +156,7 @@ data:
     \ >> i);\n    }\n\n    X xl = Monoid_X::unit, xr = Monoid_X::unit;\n    while\
     \ (l < r) {\n      if (l & 1) xl = Monoid_X::op(xl, dat[l++]);\n      if (r &\
     \ 1) xr = Monoid_X::op(dat[--r], xr);\n      l >>= 1;\n      r >>= 1;\n    }\n\
-    \n    return Monoid_X::op(xl, xr);\n  }\n\n  X all_prod() { return dat[1]; }\n\
+    \n    return Monoid_X::op(xl, xr);\n  }\n\n  X prod_all() { return dat[1]; }\n\
     \n  void apply(int p, A a) {\n    assert(0 <= p && p < n);\n    p += size;\n \
     \   dat[p] = Lazy::act(dat[p], a);\n    for (int i = 1; i <= log; i++) update(p\
     \ >> i);\n  }\n\n  void apply(int l, int r, A a) {\n    assert(0 <= l && l <=\
@@ -254,7 +254,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-01-01 23:37:45+09:00'
+  timestamp: '2022-01-02 01:47:55+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/range_affine_range_sum.test.cpp

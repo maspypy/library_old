@@ -2,20 +2,23 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: algebra/group_cntsum.hpp
-    title: algebra/group_cntsum.hpp
+    path: algebra/group_add.hpp
+    title: algebra/group_add.hpp
   - icon: ':heavy_check_mark:'
-    path: algebra/lazy_cntsum_set.hpp
-    title: algebra/lazy_cntsum_set.hpp
+    path: algebra/lazy_cntminmincnt_add.hpp
+    title: algebra/lazy_cntminmincnt_add.hpp
   - icon: ':heavy_check_mark:'
-    path: algebra/monoid_set.hpp
-    title: algebra/monoid_set.hpp
+    path: algebra/monoid_cntminmincnt.hpp
+    title: algebra/monoid_cntminmincnt.hpp
   - icon: ':heavy_check_mark:'
     path: ds/lazysegtree.hpp
     title: ds/lazysegtree.hpp
   - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
+  - icon: ':heavy_check_mark:'
+    path: other/rectangleunion.hpp
+    title: other/rectangleunion.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -23,15 +26,15 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_I
+    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_4_A
     links:
-    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_I
-  bundledCode: "#line 1 \"test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_I\"\r\n\r\n\
-    #line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
-    \nusing ll = long long;\nusing ll8 = __int128;\nusing ld = long double;\nusing\
-    \ pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint = unsigned int;\nusing\
-    \ ull = unsigned long long;\n\ntemplate <class T>\nusing vc = vector<T>;\ntemplate\
+    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_4_A
+  bundledCode: "#line 1 \"test/aoj/DSL_4_A_rectangle_union.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_4_A\"\r\n#line\
+    \ 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\n\
+    using ll = long long;\nusing ll8 = __int128;\nusing ld = long double;\nusing pi\
+    \ = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint = unsigned int;\nusing ull\
+    \ = unsigned long long;\n\ntemplate <class T>\nusing vc = vector<T>;\ntemplate\
     \ <class T>\nusing vvc = vector<vc<T>>;\ntemplate <class T>\nusing vvvc = vector<vvc<T>>;\n\
     template <class T>\nusing vvvvc = vector<vvvc<T>>;\ntemplate <class T>\nusing\
     \ vvvvvc = vector<vvvvc<T>>;\ntemplate <class T>\nusing pq = priority_queue<T>;\n\
@@ -110,21 +113,7 @@ data:
     }\n\n#define SUM(v) accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n\
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
-    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 1 \"algebra/group_cntsum.hpp\"\
-    \ntemplate <typename E = long long>\r\nstruct Group_CntSum {\r\n  using value_type\
-    \ = pair<E,E>;\r\n  using X = value_type;\r\n  static constexpr X op(const X &x,\
-    \ const X &y) { return {x.fi + y.fi, x.se + y.se}; }\r\n  static constexpr X inverse(const\
-    \ X &x) { return {-x.fi, -x.se}; }\r\n  static constexpr X unit = {0, 0};\r\n\
-    \  static constexpr bool commute = true;\r\n};\r\n#line 1 \"algebra/monoid_set.hpp\"\
-    \ntemplate <typename E, E none_val>\r\nstruct Monoid_Set {\r\n  using value_type\
-    \ = E;\r\n  using X = value_type;\r\n  static X op(X x, X y) { return (y == none_val\
-    \ ? x : y); }\r\n  static constexpr X unit = none_val;\r\n  static constexpr bool\
-    \ commute = false;\r\n};\n#line 3 \"algebra/lazy_cntsum_set.hpp\"\n\r\ntemplate\
-    \ <typename E, E none_val>\r\nstruct Lazy_CntSum_Set {\r\n  using X_structure\
-    \ = Group_CntSum<E>;\r\n  using A_structure = Monoid_Set<E, none_val>;\r\n  using\
-    \ X = typename X_structure::value_type;\r\n  using A = typename A_structure::value_type;\r\
-    \n  static constexpr X act(const X &x, const A &a) {\r\n    if(a == A_structure::unit)\
-    \ return x;\r\n    return {x.fi, x.fi * a};\r\n  }\r\n};\n#line 2 \"ds/lazysegtree.hpp\"\
+    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 2 \"ds/lazysegtree.hpp\"\
     \n\ntemplate <typename Lazy>\nstruct LazySegTree {\n  using Monoid_X = typename\
     \ Lazy::X_structure;\n  using Monoid_A = typename Lazy::A_structure;\n  using\
     \ X = typename Monoid_X::value_type;\n  using A = typename Monoid_A::value_type;\n\
@@ -179,40 +168,71 @@ data:
     \ sm);\n            r--;\n          }\n        }\n        return r + 1 - size;\n\
     \      }\n      sm = Monoid_X::op(dat[r], sm);\n    } while ((r & -r) != r);\n\
     \    return 0;\n  }\n\n  void debug() { print(\"lazysegtree getall:\", get_all());\
-    \ }\n};\n#line 6 \"test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp\"\n\r\nvoid solve()\
-    \ {\r\n  LL(N, Q);\r\n  using Lazy = Lazy_CntSum_Set<ll, 12345>;\r\n  vc<pi> seg_raw(N);\r\
-    \n  FOR(i, N) seg_raw[i] = {1, 0};\r\n  LazySegTree<Lazy> seg(seg_raw);\r\n  FOR(_,\
-    \ Q) {\r\n    LL(t, L, R);\r\n    ++R;\r\n    if (t == 0) {\r\n      LL(x);\r\n\
-    \      seg.apply(L, R, x);\r\n    } else {\r\n      print(seg.prod(L, R).se);\r\
-    \n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  ll T = 1;\r\n  // LL(T);\r\n  FOR(_, T)\
-    \ solve();\r\n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_I\"\
-    \r\n\r\n#include \"my_template.hpp\"\r\n#include \"algebra/lazy_cntsum_set.hpp\"\
-    \r\n#include \"ds/lazysegtree.hpp\"\r\n\r\nvoid solve() {\r\n  LL(N, Q);\r\n \
-    \ using Lazy = Lazy_CntSum_Set<ll, 12345>;\r\n  vc<pi> seg_raw(N);\r\n  FOR(i,\
-    \ N) seg_raw[i] = {1, 0};\r\n  LazySegTree<Lazy> seg(seg_raw);\r\n  FOR(_, Q)\
-    \ {\r\n    LL(t, L, R);\r\n    ++R;\r\n    if (t == 0) {\r\n      LL(x);\r\n \
-    \     seg.apply(L, R, x);\r\n    } else {\r\n      print(seg.prod(L, R).se);\r\
-    \n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \ }\n};\n#line 1 \"algebra/monoid_cntminmincnt.hpp\"\n// \u5168\u4F53\u306E\u500B\
+    \u6570\u3001\u6700\u5C0F\u5024\u3001\u6700\u5C0F\u5024\u306E\u500B\u6570\r\ntemplate\
+    \ <ll INF>\r\nstruct Monoid_CntMinMincnt {\r\n  using value_type = tuple<ll, ll,\
+    \ ll>;\r\n  using X = value_type;\r\n  static X op(X x, X y) {\r\n    auto [xcnt,\
+    \ xmin, xmincnt] = x;\r\n    auto [ycnt, ymin, ymincnt] = y;\r\n    if (xmin >\
+    \ ymin) return {xcnt + ycnt, ymin, ymincnt};\r\n    if (xmin == ymin) return {xcnt\
+    \ + ycnt, xmin, xmincnt + ymincnt};\r\n    return {xcnt + ycnt, xmin, xmincnt};\r\
+    \n  }\r\n  static constexpr X unit = X(0, INF, 0);\r\n  static constexpr bool\
+    \ commute = true;\r\n};\n#line 2 \"algebra/group_add.hpp\"\ntemplate <class X,\
+    \ X ZERO = X(0)>\r\nstruct Group_Add {\r\n  using value_type = X;\r\n  static\
+    \ constexpr X op(const X &x, const X &y) noexcept { return x + y; }\r\n  static\
+    \ constexpr X inverse(const X &x) noexcept { return -x; }\r\n  static constexpr\
+    \ X power(const X &x, ll n) noexcept { return n * x; }\r\n  static constexpr X\
+    \ unit = ZERO;\r\n  static constexpr bool commute = true;\r\n};\r\n#line 3 \"\
+    algebra/lazy_cntminmincnt_add.hpp\"\n\r\ntemplate <ll INF>\r\nstruct Lazy_CntMinMincnt_Add\
+    \ {\r\n  using MX = Monoid_CntMinMincnt<INF>;\r\n  using MA = Group_Add<ll>;\r\
+    \n  using X_structure = MX;\r\n  using A_structure = MA;\r\n  using X = typename\
+    \ MX::value_type;\r\n  using A = typename MA::value_type;\r\n  static constexpr\
+    \ X act(const X &x, const A &a) {\r\n    auto [xcnt, xmin, xmincnt] = x;\r\n \
+    \   return {xcnt, min(INF, xmin + a), xmincnt};\r\n  }\r\n};\n#line 3 \"other/rectangleunion.hpp\"\
+    \n\r\nstruct RectangleUnion {\r\n  using RECT = tuple<ll, ll, ll, ll>;\r\n  vc<RECT>\
+    \ rectangles;\r\n  vi X, Y;\r\n\r\n  void add_rect(ll xl, ll xr, ll yl, ll yr)\
+    \ {\r\n    assert(xl < xr && yl < yr);\r\n    X.eb(xl), X.eb(xr), Y.eb(yl), Y.eb(yr);\r\
+    \n    rectangles.eb(xl, xr, yl, yr);\r\n  }\r\n\r\n  ll calc() {\r\n    UNIQUE(X),\
+    \ UNIQUE(Y);\r\n    ll N = len(X);\r\n    vc<vc<pi>> add(N), rm(N);\r\n    for\
+    \ (auto &&[xl, xr, yl, yr]: rectangles) {\r\n      xl = LB(X, xl), xr = LB(X,\
+    \ xr);\r\n      yl = LB(Y, yl), yr = LB(Y, yr);\r\n      add[xl].eb(yl, yr);\r\
+    \n      rm[xr].eb(yl, yr);\r\n    }\r\n\r\n    using Lazy = Lazy_CntMinMincnt_Add<1LL\
+    \ << 60>;\r\n\r\n    vc<typename Lazy::X> seg_raw(len(Y) - 1);\r\n    FOR(i, len(Y)\
+    \ - 1) seg_raw[i] = {Y[i + 1] - Y[i], 0, Y[i + 1] - Y[i]};\r\n    LazySegTree<Lazy>\
+    \ seg(seg_raw);\r\n    ll ANS = 0;\r\n    FOR(i, len(X) - 1) {\r\n      ll dx\
+    \ = X[i + 1] - X[i];\r\n      for (auto &&[yl, yr]: add[i]) seg.apply(yl, yr,\
+    \ 1);\r\n      for (auto &&[yl, yr]: rm[i]) seg.apply(yl, yr, -1);\r\n      auto\
+    \ [cnt, min, mincnt] = seg.prod_all();\r\n      ll n = cnt;\r\n      if (min ==\
+    \ 0) n -= mincnt;\r\n      ANS += n * dx;\r\n    }\r\n    return ANS;\r\n  }\r\
+    \n};\r\n#line 4 \"test/aoj/DSL_4_A_rectangle_union.test.cpp\"\n\r\nvoid solve()\
+    \ {\r\n  LL(N);\r\n  RectangleUnion RU;\r\n  FOR(_, N) {\r\n    LL(a, b, c, d);\r\
+    \n    RU.add_rect(a, c, b, d);\r\n  }\r\n  print(RU.calc());\r\n}\r\n\r\nsigned\
+    \ main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout\
+    \ << setprecision(15);\r\n\r\n  ll T = 1;\r\n  // LL(T);\r\n  FOR(_, T) solve();\r\
+    \n\r\n  return 0;\r\n}\r\n"
+  code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_4_A\"\
+    \r\n#include \"my_template.hpp\"\r\n#include \"other/rectangleunion.hpp\"\r\n\r\
+    \nvoid solve() {\r\n  LL(N);\r\n  RectangleUnion RU;\r\n  FOR(_, N) {\r\n    LL(a,\
+    \ b, c, d);\r\n    RU.add_rect(a, c, b, d);\r\n  }\r\n  print(RU.calc());\r\n\
+    }\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
     \n  cout << setprecision(15);\r\n\r\n  ll T = 1;\r\n  // LL(T);\r\n  FOR(_, T)\
     \ solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
-  - algebra/lazy_cntsum_set.hpp
-  - algebra/group_cntsum.hpp
-  - algebra/monoid_set.hpp
+  - other/rectangleunion.hpp
   - ds/lazysegtree.hpp
+  - algebra/lazy_cntminmincnt_add.hpp
+  - algebra/monoid_cntminmincnt.hpp
+  - algebra/group_add.hpp
   isVerificationFile: true
-  path: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
+  path: test/aoj/DSL_4_A_rectangle_union.test.cpp
   requiredBy: []
-  timestamp: '2022-01-02 01:47:55+09:00'
+  timestamp: '2022-01-02 01:48:16+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
+documentation_of: test/aoj/DSL_4_A_rectangle_union.test.cpp
 layout: document
 redirect_from:
-- /verify/test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
-- /verify/test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp.html
-title: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
+- /verify/test/aoj/DSL_4_A_rectangle_union.test.cpp
+- /verify/test/aoj/DSL_4_A_rectangle_union.test.cpp.html
+title: test/aoj/DSL_4_A_rectangle_union.test.cpp
 ---

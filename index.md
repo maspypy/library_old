@@ -25,6 +25,9 @@ data:
       path: algebra/lazy_add_mul.hpp
       title: algebra/lazy_add_mul.hpp
     - icon: ':heavy_check_mark:'
+      path: algebra/lazy_cntminmincnt_add.hpp
+      title: algebra/lazy_cntminmincnt_add.hpp
+    - icon: ':heavy_check_mark:'
       path: algebra/lazy_cntsum_affine.hpp
       title: algebra/lazy_cntsum_affine.hpp
     - icon: ':heavy_check_mark:'
@@ -45,6 +48,9 @@ data:
     - icon: ':warning:'
       path: algebra/lazy_reverse.hpp
       title: algebra/lazy_reverse.hpp
+    - icon: ':heavy_check_mark:'
+      path: algebra/monoid_cntminmincnt.hpp
+      title: algebra/monoid_cntminmincnt.hpp
     - icon: ':warning:'
       path: algebra/monoid_max.hpp
       title: algebra/monoid_max.hpp
@@ -261,6 +267,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: other/rectanglesums.hpp
       title: other/rectanglesums.hpp
+    - icon: ':heavy_check_mark:'
+      path: other/rectangleunion.hpp
+      title: other/rectangleunion.hpp
   - name: persistent_ds
     pages:
     - icon: ':heavy_check_mark:'
@@ -320,6 +329,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
       title: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/DSL_4_A_rectangle_union.test.cpp
+      title: test/aoj/DSL_4_A_rectangle_union.test.cpp
   - name: test
     pages:
     - icon: ':heavy_check_mark:'
