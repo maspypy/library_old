@@ -1,4 +1,6 @@
 #pragma once
+#include "algebra/addgroup.hpp"
+
 template <typename AbelGroup>
 struct FenwickTree {
   using E = typename AbelGroup::value_type;
