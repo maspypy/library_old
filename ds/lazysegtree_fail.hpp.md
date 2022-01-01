@@ -42,8 +42,8 @@ data:
     \    p += size;\n    if (!Monoid_A::commute)\n      for (int i = log; i >= 1;\
     \ i--) push(p >> i);\n    dat[p] = Lazy::act(dat[p], a);\n    for (int i = 1;\
     \ i <= log; i++) update(p >> i);\n  }\n\n  void apply(int l, int r, A a) {\n \
-    \   assert(0 <= l && l <= r && r <= n);\n    if (l == r) return;\n\n    l += size;\n\
-    \    r += size;\n\n    for (int i = log; i >= 1; i--) {\n      if (((l >> i) <<\
+    \   assert(0 <= l && l <= r && r <= n);\n    if (l == r) return;\n    l += size;\n\
+    \    r += size;\n    for (int i = log; i >= 1; i--) {\n      if (((l >> i) <<\
     \ i) != l) push(l >> i);\n      if (((r >> i) << i) != r) push((r - 1) >> i);\n\
     \    }\n\n    {\n      int l2 = l, r2 = r;\n      while (l < r) {\n        if\
     \ (l & 1) all_apply(l++, a);\n        if (r & 1) all_apply(--r, a);\n        l\
@@ -99,8 +99,8 @@ data:
     \    p += size;\n    if (!Monoid_A::commute)\n      for (int i = log; i >= 1;\
     \ i--) push(p >> i);\n    dat[p] = Lazy::act(dat[p], a);\n    for (int i = 1;\
     \ i <= log; i++) update(p >> i);\n  }\n\n  void apply(int l, int r, A a) {\n \
-    \   assert(0 <= l && l <= r && r <= n);\n    if (l == r) return;\n\n    l += size;\n\
-    \    r += size;\n\n    for (int i = log; i >= 1; i--) {\n      if (((l >> i) <<\
+    \   assert(0 <= l && l <= r && r <= n);\n    if (l == r) return;\n    l += size;\n\
+    \    r += size;\n    for (int i = log; i >= 1; i--) {\n      if (((l >> i) <<\
     \ i) != l) push(l >> i);\n      if (((r >> i) << i) != r) push((r - 1) >> i);\n\
     \    }\n\n    {\n      int l2 = l, r2 = r;\n      while (l < r) {\n        if\
     \ (l & 1) all_apply(l++, a);\n        if (r & 1) all_apply(--r, a);\n        l\
@@ -130,7 +130,7 @@ data:
   isVerificationFile: false
   path: ds/lazysegtree_fail.hpp
   requiredBy: []
-  timestamp: '2022-01-02 01:47:55+09:00'
+  timestamp: '2022-01-02 03:25:27+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/datastructure/range_chmin_chmax_add_range_sum.test.cpp
