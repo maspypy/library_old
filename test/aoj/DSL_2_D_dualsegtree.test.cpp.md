@@ -1,15 +1,12 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
-    path: algebra/group_add.hpp
-    title: algebra/group_add.hpp
   - icon: ':heavy_check_mark:'
-    path: ds/fenwick.hpp
-    title: ds/fenwick.hpp
+    path: algebra/monoid_set.hpp
+    title: algebra/monoid_set.hpp
   - icon: ':heavy_check_mark:'
-    path: ds/fenwickraq.hpp
-    title: ds/fenwickraq.hpp
+    path: ds/dualsegtree.hpp
+    title: ds/dualsegtree.hpp
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
@@ -20,11 +17,11 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E
+    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D
     links:
-    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E
-  bundledCode: "#line 1 \"test/aoj/DSL_2_E_fenwick_raq.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E\"\r\n#line\
+    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D
+  bundledCode: "#line 1 \"test/aoj/DSL_2_D_dualsegtree.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D\"\r\n#line\
     \ 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\n\
     using ll = long long;\nusing ll8 = __int128;\nusing ld = long double;\nusing pi\
     \ = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint = unsigned int;\nusing ull\
@@ -107,75 +104,58 @@ data:
     }\n\n#define SUM(v) accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n\
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
-    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 2 \"algebra/group_add.hpp\"\
-    \ntemplate <class X, X ZERO = X(0)>\r\nstruct AddGroup {\r\n  using value_type\
-    \ = X;\r\n  static constexpr X op(const X &x, const X &y) noexcept { return x\
-    \ + y; }\r\n  static constexpr X inverse(const X &x) noexcept { return -x; }\r\
-    \n  static constexpr X power(const X &x, ll n) noexcept { return n * x; }\r\n\
-    \  static constexpr X unit = ZERO;\r\n  static constexpr bool commute = true;\r\
-    \n};\r\n#line 3 \"ds/fenwick.hpp\"\n\ntemplate <typename AbelGroup>\nstruct FenwickTree\
-    \ {\n  using E = typename AbelGroup::value_type;\n  int n;\n  vector<E> dat;\n\
-    \  E total;\n\n  FenwickTree() : FenwickTree(0) {}\n  FenwickTree(int n) : n(n),\
-    \ total(AbelGroup::unit) {\n    assert(AbelGroup::commute);\n    dat.assign(n,\
-    \ AbelGroup::unit);\n  }\n  FenwickTree(vc<E> v) : n(len(v)), total(AbelGroup::unit)\
-    \ {\n    assert(AbelGroup::commute);\n    dat = v;\n    FOR3(i, 1, n + 1) {\n\
-    \      int j = i + (i & -i);\n      if (j <= n) dat[j - 1] = AbelGroup::op(dat[i\
-    \ - 1], dat[j - 1]);\n    }\n  }\n\n  E sum(int k) {\n    E ret = AbelGroup::unit;\n\
-    \    for (; k > 0; k -= k & -k) ret = AbelGroup::op(ret, dat[k - 1]);\n    return\
-    \ ret;\n  }\n\n  E sum(int L, int R) {\n    E pos = AbelGroup::unit;\n    while\
-    \ (L < R) {\n      pos = AbelGroup::op(pos, dat[R - 1]);\n      R -= R & -R;\n\
-    \    }\n    E neg = AbelGroup::unit;\n    while (R < L) {\n      neg = AbelGroup::op(neg,\
-    \ dat[L - 1]);\n      L -= L & -L;\n    }\n    return AbelGroup::op(pos, AbelGroup::inverse(neg));\n\
-    \  }\n\n  E sum_all() { return total; }\n\n  void add(int k, E x) {\n    total\
-    \ = AbelGroup::op(total, x);\n    for (++k; k <= n; k += k & -k) dat[k - 1] =\
-    \ AbelGroup::op(dat[k - 1], x);\n  }\n\n  template <class F>\n  int max_right(F&\
-    \ check) {\n    assert(f(E(0)));\n    ll i = 0;\n    E s = AbelGroup::unit;\n\
-    \    int k = 1;\n    int N = len(dat) + 1;\n    while (2 * k < N) k *= 2;\n  \
-    \  while (k) {\n      if (i + k < N && check(AbelGroup::op(s, dat[i + k - 1])))\
-    \ {\n        i += k;\n        s = AbelGroup::op(s, dat[i - 1]);\n      }\n   \
-    \   k >>= 1;\n    }\n    return i;\n  }\n\n  int find_kth_element(E k) {\n   \
-    \ auto check = [&](E x) -> bool { return x < k; };\n    return max_right(check);\n\
-    \  }\n\n  void debug() { print(\"fenwick\", dat); }\n};\n#line 2 \"ds/fenwickraq.hpp\"\
-    \ntemplate <typename AbelGroup>\r\nstruct FenwickRAQ {\r\n  using E = typename\
-    \ AbelGroup::value_type;\r\n  int n;\r\n  FenwickTree<AbelGroup> bit0;\r\n  FenwickTree<AbelGroup>\
-    \ bit1;\r\n\r\n  FenwickRAQ() : FenwickRAQ(0) {}\r\n  FenwickRAQ(int n) : n(n),\
-    \ bit0(n), bit1(n) {}\r\n  FenwickRAQ(vc<E> v) : n(len(v)), bit0(v), bit1(len(v))\
-    \ {}\r\n\r\n  void add(ll i, E val) { bit0.add(i, val); }\r\n\r\n  void add(ll\
-    \ L, ll R, E val) {\r\n    bit0.add(L, AbelGroup::power(val, -L));\r\n    bit0.add(R,\
-    \ AbelGroup::power(val, R));\r\n    bit1.add(L, val);\r\n    bit1.add(R, AbelGroup::inverse(val));\r\
-    \n  }\r\n\r\n  E sum(ll L, ll R) {\r\n    E sum_R = AbelGroup::op(AbelGroup::power(bit1.sum(R),\
-    \ R), bit0.sum(R));\r\n    E sum_L = AbelGroup::op(AbelGroup::power(bit1.sum(L),\
-    \ L), bit0.sum(L));\r\n    return AbelGroup::op(AbelGroup::inverse(sum_L), sum_R);\r\
-    \n  }\r\n};\r\n#line 4 \"test/aoj/DSL_2_E_fenwick_raq.test.cpp\"\n\r\nvoid solve()\
-    \ {\r\n  LL(N, Q);\r\n  FenwickRAQ<AddGroup<ll>> bit(N);\r\n  FOR(_, Q) {\r\n\
-    \    LL(t);\r\n    if (t == 0) {\r\n      LL(L, R, x);\r\n      bit.add(--L, R,\
-    \ x);\r\n    } else {\r\n      LL(L);\r\n      print(bit.sum(L - 1, L));\r\n \
-    \   }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 2 \"ds/dualsegtree.hpp\"\
+    \n\ntemplate <typename Monoid>\nstruct DualSegTree {\n  using A = typename Monoid::value_type;\n\
+    \  int n, log, size;\n  vc<A> laz;\n\n  DualSegTree() : DualSegTree(0) {}\n  DualSegTree(int\
+    \ n) : n(n) {\n    log = 1;\n    while ((1 << log) < n) ++log;\n    size = 1 <<\
+    \ log;\n    laz.assign(size << 1, Monoid::unit);\n  }\n\n  void all_apply(int\
+    \ k, A a) { laz[k] = Monoid::op(laz[k], a); }\n\n  void push(int k) {\n    all_apply(2\
+    \ * k, laz[k]);\n    all_apply(2 * k + 1, laz[k]);\n    laz[k] = Monoid::unit;\n\
+    \  }\n\n  A get(int p) {\n    assert(0 <= p && p < n);\n    p += size;\n    for\
+    \ (int i = log; i >= 1; i--) push(p >> i);\n    return laz[p];\n  }\n\n  vc<A>\
+    \ get_all() {\n    FOR(i, size) push(i);\n    return {laz.begin() + size, laz.begin()\
+    \ + size + n};\n  }\n\n  void apply(int l, int r, A a) {\n    assert(0 <= l &&\
+    \ l <= r && r <= n);\n    if (l == r) return;\n\n    l += size;\n    r += size;\n\
+    \n    if (!Monoid::commute) {\n      for (int i = log; i >= 1; i--) {\n      \
+    \  if (((l >> i) << i) != l) push(l >> i);\n        if (((r >> i) << i) != r)\
+    \ push((r - 1) >> i);\n      }\n    }\n\n    {\n      int l2 = l, r2 = r;\n  \
+    \    while (l < r) {\n        if (l & 1) all_apply(l++, a);\n        if (r & 1)\
+    \ all_apply(--r, a);\n        l >>= 1;\n        r >>= 1;\n      }\n      l = l2;\n\
+    \      r = r2;\n    }\n  }\n  void debug() { print(\"dualsegtree getall:\", get_all());\
+    \ }\n};\n#line 1 \"algebra/monoid_set.hpp\"\ntemplate <typename E, E none_val\
+    \ = E(-1)>\r\nstruct SetMonoid {\r\n  using value_type = E;\r\n  using X = value_type;\r\
+    \n  static X op(X x, X y) { return (y == none_val ? x : y); }\r\n  static constexpr\
+    \ X unit = none_val;\r\n  static constexpr bool commute = false;\r\n};\n#line\
+    \ 5 \"test/aoj/DSL_2_D_dualsegtree.test.cpp\"\n\r\nvoid solve() {\r\n  using Mono\
+    \ = SetMonoid<ll, (1LL << 31) - 1>;\r\n  LL(N, Q);\r\n  DualSegTree<Mono> seg(N);\r\
+    \n  FOR(_, Q) {\r\n    LL(t);\r\n    if (t == 0) {\r\n      LL(L, R, x);\r\n \
+    \     seg.apply(L, ++R, x);\r\n    } else {\r\n      LL(i);\r\n      print(seg.get(i));\r\
+    \n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
     \n  cout << setprecision(15);\r\n\r\n  ll T = 1;\r\n  // LL(T);\r\n  FOR(_, T)\
     \ solve();\r\n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E\"\
-    \r\n#include \"my_template.hpp\"\r\n#include \"ds/fenwickraq.hpp\"\r\n\r\nvoid\
-    \ solve() {\r\n  LL(N, Q);\r\n  FenwickRAQ<AddGroup<ll>> bit(N);\r\n  FOR(_, Q)\
-    \ {\r\n    LL(t);\r\n    if (t == 0) {\r\n      LL(L, R, x);\r\n      bit.add(--L,\
-    \ R, x);\r\n    } else {\r\n      LL(L);\r\n      print(bit.sum(L - 1, L));\r\n\
-    \    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+  code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D\"\
+    \r\n#include \"my_template.hpp\"\r\n#include \"ds/dualsegtree.hpp\"\r\n#include\
+    \ \"algebra/monoid_set.hpp\"\r\n\r\nvoid solve() {\r\n  using Mono = SetMonoid<ll,\
+    \ (1LL << 31) - 1>;\r\n  LL(N, Q);\r\n  DualSegTree<Mono> seg(N);\r\n  FOR(_,\
+    \ Q) {\r\n    LL(t);\r\n    if (t == 0) {\r\n      LL(L, R, x);\r\n      seg.apply(L,\
+    \ ++R, x);\r\n    } else {\r\n      LL(i);\r\n      print(seg.get(i));\r\n   \
+    \ }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
     \n  cout << setprecision(15);\r\n\r\n  ll T = 1;\r\n  // LL(T);\r\n  FOR(_, T)\
     \ solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
-  - ds/fenwickraq.hpp
-  - ds/fenwick.hpp
-  - algebra/group_add.hpp
+  - ds/dualsegtree.hpp
+  - algebra/monoid_set.hpp
   isVerificationFile: true
-  path: test/aoj/DSL_2_E_fenwick_raq.test.cpp
+  path: test/aoj/DSL_2_D_dualsegtree.test.cpp
   requiredBy: []
-  timestamp: '2022-01-01 19:42:01+09:00'
+  timestamp: '2022-01-01 20:04:54+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/aoj/DSL_2_E_fenwick_raq.test.cpp
+documentation_of: test/aoj/DSL_2_D_dualsegtree.test.cpp
 layout: document
 redirect_from:
-- /verify/test/aoj/DSL_2_E_fenwick_raq.test.cpp
-- /verify/test/aoj/DSL_2_E_fenwick_raq.test.cpp.html
-title: test/aoj/DSL_2_E_fenwick_raq.test.cpp
+- /verify/test/aoj/DSL_2_D_dualsegtree.test.cpp
+- /verify/test/aoj/DSL_2_D_dualsegtree.test.cpp.html
+title: test/aoj/DSL_2_D_dualsegtree.test.cpp
 ---

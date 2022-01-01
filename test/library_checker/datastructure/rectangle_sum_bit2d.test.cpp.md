@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
+    path: algebra/group_add.hpp
+    title: algebra/group_add.hpp
+  - icon: ':heavy_check_mark:'
     path: ds/fenwick2d.hpp
     title: ds/fenwick2d.hpp
   - icon: ':question:'
@@ -9,9 +12,9 @@ data:
     title: my_template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/rectangle_sum
@@ -102,17 +105,23 @@ data:
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
     \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 4 \"test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp\"\
-    \n\n#line 1 \"ds/fenwick2d.hpp\"\ntemplate <typename AbelGroup, bool SMALL = false>\r\
-    \nstruct Fenwick2D {\r\n  using E = typename AbelGroup::value_type;\r\n  int N;\r\
-    \n  vi keyX;\r\n  int min_X;\r\n  vc<int> indptr;\r\n  vi keyY;\r\n  vc<E> dat;\r\
-    \n\r\n  Fenwick2D(vi& X, vi& Y, vc<E>& wt) { build(X, Y, wt); }\r\n\r\n  Fenwick2D(vi&\
-    \ X, vi& Y) {\r\n    vc<E> wt(len(X), AbelGroup::unit);\r\n    build(X, Y, wt);\r\
-    \n  }\r\n\r\n  inline int xtoi(int x) {\r\n    return (SMALL ? clamp(x - min_X,\
-    \ 0, N) : LB(keyX, x));\r\n  }\r\n\r\n  inline int nxt(int i) {\r\n    i += 1;\r\
-    \n    return i + (i & -i) - 1;\r\n  }\r\n\r\n  inline int prev(int i) {\r\n  \
-    \  i += 1;\r\n    return i - (i & -i) - 1;\r\n  }\r\n\r\n  void build(vi& X, vi&\
-    \ Y, vc<E>& wt) {\r\n    if (!SMALL) {\r\n      keyX = X;\r\n      UNIQUE(keyX);\r\
-    \n      N = len(keyX);\r\n    } else {\r\n      min_X = (len(X) == 0 ? 0 : MIN(X));\r\
+    \n\n#line 2 \"algebra/group_add.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\nstruct\
+    \ AddGroup {\r\n  using value_type = X;\r\n  static constexpr X op(const X &x,\
+    \ const X &y) noexcept { return x + y; }\r\n  static constexpr X inverse(const\
+    \ X &x) noexcept { return -x; }\r\n  static constexpr X power(const X &x, ll n)\
+    \ noexcept { return n * x; }\r\n  static constexpr X unit = ZERO;\r\n  static\
+    \ constexpr bool commute = true;\r\n};\r\n#line 2 \"ds/fenwick2d.hpp\"\ntemplate\
+    \ <typename AbelGroup, bool SMALL = false>\r\nstruct Fenwick2D {\r\n  using E\
+    \ = typename AbelGroup::value_type;\r\n  int N;\r\n  vi keyX;\r\n  int min_X;\r\
+    \n  vc<int> indptr;\r\n  vi keyY;\r\n  vc<E> dat;\r\n\r\n  Fenwick2D(vi& X, vi&\
+    \ Y, vc<E>& wt) { build(X, Y, wt); }\r\n\r\n  Fenwick2D(vi& X, vi& Y) {\r\n  \
+    \  vc<E> wt(len(X), AbelGroup::unit);\r\n    build(X, Y, wt);\r\n  }\r\n\r\n \
+    \ inline int xtoi(int x) {\r\n    return (SMALL ? clamp(x - min_X, 0, N) : LB(keyX,\
+    \ x));\r\n  }\r\n\r\n  inline int nxt(int i) {\r\n    i += 1;\r\n    return i\
+    \ + (i & -i) - 1;\r\n  }\r\n\r\n  inline int prev(int i) {\r\n    i += 1;\r\n\
+    \    return i - (i & -i) - 1;\r\n  }\r\n\r\n  void build(vi& X, vi& Y, vc<E>&\
+    \ wt) {\r\n    if (!SMALL) {\r\n      keyX = X;\r\n      UNIQUE(keyX);\r\n   \
+    \   N = len(keyX);\r\n    } else {\r\n      min_X = (len(X) == 0 ? 0 : MIN(X));\r\
     \n      N = (len(X) == 0 ? 0 : MAX(X)) - min_X + 1;\r\n      keyX.resize(N);\r\
     \n      FOR(i, N) keyX[i] = min_X + i;\r\n    }\r\n\r\n    vc<vi> keyY_raw(N);\r\
     \n    vc<vc<E>> dat_raw(N);\r\n\r\n    auto I = argsort(Y);\r\n    for (auto&&\
@@ -164,11 +173,12 @@ data:
   dependsOn:
   - my_template.hpp
   - ds/fenwick2d.hpp
+  - algebra/group_add.hpp
   isVerificationFile: true
   path: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
   requiredBy: []
-  timestamp: '2022-01-01 19:45:42+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-01-01 20:06:13+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
 layout: document
