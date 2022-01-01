@@ -1,35 +1,35 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algebra/group_affine.hpp
     title: algebra/group_affine.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: algebra/monoid_reverse.hpp
     title: algebra/monoid_reverse.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/hld.hpp
     title: graph/hld.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/treemonoid.hpp
     title: graph/treemonoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_set_path_composite
@@ -120,7 +120,7 @@ data:
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
     \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 4 \"test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp\"\
-    \n\n#line 1 \"algebra/group_affine.hpp\"\ntemplate <typename K>\nstruct AffineGroup\
+    \n\n#line 1 \"algebra/group_affine.hpp\"\ntemplate <typename K>\nstruct Group_Affine\
     \ {\n  using F = pair<K, K>;\n  using value_type = F;\n  static constexpr F op(const\
     \ F &x, const F &y) noexcept {\n    return F({x.fi * y.fi, x.se * y.fi + y.se});\n\
     \  }\n  static constexpr F inverse(const F &x) {\n    auto [a, b] = x;\n    a\
@@ -258,7 +258,7 @@ data:
     \u9593\u3002\");\r\n    print(\"\u6728\u306E\u554F\u984C\u3067\u306F\u771F\u3063\
     \u5148\u306B\u3053\u308C\u3092\u4F5C\u308B\u3002\");\r\n    print(\"\u2192 \u6728\
     DP\u3084\u6728\u30AF\u30A8\u30EA\u306B\u6D3E\u751F\u3002\");\r\n  }\r\n};\r\n\
-    #line 1 \"algebra/monoid_reverse.hpp\"\ntemplate <class Monoid>\r\nstruct ReverseMonoid\
+    #line 1 \"algebra/monoid_reverse.hpp\"\ntemplate <class Monoid>\r\nstruct Monoid_Reverse\
     \ {\r\n  using value_type = typename Monoid::value_type;\r\n  using X = value_type;\r\
     \n  static constexpr X op(const X &x, const X &y) { return Monoid::op(y, x); }\r\
     \n  static constexpr X unit = Monoid::unit;\r\n  static const bool commute = Monoid::commute;\r\
@@ -295,7 +295,7 @@ data:
     \u3002\");\r\n    print(\"\u90E8\u5206\u6728\u30AF\u30A8\u30EA O(logN) \u6642\u9593\
     \u3001\u30D1\u30B9\u30AF\u30A8\u30EA O(log^2N) \u6642\u9593\u3002\");\r\n  }\r\
     \n};\r\n#line 8 \"test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp\"\
-    \n\nusing mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using Mono = AffineGroup<mint>;\n\
+    \n\nusing mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using Mono = Group_Affine<mint>;\n\
     \  using E = pair<mint, mint>;\n  vc<E> A(N);\n  FOR(i, N) {\n    LL(a, b);\n\
     \    A[i] = E({a, b});\n  }\n\n  Graph<int> G(N);\n  FOR(_, N - 1) {\n    LL(a,\
     \ b);\n    G.add(a, b);\n  }\n  G.prepare();\n\n  HLD hld(G);\n  TreeMonoid<decltype(hld),\
@@ -307,7 +307,7 @@ data:
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_set_path_composite\"\
     \n\n#include \"my_template.hpp\"\n\n#include \"algebra/group_affine.hpp\"\n#include\
     \ \"mod/modint.hpp\"\n#include \"graph/treemonoid.hpp\"\n\nusing mint = modint998;\n\
-    \nvoid solve() {\n  LL(N, Q);\n  using Mono = AffineGroup<mint>;\n  using E =\
+    \nvoid solve() {\n  LL(N, Q);\n  using Mono = Group_Affine<mint>;\n  using E =\
     \ pair<mint, mint>;\n  vc<E> A(N);\n  FOR(i, N) {\n    LL(a, b);\n    A[i] = E({a,\
     \ b});\n  }\n\n  Graph<int> G(N);\n  FOR(_, N - 1) {\n    LL(a, b);\n    G.add(a,\
     \ b);\n  }\n  G.prepare();\n\n  HLD hld(G);\n  TreeMonoid<decltype(hld), Mono,\
@@ -328,8 +328,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   requiredBy: []
-  timestamp: '2022-01-01 20:29:17+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-01 23:37:45+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
 layout: document

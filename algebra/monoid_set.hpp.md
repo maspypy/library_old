@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: algebra/lazy_cntsum_set.hpp
+    title: algebra/lazy_cntsum_set.hpp
+  - icon: ':warning:'
     path: algebra/lazy_max_set.hpp
     title: algebra/lazy_max_set.hpp
   - icon: ':heavy_check_mark:'
@@ -21,10 +24,10 @@ data:
   attributes:
     links: []
   bundledCode: "#line 1 \"algebra/monoid_set.hpp\"\ntemplate <typename E, E none_val\
-    \ = E(-1)>\r\nstruct SetMonoid {\r\n  using value_type = E;\r\n  using X = value_type;\r\
+    \ = E(-1)>\r\nstruct Monoid_Set {\r\n  using value_type = E;\r\n  using X = value_type;\r\
     \n  static X op(X x, X y) { return (y == none_val ? x : y); }\r\n  static constexpr\
     \ X unit = none_val;\r\n  static constexpr bool commute = false;\r\n};\n"
-  code: "template <typename E, E none_val = E(-1)>\r\nstruct SetMonoid {\r\n  using\
+  code: "template <typename E, E none_val = E(-1)>\r\nstruct Monoid_Set {\r\n  using\
     \ value_type = E;\r\n  using X = value_type;\r\n  static X op(X x, X y) { return\
     \ (y == none_val ? x : y); }\r\n  static constexpr X unit = none_val;\r\n  static\
     \ constexpr bool commute = false;\r\n};"
@@ -32,9 +35,10 @@ data:
   isVerificationFile: false
   path: algebra/monoid_set.hpp
   requiredBy:
+  - algebra/lazy_cntsum_set.hpp
   - algebra/lazy_max_set.hpp
   - algebra/lazy_min_set.hpp
-  timestamp: '2022-01-01 20:04:54+09:00'
+  timestamp: '2022-01-01 23:37:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DSL_2_D_dualsegtree.test.cpp

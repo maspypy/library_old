@@ -15,11 +15,11 @@ data:
   attributes:
     links: []
   bundledCode: "#line 1 \"algebra/group_mul.hpp\"\ntemplate <class X, X ONE = X(1)>\r\
-    \nstruct MulGroup {\r\n  using value_type = X;\r\n  static constexpr X op(const\
+    \nstruct Group_Mul {\r\n  using value_type = X;\r\n  static constexpr X op(const\
     \ X &x, const X &y) noexcept { return x * y; }\r\n  static constexpr X inverse(const\
     \ X &x) noexcept { return X(1) / x; }\r\n  static constexpr X unit = ONE;\r\n\
     \  static constexpr bool commute = true;\r\n};\r\n"
-  code: "template <class X, X ONE = X(1)>\r\nstruct MulGroup {\r\n  using value_type\
+  code: "template <class X, X ONE = X(1)>\r\nstruct Group_Mul {\r\n  using value_type\
     \ = X;\r\n  static constexpr X op(const X &x, const X &y) noexcept { return x\
     \ * y; }\r\n  static constexpr X inverse(const X &x) noexcept { return X(1) /\
     \ x; }\r\n  static constexpr X unit = ONE;\r\n  static constexpr bool commute\
@@ -29,7 +29,7 @@ data:
   path: algebra/group_mul.hpp
   requiredBy:
   - algebra/lazy_add_mul.hpp
-  timestamp: '2022-01-01 19:42:01+09:00'
+  timestamp: '2022-01-01 23:37:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/899_bfsnumbering.test.cpp

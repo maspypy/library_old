@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algebra/group_add.hpp
     title: algebra/group_add.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ds/fenwick.hpp
     title: ds/fenwick.hpp
   - icon: ':heavy_check_mark:'
     path: ds/fenwickraq.hpp
     title: ds/fenwickraq.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
@@ -108,7 +108,7 @@ data:
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
     \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 2 \"algebra/group_add.hpp\"\
-    \ntemplate <class X, X ZERO = X(0)>\r\nstruct AddGroup {\r\n  using value_type\
+    \ntemplate <class X, X ZERO = X(0)>\r\nstruct Group_Add {\r\n  using value_type\
     \ = X;\r\n  static constexpr X op(const X &x, const X &y) noexcept { return x\
     \ + y; }\r\n  static constexpr X inverse(const X &x) noexcept { return -x; }\r\
     \n  static constexpr X power(const X &x, ll n) noexcept { return n * x; }\r\n\
@@ -147,7 +147,7 @@ data:
     \ R), bit0.sum(R));\r\n    E sum_L = AbelGroup::op(AbelGroup::power(bit1.sum(L),\
     \ L), bit0.sum(L));\r\n    return AbelGroup::op(AbelGroup::inverse(sum_L), sum_R);\r\
     \n  }\r\n};\r\n#line 4 \"test/aoj/DSL_2_E_fenwick_raq.test.cpp\"\n\r\nvoid solve()\
-    \ {\r\n  LL(N, Q);\r\n  FenwickRAQ<AddGroup<ll>> bit(N);\r\n  FOR(_, Q) {\r\n\
+    \ {\r\n  LL(N, Q);\r\n  FenwickRAQ<Group_Add<ll>> bit(N);\r\n  FOR(_, Q) {\r\n\
     \    LL(t);\r\n    if (t == 0) {\r\n      LL(L, R, x);\r\n      bit.add(--L, R,\
     \ x);\r\n    } else {\r\n      LL(L);\r\n      print(bit.sum(L - 1, L));\r\n \
     \   }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
@@ -155,8 +155,8 @@ data:
     \ solve();\r\n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E\"\
     \r\n#include \"my_template.hpp\"\r\n#include \"ds/fenwickraq.hpp\"\r\n\r\nvoid\
-    \ solve() {\r\n  LL(N, Q);\r\n  FenwickRAQ<AddGroup<ll>> bit(N);\r\n  FOR(_, Q)\
-    \ {\r\n    LL(t);\r\n    if (t == 0) {\r\n      LL(L, R, x);\r\n      bit.add(--L,\
+    \ solve() {\r\n  LL(N, Q);\r\n  FenwickRAQ<Group_Add<ll>> bit(N);\r\n  FOR(_,\
+    \ Q) {\r\n    LL(t);\r\n    if (t == 0) {\r\n      LL(L, R, x);\r\n      bit.add(--L,\
     \ R, x);\r\n    } else {\r\n      LL(L);\r\n      print(bit.sum(L - 1, L));\r\n\
     \    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
     \n  cout << setprecision(15);\r\n\r\n  ll T = 1;\r\n  // LL(T);\r\n  FOR(_, T)\
@@ -169,7 +169,7 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_E_fenwick_raq.test.cpp
   requiredBy: []
-  timestamp: '2022-01-01 19:42:01+09:00'
+  timestamp: '2022-01-01 23:37:45+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_E_fenwick_raq.test.cpp

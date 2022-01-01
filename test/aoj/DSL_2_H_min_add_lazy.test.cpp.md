@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algebra/group_add.hpp
     title: algebra/group_add.hpp
   - icon: ':heavy_check_mark:'
@@ -13,7 +13,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: ds/lazysegtree.hpp
     title: ds/lazysegtree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
@@ -111,16 +111,16 @@ data:
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
     \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 2 \"algebra/group_add.hpp\"\
-    \ntemplate <class X, X ZERO = X(0)>\r\nstruct AddGroup {\r\n  using value_type\
+    \ntemplate <class X, X ZERO = X(0)>\r\nstruct Group_Add {\r\n  using value_type\
     \ = X;\r\n  static constexpr X op(const X &x, const X &y) noexcept { return x\
     \ + y; }\r\n  static constexpr X inverse(const X &x) noexcept { return -x; }\r\
     \n  static constexpr X power(const X &x, ll n) noexcept { return n * x; }\r\n\
     \  static constexpr X unit = ZERO;\r\n  static constexpr bool commute = true;\r\
     \n};\r\n#line 1 \"algebra/monoid_min.hpp\"\ntemplate <class X, X INF>\r\nstruct\
-    \ MinMonoid {\r\n  using value_type = X;\r\n  static constexpr X op(const X &x,\
+    \ Monoid_Min {\r\n  using value_type = X;\r\n  static constexpr X op(const X &x,\
     \ const X &y) noexcept { return min(x, y); }\r\n  static constexpr X unit = INF;\r\
     \n};\r\n#line 3 \"algebra/lazy_min_add.hpp\"\n\r\ntemplate <typename E, E INF>\r\
-    \nstruct Min_Add_Lazy {\r\n  using MX = MinMonoid<E, INF>;\r\n  using MA = AddGroup<E>;\r\
+    \nstruct Lazy_Min_Add {\r\n  using MX = Monoid_Min<E, INF>;\r\n  using MA = Group_Add<E>;\r\
     \n  using X_structure = MX;\r\n  using A_structure = MA;\r\n  using X = typename\
     \ MX::value_type;\r\n  using A = typename MA::value_type;\r\n  static constexpr\
     \ X act(const X &x, const A &a) { \r\n    return min(MX::unit, x + a);\r\n  }\r\
@@ -179,7 +179,7 @@ data:
     \      }\n        }\n        return r + 1 - size;\n      }\n      sm = Monoid_X::op(dat[r],\
     \ sm);\n    } while ((r & -r) != r);\n    return 0;\n  }\n\n  void debug() { print(\"\
     lazysegtree getall:\", get_all()); }\n};\n#line 6 \"test/aoj/DSL_2_H_min_add_lazy.test.cpp\"\
-    \n\r\nvoid solve() {\r\n  using Lazy = Min_Add_Lazy<ll, 1LL << 60>;\r\n  LL(N,\
+    \n\r\nvoid solve() {\r\n  using Lazy = Lazy_Min_Add<ll, 1LL << 60>;\r\n  LL(N,\
     \ Q);\r\n  vi A(N);\r\n  LazySegTree<Lazy> seg(A);\r\n  FOR(_, Q) {\r\n    LL(t,\
     \ L, R);\r\n    ++R;\r\n    if (t == 0) {\r\n      LL(x);\r\n      seg.apply(L,\
     \ R, x);\r\n    } else {\r\n      print(seg.prod(L, R));\r\n    }\r\n  }\r\n}\r\
@@ -188,7 +188,7 @@ data:
     \ solve();\r\n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H\"\
     \r\n\r\n#include \"my_template.hpp\"\r\n#include \"algebra/lazy_min_add.hpp\"\r\
-    \n#include \"ds/lazysegtree.hpp\"\r\n\r\nvoid solve() {\r\n  using Lazy = Min_Add_Lazy<ll,\
+    \n#include \"ds/lazysegtree.hpp\"\r\n\r\nvoid solve() {\r\n  using Lazy = Lazy_Min_Add<ll,\
     \ 1LL << 60>;\r\n  LL(N, Q);\r\n  vi A(N);\r\n  LazySegTree<Lazy> seg(A);\r\n\
     \  FOR(_, Q) {\r\n    LL(t, L, R);\r\n    ++R;\r\n    if (t == 0) {\r\n      LL(x);\r\
     \n      seg.apply(L, R, x);\r\n    } else {\r\n      print(seg.prod(L, R));\r\n\
@@ -204,7 +204,7 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_H_min_add_lazy.test.cpp
   requiredBy: []
-  timestamp: '2022-01-01 20:29:17+09:00'
+  timestamp: '2022-01-01 23:37:45+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_H_min_add_lazy.test.cpp

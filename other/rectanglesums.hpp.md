@@ -1,24 +1,24 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algebra/group_add.hpp
     title: algebra/group_add.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ds/fenwick.hpp
     title: ds/fenwick.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
     title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"algebra/group_add.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\
-    \nstruct AddGroup {\r\n  using value_type = X;\r\n  static constexpr X op(const\
+    \nstruct Group_Add {\r\n  using value_type = X;\r\n  static constexpr X op(const\
     \ X &x, const X &y) noexcept { return x + y; }\r\n  static constexpr X inverse(const\
     \ X &x) noexcept { return -x; }\r\n  static constexpr X power(const X &x, ll n)\
     \ noexcept { return n * x; }\r\n  static constexpr X unit = ZERO;\r\n  static\
@@ -125,8 +125,8 @@ data:
   isVerificationFile: false
   path: other/rectanglesums.hpp
   requiredBy: []
-  timestamp: '2022-01-01 20:22:14+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-01-01 23:37:45+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
 documentation_of: other/rectanglesums.hpp

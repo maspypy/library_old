@@ -1,32 +1,32 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algebra/group_add.hpp
     title: algebra/group_add.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: algebra/group_reverse.hpp
     title: algebra/group_reverse.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/hld.hpp
     title: graph/hld.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/treegroup.hpp
     title: graph/treegroup.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_add_path_sum
@@ -118,7 +118,7 @@ data:
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
     \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp\"\
     \n\r\n#line 2 \"algebra/group_add.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\n\
-    struct AddGroup {\r\n  using value_type = X;\r\n  static constexpr X op(const\
+    struct Group_Add {\r\n  using value_type = X;\r\n  static constexpr X op(const\
     \ X &x, const X &y) noexcept { return x + y; }\r\n  static constexpr X inverse(const\
     \ X &x) noexcept { return -x; }\r\n  static constexpr X power(const X &x, ll n)\
     \ noexcept { return n * x; }\r\n  static constexpr X unit = ZERO;\r\n  static\
@@ -215,7 +215,7 @@ data:
     \u9593\u3002\");\r\n    print(\"\u6728\u306E\u554F\u984C\u3067\u306F\u771F\u3063\
     \u5148\u306B\u3053\u308C\u3092\u4F5C\u308B\u3002\");\r\n    print(\"\u2192 \u6728\
     DP\u3084\u6728\u30AF\u30A8\u30EA\u306B\u6D3E\u751F\u3002\");\r\n  }\r\n};\r\n\
-    #line 1 \"algebra/group_reverse.hpp\"\ntemplate <class Group>\r\nstruct ReverseGroup\
+    #line 1 \"algebra/group_reverse.hpp\"\ntemplate <class Group>\r\nstruct Group_Reverse\
     \ {\r\n  using value_type = typename Group::value_type;\r\n  using X = value_type;\r\
     \n  static constexpr X op(const X &x, const X &y) { return Group::op(y, x); }\r\
     \n  static constexpr X inverse(const X &x) { return Group::inverse(x); }\r\n \
@@ -268,7 +268,7 @@ data:
     \ \u6642\u9593\u3002\");\r\n  }\r\n};\n#line 7 \"test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp\"\
     \n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  VEC(ll, A, N);\r\n  Graph<int> G(N);\r\
     \n  FOR(_, N - 1) {\r\n    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n  G.prepare();\r\
-    \n\r\n  HLD<Graph<int>> hld(G);\r\n  using Group = AddGroup<ll>;\r\n  TreeGroup<decltype(hld),\
+    \n\r\n  HLD<Graph<int>> hld(G);\r\n  using Group = Group_Add<ll>;\r\n  TreeGroup<decltype(hld),\
     \ Group, false, true, false> TG(hld, A);\r\n\r\n  FOR(_, Q) {\r\n    LL(t);\r\n\
     \    if (t == 0) {\r\n      LL(v, x);\r\n      A[v] += x;\r\n      TG.set(v, A[v]);\r\
     \n    } else {\r\n      LL(u, v);\r\n      print(TG.prod_path(u, v));\r\n    }\r\
@@ -279,7 +279,7 @@ data:
     \ \"ds/segtree.hpp\"\r\n#include \"graph/treegroup.hpp\"\r\n\r\nvoid solve() {\r\
     \n  LL(N, Q);\r\n  VEC(ll, A, N);\r\n  Graph<int> G(N);\r\n  FOR(_, N - 1) {\r\
     \n    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n  G.prepare();\r\n\r\n  HLD<Graph<int>>\
-    \ hld(G);\r\n  using Group = AddGroup<ll>;\r\n  TreeGroup<decltype(hld), Group,\
+    \ hld(G);\r\n  using Group = Group_Add<ll>;\r\n  TreeGroup<decltype(hld), Group,\
     \ false, true, false> TG(hld, A);\r\n\r\n  FOR(_, Q) {\r\n    LL(t);\r\n    if\
     \ (t == 0) {\r\n      LL(v, x);\r\n      A[v] += x;\r\n      TG.set(v, A[v]);\r\
     \n    } else {\r\n      LL(u, v);\r\n      print(TG.prod_path(u, v));\r\n    }\r\
@@ -296,8 +296,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
   requiredBy: []
-  timestamp: '2022-01-01 20:29:17+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-01 23:37:45+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
 layout: document

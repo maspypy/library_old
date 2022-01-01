@@ -4,10 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: algebra/monoid_min.hpp
     title: algebra/monoid_min.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
@@ -133,17 +133,17 @@ data:
     \    }\n        }\n        return R + 1 - size;\n      }\n      sm = Monoid::op(dat[R],\
     \ sm);\n    } while ((R & -R) != R);\n    return 0;\n  }\n\n  void debug() { print(\"\
     segtree\", dat); }\n};\n#line 1 \"algebra/monoid_min.hpp\"\ntemplate <class X,\
-    \ X INF>\r\nstruct MinMonoid {\r\n  using value_type = X;\r\n  static constexpr\
+    \ X INF>\r\nstruct Monoid_Min {\r\n  using value_type = X;\r\n  static constexpr\
     \ X op(const X &x, const X &y) noexcept { return min(x, y); }\r\n  static constexpr\
     \ X unit = INF;\r\n};\r\n#line 5 \"test/library_checker/datastructure/staticrmq_seg.test.cpp\"\
-    \n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  VEC(int, A, N);\r\n  using Mono = MinMonoid<int,\
+    \n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  VEC(int, A, N);\r\n  using Mono = Monoid_Min<int,\
     \ 1 << 30>;\r\n  SegTree<Mono> seg(A);\r\n  FOR(_, Q) {\r\n    LL(L, R);\r\n \
     \   print(seg.prod(L, R));\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
     \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
     \n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/staticrmq\"\r\n#include\
     \ \"my_template.hpp\"\r\n#include \"ds/segtree.hpp\"\r\n#include \"algebra/monoid_min.hpp\"\
-    \r\n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  VEC(int, A, N);\r\n  using Mono = MinMonoid<int,\
+    \r\n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  VEC(int, A, N);\r\n  using Mono = Monoid_Min<int,\
     \ 1 << 30>;\r\n  SegTree<Mono> seg(A);\r\n  FOR(_, Q) {\r\n    LL(L, R);\r\n \
     \   print(seg.prod(L, R));\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
     \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
@@ -155,7 +155,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/staticrmq_seg.test.cpp
   requiredBy: []
-  timestamp: '2022-01-01 19:45:42+09:00'
+  timestamp: '2022-01-01 23:37:45+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/staticrmq_seg.test.cpp

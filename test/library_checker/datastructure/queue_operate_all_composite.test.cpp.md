@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algebra/group_affine.hpp
     title: algebra/group_affine.hpp
   - icon: ':heavy_check_mark:'
     path: ds/swag.hpp
     title: ds/swag.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
@@ -108,7 +108,7 @@ data:
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
     \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/datastructure/queue_operate_all_composite.test.cpp\"\
-    \n\r\n#line 1 \"algebra/group_affine.hpp\"\ntemplate <typename K>\nstruct AffineGroup\
+    \n\r\n#line 1 \"algebra/group_affine.hpp\"\ntemplate <typename K>\nstruct Group_Affine\
     \ {\n  using F = pair<K, K>;\n  using value_type = F;\n  static constexpr F op(const\
     \ F &x, const F &y) noexcept {\n    return F({x.fi * y.fi, x.se * y.fi + y.se});\n\
     \  }\n  static constexpr F inverse(const F &x) {\n    auto [a, b] = x;\n    a\
@@ -164,7 +164,7 @@ data:
     \ i;\n      x *= inv(i + 1);\n    }\n    return x;\n  }\n};\n\nusing modint107\
     \ = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n#line 7 \"\
     test/library_checker/datastructure/queue_operate_all_composite.test.cpp\"\n\r\n\
-    using mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(Q);\r\n  using Mono = AffineGroup<mint>;\r\
+    using mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(Q);\r\n  using Mono = Group_Affine<mint>;\r\
     \n  using F = Mono::value_type;\r\n\r\n  SWAG<Mono> swag;\r\n\r\n  FOR(_, Q) {\r\
     \n    LL(t);\r\n    if (t == 0) {\r\n      LL(a, b);\r\n      swag.push(F({a,\
     \ b}));\r\n    }\r\n    elif (t == 1) { swag.pop(); }\r\n    elif (t == 2) {\r\
@@ -174,7 +174,7 @@ data:
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/queue_operate_all_composite\"\
     \r\n#include \"my_template.hpp\"\r\n\r\n#include \"algebra/group_affine.hpp\"\r\
     \n#include \"ds/swag.hpp\"\r\n#include \"mod/modint.hpp\"\r\n\r\nusing mint =\
-    \ modint998;\r\n\r\nvoid solve() {\r\n  LL(Q);\r\n  using Mono = AffineGroup<mint>;\r\
+    \ modint998;\r\n\r\nvoid solve() {\r\n  LL(Q);\r\n  using Mono = Group_Affine<mint>;\r\
     \n  using F = Mono::value_type;\r\n\r\n  SWAG<Mono> swag;\r\n\r\n  FOR(_, Q) {\r\
     \n    LL(t);\r\n    if (t == 0) {\r\n      LL(a, b);\r\n      swag.push(F({a,\
     \ b}));\r\n    }\r\n    elif (t == 1) { swag.pop(); }\r\n    elif (t == 2) {\r\
@@ -189,7 +189,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
   requiredBy: []
-  timestamp: '2022-01-01 19:45:42+09:00'
+  timestamp: '2022-01-01 23:37:45+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/queue_operate_all_composite.test.cpp

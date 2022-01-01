@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: ds/dualsegtree.hpp
     title: ds/dualsegtree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
@@ -123,11 +123,11 @@ data:
     \ all_apply(--r, a);\n        l >>= 1;\n        r >>= 1;\n      }\n      l = l2;\n\
     \      r = r2;\n    }\n  }\n  void debug() { print(\"dualsegtree getall:\", get_all());\
     \ }\n};\n#line 1 \"algebra/monoid_set.hpp\"\ntemplate <typename E, E none_val\
-    \ = E(-1)>\r\nstruct SetMonoid {\r\n  using value_type = E;\r\n  using X = value_type;\r\
+    \ = E(-1)>\r\nstruct Monoid_Set {\r\n  using value_type = E;\r\n  using X = value_type;\r\
     \n  static X op(X x, X y) { return (y == none_val ? x : y); }\r\n  static constexpr\
     \ X unit = none_val;\r\n  static constexpr bool commute = false;\r\n};\n#line\
     \ 5 \"test/aoj/DSL_2_D_dualsegtree.test.cpp\"\n\r\nvoid solve() {\r\n  using Mono\
-    \ = SetMonoid<ll, (1LL << 31) - 1>;\r\n  LL(N, Q);\r\n  DualSegTree<Mono> seg(N);\r\
+    \ = Monoid_Set<ll, (1LL << 31) - 1>;\r\n  LL(N, Q);\r\n  DualSegTree<Mono> seg(N);\r\
     \n  FOR(_, Q) {\r\n    LL(t);\r\n    if (t == 0) {\r\n      LL(L, R, x);\r\n \
     \     seg.apply(L, ++R, x);\r\n    } else {\r\n      LL(i);\r\n      print(seg.get(i));\r\
     \n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
@@ -135,7 +135,7 @@ data:
     \ solve();\r\n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D\"\
     \r\n#include \"my_template.hpp\"\r\n#include \"ds/dualsegtree.hpp\"\r\n#include\
-    \ \"algebra/monoid_set.hpp\"\r\n\r\nvoid solve() {\r\n  using Mono = SetMonoid<ll,\
+    \ \"algebra/monoid_set.hpp\"\r\n\r\nvoid solve() {\r\n  using Mono = Monoid_Set<ll,\
     \ (1LL << 31) - 1>;\r\n  LL(N, Q);\r\n  DualSegTree<Mono> seg(N);\r\n  FOR(_,\
     \ Q) {\r\n    LL(t);\r\n    if (t == 0) {\r\n      LL(L, R, x);\r\n      seg.apply(L,\
     \ ++R, x);\r\n    } else {\r\n      LL(i);\r\n      print(seg.get(i));\r\n   \
@@ -149,7 +149,7 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_D_dualsegtree.test.cpp
   requiredBy: []
-  timestamp: '2022-01-01 20:04:54+09:00'
+  timestamp: '2022-01-01 23:37:45+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_D_dualsegtree.test.cpp

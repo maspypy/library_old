@@ -5,31 +5,31 @@ data:
   - icon: ':warning:'
     path: algebra/lazy_reverse.hpp
     title: algebra/lazy_reverse.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/treemonoid.hpp
     title: graph/treemonoid.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
     title: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
     title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
     title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 1 \"algebra/monoid_reverse.hpp\"\ntemplate <class Monoid>\r\n\
-    struct ReverseMonoid {\r\n  using value_type = typename Monoid::value_type;\r\n\
-    \  using X = value_type;\r\n  static constexpr X op(const X &x, const X &y) {\
+    struct Monoid_Reverse {\r\n  using value_type = typename Monoid::value_type;\r\
+    \n  using X = value_type;\r\n  static constexpr X op(const X &x, const X &y) {\
     \ return Monoid::op(y, x); }\r\n  static constexpr X unit = Monoid::unit;\r\n\
     \  static const bool commute = Monoid::commute;\r\n};\r\n"
-  code: "template <class Monoid>\r\nstruct ReverseMonoid {\r\n  using value_type =\
-    \ typename Monoid::value_type;\r\n  using X = value_type;\r\n  static constexpr\
+  code: "template <class Monoid>\r\nstruct Monoid_Reverse {\r\n  using value_type\
+    \ = typename Monoid::value_type;\r\n  using X = value_type;\r\n  static constexpr\
     \ X op(const X &x, const X &y) { return Monoid::op(y, x); }\r\n  static constexpr\
     \ X unit = Monoid::unit;\r\n  static const bool commute = Monoid::commute;\r\n\
     };\r\n"
@@ -39,8 +39,8 @@ data:
   requiredBy:
   - graph/treemonoid.hpp
   - algebra/lazy_reverse.hpp
-  timestamp: '2022-01-01 19:42:01+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-01-01 23:37:45+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
   - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp

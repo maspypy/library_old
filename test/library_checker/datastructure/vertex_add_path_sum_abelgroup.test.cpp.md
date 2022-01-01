@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algebra/group_add.hpp
     title: algebra/group_add.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ds/fenwick.hpp
     title: ds/fenwick.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/hld.hpp
     title: graph/hld.hpp
   - icon: ':heavy_check_mark:'
     path: graph/treeabelgroup.hpp
     title: graph/treeabelgroup.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
@@ -115,7 +115,7 @@ data:
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
     \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp\"\
     \n\r\n#line 2 \"algebra/group_add.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\n\
-    struct AddGroup {\r\n  using value_type = X;\r\n  static constexpr X op(const\
+    struct Group_Add {\r\n  using value_type = X;\r\n  static constexpr X op(const\
     \ X &x, const X &y) noexcept { return x + y; }\r\n  static constexpr X inverse(const\
     \ X &x) noexcept { return -x; }\r\n  static constexpr X power(const X &x, ll n)\
     \ noexcept { return n * x; }\r\n  static constexpr X unit = ZERO;\r\n  static\
@@ -244,7 +244,7 @@ data:
     };\n#line 6 \"test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp\"\
     \n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  VEC(ll, A, N);\r\n  Graph<int> G(N);\r\
     \n  FOR(_, N - 1) {\r\n    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n  G.prepare();\r\
-    \n\r\n  HLD hld(G);\r\n  TreeAbelGroup<decltype(hld), AddGroup<ll>, false, true,\
+    \n\r\n  HLD hld(G);\r\n  TreeAbelGroup<decltype(hld), Group_Add<ll>, false, true,\
     \ false> TA(hld, A);\r\n\r\n  FOR(_, Q) {\r\n    LL(t);\r\n    if (t == 0) {\r\
     \n      LL(v, x);\r\n      TA.add(v, x);\r\n    } else {\r\n      LL(u, v);\r\n\
     \      print(TA.sum_path(u, v));\r\n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\
@@ -255,7 +255,7 @@ data:
     #include \"algebra/group_add.hpp\"\r\n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  VEC(ll,\
     \ A, N);\r\n  Graph<int> G(N);\r\n  FOR(_, N - 1) {\r\n    LL(a, b);\r\n    G.add(a,\
     \ b);\r\n  }\r\n  G.prepare();\r\n\r\n  HLD hld(G);\r\n  TreeAbelGroup<decltype(hld),\
-    \ AddGroup<ll>, false, true, false> TA(hld, A);\r\n\r\n  FOR(_, Q) {\r\n    LL(t);\r\
+    \ Group_Add<ll>, false, true, false> TA(hld, A);\r\n\r\n  FOR(_, Q) {\r\n    LL(t);\r\
     \n    if (t == 0) {\r\n      LL(v, x);\r\n      TA.add(v, x);\r\n    } else {\r\
     \n      LL(u, v);\r\n      print(TA.sum_path(u, v));\r\n    }\r\n  }\r\n}\r\n\r\
     \nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n\
@@ -270,7 +270,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
   requiredBy: []
-  timestamp: '2022-01-01 19:45:42+09:00'
+  timestamp: '2022-01-01 23:37:45+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp

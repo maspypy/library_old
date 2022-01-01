@@ -6,16 +6,19 @@ data:
     - icon: ':heavy_check_mark:'
       path: algebra/beats_sample.hpp
       title: algebra/beats_sample.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: algebra/group_add.hpp
       title: algebra/group_add.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: algebra/group_affine.hpp
       title: algebra/group_affine.hpp
     - icon: ':heavy_check_mark:'
+      path: algebra/group_cntsum.hpp
+      title: algebra/group_cntsum.hpp
+    - icon: ':heavy_check_mark:'
       path: algebra/group_mul.hpp
       title: algebra/group_mul.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: algebra/group_reverse.hpp
       title: algebra/group_reverse.hpp
     - icon: ':heavy_check_mark:'
@@ -42,16 +45,13 @@ data:
     - icon: ':warning:'
       path: algebra/lazy_reverse.hpp
       title: algebra/lazy_reverse.hpp
-    - icon: ':heavy_check_mark:'
-      path: algebra/monoid_cntsum.hpp
-      title: algebra/monoid_cntsum.hpp
     - icon: ':warning:'
       path: algebra/monoid_max.hpp
       title: algebra/monoid_max.hpp
     - icon: ':heavy_check_mark:'
       path: algebra/monoid_min.hpp
       title: algebra/monoid_min.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: algebra/monoid_reverse.hpp
       title: algebra/monoid_reverse.hpp
     - icon: ':heavy_check_mark:'
@@ -74,7 +74,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: ds/fastset.hpp
       title: ds/fastset.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: ds/fenwick.hpp
       title: ds/fenwick.hpp
     - icon: ':heavy_check_mark:'
@@ -95,7 +95,7 @@ data:
     - icon: ':warning:'
       path: ds/lichao.hpp
       title: ds/lichao.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: ds/segtree.hpp
       title: ds/segtree.hpp
     - icon: ':heavy_check_mark:'
@@ -134,7 +134,7 @@ data:
       title: geometry/geometry.hpp
   - name: graph
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: graph/base.hpp
       title: graph/base.hpp
     - icon: ':warning:'
@@ -167,7 +167,7 @@ data:
     - icon: ':warning:'
       path: graph/functional.hpp
       title: graph/functional.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: graph/hld.hpp
       title: graph/hld.hpp
     - icon: ':warning:'
@@ -194,10 +194,10 @@ data:
     - icon: ':warning:'
       path: graph/treedoubling.hpp
       title: graph/treedoubling.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/treegroup.hpp
       title: graph/treegroup.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/treemonoid.hpp
       title: graph/treemonoid.hpp
     - icon: ':warning:'
@@ -213,12 +213,12 @@ data:
     - icon: ':warning:'
       path: mod/amodint.hpp
       title: mod/amodint.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: mod/modint.hpp
       title: mod/modint.hpp
   - name: .
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: my_template.hpp
       title: my_template.hpp
   - name: nt
@@ -258,7 +258,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: other/random.hpp
       title: other/random.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: other/rectanglesums.hpp
       title: other/rectanglesums.hpp
   - name: persistent_ds
@@ -357,7 +357,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
       title: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
       title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
     - icon: ':heavy_check_mark:'
@@ -375,19 +375,19 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
       title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
       title: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
       title: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
       title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
       title: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
       title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   - name: test/library_checker/graph

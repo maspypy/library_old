@@ -13,7 +13,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: ds/lazysegtree.hpp
     title: ds/lazysegtree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
@@ -166,19 +166,19 @@ data:
     \      }\n      sm = Monoid_X::op(dat[r], sm);\n    } while ((r & -r) != r);\n\
     \    return 0;\n  }\n\n  void debug() { print(\"lazysegtree getall:\", get_all());\
     \ }\n};\n#line 1 \"algebra/monoid_min.hpp\"\ntemplate <class X, X INF>\r\nstruct\
-    \ MinMonoid {\r\n  using value_type = X;\r\n  static constexpr X op(const X &x,\
+    \ Monoid_Min {\r\n  using value_type = X;\r\n  static constexpr X op(const X &x,\
     \ const X &y) noexcept { return min(x, y); }\r\n  static constexpr X unit = INF;\r\
     \n};\r\n#line 1 \"algebra/monoid_set.hpp\"\ntemplate <typename E, E none_val =\
-    \ E(-1)>\r\nstruct SetMonoid {\r\n  using value_type = E;\r\n  using X = value_type;\r\
+    \ E(-1)>\r\nstruct Monoid_Set {\r\n  using value_type = E;\r\n  using X = value_type;\r\
     \n  static X op(X x, X y) { return (y == none_val ? x : y); }\r\n  static constexpr\
     \ X unit = none_val;\r\n  static constexpr bool commute = false;\r\n};\n#line\
     \ 3 \"algebra/lazy_min_set.hpp\"\n\r\ntemplate <typename E, E INF, E none_val=-1>\r\
-    \nstruct Min_Set_Lazy {\r\n  using MX = MinMonoid<E, INF>;\r\n  using MA = SetMonoid<E,\
+    \nstruct Lazy_Min_Set {\r\n  using MX = Monoid_Min<E, INF>;\r\n  using MA = Monoid_Set<E,\
     \ none_val>;\r\n  using X_structure = MX;\r\n  using A_structure = MA;\r\n  using\
     \ X = typename MX::value_type;\r\n  using A = typename MA::value_type;\r\n  static\
     \ constexpr X act(const X &x, const A &a) { return (a==none_val ? x : a) ;}\r\n\
     };\r\n#line 5 \"test/aoj/DSL_2_F_min_set_lazy.test.cpp\"\n\r\nvoid solve() {\r\
-    \n  LL(N, Q);\r\n  const ll MAX = (1LL << 31) - 1;\r\n  using Lazy = Min_Set_Lazy<ll,\
+    \n  LL(N, Q);\r\n  const ll MAX = (1LL << 31) - 1;\r\n  using Lazy = Lazy_Min_Set<ll,\
     \ MAX, -1>;\r\n  LazySegTree<Lazy> seg(N);\r\n  FOR(_, Q) {\r\n    LL(t);\r\n\
     \    if (t == 0) {\r\n      LL(L, R, x);\r\n      seg.apply(L, ++R, x);\r\n  \
     \  } else {\r\n      LL(L, R);\r\n      print(seg.prod(L, ++R));\r\n    }\r\n\
@@ -188,7 +188,7 @@ data:
   code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F\"\
     \r\n#include \"my_template.hpp\"\r\n#include \"ds/lazysegtree.hpp\"\r\n#include\
     \ \"algebra/lazy_min_set.hpp\"\r\n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  const\
-    \ ll MAX = (1LL << 31) - 1;\r\n  using Lazy = Min_Set_Lazy<ll, MAX, -1>;\r\n \
+    \ ll MAX = (1LL << 31) - 1;\r\n  using Lazy = Lazy_Min_Set<ll, MAX, -1>;\r\n \
     \ LazySegTree<Lazy> seg(N);\r\n  FOR(_, Q) {\r\n    LL(t);\r\n    if (t == 0)\
     \ {\r\n      LL(L, R, x);\r\n      seg.apply(L, ++R, x);\r\n    } else {\r\n \
     \     LL(L, R);\r\n      print(seg.prod(L, ++R));\r\n    }\r\n  }\r\n}\r\n\r\n\
@@ -204,7 +204,7 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_F_min_set_lazy.test.cpp
   requiredBy: []
-  timestamp: '2022-01-01 20:29:17+09:00'
+  timestamp: '2022-01-01 23:37:45+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_F_min_set_lazy.test.cpp

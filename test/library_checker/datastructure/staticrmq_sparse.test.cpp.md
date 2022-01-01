@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: ds/disjointsparse.hpp
     title: ds/disjointsparse.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
@@ -104,7 +104,7 @@ data:
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
     \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/datastructure/staticrmq_sparse.test.cpp\"\
-    \n\n#line 1 \"algebra/monoid_min.hpp\"\ntemplate <class X, X INF>\r\nstruct MinMonoid\
+    \n\n#line 1 \"algebra/monoid_min.hpp\"\ntemplate <class X, X INF>\r\nstruct Monoid_Min\
     \ {\r\n  using value_type = X;\r\n  static constexpr X op(const X &x, const X\
     \ &y) noexcept { return min(x, y); }\r\n  static constexpr X unit = INF;\r\n};\r\
     \n#line 1 \"ds/disjointsparse.hpp\"\ntemplate <class Monoid>\r\nstruct DisjointSparse\
@@ -120,13 +120,13 @@ data:
     \n    int k = 31 - __builtin_clz(L ^ R);\r\n    return Monoid::op(dat[k][L], dat[k][R]);\r\
     \n  }\r\n\r\n  void debug() {\r\n    print(\"disjoint sparse table\");\r\n   \
     \ FOR(i, log) print(dat[i]);\r\n  }\r\n};\r\n#line 6 \"test/library_checker/datastructure/staticrmq_sparse.test.cpp\"\
-    \n\nvoid solve() {\n  LL(N, Q);\n  VEC(int, A, N);\n  using Mono = MinMonoid<int,\
+    \n\nvoid solve() {\n  LL(N, Q);\n  VEC(int, A, N);\n  using Mono = Monoid_Min<int,\
     \ 1 << 30>;\n  DisjointSparse<Mono> DS(A);\n\n  FOR(_, Q) {\n    LL(L, R);\n \
     \   print(DS.prod(L, R));\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
     \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/staticrmq\"\n#include \"\
     my_template.hpp\"\n\n#include \"algebra/monoid_min.hpp\"\n#include \"ds/disjointsparse.hpp\"\
-    \n\nvoid solve() {\n  LL(N, Q);\n  VEC(int, A, N);\n  using Mono = MinMonoid<int,\
+    \n\nvoid solve() {\n  LL(N, Q);\n  VEC(int, A, N);\n  using Mono = Monoid_Min<int,\
     \ 1 << 30>;\n  DisjointSparse<Mono> DS(A);\n\n  FOR(_, Q) {\n    LL(L, R);\n \
     \   print(DS.prod(L, R));\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
     \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
@@ -137,7 +137,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/staticrmq_sparse.test.cpp
   requiredBy: []
-  timestamp: '2022-01-01 19:45:42+09:00'
+  timestamp: '2022-01-01 23:37:45+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/staticrmq_sparse.test.cpp

@@ -1,35 +1,35 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algebra/group_affine.hpp
     title: algebra/group_affine.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: algebra/group_reverse.hpp
     title: algebra/group_reverse.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/hld.hpp
     title: graph/hld.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/treegroup.hpp
     title: graph/treegroup.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_set_path_composite
@@ -251,7 +251,7 @@ data:
     \u9593\u3002\");\r\n    print(\"\u6728\u306E\u554F\u984C\u3067\u306F\u771F\u3063\
     \u5148\u306B\u3053\u308C\u3092\u4F5C\u308B\u3002\");\r\n    print(\"\u2192 \u6728\
     DP\u3084\u6728\u30AF\u30A8\u30EA\u306B\u6D3E\u751F\u3002\");\r\n  }\r\n};\r\n\
-    #line 1 \"algebra/group_reverse.hpp\"\ntemplate <class Group>\r\nstruct ReverseGroup\
+    #line 1 \"algebra/group_reverse.hpp\"\ntemplate <class Group>\r\nstruct Group_Reverse\
     \ {\r\n  using value_type = typename Group::value_type;\r\n  using X = value_type;\r\
     \n  static constexpr X op(const X &x, const X &y) { return Group::op(y, x); }\r\
     \n  static constexpr X inverse(const X &x) { return Group::inverse(x); }\r\n \
@@ -302,14 +302,14 @@ data:
     \ \u6642\u9593\u3067\u884C\u3046\u3002\");\r\n    print(\"\u90E8\u5206\u6728\u30AF\
     \u30A8\u30EA O(logN) \u6642\u9593\u3001\u30D1\u30B9\u30AF\u30A8\u30EA O(logN)\
     \ \u6642\u9593\u3002\");\r\n  }\r\n};\n#line 1 \"algebra/group_affine.hpp\"\n\
-    template <typename K>\nstruct AffineGroup {\n  using F = pair<K, K>;\n  using\
+    template <typename K>\nstruct Group_Affine {\n  using F = pair<K, K>;\n  using\
     \ value_type = F;\n  static constexpr F op(const F &x, const F &y) noexcept {\n\
     \    return F({x.fi * y.fi, x.se * y.fi + y.se});\n  }\n  static constexpr F inverse(const\
     \ F &x) {\n    auto [a, b] = x;\n    a = K(1) / a;\n    return {a, a * (-b)};\n\
     \  }\n  static constexpr K eval(const F &f, K x) noexcept { return f.fi * x +\
     \ f.se; }\n  static constexpr F unit = {K(1), K(0)};\n  static constexpr bool\
     \ commute = false;\n};\n#line 7 \"test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp\"\
-    \n\nusing mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using Mono = AffineGroup<mint>;\n\
+    \n\nusing mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using Mono = Group_Affine<mint>;\n\
     \  using E = Mono::value_type;\n  vc<E> A(N);\n  FOR(i, N) {\n    LL(a, b);\n\
     \    A[i] = mp(mint(a), mint(b));\n  }\n\n  Graph<int> G(N);\n  FOR(_, N - 1)\
     \ {\n    LL(a, b);\n    G.add(a, b);\n  }\n  G.prepare();\n\n  HLD hld(G);\n \
@@ -322,7 +322,7 @@ data:
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_set_path_composite\"\
     \n#include \"my_template.hpp\"\n\n#include \"mod/modint.hpp\"\n#include \"graph/treegroup.hpp\"\
     \n#include \"algebra/group_affine.hpp\"\n\nusing mint = modint998;\n\nvoid solve()\
-    \ {\n  LL(N, Q);\n  using Mono = AffineGroup<mint>;\n  using E = Mono::value_type;\n\
+    \ {\n  LL(N, Q);\n  using Mono = Group_Affine<mint>;\n  using E = Mono::value_type;\n\
     \  vc<E> A(N);\n  FOR(i, N) {\n    LL(a, b);\n    A[i] = mp(mint(a), mint(b));\n\
     \  }\n\n  Graph<int> G(N);\n  FOR(_, N - 1) {\n    LL(a, b);\n    G.add(a, b);\n\
     \  }\n  G.prepare();\n\n  HLD hld(G);\n  TreeGroup<decltype(hld), Mono, false,\
@@ -343,8 +343,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
   requiredBy: []
-  timestamp: '2022-01-01 20:29:17+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-01 23:37:45+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
 layout: document

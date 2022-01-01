@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algebra/group_affine.hpp
     title: algebra/group_affine.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
@@ -175,14 +175,14 @@ data:
     \ - k);\n    k = min(k, n - k);\n    T x(1);\n    FOR(i, k) {\n      x *= n -\
     \ i;\n      x *= inv(i + 1);\n    }\n    return x;\n  }\n};\n\nusing modint107\
     \ = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n#line 1 \"\
-    algebra/group_affine.hpp\"\ntemplate <typename K>\nstruct AffineGroup {\n  using\
+    algebra/group_affine.hpp\"\ntemplate <typename K>\nstruct Group_Affine {\n  using\
     \ F = pair<K, K>;\n  using value_type = F;\n  static constexpr F op(const F &x,\
     \ const F &y) noexcept {\n    return F({x.fi * y.fi, x.se * y.fi + y.se});\n \
     \ }\n  static constexpr F inverse(const F &x) {\n    auto [a, b] = x;\n    a =\
     \ K(1) / a;\n    return {a, a * (-b)};\n  }\n  static constexpr K eval(const F\
     \ &f, K x) noexcept { return f.fi * x + f.se; }\n  static constexpr F unit = {K(1),\
     \ K(0)};\n  static constexpr bool commute = false;\n};\n#line 7 \"test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp\"\
-    \n\nusing mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using Mono = AffineGroup<mint>;\n\
+    \n\nusing mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using Mono = Group_Affine<mint>;\n\
     \  using F = Mono::value_type;\n\n  vc<F> seg_raw(N);\n  FOR(i, N) {\n    LL(a,\
     \ b);\n    seg_raw[i] = {a, b};\n  }\n\n  SegTree<Mono> seg(seg_raw);\n\n  FOR(q,\
     \ Q) {\n    LL(t);\n    if (t == 0) {\n      LL(i, a, b);\n      seg.set(i, F({a,\
@@ -193,7 +193,7 @@ data:
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_set_range_composite\"\
     \n#include \"my_template.hpp\"\n\n#include \"ds/segtree.hpp\"\n#include \"mod/modint.hpp\"\
     \n#include \"algebra/group_affine.hpp\"\n\nusing mint = modint998;\n\nvoid solve()\
-    \ {\n  LL(N, Q);\n  using Mono = AffineGroup<mint>;\n  using F = Mono::value_type;\n\
+    \ {\n  LL(N, Q);\n  using Mono = Group_Affine<mint>;\n  using F = Mono::value_type;\n\
     \n  vc<F> seg_raw(N);\n  FOR(i, N) {\n    LL(a, b);\n    seg_raw[i] = {a, b};\n\
     \  }\n\n  SegTree<Mono> seg(seg_raw);\n\n  FOR(q, Q) {\n    LL(t);\n    if (t\
     \ == 0) {\n      LL(i, a, b);\n      seg.set(i, F({a, b}));\n    } else {\n  \
@@ -208,7 +208,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
   requiredBy: []
-  timestamp: '2022-01-01 19:45:42+09:00'
+  timestamp: '2022-01-01 23:37:45+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp

@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algebra/group_add.hpp
     title: algebra/group_add.hpp
   - icon: ':heavy_check_mark:'
     path: ds/segtree2d.hpp
     title: ds/segtree2d.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
@@ -106,7 +106,7 @@ data:
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
     \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 4 \"test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp\"\
     \n\r\n#line 2 \"algebra/group_add.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\n\
-    struct AddGroup {\r\n  using value_type = X;\r\n  static constexpr X op(const\
+    struct Group_Add {\r\n  using value_type = X;\r\n  static constexpr X op(const\
     \ X &x, const X &y) noexcept { return x + y; }\r\n  static constexpr X inverse(const\
     \ X &x) noexcept { return -x; }\r\n  static constexpr X power(const X &x, ll n)\
     \ noexcept { return n * x; }\r\n  static constexpr X unit = ZERO;\r\n  static\
@@ -163,7 +163,7 @@ data:
     \n    LL(t);\r\n    if (t == 0) {\r\n      LL(x, y, w);\r\n      X.eb(x);\r\n\
     \      Y.eb(y);\r\n      W.eb(0);\r\n      query[q] = mt(-1, x, y, w);\r\n   \
     \ } else {\r\n      LL(a, b, c, d);\r\n      query[q] = mt(a, c, b, d);\r\n  \
-    \  }\r\n  }\r\n\r\n  using Mono = AddGroup<ll>;\r\n\r\n  SegTree2D<Mono, int,\
+    \  }\r\n  }\r\n\r\n  using Mono = Group_Add<ll>;\r\n\r\n  SegTree2D<Mono, int,\
     \ false> seg(X, Y, W);\r\n\r\n  FOR(q, Q) {\r\n    auto [a, b, c, d] = query[q];\r\
     \n    if (a == -1) {\r\n      seg.multiply(b, c, d);\r\n    } else {\r\n     \
     \ print(seg.prod(a, b, c, d));\r\n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n\
@@ -177,8 +177,8 @@ data:
     \ query(Q);\r\n  FOR(q, Q) {\r\n    LL(t);\r\n    if (t == 0) {\r\n      LL(x,\
     \ y, w);\r\n      X.eb(x);\r\n      Y.eb(y);\r\n      W.eb(0);\r\n      query[q]\
     \ = mt(-1, x, y, w);\r\n    } else {\r\n      LL(a, b, c, d);\r\n      query[q]\
-    \ = mt(a, c, b, d);\r\n    }\r\n  }\r\n\r\n  using Mono = AddGroup<ll>;\r\n\r\n\
-    \  SegTree2D<Mono, int, false> seg(X, Y, W);\r\n\r\n  FOR(q, Q) {\r\n    auto\
+    \ = mt(a, c, b, d);\r\n    }\r\n  }\r\n\r\n  using Mono = Group_Add<ll>;\r\n\r\
+    \n  SegTree2D<Mono, int, false> seg(X, Y, W);\r\n\r\n  FOR(q, Q) {\r\n    auto\
     \ [a, b, c, d] = query[q];\r\n    if (a == -1) {\r\n      seg.multiply(b, c, d);\r\
     \n    } else {\r\n      print(seg.prod(a, b, c, d));\r\n    }\r\n  }\r\n}\r\n\r\
     \nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n\
@@ -190,7 +190,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
   requiredBy: []
-  timestamp: '2022-01-01 19:45:42+09:00'
+  timestamp: '2022-01-01 23:37:45+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp

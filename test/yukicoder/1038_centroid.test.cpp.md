@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algebra/group_add.hpp
     title: algebra/group_add.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ds/fenwick.hpp
     title: ds/fenwick.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
   - icon: ':heavy_check_mark:'
     path: graph/centroid.hpp
     title: graph/centroid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
@@ -111,7 +111,7 @@ data:
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
     \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/yukicoder/1038_centroid.test.cpp\"\
     \n\r\n#line 2 \"algebra/group_add.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\n\
-    struct AddGroup {\r\n  using value_type = X;\r\n  static constexpr X op(const\
+    struct Group_Add {\r\n  using value_type = X;\r\n  static constexpr X op(const\
     \ X &x, const X &y) noexcept { return x + y; }\r\n  static constexpr X inverse(const\
     \ X &x) noexcept { return -x; }\r\n  static constexpr X power(const X &x, ll n)\
     \ noexcept { return n * x; }\r\n  static constexpr X unit = ZERO;\r\n  static\
@@ -203,7 +203,7 @@ data:
     \ ll>;\r\n  VEC(T, query, Q);\r\n  for (auto&& [a, b, c]: query) --a;\r\n\r\n\
     \  // \u9802\u70B9 -> \u30AF\u30A8\u30EA\r\n  vc<vi> query_at(N);\r\n  FOR(q,\
     \ Q) query_at[get<0>(query[q])].eb(q);\r\n\r\n  CentroidDecomposition CD(G);\r\
-    \n  vi ANS(Q);\r\n  FenwickTree<AddGroup<ll>> bit(N + 10);\r\n\r\n  FOR(root,\
+    \n  vi ANS(Q);\r\n  FenwickTree<Group_Add<ll>> bit(N + 10);\r\n\r\n  FOR(root,\
     \ N) {\r\n    auto dats = CD.collect(root, 0);\r\n    FOR(i, len(dats)) {\r\n\
     \      auto dat = dats[i];\r\n      // qid, v, dv\r\n      vc<T> event;\r\n  \
     \    for (auto&& [v, dv]: dat) {\r\n        for (auto&& q: query_at[v]) { event.eb(q,\
@@ -224,8 +224,8 @@ data:
     \  using T = tuple<ll, ll, ll>;\r\n  VEC(T, query, Q);\r\n  for (auto&& [a, b,\
     \ c]: query) --a;\r\n\r\n  // \u9802\u70B9 -> \u30AF\u30A8\u30EA\r\n  vc<vi> query_at(N);\r\
     \n  FOR(q, Q) query_at[get<0>(query[q])].eb(q);\r\n\r\n  CentroidDecomposition\
-    \ CD(G);\r\n  vi ANS(Q);\r\n  FenwickTree<AddGroup<ll>> bit(N + 10);\r\n\r\n \
-    \ FOR(root, N) {\r\n    auto dats = CD.collect(root, 0);\r\n    FOR(i, len(dats))\
+    \ CD(G);\r\n  vi ANS(Q);\r\n  FenwickTree<Group_Add<ll>> bit(N + 10);\r\n\r\n\
+    \  FOR(root, N) {\r\n    auto dats = CD.collect(root, 0);\r\n    FOR(i, len(dats))\
     \ {\r\n      auto dat = dats[i];\r\n      // qid, v, dv\r\n      vc<T> event;\r\
     \n      for (auto&& [v, dv]: dat) {\r\n        for (auto&& q: query_at[v]) { event.eb(q,\
     \ v, dv); }\r\n      }\r\n      sort(all(event));\r\n      for (auto&& [qid, v,\
@@ -247,7 +247,7 @@ data:
   isVerificationFile: true
   path: test/yukicoder/1038_centroid.test.cpp
   requiredBy: []
-  timestamp: '2022-01-01 19:45:42+09:00'
+  timestamp: '2022-01-01 23:37:45+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yukicoder/1038_centroid.test.cpp
