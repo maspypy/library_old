@@ -16,9 +16,9 @@ pair<vector<typename Graph::cost_type>, vector<int>> dijkstra(Graph& G, int v) {
   while (!que.empty()) {
     auto [dv, v] = que.top();
     que.pop();
-    if(dv > dist[v]) continue;
-    for (auto&& e : G[v]) {
-      if (dist[e.to] == -1 || dist[e.to] > dist[e.frm] + e.cost){
+    if (dv > dist[v]) continue;
+    for (auto&& e: G[v]) {
+      if (dist[e.to] == -1 || dist[e.to] > dist[e.frm] + e.cost) {
         dist[e.to] = dist[e.frm] + e.cost;
         par[e.to] = e.frm;
         que.push(mp(dist[e.to], e.to));
