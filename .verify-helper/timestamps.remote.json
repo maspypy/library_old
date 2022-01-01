@@ -31,6 +31,7 @@
 "test/library_checker/graph/shortest_path.test.cpp": "2022-01-01 16:54:25 +0900",
 "test/library_checker/math/enumerate_primes.test.cpp": "2021-12-29 04:00:18 +0900",
 "test/library_checker/math/factorize.test.cpp": "2021-12-29 02:24:08 +0900",
+"test/library_checker/string/zalgorithm/zalgorithm.test.cpp": "2022-01-01 17:01:47 +0900",
 "test/yukicoder/1002_centroid.test.cpp": "2022-01-01 12:00:30 +0900",
 "test/yukicoder/1038_centroid.test.cpp": "2022-01-01 12:00:30 +0900",
 "test/yukicoder/899_bfsnumbering.test.cpp": "2022-01-01 12:00:30 +0900"
