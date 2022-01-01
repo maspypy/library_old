@@ -100,6 +100,9 @@ data:
     path: test/library_checker/graph/scc.test.cpp
     title: test/library_checker/graph/scc.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/library_checker/graph/shortest_path.test.cpp
+    title: test/library_checker/graph/shortest_path.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/math/enumerate_primes.test.cpp
     title: test/library_checker/math/enumerate_primes.test.cpp
   - icon: ':heavy_check_mark:'
@@ -301,6 +304,7 @@ data:
   - test/library_checker/graph/lca.test.cpp
   - test/library_checker/graph/scc.test.cpp
   - test/library_checker/graph/lca_directed.test.cpp
+  - test/library_checker/graph/shortest_path.test.cpp
   - test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
   - test/library_checker/math/enumerate_primes.test.cpp
   - test/library_checker/math/factorize.test.cpp

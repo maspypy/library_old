@@ -140,7 +140,7 @@ data:
     - icon: ':warning:'
       path: graph/degree.hpp
       title: graph/degree.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: graph/dijkstra.hpp
       title: graph/dijkstra.hpp
     - icon: ':warning:'
@@ -155,6 +155,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/mis.hpp
       title: graph/mis.hpp
+    - icon: ':heavy_check_mark:'
+      path: graph/restore_path.hpp
+      title: graph/restore_path.hpp
     - icon: ':heavy_check_mark:'
       path: graph/scc.hpp
       title: graph/scc.hpp
@@ -372,6 +375,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/graph/scc.test.cpp
       title: test/library_checker/graph/scc.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/graph/shortest_path.test.cpp
+      title: test/library_checker/graph/shortest_path.test.cpp
   - name: test/library_checker/math
     pages:
     - icon: ':heavy_check_mark:'

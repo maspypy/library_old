@@ -5,16 +5,19 @@ data:
     path: graph/base.hpp
     title: graph/base.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/graph/shortest_path.test.cpp
+    title: test/library_checker/graph/shortest_path.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n\
-    \  int frm, to;\n  T cost;\n  int id;\n};\n\ntemplate <typename T, bool directed\
-    \ = false>\nstruct Graph {\n  int N, M;\n  using cost_type = T;\n  using edge_type\
-    \ = Edge<T>;\n  vector<edge_type> edges;\n  vector<int> indptr;\n  vector<edge_type>\
+    \  int frm, to;\n  T cost;\n  int id;\n};\n\ntemplate <typename T = int, bool\
+    \ directed = false>\nstruct Graph {\n  int N, M;\n  using cost_type = T;\n  using\
+    \ edge_type = Edge<T>;\n  vector<edge_type> edges;\n  vector<int> indptr;\n  vector<edge_type>\
     \ csr_edges;\n  bool prepared;\n\n  class OutgoingEdges {\n  public:\n    OutgoingEdges(const\
     \ Graph* G, int l, int r) : G(G), l(l), r(r) {}\n\n    const edge_type* begin()\
     \ const {\n      if (l == r) { return 0; }\n      return &G->csr_edges[l];\n \
@@ -38,30 +41,34 @@ data:
     \    } else {\n      print(\"indptr\", indptr);\n      print(\"frm to cost id\"\
     );\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e.frm, e.to, e.cost, e.id);\n\
     \    }\n  }\n\n  int size() { return N; }\n};\n#line 3 \"graph/dijkstra.hpp\"\n\
-    \ntemplate <typename T>\npair<vi, vi> dijkstra(Graph<T>& G, ll v) {\n  const ll\
-    \ INF = 1LL << 60;\n  auto N = G.N;\n  vi dist(N, INF);\n  vi par(N, -1);\n  using\
-    \ P = pair<T, ll>;\n\n  priority_queue<P, vector<P>, greater<P>> que;\n\n  dist[v]\
-    \ = 0;\n  que.push(mp(T(0), v));\n  while (!que.empty()) {\n    auto [dv, v] =\
-    \ que.top();\n    que.pop();\n    if(dv > dist[v]) continue;\n    for (auto&&\
-    \ e : G[v]) {\n      if (chmin(dist[e.to], dist[e.frm] + e.cost)) {\n        par[e.to]\
-    \ = e.frm;\n        que.push(mp(dist[e.to], e.to));\n      }\n    }\n  }\n  return\
-    \ mp(dist, par);\n}\n"
-  code: "#pragma once\n#include \"graph/base.hpp\"\n\ntemplate <typename T>\npair<vi,\
-    \ vi> dijkstra(Graph<T>& G, ll v) {\n  const ll INF = 1LL << 60;\n  auto N = G.N;\n\
-    \  vi dist(N, INF);\n  vi par(N, -1);\n  using P = pair<T, ll>;\n\n  priority_queue<P,\
+    \ntemplate <typename Graph>\npair<vector<typename Graph::cost_type>, vector<int>>\
+    \ dijkstra(Graph& G, int v) {\n  auto N = G.N;\n  using T = typename Graph::cost_type;\n\
+    \  vector<T> dist(N, -1);\n  vector<int> par(N, -1);\n  using P = pair<T, int>;\n\
+    \n  priority_queue<P, vector<P>, greater<P>> que;\n\n  dist[v] = 0;\n  que.push(mp(T(0),\
+    \ v));\n  while (!que.empty()) {\n    auto [dv, v] = que.top();\n    que.pop();\n\
+    \    if(dv > dist[v]) continue;\n    for (auto&& e : G[v]) {\n      if (dist[e.to]\
+    \ == -1 || dist[e.to] > dist[e.frm] + e.cost){\n        dist[e.to] = dist[e.frm]\
+    \ + e.cost;\n        par[e.to] = e.frm;\n        que.push(mp(dist[e.to], e.to));\n\
+    \      }\n    }\n  }\n  return mp(dist, par);\n}\n"
+  code: "#pragma once\n#include \"graph/base.hpp\"\n\ntemplate <typename Graph>\n\
+    pair<vector<typename Graph::cost_type>, vector<int>> dijkstra(Graph& G, int v)\
+    \ {\n  auto N = G.N;\n  using T = typename Graph::cost_type;\n  vector<T> dist(N,\
+    \ -1);\n  vector<int> par(N, -1);\n  using P = pair<T, int>;\n\n  priority_queue<P,\
     \ vector<P>, greater<P>> que;\n\n  dist[v] = 0;\n  que.push(mp(T(0), v));\n  while\
     \ (!que.empty()) {\n    auto [dv, v] = que.top();\n    que.pop();\n    if(dv >\
-    \ dist[v]) continue;\n    for (auto&& e : G[v]) {\n      if (chmin(dist[e.to],\
-    \ dist[e.frm] + e.cost)) {\n        par[e.to] = e.frm;\n        que.push(mp(dist[e.to],\
-    \ e.to));\n      }\n    }\n  }\n  return mp(dist, par);\n}\n"
+    \ dist[v]) continue;\n    for (auto&& e : G[v]) {\n      if (dist[e.to] == -1\
+    \ || dist[e.to] > dist[e.frm] + e.cost){\n        dist[e.to] = dist[e.frm] + e.cost;\n\
+    \        par[e.to] = e.frm;\n        que.push(mp(dist[e.to], e.to));\n      }\n\
+    \    }\n  }\n  return mp(dist, par);\n}\n"
   dependsOn:
   - graph/base.hpp
   isVerificationFile: false
   path: graph/dijkstra.hpp
   requiredBy: []
-  timestamp: '2021-12-31 12:24:19+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2022-01-01 12:00:30+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/library_checker/graph/shortest_path.test.cpp
 documentation_of: graph/dijkstra.hpp
 layout: document
 redirect_from:

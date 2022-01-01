@@ -21,9 +21,9 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n\
-    \  int frm, to;\n  T cost;\n  int id;\n};\n\ntemplate <typename T, bool directed\
-    \ = false>\nstruct Graph {\n  int N, M;\n  using cost_type = T;\n  using edge_type\
-    \ = Edge<T>;\n  vector<edge_type> edges;\n  vector<int> indptr;\n  vector<edge_type>\
+    \  int frm, to;\n  T cost;\n  int id;\n};\n\ntemplate <typename T = int, bool\
+    \ directed = false>\nstruct Graph {\n  int N, M;\n  using cost_type = T;\n  using\
+    \ edge_type = Edge<T>;\n  vector<edge_type> edges;\n  vector<int> indptr;\n  vector<edge_type>\
     \ csr_edges;\n  bool prepared;\n\n  class OutgoingEdges {\n  public:\n    OutgoingEdges(const\
     \ Graph* G, int l, int r) : G(G), l(l), r(r) {}\n\n    const edge_type* begin()\
     \ const {\n      if (l == r) { return 0; }\n      return &G->csr_edges[l];\n \
@@ -159,7 +159,7 @@ data:
   isVerificationFile: false
   path: graph/tree_all_distances.hpp
   requiredBy: []
-  timestamp: '2021-12-31 19:35:06+09:00'
+  timestamp: '2022-01-01 12:00:30+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/graph/frequency_table_of_tree_distance.test.cpp

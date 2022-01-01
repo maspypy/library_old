@@ -17,7 +17,7 @@ data:
   - icon: ':warning:'
     path: graph/degree.hpp
     title: graph/degree.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: graph/dijkstra.hpp
     title: graph/dijkstra.hpp
   - icon: ':warning:'
@@ -85,6 +85,9 @@ data:
     path: test/library_checker/graph/scc.test.cpp
     title: test/library_checker/graph/scc.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/library_checker/graph/shortest_path.test.cpp
+    title: test/library_checker/graph/shortest_path.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1002_centroid.test.cpp
     title: test/yukicoder/1002_centroid.test.cpp
   - icon: ':heavy_check_mark:'
@@ -99,9 +102,9 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n\
-    \  int frm, to;\n  T cost;\n  int id;\n};\n\ntemplate <typename T, bool directed\
-    \ = false>\nstruct Graph {\n  int N, M;\n  using cost_type = T;\n  using edge_type\
-    \ = Edge<T>;\n  vector<edge_type> edges;\n  vector<int> indptr;\n  vector<edge_type>\
+    \  int frm, to;\n  T cost;\n  int id;\n};\n\ntemplate <typename T = int, bool\
+    \ directed = false>\nstruct Graph {\n  int N, M;\n  using cost_type = T;\n  using\
+    \ edge_type = Edge<T>;\n  vector<edge_type> edges;\n  vector<int> indptr;\n  vector<edge_type>\
     \ csr_edges;\n  bool prepared;\n\n  class OutgoingEdges {\n  public:\n    OutgoingEdges(const\
     \ Graph* G, int l, int r) : G(G), l(l), r(r) {}\n\n    const edge_type* begin()\
     \ const {\n      if (l == r) { return 0; }\n      return &G->csr_edges[l];\n \
@@ -126,8 +129,8 @@ data:
     );\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e.frm, e.to, e.cost, e.id);\n\
     \    }\n  }\n\n  int size() { return N; }\n};\n"
   code: "#pragma once\n\ntemplate <typename T>\nstruct Edge {\n  int frm, to;\n  T\
-    \ cost;\n  int id;\n};\n\ntemplate <typename T, bool directed = false>\nstruct\
-    \ Graph {\n  int N, M;\n  using cost_type = T;\n  using edge_type = Edge<T>;\n\
+    \ cost;\n  int id;\n};\n\ntemplate <typename T = int, bool directed = false>\n\
+    struct Graph {\n  int N, M;\n  using cost_type = T;\n  using edge_type = Edge<T>;\n\
     \  vector<edge_type> edges;\n  vector<int> indptr;\n  vector<edge_type> csr_edges;\n\
     \  bool prepared;\n\n  class OutgoingEdges {\n  public:\n    OutgoingEdges(const\
     \ Graph* G, int l, int r) : G(G), l(l), r(r) {}\n\n    const edge_type* begin()\
@@ -171,7 +174,7 @@ data:
   - graph/lazytreemonoid.hpp
   - graph/eulerwalk.hpp
   - graph/bfsnumbering.hpp
-  timestamp: '2021-12-31 12:24:19+09:00'
+  timestamp: '2022-01-01 12:00:30+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/graph/cycle_detection.test.cpp
@@ -179,6 +182,7 @@ data:
   - test/library_checker/graph/lca.test.cpp
   - test/library_checker/graph/scc.test.cpp
   - test/library_checker/graph/lca_directed.test.cpp
+  - test/library_checker/graph/shortest_path.test.cpp
   - test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp

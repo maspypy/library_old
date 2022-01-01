@@ -139,13 +139,13 @@ data:
     \ k) {\n    auto check = [&](E x) -> bool { return x < k; };\n    return max_right(check);\n\
     \  }\n\n  void debug() { print(\"fenwick\", dat); }\n};\n#line 2 \"graph/base.hpp\"\
     \n\ntemplate <typename T>\nstruct Edge {\n  int frm, to;\n  T cost;\n  int id;\n\
-    };\n\ntemplate <typename T, bool directed = false>\nstruct Graph {\n  int N, M;\n\
-    \  using cost_type = T;\n  using edge_type = Edge<T>;\n  vector<edge_type> edges;\n\
-    \  vector<int> indptr;\n  vector<edge_type> csr_edges;\n  bool prepared;\n\n \
-    \ class OutgoingEdges {\n  public:\n    OutgoingEdges(const Graph* G, int l, int\
-    \ r) : G(G), l(l), r(r) {}\n\n    const edge_type* begin() const {\n      if (l\
-    \ == r) { return 0; }\n      return &G->csr_edges[l];\n    }\n\n    const edge_type*\
-    \ end() const {\n      if (l == r) { return 0; }\n      return &G->csr_edges[r];\n\
+    };\n\ntemplate <typename T = int, bool directed = false>\nstruct Graph {\n  int\
+    \ N, M;\n  using cost_type = T;\n  using edge_type = Edge<T>;\n  vector<edge_type>\
+    \ edges;\n  vector<int> indptr;\n  vector<edge_type> csr_edges;\n  bool prepared;\n\
+    \n  class OutgoingEdges {\n  public:\n    OutgoingEdges(const Graph* G, int l,\
+    \ int r) : G(G), l(l), r(r) {}\n\n    const edge_type* begin() const {\n     \
+    \ if (l == r) { return 0; }\n      return &G->csr_edges[l];\n    }\n\n    const\
+    \ edge_type* end() const {\n      if (l == r) { return 0; }\n      return &G->csr_edges[r];\n\
     \    }\n\n  private:\n    int l, r;\n    const Graph* G;\n  };\n\n  bool is_prepared()\
     \ { return prepared; }\n  constexpr bool is_directed() { return directed; }\n\n\
     \  Graph() {}\n  Graph(int N) : N(N), M(0), prepared(0) {}\n\n  void add(int frm,\
@@ -248,7 +248,7 @@ data:
   isVerificationFile: true
   path: test/yukicoder/1038_centroid.test.cpp
   requiredBy: []
-  timestamp: '2021-12-31 14:21:43+09:00'
+  timestamp: '2022-01-01 12:00:30+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yukicoder/1038_centroid.test.cpp

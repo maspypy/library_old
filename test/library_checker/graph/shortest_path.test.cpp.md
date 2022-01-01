@@ -5,8 +5,11 @@ data:
     path: graph/base.hpp
     title: graph/base.hpp
   - icon: ':heavy_check_mark:'
-    path: graph/hld.hpp
-    title: graph/hld.hpp
+    path: graph/dijkstra.hpp
+    title: graph/dijkstra.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/restore_path.hpp
+    title: graph/restore_path.hpp
   - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
@@ -17,21 +20,22 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/lca
+    PROBLEM: https://judge.yosupo.jp/problem/shortest_path
     links:
-    - https://judge.yosupo.jp/problem/lca
-  bundledCode: "#line 1 \"test/library_checker/graph/lca.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.yosupo.jp/problem/lca\"\n#line 2 \"my_template.hpp\"\n#include\
-    \ <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\nusing ll8\
-    \ = __int128;\nusing ld = long double;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\n\
-    using uint = unsigned int;\nusing ull = unsigned long long;\n\ntemplate <class\
-    \ T>\nusing vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\n\
-    template <class T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc\
-    \ = vector<vvvc<T>>;\ntemplate <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate\
-    \ <class T>\nusing pq = priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T,\
-    \ vector<T>, greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
-    #define VEC(type, name, size) \\\n  vector<type> name(size);    \\\n  IN(name)\n\
-    #define vv(type, name, h, ...) \\\n  vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n\
+    - https://judge.yosupo.jp/problem/shortest_path
+  bundledCode: "#line 1 \"test/library_checker/graph/shortest_path.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/shortest_path\"\r\n\r\n#line 2 \"\
+    my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll\
+    \ = long long;\nusing ll8 = __int128;\nusing ld = long double;\nusing pi = pair<ll,\
+    \ ll>;\nusing vi = vector<ll>;\nusing uint = unsigned int;\nusing ull = unsigned\
+    \ long long;\n\ntemplate <class T>\nusing vc = vector<T>;\ntemplate <class T>\n\
+    using vvc = vector<vc<T>>;\ntemplate <class T>\nusing vvvc = vector<vvc<T>>;\n\
+    template <class T>\nusing vvvvc = vector<vvvc<T>>;\ntemplate <class T>\nusing\
+    \ vvvvvc = vector<vvvvc<T>>;\ntemplate <class T>\nusing pq = priority_queue<T>;\n\
+    template <class T>\nusing pqg = priority_queue<T, vector<T>, greater<T>>;\n\n\
+    #define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n#define VEC(type,\
+    \ name, size) \\\n  vector<type> name(size);    \\\n  IN(name)\n#define vv(type,\
+    \ name, h, ...) \\\n  vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n\
     #define VV(type, name, h, w)                     \\\n  vector<vector<type>> name(h,\
     \ vector<type>(w)); \\\n  IN(name)\n#define vvv(type, name, h, w, ...)   \\\n\
     \  vector<vector<vector<type>>> name( \\\n      h, vector<vector<type>>(w, vector<type>(__VA_ARGS__)))\n\
@@ -103,8 +107,8 @@ data:
     }\n\n#define SUM(v) accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n\
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
-    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/graph/lca.test.cpp\"\
-    \n\n#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n  int\
+    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 4 \"test/library_checker/graph/shortest_path.test.cpp\"\
+    \n\r\n#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n  int\
     \ frm, to;\n  T cost;\n  int id;\n};\n\ntemplate <typename T = int, bool directed\
     \ = false>\nstruct Graph {\n  int N, M;\n  using cost_type = T;\n  using edge_type\
     \ = Edge<T>;\n  vector<edge_type> edges;\n  vector<int> indptr;\n  vector<edge_type>\
@@ -130,70 +134,50 @@ data:
     frm to cost id\");\n      for (auto&& e: edges) print(e.frm, e.to, e.cost, e.id);\n\
     \    } else {\n      print(\"indptr\", indptr);\n      print(\"frm to cost id\"\
     );\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e.frm, e.to, e.cost, e.id);\n\
-    \    }\n  }\n\n  int size() { return N; }\n};\n#line 3 \"graph/hld.hpp\"\n\r\n\
-    template <typename Graph>\r\nstruct HLD {\r\n  Graph &G;\r\n  int N;\r\n  vector<int>\
-    \ LID, RID, head, V, parent, depth;\r\n\r\n  HLD(Graph &G, int root = 0)\r\n \
-    \     : G(G),\r\n        N(G.N),\r\n        LID(G.N),\r\n        RID(G.N),\r\n\
-    \        head(G.N, root),\r\n        V(G.N),\r\n        parent(G.N, -1),\r\n \
-    \       depth(G.N) {\r\n    assert(G.is_prepared());\r\n    int t1 = 0;\r\n  \
-    \  dfs_sz(root, -1);\r\n    dfs_hld(root, -1, t1);\r\n  }\r\n\r\n  void dfs_sz(int\
-    \ v, int p) {\r\n    auto &sz = RID;\r\n    parent[v] = p;\r\n    depth[v] = (p\
-    \ == -1 ? 0 : depth[p] + 1);\r\n    sz[v] = 1;\r\n    int l = G.indptr[v], r =\
-    \ G.indptr[v + 1];\r\n    auto &csr = G.csr_edges;\r\n    if (l + 1 < r && csr[l].to\
-    \ == p) swap(csr[l], csr[l + 1]);\r\n    int hld_sz = 0;\r\n    for (int i = l;\
-    \ i < r; ++i) {\r\n      auto e = csr[i];\r\n      if (e.to == p) {\r\n      \
-    \  assert(!G.is_directed());\r\n        continue;\r\n      }\r\n      dfs_sz(e.to,\
-    \ v);\r\n      sz[v] += sz[e.to];\r\n      if (chmax(hld_sz, sz[e.to]) && l <\
-    \ i) { swap(csr[l], csr[i]); }\r\n    }\r\n  }\r\n\r\n  void dfs_hld(int v, int\
-    \ p, int &times) {\r\n    LID[v] = times++;\r\n    RID[v] += LID[v];\r\n    V[LID[v]]\
-    \ = v;\r\n    bool heavy = true;\r\n    for (auto &&e: G[v]) {\r\n      if (e.to\
-    \ == p) continue;\r\n      head[e.to] = (heavy ? head[v] : e.to);\r\n      heavy\
-    \ = false;\r\n      dfs_hld(e.to, v, times);\r\n    }\r\n  }\r\n\r\n  int e_to_v(int\
-    \ eid) {\r\n    auto e = G.edges[eid];\r\n    return (parent[e.frm] == e.to ?\
-    \ e.frm : e.to);\r\n  }\r\n\r\n  int ELID(int v) { return 2 * LID[v] - depth[v];\
-    \ }\r\n  int ERID(int v) { return 2 * RID[v] - depth[v] - 1; }\r\n\r\n  /* k:\
-    \ 0-indexed */\r\n  int LA(int v, int k) {\r\n    while (1) {\r\n      int u =\
-    \ head[v];\r\n      if (LID[v] - k >= LID[u]) return V[LID[v] - k];\r\n      k\
-    \ -= LID[v] - LID[u] + 1;\r\n      v = parent[u];\r\n    }\r\n  }\r\n\r\n  int\
-    \ LCA(int u, int v) {\r\n    for (;; v = parent[head[v]]) {\r\n      if (LID[u]\
-    \ > LID[v]) swap(u, v);\r\n      if (head[u] == head[v]) return u;\r\n    }\r\n\
-    \  }\r\n\r\n  int dist(int a, int b) {\r\n    int c = LCA(a, b);\r\n    return\
-    \ depth[a] + depth[b] - 2 * depth[c];\r\n  }\r\n\r\n  bool in_subtree(int a, int\
-    \ b) { return LID[b] <= LID[a] && LID[a] < RID[b]; }\r\n\r\n  int move(int a,\
-    \ int b) {\r\n    assert(a != b);\r\n    return (in_subtree(b, a) ? LA(b, depth[b]\
-    \ - depth[a] - 1) : parent[a]);\r\n  }\r\n\r\n  void debug() {\r\n    print(\"\
-    V\", V);\r\n    print(\"LID\", LID);\r\n    print(\"RID\", RID);\r\n    print(\"\
-    parent\", parent);\r\n    print(\"depth\", depth);\r\n    print(\"head\", head);\r\
-    \n  }\r\n\r\n  void doc() {\r\n    print(\"HL\u5206\u89E3\u3002O(N) \u6642\u9593\
-    \u69CB\u7BC9\u3002\");\r\n    print(\"LCA, LA \u306A\u3069\u306F O(logN) \u6642\
-    \u9593\u3002\");\r\n    print(\"\u6728\u306E\u554F\u984C\u3067\u306F\u771F\u3063\
-    \u5148\u306B\u3053\u308C\u3092\u4F5C\u308B\u3002\");\r\n    print(\"\u2192 \u6728\
-    DP\u3084\u6728\u30AF\u30A8\u30EA\u306B\u6D3E\u751F\u3002\");\r\n  }\r\n};\r\n\
-    #line 5 \"test/library_checker/graph/lca.test.cpp\"\n\nvoid solve() {\n  LL(N,\
-    \ Q);\n  Graph<int, 0> G(N);\n  FOR3(v, 1, N) {\n    LL(p);\n    G.add(p, v);\n\
-    \  }\n  G.prepare();\n  HLD hld(G);\n\n  FOR(_, Q) {\n    LL(a, b);\n    print(hld.LCA(a,\
-    \ b));\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
-    \  cout << setprecision(15);\n\n  solve();\n  return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\n#include \"my_template.hpp\"\
-    \n\n#include \"graph/hld.hpp\"\n\nvoid solve() {\n  LL(N, Q);\n  Graph<int, 0>\
-    \ G(N);\n  FOR3(v, 1, N) {\n    LL(p);\n    G.add(p, v);\n  }\n  G.prepare();\n\
-    \  HLD hld(G);\n\n  FOR(_, Q) {\n    LL(a, b);\n    print(hld.LCA(a, b));\n  }\n\
-    }\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout\
-    \ << setprecision(15);\n\n  solve();\n  return 0;\n}\n"
+    \    }\n  }\n\n  int size() { return N; }\n};\n#line 3 \"graph/dijkstra.hpp\"\n\
+    \ntemplate <typename Graph>\npair<vector<typename Graph::cost_type>, vector<int>>\
+    \ dijkstra(Graph& G, int v) {\n  auto N = G.N;\n  using T = typename Graph::cost_type;\n\
+    \  vector<T> dist(N, -1);\n  vector<int> par(N, -1);\n  using P = pair<T, int>;\n\
+    \n  priority_queue<P, vector<P>, greater<P>> que;\n\n  dist[v] = 0;\n  que.push(mp(T(0),\
+    \ v));\n  while (!que.empty()) {\n    auto [dv, v] = que.top();\n    que.pop();\n\
+    \    if(dv > dist[v]) continue;\n    for (auto&& e : G[v]) {\n      if (dist[e.to]\
+    \ == -1 || dist[e.to] > dist[e.frm] + e.cost){\n        dist[e.to] = dist[e.frm]\
+    \ + e.cost;\n        par[e.to] = e.frm;\n        que.push(mp(dist[e.to], e.to));\n\
+    \      }\n    }\n  }\n  return mp(dist, par);\n}\n#line 1 \"graph/restore_path.hpp\"\
+    \nvector<int> restore_path(vector<int> par, int t){\r\n  vector<int> pth = {t};\r\
+    \n  while (par[pth.back()] != -1) pth.eb(par[pth.back()]);\r\n  reverse(all(pth));\r\
+    \n  return pth;\r\n}\n#line 7 \"test/library_checker/graph/shortest_path.test.cpp\"\
+    \n\r\nvoid solve() {\r\n  LL(N, M, s, t);\r\n  Graph<ll, true> G(N);\r\n  FOR(_,\
+    \ M) {\r\n    LL(a, b, c);\r\n    G.add(a, b, c);\r\n  }\r\n  G.prepare();\r\n\
+    \r\n  auto [dist, par] = dijkstra(G, s);\r\n  if (dist[t] == -1) return print(-1);\r\
+    \n\r\n  vector<int> pth = restore_path(par, t);\r\n  print(dist[t], len(pth) -\
+    \ 1);\r\n  FOR(i, len(pth) - 1) print(pth[i], pth[i + 1]);\r\n}\r\n\r\nsigned\
+    \ main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout\
+    \ << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/shortest_path\"\r\n\r\n\
+    #include \"my_template.hpp\"\r\n\r\n#include \"graph/dijkstra.hpp\"\r\n#include\
+    \ \"graph/restore_path.hpp\"\r\n\r\nvoid solve() {\r\n  LL(N, M, s, t);\r\n  Graph<ll,\
+    \ true> G(N);\r\n  FOR(_, M) {\r\n    LL(a, b, c);\r\n    G.add(a, b, c);\r\n\
+    \  }\r\n  G.prepare();\r\n\r\n  auto [dist, par] = dijkstra(G, s);\r\n  if (dist[t]\
+    \ == -1) return print(-1);\r\n\r\n  vector<int> pth = restore_path(par, t);\r\n\
+    \  print(dist[t], len(pth) - 1);\r\n  FOR(i, len(pth) - 1) print(pth[i], pth[i\
+    \ + 1]);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
-  - graph/hld.hpp
+  - graph/dijkstra.hpp
   - graph/base.hpp
+  - graph/restore_path.hpp
   isVerificationFile: true
-  path: test/library_checker/graph/lca.test.cpp
+  path: test/library_checker/graph/shortest_path.test.cpp
   requiredBy: []
   timestamp: '2022-01-01 12:00:30+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/library_checker/graph/lca.test.cpp
+documentation_of: test/library_checker/graph/shortest_path.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/graph/lca.test.cpp
-- /verify/test/library_checker/graph/lca.test.cpp.html
-title: test/library_checker/graph/lca.test.cpp
+- /verify/test/library_checker/graph/shortest_path.test.cpp
+- /verify/test/library_checker/graph/shortest_path.test.cpp.html
+title: test/library_checker/graph/shortest_path.test.cpp
 ---
