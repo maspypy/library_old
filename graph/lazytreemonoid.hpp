@@ -8,7 +8,7 @@ struct LazyTreeMonoid {
   using MonoA = typename Lazy::A_structure;
   using X = typename MonoX::value_type;
   using A = typename MonoA::value_type;
-  using RevLazy = ReverseLazy<Lazy>;
+  using RevLazy = Lazy_Reverse<Lazy>;
   HLD &hld;
   int N;
   LazySegTree<Lazy> seg;
