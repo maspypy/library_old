@@ -102,6 +102,9 @@ data:
       path: ds/lichao.hpp
       title: ds/lichao.hpp
     - icon: ':heavy_check_mark:'
+      path: ds/mo.hpp
+      title: ds/mo.hpp
+    - icon: ':heavy_check_mark:'
       path: ds/segtree.hpp
       title: ds/segtree.hpp
     - icon: ':heavy_check_mark:'
@@ -256,9 +259,6 @@ data:
       path: other/maximal_rectangles.hpp
       title: other/maximal_rectangles.hpp
     - icon: ':warning:'
-      path: other/mo.hpp
-      title: other/mo.hpp
-    - icon: ':warning:'
       path: other/monge_shortest_path.hpp
       title: other/monge_shortest_path.hpp
     - icon: ':heavy_check_mark:'
@@ -343,6 +343,9 @@ data:
       path: test/library_checker/datastructure/associative_array.test.cpp
       title: test/library_checker/datastructure/associative_array.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/library_checker/datastructure/persistent_queue.test.cpp
+      title: test/library_checker/datastructure/persistent_queue.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/persistent_unionfind.test.cpp
       title: test/library_checker/datastructure/persistent_unionfind.test.cpp
     - icon: ':heavy_check_mark:'
@@ -378,6 +381,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/static_range_sum.test.cpp
       title: test/library_checker/datastructure/static_range_sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
+      title: test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/staticrmq_seg.test.cpp
       title: test/library_checker/datastructure/staticrmq_seg.test.cpp
