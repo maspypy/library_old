@@ -43,7 +43,7 @@ using pqg = priority_queue<T, vector<T>, greater<T>>;
       a, vector<vector<vector<type>>>(       \
              b, vector<vector<type>>(c, vector<type>(__VA_ARGS__))))
 
-#define FOR0(n) for (ll _ = 0; (_) < (ll)(n); ++(_))
+#define FOR_(n) for (ll _ = 0; (_) < (ll)(n); ++(_))
 #define FOR(i, n) for (ll i = 0; (i) < (ll)(n); ++(i))
 #define FOR3(i, m, n) for (ll i = (m); (i) < (ll)(n); ++(i))
 #define FOR_R(i, n) for (ll i = (ll)(n)-1; (i) >= 0; --(i))
