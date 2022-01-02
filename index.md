@@ -104,7 +104,7 @@ data:
     - icon: ':warning:'
       path: ds/lichao.hpp
       title: ds/lichao.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: ds/mo.hpp
       title: ds/mo.hpp
     - icon: ':question:'
@@ -267,7 +267,7 @@ data:
     - icon: ':x:'
       path: other/random.hpp
       title: other/random.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other/rectanglesums.hpp
       title: other/rectanglesums.hpp
     - icon: ':heavy_check_mark:'
@@ -378,16 +378,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
       title: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
       title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/static_range_sum.test.cpp
       title: test/library_checker/datastructure/static_range_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
       title: test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/staticrmq_seg.test.cpp
       title: test/library_checker/datastructure/staticrmq_seg.test.cpp
     - icon: ':x:'

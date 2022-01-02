@@ -23,7 +23,7 @@ data:
   - icon: ':x:'
     path: graph/treeabelgroup.hpp
     title: graph/treeabelgroup.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: other/rectanglesums.hpp
     title: other/rectanglesums.hpp
   - icon: ':heavy_check_mark:'
@@ -54,10 +54,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
     title: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
     title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
     title: test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
   - icon: ':x:'
