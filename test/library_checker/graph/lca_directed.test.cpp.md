@@ -161,19 +161,28 @@ data:
     \ depth[a] + depth[b] - 2 * depth[c];\r\n  }\r\n\r\n  bool in_subtree(int a, int\
     \ b) { return LID[b] <= LID[a] && LID[a] < RID[b]; }\r\n\r\n  int move(int a,\
     \ int b) {\r\n    assert(a != b);\r\n    return (in_subtree(b, a) ? LA(b, depth[b]\
-    \ - depth[a] - 1) : parent[a]);\r\n  }\r\n\r\n  void debug() {\r\n    print(\"\
-    V\", V);\r\n    print(\"LID\", LID);\r\n    print(\"RID\", RID);\r\n    print(\"\
-    parent\", parent);\r\n    print(\"depth\", depth);\r\n    print(\"head\", head);\r\
-    \n  }\r\n\r\n  void doc() {\r\n    print(\"HL\u5206\u89E3\u3002O(N) \u6642\u9593\
-    \u69CB\u7BC9\u3002\");\r\n    print(\"LCA, LA \u306A\u3069\u306F O(logN) \u6642\
-    \u9593\u3002\");\r\n    print(\"\u6728\u306E\u554F\u984C\u3067\u306F\u771F\u3063\
-    \u5148\u306B\u3053\u308C\u3092\u4F5C\u308B\u3002\");\r\n    print(\"\u2192 \u6728\
-    DP\u3084\u6728\u30AF\u30A8\u30EA\u306B\u6D3E\u751F\u3002\");\r\n  }\r\n};\r\n\
-    #line 5 \"test/library_checker/graph/lca_directed.test.cpp\"\n\nvoid solve() {\n\
-    \  LL(N, Q);\n  Graph<int, 1> G(N);\n  FOR3(v, 1, N) {\n    LL(p);\n    G.add(p,\
-    \ v);\n  }\n  G.prepare();\n  HLD hld(G);\n\n  FOR(_, Q) {\n    LL(a, b);\n  \
-    \  print(hld.LCA(a, b));\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
-    \  cout << setprecision(15);\n\n  solve();\n  return 0;\n}\n"
+    \ - depth[a] - 1) : parent[a]);\r\n  }\r\n\r\n  vc<pair<int, int>> get_path_decomposition(int\
+    \ u, int v, bool edge) {\r\n    // [\u59CB\u70B9, \u7D42\u70B9] \u306E\"\u9589\
+    \"\u533A\u9593\u5217\u3002\r\n    vc<pair<int, int>> up, down;\r\n    while (1)\
+    \ {\r\n      if (head[u] == head[v]) break;\r\n      if (LID[u] < LID[v]) {\r\n\
+    \        down.eb(LID[head[v]], LID[v]);\r\n        v = parent[head[v]];\r\n  \
+    \    } else {\r\n        up.eb(LID[u], LID[head[u]]);\r\n        u = parent[head[u]];\r\
+    \n      }\r\n    }\r\n    if (LID[u] < LID[v]) down.eb(LID[u] + edge, LID[v]);\r\
+    \n    elif (LID[v] + edge <= LID[u]) up.eb(LID[u], LID[v] + edge);\r\n    reverse(all(down));\r\
+    \n    up.insert(up.end(), all(down));\r\n    return up;\r\n  }\r\n\r\n  void debug()\
+    \ {\r\n    print(\"V\", V);\r\n    print(\"LID\", LID);\r\n    print(\"RID\",\
+    \ RID);\r\n    print(\"parent\", parent);\r\n    print(\"depth\", depth);\r\n\
+    \    print(\"head\", head);\r\n  }\r\n\r\n  void doc() {\r\n    print(\"HL\u5206\
+    \u89E3\u3002O(N) \u6642\u9593\u69CB\u7BC9\u3002\");\r\n    print(\"LCA, LA \u306A\
+    \u3069\u306F O(logN) \u6642\u9593\u3002\");\r\n    print(\"\u6728\u306E\u554F\u984C\
+    \u3067\u306F\u771F\u3063\u5148\u306B\u3053\u308C\u3092\u4F5C\u308B\u3002\");\r\
+    \n    print(\"\u2192 \u6728DP\u3084\u6728\u30AF\u30A8\u30EA\u306B\u6D3E\u751F\u3002\
+    \");\r\n  }\r\n};\r\n#line 5 \"test/library_checker/graph/lca_directed.test.cpp\"\
+    \n\nvoid solve() {\n  LL(N, Q);\n  Graph<int, 1> G(N);\n  FOR3(v, 1, N) {\n  \
+    \  LL(p);\n    G.add(p, v);\n  }\n  G.prepare();\n  HLD hld(G);\n\n  FOR(_, Q)\
+    \ {\n    LL(a, b);\n    print(hld.LCA(a, b));\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
+    \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  solve();\n \
+    \ return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\n#include \"my_template.hpp\"\
     \n\n#include \"graph/hld.hpp\"\n\nvoid solve() {\n  LL(N, Q);\n  Graph<int, 1>\
     \ G(N);\n  FOR3(v, 1, N) {\n    LL(p);\n    G.add(p, v);\n  }\n  G.prepare();\n\
@@ -187,7 +196,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/graph/lca_directed.test.cpp
   requiredBy: []
-  timestamp: '2022-01-03 02:37:31+09:00'
+  timestamp: '2022-01-03 14:52:38+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/graph/lca_directed.test.cpp

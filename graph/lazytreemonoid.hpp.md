@@ -32,32 +32,23 @@ data:
     \n    if (!MonoX::commute) seg_r = LazySegTree<RevLazy>(seg_raw);\r\n  }\r\n\r\
     \n  void set(int i, X x) {\r\n    if (edge) i = hld.e_to_v(i);\r\n    i = hld.LID[i];\r\
     \n    seg.set(i, x);\r\n    if (!MonoX::commute) seg_r.set(i, x);\r\n  }\r\n\r\
-    \n  X prod_path_nc(int u, int v) {\r\n    X xl = MonoX::unit, xr = MonoX::unit;\r\
-    \n    while (1) {\r\n      if (hld.head[u] == hld.head[v]) break;\r\n      if\
-    \ (hld.LID[u] < hld.LID[v]) {\r\n        xr = MonoX::op(seg.prod(hld.LID[hld.head[v]],\
-    \ hld.LID[v] + 1), xr);\r\n        v = hld.parent[hld.head[v]];\r\n      } else\
-    \ {\r\n        xl = MonoX::op(xl, seg_r.prod(hld.LID[hld.head[u]], hld.LID[u]\
-    \ + 1));\r\n        u = hld.parent[hld.head[u]];\r\n      }\r\n    }\r\n    X\
-    \ xm = (hld.LID[u] < hld.LID[v]\r\n                ? seg.prod(hld.LID[u] + edge,\
-    \ hld.LID[v] + 1)\r\n                : seg_r.prod(hld.LID[v] + edge, hld.LID[u]\
-    \ + 1));\r\n    return MonoX::op(xl, MonoX::op(xm, xr));\r\n  }\r\n\r\n  X prod_path(int\
-    \ u, int v) {\r\n    if (!MonoX::commute) return prod_path_nc(u, v);\r\n    X\
-    \ val = MonoX::unit;\r\n    while (1) {\r\n      if (hld.LID[u] > hld.LID[v])\
-    \ swap(u, v);\r\n      if (hld.head[u] == hld.head[v]) break;\r\n      val = MonoX::op(seg.prod(hld.LID[hld.head[v]],\
-    \ hld.LID[v] + 1), val);\r\n      v = hld.parent[hld.head[v]];\r\n    }\r\n  \
-    \  return MonoX::op(seg.prod(hld.LID[u] + edge, hld.LID[v] + 1), val);\r\n  }\r\
-    \n\r\n  X prod_subtree(int u) {\r\n    int l = hld.LID[u], r = hld.RID[u];\r\n\
-    \    return seg.prod(l + edge, r);\r\n  }\r\n\r\n  void apply_path(int u, int\
-    \ v, A a) {\r\n    while (1) {\r\n      if (hld.LID[u] > hld.LID[v]) swap(u, v);\r\
-    \n      if (hld.head[u] == hld.head[v]) break;\r\n      seg.apply(hld.LID[hld.head[v]],\
-    \ hld.LID[v] + 1, a);\r\n      v = hld.parent[hld.head[v]];\r\n    }\r\n    seg.apply(hld.LID[u]\
-    \ + edge, hld.LID[v] + 1, a);\r\n  }\r\n\r\n  void apply_subtree(int u, A a) {\r\
-    \n    int l = hld.LID[u], r = hld.RID[u];\r\n    return seg.apply(l + edge, r,\
-    \ a);\r\n  }\r\n\r\n  void debug() {\r\n    print(\"tree_monoid\");\r\n    hld.debug();\r\
-    \n    seg.debug();\r\n    seg_r.debug();\r\n  }\r\n\r\n  void doc() {\r\n    print(\"\
-    HL\u5206\u89E3 + \u30BB\u30B0\u6728\u3002\");\r\n    print(\"\u90E8\u5206\u6728\
-    \u30AF\u30A8\u30EA O(logN) \u6642\u9593\u3001\u30D1\u30B9\u30AF\u30A8\u30EA O(log^2N)\
-    \ \u6642\u9593\u3002\");\r\n  }\r\n};\r\n"
+    \n  X prod_path(int u, int v) {\r\n    auto pd = hld.get_path_decomposition(u,\
+    \ v, edge);\r\n    X val = Monoid::unit;\r\n    for (auto &&[a, b]: pd) {\r\n\
+    \      X x = (a <= b ? seg.prod(a, b + 1)\r\n                    : (Monoid::commute\
+    \ ? seg.prod(b, a + 1)\r\n                                       : seg_r.prod(b,\
+    \ a + 1)));\r\n      val = Monoid::op(val, x);\r\n    }\r\n    return val;\r\n\
+    \  }\r\n\r\n  X prod_subtree(int u) {\r\n    int l = hld.LID[u], r = hld.RID[u];\r\
+    \n    return seg.prod(l + edge, r);\r\n  }\r\n\r\n  void apply_path(int u, int\
+    \ v, A a) {\r\n    auto pd = hld.get_path_decomposition(u, v, edge);\r\n    for\
+    \ (auto &&[x, y]: pd) {\r\n      int l = min(x, y), r = max(x, y);\r\n      seg.apply(l,\
+    \ r + 1, a);\r\n      if(!Monoid::commute) seg_r.apply(l, r + 1, a);\r\n    }\r\
+    \n  }\r\n\r\n  void apply_subtree(int u, A a) {\r\n    int l = hld.LID[u], r =\
+    \ hld.RID[u];\r\n    return seg.apply(l + edge, r, a);\r\n  }\r\n\r\n  void debug()\
+    \ {\r\n    print(\"tree_monoid\");\r\n    hld.debug();\r\n    seg.debug();\r\n\
+    \    seg_r.debug();\r\n  }\r\n\r\n  void doc() {\r\n    print(\"HL\u5206\u89E3\
+    \ + \u30BB\u30B0\u6728\u3002\");\r\n    print(\"\u90E8\u5206\u6728\u30AF\u30A8\
+    \u30EA O(logN) \u6642\u9593\u3001\u30D1\u30B9\u30AF\u30A8\u30EA O(log^2N) \u6642\
+    \u9593\u3002\");\r\n  }\r\n};\r\n"
   dependsOn: []
   isVerificationFile: false
   path: graph/lazytreemonoid.hpp
