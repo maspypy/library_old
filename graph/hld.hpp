@@ -93,6 +93,26 @@ struct HLD {
     return (in_subtree(b, a) ? LA(b, depth[b] - depth[a] - 1) : parent[a]);
   }
 
+  vc<pair<int, int>> get_path_decomposition(int u, int v, bool edge) {
+    // [始点, 終点] の"閉"区間列。
+    vc<pair<int, int>> up, down;
+    while (1) {
+      if (head[u] == head[v]) break;
+      if (LID[u] < LID[v]) {
+        down.eb(LID[head[v]], LID[v]);
+        v = parent[head[v]];
+      } else {
+        up.eb(LID[u], LID[head[u]]);
+        u = parent[head[u]];
+      }
+    }
+    if (LID[u] < LID[v]) down.eb(LID[u] + edge, LID[v]);
+    elif (LID[v] + edge <= LID[u]) up.eb(LID[u], LID[v] + edge);
+    reverse(all(down));
+    up.insert(up.end(), all(down));
+    return up;
+  }
+
   void debug() {
     print("V", V);
     print("LID", LID);

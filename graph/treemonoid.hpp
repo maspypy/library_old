@@ -36,34 +36,16 @@ struct TreeMonoid {
     if (!Monoid::commute) seg_r.set(i, x);
   }
 
-  X prod_path_nc(int u, int v) {
-    X xl = Monoid::unit, xr = Monoid::unit;
-    while (1) {
-      if (hld.head[u] == hld.head[v]) break;
-      if (hld.LID[u] < hld.LID[v]) {
-        xr = Monoid::op(seg.prod(hld.LID[hld.head[v]], hld.LID[v] + 1), xr);
-        v = hld.parent[hld.head[v]];
-      } else {
-        xl = Monoid::op(xl, seg_r.prod(hld.LID[hld.head[u]], hld.LID[u] + 1));
-        u = hld.parent[hld.head[u]];
-      }
-    }
-    X xm = (hld.LID[u] < hld.LID[v]
-                ? seg.prod(hld.LID[u] + edge, hld.LID[v] + 1)
-                : seg_r.prod(hld.LID[v] + edge, hld.LID[u] + 1));
-    return Monoid::op(xl, Monoid::op(xm, xr));
-  }
-
   X prod_path(int u, int v) {
-    if (!Monoid::commute) return prod_path_nc(u, v);
+    auto pd = hld.get_path_decomposition(u, v, edge);
     X val = Monoid::unit;
-    while (1) {
-      if (hld.LID[u] > hld.LID[v]) swap(u, v);
-      if (hld.head[u] == hld.head[v]) break;
-      val = Monoid::op(seg.prod(hld.LID[hld.head[v]], hld.LID[v] + 1), val);
-      v = hld.parent[hld.head[v]];
+    for (auto &&[a, b]: pd) {
+      X x = (a <= b ? seg.prod(a, b + 1)
+                    : (Monoid::commute ? seg.prod(b, a + 1)
+                                       : seg_r.prod(b, a + 1)));
+      val = Monoid::op(val, x);
     }
-    return Monoid::op(seg.prod(hld.LID[u] + edge, hld.LID[v] + 1), val);
+    return val;
   }
 
   X prod_subtree(int u) {

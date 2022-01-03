@@ -39,34 +39,16 @@ struct LazyTreeMonoid {
     if (!MonoX::commute) seg_r.set(i, x);
   }
 
-  X prod_path_nc(int u, int v) {
-    X xl = MonoX::unit, xr = MonoX::unit;
-    while (1) {
-      if (hld.head[u] == hld.head[v]) break;
-      if (hld.LID[u] < hld.LID[v]) {
-        xr = MonoX::op(seg.prod(hld.LID[hld.head[v]], hld.LID[v] + 1), xr);
-        v = hld.parent[hld.head[v]];
-      } else {
-        xl = MonoX::op(xl, seg_r.prod(hld.LID[hld.head[u]], hld.LID[u] + 1));
-        u = hld.parent[hld.head[u]];
-      }
-    }
-    X xm = (hld.LID[u] < hld.LID[v]
-                ? seg.prod(hld.LID[u] + edge, hld.LID[v] + 1)
-                : seg_r.prod(hld.LID[v] + edge, hld.LID[u] + 1));
-    return MonoX::op(xl, MonoX::op(xm, xr));
-  }
-
   X prod_path(int u, int v) {
-    if (!MonoX::commute) return prod_path_nc(u, v);
-    X val = MonoX::unit;
-    while (1) {
-      if (hld.LID[u] > hld.LID[v]) swap(u, v);
-      if (hld.head[u] == hld.head[v]) break;
-      val = MonoX::op(seg.prod(hld.LID[hld.head[v]], hld.LID[v] + 1), val);
-      v = hld.parent[hld.head[v]];
+    auto pd = hld.get_path_decomposition(u, v, edge);
+    X val = Monoid::unit;
+    for (auto &&[a, b]: pd) {
+      X x = (a <= b ? seg.prod(a, b + 1)
+                    : (Monoid::commute ? seg.prod(b, a + 1)
+                                       : seg_r.prod(b, a + 1)));
+      val = Monoid::op(val, x);
     }
-    return MonoX::op(seg.prod(hld.LID[u] + edge, hld.LID[v] + 1), val);
+    return val;
   }
 
   X prod_subtree(int u) {
@@ -75,13 +57,12 @@ struct LazyTreeMonoid {
   }
 
   void apply_path(int u, int v, A a) {
-    while (1) {
-      if (hld.LID[u] > hld.LID[v]) swap(u, v);
-      if (hld.head[u] == hld.head[v]) break;
-      seg.apply(hld.LID[hld.head[v]], hld.LID[v] + 1, a);
-      v = hld.parent[hld.head[v]];
+    auto pd = hld.get_path_decomposition(u, v, edge);
+    for (auto &&[x, y]: pd) {
+      int l = min(x, y), r = max(x, y);
+      seg.apply(l, r + 1, a);
+      if(!Monoid::commute) seg_r.apply(l, r + 1, a);
     }
-    seg.apply(hld.LID[u] + edge, hld.LID[v] + 1, a);
   }
 
   void apply_subtree(int u, A a) {
