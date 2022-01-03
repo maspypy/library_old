@@ -153,7 +153,21 @@ data:
     \      X x = (a <= b ? seg.prod(a, b + 1)\r\n                    : (Monoid::commute\
     \ ? seg.prod(b, a + 1)\r\n                                       : seg_r.prod(b,\
     \ a + 1)));\r\n      val = Monoid::op(val, x);\r\n    }\r\n    return val;\r\n\
-    \  }\r\n\r\n  X prod_subtree(int u) {\r\n    int l = hld.LID[u], r = hld.RID[u];\r\
+    \  }\r\n\r\n  template <class F>\r\n  int find_path(F &check, int u, int v) {\r\
+    \n    /*\r\n    uv path \u4E0A\u3067 prod_path(u, x) \u304C check \u3092\u6E80\
+    \u305F\u3059\u6700\u521D\u306E x\r\n    \u306A\u3051\u308C\u3070 -1\r\n    */\r\
+    \n    if (check(prod_path(u, u))) return u;\r\n    auto pd = hld.get_path_decomposition(u,\
+    \ v, edge);\r\n    X val = Monoid::unit;\r\n    for (auto &&[a, b]: pd) {\r\n\
+    \      X x = (a <= b ? seg.prod(a, b + 1)\r\n                    : (Monoid::commute\
+    \ ? seg.prod(b, a + 1)\r\n                                       : seg_r.prod(b,\
+    \ a + 1)));\r\n      if (!check(Monoid::op(val, x))) {\r\n        val = Monoid::op(val,\
+    \ x);\r\n        continue;\r\n      }\r\n      auto check_tmp = [&](X x) -> bool\
+    \ { return !check(Monoid::op(val, x)); };\r\n      if (a <= b) {\r\n        auto\
+    \ i = seg.max_right(check_tmp, a);\r\n        return hld.LID[i];\r\n      } else\
+    \ {\r\n        auto i = (Monoid::commute ? seg.min_left(check_tmp, a + 1)\r\n\
+    \                                  : seg_r.min_left(check_tmp, a + 1));\r\n  \
+    \      --i;\r\n        return hld.LID[i];\r\n      }\r\n    }\r\n    return -1;\r\
+    \n  }\r\n\r\n  X prod_subtree(int u) {\r\n    int l = hld.LID[u], r = hld.RID[u];\r\
     \n    return seg.prod(l + edge, r);\r\n  }\r\n\r\n  void debug() {\r\n    print(\"\
     tree_monoid\");\r\n    hld.debug();\r\n    seg.debug();\r\n    seg_r.debug();\r\
     \n  }\r\n\r\n  void doc() {\r\n    print(\"HL\u5206\u89E3 + \u30BB\u30B0\u6728\
@@ -178,7 +192,21 @@ data:
     \      X x = (a <= b ? seg.prod(a, b + 1)\r\n                    : (Monoid::commute\
     \ ? seg.prod(b, a + 1)\r\n                                       : seg_r.prod(b,\
     \ a + 1)));\r\n      val = Monoid::op(val, x);\r\n    }\r\n    return val;\r\n\
-    \  }\r\n\r\n  X prod_subtree(int u) {\r\n    int l = hld.LID[u], r = hld.RID[u];\r\
+    \  }\r\n\r\n  template <class F>\r\n  int find_path(F &check, int u, int v) {\r\
+    \n    /*\r\n    uv path \u4E0A\u3067 prod_path(u, x) \u304C check \u3092\u6E80\
+    \u305F\u3059\u6700\u521D\u306E x\r\n    \u306A\u3051\u308C\u3070 -1\r\n    */\r\
+    \n    if (check(prod_path(u, u))) return u;\r\n    auto pd = hld.get_path_decomposition(u,\
+    \ v, edge);\r\n    X val = Monoid::unit;\r\n    for (auto &&[a, b]: pd) {\r\n\
+    \      X x = (a <= b ? seg.prod(a, b + 1)\r\n                    : (Monoid::commute\
+    \ ? seg.prod(b, a + 1)\r\n                                       : seg_r.prod(b,\
+    \ a + 1)));\r\n      if (!check(Monoid::op(val, x))) {\r\n        val = Monoid::op(val,\
+    \ x);\r\n        continue;\r\n      }\r\n      auto check_tmp = [&](X x) -> bool\
+    \ { return !check(Monoid::op(val, x)); };\r\n      if (a <= b) {\r\n        auto\
+    \ i = seg.max_right(check_tmp, a);\r\n        return hld.LID[i];\r\n      } else\
+    \ {\r\n        auto i = (Monoid::commute ? seg.min_left(check_tmp, a + 1)\r\n\
+    \                                  : seg_r.min_left(check_tmp, a + 1));\r\n  \
+    \      --i;\r\n        return hld.LID[i];\r\n      }\r\n    }\r\n    return -1;\r\
+    \n  }\r\n\r\n  X prod_subtree(int u) {\r\n    int l = hld.LID[u], r = hld.RID[u];\r\
     \n    return seg.prod(l + edge, r);\r\n  }\r\n\r\n  void debug() {\r\n    print(\"\
     tree_monoid\");\r\n    hld.debug();\r\n    seg.debug();\r\n    seg_r.debug();\r\
     \n  }\r\n\r\n  void doc() {\r\n    print(\"HL\u5206\u89E3 + \u30BB\u30B0\u6728\
@@ -193,7 +221,7 @@ data:
   isVerificationFile: false
   path: graph/treemonoid.hpp
   requiredBy: []
-  timestamp: '2022-01-03 14:52:38+09:00'
+  timestamp: '2022-01-03 15:12:53+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
