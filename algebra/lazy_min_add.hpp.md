@@ -25,12 +25,13 @@ data:
     \ constexpr bool commute = true;\r\n};\r\n#line 1 \"algebra/monoid_min.hpp\"\n\
     template <class X, X INF>\r\nstruct Monoid_Min {\r\n  using value_type = X;\r\n\
     \  static constexpr X op(const X &x, const X &y) noexcept { return min(x, y);\
-    \ }\r\n  static constexpr X unit = INF;\r\n};\r\n#line 3 \"algebra/lazy_min_add.hpp\"\
-    \n\r\ntemplate <typename E, E INF>\r\nstruct Lazy_Min_Add {\r\n  using MX = Monoid_Min<E,\
-    \ INF>;\r\n  using MA = Group_Add<E>;\r\n  using X_structure = MX;\r\n  using\
-    \ A_structure = MA;\r\n  using X = typename MX::value_type;\r\n  using A = typename\
-    \ MA::value_type;\r\n  static constexpr X act(const X &x, const A &a) { \r\n \
-    \   return min(MX::unit, x + a);\r\n  }\r\n};\n"
+    \ }\r\n  static constexpr X unit = INF;\r\n  static constexpr bool commute = true;\r\
+    \n};\r\n#line 3 \"algebra/lazy_min_add.hpp\"\n\r\ntemplate <typename E, E INF>\r\
+    \nstruct Lazy_Min_Add {\r\n  using MX = Monoid_Min<E, INF>;\r\n  using MA = Group_Add<E>;\r\
+    \n  using X_structure = MX;\r\n  using A_structure = MA;\r\n  using X = typename\
+    \ MX::value_type;\r\n  using A = typename MA::value_type;\r\n  static constexpr\
+    \ X act(const X &x, const A &a) { \r\n    return min(MX::unit, x + a);\r\n  }\r\
+    \n};\n"
   code: "#include \"algebra/group_add.hpp\"\r\n#include \"algebra/monoid_min.hpp\"\
     \r\n\r\ntemplate <typename E, E INF>\r\nstruct Lazy_Min_Add {\r\n  using MX =\
     \ Monoid_Min<E, INF>;\r\n  using MA = Group_Add<E>;\r\n  using X_structure = MX;\r\
@@ -43,7 +44,7 @@ data:
   isVerificationFile: false
   path: algebra/lazy_min_add.hpp
   requiredBy: []
-  timestamp: '2022-01-01 23:37:45+09:00'
+  timestamp: '2022-01-03 15:33:48+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DSL_2_H_min_add_lazy.test.cpp

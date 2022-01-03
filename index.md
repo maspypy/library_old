@@ -225,12 +225,12 @@ data:
     - icon: ':warning:'
       path: mod/amodint.hpp
       title: mod/amodint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: mod/modint.hpp
       title: mod/modint.hpp
   - name: .
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: my_template.hpp
       title: my_template.hpp
   - name: nt
@@ -296,16 +296,16 @@ data:
       title: sequence/linearrecurrence.hpp
   - name: setfunc
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: setfunc/and_convolution.hpp
       title: setfunc/and_convolution.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: setfunc/or_convolution.hpp
       title: setfunc/or_convolution.hpp
     - icon: ':heavy_check_mark:'
       path: setfunc/subset_convolution.hpp
       title: setfunc/subset_convolution.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: setfunc/zeta.hpp
       title: setfunc/zeta.hpp
   - name: string
@@ -356,12 +356,12 @@ data:
       title: test/example.test.cpp
   - name: test/library_checker/convolution
     pages:
-    - icon: ':x:'
-      path: test/library_checker/convolution/bitwise_and_convolution.test.hpp
-      title: test/library_checker/convolution/bitwise_and_convolution.test.hpp
-    - icon: ':x:'
-      path: test/library_checker/convolution/bitwise_or_convolution.test.hpp
-      title: test/library_checker/convolution/bitwise_or_convolution.test.hpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/convolution/bitwise_and_convolution.test.cpp
+      title: test/library_checker/convolution/bitwise_and_convolution.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/convolution/bitwise_or_convolution.test.cpp
+      title: test/library_checker/convolution/bitwise_or_convolution.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/convolution/subset_convolution.test.cpp
       title: test/library_checker/convolution/subset_convolution.test.cpp

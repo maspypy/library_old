@@ -2,22 +2,22 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: setfunc/and_convolution.hpp
     title: setfunc/and_convolution.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: setfunc/or_convolution.hpp
     title: setfunc/or_convolution.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
-    path: test/library_checker/convolution/bitwise_and_convolution.test.hpp
-    title: test/library_checker/convolution/bitwise_and_convolution.test.hpp
-  - icon: ':x:'
-    path: test/library_checker/convolution/bitwise_or_convolution.test.hpp
-    title: test/library_checker/convolution/bitwise_or_convolution.test.hpp
-  _isVerificationFailed: true
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/convolution/bitwise_and_convolution.test.cpp
+    title: test/library_checker/convolution/bitwise_and_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/convolution/bitwise_or_convolution.test.cpp
+    title: test/library_checker/convolution/bitwise_or_convolution.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"setfunc/zeta.hpp\"\n\r\ntemplate <typename T>\r\nvoid superset_zeta(vc<T>&\
@@ -53,10 +53,10 @@ data:
   - setfunc/and_convolution.hpp
   - setfunc/or_convolution.hpp
   timestamp: '2022-01-03 11:29:10+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/convolution/bitwise_or_convolution.test.hpp
-  - test/library_checker/convolution/bitwise_and_convolution.test.hpp
+  - test/library_checker/convolution/bitwise_and_convolution.test.cpp
+  - test/library_checker/convolution/bitwise_or_convolution.test.cpp
 documentation_of: setfunc/zeta.hpp
 layout: document
 redirect_from:

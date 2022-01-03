@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: setfunc/or_convolution.hpp
     title: setfunc/or_convolution.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: setfunc/zeta.hpp
     title: setfunc/zeta.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
-  _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _isVerificationFailed: false
+  _pathExtension: cpp
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/bitwise_and_convolution
     links:
     - https://judge.yosupo.jp/problem/bitwise_and_convolution
-  bundledCode: "#line 1 \"test/library_checker/convolution/bitwise_or_convolution.test.hpp\"\
+  bundledCode: "#line 1 \"test/library_checker/convolution/bitwise_or_convolution.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/bitwise_and_convolution\"\r\
     \n#line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
     \nusing ll = long long;\nusing ll8 = __int128;\nusing ld = long double;\nusing\
@@ -107,7 +107,7 @@ data:
     }\n\n#define SUM(v) accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n\
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
-    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/convolution/bitwise_or_convolution.test.hpp\"\
+    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/convolution/bitwise_or_convolution.test.cpp\"\
     \n\r\n#line 1 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n  int val;\n\
     \n  constexpr modint(const ll val = 0) noexcept\n      : val(val >= 0 ? val %\
     \ mod : (mod - (-val) % mod) % mod) {}\n\n  bool operator<(const modint &other)\
@@ -159,7 +159,7 @@ data:
     \ t = s ^ (1 << n);\r\n    if (s > t) A[s] -= A[t];\r\n  }\r\n}\n#line 2 \"setfunc/or_convolution.hpp\"\
     \ntemplate <typename T>\r\nvc<T> or_convolution(vc<T> A, vc<T> B) {\r\n  subset_zeta(A);\r\
     \n  subset_zeta(B);\r\n  FOR(i, len(A)) A[i] *= B[i];\r\n  subset_mobius(A);\r\
-    \n  return A;\r\n}\r\n#line 6 \"test/library_checker/convolution/bitwise_or_convolution.test.hpp\"\
+    \n  return A;\r\n}\r\n#line 6 \"test/library_checker/convolution/bitwise_or_convolution.test.cpp\"\
     \n\r\nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N);\r\n  vc<mint>\
     \ A(1 << N), B(1 << N);\r\n  FOR(i, 1 << N) {\r\n    LL(a);\r\n    A[i] = a;\r\
     \n  }\r\n  FOR(i, 1 << N) {\r\n    LL(a);\r\n    B[i] = a;\r\n  }\r\n  reverse(all(A));\r\
@@ -181,15 +181,15 @@ data:
   - setfunc/or_convolution.hpp
   - setfunc/zeta.hpp
   isVerificationFile: true
-  path: test/library_checker/convolution/bitwise_or_convolution.test.hpp
+  path: test/library_checker/convolution/bitwise_or_convolution.test.cpp
   requiredBy: []
-  timestamp: '2022-01-03 11:29:10+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-01-03 15:36:00+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/library_checker/convolution/bitwise_or_convolution.test.hpp
+documentation_of: test/library_checker/convolution/bitwise_or_convolution.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/convolution/bitwise_or_convolution.test.hpp
-- /verify/test/library_checker/convolution/bitwise_or_convolution.test.hpp.html
-title: test/library_checker/convolution/bitwise_or_convolution.test.hpp
+- /verify/test/library_checker/convolution/bitwise_or_convolution.test.cpp
+- /verify/test/library_checker/convolution/bitwise_or_convolution.test.cpp.html
+title: test/library_checker/convolution/bitwise_or_convolution.test.cpp
 ---

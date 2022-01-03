@@ -7,7 +7,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
@@ -136,12 +136,12 @@ data:
     segtree\", dat); }\n};\n#line 1 \"algebra/monoid_min.hpp\"\ntemplate <class X,\
     \ X INF>\r\nstruct Monoid_Min {\r\n  using value_type = X;\r\n  static constexpr\
     \ X op(const X &x, const X &y) noexcept { return min(x, y); }\r\n  static constexpr\
-    \ X unit = INF;\r\n};\r\n#line 5 \"test/library_checker/datastructure/staticrmq_seg.test.cpp\"\
-    \n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  VEC(int, A, N);\r\n  using Mono = Monoid_Min<int,\
-    \ 1 << 30>;\r\n  SegTree<Mono> seg(A);\r\n  FOR(_, Q) {\r\n    LL(L, R);\r\n \
-    \   print(seg.prod(L, R));\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
-    \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
-    \n\r\n  return 0;\r\n}\r\n"
+    \ X unit = INF;\r\n  static constexpr bool commute = true;\r\n};\r\n#line 5 \"\
+    test/library_checker/datastructure/staticrmq_seg.test.cpp\"\n\r\nvoid solve()\
+    \ {\r\n  LL(N, Q);\r\n  VEC(int, A, N);\r\n  using Mono = Monoid_Min<int, 1 <<\
+    \ 30>;\r\n  SegTree<Mono> seg(A);\r\n  FOR(_, Q) {\r\n    LL(L, R);\r\n    print(seg.prod(L,\
+    \ R));\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/staticrmq\"\r\n#include\
     \ \"my_template.hpp\"\r\n#include \"ds/segtree.hpp\"\r\n#include \"algebra/monoid_min.hpp\"\
     \r\n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  VEC(int, A, N);\r\n  using Mono = Monoid_Min<int,\
@@ -156,7 +156,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/staticrmq_seg.test.cpp
   requiredBy: []
-  timestamp: '2022-01-03 02:37:31+09:00'
+  timestamp: '2022-01-03 15:33:48+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/staticrmq_seg.test.cpp

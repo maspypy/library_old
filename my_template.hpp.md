@@ -39,12 +39,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_4_A_rectangle_union.test.cpp
     title: test/aoj/DSL_4_A_rectangle_union.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/convolution/bitwise_and_convolution.test.hpp
-    title: test/library_checker/convolution/bitwise_and_convolution.test.hpp
-  - icon: ':x:'
-    path: test/library_checker/convolution/bitwise_or_convolution.test.hpp
-    title: test/library_checker/convolution/bitwise_or_convolution.test.hpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/convolution/bitwise_and_convolution.test.cpp
+    title: test/library_checker/convolution/bitwise_and_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/convolution/bitwise_or_convolution.test.cpp
+    title: test/library_checker/convolution/bitwise_or_convolution.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/convolution/subset_convolution.test.cpp
     title: test/library_checker/convolution/subset_convolution.test.cpp
@@ -165,9 +165,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/899_bfsnumbering.test.cpp
     title: test/yukicoder/899_bfsnumbering.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace\
@@ -346,7 +346,7 @@ data:
   - ds/unionfind.hpp
   - geometry/geometry.hpp
   timestamp: '2022-01-03 02:37:31+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
   - test/aoj/DSL_2_E_fenwick_raq.test.cpp
@@ -355,9 +355,9 @@ data:
   - test/aoj/DSL_2_H_min_add_lazy.test.cpp
   - test/aoj/DSL_2_F_min_set_lazy.test.cpp
   - test/aoj/DSL_2_G_fenwick_raq.test.cpp
-  - test/library_checker/convolution/bitwise_or_convolution.test.hpp
   - test/library_checker/convolution/subset_convolution.test.cpp
-  - test/library_checker/convolution/bitwise_and_convolution.test.hpp
+  - test/library_checker/convolution/bitwise_and_convolution.test.cpp
+  - test/library_checker/convolution/bitwise_or_convolution.test.cpp
   - test/library_checker/graph/cycle_detection.test.cpp
   - test/library_checker/graph/maximum_independent_set.test.cpp
   - test/library_checker/graph/lca.test.cpp
