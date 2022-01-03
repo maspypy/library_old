@@ -76,25 +76,7 @@ struct TreeMonoid {
         return hld.LID[i];
       }
     }
-    if (L == n) return n;
-    L += size;
-    X sm = Monoid::unit;
-    do {
-      while (L % 2 == 0) L >>= 1;
-      if (!check(Monoid::op(sm, dat[L]))) {
-        while (L < size) {
-          L = 2 * L;
-          if (check(Monoid::op(sm, dat[L]))) {
-            sm = Monoid::op(sm, dat[L]);
-            L++;
-          }
-        }
-        return L - size;
-      }
-      sm = Monoid::op(sm, dat[L]);
-      L++;
-    } while ((L & -L) != L);
-    return n;
+    return -1;
   }
 
   X prod_subtree(int u) {
