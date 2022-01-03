@@ -101,17 +101,7 @@ struct CFFT {
 
 CFFT cfft;
 
-vector<ll> convolve(vector<ll>& A, vector<ll>& B) {
-  if (min(len(A), len(B)) <= 60) {
-    vector<ll> C(len(A) + len(B) - 1);
-    FOR(i, len(A)) FOR(j, len(B)) C[i + j] += A[i] * B[j];
-    return C;
-  }
-  assert(SUM(A) * SUM(B) < 1e15);
-  return cfft.conv(A, B);
-}
-
-vector<ll> conv_ll(vector<ll>& A, vector<ll>& B) {
+vector<ll> convolution_ll(vector<ll>& A, vector<ll>& B) {
   if (min(len(A), len(B)) <= 60) {
     vector<ll> C(len(A) + len(B) - 1);
     FOR(i, len(A)) FOR(j, len(B)) C[i + j] += A[i] * B[j];
