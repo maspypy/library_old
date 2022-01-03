@@ -2,11 +2,14 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
+    path: mod/modint.hpp
+    title: mod/modint.hpp
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   - icon: ':heavy_check_mark:'
-    path: string/manacher.hpp
-    title: string/manacher.hpp
+    path: setfunc/subset_convolution.hpp
+    title: setfunc/subset_convolution.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -14,15 +17,15 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/enumerate_palindromes
+    PROBLEM: https://judge.yosupo.jp/problem/subset_convolution
     links:
-    - https://judge.yosupo.jp/problem/enumerate_palindromes
-  bundledCode: "#line 1 \"test/library_checker/string/enumerate_palindromes.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/enumerate_palindromes\"\r\n\
-    #line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
-    \nusing ll = long long;\nusing ll8 = __int128;\nusing ld = long double;\nusing\
-    \ pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint = unsigned int;\nusing\
-    \ ull = unsigned long long;\n\ntemplate <class T>\nusing vc = vector<T>;\ntemplate\
+    - https://judge.yosupo.jp/problem/subset_convolution
+  bundledCode: "#line 1 \"test/library_checker/convolution/subset_convolution.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/subset_convolution\"\r\n#line\
+    \ 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\n\
+    using ll = long long;\nusing ll8 = __int128;\nusing ld = long double;\nusing pi\
+    \ = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint = unsigned int;\nusing ull\
+    \ = unsigned long long;\n\ntemplate <class T>\nusing vc = vector<T>;\ntemplate\
     \ <class T>\nusing vvc = vector<vc<T>>;\ntemplate <class T>\nusing vvvc = vector<vvc<T>>;\n\
     template <class T>\nusing vvvvc = vector<vvvc<T>>;\ntemplate <class T>\nusing\
     \ vvvvvc = vector<vvvvc<T>>;\ntemplate <class T>\nusing pq = priority_queue<T>;\n\
@@ -101,39 +104,84 @@ data:
     }\n\n#define SUM(v) accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n\
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
-    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/string/enumerate_palindromes.test.cpp\"\
-    \n\r\n#line 1 \"string/manacher.hpp\"\ntemplate <bool CALC_ALL, typename STRING>\r\
-    \nvector<int> longest_palindrome(STRING s) {\r\n  if (CALC_ALL) {\r\n    int n\
-    \ = len(s);\r\n    assert(n > 0);\r\n    s.resize(2 * n - 1);\r\n    FOR_R(i,\
-    \ n) s[2 * i] = s[i];\r\n    FOR(i, n - 1) s[2 * i + 1] = '-';\r\n  }\r\n  vector<int>\
-    \ A(len(s));\r\n  int i = 0, j = 0;\r\n  while (i < len(s)) {\r\n    while (i\
-    \ - j >= 0 && i + j < len(s) && s[i - j] == s[i + j]) ++j;\r\n    A[i] = j;\r\n\
-    \    int k = 1;\r\n    while (i - k >= 0 && i + k < len(s) && k + A[i - k] < j)\
-    \ {\r\n      A[i + k] = A[i - k];\r\n      ++k;\r\n    }\r\n    i += k, j -= k;\r\
-    \n  }\r\n  if (CALC_ALL) {\r\n    FOR(i, len(A)) {\r\n      if (!((i ^ A[i]) &\
-    \ 1)) A[i]--;\r\n    }\r\n  } else {\r\n    for (auto&& x: A) x = 2 * x - 1;\r\
-    \n  }\r\n  return A;\r\n}\r\n#line 5 \"test/library_checker/string/enumerate_palindromes.test.cpp\"\
-    \n\r\nvoid solve() {\r\n  STR(S);\r\n  auto A = longest_palindrome<1>(S);\r\n\
-    \  print(A);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/enumerate_palindromes\"\
-    \r\n#include \"my_template.hpp\"\r\n\r\n#include \"string/manacher.hpp\"\r\n\r\
-    \nvoid solve() {\r\n  STR(S);\r\n  auto A = longest_palindrome<1>(S);\r\n  print(A);\r\
-    \n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/convolution/subset_convolution.test.cpp\"\
+    \n\r\n#line 1 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n  int val;\n\
+    \n  constexpr modint(const ll val = 0) noexcept\n      : val(val >= 0 ? val %\
+    \ mod : (mod - (-val) % mod) % mod) {}\n\n  bool operator<(const modint &other)\
+    \ const {\n    return val < other.val;\n  } // To use std::map\n\n  modint &operator+=(const\
+    \ modint &p) {\n    if ((val += p.val) >= mod) val -= mod;\n    return *this;\n\
+    \  }\n  modint &operator-=(const modint &p) {\n    if ((val += mod - p.val) >=\
+    \ mod) val -= mod;\n    return *this;\n  }\n  modint &operator*=(const modint\
+    \ &p) {\n    val = (int)(1LL * val * p.val % mod);\n    return *this;\n  }\n \
+    \ modint &operator/=(const modint &p) {\n    *this *= p.inverse();\n    return\
+    \ *this;\n  }\n  modint operator-() const { return modint(-val); }\n  modint operator+(const\
+    \ modint &p) const { return modint(*this) += p; }\n  modint operator-(const modint\
+    \ &p) const { return modint(*this) -= p; }\n  modint operator*(const modint &p)\
+    \ const { return modint(*this) *= p; }\n  modint operator/(const modint &p) const\
+    \ { return modint(*this) /= p; }\n  bool operator==(const modint &p) const { return\
+    \ val == p.val; }\n  bool operator!=(const modint &p) const { return val != p.val;\
+    \ }\n\n  modint inverse() const {\n    int a = val, b = mod, u = 1, v = 0, t;\n\
+    \    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b);\n      swap(u\
+    \ -= t * v, v);\n    }\n    return modint(u);\n  }\n\n  modint pow(int64_t n)\
+    \ const {\n    modint ret(1), mul(val);\n    while (n > 0) {\n      if (n & 1)\
+    \ ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n    return ret;\n  }\n\
+    \n  friend ostream &operator<<(ostream &os, const modint &p) { return os << p.val;\
+    \ }\n  static int get_mod() { return mod; }\n};\n\ntemplate <typename T>\nstruct\
+    \ ModCalc {\n  vector<T> _fact = {1, 1};\n  vector<T> _fact_inv = {1, 1};\n  vector<T>\
+    \ _inv = {0, 1};\n\n  T pow(T a, int n) {\n    T x(1);\n    while (n) {\n    \
+    \  if (n & 1) x *= a;\n      a *= a;\n      n >>= 1;\n    }\n    return x;\n \
+    \ }\n  void expand(int n) {\n    while (_fact.size() <= n) {\n      auto i = _fact.size();\n\
+    \      _fact.eb(_fact[i - 1] * T(i));\n      auto q = T::get_mod() / i, r = T::get_mod()\
+    \ % i;\n      _inv.eb(_inv[r] * T(T::get_mod() - q));\n      _fact_inv.eb(_fact_inv[i\
+    \ - 1] * _inv[i]);\n    }\n  }\n\n  T fact(int n) {\n    if (n >= _fact.size())\
+    \ expand(n);\n    return _fact[n];\n  }\n\n  T fact_inv(int n) {\n    if (n >=\
+    \ _fact.size()) expand(n);\n    return _fact_inv[n];\n  }\n\n  T inv(int n) {\n\
+    \    if (n >= _fact.size()) expand(n);\n    return _inv[n];\n  }\n\n  T C(ll n,\
+    \ ll k, bool large = false) {\n    assert(n >= 0);\n    if (k < 0 || n < k) return\
+    \ 0;\n    if (!large) return fact(n) * fact_inv(k) * fact_inv(n - k);\n    k =\
+    \ min(k, n - k);\n    T x(1);\n    FOR(i, k) {\n      x *= n - i;\n      x *=\
+    \ inv(i + 1);\n    }\n    return x;\n  }\n};\n\nusing modint107 = modint<1'000'000'007>;\n\
+    using modint998 = modint<998'244'353>;\n#line 1 \"setfunc/subset_convolution.hpp\"\
+    \ntemplate <typename T, int LIM = 20>\r\nvc<T> subset_convolution(vc<T>& A, vc<T>&\
+    \ B) {\r\n  using F = array<T, LIM + 1>;\r\n  int N = len(A);\r\n  int log = topbit(N);\r\
+    \n  assert(N == 1 << log);\r\n  vc<F> RA(N), RB(N);\r\n  FOR(s, N) RA[s][popcnt(s)]\
+    \ = A[s];\r\n  FOR(s, N) RB[s][popcnt(s)] = B[s];\r\n  // subset zeta\r\n  FOR(i,\
+    \ log) FOR(s, 1 << log) if (!(s & 1 << i)) {\r\n    int t = s | 1 << i;\r\n  \
+    \  FOR(k, log + 1) RA[t][k] += RA[s][k], RB[t][k] += RB[s][k];\r\n  }\r\n  //\
+    \ pointwise multiplication\r\n  FOR(s, 1 << log) {\r\n    auto &f = RA[s], &g\
+    \ = RB[s];\r\n    FOR_R(i, log + 1) {\r\n      FOR3(j, 1, log - i + 1) f[i + j]\
+    \ += f[i] * g[j];\r\n      f[i] *= g[0];\r\n    }\r\n  }\r\n  // subset mobius\r\
+    \n  FOR(i, log) FOR(s, 1 << log) if (!(s & 1 << i)) {\r\n    int t = s | 1 <<\
+    \ i;\r\n    FOR(k, log + 1) RA[t][k] -= RA[s][k];\r\n  }\r\n  vc<T> res(N);\r\n\
+    \  FOR(s, N) res[s] = RA[s][popcnt(s)];\r\n  return res;\r\n}\r\n#line 6 \"test/library_checker/convolution/subset_convolution.test.cpp\"\
+    \n\r\nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N);\r\n  vc<mint>\
+    \ A(1 << N), B(1 << N);\r\n  FOR(i, 1 << N) {\r\n    LL(a);\r\n    A[i] = a;\r\
+    \n  }\r\n  FOR(i, 1 << N) {\r\n    LL(a);\r\n    B[i] = a;\r\n  }\r\n  auto C\
+    \ = subset_convolution(A, B);\r\n  print(C);\r\n}\r\n\r\nsigned main() {\r\n \
+    \ cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
+    \n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/subset_convolution\"\r\n\
+    #include \"my_template.hpp\"\r\n\r\n#include \"mod/modint.hpp\"\r\n#include \"\
+    setfunc/subset_convolution.hpp\"\r\n\r\nusing mint = modint998;\r\n\r\nvoid solve()\
+    \ {\r\n  LL(N);\r\n  vc<mint> A(1 << N), B(1 << N);\r\n  FOR(i, 1 << N) {\r\n\
+    \    LL(a);\r\n    A[i] = a;\r\n  }\r\n  FOR(i, 1 << N) {\r\n    LL(a);\r\n  \
+    \  B[i] = a;\r\n  }\r\n  auto C = subset_convolution(A, B);\r\n  print(C);\r\n\
+    }\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
     \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
-  - string/manacher.hpp
+  - mod/modint.hpp
+  - setfunc/subset_convolution.hpp
   isVerificationFile: true
-  path: test/library_checker/string/enumerate_palindromes.test.cpp
+  path: test/library_checker/convolution/subset_convolution.test.cpp
   requiredBy: []
-  timestamp: '2022-01-03 02:37:31+09:00'
+  timestamp: '2022-01-03 12:24:42+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/library_checker/string/enumerate_palindromes.test.cpp
+documentation_of: test/library_checker/convolution/subset_convolution.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/string/enumerate_palindromes.test.cpp
-- /verify/test/library_checker/string/enumerate_palindromes.test.cpp.html
-title: test/library_checker/string/enumerate_palindromes.test.cpp
+- /verify/test/library_checker/convolution/subset_convolution.test.cpp
+- /verify/test/library_checker/convolution/subset_convolution.test.cpp.html
+title: test/library_checker/convolution/subset_convolution.test.cpp
 ---

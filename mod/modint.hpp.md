@@ -10,6 +10,9 @@ data:
     path: test/library_checker/convolution/bitwise_or_convolution.test.hpp
     title: test/library_checker/convolution/bitwise_or_convolution.test.hpp
   - icon: ':heavy_check_mark:'
+    path: test/library_checker/convolution/subset_convolution.test.cpp
+    title: test/library_checker/convolution/subset_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
     title: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
   - icon: ':heavy_check_mark:'
@@ -111,6 +114,7 @@ data:
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/library_checker/convolution/bitwise_or_convolution.test.hpp
+  - test/library_checker/convolution/subset_convolution.test.cpp
   - test/library_checker/convolution/bitwise_and_convolution.test.hpp
   - test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
   - test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
