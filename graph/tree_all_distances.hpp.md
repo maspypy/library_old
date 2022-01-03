@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: graph/centroid.hpp
     title: graph/centroid.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: polynomial/convolution_ll.hpp
     title: polynomial/convolution_ll.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
     title: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n\
@@ -122,26 +122,23 @@ data:
     \n    for (int i = 0; i < as; i++) f[i].x = a[i];\r\n    fft(f, 0);\r\n    for\
     \ (int i = 0; i < n; i++) f[i] = f[i] * f[i];\r\n    fft(f, 1);\r\n    for (int\
     \ i = 0; i < cs; i++) c[i] = f[i].x / n + .5;\r\n    return c;\r\n  }\r\n};\r\n\
-    \r\nCFFT cfft;\r\n\r\nvector<ll> convolve(vector<ll>& A, vector<ll>& B) {\r\n\
-    \  if (min(len(A), len(B)) <= 60) {\r\n    vector<ll> C(len(A) + len(B) - 1);\r\
-    \n    FOR(i, len(A)) FOR(j, len(B)) C[i + j] += A[i] * B[j];\r\n    return C;\r\
-    \n  }\r\n  assert(SUM(A) * SUM(B) < 1e15);\r\n  return cfft.conv(A, B);\r\n}\r\
-    \n\r\nvector<ll> conv_ll(vector<ll>& A, vector<ll>& B) {\r\n  if (min(len(A),\
-    \ len(B)) <= 60) {\r\n    vector<ll> C(len(A) + len(B) - 1);\r\n    FOR(i, len(A))\
-    \ FOR(j, len(B)) C[i + j] += A[i] * B[j];\r\n    return C;\r\n  }\r\n  assert(SUM(A)\
-    \ * SUM(B) < 1e15);\r\n  return cfft.conv(A, B);\r\n}\r\n\r\nvector<ll> conv_square_ll(vector<ll>&\
-    \ A) {\r\n  if (len(A) <= 60) {\r\n    vector<ll> C(2 * len(A) - 1);\r\n    FOR(i,\
-    \ len(A)) FOR(j, len(A)) C[i + j] += A[i] * A[j];\r\n    return C;\r\n  }\r\n\
-    \  assert(SUM(A) * SUM(A) < 1e15);\r\n  return cfft.square(A);\r\n}\r\n#line 3\
-    \ \"graph/tree_all_distances.hpp\"\n\r\ntemplate<typename Graph>\r\nvi tree_all_distances(Graph&\
-    \ G){\r\n  // frequency table of distance of all directed pairs. \r\n  // sum\
-    \ of result array = N^2\r\n  \r\n  assert(G.is_prepared());\r\n  assert(!G.is_directed());\r\
-    \n\r\n  CentroidDecomposition CD(G);\r\n\r\n  ll N = G.N;\r\n  vi ANS(N);\r\n\
-    \  FOR(root, N) {\r\n    auto data = CD.collect(root, 0);\r\n    FOR(i, len(data))\
-    \ {\r\n      int n = 0;\r\n      FOR(j, len(data[i])) chmax(n, data[i][j].se +\
-    \ 1);\r\n      vi A(n);\r\n      FOR(j, len(data[i])) A[data[i][j].se]++;\r\n\
-    \      auto B = conv_square_ll(A);\r\n      FOR(j, min(N, len(B))) ANS[j] += (i\
-    \ == 0 ? B[j] : -B[j]);\r\n    }\r\n  }\r\n  return ANS;\r\n}\n"
+    \r\nCFFT cfft;\r\n\r\nvector<ll> convolution_ll(vector<ll>& A, vector<ll>& B)\
+    \ {\r\n  if (min(len(A), len(B)) <= 60) {\r\n    vector<ll> C(len(A) + len(B)\
+    \ - 1);\r\n    FOR(i, len(A)) FOR(j, len(B)) C[i + j] += A[i] * B[j];\r\n    return\
+    \ C;\r\n  }\r\n  assert(SUM(A) * SUM(B) < 1e15);\r\n  return cfft.conv(A, B);\r\
+    \n}\r\n\r\nvector<ll> conv_square_ll(vector<ll>& A) {\r\n  if (len(A) <= 60) {\r\
+    \n    vector<ll> C(2 * len(A) - 1);\r\n    FOR(i, len(A)) FOR(j, len(A)) C[i +\
+    \ j] += A[i] * A[j];\r\n    return C;\r\n  }\r\n  assert(SUM(A) * SUM(A) < 1e15);\r\
+    \n  return cfft.square(A);\r\n}\r\n#line 3 \"graph/tree_all_distances.hpp\"\n\r\
+    \ntemplate<typename Graph>\r\nvi tree_all_distances(Graph& G){\r\n  // frequency\
+    \ table of distance of all directed pairs. \r\n  // sum of result array = N^2\r\
+    \n  \r\n  assert(G.is_prepared());\r\n  assert(!G.is_directed());\r\n\r\n  CentroidDecomposition\
+    \ CD(G);\r\n\r\n  ll N = G.N;\r\n  vi ANS(N);\r\n  FOR(root, N) {\r\n    auto\
+    \ data = CD.collect(root, 0);\r\n    FOR(i, len(data)) {\r\n      int n = 0;\r\
+    \n      FOR(j, len(data[i])) chmax(n, data[i][j].se + 1);\r\n      vi A(n);\r\n\
+    \      FOR(j, len(data[i])) A[data[i][j].se]++;\r\n      auto B = conv_square_ll(A);\r\
+    \n      FOR(j, min(N, len(B))) ANS[j] += (i == 0 ? B[j] : -B[j]);\r\n    }\r\n\
+    \  }\r\n  return ANS;\r\n}\n"
   code: "#include \"graph/centroid.hpp\"\r\n#include \"polynomial/convolution_ll.hpp\"\
     \r\n\r\ntemplate<typename Graph>\r\nvi tree_all_distances(Graph& G){\r\n  // frequency\
     \ table of distance of all directed pairs. \r\n  // sum of result array = N^2\r\
@@ -159,8 +156,8 @@ data:
   isVerificationFile: false
   path: graph/tree_all_distances.hpp
   requiredBy: []
-  timestamp: '2022-01-01 12:00:30+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-01-03 11:29:10+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
 documentation_of: graph/tree_all_distances.hpp

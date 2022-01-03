@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: algebra/lazy_min_set.hpp
     title: algebra/lazy_min_set.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algebra/monoid_min.hpp
     title: algebra/monoid_min.hpp
   - icon: ':heavy_check_mark:'

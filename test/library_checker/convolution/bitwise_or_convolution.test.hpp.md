@@ -2,26 +2,29 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: graph/base.hpp
-    title: graph/base.hpp
-  - icon: ':heavy_check_mark:'
-    path: graph/mis.hpp
-    title: graph/mis.hpp
+    path: mod/modint.hpp
+    title: mod/modint.hpp
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
+  - icon: ':x:'
+    path: setfunc/or_convolution.hpp
+    title: setfunc/or_convolution.hpp
+  - icon: ':x:'
+    path: setfunc/zeta.hpp
+    title: setfunc/zeta.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
-  _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _isVerificationFailed: true
+  _pathExtension: hpp
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/maximum_independent_set
+    PROBLEM: https://judge.yosupo.jp/problem/bitwise_and_convolution
     links:
-    - https://judge.yosupo.jp/problem/maximum_independent_set
-  bundledCode: "#line 1 \"test/library_checker/graph/maximum_independent_set.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/maximum_independent_set\"\r\
+    - https://judge.yosupo.jp/problem/bitwise_and_convolution
+  bundledCode: "#line 1 \"test/library_checker/convolution/bitwise_or_convolution.test.hpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/bitwise_and_convolution\"\r\
     \n#line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
     \nusing ll = long long;\nusing ll8 = __int128;\nusing ld = long double;\nusing\
     \ pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint = unsigned int;\nusing\
@@ -104,72 +107,89 @@ data:
     }\n\n#define SUM(v) accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n\
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
-    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/graph/maximum_independent_set.test.cpp\"\
-    \n\r\n#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n  int\
-    \ frm, to;\n  T cost;\n  int id;\n};\n\ntemplate <typename T = int, bool directed\
-    \ = false>\nstruct Graph {\n  int N, M;\n  using cost_type = T;\n  using edge_type\
-    \ = Edge<T>;\n  vector<edge_type> edges;\n  vector<int> indptr;\n  vector<edge_type>\
-    \ csr_edges;\n  bool prepared;\n\n  class OutgoingEdges {\n  public:\n    OutgoingEdges(const\
-    \ Graph* G, int l, int r) : G(G), l(l), r(r) {}\n\n    const edge_type* begin()\
-    \ const {\n      if (l == r) { return 0; }\n      return &G->csr_edges[l];\n \
-    \   }\n\n    const edge_type* end() const {\n      if (l == r) { return 0; }\n\
-    \      return &G->csr_edges[r];\n    }\n\n  private:\n    int l, r;\n    const\
-    \ Graph* G;\n  };\n\n  bool is_prepared() { return prepared; }\n  constexpr bool\
-    \ is_directed() { return directed; }\n\n  Graph() {}\n  Graph(int N) : N(N), M(0),\
-    \ prepared(0) {}\n\n  void add(int frm, int to, T cost = 1, int i = -1) {\n  \
-    \  assert(!prepared);\n    assert(0 <= frm && frm < N && 0 <= to && to < N);\n\
-    \    if (i == -1) i = M;\n    auto e = edge_type({frm, to, cost, i});\n    edges.eb(e);\n\
-    \    ++M;\n  }\n\n  void prepare() {\n    assert(!prepared);\n    prepared = true;\n\
-    \    indptr.assign(N + 1, 0);\n    for (auto&& e: edges) {\n      indptr[e.frm\
-    \ + 1]++;\n      if (!directed) indptr[e.to + 1]++;\n    }\n    FOR(v, N) indptr[v\
-    \ + 1] += indptr[v];\n    auto counter = indptr;\n    csr_edges.resize(indptr.back()\
-    \ + 1);\n    for (auto&& e: edges) {\n      csr_edges[counter[e.frm]++] = e;\n\
-    \      if (!directed)\n        csr_edges[counter[e.to]++] = edge_type({e.to, e.frm,\
-    \ e.cost, e.id});\n    }\n  }\n\n  OutgoingEdges operator[](int v) const {\n \
-    \   assert(prepared);\n    return {this, indptr[v], indptr[v + 1]};\n  }\n\n \
-    \ void debug() {\n    print(\"Graph\");\n    if (!prepared) {\n      print(\"\
-    frm to cost id\");\n      for (auto&& e: edges) print(e.frm, e.to, e.cost, e.id);\n\
-    \    } else {\n      print(\"indptr\", indptr);\n      print(\"frm to cost id\"\
-    );\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e.frm, e.to, e.cost, e.id);\n\
-    \    }\n  }\n\n  int size() { return N; }\n};\n#line 2 \"graph/mis.hpp\"\n\r\n\
-    template <typename Graph>\r\nvector<int> maximum_independent_set(Graph& G, int\
-    \ trial = 1000000) {\r\n  assert(G.is_prepared());\r\n  assert(!G.is_directed());\r\
-    \n  int N = G.N;\r\n  vector<uint64_t> bit(N);\r\n  assert(N <= 64);\r\n  FOR(a,\
-    \ N) for (auto&& e: G[a]) bit[a] |= uint64_t(1) << e.to;\r\n  vector<int> ord(N);\r\
-    \n  iota(begin(ord), end(ord), 0);\r\n  mt19937 mt(chrono::steady_clock::now().time_since_epoch().count());\r\
-    \n  int ret = 0;\r\n  uint64_t ver;\r\n  for (int i = 0; i < trial; i++) {\r\n\
-    \    shuffle(begin(ord), end(ord), mt);\r\n    uint64_t used = 0;\r\n    int add\
-    \ = 0;\r\n    for (int j: ord) {\r\n      if (used & bit[j]) continue;\r\n   \
-    \   used |= uint64_t(1) << j;\r\n      ++add;\r\n    }\r\n    if (ret < add) {\r\
-    \n      ret = add;\r\n      ver = used;\r\n    }\r\n  }\r\n  vector<int> ans;\r\
-    \n  for (int i = 0; i < N; i++) {\r\n    if ((ver >> i) & 1) ans.emplace_back(i);\r\
-    \n  }\r\n  return ans;\r\n}\r\n#line 5 \"test/library_checker/graph/maximum_independent_set.test.cpp\"\
-    \n\r\nvoid solve() {\r\n  LL(N, M);\r\n  Graph<int> G(N);\r\n  FOR(_, M) {\r\n\
-    \    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n  G.prepare();\r\n  auto mis = maximum_independent_set(G);\r\
-    \n  print(len(mis));\r\n  print(mis);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
-    \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
-    \n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/maximum_independent_set\"\
-    \r\n#include \"my_template.hpp\"\r\n\r\n#include \"graph/mis.hpp\"\r\n\r\nvoid\
-    \ solve() {\r\n  LL(N, M);\r\n  Graph<int> G(N);\r\n  FOR(_, M) {\r\n    LL(a,\
-    \ b);\r\n    G.add(a, b);\r\n  }\r\n  G.prepare();\r\n  auto mis = maximum_independent_set(G);\r\
-    \n  print(len(mis));\r\n  print(mis);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
-    \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
-    \n\r\n  return 0;\r\n}\r\n"
+    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/convolution/bitwise_or_convolution.test.hpp\"\
+    \n\r\n#line 1 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n  int val;\n\
+    \n  constexpr modint(const ll val = 0) noexcept\n      : val(val >= 0 ? val %\
+    \ mod : (mod - (-val) % mod) % mod) {}\n\n  bool operator<(const modint &other)\
+    \ const {\n    return val < other.val;\n  } // To use std::map\n\n  modint &operator+=(const\
+    \ modint &p) {\n    if ((val += p.val) >= mod) val -= mod;\n    return *this;\n\
+    \  }\n  modint &operator-=(const modint &p) {\n    if ((val += mod - p.val) >=\
+    \ mod) val -= mod;\n    return *this;\n  }\n  modint &operator*=(const modint\
+    \ &p) {\n    val = (int)(1LL * val * p.val % mod);\n    return *this;\n  }\n \
+    \ modint &operator/=(const modint &p) {\n    *this *= p.inverse();\n    return\
+    \ *this;\n  }\n  modint operator-() const { return modint(-val); }\n  modint operator+(const\
+    \ modint &p) const { return modint(*this) += p; }\n  modint operator-(const modint\
+    \ &p) const { return modint(*this) -= p; }\n  modint operator*(const modint &p)\
+    \ const { return modint(*this) *= p; }\n  modint operator/(const modint &p) const\
+    \ { return modint(*this) /= p; }\n  bool operator==(const modint &p) const { return\
+    \ val == p.val; }\n  bool operator!=(const modint &p) const { return val != p.val;\
+    \ }\n\n  modint inverse() const {\n    int a = val, b = mod, u = 1, v = 0, t;\n\
+    \    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b);\n      swap(u\
+    \ -= t * v, v);\n    }\n    return modint(u);\n  }\n\n  modint pow(int64_t n)\
+    \ const {\n    modint ret(1), mul(val);\n    while (n > 0) {\n      if (n & 1)\
+    \ ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n    return ret;\n  }\n\
+    \n  friend ostream &operator<<(ostream &os, const modint &p) { return os << p.val;\
+    \ }\n  static int get_mod() { return mod; }\n};\n\ntemplate <typename T>\nstruct\
+    \ ModCalc {\n  vector<T> _fact = {1, 1};\n  vector<T> _fact_inv = {1, 1};\n  vector<T>\
+    \ _inv = {0, 1};\n\n  T pow(T a, int n) {\n    T x(1);\n    while (n) {\n    \
+    \  if (n & 1) x *= a;\n      a *= a;\n      n >>= 1;\n    }\n    return x;\n \
+    \ }\n  void expand(int n) {\n    while (_fact.size() <= n) {\n      auto i = _fact.size();\n\
+    \      _fact.eb(_fact[i - 1] * T(i));\n      auto q = T::get_mod() / i, r = T::get_mod()\
+    \ % i;\n      _inv.eb(_inv[r] * T(T::get_mod() - q));\n      _fact_inv.eb(_fact_inv[i\
+    \ - 1] * _inv[i]);\n    }\n  }\n\n  T fact(int n) {\n    if (n >= _fact.size())\
+    \ expand(n);\n    return _fact[n];\n  }\n\n  T fact_inv(int n) {\n    if (n >=\
+    \ _fact.size()) expand(n);\n    return _fact_inv[n];\n  }\n\n  T inv(int n) {\n\
+    \    if (n >= _fact.size()) expand(n);\n    return _inv[n];\n  }\n\n  T C(ll n,\
+    \ ll k, bool large = false) {\n    assert(n >= 0);\n    if (k < 0 || n < k) return\
+    \ 0;\n    if (!large) return fact(n) * fact_inv(k) * fact_inv(n - k);\n    k =\
+    \ min(k, n - k);\n    T x(1);\n    FOR(i, k) {\n      x *= n - i;\n      x *=\
+    \ inv(i + 1);\n    }\n    return x;\n  }\n};\n\nusing modint107 = modint<1'000'000'007>;\n\
+    using modint998 = modint<998'244'353>;\n#line 2 \"setfunc/zeta.hpp\"\n\r\ntemplate\
+    \ <typename T>\r\nvoid superset_zeta(vc<T>& A) {\r\n  int log = topbit(len(A));\r\
+    \n  assert(1 << log == len(A));\r\n  FOR(n, log) FOR(s, 1 << log) {\r\n    int\
+    \ t = s ^ (1 << n);\r\n    if (s < t) A[s] += A[t];\r\n  }\r\n}\r\n\r\ntemplate\
+    \ <typename T>\r\nvoid superset_mobius(vc<T>& A) {\r\n  int log = topbit(len(A));\r\
+    \n  assert(1 << log == len(A));\r\n  FOR(n, log) FOR(s, 1 << log) {\r\n    int\
+    \ t = s ^ (1 << n);\r\n    if (s < t) A[s] -= A[t];\r\n  }\r\n}\r\n\r\ntemplate\
+    \ <typename T>\r\nvoid subset_zeta(vc<T>& A) {\r\n  int log = topbit(len(A));\r\
+    \n  assert(1 << log == len(A));\r\n  FOR(n, log) FOR(s, 1 << log) {\r\n    int\
+    \ t = s ^ (1 << n);\r\n    if (s > t) A[s] += A[t];\r\n  }\r\n}\r\n\r\ntemplate\
+    \ <typename T>\r\nvoid subset_mobius(vc<T>& A) {\r\n  int log = topbit(len(A));\r\
+    \n  assert(1 << log == len(A));\r\n  FOR(n, log) FOR(s, 1 << log) {\r\n    int\
+    \ t = s ^ (1 << n);\r\n    if (s > t) A[s] -= A[t];\r\n  }\r\n}\n#line 2 \"setfunc/or_convolution.hpp\"\
+    \ntemplate <typename T>\r\nvc<T> or_convolution(vc<T> A, vc<T> B) {\r\n  subset_zeta(A);\r\
+    \n  subset_zeta(B);\r\n  FOR(i, len(A)) A[i] *= B[i];\r\n  subset_mobius(A);\r\
+    \n  return A;\r\n}\r\n#line 6 \"test/library_checker/convolution/bitwise_or_convolution.test.hpp\"\
+    \n\r\nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N);\r\n  vc<mint>\
+    \ A(1 << N), B(1 << N);\r\n  FOR(i, 1 << N) {\r\n    LL(a);\r\n    A[i] = a;\r\
+    \n  }\r\n  FOR(i, 1 << N) {\r\n    LL(a);\r\n    B[i] = a;\r\n  }\r\n  reverse(all(A));\r\
+    \n  reverse(all(B));\r\n  auto ANS = or_convolution(A, B);\r\n  reverse(all(ANS));\r\
+    \n  print(ANS);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/bitwise_and_convolution\"\
+    \r\n#include \"my_template.hpp\"\r\n\r\n#include \"mod/modint.hpp\"\r\n#include\
+    \ \"setfunc/or_convolution.hpp\"\r\n\r\nusing mint = modint998;\r\n\r\nvoid solve()\
+    \ {\r\n  LL(N);\r\n  vc<mint> A(1 << N), B(1 << N);\r\n  FOR(i, 1 << N) {\r\n\
+    \    LL(a);\r\n    A[i] = a;\r\n  }\r\n  FOR(i, 1 << N) {\r\n    LL(a);\r\n  \
+    \  B[i] = a;\r\n  }\r\n  reverse(all(A));\r\n  reverse(all(B));\r\n  auto ANS\
+    \ = or_convolution(A, B);\r\n  reverse(all(ANS));\r\n  print(ANS);\r\n}\r\n\r\n\
+    signed main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n \
+    \ cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
-  - graph/mis.hpp
-  - graph/base.hpp
+  - mod/modint.hpp
+  - setfunc/or_convolution.hpp
+  - setfunc/zeta.hpp
   isVerificationFile: true
-  path: test/library_checker/graph/maximum_independent_set.test.cpp
+  path: test/library_checker/convolution/bitwise_or_convolution.test.hpp
   requiredBy: []
-  timestamp: '2022-01-03 02:37:31+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-03 11:29:10+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/library_checker/graph/maximum_independent_set.test.cpp
+documentation_of: test/library_checker/convolution/bitwise_or_convolution.test.hpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/graph/maximum_independent_set.test.cpp
-- /verify/test/library_checker/graph/maximum_independent_set.test.cpp.html
-title: test/library_checker/graph/maximum_independent_set.test.cpp
+- /verify/test/library_checker/convolution/bitwise_or_convolution.test.hpp
+- /verify/test/library_checker/convolution/bitwise_or_convolution.test.hpp.html
+title: test/library_checker/convolution/bitwise_or_convolution.test.hpp
 ---

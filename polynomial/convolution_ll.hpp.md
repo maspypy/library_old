@@ -2,16 +2,16 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/tree_all_distances.hpp
     title: graph/tree_all_distances.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
     title: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"polynomial/convolution_ll.hpp\"\nstruct CFFT {\r\n  struct\
@@ -56,17 +56,14 @@ data:
     \n    for (int i = 0; i < as; i++) f[i].x = a[i];\r\n    fft(f, 0);\r\n    for\
     \ (int i = 0; i < n; i++) f[i] = f[i] * f[i];\r\n    fft(f, 1);\r\n    for (int\
     \ i = 0; i < cs; i++) c[i] = f[i].x / n + .5;\r\n    return c;\r\n  }\r\n};\r\n\
-    \r\nCFFT cfft;\r\n\r\nvector<ll> convolve(vector<ll>& A, vector<ll>& B) {\r\n\
-    \  if (min(len(A), len(B)) <= 60) {\r\n    vector<ll> C(len(A) + len(B) - 1);\r\
-    \n    FOR(i, len(A)) FOR(j, len(B)) C[i + j] += A[i] * B[j];\r\n    return C;\r\
-    \n  }\r\n  assert(SUM(A) * SUM(B) < 1e15);\r\n  return cfft.conv(A, B);\r\n}\r\
-    \n\r\nvector<ll> conv_ll(vector<ll>& A, vector<ll>& B) {\r\n  if (min(len(A),\
-    \ len(B)) <= 60) {\r\n    vector<ll> C(len(A) + len(B) - 1);\r\n    FOR(i, len(A))\
-    \ FOR(j, len(B)) C[i + j] += A[i] * B[j];\r\n    return C;\r\n  }\r\n  assert(SUM(A)\
-    \ * SUM(B) < 1e15);\r\n  return cfft.conv(A, B);\r\n}\r\n\r\nvector<ll> conv_square_ll(vector<ll>&\
-    \ A) {\r\n  if (len(A) <= 60) {\r\n    vector<ll> C(2 * len(A) - 1);\r\n    FOR(i,\
-    \ len(A)) FOR(j, len(A)) C[i + j] += A[i] * A[j];\r\n    return C;\r\n  }\r\n\
-    \  assert(SUM(A) * SUM(A) < 1e15);\r\n  return cfft.square(A);\r\n}\r\n"
+    \r\nCFFT cfft;\r\n\r\nvector<ll> convolution_ll(vector<ll>& A, vector<ll>& B)\
+    \ {\r\n  if (min(len(A), len(B)) <= 60) {\r\n    vector<ll> C(len(A) + len(B)\
+    \ - 1);\r\n    FOR(i, len(A)) FOR(j, len(B)) C[i + j] += A[i] * B[j];\r\n    return\
+    \ C;\r\n  }\r\n  assert(SUM(A) * SUM(B) < 1e15);\r\n  return cfft.conv(A, B);\r\
+    \n}\r\n\r\nvector<ll> conv_square_ll(vector<ll>& A) {\r\n  if (len(A) <= 60) {\r\
+    \n    vector<ll> C(2 * len(A) - 1);\r\n    FOR(i, len(A)) FOR(j, len(A)) C[i +\
+    \ j] += A[i] * A[j];\r\n    return C;\r\n  }\r\n  assert(SUM(A) * SUM(A) < 1e15);\r\
+    \n  return cfft.square(A);\r\n}\r\n"
   code: "#pragma once\r\nstruct CFFT {\r\n  struct C {\r\n    double x, y;\r\n   \
     \ C(double _x = 0, double _y = 0) : x(_x), y(_y) {}\r\n    C operator~() const\
     \ { return C(x, -y); }\r\n    C operator*(const C& c) const {\r\n      return\
@@ -108,25 +105,21 @@ data:
     \ - 1);\r\n    vector<C> f(n);\r\n    for (int i = 0; i < as; i++) f[i].x = a[i];\r\
     \n    fft(f, 0);\r\n    for (int i = 0; i < n; i++) f[i] = f[i] * f[i];\r\n  \
     \  fft(f, 1);\r\n    for (int i = 0; i < cs; i++) c[i] = f[i].x / n + .5;\r\n\
-    \    return c;\r\n  }\r\n};\r\n\r\nCFFT cfft;\r\n\r\nvector<ll> convolve(vector<ll>&\
+    \    return c;\r\n  }\r\n};\r\n\r\nCFFT cfft;\r\n\r\nvector<ll> convolution_ll(vector<ll>&\
     \ A, vector<ll>& B) {\r\n  if (min(len(A), len(B)) <= 60) {\r\n    vector<ll>\
     \ C(len(A) + len(B) - 1);\r\n    FOR(i, len(A)) FOR(j, len(B)) C[i + j] += A[i]\
     \ * B[j];\r\n    return C;\r\n  }\r\n  assert(SUM(A) * SUM(B) < 1e15);\r\n  return\
-    \ cfft.conv(A, B);\r\n}\r\n\r\nvector<ll> conv_ll(vector<ll>& A, vector<ll>& B)\
-    \ {\r\n  if (min(len(A), len(B)) <= 60) {\r\n    vector<ll> C(len(A) + len(B)\
-    \ - 1);\r\n    FOR(i, len(A)) FOR(j, len(B)) C[i + j] += A[i] * B[j];\r\n    return\
-    \ C;\r\n  }\r\n  assert(SUM(A) * SUM(B) < 1e15);\r\n  return cfft.conv(A, B);\r\
-    \n}\r\n\r\nvector<ll> conv_square_ll(vector<ll>& A) {\r\n  if (len(A) <= 60) {\r\
-    \n    vector<ll> C(2 * len(A) - 1);\r\n    FOR(i, len(A)) FOR(j, len(A)) C[i +\
-    \ j] += A[i] * A[j];\r\n    return C;\r\n  }\r\n  assert(SUM(A) * SUM(A) < 1e15);\r\
-    \n  return cfft.square(A);\r\n}\r\n"
+    \ cfft.conv(A, B);\r\n}\r\n\r\nvector<ll> conv_square_ll(vector<ll>& A) {\r\n\
+    \  if (len(A) <= 60) {\r\n    vector<ll> C(2 * len(A) - 1);\r\n    FOR(i, len(A))\
+    \ FOR(j, len(A)) C[i + j] += A[i] * A[j];\r\n    return C;\r\n  }\r\n  assert(SUM(A)\
+    \ * SUM(A) < 1e15);\r\n  return cfft.square(A);\r\n}\r\n"
   dependsOn: []
   isVerificationFile: false
   path: polynomial/convolution_ll.hpp
   requiredBy:
   - graph/tree_all_distances.hpp
-  timestamp: '2021-12-31 19:25:48+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-01-03 11:29:10+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
 documentation_of: polynomial/convolution_ll.hpp

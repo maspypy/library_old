@@ -3,6 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/library_checker/convolution/bitwise_and_convolution.test.hpp
+    title: test/library_checker/convolution/bitwise_and_convolution.test.hpp
+  - icon: ':x:'
+    path: test/library_checker/convolution/bitwise_or_convolution.test.hpp
+    title: test/library_checker/convolution/bitwise_or_convolution.test.hpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
     title: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
@@ -12,10 +18,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
     title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
     title: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
     title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   _isVerificationFailed: true
@@ -104,6 +110,8 @@ data:
   timestamp: '2022-01-02 02:35:12+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/library_checker/convolution/bitwise_or_convolution.test.hpp
+  - test/library_checker/convolution/bitwise_and_convolution.test.hpp
   - test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
   - test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
   - test/library_checker/datastructure/queue_operate_all_composite.test.cpp
