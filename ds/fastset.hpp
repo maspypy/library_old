@@ -72,7 +72,7 @@ struct FastSet {
     }
     return -1;
   }
-  void print(){
+  void debug(){
     for(int i=0;i<n;++i) cout << (*this)[i];
     cout << endl;
   }

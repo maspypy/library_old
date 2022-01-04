@@ -1,6 +1,6 @@
 #pragma once
 
-#include "algebra/convolution.hpp"
+#include "polynomial/convolution.hpp"
 
 template <typename mint>
 mint coef_of_rational(vector<mint> A, vector<mint> B, ll N) {
@@ -10,8 +10,8 @@ mint coef_of_rational(vector<mint> A, vector<mint> B, ll N) {
   while (N) {
     vc<mint> B1 = B;
     FOR(i, len(B1)) if (i & 1) B1[i] = -B1[i];
-    A = convolve(A, B1);
-    B = convolve(B, B1);
+    A = convolution(A, B1);
+    B = convolution(B, B1);
     FOR(i, len(B1)) B[i] = B[2 * i];
     if (N & 1) {
       FOR(i, len(B1) - 1) A[i] = A[2 * i | 1];
@@ -56,7 +56,7 @@ vector<mint> berlekamp_massey(vector<mint>& A) {
 template <typename mint>
 mint interpolate_linear_recurrence(vector<mint>& A, ll N) {
   auto G = berlekamp_massey(A);
-  auto F = convolve(A, G);
+  auto F = convolution(A, G);
   F.resize(len(G) - 1);
   return coef_of_rational(F, G, N);
 }
