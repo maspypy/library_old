@@ -35,7 +35,7 @@ data:
     \     if (!d) {\r\n        i = i / B - 1;\r\n        continue;\r\n      }\r\n\
     \      // find\r\n      i += bsr(d) - (B - 1);\r\n      for (int g = h - 1; g\
     \ >= 0; g--) {\r\n        i *= B;\r\n        i += bsr(seg[g][i / B]);\r\n    \
-    \  }\r\n      return i;\r\n    }\r\n    return -1;\r\n  }\r\n  void print(){\r\
+    \  }\r\n      return i;\r\n    }\r\n    return -1;\r\n  }\r\n  void debug(){\r\
     \n    for(int i=0;i<n;++i) cout << (*this)[i];\r\n    cout << endl;\r\n  }\r\n\
     };\n"
   code: "struct FastSet {\r\n  using uint = unsigned;\r\n  using ull = unsigned long\
@@ -62,13 +62,13 @@ data:
     \ = i / B - 1;\r\n        continue;\r\n      }\r\n      // find\r\n      i +=\
     \ bsr(d) - (B - 1);\r\n      for (int g = h - 1; g >= 0; g--) {\r\n        i *=\
     \ B;\r\n        i += bsr(seg[g][i / B]);\r\n      }\r\n      return i;\r\n   \
-    \ }\r\n    return -1;\r\n  }\r\n  void print(){\r\n    for(int i=0;i<n;++i) cout\
+    \ }\r\n    return -1;\r\n  }\r\n  void debug(){\r\n    for(int i=0;i<n;++i) cout\
     \ << (*this)[i];\r\n    cout << endl;\r\n  }\r\n};"
   dependsOn: []
   isVerificationFile: false
   path: ds/fastset.hpp
   requiredBy: []
-  timestamp: '2021-12-25 22:40:58+09:00'
+  timestamp: '2022-01-04 19:49:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/datastructure/predecessor_problem.test..cpp

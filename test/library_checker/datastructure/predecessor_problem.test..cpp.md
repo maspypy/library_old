@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: ds/fastset.hpp
     title: ds/fastset.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
@@ -126,7 +126,7 @@ data:
     \ = i / B - 1;\r\n        continue;\r\n      }\r\n      // find\r\n      i +=\
     \ bsr(d) - (B - 1);\r\n      for (int g = h - 1; g >= 0; g--) {\r\n        i *=\
     \ B;\r\n        i += bsr(seg[g][i / B]);\r\n      }\r\n      return i;\r\n   \
-    \ }\r\n    return -1;\r\n  }\r\n  void print(){\r\n    for(int i=0;i<n;++i) cout\
+    \ }\r\n    return -1;\r\n  }\r\n  void debug(){\r\n    for(int i=0;i<n;++i) cout\
     \ << (*this)[i];\r\n    cout << endl;\r\n  }\r\n};\n#line 4 \"test/library_checker/datastructure/predecessor_problem.test..cpp\"\
     \n\nvoid solve() {\n  LL(N, Q);\n  FastSet ss(N);\n  STR(S);\n  FOR(x, N) {\n\
     \    if (S[x] == '1') ss.insert(x);\n  }\n\n  FOR(_, Q) {\n    LL(t, k);\n   \
@@ -150,7 +150,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/predecessor_problem.test..cpp
   requiredBy: []
-  timestamp: '2022-01-03 02:37:31+09:00'
+  timestamp: '2022-01-04 19:49:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/predecessor_problem.test..cpp

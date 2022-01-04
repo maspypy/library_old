@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: sequence/linearrecurrence.hpp
+    title: sequence/linearrecurrence.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -18,7 +21,8 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: polynomial/convolution.hpp
-  requiredBy: []
+  requiredBy:
+  - sequence/linearrecurrence.hpp
   timestamp: '2022-01-03 11:29:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

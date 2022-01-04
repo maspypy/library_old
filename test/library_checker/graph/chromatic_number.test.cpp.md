@@ -1,27 +1,27 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: algebra/monoid_set.hpp
-    title: algebra/monoid_set.hpp
-  - icon: ':heavy_check_mark:'
-    path: ds/dualsegtree.hpp
-    title: ds/dualsegtree.hpp
+  - icon: ':question:'
+    path: graph/base.hpp
+    title: graph/base.hpp
+  - icon: ':x:'
+    path: graph/chromatic.hpp
+    title: graph/chromatic.hpp
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D
+    PROBLEM: https://judge.yosupo.jp/problem/chromatic_number
     links:
-    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D
-  bundledCode: "#line 1 \"test/aoj/DSL_2_D_dualsegtree.test.cpp\"\n#define PROBLEM\
-    \ \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D\"\r\n#line\
+    - https://judge.yosupo.jp/problem/chromatic_number
+  bundledCode: "#line 1 \"test/library_checker/graph/chromatic_number.test.cpp\"\n\
+    #define PROBLEM \"https://judge.yosupo.jp/problem/chromatic_number\"\r\n#line\
     \ 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\n\
     using ll = long long;\nusing ll8 = __int128;\nusing ld = long double;\nusing pi\
     \ = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint = unsigned int;\nusing ull\
@@ -104,58 +104,74 @@ data:
     }\n\n#define SUM(v) accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n\
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
-    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 2 \"ds/dualsegtree.hpp\"\
-    \n\ntemplate <typename Monoid>\nstruct DualSegTree {\n  using A = typename Monoid::value_type;\n\
-    \  int n, log, size;\n  vc<A> laz;\n\n  DualSegTree() : DualSegTree(0) {}\n  DualSegTree(int\
-    \ n) : n(n) {\n    log = 1;\n    while ((1 << log) < n) ++log;\n    size = 1 <<\
-    \ log;\n    laz.assign(size << 1, Monoid::unit);\n  }\n\n  void all_apply(int\
-    \ k, A a) { laz[k] = Monoid::op(laz[k], a); }\n\n  void push(int k) {\n    all_apply(2\
-    \ * k, laz[k]);\n    all_apply(2 * k + 1, laz[k]);\n    laz[k] = Monoid::unit;\n\
-    \  }\n\n  A get(int p) {\n    assert(0 <= p && p < n);\n    p += size;\n    for\
-    \ (int i = log; i >= 1; i--) push(p >> i);\n    return laz[p];\n  }\n\n  vc<A>\
-    \ get_all() {\n    FOR(i, size) push(i);\n    return {laz.begin() + size, laz.begin()\
-    \ + size + n};\n  }\n\n  void apply(int l, int r, A a) {\n    assert(0 <= l &&\
-    \ l <= r && r <= n);\n    if (l == r) return;\n\n    l += size;\n    r += size;\n\
-    \n    if (!Monoid::commute) {\n      for (int i = log; i >= 1; i--) {\n      \
-    \  if (((l >> i) << i) != l) push(l >> i);\n        if (((r >> i) << i) != r)\
-    \ push((r - 1) >> i);\n      }\n    }\n\n    {\n      int l2 = l, r2 = r;\n  \
-    \    while (l < r) {\n        if (l & 1) all_apply(l++, a);\n        if (r & 1)\
-    \ all_apply(--r, a);\n        l >>= 1;\n        r >>= 1;\n      }\n      l = l2;\n\
-    \      r = r2;\n    }\n  }\n  void debug() { print(\"dualsegtree getall:\", get_all());\
-    \ }\n};\n#line 1 \"algebra/monoid_set.hpp\"\ntemplate <typename E, E none_val>\r\
-    \nstruct Monoid_Set {\r\n  using value_type = E;\r\n  using X = value_type;\r\n\
-    \  static X op(X x, X y) { return (y == none_val ? x : y); }\r\n  static constexpr\
-    \ X unit = none_val;\r\n  static constexpr bool commute = false;\r\n};\n#line\
-    \ 5 \"test/aoj/DSL_2_D_dualsegtree.test.cpp\"\n\r\nvoid solve() {\r\n  using Mono\
-    \ = Monoid_Set<ll, (1LL << 31) - 1>;\r\n  LL(N, Q);\r\n  DualSegTree<Mono> seg(N);\r\
-    \n  FOR(_, Q) {\r\n    LL(t);\r\n    if (t == 0) {\r\n      LL(L, R, x);\r\n \
-    \     seg.apply(L, ++R, x);\r\n    } else {\r\n      LL(i);\r\n      print(seg.get(i));\r\
-    \n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  ll T = 1;\r\n  // LL(T);\r\n  FOR(_, T)\
-    \ solve();\r\n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D\"\
-    \r\n#include \"my_template.hpp\"\r\n#include \"ds/dualsegtree.hpp\"\r\n#include\
-    \ \"algebra/monoid_set.hpp\"\r\n\r\nvoid solve() {\r\n  using Mono = Monoid_Set<ll,\
-    \ (1LL << 31) - 1>;\r\n  LL(N, Q);\r\n  DualSegTree<Mono> seg(N);\r\n  FOR(_,\
-    \ Q) {\r\n    LL(t);\r\n    if (t == 0) {\r\n      LL(L, R, x);\r\n      seg.apply(L,\
-    \ ++R, x);\r\n    } else {\r\n      LL(i);\r\n      print(seg.get(i));\r\n   \
-    \ }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  ll T = 1;\r\n  // LL(T);\r\n  FOR(_, T)\
-    \ solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/graph/chromatic_number.test.cpp\"\
+    \n\r\n#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n  int\
+    \ frm, to;\n  T cost;\n  int id;\n};\n\ntemplate <typename T = int, bool directed\
+    \ = false>\nstruct Graph {\n  int N, M;\n  using cost_type = T;\n  using edge_type\
+    \ = Edge<T>;\n  vector<edge_type> edges;\n  vector<int> indptr;\n  vector<edge_type>\
+    \ csr_edges;\n  bool prepared;\n\n  class OutgoingEdges {\n  public:\n    OutgoingEdges(const\
+    \ Graph* G, int l, int r) : G(G), l(l), r(r) {}\n\n    const edge_type* begin()\
+    \ const {\n      if (l == r) { return 0; }\n      return &G->csr_edges[l];\n \
+    \   }\n\n    const edge_type* end() const {\n      if (l == r) { return 0; }\n\
+    \      return &G->csr_edges[r];\n    }\n\n  private:\n    int l, r;\n    const\
+    \ Graph* G;\n  };\n\n  bool is_prepared() { return prepared; }\n  constexpr bool\
+    \ is_directed() { return directed; }\n\n  Graph() {}\n  Graph(int N) : N(N), M(0),\
+    \ prepared(0) {}\n\n  void add(int frm, int to, T cost = 1, int i = -1) {\n  \
+    \  assert(!prepared);\n    assert(0 <= frm && frm < N && 0 <= to && to < N);\n\
+    \    if (i == -1) i = M;\n    auto e = edge_type({frm, to, cost, i});\n    edges.eb(e);\n\
+    \    ++M;\n  }\n\n  void prepare() {\n    assert(!prepared);\n    prepared = true;\n\
+    \    indptr.assign(N + 1, 0);\n    for (auto&& e: edges) {\n      indptr[e.frm\
+    \ + 1]++;\n      if (!directed) indptr[e.to + 1]++;\n    }\n    FOR(v, N) indptr[v\
+    \ + 1] += indptr[v];\n    auto counter = indptr;\n    csr_edges.resize(indptr.back()\
+    \ + 1);\n    for (auto&& e: edges) {\n      csr_edges[counter[e.frm]++] = e;\n\
+    \      if (!directed)\n        csr_edges[counter[e.to]++] = edge_type({e.to, e.frm,\
+    \ e.cost, e.id});\n    }\n  }\n\n  OutgoingEdges operator[](int v) const {\n \
+    \   assert(prepared);\n    return {this, indptr[v], indptr[v + 1]};\n  }\n\n \
+    \ void debug() {\n    print(\"Graph\");\n    if (!prepared) {\n      print(\"\
+    frm to cost id\");\n      for (auto&& e: edges) print(e.frm, e.to, e.cost, e.id);\n\
+    \    } else {\n      print(\"indptr\", indptr);\n      print(\"frm to cost id\"\
+    );\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e.frm, e.to, e.cost, e.id);\n\
+    \    }\n  }\n\n  int size() { return N; }\n};\n#line 1 \"graph/chromatic.hpp\"\
+    \ntemplate <typename Graph, int TRIAL = 0>\r\nint chromatic_number(Graph& G) {\r\
+    \n  assert(G.is_prepared());\r\n  // O(N2^N)\r\n\r\n  int N = G.N;\r\n  vc<int>\
+    \ nbd(N);\r\n  FOR(v, N) for (auto&& e : G[v]) nbd[v] |= 1 << e.to;\r\n\r\n  //\
+    \ s \u306E subset \u3067\u3042\u308B\u3088\u3046\u306A\u72EC\u7ACB\u96C6\u5408\
+    \u306E\u6570\u3048\u4E0A\u3052\r\n  vc<int> dp(1 << N);\r\n  dp[0] = 1;\r\n  FOR(v,\
+    \ N) FOR(s, 1 << v) { dp[s | 1 << v] = dp[s] + dp[s & (~nbd[v])]; }\r\n\r\n  vi\
+    \ pow(1 << N);\r\n  auto solve_p = [&](int p) -> int {\r\n    FOR(s, 1 << N) pow[s]\
+    \ = ((N - popcnt(s)) & 1 ? 1 : -1);\r\n    FOR3(k, 1, N) {\r\n      ll sum = 0;\r\
+    \n      FOR(s, 1 << N) {\r\n        pow[s] = pow[s] * dp[s];\r\n        if (p)\
+    \ pow[s] %= p;\r\n        sum += pow[s];\r\n      }\r\n      if (p) sum %= p;\r\
+    \n      if (sum != 0) { return k; }\r\n    }\r\n    return N;\r\n  };\r\n\r\n\
+    \  int ANS = 0;\r\n  chmax(ANS, solve_p(0));\r\n\r\n  FOR_(TRIAL) {\r\n    RandomNumberGenerator\
+    \ RNG;\r\n    int p;\r\n    while (1) {\r\n      p = RNG(1LL << 30, 1LL << 31);\r\
+    \n      if (primetest(p)) break;\r\n    }\r\n    chmax(ANS, solve_p(p));\r\n \
+    \ }\r\n  return ANS;\r\n}\r\n#line 6 \"test/library_checker/graph/chromatic_number.test.cpp\"\
+    \n\r\n\r\nvoid solve() {\r\n  LL(N, M);\r\n  Graph<int> G(N);\r\n  FOR_(M) {\r\
+    \n    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n  G.prepare();\r\n  print(chromatic_number(G));\r\
+    \n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/chromatic_number\"\r\n\
+    #include \"my_template.hpp\"\r\n\r\n#include \"graph/base.hpp\"\r\n#include \"\
+    graph/chromatic.hpp\"\r\n\r\n\r\nvoid solve() {\r\n  LL(N, M);\r\n  Graph<int>\
+    \ G(N);\r\n  FOR_(M) {\r\n    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n  G.prepare();\r\
+    \n  print(chromatic_number(G));\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
+    \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
+    \n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
-  - ds/dualsegtree.hpp
-  - algebra/monoid_set.hpp
+  - graph/base.hpp
+  - graph/chromatic.hpp
   isVerificationFile: true
-  path: test/aoj/DSL_2_D_dualsegtree.test.cpp
+  path: test/library_checker/graph/chromatic_number.test.cpp
   requiredBy: []
-  timestamp: '2022-01-03 02:37:31+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-04 19:49:31+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/aoj/DSL_2_D_dualsegtree.test.cpp
+documentation_of: test/library_checker/graph/chromatic_number.test.cpp
 layout: document
 redirect_from:
-- /verify/test/aoj/DSL_2_D_dualsegtree.test.cpp
-- /verify/test/aoj/DSL_2_D_dualsegtree.test.cpp.html
-title: test/aoj/DSL_2_D_dualsegtree.test.cpp
+- /verify/test/library_checker/graph/chromatic_number.test.cpp
+- /verify/test/library_checker/graph/chromatic_number.test.cpp.html
+title: test/library_checker/graph/chromatic_number.test.cpp
 ---
