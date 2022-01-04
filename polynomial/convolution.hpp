@@ -215,87 +215,6 @@ vector<mint> convolution_ntt(vector<mint> a, vector<mint> b) {
   return a;
 }
 
-template <typename C>
-struct cfft_info {
-  int lg;
-  vector<vector<C>> w = vector<vector<C>>(1, vector<C>(1, 1));
-  void init(int lg) {
-    for (int d = 1, m = 1; d <= lg; d++, m <<= 1)
-      if (d >= (int)w.size()) {
-        w.emplace_back(m);
-        const double th = M_PI / m;
-        for (int i = 0; i < m; i++)
-          w[d][i] = (i & 1 ? C(cos(th * i), sin(th * i)) : w[d - 1][i >> 1]);
-      }
-  }
-};
-
-template <typename C>
-void fft(vector<C>& f, bool inverse) {
-  static cfft_info<C> info;
-  int n = f.size();
-  int lg = __lg(n);
-  auto& w = info.w;
-  if (lg >= len(w)) info.init(lg);
-  if (inverse) {
-    for (int k = 1; k <= lg; k++) {
-      const int d = 1 << (k - 1);
-      for (int s = 0; s < n; s += 2 * d) {
-        for (int i = s; i < s + d; i++) {
-          C x = f[i], y = ~w[k][i - s] * f[d + i];
-          f[i] = x + y;
-          f[d + i] = x - y;
-        }
-      }
-    }
-  } else {
-    for (int k = lg; k; k--) {
-      const int d = 1 << (k - 1);
-      for (int s = 0; s < n; s += 2 * d) {
-        for (int i = s; i < s + d; i++) {
-          C x = f[i], y = f[d + i];
-          f[i] = x + y;
-          f[d + i] = w[k][i - s] * (x - y);
-        }
-      }
-    }
-  }
-}
-
-template <class R>
-vector<double> convolution_fft(vector<R>& a, vector<R>& b) {
-  struct C {
-    double x, y;
-    C(double _x = 0, double _y = 0) : x(_x), y(_y) {}
-    C operator~() const { return C(x, -y); }
-    C operator*(const C& c) const {
-      return C(x * c.x - y * c.y, x * c.y + y * c.x);
-    }
-    C operator+(const C& c) const { return C(x + c.x, y + c.y); }
-    C operator-(const C& c) const { return C(x - c.x, y - c.y); }
-  };
-
-  int n = len(a), m = len(b);
-  int sz = 1;
-  while (sz < n + m - 1) sz *= 2;
-  vc<C> f(sz);
-  FOR(i, len(a)) f[i].x = a[i];
-  FOR(i, len(b)) f[i].y = b[i];
-  fft(f, false);
-  static const C rad(0, -.25);
-  for (int i = 0; i < n; i++) {
-    int j = i ? i ^ ((1 << __lg(i)) - 1) : 0;
-    if (i > j) continue;
-    C x = f[i] + ~f[j], y = f[i] - ~f[j];
-    f[i] = x * y * rad;
-    f[j] = ~f[i];
-  }
-  fft(f, true);
-  vc<double> c(n + m - 1);
-  FOR(i, len(c)) c[i] = f[i].x / n;
-  return c;
-}
-
 template <typename mint>
 vector<mint> convolution_garner(const vector<mint>& a, const vector<mint>& b) {
   int n = len(a), m = len(b);
@@ -325,6 +244,118 @@ vector<mint> convolution_garner(const vector<mint>& a, const vector<mint>& b) {
   vc<mint> c(len(c0));
   FOR(i, len(c)) c[i] = garner(c0[i], c1[i], c2[i]);
   return c;
+}
+
+namespace CFFT {
+using real = double;
+
+struct C {
+  real x, y;
+
+  C() : x(0), y(0) {}
+
+  C(real x, real y) : x(x), y(y) {}
+
+  inline C operator+(const C& c) const { return C(x + c.x, y + c.y); }
+
+  inline C operator-(const C& c) const { return C(x - c.x, y - c.y); }
+
+  inline C operator*(const C& c) const {
+    return C(x * c.x - y * c.y, x * c.y + y * c.x);
+  }
+
+  inline C conj() const { return C(x, -y); }
+};
+
+const real PI = acosl(-1);
+int base = 1;
+vector<C> rts = {{0, 0}, {1, 0}};
+vector<int> rev = {0, 1};
+
+void ensure_base(int nbase) {
+  if (nbase <= base) return;
+  rev.resize(1 << nbase);
+  rts.resize(1 << nbase);
+  for (int i = 0; i < (1 << nbase); i++) {
+    rev[i] = (rev[i >> 1] >> 1) + ((i & 1) << (nbase - 1));
+  }
+  while (base < nbase) {
+    real angle = PI * 2.0 / (1 << (base + 1));
+    for (int i = 1 << (base - 1); i < (1 << base); i++) {
+      rts[i << 1] = rts[i];
+      real angle_i = angle * (2 * i + 1 - (1 << base));
+      rts[(i << 1) + 1] = C(cos(angle_i), sin(angle_i));
+    }
+    ++base;
+  }
+}
+
+void fft(vector<C>& a, int n) {
+  assert((n & (n - 1)) == 0);
+  int zeros = __builtin_ctz(n);
+  ensure_base(zeros);
+  int shift = base - zeros;
+  for (int i = 0; i < n; i++) {
+    if (i < (rev[i] >> shift)) { swap(a[i], a[rev[i] >> shift]); }
+  }
+  for (int k = 1; k < n; k <<= 1) {
+    for (int i = 0; i < n; i += 2 * k) {
+      for (int j = 0; j < k; j++) {
+        C z = a[i + j + k] * rts[j + k];
+        a[i + j + k] = a[i + j] - z;
+        a[i + j] = a[i + j] + z;
+      }
+    }
+  }
+}
+
+template <typename R>
+vc<double> convolution_fft(const vc<R>& a, const vc<R>& b) {
+  int need = (int)a.size() + (int)b.size() - 1;
+  int nbase = 1;
+  while ((1 << nbase) < need) nbase++;
+  ensure_base(nbase);
+  int sz = 1 << nbase;
+  vector<C> fa(sz);
+  for (int i = 0; i < sz; i++) {
+    int x = (i < (int)a.size() ? a[i] : 0);
+    int y = (i < (int)b.size() ? b[i] : 0);
+    fa[i] = C(x, y);
+  }
+  fft(fa, sz);
+  C r(0, -0.25 / (sz >> 1)), s(0, 1), t(0.5, 0);
+  for (int i = 0; i <= (sz >> 1); i++) {
+    int j = (sz - i) & (sz - 1);
+    C z = (fa[j] * fa[j] - (fa[i] * fa[i]).conj()) * r;
+    fa[j] = (fa[i] * fa[i] - (fa[j] * fa[j]).conj()) * r;
+    fa[i] = z;
+  }
+  for (int i = 0; i < (sz >> 1); i++) {
+    C A0 = (fa[i] + fa[i + (sz >> 1)]) * t;
+    C A1 = (fa[i] - fa[i + (sz >> 1)]) * t * rts[(sz >> 1) + i];
+    fa[i] = A0 + A1 * s;
+  }
+  fft(fa, sz >> 1);
+  vector<double> ret(need);
+  for (int i = 0; i < need; i++) {
+    ret[i] = (i & 1 ? fa[i >> 1].y : fa[i >> 1].x);
+  }
+  return ret;
+}
+} // namespace CFFT
+
+vector<ll> convolution(vector<ll>& a, vector<ll>& b) {
+  int n = len(a), m = len(b);
+  if (!n || !m) return {};
+  if (min(n, m) <= 60) return convolution_naive(a, b);
+  ll abs_sum_a = 0, abs_sum_b = 0;
+  FOR(i, n) abs_sum_a += abs(a[i]);
+  FOR(i, n) abs_sum_b += abs(b[i]);
+  assert(abs_sum_a * abs_sum_b < 1e15);
+  vc<double> c = CFFT::convolution_fft(a, b);
+  vc<ll> res(len(c));
+  FOR(i, len(c)) res[i] = ll(floor(c[i] + .5));
+  return res;
 }
 
 template <typename mint>

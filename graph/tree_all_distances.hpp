@@ -1,5 +1,5 @@
 #include "graph/centroid.hpp"
-#include "polynomial/convolution_ll.hpp"
+#include "polynomial/convolution.hpp"
 
 template<typename Graph>
 vi tree_all_distances(Graph& G){
@@ -20,7 +20,7 @@ vi tree_all_distances(Graph& G){
       FOR(j, len(data[i])) chmax(n, data[i][j].se + 1);
       vi A(n);
       FOR(j, len(data[i])) A[data[i][j].se]++;
-      auto B = conv_square_ll(A);
+      auto B = convolution(A, A);
       FOR(j, min(N, len(B))) ANS[j] += (i == 0 ? B[j] : -B[j]);
     }
   }
