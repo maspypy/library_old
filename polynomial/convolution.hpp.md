@@ -8,7 +8,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/tree_all_distances.hpp
     title: graph/tree_all_distances.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: sequence/linearrecurrence.hpp
     title: sequence/linearrecurrence.hpp
   _extendedVerifiedWith:
@@ -21,6 +21,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
     title: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/math/find_linear_recurrence.test.cpp
+    title: test/library_checker/math/find_linear_recurrence.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
+    title: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -388,6 +394,8 @@ data:
   - test/library_checker/convolution/convolution_mod_107.test.cpp
   - test/library_checker/convolution/convolution_mod.test.cpp
   - test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
+  - test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - test/library_checker/math/find_linear_recurrence.test.cpp
 documentation_of: polynomial/convolution.hpp
 layout: document
 redirect_from:

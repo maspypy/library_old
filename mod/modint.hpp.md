@@ -8,7 +8,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: sequence/linearrecurrence.hpp
     title: sequence/linearrecurrence.hpp
   _extendedVerifiedWith:
@@ -45,6 +45,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
     title: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/math/find_linear_recurrence.test.cpp
+    title: test/library_checker/math/find_linear_recurrence.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
+    title: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -144,6 +150,8 @@ data:
   - test/library_checker/convolution/bitwise_or_convolution.test.cpp
   - test/library_checker/convolution/convolution_mod.test.cpp
   - test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
+  - test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - test/library_checker/math/find_linear_recurrence.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
   - test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
   - test/library_checker/datastructure/queue_operate_all_composite.test.cpp

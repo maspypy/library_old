@@ -297,7 +297,7 @@ data:
       title: polynomial/convolution.hpp
   - name: sequence
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: sequence/linearrecurrence.hpp
       title: sequence/linearrecurrence.hpp
   - name: setfunc
@@ -485,6 +485,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/math/factorize.test.cpp
       title: test/library_checker/math/factorize.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/math/find_linear_recurrence.test.cpp
+      title: test/library_checker/math/find_linear_recurrence.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
+      title: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
   - name: test/library_checker/string
     pages:
     - icon: ':heavy_check_mark:'

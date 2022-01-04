@@ -157,6 +157,12 @@ data:
     path: test/library_checker/math/factorize.test.cpp
     title: test/library_checker/math/factorize.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/library_checker/math/find_linear_recurrence.test.cpp
+    title: test/library_checker/math/find_linear_recurrence.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
+    title: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/string/enumerate_palindromes.test.cpp
     title: test/library_checker/string/enumerate_palindromes.test.cpp
   - icon: ':heavy_check_mark:'
@@ -380,7 +386,9 @@ data:
   - test/library_checker/string/zalgorithm.test.cpp
   - test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
   - test/library_checker/math/enumerate_primes.test.cpp
+  - test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/library_checker/math/factorize.test.cpp
+  - test/library_checker/math/find_linear_recurrence.test.cpp
   - test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
   - test/library_checker/datastructure/staticrmq_sparse.test.cpp
   - test/library_checker/datastructure/static_range_sum.test.cpp
