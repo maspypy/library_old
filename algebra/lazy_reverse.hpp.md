@@ -4,7 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: algebra/monoid_reverse.hpp
     title: algebra/monoid_reverse.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: graph/lazytreemonoid.hpp
+    title: graph/lazytreemonoid.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -31,7 +34,8 @@ data:
   - algebra/monoid_reverse.hpp
   isVerificationFile: false
   path: algebra/lazy_reverse.hpp
-  requiredBy: []
+  requiredBy:
+  - graph/lazytreemonoid.hpp
   timestamp: '2022-01-01 23:37:45+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

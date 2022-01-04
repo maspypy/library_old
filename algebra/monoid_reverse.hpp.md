@@ -5,6 +5,9 @@ data:
   - icon: ':warning:'
     path: algebra/lazy_reverse.hpp
     title: algebra/lazy_reverse.hpp
+  - icon: ':warning:'
+    path: graph/lazytreemonoid.hpp
+    title: graph/lazytreemonoid.hpp
   - icon: ':heavy_check_mark:'
     path: graph/treemonoid.hpp
     title: graph/treemonoid.hpp
@@ -38,6 +41,7 @@ data:
   path: algebra/monoid_reverse.hpp
   requiredBy:
   - graph/treemonoid.hpp
+  - graph/lazytreemonoid.hpp
   - algebra/lazy_reverse.hpp
   timestamp: '2022-01-01 23:37:45+09:00'
   verificationStatus: LIBRARY_ALL_AC
