@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
+    path: graph/tree_all_distances.hpp
+    title: graph/tree_all_distances.hpp
+  - icon: ':heavy_check_mark:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
   - icon: ':warning:'
@@ -39,6 +42,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
     title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
+    title: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -126,6 +132,7 @@ data:
   isVerificationFile: false
   path: mod/modint.hpp
   requiredBy:
+  - graph/tree_all_distances.hpp
   - polynomial/convolution.hpp
   - sequence/linearrecurrence.hpp
   timestamp: '2022-01-05 04:56:51+09:00'
@@ -136,6 +143,7 @@ data:
   - test/library_checker/convolution/bitwise_and_convolution.test.cpp
   - test/library_checker/convolution/bitwise_or_convolution.test.cpp
   - test/library_checker/convolution/convolution_mod.test.cpp
+  - test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
   - test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
   - test/library_checker/datastructure/queue_operate_all_composite.test.cpp

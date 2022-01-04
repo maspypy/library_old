@@ -295,9 +295,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: polynomial/convolution.hpp
       title: polynomial/convolution.hpp
-    - icon: ':heavy_check_mark:'
-      path: polynomial/convolution_ll.hpp
-      title: polynomial/convolution_ll.hpp
   - name: sequence
     pages:
     - icon: ':warning:'
