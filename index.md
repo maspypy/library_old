@@ -270,7 +270,7 @@ data:
     - icon: ':warning:'
       path: other/monge_shortest_path.hpp
       title: other/monge_shortest_path.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: other/random.hpp
       title: other/random.hpp
     - icon: ':heavy_check_mark:'
