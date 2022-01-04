@@ -1,0 +1,23 @@
+#define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod"
+#include "my_template.hpp"
+
+#include "polynomial/convolution.hpp"
+using mint = modint998;
+
+void solve() {
+  LL(N, M);
+  VEC(mint, A, N);
+  VEC(mint, B, M);
+  auto ANS = convolution(A, B);
+  print(ANS);
+}
+
+signed main() {
+  cin.tie(nullptr);
+  ios::sync_with_stdio(false);
+  cout << setprecision(15);
+
+  solve();
+
+  return 0;
+}

@@ -1,3 +1,4 @@
+#pragma once
 template <int mod>
 struct modint {
   int val;
@@ -54,7 +55,13 @@ struct modint {
   }
 
   friend ostream &operator<<(ostream &os, const modint &p) { return os << p.val; }
-  static int get_mod() { return mod; }
+  friend istream &operator>>(istream &is, modint &a) {
+    int64_t t;
+    is >> t;
+    a = modint(t);
+    return (is);
+  }
+  static constexpr int get_mod() { return mod; }
 };
 
 template <typename T>
