@@ -1,4 +1,6 @@
 #include "other/random.hpp"
+#include "nt/primetest.hpp"
+
 template <typename Graph, int TRIAL = 0>
 int chromatic_number(Graph& G) {
   assert(G.is_prepared());
