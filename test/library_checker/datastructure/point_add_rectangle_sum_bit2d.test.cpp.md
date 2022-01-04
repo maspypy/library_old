@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: algebra/group_add.hpp
     title: algebra/group_add.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/fenwick2d.hpp
     title: ds/fenwick2d.hpp
   - icon: ':question:'
