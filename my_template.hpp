@@ -5,7 +5,6 @@ using namespace std;
 
 using ll = long long;
 using ll8 = __int128;
-using ld = long double;
 using pi = pair<ll, ll>;
 using vi = vector<ll>;
 using uint = unsigned int;
