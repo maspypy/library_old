@@ -26,7 +26,7 @@ mint coef_of_rational(vector<mint> A, vector<mint> B, ll N) {
 }
 
 template <typename mint>
-vector<mint> berlekamp_massey(vector<mint>& A) {
+vector<mint> find_linear_recurrence(vector<mint>& A) {
   int N = len(A);
   vc<mint> B = {1}, C = {1};
   int l = 0, m = 1;
@@ -55,7 +55,7 @@ vector<mint> berlekamp_massey(vector<mint>& A) {
 
 template <typename mint>
 mint interpolate_linear_recurrence(vector<mint>& A, ll N) {
-  auto G = berlekamp_massey(A);
+  auto G = find_linear_recurrence(A);
   auto F = convolution(A, G);
   F.resize(len(G) - 1);
   return coef_of_rational(F, G, N);
