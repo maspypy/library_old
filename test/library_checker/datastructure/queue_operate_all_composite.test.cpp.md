@@ -123,7 +123,7 @@ data:
     \        dat.pop_back();\n      }\n      dat.pop_back();\n    }\n  }\n\n  X prod()\
     \ { return Monoid::op(cum_l.back(), cum_r); }\n\n  void debug() {\n    print(\"\
     swag\");\n    print(\"dat\", dat);\n    print(\"cum_l\", cum_l);\n    print(\"\
-    cum_r\", cum_r);\n  }\n};\n#line 1 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct\
+    cum_r\", cum_r);\n  }\n};\n#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct\
     \ modint {\n  int val;\n\n  constexpr modint(const ll val = 0) noexcept\n    \
     \  : val(val >= 0 ? val % mod : (mod - (-val) % mod) % mod) {}\n\n  bool operator<(const\
     \ modint &other) const {\n    return val < other.val;\n  } // To use std::map\n\
@@ -144,31 +144,32 @@ data:
     \  modint pow(int64_t n) const {\n    modint ret(1), mul(val);\n    while (n >\
     \ 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n\
     \    return ret;\n  }\n\n  friend ostream &operator<<(ostream &os, const modint\
-    \ &p) { return os << p.val; }\n  static int get_mod() { return mod; }\n};\n\n\
-    template <typename T>\nstruct ModCalc {\n  vector<T> _fact = {1, 1};\n  vector<T>\
-    \ _fact_inv = {1, 1};\n  vector<T> _inv = {0, 1};\n\n  T pow(T a, int n) {\n \
-    \   T x(1);\n    while (n) {\n      if (n & 1) x *= a;\n      a *= a;\n      n\
-    \ >>= 1;\n    }\n    return x;\n  }\n  void expand(int n) {\n    while (_fact.size()\
-    \ <= n) {\n      auto i = _fact.size();\n      _fact.eb(_fact[i - 1] * T(i));\n\
-    \      auto q = T::get_mod() / i, r = T::get_mod() % i;\n      _inv.eb(_inv[r]\
-    \ * T(T::get_mod() - q));\n      _fact_inv.eb(_fact_inv[i - 1] * _inv[i]);\n \
-    \   }\n  }\n\n  T fact(int n) {\n    if (n >= _fact.size()) expand(n);\n    return\
-    \ _fact[n];\n  }\n\n  T fact_inv(int n) {\n    if (n >= _fact.size()) expand(n);\n\
-    \    return _fact_inv[n];\n  }\n\n  T inv(int n) {\n    if (n >= _fact.size())\
-    \ expand(n);\n    return _inv[n];\n  }\n\n  T C(ll n, ll k, bool large = false)\
-    \ {\n    assert(n >= 0);\n    if (k < 0 || n < k) return 0;\n    if (!large) return\
-    \ fact(n) * fact_inv(k) * fact_inv(n - k);\n    k = min(k, n - k);\n    T x(1);\n\
-    \    FOR(i, k) {\n      x *= n - i;\n      x *= inv(i + 1);\n    }\n    return\
-    \ x;\n  }\n};\n\nusing modint107 = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n\
-    #line 7 \"test/library_checker/datastructure/queue_operate_all_composite.test.cpp\"\
-    \n\r\nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(Q);\r\n  using Mono\
-    \ = Group_Affine<mint>;\r\n  using F = Mono::value_type;\r\n\r\n  SWAG<Mono> swag;\r\
-    \n\r\n  FOR(_, Q) {\r\n    LL(t);\r\n    if (t == 0) {\r\n      LL(a, b);\r\n\
-    \      swag.push(F({a, b}));\r\n    }\r\n    elif (t == 1) { swag.pop(); }\r\n\
-    \    elif (t == 2) {\r\n      LL(x);\r\n      F f = swag.prod();\r\n      print(Mono::eval(f,\
-    \ x));\r\n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n\
-    \  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
-    \n\r\n  return 0;\r\n}\r\n"
+    \ &p) { return os << p.val; }\n  friend istream &operator>>(istream &is, modint\
+    \ &a) {\n    int64_t t;\n    is >> t;\n    a = modint(t);\n    return (is);\n\
+    \  }\n  static constexpr int get_mod() { return mod; }\n};\n\ntemplate <typename\
+    \ T>\nstruct ModCalc {\n  vector<T> _fact = {1, 1};\n  vector<T> _fact_inv = {1,\
+    \ 1};\n  vector<T> _inv = {0, 1};\n\n  T pow(T a, int n) {\n    T x(1);\n    while\
+    \ (n) {\n      if (n & 1) x *= a;\n      a *= a;\n      n >>= 1;\n    }\n    return\
+    \ x;\n  }\n  void expand(int n) {\n    while (_fact.size() <= n) {\n      auto\
+    \ i = _fact.size();\n      _fact.eb(_fact[i - 1] * T(i));\n      auto q = T::get_mod()\
+    \ / i, r = T::get_mod() % i;\n      _inv.eb(_inv[r] * T(T::get_mod() - q));\n\
+    \      _fact_inv.eb(_fact_inv[i - 1] * _inv[i]);\n    }\n  }\n\n  T fact(int n)\
+    \ {\n    if (n >= _fact.size()) expand(n);\n    return _fact[n];\n  }\n\n  T fact_inv(int\
+    \ n) {\n    if (n >= _fact.size()) expand(n);\n    return _fact_inv[n];\n  }\n\
+    \n  T inv(int n) {\n    if (n >= _fact.size()) expand(n);\n    return _inv[n];\n\
+    \  }\n\n  T C(ll n, ll k, bool large = false) {\n    assert(n >= 0);\n    if (k\
+    \ < 0 || n < k) return 0;\n    if (!large) return fact(n) * fact_inv(k) * fact_inv(n\
+    \ - k);\n    k = min(k, n - k);\n    T x(1);\n    FOR(i, k) {\n      x *= n -\
+    \ i;\n      x *= inv(i + 1);\n    }\n    return x;\n  }\n};\n\nusing modint107\
+    \ = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n#line 7 \"\
+    test/library_checker/datastructure/queue_operate_all_composite.test.cpp\"\n\r\n\
+    using mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(Q);\r\n  using Mono = Group_Affine<mint>;\r\
+    \n  using F = Mono::value_type;\r\n\r\n  SWAG<Mono> swag;\r\n\r\n  FOR(_, Q) {\r\
+    \n    LL(t);\r\n    if (t == 0) {\r\n      LL(a, b);\r\n      swag.push(F({a,\
+    \ b}));\r\n    }\r\n    elif (t == 1) { swag.pop(); }\r\n    elif (t == 2) {\r\
+    \n      LL(x);\r\n      F f = swag.prod();\r\n      print(Mono::eval(f, x));\r\
+    \n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/queue_operate_all_composite\"\
     \r\n#include \"my_template.hpp\"\r\n\r\n#include \"algebra/group_affine.hpp\"\r\
     \n#include \"ds/swag.hpp\"\r\n#include \"mod/modint.hpp\"\r\n\r\nusing mint =\
@@ -187,7 +188,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
   requiredBy: []
-  timestamp: '2022-01-05 00:19:00+09:00'
+  timestamp: '2022-01-05 04:56:51+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/queue_operate_all_composite.test.cpp

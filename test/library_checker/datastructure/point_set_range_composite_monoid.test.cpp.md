@@ -135,7 +135,7 @@ data:
     \ sm))) {\n            sm = Monoid::op(dat[R], sm);\n            R--;\n      \
     \    }\n        }\n        return R + 1 - size;\n      }\n      sm = Monoid::op(dat[R],\
     \ sm);\n    } while ((R & -R) != R);\n    return 0;\n  }\n\n  void debug() { print(\"\
-    segtree\", dat); }\n};\n#line 1 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct\
+    segtree\", dat); }\n};\n#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct\
     \ modint {\n  int val;\n\n  constexpr modint(const ll val = 0) noexcept\n    \
     \  : val(val >= 0 ? val % mod : (mod - (-val) % mod) % mod) {}\n\n  bool operator<(const\
     \ modint &other) const {\n    return val < other.val;\n  } // To use std::map\n\
@@ -156,29 +156,31 @@ data:
     \  modint pow(int64_t n) const {\n    modint ret(1), mul(val);\n    while (n >\
     \ 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n\
     \    return ret;\n  }\n\n  friend ostream &operator<<(ostream &os, const modint\
-    \ &p) { return os << p.val; }\n  static int get_mod() { return mod; }\n};\n\n\
-    template <typename T>\nstruct ModCalc {\n  vector<T> _fact = {1, 1};\n  vector<T>\
-    \ _fact_inv = {1, 1};\n  vector<T> _inv = {0, 1};\n\n  T pow(T a, int n) {\n \
-    \   T x(1);\n    while (n) {\n      if (n & 1) x *= a;\n      a *= a;\n      n\
-    \ >>= 1;\n    }\n    return x;\n  }\n  void expand(int n) {\n    while (_fact.size()\
-    \ <= n) {\n      auto i = _fact.size();\n      _fact.eb(_fact[i - 1] * T(i));\n\
-    \      auto q = T::get_mod() / i, r = T::get_mod() % i;\n      _inv.eb(_inv[r]\
-    \ * T(T::get_mod() - q));\n      _fact_inv.eb(_fact_inv[i - 1] * _inv[i]);\n \
-    \   }\n  }\n\n  T fact(int n) {\n    if (n >= _fact.size()) expand(n);\n    return\
-    \ _fact[n];\n  }\n\n  T fact_inv(int n) {\n    if (n >= _fact.size()) expand(n);\n\
-    \    return _fact_inv[n];\n  }\n\n  T inv(int n) {\n    if (n >= _fact.size())\
-    \ expand(n);\n    return _inv[n];\n  }\n\n  T C(ll n, ll k, bool large = false)\
-    \ {\n    assert(n >= 0);\n    if (k < 0 || n < k) return 0;\n    if (!large) return\
-    \ fact(n) * fact_inv(k) * fact_inv(n - k);\n    k = min(k, n - k);\n    T x(1);\n\
-    \    FOR(i, k) {\n      x *= n - i;\n      x *= inv(i + 1);\n    }\n    return\
-    \ x;\n  }\n};\n\nusing modint107 = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n\
-    #line 1 \"algebra/group_affine.hpp\"\ntemplate <typename K>\nstruct Group_Affine\
-    \ {\n  using F = pair<K, K>;\n  using value_type = F;\n  static constexpr F op(const\
-    \ F &x, const F &y) noexcept {\n    return F({x.fi * y.fi, x.se * y.fi + y.se});\n\
-    \  }\n  static constexpr F inverse(const F &x) {\n    auto [a, b] = x;\n    a\
-    \ = K(1) / a;\n    return {a, a * (-b)};\n  }\n  static constexpr K eval(const\
-    \ F &f, K x) noexcept { return f.fi * x + f.se; }\n  static constexpr F unit =\
-    \ {K(1), K(0)};\n  static constexpr bool commute = false;\n};\n#line 7 \"test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp\"\
+    \ &p) { return os << p.val; }\n  friend istream &operator>>(istream &is, modint\
+    \ &a) {\n    int64_t t;\n    is >> t;\n    a = modint(t);\n    return (is);\n\
+    \  }\n  static constexpr int get_mod() { return mod; }\n};\n\ntemplate <typename\
+    \ T>\nstruct ModCalc {\n  vector<T> _fact = {1, 1};\n  vector<T> _fact_inv = {1,\
+    \ 1};\n  vector<T> _inv = {0, 1};\n\n  T pow(T a, int n) {\n    T x(1);\n    while\
+    \ (n) {\n      if (n & 1) x *= a;\n      a *= a;\n      n >>= 1;\n    }\n    return\
+    \ x;\n  }\n  void expand(int n) {\n    while (_fact.size() <= n) {\n      auto\
+    \ i = _fact.size();\n      _fact.eb(_fact[i - 1] * T(i));\n      auto q = T::get_mod()\
+    \ / i, r = T::get_mod() % i;\n      _inv.eb(_inv[r] * T(T::get_mod() - q));\n\
+    \      _fact_inv.eb(_fact_inv[i - 1] * _inv[i]);\n    }\n  }\n\n  T fact(int n)\
+    \ {\n    if (n >= _fact.size()) expand(n);\n    return _fact[n];\n  }\n\n  T fact_inv(int\
+    \ n) {\n    if (n >= _fact.size()) expand(n);\n    return _fact_inv[n];\n  }\n\
+    \n  T inv(int n) {\n    if (n >= _fact.size()) expand(n);\n    return _inv[n];\n\
+    \  }\n\n  T C(ll n, ll k, bool large = false) {\n    assert(n >= 0);\n    if (k\
+    \ < 0 || n < k) return 0;\n    if (!large) return fact(n) * fact_inv(k) * fact_inv(n\
+    \ - k);\n    k = min(k, n - k);\n    T x(1);\n    FOR(i, k) {\n      x *= n -\
+    \ i;\n      x *= inv(i + 1);\n    }\n    return x;\n  }\n};\n\nusing modint107\
+    \ = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n#line 1 \"\
+    algebra/group_affine.hpp\"\ntemplate <typename K>\nstruct Group_Affine {\n  using\
+    \ F = pair<K, K>;\n  using value_type = F;\n  static constexpr F op(const F &x,\
+    \ const F &y) noexcept {\n    return F({x.fi * y.fi, x.se * y.fi + y.se});\n \
+    \ }\n  static constexpr F inverse(const F &x) {\n    auto [a, b] = x;\n    a =\
+    \ K(1) / a;\n    return {a, a * (-b)};\n  }\n  static constexpr K eval(const F\
+    \ &f, K x) noexcept { return f.fi * x + f.se; }\n  static constexpr F unit = {K(1),\
+    \ K(0)};\n  static constexpr bool commute = false;\n};\n#line 7 \"test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp\"\
     \n\nusing mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using Mono = Group_Affine<mint>;\n\
     \  using F = Mono::value_type;\n\n  vc<F> seg_raw(N);\n  FOR(i, N) {\n    LL(a,\
     \ b);\n    seg_raw[i] = {a, b};\n  }\n\n  SegTree<Mono> seg(seg_raw);\n\n  FOR(q,\
@@ -205,7 +207,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
   requiredBy: []
-  timestamp: '2022-01-05 00:19:00+09:00'
+  timestamp: '2022-01-05 04:56:51+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp

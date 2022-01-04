@@ -1,31 +1,361 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: mod/modint.hpp
+    title: mod/modint.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
     path: sequence/linearrecurrence.hpp
     title: sequence/linearrecurrence.hpp
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/convolution/convolution_mod.test.cpp
+    title: test/library_checker/convolution/convolution_mod.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/convolution/convolution_mod_107.test.cpp
+    title: test/library_checker/convolution/convolution_mod_107.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"polynomial/convolution.hpp\"\ntemplate <typename mint>\r\
-    \nvector<mint> convolution(vector<mint>& A, vector<mint>& B) {\r\n  vector<mint>\
-    \ C(len(A) + len(B) - 1);\r\n  FOR(i, len(A)) FOR(j, len(B)) C[i + j] += A[i]\
-    \ * B[j];\r\n  return C;\r\n}\r\n"
-  code: "#pragma once\r\ntemplate <typename mint>\r\nvector<mint> convolution(vector<mint>&\
-    \ A, vector<mint>& B) {\r\n  vector<mint> C(len(A) + len(B) - 1);\r\n  FOR(i,\
-    \ len(A)) FOR(j, len(B)) C[i + j] += A[i] * B[j];\r\n  return C;\r\n}\r\n"
-  dependsOn: []
+  bundledCode: "#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n\
+    \  int val;\n\n  constexpr modint(const ll val = 0) noexcept\n      : val(val\
+    \ >= 0 ? val % mod : (mod - (-val) % mod) % mod) {}\n\n  bool operator<(const\
+    \ modint &other) const {\n    return val < other.val;\n  } // To use std::map\n\
+    \n  modint &operator+=(const modint &p) {\n    if ((val += p.val) >= mod) val\
+    \ -= mod;\n    return *this;\n  }\n  modint &operator-=(const modint &p) {\n \
+    \   if ((val += mod - p.val) >= mod) val -= mod;\n    return *this;\n  }\n  modint\
+    \ &operator*=(const modint &p) {\n    val = (int)(1LL * val * p.val % mod);\n\
+    \    return *this;\n  }\n  modint &operator/=(const modint &p) {\n    *this *=\
+    \ p.inverse();\n    return *this;\n  }\n  modint operator-() const { return modint(-val);\
+    \ }\n  modint operator+(const modint &p) const { return modint(*this) += p; }\n\
+    \  modint operator-(const modint &p) const { return modint(*this) -= p; }\n  modint\
+    \ operator*(const modint &p) const { return modint(*this) *= p; }\n  modint operator/(const\
+    \ modint &p) const { return modint(*this) /= p; }\n  bool operator==(const modint\
+    \ &p) const { return val == p.val; }\n  bool operator!=(const modint &p) const\
+    \ { return val != p.val; }\n\n  modint inverse() const {\n    int a = val, b =\
+    \ mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -=\
+    \ t * b, b);\n      swap(u -= t * v, v);\n    }\n    return modint(u);\n  }\n\n\
+    \  modint pow(int64_t n) const {\n    modint ret(1), mul(val);\n    while (n >\
+    \ 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n\
+    \    return ret;\n  }\n\n  friend ostream &operator<<(ostream &os, const modint\
+    \ &p) { return os << p.val; }\n  friend istream &operator>>(istream &is, modint\
+    \ &a) {\n    int64_t t;\n    is >> t;\n    a = modint(t);\n    return (is);\n\
+    \  }\n  static constexpr int get_mod() { return mod; }\n};\n\ntemplate <typename\
+    \ T>\nstruct ModCalc {\n  vector<T> _fact = {1, 1};\n  vector<T> _fact_inv = {1,\
+    \ 1};\n  vector<T> _inv = {0, 1};\n\n  T pow(T a, int n) {\n    T x(1);\n    while\
+    \ (n) {\n      if (n & 1) x *= a;\n      a *= a;\n      n >>= 1;\n    }\n    return\
+    \ x;\n  }\n  void expand(int n) {\n    while (_fact.size() <= n) {\n      auto\
+    \ i = _fact.size();\n      _fact.eb(_fact[i - 1] * T(i));\n      auto q = T::get_mod()\
+    \ / i, r = T::get_mod() % i;\n      _inv.eb(_inv[r] * T(T::get_mod() - q));\n\
+    \      _fact_inv.eb(_fact_inv[i - 1] * _inv[i]);\n    }\n  }\n\n  T fact(int n)\
+    \ {\n    if (n >= _fact.size()) expand(n);\n    return _fact[n];\n  }\n\n  T fact_inv(int\
+    \ n) {\n    if (n >= _fact.size()) expand(n);\n    return _fact_inv[n];\n  }\n\
+    \n  T inv(int n) {\n    if (n >= _fact.size()) expand(n);\n    return _inv[n];\n\
+    \  }\n\n  T C(ll n, ll k, bool large = false) {\n    assert(n >= 0);\n    if (k\
+    \ < 0 || n < k) return 0;\n    if (!large) return fact(n) * fact_inv(k) * fact_inv(n\
+    \ - k);\n    k = min(k, n - k);\n    T x(1);\n    FOR(i, k) {\n      x *= n -\
+    \ i;\n      x *= inv(i + 1);\n    }\n    return x;\n  }\n};\n\nusing modint107\
+    \ = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n#line 2 \"\
+    polynomial/convolution.hpp\"\ntemplate <class T>\r\nvector<T> convolution_naive(const\
+    \ vector<T>& a, const vector<T>& b) {\r\n  int n = int(a.size()), m = int(b.size());\r\
+    \n  vector<T> ans(n + m - 1);\r\n  if (n < m) {\r\n    FOR(j, m) FOR(i, n) ans[i\
+    \ + j] += a[i] * b[j];\r\n  } else {\r\n    FOR(i, n) FOR(j, m) ans[i + j] +=\
+    \ a[i] * b[j];\r\n  }\r\n  return ans;\r\n}\r\n\r\ntemplate <class mint>\r\nstruct\
+    \ fft_info {\r\n  static constexpr int bsf_constexpr(unsigned int n) {\r\n   \
+    \ int x = 0;\r\n    while (!(n & (1 << x))) x++;\r\n    return x;\r\n  }\r\n\r\
+    \n  static constexpr int rank2 = bsf_constexpr(mint::get_mod() - 1);\r\n  array<mint,\
+    \ rank2 + 1> root;\r\n  array<mint, rank2 + 1> iroot;\r\n  array<mint, max(0,\
+    \ rank2 - 1)> rate2;\r\n  array<mint, max(0, rank2 - 1)> irate2;\r\n  array<mint,\
+    \ max(0, rank2 - 2)> rate3;\r\n  array<mint, max(0, rank2 - 2)> irate3;\r\n\r\n\
+    \  fft_info() {\r\n    int g = primitive_root_constexpr(mint::get_mod());\r\n\
+    \    root[rank2] = mint(g).pow((mint::get_mod() - 1) >> rank2);\r\n    iroot[rank2]\
+    \ = mint(1) / root[rank2];\r\n    FOR_R(i, rank2) {\r\n      root[i] = root[i\
+    \ + 1] * root[i + 1];\r\n      iroot[i] = iroot[i + 1] * iroot[i + 1];\r\n   \
+    \ }\r\n\r\n    {\r\n      mint prod = 1, iprod = 1;\r\n      for (int i = 0; i\
+    \ <= rank2 - 2; i++) {\r\n        rate2[i] = root[i + 2] * prod;\r\n        irate2[i]\
+    \ = iroot[i + 2] * iprod;\r\n        prod *= iroot[i + 2];\r\n        iprod *=\
+    \ root[i + 2];\r\n      }\r\n    }\r\n    {\r\n      mint prod = 1, iprod = 1;\r\
+    \n      for (int i = 0; i <= rank2 - 3; i++) {\r\n        rate3[i] = root[i +\
+    \ 3] * prod;\r\n        irate3[i] = iroot[i + 3] * iprod;\r\n        prod *= iroot[i\
+    \ + 3];\r\n        iprod *= root[i + 3];\r\n      }\r\n    }\r\n  }\r\n\r\n  constexpr\
+    \ int primitive_root_constexpr(int m) {\r\n    if (m == 2) return 1;\r\n    if\
+    \ (m == 167772161) return 3;\r\n    if (m == 469762049) return 3;\r\n    if (m\
+    \ == 754974721) return 11;\r\n    if (m == 998244353) return 3;\r\n    int divs[20]\
+    \ = {};\r\n    divs[0] = 2;\r\n    int cnt = 1;\r\n    int x = (m - 1) / 2;\r\n\
+    \    while (x % 2 == 0) x /= 2;\r\n    for (int i = 3; (long long)(i)*i <= x;\
+    \ i += 2) {\r\n      if (x % i == 0) {\r\n        divs[cnt++] = i;\r\n       \
+    \ while (x % i == 0) { x /= i; }\r\n      }\r\n    }\r\n    if (x > 1) { divs[cnt++]\
+    \ = x; }\r\n    for (int g = 2;; g++) {\r\n      bool ok = true;\r\n      for\
+    \ (int i = 0; i < cnt; i++) {\r\n        if (pow_mod(g, (m - 1) / divs[i], m)\
+    \ == 1) {\r\n          ok = false;\r\n          break;\r\n        }\r\n      }\r\
+    \n      if (ok) return g;\r\n    }\r\n  }\r\n  constexpr long long pow_mod(long\
+    \ long x, long long n, int m) {\r\n    if (m == 1) return 0;\r\n    ll v = 1;\r\
+    \n    while (n) {\r\n      if (n & 1) v = (v * x) % m;\r\n      x = (x * x) %\
+    \ m;\r\n      n >>= 1;\r\n    }\r\n    return v;\r\n  }\r\n};\r\n\r\ntemplate\
+    \ <class mint>\r\nvoid ntt(vector<mint>& a, bool inverse) {\r\n  int n = int(a.size());\r\
+    \n  int h = topbit(n);\r\n  assert(n == 1 << h);\r\n  static const fft_info<mint>\
+    \ info;\r\n  if (!inverse) {\r\n    int len = 0; // a[i, i+(n>>len), i+2*(n>>len),\
+    \ ..] is transformed\r\n    while (len < h) {\r\n      if (h - len == 1) {\r\n\
+    \        int p = 1 << (h - len - 1);\r\n        mint rot = 1;\r\n        FOR(s,\
+    \ 1 << len) {\r\n          int offset = s << (h - len);\r\n          FOR(i, p)\
+    \ {\r\n            auto l = a[i + offset];\r\n            auto r = a[i + offset\
+    \ + p] * rot;\r\n            a[i + offset] = l + r;\r\n            a[i + offset\
+    \ + p] = l - r;\r\n          }\r\n          rot *= info.rate2[topbit(~s & -~s)];\r\
+    \n        }\r\n        len++;\r\n      } else {\r\n        int p = 1 << (h - len\
+    \ - 2);\r\n        mint rot = 1, imag = info.root[2];\r\n        for (int s =\
+    \ 0; s < (1 << len); s++) {\r\n          mint rot2 = rot * rot;\r\n          mint\
+    \ rot3 = rot2 * rot;\r\n          int offset = s << (h - len);\r\n          for\
+    \ (int i = 0; i < p; i++) {\r\n            auto mod2 = 1ULL * mint::get_mod()\
+    \ * mint::get_mod();\r\n            auto a0 = 1ULL * a[i + offset].val;\r\n  \
+    \          auto a1 = 1ULL * a[i + offset + p].val * rot.val;\r\n            auto\
+    \ a2 = 1ULL * a[i + offset + 2 * p].val * rot2.val;\r\n            auto a3 = 1ULL\
+    \ * a[i + offset + 3 * p].val * rot3.val;\r\n            auto a1na3imag = 1ULL\
+    \ * mint(a1 + mod2 - a3).val * imag.val;\r\n            auto na2 = mod2 - a2;\r\
+    \n            a[i + offset] = a0 + a2 + a1 + a3;\r\n            a[i + offset +\
+    \ 1 * p] = a0 + a2 + (2 * mod2 - (a1 + a3));\r\n            a[i + offset + 2 *\
+    \ p] = a0 + na2 + a1na3imag;\r\n            a[i + offset + 3 * p] = a0 + na2 +\
+    \ (mod2 - a1na3imag);\r\n          }\r\n          rot *= info.rate3[topbit(~s\
+    \ & -~s)];\r\n        }\r\n        len += 2;\r\n      }\r\n    }\r\n  } else {\r\
+    \n    int len = h;\r\n    while (len) {\r\n      if (len == 1) {\r\n        int\
+    \ p = 1 << (h - len);\r\n        mint irot = 1;\r\n        FOR(s, 1 << (len -\
+    \ 1)) {\r\n          int offset = s << (h - len + 1);\r\n          FOR(i, p) {\r\
+    \n            auto l = a[i + offset];\r\n            auto r = a[i + offset + p];\r\
+    \n            a[i + offset] = l + r;\r\n            a[i + offset + p]\r\n    \
+    \            = (unsigned long long)(mint::get_mod() + l.val - r.val)\r\n     \
+    \             * irot.val;\r\n            ;\r\n          }\r\n          irot *=\
+    \ info.irate2[topbit(~s & -~s)];\r\n        }\r\n        len--;\r\n      } else\
+    \ {\r\n        int p = 1 << (h - len);\r\n        mint irot = 1, iimag = info.iroot[2];\r\
+    \n        FOR(s, (1 << (len - 2))) {\r\n          mint irot2 = irot * irot;\r\n\
+    \          mint irot3 = irot2 * irot;\r\n          int offset = s << (h - len\
+    \ + 2);\r\n          for (int i = 0; i < p; i++) {\r\n            auto a0 = 1ULL\
+    \ * a[i + offset + 0 * p].val;\r\n            auto a1 = 1ULL * a[i + offset +\
+    \ 1 * p].val;\r\n            auto a2 = 1ULL * a[i + offset + 2 * p].val;\r\n \
+    \           auto a3 = 1ULL * a[i + offset + 3 * p].val;\r\n\r\n            auto\
+    \ a2na3iimag\r\n                = 1ULL * mint((mint::get_mod() + a2 - a3) * iimag.val).val;\r\
+    \n\r\n            a[i + offset] = a0 + a1 + a2 + a3;\r\n            a[i + offset\
+    \ + 1 * p]\r\n                = (a0 + (mint::get_mod() - a1) + a2na3iimag) * irot.val;\r\
+    \n            a[i + offset + 2 * p]\r\n                = (a0 + a1 + (mint::get_mod()\
+    \ - a2) + (mint::get_mod() - a3))\r\n                  * irot2.val;\r\n      \
+    \      a[i + offset + 3 * p]\r\n                = (a0 + (mint::get_mod() - a1)\
+    \ + (mint::get_mod() - a2na3iimag))\r\n                  * irot3.val;\r\n    \
+    \      }\r\n          irot *= info.irate3[topbit(~s & -~s)];\r\n        }\r\n\
+    \        len -= 2;\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\ntemplate <class mint>\r\
+    \nvector<mint> convolution_ntt(vector<mint> a, vector<mint> b) {\r\n  int n =\
+    \ int(a.size()), m = int(b.size());\r\n  int sz = 1;\r\n  while (sz < n + m -\
+    \ 1) sz *= 2;\r\n  a.resize(sz), b.resize(sz);\r\n  ntt(a, false);\r\n  ntt(b,\
+    \ false);\r\n  FOR(i, sz) a[i] *= b[i];\r\n  ntt(a, true);\r\n  a.resize(n + m\
+    \ - 1);\r\n  mint iz = mint(1) / mint(sz);\r\n  FOR(i, len(a)) a[i] *= iz;\r\n\
+    \  return a;\r\n}\r\n\r\ntemplate <typename C>\r\nstruct cfft_info {\r\n  int\
+    \ lg;\r\n  vector<vector<C>> w = vector<vector<C>>(1, vector<C>(1, 1));\r\n  void\
+    \ init(int lg) {\r\n    for (int d = 1, m = 1; d <= lg; d++, m <<= 1)\r\n    \
+    \  if (d >= (int)w.size()) {\r\n        w.emplace_back(m);\r\n        const double\
+    \ th = M_PI / m;\r\n        for (int i = 0; i < m; i++)\r\n          w[d][i] =\
+    \ (i & 1 ? C(cos(th * i), sin(th * i)) : w[d - 1][i >> 1]);\r\n      }\r\n  }\r\
+    \n};\r\n\r\ntemplate <typename C>\r\nvoid fft(vector<C>& f, bool inverse) {\r\n\
+    \  static cfft_info<C> info;\r\n  int n = f.size();\r\n  int lg = __lg(n);\r\n\
+    \  auto& w = info.w;\r\n  if (lg >= len(w)) info.init(lg);\r\n  if (inverse) {\r\
+    \n    for (int k = 1; k <= lg; k++) {\r\n      const int d = 1 << (k - 1);\r\n\
+    \      for (int s = 0; s < n; s += 2 * d) {\r\n        for (int i = s; i < s +\
+    \ d; i++) {\r\n          C x = f[i], y = ~w[k][i - s] * f[d + i];\r\n        \
+    \  f[i] = x + y;\r\n          f[d + i] = x - y;\r\n        }\r\n      }\r\n  \
+    \  }\r\n  } else {\r\n    for (int k = lg; k; k--) {\r\n      const int d = 1\
+    \ << (k - 1);\r\n      for (int s = 0; s < n; s += 2 * d) {\r\n        for (int\
+    \ i = s; i < s + d; i++) {\r\n          C x = f[i], y = f[d + i];\r\n        \
+    \  f[i] = x + y;\r\n          f[d + i] = w[k][i - s] * (x - y);\r\n        }\r\
+    \n      }\r\n    }\r\n  }\r\n}\r\n\r\ntemplate <class R>\r\nvector<double> convolution_fft(vector<R>&\
+    \ a, vector<R>& b) {\r\n  struct C {\r\n    double x, y;\r\n    C(double _x =\
+    \ 0, double _y = 0) : x(_x), y(_y) {}\r\n    C operator~() const { return C(x,\
+    \ -y); }\r\n    C operator*(const C& c) const {\r\n      return C(x * c.x - y\
+    \ * c.y, x * c.y + y * c.x);\r\n    }\r\n    C operator+(const C& c) const { return\
+    \ C(x + c.x, y + c.y); }\r\n    C operator-(const C& c) const { return C(x - c.x,\
+    \ y - c.y); }\r\n  };\r\n\r\n  int n = len(a), m = len(b);\r\n  int sz = 1;\r\n\
+    \  while (sz < n + m - 1) sz *= 2;\r\n  vc<C> f(sz);\r\n  FOR(i, len(a)) f[i].x\
+    \ = a[i];\r\n  FOR(i, len(b)) f[i].y = b[i];\r\n  fft(f, false);\r\n  static const\
+    \ C rad(0, -.25);\r\n  for (int i = 0; i < n; i++) {\r\n    int j = i ? i ^ ((1\
+    \ << __lg(i)) - 1) : 0;\r\n    if (i > j) continue;\r\n    C x = f[i] + ~f[j],\
+    \ y = f[i] - ~f[j];\r\n    f[i] = x * y * rad;\r\n    f[j] = ~f[i];\r\n  }\r\n\
+    \  fft(f, true);\r\n  vc<double> c(n + m - 1);\r\n  FOR(i, len(c)) c[i] = f[i].x\
+    \ / n;\r\n  return c;\r\n}\r\n\r\ntemplate <typename mint>\r\nvector<mint> convolution_garner(const\
+    \ vector<mint>& a, const vector<mint>& b) {\r\n  int n = len(a), m = len(b);\r\
+    \n  if (!n || !m) return {};\r\n  static const long long nttprimes[] = {754974721,\
+    \ 167772161, 469762049};\r\n  using mint0 = modint<754974721>;\r\n  using mint1\
+    \ = modint<167772161>;\r\n  using mint2 = modint<469762049>;\r\n  vc<mint0> a0(n),\
+    \ b0(m);\r\n  vc<mint1> a1(n), b1(m);\r\n  vc<mint2> a2(n), b2(m);\r\n  FOR(i,\
+    \ n) a0[i] = a[i].val, a1[i] = a[i].val, a2[i] = a[i].val;\r\n  FOR(i, m) b0[i]\
+    \ = b[i].val, b1[i] = b[i].val, b2[i] = b[i].val;\r\n  auto c0 = convolution_ntt<mint0>(a0,\
+    \ b0);\r\n  auto c1 = convolution_ntt<mint1>(a1, b1);\r\n  auto c2 = convolution_ntt<mint2>(a2,\
+    \ b2);\r\n  static const long long m01 = 1LL * nttprimes[0] * nttprimes[1];\r\n\
+    \  static const long long m0_inv_m1 = mint1(nttprimes[0]).inverse().val;\r\n \
+    \ static const long long m01_inv_m2 = mint2(m01).inverse().val;\r\n  static const\
+    \ int mod = mint::get_mod();\r\n  auto garner = [&](mint0 x0, mint1 x1, mint2\
+    \ x2) -> mint {\r\n    int r0 = x0.val, r1 = x1.val, r2 = x2.val;\r\n    int v1\
+    \ = (m0_inv_m1 * (r1 + nttprimes[1] - r0)) % nttprimes[1];\r\n    auto v2 = (mint2(r2)\
+    \ - r0 - mint2(nttprimes[0]) * v1) * mint2(m01_inv_m2);\r\n    return mint(r0\
+    \ + 1LL * nttprimes[0] * v1 + m01 % mod * v2.val);\r\n  };\r\n  vc<mint> c(len(c0));\r\
+    \n  FOR(i, len(c)) c[i] = garner(c0[i], c1[i], c2[i]);\r\n  return c;\r\n}\r\n\
+    \r\ntemplate <typename mint>\r\nvector<mint> convolution(vector<mint>& a, vector<mint>&\
+    \ b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return {};\r\n  if\
+    \ (min(n, m) <= 60) return convolution_naive(a, b);\r\n  int mod = mint::get_mod();\r\
+    \n  if (mod == 167772161 || mod == 469762049 || mod == 754974721\r\n      || mod\
+    \ == 998244353) {\r\n    return convolution_ntt(a, b);\r\n  }\r\n  return convolution_garner(a,\
+    \ b);\r\n}\r\n"
+  code: "#include \"mod/modint.hpp\"\r\ntemplate <class T>\r\nvector<T> convolution_naive(const\
+    \ vector<T>& a, const vector<T>& b) {\r\n  int n = int(a.size()), m = int(b.size());\r\
+    \n  vector<T> ans(n + m - 1);\r\n  if (n < m) {\r\n    FOR(j, m) FOR(i, n) ans[i\
+    \ + j] += a[i] * b[j];\r\n  } else {\r\n    FOR(i, n) FOR(j, m) ans[i + j] +=\
+    \ a[i] * b[j];\r\n  }\r\n  return ans;\r\n}\r\n\r\ntemplate <class mint>\r\nstruct\
+    \ fft_info {\r\n  static constexpr int bsf_constexpr(unsigned int n) {\r\n   \
+    \ int x = 0;\r\n    while (!(n & (1 << x))) x++;\r\n    return x;\r\n  }\r\n\r\
+    \n  static constexpr int rank2 = bsf_constexpr(mint::get_mod() - 1);\r\n  array<mint,\
+    \ rank2 + 1> root;\r\n  array<mint, rank2 + 1> iroot;\r\n  array<mint, max(0,\
+    \ rank2 - 1)> rate2;\r\n  array<mint, max(0, rank2 - 1)> irate2;\r\n  array<mint,\
+    \ max(0, rank2 - 2)> rate3;\r\n  array<mint, max(0, rank2 - 2)> irate3;\r\n\r\n\
+    \  fft_info() {\r\n    int g = primitive_root_constexpr(mint::get_mod());\r\n\
+    \    root[rank2] = mint(g).pow((mint::get_mod() - 1) >> rank2);\r\n    iroot[rank2]\
+    \ = mint(1) / root[rank2];\r\n    FOR_R(i, rank2) {\r\n      root[i] = root[i\
+    \ + 1] * root[i + 1];\r\n      iroot[i] = iroot[i + 1] * iroot[i + 1];\r\n   \
+    \ }\r\n\r\n    {\r\n      mint prod = 1, iprod = 1;\r\n      for (int i = 0; i\
+    \ <= rank2 - 2; i++) {\r\n        rate2[i] = root[i + 2] * prod;\r\n        irate2[i]\
+    \ = iroot[i + 2] * iprod;\r\n        prod *= iroot[i + 2];\r\n        iprod *=\
+    \ root[i + 2];\r\n      }\r\n    }\r\n    {\r\n      mint prod = 1, iprod = 1;\r\
+    \n      for (int i = 0; i <= rank2 - 3; i++) {\r\n        rate3[i] = root[i +\
+    \ 3] * prod;\r\n        irate3[i] = iroot[i + 3] * iprod;\r\n        prod *= iroot[i\
+    \ + 3];\r\n        iprod *= root[i + 3];\r\n      }\r\n    }\r\n  }\r\n\r\n  constexpr\
+    \ int primitive_root_constexpr(int m) {\r\n    if (m == 2) return 1;\r\n    if\
+    \ (m == 167772161) return 3;\r\n    if (m == 469762049) return 3;\r\n    if (m\
+    \ == 754974721) return 11;\r\n    if (m == 998244353) return 3;\r\n    int divs[20]\
+    \ = {};\r\n    divs[0] = 2;\r\n    int cnt = 1;\r\n    int x = (m - 1) / 2;\r\n\
+    \    while (x % 2 == 0) x /= 2;\r\n    for (int i = 3; (long long)(i)*i <= x;\
+    \ i += 2) {\r\n      if (x % i == 0) {\r\n        divs[cnt++] = i;\r\n       \
+    \ while (x % i == 0) { x /= i; }\r\n      }\r\n    }\r\n    if (x > 1) { divs[cnt++]\
+    \ = x; }\r\n    for (int g = 2;; g++) {\r\n      bool ok = true;\r\n      for\
+    \ (int i = 0; i < cnt; i++) {\r\n        if (pow_mod(g, (m - 1) / divs[i], m)\
+    \ == 1) {\r\n          ok = false;\r\n          break;\r\n        }\r\n      }\r\
+    \n      if (ok) return g;\r\n    }\r\n  }\r\n  constexpr long long pow_mod(long\
+    \ long x, long long n, int m) {\r\n    if (m == 1) return 0;\r\n    ll v = 1;\r\
+    \n    while (n) {\r\n      if (n & 1) v = (v * x) % m;\r\n      x = (x * x) %\
+    \ m;\r\n      n >>= 1;\r\n    }\r\n    return v;\r\n  }\r\n};\r\n\r\ntemplate\
+    \ <class mint>\r\nvoid ntt(vector<mint>& a, bool inverse) {\r\n  int n = int(a.size());\r\
+    \n  int h = topbit(n);\r\n  assert(n == 1 << h);\r\n  static const fft_info<mint>\
+    \ info;\r\n  if (!inverse) {\r\n    int len = 0; // a[i, i+(n>>len), i+2*(n>>len),\
+    \ ..] is transformed\r\n    while (len < h) {\r\n      if (h - len == 1) {\r\n\
+    \        int p = 1 << (h - len - 1);\r\n        mint rot = 1;\r\n        FOR(s,\
+    \ 1 << len) {\r\n          int offset = s << (h - len);\r\n          FOR(i, p)\
+    \ {\r\n            auto l = a[i + offset];\r\n            auto r = a[i + offset\
+    \ + p] * rot;\r\n            a[i + offset] = l + r;\r\n            a[i + offset\
+    \ + p] = l - r;\r\n          }\r\n          rot *= info.rate2[topbit(~s & -~s)];\r\
+    \n        }\r\n        len++;\r\n      } else {\r\n        int p = 1 << (h - len\
+    \ - 2);\r\n        mint rot = 1, imag = info.root[2];\r\n        for (int s =\
+    \ 0; s < (1 << len); s++) {\r\n          mint rot2 = rot * rot;\r\n          mint\
+    \ rot3 = rot2 * rot;\r\n          int offset = s << (h - len);\r\n          for\
+    \ (int i = 0; i < p; i++) {\r\n            auto mod2 = 1ULL * mint::get_mod()\
+    \ * mint::get_mod();\r\n            auto a0 = 1ULL * a[i + offset].val;\r\n  \
+    \          auto a1 = 1ULL * a[i + offset + p].val * rot.val;\r\n            auto\
+    \ a2 = 1ULL * a[i + offset + 2 * p].val * rot2.val;\r\n            auto a3 = 1ULL\
+    \ * a[i + offset + 3 * p].val * rot3.val;\r\n            auto a1na3imag = 1ULL\
+    \ * mint(a1 + mod2 - a3).val * imag.val;\r\n            auto na2 = mod2 - a2;\r\
+    \n            a[i + offset] = a0 + a2 + a1 + a3;\r\n            a[i + offset +\
+    \ 1 * p] = a0 + a2 + (2 * mod2 - (a1 + a3));\r\n            a[i + offset + 2 *\
+    \ p] = a0 + na2 + a1na3imag;\r\n            a[i + offset + 3 * p] = a0 + na2 +\
+    \ (mod2 - a1na3imag);\r\n          }\r\n          rot *= info.rate3[topbit(~s\
+    \ & -~s)];\r\n        }\r\n        len += 2;\r\n      }\r\n    }\r\n  } else {\r\
+    \n    int len = h;\r\n    while (len) {\r\n      if (len == 1) {\r\n        int\
+    \ p = 1 << (h - len);\r\n        mint irot = 1;\r\n        FOR(s, 1 << (len -\
+    \ 1)) {\r\n          int offset = s << (h - len + 1);\r\n          FOR(i, p) {\r\
+    \n            auto l = a[i + offset];\r\n            auto r = a[i + offset + p];\r\
+    \n            a[i + offset] = l + r;\r\n            a[i + offset + p]\r\n    \
+    \            = (unsigned long long)(mint::get_mod() + l.val - r.val)\r\n     \
+    \             * irot.val;\r\n            ;\r\n          }\r\n          irot *=\
+    \ info.irate2[topbit(~s & -~s)];\r\n        }\r\n        len--;\r\n      } else\
+    \ {\r\n        int p = 1 << (h - len);\r\n        mint irot = 1, iimag = info.iroot[2];\r\
+    \n        FOR(s, (1 << (len - 2))) {\r\n          mint irot2 = irot * irot;\r\n\
+    \          mint irot3 = irot2 * irot;\r\n          int offset = s << (h - len\
+    \ + 2);\r\n          for (int i = 0; i < p; i++) {\r\n            auto a0 = 1ULL\
+    \ * a[i + offset + 0 * p].val;\r\n            auto a1 = 1ULL * a[i + offset +\
+    \ 1 * p].val;\r\n            auto a2 = 1ULL * a[i + offset + 2 * p].val;\r\n \
+    \           auto a3 = 1ULL * a[i + offset + 3 * p].val;\r\n\r\n            auto\
+    \ a2na3iimag\r\n                = 1ULL * mint((mint::get_mod() + a2 - a3) * iimag.val).val;\r\
+    \n\r\n            a[i + offset] = a0 + a1 + a2 + a3;\r\n            a[i + offset\
+    \ + 1 * p]\r\n                = (a0 + (mint::get_mod() - a1) + a2na3iimag) * irot.val;\r\
+    \n            a[i + offset + 2 * p]\r\n                = (a0 + a1 + (mint::get_mod()\
+    \ - a2) + (mint::get_mod() - a3))\r\n                  * irot2.val;\r\n      \
+    \      a[i + offset + 3 * p]\r\n                = (a0 + (mint::get_mod() - a1)\
+    \ + (mint::get_mod() - a2na3iimag))\r\n                  * irot3.val;\r\n    \
+    \      }\r\n          irot *= info.irate3[topbit(~s & -~s)];\r\n        }\r\n\
+    \        len -= 2;\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\ntemplate <class mint>\r\
+    \nvector<mint> convolution_ntt(vector<mint> a, vector<mint> b) {\r\n  int n =\
+    \ int(a.size()), m = int(b.size());\r\n  int sz = 1;\r\n  while (sz < n + m -\
+    \ 1) sz *= 2;\r\n  a.resize(sz), b.resize(sz);\r\n  ntt(a, false);\r\n  ntt(b,\
+    \ false);\r\n  FOR(i, sz) a[i] *= b[i];\r\n  ntt(a, true);\r\n  a.resize(n + m\
+    \ - 1);\r\n  mint iz = mint(1) / mint(sz);\r\n  FOR(i, len(a)) a[i] *= iz;\r\n\
+    \  return a;\r\n}\r\n\r\ntemplate <typename C>\r\nstruct cfft_info {\r\n  int\
+    \ lg;\r\n  vector<vector<C>> w = vector<vector<C>>(1, vector<C>(1, 1));\r\n  void\
+    \ init(int lg) {\r\n    for (int d = 1, m = 1; d <= lg; d++, m <<= 1)\r\n    \
+    \  if (d >= (int)w.size()) {\r\n        w.emplace_back(m);\r\n        const double\
+    \ th = M_PI / m;\r\n        for (int i = 0; i < m; i++)\r\n          w[d][i] =\
+    \ (i & 1 ? C(cos(th * i), sin(th * i)) : w[d - 1][i >> 1]);\r\n      }\r\n  }\r\
+    \n};\r\n\r\ntemplate <typename C>\r\nvoid fft(vector<C>& f, bool inverse) {\r\n\
+    \  static cfft_info<C> info;\r\n  int n = f.size();\r\n  int lg = __lg(n);\r\n\
+    \  auto& w = info.w;\r\n  if (lg >= len(w)) info.init(lg);\r\n  if (inverse) {\r\
+    \n    for (int k = 1; k <= lg; k++) {\r\n      const int d = 1 << (k - 1);\r\n\
+    \      for (int s = 0; s < n; s += 2 * d) {\r\n        for (int i = s; i < s +\
+    \ d; i++) {\r\n          C x = f[i], y = ~w[k][i - s] * f[d + i];\r\n        \
+    \  f[i] = x + y;\r\n          f[d + i] = x - y;\r\n        }\r\n      }\r\n  \
+    \  }\r\n  } else {\r\n    for (int k = lg; k; k--) {\r\n      const int d = 1\
+    \ << (k - 1);\r\n      for (int s = 0; s < n; s += 2 * d) {\r\n        for (int\
+    \ i = s; i < s + d; i++) {\r\n          C x = f[i], y = f[d + i];\r\n        \
+    \  f[i] = x + y;\r\n          f[d + i] = w[k][i - s] * (x - y);\r\n        }\r\
+    \n      }\r\n    }\r\n  }\r\n}\r\n\r\ntemplate <class R>\r\nvector<double> convolution_fft(vector<R>&\
+    \ a, vector<R>& b) {\r\n  struct C {\r\n    double x, y;\r\n    C(double _x =\
+    \ 0, double _y = 0) : x(_x), y(_y) {}\r\n    C operator~() const { return C(x,\
+    \ -y); }\r\n    C operator*(const C& c) const {\r\n      return C(x * c.x - y\
+    \ * c.y, x * c.y + y * c.x);\r\n    }\r\n    C operator+(const C& c) const { return\
+    \ C(x + c.x, y + c.y); }\r\n    C operator-(const C& c) const { return C(x - c.x,\
+    \ y - c.y); }\r\n  };\r\n\r\n  int n = len(a), m = len(b);\r\n  int sz = 1;\r\n\
+    \  while (sz < n + m - 1) sz *= 2;\r\n  vc<C> f(sz);\r\n  FOR(i, len(a)) f[i].x\
+    \ = a[i];\r\n  FOR(i, len(b)) f[i].y = b[i];\r\n  fft(f, false);\r\n  static const\
+    \ C rad(0, -.25);\r\n  for (int i = 0; i < n; i++) {\r\n    int j = i ? i ^ ((1\
+    \ << __lg(i)) - 1) : 0;\r\n    if (i > j) continue;\r\n    C x = f[i] + ~f[j],\
+    \ y = f[i] - ~f[j];\r\n    f[i] = x * y * rad;\r\n    f[j] = ~f[i];\r\n  }\r\n\
+    \  fft(f, true);\r\n  vc<double> c(n + m - 1);\r\n  FOR(i, len(c)) c[i] = f[i].x\
+    \ / n;\r\n  return c;\r\n}\r\n\r\ntemplate <typename mint>\r\nvector<mint> convolution_garner(const\
+    \ vector<mint>& a, const vector<mint>& b) {\r\n  int n = len(a), m = len(b);\r\
+    \n  if (!n || !m) return {};\r\n  static const long long nttprimes[] = {754974721,\
+    \ 167772161, 469762049};\r\n  using mint0 = modint<754974721>;\r\n  using mint1\
+    \ = modint<167772161>;\r\n  using mint2 = modint<469762049>;\r\n  vc<mint0> a0(n),\
+    \ b0(m);\r\n  vc<mint1> a1(n), b1(m);\r\n  vc<mint2> a2(n), b2(m);\r\n  FOR(i,\
+    \ n) a0[i] = a[i].val, a1[i] = a[i].val, a2[i] = a[i].val;\r\n  FOR(i, m) b0[i]\
+    \ = b[i].val, b1[i] = b[i].val, b2[i] = b[i].val;\r\n  auto c0 = convolution_ntt<mint0>(a0,\
+    \ b0);\r\n  auto c1 = convolution_ntt<mint1>(a1, b1);\r\n  auto c2 = convolution_ntt<mint2>(a2,\
+    \ b2);\r\n  static const long long m01 = 1LL * nttprimes[0] * nttprimes[1];\r\n\
+    \  static const long long m0_inv_m1 = mint1(nttprimes[0]).inverse().val;\r\n \
+    \ static const long long m01_inv_m2 = mint2(m01).inverse().val;\r\n  static const\
+    \ int mod = mint::get_mod();\r\n  auto garner = [&](mint0 x0, mint1 x1, mint2\
+    \ x2) -> mint {\r\n    int r0 = x0.val, r1 = x1.val, r2 = x2.val;\r\n    int v1\
+    \ = (m0_inv_m1 * (r1 + nttprimes[1] - r0)) % nttprimes[1];\r\n    auto v2 = (mint2(r2)\
+    \ - r0 - mint2(nttprimes[0]) * v1) * mint2(m01_inv_m2);\r\n    return mint(r0\
+    \ + 1LL * nttprimes[0] * v1 + m01 % mod * v2.val);\r\n  };\r\n  vc<mint> c(len(c0));\r\
+    \n  FOR(i, len(c)) c[i] = garner(c0[i], c1[i], c2[i]);\r\n  return c;\r\n}\r\n\
+    \r\ntemplate <typename mint>\r\nvector<mint> convolution(vector<mint>& a, vector<mint>&\
+    \ b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return {};\r\n  if\
+    \ (min(n, m) <= 60) return convolution_naive(a, b);\r\n  int mod = mint::get_mod();\r\
+    \n  if (mod == 167772161 || mod == 469762049 || mod == 754974721\r\n      || mod\
+    \ == 998244353) {\r\n    return convolution_ntt(a, b);\r\n  }\r\n  return convolution_garner(a,\
+    \ b);\r\n}\r\n"
+  dependsOn:
+  - mod/modint.hpp
   isVerificationFile: false
   path: polynomial/convolution.hpp
   requiredBy:
   - sequence/linearrecurrence.hpp
-  timestamp: '2022-01-03 11:29:10+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2022-01-05 04:56:51+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/library_checker/convolution/convolution_mod_107.test.cpp
+  - test/library_checker/convolution/convolution_mod.test.cpp
 documentation_of: polynomial/convolution.hpp
 layout: document
 redirect_from:
