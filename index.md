@@ -312,11 +312,17 @@ data:
       path: setfunc/and_convolution.hpp
       title: setfunc/and_convolution.hpp
     - icon: ':heavy_check_mark:'
+      path: setfunc/hadamard.hpp
+      title: setfunc/hadamard.hpp
+    - icon: ':heavy_check_mark:'
       path: setfunc/or_convolution.hpp
       title: setfunc/or_convolution.hpp
     - icon: ':heavy_check_mark:'
       path: setfunc/subset_convolution.hpp
       title: setfunc/subset_convolution.hpp
+    - icon: ':heavy_check_mark:'
+      path: setfunc/xor_convolution.hpp
+      title: setfunc/xor_convolution.hpp
     - icon: ':heavy_check_mark:'
       path: setfunc/zeta.hpp
       title: setfunc/zeta.hpp
@@ -374,6 +380,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/convolution/bitwise_or_convolution.test.cpp
       title: test/library_checker/convolution/bitwise_or_convolution.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/convolution/bitwise_xor_convolution.test.cpp
+      title: test/library_checker/convolution/bitwise_xor_convolution.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/convolution/convolution_mod.test.cpp
       title: test/library_checker/convolution/convolution_mod.test.cpp
