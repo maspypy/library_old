@@ -231,12 +231,12 @@ data:
     - icon: ':warning:'
       path: mod/amodint.hpp
       title: mod/amodint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: mod/modint.hpp
       title: mod/modint.hpp
   - name: .
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: my_template.hpp
       title: my_template.hpp
     - icon: ':warning:'
@@ -295,10 +295,10 @@ data:
       title: persistent_ds/unionfind.hpp
   - name: polynomial
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: polynomial/convolution.hpp
       title: polynomial/convolution.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: polynomial/multivar_convolution.hpp
       title: polynomial/multivar_convolution.hpp
   - name: sequence
@@ -392,7 +392,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/convolution/mul_mod2n_convolution.test.cpp
       title: test/library_checker/convolution/mul_mod2n_convolution.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/convolution/multivariate_convolution.test.cpp
       title: test/library_checker/convolution/multivariate_convolution.test.cpp
     - icon: ':heavy_check_mark:'

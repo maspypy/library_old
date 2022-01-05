@@ -1,37 +1,38 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: polynomial/multivar_convolution.hpp
     title: polynomial/multivar_convolution.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: multivariate_convolution
-    links: []
+    PROBLEM: https://judge.yosupo.jp/problem/multivariate_convolution
+    links:
+    - https://judge.yosupo.jp/problem/multivariate_convolution
   bundledCode: "#line 1 \"test/library_checker/convolution/multivariate_convolution.test.cpp\"\
-    \n#define PROBLEM \"multivariate_convolution\"\r\n#line 2 \"my_template.hpp\"\n\
-    #include <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\nusing\
-    \ ll8 = __int128;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint\
-    \ = unsigned int;\nusing ull = unsigned long long;\n\ntemplate <class T>\nusing\
-    \ vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\ntemplate <class\
-    \ T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc = vector<vvvc<T>>;\n\
-    template <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate <class T>\nusing\
-    \ pq = priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T, vector<T>,\
-    \ greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/multivariate_convolution\"\
+    \r\n#line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
+    \nusing ll = long long;\nusing ll8 = __int128;\nusing pi = pair<ll, ll>;\nusing\
+    \ vi = vector<ll>;\nusing uint = unsigned int;\nusing ull = unsigned long long;\n\
+    \ntemplate <class T>\nusing vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\n\
+    template <class T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc\
+    \ = vector<vvvc<T>>;\ntemplate <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate\
+    \ <class T>\nusing pq = priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T,\
+    \ vector<T>, greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
     #define VEC(type, name, size) \\\n  vector<type> name(size);    \\\n  IN(name)\n\
     #define vv(type, name, h, ...) \\\n  vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n\
     #define VV(type, name, h, w)                     \\\n  vector<vector<type>> name(h,\
@@ -325,13 +326,13 @@ data:
     \ g, N);\r\n\r\n  auto h = multivar_convolution(ns, f, g);\r\n  print(h);\r\n\
     }\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
     \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"multivariate_convolution\"\r\n#include \"my_template.hpp\"\
-    \r\n\r\n#include \"polynomial/multivar_convolution.hpp\"\r\n\r\nusing mint = modint998;\r\
-    \n\r\nvoid solve() {\r\n  LL(K);\r\n  VEC(ll, ns, K);\r\n  ll N = 1;\r\n  FOR(k,\
-    \ K) N *= ns[k];\r\n  VEC(mint, f, N);\r\n  VEC(mint, g, N);\r\n\r\n  auto h =\
-    \ multivar_convolution(ns, f, g);\r\n  print(h);\r\n}\r\n\r\nsigned main() {\r\
-    \n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
-    \n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/multivariate_convolution\"\
+    \r\n#include \"my_template.hpp\"\r\n\r\n#include \"polynomial/multivar_convolution.hpp\"\
+    \r\n\r\nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(K);\r\n  VEC(ll,\
+    \ ns, K);\r\n  ll N = 1;\r\n  FOR(k, K) N *= ns[k];\r\n  VEC(mint, f, N);\r\n\
+    \  VEC(mint, g, N);\r\n\r\n  auto h = multivar_convolution(ns, f, g);\r\n  print(h);\r\
+    \n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
   - polynomial/multivar_convolution.hpp
@@ -340,8 +341,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/convolution/multivariate_convolution.test.cpp
   requiredBy: []
-  timestamp: '2022-01-06 02:16:20+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-01-06 02:31:02+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/convolution/multivariate_convolution.test.cpp
 layout: document
