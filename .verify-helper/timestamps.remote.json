@@ -13,6 +13,7 @@
 "test/library_checker/convolution/convolution_mod.test.cpp": "2022-01-05 06:36:55 +0900",
 "test/library_checker/convolution/convolution_mod_107.test.cpp": "2022-01-05 06:36:55 +0900",
 "test/library_checker/convolution/mul_mod2n_convolution.test.cpp": "2022-01-06 02:16:20 +0900",
+"test/library_checker/convolution/multivariate_convolution.test.cpp": "2022-01-06 02:31:02 +0900",
 "test/library_checker/convolution/subset_convolution.test.cpp": "2022-01-06 02:16:20 +0900",
 "test/library_checker/convolution/subset_convolution_multivar.test.cpp": "2022-01-06 02:16:20 +0900",
 "test/library_checker/datastructure/associative_array.test.cpp": "2022-01-05 00:19:00 +0900",
