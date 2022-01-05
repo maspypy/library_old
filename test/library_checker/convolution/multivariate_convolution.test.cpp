@@ -1,4 +1,4 @@
-#define PROBLEM "multivariate_convolution"
+#define PROBLEM "https://judge.yosupo.jp/problem/multivariate_convolution"
 #include "my_template.hpp"
 
 #include "polynomial/multivar_convolution.hpp"
