@@ -52,8 +52,17 @@ data:
     path: test/library_checker/convolution/convolution_mod_107.test.cpp
     title: test/library_checker/convolution/convolution_mod_107.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/library_checker/convolution/mul_mod2n_convolution.test.cpp
+    title: test/library_checker/convolution/mul_mod2n_convolution.test.cpp
+  - icon: ':x:'
+    path: test/library_checker/convolution/multivariate_convolution.test.cpp
+    title: test/library_checker/convolution/multivariate_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/convolution/subset_convolution.test.cpp
     title: test/library_checker/convolution/subset_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/convolution/subset_convolution_multivar.test.cpp
+    title: test/library_checker/convolution/subset_convolution_multivar.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/associative_array.test.cpp
     title: test/library_checker/datastructure/associative_array.test.cpp
@@ -180,9 +189,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/899_bfsnumbering.test.cpp
     title: test/yukicoder/899_bfsnumbering.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace\
@@ -360,7 +369,7 @@ data:
   - ds/unionfind.hpp
   - geometry/geometry.hpp
   timestamp: '2022-01-05 00:19:00+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
   - test/aoj/DSL_2_E_fenwick_raq.test.cpp
@@ -369,9 +378,12 @@ data:
   - test/aoj/DSL_2_H_min_add_lazy.test.cpp
   - test/aoj/DSL_2_F_min_set_lazy.test.cpp
   - test/aoj/DSL_2_G_fenwick_raq.test.cpp
+  - test/library_checker/convolution/mul_mod2n_convolution.test.cpp
+  - test/library_checker/convolution/multivariate_convolution.test.cpp
   - test/library_checker/convolution/convolution_mod_107.test.cpp
   - test/library_checker/convolution/subset_convolution.test.cpp
   - test/library_checker/convolution/bitwise_and_convolution.test.cpp
+  - test/library_checker/convolution/subset_convolution_multivar.test.cpp
   - test/library_checker/convolution/bitwise_or_convolution.test.cpp
   - test/library_checker/convolution/convolution_mod.test.cpp
   - test/library_checker/graph/cycle_detection.test.cpp

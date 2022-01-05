@@ -10,26 +10,28 @@ data:
   - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
+  - icon: ':question:'
+    path: polynomial/multivar_convolution.hpp
+    title: polynomial/multivar_convolution.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/convolution_mod
-    links:
-    - https://judge.yosupo.jp/problem/convolution_mod
-  bundledCode: "#line 1 \"test/library_checker/convolution/convolution_mod.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod\"\r\n#line\
-    \ 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\n\
-    using ll = long long;\nusing ll8 = __int128;\nusing pi = pair<ll, ll>;\nusing\
-    \ vi = vector<ll>;\nusing uint = unsigned int;\nusing ull = unsigned long long;\n\
-    \ntemplate <class T>\nusing vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\n\
-    template <class T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc\
-    \ = vector<vvvc<T>>;\ntemplate <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate\
-    \ <class T>\nusing pq = priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T,\
-    \ vector<T>, greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
+    PROBLEM: multivariate_convolution
+    links: []
+  bundledCode: "#line 1 \"test/library_checker/convolution/multivariate_convolution.test.cpp\"\
+    \n#define PROBLEM \"multivariate_convolution\"\r\n#line 2 \"my_template.hpp\"\n\
+    #include <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\nusing\
+    \ ll8 = __int128;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint\
+    \ = unsigned int;\nusing ull = unsigned long long;\n\ntemplate <class T>\nusing\
+    \ vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\ntemplate <class\
+    \ T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc = vector<vvvc<T>>;\n\
+    template <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate <class T>\nusing\
+    \ pq = priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T, vector<T>,\
+    \ greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
     #define VEC(type, name, size) \\\n  vector<type> name(size);    \\\n  IN(name)\n\
     #define vv(type, name, h, ...) \\\n  vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n\
     #define VV(type, name, h, w)                     \\\n  vector<vector<type>> name(h,\
@@ -103,7 +105,7 @@ data:
     }\n\n#define SUM(v) accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n\
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
-    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/convolution/convolution_mod.test.cpp\"\
+    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/convolution/multivariate_convolution.test.cpp\"\
     \n\r\n#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n  int val;\n\
     \n  constexpr modint(const ll val = 0) noexcept\n      : val(val >= 0 ? val %\
     \ mod : (mod - (-val) % mod) % mod) {}\n\n  bool operator<(const modint &other)\
@@ -297,31 +299,54 @@ data:
     \ (min(n, m) <= 60) return convolution_naive(a, b);\r\n  int mod = mint::get_mod();\r\
     \n  if (mod == 167772161 || mod == 469762049 || mod == 754974721\r\n      || mod\
     \ == 998244353) {\r\n    return convolution_ntt(a, b);\r\n  }\r\n  return convolution_garner(a,\
-    \ b);\r\n}\r\n#line 5 \"test/library_checker/convolution/convolution_mod.test.cpp\"\
-    \nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N, M);\r\n  VEC(mint,\
-    \ A, N);\r\n  VEC(mint, B, M);\r\n  auto ANS = convolution(A, B);\r\n  print(ANS);\r\
-    \n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \ b);\r\n}\r\n#line 2 \"polynomial/multivar_convolution.hpp\"\ntemplate <typename\
+    \ mint>\r\nvc<mint> multivar_convolution(vi ns, vc<mint>& f, vc<mint>& g) {\r\n\
+    \  /*\r\n  (n0, n1, n2, ...) \u9032\u6CD5\u3067\u306E\u7E70\u308A\u4E0A\u304C\u308A\
+    \u306E\u306A\u3044\u8DB3\u3057\u7B97\u306B\u95A2\u3059\u308B\u7573\u307F\u8FBC\
+    \u307F\r\n\r\n  example : ns = (2, 3) \u2192 1 \u306E\u4F4D\u304B\u3089\u9806\u306B\
+    \ 2, 3 \u9032\u6CD5\r\n  [a0, a1, a2, a3, a4, a5] = [a(0,0), a(1,0), a(0,1), a(1,1),\
+    \ a(0,2), a(1,2)]\r\n  [b0, b1, b2, b3, b4, b5] = [b(0,0), b(1,0), b(0,1), b(1,1),\
+    \ b(0,2), b(1,2)]\r\n  c(0,2) = a(0,0)b(0,2) + a(0,1)b(0,1) + a(0,2)b(1,1)\r\n\
+    \  c4 = a0b4 + a2b2 + a4b0\r\n\r\n  example : ns = (2, 2, ..., 2, 2)\r\n  \u2192\
+    \ subset convolution \u304C\u3053\u308C\u306E\u7279\u6B8A\u30B1\u30FC\u30B9\r\n\
+    \  */\r\n  int K = len(ns);\r\n  int N = 1;\r\n  FOR(k, K) N *= ns[k];\r\n  assert(len(f)\
+    \ == N && len(g) == N);\r\n  if (N == 1) return {f[0] * g[0]};\r\n\r\n  auto chi\
+    \ = [&](ll i) -> ll {\r\n    int x = 0;\r\n    for (auto&& n : ns) {\r\n     \
+    \ i /= n;\r\n      x += i;\r\n    }\r\n    return x % K;\r\n  };\r\n\r\n  int\
+    \ sz = 1;\r\n  while (sz < N + N) sz *= 2;\r\n  vv(mint, ff, K, sz);\r\n  vv(mint,\
+    \ gg, K, sz);\r\n\r\n  FOR(i, N) {\r\n    auto k = chi(i);\r\n    ff[k][i] = f[i];\r\
+    \n    gg[k][i] = g[i];\r\n  }\r\n\r\n  FOR(k, K) {\r\n    ntt(ff[k], false);\r\
+    \n    ntt(gg[k], false);\r\n  }\r\n\r\n  vv(mint, hh, K, sz);\r\n  FOR(a, K) FOR(b,\
+    \ K) FOR(i, sz) { hh[(a + b) % K][i] += ff[a][i] * gg[b][i]; }\r\n  FOR(k, K)\
+    \ ntt(hh[k], true);\r\n\r\n  vc<mint> h(N);\r\n  mint c = mint(1) / mint(sz);\r\
+    \n  FOR(i, N) h[i] = hh[chi(i)][i] * c;\r\n  return h;\r\n}\r\n#line 5 \"test/library_checker/convolution/multivariate_convolution.test.cpp\"\
+    \n\r\nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(K);\r\n  VEC(ll, ns,\
+    \ K);\r\n  ll N = 1;\r\n  FOR(k, K) N *= ns[k];\r\n  VEC(mint, f, N);\r\n  VEC(mint,\
+    \ g, N);\r\n\r\n  auto h = multivar_convolution(ns, f, g);\r\n  print(h);\r\n\
+    }\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
     \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod\"\r\n#include\
-    \ \"my_template.hpp\"\r\n\r\n#include \"polynomial/convolution.hpp\"\r\nusing\
-    \ mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N, M);\r\n  VEC(mint, A, N);\r\
-    \n  VEC(mint, B, M);\r\n  auto ANS = convolution(A, B);\r\n  print(ANS);\r\n}\r\
-    \n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+  code: "#define PROBLEM \"multivariate_convolution\"\r\n#include \"my_template.hpp\"\
+    \r\n\r\n#include \"polynomial/multivar_convolution.hpp\"\r\n\r\nusing mint = modint998;\r\
+    \n\r\nvoid solve() {\r\n  LL(K);\r\n  VEC(ll, ns, K);\r\n  ll N = 1;\r\n  FOR(k,\
+    \ K) N *= ns[k];\r\n  VEC(mint, f, N);\r\n  VEC(mint, g, N);\r\n\r\n  auto h =\
+    \ multivar_convolution(ns, f, g);\r\n  print(h);\r\n}\r\n\r\nsigned main() {\r\
+    \n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
+    \n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
+  - polynomial/multivar_convolution.hpp
   - polynomial/convolution.hpp
   - mod/modint.hpp
   isVerificationFile: true
-  path: test/library_checker/convolution/convolution_mod.test.cpp
+  path: test/library_checker/convolution/multivariate_convolution.test.cpp
   requiredBy: []
-  timestamp: '2022-01-05 06:36:55+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-06 02:16:20+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/library_checker/convolution/convolution_mod.test.cpp
+documentation_of: test/library_checker/convolution/multivariate_convolution.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/convolution/convolution_mod.test.cpp
-- /verify/test/library_checker/convolution/convolution_mod.test.cpp.html
-title: test/library_checker/convolution/convolution_mod.test.cpp
+- /verify/test/library_checker/convolution/multivariate_convolution.test.cpp
+- /verify/test/library_checker/convolution/multivariate_convolution.test.cpp.html
+title: test/library_checker/convolution/multivariate_convolution.test.cpp
 ---

@@ -1,12 +1,6 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: graph/base.hpp
-    title: graph/base.hpp
-  - icon: ':heavy_check_mark:'
-    path: graph/centroid.hpp
-    title: graph/centroid.hpp
   - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
@@ -16,74 +10,14 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
-    title: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
+    path: test/library_checker/convolution/mul_mod2n_convolution.test.cpp
+    title: test/library_checker/convolution/mul_mod2n_convolution.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n\
-    \  int frm, to;\n  T cost;\n  int id;\n};\n\ntemplate <typename T = int, bool\
-    \ directed = false>\nstruct Graph {\n  int N, M;\n  using cost_type = T;\n  using\
-    \ edge_type = Edge<T>;\n  vector<edge_type> edges;\n  vector<int> indptr;\n  vector<edge_type>\
-    \ csr_edges;\n  bool prepared;\n\n  class OutgoingEdges {\n  public:\n    OutgoingEdges(const\
-    \ Graph* G, int l, int r) : G(G), l(l), r(r) {}\n\n    const edge_type* begin()\
-    \ const {\n      if (l == r) { return 0; }\n      return &G->csr_edges[l];\n \
-    \   }\n\n    const edge_type* end() const {\n      if (l == r) { return 0; }\n\
-    \      return &G->csr_edges[r];\n    }\n\n  private:\n    int l, r;\n    const\
-    \ Graph* G;\n  };\n\n  bool is_prepared() { return prepared; }\n  constexpr bool\
-    \ is_directed() { return directed; }\n\n  Graph() {}\n  Graph(int N) : N(N), M(0),\
-    \ prepared(0) {}\n\n  void add(int frm, int to, T cost = 1, int i = -1) {\n  \
-    \  assert(!prepared);\n    assert(0 <= frm && frm < N && 0 <= to && to < N);\n\
-    \    if (i == -1) i = M;\n    auto e = edge_type({frm, to, cost, i});\n    edges.eb(e);\n\
-    \    ++M;\n  }\n\n  void prepare() {\n    assert(!prepared);\n    prepared = true;\n\
-    \    indptr.assign(N + 1, 0);\n    for (auto&& e: edges) {\n      indptr[e.frm\
-    \ + 1]++;\n      if (!directed) indptr[e.to + 1]++;\n    }\n    FOR(v, N) indptr[v\
-    \ + 1] += indptr[v];\n    auto counter = indptr;\n    csr_edges.resize(indptr.back()\
-    \ + 1);\n    for (auto&& e: edges) {\n      csr_edges[counter[e.frm]++] = e;\n\
-    \      if (!directed)\n        csr_edges[counter[e.to]++] = edge_type({e.to, e.frm,\
-    \ e.cost, e.id});\n    }\n  }\n\n  OutgoingEdges operator[](int v) const {\n \
-    \   assert(prepared);\n    return {this, indptr[v], indptr[v + 1]};\n  }\n\n \
-    \ void debug() {\n    print(\"Graph\");\n    if (!prepared) {\n      print(\"\
-    frm to cost id\");\n      for (auto&& e: edges) print(e.frm, e.to, e.cost, e.id);\n\
-    \    } else {\n      print(\"indptr\", indptr);\n      print(\"frm to cost id\"\
-    );\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e.frm, e.to, e.cost, e.id);\n\
-    \    }\n  }\n\n  int size() { return N; }\n};\n#line 2 \"graph/centroid.hpp\"\n\
-    template <typename Graph, typename E = int>\r\nstruct CentroidDecomposition {\r\
-    \n  using edge_type = typename Graph::edge_type;\r\n  using F = function<E(E,\
-    \ edge_type)>;\r\n  Graph& G;\r\n  F f; // (E path value, edge e) -> E new_path_value\r\
-    \n  int N;\r\n  vector<int> cdep; // depth in centroid tree\r\n  vc<int> sz;\r\
-    \n  vc<int> par;\r\n\r\n  CentroidDecomposition(\r\n      Graph& G, F f = [](int\
-    \ x, edge_type e) { return x + e.cost; })\r\n      : G(G), N(G.N), f(f), sz(G.N),\
-    \ par(G.N), cdep(G.N, -1) {\r\n    build();\r\n  }\r\n\r\n  int find(int v) {\r\
-    \n    vc<int> V = {v};\r\n    par[v] = -1;\r\n    int p = 0;\r\n    while (p <\
-    \ len(V)) {\r\n      int v = V[p++];\r\n      sz[v] = 0;\r\n      for (auto&&\
-    \ e: G[v]) {\r\n        if (e.to == par[v] || cdep[e.to] != -1) continue;\r\n\
-    \        par[e.to] = v;\r\n        V.eb(e.to);\r\n      }\r\n    }\r\n    while\
-    \ (len(V)) {\r\n      int v = V.back();\r\n      V.pop_back();\r\n      sz[v]\
-    \ += 1;\r\n      if (p - sz[v] <= p / 2) return v;\r\n      sz[par[v]] += sz[v];\r\
-    \n    }\r\n    return -1;\r\n  }\r\n\r\n  void build() {\r\n    assert(G.is_prepared());\r\
-    \n    assert(!G.is_directed());\r\n    int N = G.N;\r\n\r\n    vc<pair<int, int>>\
-    \ st = {{0, 0}};\r\n    while (len(st)) {\r\n      auto [lv, v] = st.back();\r\
-    \n      st.pop_back();\r\n      auto c = find(v);\r\n      cdep[c] = lv;\r\n \
-    \     for (auto&& [frm, to, cost, id]: G[c]) {\r\n        if (cdep[to] == -1)\
-    \ st.eb(lv + 1, to);\r\n      }\r\n    }\r\n  }\r\n\r\n  vc<vc<pair<int, E>>>\
-    \ collect(int root, E root_val) {\r\n    /*\r\n    root \u3092\u91CD\u5FC3\u3068\
-    \u3059\u308B\u6728\u306B\u304A\u3044\u3066\u3001(v, path data v) \u306E vector\
-    \ \u3092\u3001\u65B9\u5411\u3054\u3068\u306B\u96C6\u3081\u3066\u8FD4\u3059\r\n\
-    \    \u30FB0 \u756A\u76EE\uFF1Aroot \u304B\u3089\u306E\u30D1\u30B9\u3059\u3079\
-    \u3066\uFF08root \u3092\u542B\u3080\uFF09\r\n    \u30FBi \u756A\u76EE\uFF1Ai \u756A\
-    \u76EE\u306E\u65B9\u5411\r\n    */\r\n    vc<vc<pair<int, E>>> res = {{{root,\
-    \ root_val}}};\r\n    for (auto&& e: G[root]) {\r\n      int nxt = e.to;\r\n \
-    \     if (cdep[nxt] < cdep[root]) continue;\r\n      vc<pair<int, E>> dat;\r\n\
-    \      int p = 0;\r\n      dat.eb(nxt, f(root_val, e));\r\n      par[nxt] = root;\r\
-    \n      while (p < len(dat)) {\r\n        auto [v, val] = dat[p++];\r\n      \
-    \  for (auto&& e: G[v]) {\r\n          if (e.to == par[v]) continue;\r\n     \
-    \     if (cdep[e.to] < cdep[root]) continue;\r\n          par[e.to] = v;\r\n \
-    \         dat.eb(e.to, f(val, e));\r\n        }\r\n      }\r\n      res.eb(dat);\r\
-    \n      res[0].insert(res[0].end(), all(dat));\r\n    }\r\n    return res;\r\n\
-    \  }\r\n};\r\n#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n\
+  bundledCode: "#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n\
     \  int val;\n\n  constexpr modint(const ll val = 0) noexcept\n      : val(val\
     \ >= 0 ? val % mod : (mod - (-val) % mod) % mod) {}\n\n  bool operator<(const\
     \ modint &other) const {\n    return val < other.val;\n  } // To use std::map\n\
@@ -276,42 +210,86 @@ data:
     \ (min(n, m) <= 60) return convolution_naive(a, b);\r\n  int mod = mint::get_mod();\r\
     \n  if (mod == 167772161 || mod == 469762049 || mod == 754974721\r\n      || mod\
     \ == 998244353) {\r\n    return convolution_ntt(a, b);\r\n  }\r\n  return convolution_garner(a,\
-    \ b);\r\n}\r\n#line 3 \"graph/tree_all_distances.hpp\"\n\r\ntemplate<typename\
-    \ Graph>\r\nvi tree_all_distances(Graph& G){\r\n  // frequency table of distance\
-    \ of all directed pairs. \r\n  // sum of result array = N^2\r\n  \r\n  assert(G.is_prepared());\r\
-    \n  assert(!G.is_directed());\r\n\r\n  CentroidDecomposition CD(G);\r\n\r\n  ll\
-    \ N = G.N;\r\n  vi ANS(N);\r\n  FOR(root, N) {\r\n    auto data = CD.collect(root,\
-    \ 0);\r\n    FOR(i, len(data)) {\r\n      int n = 0;\r\n      FOR(j, len(data[i]))\
-    \ chmax(n, data[i][j].se + 1);\r\n      vi A(n);\r\n      FOR(j, len(data[i]))\
-    \ A[data[i][j].se]++;\r\n      auto B = convolution(A, A);\r\n      FOR(j, min(N,\
-    \ len(B))) ANS[j] += (i == 0 ? B[j] : -B[j]);\r\n    }\r\n  }\r\n  return ANS;\r\
-    \n}\n"
-  code: "#include \"graph/centroid.hpp\"\r\n#include \"polynomial/convolution.hpp\"\
-    \r\n\r\ntemplate<typename Graph>\r\nvi tree_all_distances(Graph& G){\r\n  // frequency\
-    \ table of distance of all directed pairs. \r\n  // sum of result array = N^2\r\
-    \n  \r\n  assert(G.is_prepared());\r\n  assert(!G.is_directed());\r\n\r\n  CentroidDecomposition\
-    \ CD(G);\r\n\r\n  ll N = G.N;\r\n  vi ANS(N);\r\n  FOR(root, N) {\r\n    auto\
-    \ data = CD.collect(root, 0);\r\n    FOR(i, len(data)) {\r\n      int n = 0;\r\
-    \n      FOR(j, len(data[i])) chmax(n, data[i][j].se + 1);\r\n      vi A(n);\r\n\
-    \      FOR(j, len(data[i])) A[data[i][j].se]++;\r\n      auto B = convolution(A,\
-    \ A);\r\n      FOR(j, min(N, len(B))) ANS[j] += (i == 0 ? B[j] : -B[j]);\r\n \
-    \   }\r\n  }\r\n  return ANS;\r\n}"
+    \ b);\r\n}\r\n#line 2 \"nt/multiplicative_convolution_mod2n.hpp\"\n\r\ntemplate\
+    \ <typename mint>\r\nvc<mint> multiplicative_convolution_mod2n(vc<mint>& A, vc<mint>&\
+    \ B){\r\n  int N = 0;\r\n  while((1<<N) < len(A)) ++N;\r\n  assert((1<<N) == len(A)\
+    \ && (1<<N) == len(B));\r\n  \r\n  int mask = (1 << N) - 1;\r\n\r\n  vc<vc<vc<mint>>>\
+    \ AA(N + 1);\r\n  vc<vc<vc<mint>>> BB(N + 1);\r\n  vc<vc<vc<mint>>> CC(N + 1);\r\
+    \n\r\n  auto shape = [&](int n) -> pair<int, int> {\r\n    int H = (N - n >= 2\
+    \ ? 2 : 1);\r\n    int W = 1 << max(N - n - 2, 0);\r\n    return {H, W};\r\n \
+    \ };\r\n\r\n  FOR(n, N + 1) {\r\n    // 2 \u3067 n \u56DE\u5272\u308C\u308B\u3068\
+    \u3053\u308D\r\n    auto [H, W] = shape(n);\r\n    AA[n].assign(H, vc<mint>(W));\r\
+    \n    BB[n].assign(H, vc<mint>(W));\r\n    CC[n].assign(H, vc<mint>(W));\r\n \
+    \   int x = (1 << n) & mask;\r\n    auto &a = AA[n], &b = BB[n];\r\n    FOR(j,\
+    \ W) {\r\n      a[0][j] = A[x];\r\n      b[0][j] = B[x];\r\n      if (H == 2)\
+    \ {\r\n        a[1][j] = A[(1 << N) - x];\r\n        b[1][j] = B[(1 << N) - x];\r\
+    \n      }\r\n      x = (5 * x) & mask;\r\n    }\r\n  }\r\n  // n \u3092\u56FA\u5B9A\
+    \u3057\u3066\u5404\u8EF8\u65B9\u5411\u306B fft\u3002\u5408\u8A08 O(N2^N)\r\n \
+    \ FOR(n, N + 1) {\r\n    auto &a = AA[n], &b = BB[n];\r\n    auto [H, W] = shape(n);\r\
+    \n    FOR(i, H) {\r\n      ntt(a[i], false);\r\n      ntt(b[i], false);\r\n  \
+    \  }\r\n    if (H == 2) {\r\n      FOR(j, W) {\r\n        tie(a[0][j], a[1][j])\
+    \ = mp(a[0][j] + a[1][j], a[0][j] - a[1][j]);\r\n        tie(b[0][j], b[1][j])\
+    \ = mp(b[0][j] + b[1][j], b[0][j] - b[1][j]);\r\n      }\r\n    }\r\n  }\r\n \
+    \ FOR(n1, N + 1) FOR(n2, N + 1) {\r\n    // \u5FC5\u8981\u306A\u9577\u3055\u306E\
+    \ fft \u5404\u70B9\u7A4D\u3092\u5FC5\u8981\u306A\u5834\u6240\u306B\u8DB3\u3057\
+    \u3053\u3080\u3002\u5408\u8A08 O(2^N)\r\n    int n3 = min(N, int(n1 + n2));\r\n\
+    \    auto [H, W] = shape(n3);\r\n    FOR(i, H) FOR(j, W) CC[n3][i][j] += AA[n1][i][j]\
+    \ * BB[n2][i][j];\r\n  }\r\n\r\n  FOR(n, N + 1) {\r\n    // inverse fft\r\n  \
+    \  auto &c = CC[n];\r\n    auto [H, W] = shape(n);\r\n    FOR(i, H) ntt(c[i],\
+    \ true);\r\n    if (H == 2) {\r\n      FOR(j, W) {\r\n        tie(c[0][j], c[1][j])\
+    \ = mp(c[0][j] + c[1][j], c[0][j] - c[1][j]);\r\n      }\r\n    }\r\n    mint\
+    \ coef = mint(1) / mint(H * W);\r\n    FOR(i, H) FOR(j, W) c[i][j] *= coef;\r\n\
+    \  }\r\n\r\n  vc<mint> C(1 << N);\r\n  FOR(n, N + 1) {\r\n    auto [H, W] = shape(n);\r\
+    \n    int x = (1 << n) & mask;\r\n    auto &c = CC[n];\r\n    FOR(j, W) {\r\n\
+    \      C[x] = c[0][j];\r\n      if (H == 2) { C[(1 << N) - x] = c[1][j]; }\r\n\
+    \      x = (5 * x) & mask;\r\n    }\r\n  }\r\n  return C;\r\n}\n"
+  code: "#include \"polynomial/convolution.hpp\"\r\n\r\ntemplate <typename mint>\r\
+    \nvc<mint> multiplicative_convolution_mod2n(vc<mint>& A, vc<mint>& B){\r\n  int\
+    \ N = 0;\r\n  while((1<<N) < len(A)) ++N;\r\n  assert((1<<N) == len(A) && (1<<N)\
+    \ == len(B));\r\n  \r\n  int mask = (1 << N) - 1;\r\n\r\n  vc<vc<vc<mint>>> AA(N\
+    \ + 1);\r\n  vc<vc<vc<mint>>> BB(N + 1);\r\n  vc<vc<vc<mint>>> CC(N + 1);\r\n\r\
+    \n  auto shape = [&](int n) -> pair<int, int> {\r\n    int H = (N - n >= 2 ? 2\
+    \ : 1);\r\n    int W = 1 << max(N - n - 2, 0);\r\n    return {H, W};\r\n  };\r\
+    \n\r\n  FOR(n, N + 1) {\r\n    // 2 \u3067 n \u56DE\u5272\u308C\u308B\u3068\u3053\
+    \u308D\r\n    auto [H, W] = shape(n);\r\n    AA[n].assign(H, vc<mint>(W));\r\n\
+    \    BB[n].assign(H, vc<mint>(W));\r\n    CC[n].assign(H, vc<mint>(W));\r\n  \
+    \  int x = (1 << n) & mask;\r\n    auto &a = AA[n], &b = BB[n];\r\n    FOR(j,\
+    \ W) {\r\n      a[0][j] = A[x];\r\n      b[0][j] = B[x];\r\n      if (H == 2)\
+    \ {\r\n        a[1][j] = A[(1 << N) - x];\r\n        b[1][j] = B[(1 << N) - x];\r\
+    \n      }\r\n      x = (5 * x) & mask;\r\n    }\r\n  }\r\n  // n \u3092\u56FA\u5B9A\
+    \u3057\u3066\u5404\u8EF8\u65B9\u5411\u306B fft\u3002\u5408\u8A08 O(N2^N)\r\n \
+    \ FOR(n, N + 1) {\r\n    auto &a = AA[n], &b = BB[n];\r\n    auto [H, W] = shape(n);\r\
+    \n    FOR(i, H) {\r\n      ntt(a[i], false);\r\n      ntt(b[i], false);\r\n  \
+    \  }\r\n    if (H == 2) {\r\n      FOR(j, W) {\r\n        tie(a[0][j], a[1][j])\
+    \ = mp(a[0][j] + a[1][j], a[0][j] - a[1][j]);\r\n        tie(b[0][j], b[1][j])\
+    \ = mp(b[0][j] + b[1][j], b[0][j] - b[1][j]);\r\n      }\r\n    }\r\n  }\r\n \
+    \ FOR(n1, N + 1) FOR(n2, N + 1) {\r\n    // \u5FC5\u8981\u306A\u9577\u3055\u306E\
+    \ fft \u5404\u70B9\u7A4D\u3092\u5FC5\u8981\u306A\u5834\u6240\u306B\u8DB3\u3057\
+    \u3053\u3080\u3002\u5408\u8A08 O(2^N)\r\n    int n3 = min(N, int(n1 + n2));\r\n\
+    \    auto [H, W] = shape(n3);\r\n    FOR(i, H) FOR(j, W) CC[n3][i][j] += AA[n1][i][j]\
+    \ * BB[n2][i][j];\r\n  }\r\n\r\n  FOR(n, N + 1) {\r\n    // inverse fft\r\n  \
+    \  auto &c = CC[n];\r\n    auto [H, W] = shape(n);\r\n    FOR(i, H) ntt(c[i],\
+    \ true);\r\n    if (H == 2) {\r\n      FOR(j, W) {\r\n        tie(c[0][j], c[1][j])\
+    \ = mp(c[0][j] + c[1][j], c[0][j] - c[1][j]);\r\n      }\r\n    }\r\n    mint\
+    \ coef = mint(1) / mint(H * W);\r\n    FOR(i, H) FOR(j, W) c[i][j] *= coef;\r\n\
+    \  }\r\n\r\n  vc<mint> C(1 << N);\r\n  FOR(n, N + 1) {\r\n    auto [H, W] = shape(n);\r\
+    \n    int x = (1 << n) & mask;\r\n    auto &c = CC[n];\r\n    FOR(j, W) {\r\n\
+    \      C[x] = c[0][j];\r\n      if (H == 2) { C[(1 << N) - x] = c[1][j]; }\r\n\
+    \      x = (5 * x) & mask;\r\n    }\r\n  }\r\n  return C;\r\n}"
   dependsOn:
-  - graph/centroid.hpp
-  - graph/base.hpp
   - polynomial/convolution.hpp
   - mod/modint.hpp
   isVerificationFile: false
-  path: graph/tree_all_distances.hpp
+  path: nt/multiplicative_convolution_mod2n.hpp
   requiredBy: []
-  timestamp: '2022-01-05 06:36:55+09:00'
+  timestamp: '2022-01-06 02:16:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
-documentation_of: graph/tree_all_distances.hpp
+  - test/library_checker/convolution/mul_mod2n_convolution.test.cpp
+documentation_of: nt/multiplicative_convolution_mod2n.hpp
 layout: document
 redirect_from:
-- /library/graph/tree_all_distances.hpp
-- /library/graph/tree_all_distances.hpp.html
-title: graph/tree_all_distances.hpp
+- /library/nt/multiplicative_convolution_mod2n.hpp
+- /library/nt/multiplicative_convolution_mod2n.hpp.html
+title: nt/multiplicative_convolution_mod2n.hpp
 ---

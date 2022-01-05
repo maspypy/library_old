@@ -231,12 +231,12 @@ data:
     - icon: ':warning:'
       path: mod/amodint.hpp
       title: mod/amodint.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: mod/modint.hpp
       title: mod/modint.hpp
   - name: .
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: my_template.hpp
       title: my_template.hpp
     - icon: ':warning:'
@@ -250,6 +250,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: nt/factor.hpp
       title: nt/factor.hpp
+    - icon: ':heavy_check_mark:'
+      path: nt/multiplicative_convolution_mod2n.hpp
+      title: nt/multiplicative_convolution_mod2n.hpp
     - icon: ':heavy_check_mark:'
       path: nt/primetable.hpp
       title: nt/primetable.hpp
@@ -292,9 +295,12 @@ data:
       title: persistent_ds/unionfind.hpp
   - name: polynomial
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: polynomial/convolution.hpp
       title: polynomial/convolution.hpp
+    - icon: ':question:'
+      path: polynomial/multivar_convolution.hpp
+      title: polynomial/multivar_convolution.hpp
   - name: sequence
     pages:
     - icon: ':heavy_check_mark:'
@@ -375,8 +381,17 @@ data:
       path: test/library_checker/convolution/convolution_mod_107.test.cpp
       title: test/library_checker/convolution/convolution_mod_107.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/library_checker/convolution/mul_mod2n_convolution.test.cpp
+      title: test/library_checker/convolution/mul_mod2n_convolution.test.cpp
+    - icon: ':x:'
+      path: test/library_checker/convolution/multivariate_convolution.test.cpp
+      title: test/library_checker/convolution/multivariate_convolution.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/convolution/subset_convolution.test.cpp
       title: test/library_checker/convolution/subset_convolution.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/convolution/subset_convolution_multivar.test.cpp
+      title: test/library_checker/convolution/subset_convolution_multivar.test.cpp
   - name: test/library_checker/datastructure
     pages:
     - icon: ':heavy_check_mark:'

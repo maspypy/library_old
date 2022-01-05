@@ -6,8 +6,14 @@ data:
     path: graph/tree_all_distances.hpp
     title: graph/tree_all_distances.hpp
   - icon: ':heavy_check_mark:'
+    path: nt/multiplicative_convolution_mod2n.hpp
+    title: nt/multiplicative_convolution_mod2n.hpp
+  - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
+  - icon: ':question:'
+    path: polynomial/multivar_convolution.hpp
+    title: polynomial/multivar_convolution.hpp
   - icon: ':heavy_check_mark:'
     path: sequence/linearrecurrence.hpp
     title: sequence/linearrecurrence.hpp
@@ -25,8 +31,17 @@ data:
     path: test/library_checker/convolution/convolution_mod_107.test.cpp
     title: test/library_checker/convolution/convolution_mod_107.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/library_checker/convolution/mul_mod2n_convolution.test.cpp
+    title: test/library_checker/convolution/mul_mod2n_convolution.test.cpp
+  - icon: ':x:'
+    path: test/library_checker/convolution/multivariate_convolution.test.cpp
+    title: test/library_checker/convolution/multivariate_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/convolution/subset_convolution.test.cpp
     title: test/library_checker/convolution/subset_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/convolution/subset_convolution_multivar.test.cpp
+    title: test/library_checker/convolution/subset_convolution_multivar.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
     title: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
@@ -51,9 +66,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n\
@@ -140,13 +155,18 @@ data:
   requiredBy:
   - graph/tree_all_distances.hpp
   - polynomial/convolution.hpp
+  - polynomial/multivar_convolution.hpp
   - sequence/linearrecurrence.hpp
+  - nt/multiplicative_convolution_mod2n.hpp
   timestamp: '2022-01-05 04:56:51+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/library_checker/convolution/mul_mod2n_convolution.test.cpp
+  - test/library_checker/convolution/multivariate_convolution.test.cpp
   - test/library_checker/convolution/convolution_mod_107.test.cpp
   - test/library_checker/convolution/subset_convolution.test.cpp
   - test/library_checker/convolution/bitwise_and_convolution.test.cpp
+  - test/library_checker/convolution/subset_convolution_multivar.test.cpp
   - test/library_checker/convolution/bitwise_or_convolution.test.cpp
   - test/library_checker/convolution/convolution_mod.test.cpp
   - test/library_checker/graph/frequency_table_of_tree_distance.test.cpp

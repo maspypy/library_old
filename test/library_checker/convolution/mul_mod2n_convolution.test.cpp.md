@@ -7,6 +7,9 @@ data:
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
+  - icon: ':heavy_check_mark:'
+    path: nt/multiplicative_convolution_mod2n.hpp
+    title: nt/multiplicative_convolution_mod2n.hpp
   - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
@@ -17,13 +20,13 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/convolution_mod
+    PROBLEM: https://judge.yosupo.jp/problem/mul_mod2n_convolution
     links:
-    - https://judge.yosupo.jp/problem/convolution_mod
-  bundledCode: "#line 1 \"test/library_checker/convolution/convolution_mod.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod\"\r\n#line\
-    \ 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\n\
-    using ll = long long;\nusing ll8 = __int128;\nusing pi = pair<ll, ll>;\nusing\
+    - https://judge.yosupo.jp/problem/mul_mod2n_convolution
+  bundledCode: "#line 1 \"test/library_checker/convolution/mul_mod2n_convolution.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/mul_mod2n_convolution\"\r\n\
+    #line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
+    \nusing ll = long long;\nusing ll8 = __int128;\nusing pi = pair<ll, ll>;\nusing\
     \ vi = vector<ll>;\nusing uint = unsigned int;\nusing ull = unsigned long long;\n\
     \ntemplate <class T>\nusing vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\n\
     template <class T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc\
@@ -103,7 +106,7 @@ data:
     }\n\n#define SUM(v) accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n\
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
-    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/convolution/convolution_mod.test.cpp\"\
+    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/convolution/mul_mod2n_convolution.test.cpp\"\
     \n\r\n#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n  int val;\n\
     \n  constexpr modint(const ll val = 0) noexcept\n      : val(val >= 0 ? val %\
     \ mod : (mod - (-val) % mod) % mod) {}\n\n  bool operator<(const modint &other)\
@@ -297,31 +300,65 @@ data:
     \ (min(n, m) <= 60) return convolution_naive(a, b);\r\n  int mod = mint::get_mod();\r\
     \n  if (mod == 167772161 || mod == 469762049 || mod == 754974721\r\n      || mod\
     \ == 998244353) {\r\n    return convolution_ntt(a, b);\r\n  }\r\n  return convolution_garner(a,\
-    \ b);\r\n}\r\n#line 5 \"test/library_checker/convolution/convolution_mod.test.cpp\"\
-    \nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N, M);\r\n  VEC(mint,\
-    \ A, N);\r\n  VEC(mint, B, M);\r\n  auto ANS = convolution(A, B);\r\n  print(ANS);\r\
-    \n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \ b);\r\n}\r\n#line 2 \"nt/multiplicative_convolution_mod2n.hpp\"\n\r\ntemplate\
+    \ <typename mint>\r\nvc<mint> multiplicative_convolution_mod2n(vc<mint>& A, vc<mint>&\
+    \ B){\r\n  int N = 0;\r\n  while((1<<N) < len(A)) ++N;\r\n  assert((1<<N) == len(A)\
+    \ && (1<<N) == len(B));\r\n  \r\n  int mask = (1 << N) - 1;\r\n\r\n  vc<vc<vc<mint>>>\
+    \ AA(N + 1);\r\n  vc<vc<vc<mint>>> BB(N + 1);\r\n  vc<vc<vc<mint>>> CC(N + 1);\r\
+    \n\r\n  auto shape = [&](int n) -> pair<int, int> {\r\n    int H = (N - n >= 2\
+    \ ? 2 : 1);\r\n    int W = 1 << max(N - n - 2, 0);\r\n    return {H, W};\r\n \
+    \ };\r\n\r\n  FOR(n, N + 1) {\r\n    // 2 \u3067 n \u56DE\u5272\u308C\u308B\u3068\
+    \u3053\u308D\r\n    auto [H, W] = shape(n);\r\n    AA[n].assign(H, vc<mint>(W));\r\
+    \n    BB[n].assign(H, vc<mint>(W));\r\n    CC[n].assign(H, vc<mint>(W));\r\n \
+    \   int x = (1 << n) & mask;\r\n    auto &a = AA[n], &b = BB[n];\r\n    FOR(j,\
+    \ W) {\r\n      a[0][j] = A[x];\r\n      b[0][j] = B[x];\r\n      if (H == 2)\
+    \ {\r\n        a[1][j] = A[(1 << N) - x];\r\n        b[1][j] = B[(1 << N) - x];\r\
+    \n      }\r\n      x = (5 * x) & mask;\r\n    }\r\n  }\r\n  // n \u3092\u56FA\u5B9A\
+    \u3057\u3066\u5404\u8EF8\u65B9\u5411\u306B fft\u3002\u5408\u8A08 O(N2^N)\r\n \
+    \ FOR(n, N + 1) {\r\n    auto &a = AA[n], &b = BB[n];\r\n    auto [H, W] = shape(n);\r\
+    \n    FOR(i, H) {\r\n      ntt(a[i], false);\r\n      ntt(b[i], false);\r\n  \
+    \  }\r\n    if (H == 2) {\r\n      FOR(j, W) {\r\n        tie(a[0][j], a[1][j])\
+    \ = mp(a[0][j] + a[1][j], a[0][j] - a[1][j]);\r\n        tie(b[0][j], b[1][j])\
+    \ = mp(b[0][j] + b[1][j], b[0][j] - b[1][j]);\r\n      }\r\n    }\r\n  }\r\n \
+    \ FOR(n1, N + 1) FOR(n2, N + 1) {\r\n    // \u5FC5\u8981\u306A\u9577\u3055\u306E\
+    \ fft \u5404\u70B9\u7A4D\u3092\u5FC5\u8981\u306A\u5834\u6240\u306B\u8DB3\u3057\
+    \u3053\u3080\u3002\u5408\u8A08 O(2^N)\r\n    int n3 = min(N, int(n1 + n2));\r\n\
+    \    auto [H, W] = shape(n3);\r\n    FOR(i, H) FOR(j, W) CC[n3][i][j] += AA[n1][i][j]\
+    \ * BB[n2][i][j];\r\n  }\r\n\r\n  FOR(n, N + 1) {\r\n    // inverse fft\r\n  \
+    \  auto &c = CC[n];\r\n    auto [H, W] = shape(n);\r\n    FOR(i, H) ntt(c[i],\
+    \ true);\r\n    if (H == 2) {\r\n      FOR(j, W) {\r\n        tie(c[0][j], c[1][j])\
+    \ = mp(c[0][j] + c[1][j], c[0][j] - c[1][j]);\r\n      }\r\n    }\r\n    mint\
+    \ coef = mint(1) / mint(H * W);\r\n    FOR(i, H) FOR(j, W) c[i][j] *= coef;\r\n\
+    \  }\r\n\r\n  vc<mint> C(1 << N);\r\n  FOR(n, N + 1) {\r\n    auto [H, W] = shape(n);\r\
+    \n    int x = (1 << n) & mask;\r\n    auto &c = CC[n];\r\n    FOR(j, W) {\r\n\
+    \      C[x] = c[0][j];\r\n      if (H == 2) { C[(1 << N) - x] = c[1][j]; }\r\n\
+    \      x = (5 * x) & mask;\r\n    }\r\n  }\r\n  return C;\r\n}\n#line 6 \"test/library_checker/convolution/mul_mod2n_convolution.test.cpp\"\
+    \n\r\nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N);\r\n  VEC(mint,\
+    \ A, 1 << N);\r\n  VEC(mint, B, 1 << N);\r\n  auto C = multiplicative_convolution_mod2n(A,\
+    \ B);\r\n  print(C);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
     \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod\"\r\n#include\
-    \ \"my_template.hpp\"\r\n\r\n#include \"polynomial/convolution.hpp\"\r\nusing\
-    \ mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N, M);\r\n  VEC(mint, A, N);\r\
-    \n  VEC(mint, B, M);\r\n  auto ANS = convolution(A, B);\r\n  print(ANS);\r\n}\r\
-    \n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/mul_mod2n_convolution\"\
+    \r\n#include \"my_template.hpp\"\r\n\r\n#include \"mod/modint.hpp\"\r\n#include\
+    \ \"nt/multiplicative_convolution_mod2n.hpp\"\r\n\r\nusing mint = modint998;\r\
+    \n\r\nvoid solve() {\r\n  LL(N);\r\n  VEC(mint, A, 1 << N);\r\n  VEC(mint, B,\
+    \ 1 << N);\r\n  auto C = multiplicative_convolution_mod2n(A, B);\r\n  print(C);\r\
+    \n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
     \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
-  - polynomial/convolution.hpp
   - mod/modint.hpp
+  - nt/multiplicative_convolution_mod2n.hpp
+  - polynomial/convolution.hpp
   isVerificationFile: true
-  path: test/library_checker/convolution/convolution_mod.test.cpp
+  path: test/library_checker/convolution/mul_mod2n_convolution.test.cpp
   requiredBy: []
-  timestamp: '2022-01-05 06:36:55+09:00'
+  timestamp: '2022-01-06 02:16:20+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/library_checker/convolution/convolution_mod.test.cpp
+documentation_of: test/library_checker/convolution/mul_mod2n_convolution.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/convolution/convolution_mod.test.cpp
-- /verify/test/library_checker/convolution/convolution_mod.test.cpp.html
-title: test/library_checker/convolution/convolution_mod.test.cpp
+- /verify/test/library_checker/convolution/mul_mod2n_convolution.test.cpp
+- /verify/test/library_checker/convolution/mul_mod2n_convolution.test.cpp.html
+title: test/library_checker/convolution/mul_mod2n_convolution.test.cpp
 ---

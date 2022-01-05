@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   - icon: ':heavy_check_mark:'
@@ -155,20 +155,17 @@ data:
     \n  FOR(i, log) FOR(s, 1 << log) if (!(s & 1 << i)) {\r\n    int t = s | 1 <<\
     \ i;\r\n    FOR(k, log + 1) RA[t][k] -= RA[s][k];\r\n  }\r\n  vc<T> res(N);\r\n\
     \  FOR(s, N) res[s] = RA[s][popcnt(s)];\r\n  return res;\r\n}\r\n#line 6 \"test/library_checker/convolution/subset_convolution.test.cpp\"\
-    \n\r\nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N);\r\n  vc<mint>\
-    \ A(1 << N), B(1 << N);\r\n  FOR(i, 1 << N) {\r\n    LL(a);\r\n    A[i] = a;\r\
-    \n  }\r\n  FOR(i, 1 << N) {\r\n    LL(a);\r\n    B[i] = a;\r\n  }\r\n  auto C\
-    \ = subset_convolution(A, B);\r\n  print(C);\r\n}\r\n\r\nsigned main() {\r\n \
-    \ cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
-    \n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \n\r\nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N);\r\n  VEC(mint,\
+    \ A, 1<<N);\r\n  VEC(mint, B, 1<<N);\r\n  auto C = subset_convolution(A, B);\r\
+    \n  print(C);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/subset_convolution\"\r\n\
     #include \"my_template.hpp\"\r\n\r\n#include \"mod/modint.hpp\"\r\n#include \"\
     setfunc/subset_convolution.hpp\"\r\n\r\nusing mint = modint998;\r\n\r\nvoid solve()\
-    \ {\r\n  LL(N);\r\n  vc<mint> A(1 << N), B(1 << N);\r\n  FOR(i, 1 << N) {\r\n\
-    \    LL(a);\r\n    A[i] = a;\r\n  }\r\n  FOR(i, 1 << N) {\r\n    LL(a);\r\n  \
-    \  B[i] = a;\r\n  }\r\n  auto C = subset_convolution(A, B);\r\n  print(C);\r\n\
-    }\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \ {\r\n  LL(N);\r\n  VEC(mint, A, 1<<N);\r\n  VEC(mint, B, 1<<N);\r\n  auto C\
+    \ = subset_convolution(A, B);\r\n  print(C);\r\n}\r\n\r\nsigned main() {\r\n \
+    \ cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
+    \n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
   - mod/modint.hpp
@@ -176,7 +173,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/convolution/subset_convolution.test.cpp
   requiredBy: []
-  timestamp: '2022-01-05 04:56:51+09:00'
+  timestamp: '2022-01-06 02:16:20+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/convolution/subset_convolution.test.cpp
