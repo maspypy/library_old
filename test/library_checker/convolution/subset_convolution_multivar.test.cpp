@@ -2,15 +2,16 @@
 #include "my_template.hpp"
 
 #include "mod/modint.hpp"
-#include "setfunc/subset_convolution.hpp"
+#include "polynomial/multivar_convolution.hpp"
 
 using mint = modint998;
 
 void solve() {
   LL(N);
-  VEC(mint, A, 1<<N);
-  VEC(mint, B, 1<<N);
-  auto C = subset_convolution(A, B);
+  VEC(mint, A, 1 << N);
+  VEC(mint, B, 1 << N);
+  vi ns(N, 2);
+  auto C = multivar_convolution(ns, A, B);
   print(C);
 }
 
