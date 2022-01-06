@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
   _extendedRequiredBy: []
@@ -163,10 +163,11 @@ data:
     \        len -= 2;\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\ntemplate <class mint>\r\
     \nvector<mint> convolution_ntt(vector<mint> a, vector<mint> b) {\r\n  int n =\
     \ int(a.size()), m = int(b.size());\r\n  int sz = 1;\r\n  while (sz < n + m -\
-    \ 1) sz *= 2;\r\n  a.resize(sz), b.resize(sz);\r\n  ntt(a, false);\r\n  ntt(b,\
-    \ false);\r\n  FOR(i, sz) a[i] *= b[i];\r\n  ntt(a, true);\r\n  a.resize(n + m\
-    \ - 1);\r\n  mint iz = mint(1) / mint(sz);\r\n  FOR(i, len(a)) a[i] *= iz;\r\n\
-    \  return a;\r\n}\r\n\r\ntemplate <typename mint>\r\nvector<mint> convolution_garner(const\
+    \ 1) sz *= 2;\r\n  a.resize(sz), b.resize(sz);\r\n  bool same = a == b;\r\n  ntt(a,\
+    \ false);\r\n  if(same){\r\n    b = a;\r\n  } else {\r\n    ntt(b, false);\r\n\
+    \  }\r\n  FOR(i, sz) a[i] *= b[i];\r\n  ntt(a, true);\r\n  a.resize(n + m - 1);\r\
+    \n  mint iz = mint(1) / mint(sz);\r\n  FOR(i, len(a)) a[i] *= iz;\r\n  return\
+    \ a;\r\n}\r\n\r\ntemplate <typename mint>\r\nvector<mint> convolution_garner(const\
     \ vector<mint>& a, const vector<mint>& b) {\r\n  int n = len(a), m = len(b);\r\
     \n  if (!n || !m) return {};\r\n  static const long long nttprimes[] = {754974721,\
     \ 167772161, 469762049};\r\n  using mint0 = modint<754974721>;\r\n  using mint1\
@@ -260,7 +261,7 @@ data:
   isVerificationFile: false
   path: polynomial/convolution_huge.hpp
   requiredBy: []
-  timestamp: '2022-01-06 20:19:50+09:00'
+  timestamp: '2022-01-07 00:48:13+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/convolution/convolution_huge.test.cpp

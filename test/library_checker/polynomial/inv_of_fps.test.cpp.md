@@ -10,18 +10,21 @@ data:
   - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
+  - icon: ':x:'
+    path: polynomial/fps_inv.hpp
+    title: polynomial/fps_inv.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/convolution_mod_1000000007
+    PROBLEM: https://judge.yosupo.jp/problem/inv_of_formal_power_series
     links:
-    - https://judge.yosupo.jp/problem/convolution_mod_1000000007
-  bundledCode: "#line 1 \"test/library_checker/convolution/convolution_mod_107.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod_1000000007\"\
+    - https://judge.yosupo.jp/problem/inv_of_formal_power_series
+  bundledCode: "#line 1 \"test/library_checker/polynomial/inv_of_fps.test.cpp\"\n\
+    #define PROBLEM \"https://judge.yosupo.jp/problem/inv_of_formal_power_series\"\
     \r\n#line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
     \nusing ll = long long;\nusing ll8 = __int128;\nusing pi = pair<ll, ll>;\nusing\
     \ vi = vector<ll>;\nusing uint = unsigned int;\nusing ull = unsigned long long;\n\
@@ -103,7 +106,7 @@ data:
     }\n\n#define SUM(v) accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n\
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
-    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/convolution/convolution_mod_107.test.cpp\"\
+    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/polynomial/inv_of_fps.test.cpp\"\
     \n\r\n#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n  static\
     \ constexpr bool is_static = true;\n  int val;\n\n  constexpr modint(const ll\
     \ val = 0) noexcept\n      : val(val >= 0 ? val % mod : (mod - (-val) % mod) %\
@@ -320,31 +323,40 @@ data:
     \ b);\r\n}\r\n\r\ntemplate<typename mint>\r\nenable_if_t<!is_same<mint, modint998>::value,\
     \ vc<mint>> convolution(vc<mint>& a, vc<mint>& b) {\r\n  int n = len(a), m = len(b);\r\
     \n  if (!n || !m) return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a,\
-    \ b);\r\n  return convolution_garner(a, b);\r\n}\r\n#line 5 \"test/library_checker/convolution/convolution_mod_107.test.cpp\"\
-    \nusing mint = modint107;\r\n\r\nvoid solve() {\r\n  LL(N, M);\r\n  VEC(mint,\
-    \ A, N);\r\n  VEC(mint, B, M);\r\n  auto ANS = convolution(A, B);\r\n  print(ANS);\r\
+    \ b);\r\n  return convolution_garner(a, b);\r\n}\r\n#line 2 \"polynomial/fps_inv.hpp\"\
+    \n\r\ntemplate <typename mint>\r\nvc<mint> fps_inv(vc<mint>& F) {\r\n  vc<mint>\
+    \ G = {mint(1) / F[0]};\r\n  ll N = len(F), n = 1;\r\n  while (n < N) {\r\n  \
+    \  vc<mint> f(2 * n), g(2 * n);\r\n    FOR(i, min(N, 2 * n)) f[i] = F[i];\r\n\
+    \    FOR(i, n) g[i] = G[i];\r\n    ntt(f, false);\r\n    ntt(g, false);\r\n  \
+    \  FOR(i, 2 * n) f[i] *= g[i];\r\n    ntt(f, true);\r\n    FOR(i, n) f[i] = 0;\r\
+    \n    ntt(f, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\n    ntt(f, true);\r\
+    \n    mint c = mint(-1) / mint(4 * n * n);\r\n    FOR3(i, n, 2 * n) G.eb(f[i]\
+    \ * c);\r\n    n *= 2;\r\n  }\r\n  G.resize(N);\r\n  return G;\r\n}\r\n#line 6\
+    \ \"test/library_checker/polynomial/inv_of_fps.test.cpp\"\nusing mint = modint998;\r\
+    \n\r\nvoid solve() {\r\n  LL(N);\r\n  VEC(mint, F, N);\r\n  print(fps_inv(F));\r\
     \n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
     \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod_1000000007\"\
-    \r\n#include \"my_template.hpp\"\r\n\r\n#include \"polynomial/convolution.hpp\"\
-    \r\nusing mint = modint107;\r\n\r\nvoid solve() {\r\n  LL(N, M);\r\n  VEC(mint,\
-    \ A, N);\r\n  VEC(mint, B, M);\r\n  auto ANS = convolution(A, B);\r\n  print(ANS);\r\
-    \n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/inv_of_formal_power_series\"\
+    \r\n#include \"my_template.hpp\"\r\n\r\n#include \"mod/modint.hpp\"\r\n#include\
+    \ \"polynomial/fps_inv.hpp\"\r\nusing mint = modint998;\r\n\r\nvoid solve() {\r\
+    \n  LL(N);\r\n  VEC(mint, F, N);\r\n  print(fps_inv(F));\r\n}\r\n\r\nsigned main()\
+    \ {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
+    \n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
-  - polynomial/convolution.hpp
   - mod/modint.hpp
+  - polynomial/fps_inv.hpp
+  - polynomial/convolution.hpp
   isVerificationFile: true
-  path: test/library_checker/convolution/convolution_mod_107.test.cpp
+  path: test/library_checker/polynomial/inv_of_fps.test.cpp
   requiredBy: []
   timestamp: '2022-01-07 00:48:13+09:00'
-  verificationStatus: TEST_ACCEPTED
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/library_checker/convolution/convolution_mod_107.test.cpp
+documentation_of: test/library_checker/polynomial/inv_of_fps.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/convolution/convolution_mod_107.test.cpp
-- /verify/test/library_checker/convolution/convolution_mod_107.test.cpp.html
-title: test/library_checker/convolution/convolution_mod_107.test.cpp
+- /verify/test/library_checker/polynomial/inv_of_fps.test.cpp
+- /verify/test/library_checker/polynomial/inv_of_fps.test.cpp.html
+title: test/library_checker/polynomial/inv_of_fps.test.cpp
 ---
