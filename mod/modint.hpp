@@ -203,6 +203,13 @@ mint C(ll n, ll k, bool large = false) {
   return x;
 }
 
+template<typename mint>
+vc<mint> power_table(mint a, ll N) {
+  vc<mint> f(N, 1);
+  FOR(i, N - 1) f[i + 1] = a * f[i];
+  return f;
+}
+
 using modint107 = modint<1'000'000'007>;
 using modint998 = modint<998'244'353>;
 using amint = ArbitraryModInt;
