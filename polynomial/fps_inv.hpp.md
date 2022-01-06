@@ -12,7 +12,7 @@ data:
     path: polynomial/fps_log.hpp
     title: polynomial/fps_log.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/polynomial/inv_of_fps.test.cpp
     title: test/library_checker/polynomial/inv_of_fps.test.cpp
   - icon: ':x:'
@@ -20,7 +20,7 @@ data:
     title: test/library_checker/polynomial/log_of_fps.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n\
@@ -269,7 +269,7 @@ data:
   requiredBy:
   - polynomial/fps_log.hpp
   timestamp: '2022-01-07 02:54:29+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/library_checker/polynomial/log_of_fps.test.cpp
   - test/library_checker/polynomial/inv_of_fps.test.cpp
