@@ -153,9 +153,9 @@ tuple<mint, mint, mint> get_factorial_data(int n){
   static constexpr int mod = mint::get_mod();
   assert(0 <= n && n < mod);
 
-  vector<mint> fact = {1, 1};
-  vector<mint> fact_inv = {1, 1};
-  vector<mint> inv = {0, 1};
+  static vector<mint> fact = {1, 1};
+  static vector<mint> fact_inv = {1, 1};
+  static vector<mint> inv = {0, 1};
   while(len(fact) <= n){
     int k = len(fact);
     fact.eb(fact[k - 1] * mint(k));
@@ -186,7 +186,7 @@ template<typename mint>
 mint inv(int n){
   static constexpr int mod = mint::get_mod();
   assert(0 <= n && n < mod);
-  return get<1>(get_factorial_data<mint>(n));
+  return get<2>(get_factorial_data<mint>(n));
 }
 
 template<typename mint>
