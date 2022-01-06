@@ -162,24 +162,27 @@ data:
     \ >>= 1;\n    }\n    return ret;\n  }\n  friend ostream &operator<<(ostream &os,\
     \ const ArbitraryModInt &p) {\n    return os << p.val;\n  }\n  friend istream\
     \ &operator>>(istream &is, ArbitraryModInt &a) {\n    int64_t t;\n    is >> t;\n\
-    \    a = ArbitraryModInt(t);\n    return (is);\n  }\n};\n\ntemplate <typename\
-    \ T>\nstruct ModCalc {\n  vector<T> _fact = {1, 1};\n  vector<T> _fact_inv = {1,\
-    \ 1};\n  vector<T> _inv = {0, 1};\n\n  T pow(T a, int n) {\n    T x(1);\n    while\
-    \ (n) {\n      if (n & 1) x *= a;\n      a *= a;\n      n >>= 1;\n    }\n    return\
-    \ x;\n  }\n  void expand(int n) {\n    while (_fact.size() <= n) {\n      auto\
-    \ i = _fact.size();\n      _fact.eb(_fact[i - 1] * T(i));\n      auto q = T::get_mod()\
-    \ / i, r = T::get_mod() % i;\n      _inv.eb(_inv[r] * T(T::get_mod() - q));\n\
-    \      _fact_inv.eb(_fact_inv[i - 1] * _inv[i]);\n    }\n  }\n\n  T fact(int n)\
-    \ {\n    if (n >= _fact.size()) expand(n);\n    return _fact[n];\n  }\n\n  T fact_inv(int\
-    \ n) {\n    if (n >= _fact.size()) expand(n);\n    return _fact_inv[n];\n  }\n\
-    \n  T inv(int n) {\n    if (n >= _fact.size()) expand(n);\n    return _inv[n];\n\
-    \  }\n\n  T C(ll n, ll k, bool large = false) {\n    assert(n >= 0);\n    if (k\
-    \ < 0 || n < k) return 0;\n    if (!large) return fact(n) * fact_inv(k) * fact_inv(n\
-    \ - k);\n    k = min(k, n - k);\n    T x(1);\n    FOR(i, k) {\n      x *= n -\
-    \ i;\n      x *= inv(i + 1);\n    }\n    return x;\n  }\n};\n\nusing modint107\
-    \ = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\nusing amint\
-    \ = ArbitraryModInt;\n#line 2 \"setfunc/zeta.hpp\"\n\r\ntemplate <typename T>\r\
-    \nvoid superset_zeta(vc<T>& A) {\r\n  int log = topbit(len(A));\r\n  assert(1\
+    \    a = ArbitraryModInt(t);\n    return (is);\n  }\n};\n\ntemplate<typename mint>\n\
+    tuple<mint, mint, mint> get_factorial_data(int n){\n  static constexpr int mod\
+    \ = mint::get_mod();\n  assert(0 <= n && n < mod);\n\n  vector<mint> fact = {1,\
+    \ 1};\n  vector<mint> fact_inv = {1, 1};\n  vector<mint> inv = {0, 1};\n  while(len(fact)\
+    \ <= n){\n    int k = len(fact);\n    fact.eb(fact[k - 1] * mint(k));\n    auto\
+    \ q = ceil(mod, k);\n    int r = k * q - mod;\n    inv.eb(inv[r] * mint(q));\n\
+    \    fact_inv.eb(fact_inv[k - 1] * inv[k]);\n  }\n  return {fact[n], fact_inv[n],\
+    \ inv[n]};\n}\n\ntemplate<typename mint>\nmint fact(int n){\n  static constexpr\
+    \ int mod = mint::get_mod();\n  assert(0 <= n);\n  if(n >= mod) return 0;\n  return\
+    \ get<0>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename mint>\nmint fact_inv(int\
+    \ n){\n  static constexpr int mod = mint::get_mod();\n  assert(0 <= n && n < mod);\n\
+    \  return get<1>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename mint>\n\
+    mint inv(int n){\n  static constexpr int mod = mint::get_mod();\n  assert(0 <=\
+    \ n && n < mod);\n  return get<1>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename\
+    \ mint>\nmint C(ll n, ll k, bool large = false) {\n  assert(n >= 0);\n  if (k\
+    \ < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n) * fact_inv<mint>(k)\
+    \ * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n  FOR(i, k) {\n\
+    \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\nusing\
+    \ modint107 = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n\
+    using amint = ArbitraryModInt;\n#line 2 \"setfunc/zeta.hpp\"\n\r\ntemplate <typename\
+    \ T>\r\nvoid superset_zeta(vc<T>& A) {\r\n  int log = topbit(len(A));\r\n  assert(1\
     \ << log == len(A));\r\n  FOR(n, log) FOR(s, 1 << log) {\r\n    int t = s ^ (1\
     \ << n);\r\n    if (s < t) A[s] += A[t];\r\n  }\r\n}\r\n\r\ntemplate <typename\
     \ T>\r\nvoid superset_mobius(vc<T>& A) {\r\n  int log = topbit(len(A));\r\n  assert(1\
@@ -217,7 +220,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/convolution/bitwise_or_convolution.test.cpp
   requiredBy: []
-  timestamp: '2022-01-06 10:16:41+09:00'
+  timestamp: '2022-01-07 01:39:05+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/convolution/bitwise_or_convolution.test.cpp

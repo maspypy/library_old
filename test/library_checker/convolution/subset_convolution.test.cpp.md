@@ -7,14 +7,14 @@ data:
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: setfunc/subset_convolution.hpp
     title: setfunc/subset_convolution.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/subset_convolution
@@ -159,35 +159,38 @@ data:
     \ >>= 1;\n    }\n    return ret;\n  }\n  friend ostream &operator<<(ostream &os,\
     \ const ArbitraryModInt &p) {\n    return os << p.val;\n  }\n  friend istream\
     \ &operator>>(istream &is, ArbitraryModInt &a) {\n    int64_t t;\n    is >> t;\n\
-    \    a = ArbitraryModInt(t);\n    return (is);\n  }\n};\n\ntemplate <typename\
-    \ T>\nstruct ModCalc {\n  vector<T> _fact = {1, 1};\n  vector<T> _fact_inv = {1,\
-    \ 1};\n  vector<T> _inv = {0, 1};\n\n  T pow(T a, int n) {\n    T x(1);\n    while\
-    \ (n) {\n      if (n & 1) x *= a;\n      a *= a;\n      n >>= 1;\n    }\n    return\
-    \ x;\n  }\n  void expand(int n) {\n    while (_fact.size() <= n) {\n      auto\
-    \ i = _fact.size();\n      _fact.eb(_fact[i - 1] * T(i));\n      auto q = T::get_mod()\
-    \ / i, r = T::get_mod() % i;\n      _inv.eb(_inv[r] * T(T::get_mod() - q));\n\
-    \      _fact_inv.eb(_fact_inv[i - 1] * _inv[i]);\n    }\n  }\n\n  T fact(int n)\
-    \ {\n    if (n >= _fact.size()) expand(n);\n    return _fact[n];\n  }\n\n  T fact_inv(int\
-    \ n) {\n    if (n >= _fact.size()) expand(n);\n    return _fact_inv[n];\n  }\n\
-    \n  T inv(int n) {\n    if (n >= _fact.size()) expand(n);\n    return _inv[n];\n\
-    \  }\n\n  T C(ll n, ll k, bool large = false) {\n    assert(n >= 0);\n    if (k\
-    \ < 0 || n < k) return 0;\n    if (!large) return fact(n) * fact_inv(k) * fact_inv(n\
-    \ - k);\n    k = min(k, n - k);\n    T x(1);\n    FOR(i, k) {\n      x *= n -\
-    \ i;\n      x *= inv(i + 1);\n    }\n    return x;\n  }\n};\n\nusing modint107\
-    \ = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\nusing amint\
-    \ = ArbitraryModInt;\n#line 1 \"setfunc/subset_convolution.hpp\"\ntemplate <typename\
-    \ T, int LIM = 20>\r\nvc<T> subset_convolution(vc<T>& A, vc<T>& B) {\r\n  using\
-    \ F = array<T, LIM + 1>;\r\n  int N = len(A);\r\n  int log = topbit(N);\r\n  assert(N\
-    \ == 1 << log);\r\n  vc<F> RA(N), RB(N);\r\n  FOR(s, N) RA[s][popcnt(s)] = A[s];\r\
-    \n  FOR(s, N) RB[s][popcnt(s)] = B[s];\r\n  // subset zeta\r\n  FOR(i, log) FOR(s,\
-    \ 1 << log) if (!(s & 1 << i)) {\r\n    int t = s | 1 << i;\r\n    FOR(k, log\
-    \ + 1) RA[t][k] += RA[s][k], RB[t][k] += RB[s][k];\r\n  }\r\n  // pointwise multiplication\r\
-    \n  FOR(s, 1 << log) {\r\n    auto &f = RA[s], &g = RB[s];\r\n    FOR_R(i, log\
-    \ + 1) {\r\n      FOR3(j, 1, log - i + 1) f[i + j] += f[i] * g[j];\r\n      f[i]\
-    \ *= g[0];\r\n    }\r\n  }\r\n  // subset mobius\r\n  FOR(i, log) FOR(s, 1 <<\
-    \ log) if (!(s & 1 << i)) {\r\n    int t = s | 1 << i;\r\n    FOR(k, log + 1)\
-    \ RA[t][k] -= RA[s][k];\r\n  }\r\n  vc<T> res(N);\r\n  FOR(s, N) res[s] = RA[s][popcnt(s)];\r\
-    \n  return res;\r\n}\r\n#line 6 \"test/library_checker/convolution/subset_convolution.test.cpp\"\
+    \    a = ArbitraryModInt(t);\n    return (is);\n  }\n};\n\ntemplate<typename mint>\n\
+    tuple<mint, mint, mint> get_factorial_data(int n){\n  static constexpr int mod\
+    \ = mint::get_mod();\n  assert(0 <= n && n < mod);\n\n  vector<mint> fact = {1,\
+    \ 1};\n  vector<mint> fact_inv = {1, 1};\n  vector<mint> inv = {0, 1};\n  while(len(fact)\
+    \ <= n){\n    int k = len(fact);\n    fact.eb(fact[k - 1] * mint(k));\n    auto\
+    \ q = ceil(mod, k);\n    int r = k * q - mod;\n    inv.eb(inv[r] * mint(q));\n\
+    \    fact_inv.eb(fact_inv[k - 1] * inv[k]);\n  }\n  return {fact[n], fact_inv[n],\
+    \ inv[n]};\n}\n\ntemplate<typename mint>\nmint fact(int n){\n  static constexpr\
+    \ int mod = mint::get_mod();\n  assert(0 <= n);\n  if(n >= mod) return 0;\n  return\
+    \ get<0>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename mint>\nmint fact_inv(int\
+    \ n){\n  static constexpr int mod = mint::get_mod();\n  assert(0 <= n && n < mod);\n\
+    \  return get<1>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename mint>\n\
+    mint inv(int n){\n  static constexpr int mod = mint::get_mod();\n  assert(0 <=\
+    \ n && n < mod);\n  return get<1>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename\
+    \ mint>\nmint C(ll n, ll k, bool large = false) {\n  assert(n >= 0);\n  if (k\
+    \ < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n) * fact_inv<mint>(k)\
+    \ * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n  FOR(i, k) {\n\
+    \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\nusing\
+    \ modint107 = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n\
+    using amint = ArbitraryModInt;\n#line 1 \"setfunc/subset_convolution.hpp\"\ntemplate\
+    \ <typename T, int LIM = 20>\r\nvc<T> subset_convolution(vc<T>& A, vc<T>& B) {\r\
+    \n  using F = array<T, LIM + 1>;\r\n  int N = len(A);\r\n  int log = topbit(N);\r\
+    \n  assert(N == 1 << log);\r\n  vc<F> RA(N), RB(N);\r\n  FOR(s, N) RA[s][popcnt(s)]\
+    \ = A[s];\r\n  FOR(s, N) RB[s][popcnt(s)] = B[s];\r\n  // subset zeta\r\n  FOR(i,\
+    \ log) FOR(s, 1 << log) if (!(s & 1 << i)) {\r\n    int t = s | 1 << i;\r\n  \
+    \  FOR(k, log + 1) RA[t][k] += RA[s][k], RB[t][k] += RB[s][k];\r\n  }\r\n  //\
+    \ pointwise multiplication\r\n  FOR(s, 1 << log) {\r\n    auto &f = RA[s], &g\
+    \ = RB[s];\r\n    FOR_R(i, log + 1) {\r\n      FOR3(j, 1, log - i + 1) f[i + j]\
+    \ += f[i] * g[j];\r\n      f[i] *= g[0];\r\n    }\r\n  }\r\n  // subset mobius\r\
+    \n  FOR(i, log) FOR(s, 1 << log) if (!(s & 1 << i)) {\r\n    int t = s | 1 <<\
+    \ i;\r\n    FOR(k, log + 1) RA[t][k] -= RA[s][k];\r\n  }\r\n  vc<T> res(N);\r\n\
+    \  FOR(s, N) res[s] = RA[s][popcnt(s)];\r\n  return res;\r\n}\r\n#line 6 \"test/library_checker/convolution/subset_convolution.test.cpp\"\
     \n\r\nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N);\r\n  VEC(mint,\
     \ A, 1<<N);\r\n  VEC(mint, B, 1<<N);\r\n  auto C = subset_convolution(A, B);\r\
     \n  print(C);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
@@ -206,8 +209,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/convolution/subset_convolution.test.cpp
   requiredBy: []
-  timestamp: '2022-01-06 10:16:41+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-07 01:39:05+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/convolution/subset_convolution.test.cpp
 layout: document

@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: algebra/group_affine.hpp
     title: algebra/group_affine.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algebra/monoid_reverse.hpp
     title: algebra/monoid_reverse.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
   - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/hld.hpp
     title: graph/hld.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/treemonoid.hpp
     title: graph/treemonoid.hpp
   - icon: ':question:'
@@ -27,9 +27,9 @@ data:
     title: my_template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_set_path_composite
@@ -181,49 +181,52 @@ data:
     \  }\n    return ret;\n  }\n  friend ostream &operator<<(ostream &os, const ArbitraryModInt\
     \ &p) {\n    return os << p.val;\n  }\n  friend istream &operator>>(istream &is,\
     \ ArbitraryModInt &a) {\n    int64_t t;\n    is >> t;\n    a = ArbitraryModInt(t);\n\
-    \    return (is);\n  }\n};\n\ntemplate <typename T>\nstruct ModCalc {\n  vector<T>\
-    \ _fact = {1, 1};\n  vector<T> _fact_inv = {1, 1};\n  vector<T> _inv = {0, 1};\n\
-    \n  T pow(T a, int n) {\n    T x(1);\n    while (n) {\n      if (n & 1) x *= a;\n\
-    \      a *= a;\n      n >>= 1;\n    }\n    return x;\n  }\n  void expand(int n)\
-    \ {\n    while (_fact.size() <= n) {\n      auto i = _fact.size();\n      _fact.eb(_fact[i\
-    \ - 1] * T(i));\n      auto q = T::get_mod() / i, r = T::get_mod() % i;\n    \
-    \  _inv.eb(_inv[r] * T(T::get_mod() - q));\n      _fact_inv.eb(_fact_inv[i - 1]\
-    \ * _inv[i]);\n    }\n  }\n\n  T fact(int n) {\n    if (n >= _fact.size()) expand(n);\n\
-    \    return _fact[n];\n  }\n\n  T fact_inv(int n) {\n    if (n >= _fact.size())\
-    \ expand(n);\n    return _fact_inv[n];\n  }\n\n  T inv(int n) {\n    if (n >=\
-    \ _fact.size()) expand(n);\n    return _inv[n];\n  }\n\n  T C(ll n, ll k, bool\
-    \ large = false) {\n    assert(n >= 0);\n    if (k < 0 || n < k) return 0;\n \
-    \   if (!large) return fact(n) * fact_inv(k) * fact_inv(n - k);\n    k = min(k,\
-    \ n - k);\n    T x(1);\n    FOR(i, k) {\n      x *= n - i;\n      x *= inv(i +\
-    \ 1);\n    }\n    return x;\n  }\n};\n\nusing modint107 = modint<1'000'000'007>;\n\
-    using modint998 = modint<998'244'353>;\nusing amint = ArbitraryModInt;\n#line\
-    \ 2 \"ds/segtree.hpp\"\ntemplate <class Monoid>\nstruct SegTree {\n  using X =\
-    \ typename Monoid::value_type;\n  using value_type = X;\n  vc<X> dat;\n  int n,\
-    \ log, size;\n\n  SegTree() : SegTree(0) {}\n  SegTree(int n) : SegTree(vc<X>(n,\
-    \ Monoid::unit)) {}\n  SegTree(vc<X> v) : n(len(v)) {\n    log = 1;\n    while\
-    \ ((1 << log) < n) ++log;\n    size = 1 << log;\n    dat.assign(size << 1, Monoid::unit);\n\
-    \    FOR(i, n) dat[size + i] = v[i];\n    FOR3_R(i, 1, size) update(i);\n  }\n\
-    \n  void update(int i) { dat[i] = Monoid::op(dat[2 * i], dat[2 * i + 1]); }\n\n\
-    \  void set(int i, X x) {\n    assert(i < n);\n    dat[i += size] = x;\n    while\
-    \ (i >>= 1) update(i);\n  }\n\n  X prod(int L, int R) {\n    assert(L <= R);\n\
-    \    assert(R <= n);\n    X vl = Monoid::unit, vr = Monoid::unit;\n    L += size,\
-    \ R += size;\n    while (L < R) {\n      if (L & 1) vl = Monoid::op(vl, dat[L++]);\n\
-    \      if (R & 1) vr = Monoid::op(dat[--R], vr);\n      L >>= 1, R >>= 1;\n  \
-    \  }\n    return Monoid::op(vl, vr);\n  }\n\n  X prod_all() { return dat[1];}\n\
-    \n  template <class F>\n  int max_right(F &check, int L) {\n    assert(0 <= L\
-    \ && L <= n && check(Monoid::unit));\n    if (L == n) return n;\n    L += size;\n\
-    \    X sm = Monoid::unit;\n    do {\n      while (L % 2 == 0) L >>= 1;\n     \
-    \ if (!check(Monoid::op(sm, dat[L]))) {\n        while (L < size) {\n        \
-    \  L = 2 * L;\n          if (check(Monoid::op(sm, dat[L]))) {\n            sm\
-    \ = Monoid::op(sm, dat[L]);\n            L++;\n          }\n        }\n      \
-    \  return L - size;\n      }\n      sm = Monoid::op(sm, dat[L]);\n      L++;\n\
-    \    } while ((L & -L) != L);\n    return n;\n  }\n\n  template <class F>\n  int\
-    \ min_left(F &check, int R) {\n    assert(0 <= R && R <= n && check(Monoid::unit));\n\
-    \    if (R == 0) return 0;\n    R += size;\n    X sm = Monoid::unit;\n    do {\n\
-    \      --R;\n      while (R > 1 && (R % 2)) R >>= 1;\n      if (!check(Monoid::op(dat[R],\
-    \ sm))) {\n        while (R < n) {\n          R = 2 * R + 1;\n          if (check(Monoid::op(dat[R],\
-    \ sm))) {\n            sm = Monoid::op(dat[R], sm);\n            R--;\n      \
-    \    }\n        }\n        return R + 1 - size;\n      }\n      sm = Monoid::op(dat[R],\
+    \    return (is);\n  }\n};\n\ntemplate<typename mint>\ntuple<mint, mint, mint>\
+    \ get_factorial_data(int n){\n  static constexpr int mod = mint::get_mod();\n\
+    \  assert(0 <= n && n < mod);\n\n  vector<mint> fact = {1, 1};\n  vector<mint>\
+    \ fact_inv = {1, 1};\n  vector<mint> inv = {0, 1};\n  while(len(fact) <= n){\n\
+    \    int k = len(fact);\n    fact.eb(fact[k - 1] * mint(k));\n    auto q = ceil(mod,\
+    \ k);\n    int r = k * q - mod;\n    inv.eb(inv[r] * mint(q));\n    fact_inv.eb(fact_inv[k\
+    \ - 1] * inv[k]);\n  }\n  return {fact[n], fact_inv[n], inv[n]};\n}\n\ntemplate<typename\
+    \ mint>\nmint fact(int n){\n  static constexpr int mod = mint::get_mod();\n  assert(0\
+    \ <= n);\n  if(n >= mod) return 0;\n  return get<0>(get_factorial_data<mint>(n));\n\
+    }\n\ntemplate<typename mint>\nmint fact_inv(int n){\n  static constexpr int mod\
+    \ = mint::get_mod();\n  assert(0 <= n && n < mod);\n  return get<1>(get_factorial_data<mint>(n));\n\
+    }\n\ntemplate<typename mint>\nmint inv(int n){\n  static constexpr int mod = mint::get_mod();\n\
+    \  assert(0 <= n && n < mod);\n  return get<1>(get_factorial_data<mint>(n));\n\
+    }\n\ntemplate<typename mint>\nmint C(ll n, ll k, bool large = false) {\n  assert(n\
+    \ >= 0);\n  if (k < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n)\
+    \ * fact_inv<mint>(k) * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n\
+    \  FOR(i, k) {\n    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return\
+    \ x;\n}\n\nusing modint107 = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n\
+    using amint = ArbitraryModInt;\n#line 2 \"ds/segtree.hpp\"\ntemplate <class Monoid>\n\
+    struct SegTree {\n  using X = typename Monoid::value_type;\n  using value_type\
+    \ = X;\n  vc<X> dat;\n  int n, log, size;\n\n  SegTree() : SegTree(0) {}\n  SegTree(int\
+    \ n) : SegTree(vc<X>(n, Monoid::unit)) {}\n  SegTree(vc<X> v) : n(len(v)) {\n\
+    \    log = 1;\n    while ((1 << log) < n) ++log;\n    size = 1 << log;\n    dat.assign(size\
+    \ << 1, Monoid::unit);\n    FOR(i, n) dat[size + i] = v[i];\n    FOR3_R(i, 1,\
+    \ size) update(i);\n  }\n\n  void update(int i) { dat[i] = Monoid::op(dat[2 *\
+    \ i], dat[2 * i + 1]); }\n\n  void set(int i, X x) {\n    assert(i < n);\n   \
+    \ dat[i += size] = x;\n    while (i >>= 1) update(i);\n  }\n\n  X prod(int L,\
+    \ int R) {\n    assert(L <= R);\n    assert(R <= n);\n    X vl = Monoid::unit,\
+    \ vr = Monoid::unit;\n    L += size, R += size;\n    while (L < R) {\n      if\
+    \ (L & 1) vl = Monoid::op(vl, dat[L++]);\n      if (R & 1) vr = Monoid::op(dat[--R],\
+    \ vr);\n      L >>= 1, R >>= 1;\n    }\n    return Monoid::op(vl, vr);\n  }\n\n\
+    \  X prod_all() { return dat[1];}\n\n  template <class F>\n  int max_right(F &check,\
+    \ int L) {\n    assert(0 <= L && L <= n && check(Monoid::unit));\n    if (L ==\
+    \ n) return n;\n    L += size;\n    X sm = Monoid::unit;\n    do {\n      while\
+    \ (L % 2 == 0) L >>= 1;\n      if (!check(Monoid::op(sm, dat[L]))) {\n       \
+    \ while (L < size) {\n          L = 2 * L;\n          if (check(Monoid::op(sm,\
+    \ dat[L]))) {\n            sm = Monoid::op(sm, dat[L]);\n            L++;\n  \
+    \        }\n        }\n        return L - size;\n      }\n      sm = Monoid::op(sm,\
+    \ dat[L]);\n      L++;\n    } while ((L & -L) != L);\n    return n;\n  }\n\n \
+    \ template <class F>\n  int min_left(F &check, int R) {\n    assert(0 <= R &&\
+    \ R <= n && check(Monoid::unit));\n    if (R == 0) return 0;\n    R += size;\n\
+    \    X sm = Monoid::unit;\n    do {\n      --R;\n      while (R > 1 && (R % 2))\
+    \ R >>= 1;\n      if (!check(Monoid::op(dat[R], sm))) {\n        while (R < n)\
+    \ {\n          R = 2 * R + 1;\n          if (check(Monoid::op(dat[R], sm))) {\n\
+    \            sm = Monoid::op(dat[R], sm);\n            R--;\n          }\n   \
+    \     }\n        return R + 1 - size;\n      }\n      sm = Monoid::op(dat[R],\
     \ sm);\n    } while ((R & -R) != R);\n    return 0;\n  }\n\n  void debug() { print(\"\
     segtree\", dat); }\n};\n#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\n\
     struct Edge {\n  int frm, to;\n  T cost;\n  int id;\n};\n\ntemplate <typename\
@@ -374,8 +377,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   requiredBy: []
-  timestamp: '2022-01-06 10:16:41+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-07 01:39:05+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
 layout: document
