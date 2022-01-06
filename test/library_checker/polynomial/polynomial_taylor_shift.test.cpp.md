@@ -11,8 +11,8 @@ data:
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
   - icon: ':heavy_check_mark:'
-    path: polynomial/convolution_mod_2_64.hpp
-    title: polynomial/convolution_mod_2_64.hpp
+    path: polynomial/polynomial_taylor_shift.hpp
+    title: polynomial/polynomial_taylor_shift.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -20,12 +20,12 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/convolution_mod_2_64
+    PROBLEM: https://judge.yosupo.jp/problem/polynomial_taylor_shift
     links:
-    - https://judge.yosupo.jp/problem/convolution_mod_2_64
-  bundledCode: "#line 1 \"test/library_checker/convolution/contolution_mod_2_64.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod_2_64\"\r\n\
-    #line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
+    - https://judge.yosupo.jp/problem/polynomial_taylor_shift
+  bundledCode: "#line 1 \"test/library_checker/polynomial/polynomial_taylor_shift.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/polynomial_taylor_shift\"\r\
+    \n#line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
     \nusing ll = long long;\nusing ll8 = __int128;\nusing pi = pair<ll, ll>;\nusing\
     \ vi = vector<ll>;\nusing uint = unsigned int;\nusing ull = unsigned long long;\n\
     \ntemplate <class T>\nusing vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\n\
@@ -106,7 +106,7 @@ data:
     }\n\n#define SUM(v) accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n\
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
-    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/convolution/contolution_mod_2_64.test.cpp\"\
+    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/polynomial/polynomial_taylor_shift.test.cpp\"\
     \n\r\n#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n  static\
     \ constexpr bool is_static = true;\n  int val;\n\n  constexpr modint(const ll\
     \ val = 0) noexcept\n      : val(val >= 0 ? val % mod : (mod - (-val) % mod) %\
@@ -328,58 +328,37 @@ data:
     \ b);\r\n}\r\n\r\ntemplate<typename mint>\r\nenable_if_t<!is_same<mint, modint998>::value,\
     \ vc<mint>> convolution(vc<mint>& a, vc<mint>& b) {\r\n  int n = len(a), m = len(b);\r\
     \n  if (!n || !m) return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a,\
-    \ b);\r\n  return convolution_garner(a, b);\r\n}\r\n#line 2 \"polynomial/convolution_mod_2_64.hpp\"\
-    \nvector<ull> convolution_mod_2_64(const vector<ull>& a, const vector<ull>& b)\
-    \ {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return {};\r\n  if (min(n,\
-    \ m) <= 60) return convolution_naive(a, b);\r\n  constexpr int P0 = 998244353;\r\
-    \n  constexpr int P1 = 754974721;\r\n  constexpr int P2 = 167772161;\r\n  constexpr\
-    \ int P3 = 469762049;\r\n  constexpr int P4 = 880803841;\r\n  using M0 = modint<P0>;\r\
-    \n  using M1 = modint<P1>;\r\n  using M2 = modint<P2>;\r\n  using M3 = modint<P3>;\r\
-    \n  using M4 = modint<P4>;\r\n  vc<M0> a0(n), b0(m);\r\n  vc<M1> a1(n), b1(m);\r\
-    \n  vc<M2> a2(n), b2(m);\r\n  vc<M3> a3(n), b3(m);\r\n  vc<M4> a4(n), b4(m);\r\
-    \n  FOR(i, n) a0[i] = a[i] % P0;\r\n  FOR(i, m) b0[i] = b[i] % P0;\r\n  FOR(i,\
-    \ n) a1[i] = a[i] % P1;\r\n  FOR(i, m) b1[i] = b[i] % P1;\r\n  FOR(i, n) a2[i]\
-    \ = a[i] % P2;\r\n  FOR(i, m) b2[i] = b[i] % P2;\r\n  FOR(i, n) a3[i] = a[i] %\
-    \ P3;\r\n  FOR(i, m) b3[i] = b[i] % P3;\r\n  FOR(i, n) a4[i] = a[i] % P4;\r\n\
-    \  FOR(i, m) b4[i] = b[i] % P4;\r\n  a0 = convolution_ntt<M0>(a0, b0);\r\n  a1\
-    \ = convolution_ntt<M1>(a1, b1);\r\n  a2 = convolution_ntt<M2>(a2, b2);\r\n  a3\
-    \ = convolution_ntt<M3>(a3, b3);\r\n  a4 = convolution_ntt<M4>(a4, b4);\r\n  static\
-    \ const M1 inv10 = M1(1) / M1(P0);\r\n  static const M2 inv21 = M2(1) / M2(P1),\
-    \ inv20 = inv21 / M2(P0);\r\n  static const M3 inv32 = M3(1) / M3(P2), inv31 =\
-    \ inv32 / M3(P1),\r\n                  inv30 = inv31 / M3(P0);\r\n  static const\
-    \ M4 inv43 = M4(1) / M4(P3), inv42 = inv43 / M4(P2),\r\n                  inv41\
-    \ = inv42 / M4(P1), inv40 = inv41 / M4(P0);\r\n  vc<ull> c(len(a0));\r\n  FOR(i,\
-    \ len(c)) {\r\n    ll x0 = a0[i].val;\r\n    ll x1 = (M1(a1[i] - x0) * inv10).val;\r\
-    \n    ll x2 = (M2(a2[i] - x0) * inv20 - M2(x1) * inv21).val;\r\n    ll x3 = (M3(a3[i]\
-    \ - x0) * inv30 - M3(x1) * inv31 - M3(x2) * inv32).val;\r\n    ll x4 = (M4(a4[i]\
-    \ - x0) * inv40 - M4(x1) * inv41 - M4(x2) * inv42\r\n             - M4(x3) * inv43)\r\
-    \n                .val;\r\n    c[i] = x0 + P0 * (x1 + P1 * (x2 + P2 * (x3 + P3\
-    \ * ull(x4))));\r\n  }\r\n  return c;\r\n}\r\n#line 5 \"test/library_checker/convolution/contolution_mod_2_64.test.cpp\"\
-    \n\r\nvoid solve() {\r\n  LL(N, M);\r\n  vc<ull> A(N), B(M);\r\n  FOR(i, N) cin\
-    \ >> A[i];\r\n  FOR(i, M) cin >> B[i];\r\n  auto C = convolution_mod_2_64(A, B);\r\
-    \n  print(C);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod_2_64\"\r\
-    \n#include \"my_template.hpp\"\r\n\r\n#include \"polynomial/convolution_mod_2_64.hpp\"\
-    \r\n\r\nvoid solve() {\r\n  LL(N, M);\r\n  vc<ull> A(N), B(M);\r\n  FOR(i, N)\
-    \ cin >> A[i];\r\n  FOR(i, M) cin >> B[i];\r\n  auto C = convolution_mod_2_64(A,\
-    \ B);\r\n  print(C);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \ b);\r\n  return convolution_garner(a, b);\r\n}\r\n#line 2 \"polynomial/polynomial_taylor_shift.hpp\"\
+    \n\r\ntemplate <typename mint>\r\nvc<mint> polynomial_taylor_shift(vc<mint> a,\
+    \ mint c) {\r\n  ll N = len(a);\r\n  FOR(i, N) a[i] *= fact<mint>(i);\r\n  auto\
+    \ b = power_table<mint>(c, N);\r\n  FOR(i, N) b[i] *= fact_inv<mint>(i);\r\n \
+    \ reverse(all(a));\r\n  auto f = convolution(a, b);\r\n  f.resize(N);\r\n  reverse(all(f));\r\
+    \n  FOR(i, N) f[i] *= fact_inv<mint>(i);\r\n  return f;\r\n}\r\n#line 6 \"test/library_checker/polynomial/polynomial_taylor_shift.test.cpp\"\
+    \n\r\nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N, c);\r\n  VEC(mint,\
+    \ A, N);\r\n  print(polynomial_taylor_shift(A, mint(c)));\r\n}\r\n\r\nsigned main()\
+    \ {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
+    \n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/polynomial_taylor_shift\"\
+    \r\n#include \"my_template.hpp\"\r\n\r\n#include \"mod/modint.hpp\"\r\n#include\
+    \ \"polynomial/polynomial_taylor_shift.hpp\"\r\n\r\nusing mint = modint998;\r\n\
+    \r\nvoid solve() {\r\n  LL(N, c);\r\n  VEC(mint, A, N);\r\n  print(polynomial_taylor_shift(A,\
+    \ mint(c)));\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
     \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
-  - polynomial/convolution_mod_2_64.hpp
-  - polynomial/convolution.hpp
   - mod/modint.hpp
+  - polynomial/polynomial_taylor_shift.hpp
+  - polynomial/convolution.hpp
   isVerificationFile: true
-  path: test/library_checker/convolution/contolution_mod_2_64.test.cpp
+  path: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
   requiredBy: []
-  timestamp: '2022-01-07 04:48:32+09:00'
+  timestamp: '2022-01-07 04:48:54+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/library_checker/convolution/contolution_mod_2_64.test.cpp
+documentation_of: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/convolution/contolution_mod_2_64.test.cpp
-- /verify/test/library_checker/convolution/contolution_mod_2_64.test.cpp.html
-title: test/library_checker/convolution/contolution_mod_2_64.test.cpp
+- /verify/test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
+- /verify/test/library_checker/polynomial/polynomial_taylor_shift.test.cpp.html
+title: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
 ---
