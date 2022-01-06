@@ -7,14 +7,17 @@ data:
   - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
+  - icon: ':x:'
+    path: polynomial/fps_inv.hpp
+    title: polynomial/fps_inv.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/convolution/contolution_mod_2_64.test.cpp
-    title: test/library_checker/convolution/contolution_mod_2_64.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: test/library_checker/polynomial/log_of_fps.test.cpp
+    title: test/library_checker/polynomial/log_of_fps.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n\
@@ -237,74 +240,40 @@ data:
     \ b);\r\n}\r\n\r\ntemplate<typename mint>\r\nenable_if_t<!is_same<mint, modint998>::value,\
     \ vc<mint>> convolution(vc<mint>& a, vc<mint>& b) {\r\n  int n = len(a), m = len(b);\r\
     \n  if (!n || !m) return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a,\
-    \ b);\r\n  return convolution_garner(a, b);\r\n}\r\n#line 2 \"polynomial/convolution_mod_2_64.hpp\"\
-    \nvector<ull> convolution_mod_2_64(const vector<ull>& a, const vector<ull>& b)\
-    \ {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return {};\r\n  if (min(n,\
-    \ m) <= 60) return convolution_naive(a, b);\r\n  constexpr int P0 = 998244353;\r\
-    \n  constexpr int P1 = 754974721;\r\n  constexpr int P2 = 167772161;\r\n  constexpr\
-    \ int P3 = 469762049;\r\n  constexpr int P4 = 880803841;\r\n  using M0 = modint<P0>;\r\
-    \n  using M1 = modint<P1>;\r\n  using M2 = modint<P2>;\r\n  using M3 = modint<P3>;\r\
-    \n  using M4 = modint<P4>;\r\n  vc<M0> a0(n), b0(m);\r\n  vc<M1> a1(n), b1(m);\r\
-    \n  vc<M2> a2(n), b2(m);\r\n  vc<M3> a3(n), b3(m);\r\n  vc<M4> a4(n), b4(m);\r\
-    \n  FOR(i, n) a0[i] = a[i] % P0;\r\n  FOR(i, m) b0[i] = b[i] % P0;\r\n  FOR(i,\
-    \ n) a1[i] = a[i] % P1;\r\n  FOR(i, m) b1[i] = b[i] % P1;\r\n  FOR(i, n) a2[i]\
-    \ = a[i] % P2;\r\n  FOR(i, m) b2[i] = b[i] % P2;\r\n  FOR(i, n) a3[i] = a[i] %\
-    \ P3;\r\n  FOR(i, m) b3[i] = b[i] % P3;\r\n  FOR(i, n) a4[i] = a[i] % P4;\r\n\
-    \  FOR(i, m) b4[i] = b[i] % P4;\r\n  a0 = convolution_ntt<M0>(a0, b0);\r\n  a1\
-    \ = convolution_ntt<M1>(a1, b1);\r\n  a2 = convolution_ntt<M2>(a2, b2);\r\n  a3\
-    \ = convolution_ntt<M3>(a3, b3);\r\n  a4 = convolution_ntt<M4>(a4, b4);\r\n  static\
-    \ const M1 inv10 = M1(1) / M1(P0);\r\n  static const M2 inv21 = M2(1) / M2(P1),\
-    \ inv20 = inv21 / M2(P0);\r\n  static const M3 inv32 = M3(1) / M3(P2), inv31 =\
-    \ inv32 / M3(P1),\r\n                  inv30 = inv31 / M3(P0);\r\n  static const\
-    \ M4 inv43 = M4(1) / M4(P3), inv42 = inv43 / M4(P2),\r\n                  inv41\
-    \ = inv42 / M4(P1), inv40 = inv41 / M4(P0);\r\n  vc<ull> c(len(a0));\r\n  FOR(i,\
-    \ len(c)) {\r\n    ll x0 = a0[i].val;\r\n    ll x1 = (M1(a1[i] - x0) * inv10).val;\r\
-    \n    ll x2 = (M2(a2[i] - x0) * inv20 - M2(x1) * inv21).val;\r\n    ll x3 = (M3(a3[i]\
-    \ - x0) * inv30 - M3(x1) * inv31 - M3(x2) * inv32).val;\r\n    ll x4 = (M4(a4[i]\
-    \ - x0) * inv40 - M4(x1) * inv41 - M4(x2) * inv42\r\n             - M4(x3) * inv43)\r\
-    \n                .val;\r\n    c[i] = x0 + P0 * (x1 + P1 * (x2 + P2 * (x3 + P3\
-    \ * ull(x4))));\r\n  }\r\n  return c;\r\n}\r\n"
-  code: "#include \"polynomial/convolution.hpp\"\r\nvector<ull> convolution_mod_2_64(const\
-    \ vector<ull>& a, const vector<ull>& b) {\r\n  int n = len(a), m = len(b);\r\n\
-    \  if (!n || !m) return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a,\
-    \ b);\r\n  constexpr int P0 = 998244353;\r\n  constexpr int P1 = 754974721;\r\n\
-    \  constexpr int P2 = 167772161;\r\n  constexpr int P3 = 469762049;\r\n  constexpr\
-    \ int P4 = 880803841;\r\n  using M0 = modint<P0>;\r\n  using M1 = modint<P1>;\r\
-    \n  using M2 = modint<P2>;\r\n  using M3 = modint<P3>;\r\n  using M4 = modint<P4>;\r\
-    \n  vc<M0> a0(n), b0(m);\r\n  vc<M1> a1(n), b1(m);\r\n  vc<M2> a2(n), b2(m);\r\
-    \n  vc<M3> a3(n), b3(m);\r\n  vc<M4> a4(n), b4(m);\r\n  FOR(i, n) a0[i] = a[i]\
-    \ % P0;\r\n  FOR(i, m) b0[i] = b[i] % P0;\r\n  FOR(i, n) a1[i] = a[i] % P1;\r\n\
-    \  FOR(i, m) b1[i] = b[i] % P1;\r\n  FOR(i, n) a2[i] = a[i] % P2;\r\n  FOR(i,\
-    \ m) b2[i] = b[i] % P2;\r\n  FOR(i, n) a3[i] = a[i] % P3;\r\n  FOR(i, m) b3[i]\
-    \ = b[i] % P3;\r\n  FOR(i, n) a4[i] = a[i] % P4;\r\n  FOR(i, m) b4[i] = b[i] %\
-    \ P4;\r\n  a0 = convolution_ntt<M0>(a0, b0);\r\n  a1 = convolution_ntt<M1>(a1,\
-    \ b1);\r\n  a2 = convolution_ntt<M2>(a2, b2);\r\n  a3 = convolution_ntt<M3>(a3,\
-    \ b3);\r\n  a4 = convolution_ntt<M4>(a4, b4);\r\n  static const M1 inv10 = M1(1)\
-    \ / M1(P0);\r\n  static const M2 inv21 = M2(1) / M2(P1), inv20 = inv21 / M2(P0);\r\
-    \n  static const M3 inv32 = M3(1) / M3(P2), inv31 = inv32 / M3(P1),\r\n      \
-    \            inv30 = inv31 / M3(P0);\r\n  static const M4 inv43 = M4(1) / M4(P3),\
-    \ inv42 = inv43 / M4(P2),\r\n                  inv41 = inv42 / M4(P1), inv40 =\
-    \ inv41 / M4(P0);\r\n  vc<ull> c(len(a0));\r\n  FOR(i, len(c)) {\r\n    ll x0\
-    \ = a0[i].val;\r\n    ll x1 = (M1(a1[i] - x0) * inv10).val;\r\n    ll x2 = (M2(a2[i]\
-    \ - x0) * inv20 - M2(x1) * inv21).val;\r\n    ll x3 = (M3(a3[i] - x0) * inv30\
-    \ - M3(x1) * inv31 - M3(x2) * inv32).val;\r\n    ll x4 = (M4(a4[i] - x0) * inv40\
-    \ - M4(x1) * inv41 - M4(x2) * inv42\r\n             - M4(x3) * inv43)\r\n    \
-    \            .val;\r\n    c[i] = x0 + P0 * (x1 + P1 * (x2 + P2 * (x3 + P3 * ull(x4))));\r\
-    \n  }\r\n  return c;\r\n}\r\n"
+    \ b);\r\n  return convolution_garner(a, b);\r\n}\r\n#line 2 \"polynomial/fps_inv.hpp\"\
+    \n\r\ntemplate <typename mint>\r\nvc<mint> fps_inv(vc<mint>& F) {\r\n  vc<mint>\
+    \ G = {mint(1) / F[0]};\r\n  ll N = len(F), n = 1;\r\n  while (n < N) {\r\n  \
+    \  vc<mint> f(2 * n), g(2 * n);\r\n    FOR(i, min(N, 2 * n)) f[i] = F[i];\r\n\
+    \    FOR(i, n) g[i] = G[i];\r\n    ntt(f, false);\r\n    ntt(g, false);\r\n  \
+    \  FOR(i, 2 * n) f[i] *= g[i];\r\n    ntt(f, true);\r\n    FOR(i, n) f[i] = 0;\r\
+    \n    ntt(f, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\n    ntt(f, true);\r\
+    \n    mint c = mint(-1) / mint(4 * n * n);\r\n    FOR3(i, n, 2 * n) G.eb(f[i]\
+    \ * c);\r\n    n *= 2;\r\n  }\r\n  G.resize(N);\r\n  return G;\r\n}\r\n#line 2\
+    \ \"polynomial/fps_log.hpp\"\n\r\ntemplate <typename mint>\r\nvc<mint> fps_log(vc<mint>&\
+    \ f) {\r\n  ll N = len(f);\r\n  vc<mint> df = f;\r\n  FOR(i, N) df[i] *= mint(i);\r\
+    \n  df.erase(df.begin());\r\n  auto f_inv = fps_inv(f);\r\n  f = convolution(df,\
+    \ f_inv);\r\n  f.resize(N - 1);\r\n  f.insert(f.begin(), 0);\r\n  FOR(i, N) f[i]\
+    \ *= inv<mint>(i);\r\n  return f;\r\n}\r\n"
+  code: "#include \"polynomial/fps_inv.hpp\"\r\n\r\ntemplate <typename mint>\r\nvc<mint>\
+    \ fps_log(vc<mint>& f) {\r\n  ll N = len(f);\r\n  vc<mint> df = f;\r\n  FOR(i,\
+    \ N) df[i] *= mint(i);\r\n  df.erase(df.begin());\r\n  auto f_inv = fps_inv(f);\r\
+    \n  f = convolution(df, f_inv);\r\n  f.resize(N - 1);\r\n  f.insert(f.begin(),\
+    \ 0);\r\n  FOR(i, N) f[i] *= inv<mint>(i);\r\n  return f;\r\n}\r\n"
   dependsOn:
+  - polynomial/fps_inv.hpp
   - polynomial/convolution.hpp
   - mod/modint.hpp
   isVerificationFile: false
-  path: polynomial/convolution_mod_2_64.hpp
+  path: polynomial/fps_log.hpp
   requiredBy: []
-  timestamp: '2022-01-07 02:54:29+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-01-07 02:54:39+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/library_checker/convolution/contolution_mod_2_64.test.cpp
-documentation_of: polynomial/convolution_mod_2_64.hpp
+  - test/library_checker/polynomial/log_of_fps.test.cpp
+documentation_of: polynomial/fps_log.hpp
 layout: document
 redirect_from:
-- /library/polynomial/convolution_mod_2_64.hpp
-- /library/polynomial/convolution_mod_2_64.hpp.html
-title: polynomial/convolution_mod_2_64.hpp
+- /library/polynomial/fps_log.hpp
+- /library/polynomial/fps_log.hpp.html
+title: polynomial/fps_log.hpp
 ---

@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/centroid.hpp
     title: graph/centroid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
     title: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n\
@@ -140,23 +140,23 @@ data:
     \ &operator>>(istream &is, ArbitraryModInt &a) {\n    int64_t t;\n    is >> t;\n\
     \    a = ArbitraryModInt(t);\n    return (is);\n  }\n};\n\ntemplate<typename mint>\n\
     tuple<mint, mint, mint> get_factorial_data(int n){\n  static constexpr int mod\
-    \ = mint::get_mod();\n  assert(0 <= n && n < mod);\n\n  vector<mint> fact = {1,\
-    \ 1};\n  vector<mint> fact_inv = {1, 1};\n  vector<mint> inv = {0, 1};\n  while(len(fact)\
-    \ <= n){\n    int k = len(fact);\n    fact.eb(fact[k - 1] * mint(k));\n    auto\
-    \ q = ceil(mod, k);\n    int r = k * q - mod;\n    inv.eb(inv[r] * mint(q));\n\
-    \    fact_inv.eb(fact_inv[k - 1] * inv[k]);\n  }\n  return {fact[n], fact_inv[n],\
-    \ inv[n]};\n}\n\ntemplate<typename mint>\nmint fact(int n){\n  static constexpr\
-    \ int mod = mint::get_mod();\n  assert(0 <= n);\n  if(n >= mod) return 0;\n  return\
-    \ get<0>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename mint>\nmint fact_inv(int\
-    \ n){\n  static constexpr int mod = mint::get_mod();\n  assert(0 <= n && n < mod);\n\
-    \  return get<1>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename mint>\n\
-    mint inv(int n){\n  static constexpr int mod = mint::get_mod();\n  assert(0 <=\
-    \ n && n < mod);\n  return get<1>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename\
-    \ mint>\nmint C(ll n, ll k, bool large = false) {\n  assert(n >= 0);\n  if (k\
-    \ < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n) * fact_inv<mint>(k)\
-    \ * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n  FOR(i, k) {\n\
-    \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\nusing\
-    \ modint107 = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n\
+    \ = mint::get_mod();\n  assert(0 <= n && n < mod);\n\n  static vector<mint> fact\
+    \ = {1, 1};\n  static vector<mint> fact_inv = {1, 1};\n  static vector<mint> inv\
+    \ = {0, 1};\n  while(len(fact) <= n){\n    int k = len(fact);\n    fact.eb(fact[k\
+    \ - 1] * mint(k));\n    auto q = ceil(mod, k);\n    int r = k * q - mod;\n   \
+    \ inv.eb(inv[r] * mint(q));\n    fact_inv.eb(fact_inv[k - 1] * inv[k]);\n  }\n\
+    \  return {fact[n], fact_inv[n], inv[n]};\n}\n\ntemplate<typename mint>\nmint\
+    \ fact(int n){\n  static constexpr int mod = mint::get_mod();\n  assert(0 <= n);\n\
+    \  if(n >= mod) return 0;\n  return get<0>(get_factorial_data<mint>(n));\n}\n\n\
+    template<typename mint>\nmint fact_inv(int n){\n  static constexpr int mod = mint::get_mod();\n\
+    \  assert(0 <= n && n < mod);\n  return get<1>(get_factorial_data<mint>(n));\n\
+    }\n\ntemplate<typename mint>\nmint inv(int n){\n  static constexpr int mod = mint::get_mod();\n\
+    \  assert(0 <= n && n < mod);\n  return get<2>(get_factorial_data<mint>(n));\n\
+    }\n\ntemplate<typename mint>\nmint C(ll n, ll k, bool large = false) {\n  assert(n\
+    \ >= 0);\n  if (k < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n)\
+    \ * fact_inv<mint>(k) * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n\
+    \  FOR(i, k) {\n    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return\
+    \ x;\n}\n\nusing modint107 = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n\
     using amint = ArbitraryModInt;\n#line 2 \"polynomial/convolution.hpp\"\ntemplate\
     \ <class T>\r\nvector<T> convolution_naive(const vector<T>& a, const vector<T>&\
     \ b) {\r\n  int n = int(a.size()), m = int(b.size());\r\n  vector<T> ans(n + m\
@@ -331,8 +331,8 @@ data:
   isVerificationFile: false
   path: graph/tree_all_distances.hpp
   requiredBy: []
-  timestamp: '2022-01-07 01:39:05+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-01-07 02:54:29+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
 documentation_of: graph/tree_all_distances.hpp
