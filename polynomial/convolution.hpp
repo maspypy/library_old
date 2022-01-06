@@ -173,8 +173,13 @@ vector<mint> convolution_ntt(vector<mint> a, vector<mint> b) {
   int sz = 1;
   while (sz < n + m - 1) sz *= 2;
   a.resize(sz), b.resize(sz);
+  bool same = a == b;
   ntt(a, false);
-  ntt(b, false);
+  if(same){
+    b = a;
+  } else {
+    ntt(b, false);
+  }
   FOR(i, sz) a[i] *= b[i];
   ntt(a, true);
   a.resize(n + m - 1);
