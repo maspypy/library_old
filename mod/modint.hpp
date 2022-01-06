@@ -148,59 +148,60 @@ struct ArbitraryModInt {
   }
 };
 
-template <typename T>
-struct ModCalc {
-  vector<T> _fact = {1, 1};
-  vector<T> _fact_inv = {1, 1};
-  vector<T> _inv = {0, 1};
+template<typename mint>
+tuple<mint, mint, mint> get_factorial_data(int n){
+  static constexpr int mod = mint::get_mod();
+  assert(0 <= n && n < mod);
 
-  T pow(T a, int n) {
-    T x(1);
-    while (n) {
-      if (n & 1) x *= a;
-      a *= a;
-      n >>= 1;
-    }
-    return x;
+  vector<mint> fact = {1, 1};
+  vector<mint> fact_inv = {1, 1};
+  vector<mint> inv = {0, 1};
+  while(len(fact) <= n){
+    int k = len(fact);
+    fact.eb(fact[k - 1] * mint(k));
+    auto q = ceil(mod, k);
+    int r = k * q - mod;
+    inv.eb(inv[r] * mint(q));
+    fact_inv.eb(fact_inv[k - 1] * inv[k]);
   }
-  void expand(int n) {
-    while (_fact.size() <= n) {
-      auto i = _fact.size();
-      _fact.eb(_fact[i - 1] * T(i));
-      auto q = T::get_mod() / i, r = T::get_mod() % i;
-      _inv.eb(_inv[r] * T(T::get_mod() - q));
-      _fact_inv.eb(_fact_inv[i - 1] * _inv[i]);
-    }
-  }
+  return {fact[n], fact_inv[n], inv[n]};
+}
 
-  T fact(int n) {
-    if (n >= _fact.size()) expand(n);
-    return _fact[n];
-  }
+template<typename mint>
+mint fact(int n){
+  static constexpr int mod = mint::get_mod();
+  assert(0 <= n);
+  if(n >= mod) return 0;
+  return get<0>(get_factorial_data<mint>(n));
+}
 
-  T fact_inv(int n) {
-    if (n >= _fact.size()) expand(n);
-    return _fact_inv[n];
-  }
+template<typename mint>
+mint fact_inv(int n){
+  static constexpr int mod = mint::get_mod();
+  assert(0 <= n && n < mod);
+  return get<1>(get_factorial_data<mint>(n));
+}
 
-  T inv(int n) {
-    if (n >= _fact.size()) expand(n);
-    return _inv[n];
-  }
+template<typename mint>
+mint inv(int n){
+  static constexpr int mod = mint::get_mod();
+  assert(0 <= n && n < mod);
+  return get<1>(get_factorial_data<mint>(n));
+}
 
-  T C(ll n, ll k, bool large = false) {
-    assert(n >= 0);
-    if (k < 0 || n < k) return 0;
-    if (!large) return fact(n) * fact_inv(k) * fact_inv(n - k);
-    k = min(k, n - k);
-    T x(1);
-    FOR(i, k) {
-      x *= n - i;
-      x *= inv(i + 1);
-    }
-    return x;
+template<typename mint>
+mint C(ll n, ll k, bool large = false) {
+  assert(n >= 0);
+  if (k < 0 || n < k) return 0;
+  if (!large) return fact<mint>(n) * fact_inv<mint>(k) * fact_inv<mint>(n - k);
+  k = min(k, n - k);
+  mint x(1);
+  FOR(i, k) {
+    x *= mint(n - i);
   }
-};
+  x *= fact_inv<mint>(k);
+  return x;
+}
 
 using modint107 = modint<1'000'000'007>;
 using modint998 = modint<998'244'353>;
