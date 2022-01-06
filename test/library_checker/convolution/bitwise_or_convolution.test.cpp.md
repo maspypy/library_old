@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   - icon: ':heavy_check_mark:'
@@ -180,9 +180,11 @@ data:
     \ >= 0);\n  if (k < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n)\
     \ * fact_inv<mint>(k) * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n\
     \  FOR(i, k) {\n    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return\
-    \ x;\n}\n\nusing modint107 = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n\
-    using amint = ArbitraryModInt;\n#line 2 \"setfunc/zeta.hpp\"\n\r\ntemplate <typename\
-    \ T>\r\nvoid superset_zeta(vc<T>& A) {\r\n  int log = topbit(len(A));\r\n  assert(1\
+    \ x;\n}\n\ntemplate<typename mint>\nvc<mint> power_table(mint a, ll N) {\n  vc<mint>\
+    \ f(N, 1);\n  FOR(i, N - 1) f[i + 1] = a * f[i];\n  return f;\n}\n\nusing modint107\
+    \ = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\nusing amint\
+    \ = ArbitraryModInt;\n#line 2 \"setfunc/zeta.hpp\"\n\r\ntemplate <typename T>\r\
+    \nvoid superset_zeta(vc<T>& A) {\r\n  int log = topbit(len(A));\r\n  assert(1\
     \ << log == len(A));\r\n  FOR(n, log) FOR(s, 1 << log) {\r\n    int t = s ^ (1\
     \ << n);\r\n    if (s < t) A[s] += A[t];\r\n  }\r\n}\r\n\r\ntemplate <typename\
     \ T>\r\nvoid superset_mobius(vc<T>& A) {\r\n  int log = topbit(len(A));\r\n  assert(1\
@@ -220,7 +222,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/convolution/bitwise_or_convolution.test.cpp
   requiredBy: []
-  timestamp: '2022-01-07 02:54:29+09:00'
+  timestamp: '2022-01-07 04:48:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/convolution/bitwise_or_convolution.test.cpp
