@@ -3,6 +3,7 @@
 template <typename mint>
 vc<mint> fps_inv(vc<mint>& F) {
   vc<mint> G = {mint(1) / F[0]};
+  G.reserve(len(F));
   ll N = len(F), n = 1;
   while (n < N) {
     vc<mint> f(2 * n), g(2 * n);
