@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: polynomial/fps_inv.hpp
     title: polynomial/fps_inv.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: polynomial/fps_log.hpp
     title: polynomial/fps_log.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/log_of_formal_power_series
@@ -332,18 +332,18 @@ data:
     \n  if (!n || !m) return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a,\
     \ b);\r\n  return convolution_garner(a, b);\r\n}\r\n#line 2 \"polynomial/fps_inv.hpp\"\
     \n\r\ntemplate <typename mint>\r\nvc<mint> fps_inv(vc<mint>& F) {\r\n  vc<mint>\
-    \ G = {mint(1) / F[0]};\r\n  ll N = len(F), n = 1;\r\n  while (n < N) {\r\n  \
-    \  vc<mint> f(2 * n), g(2 * n);\r\n    FOR(i, min(N, 2 * n)) f[i] = F[i];\r\n\
-    \    FOR(i, n) g[i] = G[i];\r\n    ntt(f, false);\r\n    ntt(g, false);\r\n  \
-    \  FOR(i, 2 * n) f[i] *= g[i];\r\n    ntt(f, true);\r\n    FOR(i, n) f[i] = 0;\r\
-    \n    ntt(f, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\n    ntt(f, true);\r\
-    \n    mint c = mint(-1) / mint(4 * n * n);\r\n    FOR3(i, n, 2 * n) G.eb(f[i]\
-    \ * c);\r\n    n *= 2;\r\n  }\r\n  G.resize(N);\r\n  return G;\r\n}\r\n#line 2\
-    \ \"polynomial/fps_log.hpp\"\n\r\ntemplate <typename mint>\r\nvc<mint> fps_log(vc<mint>&\
-    \ f) {\r\n  ll N = len(f);\r\n  vc<mint> df = f;\r\n  FOR(i, N) df[i] *= mint(i);\r\
-    \n  df.erase(df.begin());\r\n  auto f_inv = fps_inv(f);\r\n  f = convolution(df,\
-    \ f_inv);\r\n  f.resize(N - 1);\r\n  f.insert(f.begin(), 0);\r\n  FOR(i, N) f[i]\
-    \ *= inv<mint>(i);\r\n  return f;\r\n}\r\n#line 6 \"test/library_checker/polynomial/log_of_fps.test.cpp\"\
+    \ G = {mint(1) / F[0]};\r\n  G.reserve(len(F));\r\n  ll N = len(F), n = 1;\r\n\
+    \  while (n < N) {\r\n    vc<mint> f(2 * n), g(2 * n);\r\n    FOR(i, min(N, 2\
+    \ * n)) f[i] = F[i];\r\n    FOR(i, n) g[i] = G[i];\r\n    ntt(f, false);\r\n \
+    \   ntt(g, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\n    ntt(f, true);\r\n\
+    \    FOR(i, n) f[i] = 0;\r\n    ntt(f, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\
+    \n    ntt(f, true);\r\n    mint c = mint(-1) / mint(4 * n * n);\r\n    FOR3(i,\
+    \ n, 2 * n) G.eb(f[i] * c);\r\n    n *= 2;\r\n  }\r\n  G.resize(N);\r\n  return\
+    \ G;\r\n}\r\n#line 2 \"polynomial/fps_log.hpp\"\n\r\ntemplate <typename mint>\r\
+    \nvc<mint> fps_log(vc<mint>& f) {\r\n  ll N = len(f);\r\n  vc<mint> df = f;\r\n\
+    \  FOR(i, N) df[i] *= mint(i);\r\n  df.erase(df.begin());\r\n  auto f_inv = fps_inv(f);\r\
+    \n  f = convolution(df, f_inv);\r\n  f.resize(N - 1);\r\n  f.insert(f.begin(),\
+    \ 0);\r\n  FOR(i, N) f[i] *= inv<mint>(i);\r\n  return f;\r\n}\r\n#line 6 \"test/library_checker/polynomial/log_of_fps.test.cpp\"\
     \n\r\nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N);\r\n  VEC(mint,\
     \ f, N);\r\n  auto ANS = fps_log(f);\r\n  print(ANS);\r\n}\r\n\r\nsigned main()\
     \ {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
@@ -363,8 +363,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/polynomial/log_of_fps.test.cpp
   requiredBy: []
-  timestamp: '2022-01-07 02:54:39+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-01-07 03:49:33+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/polynomial/log_of_fps.test.cpp
 layout: document

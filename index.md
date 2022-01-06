@@ -228,12 +228,12 @@ data:
       title: matrix/matrix.hpp
   - name: mod
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: mod/modint.hpp
       title: mod/modint.hpp
   - name: .
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: my_template.hpp
       title: my_template.hpp
     - icon: ':warning:'
@@ -292,7 +292,7 @@ data:
       title: persistent_ds/unionfind.hpp
   - name: polynomial
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: polynomial/convolution.hpp
       title: polynomial/convolution.hpp
     - icon: ':heavy_check_mark:'
@@ -301,10 +301,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: polynomial/convolution_mod_2_64.hpp
       title: polynomial/convolution_mod_2_64.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: polynomial/fps_inv.hpp
       title: polynomial/fps_inv.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: polynomial/fps_log.hpp
       title: polynomial/fps_log.hpp
     - icon: ':heavy_check_mark:'
@@ -538,7 +538,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/inv_of_fps.test.cpp
       title: test/library_checker/polynomial/inv_of_fps.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/log_of_fps.test.cpp
       title: test/library_checker/polynomial/log_of_fps.test.cpp
   - name: test/library_checker/string
