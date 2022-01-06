@@ -49,6 +49,9 @@ data:
     path: test/library_checker/convolution/bitwise_xor_convolution.test.cpp
     title: test/library_checker/convolution/bitwise_xor_convolution.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/library_checker/convolution/contolution_mod_2_64.test.cpp
+    title: test/library_checker/convolution/contolution_mod_2_64.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/convolution/convolution_mod.test.cpp
     title: test/library_checker/convolution/convolution_mod.test.cpp
   - icon: ':heavy_check_mark:'
@@ -394,6 +397,7 @@ data:
   - test/library_checker/convolution/bitwise_or_convolution.test.cpp
   - test/library_checker/convolution/convolution_mod_107_amint.test.cpp
   - test/library_checker/convolution/convolution_mod.test.cpp
+  - test/library_checker/convolution/contolution_mod_2_64.test.cpp
   - test/library_checker/graph/cycle_detection.test.cpp
   - test/library_checker/graph/maximum_independent_set.test.cpp
   - test/library_checker/graph/chromatic_number.test.cpp

@@ -190,31 +190,20 @@ data:
     \ rank2 + 1> root;\r\n  array<mint, rank2 + 1> iroot;\r\n  array<mint, max(0,\
     \ rank2 - 1)> rate2;\r\n  array<mint, max(0, rank2 - 1)> irate2;\r\n  array<mint,\
     \ max(0, rank2 - 2)> rate3;\r\n  array<mint, max(0, rank2 - 2)> irate3;\r\n\r\n\
-    \  fft_info() {\r\n    int g = primitive_root_constexpr(mint::get_mod());\r\n\
-    \    root[rank2] = mint(g).pow((mint::get_mod() - 1) >> rank2);\r\n    iroot[rank2]\
-    \ = mint(1) / root[rank2];\r\n    FOR_R(i, rank2) {\r\n      root[i] = root[i\
-    \ + 1] * root[i + 1];\r\n      iroot[i] = iroot[i + 1] * iroot[i + 1];\r\n   \
-    \ }\r\n\r\n    {\r\n      mint prod = 1, iprod = 1;\r\n      for (int i = 0; i\
-    \ <= rank2 - 2; i++) {\r\n        rate2[i] = root[i + 2] * prod;\r\n        irate2[i]\
-    \ = iroot[i + 2] * iprod;\r\n        prod *= iroot[i + 2];\r\n        iprod *=\
-    \ root[i + 2];\r\n      }\r\n    }\r\n    {\r\n      mint prod = 1, iprod = 1;\r\
-    \n      for (int i = 0; i <= rank2 - 3; i++) {\r\n        rate3[i] = root[i +\
-    \ 3] * prod;\r\n        irate3[i] = iroot[i + 3] * iprod;\r\n        prod *= iroot[i\
-    \ + 3];\r\n        iprod *= root[i + 3];\r\n      }\r\n    }\r\n  }\r\n\r\n  constexpr\
-    \ int primitive_root_constexpr(int m) {\r\n    if (m == 2) return 1;\r\n    if\
-    \ (m == 167772161) return 3;\r\n    if (m == 469762049) return 3;\r\n    if (m\
-    \ == 754974721) return 11;\r\n    if (m == 998244353) return 3;\r\n    int divs[20]\
-    \ = {};\r\n    divs[0] = 2;\r\n    int cnt = 1;\r\n    int x = (m - 1) / 2;\r\n\
-    \    while (x % 2 == 0) x /= 2;\r\n    for (int i = 3; (long long)(i)*i <= x;\
-    \ i += 2) {\r\n      if (x % i == 0) {\r\n        divs[cnt++] = i;\r\n       \
-    \ while (x % i == 0) { x /= i; }\r\n      }\r\n    }\r\n    if (x > 1) { divs[cnt++]\
-    \ = x; }\r\n    for (int g = 2;; g++) {\r\n      bool ok = true;\r\n      for\
-    \ (int i = 0; i < cnt; i++) {\r\n        if (pow_mod(g, (m - 1) / divs[i], m)\
-    \ == 1) {\r\n          ok = false;\r\n          break;\r\n        }\r\n      }\r\
-    \n      if (ok) return g;\r\n    }\r\n  }\r\n  constexpr long long pow_mod(long\
-    \ long x, long long n, int m) {\r\n    if (m == 1) return 0;\r\n    ll v = 1;\r\
-    \n    while (n) {\r\n      if (n & 1) v = (v * x) % m;\r\n      x = (x * x) %\
-    \ m;\r\n      n >>= 1;\r\n    }\r\n    return v;\r\n  }\r\n};\r\n\r\ntemplate\
+    \  fft_info() {\r\n    int g = primitive_root(mint::get_mod());\r\n    root[rank2]\
+    \ = mint(g).pow((mint::get_mod() - 1) >> rank2);\r\n    iroot[rank2] = mint(1)\
+    \ / root[rank2];\r\n    FOR_R(i, rank2) {\r\n      root[i] = root[i + 1] * root[i\
+    \ + 1];\r\n      iroot[i] = iroot[i + 1] * iroot[i + 1];\r\n    }\r\n\r\n    {\r\
+    \n      mint prod = 1, iprod = 1;\r\n      for (int i = 0; i <= rank2 - 2; i++)\
+    \ {\r\n        rate2[i] = root[i + 2] * prod;\r\n        irate2[i] = iroot[i +\
+    \ 2] * iprod;\r\n        prod *= iroot[i + 2];\r\n        iprod *= root[i + 2];\r\
+    \n      }\r\n    }\r\n    {\r\n      mint prod = 1, iprod = 1;\r\n      for (int\
+    \ i = 0; i <= rank2 - 3; i++) {\r\n        rate3[i] = root[i + 3] * prod;\r\n\
+    \        irate3[i] = iroot[i + 3] * iprod;\r\n        prod *= iroot[i + 3];\r\n\
+    \        iprod *= root[i + 3];\r\n      }\r\n    }\r\n  }\r\n\r\n  constexpr int\
+    \ primitive_root(int m) {\r\n    if (m == 167772161) return 3;\r\n    if (m ==\
+    \ 469762049) return 3;\r\n    if (m == 754974721) return 11;\r\n    if (m == 880803841)\
+    \ return 26;\r\n    if (m == 998244353) return 3;\r\n  }\r\n};\r\n\r\ntemplate\
     \ <class mint>\r\nvoid ntt(vector<mint>& a, bool inverse) {\r\n  int n = int(a.size());\r\
     \n  int h = topbit(n);\r\n  assert(n == 1 << h);\r\n  static const fft_info<mint>\
     \ info;\r\n  if (!inverse) {\r\n    int len = 0; // a[i, i+(n>>len), i+2*(n>>len),\
@@ -376,7 +365,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
   requiredBy: []
-  timestamp: '2022-01-06 10:16:41+09:00'
+  timestamp: '2022-01-06 11:13:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
