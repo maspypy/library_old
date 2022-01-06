@@ -12,6 +12,9 @@ data:
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
   - icon: ':heavy_check_mark:'
+    path: polynomial/convolution_huge.hpp
+    title: polynomial/convolution_huge.hpp
+  - icon: ':heavy_check_mark:'
     path: polynomial/convolution_mod_2_64.hpp
     title: polynomial/convolution_mod_2_64.hpp
   - icon: ':heavy_check_mark:'
@@ -33,6 +36,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/convolution/contolution_mod_2_64.test.cpp
     title: test/library_checker/convolution/contolution_mod_2_64.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/convolution/convolution_huge.test.cpp
+    title: test/library_checker/convolution/convolution_huge.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/convolution/convolution_mod.test.cpp
     title: test/library_checker/convolution/convolution_mod.test.cpp
@@ -232,6 +238,7 @@ data:
   requiredBy:
   - graph/tree_all_distances.hpp
   - polynomial/convolution.hpp
+  - polynomial/convolution_huge.hpp
   - polynomial/multivar_convolution.hpp
   - polynomial/convolution_mod_2_64.hpp
   - sequence/linearrecurrence.hpp
@@ -248,6 +255,7 @@ data:
   - test/library_checker/convolution/subset_convolution_multivar.test.cpp
   - test/library_checker/convolution/bitwise_or_convolution.test.cpp
   - test/library_checker/convolution/convolution_mod_107_amint.test.cpp
+  - test/library_checker/convolution/convolution_huge.test.cpp
   - test/library_checker/convolution/convolution_mod.test.cpp
   - test/library_checker/convolution/contolution_mod_2_64.test.cpp
   - test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
