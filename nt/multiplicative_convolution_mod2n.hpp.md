@@ -18,29 +18,61 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n\
-    \  int val;\n\n  constexpr modint(const ll val = 0) noexcept\n      : val(val\
-    \ >= 0 ? val % mod : (mod - (-val) % mod) % mod) {}\n\n  bool operator<(const\
-    \ modint &other) const {\n    return val < other.val;\n  } // To use std::map\n\
-    \n  modint &operator+=(const modint &p) {\n    if ((val += p.val) >= mod) val\
-    \ -= mod;\n    return *this;\n  }\n  modint &operator-=(const modint &p) {\n \
-    \   if ((val += mod - p.val) >= mod) val -= mod;\n    return *this;\n  }\n  modint\
-    \ &operator*=(const modint &p) {\n    val = (int)(1LL * val * p.val % mod);\n\
-    \    return *this;\n  }\n  modint &operator/=(const modint &p) {\n    *this *=\
-    \ p.inverse();\n    return *this;\n  }\n  modint operator-() const { return modint(-val);\
-    \ }\n  modint operator+(const modint &p) const { return modint(*this) += p; }\n\
-    \  modint operator-(const modint &p) const { return modint(*this) -= p; }\n  modint\
-    \ operator*(const modint &p) const { return modint(*this) *= p; }\n  modint operator/(const\
-    \ modint &p) const { return modint(*this) /= p; }\n  bool operator==(const modint\
-    \ &p) const { return val == p.val; }\n  bool operator!=(const modint &p) const\
-    \ { return val != p.val; }\n\n  modint inverse() const {\n    int a = val, b =\
-    \ mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -=\
-    \ t * b, b);\n      swap(u -= t * v, v);\n    }\n    return modint(u);\n  }\n\n\
-    \  modint pow(int64_t n) const {\n    modint ret(1), mul(val);\n    while (n >\
-    \ 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n\
-    \    return ret;\n  }\n\n  friend ostream &operator<<(ostream &os, const modint\
-    \ &p) { return os << p.val; }\n  friend istream &operator>>(istream &is, modint\
-    \ &a) {\n    int64_t t;\n    is >> t;\n    a = modint(t);\n    return (is);\n\
-    \  }\n  static constexpr int get_mod() { return mod; }\n};\n\ntemplate <typename\
+    \  static constexpr bool is_static = true;\n  int val;\n\n  constexpr modint(const\
+    \ ll val = 0) noexcept\n      : val(val >= 0 ? val % mod : (mod - (-val) % mod)\
+    \ % mod) {}\n\n  bool operator<(const modint &other) const {\n    return val <\
+    \ other.val;\n  } // To use std::map\n\n  modint &operator+=(const modint &p)\
+    \ {\n    if ((val += p.val) >= mod) val -= mod;\n    return *this;\n  }\n  modint\
+    \ &operator-=(const modint &p) {\n    if ((val += mod - p.val) >= mod) val -=\
+    \ mod;\n    return *this;\n  }\n  modint &operator*=(const modint &p) {\n    val\
+    \ = (int)(1LL * val * p.val % mod);\n    return *this;\n  }\n  modint &operator/=(const\
+    \ modint &p) {\n    *this *= p.inverse();\n    return *this;\n  }\n  modint operator-()\
+    \ const { return modint(-val); }\n  modint operator+(const modint &p) const {\
+    \ return modint(*this) += p; }\n  modint operator-(const modint &p) const { return\
+    \ modint(*this) -= p; }\n  modint operator*(const modint &p) const { return modint(*this)\
+    \ *= p; }\n  modint operator/(const modint &p) const { return modint(*this) /=\
+    \ p; }\n  bool operator==(const modint &p) const { return val == p.val; }\n  bool\
+    \ operator!=(const modint &p) const { return val != p.val; }\n\n  modint inverse()\
+    \ const {\n    int a = val, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n \
+    \     t = a / b;\n      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n   \
+    \ }\n    return modint(u);\n  }\n\n  modint pow(int64_t n) const {\n    modint\
+    \ ret(1), mul(val);\n    while (n > 0) {\n      if (n & 1) ret *= mul;\n     \
+    \ mul *= mul;\n      n >>= 1;\n    }\n    return ret;\n  }\n\n  friend ostream\
+    \ &operator<<(ostream &os, const modint &p) {\n    return os << p.val;\n  }\n\
+    \  friend istream &operator>>(istream &is, modint &a) {\n    int64_t t;\n    is\
+    \ >> t;\n    a = modint(t);\n    return (is);\n  }\n  static constexpr int get_mod()\
+    \ { return mod; }\n};\n\nstruct ArbitraryModInt {\n  int val;\n  ArbitraryModInt()\
+    \ : val(0) {}\n  ArbitraryModInt(int64_t y)\n      : val(y >= 0 ? y % get_mod()\n\
+    \                   : (get_mod() - (-y) % get_mod()) % get_mod()) {}\n\n  bool\
+    \ operator<(const ArbitraryModInt &other) const {\n    return val < other.val;\n\
+    \  } // To use std::map<ArbitraryModInt, T>\n\n  static int &get_mod() {\n   \
+    \ static int mod = 0;\n    return mod;\n  }\n  static void set_mod(int md) { get_mod()\
+    \ = md; }\n  ArbitraryModInt &operator+=(const ArbitraryModInt &p) {\n    if ((val\
+    \ += p.val) >= get_mod()) val -= get_mod();\n    return *this;\n  }\n  ArbitraryModInt\
+    \ &operator-=(const ArbitraryModInt &p) {\n    if ((val += get_mod() - p.val)\
+    \ >= get_mod()) val -= get_mod();\n    return *this;\n  }\n  ArbitraryModInt &operator*=(const\
+    \ ArbitraryModInt &p) {\n    unsigned long long a = (unsigned long long)val *\
+    \ p.val;\n    unsigned xh = (unsigned)(a >> 32), xl = (unsigned)a, d, m;\n   \
+    \ asm(\"divl %4; \\n\\t\" : \"=a\"(d), \"=d\"(m) : \"d\"(xh), \"a\"(xl), \"r\"\
+    (get_mod()));\n    val = m;\n    return *this;\n  }\n  ArbitraryModInt &operator/=(const\
+    \ ArbitraryModInt &p) {\n    *this *= p.inverse();\n    return *this;\n  }\n \
+    \ ArbitraryModInt operator-() const { return ArbitraryModInt(-val); }\n  ArbitraryModInt\
+    \ operator+(const ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this)\
+    \ += p;\n  }\n  ArbitraryModInt operator-(const ArbitraryModInt &p) const {\n\
+    \    return ArbitraryModInt(*this) -= p;\n  }\n  ArbitraryModInt operator*(const\
+    \ ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this) *= p;\n  }\n\n\
+    \  ArbitraryModInt operator/(const ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this)\
+    \ /= p;\n  }\n\n  bool operator==(const ArbitraryModInt &p) const { return val\
+    \ == p.val; }\n  bool operator!=(const ArbitraryModInt &p) const { return val\
+    \ != p.val; }\n  ArbitraryModInt inverse() const {\n    int a = val, b = get_mod(),\
+    \ u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -= t *\
+    \ b, b);\n      swap(u -= t * v, v);\n    }\n    return ArbitraryModInt(u);\n\
+    \  }\n  ArbitraryModInt pow(int64_t n) const {\n    ArbitraryModInt ret(1), mul(val);\n\
+    \    while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n\
+    \ >>= 1;\n    }\n    return ret;\n  }\n  friend ostream &operator<<(ostream &os,\
+    \ const ArbitraryModInt &p) {\n    return os << p.val;\n  }\n  friend istream\
+    \ &operator>>(istream &is, ArbitraryModInt &a) {\n    int64_t t;\n    is >> t;\n\
+    \    a = ArbitraryModInt(t);\n    return (is);\n  }\n};\n\ntemplate <typename\
     \ T>\nstruct ModCalc {\n  vector<T> _fact = {1, 1};\n  vector<T> _fact_inv = {1,\
     \ 1};\n  vector<T> _inv = {0, 1};\n\n  T pow(T a, int n) {\n    T x(1);\n    while\
     \ (n) {\n      if (n & 1) x *= a;\n      a *= a;\n      n >>= 1;\n    }\n    return\
@@ -55,20 +87,20 @@ data:
     \ < 0 || n < k) return 0;\n    if (!large) return fact(n) * fact_inv(k) * fact_inv(n\
     \ - k);\n    k = min(k, n - k);\n    T x(1);\n    FOR(i, k) {\n      x *= n -\
     \ i;\n      x *= inv(i + 1);\n    }\n    return x;\n  }\n};\n\nusing modint107\
-    \ = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n#line 2 \"\
-    polynomial/convolution.hpp\"\ntemplate <class T>\r\nvector<T> convolution_naive(const\
-    \ vector<T>& a, const vector<T>& b) {\r\n  int n = int(a.size()), m = int(b.size());\r\
-    \n  vector<T> ans(n + m - 1);\r\n  if (n < m) {\r\n    FOR(j, m) FOR(i, n) ans[i\
-    \ + j] += a[i] * b[j];\r\n  } else {\r\n    FOR(i, n) FOR(j, m) ans[i + j] +=\
-    \ a[i] * b[j];\r\n  }\r\n  return ans;\r\n}\r\n\r\ntemplate <class mint>\r\nstruct\
-    \ fft_info {\r\n  static constexpr int bsf_constexpr(unsigned int n) {\r\n   \
-    \ int x = 0;\r\n    while (!(n & (1 << x))) x++;\r\n    return x;\r\n  }\r\n\r\
-    \n  static constexpr int rank2 = bsf_constexpr(mint::get_mod() - 1);\r\n  array<mint,\
-    \ rank2 + 1> root;\r\n  array<mint, rank2 + 1> iroot;\r\n  array<mint, max(0,\
-    \ rank2 - 1)> rate2;\r\n  array<mint, max(0, rank2 - 1)> irate2;\r\n  array<mint,\
-    \ max(0, rank2 - 2)> rate3;\r\n  array<mint, max(0, rank2 - 2)> irate3;\r\n\r\n\
-    \  fft_info() {\r\n    int g = primitive_root_constexpr(mint::get_mod());\r\n\
-    \    root[rank2] = mint(g).pow((mint::get_mod() - 1) >> rank2);\r\n    iroot[rank2]\
+    \ = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\nusing amint\
+    \ = ArbitraryModInt;\n#line 2 \"polynomial/convolution.hpp\"\ntemplate <class\
+    \ T>\r\nvector<T> convolution_naive(const vector<T>& a, const vector<T>& b) {\r\
+    \n  int n = int(a.size()), m = int(b.size());\r\n  vector<T> ans(n + m - 1);\r\
+    \n  if (n < m) {\r\n    FOR(j, m) FOR(i, n) ans[i + j] += a[i] * b[j];\r\n  }\
+    \ else {\r\n    FOR(i, n) FOR(j, m) ans[i + j] += a[i] * b[j];\r\n  }\r\n  return\
+    \ ans;\r\n}\r\n\r\ntemplate <class mint>\r\nstruct fft_info {\r\n  static constexpr\
+    \ int bsf_constexpr(unsigned int n) {\r\n    int x = 0;\r\n    while (!(n & (1\
+    \ << x))) x++;\r\n    return x;\r\n  }\r\n\r\n  static constexpr int rank2 = bsf_constexpr(mint::get_mod()\
+    \ - 1);\r\n  array<mint, rank2 + 1> root;\r\n  array<mint, rank2 + 1> iroot;\r\
+    \n  array<mint, max(0, rank2 - 1)> rate2;\r\n  array<mint, max(0, rank2 - 1)>\
+    \ irate2;\r\n  array<mint, max(0, rank2 - 2)> rate3;\r\n  array<mint, max(0, rank2\
+    \ - 2)> irate3;\r\n\r\n  fft_info() {\r\n    int g = primitive_root_constexpr(mint::get_mod());\r\
+    \n    root[rank2] = mint(g).pow((mint::get_mod() - 1) >> rank2);\r\n    iroot[rank2]\
     \ = mint(1) / root[rank2];\r\n    FOR_R(i, rank2) {\r\n      root[i] = root[i\
     \ + 1] * root[i + 1];\r\n      iroot[i] = iroot[i + 1] * iroot[i + 1];\r\n   \
     \ }\r\n\r\n    {\r\n      mint prod = 1, iprod = 1;\r\n      for (int i = 0; i\
@@ -164,63 +196,64 @@ data:
     \ + 1LL * nttprimes[0] * v1 + m01 % mod * v2.val);\r\n  };\r\n  vc<mint> c(len(c0));\r\
     \n  FOR(i, len(c)) c[i] = garner(c0[i], c1[i], c2[i]);\r\n  return c;\r\n}\r\n\
     \r\nnamespace CFFT {\r\nusing real = double;\r\n\r\nstruct C {\r\n  real x, y;\r\
-    \n\r\n  C() : x(0), y(0) {}\r\n\r\n  C(real x, real y) : x(x), y(y) {}\r\n\r\n\
-    \  inline C operator+(const C& c) const { return C(x + c.x, y + c.y); }\r\n\r\n\
-    \  inline C operator-(const C& c) const { return C(x - c.x, y - c.y); }\r\n\r\n\
-    \  inline C operator*(const C& c) const {\r\n    return C(x * c.x - y * c.y, x\
-    \ * c.y + y * c.x);\r\n  }\r\n\r\n  inline C conj() const { return C(x, -y); }\r\
-    \n};\r\n\r\nconst real PI = acosl(-1);\r\nint base = 1;\r\nvector<C> rts = {{0,\
-    \ 0}, {1, 0}};\r\nvector<int> rev = {0, 1};\r\n\r\nvoid ensure_base(int nbase)\
-    \ {\r\n  if (nbase <= base) return;\r\n  rev.resize(1 << nbase);\r\n  rts.resize(1\
-    \ << nbase);\r\n  for (int i = 0; i < (1 << nbase); i++) {\r\n    rev[i] = (rev[i\
-    \ >> 1] >> 1) + ((i & 1) << (nbase - 1));\r\n  }\r\n  while (base < nbase) {\r\
-    \n    real angle = PI * 2.0 / (1 << (base + 1));\r\n    for (int i = 1 << (base\
-    \ - 1); i < (1 << base); i++) {\r\n      rts[i << 1] = rts[i];\r\n      real angle_i\
-    \ = angle * (2 * i + 1 - (1 << base));\r\n      rts[(i << 1) + 1] = C(cos(angle_i),\
-    \ sin(angle_i));\r\n    }\r\n    ++base;\r\n  }\r\n}\r\n\r\nvoid fft(vector<C>&\
-    \ a, int n) {\r\n  assert((n & (n - 1)) == 0);\r\n  int zeros = __builtin_ctz(n);\r\
-    \n  ensure_base(zeros);\r\n  int shift = base - zeros;\r\n  for (int i = 0; i\
-    \ < n; i++) {\r\n    if (i < (rev[i] >> shift)) { swap(a[i], a[rev[i] >> shift]);\
-    \ }\r\n  }\r\n  for (int k = 1; k < n; k <<= 1) {\r\n    for (int i = 0; i < n;\
-    \ i += 2 * k) {\r\n      for (int j = 0; j < k; j++) {\r\n        C z = a[i +\
-    \ j + k] * rts[j + k];\r\n        a[i + j + k] = a[i + j] - z;\r\n        a[i\
-    \ + j] = a[i + j] + z;\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\ntemplate <typename\
-    \ R>\r\nvc<double> convolution_fft(const vc<R>& a, const vc<R>& b) {\r\n  int\
-    \ need = (int)a.size() + (int)b.size() - 1;\r\n  int nbase = 1;\r\n  while ((1\
-    \ << nbase) < need) nbase++;\r\n  ensure_base(nbase);\r\n  int sz = 1 << nbase;\r\
-    \n  vector<C> fa(sz);\r\n  for (int i = 0; i < sz; i++) {\r\n    int x = (i <\
-    \ (int)a.size() ? a[i] : 0);\r\n    int y = (i < (int)b.size() ? b[i] : 0);\r\n\
-    \    fa[i] = C(x, y);\r\n  }\r\n  fft(fa, sz);\r\n  C r(0, -0.25 / (sz >> 1)),\
-    \ s(0, 1), t(0.5, 0);\r\n  for (int i = 0; i <= (sz >> 1); i++) {\r\n    int j\
-    \ = (sz - i) & (sz - 1);\r\n    C z = (fa[j] * fa[j] - (fa[i] * fa[i]).conj())\
-    \ * r;\r\n    fa[j] = (fa[i] * fa[i] - (fa[j] * fa[j]).conj()) * r;\r\n    fa[i]\
-    \ = z;\r\n  }\r\n  for (int i = 0; i < (sz >> 1); i++) {\r\n    C A0 = (fa[i]\
-    \ + fa[i + (sz >> 1)]) * t;\r\n    C A1 = (fa[i] - fa[i + (sz >> 1)]) * t * rts[(sz\
-    \ >> 1) + i];\r\n    fa[i] = A0 + A1 * s;\r\n  }\r\n  fft(fa, sz >> 1);\r\n  vector<double>\
-    \ ret(need);\r\n  for (int i = 0; i < need; i++) {\r\n    ret[i] = (i & 1 ? fa[i\
-    \ >> 1].y : fa[i >> 1].x);\r\n  }\r\n  return ret;\r\n}\r\n} // namespace CFFT\r\
-    \n\r\nvector<ll> convolution(vector<ll>& a, vector<ll>& b) {\r\n  int n = len(a),\
-    \ m = len(b);\r\n  if (!n || !m) return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a,\
-    \ b);\r\n  ll abs_sum_a = 0, abs_sum_b = 0;\r\n  FOR(i, n) abs_sum_a += abs(a[i]);\r\
-    \n  FOR(i, n) abs_sum_b += abs(b[i]);\r\n  assert(abs_sum_a * abs_sum_b < 1e15);\r\
-    \n  vc<double> c = CFFT::convolution_fft(a, b);\r\n  vc<ll> res(len(c));\r\n \
-    \ FOR(i, len(c)) res[i] = ll(floor(c[i] + .5));\r\n  return res;\r\n}\r\n\r\n\
-    template <typename mint>\r\nvector<mint> convolution(vector<mint>& a, vector<mint>&\
-    \ b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return {};\r\n  if\
-    \ (min(n, m) <= 60) return convolution_naive(a, b);\r\n  int mod = mint::get_mod();\r\
-    \n  if (mod == 167772161 || mod == 469762049 || mod == 754974721\r\n      || mod\
-    \ == 998244353) {\r\n    return convolution_ntt(a, b);\r\n  }\r\n  return convolution_garner(a,\
-    \ b);\r\n}\r\n#line 2 \"nt/multiplicative_convolution_mod2n.hpp\"\n\r\ntemplate\
-    \ <typename mint>\r\nvc<mint> multiplicative_convolution_mod2n(vc<mint>& A, vc<mint>&\
-    \ B){\r\n  int N = 0;\r\n  while((1<<N) < len(A)) ++N;\r\n  assert((1<<N) == len(A)\
-    \ && (1<<N) == len(B));\r\n  \r\n  int mask = (1 << N) - 1;\r\n\r\n  vc<vc<vc<mint>>>\
-    \ AA(N + 1);\r\n  vc<vc<vc<mint>>> BB(N + 1);\r\n  vc<vc<vc<mint>>> CC(N + 1);\r\
-    \n\r\n  auto shape = [&](int n) -> pair<int, int> {\r\n    int H = (N - n >= 2\
-    \ ? 2 : 1);\r\n    int W = 1 << max(N - n - 2, 0);\r\n    return {H, W};\r\n \
-    \ };\r\n\r\n  FOR(n, N + 1) {\r\n    // 2 \u3067 n \u56DE\u5272\u308C\u308B\u3068\
-    \u3053\u308D\r\n    auto [H, W] = shape(n);\r\n    AA[n].assign(H, vc<mint>(W));\r\
-    \n    BB[n].assign(H, vc<mint>(W));\r\n    CC[n].assign(H, vc<mint>(W));\r\n \
-    \   int x = (1 << n) & mask;\r\n    auto &a = AA[n], &b = BB[n];\r\n    FOR(j,\
+    \n\r\n  C() : x(0), y(0) {}\r\n\r\n  C(real x, real y) : x(x), y(y) {}\r\n  inline\
+    \ C operator+(const C& c) const { return C(x + c.x, y + c.y); }\r\n  inline C\
+    \ operator-(const C& c) const { return C(x - c.x, y - c.y); }\r\n  inline C operator*(const\
+    \ C& c) const {\r\n    return C(x * c.x - y * c.y, x * c.y + y * c.x);\r\n  }\r\
+    \n\r\n  inline C conj() const { return C(x, -y); }\r\n};\r\n\r\nconst real PI\
+    \ = acosl(-1);\r\nint base = 1;\r\nvector<C> rts = {{0, 0}, {1, 0}};\r\nvector<int>\
+    \ rev = {0, 1};\r\n\r\nvoid ensure_base(int nbase) {\r\n  if (nbase <= base) return;\r\
+    \n  rev.resize(1 << nbase);\r\n  rts.resize(1 << nbase);\r\n  for (int i = 0;\
+    \ i < (1 << nbase); i++) {\r\n    rev[i] = (rev[i >> 1] >> 1) + ((i & 1) << (nbase\
+    \ - 1));\r\n  }\r\n  while (base < nbase) {\r\n    real angle = PI * 2.0 / (1\
+    \ << (base + 1));\r\n    for (int i = 1 << (base - 1); i < (1 << base); i++) {\r\
+    \n      rts[i << 1] = rts[i];\r\n      real angle_i = angle * (2 * i + 1 - (1\
+    \ << base));\r\n      rts[(i << 1) + 1] = C(cos(angle_i), sin(angle_i));\r\n \
+    \   }\r\n    ++base;\r\n  }\r\n}\r\n\r\nvoid fft(vector<C>& a, int n) {\r\n  assert((n\
+    \ & (n - 1)) == 0);\r\n  int zeros = __builtin_ctz(n);\r\n  ensure_base(zeros);\r\
+    \n  int shift = base - zeros;\r\n  for (int i = 0; i < n; i++) {\r\n    if (i\
+    \ < (rev[i] >> shift)) { swap(a[i], a[rev[i] >> shift]); }\r\n  }\r\n  for (int\
+    \ k = 1; k < n; k <<= 1) {\r\n    for (int i = 0; i < n; i += 2 * k) {\r\n   \
+    \   for (int j = 0; j < k; j++) {\r\n        C z = a[i + j + k] * rts[j + k];\r\
+    \n        a[i + j + k] = a[i + j] - z;\r\n        a[i + j] = a[i + j] + z;\r\n\
+    \      }\r\n    }\r\n  }\r\n}\r\n\r\ntemplate <typename R>\r\nvc<double> convolution_fft(const\
+    \ vc<R>& a, const vc<R>& b) {\r\n  int need = (int)a.size() + (int)b.size() -\
+    \ 1;\r\n  int nbase = 1;\r\n  while ((1 << nbase) < need) nbase++;\r\n  ensure_base(nbase);\r\
+    \n  int sz = 1 << nbase;\r\n  vector<C> fa(sz);\r\n  for (int i = 0; i < sz; i++)\
+    \ {\r\n    int x = (i < (int)a.size() ? a[i] : 0);\r\n    int y = (i < (int)b.size()\
+    \ ? b[i] : 0);\r\n    fa[i] = C(x, y);\r\n  }\r\n  fft(fa, sz);\r\n  C r(0, -0.25\
+    \ / (sz >> 1)), s(0, 1), t(0.5, 0);\r\n  for (int i = 0; i <= (sz >> 1); i++)\
+    \ {\r\n    int j = (sz - i) & (sz - 1);\r\n    C z = (fa[j] * fa[j] - (fa[i] *\
+    \ fa[i]).conj()) * r;\r\n    fa[j] = (fa[i] * fa[i] - (fa[j] * fa[j]).conj())\
+    \ * r;\r\n    fa[i] = z;\r\n  }\r\n  for (int i = 0; i < (sz >> 1); i++) {\r\n\
+    \    C A0 = (fa[i] + fa[i + (sz >> 1)]) * t;\r\n    C A1 = (fa[i] - fa[i + (sz\
+    \ >> 1)]) * t * rts[(sz >> 1) + i];\r\n    fa[i] = A0 + A1 * s;\r\n  }\r\n  fft(fa,\
+    \ sz >> 1);\r\n  vector<double> ret(need);\r\n  for (int i = 0; i < need; i++)\
+    \ {\r\n    ret[i] = (i & 1 ? fa[i >> 1].y : fa[i >> 1].x);\r\n  }\r\n  return\
+    \ ret;\r\n}\r\n} // namespace CFFT\r\n\r\nvector<ll> convolution(vector<ll>& a,\
+    \ vector<ll>& b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return\
+    \ {};\r\n  if (min(n, m) <= 60) return convolution_naive(a, b);\r\n  ll abs_sum_a\
+    \ = 0, abs_sum_b = 0;\r\n  FOR(i, n) abs_sum_a += abs(a[i]);\r\n  FOR(i, n) abs_sum_b\
+    \ += abs(b[i]);\r\n  assert(abs_sum_a * abs_sum_b < 1e15);\r\n  vc<double> c =\
+    \ CFFT::convolution_fft(a, b);\r\n  vc<ll> res(len(c));\r\n  FOR(i, len(c)) res[i]\
+    \ = ll(floor(c[i] + .5));\r\n  return res;\r\n}\r\n\r\ntemplate<typename mint>\r\
+    \nenable_if_t<is_same<mint, modint998>::value, vc<mint>> convolution(vc<mint>&\
+    \ a, vc<mint>& b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return\
+    \ {};\r\n  if (min(n, m) <= 60) return convolution_naive(a, b);\r\n  return convolution_ntt(a,\
+    \ b);\r\n}\r\n\r\ntemplate<typename mint>\r\nenable_if_t<!is_same<mint, modint998>::value,\
+    \ vc<mint>> convolution(vc<mint>& a, vc<mint>& b) {\r\n  int n = len(a), m = len(b);\r\
+    \n  if (!n || !m) return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a,\
+    \ b);\r\n  return convolution_garner(a, b);\r\n}\r\n#line 2 \"nt/multiplicative_convolution_mod2n.hpp\"\
+    \n\r\ntemplate <typename mint>\r\nvc<mint> multiplicative_convolution_mod2n(vc<mint>&\
+    \ A, vc<mint>& B){\r\n  int N = 0;\r\n  while((1<<N) < len(A)) ++N;\r\n  assert((1<<N)\
+    \ == len(A) && (1<<N) == len(B));\r\n  \r\n  int mask = (1 << N) - 1;\r\n\r\n\
+    \  vc<vc<vc<mint>>> AA(N + 1);\r\n  vc<vc<vc<mint>>> BB(N + 1);\r\n  vc<vc<vc<mint>>>\
+    \ CC(N + 1);\r\n\r\n  auto shape = [&](int n) -> pair<int, int> {\r\n    int H\
+    \ = (N - n >= 2 ? 2 : 1);\r\n    int W = 1 << max(N - n - 2, 0);\r\n    return\
+    \ {H, W};\r\n  };\r\n\r\n  FOR(n, N + 1) {\r\n    // 2 \u3067 n \u56DE\u5272\u308C\
+    \u308B\u3068\u3053\u308D\r\n    auto [H, W] = shape(n);\r\n    AA[n].assign(H,\
+    \ vc<mint>(W));\r\n    BB[n].assign(H, vc<mint>(W));\r\n    CC[n].assign(H, vc<mint>(W));\r\
+    \n    int x = (1 << n) & mask;\r\n    auto &a = AA[n], &b = BB[n];\r\n    FOR(j,\
     \ W) {\r\n      a[0][j] = A[x];\r\n      b[0][j] = B[x];\r\n      if (H == 2)\
     \ {\r\n        a[1][j] = A[(1 << N) - x];\r\n        b[1][j] = B[(1 << N) - x];\r\
     \n      }\r\n      x = (5 * x) & mask;\r\n    }\r\n  }\r\n  // n \u3092\u56FA\u5B9A\
@@ -282,7 +315,7 @@ data:
   isVerificationFile: false
   path: nt/multiplicative_convolution_mod2n.hpp
   requiredBy: []
-  timestamp: '2022-01-06 02:16:20+09:00'
+  timestamp: '2022-01-06 10:16:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/convolution/mul_mod2n_convolution.test.cpp

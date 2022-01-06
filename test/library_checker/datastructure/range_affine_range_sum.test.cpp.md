@@ -185,32 +185,64 @@ data:
     \      }\n        }\n        return r + 1 - size;\n      }\n      sm = Monoid_X::op(dat[r],\
     \ sm);\n    } while ((r & -r) != r);\n    return 0;\n  }\n\n  void debug() { print(\"\
     lazysegtree getall:\", get_all()); }\n};\n#line 2 \"mod/modint.hpp\"\ntemplate\
-    \ <int mod>\nstruct modint {\n  int val;\n\n  constexpr modint(const ll val =\
-    \ 0) noexcept\n      : val(val >= 0 ? val % mod : (mod - (-val) % mod) % mod)\
-    \ {}\n\n  bool operator<(const modint &other) const {\n    return val < other.val;\n\
-    \  } // To use std::map\n\n  modint &operator+=(const modint &p) {\n    if ((val\
-    \ += p.val) >= mod) val -= mod;\n    return *this;\n  }\n  modint &operator-=(const\
-    \ modint &p) {\n    if ((val += mod - p.val) >= mod) val -= mod;\n    return *this;\n\
-    \  }\n  modint &operator*=(const modint &p) {\n    val = (int)(1LL * val * p.val\
-    \ % mod);\n    return *this;\n  }\n  modint &operator/=(const modint &p) {\n \
-    \   *this *= p.inverse();\n    return *this;\n  }\n  modint operator-() const\
-    \ { return modint(-val); }\n  modint operator+(const modint &p) const { return\
-    \ modint(*this) += p; }\n  modint operator-(const modint &p) const { return modint(*this)\
-    \ -= p; }\n  modint operator*(const modint &p) const { return modint(*this) *=\
-    \ p; }\n  modint operator/(const modint &p) const { return modint(*this) /= p;\
-    \ }\n  bool operator==(const modint &p) const { return val == p.val; }\n  bool\
-    \ operator!=(const modint &p) const { return val != p.val; }\n\n  modint inverse()\
-    \ const {\n    int a = val, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n \
-    \     t = a / b;\n      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n   \
-    \ }\n    return modint(u);\n  }\n\n  modint pow(int64_t n) const {\n    modint\
-    \ ret(1), mul(val);\n    while (n > 0) {\n      if (n & 1) ret *= mul;\n     \
-    \ mul *= mul;\n      n >>= 1;\n    }\n    return ret;\n  }\n\n  friend ostream\
-    \ &operator<<(ostream &os, const modint &p) { return os << p.val; }\n  friend\
-    \ istream &operator>>(istream &is, modint &a) {\n    int64_t t;\n    is >> t;\n\
-    \    a = modint(t);\n    return (is);\n  }\n  static constexpr int get_mod() {\
-    \ return mod; }\n};\n\ntemplate <typename T>\nstruct ModCalc {\n  vector<T> _fact\
-    \ = {1, 1};\n  vector<T> _fact_inv = {1, 1};\n  vector<T> _inv = {0, 1};\n\n \
-    \ T pow(T a, int n) {\n    T x(1);\n    while (n) {\n      if (n & 1) x *= a;\n\
+    \ <int mod>\nstruct modint {\n  static constexpr bool is_static = true;\n  int\
+    \ val;\n\n  constexpr modint(const ll val = 0) noexcept\n      : val(val >= 0\
+    \ ? val % mod : (mod - (-val) % mod) % mod) {}\n\n  bool operator<(const modint\
+    \ &other) const {\n    return val < other.val;\n  } // To use std::map\n\n  modint\
+    \ &operator+=(const modint &p) {\n    if ((val += p.val) >= mod) val -= mod;\n\
+    \    return *this;\n  }\n  modint &operator-=(const modint &p) {\n    if ((val\
+    \ += mod - p.val) >= mod) val -= mod;\n    return *this;\n  }\n  modint &operator*=(const\
+    \ modint &p) {\n    val = (int)(1LL * val * p.val % mod);\n    return *this;\n\
+    \  }\n  modint &operator/=(const modint &p) {\n    *this *= p.inverse();\n   \
+    \ return *this;\n  }\n  modint operator-() const { return modint(-val); }\n  modint\
+    \ operator+(const modint &p) const { return modint(*this) += p; }\n  modint operator-(const\
+    \ modint &p) const { return modint(*this) -= p; }\n  modint operator*(const modint\
+    \ &p) const { return modint(*this) *= p; }\n  modint operator/(const modint &p)\
+    \ const { return modint(*this) /= p; }\n  bool operator==(const modint &p) const\
+    \ { return val == p.val; }\n  bool operator!=(const modint &p) const { return\
+    \ val != p.val; }\n\n  modint inverse() const {\n    int a = val, b = mod, u =\
+    \ 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b,\
+    \ b);\n      swap(u -= t * v, v);\n    }\n    return modint(u);\n  }\n\n  modint\
+    \ pow(int64_t n) const {\n    modint ret(1), mul(val);\n    while (n > 0) {\n\
+    \      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n    return\
+    \ ret;\n  }\n\n  friend ostream &operator<<(ostream &os, const modint &p) {\n\
+    \    return os << p.val;\n  }\n  friend istream &operator>>(istream &is, modint\
+    \ &a) {\n    int64_t t;\n    is >> t;\n    a = modint(t);\n    return (is);\n\
+    \  }\n  static constexpr int get_mod() { return mod; }\n};\n\nstruct ArbitraryModInt\
+    \ {\n  int val;\n  ArbitraryModInt() : val(0) {}\n  ArbitraryModInt(int64_t y)\n\
+    \      : val(y >= 0 ? y % get_mod()\n                   : (get_mod() - (-y) %\
+    \ get_mod()) % get_mod()) {}\n\n  bool operator<(const ArbitraryModInt &other)\
+    \ const {\n    return val < other.val;\n  } // To use std::map<ArbitraryModInt,\
+    \ T>\n\n  static int &get_mod() {\n    static int mod = 0;\n    return mod;\n\
+    \  }\n  static void set_mod(int md) { get_mod() = md; }\n  ArbitraryModInt &operator+=(const\
+    \ ArbitraryModInt &p) {\n    if ((val += p.val) >= get_mod()) val -= get_mod();\n\
+    \    return *this;\n  }\n  ArbitraryModInt &operator-=(const ArbitraryModInt &p)\
+    \ {\n    if ((val += get_mod() - p.val) >= get_mod()) val -= get_mod();\n    return\
+    \ *this;\n  }\n  ArbitraryModInt &operator*=(const ArbitraryModInt &p) {\n   \
+    \ unsigned long long a = (unsigned long long)val * p.val;\n    unsigned xh = (unsigned)(a\
+    \ >> 32), xl = (unsigned)a, d, m;\n    asm(\"divl %4; \\n\\t\" : \"=a\"(d), \"\
+    =d\"(m) : \"d\"(xh), \"a\"(xl), \"r\"(get_mod()));\n    val = m;\n    return *this;\n\
+    \  }\n  ArbitraryModInt &operator/=(const ArbitraryModInt &p) {\n    *this *=\
+    \ p.inverse();\n    return *this;\n  }\n  ArbitraryModInt operator-() const {\
+    \ return ArbitraryModInt(-val); }\n  ArbitraryModInt operator+(const ArbitraryModInt\
+    \ &p) const {\n    return ArbitraryModInt(*this) += p;\n  }\n  ArbitraryModInt\
+    \ operator-(const ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this)\
+    \ -= p;\n  }\n  ArbitraryModInt operator*(const ArbitraryModInt &p) const {\n\
+    \    return ArbitraryModInt(*this) *= p;\n  }\n\n  ArbitraryModInt operator/(const\
+    \ ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this) /= p;\n  }\n\n\
+    \  bool operator==(const ArbitraryModInt &p) const { return val == p.val; }\n\
+    \  bool operator!=(const ArbitraryModInt &p) const { return val != p.val; }\n\
+    \  ArbitraryModInt inverse() const {\n    int a = val, b = get_mod(), u = 1, v\
+    \ = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b);\n\
+    \      swap(u -= t * v, v);\n    }\n    return ArbitraryModInt(u);\n  }\n  ArbitraryModInt\
+    \ pow(int64_t n) const {\n    ArbitraryModInt ret(1), mul(val);\n    while (n\
+    \ > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n  \
+    \  }\n    return ret;\n  }\n  friend ostream &operator<<(ostream &os, const ArbitraryModInt\
+    \ &p) {\n    return os << p.val;\n  }\n  friend istream &operator>>(istream &is,\
+    \ ArbitraryModInt &a) {\n    int64_t t;\n    is >> t;\n    a = ArbitraryModInt(t);\n\
+    \    return (is);\n  }\n};\n\ntemplate <typename T>\nstruct ModCalc {\n  vector<T>\
+    \ _fact = {1, 1};\n  vector<T> _fact_inv = {1, 1};\n  vector<T> _inv = {0, 1};\n\
+    \n  T pow(T a, int n) {\n    T x(1);\n    while (n) {\n      if (n & 1) x *= a;\n\
     \      a *= a;\n      n >>= 1;\n    }\n    return x;\n  }\n  void expand(int n)\
     \ {\n    while (_fact.size() <= n) {\n      auto i = _fact.size();\n      _fact.eb(_fact[i\
     \ - 1] * T(i));\n      auto q = T::get_mod() / i, r = T::get_mod() % i;\n    \
@@ -223,8 +255,9 @@ data:
     \   if (!large) return fact(n) * fact_inv(k) * fact_inv(n - k);\n    k = min(k,\
     \ n - k);\n    T x(1);\n    FOR(i, k) {\n      x *= n - i;\n      x *= inv(i +\
     \ 1);\n    }\n    return x;\n  }\n};\n\nusing modint107 = modint<1'000'000'007>;\n\
-    using modint998 = modint<998'244'353>;\n#line 7 \"test/library_checker/datastructure/range_affine_range_sum.test.cpp\"\
-    \n\nusing mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using S = Lazy_CntSum_Affine<mint>;\n\
+    using modint998 = modint<998'244'353>;\nusing amint = ArbitraryModInt;\n#line\
+    \ 7 \"test/library_checker/datastructure/range_affine_range_sum.test.cpp\"\n\n\
+    using mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using S = Lazy_CntSum_Affine<mint>;\n\
     \  using E = pair<mint, mint>;\n  vc<E> seg_raw(N);\n  FOR(i, N) {\n    LL(x);\n\
     \    seg_raw[i] = E({mint(1), mint(x)});\n  }\n  LazySegTree<S> seg(seg_raw);\n\
     \n  FOR(_, Q) {\n    LL(t);\n    if (t == 0) {\n      LL(l, r, a, b);\n      seg.apply(l,\
@@ -253,7 +286,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-01-05 04:56:51+09:00'
+  timestamp: '2022-01-06 10:16:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/range_affine_range_sum.test.cpp

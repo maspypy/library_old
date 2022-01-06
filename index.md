@@ -228,9 +228,6 @@ data:
       title: matrix/matrix.hpp
   - name: mod
     pages:
-    - icon: ':warning:'
-      path: mod/amodint.hpp
-      title: mod/amodint.hpp
     - icon: ':heavy_check_mark:'
       path: mod/modint.hpp
       title: mod/modint.hpp
@@ -389,6 +386,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/convolution/convolution_mod_107.test.cpp
       title: test/library_checker/convolution/convolution_mod_107.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/convolution/convolution_mod_107_amint.test.cpp
+      title: test/library_checker/convolution/convolution_mod_107_amint.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/convolution/mul_mod2n_convolution.test.cpp
       title: test/library_checker/convolution/mul_mod2n_convolution.test.cpp
