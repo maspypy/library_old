@@ -255,11 +255,8 @@ struct C {
   C() : x(0), y(0) {}
 
   C(real x, real y) : x(x), y(y) {}
-
   inline C operator+(const C& c) const { return C(x + c.x, y + c.y); }
-
   inline C operator-(const C& c) const { return C(x - c.x, y - c.y); }
-
   inline C operator*(const C& c) const {
     return C(x * c.x - y * c.y, x * c.y + y * c.x);
   }
@@ -358,15 +355,18 @@ vector<ll> convolution(vector<ll>& a, vector<ll>& b) {
   return res;
 }
 
-template <typename mint>
-vector<mint> convolution(vector<mint>& a, vector<mint>& b) {
+template<typename mint>
+enable_if_t<is_same<mint, modint998>::value, vc<mint>> convolution(vc<mint>& a, vc<mint>& b) {
   int n = len(a), m = len(b);
   if (!n || !m) return {};
   if (min(n, m) <= 60) return convolution_naive(a, b);
-  int mod = mint::get_mod();
-  if (mod == 167772161 || mod == 469762049 || mod == 754974721
-      || mod == 998244353) {
-    return convolution_ntt(a, b);
-  }
+  return convolution_ntt(a, b);
+}
+
+template<typename mint>
+enable_if_t<!is_same<mint, modint998>::value, vc<mint>> convolution(vc<mint>& a, vc<mint>& b) {
+  int n = len(a), m = len(b);
+  if (!n || !m) return {};
+  if (min(n, m) <= 60) return convolution_naive(a, b);
   return convolution_garner(a, b);
 }
