@@ -27,6 +27,9 @@ data:
     path: polynomial/multivar_convolution.hpp
     title: polynomial/multivar_convolution.hpp
   - icon: ':heavy_check_mark:'
+    path: polynomial/polynomial_division.hpp
+    title: polynomial/polynomial_division.hpp
+  - icon: ':heavy_check_mark:'
     path: polynomial/polynomial_taylor_shift.hpp
     title: polynomial/polynomial_taylor_shift.hpp
   - icon: ':heavy_check_mark:'
@@ -99,6 +102,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/polynomial/log_of_fps.test.cpp
     title: test/library_checker/polynomial/log_of_fps.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/polynomial/polynomial_division.test.cpp
+    title: test/library_checker/polynomial/polynomial_division.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
     title: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
@@ -266,6 +272,7 @@ data:
   requiredBy:
   - graph/tree_all_distances.hpp
   - polynomial/fps_log.hpp
+  - polynomial/polynomial_division.hpp
   - polynomial/convolution.hpp
   - polynomial/convolution_huge.hpp
   - polynomial/fps_inv.hpp
@@ -291,6 +298,7 @@ data:
   - test/library_checker/convolution/contolution_mod_2_64.test.cpp
   - test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
   - test/library_checker/polynomial/log_of_fps.test.cpp
+  - test/library_checker/polynomial/polynomial_division.test.cpp
   - test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
   - test/library_checker/polynomial/inv_of_fps.test.cpp
   - test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp

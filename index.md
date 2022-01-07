@@ -311,6 +311,9 @@ data:
       path: polynomial/multivar_convolution.hpp
       title: polynomial/multivar_convolution.hpp
     - icon: ':heavy_check_mark:'
+      path: polynomial/polynomial_division.hpp
+      title: polynomial/polynomial_division.hpp
+    - icon: ':heavy_check_mark:'
       path: polynomial/polynomial_taylor_shift.hpp
       title: polynomial/polynomial_taylor_shift.hpp
   - name: sequence
@@ -544,6 +547,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/log_of_fps.test.cpp
       title: test/library_checker/polynomial/log_of_fps.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/polynomial/polynomial_division.test.cpp
+      title: test/library_checker/polynomial/polynomial_division.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
       title: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
