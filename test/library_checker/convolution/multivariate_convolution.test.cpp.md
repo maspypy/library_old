@@ -10,14 +10,14 @@ data:
   - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
-  - icon: ':question:'
+  - icon: ':x:'
     path: polynomial/multivar_convolution.hpp
     title: polynomial/multivar_convolution.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/multivariate_convolution
@@ -183,7 +183,7 @@ data:
     \ x;\n}\n\ntemplate<typename mint>\nvc<mint> power_table(mint a, ll N) {\n  vc<mint>\
     \ f(N, 1);\n  FOR(i, N - 1) f[i + 1] = a * f[i];\n  return f;\n}\n\nusing modint107\
     \ = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\nusing amint\
-    \ = ArbitraryModInt;\n#line 2 \"polynomial/convolution.hpp\"\ntemplate <class\
+    \ = ArbitraryModInt;\n#line 3 \"polynomial/convolution.hpp\"\ntemplate <class\
     \ T>\r\nvector<T> convolution_naive(const vector<T>& a, const vector<T>& b) {\r\
     \n  int n = int(a.size()), m = int(b.size());\r\n  vector<T> ans(n + m - 1);\r\
     \n  if (n < m) {\r\n    FOR(j, m) FOR(i, n) ans[i + j] += a[i] * b[j];\r\n  }\
@@ -369,8 +369,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/convolution/multivariate_convolution.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 14:13:02+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-08 14:37:20+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/convolution/multivariate_convolution.test.cpp
 layout: document

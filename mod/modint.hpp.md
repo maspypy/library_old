@@ -5,7 +5,7 @@ data:
   - icon: ':x:'
     path: graph/tree_all_distances.hpp
     title: graph/tree_all_distances.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: nt/multiplicative_convolution_mod2n.hpp
     title: nt/multiplicative_convolution_mod2n.hpp
   - icon: ':question:'
@@ -29,15 +29,15 @@ data:
   - icon: ':x:'
     path: polynomial/lagrange_interpolate_iota.hpp
     title: polynomial/lagrange_interpolate_iota.hpp
-  - icon: ':question:'
+  - icon: ':x:'
     path: polynomial/multivar_convolution.hpp
     title: polynomial/multivar_convolution.hpp
   - icon: ':x:'
-    path: polynomial/polynomial_division.hpp
-    title: polynomial/polynomial_division.hpp
+    path: polynomial/poly_divmod.hpp
+    title: polynomial/poly_divmod.hpp
   - icon: ':x:'
-    path: polynomial/polynomial_taylor_shift.hpp
-    title: polynomial/polynomial_taylor_shift.hpp
+    path: polynomial/poly_taylor_shift.hpp
+    title: polynomial/poly_taylor_shift.hpp
   - icon: ':x:'
     path: sequence/linearrecurrence.hpp
     title: sequence/linearrecurrence.hpp
@@ -66,10 +66,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/convolution/convolution_mod_107_amint.test.cpp
     title: test/library_checker/convolution/convolution_mod_107_amint.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/convolution/mul_mod2n_convolution.test.cpp
     title: test/library_checker/convolution/mul_mod2n_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/convolution/multivariate_convolution.test.cpp
     title: test/library_checker/convolution/multivariate_convolution.test.cpp
   - icon: ':heavy_check_mark:'
@@ -284,14 +284,14 @@ data:
   requiredBy:
   - graph/tree_all_distances.hpp
   - polynomial/fps_log.hpp
-  - polynomial/polynomial_division.hpp
   - polynomial/fps_exp.hpp
   - polynomial/convolution.hpp
   - polynomial/convolution_huge.hpp
+  - polynomial/poly_divmod.hpp
   - polynomial/fps_inv.hpp
   - polynomial/multivar_convolution.hpp
+  - polynomial/poly_taylor_shift.hpp
   - polynomial/lagrange_interpolate_iota.hpp
-  - polynomial/polynomial_taylor_shift.hpp
   - polynomial/convolution_mod_2_64.hpp
   - sequence/linearrecurrence.hpp
   - nt/multiplicative_convolution_mod2n.hpp

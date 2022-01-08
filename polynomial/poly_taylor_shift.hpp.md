@@ -93,7 +93,7 @@ data:
     \ x;\n}\n\ntemplate<typename mint>\nvc<mint> power_table(mint a, ll N) {\n  vc<mint>\
     \ f(N, 1);\n  FOR(i, N - 1) f[i + 1] = a * f[i];\n  return f;\n}\n\nusing modint107\
     \ = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\nusing amint\
-    \ = ArbitraryModInt;\n#line 2 \"polynomial/convolution.hpp\"\ntemplate <class\
+    \ = ArbitraryModInt;\n#line 3 \"polynomial/convolution.hpp\"\ntemplate <class\
     \ T>\r\nvector<T> convolution_naive(const vector<T>& a, const vector<T>& b) {\r\
     \n  int n = int(a.size()), m = int(b.size());\r\n  vector<T> ans(n + m - 1);\r\
     \n  if (n < m) {\r\n    FOR(j, m) FOR(i, n) ans[i + j] += a[i] * b[j];\r\n  }\
@@ -238,32 +238,32 @@ data:
     \ b);\r\n}\r\n\r\ntemplate<typename mint>\r\nenable_if_t<!is_same<mint, modint998>::value,\
     \ vc<mint>> convolution(vc<mint>& a, vc<mint>& b) {\r\n  int n = len(a), m = len(b);\r\
     \n  if (!n || !m) return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a,\
-    \ b);\r\n  return convolution_garner(a, b);\r\n}\r\n#line 2 \"polynomial/polynomial_taylor_shift.hpp\"\
-    \n\r\ntemplate <typename mint>\r\nvc<mint> polynomial_taylor_shift(vc<mint> a,\
-    \ mint c) {\r\n  ll N = len(a);\r\n  FOR(i, N) a[i] *= fact<mint>(i);\r\n  auto\
-    \ b = power_table<mint>(c, N);\r\n  FOR(i, N) b[i] *= fact_inv<mint>(i);\r\n \
-    \ reverse(all(a));\r\n  auto f = convolution(a, b);\r\n  f.resize(N);\r\n  reverse(all(f));\r\
-    \n  FOR(i, N) f[i] *= fact_inv<mint>(i);\r\n  return f;\r\n}\r\n"
+    \ b);\r\n  return convolution_garner(a, b);\r\n}\r\n#line 2 \"polynomial/poly_taylor_shift.hpp\"\
+    \n\r\ntemplate <typename mint>\r\nvc<mint> poly_taylor_shift(vc<mint> a, mint\
+    \ c) {\r\n  ll N = len(a);\r\n  FOR(i, N) a[i] *= fact<mint>(i);\r\n  auto b =\
+    \ power_table<mint>(c, N);\r\n  FOR(i, N) b[i] *= fact_inv<mint>(i);\r\n  reverse(all(a));\r\
+    \n  auto f = convolution(a, b);\r\n  f.resize(N);\r\n  reverse(all(f));\r\n  FOR(i,\
+    \ N) f[i] *= fact_inv<mint>(i);\r\n  return f;\r\n}\r\n"
   code: "#include \"polynomial/convolution.hpp\"\r\n\r\ntemplate <typename mint>\r\
-    \nvc<mint> polynomial_taylor_shift(vc<mint> a, mint c) {\r\n  ll N = len(a);\r\
-    \n  FOR(i, N) a[i] *= fact<mint>(i);\r\n  auto b = power_table<mint>(c, N);\r\n\
-    \  FOR(i, N) b[i] *= fact_inv<mint>(i);\r\n  reverse(all(a));\r\n  auto f = convolution(a,\
+    \nvc<mint> poly_taylor_shift(vc<mint> a, mint c) {\r\n  ll N = len(a);\r\n  FOR(i,\
+    \ N) a[i] *= fact<mint>(i);\r\n  auto b = power_table<mint>(c, N);\r\n  FOR(i,\
+    \ N) b[i] *= fact_inv<mint>(i);\r\n  reverse(all(a));\r\n  auto f = convolution(a,\
     \ b);\r\n  f.resize(N);\r\n  reverse(all(f));\r\n  FOR(i, N) f[i] *= fact_inv<mint>(i);\r\
     \n  return f;\r\n}\r\n"
   dependsOn:
   - polynomial/convolution.hpp
   - mod/modint.hpp
   isVerificationFile: false
-  path: polynomial/polynomial_taylor_shift.hpp
+  path: polynomial/poly_taylor_shift.hpp
   requiredBy: []
-  timestamp: '2022-01-08 14:13:02+09:00'
+  timestamp: '2022-01-08 14:37:20+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
-documentation_of: polynomial/polynomial_taylor_shift.hpp
+documentation_of: polynomial/poly_taylor_shift.hpp
 layout: document
 redirect_from:
-- /library/polynomial/polynomial_taylor_shift.hpp
-- /library/polynomial/polynomial_taylor_shift.hpp.html
-title: polynomial/polynomial_taylor_shift.hpp
+- /library/polynomial/poly_taylor_shift.hpp
+- /library/polynomial/poly_taylor_shift.hpp.html
+title: polynomial/poly_taylor_shift.hpp
 ---

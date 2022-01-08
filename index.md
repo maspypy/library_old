@@ -247,7 +247,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: nt/factor.hpp
       title: nt/factor.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: nt/multiplicative_convolution_mod2n.hpp
       title: nt/multiplicative_convolution_mod2n.hpp
     - icon: ':heavy_check_mark:'
@@ -313,15 +313,15 @@ data:
     - icon: ':x:'
       path: polynomial/lagrange_interpolate_iota.hpp
       title: polynomial/lagrange_interpolate_iota.hpp
-    - icon: ':question:'
+    - icon: ':x:'
       path: polynomial/multivar_convolution.hpp
       title: polynomial/multivar_convolution.hpp
     - icon: ':x:'
-      path: polynomial/polynomial_division.hpp
-      title: polynomial/polynomial_division.hpp
+      path: polynomial/poly_divmod.hpp
+      title: polynomial/poly_divmod.hpp
     - icon: ':x:'
-      path: polynomial/polynomial_taylor_shift.hpp
-      title: polynomial/polynomial_taylor_shift.hpp
+      path: polynomial/poly_taylor_shift.hpp
+      title: polynomial/poly_taylor_shift.hpp
   - name: sequence
     pages:
     - icon: ':x:'
@@ -419,10 +419,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/convolution/convolution_mod_107_amint.test.cpp
       title: test/library_checker/convolution/convolution_mod_107_amint.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/convolution/mul_mod2n_convolution.test.cpp
       title: test/library_checker/convolution/mul_mod2n_convolution.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/convolution/multivariate_convolution.test.cpp
       title: test/library_checker/convolution/multivariate_convolution.test.cpp
     - icon: ':heavy_check_mark:'

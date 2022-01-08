@@ -96,7 +96,7 @@ data:
     \ x;\n}\n\ntemplate<typename mint>\nvc<mint> power_table(mint a, ll N) {\n  vc<mint>\
     \ f(N, 1);\n  FOR(i, N - 1) f[i + 1] = a * f[i];\n  return f;\n}\n\nusing modint107\
     \ = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\nusing amint\
-    \ = ArbitraryModInt;\n#line 2 \"polynomial/convolution.hpp\"\ntemplate <class\
+    \ = ArbitraryModInt;\n#line 3 \"polynomial/convolution.hpp\"\ntemplate <class\
     \ T>\r\nvector<T> convolution_naive(const vector<T>& a, const vector<T>& b) {\r\
     \n  int n = int(a.size()), m = int(b.size());\r\n  vector<T> ans(n + m - 1);\r\
     \n  if (n < m) {\r\n    FOR(j, m) FOR(i, n) ans[i + j] += a[i] * b[j];\r\n  }\
@@ -249,9 +249,9 @@ data:
     \   ntt(g, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\n    ntt(f, true);\r\n\
     \    FOR(i, n) f[i] = 0;\r\n    ntt(f, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\
     \n    ntt(f, true);\r\n    FOR3(i, n, 2 * n) G.eb(f[i] * mint(-1));\r\n    n *=\
-    \ 2;\r\n  }\r\n  G.resize(N);\r\n  return G;\r\n}\r\n#line 2 \"polynomial/polynomial_division.hpp\"\
-    \ntemplate <typename mint>\r\npair<vc<mint>, vc<mint>> polynomial_division(vc<mint>\
-    \ f, vc<mint>& g) {\r\n  assert(g.back() != 0);\r\n  if (len(f) < len(g)) { return\
+    \ 2;\r\n  }\r\n  G.resize(N);\r\n  return G;\r\n}\r\n#line 2 \"polynomial/poly_divmod.hpp\"\
+    \ntemplate <typename mint>\r\npair<vc<mint>, vc<mint>> poly_divmod(vc<mint> f,\
+    \ vc<mint>& g) {\r\n  assert(g.back() != 0);\r\n  if (len(f) < len(g)) { return\
     \ {{}, f}; }\r\n  auto rf = f, rg = g;\r\n  reverse(all(rf)), reverse(all(rg));\r\
     \n  ll deg = len(rf) - len(rg) + 1;\r\n  rf.resize(deg), rg.resize(deg);\r\n \
     \ rg = fps_inv(rg);\r\n  auto q = convolution(rf, rg);\r\n  q.resize(deg);\r\n\
@@ -259,28 +259,28 @@ data:
     \ -= h[i];\r\n  while (len(f) > 0 && f.back() == 0) f.pop_back();\r\n  return\
     \ {q, f};\r\n}\r\n"
   code: "#include \"polynomial/fps_inv.hpp\"\r\ntemplate <typename mint>\r\npair<vc<mint>,\
-    \ vc<mint>> polynomial_division(vc<mint> f, vc<mint>& g) {\r\n  assert(g.back()\
-    \ != 0);\r\n  if (len(f) < len(g)) { return {{}, f}; }\r\n  auto rf = f, rg =\
-    \ g;\r\n  reverse(all(rf)), reverse(all(rg));\r\n  ll deg = len(rf) - len(rg)\
-    \ + 1;\r\n  rf.resize(deg), rg.resize(deg);\r\n  rg = fps_inv(rg);\r\n  auto q\
-    \ = convolution(rf, rg);\r\n  q.resize(deg);\r\n  reverse(all(q));\r\n  auto h\
-    \ = convolution(q, g);\r\n  FOR(i, len(f)) f[i] -= h[i];\r\n  while (len(f) >\
-    \ 0 && f.back() == 0) f.pop_back();\r\n  return {q, f};\r\n}\r\n"
+    \ vc<mint>> poly_divmod(vc<mint> f, vc<mint>& g) {\r\n  assert(g.back() != 0);\r\
+    \n  if (len(f) < len(g)) { return {{}, f}; }\r\n  auto rf = f, rg = g;\r\n  reverse(all(rf)),\
+    \ reverse(all(rg));\r\n  ll deg = len(rf) - len(rg) + 1;\r\n  rf.resize(deg),\
+    \ rg.resize(deg);\r\n  rg = fps_inv(rg);\r\n  auto q = convolution(rf, rg);\r\n\
+    \  q.resize(deg);\r\n  reverse(all(q));\r\n  auto h = convolution(q, g);\r\n \
+    \ FOR(i, len(f)) f[i] -= h[i];\r\n  while (len(f) > 0 && f.back() == 0) f.pop_back();\r\
+    \n  return {q, f};\r\n}\r\n"
   dependsOn:
   - polynomial/fps_inv.hpp
   - polynomial/convolution.hpp
   - mod/modint.hpp
   isVerificationFile: false
-  path: polynomial/polynomial_division.hpp
+  path: polynomial/poly_divmod.hpp
   requiredBy: []
-  timestamp: '2022-01-08 14:13:02+09:00'
+  timestamp: '2022-01-08 14:37:20+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/polynomial/polynomial_division.test.cpp
-documentation_of: polynomial/polynomial_division.hpp
+documentation_of: polynomial/poly_divmod.hpp
 layout: document
 redirect_from:
-- /library/polynomial/polynomial_division.hpp
-- /library/polynomial/polynomial_division.hpp.html
-title: polynomial/polynomial_division.hpp
+- /library/polynomial/poly_divmod.hpp
+- /library/polynomial/poly_divmod.hpp.html
+title: polynomial/poly_divmod.hpp
 ---

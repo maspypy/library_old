@@ -12,8 +12,8 @@ data:
     path: polynomial/fps_log.hpp
     title: polynomial/fps_log.hpp
   - icon: ':x:'
-    path: polynomial/polynomial_division.hpp
-    title: polynomial/polynomial_division.hpp
+    path: polynomial/poly_divmod.hpp
+    title: polynomial/poly_divmod.hpp
   _extendedVerifiedWith:
   - icon: ':x:'
     path: test/library_checker/polynomial/inv_of_fps.test.cpp
@@ -105,7 +105,7 @@ data:
     \ x;\n}\n\ntemplate<typename mint>\nvc<mint> power_table(mint a, ll N) {\n  vc<mint>\
     \ f(N, 1);\n  FOR(i, N - 1) f[i + 1] = a * f[i];\n  return f;\n}\n\nusing modint107\
     \ = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\nusing amint\
-    \ = ArbitraryModInt;\n#line 2 \"polynomial/convolution.hpp\"\ntemplate <class\
+    \ = ArbitraryModInt;\n#line 3 \"polynomial/convolution.hpp\"\ntemplate <class\
     \ T>\r\nvector<T> convolution_naive(const vector<T>& a, const vector<T>& b) {\r\
     \n  int n = int(a.size()), m = int(b.size());\r\n  vector<T> ans(n + m - 1);\r\
     \n  if (n < m) {\r\n    FOR(j, m) FOR(i, n) ans[i + j] += a[i] * b[j];\r\n  }\
@@ -274,8 +274,8 @@ data:
   path: polynomial/fps_inv.hpp
   requiredBy:
   - polynomial/fps_log.hpp
-  - polynomial/polynomial_division.hpp
-  timestamp: '2022-01-08 14:13:02+09:00'
+  - polynomial/poly_divmod.hpp
+  timestamp: '2022-01-08 14:37:20+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/polynomial/log_of_fps.test.cpp

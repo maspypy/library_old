@@ -114,7 +114,7 @@ data:
     \ mint>\nvc<mint> power_table(mint a, ll N) {\n  vc<mint> f(N, 1);\n  FOR(i, N\
     \ - 1) f[i + 1] = a * f[i];\n  return f;\n}\n\nusing modint107 = modint<1'000'000'007>;\n\
     using modint998 = modint<998'244'353>;\nusing amint = ArbitraryModInt;\n#line\
-    \ 2 \"polynomial/convolution.hpp\"\ntemplate <class T>\r\nvector<T> convolution_naive(const\
+    \ 3 \"polynomial/convolution.hpp\"\ntemplate <class T>\r\nvector<T> convolution_naive(const\
     \ vector<T>& a, const vector<T>& b) {\r\n  int n = int(a.size()), m = int(b.size());\r\
     \n  vector<T> ans(n + m - 1);\r\n  if (n < m) {\r\n    FOR(j, m) FOR(i, n) ans[i\
     \ + j] += a[i] * b[j];\r\n  } else {\r\n    FOR(i, n) FOR(j, m) ans[i + j] +=\
@@ -301,7 +301,7 @@ data:
   isVerificationFile: false
   path: polynomial/lagrange_interpolate_iota.hpp
   requiredBy: []
-  timestamp: '2022-01-08 14:13:02+09:00'
+  timestamp: '2022-01-08 14:37:20+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp

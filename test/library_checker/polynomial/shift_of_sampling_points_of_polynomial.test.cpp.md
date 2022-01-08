@@ -203,7 +203,7 @@ data:
     \        dat.pop_back();\n      }\n      dat.pop_back();\n    }\n  }\n\n  X prod()\
     \ { return Monoid::op(cum_l.back(), cum_r); }\n\n  void debug() {\n    print(\"\
     swag\");\n    print(\"dat\", dat);\n    print(\"cum_l\", cum_l);\n    print(\"\
-    cum_r\", cum_r);\n  }\n};\n#line 2 \"polynomial/convolution.hpp\"\ntemplate <class\
+    cum_r\", cum_r);\n  }\n};\n#line 3 \"polynomial/convolution.hpp\"\ntemplate <class\
     \ T>\r\nvector<T> convolution_naive(const vector<T>& a, const vector<T>& b) {\r\
     \n  int n = int(a.size()), m = int(b.size());\r\n  vector<T> ans(n + m - 1);\r\
     \n  if (n < m) {\r\n    FOR(j, m) FOR(i, n) ans[i + j] += a[i] * b[j];\r\n  }\
@@ -385,7 +385,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 14:13:02+09:00'
+  timestamp: '2022-01-08 14:37:20+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp

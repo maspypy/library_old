@@ -11,8 +11,8 @@ data:
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
   - icon: ':x:'
-    path: polynomial/polynomial_taylor_shift.hpp
-    title: polynomial/polynomial_taylor_shift.hpp
+    path: polynomial/poly_taylor_shift.hpp
+    title: polynomial/poly_taylor_shift.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: true
@@ -183,7 +183,7 @@ data:
     \ x;\n}\n\ntemplate<typename mint>\nvc<mint> power_table(mint a, ll N) {\n  vc<mint>\
     \ f(N, 1);\n  FOR(i, N - 1) f[i + 1] = a * f[i];\n  return f;\n}\n\nusing modint107\
     \ = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\nusing amint\
-    \ = ArbitraryModInt;\n#line 2 \"polynomial/convolution.hpp\"\ntemplate <class\
+    \ = ArbitraryModInt;\n#line 3 \"polynomial/convolution.hpp\"\ntemplate <class\
     \ T>\r\nvector<T> convolution_naive(const vector<T>& a, const vector<T>& b) {\r\
     \n  int n = int(a.size()), m = int(b.size());\r\n  vector<T> ans(n + m - 1);\r\
     \n  if (n < m) {\r\n    FOR(j, m) FOR(i, n) ans[i + j] += a[i] * b[j];\r\n  }\
@@ -328,31 +328,31 @@ data:
     \ b);\r\n}\r\n\r\ntemplate<typename mint>\r\nenable_if_t<!is_same<mint, modint998>::value,\
     \ vc<mint>> convolution(vc<mint>& a, vc<mint>& b) {\r\n  int n = len(a), m = len(b);\r\
     \n  if (!n || !m) return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a,\
-    \ b);\r\n  return convolution_garner(a, b);\r\n}\r\n#line 2 \"polynomial/polynomial_taylor_shift.hpp\"\
-    \n\r\ntemplate <typename mint>\r\nvc<mint> polynomial_taylor_shift(vc<mint> a,\
-    \ mint c) {\r\n  ll N = len(a);\r\n  FOR(i, N) a[i] *= fact<mint>(i);\r\n  auto\
-    \ b = power_table<mint>(c, N);\r\n  FOR(i, N) b[i] *= fact_inv<mint>(i);\r\n \
-    \ reverse(all(a));\r\n  auto f = convolution(a, b);\r\n  f.resize(N);\r\n  reverse(all(f));\r\
-    \n  FOR(i, N) f[i] *= fact_inv<mint>(i);\r\n  return f;\r\n}\r\n#line 6 \"test/library_checker/polynomial/polynomial_taylor_shift.test.cpp\"\
+    \ b);\r\n  return convolution_garner(a, b);\r\n}\r\n#line 2 \"polynomial/poly_taylor_shift.hpp\"\
+    \n\r\ntemplate <typename mint>\r\nvc<mint> poly_taylor_shift(vc<mint> a, mint\
+    \ c) {\r\n  ll N = len(a);\r\n  FOR(i, N) a[i] *= fact<mint>(i);\r\n  auto b =\
+    \ power_table<mint>(c, N);\r\n  FOR(i, N) b[i] *= fact_inv<mint>(i);\r\n  reverse(all(a));\r\
+    \n  auto f = convolution(a, b);\r\n  f.resize(N);\r\n  reverse(all(f));\r\n  FOR(i,\
+    \ N) f[i] *= fact_inv<mint>(i);\r\n  return f;\r\n}\r\n#line 6 \"test/library_checker/polynomial/polynomial_taylor_shift.test.cpp\"\
     \n\r\nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N, c);\r\n  VEC(mint,\
-    \ A, N);\r\n  print(polynomial_taylor_shift(A, mint(c)));\r\n}\r\n\r\nsigned main()\
+    \ A, N);\r\n  print(poly_taylor_shift(A, mint(c)));\r\n}\r\n\r\nsigned main()\
     \ {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
     \n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/polynomial_taylor_shift\"\
     \r\n#include \"my_template.hpp\"\r\n\r\n#include \"mod/modint.hpp\"\r\n#include\
-    \ \"polynomial/polynomial_taylor_shift.hpp\"\r\n\r\nusing mint = modint998;\r\n\
-    \r\nvoid solve() {\r\n  LL(N, c);\r\n  VEC(mint, A, N);\r\n  print(polynomial_taylor_shift(A,\
+    \ \"polynomial/poly_taylor_shift.hpp\"\r\n\r\nusing mint = modint998;\r\n\r\n\
+    void solve() {\r\n  LL(N, c);\r\n  VEC(mint, A, N);\r\n  print(poly_taylor_shift(A,\
     \ mint(c)));\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
     \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
   - mod/modint.hpp
-  - polynomial/polynomial_taylor_shift.hpp
+  - polynomial/poly_taylor_shift.hpp
   - polynomial/convolution.hpp
   isVerificationFile: true
   path: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 14:13:02+09:00'
+  timestamp: '2022-01-08 14:37:20+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp

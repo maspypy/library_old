@@ -14,8 +14,8 @@ data:
     path: polynomial/fps_inv.hpp
     title: polynomial/fps_inv.hpp
   - icon: ':x:'
-    path: polynomial/polynomial_division.hpp
-    title: polynomial/polynomial_division.hpp
+    path: polynomial/poly_divmod.hpp
+    title: polynomial/poly_divmod.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: true
@@ -186,7 +186,7 @@ data:
     \ x;\n}\n\ntemplate<typename mint>\nvc<mint> power_table(mint a, ll N) {\n  vc<mint>\
     \ f(N, 1);\n  FOR(i, N - 1) f[i + 1] = a * f[i];\n  return f;\n}\n\nusing modint107\
     \ = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\nusing amint\
-    \ = ArbitraryModInt;\n#line 2 \"polynomial/convolution.hpp\"\ntemplate <class\
+    \ = ArbitraryModInt;\n#line 3 \"polynomial/convolution.hpp\"\ntemplate <class\
     \ T>\r\nvector<T> convolution_naive(const vector<T>& a, const vector<T>& b) {\r\
     \n  int n = int(a.size()), m = int(b.size());\r\n  vector<T> ans(n + m - 1);\r\
     \n  if (n < m) {\r\n    FOR(j, m) FOR(i, n) ans[i + j] += a[i] * b[j];\r\n  }\
@@ -339,9 +339,9 @@ data:
     \   ntt(g, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\n    ntt(f, true);\r\n\
     \    FOR(i, n) f[i] = 0;\r\n    ntt(f, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\
     \n    ntt(f, true);\r\n    FOR3(i, n, 2 * n) G.eb(f[i] * mint(-1));\r\n    n *=\
-    \ 2;\r\n  }\r\n  G.resize(N);\r\n  return G;\r\n}\r\n#line 2 \"polynomial/polynomial_division.hpp\"\
-    \ntemplate <typename mint>\r\npair<vc<mint>, vc<mint>> polynomial_division(vc<mint>\
-    \ f, vc<mint>& g) {\r\n  assert(g.back() != 0);\r\n  if (len(f) < len(g)) { return\
+    \ 2;\r\n  }\r\n  G.resize(N);\r\n  return G;\r\n}\r\n#line 2 \"polynomial/poly_divmod.hpp\"\
+    \ntemplate <typename mint>\r\npair<vc<mint>, vc<mint>> poly_divmod(vc<mint> f,\
+    \ vc<mint>& g) {\r\n  assert(g.back() != 0);\r\n  if (len(f) < len(g)) { return\
     \ {{}, f}; }\r\n  auto rf = f, rg = g;\r\n  reverse(all(rf)), reverse(all(rg));\r\
     \n  ll deg = len(rf) - len(rg) + 1;\r\n  rf.resize(deg), rg.resize(deg);\r\n \
     \ rg = fps_inv(rg);\r\n  auto q = convolution(rf, rg);\r\n  q.resize(deg);\r\n\
@@ -349,27 +349,27 @@ data:
     \ -= h[i];\r\n  while (len(f) > 0 && f.back() == 0) f.pop_back();\r\n  return\
     \ {q, f};\r\n}\r\n#line 6 \"test/library_checker/polynomial/polynomial_division.test.cpp\"\
     \n\r\nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N, M);\r\n  VEC(mint,\
-    \ f, N);\r\n  VEC(mint, g, M);\r\n  auto [q, r] = polynomial_division(f, g);\r\
-    \n  print(len(q), len(r));\r\n  print(q);\r\n  print(r);\r\n}\r\n\r\nsigned main()\
-    \ {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
-    \n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \ f, N);\r\n  VEC(mint, g, M);\r\n  auto [q, r] = poly_divmod(f, g);\r\n  print(len(q),\
+    \ len(r));\r\n  print(q);\r\n  print(r);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
+    \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
+    \n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/division_of_polynomials\"\
     \r\n#include \"my_template.hpp\"\r\n\r\n#include \"mod/modint.hpp\"\r\n#include\
-    \ \"polynomial/polynomial_division.hpp\"\r\n\r\nusing mint = modint998;\r\n\r\n\
-    void solve() {\r\n  LL(N, M);\r\n  VEC(mint, f, N);\r\n  VEC(mint, g, M);\r\n\
-    \  auto [q, r] = polynomial_division(f, g);\r\n  print(len(q), len(r));\r\n  print(q);\r\
-    \n  print(r);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \ \"polynomial/poly_divmod.hpp\"\r\n\r\nusing mint = modint998;\r\n\r\nvoid solve()\
+    \ {\r\n  LL(N, M);\r\n  VEC(mint, f, N);\r\n  VEC(mint, g, M);\r\n  auto [q, r]\
+    \ = poly_divmod(f, g);\r\n  print(len(q), len(r));\r\n  print(q);\r\n  print(r);\r\
+    \n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
     \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
   - mod/modint.hpp
-  - polynomial/polynomial_division.hpp
+  - polynomial/poly_divmod.hpp
   - polynomial/fps_inv.hpp
   - polynomial/convolution.hpp
   isVerificationFile: true
   path: test/library_checker/polynomial/polynomial_division.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 14:13:02+09:00'
+  timestamp: '2022-01-08 14:37:20+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/polynomial/polynomial_division.test.cpp
