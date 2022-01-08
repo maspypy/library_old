@@ -5,18 +5,12 @@ data:
   - icon: ':warning:'
     path: ds/lichao.hpp
     title: ds/lichao.hpp
-  - icon: ':x:'
-    path: ds/unionfind.hpp
-    title: ds/unionfind.hpp
   - icon: ':warning:'
     path: geometry/geometry.hpp
     title: geometry/geometry.hpp
   - icon: ':warning:'
     path: graph/bipartite_coloring.hpp
     title: graph/bipartite_coloring.hpp
-  - icon: ':warning:'
-    path: graph/functional.hpp
-    title: graph/functional.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_D_dualsegtree.test.cpp
@@ -361,8 +355,8 @@ data:
     \ uval) {\n    if (uval == 0) {\n      write_single('0');\n      return;\n   \
     \ }\n    if (pos > SIZE - 50) flush();\n\n    write_unsigned(uval);\n  }\n\n \
     \ template <class U, is_unsigned_int_t<U> * = nullptr>\n  static int calc_len(U\
-    \ x) {\n    int i = (bsr(x) * 3 + 3) / 10;\n    if (x < tens[i])\n      return\
-    \ i;\n    else\n      return i + 1;\n  }\n\n  template <class U, is_unsigned_int_t<U>\
+    \ x) {\n    int i = (bsr(1ULL * x) * 3 + 3) / 10;\n    if (x < tens[i])\n    \
+    \  return i;\n    else\n      return i + 1;\n  }\n\n  template <class U, is_unsigned_int_t<U>\
     \ * = nullptr,\n            enable_if_t<2 >= sizeof(U)> * = nullptr>\n  void write_unsigned(U\
     \ uval) {\n    size_t len = calc_len(uval);\n    pos += len;\n\n    char *ptr\
     \ = line.data() + pos;\n    while (uval >= 100) {\n      ptr -= 2;\n      memcpy(ptr,\
@@ -572,8 +566,8 @@ data:
     \ uval) {\n    if (uval == 0) {\n      write_single('0');\n      return;\n   \
     \ }\n    if (pos > SIZE - 50) flush();\n\n    write_unsigned(uval);\n  }\n\n \
     \ template <class U, is_unsigned_int_t<U> * = nullptr>\n  static int calc_len(U\
-    \ x) {\n    int i = (bsr(x) * 3 + 3) / 10;\n    if (x < tens[i])\n      return\
-    \ i;\n    else\n      return i + 1;\n  }\n\n  template <class U, is_unsigned_int_t<U>\
+    \ x) {\n    int i = (bsr(1ULL * x) * 3 + 3) / 10;\n    if (x < tens[i])\n    \
+    \  return i;\n    else\n      return i + 1;\n  }\n\n  template <class U, is_unsigned_int_t<U>\
     \ * = nullptr,\n            enable_if_t<2 >= sizeof(U)> * = nullptr>\n  void write_unsigned(U\
     \ uval) {\n    size_t len = calc_len(uval);\n    pos += len;\n\n    char *ptr\
     \ = line.data() + pos;\n    while (uval >= 100) {\n      ptr -= 2;\n      memcpy(ptr,\
@@ -658,11 +652,9 @@ data:
   path: my_template.hpp
   requiredBy:
   - graph/bipartite_coloring.hpp
-  - graph/functional.hpp
   - ds/lichao.hpp
-  - ds/unionfind.hpp
   - geometry/geometry.hpp
-  timestamp: '2022-01-08 21:53:05+09:00'
+  timestamp: '2022-01-08 22:12:01+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp

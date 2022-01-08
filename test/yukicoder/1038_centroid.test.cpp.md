@@ -158,8 +158,8 @@ data:
     \ uval) {\n    if (uval == 0) {\n      write_single('0');\n      return;\n   \
     \ }\n    if (pos > SIZE - 50) flush();\n\n    write_unsigned(uval);\n  }\n\n \
     \ template <class U, is_unsigned_int_t<U> * = nullptr>\n  static int calc_len(U\
-    \ x) {\n    int i = (bsr(x) * 3 + 3) / 10;\n    if (x < tens[i])\n      return\
-    \ i;\n    else\n      return i + 1;\n  }\n\n  template <class U, is_unsigned_int_t<U>\
+    \ x) {\n    int i = (bsr(1ULL * x) * 3 + 3) / 10;\n    if (x < tens[i])\n    \
+    \  return i;\n    else\n      return i + 1;\n  }\n\n  template <class U, is_unsigned_int_t<U>\
     \ * = nullptr,\n            enable_if_t<2 >= sizeof(U)> * = nullptr>\n  void write_unsigned(U\
     \ uval) {\n    size_t len = calc_len(uval);\n    pos += len;\n\n    char *ptr\
     \ = line.data() + pos;\n    while (uval >= 100) {\n      ptr -= 2;\n      memcpy(ptr,\
@@ -376,7 +376,7 @@ data:
   isVerificationFile: true
   path: test/yukicoder/1038_centroid.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 21:53:05+09:00'
+  timestamp: '2022-01-08 22:12:01+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yukicoder/1038_centroid.test.cpp
