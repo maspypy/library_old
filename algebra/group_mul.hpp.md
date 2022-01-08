@@ -5,11 +5,11 @@ data:
   - icon: ':x:'
     path: algebra/lazy_add_mul.hpp
     title: algebra/lazy_add_mul.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: polynomial/lagrange_interpolate_iota.hpp
     title: polynomial/lagrange_interpolate_iota.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
     title: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
   - icon: ':x:'
@@ -17,7 +17,7 @@ data:
     title: test/yukicoder/899_bfsnumbering.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 1 \"algebra/group_mul.hpp\"\ntemplate <class X>\r\nstruct Group_Mul\
@@ -36,7 +36,7 @@ data:
   - algebra/lazy_add_mul.hpp
   - polynomial/lagrange_interpolate_iota.hpp
   timestamp: '2022-01-08 10:07:27+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
   - test/yukicoder/899_bfsnumbering.test.cpp
