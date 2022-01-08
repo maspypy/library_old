@@ -68,8 +68,8 @@ vc<mint> multiplicative_convolution_mod2n(vc<mint>& A, vc<mint>& B){
         tie(c[0][j], c[1][j]) = mp(c[0][j] + c[1][j], c[0][j] - c[1][j]);
       }
     }
-    mint coef = mint(1) / mint(H * W);
-    FOR(i, H) FOR(j, W) c[i][j] *= coef;
+    mint coef = mint(1) / mint(H);
+    FOR(i, H) FOR(j, W) c[i][j] *= coef;  
   }
 
   vc<mint> C(1 << N);

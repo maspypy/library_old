@@ -49,7 +49,6 @@ vc<mint> multivar_convolution(vi ns, vc<mint>& f, vc<mint>& g) {
   FOR(k, K) ntt(hh[k], true);
 
   vc<mint> h(N);
-  mint c = mint(1) / mint(sz);
-  FOR(i, N) h[i] = hh[chi(i)][i] * c;
+  FOR(i, N) h[i] = hh[chi(i)][i];
   return h;
 }

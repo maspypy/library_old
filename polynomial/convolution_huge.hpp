@@ -17,7 +17,5 @@ vc<mint> convolution_huge(vc<mint>& A, vc<mint>& B) {
   vc<mint> ANS(8 << L);
   FOR(i, 7) FOR(k, 2 << L) ANS[(i << L) + k] += E[i][k];
   ANS.resize(N + M - 1);
-  mint c = mint(1) / mint(2 << L);
-  FOR(i, len(ANS)) ANS[i] *= c;
   return ANS;
 }

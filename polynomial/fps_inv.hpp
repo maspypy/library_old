@@ -17,8 +17,7 @@ vc<mint> fps_inv(vc<mint>& F) {
     ntt(f, false);
     FOR(i, 2 * n) f[i] *= g[i];
     ntt(f, true);
-    mint c = mint(-1) / mint(4 * n * n);
-    FOR3(i, n, 2 * n) G.eb(f[i] * c);
+    FOR3(i, n, 2 * n) G.eb(f[i] * mint(-1));
     n *= 2;
   }
   G.resize(N);

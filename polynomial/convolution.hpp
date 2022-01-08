@@ -114,6 +114,8 @@ void ntt(vector<mint>& a, bool inverse) {
       }
     }
   } else {
+    mint coef = mint(1) / mint(len(a));
+    FOR(i, len(a)) a[i] *= coef;
     int len = h;
     while (len) {
       if (len == 1) {
@@ -174,17 +176,15 @@ vector<mint> convolution_ntt(vector<mint> a, vector<mint> b) {
   while (sz < n + m - 1) sz *= 2;
   a.resize(sz), b.resize(sz);
   bool same = a == b;
-  ntt(a, false);
+  ntt(a, 0);
   if(same){
     b = a;
   } else {
-    ntt(b, false);
+    ntt(b, 0);
   }
   FOR(i, sz) a[i] *= b[i];
-  ntt(a, true);
+  ntt(a, 1);
   a.resize(n + m - 1);
-  mint iz = mint(1) / mint(sz);
-  FOR(i, len(a)) a[i] *= iz;
   return a;
 }
 
