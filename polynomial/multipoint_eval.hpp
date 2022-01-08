@@ -1,4 +1,4 @@
-#include "polynomial/poly_divmod.hpp"
+#include "polynomial/fps_inv.hpp"
 
 template <typename mint>
 vc<mint> mid_prod(vc<mint>& a, vc<mint>& b) {
