@@ -8,15 +8,8 @@ using mint = modint998;
 
 void solve() {
   LL(N);
-  vc<mint> A(1 << N), B(1 << N);
-  FOR(i, 1 << N) {
-    LL(a);
-    A[i] = a;
-  }
-  FOR(i, 1 << N) {
-    LL(a);
-    B[i] = a;
-  }
+  VEC(mint, A, 1<<N);
+  VEC(mint, B, 1<<N);
   auto ANS = and_convolution(A, B);
   print(ANS);
 }

@@ -5,9 +5,8 @@
 
 void solve() {
   LL(N, M);
-  vc<ull> A(N), B(M);
-  FOR(i, N) cin >> A[i];
-  FOR(i, M) cin >> B[i];
+  VEC(ull, A, N);
+  VEC(ull, B, M);
   auto C = convolution_mod_2_64(A, B);
   print(C);
 }

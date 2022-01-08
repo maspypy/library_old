@@ -1,7 +1,7 @@
 #pragma once
 template <int mod>
 struct modint {
-  static constexpr bool is_static = true;
+  static constexpr bool is_modint = true;
   int val;
 
   constexpr modint(const ll val = 0) noexcept
@@ -54,20 +54,11 @@ struct modint {
     }
     return ret;
   }
-
-  friend ostream &operator<<(ostream &os, const modint &p) {
-    return os << p.val;
-  }
-  friend istream &operator>>(istream &is, modint &a) {
-    int64_t t;
-    is >> t;
-    a = modint(t);
-    return (is);
-  }
   static constexpr int get_mod() { return mod; }
 };
 
 struct ArbitraryModInt {
+  static constexpr bool is_modint = true;
   int val;
   ArbitraryModInt() : val(0) {}
   ArbitraryModInt(int64_t y)

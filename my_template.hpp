@@ -135,6 +135,19 @@ using is_signed_int_t = enable_if_t<is_signed_int<T>::value>;
 template <class T>
 using is_unsigned_int_t = enable_if_t<is_unsigned_int<T>::value>;
 
+namespace detail {
+template <typename T, decltype(&T::is_modint) = &T::is_modint>
+std::true_type check_value(int);
+template <typename T>
+std::false_type check_value(long);
+} // namespace detail
+
+template <typename T>
+struct is_modint : decltype(detail::check_value<T>(0)) {};
+
+template <typename T>
+using is_modint_t = enable_if_t<is_modint<T>::value>;
+
 template <class T>
 using to_unsigned_t = typename to_unsigned<T>::type;
 
@@ -327,6 +340,11 @@ private:
     write_unsigned(uval);
   }
 
+  template <class T, is_modint_t<T> * = nullptr>
+  void write_single(const T &val) {
+    write_single(val.val);
+  }
+
   static int bsr(unsigned int n) {
     return 8 * (int)sizeof(unsigned int) - 1 - __builtin_clz(n);
   }
@@ -490,7 +508,8 @@ Printer printer = Printer(stdout);
   long double __VA_ARGS__; \
   IN(__VA_ARGS__)
 void scan(int &a) { scanner.read(a); }
-void scan(long long &a) { scanner.read(a); }
+void scan(ll &a) { scanner.read(a); }
+void scan(ull &a) { scanner.read(a); }
 void scan(char &a) { scanner.read(a); }
 void scan(double &a) { scanner.read(a); }
 // void scan(long double &a) { scanner.read(a); }
@@ -511,9 +530,11 @@ template <class T>
 void scan(vector<T> &a) {
   for (auto &&i: a) scan(i);
 }
-template <class T>
+template <class T> // modint
 void scan(T &a) {
-  scanner.read(a);
+  ll x;
+  scanner.read(x);
+  a = x;
 }
 void IN() {}
 template <class Head, class... Tail>
@@ -528,35 +549,11 @@ vi s_to_vi(string S, char first_char = 'a') {
   return A;
 }
 
-template <typename T, typename U>
-ostream &operator<<(ostream &os, const pair<T, U> &A) {
-  os << A.fi << " " << A.se;
-  return os;
-}
-template <typename T1, typename T2, typename T3>
-ostream &operator<<(ostream &os, const tuple<T1, T2, T3> &t) {
-  os << get<0>(t) << " " << get<1>(t) << " " << get<2>(t);
-  return os;
-}
-template <typename T1, typename T2, typename T3, typename T4>
-ostream &operator<<(ostream &os, const tuple<T1, T2, T3, T4> &t) {
-  os << get<0>(t) << " " << get<1>(t) << " " << get<2>(t) << " " << get<3>(t);
-  return os;
-}
-template <typename T>
-ostream &operator<<(ostream &os, const vector<T> &A) {
-  for (size_t i = 0; i < A.size(); i++) {
-    if (i) os << " ";
-    os << A[i];
-  }
-  return os;
-}
-
 void print() { printer.writeln(); }
 template <class Head, class... Tail>
 void print(Head &&head, Tail &&... tail) {
   printer.write(head);
-  if (sizeof...(Tail)) printer.write(" ");
+  if (sizeof...(Tail)) printer.write(' ');
   print(forward<Tail>(tail)...);
 }
 
