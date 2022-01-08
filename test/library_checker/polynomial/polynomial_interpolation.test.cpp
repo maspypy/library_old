@@ -1,16 +1,13 @@
-#define PROBLEM "https://judge.yosupo.jp/problem/multipoint_evaluation"
+#define PROBLEM "https://judge.yosupo.jp/problem/polynomial_interpolation"
 #include "my_template.hpp"
-
 #include "polynomial/multipoint.hpp"
 
-#include "mod/modint.hpp"
 using mint = modint998;
-
 void solve() {
-  LL(N, M);
-  VEC(mint, f, N);
-  VEC(mint, pts, M);
-  print(multipoint_eval(f, pts));
+  LL(N);
+  VEC(mint, X, N);
+  VEC(mint, Y, N);
+  print(multipoint_interpolate(X, Y));
 }
 
 signed main() {
