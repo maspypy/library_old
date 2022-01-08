@@ -175,6 +175,21 @@ vector<mint> convolution_ntt(vector<mint> a, vector<mint> b) {
   int n = int(a.size()), m = int(b.size());
   int sz = 1;
   while (sz < n + m - 1) sz *= 2;
+
+  // sz = 2^k のときの高速化。分割統治的なやつで損しまくるので。
+  if((n+m-3) <= sz / 2){
+    auto a_last = a.back(), b_last = b.back();
+    a.pop_back(), b.pop_back();
+    auto c = convolution(a, b);
+    c.eb(0);
+    c.eb(0);
+    c.back() = a_last * b_last;
+    FOR(i, len(a)) c[i + len(b)] += a[i] * b_last;
+    FOR(i, len(b)) c[i + len(a)] += b[i] * a_last;
+    return c;
+  }
+
+
   a.resize(sz), b.resize(sz);
   bool same = a == b;
   ntt(a, 0);
