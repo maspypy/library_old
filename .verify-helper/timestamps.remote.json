@@ -64,5 +64,9 @@
 "test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp": "2022-01-08 22:12:01 +0900",
 "test/library_checker/sample/many_aplusb.test.cpp": "2022-01-08 22:12:01 +0900",
 "test/library_checker/string/enumerate_palindromes.test.cpp": "2022-01-08 22:12:01 +0900",
-"test/library_checker/string/zalgorithm.test.cpp": "2022-01-08 22:12:01 +0900"
+"test/library_checker/string/zalgorithm.test.cpp": "2022-01-08 22:12:01 +0900",
+"test/library_checker/string/zalgorithm_by_rollinghash.test.cpp": "2022-01-08 22:12:01 +0900",
+"test/yukicoder/1002_centroid.test.cpp": "2022-01-08 22:12:01 +0900",
+"test/yukicoder/1038_centroid.test.cpp": "2022-01-08 22:12:01 +0900",
+"test/yukicoder/899_bfsnumbering.test.cpp": "2022-01-08 22:12:01 +0900"
 }
