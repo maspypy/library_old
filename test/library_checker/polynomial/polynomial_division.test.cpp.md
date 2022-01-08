@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
   - icon: ':x:'
@@ -89,6 +89,10 @@ data:
     \ <class T>\nusing is_integral_t = enable_if_t<is_integral<T>::value>;\n\ntemplate\
     \ <class T>\nusing is_signed_int_t = enable_if_t<is_signed_int<T>::value>;\n\n\
     template <class T>\nusing is_unsigned_int_t = enable_if_t<is_unsigned_int<T>::value>;\n\
+    \nnamespace detail {\ntemplate <typename T, decltype(&T::is_modint) = &T::is_modint>\n\
+    std::true_type check_value(int);\ntemplate <typename T>\nstd::false_type check_value(long);\n\
+    } // namespace detail\n\ntemplate <typename T>\nstruct is_modint : decltype(detail::check_value<T>(0))\
+    \ {};\n\ntemplate <typename T>\nusing is_modint_t = enable_if_t<is_modint<T>::value>;\n\
     \ntemplate <class T>\nusing to_unsigned_t = typename to_unsigned<T>::type;\n\n\
     struct Scanner {\npublic:\n  Scanner(const Scanner &) = delete;\n  Scanner &operator=(const\
     \ Scanner &) = delete;\n\n  Scanner(FILE *fp) : fd(fileno(fp)) { line[0] = 127;\
@@ -145,14 +149,16 @@ data:
     \ T &val) {\n    using U = to_unsigned_t<T>;\n    if (val == 0) {\n      write_single('0');\n\
     \      return;\n    }\n    if (pos > SIZE - 50) flush();\n    U uval = val;\n\
     \    if (val < 0) {\n      write_single('-');\n      uval = -uval;\n    }\n  \
-    \  write_unsigned(uval);\n  }\n\n  static int bsr(unsigned int n) {\n    return\
-    \ 8 * (int)sizeof(unsigned int) - 1 - __builtin_clz(n);\n  }\n  static int bsr(unsigned\
-    \ long n) {\n    return 8 * (int)sizeof(unsigned long) - 1 - __builtin_clzl(n);\n\
-    \  }\n  static int bsr(unsigned long long n) {\n    return 8 * (int)sizeof(unsigned\
-    \ long long) - 1 - __builtin_clzll(n);\n  }\n\n  template <class U, is_unsigned_int_t<U>\
-    \ * = nullptr>\n  void write_single(U uval) {\n    if (uval == 0) {\n      write_single('0');\n\
-    \      return;\n    }\n    if (pos > SIZE - 50) flush();\n\n    write_unsigned(uval);\n\
-    \  }\n\n  template <class U, is_unsigned_int_t<U> * = nullptr>\n  static int calc_len(U\
+    \  write_unsigned(uval);\n  }\n\n  template <class T, is_modint_t<T> * = nullptr>\n\
+    \  void write_single(const T &val) {\n    write_single(val.val);\n  }\n\n  static\
+    \ int bsr(unsigned int n) {\n    return 8 * (int)sizeof(unsigned int) - 1 - __builtin_clz(n);\n\
+    \  }\n  static int bsr(unsigned long n) {\n    return 8 * (int)sizeof(unsigned\
+    \ long) - 1 - __builtin_clzl(n);\n  }\n  static int bsr(unsigned long long n)\
+    \ {\n    return 8 * (int)sizeof(unsigned long long) - 1 - __builtin_clzll(n);\n\
+    \  }\n\n  template <class U, is_unsigned_int_t<U> * = nullptr>\n  void write_single(U\
+    \ uval) {\n    if (uval == 0) {\n      write_single('0');\n      return;\n   \
+    \ }\n    if (pos > SIZE - 50) flush();\n\n    write_unsigned(uval);\n  }\n\n \
+    \ template <class U, is_unsigned_int_t<U> * = nullptr>\n  static int calc_len(U\
     \ x) {\n    int i = (bsr(x) * 3 + 3) / 10;\n    if (x < tens[i])\n      return\
     \ i;\n    else\n      return i + 1;\n  }\n\n  template <class U, is_unsigned_int_t<U>\
     \ * = nullptr,\n            enable_if_t<2 >= sizeof(U)> * = nullptr>\n  void write_unsigned(U\
@@ -199,52 +205,43 @@ data:
     \ \\\n  IN(__VA_ARGS__)\n#define STR(...)      \\\n  string __VA_ARGS__; \\\n\
     \  IN(__VA_ARGS__)\n#define CHR(...)    \\\n  char __VA_ARGS__; \\\n  IN(__VA_ARGS__)\n\
     #define DBL(...)           \\\n  long double __VA_ARGS__; \\\n  IN(__VA_ARGS__)\n\
-    void scan(int &a) { scanner.read(a); }\nvoid scan(long long &a) { scanner.read(a);\
-    \ }\nvoid scan(char &a) { scanner.read(a); }\nvoid scan(double &a) { scanner.read(a);\
-    \ }\n// void scan(long double &a) { scanner.read(a); }\nvoid scan(string &a) {\
-    \ scanner.read(a); }\ntemplate <class T>\nvoid scan(pair<T, T> &p) {\n  scan(p.first),\
-    \ scan(p.second);\n}\ntemplate <class T>\nvoid scan(tuple<T, T, T> &p) {\n  scan(get<0>(p)),\
-    \ scan(get<1>(p)), scan(get<2>(p));\n}\ntemplate <class T>\nvoid scan(tuple<T,\
-    \ T, T, T> &p) {\n  scan(get<0>(p)), scan(get<1>(p)), scan(get<2>(p)), scan(get<3>(p));\n\
-    }\ntemplate <class T>\nvoid scan(vector<T> &a) {\n  for (auto &&i: a) scan(i);\n\
-    }\ntemplate <class T>\nvoid scan(T &a) {\n  scanner.read(a);\n}\nvoid IN() {}\n\
-    template <class Head, class... Tail>\nvoid IN(Head &head, Tail &... tail) {\n\
-    \  scan(head);\n  IN(tail...);\n}\n\nvi s_to_vi(string S, char first_char = 'a')\
-    \ {\n  vi A(S.size());\n  FOR(i, S.size()) { A[i] = S[i] - first_char; }\n  return\
-    \ A;\n}\n\ntemplate <typename T, typename U>\nostream &operator<<(ostream &os,\
-    \ const pair<T, U> &A) {\n  os << A.fi << \" \" << A.se;\n  return os;\n}\ntemplate\
-    \ <typename T1, typename T2, typename T3>\nostream &operator<<(ostream &os, const\
-    \ tuple<T1, T2, T3> &t) {\n  os << get<0>(t) << \" \" << get<1>(t) << \" \" <<\
-    \ get<2>(t);\n  return os;\n}\ntemplate <typename T1, typename T2, typename T3,\
-    \ typename T4>\nostream &operator<<(ostream &os, const tuple<T1, T2, T3, T4> &t)\
-    \ {\n  os << get<0>(t) << \" \" << get<1>(t) << \" \" << get<2>(t) << \" \" <<\
-    \ get<3>(t);\n  return os;\n}\ntemplate <typename T>\nostream &operator<<(ostream\
-    \ &os, const vector<T> &A) {\n  for (size_t i = 0; i < A.size(); i++) {\n    if\
-    \ (i) os << \" \";\n    os << A[i];\n  }\n  return os;\n}\n\nvoid print() { printer.writeln();\
-    \ }\ntemplate <class Head, class... Tail>\nvoid print(Head &&head, Tail &&...\
-    \ tail) {\n  printer.write(head);\n  if (sizeof...(Tail)) printer.write(\" \"\
-    );\n  print(forward<Tail>(tail)...);\n}\n\nvoid YES(bool t = 1) { print(t ? \"\
-    YES\" : \"NO\"); }\nvoid NO(bool t = 1) { YES(!t); }\nvoid Yes(bool t = 1) { print(t\
-    \ ? \"Yes\" : \"No\"); }\nvoid No(bool t = 1) { Yes(!t); }\nvoid yes(bool t =\
-    \ 1) { print(t ? \"yes\" : \"no\"); }\nvoid no(bool t = 1) { yes(!t); }\n\ntemplate\
-    \ <typename T>\nvector<T> cumsum(vector<T> &A) {\n  int N = A.size();\n  vector<T>\
-    \ B(N + 1);\n  B[0] = T(0);\n  FOR(i, N) { B[i + 1] = B[i] + A[i]; }\n  return\
-    \ B;\n}\n\nvc<int> bin_count(vi &A, int size) {\n  vc<int> C(size);\n  for (auto\
-    \ &x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate <typename T>\nvector<int> argsort(vector<T>\
-    \ &A) {\n  vector<int> ids(A.size());\n  iota(all(ids), 0);\n  sort(all(ids),\n\
-    \       [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j] && i < j); });\n\
-    \  return ids;\n}\n\nll binary_search(function<bool(ll)> check, ll ok, ll ng)\
-    \ {\n  assert(check(ok));\n  while (abs(ok - ng) > 1) {\n    auto x = (ng + ok)\
-    \ / 2;\n    if (check(x))\n      ok = x;\n    else\n      ng = x;\n  }\n  return\
-    \ ok;\n}\n\ntemplate <class T, class S>\ninline bool chmax(T &a, const S &b) {\n\
-    \  return (a < b ? a = b, 1 : 0);\n}\ntemplate <class T, class S>\ninline bool\
-    \ chmin(T &a, const S &b) {\n  return (a > b ? a = b, 1 : 0);\n}\n\n#define SUM(v)\
-    \ accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n#define MAX(v)\
-    \ *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
+    void scan(int &a) { scanner.read(a); }\nvoid scan(ll &a) { scanner.read(a); }\n\
+    void scan(ull &a) { scanner.read(a); }\nvoid scan(char &a) { scanner.read(a);\
+    \ }\nvoid scan(double &a) { scanner.read(a); }\n// void scan(long double &a) {\
+    \ scanner.read(a); }\nvoid scan(string &a) { scanner.read(a); }\ntemplate <class\
+    \ T>\nvoid scan(pair<T, T> &p) {\n  scan(p.first), scan(p.second);\n}\ntemplate\
+    \ <class T>\nvoid scan(tuple<T, T, T> &p) {\n  scan(get<0>(p)), scan(get<1>(p)),\
+    \ scan(get<2>(p));\n}\ntemplate <class T>\nvoid scan(tuple<T, T, T, T> &p) {\n\
+    \  scan(get<0>(p)), scan(get<1>(p)), scan(get<2>(p)), scan(get<3>(p));\n}\ntemplate\
+    \ <class T>\nvoid scan(vector<T> &a) {\n  for (auto &&i: a) scan(i);\n}\ntemplate\
+    \ <class T> // modint\nvoid scan(T &a) {\n  ll x;\n  scanner.read(x);\n  a = x;\n\
+    }\nvoid IN() {}\ntemplate <class Head, class... Tail>\nvoid IN(Head &head, Tail\
+    \ &... tail) {\n  scan(head);\n  IN(tail...);\n}\n\nvi s_to_vi(string S, char\
+    \ first_char = 'a') {\n  vi A(S.size());\n  FOR(i, S.size()) { A[i] = S[i] - first_char;\
+    \ }\n  return A;\n}\n\nvoid print() { printer.writeln(); }\ntemplate <class Head,\
+    \ class... Tail>\nvoid print(Head &&head, Tail &&... tail) {\n  printer.write(head);\n\
+    \  if (sizeof...(Tail)) printer.write(' ');\n  print(forward<Tail>(tail)...);\n\
+    }\n\nvoid YES(bool t = 1) { print(t ? \"YES\" : \"NO\"); }\nvoid NO(bool t = 1)\
+    \ { YES(!t); }\nvoid Yes(bool t = 1) { print(t ? \"Yes\" : \"No\"); }\nvoid No(bool\
+    \ t = 1) { Yes(!t); }\nvoid yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\n\
+    void no(bool t = 1) { yes(!t); }\n\ntemplate <typename T>\nvector<T> cumsum(vector<T>\
+    \ &A) {\n  int N = A.size();\n  vector<T> B(N + 1);\n  B[0] = T(0);\n  FOR(i,\
+    \ N) { B[i + 1] = B[i] + A[i]; }\n  return B;\n}\n\nvc<int> bin_count(vi &A, int\
+    \ size) {\n  vc<int> C(size);\n  for (auto &x: A) { ++C[x]; }\n  return C;\n}\n\
+    \ntemplate <typename T>\nvector<int> argsort(vector<T> &A) {\n  vector<int> ids(A.size());\n\
+    \  iota(all(ids), 0);\n  sort(all(ids),\n       [&](int i, int j) { return A[i]\
+    \ < A[j] || (A[i] == A[j] && i < j); });\n  return ids;\n}\n\nll binary_search(function<bool(ll)>\
+    \ check, ll ok, ll ng) {\n  assert(check(ok));\n  while (abs(ok - ng) > 1) {\n\
+    \    auto x = (ng + ok) / 2;\n    if (check(x))\n      ok = x;\n    else\n   \
+    \   ng = x;\n  }\n  return ok;\n}\n\ntemplate <class T, class S>\ninline bool\
+    \ chmax(T &a, const S &b) {\n  return (a < b ? a = b, 1 : 0);\n}\ntemplate <class\
+    \ T, class S>\ninline bool chmin(T &a, const S &b) {\n  return (a > b ? a = b,\
+    \ 1 : 0);\n}\n\n#define SUM(v) accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n\
+    #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
     \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/polynomial/polynomial_division.test.cpp\"\
     \n\r\n#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n  static\
-    \ constexpr bool is_static = true;\n  int val;\n\n  constexpr modint(const ll\
+    \ constexpr bool is_modint = true;\n  int val;\n\n  constexpr modint(const ll\
     \ val = 0) noexcept\n      : val(val >= 0 ? val % mod : (mod - (-val) % mod) %\
     \ mod) {}\n\n  bool operator<(const modint &other) const {\n    return val < other.val;\n\
     \  } // To use std::map\n\n  modint &operator+=(const modint &p) {\n    if ((val\
@@ -263,101 +260,99 @@ data:
     \     t = a / b;\n      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n   \
     \ }\n    return modint(u);\n  }\n\n  modint pow(int64_t n) const {\n    modint\
     \ ret(1), mul(val);\n    while (n > 0) {\n      if (n & 1) ret *= mul;\n     \
-    \ mul *= mul;\n      n >>= 1;\n    }\n    return ret;\n  }\n\n  friend ostream\
-    \ &operator<<(ostream &os, const modint &p) {\n    return os << p.val;\n  }\n\
-    \  friend istream &operator>>(istream &is, modint &a) {\n    int64_t t;\n    is\
-    \ >> t;\n    a = modint(t);\n    return (is);\n  }\n  static constexpr int get_mod()\
-    \ { return mod; }\n};\n\nstruct ArbitraryModInt {\n  int val;\n  ArbitraryModInt()\
-    \ : val(0) {}\n  ArbitraryModInt(int64_t y)\n      : val(y >= 0 ? y % get_mod()\n\
-    \                   : (get_mod() - (-y) % get_mod()) % get_mod()) {}\n\n  bool\
-    \ operator<(const ArbitraryModInt &other) const {\n    return val < other.val;\n\
-    \  } // To use std::map<ArbitraryModInt, T>\n\n  static int &get_mod() {\n   \
-    \ static int mod = 0;\n    return mod;\n  }\n  static void set_mod(int md) { get_mod()\
-    \ = md; }\n  ArbitraryModInt &operator+=(const ArbitraryModInt &p) {\n    if ((val\
-    \ += p.val) >= get_mod()) val -= get_mod();\n    return *this;\n  }\n  ArbitraryModInt\
-    \ &operator-=(const ArbitraryModInt &p) {\n    if ((val += get_mod() - p.val)\
-    \ >= get_mod()) val -= get_mod();\n    return *this;\n  }\n  ArbitraryModInt &operator*=(const\
-    \ ArbitraryModInt &p) {\n    unsigned long long a = (unsigned long long)val *\
-    \ p.val;\n    unsigned xh = (unsigned)(a >> 32), xl = (unsigned)a, d, m;\n   \
-    \ asm(\"divl %4; \\n\\t\" : \"=a\"(d), \"=d\"(m) : \"d\"(xh), \"a\"(xl), \"r\"\
-    (get_mod()));\n    val = m;\n    return *this;\n  }\n  ArbitraryModInt &operator/=(const\
-    \ ArbitraryModInt &p) {\n    *this *= p.inverse();\n    return *this;\n  }\n \
-    \ ArbitraryModInt operator-() const { return ArbitraryModInt(-val); }\n  ArbitraryModInt\
-    \ operator+(const ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this)\
-    \ += p;\n  }\n  ArbitraryModInt operator-(const ArbitraryModInt &p) const {\n\
-    \    return ArbitraryModInt(*this) -= p;\n  }\n  ArbitraryModInt operator*(const\
-    \ ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this) *= p;\n  }\n\n\
-    \  ArbitraryModInt operator/(const ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this)\
-    \ /= p;\n  }\n\n  bool operator==(const ArbitraryModInt &p) const { return val\
-    \ == p.val; }\n  bool operator!=(const ArbitraryModInt &p) const { return val\
-    \ != p.val; }\n  ArbitraryModInt inverse() const {\n    int a = val, b = get_mod(),\
-    \ u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -= t *\
-    \ b, b);\n      swap(u -= t * v, v);\n    }\n    return ArbitraryModInt(u);\n\
-    \  }\n  ArbitraryModInt pow(int64_t n) const {\n    ArbitraryModInt ret(1), mul(val);\n\
-    \    while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n\
-    \ >>= 1;\n    }\n    return ret;\n  }\n  friend ostream &operator<<(ostream &os,\
-    \ const ArbitraryModInt &p) {\n    return os << p.val;\n  }\n  friend istream\
-    \ &operator>>(istream &is, ArbitraryModInt &a) {\n    int64_t t;\n    is >> t;\n\
-    \    a = ArbitraryModInt(t);\n    return (is);\n  }\n};\n\ntemplate<typename mint>\n\
-    tuple<mint, mint, mint> get_factorial_data(int n){\n  static constexpr int mod\
-    \ = mint::get_mod();\n  assert(0 <= n && n < mod);\n\n  static vector<mint> fact\
-    \ = {1, 1};\n  static vector<mint> fact_inv = {1, 1};\n  static vector<mint> inv\
-    \ = {0, 1};\n  while(len(fact) <= n){\n    int k = len(fact);\n    fact.eb(fact[k\
-    \ - 1] * mint(k));\n    auto q = ceil(mod, k);\n    int r = k * q - mod;\n   \
-    \ inv.eb(inv[r] * mint(q));\n    fact_inv.eb(fact_inv[k - 1] * inv[k]);\n  }\n\
-    \  return {fact[n], fact_inv[n], inv[n]};\n}\n\ntemplate<typename mint>\nmint\
-    \ fact(int n){\n  static constexpr int mod = mint::get_mod();\n  assert(0 <= n);\n\
-    \  if(n >= mod) return 0;\n  return get<0>(get_factorial_data<mint>(n));\n}\n\n\
-    template<typename mint>\nmint fact_inv(int n){\n  static constexpr int mod = mint::get_mod();\n\
-    \  assert(0 <= n && n < mod);\n  return get<1>(get_factorial_data<mint>(n));\n\
-    }\n\ntemplate<typename mint>\nmint inv(int n){\n  static constexpr int mod = mint::get_mod();\n\
-    \  assert(0 <= n && n < mod);\n  return get<2>(get_factorial_data<mint>(n));\n\
-    }\n\ntemplate<typename mint>\nmint C(ll n, ll k, bool large = false) {\n  assert(n\
-    \ >= 0);\n  if (k < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n)\
-    \ * fact_inv<mint>(k) * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n\
-    \  FOR(i, k) {\n    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return\
-    \ x;\n}\n\ntemplate<typename mint>\nvc<mint> power_table(mint a, ll N) {\n  vc<mint>\
-    \ f(N, 1);\n  FOR(i, N - 1) f[i + 1] = a * f[i];\n  return f;\n}\n\nusing modint107\
-    \ = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\nusing amint\
-    \ = ArbitraryModInt;\n#line 3 \"polynomial/convolution.hpp\"\ntemplate <class\
-    \ T>\r\nvector<T> convolution_naive(const vector<T>& a, const vector<T>& b) {\r\
-    \n  int n = int(a.size()), m = int(b.size());\r\n  vector<T> ans(n + m - 1);\r\
-    \n  if (n < m) {\r\n    FOR(j, m) FOR(i, n) ans[i + j] += a[i] * b[j];\r\n  }\
-    \ else {\r\n    FOR(i, n) FOR(j, m) ans[i + j] += a[i] * b[j];\r\n  }\r\n  return\
-    \ ans;\r\n}\r\n\r\ntemplate <class mint>\r\nstruct fft_info {\r\n  static constexpr\
-    \ int bsf_constexpr(unsigned int n) {\r\n    int x = 0;\r\n    while (!(n & (1\
-    \ << x))) x++;\r\n    return x;\r\n  }\r\n\r\n  static constexpr int rank2 = bsf_constexpr(mint::get_mod()\
-    \ - 1);\r\n  array<mint, rank2 + 1> root;\r\n  array<mint, rank2 + 1> iroot;\r\
-    \n  array<mint, max(0, rank2 - 1)> rate2;\r\n  array<mint, max(0, rank2 - 1)>\
-    \ irate2;\r\n  array<mint, max(0, rank2 - 2)> rate3;\r\n  array<mint, max(0, rank2\
-    \ - 2)> irate3;\r\n\r\n  fft_info() {\r\n    int g = primitive_root(mint::get_mod());\r\
-    \n    root[rank2] = mint(g).pow((mint::get_mod() - 1) >> rank2);\r\n    iroot[rank2]\
-    \ = mint(1) / root[rank2];\r\n    FOR_R(i, rank2) {\r\n      root[i] = root[i\
-    \ + 1] * root[i + 1];\r\n      iroot[i] = iroot[i + 1] * iroot[i + 1];\r\n   \
-    \ }\r\n\r\n    {\r\n      mint prod = 1, iprod = 1;\r\n      for (int i = 0; i\
-    \ <= rank2 - 2; i++) {\r\n        rate2[i] = root[i + 2] * prod;\r\n        irate2[i]\
-    \ = iroot[i + 2] * iprod;\r\n        prod *= iroot[i + 2];\r\n        iprod *=\
-    \ root[i + 2];\r\n      }\r\n    }\r\n    {\r\n      mint prod = 1, iprod = 1;\r\
-    \n      for (int i = 0; i <= rank2 - 3; i++) {\r\n        rate3[i] = root[i +\
-    \ 3] * prod;\r\n        irate3[i] = iroot[i + 3] * iprod;\r\n        prod *= iroot[i\
-    \ + 3];\r\n        iprod *= root[i + 3];\r\n      }\r\n    }\r\n  }\r\n\r\n  constexpr\
-    \ int primitive_root(int m) {\r\n    if (m == 167772161) return 3;\r\n    if (m\
-    \ == 469762049) return 3;\r\n    if (m == 754974721) return 11;\r\n    if (m ==\
-    \ 880803841) return 26;\r\n    if (m == 998244353) return 3;\r\n  }\r\n};\r\n\r\
-    \ntemplate <class mint>\r\nvoid ntt(vector<mint>& a, bool inverse) {\r\n  int\
-    \ n = int(a.size());\r\n  int h = topbit(n);\r\n  assert(n == 1 << h);\r\n  static\
-    \ const fft_info<mint> info;\r\n  if (!inverse) {\r\n    int len = 0; // a[i,\
-    \ i+(n>>len), i+2*(n>>len), ..] is transformed\r\n    while (len < h) {\r\n  \
-    \    if (h - len == 1) {\r\n        int p = 1 << (h - len - 1);\r\n        mint\
-    \ rot = 1;\r\n        FOR(s, 1 << len) {\r\n          int offset = s << (h - len);\r\
-    \n          FOR(i, p) {\r\n            auto l = a[i + offset];\r\n           \
-    \ auto r = a[i + offset + p] * rot;\r\n            a[i + offset] = l + r;\r\n\
-    \            a[i + offset + p] = l - r;\r\n          }\r\n          rot *= info.rate2[topbit(~s\
-    \ & -~s)];\r\n        }\r\n        len++;\r\n      } else {\r\n        int p =\
-    \ 1 << (h - len - 2);\r\n        mint rot = 1, imag = info.root[2];\r\n      \
-    \  for (int s = 0; s < (1 << len); s++) {\r\n          mint rot2 = rot * rot;\r\
-    \n          mint rot3 = rot2 * rot;\r\n          int offset = s << (h - len);\r\
-    \n          for (int i = 0; i < p; i++) {\r\n            auto mod2 = 1ULL * mint::get_mod()\
+    \ mul *= mul;\n      n >>= 1;\n    }\n    return ret;\n  }\n  static constexpr\
+    \ int get_mod() { return mod; }\n};\n\nstruct ArbitraryModInt {\n  static constexpr\
+    \ bool is_modint = true;\n  int val;\n  ArbitraryModInt() : val(0) {}\n  ArbitraryModInt(int64_t\
+    \ y)\n      : val(y >= 0 ? y % get_mod()\n                   : (get_mod() - (-y)\
+    \ % get_mod()) % get_mod()) {}\n\n  bool operator<(const ArbitraryModInt &other)\
+    \ const {\n    return val < other.val;\n  } // To use std::map<ArbitraryModInt,\
+    \ T>\n\n  static int &get_mod() {\n    static int mod = 0;\n    return mod;\n\
+    \  }\n  static void set_mod(int md) { get_mod() = md; }\n  ArbitraryModInt &operator+=(const\
+    \ ArbitraryModInt &p) {\n    if ((val += p.val) >= get_mod()) val -= get_mod();\n\
+    \    return *this;\n  }\n  ArbitraryModInt &operator-=(const ArbitraryModInt &p)\
+    \ {\n    if ((val += get_mod() - p.val) >= get_mod()) val -= get_mod();\n    return\
+    \ *this;\n  }\n  ArbitraryModInt &operator*=(const ArbitraryModInt &p) {\n   \
+    \ unsigned long long a = (unsigned long long)val * p.val;\n    unsigned xh = (unsigned)(a\
+    \ >> 32), xl = (unsigned)a, d, m;\n    asm(\"divl %4; \\n\\t\" : \"=a\"(d), \"\
+    =d\"(m) : \"d\"(xh), \"a\"(xl), \"r\"(get_mod()));\n    val = m;\n    return *this;\n\
+    \  }\n  ArbitraryModInt &operator/=(const ArbitraryModInt &p) {\n    *this *=\
+    \ p.inverse();\n    return *this;\n  }\n  ArbitraryModInt operator-() const {\
+    \ return ArbitraryModInt(-val); }\n  ArbitraryModInt operator+(const ArbitraryModInt\
+    \ &p) const {\n    return ArbitraryModInt(*this) += p;\n  }\n  ArbitraryModInt\
+    \ operator-(const ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this)\
+    \ -= p;\n  }\n  ArbitraryModInt operator*(const ArbitraryModInt &p) const {\n\
+    \    return ArbitraryModInt(*this) *= p;\n  }\n\n  ArbitraryModInt operator/(const\
+    \ ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this) /= p;\n  }\n\n\
+    \  bool operator==(const ArbitraryModInt &p) const { return val == p.val; }\n\
+    \  bool operator!=(const ArbitraryModInt &p) const { return val != p.val; }\n\
+    \  ArbitraryModInt inverse() const {\n    int a = val, b = get_mod(), u = 1, v\
+    \ = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b);\n\
+    \      swap(u -= t * v, v);\n    }\n    return ArbitraryModInt(u);\n  }\n  ArbitraryModInt\
+    \ pow(int64_t n) const {\n    ArbitraryModInt ret(1), mul(val);\n    while (n\
+    \ > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n  \
+    \  }\n    return ret;\n  }\n  friend ostream &operator<<(ostream &os, const ArbitraryModInt\
+    \ &p) {\n    return os << p.val;\n  }\n  friend istream &operator>>(istream &is,\
+    \ ArbitraryModInt &a) {\n    int64_t t;\n    is >> t;\n    a = ArbitraryModInt(t);\n\
+    \    return (is);\n  }\n};\n\ntemplate<typename mint>\ntuple<mint, mint, mint>\
+    \ get_factorial_data(int n){\n  static constexpr int mod = mint::get_mod();\n\
+    \  assert(0 <= n && n < mod);\n\n  static vector<mint> fact = {1, 1};\n  static\
+    \ vector<mint> fact_inv = {1, 1};\n  static vector<mint> inv = {0, 1};\n  while(len(fact)\
+    \ <= n){\n    int k = len(fact);\n    fact.eb(fact[k - 1] * mint(k));\n    auto\
+    \ q = ceil(mod, k);\n    int r = k * q - mod;\n    inv.eb(inv[r] * mint(q));\n\
+    \    fact_inv.eb(fact_inv[k - 1] * inv[k]);\n  }\n  return {fact[n], fact_inv[n],\
+    \ inv[n]};\n}\n\ntemplate<typename mint>\nmint fact(int n){\n  static constexpr\
+    \ int mod = mint::get_mod();\n  assert(0 <= n);\n  if(n >= mod) return 0;\n  return\
+    \ get<0>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename mint>\nmint fact_inv(int\
+    \ n){\n  static constexpr int mod = mint::get_mod();\n  assert(0 <= n && n < mod);\n\
+    \  return get<1>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename mint>\n\
+    mint inv(int n){\n  static constexpr int mod = mint::get_mod();\n  assert(0 <=\
+    \ n && n < mod);\n  return get<2>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename\
+    \ mint>\nmint C(ll n, ll k, bool large = false) {\n  assert(n >= 0);\n  if (k\
+    \ < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n) * fact_inv<mint>(k)\
+    \ * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n  FOR(i, k) {\n\
+    \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\ntemplate<typename\
+    \ mint>\nvc<mint> power_table(mint a, ll N) {\n  vc<mint> f(N, 1);\n  FOR(i, N\
+    \ - 1) f[i + 1] = a * f[i];\n  return f;\n}\n\nusing modint107 = modint<1'000'000'007>;\n\
+    using modint998 = modint<998'244'353>;\nusing amint = ArbitraryModInt;\n#line\
+    \ 3 \"polynomial/convolution.hpp\"\ntemplate <class T>\r\nvector<T> convolution_naive(const\
+    \ vector<T>& a, const vector<T>& b) {\r\n  int n = int(a.size()), m = int(b.size());\r\
+    \n  vector<T> ans(n + m - 1);\r\n  if (n < m) {\r\n    FOR(j, m) FOR(i, n) ans[i\
+    \ + j] += a[i] * b[j];\r\n  } else {\r\n    FOR(i, n) FOR(j, m) ans[i + j] +=\
+    \ a[i] * b[j];\r\n  }\r\n  return ans;\r\n}\r\n\r\ntemplate <class mint>\r\nstruct\
+    \ fft_info {\r\n  static constexpr int bsf_constexpr(unsigned int n) {\r\n   \
+    \ int x = 0;\r\n    while (!(n & (1 << x))) x++;\r\n    return x;\r\n  }\r\n\r\
+    \n  static constexpr int rank2 = bsf_constexpr(mint::get_mod() - 1);\r\n  array<mint,\
+    \ rank2 + 1> root;\r\n  array<mint, rank2 + 1> iroot;\r\n  array<mint, max(0,\
+    \ rank2 - 1)> rate2;\r\n  array<mint, max(0, rank2 - 1)> irate2;\r\n  array<mint,\
+    \ max(0, rank2 - 2)> rate3;\r\n  array<mint, max(0, rank2 - 2)> irate3;\r\n\r\n\
+    \  fft_info() {\r\n    int g = primitive_root(mint::get_mod());\r\n    root[rank2]\
+    \ = mint(g).pow((mint::get_mod() - 1) >> rank2);\r\n    iroot[rank2] = mint(1)\
+    \ / root[rank2];\r\n    FOR_R(i, rank2) {\r\n      root[i] = root[i + 1] * root[i\
+    \ + 1];\r\n      iroot[i] = iroot[i + 1] * iroot[i + 1];\r\n    }\r\n\r\n    {\r\
+    \n      mint prod = 1, iprod = 1;\r\n      for (int i = 0; i <= rank2 - 2; i++)\
+    \ {\r\n        rate2[i] = root[i + 2] * prod;\r\n        irate2[i] = iroot[i +\
+    \ 2] * iprod;\r\n        prod *= iroot[i + 2];\r\n        iprod *= root[i + 2];\r\
+    \n      }\r\n    }\r\n    {\r\n      mint prod = 1, iprod = 1;\r\n      for (int\
+    \ i = 0; i <= rank2 - 3; i++) {\r\n        rate3[i] = root[i + 3] * prod;\r\n\
+    \        irate3[i] = iroot[i + 3] * iprod;\r\n        prod *= iroot[i + 3];\r\n\
+    \        iprod *= root[i + 3];\r\n      }\r\n    }\r\n  }\r\n\r\n  constexpr int\
+    \ primitive_root(int m) {\r\n    if (m == 167772161) return 3;\r\n    if (m ==\
+    \ 469762049) return 3;\r\n    if (m == 754974721) return 11;\r\n    if (m == 880803841)\
+    \ return 26;\r\n    if (m == 998244353) return 3;\r\n  }\r\n};\r\n\r\ntemplate\
+    \ <class mint>\r\nvoid ntt(vector<mint>& a, bool inverse) {\r\n  int n = int(a.size());\r\
+    \n  int h = topbit(n);\r\n  assert(n == 1 << h);\r\n  static const fft_info<mint>\
+    \ info;\r\n  if (!inverse) {\r\n    int len = 0; // a[i, i+(n>>len), i+2*(n>>len),\
+    \ ..] is transformed\r\n    while (len < h) {\r\n      if (h - len == 1) {\r\n\
+    \        int p = 1 << (h - len - 1);\r\n        mint rot = 1;\r\n        FOR(s,\
+    \ 1 << len) {\r\n          int offset = s << (h - len);\r\n          FOR(i, p)\
+    \ {\r\n            auto l = a[i + offset];\r\n            auto r = a[i + offset\
+    \ + p] * rot;\r\n            a[i + offset] = l + r;\r\n            a[i + offset\
+    \ + p] = l - r;\r\n          }\r\n          rot *= info.rate2[topbit(~s & -~s)];\r\
+    \n        }\r\n        len++;\r\n      } else {\r\n        int p = 1 << (h - len\
+    \ - 2);\r\n        mint rot = 1, imag = info.root[2];\r\n        for (int s =\
+    \ 0; s < (1 << len); s++) {\r\n          mint rot2 = rot * rot;\r\n          mint\
+    \ rot3 = rot2 * rot;\r\n          int offset = s << (h - len);\r\n          for\
+    \ (int i = 0; i < p; i++) {\r\n            auto mod2 = 1ULL * mint::get_mod()\
     \ * mint::get_mod();\r\n            auto a0 = 1ULL * a[i + offset].val;\r\n  \
     \          auto a1 = 1ULL * a[i + offset + p].val * rot.val;\r\n            auto\
     \ a2 = 1ULL * a[i + offset + 2 * p].val * rot2.val;\r\n            auto a3 = 1ULL\
@@ -502,7 +497,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/polynomial/polynomial_division.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:53:43+09:00'
+  timestamp: '2022-01-08 21:53:05+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/polynomial/polynomial_division.test.cpp

@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
   _extendedRequiredBy: []
@@ -21,7 +21,7 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"sequence/linearrecurrence.hpp\"\n\r\n#line 2 \"mod/modint.hpp\"\
-    \ntemplate <int mod>\nstruct modint {\n  static constexpr bool is_static = true;\n\
+    \ntemplate <int mod>\nstruct modint {\n  static constexpr bool is_modint = true;\n\
     \  int val;\n\n  constexpr modint(const ll val = 0) noexcept\n      : val(val\
     \ >= 0 ? val % mod : (mod - (-val) % mod) % mod) {}\n\n  bool operator<(const\
     \ modint &other) const {\n    return val < other.val;\n  } // To use std::map\n\
@@ -41,23 +41,21 @@ data:
     \ t * b, b);\n      swap(u -= t * v, v);\n    }\n    return modint(u);\n  }\n\n\
     \  modint pow(int64_t n) const {\n    modint ret(1), mul(val);\n    while (n >\
     \ 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n\
-    \    return ret;\n  }\n\n  friend ostream &operator<<(ostream &os, const modint\
-    \ &p) {\n    return os << p.val;\n  }\n  friend istream &operator>>(istream &is,\
-    \ modint &a) {\n    int64_t t;\n    is >> t;\n    a = modint(t);\n    return (is);\n\
-    \  }\n  static constexpr int get_mod() { return mod; }\n};\n\nstruct ArbitraryModInt\
-    \ {\n  int val;\n  ArbitraryModInt() : val(0) {}\n  ArbitraryModInt(int64_t y)\n\
-    \      : val(y >= 0 ? y % get_mod()\n                   : (get_mod() - (-y) %\
-    \ get_mod()) % get_mod()) {}\n\n  bool operator<(const ArbitraryModInt &other)\
-    \ const {\n    return val < other.val;\n  } // To use std::map<ArbitraryModInt,\
-    \ T>\n\n  static int &get_mod() {\n    static int mod = 0;\n    return mod;\n\
-    \  }\n  static void set_mod(int md) { get_mod() = md; }\n  ArbitraryModInt &operator+=(const\
-    \ ArbitraryModInt &p) {\n    if ((val += p.val) >= get_mod()) val -= get_mod();\n\
-    \    return *this;\n  }\n  ArbitraryModInt &operator-=(const ArbitraryModInt &p)\
-    \ {\n    if ((val += get_mod() - p.val) >= get_mod()) val -= get_mod();\n    return\
-    \ *this;\n  }\n  ArbitraryModInt &operator*=(const ArbitraryModInt &p) {\n   \
-    \ unsigned long long a = (unsigned long long)val * p.val;\n    unsigned xh = (unsigned)(a\
-    \ >> 32), xl = (unsigned)a, d, m;\n    asm(\"divl %4; \\n\\t\" : \"=a\"(d), \"\
-    =d\"(m) : \"d\"(xh), \"a\"(xl), \"r\"(get_mod()));\n    val = m;\n    return *this;\n\
+    \    return ret;\n  }\n  static constexpr int get_mod() { return mod; }\n};\n\n\
+    struct ArbitraryModInt {\n  static constexpr bool is_modint = true;\n  int val;\n\
+    \  ArbitraryModInt() : val(0) {}\n  ArbitraryModInt(int64_t y)\n      : val(y\
+    \ >= 0 ? y % get_mod()\n                   : (get_mod() - (-y) % get_mod()) %\
+    \ get_mod()) {}\n\n  bool operator<(const ArbitraryModInt &other) const {\n  \
+    \  return val < other.val;\n  } // To use std::map<ArbitraryModInt, T>\n\n  static\
+    \ int &get_mod() {\n    static int mod = 0;\n    return mod;\n  }\n  static void\
+    \ set_mod(int md) { get_mod() = md; }\n  ArbitraryModInt &operator+=(const ArbitraryModInt\
+    \ &p) {\n    if ((val += p.val) >= get_mod()) val -= get_mod();\n    return *this;\n\
+    \  }\n  ArbitraryModInt &operator-=(const ArbitraryModInt &p) {\n    if ((val\
+    \ += get_mod() - p.val) >= get_mod()) val -= get_mod();\n    return *this;\n \
+    \ }\n  ArbitraryModInt &operator*=(const ArbitraryModInt &p) {\n    unsigned long\
+    \ long a = (unsigned long long)val * p.val;\n    unsigned xh = (unsigned)(a >>\
+    \ 32), xl = (unsigned)a, d, m;\n    asm(\"divl %4; \\n\\t\" : \"=a\"(d), \"=d\"\
+    (m) : \"d\"(xh), \"a\"(xl), \"r\"(get_mod()));\n    val = m;\n    return *this;\n\
     \  }\n  ArbitraryModInt &operator/=(const ArbitraryModInt &p) {\n    *this *=\
     \ p.inverse();\n    return *this;\n  }\n  ArbitraryModInt operator-() const {\
     \ return ArbitraryModInt(-val); }\n  ArbitraryModInt operator+(const ArbitraryModInt\
@@ -290,7 +288,7 @@ data:
   isVerificationFile: false
   path: sequence/linearrecurrence.hpp
   requiredBy: []
-  timestamp: '2022-01-08 14:37:20+09:00'
+  timestamp: '2022-01-08 21:53:05+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp

@@ -228,7 +228,7 @@ data:
       title: matrix/matrix.hpp
   - name: mod
     pages:
-    - icon: ':x:'
+    - icon: ':question:'
       path: mod/modint.hpp
       title: mod/modint.hpp
   - name: .
@@ -292,13 +292,13 @@ data:
       title: persistent_ds/unionfind.hpp
   - name: polynomial
     pages:
-    - icon: ':x:'
+    - icon: ':question:'
       path: polynomial/convolution.hpp
       title: polynomial/convolution.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: polynomial/convolution_huge.hpp
       title: polynomial/convolution_huge.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: polynomial/convolution_mod_2_64.hpp
       title: polynomial/convolution_mod_2_64.hpp
     - icon: ':x:'
@@ -332,22 +332,22 @@ data:
       title: sequence/linearrecurrence.hpp
   - name: setfunc
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: setfunc/and_convolution.hpp
       title: setfunc/and_convolution.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: setfunc/hadamard.hpp
       title: setfunc/hadamard.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: setfunc/or_convolution.hpp
       title: setfunc/or_convolution.hpp
     - icon: ':x:'
       path: setfunc/subset_convolution.hpp
       title: setfunc/subset_convolution.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: setfunc/xor_convolution.hpp
       title: setfunc/xor_convolution.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: setfunc/zeta.hpp
       title: setfunc/zeta.hpp
   - name: string
@@ -398,19 +398,19 @@ data:
       title: test/example.test.cpp
   - name: test/library_checker/convolution
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/convolution/bitwise_and_convolution.test.cpp
       title: test/library_checker/convolution/bitwise_and_convolution.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/convolution/bitwise_or_convolution.test.cpp
       title: test/library_checker/convolution/bitwise_or_convolution.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/convolution/bitwise_xor_convolution.test.cpp
       title: test/library_checker/convolution/bitwise_xor_convolution.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/convolution/contolution_mod_2_64.test.cpp
       title: test/library_checker/convolution/contolution_mod_2_64.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/convolution/convolution_huge.test.cpp
       title: test/library_checker/convolution/convolution_huge.test.cpp
     - icon: ':x:'

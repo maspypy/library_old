@@ -83,6 +83,10 @@ data:
     \ <class T>\nusing is_integral_t = enable_if_t<is_integral<T>::value>;\n\ntemplate\
     \ <class T>\nusing is_signed_int_t = enable_if_t<is_signed_int<T>::value>;\n\n\
     template <class T>\nusing is_unsigned_int_t = enable_if_t<is_unsigned_int<T>::value>;\n\
+    \nnamespace detail {\ntemplate <typename T, decltype(&T::is_modint) = &T::is_modint>\n\
+    std::true_type check_value(int);\ntemplate <typename T>\nstd::false_type check_value(long);\n\
+    } // namespace detail\n\ntemplate <typename T>\nstruct is_modint : decltype(detail::check_value<T>(0))\
+    \ {};\n\ntemplate <typename T>\nusing is_modint_t = enable_if_t<is_modint<T>::value>;\n\
     \ntemplate <class T>\nusing to_unsigned_t = typename to_unsigned<T>::type;\n\n\
     struct Scanner {\npublic:\n  Scanner(const Scanner &) = delete;\n  Scanner &operator=(const\
     \ Scanner &) = delete;\n\n  Scanner(FILE *fp) : fd(fileno(fp)) { line[0] = 127;\
@@ -139,14 +143,16 @@ data:
     \ T &val) {\n    using U = to_unsigned_t<T>;\n    if (val == 0) {\n      write_single('0');\n\
     \      return;\n    }\n    if (pos > SIZE - 50) flush();\n    U uval = val;\n\
     \    if (val < 0) {\n      write_single('-');\n      uval = -uval;\n    }\n  \
-    \  write_unsigned(uval);\n  }\n\n  static int bsr(unsigned int n) {\n    return\
-    \ 8 * (int)sizeof(unsigned int) - 1 - __builtin_clz(n);\n  }\n  static int bsr(unsigned\
-    \ long n) {\n    return 8 * (int)sizeof(unsigned long) - 1 - __builtin_clzl(n);\n\
-    \  }\n  static int bsr(unsigned long long n) {\n    return 8 * (int)sizeof(unsigned\
-    \ long long) - 1 - __builtin_clzll(n);\n  }\n\n  template <class U, is_unsigned_int_t<U>\
-    \ * = nullptr>\n  void write_single(U uval) {\n    if (uval == 0) {\n      write_single('0');\n\
-    \      return;\n    }\n    if (pos > SIZE - 50) flush();\n\n    write_unsigned(uval);\n\
-    \  }\n\n  template <class U, is_unsigned_int_t<U> * = nullptr>\n  static int calc_len(U\
+    \  write_unsigned(uval);\n  }\n\n  template <class T, is_modint_t<T> * = nullptr>\n\
+    \  void write_single(const T &val) {\n    write_single(val.val);\n  }\n\n  static\
+    \ int bsr(unsigned int n) {\n    return 8 * (int)sizeof(unsigned int) - 1 - __builtin_clz(n);\n\
+    \  }\n  static int bsr(unsigned long n) {\n    return 8 * (int)sizeof(unsigned\
+    \ long) - 1 - __builtin_clzl(n);\n  }\n  static int bsr(unsigned long long n)\
+    \ {\n    return 8 * (int)sizeof(unsigned long long) - 1 - __builtin_clzll(n);\n\
+    \  }\n\n  template <class U, is_unsigned_int_t<U> * = nullptr>\n  void write_single(U\
+    \ uval) {\n    if (uval == 0) {\n      write_single('0');\n      return;\n   \
+    \ }\n    if (pos > SIZE - 50) flush();\n\n    write_unsigned(uval);\n  }\n\n \
+    \ template <class U, is_unsigned_int_t<U> * = nullptr>\n  static int calc_len(U\
     \ x) {\n    int i = (bsr(x) * 3 + 3) / 10;\n    if (x < tens[i])\n      return\
     \ i;\n    else\n      return i + 1;\n  }\n\n  template <class U, is_unsigned_int_t<U>\
     \ * = nullptr,\n            enable_if_t<2 >= sizeof(U)> * = nullptr>\n  void write_unsigned(U\
@@ -193,48 +199,39 @@ data:
     \ \\\n  IN(__VA_ARGS__)\n#define STR(...)      \\\n  string __VA_ARGS__; \\\n\
     \  IN(__VA_ARGS__)\n#define CHR(...)    \\\n  char __VA_ARGS__; \\\n  IN(__VA_ARGS__)\n\
     #define DBL(...)           \\\n  long double __VA_ARGS__; \\\n  IN(__VA_ARGS__)\n\
-    void scan(int &a) { scanner.read(a); }\nvoid scan(long long &a) { scanner.read(a);\
-    \ }\nvoid scan(char &a) { scanner.read(a); }\nvoid scan(double &a) { scanner.read(a);\
-    \ }\n// void scan(long double &a) { scanner.read(a); }\nvoid scan(string &a) {\
-    \ scanner.read(a); }\ntemplate <class T>\nvoid scan(pair<T, T> &p) {\n  scan(p.first),\
-    \ scan(p.second);\n}\ntemplate <class T>\nvoid scan(tuple<T, T, T> &p) {\n  scan(get<0>(p)),\
-    \ scan(get<1>(p)), scan(get<2>(p));\n}\ntemplate <class T>\nvoid scan(tuple<T,\
-    \ T, T, T> &p) {\n  scan(get<0>(p)), scan(get<1>(p)), scan(get<2>(p)), scan(get<3>(p));\n\
-    }\ntemplate <class T>\nvoid scan(vector<T> &a) {\n  for (auto &&i: a) scan(i);\n\
-    }\ntemplate <class T>\nvoid scan(T &a) {\n  scanner.read(a);\n}\nvoid IN() {}\n\
-    template <class Head, class... Tail>\nvoid IN(Head &head, Tail &... tail) {\n\
-    \  scan(head);\n  IN(tail...);\n}\n\nvi s_to_vi(string S, char first_char = 'a')\
-    \ {\n  vi A(S.size());\n  FOR(i, S.size()) { A[i] = S[i] - first_char; }\n  return\
-    \ A;\n}\n\ntemplate <typename T, typename U>\nostream &operator<<(ostream &os,\
-    \ const pair<T, U> &A) {\n  os << A.fi << \" \" << A.se;\n  return os;\n}\ntemplate\
-    \ <typename T1, typename T2, typename T3>\nostream &operator<<(ostream &os, const\
-    \ tuple<T1, T2, T3> &t) {\n  os << get<0>(t) << \" \" << get<1>(t) << \" \" <<\
-    \ get<2>(t);\n  return os;\n}\ntemplate <typename T1, typename T2, typename T3,\
-    \ typename T4>\nostream &operator<<(ostream &os, const tuple<T1, T2, T3, T4> &t)\
-    \ {\n  os << get<0>(t) << \" \" << get<1>(t) << \" \" << get<2>(t) << \" \" <<\
-    \ get<3>(t);\n  return os;\n}\ntemplate <typename T>\nostream &operator<<(ostream\
-    \ &os, const vector<T> &A) {\n  for (size_t i = 0; i < A.size(); i++) {\n    if\
-    \ (i) os << \" \";\n    os << A[i];\n  }\n  return os;\n}\n\nvoid print() { printer.writeln();\
-    \ }\ntemplate <class Head, class... Tail>\nvoid print(Head &&head, Tail &&...\
-    \ tail) {\n  printer.write(head);\n  if (sizeof...(Tail)) printer.write(\" \"\
-    );\n  print(forward<Tail>(tail)...);\n}\n\nvoid YES(bool t = 1) { print(t ? \"\
-    YES\" : \"NO\"); }\nvoid NO(bool t = 1) { YES(!t); }\nvoid Yes(bool t = 1) { print(t\
-    \ ? \"Yes\" : \"No\"); }\nvoid No(bool t = 1) { Yes(!t); }\nvoid yes(bool t =\
-    \ 1) { print(t ? \"yes\" : \"no\"); }\nvoid no(bool t = 1) { yes(!t); }\n\ntemplate\
-    \ <typename T>\nvector<T> cumsum(vector<T> &A) {\n  int N = A.size();\n  vector<T>\
-    \ B(N + 1);\n  B[0] = T(0);\n  FOR(i, N) { B[i + 1] = B[i] + A[i]; }\n  return\
-    \ B;\n}\n\nvc<int> bin_count(vi &A, int size) {\n  vc<int> C(size);\n  for (auto\
-    \ &x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate <typename T>\nvector<int> argsort(vector<T>\
-    \ &A) {\n  vector<int> ids(A.size());\n  iota(all(ids), 0);\n  sort(all(ids),\n\
-    \       [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j] && i < j); });\n\
-    \  return ids;\n}\n\nll binary_search(function<bool(ll)> check, ll ok, ll ng)\
-    \ {\n  assert(check(ok));\n  while (abs(ok - ng) > 1) {\n    auto x = (ng + ok)\
-    \ / 2;\n    if (check(x))\n      ok = x;\n    else\n      ng = x;\n  }\n  return\
-    \ ok;\n}\n\ntemplate <class T, class S>\ninline bool chmax(T &a, const S &b) {\n\
-    \  return (a < b ? a = b, 1 : 0);\n}\ntemplate <class T, class S>\ninline bool\
-    \ chmin(T &a, const S &b) {\n  return (a > b ? a = b, 1 : 0);\n}\n\n#define SUM(v)\
-    \ accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n#define MAX(v)\
-    \ *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
+    void scan(int &a) { scanner.read(a); }\nvoid scan(ll &a) { scanner.read(a); }\n\
+    void scan(ull &a) { scanner.read(a); }\nvoid scan(char &a) { scanner.read(a);\
+    \ }\nvoid scan(double &a) { scanner.read(a); }\n// void scan(long double &a) {\
+    \ scanner.read(a); }\nvoid scan(string &a) { scanner.read(a); }\ntemplate <class\
+    \ T>\nvoid scan(pair<T, T> &p) {\n  scan(p.first), scan(p.second);\n}\ntemplate\
+    \ <class T>\nvoid scan(tuple<T, T, T> &p) {\n  scan(get<0>(p)), scan(get<1>(p)),\
+    \ scan(get<2>(p));\n}\ntemplate <class T>\nvoid scan(tuple<T, T, T, T> &p) {\n\
+    \  scan(get<0>(p)), scan(get<1>(p)), scan(get<2>(p)), scan(get<3>(p));\n}\ntemplate\
+    \ <class T>\nvoid scan(vector<T> &a) {\n  for (auto &&i: a) scan(i);\n}\ntemplate\
+    \ <class T> // modint\nvoid scan(T &a) {\n  ll x;\n  scanner.read(x);\n  a = x;\n\
+    }\nvoid IN() {}\ntemplate <class Head, class... Tail>\nvoid IN(Head &head, Tail\
+    \ &... tail) {\n  scan(head);\n  IN(tail...);\n}\n\nvi s_to_vi(string S, char\
+    \ first_char = 'a') {\n  vi A(S.size());\n  FOR(i, S.size()) { A[i] = S[i] - first_char;\
+    \ }\n  return A;\n}\n\nvoid print() { printer.writeln(); }\ntemplate <class Head,\
+    \ class... Tail>\nvoid print(Head &&head, Tail &&... tail) {\n  printer.write(head);\n\
+    \  if (sizeof...(Tail)) printer.write(' ');\n  print(forward<Tail>(tail)...);\n\
+    }\n\nvoid YES(bool t = 1) { print(t ? \"YES\" : \"NO\"); }\nvoid NO(bool t = 1)\
+    \ { YES(!t); }\nvoid Yes(bool t = 1) { print(t ? \"Yes\" : \"No\"); }\nvoid No(bool\
+    \ t = 1) { Yes(!t); }\nvoid yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\n\
+    void no(bool t = 1) { yes(!t); }\n\ntemplate <typename T>\nvector<T> cumsum(vector<T>\
+    \ &A) {\n  int N = A.size();\n  vector<T> B(N + 1);\n  B[0] = T(0);\n  FOR(i,\
+    \ N) { B[i + 1] = B[i] + A[i]; }\n  return B;\n}\n\nvc<int> bin_count(vi &A, int\
+    \ size) {\n  vc<int> C(size);\n  for (auto &x: A) { ++C[x]; }\n  return C;\n}\n\
+    \ntemplate <typename T>\nvector<int> argsort(vector<T> &A) {\n  vector<int> ids(A.size());\n\
+    \  iota(all(ids), 0);\n  sort(all(ids),\n       [&](int i, int j) { return A[i]\
+    \ < A[j] || (A[i] == A[j] && i < j); });\n  return ids;\n}\n\nll binary_search(function<bool(ll)>\
+    \ check, ll ok, ll ng) {\n  assert(check(ok));\n  while (abs(ok - ng) > 1) {\n\
+    \    auto x = (ng + ok) / 2;\n    if (check(x))\n      ok = x;\n    else\n   \
+    \   ng = x;\n  }\n  return ok;\n}\n\ntemplate <class T, class S>\ninline bool\
+    \ chmax(T &a, const S &b) {\n  return (a < b ? a = b, 1 : 0);\n}\ntemplate <class\
+    \ T, class S>\ninline bool chmin(T &a, const S &b) {\n  return (a > b ? a = b,\
+    \ 1 : 0);\n}\n\n#define SUM(v) accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n\
+    #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
     \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 2 \"ds/dualsegtree.hpp\"\
     \n\ntemplate <typename Monoid>\nstruct DualSegTree {\n  using A = typename Monoid::value_type;\n\
@@ -281,7 +278,7 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_D_dualsegtree.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 20:53:43+09:00'
+  timestamp: '2022-01-08 21:53:05+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_D_dualsegtree.test.cpp
