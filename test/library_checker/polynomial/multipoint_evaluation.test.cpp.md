@@ -13,6 +13,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: polynomial/fps_inv.hpp
     title: polynomial/fps_inv.hpp
+  - icon: ':heavy_check_mark:'
+    path: polynomial/multipoint_eval.hpp
+    title: polynomial/multipoint_eval.hpp
+  - icon: ':heavy_check_mark:'
+    path: polynomial/poly_divmod.hpp
+    title: polynomial/poly_divmod.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -20,15 +26,15 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/inv_of_formal_power_series
+    PROBLEM: https://judge.yosupo.jp/problem/multipoint_evaluation
     links:
-    - https://judge.yosupo.jp/problem/inv_of_formal_power_series
-  bundledCode: "#line 1 \"test/library_checker/polynomial/inv_of_fps.test.cpp\"\n\
-    #define PROBLEM \"https://judge.yosupo.jp/problem/inv_of_formal_power_series\"\
-    \r\n#line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n#include <unistd.h>\n\
-    \nusing namespace std;\n\nusing ll = long long;\nusing ll8 = __int128;\nusing\
-    \ pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint = unsigned int;\nusing\
-    \ ull = unsigned long long;\n\ntemplate <class T>\nusing vc = vector<T>;\ntemplate\
+    - https://judge.yosupo.jp/problem/multipoint_evaluation
+  bundledCode: "#line 1 \"test/library_checker/polynomial/multipoint_evaluation.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/multipoint_evaluation\"\r\n\
+    #line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n#include <unistd.h>\n\n\
+    using namespace std;\n\nusing ll = long long;\nusing ll8 = __int128;\nusing pi\
+    \ = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint = unsigned int;\nusing ull\
+    \ = unsigned long long;\n\ntemplate <class T>\nusing vc = vector<T>;\ntemplate\
     \ <class T>\nusing vvc = vector<vc<T>>;\ntemplate <class T>\nusing vvvc = vector<vvc<T>>;\n\
     template <class T>\nusing vvvvc = vector<vvvc<T>>;\ntemplate <class T>\nusing\
     \ vvvvvc = vector<vvvvc<T>>;\ntemplate <class T>\nusing pq = priority_queue<T>;\n\
@@ -236,7 +242,7 @@ data:
     \ 1 : 0);\n}\n\n#define SUM(v) accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n\
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
-    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/polynomial/inv_of_fps.test.cpp\"\
+    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/polynomial/multipoint_evaluation.test.cpp\"\
     \n\r\n#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n  static\
     \ constexpr bool is_modint = true;\n  int val;\n\n  constexpr modint(const ll\
     \ val = 0) noexcept\n      : val(val >= 0 ? val % mod : (mod - (-val) % mod) %\
@@ -471,32 +477,61 @@ data:
     \   ntt(g, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\n    ntt(f, true);\r\n\
     \    FOR(i, n) f[i] = 0;\r\n    ntt(f, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\
     \n    ntt(f, true);\r\n    FOR3(i, n, 2 * n) G.eb(f[i] * mint(-1));\r\n    n *=\
-    \ 2;\r\n  }\r\n  G.resize(N);\r\n  return G;\r\n}\r\n#line 6 \"test/library_checker/polynomial/inv_of_fps.test.cpp\"\
-    \nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N);\r\n  VEC(mint, F,\
-    \ N);\r\n  print(fps_inv(F));\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
-    \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
-    \n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/inv_of_formal_power_series\"\
-    \r\n#include \"my_template.hpp\"\r\n\r\n#include \"mod/modint.hpp\"\r\n#include\
-    \ \"polynomial/fps_inv.hpp\"\r\nusing mint = modint998;\r\n\r\nvoid solve() {\r\
-    \n  LL(N);\r\n  VEC(mint, F, N);\r\n  print(fps_inv(F));\r\n}\r\n\r\nsigned main()\
-    \ {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
-    \n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \ 2;\r\n  }\r\n  G.resize(N);\r\n  return G;\r\n}\r\n#line 2 \"polynomial/poly_divmod.hpp\"\
+    \ntemplate <typename mint>\r\npair<vc<mint>, vc<mint>> poly_divmod(vc<mint> f,\
+    \ vc<mint>& g) {\r\n  assert(g.back() != 0);\r\n  if (len(f) < len(g)) { return\
+    \ {{}, f}; }\r\n  auto rf = f, rg = g;\r\n  reverse(all(rf)), reverse(all(rg));\r\
+    \n  ll deg = len(rf) - len(rg) + 1;\r\n  rf.resize(deg), rg.resize(deg);\r\n \
+    \ rg = fps_inv(rg);\r\n  auto q = convolution(rf, rg);\r\n  q.resize(deg);\r\n\
+    \  reverse(all(q));\r\n  auto h = convolution(q, g);\r\n  FOR(i, len(f)) f[i]\
+    \ -= h[i];\r\n  while (len(f) > 0 && f.back() == 0) f.pop_back();\r\n  return\
+    \ {q, f};\r\n}\r\n#line 2 \"polynomial/multipoint_eval.hpp\"\n\r\ntemplate <typename\
+    \ mint>\r\nvc<mint> mid_prod(vc<mint>& a, vc<mint>& b) {\r\n  assert(len(a) >=\
+    \ len(b) && !b.empty());\r\n  if (min(len(b), len(a) - len(b) + 1) <= 60) {\r\n\
+    \    vc<mint> res(len(a) - len(b) + 1);\r\n    FOR(i, len(res)) FOR(j, len(b))\
+    \ res[i] += b[j] * a[i + j];\r\n    return res;\r\n  }\r\n  int n = 1 << std::__lg(2\
+    \ * len(a) - 1);\r\n  vc<mint> fa(n), fb(n);\r\n  std::copy(a.begin(), a.end(),\
+    \ fa.begin());\r\n  std::copy(b.rbegin(), b.rend(), fb.begin());\r\n  ntt(fa,\
+    \ 0), ntt(fb, 0);\r\n  FOR(i, n) fa[i] *= fb[i];\r\n  ntt(fa, 1);\r\n  fa.resize(len(a));\r\
+    \n  fa.erase(fa.begin(), fa.begin() + len(b) - 1);\r\n  return fa;\r\n}\r\n\r\n\
+    template <typename mint>\r\nvc<mint> multipoint_eval(vc<mint>& f, vc<mint> v)\
+    \ {\r\n  int n = len(f), m = len(v);\r\n  int sz = 2;\r\n  while (sz < m) sz *=\
+    \ 2;\r\n  v.resize(sz);\r\n  vc<vc<mint>> T(2 * sz);\r\n  FOR(i, sz) T[sz + i]\
+    \ = {1, -v[i]};\r\n  FOR3_R(i, 1, sz) T[i] = convolution(T[2 * i], T[2 * i + 1]);\r\
+    \n  f.resize(2 * n - 1);\r\n  T[1].resize(n);\r\n  T[1] = fps_inv(T[1]);\r\n \
+    \ T[1] = mid_prod(f, T[1]);\r\n  T[1].resize(sz);\r\n\r\n  FOR3(i, 1, sz) {\r\n\
+    \    T[2 * i] = mid_prod(T[i], T[2 * i]);\r\n    T[2 * i + 1] = mid_prod(T[i],\
+    \ T[2 * i + 1]);\r\n    swap(T[2 * i], T[2 * i + 1]);\r\n  }\r\n  vc<mint> vals(m);\r\
+    \n  FOR(i, m) vals[i] = (len(T[sz + i]) ? T[sz + i][0] : 0);\r\n  return vals;\r\
+    \n}\r\n#line 5 \"test/library_checker/polynomial/multipoint_evaluation.test.cpp\"\
+    \n\r\n#line 7 \"test/library_checker/polynomial/multipoint_evaluation.test.cpp\"\
+    \nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N, M);\r\n  VEC(mint,\
+    \ f, N);\r\n  VEC(mint, pts, M);\r\n  print(multipoint_eval(f, pts));\r\n}\r\n\
+    \r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/multipoint_evaluation\"\
+    \r\n#include \"my_template.hpp\"\r\n\r\n#include \"polynomial/multipoint_eval.hpp\"\
+    \r\n\r\n#include \"mod/modint.hpp\"\r\nusing mint = modint998;\r\n\r\nvoid solve()\
+    \ {\r\n  LL(N, M);\r\n  VEC(mint, f, N);\r\n  VEC(mint, pts, M);\r\n  print(multipoint_eval(f,\
+    \ pts));\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
-  - mod/modint.hpp
+  - polynomial/multipoint_eval.hpp
+  - polynomial/poly_divmod.hpp
   - polynomial/fps_inv.hpp
   - polynomial/convolution.hpp
+  - mod/modint.hpp
   isVerificationFile: true
-  path: test/library_checker/polynomial/inv_of_fps.test.cpp
+  path: test/library_checker/polynomial/multipoint_evaluation.test.cpp
   requiredBy: []
-  timestamp: '2022-01-09 00:45:26+09:00'
+  timestamp: '2022-01-09 01:30:39+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/library_checker/polynomial/inv_of_fps.test.cpp
+documentation_of: test/library_checker/polynomial/multipoint_evaluation.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/polynomial/inv_of_fps.test.cpp
-- /verify/test/library_checker/polynomial/inv_of_fps.test.cpp.html
-title: test/library_checker/polynomial/inv_of_fps.test.cpp
+- /verify/test/library_checker/polynomial/multipoint_evaluation.test.cpp
+- /verify/test/library_checker/polynomial/multipoint_evaluation.test.cpp.html
+title: test/library_checker/polynomial/multipoint_evaluation.test.cpp
 ---

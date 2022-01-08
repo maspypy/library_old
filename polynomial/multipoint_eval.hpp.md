@@ -7,55 +7,57 @@ data:
   - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
+  - icon: ':heavy_check_mark:'
+    path: polynomial/fps_inv.hpp
+    title: polynomial/fps_inv.hpp
+  - icon: ':heavy_check_mark:'
+    path: polynomial/poly_divmod.hpp
+    title: polynomial/poly_divmod.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/math/find_linear_recurrence.test.cpp
-    title: test/library_checker/math/find_linear_recurrence.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
-    title: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
+    path: test/library_checker/polynomial/multipoint_evaluation.test.cpp
+    title: test/library_checker/polynomial/multipoint_evaluation.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"sequence/linearrecurrence.hpp\"\n\r\n#line 2 \"mod/modint.hpp\"\
-    \ntemplate <int mod>\nstruct modint {\n  static constexpr bool is_modint = true;\n\
-    \  int val;\n\n  constexpr modint(const ll val = 0) noexcept\n      : val(val\
-    \ >= 0 ? val % mod : (mod - (-val) % mod) % mod) {}\n\n  bool operator<(const\
-    \ modint &other) const {\n    return val < other.val;\n  } // To use std::map\n\
-    \n  modint &operator+=(const modint &p) {\n    if ((val += p.val) >= mod) val\
-    \ -= mod;\n    return *this;\n  }\n  modint &operator-=(const modint &p) {\n \
-    \   if ((val += mod - p.val) >= mod) val -= mod;\n    return *this;\n  }\n  modint\
-    \ &operator*=(const modint &p) {\n    val = (int)(1LL * val * p.val % mod);\n\
-    \    return *this;\n  }\n  modint &operator/=(const modint &p) {\n    *this *=\
-    \ p.inverse();\n    return *this;\n  }\n  modint operator-() const { return modint(-val);\
-    \ }\n  modint operator+(const modint &p) const { return modint(*this) += p; }\n\
-    \  modint operator-(const modint &p) const { return modint(*this) -= p; }\n  modint\
-    \ operator*(const modint &p) const { return modint(*this) *= p; }\n  modint operator/(const\
-    \ modint &p) const { return modint(*this) /= p; }\n  bool operator==(const modint\
-    \ &p) const { return val == p.val; }\n  bool operator!=(const modint &p) const\
-    \ { return val != p.val; }\n\n  modint inverse() const {\n    int a = val, b =\
-    \ mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -=\
-    \ t * b, b);\n      swap(u -= t * v, v);\n    }\n    return modint(u);\n  }\n\n\
-    \  modint pow(int64_t n) const {\n    modint ret(1), mul(val);\n    while (n >\
-    \ 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n\
-    \    return ret;\n  }\n  static constexpr int get_mod() { return mod; }\n};\n\n\
-    struct ArbitraryModInt {\n  static constexpr bool is_modint = true;\n  int val;\n\
-    \  ArbitraryModInt() : val(0) {}\n  ArbitraryModInt(int64_t y)\n      : val(y\
-    \ >= 0 ? y % get_mod()\n                   : (get_mod() - (-y) % get_mod()) %\
-    \ get_mod()) {}\n\n  bool operator<(const ArbitraryModInt &other) const {\n  \
-    \  return val < other.val;\n  } // To use std::map<ArbitraryModInt, T>\n\n  static\
-    \ int &get_mod() {\n    static int mod = 0;\n    return mod;\n  }\n  static void\
-    \ set_mod(int md) { get_mod() = md; }\n  ArbitraryModInt &operator+=(const ArbitraryModInt\
-    \ &p) {\n    if ((val += p.val) >= get_mod()) val -= get_mod();\n    return *this;\n\
-    \  }\n  ArbitraryModInt &operator-=(const ArbitraryModInt &p) {\n    if ((val\
-    \ += get_mod() - p.val) >= get_mod()) val -= get_mod();\n    return *this;\n \
-    \ }\n  ArbitraryModInt &operator*=(const ArbitraryModInt &p) {\n    unsigned long\
-    \ long a = (unsigned long long)val * p.val;\n    unsigned xh = (unsigned)(a >>\
-    \ 32), xl = (unsigned)a, d, m;\n    asm(\"divl %4; \\n\\t\" : \"=a\"(d), \"=d\"\
-    (m) : \"d\"(xh), \"a\"(xl), \"r\"(get_mod()));\n    val = m;\n    return *this;\n\
+  bundledCode: "#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n\
+    \  static constexpr bool is_modint = true;\n  int val;\n\n  constexpr modint(const\
+    \ ll val = 0) noexcept\n      : val(val >= 0 ? val % mod : (mod - (-val) % mod)\
+    \ % mod) {}\n\n  bool operator<(const modint &other) const {\n    return val <\
+    \ other.val;\n  } // To use std::map\n\n  modint &operator+=(const modint &p)\
+    \ {\n    if ((val += p.val) >= mod) val -= mod;\n    return *this;\n  }\n  modint\
+    \ &operator-=(const modint &p) {\n    if ((val += mod - p.val) >= mod) val -=\
+    \ mod;\n    return *this;\n  }\n  modint &operator*=(const modint &p) {\n    val\
+    \ = (int)(1LL * val * p.val % mod);\n    return *this;\n  }\n  modint &operator/=(const\
+    \ modint &p) {\n    *this *= p.inverse();\n    return *this;\n  }\n  modint operator-()\
+    \ const { return modint(-val); }\n  modint operator+(const modint &p) const {\
+    \ return modint(*this) += p; }\n  modint operator-(const modint &p) const { return\
+    \ modint(*this) -= p; }\n  modint operator*(const modint &p) const { return modint(*this)\
+    \ *= p; }\n  modint operator/(const modint &p) const { return modint(*this) /=\
+    \ p; }\n  bool operator==(const modint &p) const { return val == p.val; }\n  bool\
+    \ operator!=(const modint &p) const { return val != p.val; }\n\n  modint inverse()\
+    \ const {\n    int a = val, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n \
+    \     t = a / b;\n      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n   \
+    \ }\n    return modint(u);\n  }\n\n  modint pow(int64_t n) const {\n    modint\
+    \ ret(1), mul(val);\n    while (n > 0) {\n      if (n & 1) ret *= mul;\n     \
+    \ mul *= mul;\n      n >>= 1;\n    }\n    return ret;\n  }\n  static constexpr\
+    \ int get_mod() { return mod; }\n};\n\nstruct ArbitraryModInt {\n  static constexpr\
+    \ bool is_modint = true;\n  int val;\n  ArbitraryModInt() : val(0) {}\n  ArbitraryModInt(int64_t\
+    \ y)\n      : val(y >= 0 ? y % get_mod()\n                   : (get_mod() - (-y)\
+    \ % get_mod()) % get_mod()) {}\n\n  bool operator<(const ArbitraryModInt &other)\
+    \ const {\n    return val < other.val;\n  } // To use std::map<ArbitraryModInt,\
+    \ T>\n\n  static int &get_mod() {\n    static int mod = 0;\n    return mod;\n\
+    \  }\n  static void set_mod(int md) { get_mod() = md; }\n  ArbitraryModInt &operator+=(const\
+    \ ArbitraryModInt &p) {\n    if ((val += p.val) >= get_mod()) val -= get_mod();\n\
+    \    return *this;\n  }\n  ArbitraryModInt &operator-=(const ArbitraryModInt &p)\
+    \ {\n    if ((val += get_mod() - p.val) >= get_mod()) val -= get_mod();\n    return\
+    \ *this;\n  }\n  ArbitraryModInt &operator*=(const ArbitraryModInt &p) {\n   \
+    \ unsigned long long a = (unsigned long long)val * p.val;\n    unsigned xh = (unsigned)(a\
+    \ >> 32), xl = (unsigned)a, d, m;\n    asm(\"divl %4; \\n\\t\" : \"=a\"(d), \"\
+    =d\"(m) : \"d\"(xh), \"a\"(xl), \"r\"(get_mod()));\n    val = m;\n    return *this;\n\
     \  }\n  ArbitraryModInt &operator/=(const ArbitraryModInt &p) {\n    *this *=\
     \ p.inverse();\n    return *this;\n  }\n  ArbitraryModInt operator-() const {\
     \ return ArbitraryModInt(-val); }\n  ArbitraryModInt operator+(const ArbitraryModInt\
@@ -247,63 +249,75 @@ data:
     \ b);\r\n}\r\n\r\ntemplate<typename mint>\r\nenable_if_t<!is_same<mint, modint998>::value,\
     \ vc<mint>> convolution(vc<mint>& a, vc<mint>& b) {\r\n  int n = len(a), m = len(b);\r\
     \n  if (!n || !m) return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a,\
-    \ b);\r\n  return convolution_garner(a, b);\r\n}\r\n#line 4 \"sequence/linearrecurrence.hpp\"\
-    \n\r\ntemplate <typename mint>\r\nmint coef_of_rational(vector<mint> A, vector<mint>\
-    \ B, ll N) {\r\n  if(len(A)==0) return 0;\r\n  assert(B[0] == 1);\r\n  assert(len(B)\
-    \ == len(A) + 1);\r\n  while (N) {\r\n    vc<mint> B1 = B;\r\n    FOR(i, len(B1))\
-    \ if (i & 1) B1[i] = -B1[i];\r\n    A = convolution(A, B1);\r\n    B = convolution(B,\
-    \ B1);\r\n    FOR(i, len(B1)) B[i] = B[2 * i];\r\n    if (N & 1) {\r\n      FOR(i,\
-    \ len(B1) - 1) A[i] = A[2 * i | 1];\r\n    } else {\r\n      FOR(i, len(B1) -\
-    \ 1) A[i] = A[2 * i];\r\n    }\r\n    A.resize(len(B1) - 1);\r\n    B.resize(len(B1));\r\
-    \n    N /= 2;\r\n  }\r\n  return A[0];\r\n}\r\n\r\ntemplate <typename mint>\r\n\
-    vector<mint> find_linear_recurrence(vector<mint>& A) {\r\n  int N = len(A);\r\n\
-    \  vc<mint> B = {1}, C = {1};\r\n  int l = 0, m = 1;\r\n  mint p = 1;\r\n  FOR(i,\
-    \ N) {\r\n    mint d = A[i];\r\n    FOR3(j, 1, l + 1) { d += C[j] * A[i - j];\
-    \ }\r\n    if (d == 0) {\r\n      ++m;\r\n      continue;\r\n    }\r\n    auto\
-    \ tmp = C;\r\n    mint q = d / p;\r\n    if (len(C) < len(B) + m) C.insert(C.end(),\
-    \ len(B) + m - len(C), 0);\r\n    FOR(j, len(B)) C[j + m] -= q * B[j];\r\n   \
-    \ if (l + l <= i) {\r\n      B = tmp;\r\n      l = i + 1 - l, m = 1;\r\n     \
-    \ p = d;\r\n    } else {\r\n      ++m;\r\n    }\r\n  }\r\n  return C;\r\n}\r\n\
-    \r\ntemplate <typename mint>\r\nmint interpolate_linear_recurrence(vector<mint>&\
-    \ A, ll N) {\r\n  auto G = find_linear_recurrence(A);\r\n  auto F = convolution(A,\
-    \ G);\r\n  F.resize(len(G) - 1);\r\n  return coef_of_rational(F, G, N);\r\n}\r\
-    \n"
-  code: "#pragma once\r\n\r\n#include \"polynomial/convolution.hpp\"\r\n\r\ntemplate\
-    \ <typename mint>\r\nmint coef_of_rational(vector<mint> A, vector<mint> B, ll\
-    \ N) {\r\n  if(len(A)==0) return 0;\r\n  assert(B[0] == 1);\r\n  assert(len(B)\
-    \ == len(A) + 1);\r\n  while (N) {\r\n    vc<mint> B1 = B;\r\n    FOR(i, len(B1))\
-    \ if (i & 1) B1[i] = -B1[i];\r\n    A = convolution(A, B1);\r\n    B = convolution(B,\
-    \ B1);\r\n    FOR(i, len(B1)) B[i] = B[2 * i];\r\n    if (N & 1) {\r\n      FOR(i,\
-    \ len(B1) - 1) A[i] = A[2 * i | 1];\r\n    } else {\r\n      FOR(i, len(B1) -\
-    \ 1) A[i] = A[2 * i];\r\n    }\r\n    A.resize(len(B1) - 1);\r\n    B.resize(len(B1));\r\
-    \n    N /= 2;\r\n  }\r\n  return A[0];\r\n}\r\n\r\ntemplate <typename mint>\r\n\
-    vector<mint> find_linear_recurrence(vector<mint>& A) {\r\n  int N = len(A);\r\n\
-    \  vc<mint> B = {1}, C = {1};\r\n  int l = 0, m = 1;\r\n  mint p = 1;\r\n  FOR(i,\
-    \ N) {\r\n    mint d = A[i];\r\n    FOR3(j, 1, l + 1) { d += C[j] * A[i - j];\
-    \ }\r\n    if (d == 0) {\r\n      ++m;\r\n      continue;\r\n    }\r\n    auto\
-    \ tmp = C;\r\n    mint q = d / p;\r\n    if (len(C) < len(B) + m) C.insert(C.end(),\
-    \ len(B) + m - len(C), 0);\r\n    FOR(j, len(B)) C[j + m] -= q * B[j];\r\n   \
-    \ if (l + l <= i) {\r\n      B = tmp;\r\n      l = i + 1 - l, m = 1;\r\n     \
-    \ p = d;\r\n    } else {\r\n      ++m;\r\n    }\r\n  }\r\n  return C;\r\n}\r\n\
-    \r\ntemplate <typename mint>\r\nmint interpolate_linear_recurrence(vector<mint>&\
-    \ A, ll N) {\r\n  auto G = find_linear_recurrence(A);\r\n  auto F = convolution(A,\
-    \ G);\r\n  F.resize(len(G) - 1);\r\n  return coef_of_rational(F, G, N);\r\n}\r\
-    \n"
+    \ b);\r\n  return convolution_garner(a, b);\r\n}\r\n#line 2 \"polynomial/fps_inv.hpp\"\
+    \n\r\ntemplate <typename mint>\r\nvc<mint> fps_inv(vc<mint>& F) {\r\n  vc<mint>\
+    \ G = {mint(1) / F[0]};\r\n  G.reserve(len(F));\r\n  ll N = len(F), n = 1;\r\n\
+    \  while (n < N) {\r\n    vc<mint> f(2 * n), g(2 * n);\r\n    FOR(i, min(N, 2\
+    \ * n)) f[i] = F[i];\r\n    FOR(i, n) g[i] = G[i];\r\n    ntt(f, false);\r\n \
+    \   ntt(g, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\n    ntt(f, true);\r\n\
+    \    FOR(i, n) f[i] = 0;\r\n    ntt(f, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\
+    \n    ntt(f, true);\r\n    FOR3(i, n, 2 * n) G.eb(f[i] * mint(-1));\r\n    n *=\
+    \ 2;\r\n  }\r\n  G.resize(N);\r\n  return G;\r\n}\r\n#line 2 \"polynomial/poly_divmod.hpp\"\
+    \ntemplate <typename mint>\r\npair<vc<mint>, vc<mint>> poly_divmod(vc<mint> f,\
+    \ vc<mint>& g) {\r\n  assert(g.back() != 0);\r\n  if (len(f) < len(g)) { return\
+    \ {{}, f}; }\r\n  auto rf = f, rg = g;\r\n  reverse(all(rf)), reverse(all(rg));\r\
+    \n  ll deg = len(rf) - len(rg) + 1;\r\n  rf.resize(deg), rg.resize(deg);\r\n \
+    \ rg = fps_inv(rg);\r\n  auto q = convolution(rf, rg);\r\n  q.resize(deg);\r\n\
+    \  reverse(all(q));\r\n  auto h = convolution(q, g);\r\n  FOR(i, len(f)) f[i]\
+    \ -= h[i];\r\n  while (len(f) > 0 && f.back() == 0) f.pop_back();\r\n  return\
+    \ {q, f};\r\n}\r\n#line 2 \"polynomial/multipoint_eval.hpp\"\n\r\ntemplate <typename\
+    \ mint>\r\nvc<mint> mid_prod(vc<mint>& a, vc<mint>& b) {\r\n  assert(len(a) >=\
+    \ len(b) && !b.empty());\r\n  if (min(len(b), len(a) - len(b) + 1) <= 60) {\r\n\
+    \    vc<mint> res(len(a) - len(b) + 1);\r\n    FOR(i, len(res)) FOR(j, len(b))\
+    \ res[i] += b[j] * a[i + j];\r\n    return res;\r\n  }\r\n  int n = 1 << std::__lg(2\
+    \ * len(a) - 1);\r\n  vc<mint> fa(n), fb(n);\r\n  std::copy(a.begin(), a.end(),\
+    \ fa.begin());\r\n  std::copy(b.rbegin(), b.rend(), fb.begin());\r\n  ntt(fa,\
+    \ 0), ntt(fb, 0);\r\n  FOR(i, n) fa[i] *= fb[i];\r\n  ntt(fa, 1);\r\n  fa.resize(len(a));\r\
+    \n  fa.erase(fa.begin(), fa.begin() + len(b) - 1);\r\n  return fa;\r\n}\r\n\r\n\
+    template <typename mint>\r\nvc<mint> multipoint_eval(vc<mint>& f, vc<mint> v)\
+    \ {\r\n  int n = len(f), m = len(v);\r\n  int sz = 2;\r\n  while (sz < m) sz *=\
+    \ 2;\r\n  v.resize(sz);\r\n  vc<vc<mint>> T(2 * sz);\r\n  FOR(i, sz) T[sz + i]\
+    \ = {1, -v[i]};\r\n  FOR3_R(i, 1, sz) T[i] = convolution(T[2 * i], T[2 * i + 1]);\r\
+    \n  f.resize(2 * n - 1);\r\n  T[1].resize(n);\r\n  T[1] = fps_inv(T[1]);\r\n \
+    \ T[1] = mid_prod(f, T[1]);\r\n  T[1].resize(sz);\r\n\r\n  FOR3(i, 1, sz) {\r\n\
+    \    T[2 * i] = mid_prod(T[i], T[2 * i]);\r\n    T[2 * i + 1] = mid_prod(T[i],\
+    \ T[2 * i + 1]);\r\n    swap(T[2 * i], T[2 * i + 1]);\r\n  }\r\n  vc<mint> vals(m);\r\
+    \n  FOR(i, m) vals[i] = (len(T[sz + i]) ? T[sz + i][0] : 0);\r\n  return vals;\r\
+    \n}\r\n"
+  code: "#include \"polynomial/poly_divmod.hpp\"\r\n\r\ntemplate <typename mint>\r\
+    \nvc<mint> mid_prod(vc<mint>& a, vc<mint>& b) {\r\n  assert(len(a) >= len(b) &&\
+    \ !b.empty());\r\n  if (min(len(b), len(a) - len(b) + 1) <= 60) {\r\n    vc<mint>\
+    \ res(len(a) - len(b) + 1);\r\n    FOR(i, len(res)) FOR(j, len(b)) res[i] += b[j]\
+    \ * a[i + j];\r\n    return res;\r\n  }\r\n  int n = 1 << std::__lg(2 * len(a)\
+    \ - 1);\r\n  vc<mint> fa(n), fb(n);\r\n  std::copy(a.begin(), a.end(), fa.begin());\r\
+    \n  std::copy(b.rbegin(), b.rend(), fb.begin());\r\n  ntt(fa, 0), ntt(fb, 0);\r\
+    \n  FOR(i, n) fa[i] *= fb[i];\r\n  ntt(fa, 1);\r\n  fa.resize(len(a));\r\n  fa.erase(fa.begin(),\
+    \ fa.begin() + len(b) - 1);\r\n  return fa;\r\n}\r\n\r\ntemplate <typename mint>\r\
+    \nvc<mint> multipoint_eval(vc<mint>& f, vc<mint> v) {\r\n  int n = len(f), m =\
+    \ len(v);\r\n  int sz = 2;\r\n  while (sz < m) sz *= 2;\r\n  v.resize(sz);\r\n\
+    \  vc<vc<mint>> T(2 * sz);\r\n  FOR(i, sz) T[sz + i] = {1, -v[i]};\r\n  FOR3_R(i,\
+    \ 1, sz) T[i] = convolution(T[2 * i], T[2 * i + 1]);\r\n  f.resize(2 * n - 1);\r\
+    \n  T[1].resize(n);\r\n  T[1] = fps_inv(T[1]);\r\n  T[1] = mid_prod(f, T[1]);\r\
+    \n  T[1].resize(sz);\r\n\r\n  FOR3(i, 1, sz) {\r\n    T[2 * i] = mid_prod(T[i],\
+    \ T[2 * i]);\r\n    T[2 * i + 1] = mid_prod(T[i], T[2 * i + 1]);\r\n    swap(T[2\
+    \ * i], T[2 * i + 1]);\r\n  }\r\n  vc<mint> vals(m);\r\n  FOR(i, m) vals[i] =\
+    \ (len(T[sz + i]) ? T[sz + i][0] : 0);\r\n  return vals;\r\n}\r\n"
   dependsOn:
+  - polynomial/poly_divmod.hpp
+  - polynomial/fps_inv.hpp
   - polynomial/convolution.hpp
   - mod/modint.hpp
   isVerificationFile: false
-  path: sequence/linearrecurrence.hpp
+  path: polynomial/multipoint_eval.hpp
   requiredBy: []
-  timestamp: '2022-01-09 00:45:26+09:00'
+  timestamp: '2022-01-09 01:30:39+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - test/library_checker/math/find_linear_recurrence.test.cpp
-documentation_of: sequence/linearrecurrence.hpp
+  - test/library_checker/polynomial/multipoint_evaluation.test.cpp
+documentation_of: polynomial/multipoint_eval.hpp
 layout: document
 redirect_from:
-- /library/sequence/linearrecurrence.hpp
-- /library/sequence/linearrecurrence.hpp.html
-title: sequence/linearrecurrence.hpp
+- /library/polynomial/multipoint_eval.hpp
+- /library/polynomial/multipoint_eval.hpp.html
+title: polynomial/multipoint_eval.hpp
 ---
