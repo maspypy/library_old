@@ -15,8 +15,8 @@ data:
     path: polynomial/fps_pow.hpp
     title: polynomial/fps_pow.hpp
   - icon: ':heavy_check_mark:'
-    path: polynomial/multipoint_eval.hpp
-    title: polynomial/multipoint_eval.hpp
+    path: polynomial/multipoint.hpp
+    title: polynomial/multipoint.hpp
   - icon: ':heavy_check_mark:'
     path: polynomial/poly_divmod.hpp
     title: polynomial/poly_divmod.hpp
@@ -33,6 +33,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/polynomial/polynomial_division.test.cpp
     title: test/library_checker/polynomial/polynomial_division.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/polynomial/polynomial_interpolation.test.cpp
+    title: test/library_checker/polynomial/polynomial_interpolation.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/polynomial/pow_of_fps.test.cpp
     title: test/library_checker/polynomial/pow_of_fps.test.cpp
@@ -292,8 +295,8 @@ data:
   requiredBy:
   - polynomial/fps_pow.hpp
   - polynomial/fps_log.hpp
+  - polynomial/multipoint.hpp
   - polynomial/poly_divmod.hpp
-  - polynomial/multipoint_eval.hpp
   timestamp: '2022-01-09 00:45:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
@@ -302,6 +305,7 @@ data:
   - test/library_checker/polynomial/multipoint_evaluation.test.cpp
   - test/library_checker/polynomial/pow_of_fps.test.cpp
   - test/library_checker/polynomial/inv_of_fps.test.cpp
+  - test/library_checker/polynomial/polynomial_interpolation.test.cpp
 documentation_of: polynomial/fps_inv.hpp
 layout: document
 redirect_from:

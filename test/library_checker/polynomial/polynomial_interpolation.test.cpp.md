@@ -23,15 +23,15 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/multipoint_evaluation
+    PROBLEM: https://judge.yosupo.jp/problem/polynomial_interpolation
     links:
-    - https://judge.yosupo.jp/problem/multipoint_evaluation
-  bundledCode: "#line 1 \"test/library_checker/polynomial/multipoint_evaluation.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/multipoint_evaluation\"\r\n\
-    #line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n#include <unistd.h>\n\n\
-    using namespace std;\n\nusing ll = long long;\nusing ll8 = __int128;\nusing pi\
-    \ = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint = unsigned int;\nusing ull\
-    \ = unsigned long long;\n\ntemplate <class T>\nusing vc = vector<T>;\ntemplate\
+    - https://judge.yosupo.jp/problem/polynomial_interpolation
+  bundledCode: "#line 1 \"test/library_checker/polynomial/polynomial_interpolation.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/polynomial_interpolation\"\
+    \r\n#line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n#include <unistd.h>\n\
+    \nusing namespace std;\n\nusing ll = long long;\nusing ll8 = __int128;\nusing\
+    \ pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint = unsigned int;\nusing\
+    \ ull = unsigned long long;\n\ntemplate <class T>\nusing vc = vector<T>;\ntemplate\
     \ <class T>\nusing vvc = vector<vc<T>>;\ntemplate <class T>\nusing vvvc = vector<vvc<T>>;\n\
     template <class T>\nusing vvvvc = vector<vvvc<T>>;\ntemplate <class T>\nusing\
     \ vvvvvc = vector<vvvvc<T>>;\ntemplate <class T>\nusing pq = priority_queue<T>;\n\
@@ -239,42 +239,42 @@ data:
     \ 1 : 0);\n}\n\n#define SUM(v) accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n\
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
-    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/polynomial/multipoint_evaluation.test.cpp\"\
-    \n\r\n#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n  static\
-    \ constexpr bool is_modint = true;\n  int val;\n\n  constexpr modint(const ll\
-    \ val = 0) noexcept\n      : val(val >= 0 ? val % mod : (mod - (-val) % mod) %\
-    \ mod) {}\n\n  bool operator<(const modint &other) const {\n    return val < other.val;\n\
-    \  } // To use std::map\n\n  modint &operator+=(const modint &p) {\n    if ((val\
-    \ += p.val) >= mod) val -= mod;\n    return *this;\n  }\n  modint &operator-=(const\
-    \ modint &p) {\n    if ((val += mod - p.val) >= mod) val -= mod;\n    return *this;\n\
-    \  }\n  modint &operator*=(const modint &p) {\n    val = (int)(1LL * val * p.val\
-    \ % mod);\n    return *this;\n  }\n  modint &operator/=(const modint &p) {\n \
-    \   *this *= p.inverse();\n    return *this;\n  }\n  modint operator-() const\
-    \ { return modint(-val); }\n  modint operator+(const modint &p) const { return\
-    \ modint(*this) += p; }\n  modint operator-(const modint &p) const { return modint(*this)\
-    \ -= p; }\n  modint operator*(const modint &p) const { return modint(*this) *=\
-    \ p; }\n  modint operator/(const modint &p) const { return modint(*this) /= p;\
-    \ }\n  bool operator==(const modint &p) const { return val == p.val; }\n  bool\
-    \ operator!=(const modint &p) const { return val != p.val; }\n\n  modint inverse()\
-    \ const {\n    int a = val, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n \
-    \     t = a / b;\n      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n   \
-    \ }\n    return modint(u);\n  }\n\n  modint pow(int64_t n) const {\n    modint\
-    \ ret(1), mul(val);\n    while (n > 0) {\n      if (n & 1) ret *= mul;\n     \
-    \ mul *= mul;\n      n >>= 1;\n    }\n    return ret;\n  }\n  static constexpr\
-    \ int get_mod() { return mod; }\n};\n\nstruct ArbitraryModInt {\n  static constexpr\
-    \ bool is_modint = true;\n  int val;\n  ArbitraryModInt() : val(0) {}\n  ArbitraryModInt(int64_t\
-    \ y)\n      : val(y >= 0 ? y % get_mod()\n                   : (get_mod() - (-y)\
-    \ % get_mod()) % get_mod()) {}\n\n  bool operator<(const ArbitraryModInt &other)\
-    \ const {\n    return val < other.val;\n  } // To use std::map<ArbitraryModInt,\
-    \ T>\n\n  static int &get_mod() {\n    static int mod = 0;\n    return mod;\n\
-    \  }\n  static void set_mod(int md) { get_mod() = md; }\n  ArbitraryModInt &operator+=(const\
-    \ ArbitraryModInt &p) {\n    if ((val += p.val) >= get_mod()) val -= get_mod();\n\
-    \    return *this;\n  }\n  ArbitraryModInt &operator-=(const ArbitraryModInt &p)\
-    \ {\n    if ((val += get_mod() - p.val) >= get_mod()) val -= get_mod();\n    return\
-    \ *this;\n  }\n  ArbitraryModInt &operator*=(const ArbitraryModInt &p) {\n   \
-    \ unsigned long long a = (unsigned long long)val * p.val;\n    unsigned xh = (unsigned)(a\
-    \ >> 32), xl = (unsigned)a, d, m;\n    asm(\"divl %4; \\n\\t\" : \"=a\"(d), \"\
-    =d\"(m) : \"d\"(xh), \"a\"(xl), \"r\"(get_mod()));\n    val = m;\n    return *this;\n\
+    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 2 \"mod/modint.hpp\"\
+    \ntemplate <int mod>\nstruct modint {\n  static constexpr bool is_modint = true;\n\
+    \  int val;\n\n  constexpr modint(const ll val = 0) noexcept\n      : val(val\
+    \ >= 0 ? val % mod : (mod - (-val) % mod) % mod) {}\n\n  bool operator<(const\
+    \ modint &other) const {\n    return val < other.val;\n  } // To use std::map\n\
+    \n  modint &operator+=(const modint &p) {\n    if ((val += p.val) >= mod) val\
+    \ -= mod;\n    return *this;\n  }\n  modint &operator-=(const modint &p) {\n \
+    \   if ((val += mod - p.val) >= mod) val -= mod;\n    return *this;\n  }\n  modint\
+    \ &operator*=(const modint &p) {\n    val = (int)(1LL * val * p.val % mod);\n\
+    \    return *this;\n  }\n  modint &operator/=(const modint &p) {\n    *this *=\
+    \ p.inverse();\n    return *this;\n  }\n  modint operator-() const { return modint(-val);\
+    \ }\n  modint operator+(const modint &p) const { return modint(*this) += p; }\n\
+    \  modint operator-(const modint &p) const { return modint(*this) -= p; }\n  modint\
+    \ operator*(const modint &p) const { return modint(*this) *= p; }\n  modint operator/(const\
+    \ modint &p) const { return modint(*this) /= p; }\n  bool operator==(const modint\
+    \ &p) const { return val == p.val; }\n  bool operator!=(const modint &p) const\
+    \ { return val != p.val; }\n\n  modint inverse() const {\n    int a = val, b =\
+    \ mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -=\
+    \ t * b, b);\n      swap(u -= t * v, v);\n    }\n    return modint(u);\n  }\n\n\
+    \  modint pow(int64_t n) const {\n    modint ret(1), mul(val);\n    while (n >\
+    \ 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n\
+    \    return ret;\n  }\n  static constexpr int get_mod() { return mod; }\n};\n\n\
+    struct ArbitraryModInt {\n  static constexpr bool is_modint = true;\n  int val;\n\
+    \  ArbitraryModInt() : val(0) {}\n  ArbitraryModInt(int64_t y)\n      : val(y\
+    \ >= 0 ? y % get_mod()\n                   : (get_mod() - (-y) % get_mod()) %\
+    \ get_mod()) {}\n\n  bool operator<(const ArbitraryModInt &other) const {\n  \
+    \  return val < other.val;\n  } // To use std::map<ArbitraryModInt, T>\n\n  static\
+    \ int &get_mod() {\n    static int mod = 0;\n    return mod;\n  }\n  static void\
+    \ set_mod(int md) { get_mod() = md; }\n  ArbitraryModInt &operator+=(const ArbitraryModInt\
+    \ &p) {\n    if ((val += p.val) >= get_mod()) val -= get_mod();\n    return *this;\n\
+    \  }\n  ArbitraryModInt &operator-=(const ArbitraryModInt &p) {\n    if ((val\
+    \ += get_mod() - p.val) >= get_mod()) val -= get_mod();\n    return *this;\n \
+    \ }\n  ArbitraryModInt &operator*=(const ArbitraryModInt &p) {\n    unsigned long\
+    \ long a = (unsigned long long)val * p.val;\n    unsigned xh = (unsigned)(a >>\
+    \ 32), xl = (unsigned)a, d, m;\n    asm(\"divl %4; \\n\\t\" : \"=a\"(d), \"=d\"\
+    (m) : \"d\"(xh), \"a\"(xl), \"r\"(get_mod()));\n    val = m;\n    return *this;\n\
     \  }\n  ArbitraryModInt &operator/=(const ArbitraryModInt &p) {\n    *this *=\
     \ p.inverse();\n    return *this;\n  }\n  ArbitraryModInt operator-() const {\
     \ return ArbitraryModInt(-val); }\n  ArbitraryModInt operator+(const ArbitraryModInt\
@@ -504,18 +504,17 @@ data:
     \ f, vc<mint>& x){\r\n  SubproductTree<mint> F(x);\r\n  return F.evaluation(f);\r\
     \n}\r\n\r\ntemplate<typename mint>\r\nvc<mint> multipoint_interpolate(vc<mint>&\
     \ x, vc<mint>& y){\r\n  SubproductTree<mint> F(x);\r\n  return F.interpolation(y);\r\
-    \n}\r\n#line 5 \"test/library_checker/polynomial/multipoint_evaluation.test.cpp\"\
-    \n\r\n#line 7 \"test/library_checker/polynomial/multipoint_evaluation.test.cpp\"\
-    \nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N, M);\r\n  VEC(mint,\
-    \ f, N);\r\n  VEC(mint, pts, M);\r\n  print(multipoint_eval(f, pts));\r\n}\r\n\
+    \n}\r\n#line 4 \"test/library_checker/polynomial/polynomial_interpolation.test.cpp\"\
+    \n\r\nusing mint = modint998;\r\nvoid solve() {\r\n  LL(N);\r\n  VEC(mint, X,\
+    \ N);\r\n  VEC(mint, Y, N);\r\n  print(multipoint_interpolate(X, Y));\r\n}\r\n\
     \r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
     \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/multipoint_evaluation\"\
-    \r\n#include \"my_template.hpp\"\r\n\r\n#include \"polynomial/multipoint.hpp\"\
-    \r\n\r\n#include \"mod/modint.hpp\"\r\nusing mint = modint998;\r\n\r\nvoid solve()\
-    \ {\r\n  LL(N, M);\r\n  VEC(mint, f, N);\r\n  VEC(mint, pts, M);\r\n  print(multipoint_eval(f,\
-    \ pts));\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/polynomial_interpolation\"\
+    \r\n#include \"my_template.hpp\"\r\n#include \"polynomial/multipoint.hpp\"\r\n\
+    \r\nusing mint = modint998;\r\nvoid solve() {\r\n  LL(N);\r\n  VEC(mint, X, N);\r\
+    \n  VEC(mint, Y, N);\r\n  print(multipoint_interpolate(X, Y));\r\n}\r\n\r\nsigned\
+    \ main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout\
+    \ << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
   - polynomial/multipoint.hpp
@@ -523,15 +522,15 @@ data:
   - polynomial/convolution.hpp
   - mod/modint.hpp
   isVerificationFile: true
-  path: test/library_checker/polynomial/multipoint_evaluation.test.cpp
+  path: test/library_checker/polynomial/polynomial_interpolation.test.cpp
   requiredBy: []
   timestamp: '2022-01-09 02:48:17+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/library_checker/polynomial/multipoint_evaluation.test.cpp
+documentation_of: test/library_checker/polynomial/polynomial_interpolation.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/polynomial/multipoint_evaluation.test.cpp
-- /verify/test/library_checker/polynomial/multipoint_evaluation.test.cpp.html
-title: test/library_checker/polynomial/multipoint_evaluation.test.cpp
+- /verify/test/library_checker/polynomial/polynomial_interpolation.test.cpp
+- /verify/test/library_checker/polynomial/polynomial_interpolation.test.cpp.html
+title: test/library_checker/polynomial/polynomial_interpolation.test.cpp
 ---

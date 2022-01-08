@@ -317,8 +317,8 @@ data:
       path: polynomial/lagrange_interpolate_iota.hpp
       title: polynomial/lagrange_interpolate_iota.hpp
     - icon: ':heavy_check_mark:'
-      path: polynomial/multipoint_eval.hpp
-      title: polynomial/multipoint_eval.hpp
+      path: polynomial/multipoint.hpp
+      title: polynomial/multipoint.hpp
     - icon: ':heavy_check_mark:'
       path: polynomial/multivar_convolution.hpp
       title: polynomial/multivar_convolution.hpp
@@ -568,6 +568,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/polynomial_division.test.cpp
       title: test/library_checker/polynomial/polynomial_division.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/polynomial/polynomial_interpolation.test.cpp
+      title: test/library_checker/polynomial/polynomial_interpolation.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
       title: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp

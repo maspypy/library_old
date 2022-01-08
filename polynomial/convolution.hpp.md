@@ -33,8 +33,8 @@ data:
     path: polynomial/lagrange_interpolate_iota.hpp
     title: polynomial/lagrange_interpolate_iota.hpp
   - icon: ':heavy_check_mark:'
-    path: polynomial/multipoint_eval.hpp
-    title: polynomial/multipoint_eval.hpp
+    path: polynomial/multipoint.hpp
+    title: polynomial/multipoint.hpp
   - icon: ':heavy_check_mark:'
     path: polynomial/multivar_convolution.hpp
     title: polynomial/multivar_convolution.hpp
@@ -96,6 +96,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/polynomial/polynomial_division.test.cpp
     title: test/library_checker/polynomial/polynomial_division.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/polynomial/polynomial_interpolation.test.cpp
+    title: test/library_checker/polynomial/polynomial_interpolation.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
     title: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
@@ -498,6 +501,7 @@ data:
   - graph/tree_all_distances.hpp
   - polynomial/fps_pow.hpp
   - polynomial/fps_log.hpp
+  - polynomial/multipoint.hpp
   - polynomial/fps_exp.hpp
   - polynomial/convolution_huge.hpp
   - polynomial/poly_divmod.hpp
@@ -505,7 +509,6 @@ data:
   - polynomial/multivar_convolution.hpp
   - polynomial/poly_taylor_shift.hpp
   - polynomial/lagrange_interpolate_iota.hpp
-  - polynomial/multipoint_eval.hpp
   - polynomial/convolution_mod_2_64.hpp
   - sequence/linearrecurrence.hpp
   - nt/multiplicative_convolution_mod2n.hpp
@@ -529,6 +532,7 @@ data:
   - test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
   - test/library_checker/polynomial/pow_of_fps.test.cpp
   - test/library_checker/polynomial/inv_of_fps.test.cpp
+  - test/library_checker/polynomial/polynomial_interpolation.test.cpp
   - test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/library_checker/math/find_linear_recurrence.test.cpp
 documentation_of: polynomial/convolution.hpp

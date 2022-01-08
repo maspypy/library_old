@@ -193,6 +193,9 @@ data:
     path: test/library_checker/polynomial/polynomial_division.test.cpp
     title: test/library_checker/polynomial/polynomial_division.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/library_checker/polynomial/polynomial_interpolation.test.cpp
+    title: test/library_checker/polynomial/polynomial_interpolation.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
     title: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
   - icon: ':heavy_check_mark:'
@@ -699,6 +702,7 @@ data:
   - test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
   - test/library_checker/polynomial/pow_of_fps.test.cpp
   - test/library_checker/polynomial/inv_of_fps.test.cpp
+  - test/library_checker/polynomial/polynomial_interpolation.test.cpp
   - test/library_checker/math/enumerate_primes.test.cpp
   - test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/library_checker/math/factorize.test.cpp
