@@ -1,7 +1,7 @@
 #include "polynomial/convolution.hpp"
 
 template <typename mint>
-vc<mint> polynomial_taylor_shift(vc<mint> a, mint c) {
+vc<mint> poly_taylor_shift(vc<mint> a, mint c) {
   ll N = len(a);
   FOR(i, N) a[i] *= fact<mint>(i);
   auto b = power_table<mint>(c, N);

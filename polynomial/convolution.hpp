@@ -1,3 +1,4 @@
+#pragma once
 #include "mod/modint.hpp"
 template <class T>
 vector<T> convolution_naive(const vector<T>& a, const vector<T>& b) {

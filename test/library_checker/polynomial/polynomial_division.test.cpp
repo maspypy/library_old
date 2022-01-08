@@ -2,7 +2,7 @@
 #include "my_template.hpp"
 
 #include "mod/modint.hpp"
-#include "polynomial/polynomial_division.hpp"
+#include "polynomial/poly_divmod.hpp"
 
 using mint = modint998;
 
@@ -10,7 +10,7 @@ void solve() {
   LL(N, M);
   VEC(mint, f, N);
   VEC(mint, g, M);
-  auto [q, r] = polynomial_division(f, g);
+  auto [q, r] = poly_divmod(f, g);
   print(len(q), len(r));
   print(q);
   print(r);

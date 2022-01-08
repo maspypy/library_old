@@ -2,14 +2,14 @@
 #include "my_template.hpp"
 
 #include "mod/modint.hpp"
-#include "polynomial/polynomial_taylor_shift.hpp"
+#include "polynomial/poly_taylor_shift.hpp"
 
 using mint = modint998;
 
 void solve() {
   LL(N, c);
   VEC(mint, A, N);
-  print(polynomial_taylor_shift(A, mint(c)));
+  print(poly_taylor_shift(A, mint(c)));
 }
 
 signed main() {
