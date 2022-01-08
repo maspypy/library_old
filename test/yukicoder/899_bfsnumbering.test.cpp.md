@@ -226,14 +226,14 @@ data:
     \ + y; }\r\n  static constexpr X inverse(const X &x) noexcept { return -x; }\r\
     \n  static constexpr X power(const X &x, ll n) noexcept { return n * x; }\r\n\
     \  static constexpr X unit = ZERO;\r\n  static constexpr bool commute = true;\r\
-    \n};\r\n#line 1 \"algebra/group_mul.hpp\"\ntemplate <class X, X ONE = X(1)>\r\n\
-    struct Group_Mul {\r\n  using value_type = X;\r\n  static constexpr X op(const\
-    \ X &x, const X &y) noexcept { return x * y; }\r\n  static constexpr X inverse(const\
-    \ X &x) noexcept { return X(1) / x; }\r\n  static constexpr X unit = ONE;\r\n\
-    \  static constexpr bool commute = true;\r\n};\r\n#line 3 \"algebra/lazy_add_mul.hpp\"\
-    \n\r\ntemplate <typename E>\r\nstruct Lazy_Add_Mul {\r\n  using MX = Group_Add<E>;\r\
-    \n  using MA = Group_Mul<E>;\r\n  using X_structure = MX;\r\n  using A_structure\
-    \ = MA;\r\n  using X = typename MX::value_type;\r\n  using A = typename MA::value_type;\r\
+    \n};\r\n#line 1 \"algebra/group_mul.hpp\"\ntemplate <class X>\r\nstruct Group_Mul\
+    \ {\r\n  using value_type = X;\r\n  static constexpr X op(const X &x, const X\
+    \ &y) noexcept { return x * y; }\r\n  static constexpr X inverse(const X &x) noexcept\
+    \ { return X(1) / x; }\r\n  static constexpr X unit = X(1);\r\n  static constexpr\
+    \ bool commute = true;\r\n};\r\n#line 3 \"algebra/lazy_add_mul.hpp\"\n\r\ntemplate\
+    \ <typename E>\r\nstruct Lazy_Add_Mul {\r\n  using MX = Group_Add<E>;\r\n  using\
+    \ MA = Group_Mul<E>;\r\n  using X_structure = MX;\r\n  using A_structure = MA;\r\
+    \n  using X = typename MX::value_type;\r\n  using A = typename MA::value_type;\r\
     \n  static constexpr X act(const X &x, const A &a) { return x * a; }\r\n};\r\n\
     #line 6 \"test/yukicoder/899_bfsnumbering.test.cpp\"\n\r\nvoid solve() {\r\n \
     \ LL(N);\r\n  Graph<int> G(N);\r\n  FOR(_, N - 1) {\r\n    LL(a, b);\r\n    G.add(a,\
@@ -278,7 +278,7 @@ data:
   isVerificationFile: true
   path: test/yukicoder/899_bfsnumbering.test.cpp
   requiredBy: []
-  timestamp: '2022-01-05 00:19:00+09:00'
+  timestamp: '2022-01-08 10:07:27+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yukicoder/899_bfsnumbering.test.cpp

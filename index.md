@@ -308,6 +308,9 @@ data:
       path: polynomial/fps_log.hpp
       title: polynomial/fps_log.hpp
     - icon: ':heavy_check_mark:'
+      path: polynomial/lagrange_interpolate_iota.hpp
+      title: polynomial/lagrange_interpolate_iota.hpp
+    - icon: ':heavy_check_mark:'
       path: polynomial/multivar_convolution.hpp
       title: polynomial/multivar_convolution.hpp
     - icon: ':heavy_check_mark:'
@@ -553,6 +556,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
       title: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
+      title: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
   - name: test/library_checker/string
     pages:
     - icon: ':heavy_check_mark:'

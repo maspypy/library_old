@@ -24,6 +24,9 @@ data:
     path: polynomial/fps_log.hpp
     title: polynomial/fps_log.hpp
   - icon: ':heavy_check_mark:'
+    path: polynomial/lagrange_interpolate_iota.hpp
+    title: polynomial/lagrange_interpolate_iota.hpp
+  - icon: ':heavy_check_mark:'
     path: polynomial/multivar_convolution.hpp
     title: polynomial/multivar_convolution.hpp
   - icon: ':heavy_check_mark:'
@@ -81,6 +84,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
     title: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
+    title: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -465,6 +471,7 @@ data:
   - polynomial/convolution_huge.hpp
   - polynomial/fps_inv.hpp
   - polynomial/multivar_convolution.hpp
+  - polynomial/lagrange_interpolate_iota.hpp
   - polynomial/polynomial_taylor_shift.hpp
   - polynomial/convolution_mod_2_64.hpp
   - sequence/linearrecurrence.hpp
@@ -484,6 +491,7 @@ data:
   - test/library_checker/polynomial/log_of_fps.test.cpp
   - test/library_checker/polynomial/polynomial_division.test.cpp
   - test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
+  - test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
   - test/library_checker/polynomial/inv_of_fps.test.cpp
   - test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/library_checker/math/find_linear_recurrence.test.cpp
