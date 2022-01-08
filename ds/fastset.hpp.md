@@ -4,8 +4,8 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/predecessor_problem.test..cpp
-    title: test/library_checker/datastructure/predecessor_problem.test..cpp
+    path: test/library_checker/datastructure/predecessor_problem.test.cpp
+    title: test/library_checker/datastructure/predecessor_problem.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -71,7 +71,7 @@ data:
   timestamp: '2022-01-04 19:49:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/datastructure/predecessor_problem.test..cpp
+  - test/library_checker/datastructure/predecessor_problem.test.cpp
 documentation_of: ds/fastset.hpp
 layout: document
 redirect_from:

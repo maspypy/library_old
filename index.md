@@ -458,8 +458,8 @@ data:
       path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
       title: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
     - icon: ':heavy_check_mark:'
-      path: test/library_checker/datastructure/predecessor_problem.test..cpp
-      title: test/library_checker/datastructure/predecessor_problem.test..cpp
+      path: test/library_checker/datastructure/predecessor_problem.test.cpp
+      title: test/library_checker/datastructure/predecessor_problem.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
       title: test/library_checker/datastructure/queue_operate_all_composite.test.cpp

@@ -17,7 +17,7 @@ data:
     PROBLEM: https://judge.yosupo.jp/problem/predecessor_problem
     links:
     - https://judge.yosupo.jp/problem/predecessor_problem
-  bundledCode: "#line 1 \"test/library_checker/datastructure/predecessor_problem.test..cpp\"\
+  bundledCode: "#line 1 \"test/library_checker/datastructure/predecessor_problem.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/predecessor_problem\"\n#line\
     \ 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n#include <unistd.h>\n\nusing\
     \ namespace std;\n\nusing ll = long long;\nusing ll8 = __int128;\nusing pi = pair<ll,\
@@ -256,7 +256,7 @@ data:
     \ bsr(d) - (B - 1);\r\n      for (int g = h - 1; g >= 0; g--) {\r\n        i *=\
     \ B;\r\n        i += bsr(seg[g][i / B]);\r\n      }\r\n      return i;\r\n   \
     \ }\r\n    return -1;\r\n  }\r\n  void debug(){\r\n    for(int i=0;i<n;++i) cout\
-    \ << (*this)[i];\r\n    cout << endl;\r\n  }\r\n};\n#line 4 \"test/library_checker/datastructure/predecessor_problem.test..cpp\"\
+    \ << (*this)[i];\r\n    cout << endl;\r\n  }\r\n};\n#line 4 \"test/library_checker/datastructure/predecessor_problem.test.cpp\"\
     \n\nvoid solve() {\n  LL(N, Q);\n  FastSet ss(N);\n  STR(S);\n  FOR(x, N) {\n\
     \    if (S[x] == '1') ss.insert(x);\n  }\n\n  FOR(_, Q) {\n    LL(t, k);\n   \
     \ if (t == 0) { ss.insert(k); }\n    elif (t == 1) { ss.erase(k); }\n    elif\
@@ -277,15 +277,15 @@ data:
   - my_template.hpp
   - ds/fastset.hpp
   isVerificationFile: true
-  path: test/library_checker/datastructure/predecessor_problem.test..cpp
+  path: test/library_checker/datastructure/predecessor_problem.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 22:12:01+09:00'
+  timestamp: '2022-01-08 23:07:40+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/library_checker/datastructure/predecessor_problem.test..cpp
+documentation_of: test/library_checker/datastructure/predecessor_problem.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/datastructure/predecessor_problem.test..cpp
-- /verify/test/library_checker/datastructure/predecessor_problem.test..cpp.html
-title: test/library_checker/datastructure/predecessor_problem.test..cpp
+- /verify/test/library_checker/datastructure/predecessor_problem.test.cpp
+- /verify/test/library_checker/datastructure/predecessor_problem.test.cpp.html
+title: test/library_checker/datastructure/predecessor_problem.test.cpp
 ---
