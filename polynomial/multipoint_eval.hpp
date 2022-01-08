@@ -21,13 +21,12 @@ vc<mint> mid_prod(vc<mint>& a, vc<mint>& b) {
 }
 
 template <typename mint>
-vc<mint> multipoint_eval(vc<mint>& f, vc<mint> v) {
-  int n = len(f), m = len(v);
+vc<mint> multipoint_eval(vc<mint>& f, vc<mint>& x) {
+  int n = len(f), m = len(x);
   int sz = 2;
   while (sz < m) sz *= 2;
-  v.resize(sz);
   vc<vc<mint>> T(2 * sz);
-  FOR(i, sz) T[sz + i] = {1, -v[i]};
+  FOR(i, sz) T[sz + i] = {1, (i < m ? -x[i] : 0)};
   FOR3_R(i, 1, sz) T[i] = convolution(T[2 * i], T[2 * i + 1]);
   f.resize(2 * n - 1);
   T[1].resize(n);
