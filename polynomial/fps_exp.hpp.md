@@ -7,14 +7,20 @@ data:
   - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: polynomial/fps_pow.hpp
+    title: polynomial/fps_pow.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/polynomial/exp_of_fps.test.cpp
     title: test/library_checker/polynomial/exp_of_fps.test.cpp
-  _isVerificationFailed: true
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/polynomial/pow_of_fps.test.cpp
+    title: test/library_checker/polynomial/pow_of_fps.test.cpp
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n\
@@ -280,11 +286,13 @@ data:
   - mod/modint.hpp
   isVerificationFile: false
   path: polynomial/fps_exp.hpp
-  requiredBy: []
+  requiredBy:
+  - polynomial/fps_pow.hpp
   timestamp: '2022-01-08 14:37:20+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/polynomial/exp_of_fps.test.cpp
+  - test/library_checker/polynomial/pow_of_fps.test.cpp
 documentation_of: polynomial/fps_exp.hpp
 layout: document
 redirect_from:

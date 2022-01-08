@@ -63,16 +63,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/convolution/convolution_mod_107_amint.test.cpp
     title: test/library_checker/convolution/convolution_mod_107_amint.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/convolution/mul_mod2n_convolution.test.cpp
     title: test/library_checker/convolution/mul_mod2n_convolution.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/convolution/multivariate_convolution.test.cpp
     title: test/library_checker/convolution/multivariate_convolution.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/convolution/subset_convolution.test.cpp
     title: test/library_checker/convolution/subset_convolution.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/convolution/subset_convolution_multivar.test.cpp
     title: test/library_checker/convolution/subset_convolution_multivar.test.cpp
   - icon: ':heavy_check_mark:'
@@ -153,7 +153,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/cycle_detection.test.cpp
     title: test/library_checker/graph/cycle_detection.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
     title: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
   - icon: ':heavy_check_mark:'
@@ -177,27 +177,30 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/factorize.test.cpp
     title: test/library_checker/math/factorize.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/math/find_linear_recurrence.test.cpp
     title: test/library_checker/math/find_linear_recurrence.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/polynomial/exp_of_fps.test.cpp
     title: test/library_checker/polynomial/exp_of_fps.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/polynomial/inv_of_fps.test.cpp
     title: test/library_checker/polynomial/inv_of_fps.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/polynomial/log_of_fps.test.cpp
     title: test/library_checker/polynomial/log_of_fps.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/polynomial/polynomial_division.test.cpp
     title: test/library_checker/polynomial/polynomial_division.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
     title: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/polynomial/pow_of_fps.test.cpp
+    title: test/library_checker/polynomial/pow_of_fps.test.cpp
   - icon: ':x:'
     path: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
     title: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
@@ -436,6 +439,7 @@ data:
   - test/library_checker/polynomial/exp_of_fps.test.cpp
   - test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
   - test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
+  - test/library_checker/polynomial/pow_of_fps.test.cpp
   - test/library_checker/polynomial/inv_of_fps.test.cpp
   - test/library_checker/math/enumerate_primes.test.cpp
   - test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
