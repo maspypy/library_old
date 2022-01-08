@@ -23,7 +23,7 @@ vc<mint> mid_prod(vc<mint>& a, vc<mint>& b) {
 template <typename mint>
 vc<mint> multipoint_eval(vc<mint>& f, vc<mint>& x) {
   int n = len(f), m = len(x);
-  int sz = 2;
+  int sz = 1;
   while (sz < m) sz *= 2;
   vc<vc<mint>> T(2 * sz);
   FOR(i, sz) T[sz + i] = {1, (i < m ? -x[i] : 0)};
