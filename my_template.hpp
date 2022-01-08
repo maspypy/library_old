@@ -368,7 +368,7 @@ private:
 
   template <class U, is_unsigned_int_t<U> * = nullptr>
   static int calc_len(U x) {
-    int i = (bsr(x) * 3 + 3) / 10;
+    int i = (bsr(1ULL * x) * 3 + 3) / 10;
     if (x < tens[i])
       return i;
     else
