@@ -1,11 +1,11 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/tree_all_distances.hpp
     title: graph/tree_all_distances.hpp
   - icon: ':heavy_check_mark:'
@@ -17,25 +17,28 @@ data:
   - icon: ':heavy_check_mark:'
     path: polynomial/convolution_mod_2_64.hpp
     title: polynomial/convolution_mod_2_64.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: polynomial/fps_exp.hpp
+    title: polynomial/fps_exp.hpp
+  - icon: ':x:'
     path: polynomial/fps_inv.hpp
     title: polynomial/fps_inv.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: polynomial/fps_log.hpp
     title: polynomial/fps_log.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: polynomial/lagrange_interpolate_iota.hpp
     title: polynomial/lagrange_interpolate_iota.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: polynomial/multivar_convolution.hpp
     title: polynomial/multivar_convolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: polynomial/polynomial_division.hpp
     title: polynomial/polynomial_division.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: polynomial/polynomial_taylor_shift.hpp
     title: polynomial/polynomial_taylor_shift.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: sequence/linearrecurrence.hpp
     title: sequence/linearrecurrence.hpp
   _extendedVerifiedWith:
@@ -60,36 +63,39 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/convolution/multivariate_convolution.test.cpp
     title: test/library_checker/convolution/multivariate_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/convolution/subset_convolution_multivar.test.cpp
     title: test/library_checker/convolution/subset_convolution_multivar.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
     title: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/math/find_linear_recurrence.test.cpp
     title: test/library_checker/math/find_linear_recurrence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: test/library_checker/polynomial/exp_of_fps.test.cpp
+    title: test/library_checker/polynomial/exp_of_fps.test.cpp
+  - icon: ':x:'
     path: test/library_checker/polynomial/inv_of_fps.test.cpp
     title: test/library_checker/polynomial/inv_of_fps.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/polynomial/log_of_fps.test.cpp
     title: test/library_checker/polynomial/log_of_fps.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/polynomial/polynomial_division.test.cpp
     title: test/library_checker/polynomial/polynomial_division.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
     title: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
     title: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n\
@@ -217,6 +223,7 @@ data:
     \ p] = a0 + na2 + a1na3imag;\r\n            a[i + offset + 3 * p] = a0 + na2 +\
     \ (mod2 - a1na3imag);\r\n          }\r\n          rot *= info.rate3[topbit(~s\
     \ & -~s)];\r\n        }\r\n        len += 2;\r\n      }\r\n    }\r\n  } else {\r\
+    \n    mint coef = mint(1) / mint(len(a));\r\n    FOR(i, len(a)) a[i] *= coef;\r\
     \n    int len = h;\r\n    while (len) {\r\n      if (len == 1) {\r\n        int\
     \ p = 1 << (h - len);\r\n        mint irot = 1;\r\n        FOR(s, 1 << (len -\
     \ 1)) {\r\n          int offset = s << (h - len + 1);\r\n          FOR(i, p) {\r\
@@ -244,9 +251,8 @@ data:
     \nvector<mint> convolution_ntt(vector<mint> a, vector<mint> b) {\r\n  int n =\
     \ int(a.size()), m = int(b.size());\r\n  int sz = 1;\r\n  while (sz < n + m -\
     \ 1) sz *= 2;\r\n  a.resize(sz), b.resize(sz);\r\n  bool same = a == b;\r\n  ntt(a,\
-    \ false);\r\n  if(same){\r\n    b = a;\r\n  } else {\r\n    ntt(b, false);\r\n\
-    \  }\r\n  FOR(i, sz) a[i] *= b[i];\r\n  ntt(a, true);\r\n  a.resize(n + m - 1);\r\
-    \n  mint iz = mint(1) / mint(sz);\r\n  FOR(i, len(a)) a[i] *= iz;\r\n  return\
+    \ 0);\r\n  if(same){\r\n    b = a;\r\n  } else {\r\n    ntt(b, 0);\r\n  }\r\n\
+    \  FOR(i, sz) a[i] *= b[i];\r\n  ntt(a, 1);\r\n  a.resize(n + m - 1);\r\n  return\
     \ a;\r\n}\r\n\r\ntemplate <typename mint>\r\nvector<mint> convolution_garner(const\
     \ vector<mint>& a, const vector<mint>& b) {\r\n  int n = len(a), m = len(b);\r\
     \n  if (!n || !m) return {};\r\n  static const long long nttprimes[] = {754974721,\
@@ -363,6 +369,7 @@ data:
     \ p] = a0 + na2 + a1na3imag;\r\n            a[i + offset + 3 * p] = a0 + na2 +\
     \ (mod2 - a1na3imag);\r\n          }\r\n          rot *= info.rate3[topbit(~s\
     \ & -~s)];\r\n        }\r\n        len += 2;\r\n      }\r\n    }\r\n  } else {\r\
+    \n    mint coef = mint(1) / mint(len(a));\r\n    FOR(i, len(a)) a[i] *= coef;\r\
     \n    int len = h;\r\n    while (len) {\r\n      if (len == 1) {\r\n        int\
     \ p = 1 << (h - len);\r\n        mint irot = 1;\r\n        FOR(s, 1 << (len -\
     \ 1)) {\r\n          int offset = s << (h - len + 1);\r\n          FOR(i, p) {\r\
@@ -390,9 +397,8 @@ data:
     \nvector<mint> convolution_ntt(vector<mint> a, vector<mint> b) {\r\n  int n =\
     \ int(a.size()), m = int(b.size());\r\n  int sz = 1;\r\n  while (sz < n + m -\
     \ 1) sz *= 2;\r\n  a.resize(sz), b.resize(sz);\r\n  bool same = a == b;\r\n  ntt(a,\
-    \ false);\r\n  if(same){\r\n    b = a;\r\n  } else {\r\n    ntt(b, false);\r\n\
-    \  }\r\n  FOR(i, sz) a[i] *= b[i];\r\n  ntt(a, true);\r\n  a.resize(n + m - 1);\r\
-    \n  mint iz = mint(1) / mint(sz);\r\n  FOR(i, len(a)) a[i] *= iz;\r\n  return\
+    \ 0);\r\n  if(same){\r\n    b = a;\r\n  } else {\r\n    ntt(b, 0);\r\n  }\r\n\
+    \  FOR(i, sz) a[i] *= b[i];\r\n  ntt(a, 1);\r\n  a.resize(n + m - 1);\r\n  return\
     \ a;\r\n}\r\n\r\ntemplate <typename mint>\r\nvector<mint> convolution_garner(const\
     \ vector<mint>& a, const vector<mint>& b) {\r\n  int n = len(a), m = len(b);\r\
     \n  if (!n || !m) return {};\r\n  static const long long nttprimes[] = {754974721,\
@@ -468,6 +474,7 @@ data:
   - graph/tree_all_distances.hpp
   - polynomial/fps_log.hpp
   - polynomial/polynomial_division.hpp
+  - polynomial/fps_exp.hpp
   - polynomial/convolution_huge.hpp
   - polynomial/fps_inv.hpp
   - polynomial/multivar_convolution.hpp
@@ -476,8 +483,8 @@ data:
   - polynomial/convolution_mod_2_64.hpp
   - sequence/linearrecurrence.hpp
   - nt/multiplicative_convolution_mod2n.hpp
-  timestamp: '2022-01-07 04:48:32+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-01-08 14:13:02+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/library_checker/convolution/mul_mod2n_convolution.test.cpp
   - test/library_checker/convolution/multivariate_convolution.test.cpp
@@ -490,6 +497,7 @@ data:
   - test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
   - test/library_checker/polynomial/log_of_fps.test.cpp
   - test/library_checker/polynomial/polynomial_division.test.cpp
+  - test/library_checker/polynomial/exp_of_fps.test.cpp
   - test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
   - test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
   - test/library_checker/polynomial/inv_of_fps.test.cpp

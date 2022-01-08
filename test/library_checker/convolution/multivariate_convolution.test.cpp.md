@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: polynomial/multivar_convolution.hpp
     title: polynomial/multivar_convolution.hpp
   _extendedRequiredBy: []
@@ -232,6 +232,7 @@ data:
     \ p] = a0 + na2 + a1na3imag;\r\n            a[i + offset + 3 * p] = a0 + na2 +\
     \ (mod2 - a1na3imag);\r\n          }\r\n          rot *= info.rate3[topbit(~s\
     \ & -~s)];\r\n        }\r\n        len += 2;\r\n      }\r\n    }\r\n  } else {\r\
+    \n    mint coef = mint(1) / mint(len(a));\r\n    FOR(i, len(a)) a[i] *= coef;\r\
     \n    int len = h;\r\n    while (len) {\r\n      if (len == 1) {\r\n        int\
     \ p = 1 << (h - len);\r\n        mint irot = 1;\r\n        FOR(s, 1 << (len -\
     \ 1)) {\r\n          int offset = s << (h - len + 1);\r\n          FOR(i, p) {\r\
@@ -259,9 +260,8 @@ data:
     \nvector<mint> convolution_ntt(vector<mint> a, vector<mint> b) {\r\n  int n =\
     \ int(a.size()), m = int(b.size());\r\n  int sz = 1;\r\n  while (sz < n + m -\
     \ 1) sz *= 2;\r\n  a.resize(sz), b.resize(sz);\r\n  bool same = a == b;\r\n  ntt(a,\
-    \ false);\r\n  if(same){\r\n    b = a;\r\n  } else {\r\n    ntt(b, false);\r\n\
-    \  }\r\n  FOR(i, sz) a[i] *= b[i];\r\n  ntt(a, true);\r\n  a.resize(n + m - 1);\r\
-    \n  mint iz = mint(1) / mint(sz);\r\n  FOR(i, len(a)) a[i] *= iz;\r\n  return\
+    \ 0);\r\n  if(same){\r\n    b = a;\r\n  } else {\r\n    ntt(b, 0);\r\n  }\r\n\
+    \  FOR(i, sz) a[i] *= b[i];\r\n  ntt(a, 1);\r\n  a.resize(n + m - 1);\r\n  return\
     \ a;\r\n}\r\n\r\ntemplate <typename mint>\r\nvector<mint> convolution_garner(const\
     \ vector<mint>& a, const vector<mint>& b) {\r\n  int n = len(a), m = len(b);\r\
     \n  if (!n || !m) return {};\r\n  static const long long nttprimes[] = {754974721,\
@@ -348,8 +348,7 @@ data:
     \    ntt(ff[k], false);\r\n    ntt(gg[k], false);\r\n  }\r\n\r\n  vv(mint, hh,\
     \ K, sz);\r\n  FOR(a, K) FOR(b, K) FOR(i, sz) { hh[(a + b) % K][i] += ff[a][i]\
     \ * gg[b][i]; }\r\n  FOR(k, K) ntt(hh[k], true);\r\n\r\n  vc<mint> h(N);\r\n \
-    \ mint c = mint(1) / mint(sz);\r\n  FOR(i, N) h[i] = hh[chi(i)][i] * c;\r\n  return\
-    \ h;\r\n}\r\n#line 5 \"test/library_checker/convolution/multivariate_convolution.test.cpp\"\
+    \ FOR(i, N) h[i] = hh[chi(i)][i];\r\n  return h;\r\n}\r\n#line 5 \"test/library_checker/convolution/multivariate_convolution.test.cpp\"\
     \n\r\nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(K);\r\n  VEC(ll, ns,\
     \ K);\r\n  ll N = 1;\r\n  FOR(k, K) N *= ns[k];\r\n  VEC(mint, f, N);\r\n  VEC(mint,\
     \ g, N);\r\n\r\n  auto h = multivar_convolution(ns, f, g);\r\n  print(h);\r\n\
@@ -370,7 +369,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/convolution/multivariate_convolution.test.cpp
   requiredBy: []
-  timestamp: '2022-01-07 04:48:32+09:00'
+  timestamp: '2022-01-08 14:13:02+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/convolution/multivariate_convolution.test.cpp

@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
   - icon: ':heavy_check_mark:'
@@ -232,6 +232,7 @@ data:
     \ p] = a0 + na2 + a1na3imag;\r\n            a[i + offset + 3 * p] = a0 + na2 +\
     \ (mod2 - a1na3imag);\r\n          }\r\n          rot *= info.rate3[topbit(~s\
     \ & -~s)];\r\n        }\r\n        len += 2;\r\n      }\r\n    }\r\n  } else {\r\
+    \n    mint coef = mint(1) / mint(len(a));\r\n    FOR(i, len(a)) a[i] *= coef;\r\
     \n    int len = h;\r\n    while (len) {\r\n      if (len == 1) {\r\n        int\
     \ p = 1 << (h - len);\r\n        mint irot = 1;\r\n        FOR(s, 1 << (len -\
     \ 1)) {\r\n          int offset = s << (h - len + 1);\r\n          FOR(i, p) {\r\
@@ -259,9 +260,8 @@ data:
     \nvector<mint> convolution_ntt(vector<mint> a, vector<mint> b) {\r\n  int n =\
     \ int(a.size()), m = int(b.size());\r\n  int sz = 1;\r\n  while (sz < n + m -\
     \ 1) sz *= 2;\r\n  a.resize(sz), b.resize(sz);\r\n  bool same = a == b;\r\n  ntt(a,\
-    \ false);\r\n  if(same){\r\n    b = a;\r\n  } else {\r\n    ntt(b, false);\r\n\
-    \  }\r\n  FOR(i, sz) a[i] *= b[i];\r\n  ntt(a, true);\r\n  a.resize(n + m - 1);\r\
-    \n  mint iz = mint(1) / mint(sz);\r\n  FOR(i, len(a)) a[i] *= iz;\r\n  return\
+    \ 0);\r\n  if(same){\r\n    b = a;\r\n  } else {\r\n    ntt(b, 0);\r\n  }\r\n\
+    \  FOR(i, sz) a[i] *= b[i];\r\n  ntt(a, 1);\r\n  a.resize(n + m - 1);\r\n  return\
     \ a;\r\n}\r\n\r\ntemplate <typename mint>\r\nvector<mint> convolution_garner(const\
     \ vector<mint>& a, const vector<mint>& b) {\r\n  int n = len(a), m = len(b);\r\
     \n  if (!n || !m) return {};\r\n  static const long long nttprimes[] = {754974721,\
@@ -337,13 +337,12 @@ data:
     \ false);\r\n  FOR(i, 4) ntt(D[i], false);\r\n  vv(mint, E, 7, 2 << L);\r\n  FOR(i,\
     \ 4) FOR(j, 4) FOR(k, 2 << L) E[i + j][k] += C[i][k] * D[j][k];\r\n  FOR(i, 7)\
     \ ntt(E[i], true);\r\n  vc<mint> ANS(8 << L);\r\n  FOR(i, 7) FOR(k, 2 << L) ANS[(i\
-    \ << L) + k] += E[i][k];\r\n  ANS.resize(N + M - 1);\r\n  mint c = mint(1) / mint(2\
-    \ << L);\r\n  FOR(i, len(ANS)) ANS[i] *= c;\r\n  return ANS;\r\n}\r\n#line 6 \"\
-    test/library_checker/convolution/convolution_huge.test.cpp\"\nusing mint = modint998;\r\
-    \n\r\nvoid solve() {\r\n  LL(N, M);\r\n  VEC(mint, A, N);\r\n  VEC(mint, B, M);\r\
-    \n  print(convolution_huge(A, B));\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
-    \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
-    \n\r\n  return 0;\r\n}\r\n"
+    \ << L) + k] += E[i][k];\r\n  ANS.resize(N + M - 1);\r\n  return ANS;\r\n}\r\n\
+    #line 6 \"test/library_checker/convolution/convolution_huge.test.cpp\"\nusing\
+    \ mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N, M);\r\n  VEC(mint, A, N);\r\
+    \n  VEC(mint, B, M);\r\n  print(convolution_huge(A, B));\r\n}\r\n\r\nsigned main()\
+    \ {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
+    \n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod_large\"\
     \r\n#include \"my_template.hpp\"\r\n\r\n#include \"mod/modint.hpp\"\r\n#include\
     \ \"polynomial/convolution_huge.hpp\"\r\nusing mint = modint998;\r\n\r\nvoid solve()\
@@ -358,7 +357,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/convolution/convolution_huge.test.cpp
   requiredBy: []
-  timestamp: '2022-01-07 04:48:32+09:00'
+  timestamp: '2022-01-08 14:13:02+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/convolution/convolution_huge.test.cpp

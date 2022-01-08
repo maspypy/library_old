@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: polynomial/fps_inv.hpp
     title: polynomial/fps_inv.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/polynomial/log_of_fps.test.cpp
     title: test/library_checker/polynomial/log_of_fps.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n\
@@ -145,6 +145,7 @@ data:
     \ p] = a0 + na2 + a1na3imag;\r\n            a[i + offset + 3 * p] = a0 + na2 +\
     \ (mod2 - a1na3imag);\r\n          }\r\n          rot *= info.rate3[topbit(~s\
     \ & -~s)];\r\n        }\r\n        len += 2;\r\n      }\r\n    }\r\n  } else {\r\
+    \n    mint coef = mint(1) / mint(len(a));\r\n    FOR(i, len(a)) a[i] *= coef;\r\
     \n    int len = h;\r\n    while (len) {\r\n      if (len == 1) {\r\n        int\
     \ p = 1 << (h - len);\r\n        mint irot = 1;\r\n        FOR(s, 1 << (len -\
     \ 1)) {\r\n          int offset = s << (h - len + 1);\r\n          FOR(i, p) {\r\
@@ -172,9 +173,8 @@ data:
     \nvector<mint> convolution_ntt(vector<mint> a, vector<mint> b) {\r\n  int n =\
     \ int(a.size()), m = int(b.size());\r\n  int sz = 1;\r\n  while (sz < n + m -\
     \ 1) sz *= 2;\r\n  a.resize(sz), b.resize(sz);\r\n  bool same = a == b;\r\n  ntt(a,\
-    \ false);\r\n  if(same){\r\n    b = a;\r\n  } else {\r\n    ntt(b, false);\r\n\
-    \  }\r\n  FOR(i, sz) a[i] *= b[i];\r\n  ntt(a, true);\r\n  a.resize(n + m - 1);\r\
-    \n  mint iz = mint(1) / mint(sz);\r\n  FOR(i, len(a)) a[i] *= iz;\r\n  return\
+    \ 0);\r\n  if(same){\r\n    b = a;\r\n  } else {\r\n    ntt(b, 0);\r\n  }\r\n\
+    \  FOR(i, sz) a[i] *= b[i];\r\n  ntt(a, 1);\r\n  a.resize(n + m - 1);\r\n  return\
     \ a;\r\n}\r\n\r\ntemplate <typename mint>\r\nvector<mint> convolution_garner(const\
     \ vector<mint>& a, const vector<mint>& b) {\r\n  int n = len(a), m = len(b);\r\
     \n  if (!n || !m) return {};\r\n  static const long long nttprimes[] = {754974721,\
@@ -248,13 +248,13 @@ data:
     \ * n)) f[i] = F[i];\r\n    FOR(i, n) g[i] = G[i];\r\n    ntt(f, false);\r\n \
     \   ntt(g, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\n    ntt(f, true);\r\n\
     \    FOR(i, n) f[i] = 0;\r\n    ntt(f, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\
-    \n    ntt(f, true);\r\n    mint c = mint(-1) / mint(4 * n * n);\r\n    FOR3(i,\
-    \ n, 2 * n) G.eb(f[i] * c);\r\n    n *= 2;\r\n  }\r\n  G.resize(N);\r\n  return\
-    \ G;\r\n}\r\n#line 2 \"polynomial/fps_log.hpp\"\n\r\ntemplate <typename mint>\r\
-    \nvc<mint> fps_log(vc<mint>& f) {\r\n  ll N = len(f);\r\n  vc<mint> df = f;\r\n\
-    \  FOR(i, N) df[i] *= mint(i);\r\n  df.erase(df.begin());\r\n  auto f_inv = fps_inv(f);\r\
-    \n  f = convolution(df, f_inv);\r\n  f.resize(N - 1);\r\n  f.insert(f.begin(),\
-    \ 0);\r\n  FOR(i, N) f[i] *= inv<mint>(i);\r\n  return f;\r\n}\r\n"
+    \n    ntt(f, true);\r\n    FOR3(i, n, 2 * n) G.eb(f[i] * mint(-1));\r\n    n *=\
+    \ 2;\r\n  }\r\n  G.resize(N);\r\n  return G;\r\n}\r\n#line 2 \"polynomial/fps_log.hpp\"\
+    \n\r\ntemplate <typename mint>\r\nvc<mint> fps_log(vc<mint>& f) {\r\n  ll N =\
+    \ len(f);\r\n  vc<mint> df = f;\r\n  FOR(i, N) df[i] *= mint(i);\r\n  df.erase(df.begin());\r\
+    \n  auto f_inv = fps_inv(f);\r\n  f = convolution(df, f_inv);\r\n  f.resize(N\
+    \ - 1);\r\n  f.insert(f.begin(), 0);\r\n  FOR(i, N) f[i] *= inv<mint>(i);\r\n\
+    \  return f;\r\n}\r\n"
   code: "#include \"polynomial/fps_inv.hpp\"\r\n\r\ntemplate <typename mint>\r\nvc<mint>\
     \ fps_log(vc<mint>& f) {\r\n  ll N = len(f);\r\n  vc<mint> df = f;\r\n  FOR(i,\
     \ N) df[i] *= mint(i);\r\n  df.erase(df.begin());\r\n  auto f_inv = fps_inv(f);\r\
@@ -267,8 +267,8 @@ data:
   isVerificationFile: false
   path: polynomial/fps_log.hpp
   requiredBy: []
-  timestamp: '2022-01-07 04:48:32+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-01-08 14:13:02+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/polynomial/log_of_fps.test.cpp
 documentation_of: polynomial/fps_log.hpp

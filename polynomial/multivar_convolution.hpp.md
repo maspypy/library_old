@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
   _extendedRequiredBy: []
@@ -12,12 +12,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/convolution/multivariate_convolution.test.cpp
     title: test/library_checker/convolution/multivariate_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/convolution/subset_convolution_multivar.test.cpp
     title: test/library_checker/convolution/subset_convolution_multivar.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n\
@@ -145,6 +145,7 @@ data:
     \ p] = a0 + na2 + a1na3imag;\r\n            a[i + offset + 3 * p] = a0 + na2 +\
     \ (mod2 - a1na3imag);\r\n          }\r\n          rot *= info.rate3[topbit(~s\
     \ & -~s)];\r\n        }\r\n        len += 2;\r\n      }\r\n    }\r\n  } else {\r\
+    \n    mint coef = mint(1) / mint(len(a));\r\n    FOR(i, len(a)) a[i] *= coef;\r\
     \n    int len = h;\r\n    while (len) {\r\n      if (len == 1) {\r\n        int\
     \ p = 1 << (h - len);\r\n        mint irot = 1;\r\n        FOR(s, 1 << (len -\
     \ 1)) {\r\n          int offset = s << (h - len + 1);\r\n          FOR(i, p) {\r\
@@ -172,9 +173,8 @@ data:
     \nvector<mint> convolution_ntt(vector<mint> a, vector<mint> b) {\r\n  int n =\
     \ int(a.size()), m = int(b.size());\r\n  int sz = 1;\r\n  while (sz < n + m -\
     \ 1) sz *= 2;\r\n  a.resize(sz), b.resize(sz);\r\n  bool same = a == b;\r\n  ntt(a,\
-    \ false);\r\n  if(same){\r\n    b = a;\r\n  } else {\r\n    ntt(b, false);\r\n\
-    \  }\r\n  FOR(i, sz) a[i] *= b[i];\r\n  ntt(a, true);\r\n  a.resize(n + m - 1);\r\
-    \n  mint iz = mint(1) / mint(sz);\r\n  FOR(i, len(a)) a[i] *= iz;\r\n  return\
+    \ 0);\r\n  if(same){\r\n    b = a;\r\n  } else {\r\n    ntt(b, 0);\r\n  }\r\n\
+    \  FOR(i, sz) a[i] *= b[i];\r\n  ntt(a, 1);\r\n  a.resize(n + m - 1);\r\n  return\
     \ a;\r\n}\r\n\r\ntemplate <typename mint>\r\nvector<mint> convolution_garner(const\
     \ vector<mint>& a, const vector<mint>& b) {\r\n  int n = len(a), m = len(b);\r\
     \n  if (!n || !m) return {};\r\n  static const long long nttprimes[] = {754974721,\
@@ -261,8 +261,7 @@ data:
     \    ntt(ff[k], false);\r\n    ntt(gg[k], false);\r\n  }\r\n\r\n  vv(mint, hh,\
     \ K, sz);\r\n  FOR(a, K) FOR(b, K) FOR(i, sz) { hh[(a + b) % K][i] += ff[a][i]\
     \ * gg[b][i]; }\r\n  FOR(k, K) ntt(hh[k], true);\r\n\r\n  vc<mint> h(N);\r\n \
-    \ mint c = mint(1) / mint(sz);\r\n  FOR(i, N) h[i] = hh[chi(i)][i] * c;\r\n  return\
-    \ h;\r\n}\r\n"
+    \ FOR(i, N) h[i] = hh[chi(i)][i];\r\n  return h;\r\n}\r\n"
   code: "#include \"polynomial/convolution.hpp\"\r\ntemplate <typename mint>\r\nvc<mint>\
     \ multivar_convolution(vi ns, vc<mint>& f, vc<mint>& g) {\r\n  /*\r\n  (n0, n1,\
     \ n2, ...) \u9032\u6CD5\u3067\u306E\u7E70\u308A\u4E0A\u304C\u308A\u306E\u306A\u3044\
@@ -282,16 +281,16 @@ data:
     \n    gg[k][i] = g[i];\r\n  }\r\n\r\n  FOR(k, K) {\r\n    ntt(ff[k], false);\r\
     \n    ntt(gg[k], false);\r\n  }\r\n\r\n  vv(mint, hh, K, sz);\r\n  FOR(a, K) FOR(b,\
     \ K) FOR(i, sz) { hh[(a + b) % K][i] += ff[a][i] * gg[b][i]; }\r\n  FOR(k, K)\
-    \ ntt(hh[k], true);\r\n\r\n  vc<mint> h(N);\r\n  mint c = mint(1) / mint(sz);\r\
-    \n  FOR(i, N) h[i] = hh[chi(i)][i] * c;\r\n  return h;\r\n}\r\n"
+    \ ntt(hh[k], true);\r\n\r\n  vc<mint> h(N);\r\n  FOR(i, N) h[i] = hh[chi(i)][i];\r\
+    \n  return h;\r\n}\r\n"
   dependsOn:
   - polynomial/convolution.hpp
   - mod/modint.hpp
   isVerificationFile: false
   path: polynomial/multivar_convolution.hpp
   requiredBy: []
-  timestamp: '2022-01-07 04:48:32+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-01-08 14:13:02+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/library_checker/convolution/multivariate_convolution.test.cpp
   - test/library_checker/convolution/subset_convolution_multivar.test.cpp

@@ -11,11 +11,8 @@ data:
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
   - icon: ':x:'
-    path: polynomial/fps_inv.hpp
-    title: polynomial/fps_inv.hpp
-  - icon: ':x:'
-    path: polynomial/polynomial_division.hpp
-    title: polynomial/polynomial_division.hpp
+    path: polynomial/fps_exp.hpp
+    title: polynomial/fps_exp.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: true
@@ -23,12 +20,12 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/division_of_polynomials
+    PROBLEM: https://judge.yosupo.jp/problem/exp_of_formal_power_series
     links:
-    - https://judge.yosupo.jp/problem/division_of_polynomials
-  bundledCode: "#line 1 \"test/library_checker/polynomial/polynomial_division.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/division_of_polynomials\"\r\
-    \n#line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
+    - https://judge.yosupo.jp/problem/exp_of_formal_power_series
+  bundledCode: "#line 1 \"test/library_checker/polynomial/exp_of_fps.test.cpp\"\n\
+    #define PROBLEM \"https://judge.yosupo.jp/problem/exp_of_formal_power_series\"\
+    \r\n#line 2 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
     \nusing ll = long long;\nusing ll8 = __int128;\nusing pi = pair<ll, ll>;\nusing\
     \ vi = vector<ll>;\nusing uint = unsigned int;\nusing ull = unsigned long long;\n\
     \ntemplate <class T>\nusing vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\n\
@@ -109,7 +106,7 @@ data:
     }\n\n#define SUM(v) accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n\
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
-    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/polynomial/polynomial_division.test.cpp\"\
+    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/polynomial/exp_of_fps.test.cpp\"\
     \n\r\n#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n  static\
     \ constexpr bool is_static = true;\n  int val;\n\n  constexpr modint(const ll\
     \ val = 0) noexcept\n      : val(val >= 0 ? val % mod : (mod - (-val) % mod) %\
@@ -331,51 +328,50 @@ data:
     \ b);\r\n}\r\n\r\ntemplate<typename mint>\r\nenable_if_t<!is_same<mint, modint998>::value,\
     \ vc<mint>> convolution(vc<mint>& a, vc<mint>& b) {\r\n  int n = len(a), m = len(b);\r\
     \n  if (!n || !m) return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a,\
-    \ b);\r\n  return convolution_garner(a, b);\r\n}\r\n#line 2 \"polynomial/fps_inv.hpp\"\
-    \n\r\ntemplate <typename mint>\r\nvc<mint> fps_inv(vc<mint>& F) {\r\n  vc<mint>\
-    \ G = {mint(1) / F[0]};\r\n  G.reserve(len(F));\r\n  ll N = len(F), n = 1;\r\n\
-    \  while (n < N) {\r\n    vc<mint> f(2 * n), g(2 * n);\r\n    FOR(i, min(N, 2\
-    \ * n)) f[i] = F[i];\r\n    FOR(i, n) g[i] = G[i];\r\n    ntt(f, false);\r\n \
-    \   ntt(g, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\n    ntt(f, true);\r\n\
-    \    FOR(i, n) f[i] = 0;\r\n    ntt(f, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\
-    \n    ntt(f, true);\r\n    FOR3(i, n, 2 * n) G.eb(f[i] * mint(-1));\r\n    n *=\
-    \ 2;\r\n  }\r\n  G.resize(N);\r\n  return G;\r\n}\r\n#line 2 \"polynomial/polynomial_division.hpp\"\
-    \ntemplate <typename mint>\r\npair<vc<mint>, vc<mint>> polynomial_division(vc<mint>\
-    \ f, vc<mint>& g) {\r\n  assert(g.back() != 0);\r\n  if (len(f) < len(g)) { return\
-    \ {{}, f}; }\r\n  auto rf = f, rg = g;\r\n  reverse(all(rf)), reverse(all(rg));\r\
-    \n  ll deg = len(rf) - len(rg) + 1;\r\n  rf.resize(deg), rg.resize(deg);\r\n \
-    \ rg = fps_inv(rg);\r\n  auto q = convolution(rf, rg);\r\n  q.resize(deg);\r\n\
-    \  reverse(all(q));\r\n  auto h = convolution(q, g);\r\n  FOR(i, len(f)) f[i]\
-    \ -= h[i];\r\n  while (len(f) > 0 && f.back() == 0) f.pop_back();\r\n  return\
-    \ {q, f};\r\n}\r\n#line 6 \"test/library_checker/polynomial/polynomial_division.test.cpp\"\
-    \n\r\nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N, M);\r\n  VEC(mint,\
-    \ f, N);\r\n  VEC(mint, g, M);\r\n  auto [q, r] = polynomial_division(f, g);\r\
-    \n  print(len(q), len(r));\r\n  print(q);\r\n  print(r);\r\n}\r\n\r\nsigned main()\
-    \ {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
-    \n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/division_of_polynomials\"\
-    \r\n#include \"my_template.hpp\"\r\n\r\n#include \"mod/modint.hpp\"\r\n#include\
-    \ \"polynomial/polynomial_division.hpp\"\r\n\r\nusing mint = modint998;\r\n\r\n\
-    void solve() {\r\n  LL(N, M);\r\n  VEC(mint, f, N);\r\n  VEC(mint, g, M);\r\n\
-    \  auto [q, r] = polynomial_division(f, g);\r\n  print(len(q), len(r));\r\n  print(q);\r\
-    \n  print(r);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \ b);\r\n  return convolution_garner(a, b);\r\n}\r\n#line 2 \"polynomial/fps_exp.hpp\"\
+    \ntemplate <typename mint>\r\nvc<mint> fps_exp(vc<mint>& f) {\r\n  const int n\
+    \ = len(f);\r\n  assert(n > 0 && f[0] == mint(0));\r\n  vc<mint> b = {1, (1 <\
+    \ n ? f[1] : 0)};\r\n  vc<mint> c = {1}, z1, z2 = {1, 1};\r\n  while (len(b) <\
+    \ n) {\r\n    int m = len(b);\r\n    auto y = b;\r\n    y.resize(2 * m);\r\n \
+    \   ntt(y, 0);\r\n    z1 = z2;\r\n    vc<mint> z(m);\r\n    FOR(i, m) z[i] = y[i]\
+    \ * z1[i];\r\n    ntt(z, 1);\r\n    FOR(i, m / 2) z[i] = 0;\r\n    ntt(z, 0);\r\
+    \n    FOR(i, m) z[i] *= -z1[i];\r\n    ntt(z, 1);\r\n    c.insert(c.end(), z.begin()\
+    \ + m / 2, z.end());\r\n    z2 = c;\r\n    z2.resize(2 * m);\r\n    ntt(z2, 0);\r\
+    \n\r\n    vc<mint> x(f.begin(), f.begin() + m);\r\n    FOR(i, len(x) - 1) x[i]\
+    \ = x[i + 1] * mint(i + 1);\r\n    x.back() = 0;\r\n    ntt(x, 0);\r\n    FOR(i,\
+    \ m) x[i] *= y[i];\r\n    ntt(x, 1);\r\n\r\n    FOR(i, m - 1) x[i] -= b[i + 1]\
+    \ * mint(i + 1);\r\n\r\n    x.resize(m + m);\r\n    FOR(i, m - 1) x[m + i] = x[i],\
+    \ x[i] = 0;\r\n    ntt(x, 0);\r\n    FOR(i, m + m) x[i] *= z2[i];\r\n    ntt(x,\
+    \ 1);\r\n    FOR_R(i, len(x) - 1) x[i + 1] = x[i] * inv<mint>(i + 1);\r\n    x[0]\
+    \ = 0;\r\n\r\n    FOR3(i, m, min(n, m + m)) x[i] += f[i];\r\n    FOR(i, m) x[i]\
+    \ = 0;\r\n    ntt(x, 0);\r\n    FOR(i, m + m) x[i] *= y[i];\r\n    ntt(x, 1);\r\
+    \n    b.insert(b.end(), x.begin() + m, x.end());\r\n  }\r\n  b.resize(n);\r\n\
+    \  return b;\r\n}\r\n#line 5 \"test/library_checker/polynomial/exp_of_fps.test.cpp\"\
+    \n\r\nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N);\r\n  VEC(mint,\
+    \ A, N);\r\n  print(fps_exp(A));\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
+    \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
+    \n\r\n  return 0;\r\n}\r\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/exp_of_formal_power_series\"\
+    \r\n#include \"my_template.hpp\"\r\n\r\n#include \"polynomial/fps_exp.hpp\"\r\n\
+    \r\nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N);\r\n  VEC(mint, A,\
+    \ N);\r\n  print(fps_exp(A));\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
+    \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
+    \n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
-  - mod/modint.hpp
-  - polynomial/polynomial_division.hpp
-  - polynomial/fps_inv.hpp
+  - polynomial/fps_exp.hpp
   - polynomial/convolution.hpp
+  - mod/modint.hpp
   isVerificationFile: true
-  path: test/library_checker/polynomial/polynomial_division.test.cpp
+  path: test/library_checker/polynomial/exp_of_fps.test.cpp
   requiredBy: []
-  timestamp: '2022-01-08 14:13:02+09:00'
+  timestamp: '2022-01-08 14:13:21+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/library_checker/polynomial/polynomial_division.test.cpp
+documentation_of: test/library_checker/polynomial/exp_of_fps.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/polynomial/polynomial_division.test.cpp
-- /verify/test/library_checker/polynomial/polynomial_division.test.cpp.html
-title: test/library_checker/polynomial/polynomial_division.test.cpp
+- /verify/test/library_checker/polynomial/exp_of_fps.test.cpp
+- /verify/test/library_checker/polynomial/exp_of_fps.test.cpp.html
+title: test/library_checker/polynomial/exp_of_fps.test.cpp
 ---
