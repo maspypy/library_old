@@ -1,18 +1,15 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
   - icon: ':heavy_check_mark:'
     path: polynomial/fps_inv.hpp
     title: polynomial/fps_inv.hpp
-  - icon: ':heavy_check_mark:'
-    path: polynomial/poly_divmod.hpp
-    title: polynomial/poly_divmod.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
@@ -257,60 +254,51 @@ data:
     \   ntt(g, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\n    ntt(f, true);\r\n\
     \    FOR(i, n) f[i] = 0;\r\n    ntt(f, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\
     \n    ntt(f, true);\r\n    FOR3(i, n, 2 * n) G.eb(f[i] * mint(-1));\r\n    n *=\
-    \ 2;\r\n  }\r\n  G.resize(N);\r\n  return G;\r\n}\r\n#line 2 \"polynomial/poly_divmod.hpp\"\
-    \ntemplate <typename mint>\r\npair<vc<mint>, vc<mint>> poly_divmod(vc<mint> f,\
-    \ vc<mint>& g) {\r\n  assert(g.back() != 0);\r\n  if (len(f) < len(g)) { return\
-    \ {{}, f}; }\r\n  auto rf = f, rg = g;\r\n  reverse(all(rf)), reverse(all(rg));\r\
-    \n  ll deg = len(rf) - len(rg) + 1;\r\n  rf.resize(deg), rg.resize(deg);\r\n \
-    \ rg = fps_inv(rg);\r\n  auto q = convolution(rf, rg);\r\n  q.resize(deg);\r\n\
-    \  reverse(all(q));\r\n  auto h = convolution(q, g);\r\n  FOR(i, len(f)) f[i]\
-    \ -= h[i];\r\n  while (len(f) > 0 && f.back() == 0) f.pop_back();\r\n  return\
-    \ {q, f};\r\n}\r\n#line 2 \"polynomial/multipoint_eval.hpp\"\n\r\ntemplate <typename\
-    \ mint>\r\nvc<mint> mid_prod(vc<mint>& a, vc<mint>& b) {\r\n  assert(len(a) >=\
-    \ len(b) && !b.empty());\r\n  if (min(len(b), len(a) - len(b) + 1) <= 60) {\r\n\
-    \    vc<mint> res(len(a) - len(b) + 1);\r\n    FOR(i, len(res)) FOR(j, len(b))\
-    \ res[i] += b[j] * a[i + j];\r\n    return res;\r\n  }\r\n  int n = 1 << std::__lg(2\
-    \ * len(a) - 1);\r\n  vc<mint> fa(n), fb(n);\r\n  std::copy(a.begin(), a.end(),\
-    \ fa.begin());\r\n  std::copy(b.rbegin(), b.rend(), fb.begin());\r\n  ntt(fa,\
-    \ 0), ntt(fb, 0);\r\n  FOR(i, n) fa[i] *= fb[i];\r\n  ntt(fa, 1);\r\n  fa.resize(len(a));\r\
-    \n  fa.erase(fa.begin(), fa.begin() + len(b) - 1);\r\n  return fa;\r\n}\r\n\r\n\
-    template <typename mint>\r\nvc<mint> multipoint_eval(vc<mint>& f, vc<mint> v)\
-    \ {\r\n  int n = len(f), m = len(v);\r\n  int sz = 2;\r\n  while (sz < m) sz *=\
-    \ 2;\r\n  v.resize(sz);\r\n  vc<vc<mint>> T(2 * sz);\r\n  FOR(i, sz) T[sz + i]\
-    \ = {1, -v[i]};\r\n  FOR3_R(i, 1, sz) T[i] = convolution(T[2 * i], T[2 * i + 1]);\r\
-    \n  f.resize(2 * n - 1);\r\n  T[1].resize(n);\r\n  T[1] = fps_inv(T[1]);\r\n \
-    \ T[1] = mid_prod(f, T[1]);\r\n  T[1].resize(sz);\r\n\r\n  FOR3(i, 1, sz) {\r\n\
-    \    T[2 * i] = mid_prod(T[i], T[2 * i]);\r\n    T[2 * i + 1] = mid_prod(T[i],\
-    \ T[2 * i + 1]);\r\n    swap(T[2 * i], T[2 * i + 1]);\r\n  }\r\n  vc<mint> vals(m);\r\
-    \n  FOR(i, m) vals[i] = (len(T[sz + i]) ? T[sz + i][0] : 0);\r\n  return vals;\r\
-    \n}\r\n"
-  code: "#include \"polynomial/poly_divmod.hpp\"\r\n\r\ntemplate <typename mint>\r\
-    \nvc<mint> mid_prod(vc<mint>& a, vc<mint>& b) {\r\n  assert(len(a) >= len(b) &&\
-    \ !b.empty());\r\n  if (min(len(b), len(a) - len(b) + 1) <= 60) {\r\n    vc<mint>\
-    \ res(len(a) - len(b) + 1);\r\n    FOR(i, len(res)) FOR(j, len(b)) res[i] += b[j]\
-    \ * a[i + j];\r\n    return res;\r\n  }\r\n  int n = 1 << std::__lg(2 * len(a)\
-    \ - 1);\r\n  vc<mint> fa(n), fb(n);\r\n  std::copy(a.begin(), a.end(), fa.begin());\r\
-    \n  std::copy(b.rbegin(), b.rend(), fb.begin());\r\n  ntt(fa, 0), ntt(fb, 0);\r\
-    \n  FOR(i, n) fa[i] *= fb[i];\r\n  ntt(fa, 1);\r\n  fa.resize(len(a));\r\n  fa.erase(fa.begin(),\
-    \ fa.begin() + len(b) - 1);\r\n  return fa;\r\n}\r\n\r\ntemplate <typename mint>\r\
-    \nvc<mint> multipoint_eval(vc<mint>& f, vc<mint> v) {\r\n  int n = len(f), m =\
-    \ len(v);\r\n  int sz = 2;\r\n  while (sz < m) sz *= 2;\r\n  v.resize(sz);\r\n\
-    \  vc<vc<mint>> T(2 * sz);\r\n  FOR(i, sz) T[sz + i] = {1, -v[i]};\r\n  FOR3_R(i,\
-    \ 1, sz) T[i] = convolution(T[2 * i], T[2 * i + 1]);\r\n  f.resize(2 * n - 1);\r\
-    \n  T[1].resize(n);\r\n  T[1] = fps_inv(T[1]);\r\n  T[1] = mid_prod(f, T[1]);\r\
-    \n  T[1].resize(sz);\r\n\r\n  FOR3(i, 1, sz) {\r\n    T[2 * i] = mid_prod(T[i],\
-    \ T[2 * i]);\r\n    T[2 * i + 1] = mid_prod(T[i], T[2 * i + 1]);\r\n    swap(T[2\
-    \ * i], T[2 * i + 1]);\r\n  }\r\n  vc<mint> vals(m);\r\n  FOR(i, m) vals[i] =\
-    \ (len(T[sz + i]) ? T[sz + i][0] : 0);\r\n  return vals;\r\n}\r\n"
+    \ 2;\r\n  }\r\n  G.resize(N);\r\n  return G;\r\n}\r\n#line 2 \"polynomial/multipoint_eval.hpp\"\
+    \n\r\ntemplate <typename mint>\r\nvc<mint> mid_prod(vc<mint>& a, vc<mint>& b)\
+    \ {\r\n  assert(len(a) >= len(b) && !b.empty());\r\n  if (min(len(b), len(a) -\
+    \ len(b) + 1) <= 60) {\r\n    vc<mint> res(len(a) - len(b) + 1);\r\n    FOR(i,\
+    \ len(res)) FOR(j, len(b)) res[i] += b[j] * a[i + j];\r\n    return res;\r\n \
+    \ }\r\n  int n = 1 << std::__lg(2 * len(a) - 1);\r\n  vc<mint> fa(n), fb(n);\r\
+    \n  std::copy(a.begin(), a.end(), fa.begin());\r\n  std::copy(b.rbegin(), b.rend(),\
+    \ fb.begin());\r\n  ntt(fa, 0), ntt(fb, 0);\r\n  FOR(i, n) fa[i] *= fb[i];\r\n\
+    \  ntt(fa, 1);\r\n  fa.resize(len(a));\r\n  fa.erase(fa.begin(), fa.begin() +\
+    \ len(b) - 1);\r\n  return fa;\r\n}\r\n\r\ntemplate <typename mint>\r\nvc<mint>\
+    \ multipoint_eval(vc<mint>& f, vc<mint>& x) {\r\n  int n = len(f), m = len(x);\r\
+    \n  int sz = 2;\r\n  while (sz < m) sz *= 2;\r\n  vc<vc<mint>> T(2 * sz);\r\n\
+    \  FOR(i, sz) T[sz + i] = {1, (i < m ? -x[i] : 0)};\r\n  FOR3_R(i, 1, sz) T[i]\
+    \ = convolution(T[2 * i], T[2 * i + 1]);\r\n  f.resize(2 * n - 1);\r\n  T[1].resize(n);\r\
+    \n  T[1] = fps_inv(T[1]);\r\n  T[1] = mid_prod(f, T[1]);\r\n  T[1].resize(sz);\r\
+    \n\r\n  FOR3(i, 1, sz) {\r\n    T[2 * i] = mid_prod(T[i], T[2 * i]);\r\n    T[2\
+    \ * i + 1] = mid_prod(T[i], T[2 * i + 1]);\r\n    swap(T[2 * i], T[2 * i + 1]);\r\
+    \n  }\r\n  vc<mint> vals(m);\r\n  FOR(i, m) vals[i] = (len(T[sz + i]) ? T[sz +\
+    \ i][0] : 0);\r\n  return vals;\r\n}\r\n"
+  code: "#include \"polynomial/fps_inv.hpp\"\r\n\r\ntemplate <typename mint>\r\nvc<mint>\
+    \ mid_prod(vc<mint>& a, vc<mint>& b) {\r\n  assert(len(a) >= len(b) && !b.empty());\r\
+    \n  if (min(len(b), len(a) - len(b) + 1) <= 60) {\r\n    vc<mint> res(len(a) -\
+    \ len(b) + 1);\r\n    FOR(i, len(res)) FOR(j, len(b)) res[i] += b[j] * a[i + j];\r\
+    \n    return res;\r\n  }\r\n  int n = 1 << std::__lg(2 * len(a) - 1);\r\n  vc<mint>\
+    \ fa(n), fb(n);\r\n  std::copy(a.begin(), a.end(), fa.begin());\r\n  std::copy(b.rbegin(),\
+    \ b.rend(), fb.begin());\r\n  ntt(fa, 0), ntt(fb, 0);\r\n  FOR(i, n) fa[i] *=\
+    \ fb[i];\r\n  ntt(fa, 1);\r\n  fa.resize(len(a));\r\n  fa.erase(fa.begin(), fa.begin()\
+    \ + len(b) - 1);\r\n  return fa;\r\n}\r\n\r\ntemplate <typename mint>\r\nvc<mint>\
+    \ multipoint_eval(vc<mint>& f, vc<mint>& x) {\r\n  int n = len(f), m = len(x);\r\
+    \n  int sz = 2;\r\n  while (sz < m) sz *= 2;\r\n  vc<vc<mint>> T(2 * sz);\r\n\
+    \  FOR(i, sz) T[sz + i] = {1, (i < m ? -x[i] : 0)};\r\n  FOR3_R(i, 1, sz) T[i]\
+    \ = convolution(T[2 * i], T[2 * i + 1]);\r\n  f.resize(2 * n - 1);\r\n  T[1].resize(n);\r\
+    \n  T[1] = fps_inv(T[1]);\r\n  T[1] = mid_prod(f, T[1]);\r\n  T[1].resize(sz);\r\
+    \n\r\n  FOR3(i, 1, sz) {\r\n    T[2 * i] = mid_prod(T[i], T[2 * i]);\r\n    T[2\
+    \ * i + 1] = mid_prod(T[i], T[2 * i + 1]);\r\n    swap(T[2 * i], T[2 * i + 1]);\r\
+    \n  }\r\n  vc<mint> vals(m);\r\n  FOR(i, m) vals[i] = (len(T[sz + i]) ? T[sz +\
+    \ i][0] : 0);\r\n  return vals;\r\n}\r\n"
   dependsOn:
-  - polynomial/poly_divmod.hpp
   - polynomial/fps_inv.hpp
   - polynomial/convolution.hpp
   - mod/modint.hpp
   isVerificationFile: false
   path: polynomial/multipoint_eval.hpp
   requiredBy: []
-  timestamp: '2022-01-09 01:30:39+09:00'
+  timestamp: '2022-01-09 01:59:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/polynomial/multipoint_evaluation.test.cpp

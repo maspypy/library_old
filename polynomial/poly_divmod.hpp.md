@@ -1,23 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
   - icon: ':heavy_check_mark:'
     path: polynomial/fps_inv.hpp
     title: polynomial/fps_inv.hpp
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: polynomial/multipoint_eval.hpp
-    title: polynomial/multipoint_eval.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/polynomial/multipoint_evaluation.test.cpp
-    title: test/library_checker/polynomial/multipoint_evaluation.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/polynomial/polynomial_division.test.cpp
     title: test/library_checker/polynomial/polynomial_division.test.cpp
@@ -283,13 +277,11 @@ data:
   - mod/modint.hpp
   isVerificationFile: false
   path: polynomial/poly_divmod.hpp
-  requiredBy:
-  - polynomial/multipoint_eval.hpp
+  requiredBy: []
   timestamp: '2022-01-09 00:45:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/polynomial/polynomial_division.test.cpp
-  - test/library_checker/polynomial/multipoint_evaluation.test.cpp
 documentation_of: polynomial/poly_divmod.hpp
 layout: document
 redirect_from:
