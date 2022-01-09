@@ -250,27 +250,28 @@ data:
     \ L = 22;\r\n  vv(mint, C, 4, 2 << L);\r\n  vv(mint, D, 4, 2 << L);\r\n  int mask\
     \ = (1 << L) - 1;\r\n  FOR(i, N) C[i >> L][i & mask] = A[i];\r\n  FOR(i, M) D[i\
     \ >> L][i & mask] = B[i];\r\n  FOR(i, 4) ntt(C[i], false);\r\n  FOR(i, 4) ntt(D[i],\
-    \ false);\r\n  vv(mint, E, 7, 2 << L);\r\n  FOR(i, 4) FOR(j, 4) FOR(k, 2 << L)\
-    \ E[i + j][k] += C[i][k] * D[j][k];\r\n  FOR(i, 7) ntt(E[i], true);\r\n  vc<mint>\
-    \ ANS(8 << L);\r\n  FOR(i, 7) FOR(k, 2 << L) ANS[(i << L) + k] += E[i][k];\r\n\
-    \  ANS.resize(N + M - 1);\r\n  return ANS;\r\n}\r\n"
+    \ false);\r\n\r\n  vc<mint> ANS(8 << L);\r\n\r\n  FOR(i, 7) {\r\n    vc<mint>\
+    \ E(2 << L);\r\n    FOR(c, 4) FOR(d, 4) if(c + d == i) {\r\n      FOR(k, 2 <<\
+    \ L) E[k] += C[c][k] * D[d][k];\r\n    }\r\n    ntt(E, true);\r\n    FOR(k, 2\
+    \ << L) ANS[(i << L) + k] += E[k];\r\n  }\r\n  ANS.resize(N + M - 1);\r\n  return\
+    \ ANS;\r\n}\r\n"
   code: "#include \"polynomial/convolution.hpp\"\r\ntemplate<typename mint>\r\nvc<mint>\
     \ convolution_huge(vc<mint>& A, vc<mint>& B) {\r\n  int N = len(A), M = len(B);\r\
     \n  if (N + M - 1 <= (1 << 23)) return convolution(A, B);\r\n  ll L = 22;\r\n\
     \  vv(mint, C, 4, 2 << L);\r\n  vv(mint, D, 4, 2 << L);\r\n  int mask = (1 <<\
     \ L) - 1;\r\n  FOR(i, N) C[i >> L][i & mask] = A[i];\r\n  FOR(i, M) D[i >> L][i\
     \ & mask] = B[i];\r\n  FOR(i, 4) ntt(C[i], false);\r\n  FOR(i, 4) ntt(D[i], false);\r\
-    \n  vv(mint, E, 7, 2 << L);\r\n  FOR(i, 4) FOR(j, 4) FOR(k, 2 << L) E[i + j][k]\
-    \ += C[i][k] * D[j][k];\r\n  FOR(i, 7) ntt(E[i], true);\r\n  vc<mint> ANS(8 <<\
-    \ L);\r\n  FOR(i, 7) FOR(k, 2 << L) ANS[(i << L) + k] += E[i][k];\r\n  ANS.resize(N\
-    \ + M - 1);\r\n  return ANS;\r\n}\r\n"
+    \n\r\n  vc<mint> ANS(8 << L);\r\n\r\n  FOR(i, 7) {\r\n    vc<mint> E(2 << L);\r\
+    \n    FOR(c, 4) FOR(d, 4) if(c + d == i) {\r\n      FOR(k, 2 << L) E[k] += C[c][k]\
+    \ * D[d][k];\r\n    }\r\n    ntt(E, true);\r\n    FOR(k, 2 << L) ANS[(i << L)\
+    \ + k] += E[k];\r\n  }\r\n  ANS.resize(N + M - 1);\r\n  return ANS;\r\n}\r\n"
   dependsOn:
   - polynomial/convolution.hpp
   - mod/modint.hpp
   isVerificationFile: false
   path: polynomial/convolution_huge.hpp
   requiredBy: []
-  timestamp: '2022-01-09 16:39:58+09:00'
+  timestamp: '2022-01-09 20:51:50+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/convolution/convolution_huge.test.cpp
