@@ -1,4 +1,4 @@
-#define PROBLEM "URL"
+#define PROBLEM "https://judge.yosupo.jp/problem/inv_of_polynomials"
 #include "my_template.hpp"
 #include "polynomial/poly_gcd.hpp"
 
