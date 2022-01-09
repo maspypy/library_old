@@ -302,6 +302,9 @@ data:
       path: polynomial/convolution_mod_2_64.hpp
       title: polynomial/convolution_mod_2_64.hpp
     - icon: ':heavy_check_mark:'
+      path: polynomial/fps_composition.hpp
+      title: polynomial/fps_composition.hpp
+    - icon: ':heavy_check_mark:'
       path: polynomial/fps_exp.hpp
       title: polynomial/fps_exp.hpp
     - icon: ':heavy_check_mark:'
@@ -553,6 +556,9 @@ data:
       title: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
   - name: test/library_checker/polynomial
     pages:
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/polynomial/composition_of_fps.test.cpp
+      title: test/library_checker/polynomial/composition_of_fps.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/exp_of_fps.test.cpp
       title: test/library_checker/polynomial/exp_of_fps.test.cpp

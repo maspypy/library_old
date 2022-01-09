@@ -18,6 +18,9 @@ data:
     path: polynomial/convolution_mod_2_64.hpp
     title: polynomial/convolution_mod_2_64.hpp
   - icon: ':heavy_check_mark:'
+    path: polynomial/fps_composition.hpp
+    title: polynomial/fps_composition.hpp
+  - icon: ':heavy_check_mark:'
     path: polynomial/fps_exp.hpp
     title: polynomial/fps_exp.hpp
   - icon: ':heavy_check_mark:'
@@ -81,6 +84,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/polynomial/composition_of_fps.test.cpp
+    title: test/library_checker/polynomial/composition_of_fps.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/polynomial/exp_of_fps.test.cpp
     title: test/library_checker/polynomial/exp_of_fps.test.cpp
@@ -503,6 +509,7 @@ data:
   - polynomial/fps_log.hpp
   - polynomial/multipoint.hpp
   - polynomial/fps_exp.hpp
+  - polynomial/fps_composition.hpp
   - polynomial/convolution_huge.hpp
   - polynomial/poly_divmod.hpp
   - polynomial/fps_inv.hpp
@@ -528,6 +535,7 @@ data:
   - test/library_checker/polynomial/polynomial_division.test.cpp
   - test/library_checker/polynomial/multipoint_evaluation.test.cpp
   - test/library_checker/polynomial/exp_of_fps.test.cpp
+  - test/library_checker/polynomial/composition_of_fps.test.cpp
   - test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
   - test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
   - test/library_checker/polynomial/pow_of_fps.test.cpp
