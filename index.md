@@ -567,6 +567,9 @@ data:
       path: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
       title: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/library_checker/math/sharp_p_subset_sum.test.cpp
+      title: test/library_checker/math/sharp_p_subset_sum.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/math/sqrt_mod.test.cpp
       title: test/library_checker/math/sqrt_mod.test.cpp
   - name: test/library_checker/matrix
