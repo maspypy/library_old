@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: algebra/group_mul.hpp
     title: algebra/group_mul.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ds/swag.hpp
     title: ds/swag.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: polynomial/lagrange_interpolate_iota.hpp
     title: polynomial/lagrange_interpolate_iota.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/shift_of_sampling_points_of_polynomial
@@ -470,28 +470,29 @@ data:
     \ >> 1)]) * t * rts[(sz >> 1) + i];\r\n    fa[i] = A0 + A1 * s;\r\n  }\r\n  fft(fa,\
     \ sz >> 1);\r\n  vector<double> ret(need);\r\n  for (int i = 0; i < need; i++)\
     \ {\r\n    ret[i] = (i & 1 ? fa[i >> 1].y : fa[i >> 1].x);\r\n  }\r\n  return\
-    \ ret;\r\n}\r\n} // namespace CFFT\r\n\r\nvector<ll> convolution(vector<ll>& a,\
-    \ vector<ll>& b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return\
-    \ {};\r\n  if (min(n, m) <= 60) return convolution_naive(a, b);\r\n  ll abs_sum_a\
-    \ = 0, abs_sum_b = 0;\r\n  FOR(i, n) abs_sum_a += abs(a[i]);\r\n  FOR(i, n) abs_sum_b\
-    \ += abs(b[i]);\r\n  assert(abs_sum_a * abs_sum_b < 1e15);\r\n  vc<double> c =\
-    \ CFFT::convolution_fft(a, b);\r\n  vc<ll> res(len(c));\r\n  FOR(i, len(c)) res[i]\
-    \ = ll(floor(c[i] + .5));\r\n  return res;\r\n}\r\n\r\ntemplate<typename mint>\r\
-    \nenable_if_t<is_same<mint, modint998>::value, vc<mint>> convolution(vc<mint>&\
-    \ a, vc<mint>& b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return\
-    \ {};\r\n  if (min(n, m) <= 60) return convolution_naive(a, b);\r\n  return convolution_ntt(a,\
-    \ b);\r\n}\r\n\r\ntemplate<typename mint>\r\nenable_if_t<!is_same<mint, modint998>::value,\
-    \ vc<mint>> convolution(vc<mint>& a, vc<mint>& b) {\r\n  int n = len(a), m = len(b);\r\
-    \n  if (!n || !m) return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a,\
-    \ b);\r\n  return convolution_garner(a, b);\r\n}\r\n#line 4 \"polynomial/lagrange_interpolate_iota.hpp\"\
-    \n\r\ntemplate <typename mint>\r\nvc<mint> lagrange_intepolate_iota(vc<mint> &f,\
-    \ mint c, int m) {\r\n  /*\r\n  Input: f(0), ..., f(n-1) and c, m (1 default)\r\
-    \n  Return: f(c), f(c+1), ..., f(c+m-1)\r\n  Complexity: M(n, m)\r\n  */\r\n \
-    \ ll n = len(f);\r\n  auto a = f;\r\n  FOR(i, n) {\r\n    a[i] = a[i] * fact_inv<mint>(i)\
-    \ * fact_inv<mint>(n - 1 - i);\r\n    if ((n - 1 - i) & 1) a[i] *= -1;\r\n  }\r\
-    \n  // x = c, c+1, ... \u306B\u5BFE\u3057\u3066 a0/x + a1/(x-1) + ... \u3092\u6C42\
-    \u3081\u3066\u304A\u304F\r\n  vc<mint> b(n + m - 1);\r\n  FOR(i, n + m - 1) b[i]\
-    \ = mint(1) / (c + mint(i - n + 1));\r\n  a = convolution(a, b);\r\n\r\n  SWAG<Group_Mul<mint>>\
+    \ ret;\r\n}\r\n} // namespace CFFT\r\n\r\nvector<ll> convolution(const vector<ll>&\
+    \ a, const vector<ll>& b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m)\
+    \ return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a, b);\r\n  ll\
+    \ abs_sum_a = 0, abs_sum_b = 0;\r\n  FOR(i, n) abs_sum_a += abs(a[i]);\r\n  FOR(i,\
+    \ n) abs_sum_b += abs(b[i]);\r\n  assert(abs_sum_a * abs_sum_b < 1e15);\r\n  vc<double>\
+    \ c = CFFT::convolution_fft(a, b);\r\n  vc<ll> res(len(c));\r\n  FOR(i, len(c))\
+    \ res[i] = ll(floor(c[i] + .5));\r\n  return res;\r\n}\r\n\r\ntemplate<typename\
+    \ mint>\r\nenable_if_t<is_same<mint, modint998>::value, vc<mint>> convolution(const\
+    \ vc<mint>& a, const vc<mint>& b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n\
+    \ || !m) return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a, b);\r\
+    \n  return convolution_ntt(a, b);\r\n}\r\n\r\ntemplate<typename mint>\r\nenable_if_t<!is_same<mint,\
+    \ modint998>::value, vc<mint>> convolution(const vc<mint>& a, const vc<mint>&\
+    \ b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return {};\r\n  if\
+    \ (min(n, m) <= 60) return convolution_naive(a, b);\r\n  return convolution_garner(a,\
+    \ b);\r\n}\r\n#line 4 \"polynomial/lagrange_interpolate_iota.hpp\"\n\r\ntemplate\
+    \ <typename mint>\r\nvc<mint> lagrange_intepolate_iota(vc<mint> &f, mint c, int\
+    \ m) {\r\n  /*\r\n  Input: f(0), ..., f(n-1) and c, m (1 default)\r\n  Return:\
+    \ f(c), f(c+1), ..., f(c+m-1)\r\n  Complexity: M(n, m)\r\n  */\r\n  ll n = len(f);\r\
+    \n  auto a = f;\r\n  FOR(i, n) {\r\n    a[i] = a[i] * fact_inv<mint>(i) * fact_inv<mint>(n\
+    \ - 1 - i);\r\n    if ((n - 1 - i) & 1) a[i] *= -1;\r\n  }\r\n  // x = c, c+1,\
+    \ ... \u306B\u5BFE\u3057\u3066 a0/x + a1/(x-1) + ... \u3092\u6C42\u3081\u3066\u304A\
+    \u304F\r\n  vc<mint> b(n + m - 1);\r\n  FOR(i, n + m - 1) b[i] = mint(1) / (c\
+    \ + mint(i - n + 1));\r\n  a = convolution(a, b);\r\n\r\n  SWAG<Group_Mul<mint>>\
     \ swag;\r\n  vc<mint> ANS(m);\r\n  ll L = 0, R = 0;\r\n  FOR(i, m) {\r\n    while\
     \ (L < i) { swag.pop(), ++L; }\r\n    while (R - L < n) { swag.push(c + mint((R++)\
     \ - n + 1)); }\r\n    auto coef = swag.prod();\r\n    if (coef == 0) {\r\n   \
@@ -520,8 +521,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
   requiredBy: []
-  timestamp: '2022-01-09 00:45:26+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-09 16:39:58+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
 layout: document

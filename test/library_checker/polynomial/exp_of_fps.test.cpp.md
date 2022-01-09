@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: polynomial/fps_exp.hpp
     title: polynomial/fps_exp.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/exp_of_formal_power_series
@@ -450,38 +450,38 @@ data:
     \ >> 1)]) * t * rts[(sz >> 1) + i];\r\n    fa[i] = A0 + A1 * s;\r\n  }\r\n  fft(fa,\
     \ sz >> 1);\r\n  vector<double> ret(need);\r\n  for (int i = 0; i < need; i++)\
     \ {\r\n    ret[i] = (i & 1 ? fa[i >> 1].y : fa[i >> 1].x);\r\n  }\r\n  return\
-    \ ret;\r\n}\r\n} // namespace CFFT\r\n\r\nvector<ll> convolution(vector<ll>& a,\
-    \ vector<ll>& b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return\
-    \ {};\r\n  if (min(n, m) <= 60) return convolution_naive(a, b);\r\n  ll abs_sum_a\
-    \ = 0, abs_sum_b = 0;\r\n  FOR(i, n) abs_sum_a += abs(a[i]);\r\n  FOR(i, n) abs_sum_b\
-    \ += abs(b[i]);\r\n  assert(abs_sum_a * abs_sum_b < 1e15);\r\n  vc<double> c =\
-    \ CFFT::convolution_fft(a, b);\r\n  vc<ll> res(len(c));\r\n  FOR(i, len(c)) res[i]\
-    \ = ll(floor(c[i] + .5));\r\n  return res;\r\n}\r\n\r\ntemplate<typename mint>\r\
-    \nenable_if_t<is_same<mint, modint998>::value, vc<mint>> convolution(vc<mint>&\
-    \ a, vc<mint>& b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return\
-    \ {};\r\n  if (min(n, m) <= 60) return convolution_naive(a, b);\r\n  return convolution_ntt(a,\
-    \ b);\r\n}\r\n\r\ntemplate<typename mint>\r\nenable_if_t<!is_same<mint, modint998>::value,\
-    \ vc<mint>> convolution(vc<mint>& a, vc<mint>& b) {\r\n  int n = len(a), m = len(b);\r\
-    \n  if (!n || !m) return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a,\
-    \ b);\r\n  return convolution_garner(a, b);\r\n}\r\n#line 2 \"polynomial/fps_exp.hpp\"\
-    \ntemplate <typename mint>\r\nvc<mint> fps_exp(vc<mint>& f) {\r\n  const int n\
-    \ = len(f);\r\n  assert(n > 0 && f[0] == mint(0));\r\n  vc<mint> b = {1, (1 <\
-    \ n ? f[1] : 0)};\r\n  vc<mint> c = {1}, z1, z2 = {1, 1};\r\n  while (len(b) <\
-    \ n) {\r\n    int m = len(b);\r\n    auto y = b;\r\n    y.resize(2 * m);\r\n \
-    \   ntt(y, 0);\r\n    z1 = z2;\r\n    vc<mint> z(m);\r\n    FOR(i, m) z[i] = y[i]\
-    \ * z1[i];\r\n    ntt(z, 1);\r\n    FOR(i, m / 2) z[i] = 0;\r\n    ntt(z, 0);\r\
-    \n    FOR(i, m) z[i] *= -z1[i];\r\n    ntt(z, 1);\r\n    c.insert(c.end(), z.begin()\
-    \ + m / 2, z.end());\r\n    z2 = c;\r\n    z2.resize(2 * m);\r\n    ntt(z2, 0);\r\
-    \n\r\n    vc<mint> x(f.begin(), f.begin() + m);\r\n    FOR(i, len(x) - 1) x[i]\
-    \ = x[i + 1] * mint(i + 1);\r\n    x.back() = 0;\r\n    ntt(x, 0);\r\n    FOR(i,\
-    \ m) x[i] *= y[i];\r\n    ntt(x, 1);\r\n\r\n    FOR(i, m - 1) x[i] -= b[i + 1]\
-    \ * mint(i + 1);\r\n\r\n    x.resize(m + m);\r\n    FOR(i, m - 1) x[m + i] = x[i],\
-    \ x[i] = 0;\r\n    ntt(x, 0);\r\n    FOR(i, m + m) x[i] *= z2[i];\r\n    ntt(x,\
-    \ 1);\r\n    FOR_R(i, len(x) - 1) x[i + 1] = x[i] * inv<mint>(i + 1);\r\n    x[0]\
-    \ = 0;\r\n\r\n    FOR3(i, m, min(n, m + m)) x[i] += f[i];\r\n    FOR(i, m) x[i]\
-    \ = 0;\r\n    ntt(x, 0);\r\n    FOR(i, m + m) x[i] *= y[i];\r\n    ntt(x, 1);\r\
-    \n    b.insert(b.end(), x.begin() + m, x.end());\r\n  }\r\n  b.resize(n);\r\n\
-    \  return b;\r\n}\r\n#line 5 \"test/library_checker/polynomial/exp_of_fps.test.cpp\"\
+    \ ret;\r\n}\r\n} // namespace CFFT\r\n\r\nvector<ll> convolution(const vector<ll>&\
+    \ a, const vector<ll>& b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m)\
+    \ return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a, b);\r\n  ll\
+    \ abs_sum_a = 0, abs_sum_b = 0;\r\n  FOR(i, n) abs_sum_a += abs(a[i]);\r\n  FOR(i,\
+    \ n) abs_sum_b += abs(b[i]);\r\n  assert(abs_sum_a * abs_sum_b < 1e15);\r\n  vc<double>\
+    \ c = CFFT::convolution_fft(a, b);\r\n  vc<ll> res(len(c));\r\n  FOR(i, len(c))\
+    \ res[i] = ll(floor(c[i] + .5));\r\n  return res;\r\n}\r\n\r\ntemplate<typename\
+    \ mint>\r\nenable_if_t<is_same<mint, modint998>::value, vc<mint>> convolution(const\
+    \ vc<mint>& a, const vc<mint>& b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n\
+    \ || !m) return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a, b);\r\
+    \n  return convolution_ntt(a, b);\r\n}\r\n\r\ntemplate<typename mint>\r\nenable_if_t<!is_same<mint,\
+    \ modint998>::value, vc<mint>> convolution(const vc<mint>& a, const vc<mint>&\
+    \ b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return {};\r\n  if\
+    \ (min(n, m) <= 60) return convolution_naive(a, b);\r\n  return convolution_garner(a,\
+    \ b);\r\n}\r\n#line 2 \"polynomial/fps_exp.hpp\"\ntemplate <typename mint>\r\n\
+    vc<mint> fps_exp(vc<mint>& f) {\r\n  const int n = len(f);\r\n  assert(n > 0 &&\
+    \ f[0] == mint(0));\r\n  vc<mint> b = {1, (1 < n ? f[1] : 0)};\r\n  vc<mint> c\
+    \ = {1}, z1, z2 = {1, 1};\r\n  while (len(b) < n) {\r\n    int m = len(b);\r\n\
+    \    auto y = b;\r\n    y.resize(2 * m);\r\n    ntt(y, 0);\r\n    z1 = z2;\r\n\
+    \    vc<mint> z(m);\r\n    FOR(i, m) z[i] = y[i] * z1[i];\r\n    ntt(z, 1);\r\n\
+    \    FOR(i, m / 2) z[i] = 0;\r\n    ntt(z, 0);\r\n    FOR(i, m) z[i] *= -z1[i];\r\
+    \n    ntt(z, 1);\r\n    c.insert(c.end(), z.begin() + m / 2, z.end());\r\n   \
+    \ z2 = c;\r\n    z2.resize(2 * m);\r\n    ntt(z2, 0);\r\n\r\n    vc<mint> x(f.begin(),\
+    \ f.begin() + m);\r\n    FOR(i, len(x) - 1) x[i] = x[i + 1] * mint(i + 1);\r\n\
+    \    x.back() = 0;\r\n    ntt(x, 0);\r\n    FOR(i, m) x[i] *= y[i];\r\n    ntt(x,\
+    \ 1);\r\n\r\n    FOR(i, m - 1) x[i] -= b[i + 1] * mint(i + 1);\r\n\r\n    x.resize(m\
+    \ + m);\r\n    FOR(i, m - 1) x[m + i] = x[i], x[i] = 0;\r\n    ntt(x, 0);\r\n\
+    \    FOR(i, m + m) x[i] *= z2[i];\r\n    ntt(x, 1);\r\n    FOR_R(i, len(x) - 1)\
+    \ x[i + 1] = x[i] * inv<mint>(i + 1);\r\n    x[0] = 0;\r\n\r\n    FOR3(i, m, min(n,\
+    \ m + m)) x[i] += f[i];\r\n    FOR(i, m) x[i] = 0;\r\n    ntt(x, 0);\r\n    FOR(i,\
+    \ m + m) x[i] *= y[i];\r\n    ntt(x, 1);\r\n    b.insert(b.end(), x.begin() +\
+    \ m, x.end());\r\n  }\r\n  b.resize(n);\r\n  return b;\r\n}\r\n#line 5 \"test/library_checker/polynomial/exp_of_fps.test.cpp\"\
     \n\r\nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N);\r\n  VEC(mint,\
     \ A, N);\r\n  print(fps_exp(A));\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
     \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
@@ -500,8 +500,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/polynomial/exp_of_fps.test.cpp
   requiredBy: []
-  timestamp: '2022-01-09 00:45:26+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-09 16:39:58+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/polynomial/exp_of_fps.test.cpp
 layout: document

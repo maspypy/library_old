@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/centroid.hpp
     title: graph/centroid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/tree_all_distances.hpp
     title: graph/tree_all_distances.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/frequency_table_of_tree_distance
@@ -516,29 +516,30 @@ data:
     \ >> 1)]) * t * rts[(sz >> 1) + i];\r\n    fa[i] = A0 + A1 * s;\r\n  }\r\n  fft(fa,\
     \ sz >> 1);\r\n  vector<double> ret(need);\r\n  for (int i = 0; i < need; i++)\
     \ {\r\n    ret[i] = (i & 1 ? fa[i >> 1].y : fa[i >> 1].x);\r\n  }\r\n  return\
-    \ ret;\r\n}\r\n} // namespace CFFT\r\n\r\nvector<ll> convolution(vector<ll>& a,\
-    \ vector<ll>& b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return\
-    \ {};\r\n  if (min(n, m) <= 60) return convolution_naive(a, b);\r\n  ll abs_sum_a\
-    \ = 0, abs_sum_b = 0;\r\n  FOR(i, n) abs_sum_a += abs(a[i]);\r\n  FOR(i, n) abs_sum_b\
-    \ += abs(b[i]);\r\n  assert(abs_sum_a * abs_sum_b < 1e15);\r\n  vc<double> c =\
-    \ CFFT::convolution_fft(a, b);\r\n  vc<ll> res(len(c));\r\n  FOR(i, len(c)) res[i]\
-    \ = ll(floor(c[i] + .5));\r\n  return res;\r\n}\r\n\r\ntemplate<typename mint>\r\
-    \nenable_if_t<is_same<mint, modint998>::value, vc<mint>> convolution(vc<mint>&\
-    \ a, vc<mint>& b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return\
-    \ {};\r\n  if (min(n, m) <= 60) return convolution_naive(a, b);\r\n  return convolution_ntt(a,\
-    \ b);\r\n}\r\n\r\ntemplate<typename mint>\r\nenable_if_t<!is_same<mint, modint998>::value,\
-    \ vc<mint>> convolution(vc<mint>& a, vc<mint>& b) {\r\n  int n = len(a), m = len(b);\r\
-    \n  if (!n || !m) return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a,\
-    \ b);\r\n  return convolution_garner(a, b);\r\n}\r\n#line 3 \"graph/tree_all_distances.hpp\"\
-    \n\r\ntemplate<typename Graph>\r\nvi tree_all_distances(Graph& G){\r\n  // frequency\
-    \ table of distance of all directed pairs. \r\n  // sum of result array = N^2\r\
-    \n  \r\n  assert(G.is_prepared());\r\n  assert(!G.is_directed());\r\n\r\n  CentroidDecomposition\
-    \ CD(G);\r\n\r\n  ll N = G.N;\r\n  vi ANS(N);\r\n  FOR(root, N) {\r\n    auto\
-    \ data = CD.collect(root, 0);\r\n    FOR(i, len(data)) {\r\n      int n = 0;\r\
-    \n      FOR(j, len(data[i])) chmax(n, data[i][j].se + 1);\r\n      vi A(n);\r\n\
-    \      FOR(j, len(data[i])) A[data[i][j].se]++;\r\n      auto B = convolution(A,\
-    \ A);\r\n      FOR(j, min(N, len(B))) ANS[j] += (i == 0 ? B[j] : -B[j]);\r\n \
-    \   }\r\n  }\r\n  return ANS;\r\n}\n#line 6 \"test/library_checker/graph/frequency_table_of_tree_distance.test.cpp\"\
+    \ ret;\r\n}\r\n} // namespace CFFT\r\n\r\nvector<ll> convolution(const vector<ll>&\
+    \ a, const vector<ll>& b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m)\
+    \ return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a, b);\r\n  ll\
+    \ abs_sum_a = 0, abs_sum_b = 0;\r\n  FOR(i, n) abs_sum_a += abs(a[i]);\r\n  FOR(i,\
+    \ n) abs_sum_b += abs(b[i]);\r\n  assert(abs_sum_a * abs_sum_b < 1e15);\r\n  vc<double>\
+    \ c = CFFT::convolution_fft(a, b);\r\n  vc<ll> res(len(c));\r\n  FOR(i, len(c))\
+    \ res[i] = ll(floor(c[i] + .5));\r\n  return res;\r\n}\r\n\r\ntemplate<typename\
+    \ mint>\r\nenable_if_t<is_same<mint, modint998>::value, vc<mint>> convolution(const\
+    \ vc<mint>& a, const vc<mint>& b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n\
+    \ || !m) return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a, b);\r\
+    \n  return convolution_ntt(a, b);\r\n}\r\n\r\ntemplate<typename mint>\r\nenable_if_t<!is_same<mint,\
+    \ modint998>::value, vc<mint>> convolution(const vc<mint>& a, const vc<mint>&\
+    \ b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return {};\r\n  if\
+    \ (min(n, m) <= 60) return convolution_naive(a, b);\r\n  return convolution_garner(a,\
+    \ b);\r\n}\r\n#line 3 \"graph/tree_all_distances.hpp\"\n\r\ntemplate<typename\
+    \ Graph>\r\nvi tree_all_distances(Graph& G){\r\n  // frequency table of distance\
+    \ of all directed pairs. \r\n  // sum of result array = N^2\r\n  \r\n  assert(G.is_prepared());\r\
+    \n  assert(!G.is_directed());\r\n\r\n  CentroidDecomposition CD(G);\r\n\r\n  ll\
+    \ N = G.N;\r\n  vi ANS(N);\r\n  FOR(root, N) {\r\n    auto data = CD.collect(root,\
+    \ 0);\r\n    FOR(i, len(data)) {\r\n      int n = 0;\r\n      FOR(j, len(data[i]))\
+    \ chmax(n, data[i][j].se + 1);\r\n      vi A(n);\r\n      FOR(j, len(data[i]))\
+    \ A[data[i][j].se]++;\r\n      auto B = convolution(A, A);\r\n      FOR(j, min(N,\
+    \ len(B))) ANS[j] += (i == 0 ? B[j] : -B[j]);\r\n    }\r\n  }\r\n  return ANS;\r\
+    \n}\n#line 6 \"test/library_checker/graph/frequency_table_of_tree_distance.test.cpp\"\
     \n\r\nvoid solve() {\r\n  LL(N);\r\n  Graph<int> G(N);\r\n  FOR(_, N - 1) {\r\n\
     \    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n  G.prepare();\r\n\r\n  vi ANS =\
     \ tree_all_distances(G);\r\n  ANS.erase(ANS.begin());\r\n  for (auto&& x : ANS)\
@@ -563,8 +564,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
   requiredBy: []
-  timestamp: '2022-01-09 00:45:26+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-09 16:39:58+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
 layout: document

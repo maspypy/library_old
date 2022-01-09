@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
   _extendedRequiredBy: []
@@ -230,30 +230,31 @@ data:
     \ >> 1)]) * t * rts[(sz >> 1) + i];\r\n    fa[i] = A0 + A1 * s;\r\n  }\r\n  fft(fa,\
     \ sz >> 1);\r\n  vector<double> ret(need);\r\n  for (int i = 0; i < need; i++)\
     \ {\r\n    ret[i] = (i & 1 ? fa[i >> 1].y : fa[i >> 1].x);\r\n  }\r\n  return\
-    \ ret;\r\n}\r\n} // namespace CFFT\r\n\r\nvector<ll> convolution(vector<ll>& a,\
-    \ vector<ll>& b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return\
-    \ {};\r\n  if (min(n, m) <= 60) return convolution_naive(a, b);\r\n  ll abs_sum_a\
-    \ = 0, abs_sum_b = 0;\r\n  FOR(i, n) abs_sum_a += abs(a[i]);\r\n  FOR(i, n) abs_sum_b\
-    \ += abs(b[i]);\r\n  assert(abs_sum_a * abs_sum_b < 1e15);\r\n  vc<double> c =\
-    \ CFFT::convolution_fft(a, b);\r\n  vc<ll> res(len(c));\r\n  FOR(i, len(c)) res[i]\
-    \ = ll(floor(c[i] + .5));\r\n  return res;\r\n}\r\n\r\ntemplate<typename mint>\r\
-    \nenable_if_t<is_same<mint, modint998>::value, vc<mint>> convolution(vc<mint>&\
-    \ a, vc<mint>& b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return\
-    \ {};\r\n  if (min(n, m) <= 60) return convolution_naive(a, b);\r\n  return convolution_ntt(a,\
-    \ b);\r\n}\r\n\r\ntemplate<typename mint>\r\nenable_if_t<!is_same<mint, modint998>::value,\
-    \ vc<mint>> convolution(vc<mint>& a, vc<mint>& b) {\r\n  int n = len(a), m = len(b);\r\
-    \n  if (!n || !m) return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a,\
-    \ b);\r\n  return convolution_garner(a, b);\r\n}\r\n#line 2 \"nt/multiplicative_convolution_mod2n.hpp\"\
-    \n\r\ntemplate <typename mint>\r\nvc<mint> multiplicative_convolution_mod2n(vc<mint>&\
-    \ A, vc<mint>& B){\r\n  int N = 0;\r\n  while((1<<N) < len(A)) ++N;\r\n  assert((1<<N)\
-    \ == len(A) && (1<<N) == len(B));\r\n  \r\n  int mask = (1 << N) - 1;\r\n\r\n\
-    \  vc<vc<vc<mint>>> AA(N + 1);\r\n  vc<vc<vc<mint>>> BB(N + 1);\r\n  vc<vc<vc<mint>>>\
-    \ CC(N + 1);\r\n\r\n  auto shape = [&](int n) -> pair<int, int> {\r\n    int H\
-    \ = (N - n >= 2 ? 2 : 1);\r\n    int W = 1 << max(N - n - 2, 0);\r\n    return\
-    \ {H, W};\r\n  };\r\n\r\n  FOR(n, N + 1) {\r\n    // 2 \u3067 n \u56DE\u5272\u308C\
-    \u308B\u3068\u3053\u308D\r\n    auto [H, W] = shape(n);\r\n    AA[n].assign(H,\
-    \ vc<mint>(W));\r\n    BB[n].assign(H, vc<mint>(W));\r\n    CC[n].assign(H, vc<mint>(W));\r\
-    \n    int x = (1 << n) & mask;\r\n    auto &a = AA[n], &b = BB[n];\r\n    FOR(j,\
+    \ ret;\r\n}\r\n} // namespace CFFT\r\n\r\nvector<ll> convolution(const vector<ll>&\
+    \ a, const vector<ll>& b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m)\
+    \ return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a, b);\r\n  ll\
+    \ abs_sum_a = 0, abs_sum_b = 0;\r\n  FOR(i, n) abs_sum_a += abs(a[i]);\r\n  FOR(i,\
+    \ n) abs_sum_b += abs(b[i]);\r\n  assert(abs_sum_a * abs_sum_b < 1e15);\r\n  vc<double>\
+    \ c = CFFT::convolution_fft(a, b);\r\n  vc<ll> res(len(c));\r\n  FOR(i, len(c))\
+    \ res[i] = ll(floor(c[i] + .5));\r\n  return res;\r\n}\r\n\r\ntemplate<typename\
+    \ mint>\r\nenable_if_t<is_same<mint, modint998>::value, vc<mint>> convolution(const\
+    \ vc<mint>& a, const vc<mint>& b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n\
+    \ || !m) return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a, b);\r\
+    \n  return convolution_ntt(a, b);\r\n}\r\n\r\ntemplate<typename mint>\r\nenable_if_t<!is_same<mint,\
+    \ modint998>::value, vc<mint>> convolution(const vc<mint>& a, const vc<mint>&\
+    \ b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return {};\r\n  if\
+    \ (min(n, m) <= 60) return convolution_naive(a, b);\r\n  return convolution_garner(a,\
+    \ b);\r\n}\r\n#line 2 \"nt/multiplicative_convolution_mod2n.hpp\"\n\r\ntemplate\
+    \ <typename mint>\r\nvc<mint> multiplicative_convolution_mod2n(vc<mint>& A, vc<mint>&\
+    \ B){\r\n  int N = 0;\r\n  while((1<<N) < len(A)) ++N;\r\n  assert((1<<N) == len(A)\
+    \ && (1<<N) == len(B));\r\n  \r\n  int mask = (1 << N) - 1;\r\n\r\n  vc<vc<vc<mint>>>\
+    \ AA(N + 1);\r\n  vc<vc<vc<mint>>> BB(N + 1);\r\n  vc<vc<vc<mint>>> CC(N + 1);\r\
+    \n\r\n  auto shape = [&](int n) -> pair<int, int> {\r\n    int H = (N - n >= 2\
+    \ ? 2 : 1);\r\n    int W = 1 << max(N - n - 2, 0);\r\n    return {H, W};\r\n \
+    \ };\r\n\r\n  FOR(n, N + 1) {\r\n    // 2 \u3067 n \u56DE\u5272\u308C\u308B\u3068\
+    \u3053\u308D\r\n    auto [H, W] = shape(n);\r\n    AA[n].assign(H, vc<mint>(W));\r\
+    \n    BB[n].assign(H, vc<mint>(W));\r\n    CC[n].assign(H, vc<mint>(W));\r\n \
+    \   int x = (1 << n) & mask;\r\n    auto &a = AA[n], &b = BB[n];\r\n    FOR(j,\
     \ W) {\r\n      a[0][j] = A[x];\r\n      b[0][j] = B[x];\r\n      if (H == 2)\
     \ {\r\n        a[1][j] = A[(1 << N) - x];\r\n        b[1][j] = B[(1 << N) - x];\r\
     \n      }\r\n      x = (5 * x) & mask;\r\n    }\r\n  }\r\n  // n \u3092\u56FA\u5B9A\
@@ -315,7 +316,7 @@ data:
   isVerificationFile: false
   path: nt/multiplicative_convolution_mod2n.hpp
   requiredBy: []
-  timestamp: '2022-01-09 00:45:26+09:00'
+  timestamp: '2022-01-09 16:39:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/convolution/mul_mod2n_convolution.test.cpp

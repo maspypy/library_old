@@ -7,22 +7,23 @@ data:
   - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
-  _extendedRequiredBy:
   - icon: ':x:'
-    path: polynomial/fps_pow.hpp
-    title: polynomial/fps_pow.hpp
+    path: polynomial/fps_inv.hpp
+    title: polynomial/fps_inv.hpp
+  - icon: ':x:'
+    path: polynomial/poly_divmod.hpp
+    title: polynomial/poly_divmod.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':x:'
-    path: test/library_checker/polynomial/exp_of_fps.test.cpp
-    title: test/library_checker/polynomial/exp_of_fps.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/polynomial/pow_of_fps.test.cpp
-    title: test/library_checker/polynomial/pow_of_fps.test.cpp
+    path: test/library_checker/polynomial/inv_of_polynomials.test.cpp
+    title: test/library_checker/polynomial/inv_of_polynomials.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':x:'
   attributes:
-    links: []
+    links:
+    - https://people.eecs.berkeley.edu/~fateman/282/readings/yap-2.pdf
   bundledCode: "#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n\
     \  static constexpr bool is_modint = true;\n  int val;\n\n  constexpr modint(const\
     \ ll val = 0) noexcept\n      : val(val >= 0 ? val % mod : (mod - (-val) % mod)\
@@ -250,58 +251,109 @@ data:
     \ modint998>::value, vc<mint>> convolution(const vc<mint>& a, const vc<mint>&\
     \ b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return {};\r\n  if\
     \ (min(n, m) <= 60) return convolution_naive(a, b);\r\n  return convolution_garner(a,\
-    \ b);\r\n}\r\n#line 2 \"polynomial/fps_exp.hpp\"\ntemplate <typename mint>\r\n\
-    vc<mint> fps_exp(vc<mint>& f) {\r\n  const int n = len(f);\r\n  assert(n > 0 &&\
-    \ f[0] == mint(0));\r\n  vc<mint> b = {1, (1 < n ? f[1] : 0)};\r\n  vc<mint> c\
-    \ = {1}, z1, z2 = {1, 1};\r\n  while (len(b) < n) {\r\n    int m = len(b);\r\n\
-    \    auto y = b;\r\n    y.resize(2 * m);\r\n    ntt(y, 0);\r\n    z1 = z2;\r\n\
-    \    vc<mint> z(m);\r\n    FOR(i, m) z[i] = y[i] * z1[i];\r\n    ntt(z, 1);\r\n\
-    \    FOR(i, m / 2) z[i] = 0;\r\n    ntt(z, 0);\r\n    FOR(i, m) z[i] *= -z1[i];\r\
-    \n    ntt(z, 1);\r\n    c.insert(c.end(), z.begin() + m / 2, z.end());\r\n   \
-    \ z2 = c;\r\n    z2.resize(2 * m);\r\n    ntt(z2, 0);\r\n\r\n    vc<mint> x(f.begin(),\
-    \ f.begin() + m);\r\n    FOR(i, len(x) - 1) x[i] = x[i + 1] * mint(i + 1);\r\n\
-    \    x.back() = 0;\r\n    ntt(x, 0);\r\n    FOR(i, m) x[i] *= y[i];\r\n    ntt(x,\
-    \ 1);\r\n\r\n    FOR(i, m - 1) x[i] -= b[i + 1] * mint(i + 1);\r\n\r\n    x.resize(m\
-    \ + m);\r\n    FOR(i, m - 1) x[m + i] = x[i], x[i] = 0;\r\n    ntt(x, 0);\r\n\
-    \    FOR(i, m + m) x[i] *= z2[i];\r\n    ntt(x, 1);\r\n    FOR_R(i, len(x) - 1)\
-    \ x[i + 1] = x[i] * inv<mint>(i + 1);\r\n    x[0] = 0;\r\n\r\n    FOR3(i, m, min(n,\
-    \ m + m)) x[i] += f[i];\r\n    FOR(i, m) x[i] = 0;\r\n    ntt(x, 0);\r\n    FOR(i,\
-    \ m + m) x[i] *= y[i];\r\n    ntt(x, 1);\r\n    b.insert(b.end(), x.begin() +\
-    \ m, x.end());\r\n  }\r\n  b.resize(n);\r\n  return b;\r\n}\r\n"
-  code: "#include \"polynomial/convolution.hpp\"\r\ntemplate <typename mint>\r\nvc<mint>\
-    \ fps_exp(vc<mint>& f) {\r\n  const int n = len(f);\r\n  assert(n > 0 && f[0]\
-    \ == mint(0));\r\n  vc<mint> b = {1, (1 < n ? f[1] : 0)};\r\n  vc<mint> c = {1},\
-    \ z1, z2 = {1, 1};\r\n  while (len(b) < n) {\r\n    int m = len(b);\r\n    auto\
-    \ y = b;\r\n    y.resize(2 * m);\r\n    ntt(y, 0);\r\n    z1 = z2;\r\n    vc<mint>\
-    \ z(m);\r\n    FOR(i, m) z[i] = y[i] * z1[i];\r\n    ntt(z, 1);\r\n    FOR(i,\
-    \ m / 2) z[i] = 0;\r\n    ntt(z, 0);\r\n    FOR(i, m) z[i] *= -z1[i];\r\n    ntt(z,\
-    \ 1);\r\n    c.insert(c.end(), z.begin() + m / 2, z.end());\r\n    z2 = c;\r\n\
-    \    z2.resize(2 * m);\r\n    ntt(z2, 0);\r\n\r\n    vc<mint> x(f.begin(), f.begin()\
-    \ + m);\r\n    FOR(i, len(x) - 1) x[i] = x[i + 1] * mint(i + 1);\r\n    x.back()\
-    \ = 0;\r\n    ntt(x, 0);\r\n    FOR(i, m) x[i] *= y[i];\r\n    ntt(x, 1);\r\n\r\
-    \n    FOR(i, m - 1) x[i] -= b[i + 1] * mint(i + 1);\r\n\r\n    x.resize(m + m);\r\
-    \n    FOR(i, m - 1) x[m + i] = x[i], x[i] = 0;\r\n    ntt(x, 0);\r\n    FOR(i,\
-    \ m + m) x[i] *= z2[i];\r\n    ntt(x, 1);\r\n    FOR_R(i, len(x) - 1) x[i + 1]\
-    \ = x[i] * inv<mint>(i + 1);\r\n    x[0] = 0;\r\n\r\n    FOR3(i, m, min(n, m +\
-    \ m)) x[i] += f[i];\r\n    FOR(i, m) x[i] = 0;\r\n    ntt(x, 0);\r\n    FOR(i,\
-    \ m + m) x[i] *= y[i];\r\n    ntt(x, 1);\r\n    b.insert(b.end(), x.begin() +\
-    \ m, x.end());\r\n  }\r\n  b.resize(n);\r\n  return b;\r\n}\r\n"
+    \ b);\r\n}\r\n#line 2 \"polynomial/fps_inv.hpp\"\n\r\ntemplate <typename mint>\r\
+    \nvc<mint> fps_inv(vc<mint>& F) {\r\n  vc<mint> G = {mint(1) / F[0]};\r\n  G.reserve(len(F));\r\
+    \n  ll N = len(F), n = 1;\r\n  while (n < N) {\r\n    vc<mint> f(2 * n), g(2 *\
+    \ n);\r\n    FOR(i, min(N, 2 * n)) f[i] = F[i];\r\n    FOR(i, n) g[i] = G[i];\r\
+    \n    ntt(f, false);\r\n    ntt(g, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\
+    \n    ntt(f, true);\r\n    FOR(i, n) f[i] = 0;\r\n    ntt(f, false);\r\n    FOR(i,\
+    \ 2 * n) f[i] *= g[i];\r\n    ntt(f, true);\r\n    FOR3(i, n, 2 * n) G.eb(f[i]\
+    \ * mint(-1));\r\n    n *= 2;\r\n  }\r\n  G.resize(N);\r\n  return G;\r\n}\r\n\
+    #line 2 \"polynomial/poly_divmod.hpp\"\ntemplate <typename mint>\r\npair<vc<mint>,\
+    \ vc<mint>> poly_divmod(vc<mint> f, vc<mint> g) {\r\n  assert(g.back() != 0);\r\
+    \n  if (len(f) < len(g)) { return {{}, f}; }\r\n  auto rf = f, rg = g;\r\n  reverse(all(rf)),\
+    \ reverse(all(rg));\r\n  ll deg = len(rf) - len(rg) + 1;\r\n  rf.resize(deg),\
+    \ rg.resize(deg);\r\n  rg = fps_inv(rg);\r\n  auto q = convolution(rf, rg);\r\n\
+    \  q.resize(deg);\r\n  reverse(all(q));\r\n  auto h = convolution(q, g);\r\n \
+    \ FOR(i, len(f)) f[i] -= h[i];\r\n  while (len(f) > 0 && f.back() == 0) f.pop_back();\r\
+    \n  return {q, f};\r\n}\r\n#line 2 \"polynomial/poly_gcd.hpp\"\n\r\nnamespace\
+    \ half_gcd {\r\n// https://people.eecs.berkeley.edu/~fateman/282/readings/yap-2.pdf\r\
+    \ntemplate <typename T>\r\nusing arr = array<vc<T>, 2>;\r\n\r\ntemplate <typename\
+    \ T>\r\nusing mat = array<vc<T>, 4>;\r\n\r\ntemplate <typename T>\r\nvoid shrink(vc<T>&\
+    \ a) {\r\n  while (len(a) && a.back() == 0) a.pop_back();\r\n}\r\n\r\ntemplate\
+    \ <typename T>\r\nvc<T> operator+(const vc<T>& a, const vc<T>& b) {\r\n  vc<T>\
+    \ c(max(len(a), len(b)));\r\n  FOR(i, len(a)) c[i] += a[i];\r\n  FOR(i, len(b))\
+    \ c[i] += b[i];\r\n  shrink(c);\r\n  return c;\r\n}\r\n\r\ntemplate <typename\
+    \ T>\r\nvc<T> operator-(const vc<T>& a, const vc<T>& b) {\r\n  vc<T> c(max(len(a),\
+    \ len(b)));\r\n  FOR(i, len(a)) c[i] += a[i];\r\n  FOR(i, len(b)) c[i] -= b[i];\r\
+    \n  shrink(c);\r\n  return c;\r\n}\r\n\r\ntemplate <typename T>\r\nvc<T> operator*(const\
+    \ vc<T>& a, const vc<T>& b) {\r\n  return convolution(a, b);\r\n}\r\n\r\ntemplate\
+    \ <typename T>\r\nmat<T> operator*(const mat<T>& A, const mat<T>& B) {\r\n  return\
+    \ {A[0] * B[0] + A[1] * B[2], A[0] * B[1] + A[1] * B[3],\r\n          A[2] * B[0]\
+    \ + A[3] * B[2], A[2] * B[1] + A[3] * B[3]};\r\n}\r\n\r\ntemplate <typename T>\r\
+    \nmat<T> step(const vc<T> q) {\r\n  mat<T> Q;\r\n  Q[1] = {1}, Q[2] = {1};\r\n\
+    \  Q[3] = Q[3] - q;\r\n  return Q;\r\n}\r\n\r\ntemplate <typename T>\r\narr<T>\
+    \ operator*(const mat<T>& A, const arr<T>& b) {\r\n  return {A[0] * b[0] + A[1]\
+    \ * b[1], A[2] * b[0] + A[3] * b[1]};\r\n}\r\n\r\ntemplate <typename T>\r\nmat<T>\
+    \ hgcd(arr<T> a) {\r\n  assert(len(a[0]) > len(a[1]) && len(a[1]) > 0);\r\n  int\
+    \ m = len(a[0]) / 2;\r\n  if (a[1].size() <= m) {\r\n    mat<T> M;\r\n    M[0]\
+    \ = {1}, M[3] = {1};\r\n    return M;\r\n  }\r\n  auto R = hgcd(arr<T>({vc<T>(a[0].begin()\
+    \ + m, a[0].end()),\r\n                        vc<T>(a[1].begin() + m, a[1].end())}));\r\
+    \n  a = R * a;\r\n  if (a[1].size() <= m) return R;\r\n  mat<T> Q = step(poly_divmod(a[0],\
+    \ a[1]).fi);\r\n  R = Q * R, a = Q * a;\r\n  if (a[1].size() <= m) return R;\r\
+    \n  int k = 2 * m + 1 - len(a[0]);\r\n  auto H = hgcd(arr<T>({vc<T>(a[0].begin()\
+    \ + k, a[0].end()),\r\n                        vc<T>(a[1].begin() + k, a[1].end())}));\r\
+    \n  return H * R;\r\n}\r\n\r\ntemplate <typename T>\r\nmat<T> cgcd(arr<T> a) {\r\
+    \n  assert(a[0].size() > a[1].size() && !a[1].empty());\r\n  auto m0 = hgcd(a);\r\
+    \n  a = m0 * a;\r\n  if (a[1].empty()) return m0;\r\n  mat<T> Q = step(poly_divmod(a[0],\
+    \ a[1]).fi);\r\n  m0 = Q * m0, a = Q * a;\r\n  if (a[1].empty()) return m0;\r\n\
+    \  return cgcd(a) * m0;\r\n}\r\n\r\ntemplate <typename T>\r\ntuple<vc<T>, vc<T>,\
+    \ vc<T>> poly_extgcd(const vc<T>& a, const vc<T>& b) {\r\n  mat<T> Q = step(poly_divmod(a,\
+    \ b).fi);\r\n  auto m = Q;\r\n  auto ap = Q * arr<T>{a, b};\r\n  if (!ap[1].empty())\
+    \ m = cgcd(ap) * m;\r\n  return {a * m[0] + b * m[1], m[0], m[1]};\r\n}\r\n} //\
+    \ namespace half_gcd\r\nusing half_gcd::poly_extgcd;\n"
+  code: "#include \"polynomial/poly_divmod.hpp\"\r\n\r\nnamespace half_gcd {\r\n//\
+    \ https://people.eecs.berkeley.edu/~fateman/282/readings/yap-2.pdf\r\ntemplate\
+    \ <typename T>\r\nusing arr = array<vc<T>, 2>;\r\n\r\ntemplate <typename T>\r\n\
+    using mat = array<vc<T>, 4>;\r\n\r\ntemplate <typename T>\r\nvoid shrink(vc<T>&\
+    \ a) {\r\n  while (len(a) && a.back() == 0) a.pop_back();\r\n}\r\n\r\ntemplate\
+    \ <typename T>\r\nvc<T> operator+(const vc<T>& a, const vc<T>& b) {\r\n  vc<T>\
+    \ c(max(len(a), len(b)));\r\n  FOR(i, len(a)) c[i] += a[i];\r\n  FOR(i, len(b))\
+    \ c[i] += b[i];\r\n  shrink(c);\r\n  return c;\r\n}\r\n\r\ntemplate <typename\
+    \ T>\r\nvc<T> operator-(const vc<T>& a, const vc<T>& b) {\r\n  vc<T> c(max(len(a),\
+    \ len(b)));\r\n  FOR(i, len(a)) c[i] += a[i];\r\n  FOR(i, len(b)) c[i] -= b[i];\r\
+    \n  shrink(c);\r\n  return c;\r\n}\r\n\r\ntemplate <typename T>\r\nvc<T> operator*(const\
+    \ vc<T>& a, const vc<T>& b) {\r\n  return convolution(a, b);\r\n}\r\n\r\ntemplate\
+    \ <typename T>\r\nmat<T> operator*(const mat<T>& A, const mat<T>& B) {\r\n  return\
+    \ {A[0] * B[0] + A[1] * B[2], A[0] * B[1] + A[1] * B[3],\r\n          A[2] * B[0]\
+    \ + A[3] * B[2], A[2] * B[1] + A[3] * B[3]};\r\n}\r\n\r\ntemplate <typename T>\r\
+    \nmat<T> step(const vc<T> q) {\r\n  mat<T> Q;\r\n  Q[1] = {1}, Q[2] = {1};\r\n\
+    \  Q[3] = Q[3] - q;\r\n  return Q;\r\n}\r\n\r\ntemplate <typename T>\r\narr<T>\
+    \ operator*(const mat<T>& A, const arr<T>& b) {\r\n  return {A[0] * b[0] + A[1]\
+    \ * b[1], A[2] * b[0] + A[3] * b[1]};\r\n}\r\n\r\ntemplate <typename T>\r\nmat<T>\
+    \ hgcd(arr<T> a) {\r\n  assert(len(a[0]) > len(a[1]) && len(a[1]) > 0);\r\n  int\
+    \ m = len(a[0]) / 2;\r\n  if (a[1].size() <= m) {\r\n    mat<T> M;\r\n    M[0]\
+    \ = {1}, M[3] = {1};\r\n    return M;\r\n  }\r\n  auto R = hgcd(arr<T>({vc<T>(a[0].begin()\
+    \ + m, a[0].end()),\r\n                        vc<T>(a[1].begin() + m, a[1].end())}));\r\
+    \n  a = R * a;\r\n  if (a[1].size() <= m) return R;\r\n  mat<T> Q = step(poly_divmod(a[0],\
+    \ a[1]).fi);\r\n  R = Q * R, a = Q * a;\r\n  if (a[1].size() <= m) return R;\r\
+    \n  int k = 2 * m + 1 - len(a[0]);\r\n  auto H = hgcd(arr<T>({vc<T>(a[0].begin()\
+    \ + k, a[0].end()),\r\n                        vc<T>(a[1].begin() + k, a[1].end())}));\r\
+    \n  return H * R;\r\n}\r\n\r\ntemplate <typename T>\r\nmat<T> cgcd(arr<T> a) {\r\
+    \n  assert(a[0].size() > a[1].size() && !a[1].empty());\r\n  auto m0 = hgcd(a);\r\
+    \n  a = m0 * a;\r\n  if (a[1].empty()) return m0;\r\n  mat<T> Q = step(poly_divmod(a[0],\
+    \ a[1]).fi);\r\n  m0 = Q * m0, a = Q * a;\r\n  if (a[1].empty()) return m0;\r\n\
+    \  return cgcd(a) * m0;\r\n}\r\n\r\ntemplate <typename T>\r\ntuple<vc<T>, vc<T>,\
+    \ vc<T>> poly_extgcd(const vc<T>& a, const vc<T>& b) {\r\n  mat<T> Q = step(poly_divmod(a,\
+    \ b).fi);\r\n  auto m = Q;\r\n  auto ap = Q * arr<T>{a, b};\r\n  if (!ap[1].empty())\
+    \ m = cgcd(ap) * m;\r\n  return {a * m[0] + b * m[1], m[0], m[1]};\r\n}\r\n} //\
+    \ namespace half_gcd\r\nusing half_gcd::poly_extgcd;"
   dependsOn:
+  - polynomial/poly_divmod.hpp
+  - polynomial/fps_inv.hpp
   - polynomial/convolution.hpp
   - mod/modint.hpp
   isVerificationFile: false
-  path: polynomial/fps_exp.hpp
-  requiredBy:
-  - polynomial/fps_pow.hpp
+  path: polynomial/poly_gcd.hpp
+  requiredBy: []
   timestamp: '2022-01-09 16:39:58+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/library_checker/polynomial/exp_of_fps.test.cpp
-  - test/library_checker/polynomial/pow_of_fps.test.cpp
-documentation_of: polynomial/fps_exp.hpp
+  - test/library_checker/polynomial/inv_of_polynomials.test.cpp
+documentation_of: polynomial/poly_gcd.hpp
 layout: document
 redirect_from:
-- /library/polynomial/fps_exp.hpp
-- /library/polynomial/fps_exp.hpp.html
-title: polynomial/fps_exp.hpp
+- /library/polynomial/poly_gcd.hpp
+- /library/polynomial/poly_gcd.hpp.html
+title: polynomial/poly_gcd.hpp
 ---

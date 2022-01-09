@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
   _extendedRequiredBy: []
@@ -230,29 +230,30 @@ data:
     \ >> 1)]) * t * rts[(sz >> 1) + i];\r\n    fa[i] = A0 + A1 * s;\r\n  }\r\n  fft(fa,\
     \ sz >> 1);\r\n  vector<double> ret(need);\r\n  for (int i = 0; i < need; i++)\
     \ {\r\n    ret[i] = (i & 1 ? fa[i >> 1].y : fa[i >> 1].x);\r\n  }\r\n  return\
-    \ ret;\r\n}\r\n} // namespace CFFT\r\n\r\nvector<ll> convolution(vector<ll>& a,\
-    \ vector<ll>& b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return\
-    \ {};\r\n  if (min(n, m) <= 60) return convolution_naive(a, b);\r\n  ll abs_sum_a\
-    \ = 0, abs_sum_b = 0;\r\n  FOR(i, n) abs_sum_a += abs(a[i]);\r\n  FOR(i, n) abs_sum_b\
-    \ += abs(b[i]);\r\n  assert(abs_sum_a * abs_sum_b < 1e15);\r\n  vc<double> c =\
-    \ CFFT::convolution_fft(a, b);\r\n  vc<ll> res(len(c));\r\n  FOR(i, len(c)) res[i]\
-    \ = ll(floor(c[i] + .5));\r\n  return res;\r\n}\r\n\r\ntemplate<typename mint>\r\
-    \nenable_if_t<is_same<mint, modint998>::value, vc<mint>> convolution(vc<mint>&\
-    \ a, vc<mint>& b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return\
-    \ {};\r\n  if (min(n, m) <= 60) return convolution_naive(a, b);\r\n  return convolution_ntt(a,\
-    \ b);\r\n}\r\n\r\ntemplate<typename mint>\r\nenable_if_t<!is_same<mint, modint998>::value,\
-    \ vc<mint>> convolution(vc<mint>& a, vc<mint>& b) {\r\n  int n = len(a), m = len(b);\r\
-    \n  if (!n || !m) return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a,\
-    \ b);\r\n  return convolution_garner(a, b);\r\n}\r\n#line 2 \"polynomial/convolution_huge.hpp\"\
-    \ntemplate<typename mint>\r\nvc<mint> convolution_huge(vc<mint>& A, vc<mint>&\
-    \ B) {\r\n  int N = len(A), M = len(B);\r\n  if (N + M - 1 <= (1 << 23)) return\
-    \ convolution(A, B);\r\n  ll L = 22;\r\n  vv(mint, C, 4, 2 << L);\r\n  vv(mint,\
-    \ D, 4, 2 << L);\r\n  int mask = (1 << L) - 1;\r\n  FOR(i, N) C[i >> L][i & mask]\
-    \ = A[i];\r\n  FOR(i, M) D[i >> L][i & mask] = B[i];\r\n  FOR(i, 4) ntt(C[i],\
-    \ false);\r\n  FOR(i, 4) ntt(D[i], false);\r\n  vv(mint, E, 7, 2 << L);\r\n  FOR(i,\
-    \ 4) FOR(j, 4) FOR(k, 2 << L) E[i + j][k] += C[i][k] * D[j][k];\r\n  FOR(i, 7)\
-    \ ntt(E[i], true);\r\n  vc<mint> ANS(8 << L);\r\n  FOR(i, 7) FOR(k, 2 << L) ANS[(i\
-    \ << L) + k] += E[i][k];\r\n  ANS.resize(N + M - 1);\r\n  return ANS;\r\n}\r\n"
+    \ ret;\r\n}\r\n} // namespace CFFT\r\n\r\nvector<ll> convolution(const vector<ll>&\
+    \ a, const vector<ll>& b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m)\
+    \ return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a, b);\r\n  ll\
+    \ abs_sum_a = 0, abs_sum_b = 0;\r\n  FOR(i, n) abs_sum_a += abs(a[i]);\r\n  FOR(i,\
+    \ n) abs_sum_b += abs(b[i]);\r\n  assert(abs_sum_a * abs_sum_b < 1e15);\r\n  vc<double>\
+    \ c = CFFT::convolution_fft(a, b);\r\n  vc<ll> res(len(c));\r\n  FOR(i, len(c))\
+    \ res[i] = ll(floor(c[i] + .5));\r\n  return res;\r\n}\r\n\r\ntemplate<typename\
+    \ mint>\r\nenable_if_t<is_same<mint, modint998>::value, vc<mint>> convolution(const\
+    \ vc<mint>& a, const vc<mint>& b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n\
+    \ || !m) return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a, b);\r\
+    \n  return convolution_ntt(a, b);\r\n}\r\n\r\ntemplate<typename mint>\r\nenable_if_t<!is_same<mint,\
+    \ modint998>::value, vc<mint>> convolution(const vc<mint>& a, const vc<mint>&\
+    \ b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return {};\r\n  if\
+    \ (min(n, m) <= 60) return convolution_naive(a, b);\r\n  return convolution_garner(a,\
+    \ b);\r\n}\r\n#line 2 \"polynomial/convolution_huge.hpp\"\ntemplate<typename mint>\r\
+    \nvc<mint> convolution_huge(vc<mint>& A, vc<mint>& B) {\r\n  int N = len(A), M\
+    \ = len(B);\r\n  if (N + M - 1 <= (1 << 23)) return convolution(A, B);\r\n  ll\
+    \ L = 22;\r\n  vv(mint, C, 4, 2 << L);\r\n  vv(mint, D, 4, 2 << L);\r\n  int mask\
+    \ = (1 << L) - 1;\r\n  FOR(i, N) C[i >> L][i & mask] = A[i];\r\n  FOR(i, M) D[i\
+    \ >> L][i & mask] = B[i];\r\n  FOR(i, 4) ntt(C[i], false);\r\n  FOR(i, 4) ntt(D[i],\
+    \ false);\r\n  vv(mint, E, 7, 2 << L);\r\n  FOR(i, 4) FOR(j, 4) FOR(k, 2 << L)\
+    \ E[i + j][k] += C[i][k] * D[j][k];\r\n  FOR(i, 7) ntt(E[i], true);\r\n  vc<mint>\
+    \ ANS(8 << L);\r\n  FOR(i, 7) FOR(k, 2 << L) ANS[(i << L) + k] += E[i][k];\r\n\
+    \  ANS.resize(N + M - 1);\r\n  return ANS;\r\n}\r\n"
   code: "#include \"polynomial/convolution.hpp\"\r\ntemplate<typename mint>\r\nvc<mint>\
     \ convolution_huge(vc<mint>& A, vc<mint>& B) {\r\n  int N = len(A), M = len(B);\r\
     \n  if (N + M - 1 <= (1 << 23)) return convolution(A, B);\r\n  ll L = 22;\r\n\
@@ -269,7 +270,7 @@ data:
   isVerificationFile: false
   path: polynomial/convolution_huge.hpp
   requiredBy: []
-  timestamp: '2022-01-09 00:45:26+09:00'
+  timestamp: '2022-01-09 16:39:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/convolution/convolution_huge.test.cpp

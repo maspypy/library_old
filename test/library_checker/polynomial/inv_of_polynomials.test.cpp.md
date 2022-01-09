@@ -10,32 +10,36 @@ data:
   - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
-  - icon: ':question:'
-    path: polynomial/multivar_convolution.hpp
-    title: polynomial/multivar_convolution.hpp
+  - icon: ':x:'
+    path: polynomial/fps_inv.hpp
+    title: polynomial/fps_inv.hpp
+  - icon: ':x:'
+    path: polynomial/poly_divmod.hpp
+    title: polynomial/poly_divmod.hpp
+  - icon: ':x:'
+    path: polynomial/poly_gcd.hpp
+    title: polynomial/poly_gcd.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/multivariate_convolution
-    links:
-    - https://judge.yosupo.jp/problem/multivariate_convolution
-  bundledCode: "#line 1 \"test/library_checker/convolution/multivariate_convolution.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/multivariate_convolution\"\
-    \r\n#line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n#include <unistd.h>\n\
-    \nusing namespace std;\n\nusing ll = long long;\nusing ll8 = __int128;\nusing\
-    \ pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint = unsigned int;\nusing\
-    \ ull = unsigned long long;\n\ntemplate <class T>\nusing vc = vector<T>;\ntemplate\
-    \ <class T>\nusing vvc = vector<vc<T>>;\ntemplate <class T>\nusing vvvc = vector<vvc<T>>;\n\
-    template <class T>\nusing vvvvc = vector<vvvc<T>>;\ntemplate <class T>\nusing\
-    \ vvvvvc = vector<vvvvc<T>>;\ntemplate <class T>\nusing pq = priority_queue<T>;\n\
-    template <class T>\nusing pqg = priority_queue<T, vector<T>, greater<T>>;\n\n\
-    #define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n#define VEC(type,\
-    \ name, size) \\\n  vector<type> name(size);    \\\n  IN(name)\n#define vv(type,\
-    \ name, h, ...) \\\n  vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n\
+    PROBLEM: URL
+    links: []
+  bundledCode: "#line 1 \"test/library_checker/polynomial/inv_of_polynomials.test.cpp\"\
+    \n#define PROBLEM \"URL\"\r\n#line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\
+    #include <unistd.h>\n\nusing namespace std;\n\nusing ll = long long;\nusing ll8\
+    \ = __int128;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint =\
+    \ unsigned int;\nusing ull = unsigned long long;\n\ntemplate <class T>\nusing\
+    \ vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\ntemplate <class\
+    \ T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc = vector<vvvc<T>>;\n\
+    template <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate <class T>\nusing\
+    \ pq = priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T, vector<T>,\
+    \ greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
+    #define VEC(type, name, size) \\\n  vector<type> name(size);    \\\n  IN(name)\n\
+    #define vv(type, name, h, ...) \\\n  vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n\
     #define VV(type, name, h, w)                     \\\n  vector<vector<type>> name(h,\
     \ vector<type>(w)); \\\n  IN(name)\n#define vvv(type, name, h, w, ...)   \\\n\
     \  vector<vector<vector<type>>> name( \\\n      h, vector<vector<type>>(w, vector<type>(__VA_ARGS__)))\n\
@@ -236,42 +240,42 @@ data:
     \ 1 : 0);\n}\n\n#define SUM(v) accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n\
     #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
-    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/convolution/multivariate_convolution.test.cpp\"\
-    \n\r\n#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n  static\
-    \ constexpr bool is_modint = true;\n  int val;\n\n  constexpr modint(const ll\
-    \ val = 0) noexcept\n      : val(val >= 0 ? val % mod : (mod - (-val) % mod) %\
-    \ mod) {}\n\n  bool operator<(const modint &other) const {\n    return val < other.val;\n\
-    \  } // To use std::map\n\n  modint &operator+=(const modint &p) {\n    if ((val\
-    \ += p.val) >= mod) val -= mod;\n    return *this;\n  }\n  modint &operator-=(const\
-    \ modint &p) {\n    if ((val += mod - p.val) >= mod) val -= mod;\n    return *this;\n\
-    \  }\n  modint &operator*=(const modint &p) {\n    val = (int)(1LL * val * p.val\
-    \ % mod);\n    return *this;\n  }\n  modint &operator/=(const modint &p) {\n \
-    \   *this *= p.inverse();\n    return *this;\n  }\n  modint operator-() const\
-    \ { return modint(-val); }\n  modint operator+(const modint &p) const { return\
-    \ modint(*this) += p; }\n  modint operator-(const modint &p) const { return modint(*this)\
-    \ -= p; }\n  modint operator*(const modint &p) const { return modint(*this) *=\
-    \ p; }\n  modint operator/(const modint &p) const { return modint(*this) /= p;\
-    \ }\n  bool operator==(const modint &p) const { return val == p.val; }\n  bool\
-    \ operator!=(const modint &p) const { return val != p.val; }\n\n  modint inverse()\
-    \ const {\n    int a = val, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n \
-    \     t = a / b;\n      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n   \
-    \ }\n    return modint(u);\n  }\n\n  modint pow(int64_t n) const {\n    modint\
-    \ ret(1), mul(val);\n    while (n > 0) {\n      if (n & 1) ret *= mul;\n     \
-    \ mul *= mul;\n      n >>= 1;\n    }\n    return ret;\n  }\n  static constexpr\
-    \ int get_mod() { return mod; }\n};\n\nstruct ArbitraryModInt {\n  static constexpr\
-    \ bool is_modint = true;\n  int val;\n  ArbitraryModInt() : val(0) {}\n  ArbitraryModInt(int64_t\
-    \ y)\n      : val(y >= 0 ? y % get_mod()\n                   : (get_mod() - (-y)\
-    \ % get_mod()) % get_mod()) {}\n\n  bool operator<(const ArbitraryModInt &other)\
-    \ const {\n    return val < other.val;\n  } // To use std::map<ArbitraryModInt,\
-    \ T>\n\n  static int &get_mod() {\n    static int mod = 0;\n    return mod;\n\
-    \  }\n  static void set_mod(int md) { get_mod() = md; }\n  ArbitraryModInt &operator+=(const\
-    \ ArbitraryModInt &p) {\n    if ((val += p.val) >= get_mod()) val -= get_mod();\n\
-    \    return *this;\n  }\n  ArbitraryModInt &operator-=(const ArbitraryModInt &p)\
-    \ {\n    if ((val += get_mod() - p.val) >= get_mod()) val -= get_mod();\n    return\
-    \ *this;\n  }\n  ArbitraryModInt &operator*=(const ArbitraryModInt &p) {\n   \
-    \ unsigned long long a = (unsigned long long)val * p.val;\n    unsigned xh = (unsigned)(a\
-    \ >> 32), xl = (unsigned)a, d, m;\n    asm(\"divl %4; \\n\\t\" : \"=a\"(d), \"\
-    =d\"(m) : \"d\"(xh), \"a\"(xl), \"r\"(get_mod()));\n    val = m;\n    return *this;\n\
+    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 2 \"mod/modint.hpp\"\
+    \ntemplate <int mod>\nstruct modint {\n  static constexpr bool is_modint = true;\n\
+    \  int val;\n\n  constexpr modint(const ll val = 0) noexcept\n      : val(val\
+    \ >= 0 ? val % mod : (mod - (-val) % mod) % mod) {}\n\n  bool operator<(const\
+    \ modint &other) const {\n    return val < other.val;\n  } // To use std::map\n\
+    \n  modint &operator+=(const modint &p) {\n    if ((val += p.val) >= mod) val\
+    \ -= mod;\n    return *this;\n  }\n  modint &operator-=(const modint &p) {\n \
+    \   if ((val += mod - p.val) >= mod) val -= mod;\n    return *this;\n  }\n  modint\
+    \ &operator*=(const modint &p) {\n    val = (int)(1LL * val * p.val % mod);\n\
+    \    return *this;\n  }\n  modint &operator/=(const modint &p) {\n    *this *=\
+    \ p.inverse();\n    return *this;\n  }\n  modint operator-() const { return modint(-val);\
+    \ }\n  modint operator+(const modint &p) const { return modint(*this) += p; }\n\
+    \  modint operator-(const modint &p) const { return modint(*this) -= p; }\n  modint\
+    \ operator*(const modint &p) const { return modint(*this) *= p; }\n  modint operator/(const\
+    \ modint &p) const { return modint(*this) /= p; }\n  bool operator==(const modint\
+    \ &p) const { return val == p.val; }\n  bool operator!=(const modint &p) const\
+    \ { return val != p.val; }\n\n  modint inverse() const {\n    int a = val, b =\
+    \ mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -=\
+    \ t * b, b);\n      swap(u -= t * v, v);\n    }\n    return modint(u);\n  }\n\n\
+    \  modint pow(int64_t n) const {\n    modint ret(1), mul(val);\n    while (n >\
+    \ 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n\
+    \    return ret;\n  }\n  static constexpr int get_mod() { return mod; }\n};\n\n\
+    struct ArbitraryModInt {\n  static constexpr bool is_modint = true;\n  int val;\n\
+    \  ArbitraryModInt() : val(0) {}\n  ArbitraryModInt(int64_t y)\n      : val(y\
+    \ >= 0 ? y % get_mod()\n                   : (get_mod() - (-y) % get_mod()) %\
+    \ get_mod()) {}\n\n  bool operator<(const ArbitraryModInt &other) const {\n  \
+    \  return val < other.val;\n  } // To use std::map<ArbitraryModInt, T>\n\n  static\
+    \ int &get_mod() {\n    static int mod = 0;\n    return mod;\n  }\n  static void\
+    \ set_mod(int md) { get_mod() = md; }\n  ArbitraryModInt &operator+=(const ArbitraryModInt\
+    \ &p) {\n    if ((val += p.val) >= get_mod()) val -= get_mod();\n    return *this;\n\
+    \  }\n  ArbitraryModInt &operator-=(const ArbitraryModInt &p) {\n    if ((val\
+    \ += get_mod() - p.val) >= get_mod()) val -= get_mod();\n    return *this;\n \
+    \ }\n  ArbitraryModInt &operator*=(const ArbitraryModInt &p) {\n    unsigned long\
+    \ long a = (unsigned long long)val * p.val;\n    unsigned xh = (unsigned)(a >>\
+    \ 32), xl = (unsigned)a, d, m;\n    asm(\"divl %4; \\n\\t\" : \"=a\"(d), \"=d\"\
+    (m) : \"d\"(xh), \"a\"(xl), \"r\"(get_mod()));\n    val = m;\n    return *this;\n\
     \  }\n  ArbitraryModInt &operator/=(const ArbitraryModInt &p) {\n    *this *=\
     \ p.inverse();\n    return *this;\n  }\n  ArbitraryModInt operator-() const {\
     \ return ArbitraryModInt(-val); }\n  ArbitraryModInt operator+(const ArbitraryModInt\
@@ -464,54 +468,87 @@ data:
     \ modint998>::value, vc<mint>> convolution(const vc<mint>& a, const vc<mint>&\
     \ b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return {};\r\n  if\
     \ (min(n, m) <= 60) return convolution_naive(a, b);\r\n  return convolution_garner(a,\
-    \ b);\r\n}\r\n#line 2 \"polynomial/multivar_convolution.hpp\"\ntemplate <typename\
-    \ mint>\r\nvc<mint> multivar_convolution(vi ns, vc<mint>& f, vc<mint>& g) {\r\n\
-    \  /*\r\n  (n0, n1, n2, ...) \u9032\u6CD5\u3067\u306E\u7E70\u308A\u4E0A\u304C\u308A\
-    \u306E\u306A\u3044\u8DB3\u3057\u7B97\u306B\u95A2\u3059\u308B\u7573\u307F\u8FBC\
-    \u307F\r\n\r\n  example : ns = (2, 3) \u2192 1 \u306E\u4F4D\u304B\u3089\u9806\u306B\
-    \ 2, 3 \u9032\u6CD5\r\n  [a0, a1, a2, a3, a4, a5] = [a(0,0), a(1,0), a(0,1), a(1,1),\
-    \ a(0,2), a(1,2)]\r\n  [b0, b1, b2, b3, b4, b5] = [b(0,0), b(1,0), b(0,1), b(1,1),\
-    \ b(0,2), b(1,2)]\r\n  c(0,2) = a(0,0)b(0,2) + a(0,1)b(0,1) + a(0,2)b(1,1)\r\n\
-    \  c4 = a0b4 + a2b2 + a4b0\r\n\r\n  example : ns = (2, 2, ..., 2, 2)\r\n  \u2192\
-    \ subset convolution \u304C\u3053\u308C\u306E\u7279\u6B8A\u30B1\u30FC\u30B9\r\n\
-    \  */\r\n  int K = len(ns);\r\n  int N = 1;\r\n  FOR(k, K) N *= ns[k];\r\n  assert(len(f)\
-    \ == N && len(g) == N);\r\n  if (N == 1) return {f[0] * g[0]};\r\n\r\n  auto chi\
-    \ = [&](ll i) -> ll {\r\n    int x = 0;\r\n    for (auto&& n : ns) {\r\n     \
-    \ i /= n;\r\n      x += i;\r\n    }\r\n    return x % K;\r\n  };\r\n\r\n  int\
-    \ sz = 1;\r\n  while (sz < N + N) sz *= 2;\r\n  vv(mint, ff, K, sz);\r\n  vv(mint,\
-    \ gg, K, sz);\r\n\r\n  FOR(i, N) {\r\n    auto k = chi(i);\r\n    ff[k][i] = f[i];\r\
-    \n    gg[k][i] = g[i];\r\n  }\r\n\r\n  FOR(k, K) {\r\n    ntt(ff[k], false);\r\
-    \n    ntt(gg[k], false);\r\n  }\r\n\r\n  vv(mint, hh, K, sz);\r\n  FOR(a, K) FOR(b,\
-    \ K) FOR(i, sz) { hh[(a + b) % K][i] += ff[a][i] * gg[b][i]; }\r\n  FOR(k, K)\
-    \ ntt(hh[k], true);\r\n\r\n  vc<mint> h(N);\r\n  FOR(i, N) h[i] = hh[chi(i)][i];\r\
-    \n  return h;\r\n}\r\n#line 5 \"test/library_checker/convolution/multivariate_convolution.test.cpp\"\
-    \n\r\nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(K);\r\n  VEC(ll, ns,\
-    \ K);\r\n  ll N = 1;\r\n  FOR(k, K) N *= ns[k];\r\n  VEC(mint, f, N);\r\n  VEC(mint,\
-    \ g, N);\r\n\r\n  auto h = multivar_convolution(ns, f, g);\r\n  print(h);\r\n\
-    }\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/multivariate_convolution\"\
-    \r\n#include \"my_template.hpp\"\r\n\r\n#include \"polynomial/multivar_convolution.hpp\"\
-    \r\n\r\nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(K);\r\n  VEC(ll,\
-    \ ns, K);\r\n  ll N = 1;\r\n  FOR(k, K) N *= ns[k];\r\n  VEC(mint, f, N);\r\n\
-    \  VEC(mint, g, N);\r\n\r\n  auto h = multivar_convolution(ns, f, g);\r\n  print(h);\r\
-    \n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \ b);\r\n}\r\n#line 2 \"polynomial/fps_inv.hpp\"\n\r\ntemplate <typename mint>\r\
+    \nvc<mint> fps_inv(vc<mint>& F) {\r\n  vc<mint> G = {mint(1) / F[0]};\r\n  G.reserve(len(F));\r\
+    \n  ll N = len(F), n = 1;\r\n  while (n < N) {\r\n    vc<mint> f(2 * n), g(2 *\
+    \ n);\r\n    FOR(i, min(N, 2 * n)) f[i] = F[i];\r\n    FOR(i, n) g[i] = G[i];\r\
+    \n    ntt(f, false);\r\n    ntt(g, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\
+    \n    ntt(f, true);\r\n    FOR(i, n) f[i] = 0;\r\n    ntt(f, false);\r\n    FOR(i,\
+    \ 2 * n) f[i] *= g[i];\r\n    ntt(f, true);\r\n    FOR3(i, n, 2 * n) G.eb(f[i]\
+    \ * mint(-1));\r\n    n *= 2;\r\n  }\r\n  G.resize(N);\r\n  return G;\r\n}\r\n\
+    #line 2 \"polynomial/poly_divmod.hpp\"\ntemplate <typename mint>\r\npair<vc<mint>,\
+    \ vc<mint>> poly_divmod(vc<mint> f, vc<mint> g) {\r\n  assert(g.back() != 0);\r\
+    \n  if (len(f) < len(g)) { return {{}, f}; }\r\n  auto rf = f, rg = g;\r\n  reverse(all(rf)),\
+    \ reverse(all(rg));\r\n  ll deg = len(rf) - len(rg) + 1;\r\n  rf.resize(deg),\
+    \ rg.resize(deg);\r\n  rg = fps_inv(rg);\r\n  auto q = convolution(rf, rg);\r\n\
+    \  q.resize(deg);\r\n  reverse(all(q));\r\n  auto h = convolution(q, g);\r\n \
+    \ FOR(i, len(f)) f[i] -= h[i];\r\n  while (len(f) > 0 && f.back() == 0) f.pop_back();\r\
+    \n  return {q, f};\r\n}\r\n#line 2 \"polynomial/poly_gcd.hpp\"\n\r\nnamespace\
+    \ half_gcd {\r\n// https://people.eecs.berkeley.edu/~fateman/282/readings/yap-2.pdf\r\
+    \ntemplate <typename T>\r\nusing arr = array<vc<T>, 2>;\r\n\r\ntemplate <typename\
+    \ T>\r\nusing mat = array<vc<T>, 4>;\r\n\r\ntemplate <typename T>\r\nvoid shrink(vc<T>&\
+    \ a) {\r\n  while (len(a) && a.back() == 0) a.pop_back();\r\n}\r\n\r\ntemplate\
+    \ <typename T>\r\nvc<T> operator+(const vc<T>& a, const vc<T>& b) {\r\n  vc<T>\
+    \ c(max(len(a), len(b)));\r\n  FOR(i, len(a)) c[i] += a[i];\r\n  FOR(i, len(b))\
+    \ c[i] += b[i];\r\n  shrink(c);\r\n  return c;\r\n}\r\n\r\ntemplate <typename\
+    \ T>\r\nvc<T> operator-(const vc<T>& a, const vc<T>& b) {\r\n  vc<T> c(max(len(a),\
+    \ len(b)));\r\n  FOR(i, len(a)) c[i] += a[i];\r\n  FOR(i, len(b)) c[i] -= b[i];\r\
+    \n  shrink(c);\r\n  return c;\r\n}\r\n\r\ntemplate <typename T>\r\nvc<T> operator*(const\
+    \ vc<T>& a, const vc<T>& b) {\r\n  return convolution(a, b);\r\n}\r\n\r\ntemplate\
+    \ <typename T>\r\nmat<T> operator*(const mat<T>& A, const mat<T>& B) {\r\n  return\
+    \ {A[0] * B[0] + A[1] * B[2], A[0] * B[1] + A[1] * B[3],\r\n          A[2] * B[0]\
+    \ + A[3] * B[2], A[2] * B[1] + A[3] * B[3]};\r\n}\r\n\r\ntemplate <typename T>\r\
+    \nmat<T> step(const vc<T> q) {\r\n  mat<T> Q;\r\n  Q[1] = {1}, Q[2] = {1};\r\n\
+    \  Q[3] = Q[3] - q;\r\n  return Q;\r\n}\r\n\r\ntemplate <typename T>\r\narr<T>\
+    \ operator*(const mat<T>& A, const arr<T>& b) {\r\n  return {A[0] * b[0] + A[1]\
+    \ * b[1], A[2] * b[0] + A[3] * b[1]};\r\n}\r\n\r\ntemplate <typename T>\r\nmat<T>\
+    \ hgcd(arr<T> a) {\r\n  assert(len(a[0]) > len(a[1]) && len(a[1]) > 0);\r\n  int\
+    \ m = len(a[0]) / 2;\r\n  if (a[1].size() <= m) {\r\n    mat<T> M;\r\n    M[0]\
+    \ = {1}, M[3] = {1};\r\n    return M;\r\n  }\r\n  auto R = hgcd(arr<T>({vc<T>(a[0].begin()\
+    \ + m, a[0].end()),\r\n                        vc<T>(a[1].begin() + m, a[1].end())}));\r\
+    \n  a = R * a;\r\n  if (a[1].size() <= m) return R;\r\n  mat<T> Q = step(poly_divmod(a[0],\
+    \ a[1]).fi);\r\n  R = Q * R, a = Q * a;\r\n  if (a[1].size() <= m) return R;\r\
+    \n  int k = 2 * m + 1 - len(a[0]);\r\n  auto H = hgcd(arr<T>({vc<T>(a[0].begin()\
+    \ + k, a[0].end()),\r\n                        vc<T>(a[1].begin() + k, a[1].end())}));\r\
+    \n  return H * R;\r\n}\r\n\r\ntemplate <typename T>\r\nmat<T> cgcd(arr<T> a) {\r\
+    \n  assert(a[0].size() > a[1].size() && !a[1].empty());\r\n  auto m0 = hgcd(a);\r\
+    \n  a = m0 * a;\r\n  if (a[1].empty()) return m0;\r\n  mat<T> Q = step(poly_divmod(a[0],\
+    \ a[1]).fi);\r\n  m0 = Q * m0, a = Q * a;\r\n  if (a[1].empty()) return m0;\r\n\
+    \  return cgcd(a) * m0;\r\n}\r\n\r\ntemplate <typename T>\r\ntuple<vc<T>, vc<T>,\
+    \ vc<T>> poly_extgcd(const vc<T>& a, const vc<T>& b) {\r\n  mat<T> Q = step(poly_divmod(a,\
+    \ b).fi);\r\n  auto m = Q;\r\n  auto ap = Q * arr<T>{a, b};\r\n  if (!ap[1].empty())\
+    \ m = cgcd(ap) * m;\r\n  return {a * m[0] + b * m[1], m[0], m[1]};\r\n}\r\n} //\
+    \ namespace half_gcd\r\nusing half_gcd::poly_extgcd;\n#line 4 \"test/library_checker/polynomial/inv_of_polynomials.test.cpp\"\
+    \n\r\nusing mint = modint998;\r\nvoid solve() {\r\n  LL(N, M);\r\n  VEC(mint,\
+    \ A, N);\r\n  VEC(mint, B, M);\r\n  auto [d, x, y] = poly_extgcd(A, B);\r\n  if\
+    \ (len(d) > 1) return print(-1);\r\n  mint c = mint(1) / d[0];\r\n  FOR(i, len(x))\
+    \ x[i] *= c;\r\n  print(len(x));\r\n  if(len(x)) print(x);\r\n}\r\n\r\nsigned\
+    \ main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout\
+    \ << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+  code: "#define PROBLEM \"URL\"\r\n#include \"my_template.hpp\"\r\n#include \"polynomial/poly_gcd.hpp\"\
+    \r\n\r\nusing mint = modint998;\r\nvoid solve() {\r\n  LL(N, M);\r\n  VEC(mint,\
+    \ A, N);\r\n  VEC(mint, B, M);\r\n  auto [d, x, y] = poly_extgcd(A, B);\r\n  if\
+    \ (len(d) > 1) return print(-1);\r\n  mint c = mint(1) / d[0];\r\n  FOR(i, len(x))\
+    \ x[i] *= c;\r\n  print(len(x));\r\n  if(len(x)) print(x);\r\n}\r\n\r\nsigned\
+    \ main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout\
+    \ << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
-  - polynomial/multivar_convolution.hpp
+  - polynomial/poly_gcd.hpp
+  - polynomial/poly_divmod.hpp
+  - polynomial/fps_inv.hpp
   - polynomial/convolution.hpp
   - mod/modint.hpp
   isVerificationFile: true
-  path: test/library_checker/convolution/multivariate_convolution.test.cpp
+  path: test/library_checker/polynomial/inv_of_polynomials.test.cpp
   requiredBy: []
   timestamp: '2022-01-09 16:39:58+09:00'
-  verificationStatus: TEST_ACCEPTED
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/library_checker/convolution/multivariate_convolution.test.cpp
+documentation_of: test/library_checker/polynomial/inv_of_polynomials.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/convolution/multivariate_convolution.test.cpp
-- /verify/test/library_checker/convolution/multivariate_convolution.test.cpp.html
-title: test/library_checker/convolution/multivariate_convolution.test.cpp
+- /verify/test/library_checker/polynomial/inv_of_polynomials.test.cpp
+- /verify/test/library_checker/polynomial/inv_of_polynomials.test.cpp.html
+title: test/library_checker/polynomial/inv_of_polynomials.test.cpp
 ---

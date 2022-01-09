@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: polynomial/fps_inv.hpp
     title: polynomial/fps_inv.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: polynomial/multipoint.hpp
     title: polynomial/multipoint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/multipoint_evaluation
@@ -453,47 +453,48 @@ data:
     \ >> 1)]) * t * rts[(sz >> 1) + i];\r\n    fa[i] = A0 + A1 * s;\r\n  }\r\n  fft(fa,\
     \ sz >> 1);\r\n  vector<double> ret(need);\r\n  for (int i = 0; i < need; i++)\
     \ {\r\n    ret[i] = (i & 1 ? fa[i >> 1].y : fa[i >> 1].x);\r\n  }\r\n  return\
-    \ ret;\r\n}\r\n} // namespace CFFT\r\n\r\nvector<ll> convolution(vector<ll>& a,\
-    \ vector<ll>& b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return\
-    \ {};\r\n  if (min(n, m) <= 60) return convolution_naive(a, b);\r\n  ll abs_sum_a\
-    \ = 0, abs_sum_b = 0;\r\n  FOR(i, n) abs_sum_a += abs(a[i]);\r\n  FOR(i, n) abs_sum_b\
-    \ += abs(b[i]);\r\n  assert(abs_sum_a * abs_sum_b < 1e15);\r\n  vc<double> c =\
-    \ CFFT::convolution_fft(a, b);\r\n  vc<ll> res(len(c));\r\n  FOR(i, len(c)) res[i]\
-    \ = ll(floor(c[i] + .5));\r\n  return res;\r\n}\r\n\r\ntemplate<typename mint>\r\
-    \nenable_if_t<is_same<mint, modint998>::value, vc<mint>> convolution(vc<mint>&\
-    \ a, vc<mint>& b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return\
-    \ {};\r\n  if (min(n, m) <= 60) return convolution_naive(a, b);\r\n  return convolution_ntt(a,\
-    \ b);\r\n}\r\n\r\ntemplate<typename mint>\r\nenable_if_t<!is_same<mint, modint998>::value,\
-    \ vc<mint>> convolution(vc<mint>& a, vc<mint>& b) {\r\n  int n = len(a), m = len(b);\r\
-    \n  if (!n || !m) return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a,\
-    \ b);\r\n  return convolution_garner(a, b);\r\n}\r\n#line 2 \"polynomial/fps_inv.hpp\"\
-    \n\r\ntemplate <typename mint>\r\nvc<mint> fps_inv(vc<mint>& F) {\r\n  vc<mint>\
-    \ G = {mint(1) / F[0]};\r\n  G.reserve(len(F));\r\n  ll N = len(F), n = 1;\r\n\
-    \  while (n < N) {\r\n    vc<mint> f(2 * n), g(2 * n);\r\n    FOR(i, min(N, 2\
-    \ * n)) f[i] = F[i];\r\n    FOR(i, n) g[i] = G[i];\r\n    ntt(f, false);\r\n \
-    \   ntt(g, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\n    ntt(f, true);\r\n\
-    \    FOR(i, n) f[i] = 0;\r\n    ntt(f, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\
-    \n    ntt(f, true);\r\n    FOR3(i, n, 2 * n) G.eb(f[i] * mint(-1));\r\n    n *=\
-    \ 2;\r\n  }\r\n  G.resize(N);\r\n  return G;\r\n}\r\n#line 2 \"polynomial/multipoint.hpp\"\
-    \n\r\ntemplate <typename mint>\r\nstruct SubproductTree {\r\n  int m;\r\n  int\
-    \ sz;\r\n  vc<vc<mint>> T;\r\n  SubproductTree(const vc<mint>& x) {\r\n    m =\
-    \ len(x);\r\n    sz = 1;\r\n    while (sz < m) sz *= 2;\r\n    T.resize(2 * sz);\r\
-    \n    FOR(i, sz) T[sz + i] = {1, (i < m ? -x[i] : 0)};\r\n    FOR3_R(i, 1, sz)\
-    \ T[i] = convolution(T[2 * i], T[2 * i + 1]);\r\n  }\r\n\r\n  vc<mint> mid_prod(vc<mint>&\
-    \ a, vc<mint>& b) {\r\n    assert(len(a) >= len(b) && !b.empty());\r\n    if (min(len(b),\
-    \ len(a) - len(b) + 1) <= 60) {\r\n      vc<mint> res(len(a) - len(b) + 1);\r\n\
-    \      FOR(i, len(res)) FOR(j, len(b)) res[i] += b[j] * a[i + j];\r\n      return\
-    \ res;\r\n    }\r\n    int n = 1 << std::__lg(2 * len(a) - 1);\r\n    vc<mint>\
-    \ fa(n), fb(n);\r\n    std::copy(a.begin(), a.end(), fa.begin());\r\n    std::copy(b.rbegin(),\
-    \ b.rend(), fb.begin());\r\n    ntt(fa, 0), ntt(fb, 0);\r\n    FOR(i, n) fa[i]\
-    \ *= fb[i];\r\n    ntt(fa, 1);\r\n    fa.resize(len(a));\r\n    fa.erase(fa.begin(),\
-    \ fa.begin() + len(b) - 1);\r\n    return fa;\r\n  }\r\n\r\n  vc<mint> evaluation(vc<mint>&\
-    \ f) {\r\n    int n = len(f);\r\n    f.resize(2 * n - 1);\r\n    vc<vc<mint>>\
-    \ g(2 * sz);\r\n    g[1] = T[1];\r\n    g[1].resize(n);\r\n    g[1] = fps_inv(g[1]);\r\
-    \n    g[1] = mid_prod(f, g[1]);\r\n    g[1].resize(sz);\r\n\r\n    FOR3(i, 1,\
-    \ sz) {\r\n      g[2 * i] = mid_prod(g[i], T[2 * i + 1]);\r\n      g[2 * i + 1]\
-    \ = mid_prod(g[i], T[2 * i]);\r\n    }\r\n    vc<mint> vals(m);\r\n    FOR(i,\
-    \ m) vals[i] = g[sz + i][0];\r\n    return vals;\r\n  }\r\n\r\n  vc<mint> interpolation(vc<mint>&\
+    \ ret;\r\n}\r\n} // namespace CFFT\r\n\r\nvector<ll> convolution(const vector<ll>&\
+    \ a, const vector<ll>& b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m)\
+    \ return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a, b);\r\n  ll\
+    \ abs_sum_a = 0, abs_sum_b = 0;\r\n  FOR(i, n) abs_sum_a += abs(a[i]);\r\n  FOR(i,\
+    \ n) abs_sum_b += abs(b[i]);\r\n  assert(abs_sum_a * abs_sum_b < 1e15);\r\n  vc<double>\
+    \ c = CFFT::convolution_fft(a, b);\r\n  vc<ll> res(len(c));\r\n  FOR(i, len(c))\
+    \ res[i] = ll(floor(c[i] + .5));\r\n  return res;\r\n}\r\n\r\ntemplate<typename\
+    \ mint>\r\nenable_if_t<is_same<mint, modint998>::value, vc<mint>> convolution(const\
+    \ vc<mint>& a, const vc<mint>& b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n\
+    \ || !m) return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a, b);\r\
+    \n  return convolution_ntt(a, b);\r\n}\r\n\r\ntemplate<typename mint>\r\nenable_if_t<!is_same<mint,\
+    \ modint998>::value, vc<mint>> convolution(const vc<mint>& a, const vc<mint>&\
+    \ b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return {};\r\n  if\
+    \ (min(n, m) <= 60) return convolution_naive(a, b);\r\n  return convolution_garner(a,\
+    \ b);\r\n}\r\n#line 2 \"polynomial/fps_inv.hpp\"\n\r\ntemplate <typename mint>\r\
+    \nvc<mint> fps_inv(vc<mint>& F) {\r\n  vc<mint> G = {mint(1) / F[0]};\r\n  G.reserve(len(F));\r\
+    \n  ll N = len(F), n = 1;\r\n  while (n < N) {\r\n    vc<mint> f(2 * n), g(2 *\
+    \ n);\r\n    FOR(i, min(N, 2 * n)) f[i] = F[i];\r\n    FOR(i, n) g[i] = G[i];\r\
+    \n    ntt(f, false);\r\n    ntt(g, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\
+    \n    ntt(f, true);\r\n    FOR(i, n) f[i] = 0;\r\n    ntt(f, false);\r\n    FOR(i,\
+    \ 2 * n) f[i] *= g[i];\r\n    ntt(f, true);\r\n    FOR3(i, n, 2 * n) G.eb(f[i]\
+    \ * mint(-1));\r\n    n *= 2;\r\n  }\r\n  G.resize(N);\r\n  return G;\r\n}\r\n\
+    #line 2 \"polynomial/multipoint.hpp\"\n\r\ntemplate <typename mint>\r\nstruct\
+    \ SubproductTree {\r\n  int m;\r\n  int sz;\r\n  vc<vc<mint>> T;\r\n  SubproductTree(const\
+    \ vc<mint>& x) {\r\n    m = len(x);\r\n    sz = 1;\r\n    while (sz < m) sz *=\
+    \ 2;\r\n    T.resize(2 * sz);\r\n    FOR(i, sz) T[sz + i] = {1, (i < m ? -x[i]\
+    \ : 0)};\r\n    FOR3_R(i, 1, sz) T[i] = convolution(T[2 * i], T[2 * i + 1]);\r\
+    \n  }\r\n\r\n  vc<mint> mid_prod(vc<mint>& a, vc<mint>& b) {\r\n    assert(len(a)\
+    \ >= len(b) && !b.empty());\r\n    if (min(len(b), len(a) - len(b) + 1) <= 60)\
+    \ {\r\n      vc<mint> res(len(a) - len(b) + 1);\r\n      FOR(i, len(res)) FOR(j,\
+    \ len(b)) res[i] += b[j] * a[i + j];\r\n      return res;\r\n    }\r\n    int\
+    \ n = 1 << std::__lg(2 * len(a) - 1);\r\n    vc<mint> fa(n), fb(n);\r\n    std::copy(a.begin(),\
+    \ a.end(), fa.begin());\r\n    std::copy(b.rbegin(), b.rend(), fb.begin());\r\n\
+    \    ntt(fa, 0), ntt(fb, 0);\r\n    FOR(i, n) fa[i] *= fb[i];\r\n    ntt(fa, 1);\r\
+    \n    fa.resize(len(a));\r\n    fa.erase(fa.begin(), fa.begin() + len(b) - 1);\r\
+    \n    return fa;\r\n  }\r\n\r\n  vc<mint> evaluation(vc<mint>& f) {\r\n    int\
+    \ n = len(f);\r\n    f.resize(2 * n - 1);\r\n    vc<vc<mint>> g(2 * sz);\r\n \
+    \   g[1] = T[1];\r\n    g[1].resize(n);\r\n    g[1] = fps_inv(g[1]);\r\n    g[1]\
+    \ = mid_prod(f, g[1]);\r\n    g[1].resize(sz);\r\n\r\n    FOR3(i, 1, sz) {\r\n\
+    \      g[2 * i] = mid_prod(g[i], T[2 * i + 1]);\r\n      g[2 * i + 1] = mid_prod(g[i],\
+    \ T[2 * i]);\r\n    }\r\n    vc<mint> vals(m);\r\n    FOR(i, m) vals[i] = g[sz\
+    \ + i][0];\r\n    return vals;\r\n  }\r\n\r\n  vc<mint> interpolation(vc<mint>&\
     \ y) {\r\n    assert(len(y) == m);\r\n    vc<mint> a(m);\r\n    FOR(i, m) a[i]\
     \ = T[1][m - i - 1] * (i + 1);\r\n\r\n    a = evaluation(a);\r\n    vc<vc<mint>>\
     \ t(2 * sz);\r\n    FOR(i, sz) t[sz + i] = {(i < m ? y[i] / a[i] : 0)};\r\n  \
@@ -525,8 +526,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/polynomial/multipoint_evaluation.test.cpp
   requiredBy: []
-  timestamp: '2022-01-09 02:48:17+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-09 16:39:58+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/polynomial/multipoint_evaluation.test.cpp
 layout: document
