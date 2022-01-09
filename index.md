@@ -290,10 +290,10 @@ data:
       title: other/rectangleunion.hpp
   - name: persistent_ds
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: persistent_ds/array.hpp
       title: persistent_ds/array.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: persistent_ds/unionfind.hpp
       title: persistent_ds/unionfind.hpp
   - name: polynomial
@@ -331,7 +331,7 @@ data:
     - icon: ':x:'
       path: polynomial/multipoint.hpp
       title: polynomial/multipoint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: polynomial/multivar_convolution.hpp
       title: polynomial/multivar_convolution.hpp
     - icon: ':x:'
@@ -449,18 +449,18 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/convolution/subset_convolution.test.cpp
       title: test/library_checker/convolution/subset_convolution.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/convolution/subset_convolution_multivar.test.cpp
       title: test/library_checker/convolution/subset_convolution_multivar.test.cpp
   - name: test/library_checker/datastructure
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/associative_array.test.cpp
       title: test/library_checker/datastructure/associative_array.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/persistent_queue.test.cpp
       title: test/library_checker/datastructure/persistent_queue.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/persistent_unionfind.test.cpp
       title: test/library_checker/datastructure/persistent_unionfind.test.cpp
     - icon: ':x:'

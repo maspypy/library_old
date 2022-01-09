@@ -466,16 +466,16 @@ data:
     \ b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return {};\r\n  if\
     \ (min(n, m) <= 60) return convolution_naive(a, b);\r\n  return convolution_garner(a,\
     \ b);\r\n}\r\n#line 2 \"polynomial/convolution_huge.hpp\"\ntemplate<typename mint>\r\
-    \nvc<mint> convolution_huge(vc<mint>& A, vc<mint>& B) {\r\n  int N = len(A), M\
-    \ = len(B);\r\n  if (N + M - 1 <= (1 << 23)) return convolution(A, B);\r\n  ll\
-    \ L = 22;\r\n  vv(mint, C, 4, 2 << L);\r\n  vv(mint, D, 4, 2 << L);\r\n  int mask\
-    \ = (1 << L) - 1;\r\n  FOR(i, N) C[i >> L][i & mask] = A[i];\r\n  FOR(i, M) D[i\
-    \ >> L][i & mask] = B[i];\r\n  FOR(i, 4) ntt(C[i], false);\r\n  FOR(i, 4) ntt(D[i],\
-    \ false);\r\n\r\n  vc<mint> ANS(8 << L);\r\n\r\n  FOR(i, 7) {\r\n    vc<mint>\
-    \ E(2 << L);\r\n    FOR(c, 4) FOR(d, 4) if(c + d == i) {\r\n      FOR(k, 2 <<\
-    \ L) E[k] += C[c][k] * D[d][k];\r\n    }\r\n    ntt(E, true);\r\n    FOR(k, 2\
-    \ << L) ANS[(i << L) + k] += E[k];\r\n  }\r\n  ANS.resize(N + M - 1);\r\n  return\
-    \ ANS;\r\n}\r\n#line 6 \"test/library_checker/convolution/convolution_huge.test.cpp\"\
+    \nvc<mint> convolution_huge(const vc<mint>& A, const vc<mint>& B) {\r\n  int N\
+    \ = len(A), M = len(B);\r\n  if (N + M - 1 <= (1 << 23)) return convolution(A,\
+    \ B);\r\n  ll L = 22;\r\n  vv(mint, C, 4, 2 << L);\r\n  vv(mint, D, 4, 2 << L);\r\
+    \n  int mask = (1 << L) - 1;\r\n  FOR(i, N) C[i >> L][i & mask] = A[i];\r\n  FOR(i,\
+    \ M) D[i >> L][i & mask] = B[i];\r\n  FOR(i, 4) ntt(C[i], false);\r\n  FOR(i,\
+    \ 4) ntt(D[i], false);\r\n\r\n  vc<mint> ANS(8 << L);\r\n\r\n  FOR(i, 7) {\r\n\
+    \    vc<mint> E(2 << L);\r\n    FOR(c, 4) FOR(d, 4) if(c + d == i) {\r\n     \
+    \ FOR(k, 2 << L) E[k] += C[c][k] * D[d][k];\r\n    }\r\n    ntt(E, true);\r\n\
+    \    FOR(k, 2 << L) ANS[(i << L) + k] += E[k];\r\n  }\r\n  ANS.resize(N + M -\
+    \ 1);\r\n  return ANS;\r\n}\r\n#line 6 \"test/library_checker/convolution/convolution_huge.test.cpp\"\
     \nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N, M);\r\n  VEC(mint,\
     \ A, N);\r\n  VEC(mint, B, M);\r\n  print(convolution_huge(A, B));\r\n}\r\n\r\n\
     signed main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n \
@@ -494,7 +494,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/convolution/convolution_huge.test.cpp
   requiredBy: []
-  timestamp: '2022-01-09 20:51:50+09:00'
+  timestamp: '2022-01-09 21:05:30+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/convolution/convolution_huge.test.cpp
