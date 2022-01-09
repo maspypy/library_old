@@ -149,7 +149,7 @@ data:
       title: geometry/geometry.hpp
   - name: graph
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/base.hpp
       title: graph/base.hpp
     - icon: ':warning:'
@@ -161,7 +161,7 @@ data:
     - icon: ':warning:'
       path: graph/bipartite_coloring.hpp
       title: graph/bipartite_coloring.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/centroid.hpp
       title: graph/centroid.hpp
     - icon: ':heavy_check_mark:'
@@ -200,7 +200,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/scc.hpp
       title: graph/scc.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/tree_all_distances.hpp
       title: graph/tree_all_distances.hpp
     - icon: ':warning:'
@@ -228,6 +228,9 @@ data:
       title: matrix/matrix.hpp
   - name: mod
     pages:
+    - icon: ':heavy_check_mark:'
+      path: mod/mod_sqrt.hpp
+      title: mod/mod_sqrt.hpp
     - icon: ':question:'
       path: mod/modint.hpp
       title: mod/modint.hpp
@@ -301,16 +304,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: polynomial/convolution_mod_2_64.hpp
       title: polynomial/convolution_mod_2_64.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: polynomial/fps_composition.hpp
       title: polynomial/fps_composition.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: polynomial/fps_exp.hpp
       title: polynomial/fps_exp.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: polynomial/fps_inv.hpp
       title: polynomial/fps_inv.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: polynomial/fps_log.hpp
       title: polynomial/fps_log.hpp
     - icon: ':x:'
@@ -319,16 +322,16 @@ data:
     - icon: ':x:'
       path: polynomial/lagrange_interpolate_iota.hpp
       title: polynomial/lagrange_interpolate_iota.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: polynomial/multipoint.hpp
       title: polynomial/multipoint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: polynomial/multivar_convolution.hpp
       title: polynomial/multivar_convolution.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: polynomial/poly_divmod.hpp
       title: polynomial/poly_divmod.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: polynomial/poly_gcd.hpp
       title: polynomial/poly_gcd.hpp
     - icon: ':x:'
@@ -336,7 +339,7 @@ data:
       title: polynomial/poly_taylor_shift.hpp
   - name: sequence
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: sequence/linearrecurrence.hpp
       title: sequence/linearrecurrence.hpp
   - name: setfunc
@@ -440,7 +443,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/convolution/subset_convolution.test.cpp
       title: test/library_checker/convolution/subset_convolution.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/convolution/subset_convolution_multivar.test.cpp
       title: test/library_checker/convolution/subset_convolution_multivar.test.cpp
   - name: test/library_checker/datastructure
@@ -525,7 +528,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/graph/cycle_detection.test.cpp
       title: test/library_checker/graph/cycle_detection.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
       title: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
     - icon: ':heavy_check_mark:'
@@ -551,33 +554,36 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/math/factorize.test.cpp
       title: test/library_checker/math/factorize.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/math/find_linear_recurrence.test.cpp
       title: test/library_checker/math/find_linear_recurrence.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
       title: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/math/sqrt_mod.test.cpp
+      title: test/library_checker/math/sqrt_mod.test.cpp
   - name: test/library_checker/polynomial
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/composition_of_fps.test.cpp
       title: test/library_checker/polynomial/composition_of_fps.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/exp_of_fps.test.cpp
       title: test/library_checker/polynomial/exp_of_fps.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/inv_of_fps.test.cpp
       title: test/library_checker/polynomial/inv_of_fps.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/inv_of_polynomials.test.cpp
       title: test/library_checker/polynomial/inv_of_polynomials.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/log_of_fps.test.cpp
       title: test/library_checker/polynomial/log_of_fps.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/multipoint_evaluation.test.cpp
       title: test/library_checker/polynomial/multipoint_evaluation.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/polynomial_division.test.cpp
       title: test/library_checker/polynomial/polynomial_division.test.cpp
     - icon: ':x:'

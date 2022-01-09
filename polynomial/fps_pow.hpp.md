@@ -7,13 +7,13 @@ data:
   - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: polynomial/fps_exp.hpp
     title: polynomial/fps_exp.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: polynomial/fps_inv.hpp
     title: polynomial/fps_inv.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: polynomial/fps_log.hpp
     title: polynomial/fps_log.hpp
   _extendedRequiredBy: []

@@ -10,10 +10,10 @@ data:
   - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: polynomial/fps_inv.hpp
     title: polynomial/fps_inv.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: polynomial/multipoint.hpp
     title: polynomial/multipoint.hpp
   _extendedRequiredBy: []

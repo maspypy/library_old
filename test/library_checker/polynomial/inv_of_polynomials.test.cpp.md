@@ -10,36 +10,38 @@ data:
   - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: polynomial/fps_inv.hpp
     title: polynomial/fps_inv.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: polynomial/poly_divmod.hpp
     title: polynomial/poly_divmod.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: polynomial/poly_gcd.hpp
     title: polynomial/poly_gcd.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: URL
-    links: []
+    PROBLEM: https://judge.yosupo.jp/problem/inv_of_polynomials
+    links:
+    - https://judge.yosupo.jp/problem/inv_of_polynomials
   bundledCode: "#line 1 \"test/library_checker/polynomial/inv_of_polynomials.test.cpp\"\
-    \n#define PROBLEM \"URL\"\r\n#line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\
-    #include <unistd.h>\n\nusing namespace std;\n\nusing ll = long long;\nusing ll8\
-    \ = __int128;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint =\
-    \ unsigned int;\nusing ull = unsigned long long;\n\ntemplate <class T>\nusing\
-    \ vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\ntemplate <class\
-    \ T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc = vector<vvvc<T>>;\n\
-    template <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate <class T>\nusing\
-    \ pq = priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T, vector<T>,\
-    \ greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
-    #define VEC(type, name, size) \\\n  vector<type> name(size);    \\\n  IN(name)\n\
-    #define vv(type, name, h, ...) \\\n  vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/inv_of_polynomials\"\r\n#line\
+    \ 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n#include <unistd.h>\n\nusing\
+    \ namespace std;\n\nusing ll = long long;\nusing ll8 = __int128;\nusing pi = pair<ll,\
+    \ ll>;\nusing vi = vector<ll>;\nusing uint = unsigned int;\nusing ull = unsigned\
+    \ long long;\n\ntemplate <class T>\nusing vc = vector<T>;\ntemplate <class T>\n\
+    using vvc = vector<vc<T>>;\ntemplate <class T>\nusing vvvc = vector<vvc<T>>;\n\
+    template <class T>\nusing vvvvc = vector<vvvc<T>>;\ntemplate <class T>\nusing\
+    \ vvvvvc = vector<vvvvc<T>>;\ntemplate <class T>\nusing pq = priority_queue<T>;\n\
+    template <class T>\nusing pqg = priority_queue<T, vector<T>, greater<T>>;\n\n\
+    #define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n#define VEC(type,\
+    \ name, size) \\\n  vector<type> name(size);    \\\n  IN(name)\n#define vv(type,\
+    \ name, h, ...) \\\n  vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n\
     #define VV(type, name, h, w)                     \\\n  vector<vector<type>> name(h,\
     \ vector<type>(w)); \\\n  IN(name)\n#define vvv(type, name, h, w, ...)   \\\n\
     \  vector<vector<vector<type>>> name( \\\n      h, vector<vector<type>>(w, vector<type>(__VA_ARGS__)))\n\
@@ -525,13 +527,14 @@ data:
     \ x[i] *= c;\r\n  print(len(x));\r\n  if(len(x)) print(x);\r\n}\r\n\r\nsigned\
     \ main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout\
     \ << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"URL\"\r\n#include \"my_template.hpp\"\r\n#include \"polynomial/poly_gcd.hpp\"\
-    \r\n\r\nusing mint = modint998;\r\nvoid solve() {\r\n  LL(N, M);\r\n  VEC(mint,\
-    \ A, N);\r\n  VEC(mint, B, M);\r\n  auto [d, x, y] = poly_extgcd(A, B);\r\n  if\
-    \ (len(d) > 1) return print(-1);\r\n  mint c = mint(1) / d[0];\r\n  FOR(i, len(x))\
-    \ x[i] *= c;\r\n  print(len(x));\r\n  if(len(x)) print(x);\r\n}\r\n\r\nsigned\
-    \ main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout\
-    \ << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/inv_of_polynomials\"\r\n\
+    #include \"my_template.hpp\"\r\n#include \"polynomial/poly_gcd.hpp\"\r\n\r\nusing\
+    \ mint = modint998;\r\nvoid solve() {\r\n  LL(N, M);\r\n  VEC(mint, A, N);\r\n\
+    \  VEC(mint, B, M);\r\n  auto [d, x, y] = poly_extgcd(A, B);\r\n  if (len(d) >\
+    \ 1) return print(-1);\r\n  mint c = mint(1) / d[0];\r\n  FOR(i, len(x)) x[i]\
+    \ *= c;\r\n  print(len(x));\r\n  if(len(x)) print(x);\r\n}\r\n\r\nsigned main()\
+    \ {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
+    \n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
   - polynomial/poly_gcd.hpp
@@ -542,8 +545,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/polynomial/inv_of_polynomials.test.cpp
   requiredBy: []
-  timestamp: '2022-01-09 16:39:58+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-01-09 17:25:06+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/polynomial/inv_of_polynomials.test.cpp
 layout: document

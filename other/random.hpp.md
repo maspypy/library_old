@@ -6,12 +6,18 @@ data:
     path: graph/chromatic.hpp
     title: graph/chromatic.hpp
   - icon: ':heavy_check_mark:'
+    path: mod/mod_sqrt.hpp
+    title: mod/mod_sqrt.hpp
+  - icon: ':heavy_check_mark:'
     path: string/rollinghash.hpp
     title: string/rollinghash.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/chromatic_number.test.cpp
     title: test/library_checker/graph/chromatic_number.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/math/sqrt_mod.test.cpp
+    title: test/library_checker/math/sqrt_mod.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
     title: test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
@@ -35,12 +41,14 @@ data:
   path: other/random.hpp
   requiredBy:
   - graph/chromatic.hpp
+  - mod/mod_sqrt.hpp
   - string/rollinghash.hpp
   timestamp: '2021-12-25 22:40:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/graph/chromatic_number.test.cpp
   - test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
+  - test/library_checker/math/sqrt_mod.test.cpp
 documentation_of: other/random.hpp
 layout: document
 redirect_from:
