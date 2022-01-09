@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: algebra/monoid_reverse.hpp
     title: algebra/monoid_reverse.hpp
   _extendedRequiredBy:

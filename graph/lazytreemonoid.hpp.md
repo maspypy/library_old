@@ -4,16 +4,16 @@ data:
   - icon: ':warning:'
     path: algebra/lazy_reverse.hpp
     title: algebra/lazy_reverse.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: algebra/monoid_reverse.hpp
     title: algebra/monoid_reverse.hpp
   - icon: ':question:'
     path: ds/lazysegtree.hpp
     title: ds/lazysegtree.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: graph/hld.hpp
     title: graph/hld.hpp
   _extendedRequiredBy: []

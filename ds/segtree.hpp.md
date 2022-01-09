@@ -2,29 +2,29 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/treegroup.hpp
     title: graph/treegroup.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: graph/treemonoid.hpp
     title: graph/treemonoid.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
     title: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/staticrmq_seg.test.cpp
     title: test/library_checker/datastructure/staticrmq_seg.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
     title: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
     title: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
     title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
     title: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
   - icon: ':x:'
@@ -32,7 +32,7 @@ data:
     title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"ds/segtree.hpp\"\ntemplate <class Monoid>\nstruct SegTree\
@@ -101,7 +101,7 @@ data:
   - graph/treegroup.hpp
   - graph/treemonoid.hpp
   timestamp: '2022-01-02 01:47:55+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp

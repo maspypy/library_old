@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: algebra/group_affine.hpp
     title: algebra/group_affine.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: algebra/monoid_reverse.hpp
     title: algebra/monoid_reverse.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: graph/hld.hpp
     title: graph/hld.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: graph/treemonoid.hpp
     title: graph/treemonoid.hpp
   - icon: ':question:'
