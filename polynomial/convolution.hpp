@@ -330,7 +330,7 @@ vc<double> convolution_fft(const vc<R>& a, const vc<R>& b) {
 }
 } // namespace CFFT
 
-vector<ll> convolution(vector<ll>& a, vector<ll>& b) {
+vector<ll> convolution(const vector<ll>& a, const vector<ll>& b) {
   int n = len(a), m = len(b);
   if (!n || !m) return {};
   if (min(n, m) <= 60) return convolution_naive(a, b);
@@ -345,7 +345,7 @@ vector<ll> convolution(vector<ll>& a, vector<ll>& b) {
 }
 
 template<typename mint>
-enable_if_t<is_same<mint, modint998>::value, vc<mint>> convolution(vc<mint>& a, vc<mint>& b) {
+enable_if_t<is_same<mint, modint998>::value, vc<mint>> convolution(const vc<mint>& a, const vc<mint>& b) {
   int n = len(a), m = len(b);
   if (!n || !m) return {};
   if (min(n, m) <= 60) return convolution_naive(a, b);
@@ -353,7 +353,7 @@ enable_if_t<is_same<mint, modint998>::value, vc<mint>> convolution(vc<mint>& a, 
 }
 
 template<typename mint>
-enable_if_t<!is_same<mint, modint998>::value, vc<mint>> convolution(vc<mint>& a, vc<mint>& b) {
+enable_if_t<!is_same<mint, modint998>::value, vc<mint>> convolution(const vc<mint>& a, const vc<mint>& b) {
   int n = len(a), m = len(b);
   if (!n || !m) return {};
   if (min(n, m) <= 60) return convolution_naive(a, b);
