@@ -1,23 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
+    path: sequence/coef_of_rational_fps.hpp
+    title: sequence/coef_of_rational_fps.hpp
+  - icon: ':x:'
+    path: sequence/find_linear_recurrence.hpp
+    title: sequence/find_linear_recurrence.hpp
+  - icon: ':x:'
     path: sequence/linearrecurrence.hpp
     title: sequence/linearrecurrence.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/find_linear_recurrence
@@ -207,35 +213,36 @@ data:
     void scan(ull &a) { scanner.read(a); }\nvoid scan(char &a) { scanner.read(a);\
     \ }\nvoid scan(double &a) { scanner.read(a); }\n// void scan(long double &a) {\
     \ scanner.read(a); }\nvoid scan(string &a) { scanner.read(a); }\ntemplate <class\
-    \ T>\nvoid scan(pair<T, T> &p) {\n  scan(p.first), scan(p.second);\n}\ntemplate\
-    \ <class T>\nvoid scan(tuple<T, T, T> &p) {\n  scan(get<0>(p)), scan(get<1>(p)),\
-    \ scan(get<2>(p));\n}\ntemplate <class T>\nvoid scan(tuple<T, T, T, T> &p) {\n\
-    \  scan(get<0>(p)), scan(get<1>(p)), scan(get<2>(p)), scan(get<3>(p));\n}\ntemplate\
-    \ <class T>\nvoid scan(vector<T> &a) {\n  for (auto &&i: a) scan(i);\n}\ntemplate\
-    \ <class T> // modint\nvoid scan(T &a) {\n  ll x;\n  scanner.read(x);\n  a = x;\n\
-    }\nvoid IN() {}\ntemplate <class Head, class... Tail>\nvoid IN(Head &head, Tail\
-    \ &... tail) {\n  scan(head);\n  IN(tail...);\n}\n\nvi s_to_vi(string S, char\
-    \ first_char = 'a') {\n  vi A(S.size());\n  FOR(i, S.size()) { A[i] = S[i] - first_char;\
-    \ }\n  return A;\n}\n\nvoid print() { printer.writeln(); }\ntemplate <class Head,\
-    \ class... Tail>\nvoid print(Head &&head, Tail &&... tail) {\n  printer.write(head);\n\
-    \  if (sizeof...(Tail)) printer.write(' ');\n  print(forward<Tail>(tail)...);\n\
-    }\n\nvoid YES(bool t = 1) { print(t ? \"YES\" : \"NO\"); }\nvoid NO(bool t = 1)\
-    \ { YES(!t); }\nvoid Yes(bool t = 1) { print(t ? \"Yes\" : \"No\"); }\nvoid No(bool\
-    \ t = 1) { Yes(!t); }\nvoid yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\n\
-    void no(bool t = 1) { yes(!t); }\n\ntemplate <typename T>\nvector<T> cumsum(vector<T>\
-    \ &A) {\n  int N = A.size();\n  vector<T> B(N + 1);\n  B[0] = T(0);\n  FOR(i,\
-    \ N) { B[i + 1] = B[i] + A[i]; }\n  return B;\n}\n\nvc<int> bin_count(vi &A, int\
-    \ size) {\n  vc<int> C(size);\n  for (auto &x: A) { ++C[x]; }\n  return C;\n}\n\
-    \ntemplate <typename T>\nvector<int> argsort(vector<T> &A) {\n  vector<int> ids(A.size());\n\
-    \  iota(all(ids), 0);\n  sort(all(ids),\n       [&](int i, int j) { return A[i]\
-    \ < A[j] || (A[i] == A[j] && i < j); });\n  return ids;\n}\n\nll binary_search(function<bool(ll)>\
-    \ check, ll ok, ll ng) {\n  assert(check(ok));\n  while (abs(ok - ng) > 1) {\n\
-    \    auto x = (ng + ok) / 2;\n    if (check(x))\n      ok = x;\n    else\n   \
-    \   ng = x;\n  }\n  return ok;\n}\n\ntemplate <class T, class S>\ninline bool\
-    \ chmax(T &a, const S &b) {\n  return (a < b ? a = b, 1 : 0);\n}\ntemplate <class\
-    \ T, class S>\ninline bool chmin(T &a, const S &b) {\n  return (a > b ? a = b,\
-    \ 1 : 0);\n}\n\n#define SUM(v) accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n\
-    #define MAX(v) *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
+    \ T, class U>\nvoid scan(pair<T, U> &p) {\n  scan(p.first), scan(p.second);\n\
+    }\ntemplate <class A, class B, class C>\nvoid scan(tuple<A, B, C> &p) {\n  scan(get<0>(p)),\
+    \ scan(get<1>(p)), scan(get<2>(p));\n}\ntemplate <class A, class B, class C, class\
+    \ D>\nvoid scan(tuple<A, B, C, D> &p) {\n  scan(get<0>(p)), scan(get<1>(p)), scan(get<2>(p)),\
+    \ scan(get<3>(p));\n}\ntemplate <class T>\nvoid scan(vector<T> &a) {\n  for (auto\
+    \ &&i: a) scan(i);\n}\ntemplate <class T> // modint\nvoid scan(T &a) {\n  ll x;\n\
+    \  scanner.read(x);\n  a = x;\n}\nvoid IN() {}\ntemplate <class Head, class...\
+    \ Tail>\nvoid IN(Head &head, Tail &... tail) {\n  scan(head);\n  IN(tail...);\n\
+    }\n\nvi s_to_vi(string S, char first_char = 'a') {\n  vi A(S.size());\n  FOR(i,\
+    \ S.size()) { A[i] = S[i] - first_char; }\n  return A;\n}\n\nvoid print() { printer.writeln();\
+    \ }\ntemplate <class Head, class... Tail>\nvoid print(Head &&head, Tail &&...\
+    \ tail) {\n  printer.write(head);\n  if (sizeof...(Tail)) printer.write(' ');\n\
+    \  print(forward<Tail>(tail)...);\n}\n\nvoid YES(bool t = 1) { print(t ? \"YES\"\
+    \ : \"NO\"); }\nvoid NO(bool t = 1) { YES(!t); }\nvoid Yes(bool t = 1) { print(t\
+    \ ? \"Yes\" : \"No\"); }\nvoid No(bool t = 1) { Yes(!t); }\nvoid yes(bool t =\
+    \ 1) { print(t ? \"yes\" : \"no\"); }\nvoid no(bool t = 1) { yes(!t); }\n\ntemplate\
+    \ <typename T>\nvector<T> cumsum(vector<T> &A) {\n  int N = A.size();\n  vector<T>\
+    \ B(N + 1);\n  B[0] = T(0);\n  FOR(i, N) { B[i + 1] = B[i] + A[i]; }\n  return\
+    \ B;\n}\n\nvc<int> bin_count(vi &A, int size) {\n  vc<int> C(size);\n  for (auto\
+    \ &x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate <typename T>\nvector<int> argsort(vector<T>\
+    \ &A) {\n  vector<int> ids(A.size());\n  iota(all(ids), 0);\n  sort(all(ids),\n\
+    \       [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j] && i < j); });\n\
+    \  return ids;\n}\n\nll binary_search(function<bool(ll)> check, ll ok, ll ng)\
+    \ {\n  assert(check(ok));\n  while (abs(ok - ng) > 1) {\n    auto x = (ng + ok)\
+    \ / 2;\n    if (check(x))\n      ok = x;\n    else\n      ng = x;\n  }\n  return\
+    \ ok;\n}\n\ntemplate <class T, class S>\ninline bool chmax(T &a, const S &b) {\n\
+    \  return (a < b ? a = b, 1 : 0);\n}\ntemplate <class T, class S>\ninline bool\
+    \ chmin(T &a, const S &b) {\n  return (a > b ? a = b, 1 : 0);\n}\n\n#define SUM(v)\
+    \ accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n#define MAX(v)\
+    \ *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
     \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/math/find_linear_recurrence.test.cpp\"\
     \n\r\n#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n  static\
@@ -312,19 +319,28 @@ data:
     \ mint>\nvc<mint> power_table(mint a, ll N) {\n  vc<mint> f(N, 1);\n  FOR(i, N\
     \ - 1) f[i + 1] = a * f[i];\n  return f;\n}\n\nusing modint107 = modint<1'000'000'007>;\n\
     using modint998 = modint<998'244'353>;\nusing amint = ArbitraryModInt;\n#line\
-    \ 2 \"sequence/linearrecurrence.hpp\"\n\r\n#line 3 \"polynomial/convolution.hpp\"\
-    \ntemplate <class T>\r\nvector<T> convolution_naive(const vector<T>& a, const\
-    \ vector<T>& b) {\r\n  int n = int(a.size()), m = int(b.size());\r\n  vector<T>\
-    \ ans(n + m - 1);\r\n  if (n < m) {\r\n    FOR(j, m) FOR(i, n) ans[i + j] += a[i]\
-    \ * b[j];\r\n  } else {\r\n    FOR(i, n) FOR(j, m) ans[i + j] += a[i] * b[j];\r\
-    \n  }\r\n  return ans;\r\n}\r\n\r\ntemplate <class mint>\r\nstruct fft_info {\r\
-    \n  static constexpr int bsf_constexpr(unsigned int n) {\r\n    int x = 0;\r\n\
-    \    while (!(n & (1 << x))) x++;\r\n    return x;\r\n  }\r\n\r\n  static constexpr\
-    \ int rank2 = bsf_constexpr(mint::get_mod() - 1);\r\n  array<mint, rank2 + 1>\
-    \ root;\r\n  array<mint, rank2 + 1> iroot;\r\n  array<mint, max(0, rank2 - 1)>\
-    \ rate2;\r\n  array<mint, max(0, rank2 - 1)> irate2;\r\n  array<mint, max(0, rank2\
-    \ - 2)> rate3;\r\n  array<mint, max(0, rank2 - 2)> irate3;\r\n\r\n  fft_info()\
-    \ {\r\n    int g = primitive_root(mint::get_mod());\r\n    root[rank2] = mint(g).pow((mint::get_mod()\
+    \ 2 \"sequence/linearrecurrence.hpp\"\n\r\n#line 1 \"sequence/find_linear_recurrence.hpp\"\
+    \ntemplate <typename mint>\r\nvector<mint> find_linear_recurrence(vector<mint>&\
+    \ A) {\r\n  int N = len(A);\r\n  vc<mint> B = {1}, C = {1};\r\n  int l = 0, m\
+    \ = 1;\r\n  mint p = 1;\r\n  FOR(i, N) {\r\n    mint d = A[i];\r\n    FOR3(j,\
+    \ 1, l + 1) { d += C[j] * A[i - j]; }\r\n    if (d == 0) {\r\n      ++m;\r\n \
+    \     continue;\r\n    }\r\n    auto tmp = C;\r\n    mint q = d / p;\r\n    if\
+    \ (len(C) < len(B) + m) C.insert(C.end(), len(B) + m - len(C), 0);\r\n    FOR(j,\
+    \ len(B)) C[j + m] -= q * B[j];\r\n    if (l + l <= i) {\r\n      B = tmp;\r\n\
+    \      l = i + 1 - l, m = 1;\r\n      p = d;\r\n    } else {\r\n      ++m;\r\n\
+    \    }\r\n  }\r\n  return C;\r\n}\r\n#line 3 \"polynomial/convolution.hpp\"\n\
+    template <class T>\r\nvector<T> convolution_naive(const vector<T>& a, const vector<T>&\
+    \ b) {\r\n  int n = int(a.size()), m = int(b.size());\r\n  vector<T> ans(n + m\
+    \ - 1);\r\n  if (n < m) {\r\n    FOR(j, m) FOR(i, n) ans[i + j] += a[i] * b[j];\r\
+    \n  } else {\r\n    FOR(i, n) FOR(j, m) ans[i + j] += a[i] * b[j];\r\n  }\r\n\
+    \  return ans;\r\n}\r\n\r\ntemplate <class mint>\r\nstruct fft_info {\r\n  static\
+    \ constexpr int bsf_constexpr(unsigned int n) {\r\n    int x = 0;\r\n    while\
+    \ (!(n & (1 << x))) x++;\r\n    return x;\r\n  }\r\n\r\n  static constexpr int\
+    \ rank2 = bsf_constexpr(mint::get_mod() - 1);\r\n  array<mint, rank2 + 1> root;\r\
+    \n  array<mint, rank2 + 1> iroot;\r\n  array<mint, max(0, rank2 - 1)> rate2;\r\
+    \n  array<mint, max(0, rank2 - 1)> irate2;\r\n  array<mint, max(0, rank2 - 2)>\
+    \ rate3;\r\n  array<mint, max(0, rank2 - 2)> irate3;\r\n\r\n  fft_info() {\r\n\
+    \    int g = primitive_root(mint::get_mod());\r\n    root[rank2] = mint(g).pow((mint::get_mod()\
     \ - 1) >> rank2);\r\n    iroot[rank2] = mint(1) / root[rank2];\r\n    FOR_R(i,\
     \ rank2) {\r\n      root[i] = root[i + 1] * root[i + 1];\r\n      iroot[i] = iroot[i\
     \ + 1] * iroot[i + 1];\r\n    }\r\n\r\n    {\r\n      mint prod = 1, iprod = 1;\r\
@@ -466,7 +482,7 @@ data:
     \ modint998>::value, vc<mint>> convolution(const vc<mint>& a, const vc<mint>&\
     \ b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return {};\r\n  if\
     \ (min(n, m) <= 60) return convolution_naive(a, b);\r\n  return convolution_garner(a,\
-    \ b);\r\n}\r\n#line 4 \"sequence/linearrecurrence.hpp\"\n\r\ntemplate <typename\
+    \ b);\r\n}\r\n#line 2 \"sequence/coef_of_rational_fps.hpp\"\n\r\ntemplate <typename\
     \ mint>\r\nmint coef_of_rational(vector<mint> A, vector<mint> B, ll N) {\r\n \
     \ if(len(A)==0) return 0;\r\n  assert(B[0] == 1);\r\n  assert(len(B) == len(A)\
     \ + 1);\r\n  while (N) {\r\n    vc<mint> B1 = B;\r\n    FOR(i, len(B1)) if (i\
@@ -474,16 +490,8 @@ data:
     \ B1);\r\n    FOR(i, len(B1)) B[i] = B[2 * i];\r\n    if (N & 1) {\r\n      FOR(i,\
     \ len(B1) - 1) A[i] = A[2 * i | 1];\r\n    } else {\r\n      FOR(i, len(B1) -\
     \ 1) A[i] = A[2 * i];\r\n    }\r\n    A.resize(len(B1) - 1);\r\n    B.resize(len(B1));\r\
-    \n    N /= 2;\r\n  }\r\n  return A[0];\r\n}\r\n\r\ntemplate <typename mint>\r\n\
-    vector<mint> find_linear_recurrence(vector<mint>& A) {\r\n  int N = len(A);\r\n\
-    \  vc<mint> B = {1}, C = {1};\r\n  int l = 0, m = 1;\r\n  mint p = 1;\r\n  FOR(i,\
-    \ N) {\r\n    mint d = A[i];\r\n    FOR3(j, 1, l + 1) { d += C[j] * A[i - j];\
-    \ }\r\n    if (d == 0) {\r\n      ++m;\r\n      continue;\r\n    }\r\n    auto\
-    \ tmp = C;\r\n    mint q = d / p;\r\n    if (len(C) < len(B) + m) C.insert(C.end(),\
-    \ len(B) + m - len(C), 0);\r\n    FOR(j, len(B)) C[j + m] -= q * B[j];\r\n   \
-    \ if (l + l <= i) {\r\n      B = tmp;\r\n      l = i + 1 - l, m = 1;\r\n     \
-    \ p = d;\r\n    } else {\r\n      ++m;\r\n    }\r\n  }\r\n  return C;\r\n}\r\n\
-    \r\ntemplate <typename mint>\r\nmint interpolate_linear_recurrence(vector<mint>&\
+    \n    N /= 2;\r\n  }\r\n  return A[0];\r\n}\n#line 5 \"sequence/linearrecurrence.hpp\"\
+    \n\r\ntemplate <typename mint>\r\nmint interpolate_linear_recurrence(vector<mint>&\
     \ A, ll N) {\r\n  auto G = find_linear_recurrence(A);\r\n  auto F = convolution(A,\
     \ G);\r\n  F.resize(len(G) - 1);\r\n  return coef_of_rational(F, G, N);\r\n}\r\
     \n#line 6 \"test/library_checker/math/find_linear_recurrence.test.cpp\"\n\r\n\
@@ -503,12 +511,14 @@ data:
   - my_template.hpp
   - mod/modint.hpp
   - sequence/linearrecurrence.hpp
+  - sequence/find_linear_recurrence.hpp
+  - sequence/coef_of_rational_fps.hpp
   - polynomial/convolution.hpp
   isVerificationFile: true
   path: test/library_checker/math/find_linear_recurrence.test.cpp
   requiredBy: []
-  timestamp: '2022-01-09 20:38:27+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-10 07:43:44+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/math/find_linear_recurrence.test.cpp
 layout: document
