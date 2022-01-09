@@ -11,7 +11,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: polynomial/fps_sqrt.hpp
     title: polynomial/fps_sqrt.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: string/rollinghash.hpp
     title: string/rollinghash.hpp
   _extendedVerifiedWith:
@@ -24,12 +24,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/polynomial/sqrt_of_fps.test.cpp
     title: test/library_checker/polynomial/sqrt_of_fps.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
     title: test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"other/random.hpp\"\nstruct RandomNumberGenerator {\n  mt19937\
@@ -51,7 +51,7 @@ data:
   - string/rollinghash.hpp
   - polynomial/fps_sqrt.hpp
   timestamp: '2021-12-25 22:40:58+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/graph/chromatic_number.test.cpp
   - test/library_checker/string/zalgorithm_by_rollinghash.test.cpp

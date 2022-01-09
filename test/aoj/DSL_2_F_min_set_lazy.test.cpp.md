@@ -10,10 +10,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: algebra/monoid_set.hpp
     title: algebra/monoid_set.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/lazysegtree.hpp
     title: ds/lazysegtree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
