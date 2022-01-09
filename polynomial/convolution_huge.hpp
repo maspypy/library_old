@@ -11,11 +11,17 @@ vc<mint> convolution_huge(vc<mint>& A, vc<mint>& B) {
   FOR(i, M) D[i >> L][i & mask] = B[i];
   FOR(i, 4) ntt(C[i], false);
   FOR(i, 4) ntt(D[i], false);
-  vv(mint, E, 7, 2 << L);
-  FOR(i, 4) FOR(j, 4) FOR(k, 2 << L) E[i + j][k] += C[i][k] * D[j][k];
-  FOR(i, 7) ntt(E[i], true);
+
   vc<mint> ANS(8 << L);
-  FOR(i, 7) FOR(k, 2 << L) ANS[(i << L) + k] += E[i][k];
+
+  FOR(i, 7) {
+    vc<mint> E(2 << L);
+    FOR(c, 4) FOR(d, 4) if(c + d == i) {
+      FOR(k, 2 << L) E[k] += C[c][k] * D[d][k];
+    }
+    ntt(E, true);
+    FOR(k, 2 << L) ANS[(i << L) + k] += E[k];
+  }
   ANS.resize(N + M - 1);
   return ANS;
 }
