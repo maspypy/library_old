@@ -1,6 +1,6 @@
 #include "polynomial/convolution.hpp"
 template<typename mint>
-vc<mint> convolution_huge(vc<mint>& A, vc<mint>& B) {
+vc<mint> convolution_huge(const vc<mint>& A, const vc<mint>& B) {
   int N = len(A), M = len(B);
   if (N + M - 1 <= (1 << 23)) return convolution(A, B);
   ll L = 22;
