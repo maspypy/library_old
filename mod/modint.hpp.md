@@ -127,6 +127,9 @@ data:
     path: test/library_checker/math/sqrt_mod.test.cpp
     title: test/library_checker/math/sqrt_mod.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/library_checker/matrix/matrix_det.test.cpp
+    title: test/library_checker/matrix/matrix_det.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/matrix/matrix_product.test.cpp
     title: test/library_checker/matrix/matrix_product.test.cpp
   - icon: ':heavy_check_mark:'
@@ -357,6 +360,7 @@ data:
   - test/library_checker/convolution/convolution_mod.test.cpp
   - test/library_checker/convolution/contolution_mod_2_64.test.cpp
   - test/library_checker/matrix/matrix_product.test.cpp
+  - test/library_checker/matrix/matrix_det.test.cpp
   - test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
   - test/library_checker/polynomial/sqrt_of_fps.test.cpp
   - test/library_checker/polynomial/log_of_fps.test.cpp

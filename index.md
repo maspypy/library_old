@@ -224,6 +224,9 @@ data:
   - name: linalg
     pages:
     - icon: ':heavy_check_mark:'
+      path: linalg/det.hpp
+      title: linalg/det.hpp
+    - icon: ':heavy_check_mark:'
       path: linalg/mat_mul.hpp
       title: linalg/mat_mul.hpp
     - icon: ':warning:'
@@ -574,6 +577,9 @@ data:
       title: test/library_checker/math/sqrt_mod.test.cpp
   - name: test/library_checker/matrix
     pages:
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/matrix/matrix_det.test.cpp
+      title: test/library_checker/matrix/matrix_det.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/matrix/matrix_product.test.cpp
       title: test/library_checker/matrix/matrix_product.test.cpp
