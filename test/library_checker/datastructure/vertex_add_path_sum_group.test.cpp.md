@@ -7,7 +7,7 @@ data:
   - icon: ':x:'
     path: algebra/group_reverse.hpp
     title: algebra/group_reverse.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
   - icon: ':x:'

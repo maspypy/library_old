@@ -3,6 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':x:'
+    path: linalg/spmat_det.hpp
+    title: linalg/spmat_det.hpp
+  - icon: ':x:'
+    path: linalg/spmat_min_poly.hpp
+    title: linalg/spmat_min_poly.hpp
+  - icon: ':x:'
     path: sequence/linearrecurrence.hpp
     title: sequence/linearrecurrence.hpp
   _extendedVerifiedWith:
@@ -12,6 +18,9 @@ data:
   - icon: ':x:'
     path: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - icon: ':x:'
+    path: test/library_checker/matrix/sparse_matrix_det.test.cpp
+    title: test/library_checker/matrix/sparse_matrix_det.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':x:'
@@ -39,10 +48,13 @@ data:
   isVerificationFile: false
   path: sequence/find_linear_recurrence.hpp
   requiredBy:
+  - linalg/spmat_min_poly.hpp
+  - linalg/spmat_det.hpp
   - sequence/linearrecurrence.hpp
   timestamp: '2022-01-10 07:43:44+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
+  - test/library_checker/matrix/sparse_matrix_det.test.cpp
   - test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/library_checker/math/find_linear_recurrence.test.cpp
 documentation_of: sequence/find_linear_recurrence.hpp

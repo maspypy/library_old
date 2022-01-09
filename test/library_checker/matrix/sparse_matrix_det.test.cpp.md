@@ -1,41 +1,41 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
-    path: algebra/group_affine.hpp
-    title: algebra/group_affine.hpp
-  - icon: ':heavy_check_mark:'
-    path: algebra/group_cntsum.hpp
-    title: algebra/group_cntsum.hpp
-  - icon: ':heavy_check_mark:'
-    path: algebra/lazy_cntsum_affine.hpp
-    title: algebra/lazy_cntsum_affine.hpp
-  - icon: ':question:'
-    path: ds/lazysegtree.hpp
-    title: ds/lazysegtree.hpp
+  - icon: ':x:'
+    path: linalg/spmat_det.hpp
+    title: linalg/spmat_det.hpp
+  - icon: ':x:'
+    path: linalg/spmat_min_poly.hpp
+    title: linalg/spmat_min_poly.hpp
   - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
+  - icon: ':x:'
+    path: other/random.hpp
+    title: other/random.hpp
+  - icon: ':x:'
+    path: sequence/find_linear_recurrence.hpp
+    title: sequence/find_linear_recurrence.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/range_affine_range_sum
+    PROBLEM: https://judge.yosupo.jp/problem/sparse_matrix_det
     links:
-    - https://judge.yosupo.jp/problem/range_affine_range_sum
-  bundledCode: "#line 1 \"test/library_checker/datastructure/range_affine_range_sum.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\n\
-    #line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n#include <unistd.h>\n\n\
-    using namespace std;\n\nusing ll = long long;\nusing ll8 = __int128;\nusing pi\
-    \ = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint = unsigned int;\nusing ull\
-    \ = unsigned long long;\n\ntemplate <class T>\nusing vc = vector<T>;\ntemplate\
-    \ <class T>\nusing vvc = vector<vc<T>>;\ntemplate <class T>\nusing vvvc = vector<vvc<T>>;\n\
+    - https://judge.yosupo.jp/problem/sparse_matrix_det
+  bundledCode: "#line 1 \"test/library_checker/matrix/sparse_matrix_det.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/sparse_matrix_det\"\r\n#line\
+    \ 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n#include <unistd.h>\n\nusing\
+    \ namespace std;\n\nusing ll = long long;\nusing ll8 = __int128;\nusing pi = pair<ll,\
+    \ ll>;\nusing vi = vector<ll>;\nusing uint = unsigned int;\nusing ull = unsigned\
+    \ long long;\n\ntemplate <class T>\nusing vc = vector<T>;\ntemplate <class T>\n\
+    using vvc = vector<vc<T>>;\ntemplate <class T>\nusing vvvc = vector<vvc<T>>;\n\
     template <class T>\nusing vvvvc = vector<vvvc<T>>;\ntemplate <class T>\nusing\
     \ vvvvvc = vector<vvvvc<T>>;\ntemplate <class T>\nusing pq = priority_queue<T>;\n\
     template <class T>\nusing pqg = priority_queue<T, vector<T>, greater<T>>;\n\n\
@@ -244,189 +244,134 @@ data:
     \ accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n#define MAX(v)\
     \ *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
-    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/datastructure/range_affine_range_sum.test.cpp\"\
-    \n\n#line 1 \"algebra/group_cntsum.hpp\"\ntemplate <typename E = long long>\r\n\
-    struct Group_CntSum {\r\n  using value_type = pair<E,E>;\r\n  using X = value_type;\r\
-    \n  static constexpr X op(const X &x, const X &y) { return {x.fi + y.fi, x.se\
-    \ + y.se}; }\r\n  static constexpr X inverse(const X &x) { return {-x.fi, -x.se};\
-    \ }\r\n  static constexpr X unit = {0, 0};\r\n  static constexpr bool commute\
-    \ = true;\r\n};\r\n#line 1 \"algebra/group_affine.hpp\"\ntemplate <typename K>\n\
-    struct Group_Affine {\n  using F = pair<K, K>;\n  using value_type = F;\n  static\
-    \ constexpr F op(const F &x, const F &y) noexcept {\n    return F({x.fi * y.fi,\
-    \ x.se * y.fi + y.se});\n  }\n  static constexpr F inverse(const F &x) {\n   \
-    \ auto [a, b] = x;\n    a = K(1) / a;\n    return {a, a * (-b)};\n  }\n  static\
-    \ constexpr K eval(const F &f, K x) noexcept { return f.fi * x + f.se; }\n  static\
-    \ constexpr F unit = {K(1), K(0)};\n  static constexpr bool commute = false;\n\
-    };\n#line 3 \"algebra/lazy_cntsum_affine.hpp\"\n\r\ntemplate <typename E>\r\n\
-    struct Lazy_CntSum_Affine {\r\n  using X_structure = Group_CntSum<E>;\r\n  using\
-    \ A_structure = Group_Affine<E>;\r\n  using X = typename X_structure::value_type;\r\
-    \n  using A = typename A_structure::value_type;\r\n  static constexpr X act(const\
-    \ X &x, const A &a) {\r\n    return {x.fi, x.fi * a.se + x.se * a.fi};\r\n  }\r\
-    \n};\n#line 2 \"ds/lazysegtree.hpp\"\n\ntemplate <typename Lazy>\nstruct LazySegTree\
-    \ {\n  using Monoid_X = typename Lazy::X_structure;\n  using Monoid_A = typename\
-    \ Lazy::A_structure;\n  using X = typename Monoid_X::value_type;\n  using A =\
-    \ typename Monoid_A::value_type;\n  int n, log, size;\n  vc<X> dat;\n  vc<A> laz;\n\
-    \n  LazySegTree() : LazySegTree(0) {}\n  LazySegTree(int n) : LazySegTree(vc<X>(n,\
-    \ Monoid_X::unit)) {}\n  LazySegTree(vc<X> v) : n(len(v)) {\n    log = 1;\n  \
-    \  while ((1 << log) < n) ++log;\n    size = 1 << log;\n    dat.assign(size <<\
-    \ 1, Monoid_X::unit);\n    laz.assign(size, Monoid_A::unit);\n    FOR(i, n) dat[size\
-    \ + i] = v[i];\n    FOR3_R(i, 1, size) update(i);\n  }\n\n  void update(int k)\
-    \ { dat[k] = Monoid_X::op(dat[2 * k], dat[2 * k + 1]); }\n\n  void all_apply(int\
-    \ k, A a) {\n    dat[k] = Lazy::act(dat[k], a);\n    if (k < size) laz[k] = Monoid_A::op(laz[k],\
-    \ a);\n  }\n\n  void push(int k) {\n    all_apply(2 * k, laz[k]);\n    all_apply(2\
-    \ * k + 1, laz[k]);\n    laz[k] = Monoid_A::unit;\n  }\n\n  void set(int p, X\
-    \ x) {\n    assert(0 <= p && p < n);\n    p += size;\n    for (int i = log; i\
-    \ >= 1; i--) push(p >> i);\n    dat[p] = x;\n    for (int i = 1; i <= log; i++)\
-    \ update(p >> i);\n  }\n\n  X get(int p) {\n    assert(0 <= p && p < n);\n   \
-    \ p += size;\n    for (int i = log; i >= 1; i--) push(p >> i);\n    return dat[p];\n\
-    \  }\n\n  vc<X> get_all() {\n    FOR(i, size) push(i);\n    return {dat.begin()\
-    \ + size, dat.begin() + size + n};\n  }\n\n  X prod(int l, int r) {\n    assert(0\
-    \ <= l && l <= r && r <= n);\n    if (l == r) return Monoid_X::unit;\n\n    l\
-    \ += size;\n    r += size;\n\n    for (int i = log; i >= 1; i--) {\n      if (((l\
-    \ >> i) << i) != l) push(l >> i);\n      if (((r >> i) << i) != r) push((r - 1)\
-    \ >> i);\n    }\n\n    X xl = Monoid_X::unit, xr = Monoid_X::unit;\n    while\
-    \ (l < r) {\n      if (l & 1) xl = Monoid_X::op(xl, dat[l++]);\n      if (r &\
-    \ 1) xr = Monoid_X::op(dat[--r], xr);\n      l >>= 1;\n      r >>= 1;\n    }\n\
-    \n    return Monoid_X::op(xl, xr);\n  }\n\n  X prod_all() { return dat[1]; }\n\
-    \n  void apply(int p, A a) {\n    assert(0 <= p && p < n);\n    p += size;\n \
-    \   dat[p] = Lazy::act(dat[p], a);\n    for (int i = 1; i <= log; i++) update(p\
-    \ >> i);\n  }\n\n  void apply(int l, int r, A a) {\n    assert(0 <= l && l <=\
-    \ r && r <= n);\n    if (l == r) return;\n\n    l += size;\n    r += size;\n\n\
-    \    for (int i = log; i >= 1; i--) {\n      if (((l >> i) << i) != l) push(l\
-    \ >> i);\n      if (((r >> i) << i) != r) push((r - 1) >> i);\n    }\n\n    {\n\
-    \      int l2 = l, r2 = r;\n      while (l < r) {\n        if (l & 1) all_apply(l++,\
-    \ a);\n        if (r & 1) all_apply(--r, a);\n        l >>= 1;\n        r >>=\
-    \ 1;\n      }\n      l = l2;\n      r = r2;\n    }\n\n    for (int i = 1; i <=\
-    \ log; i++) {\n      if (((l >> i) << i) != l) update(l >> i);\n      if (((r\
-    \ >> i) << i) != r) update((r - 1) >> i);\n    }\n  }\n\n  template <typename\
-    \ C>\n  int max_right(C& check, int l) {\n    assert(0 <= l && l <= n);\n    assert(check(Monoid_X::unit));\n\
-    \    if (l == n) return n;\n    l += size;\n    for (int i = log; i >= 1; i--)\
-    \ push(l >> i);\n    X sm = Monoid_X::unit;\n    do {\n      while (l % 2 == 0)\
-    \ l >>= 1;\n      if (!check(Monoid_X::op(sm, dat[l]))) {\n        while (l <\
-    \ size) {\n          push(l);\n          l = (2 * l);\n          if (check(Monoid_X::op(sm,\
-    \ dat[l]))) {\n            sm = Monoid_X::op(sm, dat[l]);\n            l++;\n\
-    \          }\n        }\n        return l - size;\n      }\n      sm = Monoid_X::op(sm,\
-    \ dat[l]);\n      l++;\n    } while ((l & -l) != l);\n    return n;\n  }\n\n \
-    \ template <typename C>\n  int min_left(C& check, int r) {\n    assert(0 <= r\
-    \ && r <= n);\n    assert(check(Monoid_X::unit));\n    if (r == 0) return 0;\n\
-    \    r += size;\n    for (int i = log; i >= 1; i--) push((r - 1) >> i);\n    X\
-    \ sm = Monoid_X::unit;\n    do {\n      r--;\n      while (r > 1 && (r % 2)) r\
-    \ >>= 1;\n      if (!check(Monoid_X::op(dat[r], sm))) {\n        while (r < size)\
-    \ {\n          push(r);\n          r = (2 * r + 1);\n          if (check(Monoid_X::op(dat[r],\
-    \ sm))) {\n            sm = Monoid_X::op(dat[r], sm);\n            r--;\n    \
-    \      }\n        }\n        return r + 1 - size;\n      }\n      sm = Monoid_X::op(dat[r],\
-    \ sm);\n    } while ((r & -r) != r);\n    return 0;\n  }\n\n  void debug() { print(\"\
-    lazysegtree getall:\", get_all()); }\n};\n#line 2 \"mod/modint.hpp\"\ntemplate\
-    \ <int mod>\nstruct modint {\n  static constexpr bool is_modint = true;\n  int\
-    \ val;\n\n  constexpr modint(const ll val = 0) noexcept\n      : val(val >= 0\
-    \ ? val % mod : (mod - (-val) % mod) % mod) {}\n\n  bool operator<(const modint\
-    \ &other) const {\n    return val < other.val;\n  } // To use std::map\n\n  modint\
-    \ &operator+=(const modint &p) {\n    if ((val += p.val) >= mod) val -= mod;\n\
-    \    return *this;\n  }\n  modint &operator-=(const modint &p) {\n    if ((val\
-    \ += mod - p.val) >= mod) val -= mod;\n    return *this;\n  }\n  modint &operator*=(const\
-    \ modint &p) {\n    val = (int)(1LL * val * p.val % mod);\n    return *this;\n\
-    \  }\n  modint &operator/=(const modint &p) {\n    *this *= p.inverse();\n   \
-    \ return *this;\n  }\n  modint operator-() const { return modint(-val); }\n  modint\
-    \ operator+(const modint &p) const { return modint(*this) += p; }\n  modint operator-(const\
-    \ modint &p) const { return modint(*this) -= p; }\n  modint operator*(const modint\
-    \ &p) const { return modint(*this) *= p; }\n  modint operator/(const modint &p)\
-    \ const { return modint(*this) /= p; }\n  bool operator==(const modint &p) const\
-    \ { return val == p.val; }\n  bool operator!=(const modint &p) const { return\
-    \ val != p.val; }\n\n  modint inverse() const {\n    int a = val, b = mod, u =\
-    \ 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b,\
-    \ b);\n      swap(u -= t * v, v);\n    }\n    return modint(u);\n  }\n\n  modint\
-    \ pow(int64_t n) const {\n    modint ret(1), mul(val);\n    while (n > 0) {\n\
-    \      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n    return\
-    \ ret;\n  }\n  static constexpr int get_mod() { return mod; }\n};\n\nstruct ArbitraryModInt\
-    \ {\n  static constexpr bool is_modint = true;\n  int val;\n  ArbitraryModInt()\
-    \ : val(0) {}\n  ArbitraryModInt(int64_t y)\n      : val(y >= 0 ? y % get_mod()\n\
-    \                   : (get_mod() - (-y) % get_mod()) % get_mod()) {}\n\n  bool\
-    \ operator<(const ArbitraryModInt &other) const {\n    return val < other.val;\n\
-    \  } // To use std::map<ArbitraryModInt, T>\n\n  static int &get_mod() {\n   \
-    \ static int mod = 0;\n    return mod;\n  }\n  static void set_mod(int md) { get_mod()\
-    \ = md; }\n  ArbitraryModInt &operator+=(const ArbitraryModInt &p) {\n    if ((val\
-    \ += p.val) >= get_mod()) val -= get_mod();\n    return *this;\n  }\n  ArbitraryModInt\
-    \ &operator-=(const ArbitraryModInt &p) {\n    if ((val += get_mod() - p.val)\
-    \ >= get_mod()) val -= get_mod();\n    return *this;\n  }\n  ArbitraryModInt &operator*=(const\
-    \ ArbitraryModInt &p) {\n    unsigned long long a = (unsigned long long)val *\
-    \ p.val;\n    unsigned xh = (unsigned)(a >> 32), xl = (unsigned)a, d, m;\n   \
-    \ asm(\"divl %4; \\n\\t\" : \"=a\"(d), \"=d\"(m) : \"d\"(xh), \"a\"(xl), \"r\"\
-    (get_mod()));\n    val = m;\n    return *this;\n  }\n  ArbitraryModInt &operator/=(const\
-    \ ArbitraryModInt &p) {\n    *this *= p.inverse();\n    return *this;\n  }\n \
-    \ ArbitraryModInt operator-() const { return ArbitraryModInt(-val); }\n  ArbitraryModInt\
-    \ operator+(const ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this)\
-    \ += p;\n  }\n  ArbitraryModInt operator-(const ArbitraryModInt &p) const {\n\
-    \    return ArbitraryModInt(*this) -= p;\n  }\n  ArbitraryModInt operator*(const\
-    \ ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this) *= p;\n  }\n\n\
-    \  ArbitraryModInt operator/(const ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this)\
-    \ /= p;\n  }\n\n  bool operator==(const ArbitraryModInt &p) const { return val\
-    \ == p.val; }\n  bool operator!=(const ArbitraryModInt &p) const { return val\
-    \ != p.val; }\n  ArbitraryModInt inverse() const {\n    int a = val, b = get_mod(),\
-    \ u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -= t *\
-    \ b, b);\n      swap(u -= t * v, v);\n    }\n    return ArbitraryModInt(u);\n\
-    \  }\n  ArbitraryModInt pow(int64_t n) const {\n    ArbitraryModInt ret(1), mul(val);\n\
-    \    while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n\
-    \ >>= 1;\n    }\n    return ret;\n  }\n  friend ostream &operator<<(ostream &os,\
-    \ const ArbitraryModInt &p) {\n    return os << p.val;\n  }\n  friend istream\
-    \ &operator>>(istream &is, ArbitraryModInt &a) {\n    int64_t t;\n    is >> t;\n\
-    \    a = ArbitraryModInt(t);\n    return (is);\n  }\n};\n\ntemplate<typename mint>\n\
-    tuple<mint, mint, mint> get_factorial_data(int n){\n  static constexpr int mod\
-    \ = mint::get_mod();\n  assert(0 <= n && n < mod);\n\n  static vector<mint> fact\
-    \ = {1, 1};\n  static vector<mint> fact_inv = {1, 1};\n  static vector<mint> inv\
-    \ = {0, 1};\n  while(len(fact) <= n){\n    int k = len(fact);\n    fact.eb(fact[k\
-    \ - 1] * mint(k));\n    auto q = ceil(mod, k);\n    int r = k * q - mod;\n   \
-    \ inv.eb(inv[r] * mint(q));\n    fact_inv.eb(fact_inv[k - 1] * inv[k]);\n  }\n\
-    \  return {fact[n], fact_inv[n], inv[n]};\n}\n\ntemplate<typename mint>\nmint\
-    \ fact(int n){\n  static constexpr int mod = mint::get_mod();\n  assert(0 <= n);\n\
-    \  if(n >= mod) return 0;\n  return get<0>(get_factorial_data<mint>(n));\n}\n\n\
-    template<typename mint>\nmint fact_inv(int n){\n  static constexpr int mod = mint::get_mod();\n\
-    \  assert(0 <= n && n < mod);\n  return get<1>(get_factorial_data<mint>(n));\n\
-    }\n\ntemplate<typename mint>\nmint inv(int n){\n  static constexpr int mod = mint::get_mod();\n\
-    \  assert(0 <= n && n < mod);\n  return get<2>(get_factorial_data<mint>(n));\n\
-    }\n\ntemplate<typename mint>\nmint C(ll n, ll k, bool large = false) {\n  assert(n\
-    \ >= 0);\n  if (k < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n)\
-    \ * fact_inv<mint>(k) * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n\
-    \  FOR(i, k) {\n    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return\
-    \ x;\n}\n\ntemplate<typename mint>\nvc<mint> power_table(mint a, ll N) {\n  vc<mint>\
-    \ f(N, 1);\n  FOR(i, N - 1) f[i + 1] = a * f[i];\n  return f;\n}\n\nusing modint107\
-    \ = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\nusing amint\
-    \ = ArbitraryModInt;\n#line 7 \"test/library_checker/datastructure/range_affine_range_sum.test.cpp\"\
-    \n\nusing mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using S = Lazy_CntSum_Affine<mint>;\n\
-    \  using E = pair<mint, mint>;\n  vc<E> seg_raw(N);\n  FOR(i, N) {\n    LL(x);\n\
-    \    seg_raw[i] = E({mint(1), mint(x)});\n  }\n  LazySegTree<S> seg(seg_raw);\n\
-    \n  FOR(_, Q) {\n    LL(t);\n    if (t == 0) {\n      LL(l, r, a, b);\n      seg.apply(l,\
-    \ r, E({a, b}));\n    }\n    elif (t == 1) {\n      LL(l, r);\n      auto cs =\
-    \ seg.prod(l, r);\n      print(cs.se);\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
-    \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  solve();\n\n\
-    \  return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_affine_range_sum\"\
-    \n#include \"my_template.hpp\"\n\n#include \"algebra/lazy_cntsum_affine.hpp\"\n\
-    #include \"ds/lazysegtree.hpp\"\n#include \"mod/modint.hpp\"\n\nusing mint = modint998;\n\
-    \nvoid solve() {\n  LL(N, Q);\n  using S = Lazy_CntSum_Affine<mint>;\n  using\
-    \ E = pair<mint, mint>;\n  vc<E> seg_raw(N);\n  FOR(i, N) {\n    LL(x);\n    seg_raw[i]\
-    \ = E({mint(1), mint(x)});\n  }\n  LazySegTree<S> seg(seg_raw);\n\n  FOR(_, Q)\
-    \ {\n    LL(t);\n    if (t == 0) {\n      LL(l, r, a, b);\n      seg.apply(l,\
-    \ r, E({a, b}));\n    }\n    elif (t == 1) {\n      LL(l, r);\n      auto cs =\
-    \ seg.prod(l, r);\n      print(cs.se);\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
-    \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  solve();\n\n\
-    \  return 0;\n}\n"
+    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 1 \"sequence/find_linear_recurrence.hpp\"\
+    \ntemplate <typename mint>\r\nvector<mint> find_linear_recurrence(vector<mint>&\
+    \ A) {\r\n  int N = len(A);\r\n  vc<mint> B = {1}, C = {1};\r\n  int l = 0, m\
+    \ = 1;\r\n  mint p = 1;\r\n  FOR(i, N) {\r\n    mint d = A[i];\r\n    FOR3(j,\
+    \ 1, l + 1) { d += C[j] * A[i - j]; }\r\n    if (d == 0) {\r\n      ++m;\r\n \
+    \     continue;\r\n    }\r\n    auto tmp = C;\r\n    mint q = d / p;\r\n    if\
+    \ (len(C) < len(B) + m) C.insert(C.end(), len(B) + m - len(C), 0);\r\n    FOR(j,\
+    \ len(B)) C[j + m] -= q * B[j];\r\n    if (l + l <= i) {\r\n      B = tmp;\r\n\
+    \      l = i + 1 - l, m = 1;\r\n      p = d;\r\n    } else {\r\n      ++m;\r\n\
+    \    }\r\n  }\r\n  return C;\r\n}\r\n#line 1 \"other/random.hpp\"\nstruct RandomNumberGenerator\
+    \ {\n  mt19937 mt;\n\n  RandomNumberGenerator() : mt(chrono::steady_clock::now().time_since_epoch().count())\
+    \ {}\n\n  ll operator()(ll a, ll b) {  // [a, b)\n    uniform_int_distribution<ll>\
+    \ dist(a, b - 1);\n    return dist(mt);\n  }\n\n  ll operator()(ll b) {  // [0,\
+    \ b)\n    return (*this)(0, b);\n  }\n};\n#line 3 \"linalg/spmat_min_poly.hpp\"\
+    \n\r\ntemplate <typename mint>\r\nvc<mint> spmat_min_poly(int N, vc<tuple<int,\
+    \ int, mint>> dat) {\r\n  RandomNumberGenerator RNG;\r\n  vc<mint> S(N + N + 10);\r\
+    \n  vc<mint> c(N);\r\n  vc<mint> v(N);\r\n  FOR(i, N) c[i] = RNG(0, mint::get_mod());\r\
+    \n  FOR(i, N) v[i] = RNG(0, mint::get_mod());\r\n  FOR(k, N + N + 10) {\r\n  \
+    \  FOR(i, N) S[k] += c[i] * v[i];\r\n    vc<mint> w(N);\r\n    for (auto&& [i,\
+    \ j, x]: dat) w[j] += x * v[i];\r\n    swap(v, w);\r\n  }\r\n  return find_linear_recurrence(S);\r\
+    \n}\r\n#line 2 \"linalg/spmat_det.hpp\"\n\r\ntemplate <typename T>\r\nT spmat_det(int\
+    \ N, vc<tuple<int, int, T>> dat) {\r\n  RandomNumberGenerator RNG;\r\n  vc<T>\
+    \ c(N);\r\n  FOR(i, N) c[i] = RNG(1, T::get_mod());\r\n  T r = 1;\r\n  FOR(i,\
+    \ N) r *= c[i];\r\n  for (auto&& [i, j, x]: dat) x *= c[i];\r\n  auto f = spmat_min_poly(N,\
+    \ dat);\r\n  f.resize(N + 1);\r\n  T det = f.back();\r\n  if (N & 1) det *= -1;\r\
+    \n  det /= r;\r\n  return det;\r\n}\r\n#line 4 \"test/library_checker/matrix/sparse_matrix_det.test.cpp\"\
+    \n\r\n#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n  static\
+    \ constexpr bool is_modint = true;\n  int val;\n\n  constexpr modint(const ll\
+    \ val = 0) noexcept\n      : val(val >= 0 ? val % mod : (mod - (-val) % mod) %\
+    \ mod) {}\n\n  bool operator<(const modint &other) const {\n    return val < other.val;\n\
+    \  } // To use std::map\n\n  modint &operator+=(const modint &p) {\n    if ((val\
+    \ += p.val) >= mod) val -= mod;\n    return *this;\n  }\n  modint &operator-=(const\
+    \ modint &p) {\n    if ((val += mod - p.val) >= mod) val -= mod;\n    return *this;\n\
+    \  }\n  modint &operator*=(const modint &p) {\n    val = (int)(1LL * val * p.val\
+    \ % mod);\n    return *this;\n  }\n  modint &operator/=(const modint &p) {\n \
+    \   *this *= p.inverse();\n    return *this;\n  }\n  modint operator-() const\
+    \ { return modint(-val); }\n  modint operator+(const modint &p) const { return\
+    \ modint(*this) += p; }\n  modint operator-(const modint &p) const { return modint(*this)\
+    \ -= p; }\n  modint operator*(const modint &p) const { return modint(*this) *=\
+    \ p; }\n  modint operator/(const modint &p) const { return modint(*this) /= p;\
+    \ }\n  bool operator==(const modint &p) const { return val == p.val; }\n  bool\
+    \ operator!=(const modint &p) const { return val != p.val; }\n\n  modint inverse()\
+    \ const {\n    int a = val, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n \
+    \     t = a / b;\n      swap(a -= t * b, b);\n      swap(u -= t * v, v);\n   \
+    \ }\n    return modint(u);\n  }\n\n  modint pow(int64_t n) const {\n    modint\
+    \ ret(1), mul(val);\n    while (n > 0) {\n      if (n & 1) ret *= mul;\n     \
+    \ mul *= mul;\n      n >>= 1;\n    }\n    return ret;\n  }\n  static constexpr\
+    \ int get_mod() { return mod; }\n};\n\nstruct ArbitraryModInt {\n  static constexpr\
+    \ bool is_modint = true;\n  int val;\n  ArbitraryModInt() : val(0) {}\n  ArbitraryModInt(int64_t\
+    \ y)\n      : val(y >= 0 ? y % get_mod()\n                   : (get_mod() - (-y)\
+    \ % get_mod()) % get_mod()) {}\n\n  bool operator<(const ArbitraryModInt &other)\
+    \ const {\n    return val < other.val;\n  } // To use std::map<ArbitraryModInt,\
+    \ T>\n\n  static int &get_mod() {\n    static int mod = 0;\n    return mod;\n\
+    \  }\n  static void set_mod(int md) { get_mod() = md; }\n  ArbitraryModInt &operator+=(const\
+    \ ArbitraryModInt &p) {\n    if ((val += p.val) >= get_mod()) val -= get_mod();\n\
+    \    return *this;\n  }\n  ArbitraryModInt &operator-=(const ArbitraryModInt &p)\
+    \ {\n    if ((val += get_mod() - p.val) >= get_mod()) val -= get_mod();\n    return\
+    \ *this;\n  }\n  ArbitraryModInt &operator*=(const ArbitraryModInt &p) {\n   \
+    \ unsigned long long a = (unsigned long long)val * p.val;\n    unsigned xh = (unsigned)(a\
+    \ >> 32), xl = (unsigned)a, d, m;\n    asm(\"divl %4; \\n\\t\" : \"=a\"(d), \"\
+    =d\"(m) : \"d\"(xh), \"a\"(xl), \"r\"(get_mod()));\n    val = m;\n    return *this;\n\
+    \  }\n  ArbitraryModInt &operator/=(const ArbitraryModInt &p) {\n    *this *=\
+    \ p.inverse();\n    return *this;\n  }\n  ArbitraryModInt operator-() const {\
+    \ return ArbitraryModInt(-val); }\n  ArbitraryModInt operator+(const ArbitraryModInt\
+    \ &p) const {\n    return ArbitraryModInt(*this) += p;\n  }\n  ArbitraryModInt\
+    \ operator-(const ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this)\
+    \ -= p;\n  }\n  ArbitraryModInt operator*(const ArbitraryModInt &p) const {\n\
+    \    return ArbitraryModInt(*this) *= p;\n  }\n\n  ArbitraryModInt operator/(const\
+    \ ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this) /= p;\n  }\n\n\
+    \  bool operator==(const ArbitraryModInt &p) const { return val == p.val; }\n\
+    \  bool operator!=(const ArbitraryModInt &p) const { return val != p.val; }\n\
+    \  ArbitraryModInt inverse() const {\n    int a = val, b = get_mod(), u = 1, v\
+    \ = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b);\n\
+    \      swap(u -= t * v, v);\n    }\n    return ArbitraryModInt(u);\n  }\n  ArbitraryModInt\
+    \ pow(int64_t n) const {\n    ArbitraryModInt ret(1), mul(val);\n    while (n\
+    \ > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n  \
+    \  }\n    return ret;\n  }\n  friend ostream &operator<<(ostream &os, const ArbitraryModInt\
+    \ &p) {\n    return os << p.val;\n  }\n  friend istream &operator>>(istream &is,\
+    \ ArbitraryModInt &a) {\n    int64_t t;\n    is >> t;\n    a = ArbitraryModInt(t);\n\
+    \    return (is);\n  }\n};\n\ntemplate<typename mint>\ntuple<mint, mint, mint>\
+    \ get_factorial_data(int n){\n  static constexpr int mod = mint::get_mod();\n\
+    \  assert(0 <= n && n < mod);\n\n  static vector<mint> fact = {1, 1};\n  static\
+    \ vector<mint> fact_inv = {1, 1};\n  static vector<mint> inv = {0, 1};\n  while(len(fact)\
+    \ <= n){\n    int k = len(fact);\n    fact.eb(fact[k - 1] * mint(k));\n    auto\
+    \ q = ceil(mod, k);\n    int r = k * q - mod;\n    inv.eb(inv[r] * mint(q));\n\
+    \    fact_inv.eb(fact_inv[k - 1] * inv[k]);\n  }\n  return {fact[n], fact_inv[n],\
+    \ inv[n]};\n}\n\ntemplate<typename mint>\nmint fact(int n){\n  static constexpr\
+    \ int mod = mint::get_mod();\n  assert(0 <= n);\n  if(n >= mod) return 0;\n  return\
+    \ get<0>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename mint>\nmint fact_inv(int\
+    \ n){\n  static constexpr int mod = mint::get_mod();\n  assert(0 <= n && n < mod);\n\
+    \  return get<1>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename mint>\n\
+    mint inv(int n){\n  static constexpr int mod = mint::get_mod();\n  assert(0 <=\
+    \ n && n < mod);\n  return get<2>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename\
+    \ mint>\nmint C(ll n, ll k, bool large = false) {\n  assert(n >= 0);\n  if (k\
+    \ < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n) * fact_inv<mint>(k)\
+    \ * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n  FOR(i, k) {\n\
+    \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\ntemplate<typename\
+    \ mint>\nvc<mint> power_table(mint a, ll N) {\n  vc<mint> f(N, 1);\n  FOR(i, N\
+    \ - 1) f[i + 1] = a * f[i];\n  return f;\n}\n\nusing modint107 = modint<1'000'000'007>;\n\
+    using modint998 = modint<998'244'353>;\nusing amint = ArbitraryModInt;\n#line\
+    \ 6 \"test/library_checker/matrix/sparse_matrix_det.test.cpp\"\nusing mint = modint998;\r\
+    \n\r\nvoid solve() {\r\n  LL(N, K);\r\n  using T = tuple<int, int, mint>;\r\n\
+    \  VEC(T, dat, K);\r\n  print(spmat_det(N, dat));\r\n}\r\n\r\nsigned main() {\r\
+    \n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
+    \n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sparse_matrix_det\"\r\n\
+    #include \"my_template.hpp\"\r\n#include \"linalg/spmat_det.hpp\"\r\n\r\n#include\
+    \ \"mod/modint.hpp\"\r\nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N,\
+    \ K);\r\n  using T = tuple<int, int, mint>;\r\n  VEC(T, dat, K);\r\n  print(spmat_det(N,\
+    \ dat));\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
-  - algebra/lazy_cntsum_affine.hpp
-  - algebra/group_cntsum.hpp
-  - algebra/group_affine.hpp
-  - ds/lazysegtree.hpp
+  - linalg/spmat_det.hpp
+  - linalg/spmat_min_poly.hpp
+  - sequence/find_linear_recurrence.hpp
+  - other/random.hpp
   - mod/modint.hpp
   isVerificationFile: true
-  path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
+  path: test/library_checker/matrix/sparse_matrix_det.test.cpp
   requiredBy: []
-  timestamp: '2022-01-10 07:43:35+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-10 08:17:05+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/library_checker/datastructure/range_affine_range_sum.test.cpp
+documentation_of: test/library_checker/matrix/sparse_matrix_det.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/datastructure/range_affine_range_sum.test.cpp
-- /verify/test/library_checker/datastructure/range_affine_range_sum.test.cpp.html
-title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
+- /verify/test/library_checker/matrix/sparse_matrix_det.test.cpp
+- /verify/test/library_checker/matrix/sparse_matrix_det.test.cpp.html
+title: test/library_checker/matrix/sparse_matrix_det.test.cpp
 ---
