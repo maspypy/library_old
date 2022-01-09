@@ -2,25 +2,25 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: mod/mod_sqrt.hpp
+    title: mod/mod_sqrt.hpp
+  - icon: ':heavy_check_mark:'
     path: mod/modint.hpp
     title: mod/modint.hpp
+  - icon: ':heavy_check_mark:'
+    path: other/random.hpp
+    title: other/random.hpp
   - icon: ':heavy_check_mark:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
   - icon: ':heavy_check_mark:'
-    path: polynomial/fps_exp.hpp
-    title: polynomial/fps_exp.hpp
-  - icon: ':heavy_check_mark:'
     path: polynomial/fps_inv.hpp
     title: polynomial/fps_inv.hpp
-  - icon: ':heavy_check_mark:'
-    path: polynomial/fps_log.hpp
-    title: polynomial/fps_log.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/polynomial/pow_of_fps.test.cpp
-    title: test/library_checker/polynomial/pow_of_fps.test.cpp
+    path: test/library_checker/polynomial/sqrt_of_fps.test.cpp
+    title: test/library_checker/polynomial/sqrt_of_fps.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -253,69 +253,76 @@ data:
     \ modint998>::value, vc<mint>> convolution(const vc<mint>& a, const vc<mint>&\
     \ b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return {};\r\n  if\
     \ (min(n, m) <= 60) return convolution_naive(a, b);\r\n  return convolution_garner(a,\
-    \ b);\r\n}\r\n#line 2 \"polynomial/fps_exp.hpp\"\ntemplate <typename mint>\r\n\
-    vc<mint> fps_exp(vc<mint>& f) {\r\n  const int n = len(f);\r\n  assert(n > 0 &&\
-    \ f[0] == mint(0));\r\n  vc<mint> b = {1, (1 < n ? f[1] : 0)};\r\n  vc<mint> c\
-    \ = {1}, z1, z2 = {1, 1};\r\n  while (len(b) < n) {\r\n    int m = len(b);\r\n\
-    \    auto y = b;\r\n    y.resize(2 * m);\r\n    ntt(y, 0);\r\n    z1 = z2;\r\n\
-    \    vc<mint> z(m);\r\n    FOR(i, m) z[i] = y[i] * z1[i];\r\n    ntt(z, 1);\r\n\
-    \    FOR(i, m / 2) z[i] = 0;\r\n    ntt(z, 0);\r\n    FOR(i, m) z[i] *= -z1[i];\r\
-    \n    ntt(z, 1);\r\n    c.insert(c.end(), z.begin() + m / 2, z.end());\r\n   \
-    \ z2 = c;\r\n    z2.resize(2 * m);\r\n    ntt(z2, 0);\r\n\r\n    vc<mint> x(f.begin(),\
-    \ f.begin() + m);\r\n    FOR(i, len(x) - 1) x[i] = x[i + 1] * mint(i + 1);\r\n\
-    \    x.back() = 0;\r\n    ntt(x, 0);\r\n    FOR(i, m) x[i] *= y[i];\r\n    ntt(x,\
-    \ 1);\r\n\r\n    FOR(i, m - 1) x[i] -= b[i + 1] * mint(i + 1);\r\n\r\n    x.resize(m\
-    \ + m);\r\n    FOR(i, m - 1) x[m + i] = x[i], x[i] = 0;\r\n    ntt(x, 0);\r\n\
-    \    FOR(i, m + m) x[i] *= z2[i];\r\n    ntt(x, 1);\r\n    FOR_R(i, len(x) - 1)\
-    \ x[i + 1] = x[i] * inv<mint>(i + 1);\r\n    x[0] = 0;\r\n\r\n    FOR3(i, m, min(n,\
-    \ m + m)) x[i] += f[i];\r\n    FOR(i, m) x[i] = 0;\r\n    ntt(x, 0);\r\n    FOR(i,\
-    \ m + m) x[i] *= y[i];\r\n    ntt(x, 1);\r\n    b.insert(b.end(), x.begin() +\
-    \ m, x.end());\r\n  }\r\n  b.resize(n);\r\n  return b;\r\n}\r\n#line 2 \"polynomial/fps_inv.hpp\"\
-    \n\r\ntemplate <typename mint>\r\nvc<mint> fps_inv(vc<mint>& F) {\r\n  vc<mint>\
-    \ G = {mint(1) / F[0]};\r\n  G.reserve(len(F));\r\n  ll N = len(F), n = 1;\r\n\
-    \  while (n < N) {\r\n    vc<mint> f(2 * n), g(2 * n);\r\n    FOR(i, min(N, 2\
-    \ * n)) f[i] = F[i];\r\n    FOR(i, n) g[i] = G[i];\r\n    ntt(f, false);\r\n \
-    \   ntt(g, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\n    ntt(f, true);\r\n\
-    \    FOR(i, n) f[i] = 0;\r\n    ntt(f, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\
-    \n    ntt(f, true);\r\n    FOR3(i, n, 2 * n) G.eb(f[i] * mint(-1));\r\n    n *=\
-    \ 2;\r\n  }\r\n  G.resize(N);\r\n  return G;\r\n}\r\n#line 2 \"polynomial/fps_log.hpp\"\
-    \n\r\ntemplate <typename mint>\r\nvc<mint> fps_log(vc<mint>& f) {\r\n  ll N =\
-    \ len(f);\r\n  vc<mint> df = f;\r\n  FOR(i, N) df[i] *= mint(i);\r\n  df.erase(df.begin());\r\
-    \n  auto f_inv = fps_inv(f);\r\n  f = convolution(df, f_inv);\r\n  f.resize(N\
-    \ - 1);\r\n  f.insert(f.begin(), 0);\r\n  FOR(i, N) f[i] *= inv<mint>(i);\r\n\
-    \  return f;\r\n}\r\n#line 3 \"polynomial/fps_pow.hpp\"\n\r\ntemplate <typename\
-    \ mint>\r\nvc<mint> fps_pow(vc<mint>& f, ll k) {\r\n  int n = len(f);\r\n  int\
-    \ d = n;\r\n  FOR_R(i, n) if (f[i] != 0) d = i;\r\n  ll off = d * k;\r\n  if (off\
-    \ >= n) return vc<mint>(n, 0);\r\n  mint c = f[d];\r\n  mint c_inv = mint(1) /\
-    \ mint(c);\r\n  vc<mint> g(n - off);\r\n  FOR(i, n - off) g[i] = f[d + i] * c_inv;\r\
-    \n  auto log_g = fps_log(g);\r\n  FOR(i, len(g)) log_g[i] *= mint(k);\r\n  g =\
-    \ fps_exp(log_g);\r\n  vc<mint> h(n);\r\n  c = c.pow(k);\r\n  FOR(i, len(g)) h[off\
-    \ + i] = g[i] * c;\r\n  return h;\r\n}\r\n"
-  code: "#include \"polynomial/fps_exp.hpp\"\r\n#include \"polynomial/fps_log.hpp\"\
-    \r\n\r\ntemplate <typename mint>\r\nvc<mint> fps_pow(vc<mint>& f, ll k) {\r\n\
-    \  int n = len(f);\r\n  int d = n;\r\n  FOR_R(i, n) if (f[i] != 0) d = i;\r\n\
-    \  ll off = d * k;\r\n  if (off >= n) return vc<mint>(n, 0);\r\n  mint c = f[d];\r\
-    \n  mint c_inv = mint(1) / mint(c);\r\n  vc<mint> g(n - off);\r\n  FOR(i, n -\
-    \ off) g[i] = f[d + i] * c_inv;\r\n  auto log_g = fps_log(g);\r\n  FOR(i, len(g))\
-    \ log_g[i] *= mint(k);\r\n  g = fps_exp(log_g);\r\n  vc<mint> h(n);\r\n  c = c.pow(k);\r\
-    \n  FOR(i, len(g)) h[off + i] = g[i] * c;\r\n  return h;\r\n}\r\n"
+    \ b);\r\n}\r\n#line 2 \"polynomial/fps_inv.hpp\"\n\r\ntemplate <typename mint>\r\
+    \nvc<mint> fps_inv(vc<mint>& F) {\r\n  vc<mint> G = {mint(1) / F[0]};\r\n  G.reserve(len(F));\r\
+    \n  ll N = len(F), n = 1;\r\n  while (n < N) {\r\n    vc<mint> f(2 * n), g(2 *\
+    \ n);\r\n    FOR(i, min(N, 2 * n)) f[i] = F[i];\r\n    FOR(i, n) g[i] = G[i];\r\
+    \n    ntt(f, false);\r\n    ntt(g, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\
+    \n    ntt(f, true);\r\n    FOR(i, n) f[i] = 0;\r\n    ntt(f, false);\r\n    FOR(i,\
+    \ 2 * n) f[i] *= g[i];\r\n    ntt(f, true);\r\n    FOR3(i, n, 2 * n) G.eb(f[i]\
+    \ * mint(-1));\r\n    n *= 2;\r\n  }\r\n  G.resize(N);\r\n  return G;\r\n}\r\n\
+    #line 1 \"other/random.hpp\"\nstruct RandomNumberGenerator {\n  mt19937 mt;\n\n\
+    \  RandomNumberGenerator() : mt(chrono::steady_clock::now().time_since_epoch().count())\
+    \ {}\n\n  ll operator()(ll a, ll b) {  // [a, b)\n    uniform_int_distribution<ll>\
+    \ dist(a, b - 1);\n    return dist(mt);\n  }\n\n  ll operator()(ll b) {  // [0,\
+    \ b)\n    return (*this)(0, b);\n  }\n};\n#line 3 \"mod/mod_sqrt.hpp\"\n\r\ntemplate\
+    \ <typename mint>\r\nmint mod_sqrt(mint a) {\r\n  int p = mint::get_mod();\r\n\
+    \  if (p == 2) return a;\r\n  if (a == 0) return 0;\r\n  int k = (p - 1) / 2;\r\
+    \n  if (a.pow(k) != 1) return 0;\r\n  RandomNumberGenerator RNG;\r\n  auto find\
+    \ = [&]() -> pair<mint, mint> {\r\n    while (1) {\r\n      mint b = RNG(2, p);\r\
+    \n      mint D = b * b - a;\r\n      if (D == 0) return {b, D};\r\n      if (D.pow(k)\
+    \ != mint(1)) return {b, D};\r\n    }\r\n  };\r\n  auto [b, D] = find();\r\n \
+    \ if (D == 0) return b;\r\n  ++k;\r\n  // (b + sqrt(D))^k\r\n  mint f0 = b, f1\
+    \ = 1;\r\n  mint g0 = 1, g1 = 0;\r\n  while (k) {\r\n    if (k & 1) { tie(g0,\
+    \ g1) = mp(f0 * g0 + D * f1 * g1, f1 * g0 + f0 * g1); }\r\n    tie(f0, f1) = mp(f0\
+    \ * f0 + D * f1 * f1, mint(2) * f0 * f1);\r\n    k >>= 1;\r\n  }\r\n  return g0;\r\
+    \n}\r\n#line 3 \"polynomial/fps_sqrt.hpp\"\ntemplate <typename mint>\r\nvc<mint>\
+    \ fps_sqrt(vc<mint>& f) {\r\n  assert(f[0] == mint(1));\r\n  int n = len(f);\r\
+    \n  vc<mint> R = {1};\r\n  while (len(R) < n) {\r\n    int m = min(2 * int(len(R)),\
+    \ n);\r\n    R.resize(m);\r\n    vc<mint> tmp = {f.begin(), f.begin() + m};\r\n\
+    \    tmp = convolution(tmp, fps_inv(R));\r\n    tmp.resize(m);\r\n    FOR(i, m)\
+    \ R[i] += tmp[i];\r\n    mint c = mint(1) / mint(2);\r\n    FOR(i, len(R)) R[i]\
+    \ *= c;\r\n  }\r\n  R.resize(n);\r\n  return R;\r\n}\r\n\r\ntemplate <typename\
+    \ mint>\r\nvc<mint> fps_sqrt_any(vc<mint>& f) {\r\n  int n = len(f);\r\n  int\
+    \ d = n;\r\n  FOR_R(i, n) if (f[i] != 0) d = i;\r\n  if (d == n) return f;\r\n\
+    \  if (d & 1) return {};\r\n  mint y = f[d];\r\n  mint x = mod_sqrt(y);\r\n  if\
+    \ (x * x != y) return {};\r\n  mint c = mint(1) / y;\r\n  vc<mint> g(n - d);\r\
+    \n  FOR(i, n - d) g[i] = f[d + i] * c;\r\n  g = fps_sqrt(g);\r\n  FOR(i, len(g))\
+    \ g[i] *= x;\r\n  g.resize(n);\r\n  FOR_R(i, n) {\r\n    if (i >= d / 2)\r\n \
+    \     g[i] = g[i - d / 2];\r\n    else\r\n      g[i] = 0;\r\n  }\r\n  return g;\r\
+    \n}\r\n"
+  code: "#include \"polynomial/fps_inv.hpp\"\r\n#include \"mod/mod_sqrt.hpp\"\r\n\
+    template <typename mint>\r\nvc<mint> fps_sqrt(vc<mint>& f) {\r\n  assert(f[0]\
+    \ == mint(1));\r\n  int n = len(f);\r\n  vc<mint> R = {1};\r\n  while (len(R)\
+    \ < n) {\r\n    int m = min(2 * int(len(R)), n);\r\n    R.resize(m);\r\n    vc<mint>\
+    \ tmp = {f.begin(), f.begin() + m};\r\n    tmp = convolution(tmp, fps_inv(R));\r\
+    \n    tmp.resize(m);\r\n    FOR(i, m) R[i] += tmp[i];\r\n    mint c = mint(1)\
+    \ / mint(2);\r\n    FOR(i, len(R)) R[i] *= c;\r\n  }\r\n  R.resize(n);\r\n  return\
+    \ R;\r\n}\r\n\r\ntemplate <typename mint>\r\nvc<mint> fps_sqrt_any(vc<mint>& f)\
+    \ {\r\n  int n = len(f);\r\n  int d = n;\r\n  FOR_R(i, n) if (f[i] != 0) d = i;\r\
+    \n  if (d == n) return f;\r\n  if (d & 1) return {};\r\n  mint y = f[d];\r\n \
+    \ mint x = mod_sqrt(y);\r\n  if (x * x != y) return {};\r\n  mint c = mint(1)\
+    \ / y;\r\n  vc<mint> g(n - d);\r\n  FOR(i, n - d) g[i] = f[d + i] * c;\r\n  g\
+    \ = fps_sqrt(g);\r\n  FOR(i, len(g)) g[i] *= x;\r\n  g.resize(n);\r\n  FOR_R(i,\
+    \ n) {\r\n    if (i >= d / 2)\r\n      g[i] = g[i - d / 2];\r\n    else\r\n  \
+    \    g[i] = 0;\r\n  }\r\n  return g;\r\n}\r\n"
   dependsOn:
-  - polynomial/fps_exp.hpp
+  - polynomial/fps_inv.hpp
   - polynomial/convolution.hpp
   - mod/modint.hpp
-  - polynomial/fps_log.hpp
-  - polynomial/fps_inv.hpp
+  - mod/mod_sqrt.hpp
+  - other/random.hpp
   isVerificationFile: false
-  path: polynomial/fps_pow.hpp
+  path: polynomial/fps_sqrt.hpp
   requiredBy: []
-  timestamp: '2022-01-09 16:39:58+09:00'
+  timestamp: '2022-01-09 17:44:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/polynomial/pow_of_fps.test.cpp
-documentation_of: polynomial/fps_pow.hpp
+  - test/library_checker/polynomial/sqrt_of_fps.test.cpp
+documentation_of: polynomial/fps_sqrt.hpp
 layout: document
 redirect_from:
-- /library/polynomial/fps_pow.hpp
-- /library/polynomial/fps_pow.hpp.html
-title: polynomial/fps_pow.hpp
+- /library/polynomial/fps_sqrt.hpp
+- /library/polynomial/fps_sqrt.hpp.html
+title: polynomial/fps_sqrt.hpp
 ---

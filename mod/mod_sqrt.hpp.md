@@ -1,17 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: mod/modint.hpp
     title: mod/modint.hpp
   - icon: ':heavy_check_mark:'
     path: other/random.hpp
     title: other/random.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: polynomial/fps_sqrt.hpp
+    title: polynomial/fps_sqrt.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/sqrt_mod.test.cpp
     title: test/library_checker/math/sqrt_mod.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/polynomial/sqrt_of_fps.test.cpp
+    title: test/library_checker/polynomial/sqrt_of_fps.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -123,10 +129,12 @@ data:
   - other/random.hpp
   isVerificationFile: false
   path: mod/mod_sqrt.hpp
-  requiredBy: []
+  requiredBy:
+  - polynomial/fps_sqrt.hpp
   timestamp: '2022-01-09 17:25:06+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/library_checker/polynomial/sqrt_of_fps.test.cpp
   - test/library_checker/math/sqrt_mod.test.cpp
 documentation_of: mod/mod_sqrt.hpp
 layout: document
