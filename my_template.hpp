@@ -516,16 +516,16 @@ void scan(char &a) { scanner.read(a); }
 void scan(double &a) { scanner.read(a); }
 // void scan(long double &a) { scanner.read(a); }
 void scan(string &a) { scanner.read(a); }
-template <class T>
-void scan(pair<T, T> &p) {
+template <class T, class U>
+void scan(pair<T, U> &p) {
   scan(p.first), scan(p.second);
 }
-template <class T>
-void scan(tuple<T, T, T> &p) {
+template <class A, class B, class C>
+void scan(tuple<A, B, C> &p) {
   scan(get<0>(p)), scan(get<1>(p)), scan(get<2>(p));
 }
-template <class T>
-void scan(tuple<T, T, T, T> &p) {
+template <class A, class B, class C, class D>
+void scan(tuple<A, B, C, D> &p) {
   scan(get<0>(p)), scan(get<1>(p)), scan(get<2>(p)), scan(get<3>(p));
 }
 template <class T>
