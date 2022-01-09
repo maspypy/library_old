@@ -55,6 +55,7 @@
 "test/library_checker/math/factorize.test.cpp": "2022-01-08 22:12:01 +0900",
 "test/library_checker/math/find_linear_recurrence.test.cpp": "2022-01-09 00:45:26 +0900",
 "test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp": "2022-01-09 00:45:26 +0900",
+"test/library_checker/polynomial/composition_of_fps.test.cpp": "2022-01-09 12:52:11 +0900",
 "test/library_checker/polynomial/exp_of_fps.test.cpp": "2022-01-09 00:45:26 +0900",
 "test/library_checker/polynomial/inv_of_fps.test.cpp": "2022-01-09 00:45:26 +0900",
 "test/library_checker/polynomial/log_of_fps.test.cpp": "2022-01-09 00:45:26 +0900",
