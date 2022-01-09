@@ -147,6 +147,8 @@ struct is_modint : decltype(detail::check_value<T>(0)) {};
 
 template <typename T>
 using is_modint_t = enable_if_t<is_modint<T>::value>;
+template <typename T>
+using is_not_modint_t = enable_if_t<!is_modint<T>::value>;
 
 template <class T>
 using to_unsigned_t = typename to_unsigned<T>::type;
