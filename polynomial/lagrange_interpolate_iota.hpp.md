@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: algebra/group_mul.hpp
     title: algebra/group_mul.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: ds/swag.hpp
     title: ds/swag.hpp
   - icon: ':question:'
@@ -15,12 +15,12 @@ data:
     title: polynomial/convolution.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
     title: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 1 \"algebra/group_mul.hpp\"\ntemplate <class X>\r\nstruct Group_Mul\
@@ -307,7 +307,7 @@ data:
   path: polynomial/lagrange_interpolate_iota.hpp
   requiredBy: []
   timestamp: '2022-01-09 16:39:58+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
 documentation_of: polynomial/lagrange_interpolate_iota.hpp
