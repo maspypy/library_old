@@ -261,13 +261,13 @@ data:
     \ m + m) x[i] *= y[i];\r\n    ntt(x, 1);\r\n    b.insert(b.end(), x.begin() +\
     \ m, x.end());\r\n  }\r\n  b.resize(n);\r\n  return b;\r\n}\r\n#line 2 \"other/sharp_p_subset_sum.hpp\"\
     \ntemplate<typename mint>\r\nvc<mint> sharp_p_subset_sum(vc<int> S, int LIM) {\r\
-    \n  auto CNT = bin_count(S, LIM);\r\n  vc<mint> logf(LIM);\r\n  FOR3(x, 1, LIM)\
+    \n  auto CNT = bincount(S, LIM);\r\n  vc<mint> logf(LIM);\r\n  FOR3(x, 1, LIM)\
     \ {\r\n    FOR3(d, 1, (LIM-1) / x + 1) {\r\n      if (d & 1)\r\n        logf[d\
     \ * x] += mint(CNT[x]) * inv<mint>(d);\r\n      else\r\n        logf[d * x] -=\
     \ mint(CNT[x]) * inv<mint>(d);\r\n    }\r\n  }\r\n  return fps_exp(logf);\r\n\
     }\r\n"
   code: "#include \"polynomial/fps_exp.hpp\"\r\ntemplate<typename mint>\r\nvc<mint>\
-    \ sharp_p_subset_sum(vc<int> S, int LIM) {\r\n  auto CNT = bin_count(S, LIM);\r\
+    \ sharp_p_subset_sum(vc<int> S, int LIM) {\r\n  auto CNT = bincount(S, LIM);\r\
     \n  vc<mint> logf(LIM);\r\n  FOR3(x, 1, LIM) {\r\n    FOR3(d, 1, (LIM-1) / x +\
     \ 1) {\r\n      if (d & 1)\r\n        logf[d * x] += mint(CNT[x]) * inv<mint>(d);\r\
     \n      else\r\n        logf[d * x] -= mint(CNT[x]) * inv<mint>(d);\r\n    }\r\
@@ -279,7 +279,7 @@ data:
   isVerificationFile: false
   path: other/sharp_p_subset_sum.hpp
   requiredBy: []
-  timestamp: '2022-01-10 16:25:53+09:00'
+  timestamp: '2022-01-10 16:38:26+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/math/sharp_p_subset_sum.test.cpp

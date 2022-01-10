@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: algebra/group_cntsum.hpp
     title: algebra/group_cntsum.hpp
   - icon: ':heavy_check_mark:'
