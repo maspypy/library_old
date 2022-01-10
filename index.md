@@ -15,7 +15,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: algebra/group_cntsum.hpp
       title: algebra/group_cntsum.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: algebra/group_mul.hpp
       title: algebra/group_mul.hpp
     - icon: ':heavy_check_mark:'
@@ -119,7 +119,7 @@ data:
     - icon: ':warning:'
       path: ds/slope.hpp
       title: ds/slope.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: ds/swag.hpp
       title: ds/swag.hpp
     - icon: ':heavy_check_mark:'
@@ -246,7 +246,7 @@ data:
       title: linalg/spmat_min_poly.hpp
   - name: mod
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: mod/mod_sqrt.hpp
       title: mod/mod_sqrt.hpp
     - icon: ':question:'
@@ -331,34 +331,34 @@ data:
     - icon: ':question:'
       path: polynomial/fps_exp.hpp
       title: polynomial/fps_exp.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: polynomial/fps_inv.hpp
       title: polynomial/fps_inv.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: polynomial/fps_log.hpp
       title: polynomial/fps_log.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: polynomial/fps_pow.hpp
       title: polynomial/fps_pow.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: polynomial/fps_sqrt.hpp
       title: polynomial/fps_sqrt.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: polynomial/lagrange_interpolate_iota.hpp
       title: polynomial/lagrange_interpolate_iota.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: polynomial/multipoint.hpp
       title: polynomial/multipoint.hpp
     - icon: ':heavy_check_mark:'
       path: polynomial/multivar_convolution.hpp
       title: polynomial/multivar_convolution.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: polynomial/poly_divmod.hpp
       title: polynomial/poly_divmod.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: polynomial/poly_gcd.hpp
       title: polynomial/poly_gcd.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: polynomial/poly_taylor_shift.hpp
       title: polynomial/poly_taylor_shift.hpp
   - name: sequence
@@ -394,7 +394,7 @@ data:
       title: setfunc/zeta.hpp
   - name: string
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/manacher.hpp
       title: string/manacher.hpp
     - icon: ':x:'
@@ -406,7 +406,7 @@ data:
     - icon: ':warning:'
       path: string/trie.hpp
       title: string/trie.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/zalgorithm.hpp
       title: string/zalgorithm.hpp
   verificationCategories:
@@ -621,47 +621,47 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/exp_of_fps.test.cpp
       title: test/library_checker/polynomial/exp_of_fps.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/inv_of_fps.test.cpp
       title: test/library_checker/polynomial/inv_of_fps.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/inv_of_polynomials.test.cpp
       title: test/library_checker/polynomial/inv_of_polynomials.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/log_of_fps.test.cpp
       title: test/library_checker/polynomial/log_of_fps.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/multipoint_evaluation.test.cpp
       title: test/library_checker/polynomial/multipoint_evaluation.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/polynomial_division.test.cpp
       title: test/library_checker/polynomial/polynomial_division.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/polynomial_interpolation.test.cpp
       title: test/library_checker/polynomial/polynomial_interpolation.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
       title: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/pow_of_fps.test.cpp
       title: test/library_checker/polynomial/pow_of_fps.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
       title: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/sqrt_of_fps.test.cpp
       title: test/library_checker/polynomial/sqrt_of_fps.test.cpp
   - name: test/library_checker/sample
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/sample/many_aplusb.test.cpp
       title: test/library_checker/sample/many_aplusb.test.cpp
   - name: test/library_checker/string
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/string/enumerate_palindromes.test.cpp
       title: test/library_checker/string/enumerate_palindromes.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/string/zalgorithm.test.cpp
       title: test/library_checker/string/zalgorithm.test.cpp
     - icon: ':x:'

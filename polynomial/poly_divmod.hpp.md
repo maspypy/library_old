@@ -7,23 +7,23 @@ data:
   - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: polynomial/fps_inv.hpp
     title: polynomial/fps_inv.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: polynomial/poly_gcd.hpp
     title: polynomial/poly_gcd.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/polynomial/inv_of_polynomials.test.cpp
     title: test/library_checker/polynomial/inv_of_polynomials.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/polynomial/polynomial_division.test.cpp
     title: test/library_checker/polynomial/polynomial_division.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n\
@@ -286,7 +286,7 @@ data:
   requiredBy:
   - polynomial/poly_gcd.hpp
   timestamp: '2022-01-09 16:39:58+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/polynomial/polynomial_division.test.cpp
   - test/library_checker/polynomial/inv_of_polynomials.test.cpp

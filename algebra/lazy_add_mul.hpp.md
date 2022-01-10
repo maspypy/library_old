@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: algebra/group_add.hpp
     title: algebra/group_add.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: algebra/group_mul.hpp
     title: algebra/group_mul.hpp
   _extendedRequiredBy: []
