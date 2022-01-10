@@ -4,20 +4,20 @@ data:
   - icon: ':question:'
     path: other/random.hpp
     title: other/random.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: sequence/find_linear_recurrence.hpp
     title: sequence/find_linear_recurrence.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linalg/spmat_det.hpp
     title: linalg/spmat_det.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/matrix/sparse_matrix_det.test.cpp
     title: test/library_checker/matrix/sparse_matrix_det.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"sequence/find_linear_recurrence.hpp\"\ntemplate <typename\
@@ -57,7 +57,7 @@ data:
   requiredBy:
   - linalg/spmat_det.hpp
   timestamp: '2022-01-10 08:17:05+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/matrix/sparse_matrix_det.test.cpp
 documentation_of: linalg/spmat_min_poly.hpp

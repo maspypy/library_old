@@ -1,21 +1,15 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
-    path: graph/base.hpp
-    title: graph/base.hpp
   - icon: ':heavy_check_mark:'
-    path: graph/chromatic.hpp
-    title: graph/chromatic.hpp
+    path: linalg/mat_inv.hpp
+    title: linalg/mat_inv.hpp
+  - icon: ':question:'
+    path: mod/modint.hpp
+    title: mod/modint.hpp
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
-    path: nt/primetest.hpp
-    title: nt/primetest.hpp
-  - icon: ':question:'
-    path: other/random.hpp
-    title: other/random.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -23,12 +17,12 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/chromatic_number
+    PROBLEM: https://judge.yosupo.jp/problem/inverse_matrix
     links:
-    - https://judge.yosupo.jp/problem/chromatic_number
-  bundledCode: "#line 1 \"test/library_checker/graph/chromatic_number.test.cpp\"\n\
-    #define PROBLEM \"https://judge.yosupo.jp/problem/chromatic_number\"\r\n#line\
-    \ 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n#include <unistd.h>\n\nusing\
+    - https://judge.yosupo.jp/problem/inverse_matrix
+  bundledCode: "#line 1 \"test/library_checker/matrix/inverse_matrix.test.cpp\"\n\
+    #define PROBLEM \"https://judge.yosupo.jp/problem/inverse_matrix\"\r\n#line 1\
+    \ \"my_template.hpp\"\n#include <bits/stdc++.h>\n#include <unistd.h>\n\nusing\
     \ namespace std;\n\nusing ll = long long;\nusing ll8 = __int128;\nusing pi = pair<ll,\
     \ ll>;\nusing vi = vector<ll>;\nusing uint = unsigned int;\nusing ull = unsigned\
     \ long long;\n\ntemplate <class T>\nusing vc = vector<T>;\ntemplate <class T>\n\
@@ -241,112 +235,115 @@ data:
     \ accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n#define MAX(v)\
     \ *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
-    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 3 \"test/library_checker/graph/chromatic_number.test.cpp\"\
-    \n\r\n#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n  int\
-    \ frm, to;\n  T cost;\n  int id;\n};\n\ntemplate <typename T = int, bool directed\
-    \ = false>\nstruct Graph {\n  int N, M;\n  using cost_type = T;\n  using edge_type\
-    \ = Edge<T>;\n  vector<edge_type> edges;\n  vector<int> indptr;\n  vector<edge_type>\
-    \ csr_edges;\n  bool prepared;\n\n  class OutgoingEdges {\n  public:\n    OutgoingEdges(const\
-    \ Graph* G, int l, int r) : G(G), l(l), r(r) {}\n\n    const edge_type* begin()\
-    \ const {\n      if (l == r) { return 0; }\n      return &G->csr_edges[l];\n \
-    \   }\n\n    const edge_type* end() const {\n      if (l == r) { return 0; }\n\
-    \      return &G->csr_edges[r];\n    }\n\n  private:\n    int l, r;\n    const\
-    \ Graph* G;\n  };\n\n  bool is_prepared() { return prepared; }\n  constexpr bool\
-    \ is_directed() { return directed; }\n\n  Graph() {}\n  Graph(int N) : N(N), M(0),\
-    \ prepared(0) {}\n\n  void add(int frm, int to, T cost = 1, int i = -1) {\n  \
-    \  assert(!prepared);\n    assert(0 <= frm && frm < N && 0 <= to && to < N);\n\
-    \    if (i == -1) i = M;\n    auto e = edge_type({frm, to, cost, i});\n    edges.eb(e);\n\
-    \    ++M;\n  }\n\n  void prepare() {\n    assert(!prepared);\n    prepared = true;\n\
-    \    indptr.assign(N + 1, 0);\n    for (auto&& e: edges) {\n      indptr[e.frm\
-    \ + 1]++;\n      if (!directed) indptr[e.to + 1]++;\n    }\n    FOR(v, N) indptr[v\
-    \ + 1] += indptr[v];\n    auto counter = indptr;\n    csr_edges.resize(indptr.back()\
-    \ + 1);\n    for (auto&& e: edges) {\n      csr_edges[counter[e.frm]++] = e;\n\
-    \      if (!directed)\n        csr_edges[counter[e.to]++] = edge_type({e.to, e.frm,\
-    \ e.cost, e.id});\n    }\n  }\n\n  OutgoingEdges operator[](int v) const {\n \
-    \   assert(prepared);\n    return {this, indptr[v], indptr[v + 1]};\n  }\n\n \
-    \ void debug() {\n    print(\"Graph\");\n    if (!prepared) {\n      print(\"\
-    frm to cost id\");\n      for (auto&& e: edges) print(e.frm, e.to, e.cost, e.id);\n\
-    \    } else {\n      print(\"indptr\", indptr);\n      print(\"frm to cost id\"\
-    );\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e.frm, e.to, e.cost, e.id);\n\
-    \    }\n  }\n\n  int size() { return N; }\n};\n#line 1 \"other/random.hpp\"\n\
-    struct RandomNumberGenerator {\n  mt19937 mt;\n\n  RandomNumberGenerator() : mt(chrono::steady_clock::now().time_since_epoch().count())\
-    \ {}\n\n  ll operator()(ll a, ll b) {  // [a, b)\n    uniform_int_distribution<ll>\
-    \ dist(a, b - 1);\n    return dist(mt);\n  }\n\n  ll operator()(ll b) {  // [0,\
-    \ b)\n    return (*this)(0, b);\n  }\n};\n#line 2 \"nt/primetest.hpp\"\nstruct\
-    \ m64 {\r\n    using i64 = int64_t;\r\n    using u64 = uint64_t;\r\n    using\
-    \ u128 = __uint128_t;\r\n\r\n    inline static u64 m, r, n2; // r * m = -1 (mod\
-    \ 1<<64), n2 = 1<<128 (mod m)\r\n    static void set_mod(u64 m) {\r\n        assert(m\
-    \ < (1ull << 62));\r\n        assert((m & 1) == 1);\r\n        m64::m = m;\r\n\
-    \        n2 = -u128(m) % m;\r\n        r = m;\r\n        FOR (_, 5) r *= 2 - m*r;\r\
-    \n        r = -r;\r\n        assert(r * m == -1ull);\r\n    }\r\n    static u64\
-    \ reduce(u128 b) { return (b + u128(u64(b) * r) * m) >> 64; }\r\n\r\n    u64 x;\r\
-    \n    m64() : x(0) {}\r\n    m64(u64 x) : x(reduce(u128(x) * n2)){};\r\n    u64\
-    \ val() const { u64 y = reduce(x); return y >= m ? y-m : y; }\r\n    m64 &operator+=(m64\
-    \ y) {\r\n        x += y.x - (m << 1);\r\n        x = (i64(x) < 0 ? x + (m <<\
-    \ 1) : x);\r\n        return *this;\r\n    }\r\n    m64 &operator-=(m64 y) {\r\
-    \n        x -= y.x;\r\n        x = (i64(x) < 0 ? x + (m << 1) : x);\r\n      \
-    \  return *this;\r\n    }\r\n    m64 &operator*=(m64 y) { x = reduce(u128(x) *\
-    \ y.x); return *this; }\r\n    m64 operator+(m64 y) const { return m64(*this)\
-    \ += y; }\r\n    m64 operator-(m64 y) const { return m64(*this) -= y; }\r\n  \
-    \  m64 operator*(m64 y) const { return m64(*this) *= y; }\r\n    bool operator==(m64\
-    \ y) const { return (x >= m ? x-m : x) == (y.x >= m ? y.x-m : y.x); }\r\n    bool\
-    \ operator!=(m64 y) const { return not operator==(y); }\r\n    m64 pow(u64 n)\
-    \ const {\r\n        m64 y = 1, z = *this;\r\n        for ( ; n; n >>= 1, z *=\
-    \ z) if (n & 1) y *= z;\r\n        return y;\r\n    }\r\n};\r\n\r\nbool primetest(const\
-    \ uint64_t x) {\r\n    using u64 = uint64_t;\r\n    if (x == 2 or x == 3 or x\
-    \ == 5 or x == 7) return true;\r\n    if (x % 2 == 0 or x % 3 == 0 or x % 5 ==\
-    \ 0 or x % 7 == 0) return false;\r\n    if (x < 121) return x > 1;\r\n    const\
-    \ u64 d = (x-1) >> __builtin_ctzll(x-1);\r\n    m64::set_mod(x);\r\n    const\
-    \ m64 one(1), minus_one(x-1);\r\n    auto ok = [&](u64 a) {\r\n        auto y\
-    \ = m64(a).pow(d);\r\n        u64 t = d;\r\n        while (y != one and y != minus_one\
-    \ and t != x-1) y *= y, t <<= 1;\r\n        if (y != minus_one and t % 2 == 0)\
-    \ return false;\r\n        return true;\r\n    };\r\n    if (x < (1ull << 32))\
-    \ {\r\n        for (u64 a : { 2, 7, 61 }) if (not ok(a)) return false;\r\n   \
-    \ } else {\r\n        for (u64 a : { 2, 325, 9375, 28178, 450775, 9780504, 1795265022\
-    \ }) {\r\n            if (x <= a) return true;\r\n            if (not ok(a)) return\
-    \ false;\r\n        }\r\n    }\r\n    return true;\r\n}\n#line 3 \"graph/chromatic.hpp\"\
-    \n\r\ntemplate <typename Graph, int TRIAL = 0>\r\nint chromatic_number(Graph&\
-    \ G) {\r\n  assert(G.is_prepared());\r\n  // O(N2^N)\r\n\r\n  int N = G.N;\r\n\
-    \  vc<int> nbd(N);\r\n  FOR(v, N) for (auto&& e : G[v]) nbd[v] |= 1 << e.to;\r\
-    \n\r\n  // s \u306E subset \u3067\u3042\u308B\u3088\u3046\u306A\u72EC\u7ACB\u96C6\
-    \u5408\u306E\u6570\u3048\u4E0A\u3052\r\n  vc<int> dp(1 << N);\r\n  dp[0] = 1;\r\
-    \n  FOR(v, N) FOR(s, 1 << v) { dp[s | 1 << v] = dp[s] + dp[s & (~nbd[v])]; }\r\
-    \n\r\n  vi pow(1 << N);\r\n  auto solve_p = [&](int p) -> int {\r\n    FOR(s,\
-    \ 1 << N) pow[s] = ((N - popcnt(s)) & 1 ? 1 : -1);\r\n    FOR3(k, 1, N) {\r\n\
-    \      ll sum = 0;\r\n      FOR(s, 1 << N) {\r\n        pow[s] = pow[s] * dp[s];\r\
-    \n        if (p) pow[s] %= p;\r\n        sum += pow[s];\r\n      }\r\n      if\
-    \ (p) sum %= p;\r\n      if (sum != 0) { return k; }\r\n    }\r\n    return N;\r\
-    \n  };\r\n\r\n  int ANS = 0;\r\n  chmax(ANS, solve_p(0));\r\n\r\n  FOR_(TRIAL)\
-    \ {\r\n    RandomNumberGenerator RNG;\r\n    int p;\r\n    while (1) {\r\n   \
-    \   p = RNG(1LL << 30, 1LL << 31);\r\n      if (primetest(p)) break;\r\n    }\r\
-    \n    chmax(ANS, solve_p(p));\r\n  }\r\n  return ANS;\r\n}\r\n#line 6 \"test/library_checker/graph/chromatic_number.test.cpp\"\
-    \n\r\n\r\nvoid solve() {\r\n  LL(N, M);\r\n  Graph<int> G(N);\r\n  FOR_(M) {\r\
-    \n    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n  G.prepare();\r\n  print(chromatic_number(G));\r\
-    \n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/chromatic_number\"\r\n\
-    #include \"my_template.hpp\"\r\n\r\n#include \"graph/base.hpp\"\r\n#include \"\
-    graph/chromatic.hpp\"\r\n\r\n\r\nvoid solve() {\r\n  LL(N, M);\r\n  Graph<int>\
-    \ G(N);\r\n  FOR_(M) {\r\n    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n  G.prepare();\r\
-    \n  print(chromatic_number(G));\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
-    \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
+    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 2 \"mod/modint.hpp\"\
+    \ntemplate <int mod>\nstruct modint {\n  static constexpr bool is_modint = true;\n\
+    \  int val;\n\n  constexpr modint(const ll val = 0) noexcept\n      : val(val\
+    \ >= 0 ? val % mod : (mod - (-val) % mod) % mod) {}\n\n  bool operator<(const\
+    \ modint &other) const {\n    return val < other.val;\n  } // To use std::map\n\
+    \n  modint &operator+=(const modint &p) {\n    if ((val += p.val) >= mod) val\
+    \ -= mod;\n    return *this;\n  }\n  modint &operator-=(const modint &p) {\n \
+    \   if ((val += mod - p.val) >= mod) val -= mod;\n    return *this;\n  }\n  modint\
+    \ &operator*=(const modint &p) {\n    val = (int)(1LL * val * p.val % mod);\n\
+    \    return *this;\n  }\n  modint &operator/=(const modint &p) {\n    *this *=\
+    \ p.inverse();\n    return *this;\n  }\n  modint operator-() const { return modint(-val);\
+    \ }\n  modint operator+(const modint &p) const { return modint(*this) += p; }\n\
+    \  modint operator-(const modint &p) const { return modint(*this) -= p; }\n  modint\
+    \ operator*(const modint &p) const { return modint(*this) *= p; }\n  modint operator/(const\
+    \ modint &p) const { return modint(*this) /= p; }\n  bool operator==(const modint\
+    \ &p) const { return val == p.val; }\n  bool operator!=(const modint &p) const\
+    \ { return val != p.val; }\n\n  modint inverse() const {\n    int a = val, b =\
+    \ mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -=\
+    \ t * b, b);\n      swap(u -= t * v, v);\n    }\n    return modint(u);\n  }\n\n\
+    \  modint pow(int64_t n) const {\n    modint ret(1), mul(val);\n    while (n >\
+    \ 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n\
+    \    return ret;\n  }\n  static constexpr int get_mod() { return mod; }\n};\n\n\
+    struct ArbitraryModInt {\n  static constexpr bool is_modint = true;\n  int val;\n\
+    \  ArbitraryModInt() : val(0) {}\n  ArbitraryModInt(int64_t y)\n      : val(y\
+    \ >= 0 ? y % get_mod()\n                   : (get_mod() - (-y) % get_mod()) %\
+    \ get_mod()) {}\n\n  bool operator<(const ArbitraryModInt &other) const {\n  \
+    \  return val < other.val;\n  } // To use std::map<ArbitraryModInt, T>\n\n  static\
+    \ int &get_mod() {\n    static int mod = 0;\n    return mod;\n  }\n  static void\
+    \ set_mod(int md) { get_mod() = md; }\n  ArbitraryModInt &operator+=(const ArbitraryModInt\
+    \ &p) {\n    if ((val += p.val) >= get_mod()) val -= get_mod();\n    return *this;\n\
+    \  }\n  ArbitraryModInt &operator-=(const ArbitraryModInt &p) {\n    if ((val\
+    \ += get_mod() - p.val) >= get_mod()) val -= get_mod();\n    return *this;\n \
+    \ }\n  ArbitraryModInt &operator*=(const ArbitraryModInt &p) {\n    unsigned long\
+    \ long a = (unsigned long long)val * p.val;\n    unsigned xh = (unsigned)(a >>\
+    \ 32), xl = (unsigned)a, d, m;\n    asm(\"divl %4; \\n\\t\" : \"=a\"(d), \"=d\"\
+    (m) : \"d\"(xh), \"a\"(xl), \"r\"(get_mod()));\n    val = m;\n    return *this;\n\
+    \  }\n  ArbitraryModInt &operator/=(const ArbitraryModInt &p) {\n    *this *=\
+    \ p.inverse();\n    return *this;\n  }\n  ArbitraryModInt operator-() const {\
+    \ return ArbitraryModInt(-val); }\n  ArbitraryModInt operator+(const ArbitraryModInt\
+    \ &p) const {\n    return ArbitraryModInt(*this) += p;\n  }\n  ArbitraryModInt\
+    \ operator-(const ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this)\
+    \ -= p;\n  }\n  ArbitraryModInt operator*(const ArbitraryModInt &p) const {\n\
+    \    return ArbitraryModInt(*this) *= p;\n  }\n\n  ArbitraryModInt operator/(const\
+    \ ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this) /= p;\n  }\n\n\
+    \  bool operator==(const ArbitraryModInt &p) const { return val == p.val; }\n\
+    \  bool operator!=(const ArbitraryModInt &p) const { return val != p.val; }\n\
+    \  ArbitraryModInt inverse() const {\n    int a = val, b = get_mod(), u = 1, v\
+    \ = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b);\n\
+    \      swap(u -= t * v, v);\n    }\n    return ArbitraryModInt(u);\n  }\n  ArbitraryModInt\
+    \ pow(int64_t n) const {\n    ArbitraryModInt ret(1), mul(val);\n    while (n\
+    \ > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n  \
+    \  }\n    return ret;\n  }\n  friend ostream &operator<<(ostream &os, const ArbitraryModInt\
+    \ &p) {\n    return os << p.val;\n  }\n  friend istream &operator>>(istream &is,\
+    \ ArbitraryModInt &a) {\n    int64_t t;\n    is >> t;\n    a = ArbitraryModInt(t);\n\
+    \    return (is);\n  }\n};\n\ntemplate<typename mint>\ntuple<mint, mint, mint>\
+    \ get_factorial_data(int n){\n  static constexpr int mod = mint::get_mod();\n\
+    \  assert(0 <= n && n < mod);\n\n  static vector<mint> fact = {1, 1};\n  static\
+    \ vector<mint> fact_inv = {1, 1};\n  static vector<mint> inv = {0, 1};\n  while(len(fact)\
+    \ <= n){\n    int k = len(fact);\n    fact.eb(fact[k - 1] * mint(k));\n    auto\
+    \ q = ceil(mod, k);\n    int r = k * q - mod;\n    inv.eb(inv[r] * mint(q));\n\
+    \    fact_inv.eb(fact_inv[k - 1] * inv[k]);\n  }\n  return {fact[n], fact_inv[n],\
+    \ inv[n]};\n}\n\ntemplate<typename mint>\nmint fact(int n){\n  static constexpr\
+    \ int mod = mint::get_mod();\n  assert(0 <= n);\n  if(n >= mod) return 0;\n  return\
+    \ get<0>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename mint>\nmint fact_inv(int\
+    \ n){\n  static constexpr int mod = mint::get_mod();\n  assert(0 <= n && n < mod);\n\
+    \  return get<1>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename mint>\n\
+    mint inv(int n){\n  static constexpr int mod = mint::get_mod();\n  assert(0 <=\
+    \ n && n < mod);\n  return get<2>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename\
+    \ mint>\nmint C(ll n, ll k, bool large = false) {\n  assert(n >= 0);\n  if (k\
+    \ < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n) * fact_inv<mint>(k)\
+    \ * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n  FOR(i, k) {\n\
+    \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\ntemplate<typename\
+    \ mint>\nvc<mint> power_table(mint a, ll N) {\n  vc<mint> f(N, 1);\n  FOR(i, N\
+    \ - 1) f[i + 1] = a * f[i];\n  return f;\n}\n\nusing modint107 = modint<1'000'000'007>;\n\
+    using modint998 = modint<998'244'353>;\nusing amint = ArbitraryModInt;\n#line\
+    \ 1 \"linalg/mat_inv.hpp\"\ntemplate <typename T>\r\nvc<vc<T>> mat_inv(vc<vc<T>>\
+    \ A) {\r\n  int N = len(A);\r\n  vv(T, B, N, N);\r\n  FOR(n, N) B[n][n] = 1;\r\
+    \n  FOR(i, N) {\r\n    FOR3(k, i, N) if (A[k][i] != 0) {\r\n      if (k != i)\
+    \ swap(A[i], A[k]), swap(B[i], B[k]);\r\n      break;\r\n    }\r\n    if (A[i][i]\
+    \ == 0) return {};\r\n    T c = T(1) / A[i][i];\r\n    FOR(j, N) {\r\n      A[i][j]\
+    \ *= c;\r\n      B[i][j] *= c;\r\n    }\r\n    FOR(k, N) if (i != k) {\r\n   \
+    \   T c = A[k][i];\r\n      FOR(j, N) A[k][j] -= A[i][j] * c;\r\n      FOR(j,\
+    \ N) B[k][j] -= B[i][j] * c;\r\n    }\r\n  }\r\n  return B;\r\n}\r\n#line 5 \"\
+    test/library_checker/matrix/inverse_matrix.test.cpp\"\n\r\nusing mint = modint998;\r\
+    \nvoid solve() {\r\n  LL(N);\r\n  VV(mint, A, N, N);\r\n  auto B = mat_inv(A);\r\
+    \n  if (B.empty()) return print(-1);\r\n  FOR(n, N) print(B[n]);\r\n}\r\n\r\n\
+    signed main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n \
+    \ cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/inverse_matrix\"\r\n#include\
+    \ \"my_template.hpp\"\r\n#include \"mod/modint.hpp\"\r\n#include \"linalg/mat_inv.hpp\"\
+    \r\n\r\nusing mint = modint998;\r\nvoid solve() {\r\n  LL(N);\r\n  VV(mint, A,\
+    \ N, N);\r\n  auto B = mat_inv(A);\r\n  if (B.empty()) return print(-1);\r\n \
+    \ FOR(n, N) print(B[n]);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n\
+    \  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
     \n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
-  - graph/base.hpp
-  - graph/chromatic.hpp
-  - other/random.hpp
-  - nt/primetest.hpp
+  - mod/modint.hpp
+  - linalg/mat_inv.hpp
   isVerificationFile: true
-  path: test/library_checker/graph/chromatic_number.test.cpp
+  path: test/library_checker/matrix/inverse_matrix.test.cpp
   requiredBy: []
-  timestamp: '2022-01-10 07:43:35+09:00'
+  timestamp: '2022-01-10 09:31:24+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/library_checker/graph/chromatic_number.test.cpp
+documentation_of: test/library_checker/matrix/inverse_matrix.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/graph/chromatic_number.test.cpp
-- /verify/test/library_checker/graph/chromatic_number.test.cpp.html
-title: test/library_checker/graph/chromatic_number.test.cpp
+- /verify/test/library_checker/matrix/inverse_matrix.test.cpp
+- /verify/test/library_checker/matrix/inverse_matrix.test.cpp.html
+title: test/library_checker/matrix/inverse_matrix.test.cpp
 ---
