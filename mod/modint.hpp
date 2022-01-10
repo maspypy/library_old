@@ -77,6 +77,7 @@ struct ArbitraryModInt {
   ArbitraryModInt &operator*=(const ArbitraryModInt &p) {
     unsigned long long a = (unsigned long long)val * p.val;
     unsigned xh = (unsigned)(a >> 32), xl = (unsigned)a, d, m;
+    asm("divl %4; \n\t" : "=a"(d), "=d"(m) : "d"(xh), "a"(xl), "r"(get_mod()));
     val = m;
     return *this;
   }
