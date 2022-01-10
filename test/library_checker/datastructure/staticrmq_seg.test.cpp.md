@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: algebra/monoid_min.hpp
     title: algebra/monoid_min.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
   - icon: ':question:'
