@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/base.hpp
     title: graph/base.hpp
   - icon: ':question:'
@@ -168,26 +168,26 @@ data:
     \ = 'a') {\n  vi A(S.size());\n  FOR(i, S.size()) { A[i] = S[i] - first_char;\
     \ }\n  return A;\n}\n\ntemplate <typename T>\nvector<T> cumsum(vector<T> &A) {\n\
     \  int N = A.size();\n  vector<T> B(N + 1);\n  FOR(i, N) { B[i + 1] = B[i] + A[i];\
-    \ }\n  return B;\n}\n\nvc<int> bincount(vi &A, int size) {\n  vc<int> C(size);\n\
-    \  for (auto&& x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate <typename T>\nvector<int>\
-    \ argsort(vector<T> &A) {\n  // stable\n  vector<int> ids(A.size());\n  iota(all(ids),\
-    \ 0);\n  sort(all(ids), [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j]\
-    \ && i < j); });\n  return ids;\n}\n#line 4 \"graph/bipartite_coloring.hpp\"\n\
-    \npair<int, vi> bipartite_edge_coloring(Graph<ll>& G) {\n  auto N = G.N;\n  vi\
-    \ deg(N);\n  vi ANS(G.M, -1);\n  FORIN(e, G.edges) {\n    ++deg[e.frm];\n    ++deg[e.to];\n\
-    \  }\n  ll C = MAX(deg);\n  // \u9802\u70B9, \u8272 -> \u8FBA\u756A\u53F7\n  vv(int,\
-    \ TO, N, C, -1);\n\n  FOR(id, G.M) {\n    auto const a = G.edges[id].frm, b =\
-    \ G.edges[id].to;\n    [&] {\n      // a \u3067\u5B9F\u73FE\u3057\u3066\u3044\u306A\
-    \u3044\u8272 ca \u3068 b \u3067\u5B9F\u73FE\u3057\u3066\u3044\u306A\u3044\u8272\
-    \ cb \u3092\u3072\u3068\u3064\u3068\u308B\u3002\n      int ca = -1, cb = -1;\n\
-    \      FOR(c, C) if (TO[a][c] == -1) {\n        ca = c;\n        break;\n    \
-    \  }\n      FOR(c, C) if (TO[b][c] == -1) {\n        cb = c;\n        break;\n\
-    \      }\n      int v = a, w = b, eid = id, cv = ca, cw = cb;\n      while (1)\
-    \ {\n        ANS[eid] = cv;\n        TO[v][cv] = eid;\n        TO[w][cw] = -1;\n\
-    \        if (TO[w][cv] == -1) {\n          TO[w][cv] = eid;\n          break;\n\
-    \        }\n        swap(eid, TO[w][cv]);\n        auto const& e = G.edges[eid];\n\
-    \        v = w;\n        w ^= e.frm ^ e.to;\n        swap(cv, cw);\n      }\n\
-    \    }();\n  }\n  return {C, ANS};\n}\n"
+    \ }\n  return B;\n}\n\ntemplate<typename T>\nvc<int> bincount(vc<T> &A, int size)\
+    \ {\n  vc<int> C(size);\n  for (auto&& x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate\
+    \ <typename T>\nvector<int> argsort(vector<T> &A) {\n  // stable\n  vector<int>\
+    \ ids(A.size());\n  iota(all(ids), 0);\n  sort(all(ids), [&](int i, int j) { return\
+    \ A[i] < A[j] || (A[i] == A[j] && i < j); });\n  return ids;\n}\n#line 4 \"graph/bipartite_coloring.hpp\"\
+    \n\npair<int, vi> bipartite_edge_coloring(Graph<ll>& G) {\n  auto N = G.N;\n \
+    \ vi deg(N);\n  vi ANS(G.M, -1);\n  FORIN(e, G.edges) {\n    ++deg[e.frm];\n \
+    \   ++deg[e.to];\n  }\n  ll C = MAX(deg);\n  // \u9802\u70B9, \u8272 -> \u8FBA\
+    \u756A\u53F7\n  vv(int, TO, N, C, -1);\n\n  FOR(id, G.M) {\n    auto const a =\
+    \ G.edges[id].frm, b = G.edges[id].to;\n    [&] {\n      // a \u3067\u5B9F\u73FE\
+    \u3057\u3066\u3044\u306A\u3044\u8272 ca \u3068 b \u3067\u5B9F\u73FE\u3057\u3066\
+    \u3044\u306A\u3044\u8272 cb \u3092\u3072\u3068\u3064\u3068\u308B\u3002\n     \
+    \ int ca = -1, cb = -1;\n      FOR(c, C) if (TO[a][c] == -1) {\n        ca = c;\n\
+    \        break;\n      }\n      FOR(c, C) if (TO[b][c] == -1) {\n        cb =\
+    \ c;\n        break;\n      }\n      int v = a, w = b, eid = id, cv = ca, cw =\
+    \ cb;\n      while (1) {\n        ANS[eid] = cv;\n        TO[v][cv] = eid;\n \
+    \       TO[w][cw] = -1;\n        if (TO[w][cv] == -1) {\n          TO[w][cv] =\
+    \ eid;\n          break;\n        }\n        swap(eid, TO[w][cv]);\n        auto\
+    \ const& e = G.edges[eid];\n        v = w;\n        w ^= e.frm ^ e.to;\n     \
+    \   swap(cv, cw);\n      }\n    }();\n  }\n  return {C, ANS};\n}\n"
   code: "#pragma once\n#include \"graph/base.hpp\"\n#include \"my_template.hpp\"\n\
     \npair<int, vi> bipartite_edge_coloring(Graph<ll>& G) {\n  auto N = G.N;\n  vi\
     \ deg(N);\n  vi ANS(G.M, -1);\n  FORIN(e, G.edges) {\n    ++deg[e.frm];\n    ++deg[e.to];\n\
@@ -211,7 +211,7 @@ data:
   isVerificationFile: false
   path: graph/bipartite_coloring.hpp
   requiredBy: []
-  timestamp: '2022-01-10 16:12:04+09:00'
+  timestamp: '2022-01-10 20:08:40+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph/bipartite_coloring.hpp

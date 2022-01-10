@@ -140,18 +140,18 @@ data:
     \ = 'a') {\n  vi A(S.size());\n  FOR(i, S.size()) { A[i] = S[i] - first_char;\
     \ }\n  return A;\n}\n\ntemplate <typename T>\nvector<T> cumsum(vector<T> &A) {\n\
     \  int N = A.size();\n  vector<T> B(N + 1);\n  FOR(i, N) { B[i + 1] = B[i] + A[i];\
-    \ }\n  return B;\n}\n\nvc<int> bincount(vi &A, int size) {\n  vc<int> C(size);\n\
-    \  for (auto&& x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate <typename T>\nvector<int>\
-    \ argsort(vector<T> &A) {\n  // stable\n  vector<int> ids(A.size());\n  iota(all(ids),\
-    \ 0);\n  sort(all(ids), [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j]\
-    \ && i < j); });\n  return ids;\n}\n#line 2 \"geometry/geometry.hpp\"\n\ntemplate\
-    \ <typename T>\nstruct xy {\n  T x, y;\n  xy() {}\n  xy(pair<T, T> p) : x(p.fi),\
-    \ y(p.se) {}\n  xy(T x, T y) : x(x), y(y) {}\n  xy operator+(const xy rhs) { return\
-    \ xy(x + rhs.x, y + rhs.y); }\n  xy operator-(const xy rhs) { return xy(x - rhs.x,\
-    \ y - rhs.y); }\n  xy operator*(const T k) { return xy(x * k, y * k); }\n  T dot(const\
-    \ xy rhs) { return x * rhs.x + y * rhs.y; }\n  T det(const xy rhs) { return x\
-    \ * rhs.y - y * rhs.x; }\n};\n\ntemplate <typename T>\nint iSP(xy<T> A, xy<T>\
-    \ B, xy<T> C) {\n  // https://www.ioi-jp.org/camp/2017/2017-sp_camp-hide.pdf\n\
+    \ }\n  return B;\n}\n\ntemplate<typename T>\nvc<int> bincount(vc<T> &A, int size)\
+    \ {\n  vc<int> C(size);\n  for (auto&& x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate\
+    \ <typename T>\nvector<int> argsort(vector<T> &A) {\n  // stable\n  vector<int>\
+    \ ids(A.size());\n  iota(all(ids), 0);\n  sort(all(ids), [&](int i, int j) { return\
+    \ A[i] < A[j] || (A[i] == A[j] && i < j); });\n  return ids;\n}\n#line 2 \"geometry/geometry.hpp\"\
+    \n\ntemplate <typename T>\nstruct xy {\n  T x, y;\n  xy() {}\n  xy(pair<T, T>\
+    \ p) : x(p.fi), y(p.se) {}\n  xy(T x, T y) : x(x), y(y) {}\n  xy operator+(const\
+    \ xy rhs) { return xy(x + rhs.x, y + rhs.y); }\n  xy operator-(const xy rhs) {\
+    \ return xy(x - rhs.x, y - rhs.y); }\n  xy operator*(const T k) { return xy(x\
+    \ * k, y * k); }\n  T dot(const xy rhs) { return x * rhs.x + y * rhs.y; }\n  T\
+    \ det(const xy rhs) { return x * rhs.y - y * rhs.x; }\n};\n\ntemplate <typename\
+    \ T>\nint iSP(xy<T> A, xy<T> B, xy<T> C) {\n  // https://www.ioi-jp.org/camp/2017/2017-sp_camp-hide.pdf\n\
     \  T d = (B - A).det(C - A);\n  if (d > 0) return 1;\n  if (d < 0) return -1;\n\
     \  if ((B - A).dot(C - A) < 0) return -2;\n  if ((A - B).dot(C - B) < 0) return\
     \ 2;\n  return 0;\n}\n\ntemplate <typename T>\nbool intersect_segment(xy<T> A,\
@@ -177,7 +177,7 @@ data:
   isVerificationFile: false
   path: geometry/geometry.hpp
   requiredBy: []
-  timestamp: '2022-01-10 16:12:04+09:00'
+  timestamp: '2022-01-10 20:08:40+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: geometry/geometry.hpp

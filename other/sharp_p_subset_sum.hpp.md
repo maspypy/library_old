@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
-  - icon: ':question:'
+  - icon: ':x:'
     path: polynomial/fps_exp.hpp
     title: polynomial/fps_exp.hpp
   _extendedRequiredBy: []

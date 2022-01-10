@@ -139,28 +139,28 @@ data:
     \ = 'a') {\n  vi A(S.size());\n  FOR(i, S.size()) { A[i] = S[i] - first_char;\
     \ }\n  return A;\n}\n\ntemplate <typename T>\nvector<T> cumsum(vector<T> &A) {\n\
     \  int N = A.size();\n  vector<T> B(N + 1);\n  FOR(i, N) { B[i + 1] = B[i] + A[i];\
-    \ }\n  return B;\n}\n\nvc<int> bincount(vi &A, int size) {\n  vc<int> C(size);\n\
-    \  for (auto&& x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate <typename T>\nvector<int>\
-    \ argsort(vector<T> &A) {\n  // stable\n  vector<int> ids(A.size());\n  iota(all(ids),\
-    \ 0);\n  sort(all(ids), [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j]\
-    \ && i < j); });\n  return ids;\n}\n#line 3 \"ds/lichao.hpp\"\n\r\ntemplate <typename\
-    \ T>\r\nstruct LiChaoTree {\r\n  struct Line {\r\n    T a, b;\r\n\r\n    Line(T\
-    \ a, T b) : a(a), b(b) {}\r\n\r\n    inline T get(T x) const { return a * x +\
-    \ b; }\r\n\r\n    inline bool over(const Line& b, const T& x) const {\r\n    \
-    \  return get(x) < b.get(x);\r\n    }\r\n  };\r\n\r\n  vector<T> xs;\r\n  vector<Line>\
-    \ seg;\r\n  int sz;\r\n\r\n  LiChaoTree(const vector<T>& x, T INF) : xs(x) {\r\
-    \n    sort(all(xs));\r\n    sz = 1;\r\n    while (sz < xs.size()) sz <<= 1;\r\n\
-    \    while (xs.size() < sz) xs.push_back(xs.back() + 1);\r\n    seg.assign(2 *\
-    \ sz - 1, Line(0, INF));\r\n  }\r\n\r\n  void update(Line& x, int k, int l, int\
-    \ r) {\r\n    int mid = (l + r) >> 1;\r\n    auto latte = x.over(seg[k], xs[l]),\
-    \ malta = x.over(seg[k], xs[mid]);\r\n    if (malta) swap(seg[k], x);\r\n    if\
-    \ (l + 1 >= r)\r\n      return;\r\n    else if (latte != malta)\r\n      update(x,\
-    \ 2 * k + 1, l, mid);\r\n    else\r\n      update(x, 2 * k + 2, mid, r);\r\n \
-    \ }\r\n\r\n  void update(T a, T b) {  // ax+b\r\n    Line l(a, b);\r\n    update(l,\
-    \ 0, 0, sz);\r\n  }\r\n\r\n  T query(T x) {\r\n    ll k = LB(xs, x);\r\n    k\
-    \ += sz - 1;\r\n    T ret = seg[k].get(x);\r\n    while (k > 0) {\r\n      k =\
-    \ (k - 1) >> 1;\r\n      ret = min(ret, seg[k].get(x));\r\n    }\r\n    return\
-    \ ret;\r\n  }\r\n};\n"
+    \ }\n  return B;\n}\n\ntemplate<typename T>\nvc<int> bincount(vc<T> &A, int size)\
+    \ {\n  vc<int> C(size);\n  for (auto&& x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate\
+    \ <typename T>\nvector<int> argsort(vector<T> &A) {\n  // stable\n  vector<int>\
+    \ ids(A.size());\n  iota(all(ids), 0);\n  sort(all(ids), [&](int i, int j) { return\
+    \ A[i] < A[j] || (A[i] == A[j] && i < j); });\n  return ids;\n}\n#line 3 \"ds/lichao.hpp\"\
+    \n\r\ntemplate <typename T>\r\nstruct LiChaoTree {\r\n  struct Line {\r\n    T\
+    \ a, b;\r\n\r\n    Line(T a, T b) : a(a), b(b) {}\r\n\r\n    inline T get(T x)\
+    \ const { return a * x + b; }\r\n\r\n    inline bool over(const Line& b, const\
+    \ T& x) const {\r\n      return get(x) < b.get(x);\r\n    }\r\n  };\r\n\r\n  vector<T>\
+    \ xs;\r\n  vector<Line> seg;\r\n  int sz;\r\n\r\n  LiChaoTree(const vector<T>&\
+    \ x, T INF) : xs(x) {\r\n    sort(all(xs));\r\n    sz = 1;\r\n    while (sz <\
+    \ xs.size()) sz <<= 1;\r\n    while (xs.size() < sz) xs.push_back(xs.back() +\
+    \ 1);\r\n    seg.assign(2 * sz - 1, Line(0, INF));\r\n  }\r\n\r\n  void update(Line&\
+    \ x, int k, int l, int r) {\r\n    int mid = (l + r) >> 1;\r\n    auto latte =\
+    \ x.over(seg[k], xs[l]), malta = x.over(seg[k], xs[mid]);\r\n    if (malta) swap(seg[k],\
+    \ x);\r\n    if (l + 1 >= r)\r\n      return;\r\n    else if (latte != malta)\r\
+    \n      update(x, 2 * k + 1, l, mid);\r\n    else\r\n      update(x, 2 * k + 2,\
+    \ mid, r);\r\n  }\r\n\r\n  void update(T a, T b) {  // ax+b\r\n    Line l(a, b);\r\
+    \n    update(l, 0, 0, sz);\r\n  }\r\n\r\n  T query(T x) {\r\n    ll k = LB(xs,\
+    \ x);\r\n    k += sz - 1;\r\n    T ret = seg[k].get(x);\r\n    while (k > 0) {\r\
+    \n      k = (k - 1) >> 1;\r\n      ret = min(ret, seg[k].get(x));\r\n    }\r\n\
+    \    return ret;\r\n  }\r\n};\n"
   code: "#pragma once\r\n#include \"my_template.hpp\"\r\n\r\ntemplate <typename T>\r\
     \nstruct LiChaoTree {\r\n  struct Line {\r\n    T a, b;\r\n\r\n    Line(T a, T\
     \ b) : a(a), b(b) {}\r\n\r\n    inline T get(T x) const { return a * x + b; }\r\
@@ -185,7 +185,7 @@ data:
   isVerificationFile: false
   path: ds/lichao.hpp
   requiredBy: []
-  timestamp: '2022-01-10 16:12:04+09:00'
+  timestamp: '2022-01-10 20:08:40+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: ds/lichao.hpp

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: ds/fastset.hpp
     title: ds/fastset.hpp
   - icon: ':question:'
@@ -12,9 +12,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/predecessor_problem
@@ -147,37 +147,37 @@ data:
     \ = 'a') {\n  vi A(S.size());\n  FOR(i, S.size()) { A[i] = S[i] - first_char;\
     \ }\n  return A;\n}\n\ntemplate <typename T>\nvector<T> cumsum(vector<T> &A) {\n\
     \  int N = A.size();\n  vector<T> B(N + 1);\n  FOR(i, N) { B[i + 1] = B[i] + A[i];\
-    \ }\n  return B;\n}\n\nvc<int> bincount(vi &A, int size) {\n  vc<int> C(size);\n\
-    \  for (auto&& x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate <typename T>\nvector<int>\
-    \ argsort(vector<T> &A) {\n  // stable\n  vector<int> ids(A.size());\n  iota(all(ids),\
-    \ 0);\n  sort(all(ids), [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j]\
-    \ && i < j); });\n  return ids;\n}\n#line 1 \"ds/fastset.hpp\"\nstruct FastSet\
-    \ {\r\n  using uint = unsigned;\r\n  using ull = unsigned long long;\r\n\r\n \
-    \ int bsr(ull x) { return 63 - __builtin_clzll(x); }\r\n  int bsf(ull x) { return\
-    \ __builtin_ctzll(x); }\r\n\r\n  static constexpr uint B = 64;\r\n  int n, lg;\r\
-    \n  vc<vc<ull>> seg;\r\n  FastSet(int _n) : n(_n) {\r\n    do {\r\n      seg.push_back(vc<ull>((_n\
-    \ + B - 1) / B));\r\n      _n = (_n + B - 1) / B;\r\n    } while (_n > 1);\r\n\
-    \    lg = int(seg.size());\r\n  }\r\n  bool operator[](int i) const { return (seg[0][i\
-    \ / B] >> (i % B) & 1) != 0; }\r\n  void insert(int i) {\r\n    for (int h = 0;\
-    \ h < lg; h++) {\r\n      seg[h][i / B] |= 1ULL << (i % B);\r\n      i /= B;\r\
-    \n    }\r\n  }\r\n  void erase(int i) {\r\n    for (int h = 0; h < lg; h++) {\r\
-    \n      seg[h][i / B] &= ~(1ULL << (i % B));\r\n      if (seg[h][i / B])\r\n \
-    \       break;\r\n      i /= B;\r\n    }\r\n  }\r\n  // x\u4EE5\u4E0A\u6700\u5C0F\
-    \u306E\u8981\u7D20\r\n  int next(int i) {\r\n    for (int h = 0; h < lg; h++)\
-    \ {\r\n      if (i / B == seg[h].size())\r\n        break;\r\n      ull d = seg[h][i\
-    \ / B] >> (i % B);\r\n      if (!d) {\r\n        i = i / B + 1;\r\n        continue;\r\
-    \n      }\r\n      // find\r\n      i += bsf(d);\r\n      for (int g = h - 1;\
-    \ g >= 0; g--) {\r\n        i *= B;\r\n        i += bsf(seg[g][i / B]);\r\n  \
-    \    }\r\n      return i;\r\n    }\r\n    return n;\r\n  }\r\n  // x\u4EE5\u4E0B\
-    \u6700\u5927\u306E\u8981\u7D20\r\n  int prev(int i) {\r\n    if(i < 0) return\
-    \ -1;\r\n    chmin(i, n - 1);\r\n    for (int h = 0; h < lg; h++) {\r\n      if\
-    \ (i == -1)\r\n        break;\r\n      ull d = seg[h][i / B] << (63 - i % 64);\r\
-    \n      if (!d) {\r\n        i = i / B - 1;\r\n        continue;\r\n      }\r\n\
-    \      // find\r\n      i += bsr(d) - (B - 1);\r\n      for (int g = h - 1; g\
-    \ >= 0; g--) {\r\n        i *= B;\r\n        i += bsr(seg[g][i / B]);\r\n    \
-    \  }\r\n      return i;\r\n    }\r\n    return -1;\r\n  }\r\n  void debug(){\r\
-    \n    for(int i=0;i<n;++i) cout << (*this)[i];\r\n    cout << endl;\r\n  }\r\n\
-    };\n#line 4 \"test/library_checker/datastructure/predecessor_problem.test.cpp\"\
+    \ }\n  return B;\n}\n\ntemplate<typename T>\nvc<int> bincount(vc<T> &A, int size)\
+    \ {\n  vc<int> C(size);\n  for (auto&& x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate\
+    \ <typename T>\nvector<int> argsort(vector<T> &A) {\n  // stable\n  vector<int>\
+    \ ids(A.size());\n  iota(all(ids), 0);\n  sort(all(ids), [&](int i, int j) { return\
+    \ A[i] < A[j] || (A[i] == A[j] && i < j); });\n  return ids;\n}\n#line 1 \"ds/fastset.hpp\"\
+    \nstruct FastSet {\r\n  using uint = unsigned;\r\n  using ull = unsigned long\
+    \ long;\r\n\r\n  int bsr(ull x) { return 63 - __builtin_clzll(x); }\r\n  int bsf(ull\
+    \ x) { return __builtin_ctzll(x); }\r\n\r\n  static constexpr uint B = 64;\r\n\
+    \  int n, lg;\r\n  vc<vc<ull>> seg;\r\n  FastSet(int _n) : n(_n) {\r\n    do {\r\
+    \n      seg.push_back(vc<ull>((_n + B - 1) / B));\r\n      _n = (_n + B - 1) /\
+    \ B;\r\n    } while (_n > 1);\r\n    lg = int(seg.size());\r\n  }\r\n  bool operator[](int\
+    \ i) const { return (seg[0][i / B] >> (i % B) & 1) != 0; }\r\n  void insert(int\
+    \ i) {\r\n    for (int h = 0; h < lg; h++) {\r\n      seg[h][i / B] |= 1ULL <<\
+    \ (i % B);\r\n      i /= B;\r\n    }\r\n  }\r\n  void erase(int i) {\r\n    for\
+    \ (int h = 0; h < lg; h++) {\r\n      seg[h][i / B] &= ~(1ULL << (i % B));\r\n\
+    \      if (seg[h][i / B])\r\n        break;\r\n      i /= B;\r\n    }\r\n  }\r\
+    \n  // x\u4EE5\u4E0A\u6700\u5C0F\u306E\u8981\u7D20\r\n  int next(int i) {\r\n\
+    \    for (int h = 0; h < lg; h++) {\r\n      if (i / B == seg[h].size())\r\n \
+    \       break;\r\n      ull d = seg[h][i / B] >> (i % B);\r\n      if (!d) {\r\
+    \n        i = i / B + 1;\r\n        continue;\r\n      }\r\n      // find\r\n\
+    \      i += bsf(d);\r\n      for (int g = h - 1; g >= 0; g--) {\r\n        i *=\
+    \ B;\r\n        i += bsf(seg[g][i / B]);\r\n      }\r\n      return i;\r\n   \
+    \ }\r\n    return n;\r\n  }\r\n  // x\u4EE5\u4E0B\u6700\u5927\u306E\u8981\u7D20\
+    \r\n  int prev(int i) {\r\n    if(i < 0) return -1;\r\n    chmin(i, n - 1);\r\n\
+    \    for (int h = 0; h < lg; h++) {\r\n      if (i == -1)\r\n        break;\r\n\
+    \      ull d = seg[h][i / B] << (63 - i % 64);\r\n      if (!d) {\r\n        i\
+    \ = i / B - 1;\r\n        continue;\r\n      }\r\n      // find\r\n      i +=\
+    \ bsr(d) - (B - 1);\r\n      for (int g = h - 1; g >= 0; g--) {\r\n        i *=\
+    \ B;\r\n        i += bsr(seg[g][i / B]);\r\n      }\r\n      return i;\r\n   \
+    \ }\r\n    return -1;\r\n  }\r\n  void debug(){\r\n    for(int i=0;i<n;++i) cout\
+    \ << (*this)[i];\r\n    cout << endl;\r\n  }\r\n};\n#line 4 \"test/library_checker/datastructure/predecessor_problem.test.cpp\"\
     \n\nvoid solve() {\n  LL(N, Q);\n  FastSet ss(N);\n  STR(S);\n  FOR(x, N) {\n\
     \    if (S[x] == '1') ss.insert(x);\n  }\n\n  FOR(_, Q) {\n    LL(t, k);\n   \
     \ if (t == 0) { ss.insert(k); }\n    elif (t == 1) { ss.erase(k); }\n    elif\
@@ -201,8 +201,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/predecessor_problem.test.cpp
   requiredBy: []
-  timestamp: '2022-01-10 16:12:04+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-10 20:08:40+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/predecessor_problem.test.cpp
 layout: document
