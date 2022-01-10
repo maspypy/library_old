@@ -3,14 +3,11 @@ template <int mod>
 struct modint {
   static constexpr bool is_modint = true;
   int val;
-
   constexpr modint(const ll val = 0) noexcept
       : val(val >= 0 ? val % mod : (mod - (-val) % mod) % mod) {}
-
   bool operator<(const modint &other) const {
     return val < other.val;
   } // To use std::map
-
   modint &operator+=(const modint &p) {
     if ((val += p.val) >= mod) val -= mod;
     return *this;
@@ -34,17 +31,14 @@ struct modint {
   modint operator/(const modint &p) const { return modint(*this) /= p; }
   bool operator==(const modint &p) const { return val == p.val; }
   bool operator!=(const modint &p) const { return val != p.val; }
-
   modint inverse() const {
     int a = val, b = mod, u = 1, v = 0, t;
     while (b > 0) {
       t = a / b;
-      swap(a -= t * b, b);
-      swap(u -= t * v, v);
+      swap(a -= t * b, b), swap(u -= t * v, v);
     }
     return modint(u);
   }
-
   modint pow(int64_t n) const {
     modint ret(1), mul(val);
     while (n > 0) {
@@ -64,11 +58,9 @@ struct ArbitraryModInt {
   ArbitraryModInt(int64_t y)
       : val(y >= 0 ? y % get_mod()
                    : (get_mod() - (-y) % get_mod()) % get_mod()) {}
-
   bool operator<(const ArbitraryModInt &other) const {
     return val < other.val;
   } // To use std::map<ArbitraryModInt, T>
-
   static int &get_mod() {
     static int mod = 0;
     return mod;
@@ -85,7 +77,6 @@ struct ArbitraryModInt {
   ArbitraryModInt &operator*=(const ArbitraryModInt &p) {
     unsigned long long a = (unsigned long long)val * p.val;
     unsigned xh = (unsigned)(a >> 32), xl = (unsigned)a, d, m;
-    asm("divl %4; \n\t" : "=a"(d), "=d"(m) : "d"(xh), "a"(xl), "r"(get_mod()));
     val = m;
     return *this;
   }
@@ -103,19 +94,16 @@ struct ArbitraryModInt {
   ArbitraryModInt operator*(const ArbitraryModInt &p) const {
     return ArbitraryModInt(*this) *= p;
   }
-
   ArbitraryModInt operator/(const ArbitraryModInt &p) const {
     return ArbitraryModInt(*this) /= p;
   }
-
   bool operator==(const ArbitraryModInt &p) const { return val == p.val; }
   bool operator!=(const ArbitraryModInt &p) const { return val != p.val; }
   ArbitraryModInt inverse() const {
     int a = val, b = get_mod(), u = 1, v = 0, t;
     while (b > 0) {
       t = a / b;
-      swap(a -= t * b, b);
-      swap(u -= t * v, v);
+      swap(a -= t * b, b), swap(u -= t * v, v);
     }
     return ArbitraryModInt(u);
   }
@@ -128,22 +116,12 @@ struct ArbitraryModInt {
     }
     return ret;
   }
-  friend ostream &operator<<(ostream &os, const ArbitraryModInt &p) {
-    return os << p.val;
-  }
-  friend istream &operator>>(istream &is, ArbitraryModInt &a) {
-    int64_t t;
-    is >> t;
-    a = ArbitraryModInt(t);
-    return (is);
-  }
 };
 
 template<typename mint>
 tuple<mint, mint, mint> get_factorial_data(int n){
   static constexpr int mod = mint::get_mod();
   assert(0 <= n && n < mod);
-
   static vector<mint> fact = {1, 1};
   static vector<mint> fact_inv = {1, 1};
   static vector<mint> inv = {0, 1};
