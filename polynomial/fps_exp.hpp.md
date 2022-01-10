@@ -9,6 +9,9 @@ data:
     title: polynomial/convolution.hpp
   _extendedRequiredBy:
   - icon: ':x:'
+    path: other/sharp_p_subset_sum.hpp
+    title: other/sharp_p_subset_sum.hpp
+  - icon: ':x:'
     path: polynomial/fps_pow.hpp
     title: polynomial/fps_pow.hpp
   _extendedVerifiedWith:
@@ -296,6 +299,7 @@ data:
   path: polynomial/fps_exp.hpp
   requiredBy:
   - polynomial/fps_pow.hpp
+  - other/sharp_p_subset_sum.hpp
   timestamp: '2022-01-09 16:39:58+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:

@@ -1,42 +1,39 @@
 ---
 data:
   _extendedDependsOn:
+  - icon: ':x:'
+    path: linalg/solve_linear.hpp
+    title: linalg/solve_linear.hpp
   - icon: ':question:'
-    path: graph/base.hpp
-    title: graph/base.hpp
-  - icon: ':heavy_check_mark:'
-    path: graph/dijkstra.hpp
-    title: graph/dijkstra.hpp
-  - icon: ':heavy_check_mark:'
-    path: graph/restore_path.hpp
-    title: graph/restore_path.hpp
+    path: mod/modint.hpp
+    title: mod/modint.hpp
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/shortest_path
+    PROBLEM: https://judge.yosupo.jp/problem/system_of_linear_equations
     links:
-    - https://judge.yosupo.jp/problem/shortest_path
-  bundledCode: "#line 1 \"test/library_checker/graph/shortest_path.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/shortest_path\"\r\n\r\n#line 1 \"\
-    my_template.hpp\"\n#include <bits/stdc++.h>\n#include <unistd.h>\n\nusing namespace\
-    \ std;\n\nusing ll = long long;\nusing ll8 = __int128;\nusing pi = pair<ll, ll>;\n\
-    using vi = vector<ll>;\nusing uint = unsigned int;\nusing ull = unsigned long\
-    \ long;\n\ntemplate <class T>\nusing vc = vector<T>;\ntemplate <class T>\nusing\
-    \ vvc = vector<vc<T>>;\ntemplate <class T>\nusing vvvc = vector<vvc<T>>;\ntemplate\
-    \ <class T>\nusing vvvvc = vector<vvvc<T>>;\ntemplate <class T>\nusing vvvvvc\
-    \ = vector<vvvvc<T>>;\ntemplate <class T>\nusing pq = priority_queue<T>;\ntemplate\
-    \ <class T>\nusing pqg = priority_queue<T, vector<T>, greater<T>>;\n\n#define\
-    \ vec(type, name, ...) vector<type> name(__VA_ARGS__)\n#define VEC(type, name,\
-    \ size) \\\n  vector<type> name(size);    \\\n  IN(name)\n#define vv(type, name,\
-    \ h, ...) \\\n  vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n#define\
-    \ VV(type, name, h, w)                     \\\n  vector<vector<type>> name(h,\
+    - https://judge.yosupo.jp/problem/system_of_linear_equations
+  bundledCode: "#line 1 \"test/library_checker/matrix/solve_linear.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/system_of_linear_equations\"\r\n#line\
+    \ 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n#include <unistd.h>\n\nusing\
+    \ namespace std;\n\nusing ll = long long;\nusing ll8 = __int128;\nusing pi = pair<ll,\
+    \ ll>;\nusing vi = vector<ll>;\nusing uint = unsigned int;\nusing ull = unsigned\
+    \ long long;\n\ntemplate <class T>\nusing vc = vector<T>;\ntemplate <class T>\n\
+    using vvc = vector<vc<T>>;\ntemplate <class T>\nusing vvvc = vector<vvc<T>>;\n\
+    template <class T>\nusing vvvvc = vector<vvvc<T>>;\ntemplate <class T>\nusing\
+    \ vvvvvc = vector<vvvvc<T>>;\ntemplate <class T>\nusing pq = priority_queue<T>;\n\
+    template <class T>\nusing pqg = priority_queue<T, vector<T>, greater<T>>;\n\n\
+    #define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n#define VEC(type,\
+    \ name, size) \\\n  vector<type> name(size);    \\\n  IN(name)\n#define vv(type,\
+    \ name, h, ...) \\\n  vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n\
+    #define VV(type, name, h, w)                     \\\n  vector<vector<type>> name(h,\
     \ vector<type>(w)); \\\n  IN(name)\n#define vvv(type, name, h, w, ...)   \\\n\
     \  vector<vector<vector<type>>> name( \\\n      h, vector<vector<type>>(w, vector<type>(__VA_ARGS__)))\n\
     #define vvvv(type, name, a, b, c, ...)       \\\n  vector<vector<vector<vector<type>>>>\
@@ -238,77 +235,126 @@ data:
     \ accumulate(all(v), 0LL)\n#define MIN(v) *min_element(all(v))\n#define MAX(v)\
     \ *max_element(all(v))\n#define LB(c, x) distance((c).begin(), lower_bound(all(c),\
     \ (x)))\n#define UB(c, x) distance((c).begin(), upper_bound(all(c), (x)))\n#define\
-    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 4 \"test/library_checker/graph/shortest_path.test.cpp\"\
-    \n\r\n#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n  int\
-    \ frm, to;\n  T cost;\n  int id;\n};\n\ntemplate <typename T = int, bool directed\
-    \ = false>\nstruct Graph {\n  int N, M;\n  using cost_type = T;\n  using edge_type\
-    \ = Edge<T>;\n  vector<edge_type> edges;\n  vector<int> indptr;\n  vector<edge_type>\
-    \ csr_edges;\n  bool prepared;\n\n  class OutgoingEdges {\n  public:\n    OutgoingEdges(const\
-    \ Graph* G, int l, int r) : G(G), l(l), r(r) {}\n\n    const edge_type* begin()\
-    \ const {\n      if (l == r) { return 0; }\n      return &G->csr_edges[l];\n \
-    \   }\n\n    const edge_type* end() const {\n      if (l == r) { return 0; }\n\
-    \      return &G->csr_edges[r];\n    }\n\n  private:\n    int l, r;\n    const\
-    \ Graph* G;\n  };\n\n  bool is_prepared() { return prepared; }\n  constexpr bool\
-    \ is_directed() { return directed; }\n\n  Graph() {}\n  Graph(int N) : N(N), M(0),\
-    \ prepared(0) {}\n\n  void add(int frm, int to, T cost = 1, int i = -1) {\n  \
-    \  assert(!prepared);\n    assert(0 <= frm && frm < N && 0 <= to && to < N);\n\
-    \    if (i == -1) i = M;\n    auto e = edge_type({frm, to, cost, i});\n    edges.eb(e);\n\
-    \    ++M;\n  }\n\n  void prepare() {\n    assert(!prepared);\n    prepared = true;\n\
-    \    indptr.assign(N + 1, 0);\n    for (auto&& e: edges) {\n      indptr[e.frm\
-    \ + 1]++;\n      if (!directed) indptr[e.to + 1]++;\n    }\n    FOR(v, N) indptr[v\
-    \ + 1] += indptr[v];\n    auto counter = indptr;\n    csr_edges.resize(indptr.back()\
-    \ + 1);\n    for (auto&& e: edges) {\n      csr_edges[counter[e.frm]++] = e;\n\
-    \      if (!directed)\n        csr_edges[counter[e.to]++] = edge_type({e.to, e.frm,\
-    \ e.cost, e.id});\n    }\n  }\n\n  OutgoingEdges operator[](int v) const {\n \
-    \   assert(prepared);\n    return {this, indptr[v], indptr[v + 1]};\n  }\n\n \
-    \ void debug() {\n    print(\"Graph\");\n    if (!prepared) {\n      print(\"\
-    frm to cost id\");\n      for (auto&& e: edges) print(e.frm, e.to, e.cost, e.id);\n\
-    \    } else {\n      print(\"indptr\", indptr);\n      print(\"frm to cost id\"\
-    );\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e.frm, e.to, e.cost, e.id);\n\
-    \    }\n  }\n\n  int size() { return N; }\n};\n#line 3 \"graph/dijkstra.hpp\"\n\
-    \ntemplate <typename Graph>\npair<vector<typename Graph::cost_type>, vector<int>>\
-    \ dijkstra(Graph& G, int v) {\n  auto N = G.N;\n  using T = typename Graph::cost_type;\n\
-    \  vector<T> dist(N, -1);\n  vector<int> par(N, -1);\n  using P = pair<T, int>;\n\
-    \n  priority_queue<P, vector<P>, greater<P>> que;\n\n  dist[v] = 0;\n  que.push(mp(T(0),\
-    \ v));\n  while (!que.empty()) {\n    auto [dv, v] = que.top();\n    que.pop();\n\
-    \    if (dv > dist[v]) continue;\n    for (auto&& e: G[v]) {\n      if (dist[e.to]\
-    \ == -1 || dist[e.to] > dist[e.frm] + e.cost) {\n        dist[e.to] = dist[e.frm]\
-    \ + e.cost;\n        par[e.to] = e.frm;\n        que.push(mp(dist[e.to], e.to));\n\
-    \      }\n    }\n  }\n  return mp(dist, par);\n}\n#line 1 \"graph/restore_path.hpp\"\
-    \nvector<int> restore_path(vector<int> par, int t){\r\n  vector<int> pth = {t};\r\
-    \n  while (par[pth.back()] != -1) pth.eb(par[pth.back()]);\r\n  reverse(all(pth));\r\
-    \n  return pth;\r\n}\n#line 7 \"test/library_checker/graph/shortest_path.test.cpp\"\
-    \n\r\nvoid solve() {\r\n  LL(N, M, s, t);\r\n  Graph<ll, true> G(N);\r\n  FOR(_,\
-    \ M) {\r\n    LL(a, b, c);\r\n    G.add(a, b, c);\r\n  }\r\n  G.prepare();\r\n\
-    \r\n  auto [dist, par] = dijkstra(G, s);\r\n  if (dist[t] == -1) return print(-1);\r\
-    \n\r\n  vector<int> pth = restore_path(par, t);\r\n  print(dist[t], len(pth) -\
-    \ 1);\r\n  FOR(i, len(pth) - 1) print(pth[i], pth[i + 1]);\r\n}\r\n\r\nsigned\
-    \ main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout\
-    \ << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/shortest_path\"\r\n\r\n\
-    #include \"my_template.hpp\"\r\n\r\n#include \"graph/dijkstra.hpp\"\r\n#include\
-    \ \"graph/restore_path.hpp\"\r\n\r\nvoid solve() {\r\n  LL(N, M, s, t);\r\n  Graph<ll,\
-    \ true> G(N);\r\n  FOR(_, M) {\r\n    LL(a, b, c);\r\n    G.add(a, b, c);\r\n\
-    \  }\r\n  G.prepare();\r\n\r\n  auto [dist, par] = dijkstra(G, s);\r\n  if (dist[t]\
-    \ == -1) return print(-1);\r\n\r\n  vector<int> pth = restore_path(par, t);\r\n\
-    \  print(dist[t], len(pth) - 1);\r\n  FOR(i, len(pth) - 1) print(pth[i], pth[i\
-    \ + 1]);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \ UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())\n#line 2 \"mod/modint.hpp\"\
+    \ntemplate <int mod>\nstruct modint {\n  static constexpr bool is_modint = true;\n\
+    \  int val;\n\n  constexpr modint(const ll val = 0) noexcept\n      : val(val\
+    \ >= 0 ? val % mod : (mod - (-val) % mod) % mod) {}\n\n  bool operator<(const\
+    \ modint &other) const {\n    return val < other.val;\n  } // To use std::map\n\
+    \n  modint &operator+=(const modint &p) {\n    if ((val += p.val) >= mod) val\
+    \ -= mod;\n    return *this;\n  }\n  modint &operator-=(const modint &p) {\n \
+    \   if ((val += mod - p.val) >= mod) val -= mod;\n    return *this;\n  }\n  modint\
+    \ &operator*=(const modint &p) {\n    val = (int)(1LL * val * p.val % mod);\n\
+    \    return *this;\n  }\n  modint &operator/=(const modint &p) {\n    *this *=\
+    \ p.inverse();\n    return *this;\n  }\n  modint operator-() const { return modint(-val);\
+    \ }\n  modint operator+(const modint &p) const { return modint(*this) += p; }\n\
+    \  modint operator-(const modint &p) const { return modint(*this) -= p; }\n  modint\
+    \ operator*(const modint &p) const { return modint(*this) *= p; }\n  modint operator/(const\
+    \ modint &p) const { return modint(*this) /= p; }\n  bool operator==(const modint\
+    \ &p) const { return val == p.val; }\n  bool operator!=(const modint &p) const\
+    \ { return val != p.val; }\n\n  modint inverse() const {\n    int a = val, b =\
+    \ mod, u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -=\
+    \ t * b, b);\n      swap(u -= t * v, v);\n    }\n    return modint(u);\n  }\n\n\
+    \  modint pow(int64_t n) const {\n    modint ret(1), mul(val);\n    while (n >\
+    \ 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n\
+    \    return ret;\n  }\n  static constexpr int get_mod() { return mod; }\n};\n\n\
+    struct ArbitraryModInt {\n  static constexpr bool is_modint = true;\n  int val;\n\
+    \  ArbitraryModInt() : val(0) {}\n  ArbitraryModInt(int64_t y)\n      : val(y\
+    \ >= 0 ? y % get_mod()\n                   : (get_mod() - (-y) % get_mod()) %\
+    \ get_mod()) {}\n\n  bool operator<(const ArbitraryModInt &other) const {\n  \
+    \  return val < other.val;\n  } // To use std::map<ArbitraryModInt, T>\n\n  static\
+    \ int &get_mod() {\n    static int mod = 0;\n    return mod;\n  }\n  static void\
+    \ set_mod(int md) { get_mod() = md; }\n  ArbitraryModInt &operator+=(const ArbitraryModInt\
+    \ &p) {\n    if ((val += p.val) >= get_mod()) val -= get_mod();\n    return *this;\n\
+    \  }\n  ArbitraryModInt &operator-=(const ArbitraryModInt &p) {\n    if ((val\
+    \ += get_mod() - p.val) >= get_mod()) val -= get_mod();\n    return *this;\n \
+    \ }\n  ArbitraryModInt &operator*=(const ArbitraryModInt &p) {\n    unsigned long\
+    \ long a = (unsigned long long)val * p.val;\n    unsigned xh = (unsigned)(a >>\
+    \ 32), xl = (unsigned)a, d, m;\n    asm(\"divl %4; \\n\\t\" : \"=a\"(d), \"=d\"\
+    (m) : \"d\"(xh), \"a\"(xl), \"r\"(get_mod()));\n    val = m;\n    return *this;\n\
+    \  }\n  ArbitraryModInt &operator/=(const ArbitraryModInt &p) {\n    *this *=\
+    \ p.inverse();\n    return *this;\n  }\n  ArbitraryModInt operator-() const {\
+    \ return ArbitraryModInt(-val); }\n  ArbitraryModInt operator+(const ArbitraryModInt\
+    \ &p) const {\n    return ArbitraryModInt(*this) += p;\n  }\n  ArbitraryModInt\
+    \ operator-(const ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this)\
+    \ -= p;\n  }\n  ArbitraryModInt operator*(const ArbitraryModInt &p) const {\n\
+    \    return ArbitraryModInt(*this) *= p;\n  }\n\n  ArbitraryModInt operator/(const\
+    \ ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this) /= p;\n  }\n\n\
+    \  bool operator==(const ArbitraryModInt &p) const { return val == p.val; }\n\
+    \  bool operator!=(const ArbitraryModInt &p) const { return val != p.val; }\n\
+    \  ArbitraryModInt inverse() const {\n    int a = val, b = get_mod(), u = 1, v\
+    \ = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b);\n\
+    \      swap(u -= t * v, v);\n    }\n    return ArbitraryModInt(u);\n  }\n  ArbitraryModInt\
+    \ pow(int64_t n) const {\n    ArbitraryModInt ret(1), mul(val);\n    while (n\
+    \ > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n  \
+    \  }\n    return ret;\n  }\n  friend ostream &operator<<(ostream &os, const ArbitraryModInt\
+    \ &p) {\n    return os << p.val;\n  }\n  friend istream &operator>>(istream &is,\
+    \ ArbitraryModInt &a) {\n    int64_t t;\n    is >> t;\n    a = ArbitraryModInt(t);\n\
+    \    return (is);\n  }\n};\n\ntemplate<typename mint>\ntuple<mint, mint, mint>\
+    \ get_factorial_data(int n){\n  static constexpr int mod = mint::get_mod();\n\
+    \  assert(0 <= n && n < mod);\n\n  static vector<mint> fact = {1, 1};\n  static\
+    \ vector<mint> fact_inv = {1, 1};\n  static vector<mint> inv = {0, 1};\n  while(len(fact)\
+    \ <= n){\n    int k = len(fact);\n    fact.eb(fact[k - 1] * mint(k));\n    auto\
+    \ q = ceil(mod, k);\n    int r = k * q - mod;\n    inv.eb(inv[r] * mint(q));\n\
+    \    fact_inv.eb(fact_inv[k - 1] * inv[k]);\n  }\n  return {fact[n], fact_inv[n],\
+    \ inv[n]};\n}\n\ntemplate<typename mint>\nmint fact(int n){\n  static constexpr\
+    \ int mod = mint::get_mod();\n  assert(0 <= n);\n  if(n >= mod) return 0;\n  return\
+    \ get<0>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename mint>\nmint fact_inv(int\
+    \ n){\n  static constexpr int mod = mint::get_mod();\n  assert(0 <= n && n < mod);\n\
+    \  return get<1>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename mint>\n\
+    mint inv(int n){\n  static constexpr int mod = mint::get_mod();\n  assert(0 <=\
+    \ n && n < mod);\n  return get<2>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename\
+    \ mint>\nmint C(ll n, ll k, bool large = false) {\n  assert(n >= 0);\n  if (k\
+    \ < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n) * fact_inv<mint>(k)\
+    \ * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n  FOR(i, k) {\n\
+    \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\ntemplate<typename\
+    \ mint>\nvc<mint> power_table(mint a, ll N) {\n  vc<mint> f(N, 1);\n  FOR(i, N\
+    \ - 1) f[i + 1] = a * f[i];\n  return f;\n}\n\nusing modint107 = modint<1'000'000'007>;\n\
+    using modint998 = modint<998'244'353>;\nusing amint = ArbitraryModInt;\n#line\
+    \ 1 \"linalg/solve_linear.hpp\"\ntemplate <typename T>\r\nvc<vc<T>> solve_linear(vc<vc<T>>\
+    \ a, vc<T> b) {\r\n  /*\r\n  0 \u884C\u76EE\u306B\u89E3\u306E\u3072\u3068\u3064\
+    \u3002\r\n  1\uFF5E\u884C\u76EE\u306B\u89E3\u7A7A\u9593\u306E\u57FA\u5E95\u304C\
+    \u884C\u30D9\u30AF\u30C8\u30EB\u3068\u3057\u3066\u5165\u308B\u3002\r\n  \u89E3\
+    \u306A\u3057 = empty\r\n  */\r\n  auto n = len(a), m = len(a[0]);\r\n  int rk\
+    \ = 0;\r\n  FOR(j, m) {\r\n    if (a[rk][j] == 0) {\r\n      FOR3(i, rk + 1, n)\
+    \ if (a[i][j] != 0) {\r\n        swap(a[rk], a[i]);\r\n        swap(b[rk], b[i]);\r\
+    \n        break;\r\n      }\r\n    }\r\n    if (a[rk][j] == 0) continue;\r\n \
+    \   T c = T(1) / a[rk][j];\r\n    for (auto&& x: a[rk]) x *= c;\r\n    b[rk] *=\
+    \ c;\r\n    FOR(i, n) if (i != rk) {\r\n      T c = a[i][j];\r\n      b[i] -=\
+    \ b[rk] * c;\r\n      FOR3(k, j, m) { a[i][k] -= a[rk][k] * c; }\r\n    }\r\n\
+    \    ++rk;\r\n    if (rk == n) break;\r\n  }\r\n  FOR3(i, rk, n) if (b[i] != 0)\
+    \ return {};\r\n  vc<vc<T>> res(1, vc<T>(m));\r\n  vc<int> pivot(m, -1);\r\n \
+    \ int p = 0;\r\n  FOR(i, rk) {\r\n    while (a[i][p] == 0) ++p;\r\n    res[0][p]\
+    \ = b[i];\r\n    pivot[p] = i;\r\n  }\r\n  FOR(j, m) if (pivot[j] == -1) {\r\n\
+    \    vc<T> x(m);\r\n    x[j] = -1;\r\n    FOR(k, j) if (pivot[k] != -1) x[k] =\
+    \ a[pivot[k]][j];\r\n    res.eb(x);\r\n  }\r\n  return res;\r\n}\r\n#line 5 \"\
+    test/library_checker/matrix/solve_linear.test.cpp\"\n\r\nusing mint = modint998;\r\
+    \nvoid solve() {\r\n  LL(N, M);\r\n  VV(mint, A, N, M);\r\n  VEC(mint, b, N);\r\
+    \n  auto xs = solve_linear(A, b);\r\n  if (len(xs) == 0) return print(-1);\r\n\
+    \  print(len(xs) - 1);\r\n  FOR(r, len(xs)) print(xs[r]);\r\n}\r\n\r\nsigned main()\
+    \ {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
+    \n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/system_of_linear_equations\"\
+    \r\n#include \"my_template.hpp\"\r\n#include \"mod/modint.hpp\"\r\n#include \"\
+    linalg/solve_linear.hpp\"\r\n\r\nusing mint = modint998;\r\nvoid solve() {\r\n\
+    \  LL(N, M);\r\n  VV(mint, A, N, M);\r\n  VEC(mint, b, N);\r\n  auto xs = solve_linear(A,\
+    \ b);\r\n  if (len(xs) == 0) return print(-1);\r\n  print(len(xs) - 1);\r\n  FOR(r,\
+    \ len(xs)) print(xs[r]);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n\
+    \  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
+    \n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
-  - graph/dijkstra.hpp
-  - graph/base.hpp
-  - graph/restore_path.hpp
+  - mod/modint.hpp
+  - linalg/solve_linear.hpp
   isVerificationFile: true
-  path: test/library_checker/graph/shortest_path.test.cpp
+  path: test/library_checker/matrix/solve_linear.test.cpp
   requiredBy: []
-  timestamp: '2022-01-10 07:43:35+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-10 09:14:17+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/library_checker/graph/shortest_path.test.cpp
+documentation_of: test/library_checker/matrix/solve_linear.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/graph/shortest_path.test.cpp
-- /verify/test/library_checker/graph/shortest_path.test.cpp.html
-title: test/library_checker/graph/shortest_path.test.cpp
+- /verify/test/library_checker/matrix/solve_linear.test.cpp
+- /verify/test/library_checker/matrix/solve_linear.test.cpp.html
+title: test/library_checker/matrix/solve_linear.test.cpp
 ---

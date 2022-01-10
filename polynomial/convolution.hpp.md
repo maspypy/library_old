@@ -5,12 +5,15 @@ data:
     path: mod/modint.hpp
     title: mod/modint.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/tree_all_distances.hpp
     title: graph/tree_all_distances.hpp
   - icon: ':heavy_check_mark:'
     path: nt/multiplicative_convolution_mod2n.hpp
     title: nt/multiplicative_convolution_mod2n.hpp
+  - icon: ':x:'
+    path: other/sharp_p_subset_sum.hpp
+    title: other/sharp_p_subset_sum.hpp
   - icon: ':heavy_check_mark:'
     path: polynomial/convolution_huge.hpp
     title: polynomial/convolution_huge.hpp
@@ -84,7 +87,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/convolution/subset_convolution_multivar.test.cpp
     title: test/library_checker/convolution/subset_convolution_multivar.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
     title: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
   - icon: ':x:'
@@ -541,6 +544,7 @@ data:
   - polynomial/poly_gcd.hpp
   - sequence/linearrecurrence.hpp
   - sequence/coef_of_rational_fps.hpp
+  - other/sharp_p_subset_sum.hpp
   - nt/multiplicative_convolution_mod2n.hpp
   timestamp: '2022-01-09 16:39:58+09:00'
   verificationStatus: LIBRARY_SOME_WA

@@ -7,6 +7,9 @@ data:
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
+  - icon: ':x:'
+    path: other/sharp_p_subset_sum.hpp
+    title: other/sharp_p_subset_sum.hpp
   - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
@@ -483,34 +486,33 @@ data:
     \ x[i + 1] = x[i] * inv<mint>(i + 1);\r\n    x[0] = 0;\r\n\r\n    FOR3(i, m, min(n,\
     \ m + m)) x[i] += f[i];\r\n    FOR(i, m) x[i] = 0;\r\n    ntt(x, 0);\r\n    FOR(i,\
     \ m + m) x[i] *= y[i];\r\n    ntt(x, 1);\r\n    b.insert(b.end(), x.begin() +\
-    \ m, x.end());\r\n  }\r\n  b.resize(n);\r\n  return b;\r\n}\r\n#line 4 \"test/library_checker/math/sharp_p_subset_sum.test.cpp\"\
-    \n\r\nusing mint = modint998;\r\nvoid solve() {\r\n  LL(N, T);\r\n  VEC(ll, S,\
-    \ N);\r\n  auto CNT = bin_count(S, T + 1);\r\n  vc<mint> logf(T + 1);\r\n  FOR3(x,\
-    \ 1, T + 1) {\r\n    FOR3(d, 1, T / x + 1) {\r\n      if (d & 1)\r\n        logf[d\
+    \ m, x.end());\r\n  }\r\n  b.resize(n);\r\n  return b;\r\n}\r\n#line 2 \"other/sharp_p_subset_sum.hpp\"\
+    \ntemplate<typename mint>\r\nvc<mint> sharp_p_subset_sum(vc<int> S, int LIM) {\r\
+    \n  auto CNT = bin_count(S, LIM);\r\n  vc<mint> logf(LIM);\r\n  FOR3(x, 1, LIM)\
+    \ {\r\n    FOR3(d, 1, (LIM-1) / x + 1) {\r\n      if (d & 1)\r\n        logf[d\
     \ * x] += mint(CNT[x]) * inv<mint>(d);\r\n      else\r\n        logf[d * x] -=\
-    \ mint(CNT[x]) * inv<mint>(d);\r\n    }\r\n  }\r\n  auto f = fps_exp(logf);\r\n\
-    \  f.erase(f.begin());\r\n  print(f);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
-    \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
-    \n\r\n  return 0;\r\n}\r\n"
+    \ mint(CNT[x]) * inv<mint>(d);\r\n    }\r\n  }\r\n  return fps_exp(logf);\r\n\
+    }\r\n#line 4 \"test/library_checker/math/sharp_p_subset_sum.test.cpp\"\n\r\nusing\
+    \ mint = modint998;\r\nvoid solve() {\r\n  LL(N, T);\r\n  VEC(int, S, N);\r\n\
+    \  auto f = sharp_p_subset_sum<mint>(S, T+1);\r\n  f.erase(f.begin());\r\n  print(f);\r\
+    \n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sharp_p_subset_sum\"\r\n\
-    #include \"my_template.hpp\"\r\n#include \"polynomial/fps_exp.hpp\"\r\n\r\nusing\
-    \ mint = modint998;\r\nvoid solve() {\r\n  LL(N, T);\r\n  VEC(ll, S, N);\r\n \
-    \ auto CNT = bin_count(S, T + 1);\r\n  vc<mint> logf(T + 1);\r\n  FOR3(x, 1, T\
-    \ + 1) {\r\n    FOR3(d, 1, T / x + 1) {\r\n      if (d & 1)\r\n        logf[d\
-    \ * x] += mint(CNT[x]) * inv<mint>(d);\r\n      else\r\n        logf[d * x] -=\
-    \ mint(CNT[x]) * inv<mint>(d);\r\n    }\r\n  }\r\n  auto f = fps_exp(logf);\r\n\
-    \  f.erase(f.begin());\r\n  print(f);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
-    \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
-    \n\r\n  return 0;\r\n}\r\n"
+    #include \"my_template.hpp\"\r\n#include \"other/sharp_p_subset_sum.hpp\"\r\n\r\
+    \nusing mint = modint998;\r\nvoid solve() {\r\n  LL(N, T);\r\n  VEC(int, S, N);\r\
+    \n  auto f = sharp_p_subset_sum<mint>(S, T+1);\r\n  f.erase(f.begin());\r\n  print(f);\r\
+    \n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
+  - other/sharp_p_subset_sum.hpp
   - polynomial/fps_exp.hpp
   - polynomial/convolution.hpp
   - mod/modint.hpp
   isVerificationFile: true
   path: test/library_checker/math/sharp_p_subset_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-01-10 07:43:35+09:00'
+  timestamp: '2022-01-10 08:22:16+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/math/sharp_p_subset_sum.test.cpp
