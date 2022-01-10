@@ -116,7 +116,8 @@ vector<T> cumsum(vector<T> &A) {
   return B;
 }
 
-vc<int> bincount(vi &A, int size) {
+template<typename T>
+vc<int> bincount(vc<T> &A, int size) {
   vc<int> C(size);
   for (auto&& x: A) { ++C[x]; }
   return C;
