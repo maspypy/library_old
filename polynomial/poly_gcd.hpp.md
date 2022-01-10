@@ -7,7 +7,7 @@ data:
   - icon: ':question:'
     path: polynomial/convolution.hpp
     title: polynomial/convolution.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: polynomial/fps_inv.hpp
     title: polynomial/fps_inv.hpp
   - icon: ':heavy_check_mark:'

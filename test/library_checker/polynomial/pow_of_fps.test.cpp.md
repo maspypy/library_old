@@ -16,7 +16,7 @@ data:
   - icon: ':question:'
     path: polynomial/fps_exp.hpp
     title: polynomial/fps_exp.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: polynomial/fps_inv.hpp
     title: polynomial/fps_inv.hpp
   - icon: ':heavy_check_mark:'
