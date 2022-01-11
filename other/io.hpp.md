@@ -14,9 +14,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':warning:'
-    path: test/library_checker/math/stirling_number_of_the_first_kind.hpp
-    title: test/library_checker/math/stirling_number_of_the_first_kind.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_D_dualsegtree.test.cpp
@@ -180,6 +177,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/sqrt_mod.test.cpp
     title: test/library_checker/math/sqrt_mod.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
+    title: test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/math/stirling_number_of_the_second_kind.test.cpp
+    title: test/library_checker/math/stirling_number_of_the_second_kind.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/matrix/hafnian_of_matrix.test.cpp
     title: test/library_checker/matrix/hafnian_of_matrix.test.cpp
@@ -452,7 +455,6 @@ data:
   requiredBy:
   - geo/geometry.hpp
   - graph/bipartite_coloring.hpp
-  - test/library_checker/math/stirling_number_of_the_first_kind.hpp
   - ds/lichao.hpp
   - my_template.hpp
   timestamp: '2022-01-10 16:12:04+09:00'
@@ -510,9 +512,11 @@ data:
   - test/library_checker/polynomial/polynomial_interpolation.test.cpp
   - test/library_checker/polynomial/inv_of_polynomials.test.cpp
   - test/library_checker/math/sharp_p_subset_sum.test.cpp
+  - test/library_checker/math/stirling_number_of_the_second_kind.test.cpp
   - test/library_checker/math/sqrt_mod.test.cpp
   - test/library_checker/math/enumerate_primes.test.cpp
   - test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
   - test/library_checker/math/factorize.test.cpp
   - test/library_checker/math/find_linear_recurrence.test.cpp
   - test/library_checker/tree/lca.test.cpp

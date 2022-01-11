@@ -16,18 +16,20 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/poly_taylor_shift.hpp
     title: poly/poly_taylor_shift.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: seq/stirling_number_1.hpp
     title: seq/stirling_number_1.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
-  _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _pathExtension: cpp
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind
     links:
     - https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind
-  bundledCode: "#line 1 \"test/library_checker/math/stirling_number_of_the_first_kind.hpp\"\
+  bundledCode: "#line 1 \"test/library_checker/math/stirling_number_of_the_first_kind.test.cpp\"\
     \n#define PROBLEM \\\r\n  \"https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind\"\
     \r\n#line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
     \n#line 1 \"other/io.hpp\"\n// based on yosupo's fastio\r\n#include <unistd.h>\r\
@@ -394,8 +396,8 @@ data:
     \  auto f = stirling_number_1<mint>(n / 2);\r\n  auto g = poly_taylor_shift(f,\
     \ -mint(n / 2));\r\n  f = convolution(f, g);\r\n  if (n & 1) {\r\n    g = {-(n\
     \ - 1), 1};\r\n    f = convolution(f, g);\r\n  }\r\n  return f;\r\n}\r\n#line\
-    \ 5 \"test/library_checker/math/stirling_number_of_the_first_kind.hpp\"\n\r\n\
-    using mint = modint998;\r\nvoid solve() {\r\n  LL(N);\r\n  auto ANS = stirling_number_1<mint>(N);\r\
+    \ 5 \"test/library_checker/math/stirling_number_of_the_first_kind.test.cpp\"\n\
+    \r\nusing mint = modint998;\r\nvoid solve() {\r\n  LL(N);\r\n  auto ANS = stirling_number_1<mint>(N);\r\
     \n  print(ANS);\r\n}\r\n\r\nsigned main() {\r\n  solve();\r\n\r\n  return 0;\r\
     \n}\r\n"
   code: "#define PROBLEM \\\r\n  \"https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind\"\
@@ -410,16 +412,16 @@ data:
   - poly/poly_taylor_shift.hpp
   - poly/convolution.hpp
   - mod/modint.hpp
-  isVerificationFile: false
-  path: test/library_checker/math/stirling_number_of_the_first_kind.hpp
+  isVerificationFile: true
+  path: test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
   requiredBy: []
-  timestamp: '2022-01-12 05:33:30+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
+  timestamp: '2022-01-12 05:48:14+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/library_checker/math/stirling_number_of_the_first_kind.hpp
+documentation_of: test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
 layout: document
 redirect_from:
-- /library/test/library_checker/math/stirling_number_of_the_first_kind.hpp
-- /library/test/library_checker/math/stirling_number_of_the_first_kind.hpp.html
-title: test/library_checker/math/stirling_number_of_the_first_kind.hpp
+- /verify/test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
+- /verify/test/library_checker/math/stirling_number_of_the_first_kind.test.cpp.html
+title: test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
 ---

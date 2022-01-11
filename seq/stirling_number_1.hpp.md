@@ -10,14 +10,14 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/poly_taylor_shift.hpp
     title: poly/poly_taylor_shift.hpp
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: test/library_checker/math/stirling_number_of_the_first_kind.hpp
-    title: test/library_checker/math/stirling_number_of_the_first_kind.hpp
-  _extendedVerifiedWith: []
+  _extendedRequiredBy: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
+    title: test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n\
@@ -269,11 +269,11 @@ data:
   - mod/modint.hpp
   isVerificationFile: false
   path: seq/stirling_number_1.hpp
-  requiredBy:
-  - test/library_checker/math/stirling_number_of_the_first_kind.hpp
+  requiredBy: []
   timestamp: '2022-01-12 05:33:30+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
 documentation_of: seq/stirling_number_1.hpp
 layout: document
 redirect_from:

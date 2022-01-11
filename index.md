@@ -378,9 +378,12 @@ data:
     - icon: ':warning:'
       path: seq/interpolate_linear_rec.hpp
       title: seq/interpolate_linear_rec.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: seq/stirling_number_1.hpp
       title: seq/stirling_number_1.hpp
+    - icon: ':heavy_check_mark:'
+      path: seq/stirling_number_2.hpp
+      title: seq/stirling_number_2.hpp
   - name: setfunc
     pages:
     - icon: ':heavy_check_mark:'
@@ -421,11 +424,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: string/zalgorithm.hpp
       title: string/zalgorithm.hpp
-  - name: test/library_checker/math
-    pages:
-    - icon: ':warning:'
-      path: test/library_checker/math/stirling_number_of_the_first_kind.hpp
-      title: test/library_checker/math/stirling_number_of_the_first_kind.hpp
   verificationCategories:
   - name: test/aoj
     pages:
@@ -604,6 +602,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/math/sqrt_mod.test.cpp
       title: test/library_checker/math/sqrt_mod.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
+      title: test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/math/stirling_number_of_the_second_kind.test.cpp
+      title: test/library_checker/math/stirling_number_of_the_second_kind.test.cpp
   - name: test/library_checker/matrix
     pages:
     - icon: ':heavy_check_mark:'

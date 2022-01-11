@@ -7,17 +7,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/convolution.hpp
     title: poly/convolution.hpp
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: seq/stirling_number_1.hpp
-    title: seq/stirling_number_1.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
-    title: test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
-    title: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
+    path: test/library_checker/math/stirling_number_of_the_second_kind.test.cpp
+    title: test/library_checker/math/stirling_number_of_the_second_kind.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -247,34 +241,30 @@ data:
     \ modint998>::value, vc<mint>> convolution(const vc<mint>& a, const vc<mint>&\
     \ b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return {};\r\n  if\
     \ (min(n, m) <= 60) return convolution_naive(a, b);\r\n  return convolution_garner(a,\
-    \ b);\r\n}\r\n#line 2 \"poly/poly_taylor_shift.hpp\"\n\r\ntemplate <typename mint>\r\
-    \nvc<mint> poly_taylor_shift(vc<mint> a, mint c) {\r\n  ll N = len(a);\r\n  FOR(i,\
-    \ N) a[i] *= fact<mint>(i);\r\n  auto b = power_table<mint>(c, N);\r\n  FOR(i,\
-    \ N) b[i] *= fact_inv<mint>(i);\r\n  reverse(all(a));\r\n  auto f = convolution(a,\
-    \ b);\r\n  f.resize(N);\r\n  reverse(all(f));\r\n  FOR(i, N) f[i] *= fact_inv<mint>(i);\r\
-    \n  return f;\r\n}\r\n"
-  code: "#include \"poly/convolution.hpp\"\r\n\r\ntemplate <typename mint>\r\nvc<mint>\
-    \ poly_taylor_shift(vc<mint> a, mint c) {\r\n  ll N = len(a);\r\n  FOR(i, N) a[i]\
-    \ *= fact<mint>(i);\r\n  auto b = power_table<mint>(c, N);\r\n  FOR(i, N) b[i]\
-    \ *= fact_inv<mint>(i);\r\n  reverse(all(a));\r\n  auto f = convolution(a, b);\r\
-    \n  f.resize(N);\r\n  reverse(all(f));\r\n  FOR(i, N) f[i] *= fact_inv<mint>(i);\r\
-    \n  return f;\r\n}\r\n"
+    \ b);\r\n}\r\n#line 2 \"seq/stirling_number_2.hpp\"\ntemplate <typename mint>\r\
+    \nvc<mint> stirling_number_2(int n) {\r\n  vc<mint> a(n + 1), b(n + 1);\r\n  FOR(i,\
+    \ n + 1) a[i] = mint(i).pow(n);\r\n  FOR(i, n + 1) b[i] = (i % 2 == 0 ? 1 : -1);\r\
+    \n  FOR(i, n + 1) a[i] *= fact_inv<mint>(i);\r\n  FOR(i, n + 1) b[i] *= fact_inv<mint>(i);\r\
+    \n  auto f = convolution(a, b);\r\n  f.resize(n + 1);\r\n  return f;\r\n}\r\n"
+  code: "#include \"poly/convolution.hpp\"\r\ntemplate <typename mint>\r\nvc<mint>\
+    \ stirling_number_2(int n) {\r\n  vc<mint> a(n + 1), b(n + 1);\r\n  FOR(i, n +\
+    \ 1) a[i] = mint(i).pow(n);\r\n  FOR(i, n + 1) b[i] = (i % 2 == 0 ? 1 : -1);\r\
+    \n  FOR(i, n + 1) a[i] *= fact_inv<mint>(i);\r\n  FOR(i, n + 1) b[i] *= fact_inv<mint>(i);\r\
+    \n  auto f = convolution(a, b);\r\n  f.resize(n + 1);\r\n  return f;\r\n}\r\n"
   dependsOn:
   - poly/convolution.hpp
   - mod/modint.hpp
   isVerificationFile: false
-  path: poly/poly_taylor_shift.hpp
-  requiredBy:
-  - seq/stirling_number_1.hpp
-  timestamp: '2022-01-11 13:34:41+09:00'
+  path: seq/stirling_number_2.hpp
+  requiredBy: []
+  timestamp: '2022-01-12 05:48:14+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
-  - test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
-documentation_of: poly/poly_taylor_shift.hpp
+  - test/library_checker/math/stirling_number_of_the_second_kind.test.cpp
+documentation_of: seq/stirling_number_2.hpp
 layout: document
 redirect_from:
-- /library/poly/poly_taylor_shift.hpp
-- /library/poly/poly_taylor_shift.hpp.html
-title: poly/poly_taylor_shift.hpp
+- /library/seq/stirling_number_2.hpp
+- /library/seq/stirling_number_2.hpp.html
+title: seq/stirling_number_2.hpp
 ---

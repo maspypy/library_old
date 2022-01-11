@@ -62,12 +62,12 @@ data:
   - icon: ':warning:'
     path: seq/interpolate_linear_rec.hpp
     title: seq/interpolate_linear_rec.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: seq/stirling_number_1.hpp
     title: seq/stirling_number_1.hpp
-  - icon: ':warning:'
-    path: test/library_checker/math/stirling_number_of_the_first_kind.hpp
-    title: test/library_checker/math/stirling_number_of_the_first_kind.hpp
+  - icon: ':heavy_check_mark:'
+    path: seq/stirling_number_2.hpp
+    title: seq/stirling_number_2.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/convolution/contolution_mod_2_64.test.cpp
@@ -99,6 +99,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/sharp_p_subset_sum.test.cpp
     title: test/library_checker/math/sharp_p_subset_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
+    title: test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/math/stirling_number_of_the_second_kind.test.cpp
+    title: test/library_checker/math/stirling_number_of_the_second_kind.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/polynomial/composition_of_fps.test.cpp
     title: test/library_checker/polynomial/composition_of_fps.test.cpp
@@ -529,9 +535,9 @@ data:
   requiredBy:
   - seq/interpolate_linear_rec.hpp
   - seq/stirling_number_1.hpp
+  - seq/stirling_number_2.hpp
   - seq/coef_of_rational_fps.hpp
   - graph/tree_all_distances.hpp
-  - test/library_checker/math/stirling_number_of_the_first_kind.hpp
   - poly/fps_pow.hpp
   - poly/fps_log.hpp
   - poly/multipoint.hpp
@@ -572,7 +578,9 @@ data:
   - test/library_checker/polynomial/polynomial_interpolation.test.cpp
   - test/library_checker/polynomial/inv_of_polynomials.test.cpp
   - test/library_checker/math/sharp_p_subset_sum.test.cpp
+  - test/library_checker/math/stirling_number_of_the_second_kind.test.cpp
   - test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
   - test/library_checker/tree/frequency_table_of_tree_distance.test.cpp
 documentation_of: poly/convolution.hpp
 layout: document
