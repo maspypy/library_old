@@ -3,7 +3,7 @@
 
 #include "my_template.hpp"
 
-#include "algebra/beats_sample.hpp"
+#include "alg/beats_sample.hpp"
 #include "ds/lazysegtree_fail.hpp"
 
 void solve() {

@@ -1,5 +1,5 @@
-#include "algebra/group_add.hpp"
-#include "algebra/monoid_min.hpp"
+#include "alg/group_add.hpp"
+#include "alg/monoid_min.hpp"
 
 template <typename E, E INF>
 struct Lazy_Min_Add {

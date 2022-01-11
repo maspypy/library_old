@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_add_path_sum"
 #include "my_template.hpp"
 
-#include "algebra/group_add.hpp"
+#include "alg/group_add.hpp"
 #include "ds/segtree.hpp"
 #include "graph/treegroup.hpp"
 

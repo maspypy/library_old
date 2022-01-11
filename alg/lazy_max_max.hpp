@@ -1,4 +1,4 @@
-#include "algebra/monoid_max.hpp"
+#include "alg/monoid_max.hpp"
 
 template <typename E, E INF>
 struct Lazy_Max_Max {

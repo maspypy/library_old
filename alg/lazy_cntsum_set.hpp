@@ -1,5 +1,5 @@
-#include "algebra/group_cntsum.hpp"
-#include "algebra/monoid_set.hpp"
+#include "alg/group_cntsum.hpp"
+#include "alg/monoid_set.hpp"
 
 template <typename E, E none_val>
 struct Lazy_CntSum_Set {

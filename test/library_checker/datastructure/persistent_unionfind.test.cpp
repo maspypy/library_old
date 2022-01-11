@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/persistent_unionfind"
 #include "my_template.hpp"
 
-#include "persistent_ds/unionfind.hpp"
+#include "pds/unionfind.hpp"
 
 void solve() {
   LL(N, Q);

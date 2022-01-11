@@ -2,7 +2,7 @@
 #include "my_template.hpp"
 
 #include "graph/treemonoid.hpp"
-#include "algebra/group_add.hpp"
+#include "alg/group_add.hpp"
 
 void solve() {
   LL(N, Q);

@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/persistent_queue"
 #include "my_template.hpp"
 
-#include "persistent_ds/array.hpp"
+#include "pds/array.hpp"
 
 void solve() {
   LL(Q);

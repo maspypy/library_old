@@ -1,5 +1,5 @@
 #pragma once
-#include "algebra/group_add.hpp"
+#include "alg/group_add.hpp"
 
 template <typename AbelGroup>
 struct FenwickTree {

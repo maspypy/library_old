@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D"
 #include "my_template.hpp"
 #include "ds/dualsegtree.hpp"
-#include "algebra/monoid_set.hpp"
+#include "alg/monoid_set.hpp"
 
 void solve() {
   using Mono = Monoid_Set<ll, (1LL << 31) - 1>;
