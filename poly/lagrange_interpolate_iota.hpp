@@ -1,6 +1,6 @@
 #include "algebra/group_mul.hpp"
 #include "ds/swag.hpp"
-#include "polynomial/convolution.hpp"
+#include "poly/convolution.hpp"
 
 template <typename mint>
 vc<mint> lagrange_intepolate_iota(vc<mint> &f, mint c, int m) {

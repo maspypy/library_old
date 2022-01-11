@@ -1,7 +1,7 @@
-#include "polynomial/convolution.hpp"
+#include "poly/convolution.hpp"
 
 template <typename mint>
-mint coef_of_rational(vector<mint> A, vector<mint> B, ll N) {
+mint coef_of_rational_fps(vector<mint> A, vector<mint> B, ll N) {
   if(len(A)==0) return 0;
   assert(B[0] == 1);
   assert(len(B) == len(A) + 1);

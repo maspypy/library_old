@@ -3,7 +3,7 @@
 #include "my_template.hpp"
 
 #include "mod/modint.hpp"
-#include "sequence/linearrecurrence.hpp"
+#include "seq/coef_of_rational_fps.hpp"
 
 using mint = modint998;
 void solve() {
@@ -14,7 +14,7 @@ void solve() {
   g.insert(g.begin(), 1);
   auto f = convolution(A, g);
   f.resize(N);
-  print(coef_of_rational(f, g, K));
+  print(coef_of_rational_fps(f, g, K));
 }
 
 signed main() {

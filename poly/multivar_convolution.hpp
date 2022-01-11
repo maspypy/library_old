@@ -1,4 +1,4 @@
-#include "polynomial/convolution.hpp"
+#include "poly/convolution.hpp"
 template <typename mint>
 vc<mint> multivar_convolution(vi ns, vc<mint>& f, vc<mint>& g) {
   /*

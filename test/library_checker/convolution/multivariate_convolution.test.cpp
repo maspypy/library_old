@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/multivariate_convolution"
 #include "my_template.hpp"
 
-#include "polynomial/multivar_convolution.hpp"
+#include "poly/multivar_convolution.hpp"
 
 using mint = modint998;
 

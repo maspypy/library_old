@@ -1,4 +1,4 @@
-#include "polynomial/convolution.hpp"
+#include "poly/convolution.hpp"
 
 template <typename mint>
 vc<mint> fps_inv(vc<mint>& F) {

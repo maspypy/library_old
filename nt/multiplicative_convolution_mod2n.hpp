@@ -1,4 +1,4 @@
-#include "polynomial/convolution.hpp"
+#include "poly/convolution.hpp"
 
 template <typename mint>
 vc<mint> multiplicative_convolution_mod2n(vc<mint>& A, vc<mint>& B){

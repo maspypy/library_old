@@ -1,4 +1,4 @@
-#include "sequence/find_linear_recurrence.hpp"
+#include "seq/find_linear_rec.hpp"
 #include "other/random.hpp"
 
 template <typename mint>
@@ -15,5 +15,5 @@ vc<mint> spmat_min_poly(int N, vc<tuple<int, int, mint>> dat) {
     for (auto&& [i, j, x]: dat) w[j] += x * v[i];
     swap(v, w);
   }
-  return find_linear_recurrence(S);
+  return find_linear_rec(S);
 }

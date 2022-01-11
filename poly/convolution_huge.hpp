@@ -1,4 +1,4 @@
-#include "polynomial/convolution.hpp"
+#include "poly/convolution.hpp"
 template<typename mint>
 vc<mint> convolution_huge(const vc<mint>& A, const vc<mint>& B) {
   int N = len(A), M = len(B);

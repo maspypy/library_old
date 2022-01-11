@@ -1,4 +1,4 @@
-#include "polynomial/fps_inv.hpp"
+#include "poly/fps_inv.hpp"
 template <typename mint>
 pair<vc<mint>, vc<mint>> poly_divmod(vc<mint> f, vc<mint> g) {
   assert(g.back() != 0);

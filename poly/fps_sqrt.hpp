@@ -1,4 +1,4 @@
-#include "polynomial/fps_inv.hpp"
+#include "poly/fps_inv.hpp"
 #include "mod/mod_sqrt.hpp"
 template <typename mint>
 vc<mint> fps_sqrt(vc<mint>& f) {

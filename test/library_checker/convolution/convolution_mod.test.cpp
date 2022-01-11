@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod"
 #include "my_template.hpp"
 
-#include "polynomial/convolution.hpp"
+#include "poly/convolution.hpp"
 using mint = modint998;
 
 void solve() {

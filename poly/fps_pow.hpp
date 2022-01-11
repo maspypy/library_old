@@ -1,5 +1,5 @@
-#include "polynomial/fps_exp.hpp"
-#include "polynomial/fps_log.hpp"
+#include "poly/fps_exp.hpp"
+#include "poly/fps_log.hpp"
 
 template <typename mint>
 vc<mint> fps_pow(vc<mint>& f, ll k) {

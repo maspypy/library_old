@@ -1,4 +1,4 @@
-#include "polynomial/poly_divmod.hpp"
+#include "poly/poly_divmod.hpp"
 
 namespace half_gcd {
 // https://people.eecs.berkeley.edu/~fateman/282/readings/yap-2.pdf

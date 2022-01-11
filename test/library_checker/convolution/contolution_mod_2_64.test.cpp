@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/convolution_mod_2_64"
 #include "my_template.hpp"
 
-#include "polynomial/convolution_mod_2_64.hpp"
+#include "poly/convolution_mod_2_64.hpp"
 
 void solve() {
   LL(N, M);

@@ -2,13 +2,13 @@
 #include "my_template.hpp"
 
 #include "mod/modint.hpp"
-#include "sequence/linearrecurrence.hpp"
+#include "seq/find_linear_rec.hpp"
 
 using mint = modint998;
 void solve() {
   LL(N);
   VEC(mint, A, N);
-  auto g = find_linear_recurrence(A);
+  auto g = find_linear_rec(A);
   g.erase(g.begin());
   for (auto&& x : g) x = -x;
   print(len(g));

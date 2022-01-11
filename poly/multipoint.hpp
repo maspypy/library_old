@@ -1,4 +1,4 @@
-#include "polynomial/fps_inv.hpp"
+#include "poly/fps_inv.hpp"
 
 template <typename mint>
 struct SubproductTree {

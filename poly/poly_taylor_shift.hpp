@@ -1,4 +1,4 @@
-#include "polynomial/convolution.hpp"
+#include "poly/convolution.hpp"
 
 template <typename mint>
 vc<mint> poly_taylor_shift(vc<mint> a, mint c) {

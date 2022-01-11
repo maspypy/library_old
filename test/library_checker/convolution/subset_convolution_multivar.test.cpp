@@ -2,7 +2,7 @@
 #include "my_template.hpp"
 
 #include "mod/modint.hpp"
-#include "polynomial/multivar_convolution.hpp"
+#include "poly/multivar_convolution.hpp"
 
 using mint = modint998;
 

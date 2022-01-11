@@ -2,7 +2,7 @@
 #include "my_template.hpp"
 
 #include "mod/modint.hpp"
-#include "polynomial/convolution_huge.hpp"
+#include "poly/convolution_huge.hpp"
 using mint = modint998;
 
 void solve() {
