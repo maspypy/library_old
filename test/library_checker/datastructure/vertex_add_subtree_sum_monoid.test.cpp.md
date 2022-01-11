@@ -20,7 +20,7 @@ data:
     \ line -1: no such header\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_subtree_sum\"\
     \r\n#include \"my_template.hpp\"\r\n\r\n#include \"graph/treemonoid.hpp\"\r\n\
-    #include \"algebra/group_add.hpp\"\r\n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  VEC(ll,\
+    #include \"alg/group_add.hpp\"\r\n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  VEC(ll,\
     \ A, N);\r\n  Graph<int, 1> G(N);\r\n  FOR3(v, 1, N) {\r\n    LL(p);\r\n    G.add(p,\
     \ v);\r\n  }\r\n  G.prepare();\r\n\r\n  HLD hld(G);\r\n  using Mono = Group_Add<ll>;\r\
     \n\r\n  TreeMonoid<decltype(hld), Mono, false> TM(hld, A);\r\n\r\n  FOR(_, Q)\

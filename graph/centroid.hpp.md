@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
   _extendedRequiredBy: []
@@ -9,9 +9,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1002_centroid.test.cpp
     title: test/yukicoder/1002_centroid.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: test/yukicoder/1038_centroid.test.cpp
+    title: test/yukicoder/1038_centroid.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n\
@@ -115,9 +118,10 @@ data:
   path: graph/centroid.hpp
   requiredBy: []
   timestamp: '2022-01-01 12:00:30+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1002_centroid.test.cpp
+  - test/yukicoder/1038_centroid.test.cpp
 documentation_of: graph/centroid.hpp
 layout: document
 redirect_from:

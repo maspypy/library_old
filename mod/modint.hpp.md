@@ -93,6 +93,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/convolution/subset_convolution_multivar.test.cpp
     title: test/library_checker/convolution/subset_convolution_multivar.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
+    title: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
+    title: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
+    title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
   - icon: ':x:'
     path: test/library_checker/math/find_linear_recurrence.test.cpp
     title: test/library_checker/math/find_linear_recurrence.test.cpp
@@ -316,6 +325,9 @@ data:
   - test/library_checker/math/sqrt_mod.test.cpp
   - test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/library_checker/math/find_linear_recurrence.test.cpp
+  - test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
+  - test/library_checker/datastructure/queue_operate_all_composite.test.cpp
+  - test/library_checker/datastructure/range_affine_range_sum.test.cpp
 documentation_of: mod/modint.hpp
 layout: document
 redirect_from:

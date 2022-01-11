@@ -1,11 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: graph/treeabelgroup.hpp
+    title: graph/treeabelgroup.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
+    title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/tree/lca.test.cpp
     title: test/library_checker/tree/lca.test.cpp
@@ -142,12 +148,14 @@ data:
   - graph/base.hpp
   isVerificationFile: false
   path: graph/hld.hpp
-  requiredBy: []
+  requiredBy:
+  - graph/treeabelgroup.hpp
   timestamp: '2022-01-03 14:52:38+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/tree/lca.test.cpp
   - test/library_checker/tree/lca_directed.test.cpp
+  - test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
 documentation_of: graph/hld.hpp
 layout: document
 redirect_from:

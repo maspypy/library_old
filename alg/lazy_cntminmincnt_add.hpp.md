@@ -1,6 +1,12 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':question:'
+    path: alg/group_add.hpp
+    title: alg/group_add.hpp
+  - icon: ':warning:'
+    path: alg/monoid_cntminmincnt.hpp
+    title: alg/monoid_cntminmincnt.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -8,27 +14,40 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.10.1/x64/lib/python3.10/site-packages/onlinejudge_verify/documentation/build.py\"\
-    , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.10.1/x64/lib/python3.10/site-packages/onlinejudge_verify/languages/cplusplus.py\"\
-    , line 187, in bundle\n    bundler.update(path)\n  File \"/opt/hostedtoolcache/Python/3.10.1/x64/lib/python3.10/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
-    , line 401, in update\n    self.update(self._resolve(pathlib.Path(included), included_from=path))\n\
-    \  File \"/opt/hostedtoolcache/Python/3.10.1/x64/lib/python3.10/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
-    , line 260, in _resolve\n    raise BundleErrorAt(path, -1, \"no such header\"\
-    )\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: algebra/monoid_cntminmincnt.hpp:\
-    \ line -1: no such header\n"
-  code: "#include \"algebra/monoid_cntminmincnt.hpp\"\r\n#include \"algebra/group_add.hpp\"\
+  bundledCode: "#line 1 \"alg/monoid_cntminmincnt.hpp\"\n// \u5168\u4F53\u306E\u500B\
+    \u6570\u3001\u6700\u5C0F\u5024\u3001\u6700\u5C0F\u5024\u306E\u500B\u6570\r\ntemplate\
+    \ <ll INF>\r\nstruct Monoid_CntMinMincnt {\r\n  using value_type = tuple<ll, ll,\
+    \ ll>;\r\n  using X = value_type;\r\n  static X op(X x, X y) {\r\n    auto [xcnt,\
+    \ xmin, xmincnt] = x;\r\n    auto [ycnt, ymin, ymincnt] = y;\r\n    if (xmin >\
+    \ ymin) return {xcnt + ycnt, ymin, ymincnt};\r\n    if (xmin == ymin) return {xcnt\
+    \ + ycnt, xmin, xmincnt + ymincnt};\r\n    return {xcnt + ycnt, xmin, xmincnt};\r\
+    \n  }\r\n  static constexpr X unit = X(0, INF, 0);\r\n  static constexpr bool\
+    \ commute = true;\r\n};\n#line 2 \"alg/group_add.hpp\"\ntemplate <class X, X ZERO\
+    \ = X(0)>\r\nstruct Group_Add {\r\n  using value_type = X;\r\n  static constexpr\
+    \ X op(const X &x, const X &y) noexcept { return x + y; }\r\n  static constexpr\
+    \ X inverse(const X &x) noexcept { return -x; }\r\n  static constexpr X power(const\
+    \ X &x, ll n) noexcept { return n * x; }\r\n  static constexpr X unit = ZERO;\r\
+    \n  static constexpr bool commute = true;\r\n};\r\n#line 3 \"alg/lazy_cntminmincnt_add.hpp\"\
+    \n\r\ntemplate <ll INF>\r\nstruct Lazy_CntMinMincnt_Add {\r\n  using MX = Monoid_CntMinMincnt<INF>;\r\
+    \n  using MA = Group_Add<ll>;\r\n  using X_structure = MX;\r\n  using A_structure\
+    \ = MA;\r\n  using X = typename MX::value_type;\r\n  using A = typename MA::value_type;\r\
+    \n  static constexpr X act(const X &x, const A &a) {\r\n    auto [xcnt, xmin,\
+    \ xmincnt] = x;\r\n    return {xcnt, min(INF, xmin + a), xmincnt};\r\n  }\r\n\
+    };\n"
+  code: "#include \"alg/monoid_cntminmincnt.hpp\"\r\n#include \"alg/group_add.hpp\"\
     \r\n\r\ntemplate <ll INF>\r\nstruct Lazy_CntMinMincnt_Add {\r\n  using MX = Monoid_CntMinMincnt<INF>;\r\
     \n  using MA = Group_Add<ll>;\r\n  using X_structure = MX;\r\n  using A_structure\
     \ = MA;\r\n  using X = typename MX::value_type;\r\n  using A = typename MA::value_type;\r\
     \n  static constexpr X act(const X &x, const A &a) {\r\n    auto [xcnt, xmin,\
     \ xmincnt] = x;\r\n    return {xcnt, min(INF, xmin + a), xmincnt};\r\n  }\r\n\
     };"
-  dependsOn: []
+  dependsOn:
+  - alg/monoid_cntminmincnt.hpp
+  - alg/group_add.hpp
   isVerificationFile: false
   path: alg/lazy_cntminmincnt_add.hpp
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
+  timestamp: '2022-01-11 13:47:23+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: alg/lazy_cntminmincnt_add.hpp

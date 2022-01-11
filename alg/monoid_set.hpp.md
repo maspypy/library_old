@@ -1,11 +1,29 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: alg/lazy_cntsum_set.hpp
+    title: alg/lazy_cntsum_set.hpp
+  - icon: ':warning:'
+    path: alg/lazy_max_set.hpp
+    title: alg/lazy_max_set.hpp
+  - icon: ':heavy_check_mark:'
+    path: alg/lazy_min_set.hpp
+    title: alg/lazy_min_set.hpp
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/DSL_2_D_dualsegtree.test.cpp
+    title: test/aoj/DSL_2_D_dualsegtree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/DSL_2_F_min_set_lazy.test.cpp
+    title: test/aoj/DSL_2_F_min_set_lazy.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
+    title: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"alg/monoid_set.hpp\"\ntemplate <typename E, E none_val>\r\
@@ -19,10 +37,16 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: alg/monoid_set.hpp
-  requiredBy: []
+  requiredBy:
+  - alg/lazy_cntsum_set.hpp
+  - alg/lazy_max_set.hpp
+  - alg/lazy_min_set.hpp
   timestamp: '2022-01-11 13:22:23+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
+  - test/aoj/DSL_2_D_dualsegtree.test.cpp
+  - test/aoj/DSL_2_F_min_set_lazy.test.cpp
 documentation_of: alg/monoid_set.hpp
 layout: document
 redirect_from:

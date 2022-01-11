@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: alg/lazy_add_mul.hpp
+    title: alg/lazy_add_mul.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -20,7 +23,8 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: alg/group_mul.hpp
-  requiredBy: []
+  requiredBy:
+  - alg/lazy_add_mul.hpp
   timestamp: '2022-01-11 13:22:23+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

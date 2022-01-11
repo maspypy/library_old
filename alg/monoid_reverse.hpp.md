@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: alg/lazy_reverse.hpp
+    title: alg/lazy_reverse.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -21,7 +24,8 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: alg/monoid_reverse.hpp
-  requiredBy: []
+  requiredBy:
+  - alg/lazy_reverse.hpp
   timestamp: '2022-01-11 13:22:23+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

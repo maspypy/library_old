@@ -1,35 +1,51 @@
 ---
 data:
-  _extendedDependsOn: []
+  _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: alg/monoid_min.hpp
+    title: alg/monoid_min.hpp
+  - icon: ':heavy_check_mark:'
+    path: alg/monoid_set.hpp
+    title: alg/monoid_set.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/DSL_2_F_min_set_lazy.test.cpp
+    title: test/aoj/DSL_2_F_min_set_lazy.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.10.1/x64/lib/python3.10/site-packages/onlinejudge_verify/documentation/build.py\"\
-    , line 71, in _render_source_code_stat\n    bundled_code = language.bundle(stat.path,\
-    \ basedir=basedir, options={'include_paths': [basedir]}).decode()\n  File \"/opt/hostedtoolcache/Python/3.10.1/x64/lib/python3.10/site-packages/onlinejudge_verify/languages/cplusplus.py\"\
-    , line 187, in bundle\n    bundler.update(path)\n  File \"/opt/hostedtoolcache/Python/3.10.1/x64/lib/python3.10/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
-    , line 401, in update\n    self.update(self._resolve(pathlib.Path(included), included_from=path))\n\
-    \  File \"/opt/hostedtoolcache/Python/3.10.1/x64/lib/python3.10/site-packages/onlinejudge_verify/languages/cplusplus_bundle.py\"\
-    , line 260, in _resolve\n    raise BundleErrorAt(path, -1, \"no such header\"\
-    )\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: algebra/monoid_min.hpp:\
-    \ line -1: no such header\n"
-  code: "#include \"algebra/monoid_min.hpp\"\r\n#include \"algebra/monoid_set.hpp\"\
-    \r\n\r\ntemplate <typename E, E INF, E none_val>\r\nstruct Lazy_Min_Set {\r\n\
-    \  using MX = Monoid_Min<E, INF>;\r\n  using MA = Monoid_Set<E, none_val>;\r\n\
-    \  using X_structure = MX;\r\n  using A_structure = MA;\r\n  using X = typename\
-    \ MX::value_type;\r\n  using A = typename MA::value_type;\r\n  static constexpr\
-    \ X act(const X &x, const A &a) { return (a==none_val ? x : a) ;}\r\n};\r\n"
-  dependsOn: []
+  bundledCode: "#line 1 \"alg/monoid_min.hpp\"\ntemplate <class X, X INF>\r\nstruct\
+    \ Monoid_Min {\r\n  using value_type = X;\r\n  static constexpr X op(const X &x,\
+    \ const X &y) noexcept { return min(x, y); }\r\n  static constexpr X unit = INF;\r\
+    \n  static constexpr bool commute = true;\r\n};\r\n#line 1 \"alg/monoid_set.hpp\"\
+    \ntemplate <typename E, E none_val>\r\nstruct Monoid_Set {\r\n  using value_type\
+    \ = E;\r\n  using X = value_type;\r\n  static X op(X x, X y) { return (y == none_val\
+    \ ? x : y); }\r\n  static constexpr X unit = none_val;\r\n  static constexpr bool\
+    \ commute = false;\r\n};\n#line 3 \"alg/lazy_min_set.hpp\"\n\r\ntemplate <typename\
+    \ E, E INF, E none_val>\r\nstruct Lazy_Min_Set {\r\n  using MX = Monoid_Min<E,\
+    \ INF>;\r\n  using MA = Monoid_Set<E, none_val>;\r\n  using X_structure = MX;\r\
+    \n  using A_structure = MA;\r\n  using X = typename MX::value_type;\r\n  using\
+    \ A = typename MA::value_type;\r\n  static constexpr X act(const X &x, const A\
+    \ &a) { return (a==none_val ? x : a) ;}\r\n};\r\n"
+  code: "#include \"alg/monoid_min.hpp\"\r\n#include \"alg/monoid_set.hpp\"\r\n\r\n\
+    template <typename E, E INF, E none_val>\r\nstruct Lazy_Min_Set {\r\n  using MX\
+    \ = Monoid_Min<E, INF>;\r\n  using MA = Monoid_Set<E, none_val>;\r\n  using X_structure\
+    \ = MX;\r\n  using A_structure = MA;\r\n  using X = typename MX::value_type;\r\
+    \n  using A = typename MA::value_type;\r\n  static constexpr X act(const X &x,\
+    \ const A &a) { return (a==none_val ? x : a) ;}\r\n};\r\n"
+  dependsOn:
+  - alg/monoid_min.hpp
+  - alg/monoid_set.hpp
   isVerificationFile: false
   path: alg/lazy_min_set.hpp
   requiredBy: []
-  timestamp: '1970-01-01 00:00:00+00:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2022-01-11 13:47:23+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/aoj/DSL_2_F_min_set_lazy.test.cpp
 documentation_of: alg/lazy_min_set.hpp
 layout: document
 redirect_from:

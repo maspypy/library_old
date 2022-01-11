@@ -20,15 +20,15 @@ data:
     \ line -1: no such header\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_path_sum\"\r\
     \n#include \"my_template.hpp\"\r\n\r\n#include \"graph/treemonoid.hpp\"\r\n#include\
-    \ \"algebra/group_add.hpp\"\r\n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  VEC(ll,\
-    \ A, N);\r\n  Graph<int> G(N);\r\n  FOR(_, N - 1) {\r\n    LL(a, b);\r\n    G.add(a,\
-    \ b);\r\n  }\r\n  G.prepare();\r\n\r\n  HLD hld(G);\r\n  const bool is_edge =\
-    \ false;\r\n  using Mono = Group_Add<ll>;\r\n  TreeMonoid<decltype(hld), Mono,\
-    \ is_edge> TM(hld, A);\r\n\r\n  FOR(_, Q) {\r\n    LL(t);\r\n    if (t == 0) {\r\
-    \n      LL(v, x);\r\n      A[v] += x;\r\n      TM.set(v, A[v]);\r\n    } else\
-    \ {\r\n      LL(u, v);\r\n      print(TM.prod_path(u, v));\r\n    }\r\n  }\r\n\
-    }\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \ \"alg/group_add.hpp\"\r\n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  VEC(ll, A, N);\r\
+    \n  Graph<int> G(N);\r\n  FOR(_, N - 1) {\r\n    LL(a, b);\r\n    G.add(a, b);\r\
+    \n  }\r\n  G.prepare();\r\n\r\n  HLD hld(G);\r\n  const bool is_edge = false;\r\
+    \n  using Mono = Group_Add<ll>;\r\n  TreeMonoid<decltype(hld), Mono, is_edge>\
+    \ TM(hld, A);\r\n\r\n  FOR(_, Q) {\r\n    LL(t);\r\n    if (t == 0) {\r\n    \
+    \  LL(v, x);\r\n      A[v] += x;\r\n      TM.set(v, A[v]);\r\n    } else {\r\n\
+    \      LL(u, v);\r\n      print(TM.prod_path(u, v));\r\n    }\r\n  }\r\n}\r\n\r\
+    \nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n\
+    \  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn: []
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp

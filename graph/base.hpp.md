@@ -11,7 +11,7 @@ data:
   - icon: ':warning:'
     path: graph/bipartite_coloring.hpp
     title: graph/bipartite_coloring.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/centroid.hpp
     title: graph/centroid.hpp
   - icon: ':warning:'
@@ -35,7 +35,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/scc.hpp
     title: graph/scc.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/treeabelgroup.hpp
+    title: graph/treeabelgroup.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
+    title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/chromatic_number.test.cpp
     title: test/library_checker/graph/chromatic_number.test.cpp
@@ -60,9 +66,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1002_centroid.test.cpp
     title: test/yukicoder/1002_centroid.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: test/yukicoder/1038_centroid.test.cpp
+    title: test/yukicoder/1038_centroid.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n\
@@ -128,6 +137,7 @@ data:
   - graph/degree.hpp
   - graph/dijkstra.hpp
   - graph/mis.hpp
+  - graph/treeabelgroup.hpp
   - graph/bfs01.hpp
   - graph/scc.hpp
   - graph/bipartite_coloring.hpp
@@ -135,7 +145,7 @@ data:
   - graph/eulerwalk.hpp
   - graph/bfsnumbering.hpp
   timestamp: '2022-01-01 12:00:30+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/library_checker/graph/cycle_detection.test.cpp
   - test/library_checker/graph/maximum_independent_set.test.cpp
@@ -144,7 +154,9 @@ data:
   - test/library_checker/graph/shortest_path.test.cpp
   - test/library_checker/tree/lca.test.cpp
   - test/library_checker/tree/lca_directed.test.cpp
+  - test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
   - test/yukicoder/1002_centroid.test.cpp
+  - test/yukicoder/1038_centroid.test.cpp
 documentation_of: graph/base.hpp
 layout: document
 redirect_from:

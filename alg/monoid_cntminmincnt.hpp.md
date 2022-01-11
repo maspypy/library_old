@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: alg/lazy_cntminmincnt_add.hpp
+    title: alg/lazy_cntminmincnt_add.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -28,7 +31,8 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: alg/monoid_cntminmincnt.hpp
-  requiredBy: []
+  requiredBy:
+  - alg/lazy_cntminmincnt_add.hpp
   timestamp: '2022-01-11 13:22:23+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
