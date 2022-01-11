@@ -5,7 +5,7 @@
 
 void solve() {
   STR(S);
-  auto Z = z_algorithm(S);
+  auto Z = zalgorithm(S);
   print(Z);
 }
 

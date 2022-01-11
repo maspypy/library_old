@@ -1,5 +1,5 @@
 template <typename STRING>  // string, vector どちらでも
-vector<int> z_algorithm(const STRING& s) {
+vector<int> zalgorithm(const STRING& s) {
   int n = int(s.size());
   if (n == 0) return {};
   vector<int> z(n);
