@@ -1,5 +1,5 @@
 #include "graph/centroid.hpp"
-#include "polynomial/convolution.hpp"
+#include "poly/convolution.hpp"
 
 template<typename Graph>
 vi tree_all_distances(Graph& G){

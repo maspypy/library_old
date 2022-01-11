@@ -1,6 +1,6 @@
 #include "ds/segtree.hpp"
 #include "graph/hld.hpp"
-#include "algebra/monoid_reverse.hpp"
+#include "alg/monoid_reverse.hpp"
 
 template <typename HLD, typename Monoid, bool edge = false>
 struct TreeMonoid {

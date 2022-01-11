@@ -1,6 +1,6 @@
 #include "ds/segtree.hpp"
 #include "graph/hld.hpp"
-#include "algebra/group_reverse.hpp"
+#include "alg/group_reverse.hpp"
 
 // 作ってみたものの、HLD(log^2N)より遅いがち？
 template <typename HLD, typename Group, bool edge = false,

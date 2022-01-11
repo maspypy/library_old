@@ -1,6 +1,6 @@
 #include "ds/lazysegtree.hpp"
 #include "graph/hld.hpp"
-#include "algebra/lazy_reverse.hpp"
+#include "alg/lazy_reverse.hpp"
 
 template <typename HLD, typename Lazy, bool edge = false>
 struct LazyTreeMonoid {
