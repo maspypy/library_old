@@ -15,6 +15,9 @@ data:
     path: graph/centroid.hpp
     title: graph/centroid.hpp
   - icon: ':warning:'
+    path: graph/check_bipartite.hpp
+    title: graph/check_bipartite.hpp
+  - icon: ':warning:'
     path: graph/degree.hpp
     title: graph/degree.hpp
   - icon: ':heavy_check_mark:'
@@ -175,6 +178,7 @@ data:
   - graph/mis.hpp
   - graph/treeabelgroup.hpp
   - graph/bfs01.hpp
+  - graph/check_bipartite.hpp
   - graph/scc.hpp
   - graph/bipartite_coloring.hpp
   - graph/functional.hpp

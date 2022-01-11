@@ -65,6 +65,12 @@ data:
   - icon: ':warning:'
     path: seq/interpolate_linear_rec.hpp
     title: seq/interpolate_linear_rec.hpp
+  - icon: ':warning:'
+    path: seq/stirling_number_1.hpp
+    title: seq/stirling_number_1.hpp
+  - icon: ':warning:'
+    path: test/library_checker/math/stirling_number_of_the_first_kind.hpp
+    title: test/library_checker/math/stirling_number_of_the_first_kind.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/convolution/bitwise_and_convolution.test.cpp
@@ -337,8 +343,10 @@ data:
   path: mod/modint.hpp
   requiredBy:
   - seq/interpolate_linear_rec.hpp
+  - seq/stirling_number_1.hpp
   - seq/coef_of_rational_fps.hpp
   - graph/tree_all_distances.hpp
+  - test/library_checker/math/stirling_number_of_the_first_kind.hpp
   - mod/mod_sqrt.hpp
   - poly/fps_pow.hpp
   - poly/fps_log.hpp

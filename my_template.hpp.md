@@ -14,6 +14,9 @@ data:
   - icon: ':warning:'
     path: graph/bipartite_coloring.hpp
     title: graph/bipartite_coloring.hpp
+  - icon: ':warning:'
+    path: test/library_checker/math/stirling_number_of_the_first_kind.hpp
+    title: test/library_checker/math/stirling_number_of_the_first_kind.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_D_dualsegtree.test.cpp
@@ -472,6 +475,7 @@ data:
   requiredBy:
   - geo/geometry.hpp
   - graph/bipartite_coloring.hpp
+  - test/library_checker/math/stirling_number_of_the_first_kind.hpp
   - ds/lichao.hpp
   timestamp: '2022-01-10 20:08:40+09:00'
   verificationStatus: LIBRARY_ALL_AC

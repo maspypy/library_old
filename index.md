@@ -167,6 +167,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/centroid.hpp
       title: graph/centroid.hpp
+    - icon: ':warning:'
+      path: graph/check_bipartite.hpp
+      title: graph/check_bipartite.hpp
     - icon: ':heavy_check_mark:'
       path: graph/chromatic.hpp
       title: graph/chromatic.hpp
@@ -212,9 +215,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/treeabelgroup.hpp
       title: graph/treeabelgroup.hpp
-    - icon: ':warning:'
-      path: graph/treedoubling.hpp
-      title: graph/treedoubling.hpp
     - icon: ':heavy_check_mark:'
       path: graph/treegroup.hpp
       title: graph/treegroup.hpp
@@ -378,6 +378,9 @@ data:
     - icon: ':warning:'
       path: seq/interpolate_linear_rec.hpp
       title: seq/interpolate_linear_rec.hpp
+    - icon: ':warning:'
+      path: seq/stirling_number_1.hpp
+      title: seq/stirling_number_1.hpp
   - name: setfunc
     pages:
     - icon: ':heavy_check_mark:'
@@ -418,6 +421,11 @@ data:
     - icon: ':heavy_check_mark:'
       path: string/zalgorithm.hpp
       title: string/zalgorithm.hpp
+  - name: test/library_checker/math
+    pages:
+    - icon: ':warning:'
+      path: test/library_checker/math/stirling_number_of_the_first_kind.hpp
+      title: test/library_checker/math/stirling_number_of_the_first_kind.hpp
   verificationCategories:
   - name: test/aoj
     pages:

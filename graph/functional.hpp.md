@@ -15,14 +15,14 @@ data:
   attributes:
     links: []
   bundledCode: "#line 2 \"ds/unionfind.hpp\"\n\nstruct UnionFind {\n  int num;\n \
-    \ int comp;\n  vi size, par;\n  UnionFind(int n) : num(n), comp(n), size(n, 1),\
-    \ par(n) { iota(par.begin(), par.end(), 0); }\n  int find(int x) {\n    while\
-    \ (par[x] != x) {\n      par[x] = par[par[x]];\n      x = par[x];\n    }\n   \
-    \ return x;\n  }\n\n  int operator[](int x) {\n    return find(x);\n  }\n\n\n\
-    \  bool merge(ll x, ll y) {\n    x = find(x);\n    y = find(y);\n    if (x ==\
-    \ y) {\n      return false;\n    }\n    comp--;\n    if (size[x] < size[y]) swap(x,\
-    \ y);\n    size[x] += size[y];\n    size[y] = 0;\n    par[y] = x;\n    return\
-    \ true;\n  }\n\n  vi find_all() {\n    vi A(num);\n    FOR(i, num) A[i] = find(i);\n\
+    \ int comp;\n  vc<int> size, par;\n  UnionFind(int n) : num(n), comp(n), size(n,\
+    \ 1), par(n) {\n    iota(par.begin(), par.end(), 0);\n  }\n  int find(int x) {\n\
+    \    while (par[x] != x) {\n      par[x] = par[par[x]];\n      x = par[x];\n \
+    \   }\n    return x;\n  }\n\n  int operator[](int x) { return find(x); }\n\n \
+    \ bool merge(ll x, ll y) {\n    x = find(x);\n    y = find(y);\n    if (x == y)\
+    \ { return false; }\n    comp--;\n    if (size[x] < size[y]) swap(x, y);\n   \
+    \ size[x] += size[y];\n    size[y] = 0;\n    par[y] = x;\n    return true;\n \
+    \ }\n\n  vc<int> find_all() {\n    vc<int> A(num);\n    FOR(i, num) A[i] = find(i);\n\
     \    return A;\n  }\n};\n#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\n\
     struct Edge {\n  int frm, to;\n  T cost;\n  int id;\n};\n\ntemplate <typename\
     \ T = int, bool directed = false>\nstruct Graph {\n  int N, M;\n  using cost_type\
@@ -89,7 +89,7 @@ data:
   isVerificationFile: false
   path: graph/functional.hpp
   requiredBy: []
-  timestamp: '2022-01-08 22:12:01+09:00'
+  timestamp: '2022-01-12 05:33:30+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph/functional.hpp
