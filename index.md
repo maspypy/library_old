@@ -256,6 +256,9 @@ data:
   - name: mod
     pages:
     - icon: ':heavy_check_mark:'
+      path: mod/mod_log.hpp
+      title: mod/mod_log.hpp
+    - icon: ':heavy_check_mark:'
       path: mod/mod_sqrt.hpp
       title: mod/mod_sqrt.hpp
     - icon: ':heavy_check_mark:'
@@ -285,6 +288,9 @@ data:
       title: nt/primetest.hpp
   - name: other
     pages:
+    - icon: ':heavy_check_mark:'
+      path: other/discrete_log.hpp
+      title: other/discrete_log.hpp
     - icon: ':warning:'
       path: other/for_nck.hpp
       title: other/for_nck.hpp
@@ -584,6 +590,9 @@ data:
       title: test/library_checker/graph/shortest_path.test.cpp
   - name: test/library_checker/math
     pages:
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/math/discrete_logarithm_mod.test.cpp
+      title: test/library_checker/math/discrete_logarithm_mod.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/math/enumerate_primes.test.cpp
       title: test/library_checker/math/enumerate_primes.test.cpp
