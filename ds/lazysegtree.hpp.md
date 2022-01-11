@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: graph/lazytreemonoid.hpp
+    title: graph/lazytreemonoid.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_F_min_set_lazy.test.cpp
@@ -15,6 +18,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
     title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yukicoder/899_bfsnumbering.test.cpp
+    title: test/yukicoder/899_bfsnumbering.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -133,7 +139,8 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: ds/lazysegtree.hpp
-  requiredBy: []
+  requiredBy:
+  - graph/lazytreemonoid.hpp
   timestamp: '2022-01-02 01:47:55+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
@@ -141,6 +148,7 @@ data:
   - test/aoj/DSL_2_H_min_add_lazy.test.cpp
   - test/aoj/DSL_2_F_min_set_lazy.test.cpp
   - test/library_checker/datastructure/range_affine_range_sum.test.cpp
+  - test/yukicoder/899_bfsnumbering.test.cpp
 documentation_of: ds/lazysegtree.hpp
 layout: document
 redirect_from:

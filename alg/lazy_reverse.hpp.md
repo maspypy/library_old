@@ -1,10 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: alg/monoid_reverse.hpp
     title: alg/monoid_reverse.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: graph/lazytreemonoid.hpp
+    title: graph/lazytreemonoid.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -31,7 +34,8 @@ data:
   - alg/monoid_reverse.hpp
   isVerificationFile: false
   path: alg/lazy_reverse.hpp
-  requiredBy: []
+  requiredBy:
+  - graph/lazytreemonoid.hpp
   timestamp: '2022-01-11 13:47:23+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
