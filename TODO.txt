@@ -1,0 +1,41 @@
+・k-th term of linear rec：
+fft を節約して高速化
+
+・prime sieve
+  prime sum of multiplicative function. 
+  mod 4 で 1, 3 であるような prime sum
+
+・prefix sum of multiplicative function
+
+・tree group 等に二分探索を入れる
+
+・static tree monoid：disjoint sparse table でいろいろ log ひとつ。
+doubling で作ってもよいが
+
+・unicyclic graph
+
+・min_cost_cycle （有向・無向）
+→ yukicoder にある
+
+・分割の列挙
+
+・順列を整数キーにする（kactl にある）
+
+・suffix automation
+
+
+・木の直径
+
+・編集距離＋復元
+・LCS＋復元
+
+・p-recursive
+
+・3DMo
+・Rollback Mo
+
+・合成数 mod で det, inv_mat
+
+・bellman-ford
+
+・2sat に atmostone を追加

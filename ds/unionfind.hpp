@@ -3,8 +3,10 @@
 struct UnionFind {
   int num;
   int comp;
-  vi size, par;
-  UnionFind(int n) : num(n), comp(n), size(n, 1), par(n) { iota(par.begin(), par.end(), 0); }
+  vc<int> size, par;
+  UnionFind(int n) : num(n), comp(n), size(n, 1), par(n) {
+    iota(par.begin(), par.end(), 0);
+  }
   int find(int x) {
     while (par[x] != x) {
       par[x] = par[par[x]];
@@ -13,17 +15,12 @@ struct UnionFind {
     return x;
   }
 
-  int operator[](int x) {
-    return find(x);
-  }
-
+  int operator[](int x) { return find(x); }
 
   bool merge(ll x, ll y) {
     x = find(x);
     y = find(y);
-    if (x == y) {
-      return false;
-    }
+    if (x == y) { return false; }
     comp--;
     if (size[x] < size[y]) swap(x, y);
     size[x] += size[y];
@@ -32,8 +29,8 @@ struct UnionFind {
     return true;
   }
 
-  vi find_all() {
-    vi A(num);
+  vc<int> find_all() {
+    vc<int> A(num);
     FOR(i, num) A[i] = find(i);
     return A;
   }
