@@ -48,6 +48,7 @@
 "test/library_checker/graph/maximum_independent_set.test.cpp": "2022-01-10 20:08:40 +0900",
 "test/library_checker/graph/scc.test.cpp": "2022-01-10 20:08:40 +0900",
 "test/library_checker/graph/shortest_path.test.cpp": "2022-01-10 20:08:40 +0900",
+"test/library_checker/math/discrete_logarithm_mod.test.cpp": "2022-01-12 07:59:37 +0900",
 "test/library_checker/math/enumerate_primes.test.cpp": "2022-01-10 20:08:40 +0900",
 "test/library_checker/math/factorize.test.cpp": "2022-01-10 20:08:40 +0900",
 "test/library_checker/math/find_linear_recurrence.test.cpp": "2022-01-11 14:06:44 +0900",
