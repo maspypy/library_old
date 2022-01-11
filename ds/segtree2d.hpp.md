@@ -2,13 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
-    title: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 1 \"ds/segtree2d.hpp\"\ntemplate <typename Monoid, typename\
@@ -108,9 +105,8 @@ data:
   path: ds/segtree2d.hpp
   requiredBy: []
   timestamp: '2021-12-28 17:04:46+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: ds/segtree2d.hpp
 layout: document
 redirect_from:

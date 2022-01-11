@@ -1,20 +1,11 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy:
-  - icon: ':x:'
-    path: polynomial/lagrange_interpolate_iota.hpp
-    title: polynomial/lagrange_interpolate_iota.hpp
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
-    title: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
-    title: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
-  _isVerificationFailed: true
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 1 \"ds/swag.hpp\"\ntemplate <class Monoid>\nstruct SWAG {\n\
@@ -40,13 +31,10 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: ds/swag.hpp
-  requiredBy:
-  - polynomial/lagrange_interpolate_iota.hpp
+  requiredBy: []
   timestamp: '2021-12-28 08:12:08+09:00'
-  verificationStatus: LIBRARY_SOME_WA
-  verifiedWith:
-  - test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
-  - test/library_checker/datastructure/queue_operate_all_composite.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: ds/swag.hpp
 layout: document
 redirect_from:

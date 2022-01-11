@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: other/io.hpp
     title: other/io.hpp
   _extendedRequiredBy:
@@ -9,33 +9,12 @@ data:
     path: ds/lichao.hpp
     title: ds/lichao.hpp
   - icon: ':warning:'
-    path: geometry/geometry.hpp
-    title: geometry/geometry.hpp
+    path: geo/geometry.hpp
+    title: geo/geometry.hpp
   - icon: ':warning:'
     path: graph/bipartite_coloring.hpp
     title: graph/bipartite_coloring.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/DSL_2_D_dualsegtree.test.cpp
-    title: test/aoj/DSL_2_D_dualsegtree.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/DSL_2_E_fenwick_raq.test.cpp
-    title: test/aoj/DSL_2_E_fenwick_raq.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/DSL_2_F_min_set_lazy.test.cpp
-    title: test/aoj/DSL_2_F_min_set_lazy.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/DSL_2_G_fenwick_raq.test.cpp
-    title: test/aoj/DSL_2_G_fenwick_raq.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/DSL_2_H_min_add_lazy.test.cpp
-    title: test/aoj/DSL_2_H_min_add_lazy.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
-    title: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/DSL_4_A_rectangle_union.test.cpp
-    title: test/aoj/DSL_4_A_rectangle_union.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/convolution/bitwise_and_convolution.test.cpp
     title: test/library_checker/convolution/bitwise_and_convolution.test.cpp
@@ -46,119 +25,26 @@ data:
     path: test/library_checker/convolution/bitwise_xor_convolution.test.cpp
     title: test/library_checker/convolution/bitwise_xor_convolution.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/convolution/contolution_mod_2_64.test.cpp
-    title: test/library_checker/convolution/contolution_mod_2_64.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/convolution/convolution_huge.test.cpp
-    title: test/library_checker/convolution/convolution_huge.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/convolution/convolution_mod.test.cpp
-    title: test/library_checker/convolution/convolution_mod.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/convolution/convolution_mod_107.test.cpp
-    title: test/library_checker/convolution/convolution_mod_107.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/convolution/convolution_mod_107_amint.test.cpp
-    title: test/library_checker/convolution/convolution_mod_107_amint.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/convolution/mul_mod2n_convolution.test.cpp
-    title: test/library_checker/convolution/mul_mod2n_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/convolution/multivariate_convolution.test.cpp
-    title: test/library_checker/convolution/multivariate_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/library_checker/convolution/subset_convolution.test.cpp
     title: test/library_checker/convolution/subset_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/convolution/subset_convolution_multivar.test.cpp
-    title: test/library_checker/convolution/subset_convolution_multivar.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/associative_array.test.cpp
     title: test/library_checker/datastructure/associative_array.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/persistent_queue.test.cpp
-    title: test/library_checker/datastructure/persistent_queue.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/persistent_unionfind.test.cpp
-    title: test/library_checker/datastructure/persistent_unionfind.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/point_add_range_sum.test.cpp
-    title: test/library_checker/datastructure/point_add_range_sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
-    title: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
-    title: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
-    title: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/predecessor_problem.test.cpp
     title: test/library_checker/datastructure/predecessor_problem.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
-    title: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
-    title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/range_chmin_chmax_add_range_sum.test.cpp
-    title: test/library_checker/datastructure/range_chmin_chmax_add_range_sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
-    title: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
-    title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/static_range_sum.test.cpp
     title: test/library_checker/datastructure/static_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
-    title: test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/staticrmq_seg.test.cpp
-    title: test/library_checker/datastructure/staticrmq_seg.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/staticrmq_sparse.test.cpp
-    title: test/library_checker/datastructure/staticrmq_sparse.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/unionfind.test.cpp
     title: test/library_checker/datastructure/unionfind.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-    title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-    title: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-    title: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-    title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-    title: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
-    title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/chromatic_number.test.cpp
     title: test/library_checker/graph/chromatic_number.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/cycle_detection.test.cpp
     title: test/library_checker/graph/cycle_detection.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
-    title: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/graph/lca.test.cpp
-    title: test/library_checker/graph/lca.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/graph/lca_directed.test.cpp
-    title: test/library_checker/graph/lca_directed.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/maximum_independent_set.test.cpp
     title: test/library_checker/graph/maximum_independent_set.test.cpp
@@ -174,102 +60,66 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/factorize.test.cpp
     title: test/library_checker/math/factorize.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/math/find_linear_recurrence.test.cpp
-    title: test/library_checker/math/find_linear_recurrence.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
-    title: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/math/sharp_p_subset_sum.test.cpp
-    title: test/library_checker/math/sharp_p_subset_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/math/sqrt_mod.test.cpp
     title: test/library_checker/math/sqrt_mod.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/matrix/hafnian_of_matrix.test.cpp
     title: test/library_checker/matrix/hafnian_of_matrix.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/matrix/inverse_matrix.test.cpp
     title: test/library_checker/matrix/inverse_matrix.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/matrix/matrix_det.test.cpp
     title: test/library_checker/matrix/matrix_det.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/matrix/matrix_product.test.cpp
     title: test/library_checker/matrix/matrix_product.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/matrix/solve_linear.test.cpp
     title: test/library_checker/matrix/solve_linear.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/matrix/sparse_matrix_det.test.cpp
-    title: test/library_checker/matrix/sparse_matrix_det.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/polynomial/composition_of_fps.test.cpp
-    title: test/library_checker/polynomial/composition_of_fps.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/polynomial/exp_of_fps.test.cpp
-    title: test/library_checker/polynomial/exp_of_fps.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/polynomial/inv_of_fps.test.cpp
-    title: test/library_checker/polynomial/inv_of_fps.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/polynomial/inv_of_polynomials.test.cpp
-    title: test/library_checker/polynomial/inv_of_polynomials.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/polynomial/log_of_fps.test.cpp
-    title: test/library_checker/polynomial/log_of_fps.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/polynomial/multipoint_evaluation.test.cpp
-    title: test/library_checker/polynomial/multipoint_evaluation.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/polynomial/polynomial_division.test.cpp
-    title: test/library_checker/polynomial/polynomial_division.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/polynomial/polynomial_interpolation.test.cpp
-    title: test/library_checker/polynomial/polynomial_interpolation.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
-    title: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/polynomial/pow_of_fps.test.cpp
-    title: test/library_checker/polynomial/pow_of_fps.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
-    title: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/polynomial/sqrt_of_fps.test.cpp
-    title: test/library_checker/polynomial/sqrt_of_fps.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/sample/many_aplusb.test.cpp
     title: test/library_checker/sample/many_aplusb.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/string/enumerate_palindromes.test.cpp
     title: test/library_checker/string/enumerate_palindromes.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/string/number_of_substrings.test.cpp
+    title: test/library_checker/string/number_of_substrings.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/string/run_enumerate.test.cpp
     title: test/library_checker/string/run_enumerate.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/string/run_enumerate_vec.test.cpp
     title: test/library_checker/string/run_enumerate_vec.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/string/suffix_array.test.cpp
+    title: test/library_checker/string/suffix_array.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/string/suffix_array_vec.test.cpp
+    title: test/library_checker/string/suffix_array_vec.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/string/zalgorithm.test.cpp
     title: test/library_checker/string/zalgorithm.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
     title: test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/tree/cartesian_tree.test.cpp
+    title: test/library_checker/tree/cartesian_tree.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/tree/lca.test.cpp
+    title: test/library_checker/tree/lca.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/tree/lca_directed.test.cpp
+    title: test/library_checker/tree/lca_directed.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1002_centroid.test.cpp
     title: test/yukicoder/1002_centroid.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1038_centroid.test.cpp
-    title: test/yukicoder/1038_centroid.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/899_bfsnumbering.test.cpp
-    title: test/yukicoder/899_bfsnumbering.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace\
@@ -458,33 +308,17 @@ data:
   isVerificationFile: false
   path: my_template.hpp
   requiredBy:
+  - geo/geometry.hpp
   - graph/bipartite_coloring.hpp
   - ds/lichao.hpp
-  - geometry/geometry.hpp
   timestamp: '2022-01-10 20:08:40+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
-  - test/aoj/DSL_2_E_fenwick_raq.test.cpp
-  - test/aoj/DSL_2_D_dualsegtree.test.cpp
-  - test/aoj/DSL_4_A_rectangle_union.test.cpp
-  - test/aoj/DSL_2_H_min_add_lazy.test.cpp
-  - test/aoj/DSL_2_F_min_set_lazy.test.cpp
-  - test/aoj/DSL_2_G_fenwick_raq.test.cpp
   - test/library_checker/sample/many_aplusb.test.cpp
-  - test/library_checker/convolution/mul_mod2n_convolution.test.cpp
   - test/library_checker/convolution/bitwise_xor_convolution.test.cpp
-  - test/library_checker/convolution/multivariate_convolution.test.cpp
-  - test/library_checker/convolution/convolution_mod_107.test.cpp
   - test/library_checker/convolution/subset_convolution.test.cpp
   - test/library_checker/convolution/bitwise_and_convolution.test.cpp
-  - test/library_checker/convolution/subset_convolution_multivar.test.cpp
   - test/library_checker/convolution/bitwise_or_convolution.test.cpp
-  - test/library_checker/convolution/convolution_mod_107_amint.test.cpp
-  - test/library_checker/convolution/convolution_huge.test.cpp
-  - test/library_checker/convolution/convolution_mod.test.cpp
-  - test/library_checker/convolution/contolution_mod_2_64.test.cpp
-  - test/library_checker/matrix/sparse_matrix_det.test.cpp
   - test/library_checker/matrix/matrix_product.test.cpp
   - test/library_checker/matrix/matrix_det.test.cpp
   - test/library_checker/matrix/hafnian_of_matrix.test.cpp
@@ -493,61 +327,27 @@ data:
   - test/library_checker/graph/cycle_detection.test.cpp
   - test/library_checker/graph/maximum_independent_set.test.cpp
   - test/library_checker/graph/chromatic_number.test.cpp
-  - test/library_checker/graph/lca.test.cpp
   - test/library_checker/graph/scc.test.cpp
-  - test/library_checker/graph/lca_directed.test.cpp
   - test/library_checker/graph/shortest_path.test.cpp
-  - test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
   - test/library_checker/string/run_enumerate.test.cpp
   - test/library_checker/string/enumerate_palindromes.test.cpp
+  - test/library_checker/string/number_of_substrings.test.cpp
   - test/library_checker/string/zalgorithm.test.cpp
   - test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
   - test/library_checker/string/run_enumerate_vec.test.cpp
-  - test/library_checker/polynomial/sqrt_of_fps.test.cpp
-  - test/library_checker/polynomial/log_of_fps.test.cpp
-  - test/library_checker/polynomial/polynomial_division.test.cpp
-  - test/library_checker/polynomial/multipoint_evaluation.test.cpp
-  - test/library_checker/polynomial/exp_of_fps.test.cpp
-  - test/library_checker/polynomial/composition_of_fps.test.cpp
-  - test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
-  - test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
-  - test/library_checker/polynomial/pow_of_fps.test.cpp
-  - test/library_checker/polynomial/inv_of_fps.test.cpp
-  - test/library_checker/polynomial/polynomial_interpolation.test.cpp
-  - test/library_checker/polynomial/inv_of_polynomials.test.cpp
-  - test/library_checker/math/sharp_p_subset_sum.test.cpp
+  - test/library_checker/string/suffix_array_vec.test.cpp
+  - test/library_checker/string/suffix_array.test.cpp
   - test/library_checker/math/sqrt_mod.test.cpp
   - test/library_checker/math/enumerate_primes.test.cpp
-  - test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/library_checker/math/factorize.test.cpp
-  - test/library_checker/math/find_linear_recurrence.test.cpp
-  - test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
-  - test/library_checker/datastructure/staticrmq_sparse.test.cpp
+  - test/library_checker/tree/lca.test.cpp
+  - test/library_checker/tree/cartesian_tree.test.cpp
+  - test/library_checker/tree/lca_directed.test.cpp
   - test/library_checker/datastructure/static_range_sum.test.cpp
   - test/library_checker/datastructure/unionfind.test.cpp
-  - test/library_checker/datastructure/persistent_unionfind.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-  - test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
   - test/library_checker/datastructure/predecessor_problem.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-  - test/library_checker/datastructure/staticrmq_seg.test.cpp
-  - test/library_checker/datastructure/point_add_range_sum.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-  - test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-  - test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
-  - test/library_checker/datastructure/range_chmin_chmax_add_range_sum.test.cpp
-  - test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
-  - test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
-  - test/library_checker/datastructure/queue_operate_all_composite.test.cpp
-  - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-  - test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
   - test/library_checker/datastructure/associative_array.test.cpp
-  - test/library_checker/datastructure/range_affine_range_sum.test.cpp
-  - test/library_checker/datastructure/persistent_queue.test.cpp
-  - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
-  - test/yukicoder/899_bfsnumbering.test.cpp
   - test/yukicoder/1002_centroid.test.cpp
-  - test/yukicoder/1038_centroid.test.cpp
 documentation_of: my_template.hpp
 layout: document
 redirect_from:

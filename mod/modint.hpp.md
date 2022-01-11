@@ -3,68 +3,11 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: graph/tree_all_distances.hpp
-    title: graph/tree_all_distances.hpp
-  - icon: ':x:'
     path: mod/mod_sqrt.hpp
     title: mod/mod_sqrt.hpp
-  - icon: ':heavy_check_mark:'
-    path: nt/multiplicative_convolution_mod2n.hpp
-    title: nt/multiplicative_convolution_mod2n.hpp
-  - icon: ':x:'
-    path: other/sharp_p_subset_sum.hpp
-    title: other/sharp_p_subset_sum.hpp
-  - icon: ':question:'
-    path: polynomial/convolution.hpp
-    title: polynomial/convolution.hpp
-  - icon: ':heavy_check_mark:'
-    path: polynomial/convolution_huge.hpp
-    title: polynomial/convolution_huge.hpp
-  - icon: ':heavy_check_mark:'
-    path: polynomial/convolution_mod_2_64.hpp
-    title: polynomial/convolution_mod_2_64.hpp
-  - icon: ':x:'
-    path: polynomial/fps_composition.hpp
-    title: polynomial/fps_composition.hpp
-  - icon: ':x:'
-    path: polynomial/fps_exp.hpp
-    title: polynomial/fps_exp.hpp
-  - icon: ':x:'
-    path: polynomial/fps_inv.hpp
-    title: polynomial/fps_inv.hpp
-  - icon: ':x:'
-    path: polynomial/fps_log.hpp
-    title: polynomial/fps_log.hpp
-  - icon: ':x:'
-    path: polynomial/fps_pow.hpp
-    title: polynomial/fps_pow.hpp
-  - icon: ':x:'
-    path: polynomial/fps_sqrt.hpp
-    title: polynomial/fps_sqrt.hpp
-  - icon: ':x:'
-    path: polynomial/lagrange_interpolate_iota.hpp
-    title: polynomial/lagrange_interpolate_iota.hpp
-  - icon: ':x:'
-    path: polynomial/multipoint.hpp
-    title: polynomial/multipoint.hpp
-  - icon: ':heavy_check_mark:'
-    path: polynomial/multivar_convolution.hpp
-    title: polynomial/multivar_convolution.hpp
-  - icon: ':x:'
-    path: polynomial/poly_divmod.hpp
-    title: polynomial/poly_divmod.hpp
-  - icon: ':x:'
-    path: polynomial/poly_gcd.hpp
-    title: polynomial/poly_gcd.hpp
-  - icon: ':x:'
-    path: polynomial/poly_taylor_shift.hpp
-    title: polynomial/poly_taylor_shift.hpp
-  - icon: ':x:'
-    path: sequence/coef_of_rational_fps.hpp
-    title: sequence/coef_of_rational_fps.hpp
-  - icon: ':x:'
-    path: sequence/linearrecurrence.hpp
-    title: sequence/linearrecurrence.hpp
+  - icon: ':warning:'
+    path: poly/convolution.hpp
+    title: poly/convolution.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/convolution/bitwise_and_convolution.test.cpp
@@ -76,119 +19,29 @@ data:
     path: test/library_checker/convolution/bitwise_xor_convolution.test.cpp
     title: test/library_checker/convolution/bitwise_xor_convolution.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/convolution/contolution_mod_2_64.test.cpp
-    title: test/library_checker/convolution/contolution_mod_2_64.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/convolution/convolution_huge.test.cpp
-    title: test/library_checker/convolution/convolution_huge.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/convolution/convolution_mod.test.cpp
-    title: test/library_checker/convolution/convolution_mod.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/convolution/convolution_mod_107.test.cpp
-    title: test/library_checker/convolution/convolution_mod_107.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/convolution/convolution_mod_107_amint.test.cpp
-    title: test/library_checker/convolution/convolution_mod_107_amint.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/convolution/mul_mod2n_convolution.test.cpp
-    title: test/library_checker/convolution/mul_mod2n_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/convolution/multivariate_convolution.test.cpp
-    title: test/library_checker/convolution/multivariate_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/library_checker/convolution/subset_convolution.test.cpp
     title: test/library_checker/convolution/subset_convolution.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/convolution/subset_convolution_multivar.test.cpp
-    title: test/library_checker/convolution/subset_convolution_multivar.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
-    title: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
-    title: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
-    title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-    title: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
-    title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
-    title: test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/math/find_linear_recurrence.test.cpp
-    title: test/library_checker/math/find_linear_recurrence.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
-    title: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/math/sharp_p_subset_sum.test.cpp
-    title: test/library_checker/math/sharp_p_subset_sum.test.cpp
-  - icon: ':x:'
     path: test/library_checker/math/sqrt_mod.test.cpp
     title: test/library_checker/math/sqrt_mod.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/matrix/hafnian_of_matrix.test.cpp
     title: test/library_checker/matrix/hafnian_of_matrix.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/matrix/inverse_matrix.test.cpp
     title: test/library_checker/matrix/inverse_matrix.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/matrix/matrix_det.test.cpp
     title: test/library_checker/matrix/matrix_det.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/matrix/matrix_product.test.cpp
     title: test/library_checker/matrix/matrix_product.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/matrix/solve_linear.test.cpp
     title: test/library_checker/matrix/solve_linear.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/matrix/sparse_matrix_det.test.cpp
-    title: test/library_checker/matrix/sparse_matrix_det.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/polynomial/composition_of_fps.test.cpp
-    title: test/library_checker/polynomial/composition_of_fps.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/polynomial/exp_of_fps.test.cpp
-    title: test/library_checker/polynomial/exp_of_fps.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/polynomial/inv_of_fps.test.cpp
-    title: test/library_checker/polynomial/inv_of_fps.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/polynomial/inv_of_polynomials.test.cpp
-    title: test/library_checker/polynomial/inv_of_polynomials.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/polynomial/log_of_fps.test.cpp
-    title: test/library_checker/polynomial/log_of_fps.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/polynomial/multipoint_evaluation.test.cpp
-    title: test/library_checker/polynomial/multipoint_evaluation.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/polynomial/polynomial_division.test.cpp
-    title: test/library_checker/polynomial/polynomial_division.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/polynomial/polynomial_interpolation.test.cpp
-    title: test/library_checker/polynomial/polynomial_interpolation.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
-    title: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/polynomial/pow_of_fps.test.cpp
-    title: test/library_checker/polynomial/pow_of_fps.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
-    title: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/polynomial/sqrt_of_fps.test.cpp
-    title: test/library_checker/polynomial/sqrt_of_fps.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n\
@@ -336,70 +189,21 @@ data:
   isVerificationFile: false
   path: mod/modint.hpp
   requiredBy:
-  - graph/tree_all_distances.hpp
   - mod/mod_sqrt.hpp
-  - polynomial/fps_pow.hpp
-  - polynomial/fps_log.hpp
-  - polynomial/multipoint.hpp
-  - polynomial/fps_exp.hpp
-  - polynomial/convolution.hpp
-  - polynomial/fps_composition.hpp
-  - polynomial/convolution_huge.hpp
-  - polynomial/poly_divmod.hpp
-  - polynomial/fps_sqrt.hpp
-  - polynomial/fps_inv.hpp
-  - polynomial/multivar_convolution.hpp
-  - polynomial/poly_taylor_shift.hpp
-  - polynomial/lagrange_interpolate_iota.hpp
-  - polynomial/convolution_mod_2_64.hpp
-  - polynomial/poly_gcd.hpp
-  - sequence/linearrecurrence.hpp
-  - sequence/coef_of_rational_fps.hpp
-  - other/sharp_p_subset_sum.hpp
-  - nt/multiplicative_convolution_mod2n.hpp
+  - poly/convolution.hpp
   timestamp: '2022-01-10 17:44:09+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/convolution/mul_mod2n_convolution.test.cpp
   - test/library_checker/convolution/bitwise_xor_convolution.test.cpp
-  - test/library_checker/convolution/multivariate_convolution.test.cpp
-  - test/library_checker/convolution/convolution_mod_107.test.cpp
   - test/library_checker/convolution/subset_convolution.test.cpp
   - test/library_checker/convolution/bitwise_and_convolution.test.cpp
-  - test/library_checker/convolution/subset_convolution_multivar.test.cpp
   - test/library_checker/convolution/bitwise_or_convolution.test.cpp
-  - test/library_checker/convolution/convolution_mod_107_amint.test.cpp
-  - test/library_checker/convolution/convolution_huge.test.cpp
-  - test/library_checker/convolution/convolution_mod.test.cpp
-  - test/library_checker/convolution/contolution_mod_2_64.test.cpp
-  - test/library_checker/matrix/sparse_matrix_det.test.cpp
   - test/library_checker/matrix/matrix_product.test.cpp
   - test/library_checker/matrix/matrix_det.test.cpp
   - test/library_checker/matrix/hafnian_of_matrix.test.cpp
   - test/library_checker/matrix/inverse_matrix.test.cpp
   - test/library_checker/matrix/solve_linear.test.cpp
-  - test/library_checker/graph/frequency_table_of_tree_distance.test.cpp
-  - test/library_checker/polynomial/sqrt_of_fps.test.cpp
-  - test/library_checker/polynomial/log_of_fps.test.cpp
-  - test/library_checker/polynomial/polynomial_division.test.cpp
-  - test/library_checker/polynomial/multipoint_evaluation.test.cpp
-  - test/library_checker/polynomial/exp_of_fps.test.cpp
-  - test/library_checker/polynomial/composition_of_fps.test.cpp
-  - test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
-  - test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
-  - test/library_checker/polynomial/pow_of_fps.test.cpp
-  - test/library_checker/polynomial/inv_of_fps.test.cpp
-  - test/library_checker/polynomial/polynomial_interpolation.test.cpp
-  - test/library_checker/polynomial/inv_of_polynomials.test.cpp
-  - test/library_checker/math/sharp_p_subset_sum.test.cpp
   - test/library_checker/math/sqrt_mod.test.cpp
-  - test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - test/library_checker/math/find_linear_recurrence.test.cpp
-  - test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-  - test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
-  - test/library_checker/datastructure/queue_operate_all_composite.test.cpp
-  - test/library_checker/datastructure/range_affine_range_sum.test.cpp
-  - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
 documentation_of: mod/modint.hpp
 layout: document
 redirect_from:

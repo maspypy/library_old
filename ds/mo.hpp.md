@@ -2,13 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
-    title: test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 1 \"ds/mo.hpp\"\nstruct Mo {\r\n  int n;\r\n  vector<pair<int,\
@@ -50,9 +47,8 @@ data:
   path: ds/mo.hpp
   requiredBy: []
   timestamp: '2022-01-02 22:49:43+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: ds/mo.hpp
 layout: document
 redirect_from:

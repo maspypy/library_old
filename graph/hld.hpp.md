@@ -1,47 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/base.hpp
     title: graph/base.hpp
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: graph/lazytreemonoid.hpp
-    title: graph/lazytreemonoid.hpp
-  - icon: ':heavy_check_mark:'
-    path: graph/treeabelgroup.hpp
-    title: graph/treeabelgroup.hpp
-  - icon: ':heavy_check_mark:'
-    path: graph/treegroup.hpp
-    title: graph/treegroup.hpp
-  - icon: ':heavy_check_mark:'
-    path: graph/treemonoid.hpp
-    title: graph/treemonoid.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-    title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
+    path: test/library_checker/tree/lca.test.cpp
+    title: test/library_checker/tree/lca.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-    title: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-    title: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-    title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-    title: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
-    title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/graph/lca.test.cpp
-    title: test/library_checker/graph/lca.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/graph/lca_directed.test.cpp
-    title: test/library_checker/graph/lca_directed.test.cpp
+    path: test/library_checker/tree/lca_directed.test.cpp
+    title: test/library_checker/tree/lca_directed.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -172,22 +142,12 @@ data:
   - graph/base.hpp
   isVerificationFile: false
   path: graph/hld.hpp
-  requiredBy:
-  - graph/treegroup.hpp
-  - graph/treemonoid.hpp
-  - graph/treeabelgroup.hpp
-  - graph/lazytreemonoid.hpp
+  requiredBy: []
   timestamp: '2022-01-03 14:52:38+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/graph/lca.test.cpp
-  - test/library_checker/graph/lca_directed.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-  - test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-  - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-  - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
+  - test/library_checker/tree/lca.test.cpp
+  - test/library_checker/tree/lca_directed.test.cpp
 documentation_of: graph/hld.hpp
 layout: document
 redirect_from:

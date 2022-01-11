@@ -1,26 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: other/random.hpp
     title: other/random.hpp
-  _extendedRequiredBy:
-  - icon: ':x:'
-    path: polynomial/fps_sqrt.hpp
-    title: polynomial/fps_sqrt.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/math/sqrt_mod.test.cpp
     title: test/library_checker/math/sqrt_mod.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/polynomial/sqrt_of_fps.test.cpp
-    title: test/library_checker/polynomial/sqrt_of_fps.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n\
@@ -126,12 +120,10 @@ data:
   - other/random.hpp
   isVerificationFile: false
   path: mod/mod_sqrt.hpp
-  requiredBy:
-  - polynomial/fps_sqrt.hpp
+  requiredBy: []
   timestamp: '2022-01-10 17:44:09+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/polynomial/sqrt_of_fps.test.cpp
   - test/library_checker/math/sqrt_mod.test.cpp
 documentation_of: mod/mod_sqrt.hpp
 layout: document

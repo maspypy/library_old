@@ -2,13 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/DSL_2_D_dualsegtree.test.cpp
-    title: test/aoj/DSL_2_D_dualsegtree.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"ds/dualsegtree.hpp\"\n\ntemplate <typename Monoid>\nstruct\
@@ -53,9 +50,8 @@ data:
   path: ds/dualsegtree.hpp
   requiredBy: []
   timestamp: '2022-01-01 20:04:54+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/aoj/DSL_2_D_dualsegtree.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: ds/dualsegtree.hpp
 layout: document
 redirect_from:
