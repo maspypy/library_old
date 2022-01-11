@@ -2,7 +2,7 @@
 #include "my_template.hpp"
 
 #include "mod/modint.hpp"
-#include "polynomial/fps_log.hpp"
+#include "poly/fps_log.hpp"
 
 using mint = modint998;
 

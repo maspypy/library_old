@@ -3,7 +3,7 @@
 #include "my_template.hpp"
 
 #include "mod/modint.hpp"
-#include "polynomial/lagrange_interpolate_iota.hpp"
+#include "poly/lagrange_interpolate_iota.hpp"
 using mint = modint998;
 void solve() {
   LL(N, M, c);

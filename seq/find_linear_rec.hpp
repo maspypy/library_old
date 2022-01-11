@@ -1,5 +1,5 @@
 template <typename mint>
-vector<mint> find_linear_recurrence(vector<mint>& A) {
+vector<mint> find_linear_rec(vector<mint>& A) {
   int N = len(A);
   vc<mint> B = {1}, C = {1};
   int l = 0, m = 1;

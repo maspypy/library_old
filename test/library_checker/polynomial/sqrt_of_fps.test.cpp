@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/sqrt_of_formal_power_series"
 #include "my_template.hpp"
-#include "polynomial/fps_sqrt.hpp"
+#include "poly/fps_sqrt.hpp"
 
 using mint = modint998;
 void solve() {

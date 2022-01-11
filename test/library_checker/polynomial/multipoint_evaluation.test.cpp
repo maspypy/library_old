@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/multipoint_evaluation"
 #include "my_template.hpp"
 
-#include "polynomial/multipoint.hpp"
+#include "poly/multipoint.hpp"
 
 #include "mod/modint.hpp"
 using mint = modint998;

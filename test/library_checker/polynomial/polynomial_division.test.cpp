@@ -2,7 +2,7 @@
 #include "my_template.hpp"
 
 #include "mod/modint.hpp"
-#include "polynomial/poly_divmod.hpp"
+#include "poly/poly_divmod.hpp"
 
 using mint = modint998;
 

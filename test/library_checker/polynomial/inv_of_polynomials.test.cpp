@@ -1,6 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/inv_of_polynomials"
 #include "my_template.hpp"
-#include "polynomial/poly_gcd.hpp"
+#include "poly/poly_gcd.hpp"
 
 using mint = modint998;
 void solve() {

@@ -2,7 +2,7 @@
 #include "my_template.hpp"
 
 #include "mod/modint.hpp"
-#include "polynomial/fps_inv.hpp"
+#include "poly/fps_inv.hpp"
 using mint = modint998;
 
 void solve() {
