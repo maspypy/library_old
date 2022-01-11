@@ -152,18 +152,18 @@ data:
     \ ids(A.size());\n  iota(all(ids), 0);\n  sort(all(ids), [&](int i, int j) { return\
     \ A[i] < A[j] || (A[i] == A[j] && i < j); });\n  return ids;\n}\n#line 3 \"test/library_checker/string/zalgorithm.test.cpp\"\
     \n\r\n#line 1 \"string/zalgorithm.hpp\"\ntemplate <typename STRING>  // string,\
-    \ vector \u3069\u3061\u3089\u3067\u3082\nvector<int> z_algorithm(const STRING&\
+    \ vector \u3069\u3061\u3089\u3067\u3082\nvector<int> zalgorithm(const STRING&\
     \ s) {\n  int n = int(s.size());\n  if (n == 0) return {};\n  vector<int> z(n);\n\
     \  z[0] = 0;\n  for (int i = 1, j = 0; i < n; i++) {\n    int& k = z[i];\n   \
     \ k = (j + z[j] <= i) ? 0 : min(j + z[j] - i, z[i - j]);\n    while (i + k < n\
     \ && s[k] == s[i + k]) k++;\n    if (j + z[j] < i + z[i]) j = i;\n  }\n  z[0]\
     \ = n;\n  return z;\n}\n#line 5 \"test/library_checker/string/zalgorithm.test.cpp\"\
-    \n\r\nvoid solve() {\r\n  STR(S);\r\n  auto Z = z_algorithm(S);\r\n  print(Z);\r\
+    \n\r\nvoid solve() {\r\n  STR(S);\r\n  auto Z = zalgorithm(S);\r\n  print(Z);\r\
     \n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
     \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/zalgorithm\"\r\n#include\
     \ \"my_template.hpp\"\r\n\r\n#include \"string/zalgorithm.hpp\"\r\n\r\nvoid solve()\
-    \ {\r\n  STR(S);\r\n  auto Z = z_algorithm(S);\r\n  print(Z);\r\n}\r\n\r\nsigned\
+    \ {\r\n  STR(S);\r\n  auto Z = zalgorithm(S);\r\n  print(Z);\r\n}\r\n\r\nsigned\
     \ main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout\
     \ << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
@@ -173,7 +173,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/string/zalgorithm.test.cpp
   requiredBy: []
-  timestamp: '2022-01-10 20:08:40+09:00'
+  timestamp: '2022-01-11 11:40:47+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/string/zalgorithm.test.cpp

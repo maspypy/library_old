@@ -2,55 +2,51 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: graph/base.hpp
-    title: graph/base.hpp
-  - icon: ':heavy_check_mark:'
-    path: graph/dijkstra.hpp
-    title: graph/dijkstra.hpp
-  - icon: ':heavy_check_mark:'
-    path: graph/restore_path.hpp
-    title: graph/restore_path.hpp
-  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
+  - icon: ':x:'
+    path: string/run_enumerate.hpp
+    title: string/run_enumerate.hpp
+  - icon: ':x:'
+    path: string/zalgorithm.hpp
+    title: string/zalgorithm.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/shortest_path
+    PROBLEM: https://judge.yosupo.jp/problem/runenumerate
     links:
-    - https://judge.yosupo.jp/problem/shortest_path
-  bundledCode: "#line 1 \"test/library_checker/graph/shortest_path.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/shortest_path\"\r\n\r\n#line 1 \"\
-    my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\n#line 1\
-    \ \"other/io.hpp\"\n// based on yosupo's fastio\r\n#include <unistd.h>\r\n\r\n\
-    namespace detail {\r\ntemplate <typename T, decltype(&T::is_modint) = &T::is_modint>\r\
-    \nstd::true_type check_value(int);\r\ntemplate <typename T>\r\nstd::false_type\
-    \ check_value(long);\r\n} // namespace detail\r\n\r\ntemplate <typename T>\r\n\
-    struct is_modint : decltype(detail::check_value<T>(0)) {};\r\ntemplate <typename\
-    \ T>\r\nusing is_modint_t = enable_if_t<is_modint<T>::value>;\r\ntemplate <typename\
-    \ T>\r\nusing is_not_modint_t = enable_if_t<!is_modint<T>::value>;\r\n\r\nstruct\
-    \ Scanner {\r\n  int fd = -1;\r\n  char line[(1 << 15) + 1];\r\n  size_t st =\
-    \ 0, ed = 0;\r\n  void reread() {\r\n    memmove(line, line + st, ed - st);\r\n\
-    \    ed -= st;\r\n    st = 0;\r\n    ed += ::read(fd, line + ed, (1 << 15) - ed);\r\
-    \n    line[ed] = '\\0';\r\n  }\r\n  bool succ() {\r\n    while (true) {\r\n  \
-    \    if (st == ed) {\r\n        reread();\r\n        if (st == ed) return false;\r\
-    \n      }\r\n      while (st != ed && isspace(line[st])) st++;\r\n      if (st\
-    \ != ed) break;\r\n    }\r\n    if (ed - st <= 50) {\r\n      bool sep = false;\r\
-    \n      for (size_t i = st; i < ed; i++) {\r\n        if (isspace(line[i])) {\r\
-    \n          sep = true;\r\n          break;\r\n        }\r\n      }\r\n      if\
-    \ (!sep) reread();\r\n    }\r\n    return true;\r\n  }\r\n  template <class T,\
-    \ enable_if_t<is_same<T, string>::value, int> = 0>\r\n  bool read_single(T &ref)\
-    \ {\r\n    if (!succ()) return false;\r\n    while (true) {\r\n      size_t sz\
-    \ = 0;\r\n      while (st + sz < ed && !isspace(line[st + sz])) sz++;\r\n    \
-    \  ref.append(line + st, sz);\r\n      st += sz;\r\n      if (!sz || st != ed)\
-    \ break;\r\n      reread();\r\n    }\r\n    return true;\r\n  }\r\n  template\
+    - https://judge.yosupo.jp/problem/runenumerate
+  bundledCode: "#line 1 \"test/library_checker/string/run_enumerate.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/runenumerate\"\r\n#line 1 \"my_template.hpp\"\
+    \n#include <bits/stdc++.h>\n\nusing namespace std;\n\n#line 1 \"other/io.hpp\"\
+    \n// based on yosupo's fastio\r\n#include <unistd.h>\r\n\r\nnamespace detail {\r\
+    \ntemplate <typename T, decltype(&T::is_modint) = &T::is_modint>\r\nstd::true_type\
+    \ check_value(int);\r\ntemplate <typename T>\r\nstd::false_type check_value(long);\r\
+    \n} // namespace detail\r\n\r\ntemplate <typename T>\r\nstruct is_modint : decltype(detail::check_value<T>(0))\
+    \ {};\r\ntemplate <typename T>\r\nusing is_modint_t = enable_if_t<is_modint<T>::value>;\r\
+    \ntemplate <typename T>\r\nusing is_not_modint_t = enable_if_t<!is_modint<T>::value>;\r\
+    \n\r\nstruct Scanner {\r\n  int fd = -1;\r\n  char line[(1 << 15) + 1];\r\n  size_t\
+    \ st = 0, ed = 0;\r\n  void reread() {\r\n    memmove(line, line + st, ed - st);\r\
+    \n    ed -= st;\r\n    st = 0;\r\n    ed += ::read(fd, line + ed, (1 << 15) -\
+    \ ed);\r\n    line[ed] = '\\0';\r\n  }\r\n  bool succ() {\r\n    while (true)\
+    \ {\r\n      if (st == ed) {\r\n        reread();\r\n        if (st == ed) return\
+    \ false;\r\n      }\r\n      while (st != ed && isspace(line[st])) st++;\r\n \
+    \     if (st != ed) break;\r\n    }\r\n    if (ed - st <= 50) {\r\n      bool\
+    \ sep = false;\r\n      for (size_t i = st; i < ed; i++) {\r\n        if (isspace(line[i]))\
+    \ {\r\n          sep = true;\r\n          break;\r\n        }\r\n      }\r\n \
+    \     if (!sep) reread();\r\n    }\r\n    return true;\r\n  }\r\n  template <class\
+    \ T, enable_if_t<is_same<T, string>::value, int> = 0>\r\n  bool read_single(T\
+    \ &ref) {\r\n    if (!succ()) return false;\r\n    while (true) {\r\n      size_t\
+    \ sz = 0;\r\n      while (st + sz < ed && !isspace(line[st + sz])) sz++;\r\n \
+    \     ref.append(line + st, sz);\r\n      st += sz;\r\n      if (!sz || st !=\
+    \ ed) break;\r\n      reread();\r\n    }\r\n    return true;\r\n  }\r\n  template\
     \ <class T, enable_if_t<is_integral<T>::value, int> = 0>\r\n  bool read_single(T\
     \ &ref) {\r\n    if (!succ()) return false;\r\n    bool neg = false;\r\n    if\
     \ (line[st] == '-') {\r\n      neg = true;\r\n      st++;\r\n    }\r\n    ref\
@@ -157,78 +153,61 @@ data:
     \ {\n  vc<int> C(size);\n  for (auto&& x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate\
     \ <typename T>\nvector<int> argsort(vector<T> &A) {\n  // stable\n  vector<int>\
     \ ids(A.size());\n  iota(all(ids), 0);\n  sort(all(ids), [&](int i, int j) { return\
-    \ A[i] < A[j] || (A[i] == A[j] && i < j); });\n  return ids;\n}\n#line 4 \"test/library_checker/graph/shortest_path.test.cpp\"\
-    \n\r\n#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n  int\
-    \ frm, to;\n  T cost;\n  int id;\n};\n\ntemplate <typename T = int, bool directed\
-    \ = false>\nstruct Graph {\n  int N, M;\n  using cost_type = T;\n  using edge_type\
-    \ = Edge<T>;\n  vector<edge_type> edges;\n  vector<int> indptr;\n  vector<edge_type>\
-    \ csr_edges;\n  bool prepared;\n\n  class OutgoingEdges {\n  public:\n    OutgoingEdges(const\
-    \ Graph* G, int l, int r) : G(G), l(l), r(r) {}\n\n    const edge_type* begin()\
-    \ const {\n      if (l == r) { return 0; }\n      return &G->csr_edges[l];\n \
-    \   }\n\n    const edge_type* end() const {\n      if (l == r) { return 0; }\n\
-    \      return &G->csr_edges[r];\n    }\n\n  private:\n    int l, r;\n    const\
-    \ Graph* G;\n  };\n\n  bool is_prepared() { return prepared; }\n  constexpr bool\
-    \ is_directed() { return directed; }\n\n  Graph() {}\n  Graph(int N) : N(N), M(0),\
-    \ prepared(0) {}\n\n  void add(int frm, int to, T cost = 1, int i = -1) {\n  \
-    \  assert(!prepared);\n    assert(0 <= frm && frm < N && 0 <= to && to < N);\n\
-    \    if (i == -1) i = M;\n    auto e = edge_type({frm, to, cost, i});\n    edges.eb(e);\n\
-    \    ++M;\n  }\n\n  void prepare() {\n    assert(!prepared);\n    prepared = true;\n\
-    \    indptr.assign(N + 1, 0);\n    for (auto&& e: edges) {\n      indptr[e.frm\
-    \ + 1]++;\n      if (!directed) indptr[e.to + 1]++;\n    }\n    FOR(v, N) indptr[v\
-    \ + 1] += indptr[v];\n    auto counter = indptr;\n    csr_edges.resize(indptr.back()\
-    \ + 1);\n    for (auto&& e: edges) {\n      csr_edges[counter[e.frm]++] = e;\n\
-    \      if (!directed)\n        csr_edges[counter[e.to]++] = edge_type({e.to, e.frm,\
-    \ e.cost, e.id});\n    }\n  }\n\n  OutgoingEdges operator[](int v) const {\n \
-    \   assert(prepared);\n    return {this, indptr[v], indptr[v + 1]};\n  }\n\n \
-    \ void debug() {\n    print(\"Graph\");\n    if (!prepared) {\n      print(\"\
-    frm to cost id\");\n      for (auto&& e: edges) print(e.frm, e.to, e.cost, e.id);\n\
-    \    } else {\n      print(\"indptr\", indptr);\n      print(\"frm to cost id\"\
-    );\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e.frm, e.to, e.cost, e.id);\n\
-    \    }\n  }\n\n  int size() { return N; }\n};\n#line 3 \"graph/dijkstra.hpp\"\n\
-    \ntemplate <typename Graph>\npair<vector<typename Graph::cost_type>, vector<int>>\
-    \ dijkstra(Graph& G, int v) {\n  auto N = G.N;\n  using T = typename Graph::cost_type;\n\
-    \  vector<T> dist(N, -1);\n  vector<int> par(N, -1);\n  using P = pair<T, int>;\n\
-    \n  priority_queue<P, vector<P>, greater<P>> que;\n\n  dist[v] = 0;\n  que.push(mp(T(0),\
-    \ v));\n  while (!que.empty()) {\n    auto [dv, v] = que.top();\n    que.pop();\n\
-    \    if (dv > dist[v]) continue;\n    for (auto&& e: G[v]) {\n      if (dist[e.to]\
-    \ == -1 || dist[e.to] > dist[e.frm] + e.cost) {\n        dist[e.to] = dist[e.frm]\
-    \ + e.cost;\n        par[e.to] = e.frm;\n        que.push(mp(dist[e.to], e.to));\n\
-    \      }\n    }\n  }\n  return mp(dist, par);\n}\n#line 1 \"graph/restore_path.hpp\"\
-    \nvector<int> restore_path(vector<int> par, int t){\r\n  vector<int> pth = {t};\r\
-    \n  while (par[pth.back()] != -1) pth.eb(par[pth.back()]);\r\n  reverse(all(pth));\r\
-    \n  return pth;\r\n}\n#line 7 \"test/library_checker/graph/shortest_path.test.cpp\"\
-    \n\r\nvoid solve() {\r\n  LL(N, M, s, t);\r\n  Graph<ll, true> G(N);\r\n  FOR(_,\
-    \ M) {\r\n    LL(a, b, c);\r\n    G.add(a, b, c);\r\n  }\r\n  G.prepare();\r\n\
-    \r\n  auto [dist, par] = dijkstra(G, s);\r\n  if (dist[t] == -1) return print(-1);\r\
-    \n\r\n  vector<int> pth = restore_path(par, t);\r\n  print(dist[t], len(pth) -\
-    \ 1);\r\n  FOR(i, len(pth) - 1) print(pth[i], pth[i + 1]);\r\n}\r\n\r\nsigned\
-    \ main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout\
-    \ << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/shortest_path\"\r\n\r\n\
-    #include \"my_template.hpp\"\r\n\r\n#include \"graph/dijkstra.hpp\"\r\n#include\
-    \ \"graph/restore_path.hpp\"\r\n\r\nvoid solve() {\r\n  LL(N, M, s, t);\r\n  Graph<ll,\
-    \ true> G(N);\r\n  FOR(_, M) {\r\n    LL(a, b, c);\r\n    G.add(a, b, c);\r\n\
-    \  }\r\n  G.prepare();\r\n\r\n  auto [dist, par] = dijkstra(G, s);\r\n  if (dist[t]\
-    \ == -1) return print(-1);\r\n\r\n  vector<int> pth = restore_path(par, t);\r\n\
-    \  print(dist[t], len(pth) - 1);\r\n  FOR(i, len(pth) - 1) print(pth[i], pth[i\
-    \ + 1]);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \ A[i] < A[j] || (A[i] == A[j] && i < j); });\n  return ids;\n}\n#line 1 \"string/zalgorithm.hpp\"\
+    \ntemplate <typename STRING>  // string, vector \u3069\u3061\u3089\u3067\u3082\
+    \nvector<int> zalgorithm(const STRING& s) {\n  int n = int(s.size());\n  if (n\
+    \ == 0) return {};\n  vector<int> z(n);\n  z[0] = 0;\n  for (int i = 1, j = 0;\
+    \ i < n; i++) {\n    int& k = z[i];\n    k = (j + z[j] <= i) ? 0 : min(j + z[j]\
+    \ - i, z[i - j]);\n    while (i + k < n && s[k] == s[i + k]) k++;\n    if (j +\
+    \ z[j] < i + z[i]) j = i;\n  }\n  z[0] = n;\n  return z;\n}\n#line 2 \"string/run_enumerate.hpp\"\
+    \ntemplate <typename STRING>\r\nvc<tuple<int, int, int>> run_enumerate(const STRING&\
+    \ S) {\r\n  // (period, l, r)\r\n  ll N = len(S);\r\n  using T = tuple<int, int,\
+    \ int>;\r\n  using P = pair<int, int>;\r\n  vc<vc<P>> by_p(N + 1);\r\n\r\n  auto\
+    \ solve_sub = [&](STRING& left, STRING& right) -> vc<T> {\r\n    vc<T> res;\r\n\
+    \    int n = len(left), m = len(right);\r\n    auto S = left, T = right;\r\n \
+    \   reverse(all(S));\r\n    T.insert(T.end(), all(left));\r\n    T.insert(T.end(),\
+    \ all(right));\r\n    auto ZS = zalgorithm(S), ZT = zalgorithm(T);\r\n    FOR3(p,\
+    \ 1, n + 1) {\r\n      int a = (p == n ? p : min(ZS[p] + int(p), n));\r\n    \
+    \  int b = min(ZT[n + m - p], m);\r\n      if (a + b < 2 * p) continue;\r\n  \
+    \    res.eb(p, a, b);\r\n    }\r\n    return res;\r\n  };\r\n\r\n  vc<P> st =\
+    \ {{0, N}};\r\n  while (!st.empty()) {\r\n    auto [L, R] = st.back();\r\n   \
+    \ st.pop_back();\r\n    if (R - L <= 1) continue;\r\n    int M = (L + R) / 2;\r\
+    \n    st.eb(L, M), st.eb(M, R);\r\n    STRING SL = {S.begin() + L, S.begin() +\
+    \ M};\r\n    STRING SR = {S.begin() + M, S.begin() + R};\r\n    {\r\n      auto\
+    \ sub_res = solve_sub(SL, SR);\r\n      for (auto&& [p, a, b]: sub_res) by_p[p].eb(M\
+    \ - a, M + b);\r\n    }\r\n    {\r\n      reverse(all(SL)), reverse(all(SR));\r\
+    \n      auto sub_res = solve_sub(SR, SL);\r\n      for (auto&& [p, a, b]: sub_res)\
+    \ by_p[p].eb(M - b, M + a);\r\n    }\r\n  }\r\n\r\n  vc<T> res;\r\n  set<P> done;\r\
+    \n  FOR(p, len(by_p)) {\r\n    auto& LR = by_p[p];\r\n    sort(all(LR),\r\n  \
+    \       [](auto& x, auto& y) { return P(x.fi, -x.se) < P(y.fi, -y.se); });\r\n\
+    \    int r = -1;\r\n    for (auto&& lr: LR) {\r\n      if (chmax(r, lr.se) &&\
+    \ !done.count(lr)) {\r\n        done.insert(lr);\r\n        res.eb(p, lr.fi, lr.se);\r\
+    \n      }\r\n    }\r\n  }\r\n  return res;\r\n}\r\n#line 4 \"test/library_checker/string/run_enumerate.test.cpp\"\
+    \n\r\nvoid solve() {\r\n  STR(S);\r\n  auto ANS = run_enumerate(S);\r\n  print(len(ANS));\r\
+    \n  for (auto&& [p, l, r]: ANS) print(p, l, r);\r\n}\r\n\r\nsigned main() {\r\n\
+    \  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
+    \n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/runenumerate\"\r\n#include\
+    \ \"my_template.hpp\"\r\n#include \"string/run_enumerate.hpp\"\r\n\r\nvoid solve()\
+    \ {\r\n  STR(S);\r\n  auto ANS = run_enumerate(S);\r\n  print(len(ANS));\r\n \
+    \ for (auto&& [p, l, r]: ANS) print(p, l, r);\r\n}\r\n\r\nsigned main() {\r\n\
+    \  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
+    \n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
-  - graph/dijkstra.hpp
-  - graph/base.hpp
-  - graph/restore_path.hpp
+  - string/run_enumerate.hpp
+  - string/zalgorithm.hpp
   isVerificationFile: true
-  path: test/library_checker/graph/shortest_path.test.cpp
+  path: test/library_checker/string/run_enumerate.test.cpp
   requiredBy: []
-  timestamp: '2022-01-10 20:08:40+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-11 11:40:47+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/library_checker/graph/shortest_path.test.cpp
+documentation_of: test/library_checker/string/run_enumerate.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/graph/shortest_path.test.cpp
-- /verify/test/library_checker/graph/shortest_path.test.cpp.html
-title: test/library_checker/graph/shortest_path.test.cpp
+- /verify/test/library_checker/string/run_enumerate.test.cpp
+- /verify/test/library_checker/string/run_enumerate.test.cpp.html
+title: test/library_checker/string/run_enumerate.test.cpp
 ---
