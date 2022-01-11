@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: other/io.hpp
     title: other/io.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: seq/find_linear_rec.hpp
     title: seq/find_linear_rec.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/find_linear_recurrence
@@ -226,7 +226,7 @@ data:
     \ mint>\nvc<mint> power_table(mint a, ll N) {\n  vc<mint> f(N, 1);\n  FOR(i, N\
     \ - 1) f[i + 1] = a * f[i];\n  return f;\n}\n\nusing modint107 = modint<1'000'000'007>;\n\
     using modint998 = modint<998'244'353>;\nusing amint = ArbitraryModInt;\n#line\
-    \ 1 \"seq/find_linear_rec.hpp\"\ntemplate <typename mint>\r\nvector<mint> find_linear_recurrence(vector<mint>&\
+    \ 1 \"seq/find_linear_rec.hpp\"\ntemplate <typename mint>\r\nvector<mint> find_linear_rec(vector<mint>&\
     \ A) {\r\n  int N = len(A);\r\n  vc<mint> B = {1}, C = {1};\r\n  int l = 0, m\
     \ = 1;\r\n  mint p = 1;\r\n  FOR(i, N) {\r\n    mint d = A[i];\r\n    FOR3(j,\
     \ 1, l + 1) { d += C[j] * A[i - j]; }\r\n    if (d == 0) {\r\n      ++m;\r\n \
@@ -255,8 +255,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/math/find_linear_recurrence.test.cpp
   requiredBy: []
-  timestamp: '2022-01-11 13:34:41+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-01-11 14:06:44+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/math/find_linear_recurrence.test.cpp
 layout: document

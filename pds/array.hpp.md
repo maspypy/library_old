@@ -1,11 +1,17 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: pds/unionfind.hpp
+    title: pds/unionfind.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/persistent_queue.test.cpp
     title: test/library_checker/datastructure/persistent_queue.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/persistent_unionfind.test.cpp
+    title: test/library_checker/datastructure/persistent_unionfind.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -49,10 +55,12 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: pds/array.hpp
-  requiredBy: []
+  requiredBy:
+  - pds/unionfind.hpp
   timestamp: '2022-01-11 13:22:23+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/library_checker/datastructure/persistent_unionfind.test.cpp
   - test/library_checker/datastructure/persistent_queue.test.cpp
 documentation_of: pds/array.hpp
 layout: document

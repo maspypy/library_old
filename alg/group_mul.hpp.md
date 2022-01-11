@@ -5,7 +5,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: alg/lazy_add_mul.hpp
     title: alg/lazy_add_mul.hpp
+  - icon: ':heavy_check_mark:'
+    path: poly/lagrange_interpolate_iota.hpp
+    title: poly/lagrange_interpolate_iota.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
+    title: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/899_bfsnumbering.test.cpp
     title: test/yukicoder/899_bfsnumbering.test.cpp
@@ -27,10 +33,12 @@ data:
   isVerificationFile: false
   path: alg/group_mul.hpp
   requiredBy:
+  - poly/lagrange_interpolate_iota.hpp
   - alg/lazy_add_mul.hpp
   timestamp: '2022-01-11 13:22:23+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
   - test/yukicoder/899_bfsnumbering.test.cpp
 documentation_of: alg/group_mul.hpp
 layout: document

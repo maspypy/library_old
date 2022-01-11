@@ -23,42 +23,48 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/convolution_mod_2_64.hpp
     title: poly/convolution_mod_2_64.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: poly/fps_composition.hpp
     title: poly/fps_composition.hpp
   - icon: ':heavy_check_mark:'
     path: poly/fps_exp.hpp
     title: poly/fps_exp.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: poly/fps_inv.hpp
     title: poly/fps_inv.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: poly/fps_log.hpp
     title: poly/fps_log.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: poly/fps_pow.hpp
     title: poly/fps_pow.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: poly/fps_sqrt.hpp
     title: poly/fps_sqrt.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
+    path: poly/lagrange_interpolate_iota.hpp
+    title: poly/lagrange_interpolate_iota.hpp
+  - icon: ':heavy_check_mark:'
     path: poly/multipoint.hpp
     title: poly/multipoint.hpp
   - icon: ':heavy_check_mark:'
     path: poly/multivar_convolution.hpp
     title: poly/multivar_convolution.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: poly/poly_divmod.hpp
     title: poly/poly_divmod.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: poly/poly_gcd.hpp
     title: poly/poly_gcd.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: poly/poly_taylor_shift.hpp
     title: poly/poly_taylor_shift.hpp
   - icon: ':heavy_check_mark:'
     path: seq/coef_of_rational_fps.hpp
     title: seq/coef_of_rational_fps.hpp
+  - icon: ':warning:'
+    path: seq/interpolate_linear_rec.hpp
+    title: seq/interpolate_linear_rec.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/convolution/bitwise_and_convolution.test.cpp
@@ -111,7 +117,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
     title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/math/find_linear_recurrence.test.cpp
     title: test/library_checker/math/find_linear_recurrence.test.cpp
   - icon: ':heavy_check_mark:'
@@ -138,15 +144,51 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/matrix/solve_linear.test.cpp
     title: test/library_checker/matrix/solve_linear.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/matrix/sparse_matrix_det.test.cpp
     title: test/library_checker/matrix/sparse_matrix_det.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/library_checker/polynomial/composition_of_fps.test.cpp
+    title: test/library_checker/polynomial/composition_of_fps.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/polynomial/exp_of_fps.test.cpp
+    title: test/library_checker/polynomial/exp_of_fps.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/polynomial/inv_of_fps.test.cpp
+    title: test/library_checker/polynomial/inv_of_fps.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/polynomial/inv_of_polynomials.test.cpp
+    title: test/library_checker/polynomial/inv_of_polynomials.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/polynomial/log_of_fps.test.cpp
+    title: test/library_checker/polynomial/log_of_fps.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/polynomial/multipoint_evaluation.test.cpp
+    title: test/library_checker/polynomial/multipoint_evaluation.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/polynomial/polynomial_division.test.cpp
+    title: test/library_checker/polynomial/polynomial_division.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/polynomial/polynomial_interpolation.test.cpp
+    title: test/library_checker/polynomial/polynomial_interpolation.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
+    title: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/polynomial/pow_of_fps.test.cpp
+    title: test/library_checker/polynomial/pow_of_fps.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
+    title: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/polynomial/sqrt_of_fps.test.cpp
+    title: test/library_checker/polynomial/sqrt_of_fps.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/tree/frequency_table_of_tree_distance.test.cpp
     title: test/library_checker/tree/frequency_table_of_tree_distance.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n\
@@ -294,6 +336,7 @@ data:
   isVerificationFile: false
   path: mod/modint.hpp
   requiredBy:
+  - seq/interpolate_linear_rec.hpp
   - seq/coef_of_rational_fps.hpp
   - graph/tree_all_distances.hpp
   - mod/mod_sqrt.hpp
@@ -309,12 +352,13 @@ data:
   - poly/fps_inv.hpp
   - poly/multivar_convolution.hpp
   - poly/poly_taylor_shift.hpp
+  - poly/lagrange_interpolate_iota.hpp
   - poly/convolution_mod_2_64.hpp
   - poly/poly_gcd.hpp
   - other/sharp_p_subset_sum.hpp
   - nt/multiplicative_convolution_mod2n.hpp
   timestamp: '2022-01-10 17:44:09+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/convolution/mul_mod2n_convolution.test.cpp
   - test/library_checker/convolution/bitwise_xor_convolution.test.cpp
@@ -334,6 +378,18 @@ data:
   - test/library_checker/matrix/hafnian_of_matrix.test.cpp
   - test/library_checker/matrix/inverse_matrix.test.cpp
   - test/library_checker/matrix/solve_linear.test.cpp
+  - test/library_checker/polynomial/sqrt_of_fps.test.cpp
+  - test/library_checker/polynomial/log_of_fps.test.cpp
+  - test/library_checker/polynomial/polynomial_division.test.cpp
+  - test/library_checker/polynomial/multipoint_evaluation.test.cpp
+  - test/library_checker/polynomial/exp_of_fps.test.cpp
+  - test/library_checker/polynomial/composition_of_fps.test.cpp
+  - test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
+  - test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
+  - test/library_checker/polynomial/pow_of_fps.test.cpp
+  - test/library_checker/polynomial/inv_of_fps.test.cpp
+  - test/library_checker/polynomial/polynomial_interpolation.test.cpp
+  - test/library_checker/polynomial/inv_of_polynomials.test.cpp
   - test/library_checker/math/sharp_p_subset_sum.test.cpp
   - test/library_checker/math/sqrt_mod.test.cpp
   - test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
