@@ -1,14 +1,92 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: nt/multiplicative_convolution_mod2n.hpp
+    title: nt/multiplicative_convolution_mod2n.hpp
+  - icon: ':x:'
+    path: other/sharp_p_subset_sum.hpp
+    title: other/sharp_p_subset_sum.hpp
+  - icon: ':heavy_check_mark:'
+    path: poly/convolution_huge.hpp
+    title: poly/convolution_huge.hpp
+  - icon: ':heavy_check_mark:'
+    path: poly/convolution_mod_2_64.hpp
+    title: poly/convolution_mod_2_64.hpp
+  - icon: ':warning:'
+    path: poly/fps_composition.hpp
+    title: poly/fps_composition.hpp
+  - icon: ':x:'
+    path: poly/fps_exp.hpp
+    title: poly/fps_exp.hpp
+  - icon: ':warning:'
+    path: poly/fps_inv.hpp
+    title: poly/fps_inv.hpp
+  - icon: ':warning:'
+    path: poly/fps_log.hpp
+    title: poly/fps_log.hpp
+  - icon: ':warning:'
+    path: poly/fps_pow.hpp
+    title: poly/fps_pow.hpp
+  - icon: ':warning:'
+    path: poly/fps_sqrt.hpp
+    title: poly/fps_sqrt.hpp
+  - icon: ':warning:'
+    path: poly/multipoint.hpp
+    title: poly/multipoint.hpp
+  - icon: ':heavy_check_mark:'
+    path: poly/multivar_convolution.hpp
+    title: poly/multivar_convolution.hpp
+  - icon: ':warning:'
+    path: poly/poly_divmod.hpp
+    title: poly/poly_divmod.hpp
+  - icon: ':warning:'
+    path: poly/poly_gcd.hpp
+    title: poly/poly_gcd.hpp
+  - icon: ':warning:'
+    path: poly/poly_taylor_shift.hpp
+    title: poly/poly_taylor_shift.hpp
+  - icon: ':x:'
+    path: seq/coef_of_rational_fps.hpp
+    title: seq/coef_of_rational_fps.hpp
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/convolution/contolution_mod_2_64.test.cpp
+    title: test/library_checker/convolution/contolution_mod_2_64.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/convolution/convolution_huge.test.cpp
+    title: test/library_checker/convolution/convolution_huge.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/convolution/convolution_mod.test.cpp
+    title: test/library_checker/convolution/convolution_mod.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/convolution/convolution_mod_107.test.cpp
+    title: test/library_checker/convolution/convolution_mod_107.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/convolution/convolution_mod_107_amint.test.cpp
+    title: test/library_checker/convolution/convolution_mod_107_amint.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/convolution/mul_mod2n_convolution.test.cpp
+    title: test/library_checker/convolution/mul_mod2n_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/convolution/multivariate_convolution.test.cpp
+    title: test/library_checker/convolution/multivariate_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/convolution/subset_convolution_multivar.test.cpp
+    title: test/library_checker/convolution/subset_convolution_multivar.test.cpp
+  - icon: ':x:'
+    path: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
+    title: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - icon: ':x:'
+    path: test/library_checker/math/sharp_p_subset_sum.test.cpp
+    title: test/library_checker/math/sharp_p_subset_sum.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n\
@@ -394,10 +472,36 @@ data:
   - mod/modint.hpp
   isVerificationFile: false
   path: poly/convolution.hpp
-  requiredBy: []
+  requiredBy:
+  - seq/coef_of_rational_fps.hpp
+  - poly/fps_pow.hpp
+  - poly/fps_log.hpp
+  - poly/multipoint.hpp
+  - poly/fps_exp.hpp
+  - poly/fps_composition.hpp
+  - poly/convolution_huge.hpp
+  - poly/poly_divmod.hpp
+  - poly/fps_sqrt.hpp
+  - poly/fps_inv.hpp
+  - poly/multivar_convolution.hpp
+  - poly/poly_taylor_shift.hpp
+  - poly/convolution_mod_2_64.hpp
+  - poly/poly_gcd.hpp
+  - other/sharp_p_subset_sum.hpp
+  - nt/multiplicative_convolution_mod2n.hpp
   timestamp: '2022-01-11 13:22:23+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_SOME_WA
+  verifiedWith:
+  - test/library_checker/convolution/mul_mod2n_convolution.test.cpp
+  - test/library_checker/convolution/multivariate_convolution.test.cpp
+  - test/library_checker/convolution/convolution_mod_107.test.cpp
+  - test/library_checker/convolution/subset_convolution_multivar.test.cpp
+  - test/library_checker/convolution/convolution_mod_107_amint.test.cpp
+  - test/library_checker/convolution/convolution_huge.test.cpp
+  - test/library_checker/convolution/convolution_mod.test.cpp
+  - test/library_checker/convolution/contolution_mod_2_64.test.cpp
+  - test/library_checker/math/sharp_p_subset_sum.test.cpp
+  - test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
 documentation_of: poly/convolution.hpp
 layout: document
 redirect_from:

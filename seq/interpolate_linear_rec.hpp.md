@@ -24,15 +24,15 @@ data:
     \ G, N);\r\n}\r\n"
   dependsOn: []
   isVerificationFile: false
-  path: seq/linearrecurrence.hpp
+  path: seq/interpolate_linear_rec.hpp
   requiredBy: []
   timestamp: '1970-01-01 00:00:00+00:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: seq/linearrecurrence.hpp
+documentation_of: seq/interpolate_linear_rec.hpp
 layout: document
 redirect_from:
-- /library/seq/linearrecurrence.hpp
-- /library/seq/linearrecurrence.hpp.html
-title: seq/linearrecurrence.hpp
+- /library/seq/interpolate_linear_rec.hpp
+- /library/seq/interpolate_linear_rec.hpp.html
+title: seq/interpolate_linear_rec.hpp
 ---

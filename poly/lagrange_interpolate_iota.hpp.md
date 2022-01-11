@@ -18,7 +18,7 @@ data:
     )\nonlinejudge_verify.languages.cplusplus_bundle.BundleErrorAt: algebra/group_mul.hpp:\
     \ line -1: no such header\n"
   code: "#include \"algebra/group_mul.hpp\"\r\n#include \"ds/swag.hpp\"\r\n#include\
-    \ \"polynomial/convolution.hpp\"\r\n\r\ntemplate <typename mint>\r\nvc<mint> lagrange_intepolate_iota(vc<mint>\
+    \ \"poly/convolution.hpp\"\r\n\r\ntemplate <typename mint>\r\nvc<mint> lagrange_intepolate_iota(vc<mint>\
     \ &f, mint c, int m) {\r\n  /*\r\n  Input: f(0), ..., f(n-1) and c, m (1 default)\r\
     \n  Return: f(c), f(c+1), ..., f(c+m-1)\r\n  Complexity: M(n, m)\r\n  */\r\n \
     \ ll n = len(f);\r\n  auto a = f;\r\n  FOR(i, n) {\r\n    a[i] = a[i] * fact_inv<mint>(i)\
