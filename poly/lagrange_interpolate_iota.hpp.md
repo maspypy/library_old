@@ -13,8 +13,14 @@ data:
   - icon: ':question:'
     path: poly/convolution.hpp
     title: poly/convolution.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':x:'
+    path: seq/interpolate_poly_exp_sum.hpp
+    title: seq/interpolate_poly_exp_sum.hpp
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/library_checker/math/sum_of_exp_times_poly.test.cpp
+    title: test/library_checker/math/sum_of_exp_times_poly.test.cpp
   - icon: ':x:'
     path: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
     title: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
@@ -317,11 +323,13 @@ data:
   - mod/modint.hpp
   isVerificationFile: false
   path: poly/lagrange_interpolate_iota.hpp
-  requiredBy: []
+  requiredBy:
+  - seq/interpolate_poly_exp_sum.hpp
   timestamp: '2022-01-13 04:16:58+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
+  - test/library_checker/math/sum_of_exp_times_poly.test.cpp
 documentation_of: poly/lagrange_interpolate_iota.hpp
 layout: document
 redirect_from:

@@ -5,16 +5,16 @@ data:
   - icon: ':x:'
     path: graph/tree_all_distances.hpp
     title: graph/tree_all_distances.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: mod/mod_log.hpp
     title: mod/mod_log.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: mod/mod_sqrt.hpp
     title: mod/mod_sqrt.hpp
   - icon: ':heavy_check_mark:'
     path: nt/multiplicative_convolution_mod2n.hpp
     title: nt/multiplicative_convolution_mod2n.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: other/sharp_p_subset_sum.hpp
     title: other/sharp_p_subset_sum.hpp
   - icon: ':question:'
@@ -29,7 +29,7 @@ data:
   - icon: ':x:'
     path: poly/fps_composition.hpp
     title: poly/fps_composition.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: poly/fps_exp.hpp
     title: poly/fps_exp.hpp
   - icon: ':x:'
@@ -62,12 +62,18 @@ data:
   - icon: ':x:'
     path: poly/poly_taylor_shift.hpp
     title: poly/poly_taylor_shift.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: seq/coef_of_rational_fps.hpp
     title: seq/coef_of_rational_fps.hpp
   - icon: ':warning:'
     path: seq/interpolate_linear_rec.hpp
     title: seq/interpolate_linear_rec.hpp
+  - icon: ':x:'
+    path: seq/interpolate_poly_exp_sum.hpp
+    title: seq/interpolate_poly_exp_sum.hpp
+  - icon: ':warning:'
+    path: seq/limit_poly_exp_sum.hpp
+    title: seq/limit_poly_exp_sum.hpp
   - icon: ':x:'
     path: seq/stirling_number_1.hpp
     title: seq/stirling_number_1.hpp
@@ -120,25 +126,25 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
     title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
     title: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
     title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/math/discrete_logarithm_mod.test.cpp
     title: test/library_checker/math/discrete_logarithm_mod.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/math/find_linear_recurrence.test.cpp
     title: test/library_checker/math/find_linear_recurrence.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/math/sharp_p_subset_sum.test.cpp
     title: test/library_checker/math/sharp_p_subset_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/math/sqrt_mod.test.cpp
     title: test/library_checker/math/sqrt_mod.test.cpp
   - icon: ':x:'
@@ -147,6 +153,9 @@ data:
   - icon: ':x:'
     path: test/library_checker/math/stirling_number_of_the_second_kind.test.cpp
     title: test/library_checker/math/stirling_number_of_the_second_kind.test.cpp
+  - icon: ':x:'
+    path: test/library_checker/math/sum_of_exp_times_poly.test.cpp
+    title: test/library_checker/math/sum_of_exp_times_poly.test.cpp
   - icon: ':x:'
     path: test/library_checker/matrix/hafnian_of_matrix.test.cpp
     title: test/library_checker/matrix/hafnian_of_matrix.test.cpp
@@ -352,8 +361,10 @@ data:
   isVerificationFile: false
   path: mod/modint.hpp
   requiredBy:
+  - seq/interpolate_poly_exp_sum.hpp
   - seq/stirling_number_2.hpp
   - seq/interpolate_linear_rec.hpp
+  - seq/limit_poly_exp_sum.hpp
   - seq/coef_of_rational_fps.hpp
   - seq/stirling_number_1.hpp
   - poly/poly_taylor_shift.hpp
@@ -404,6 +415,7 @@ data:
   - test/library_checker/datastructure/queue_operate_all_composite.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   - test/library_checker/math/sqrt_mod.test.cpp
+  - test/library_checker/math/sum_of_exp_times_poly.test.cpp
   - test/library_checker/math/discrete_logarithm_mod.test.cpp
   - test/library_checker/math/find_linear_recurrence.test.cpp
   - test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp

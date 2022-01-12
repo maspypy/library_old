@@ -1,33 +1,51 @@
 ---
 data:
   _extendedDependsOn:
+  - icon: ':x:'
+    path: alg/group_mul.hpp
+    title: alg/group_mul.hpp
+  - icon: ':question:'
+    path: ds/swag.hpp
+    title: ds/swag.hpp
   - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
+  - icon: ':x:'
+    path: mod/powertable.hpp
+    title: mod/powertable.hpp
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
+  - icon: ':question:'
+    path: nt/primetable.hpp
+    title: nt/primetable.hpp
   - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
   - icon: ':question:'
     path: poly/convolution.hpp
     title: poly/convolution.hpp
-  - icon: ':heavy_check_mark:'
-    path: seq/coef_of_rational_fps.hpp
-    title: seq/coef_of_rational_fps.hpp
+  - icon: ':x:'
+    path: poly/lagrange_interpolate_iota.hpp
+    title: poly/lagrange_interpolate_iota.hpp
+  - icon: ':x:'
+    path: seq/interpolate_poly_exp.hpp
+    title: seq/interpolate_poly_exp.hpp
+  - icon: ':x:'
+    path: seq/interpolate_poly_exp_sum.hpp
+    title: seq/interpolate_poly_exp_sum.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence
+    PROBLEM: https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial
     links:
-    - https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence
-  bundledCode: "#line 1 \"test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp\"\
-    \n#define PROBLEM \\\r\n  \"https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence\"\
+    - https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial
+  bundledCode: "#line 1 \"test/library_checker/math/sum_of_exp_times_poly.test.cpp\"\
+    \n#define PROBLEM \\\r\n  \"https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial\"\
     \r\n#line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
     \n#line 1 \"other/io.hpp\"\n// based on yosupo's fastio\r\n#include <unistd.h>\r\
     \n\r\nnamespace detail {\r\ntemplate <typename T, decltype(&T::is_modint) = &T::is_modint>\r\
@@ -159,30 +177,43 @@ data:
     \  for (auto&& x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate <typename T>\nvector<int>\
     \ argsort(vector<T> &A) {\n  // stable\n  vector<int> ids(A.size());\n  iota(all(ids),\
     \ 0);\n  sort(all(ids), [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j]\
-    \ && i < j); });\n  return ids;\n}\n#line 4 \"test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp\"\
-    \n\r\n#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n  static\
-    \ constexpr bool is_modint = true;\n  int val;\n  constexpr modint(const ll val\
-    \ = 0) noexcept\n      : val(val >= 0 ? val % mod : (mod - (-val) % mod) % mod)\
-    \ {}\n  bool operator<(const modint &other) const {\n    return val < other.val;\n\
-    \  } // To use std::map\n  modint &operator+=(const modint &p) {\n    if ((val\
-    \ += p.val) >= mod) val -= mod;\n    return *this;\n  }\n  modint &operator-=(const\
-    \ modint &p) {\n    if ((val += mod - p.val) >= mod) val -= mod;\n    return *this;\n\
-    \  }\n  modint &operator*=(const modint &p) {\n    val = (int)(1LL * val * p.val\
-    \ % mod);\n    return *this;\n  }\n  modint &operator/=(const modint &p) {\n \
-    \   *this *= p.inverse();\n    return *this;\n  }\n  modint operator-() const\
-    \ { return modint(-val); }\n  modint operator+(const modint &p) const { return\
-    \ modint(*this) += p; }\n  modint operator-(const modint &p) const { return modint(*this)\
-    \ -= p; }\n  modint operator*(const modint &p) const { return modint(*this) *=\
-    \ p; }\n  modint operator/(const modint &p) const { return modint(*this) /= p;\
-    \ }\n  bool operator==(const modint &p) const { return val == p.val; }\n  bool\
-    \ operator!=(const modint &p) const { return val != p.val; }\n  modint inverse()\
-    \ const {\n    int a = val, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n \
-    \     t = a / b;\n      swap(a -= t * b, b), swap(u -= t * v, v);\n    }\n   \
-    \ return modint(u);\n  }\n  modint pow(int64_t n) const {\n    modint ret(1),\
-    \ mul(val);\n    while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n\
-    \      n >>= 1;\n    }\n    return ret;\n  }\n  static constexpr int get_mod()\
-    \ { return mod; }\n};\n\nstruct ArbitraryModInt {\n  static constexpr bool is_modint\
-    \ = true;\n  int val;\n  ArbitraryModInt() : val(0) {}\n  ArbitraryModInt(int64_t\
+    \ && i < j); });\n  return ids;\n}\n#line 1 \"alg/group_mul.hpp\"\ntemplate <class\
+    \ X>\r\nstruct Group_Mul {\r\n  using value_type = X;\r\n  static constexpr X\
+    \ op(const X &x, const X &y) noexcept { return x * y; }\r\n  static constexpr\
+    \ X inverse(const X &x) noexcept { return X(1) / x; }\r\n  static constexpr X\
+    \ unit = X(1);\r\n  static constexpr bool commute = true;\r\n};\r\n#line 1 \"\
+    ds/swag.hpp\"\ntemplate <class Monoid>\nstruct SWAG {\n  using X = typename Monoid::value_type;\n\
+    \  using value_type = X;\n  vc<X> dat;\n  vc<X> cum_l;\n  X cum_r;\n\n  SWAG()\
+    \ : cum_l({Monoid::unit}), cum_r(Monoid::unit) {}\n\n  void push(X x) {\n    cum_r\
+    \ = Monoid::op(cum_r, x);\n    dat.eb(x);\n  }\n\n  void pop() {\n    cum_l.pop_back();\n\
+    \    if (len(cum_l) == 0) {\n      cum_l = {Monoid::unit};\n      cum_r = Monoid::unit;\n\
+    \      while (len(dat) > 1) {\n        cum_l.eb(Monoid::op(dat.back(), cum_l.back()));\n\
+    \        dat.pop_back();\n      }\n      dat.pop_back();\n    }\n  }\n\n  X prod()\
+    \ { return Monoid::op(cum_l.back(), cum_r); }\n\n  void debug() {\n    print(\"\
+    swag\");\n    print(\"dat\", dat);\n    print(\"cum_l\", cum_l);\n    print(\"\
+    cum_r\", cum_r);\n  }\n};\n#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct\
+    \ modint {\n  static constexpr bool is_modint = true;\n  int val;\n  constexpr\
+    \ modint(const ll val = 0) noexcept\n      : val(val >= 0 ? val % mod : (mod -\
+    \ (-val) % mod) % mod) {}\n  bool operator<(const modint &other) const {\n   \
+    \ return val < other.val;\n  } // To use std::map\n  modint &operator+=(const\
+    \ modint &p) {\n    if ((val += p.val) >= mod) val -= mod;\n    return *this;\n\
+    \  }\n  modint &operator-=(const modint &p) {\n    if ((val += mod - p.val) >=\
+    \ mod) val -= mod;\n    return *this;\n  }\n  modint &operator*=(const modint\
+    \ &p) {\n    val = (int)(1LL * val * p.val % mod);\n    return *this;\n  }\n \
+    \ modint &operator/=(const modint &p) {\n    *this *= p.inverse();\n    return\
+    \ *this;\n  }\n  modint operator-() const { return modint(-val); }\n  modint operator+(const\
+    \ modint &p) const { return modint(*this) += p; }\n  modint operator-(const modint\
+    \ &p) const { return modint(*this) -= p; }\n  modint operator*(const modint &p)\
+    \ const { return modint(*this) *= p; }\n  modint operator/(const modint &p) const\
+    \ { return modint(*this) /= p; }\n  bool operator==(const modint &p) const { return\
+    \ val == p.val; }\n  bool operator!=(const modint &p) const { return val != p.val;\
+    \ }\n  modint inverse() const {\n    int a = val, b = mod, u = 1, v = 0, t;\n\
+    \    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b), swap(u -= t\
+    \ * v, v);\n    }\n    return modint(u);\n  }\n  modint pow(int64_t n) const {\n\
+    \    modint ret(1), mul(val);\n    while (n > 0) {\n      if (n & 1) ret *= mul;\n\
+    \      mul *= mul;\n      n >>= 1;\n    }\n    return ret;\n  }\n  static constexpr\
+    \ int get_mod() { return mod; }\n};\n\nstruct ArbitraryModInt {\n  static constexpr\
+    \ bool is_modint = true;\n  int val;\n  ArbitraryModInt() : val(0) {}\n  ArbitraryModInt(int64_t\
     \ y)\n      : val(y >= 0 ? y % get_mod()\n                   : (get_mod() - (-y)\
     \ % get_mod()) % get_mod()) {}\n  bool operator<(const ArbitraryModInt &other)\
     \ const {\n    return val < other.val;\n  } // To use std::map<ArbitraryModInt,\
@@ -382,44 +413,104 @@ data:
     \ modint998>::value, vc<mint>> convolution(const vc<mint>& a, const vc<mint>&\
     \ b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return {};\r\n  if\
     \ (min(n, m) <= 60) return convolution_naive(a, b);\r\n  return convolution_garner(a,\
-    \ b);\r\n}\r\n#line 2 \"seq/coef_of_rational_fps.hpp\"\n\r\ntemplate <typename\
-    \ mint>\r\nmint coef_of_rational_fps(vector<mint> A, vector<mint> B, ll N) {\r\
-    \n  if(len(A)==0) return 0;\r\n  assert(B[0] == 1);\r\n  assert(len(B) == len(A)\
-    \ + 1);\r\n  while (N) {\r\n    vc<mint> B1 = B;\r\n    FOR(i, len(B1)) if (i\
-    \ & 1) B1[i] = -B1[i];\r\n    A = convolution(A, B1);\r\n    B = convolution(B,\
-    \ B1);\r\n    FOR(i, len(B1)) B[i] = B[2 * i];\r\n    if (N & 1) {\r\n      FOR(i,\
-    \ len(B1) - 1) A[i] = A[2 * i | 1];\r\n    } else {\r\n      FOR(i, len(B1) -\
-    \ 1) A[i] = A[2 * i];\r\n    }\r\n    A.resize(len(B1) - 1);\r\n    B.resize(len(B1));\r\
-    \n    N /= 2;\r\n  }\r\n  return A[0];\r\n}\n#line 7 \"test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp\"\
-    \n\r\nusing mint = modint998;\r\nvoid solve() {\r\n  LL(N, K);\r\n  VEC(mint,\
-    \ A, N);\r\n  VEC(mint, g, N);\r\n  for (auto&& x : g) x = -x;\r\n  g.insert(g.begin(),\
-    \ 1);\r\n  auto f = convolution(A, g);\r\n  f.resize(N);\r\n  print(coef_of_rational_fps(f,\
-    \ g, K));\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \\\r\n  \"https://judge.yosupo.jp/problem/kth_term_of_linearly_recurrent_sequence\"\
-    \r\n#include \"my_template.hpp\"\r\n\r\n#include \"mod/modint.hpp\"\r\n#include\
-    \ \"seq/coef_of_rational_fps.hpp\"\r\n\r\nusing mint = modint998;\r\nvoid solve()\
-    \ {\r\n  LL(N, K);\r\n  VEC(mint, A, N);\r\n  VEC(mint, g, N);\r\n  for (auto&&\
-    \ x : g) x = -x;\r\n  g.insert(g.begin(), 1);\r\n  auto f = convolution(A, g);\r\
-    \n  f.resize(N);\r\n  print(coef_of_rational_fps(f, g, K));\r\n}\r\n\r\nsigned\
-    \ main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout\
-    \ << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \ b);\r\n}\r\n#line 5 \"poly/lagrange_interpolate_iota.hpp\"\n\r\ntemplate <typename\
+    \ mint>\r\nvc<mint> lagrange_interpolate_iota(vc<mint> &f, mint c, int m) {\r\n\
+    \  /*\r\n  Input: f(0), ..., f(n-1) and c, m (1 default)\r\n  Return: f(c), f(c+1),\
+    \ ..., f(c+m-1)\r\n  Complexity: M(n, n + m)\r\n  \u2192 m \u304C\u3068\u3066\u3082\
+    \u5C0F\u3055\u3044\u306A\u3089\u3070 O(n) \u3092 m \u56DE\u3084\u308B\u65B9\u304C\
+    \u901F\u3044\u306E\u304B\r\n  */\r\n  if(m <= 60){\r\n    vc<mint> ANS(m);\r\n\
+    \    FOR(i, m) ANS[i] = lagrange_interpolate_iota(f, c + mint(i));\r\n    return\
+    \ ANS;\r\n  }\r\n  ll n = len(f);\r\n  auto a = f;\r\n  FOR(i, n) {\r\n    a[i]\
+    \ = a[i] * fact_inv<mint>(i) * fact_inv<mint>(n - 1 - i);\r\n    if ((n - 1 -\
+    \ i) & 1) a[i] = -a[i];\r\n  }\r\n  // x = c, c+1, ... \u306B\u5BFE\u3057\u3066\
+    \ a0/x + a1/(x-1) + ... \u3092\u6C42\u3081\u3066\u304A\u304F\r\n  vc<mint> b(n\
+    \ + m - 1);\r\n  FOR(i, n + m - 1) b[i] = mint(1) / (c + mint(i - n + 1));\r\n\
+    \  a = convolution(a, b);\r\n\r\n  SWAG<Group_Mul<mint>> swag;\r\n  vc<mint> ANS(m);\r\
+    \n  ll L = 0, R = 0;\r\n  FOR(i, m) {\r\n    while (L < i) { swag.pop(), ++L;\
+    \ }\r\n    while (R - L < n) { swag.push(c + mint((R++) - n + 1)); }\r\n    auto\
+    \ coef = swag.prod();\r\n    if (coef == 0) {\r\n      ANS[i] = f[(c + i).val];\r\
+    \n    } else {\r\n      ANS[i] = a[i + n - 1] * coef;\r\n    }\r\n  }\r\n  return\
+    \ ANS;\r\n}\r\n\r\ntemplate <typename mint>\r\nmint lagrange_interpolate_iota(vc<mint>\
+    \ &f, mint c) {\r\n  /*\r\n  Input: f(0), ..., f(n-1) and c\r\n  Return: f(c)\r\
+    \n  Complexity: O(n)\r\n  */\r\n  int n = len(f);\r\n  if(c.val < n) return f[c.val];\r\
+    \n  auto a = f;\r\n  FOR(i, n) {\r\n    a[i] = a[i] * fact_inv<mint>(i) * fact_inv<mint>(n\
+    \ - 1 - i);\r\n    if ((n - 1 - i) & 1) a[i] = -a[i];\r\n  }\r\n  vc<mint> lp(n+1),\
+    \ rp(n+1);\r\n  lp[0] = rp[n] = 1;\r\n  FOR(i, n) lp[i+1] = lp[i] * (c - i);\r\
+    \n  FOR_R(i, n) rp[i] = rp[i+1] * (c - i);\r\n  mint ANS = 0;\r\n  FOR(i, n) ANS\
+    \ += a[i] * lp[i] * rp[i + 1];\r\n  return ANS;\r\n}\r\n#line 1 \"seq/interpolate_poly_exp.hpp\"\
+    \ntemplate <typename mint>\r\nmint interpolate_poly_exp(vc<mint> a, mint r, ll\
+    \ n) {\r\n  // a[i] = r^i * (polynomial of i) \u3068\u306A\u3063\u3066\u3044\u308B\
+    \u5834\u5408\u306E\u88DC\u9593\r\n  if (r == 0) return (n == 0 ? a[0] : 0);\r\n\
+    \  mint inv_r = mint(1) / r;\r\n  mint p = 1;\r\n  for (auto&& x: a) {\r\n   \
+    \ x *= p;\r\n    p *= inv_r;\r\n  }\r\n  return lagrange_interpolate_iota(a, mint(n))\
+    \ * r.pow(n);\r\n}\r\n#line 3 \"seq/interpolate_poly_exp_sum.hpp\"\n\r\ntemplate\
+    \ <typename mint>\r\nmint interpolate_poly_exp_sum(vc<mint> a, mint r, ll n) {\r\
+    \n  /*\r\n  a[i] = (prefix sum of r^i * (polynomial of i)) \u3068\u306A\u3063\u3066\
+    \u3044\u308B\u5834\u5408\u306E\u88DC\u9593\r\n  fps \u3067\u306F (1-rx)^d(1-x)\
+    \ \u306E\u5F62\u306E\u5206\u6BCD\u3092\u6301\u3064\u5834\u5408\u3068\u3044\u3046\
+    \u3053\u3068\u306B\u306A\u308B\r\n  f(x) = g(x) / (1-rx)^d + c / (1-x) \u3068\u3057\
+    \u3066\u3001c \u304C\u77E5\u308A\u305F\u3044\r\n  (1-rx)^d \u3092\u304B\u3051\u3066\
+    \u3001d \u6B21\u306E\u4FC2\u6570\u3092\u3068\u308C\u3070\u3001c \u304C\u624B\u306B\
+    \u5165\u308B\r\n  */\r\n  if (r == mint(1)) return lagrange_interpolate_iota(a,\
+    \ mint(n));\r\n  mint c = 0;\r\n  int d = len(a) - 1;\r\n  mint p = 1;\r\n  FOR(i,\
+    \ d + 1) {\r\n    c += a[d - i] * p * C<mint>(d, i);\r\n    p *= -r;\r\n  }\r\n\
+    \  c /= (mint(1) - r).pow(d);\r\n  for (auto&& x: a) x -= c;\r\n  return interpolate_poly_exp(a,\
+    \ r, n) + c;\r\n}\r\n#line 1 \"nt/primetable.hpp\"\ntemplate <int LIM = (1 <<\
+    \ 20)>\nvc<int> primetable() {\n  const int S = 32768, R = LIM / 2;\n  static\
+    \ vc<int> primes = {2}, sieve(S + 1);\n  if(len(primes) > 1) return primes;  //\
+    \ already computed\n\n  primes.reserve(int(LIM / log(LIM) * 1.1));\n  vc<pi> cp;\n\
+    \  for (int i = 3; i <= S; i += 2) {\n    if (!sieve[i]) {\n      cp.eb(i, i *\
+    \ i / 2);\n      for (int j = i * i; j <= S; j += 2 * i) sieve[j] = 1;\n    }\n\
+    \  }\n  for (int L = 1; L <= R; L += S) {\n    array<bool, S> block{};\n    for\
+    \ (auto& [p, idx]: cp)\n      for (int i = idx; i < S + L; idx = (i += p)) block[i\
+    \ - L] = 1;\n    FOR(i, min(S, R - L)) if (!block[i]) primes.eb((L + i) * 2 +\
+    \ 1);\n  }\n  return primes;\n}\n#line 2 \"mod/powertable.hpp\"\n\r\ntemplate<typename\
+    \ mint>\r\nvc<mint> powertable_1(mint a, ll N) {\r\n  // table of a^i\r\n  vc<mint>\
+    \ f(N, 1);\r\n  FOR(i, N - 1) f[i + 1] = a * f[i];\r\n  return f;\r\n}\r\n\r\n\
+    template<typename mint, int LIM>\r\nvc<mint> powertable_2(ll e, ll N) {\r\n  //\
+    \ table of i^e. LIM \u4EE5\u4E0B\u306E\u7D20\u6570\u30C6\u30FC\u30D6\u30EB\u3092\
+    \u5229\u7528\u3059\u308B. \r\n  auto primes = primetable<LIM>();\r\n  vc<mint>\
+    \ f(N, 1);\r\n  f[0] = mint(0).pow(e);\r\n  for(auto&& p : primes){\r\n    mint\
+    \ xp = mint(p).pow(e);\r\n    ll pp = p;\r\n    while(pp < N){\r\n      ll i =\
+    \ pp;\r\n      while(i < N){\r\n        f[i] *= xp;\r\n        i += pp;\r\n  \
+    \    }\r\n      pp *= p;\r\n    }\r\n  }\r\n  return f;\r\n}\r\n\r\n#line 6 \"\
+    test/library_checker/math/sum_of_exp_times_poly.test.cpp\"\n\r\nusing mint = modint998;\r\
+    \nvoid solve() {\r\n  mint r;\r\n  scanner.read(r);\r\n  LL(d, n);\r\n  int L\
+    \ = d + 5;\r\n  vc<mint> a = powertable_2<mint, 10'000'000>(d, L);\r\n  mint p\
+    \ = 1;\r\n  FOR(i, L) {\r\n    a[i] *= p;\r\n    p *= r;\r\n  }\r\n  a = cumsum(a,\
+    \ 0);\r\n  if (n == 0) return print(0);\r\n  print(interpolate_poly_exp_sum(a,\
+    \ r, n - 1));\r\n}\r\n\r\nsigned main() {\r\n  solve();\r\n\r\n  return 0;\r\n\
+    }\r\n"
+  code: "#define PROBLEM \\\r\n  \"https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial\"\
+    \r\n#include \"my_template.hpp\"\r\n#include \"seq/interpolate_poly_exp_sum.hpp\"\
+    \r\n#include \"mod/powertable.hpp\"\r\n\r\nusing mint = modint998;\r\nvoid solve()\
+    \ {\r\n  mint r;\r\n  scanner.read(r);\r\n  LL(d, n);\r\n  int L = d + 5;\r\n\
+    \  vc<mint> a = powertable_2<mint, 10'000'000>(d, L);\r\n  mint p = 1;\r\n  FOR(i,\
+    \ L) {\r\n    a[i] *= p;\r\n    p *= r;\r\n  }\r\n  a = cumsum(a, 0);\r\n  if\
+    \ (n == 0) return print(0);\r\n  print(interpolate_poly_exp_sum(a, r, n - 1));\r\
+    \n}\r\n\r\nsigned main() {\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
-  - mod/modint.hpp
-  - seq/coef_of_rational_fps.hpp
+  - seq/interpolate_poly_exp_sum.hpp
+  - poly/lagrange_interpolate_iota.hpp
+  - alg/group_mul.hpp
+  - ds/swag.hpp
   - poly/convolution.hpp
+  - mod/modint.hpp
+  - seq/interpolate_poly_exp.hpp
+  - mod/powertable.hpp
+  - nt/primetable.hpp
   isVerificationFile: true
-  path: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
+  path: test/library_checker/math/sum_of_exp_times_poly.test.cpp
   requiredBy: []
-  timestamp: '2022-01-13 04:04:32+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-13 04:29:52+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
+documentation_of: test/library_checker/math/sum_of_exp_times_poly.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
-- /verify/test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp.html
-title: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
+- /verify/test/library_checker/math/sum_of_exp_times_poly.test.cpp
+- /verify/test/library_checker/math/sum_of_exp_times_poly.test.cpp.html
+title: test/library_checker/math/sum_of_exp_times_poly.test.cpp
 ---

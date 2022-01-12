@@ -2,17 +2,20 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
+    path: graph/base.hpp
+    title: graph/base.hpp
+  - icon: ':question:'
+    path: graph/scc.hpp
+    title: graph/scc.hpp
+  - icon: ':x:'
+    path: graph/twosat.hpp
+    title: graph/twosat.hpp
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
-  - icon: ':question:'
-    path: other/random.hpp
-    title: other/random.hpp
-  - icon: ':x:'
-    path: string/rollinghash.hpp
-    title: string/rollinghash.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: true
@@ -20,34 +23,33 @@ data:
   _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/zalgorithm
+    PROBLEM: https://judge.yosupo.jp/problem/two_sat
     links:
-    - https://judge.yosupo.jp/problem/zalgorithm
-  bundledCode: "#line 1 \"test/library_checker/string/zalgorithm_by_rollinghash.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/zalgorithm\"\r\n#line 1 \"\
-    my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\n#line 1\
-    \ \"other/io.hpp\"\n// based on yosupo's fastio\r\n#include <unistd.h>\r\n\r\n\
-    namespace detail {\r\ntemplate <typename T, decltype(&T::is_modint) = &T::is_modint>\r\
-    \nstd::true_type check_value(int);\r\ntemplate <typename T>\r\nstd::false_type\
-    \ check_value(long);\r\n} // namespace detail\r\n\r\ntemplate <typename T>\r\n\
-    struct is_modint : decltype(detail::check_value<T>(0)) {};\r\ntemplate <typename\
-    \ T>\r\nusing is_modint_t = enable_if_t<is_modint<T>::value>;\r\ntemplate <typename\
-    \ T>\r\nusing is_not_modint_t = enable_if_t<!is_modint<T>::value>;\r\n\r\nstruct\
-    \ Scanner {\r\n  int fd = -1;\r\n  char line[(1 << 15) + 1];\r\n  size_t st =\
-    \ 0, ed = 0;\r\n  void reread() {\r\n    memmove(line, line + st, ed - st);\r\n\
-    \    ed -= st;\r\n    st = 0;\r\n    ed += ::read(fd, line + ed, (1 << 15) - ed);\r\
-    \n    line[ed] = '\\0';\r\n  }\r\n  bool succ() {\r\n    while (true) {\r\n  \
-    \    if (st == ed) {\r\n        reread();\r\n        if (st == ed) return false;\r\
-    \n      }\r\n      while (st != ed && isspace(line[st])) st++;\r\n      if (st\
-    \ != ed) break;\r\n    }\r\n    if (ed - st <= 50) {\r\n      bool sep = false;\r\
-    \n      for (size_t i = st; i < ed; i++) {\r\n        if (isspace(line[i])) {\r\
-    \n          sep = true;\r\n          break;\r\n        }\r\n      }\r\n      if\
-    \ (!sep) reread();\r\n    }\r\n    return true;\r\n  }\r\n  template <class T,\
-    \ enable_if_t<is_same<T, string>::value, int> = 0>\r\n  bool read_single(T &ref)\
-    \ {\r\n    if (!succ()) return false;\r\n    while (true) {\r\n      size_t sz\
-    \ = 0;\r\n      while (st + sz < ed && !isspace(line[st + sz])) sz++;\r\n    \
-    \  ref.append(line + st, sz);\r\n      st += sz;\r\n      if (!sz || st != ed)\
-    \ break;\r\n      reread();\r\n    }\r\n    return true;\r\n  }\r\n  template\
+    - https://judge.yosupo.jp/problem/two_sat
+  bundledCode: "#line 1 \"test/library_checker/math/twosat.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.yosupo.jp/problem/two_sat\"\r\n#line 1 \"my_template.hpp\"\n\
+    #include <bits/stdc++.h>\n\nusing namespace std;\n\n#line 1 \"other/io.hpp\"\n\
+    // based on yosupo's fastio\r\n#include <unistd.h>\r\n\r\nnamespace detail {\r\
+    \ntemplate <typename T, decltype(&T::is_modint) = &T::is_modint>\r\nstd::true_type\
+    \ check_value(int);\r\ntemplate <typename T>\r\nstd::false_type check_value(long);\r\
+    \n} // namespace detail\r\n\r\ntemplate <typename T>\r\nstruct is_modint : decltype(detail::check_value<T>(0))\
+    \ {};\r\ntemplate <typename T>\r\nusing is_modint_t = enable_if_t<is_modint<T>::value>;\r\
+    \ntemplate <typename T>\r\nusing is_not_modint_t = enable_if_t<!is_modint<T>::value>;\r\
+    \n\r\nstruct Scanner {\r\n  int fd = -1;\r\n  char line[(1 << 15) + 1];\r\n  size_t\
+    \ st = 0, ed = 0;\r\n  void reread() {\r\n    memmove(line, line + st, ed - st);\r\
+    \n    ed -= st;\r\n    st = 0;\r\n    ed += ::read(fd, line + ed, (1 << 15) -\
+    \ ed);\r\n    line[ed] = '\\0';\r\n  }\r\n  bool succ() {\r\n    while (true)\
+    \ {\r\n      if (st == ed) {\r\n        reread();\r\n        if (st == ed) return\
+    \ false;\r\n      }\r\n      while (st != ed && isspace(line[st])) st++;\r\n \
+    \     if (st != ed) break;\r\n    }\r\n    if (ed - st <= 50) {\r\n      bool\
+    \ sep = false;\r\n      for (size_t i = st; i < ed; i++) {\r\n        if (isspace(line[i]))\
+    \ {\r\n          sep = true;\r\n          break;\r\n        }\r\n      }\r\n \
+    \     if (!sep) reread();\r\n    }\r\n    return true;\r\n  }\r\n  template <class\
+    \ T, enable_if_t<is_same<T, string>::value, int> = 0>\r\n  bool read_single(T\
+    \ &ref) {\r\n    if (!succ()) return false;\r\n    while (true) {\r\n      size_t\
+    \ sz = 0;\r\n      while (st + sz < ed && !isspace(line[st + sz])) sz++;\r\n \
+    \     ref.append(line + st, sz);\r\n      st += sz;\r\n      if (!sz || st !=\
+    \ ed) break;\r\n      reread();\r\n    }\r\n    return true;\r\n  }\r\n  template\
     \ <class T, enable_if_t<is_integral<T>::value, int> = 0>\r\n  bool read_single(T\
     \ &ref) {\r\n    if (!succ()) return false;\r\n    bool neg = false;\r\n    if\
     \ (line[st] == '-') {\r\n      neg = true;\r\n      st++;\r\n    }\r\n    ref\
@@ -156,66 +158,92 @@ data:
     \  for (auto&& x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate <typename T>\nvector<int>\
     \ argsort(vector<T> &A) {\n  // stable\n  vector<int> ids(A.size());\n  iota(all(ids),\
     \ 0);\n  sort(all(ids), [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j]\
-    \ && i < j); });\n  return ids;\n}\n#line 3 \"test/library_checker/string/zalgorithm_by_rollinghash.test.cpp\"\
-    \n\r\n#line 1 \"other/random.hpp\"\nstruct RandomNumberGenerator {\n  mt19937\
-    \ mt;\n\n  RandomNumberGenerator() : mt(chrono::steady_clock::now().time_since_epoch().count())\
-    \ {}\n\n  ll operator()(ll a, ll b) {  // [a, b)\n    uniform_int_distribution<ll>\
-    \ dist(a, b - 1);\n    return dist(mt);\n  }\n\n  ll operator()(ll b) {  // [0,\
-    \ b)\n    return (*this)(0, b);\n  }\n};\n#line 3 \"string/rollinghash.hpp\"\n\
-    \nstruct RollingHash {\n  static const uint64_t mod = (1ull << 61ull) - 1;\n \
-    \ vector<uint64_t> power;\n  const uint64_t base;\n\n  static inline uint64_t\
-    \ add(uint64_t a, uint64_t b) {\n    if ((a += b) >= mod) a -= mod;\n    return\
-    \ a;\n  }\n\n  static inline uint64_t mul(uint64_t a, uint64_t b) {\n    const\
-    \ uint64_t MASK30 = (1LL << 30) - 1;\n    const uint64_t MASK31 = (1LL << 31)\
-    \ - 1;\n    const uint64_t MASK61 = (1LL << 61) - 1;\n    uint64_t au = a >> 31,\
-    \ ad = a & MASK31;\n    uint64_t bu = b >> 31, bd = b & MASK31;\n    uint64_t\
-    \ x = ad * bu + au * bd;\n    uint64_t xu = x >> 30, xd = x & MASK30;\n    x =\
-    \ au * bu * 2 + xu + (xd << 31) + ad * bd;\n    xu = x >> 61, xd = x & MASK61;\n\
-    \    x = xu + xd;\n    if (x >= MASK61) x -= MASK61;\n    return x;\n  }\n\n \
-    \ static inline uint64_t generate_base() {\n    RandomNumberGenerator RNG;\n \
-    \   return RNG(mod);\n  }\n\n  inline void expand(size_t sz) {\n    if (power.size()\
-    \ < sz + 1) {\n      int pre_sz = (int)power.size();\n      power.resize(sz +\
-    \ 1);\n      for (int i = pre_sz - 1; i < sz; i++) {\n        power[i + 1] = mul(power[i],\
-    \ base);\n      }\n    }\n  }\n\n  explicit RollingHash(uint64_t base = generate_base())\n\
-    \      : base(base), power{1} {}\n\n  template<typename STRING>\n  vector<uint64_t>\
-    \ build(const STRING& s) const {\n    int sz = s.size();\n    vector<uint64_t>\
-    \ hashed(sz + 1);\n    for (int i = 0; i < sz; i++) {\n      hashed[i + 1] = add(mul(hashed[i],\
-    \ base), s[i]);\n    }\n    return hashed;\n  }\n\n  uint64_t query(const vector<uint64_t>&\
-    \ s, int l, int r) {\n    expand(r - l);\n    return add(s[r], mod - mul(s[l],\
-    \ power[r - l]));\n  }\n\n  uint64_t combine(uint64_t h1, uint64_t h2, size_t\
-    \ h2len) {\n    expand(h2len);\n    return add(mul(h1, power[h2len]), h2);\n \
-    \ }\n\n  int lcp(const vector<uint64_t>& a, int l1, int r1, const vector<uint64_t>&\
-    \ b,\n          int l2, int r2) {\n    int len = min(r1 - l1, r2 - l2);\n    int\
-    \ low = 0, high = len + 1;\n    while (high - low > 1) {\n      int mid = (low\
-    \ + high) / 2;\n      if (query(a, l1, l1 + mid) == query(b, l2, l2 + mid))\n\
-    \        low = mid;\n      else\n        high = mid;\n    }\n    return low;\n\
-    \  }\n};\n#line 5 \"test/library_checker/string/zalgorithm_by_rollinghash.test.cpp\"\
-    \n\r\nvoid solve() {\r\n  STR(S);\r\n  ll N = len(S);\r\n  RollingHash RH;\r\n\
-    \  auto RS = RH.build(S);\r\n  vi Z(N);\r\n  FOR(i, N) { Z[i] = RH.lcp(RS, 0,\
-    \ N, RS, i, N); }\r\n  print(Z);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
-    \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
-    \n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/zalgorithm\"\r\n#include\
-    \ \"my_template.hpp\"\r\n\r\n#include \"string/rollinghash.hpp\"\r\n\r\nvoid solve()\
-    \ {\r\n  STR(S);\r\n  ll N = len(S);\r\n  RollingHash RH;\r\n  auto RS = RH.build(S);\r\
-    \n  vi Z(N);\r\n  FOR(i, N) { Z[i] = RH.lcp(RS, 0, N, RS, i, N); }\r\n  print(Z);\r\
-    \n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \ && i < j); });\n  return ids;\n}\n#line 2 \"graph/base.hpp\"\n\ntemplate <typename\
+    \ T>\nstruct Edge {\n  int frm, to;\n  T cost;\n  int id;\n};\n\ntemplate <typename\
+    \ T = int, bool directed = false>\nstruct Graph {\n  int N, M;\n  using cost_type\
+    \ = T;\n  using edge_type = Edge<T>;\n  vector<edge_type> edges;\n  vector<int>\
+    \ indptr;\n  vector<edge_type> csr_edges;\n  bool prepared;\n\n  class OutgoingEdges\
+    \ {\n  public:\n    OutgoingEdges(const Graph* G, int l, int r) : G(G), l(l),\
+    \ r(r) {}\n\n    const edge_type* begin() const {\n      if (l == r) { return\
+    \ 0; }\n      return &G->csr_edges[l];\n    }\n\n    const edge_type* end() const\
+    \ {\n      if (l == r) { return 0; }\n      return &G->csr_edges[r];\n    }\n\n\
+    \  private:\n    int l, r;\n    const Graph* G;\n  };\n\n  bool is_prepared()\
+    \ { return prepared; }\n  constexpr bool is_directed() { return directed; }\n\n\
+    \  Graph() {}\n  Graph(int N) : N(N), M(0), prepared(0) {}\n\n  void add(int frm,\
+    \ int to, T cost = 1, int i = -1) {\n    assert(!prepared);\n    assert(0 <= frm\
+    \ && frm < N && 0 <= to && to < N);\n    if (i == -1) i = M;\n    auto e = edge_type({frm,\
+    \ to, cost, i});\n    edges.eb(e);\n    ++M;\n  }\n\n  void prepare() {\n    assert(!prepared);\n\
+    \    prepared = true;\n    indptr.assign(N + 1, 0);\n    for (auto&& e: edges)\
+    \ {\n      indptr[e.frm + 1]++;\n      if (!directed) indptr[e.to + 1]++;\n  \
+    \  }\n    FOR(v, N) indptr[v + 1] += indptr[v];\n    auto counter = indptr;\n\
+    \    csr_edges.resize(indptr.back() + 1);\n    for (auto&& e: edges) {\n     \
+    \ csr_edges[counter[e.frm]++] = e;\n      if (!directed)\n        csr_edges[counter[e.to]++]\
+    \ = edge_type({e.to, e.frm, e.cost, e.id});\n    }\n  }\n\n  OutgoingEdges operator[](int\
+    \ v) const {\n    assert(prepared);\n    return {this, indptr[v], indptr[v + 1]};\n\
+    \  }\n\n  void debug() {\n    print(\"Graph\");\n    if (!prepared) {\n      print(\"\
+    frm to cost id\");\n      for (auto&& e: edges) print(e.frm, e.to, e.cost, e.id);\n\
+    \    } else {\n      print(\"indptr\", indptr);\n      print(\"frm to cost id\"\
+    );\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e.frm, e.to, e.cost, e.id);\n\
+    \    }\n  }\n\n  int size() { return N; }\n};\n#line 3 \"graph/scc.hpp\"\n\ntemplate\
+    \ <typename Graph>\nstruct SCC {\n  Graph &G;\n  int N;\n  int cnt;\n  vc<int>\
+    \ comp;\n  vc<int> low;\n  vc<int> ord;\n  vc<int> visited;\n  int now = 0;\n\n\
+    \  SCC(Graph &G)\n      : G(G), N(G.N), cnt(0), comp(G.N, 0), low(G.N, 0), ord(G.N,\
+    \ -1) {\n    assert(G.is_directed());\n    assert(G.is_prepared());\n    build();\n\
+    \  }\n\n  int operator[](int v) { return comp[v]; }\n\n  void dfs(int v) {\n \
+    \   low[v] = now;\n    ord[v] = now;\n    ++now;\n    visited.eb(v);\n    for\
+    \ (auto &&[frm, to, cost, id]: G[v]) {\n      if (ord[to] == -1) {\n        dfs(to);\n\
+    \        chmin(low[v], low[to]);\n      } else {\n        chmin(low[v], ord[to]);\n\
+    \      }\n    }\n    if (low[v] == ord[v]) {\n      while (1) {\n        int u\
+    \ = visited.back();\n        visited.pop_back();\n        ord[u] = N;\n      \
+    \  comp[u] = cnt;\n        if (u == v) break;\n      }\n      ++cnt;\n    }\n\
+    \  }\n\n  void build() {\n    FOR(v, N) {\n      if (ord[v] == -1) dfs(v);\n \
+    \   }\n    FOR(v, N) comp[v] = cnt - 1 - comp[v];\n  }\n};\n#line 2 \"graph/twosat.hpp\"\
+    \nstruct TwoSat {\r\n  vc<int> values;\r\n\r\n  Graph<int, 1> G;\r\n  TwoSat(ll\
+    \ n) : G(n + n), values(n, -1) {}\r\n  void add(int a, int b) {\r\n    a = (a\
+    \ >= 0 ? 2 * a + 1 : 2 * (~a));\r\n    b = (b >= 0 ? 2 * b + 1 : 2 * (~b));\r\n\
+    \    G.add(a ^ 1, b);\r\n    G.add(b ^ 1, a);\r\n  }\r\n  void set(int a) {\r\n\
+    \    if (a >= 0)\r\n      values[a] = 1;\r\n    else\r\n      values[~a] = 0;\r\
+    \n    a = (a >= 0 ? 2 * a + 1 : 2 * (~a));\r\n    G.add(a ^ 1, a);\r\n  }\r\n\
+    \  void implies(int a, int b) { add(~a, b); }\r\n\r\n  bool calc() {\r\n    G.prepare();\r\
+    \n    ll n = len(values);\r\n    SCC<Graph<int, 1>> scc(G);\r\n    FOR(i, n) {\r\
+    \n      if (scc[2 * i] == scc[2 * i + 1]) return false;\r\n      values[i] = scc[2\
+    \ * i] < scc[2 * i + 1];\r\n    }\r\n    return true;\r\n  }\r\n};\n#line 4 \"\
+    test/library_checker/math/twosat.test.cpp\"\n\r\nvoid solve() {\r\n  STR(p, cnf);\r\
+    \n  LL(N, M);\r\n  TwoSat ts(N);\r\n  FOR(i, M) {\r\n    LL(a, b, c);\r\n    a\
+    \ = (a > 0 ? a - 1 : a);\r\n    b = (b > 0 ? b - 1 : b);\r\n    ts.add(a, b);\r\
+    \n  }\r\n  bool ok = ts.calc();\r\n  auto A = ts.values;\r\n  if (ok) {\r\n  \
+    \  print(\"s SATISFIABLE\");\r\n    vc<int> ANS(N);\r\n    FOR(i, N) ANS[i] =\
+    \ (A[i] ? i + 1 : -(i + 1));\r\n    print(\"v\", ANS, \"0\");\r\n  } else {\r\n\
+    \    print(\"s UNSATISFIABLE\");\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
+    \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  // LL(T);\r\
+    \n  ll T = 1;\r\n  FOR(_, T) solve();\r\n\r\n  return 0;\r\n}\r\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/two_sat\"\r\n#include \"\
+    my_template.hpp\"\r\n#include \"graph/twosat.hpp\"\r\n\r\nvoid solve() {\r\n \
+    \ STR(p, cnf);\r\n  LL(N, M);\r\n  TwoSat ts(N);\r\n  FOR(i, M) {\r\n    LL(a,\
+    \ b, c);\r\n    a = (a > 0 ? a - 1 : a);\r\n    b = (b > 0 ? b - 1 : b);\r\n \
+    \   ts.add(a, b);\r\n  }\r\n  bool ok = ts.calc();\r\n  auto A = ts.values;\r\n\
+    \  if (ok) {\r\n    print(\"s SATISFIABLE\");\r\n    vc<int> ANS(N);\r\n    FOR(i,\
+    \ N) ANS[i] = (A[i] ? i + 1 : -(i + 1));\r\n    print(\"v\", ANS, \"0\");\r\n\
+    \  } else {\r\n    print(\"s UNSATISFIABLE\");\r\n  }\r\n}\r\n\r\nsigned main()\
+    \ {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
+    \n\r\n  // LL(T);\r\n  ll T = 1;\r\n  FOR(_, T) solve();\r\n\r\n  return 0;\r\n\
+    }\r\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
-  - string/rollinghash.hpp
-  - other/random.hpp
+  - graph/twosat.hpp
+  - graph/scc.hpp
+  - graph/base.hpp
   isVerificationFile: true
-  path: test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
+  path: test/library_checker/math/twosat.test.cpp
   requiredBy: []
-  timestamp: '2022-01-13 03:05:54+09:00'
+  timestamp: '2022-01-13 04:29:33+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
+documentation_of: test/library_checker/math/twosat.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
-- /verify/test/library_checker/string/zalgorithm_by_rollinghash.test.cpp.html
-title: test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
+- /verify/test/library_checker/math/twosat.test.cpp
+- /verify/test/library_checker/math/twosat.test.cpp.html
+title: test/library_checker/math/twosat.test.cpp
 ---

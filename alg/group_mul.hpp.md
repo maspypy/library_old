@@ -8,7 +8,13 @@ data:
   - icon: ':x:'
     path: poly/lagrange_interpolate_iota.hpp
     title: poly/lagrange_interpolate_iota.hpp
+  - icon: ':x:'
+    path: seq/interpolate_poly_exp_sum.hpp
+    title: seq/interpolate_poly_exp_sum.hpp
   _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/library_checker/math/sum_of_exp_times_poly.test.cpp
+    title: test/library_checker/math/sum_of_exp_times_poly.test.cpp
   - icon: ':x:'
     path: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
     title: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
@@ -33,12 +39,14 @@ data:
   isVerificationFile: false
   path: alg/group_mul.hpp
   requiredBy:
+  - seq/interpolate_poly_exp_sum.hpp
   - poly/lagrange_interpolate_iota.hpp
   - alg/lazy_add_mul.hpp
   timestamp: '2022-01-11 13:22:23+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
+  - test/library_checker/math/sum_of_exp_times_poly.test.cpp
   - test/yukicoder/899_bfsnumbering.test.cpp
 documentation_of: alg/group_mul.hpp
 layout: document

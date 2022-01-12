@@ -5,10 +5,16 @@ data:
   - icon: ':x:'
     path: poly/lagrange_interpolate_iota.hpp
     title: poly/lagrange_interpolate_iota.hpp
+  - icon: ':x:'
+    path: seq/interpolate_poly_exp_sum.hpp
+    title: seq/interpolate_poly_exp_sum.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
     title: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
+  - icon: ':x:'
+    path: test/library_checker/math/sum_of_exp_times_poly.test.cpp
+    title: test/library_checker/math/sum_of_exp_times_poly.test.cpp
   - icon: ':x:'
     path: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
     title: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
@@ -41,12 +47,14 @@ data:
   isVerificationFile: false
   path: ds/swag.hpp
   requiredBy:
+  - seq/interpolate_poly_exp_sum.hpp
   - poly/lagrange_interpolate_iota.hpp
   timestamp: '2021-12-28 08:12:08+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
   - test/library_checker/datastructure/queue_operate_all_composite.test.cpp
+  - test/library_checker/math/sum_of_exp_times_poly.test.cpp
 documentation_of: ds/swag.hpp
 layout: document
 redirect_from:

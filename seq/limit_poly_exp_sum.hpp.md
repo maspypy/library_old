@@ -4,23 +4,11 @@ data:
   - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':question:'
-    path: other/random.hpp
-    title: other/random.hpp
-  _extendedRequiredBy:
-  - icon: ':x:'
-    path: poly/fps_sqrt.hpp
-    title: poly/fps_sqrt.hpp
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/math/sqrt_mod.test.cpp
-    title: test/library_checker/math/sqrt_mod.test.cpp
-  - icon: ':x:'
-    path: test/library_checker/polynomial/sqrt_of_fps.test.cpp
-    title: test/library_checker/polynomial/sqrt_of_fps.test.cpp
-  _isVerificationFailed: true
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n\
@@ -92,50 +80,37 @@ data:
     \ * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n  FOR(i, k) {\n\
     \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\nusing\
     \ modint107 = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n\
-    using amint = ArbitraryModInt;\n#line 1 \"other/random.hpp\"\nstruct RandomNumberGenerator\
-    \ {\n  mt19937 mt;\n\n  RandomNumberGenerator() : mt(chrono::steady_clock::now().time_since_epoch().count())\
-    \ {}\n\n  ll operator()(ll a, ll b) {  // [a, b)\n    uniform_int_distribution<ll>\
-    \ dist(a, b - 1);\n    return dist(mt);\n  }\n\n  ll operator()(ll b) {  // [0,\
-    \ b)\n    return (*this)(0, b);\n  }\n};\n#line 3 \"mod/mod_sqrt.hpp\"\n\r\ntemplate\
-    \ <typename mint>\r\nmint mod_sqrt(mint a) {\r\n  int p = mint::get_mod();\r\n\
-    \  if (p == 2) return a;\r\n  if (a == 0) return 0;\r\n  int k = (p - 1) / 2;\r\
-    \n  if (a.pow(k) != 1) return 0;\r\n  RandomNumberGenerator RNG;\r\n  auto find\
-    \ = [&]() -> pair<mint, mint> {\r\n    while (1) {\r\n      mint b = RNG(2, p);\r\
-    \n      mint D = b * b - a;\r\n      if (D == 0) return {b, D};\r\n      if (D.pow(k)\
-    \ != mint(1)) return {b, D};\r\n    }\r\n  };\r\n  auto [b, D] = find();\r\n \
-    \ if (D == 0) return b;\r\n  ++k;\r\n  // (b + sqrt(D))^k\r\n  mint f0 = b, f1\
-    \ = 1;\r\n  mint g0 = 1, g1 = 0;\r\n  while (k) {\r\n    if (k & 1) { tie(g0,\
-    \ g1) = mp(f0 * g0 + D * f1 * g1, f1 * g0 + f0 * g1); }\r\n    tie(f0, f1) = mp(f0\
-    \ * f0 + D * f1 * f1, mint(2) * f0 * f1);\r\n    k >>= 1;\r\n  }\r\n  return g0;\r\
-    \n}\r\n"
-  code: "#include \"mod/modint.hpp\"\r\n#include \"other/random.hpp\"\r\n\r\ntemplate\
-    \ <typename mint>\r\nmint mod_sqrt(mint a) {\r\n  int p = mint::get_mod();\r\n\
-    \  if (p == 2) return a;\r\n  if (a == 0) return 0;\r\n  int k = (p - 1) / 2;\r\
-    \n  if (a.pow(k) != 1) return 0;\r\n  RandomNumberGenerator RNG;\r\n  auto find\
-    \ = [&]() -> pair<mint, mint> {\r\n    while (1) {\r\n      mint b = RNG(2, p);\r\
-    \n      mint D = b * b - a;\r\n      if (D == 0) return {b, D};\r\n      if (D.pow(k)\
-    \ != mint(1)) return {b, D};\r\n    }\r\n  };\r\n  auto [b, D] = find();\r\n \
-    \ if (D == 0) return b;\r\n  ++k;\r\n  // (b + sqrt(D))^k\r\n  mint f0 = b, f1\
-    \ = 1;\r\n  mint g0 = 1, g1 = 0;\r\n  while (k) {\r\n    if (k & 1) { tie(g0,\
-    \ g1) = mp(f0 * g0 + D * f1 * g1, f1 * g0 + f0 * g1); }\r\n    tie(f0, f1) = mp(f0\
-    \ * f0 + D * f1 * f1, mint(2) * f0 * f1);\r\n    k >>= 1;\r\n  }\r\n  return g0;\r\
-    \n}\r\n"
+    using amint = ArbitraryModInt;\n#line 2 \"seq/limit_poly_exp_sum.hpp\"\ntemplate\
+    \ <typename mint>\r\nmint limit_poly_exp_sum(vc<mint> a, mint r) {\r\n  /*\r\n\
+    \  a[i] = (prefix sum of r^i * (polynomial of i)) \u3068\u306A\u3063\u3066\u3044\
+    \u308B\u3082\u306E\u306E\u6975\u9650\r\n  fps \u3067\u306F (1-rx)^d(1-x) \u306E\
+    \u5F62\u306E\u5206\u6BCD\u3092\u6301\u3064\u5834\u5408\u3068\u3044\u3046\u3053\
+    \u3068\u306B\u306A\u308B\r\n  f(x) = g(x) / (1-rx)^d + c / (1-x) \u3068\u3057\u3066\
+    \u3001c \u304C\u7B54\u3067\u3042\u308B\r\n  */\r\n  mint c = 0;\r\n  int d = len(a)\
+    \ - 1;\r\n  mint p = 1;\r\n  FOR(i, d + 1) {\r\n    c += a[d - i] * p * C<mint>(d,\
+    \ i);\r\n    p *= -r;\r\n  }\r\n  c /= (mint(1) - r).pow(d);\r\n  return c;\r\n\
+    }\r\n"
+  code: "#include \"mod/modint.hpp\"\r\ntemplate <typename mint>\r\nmint limit_poly_exp_sum(vc<mint>\
+    \ a, mint r) {\r\n  /*\r\n  a[i] = (prefix sum of r^i * (polynomial of i)) \u3068\
+    \u306A\u3063\u3066\u3044\u308B\u3082\u306E\u306E\u6975\u9650\r\n  fps \u3067\u306F\
+    \ (1-rx)^d(1-x) \u306E\u5F62\u306E\u5206\u6BCD\u3092\u6301\u3064\u5834\u5408\u3068\
+    \u3044\u3046\u3053\u3068\u306B\u306A\u308B\r\n  f(x) = g(x) / (1-rx)^d + c / (1-x)\
+    \ \u3068\u3057\u3066\u3001c \u304C\u7B54\u3067\u3042\u308B\r\n  */\r\n  mint c\
+    \ = 0;\r\n  int d = len(a) - 1;\r\n  mint p = 1;\r\n  FOR(i, d + 1) {\r\n    c\
+    \ += a[d - i] * p * C<mint>(d, i);\r\n    p *= -r;\r\n  }\r\n  c /= (mint(1) -\
+    \ r).pow(d);\r\n  return c;\r\n}\r\n"
   dependsOn:
   - mod/modint.hpp
-  - other/random.hpp
   isVerificationFile: false
-  path: mod/mod_sqrt.hpp
-  requiredBy:
-  - poly/fps_sqrt.hpp
-  timestamp: '2022-01-13 04:04:32+09:00'
-  verificationStatus: LIBRARY_SOME_WA
-  verifiedWith:
-  - test/library_checker/polynomial/sqrt_of_fps.test.cpp
-  - test/library_checker/math/sqrt_mod.test.cpp
-documentation_of: mod/mod_sqrt.hpp
+  path: seq/limit_poly_exp_sum.hpp
+  requiredBy: []
+  timestamp: '2022-01-13 04:29:52+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: seq/limit_poly_exp_sum.hpp
 layout: document
 redirect_from:
-- /library/mod/mod_sqrt.hpp
-- /library/mod/mod_sqrt.hpp.html
-title: mod/mod_sqrt.hpp
+- /library/seq/limit_poly_exp_sum.hpp
+- /library/seq/limit_poly_exp_sum.hpp.html
+title: seq/limit_poly_exp_sum.hpp
 ---

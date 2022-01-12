@@ -7,7 +7,7 @@ data:
   - icon: ':x:'
     path: mod/powertable.hpp
     title: mod/powertable.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: nt/primetable.hpp
     title: nt/primetable.hpp
   - icon: ':question:'
@@ -31,69 +31,70 @@ data:
     links: []
   bundledCode: "#line 1 \"nt/primetable.hpp\"\ntemplate <int LIM = (1 << 20)>\nvc<int>\
     \ primetable() {\n  const int S = 32768, R = LIM / 2;\n  static vc<int> primes\
-    \ = {2}, sieve(S + 1);\n  primes.reserve(int(LIM / log(LIM) * 1.1));\n  vc<pi>\
-    \ cp;\n  for (int i = 3; i <= S; i += 2) {\n    if (!sieve[i]) {\n      cp.eb(i,\
-    \ i * i / 2);\n      for (int j = i * i; j <= S; j += 2 * i) sieve[j] = 1;\n \
-    \   }\n  }\n  for (int L = 1; L <= R; L += S) {\n    array<bool, S> block{};\n\
-    \    for (auto& [p, idx]: cp)\n      for (int i = idx; i < S + L; idx = (i +=\
-    \ p)) block[i - L] = 1;\n    FOR(i, min(S, R - L)) if (!block[i]) primes.eb((L\
-    \ + i) * 2 + 1);\n  }\n  return primes;\n}\n#line 2 \"mod/powertable.hpp\"\n\r\
-    \ntemplate<typename mint>\r\nvc<mint> powertable_1(mint a, ll N) {\r\n  // table\
-    \ of a^i\r\n  vc<mint> f(N, 1);\r\n  FOR(i, N - 1) f[i + 1] = a * f[i];\r\n  return\
-    \ f;\r\n}\r\n\r\ntemplate<typename mint, int LIM>\r\nvc<mint> powertable_2(ll\
-    \ e, ll N) {\r\n  // table of i^e. LIM \u4EE5\u4E0B\u306E\u7D20\u6570\u30C6\u30FC\
-    \u30D6\u30EB\u3092\u5229\u7528\u3059\u308B. \r\n  auto primes = primetable<LIM>();\r\
-    \n  vc<mint> f(N, 1);\r\n  f[0] = mint(0).pow(e);\r\n  for(auto&& p : primes){\r\
-    \n    mint xp = mint(p).pow(e);\r\n    ll pp = p;\r\n    while(pp < N){\r\n  \
-    \    ll i = pp;\r\n      while(i < N){\r\n        f[i] *= xp;\r\n        i +=\
-    \ pp;\r\n      }\r\n      pp *= p;\r\n    }\r\n  }\r\n  return f;\r\n}\r\n\r\n\
-    #line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n  static constexpr\
-    \ bool is_modint = true;\n  int val;\n  constexpr modint(const ll val = 0) noexcept\n\
-    \      : val(val >= 0 ? val % mod : (mod - (-val) % mod) % mod) {}\n  bool operator<(const\
-    \ modint &other) const {\n    return val < other.val;\n  } // To use std::map\n\
-    \  modint &operator+=(const modint &p) {\n    if ((val += p.val) >= mod) val -=\
-    \ mod;\n    return *this;\n  }\n  modint &operator-=(const modint &p) {\n    if\
-    \ ((val += mod - p.val) >= mod) val -= mod;\n    return *this;\n  }\n  modint\
-    \ &operator*=(const modint &p) {\n    val = (int)(1LL * val * p.val % mod);\n\
-    \    return *this;\n  }\n  modint &operator/=(const modint &p) {\n    *this *=\
-    \ p.inverse();\n    return *this;\n  }\n  modint operator-() const { return modint(-val);\
-    \ }\n  modint operator+(const modint &p) const { return modint(*this) += p; }\n\
-    \  modint operator-(const modint &p) const { return modint(*this) -= p; }\n  modint\
-    \ operator*(const modint &p) const { return modint(*this) *= p; }\n  modint operator/(const\
-    \ modint &p) const { return modint(*this) /= p; }\n  bool operator==(const modint\
-    \ &p) const { return val == p.val; }\n  bool operator!=(const modint &p) const\
-    \ { return val != p.val; }\n  modint inverse() const {\n    int a = val, b = mod,\
-    \ u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -= t *\
-    \ b, b), swap(u -= t * v, v);\n    }\n    return modint(u);\n  }\n  modint pow(int64_t\
-    \ n) const {\n    modint ret(1), mul(val);\n    while (n > 0) {\n      if (n &\
-    \ 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n    return ret;\n\
-    \  }\n  static constexpr int get_mod() { return mod; }\n};\n\nstruct ArbitraryModInt\
-    \ {\n  static constexpr bool is_modint = true;\n  int val;\n  ArbitraryModInt()\
-    \ : val(0) {}\n  ArbitraryModInt(int64_t y)\n      : val(y >= 0 ? y % get_mod()\n\
-    \                   : (get_mod() - (-y) % get_mod()) % get_mod()) {}\n  bool operator<(const\
-    \ ArbitraryModInt &other) const {\n    return val < other.val;\n  } // To use\
-    \ std::map<ArbitraryModInt, T>\n  static int &get_mod() {\n    static int mod\
-    \ = 0;\n    return mod;\n  }\n  static void set_mod(int md) { get_mod() = md;\
-    \ }\n  ArbitraryModInt &operator+=(const ArbitraryModInt &p) {\n    if ((val +=\
-    \ p.val) >= get_mod()) val -= get_mod();\n    return *this;\n  }\n  ArbitraryModInt\
-    \ &operator-=(const ArbitraryModInt &p) {\n    if ((val += get_mod() - p.val)\
-    \ >= get_mod()) val -= get_mod();\n    return *this;\n  }\n  ArbitraryModInt &operator*=(const\
-    \ ArbitraryModInt &p) {\n    unsigned long long a = (unsigned long long)val *\
-    \ p.val;\n    unsigned xh = (unsigned)(a >> 32), xl = (unsigned)a, d, m;\n   \
-    \ asm(\"divl %4; \\n\\t\" : \"=a\"(d), \"=d\"(m) : \"d\"(xh), \"a\"(xl), \"r\"\
-    (get_mod()));\n    val = m;\n    return *this;\n  }\n  ArbitraryModInt &operator/=(const\
-    \ ArbitraryModInt &p) {\n    *this *= p.inverse();\n    return *this;\n  }\n \
-    \ ArbitraryModInt operator-() const { return ArbitraryModInt(-val); }\n  ArbitraryModInt\
-    \ operator+(const ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this)\
-    \ += p;\n  }\n  ArbitraryModInt operator-(const ArbitraryModInt &p) const {\n\
-    \    return ArbitraryModInt(*this) -= p;\n  }\n  ArbitraryModInt operator*(const\
-    \ ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this) *= p;\n  }\n\
-    \  ArbitraryModInt operator/(const ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this)\
-    \ /= p;\n  }\n  bool operator==(const ArbitraryModInt &p) const { return val ==\
-    \ p.val; }\n  bool operator!=(const ArbitraryModInt &p) const { return val !=\
-    \ p.val; }\n  ArbitraryModInt inverse() const {\n    int a = val, b = get_mod(),\
-    \ u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -= t *\
-    \ b, b), swap(u -= t * v, v);\n    }\n    return ArbitraryModInt(u);\n  }\n  ArbitraryModInt\
+    \ = {2}, sieve(S + 1);\n  if(len(primes) > 1) return primes;  // already computed\n\
+    \n  primes.reserve(int(LIM / log(LIM) * 1.1));\n  vc<pi> cp;\n  for (int i = 3;\
+    \ i <= S; i += 2) {\n    if (!sieve[i]) {\n      cp.eb(i, i * i / 2);\n      for\
+    \ (int j = i * i; j <= S; j += 2 * i) sieve[j] = 1;\n    }\n  }\n  for (int L\
+    \ = 1; L <= R; L += S) {\n    array<bool, S> block{};\n    for (auto& [p, idx]:\
+    \ cp)\n      for (int i = idx; i < S + L; idx = (i += p)) block[i - L] = 1;\n\
+    \    FOR(i, min(S, R - L)) if (!block[i]) primes.eb((L + i) * 2 + 1);\n  }\n \
+    \ return primes;\n}\n#line 2 \"mod/powertable.hpp\"\n\r\ntemplate<typename mint>\r\
+    \nvc<mint> powertable_1(mint a, ll N) {\r\n  // table of a^i\r\n  vc<mint> f(N,\
+    \ 1);\r\n  FOR(i, N - 1) f[i + 1] = a * f[i];\r\n  return f;\r\n}\r\n\r\ntemplate<typename\
+    \ mint, int LIM>\r\nvc<mint> powertable_2(ll e, ll N) {\r\n  // table of i^e.\
+    \ LIM \u4EE5\u4E0B\u306E\u7D20\u6570\u30C6\u30FC\u30D6\u30EB\u3092\u5229\u7528\
+    \u3059\u308B. \r\n  auto primes = primetable<LIM>();\r\n  vc<mint> f(N, 1);\r\n\
+    \  f[0] = mint(0).pow(e);\r\n  for(auto&& p : primes){\r\n    mint xp = mint(p).pow(e);\r\
+    \n    ll pp = p;\r\n    while(pp < N){\r\n      ll i = pp;\r\n      while(i <\
+    \ N){\r\n        f[i] *= xp;\r\n        i += pp;\r\n      }\r\n      pp *= p;\r\
+    \n    }\r\n  }\r\n  return f;\r\n}\r\n\r\n#line 2 \"mod/modint.hpp\"\ntemplate\
+    \ <int mod>\nstruct modint {\n  static constexpr bool is_modint = true;\n  int\
+    \ val;\n  constexpr modint(const ll val = 0) noexcept\n      : val(val >= 0 ?\
+    \ val % mod : (mod - (-val) % mod) % mod) {}\n  bool operator<(const modint &other)\
+    \ const {\n    return val < other.val;\n  } // To use std::map\n  modint &operator+=(const\
+    \ modint &p) {\n    if ((val += p.val) >= mod) val -= mod;\n    return *this;\n\
+    \  }\n  modint &operator-=(const modint &p) {\n    if ((val += mod - p.val) >=\
+    \ mod) val -= mod;\n    return *this;\n  }\n  modint &operator*=(const modint\
+    \ &p) {\n    val = (int)(1LL * val * p.val % mod);\n    return *this;\n  }\n \
+    \ modint &operator/=(const modint &p) {\n    *this *= p.inverse();\n    return\
+    \ *this;\n  }\n  modint operator-() const { return modint(-val); }\n  modint operator+(const\
+    \ modint &p) const { return modint(*this) += p; }\n  modint operator-(const modint\
+    \ &p) const { return modint(*this) -= p; }\n  modint operator*(const modint &p)\
+    \ const { return modint(*this) *= p; }\n  modint operator/(const modint &p) const\
+    \ { return modint(*this) /= p; }\n  bool operator==(const modint &p) const { return\
+    \ val == p.val; }\n  bool operator!=(const modint &p) const { return val != p.val;\
+    \ }\n  modint inverse() const {\n    int a = val, b = mod, u = 1, v = 0, t;\n\
+    \    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b), swap(u -= t\
+    \ * v, v);\n    }\n    return modint(u);\n  }\n  modint pow(int64_t n) const {\n\
+    \    modint ret(1), mul(val);\n    while (n > 0) {\n      if (n & 1) ret *= mul;\n\
+    \      mul *= mul;\n      n >>= 1;\n    }\n    return ret;\n  }\n  static constexpr\
+    \ int get_mod() { return mod; }\n};\n\nstruct ArbitraryModInt {\n  static constexpr\
+    \ bool is_modint = true;\n  int val;\n  ArbitraryModInt() : val(0) {}\n  ArbitraryModInt(int64_t\
+    \ y)\n      : val(y >= 0 ? y % get_mod()\n                   : (get_mod() - (-y)\
+    \ % get_mod()) % get_mod()) {}\n  bool operator<(const ArbitraryModInt &other)\
+    \ const {\n    return val < other.val;\n  } // To use std::map<ArbitraryModInt,\
+    \ T>\n  static int &get_mod() {\n    static int mod = 0;\n    return mod;\n  }\n\
+    \  static void set_mod(int md) { get_mod() = md; }\n  ArbitraryModInt &operator+=(const\
+    \ ArbitraryModInt &p) {\n    if ((val += p.val) >= get_mod()) val -= get_mod();\n\
+    \    return *this;\n  }\n  ArbitraryModInt &operator-=(const ArbitraryModInt &p)\
+    \ {\n    if ((val += get_mod() - p.val) >= get_mod()) val -= get_mod();\n    return\
+    \ *this;\n  }\n  ArbitraryModInt &operator*=(const ArbitraryModInt &p) {\n   \
+    \ unsigned long long a = (unsigned long long)val * p.val;\n    unsigned xh = (unsigned)(a\
+    \ >> 32), xl = (unsigned)a, d, m;\n    asm(\"divl %4; \\n\\t\" : \"=a\"(d), \"\
+    =d\"(m) : \"d\"(xh), \"a\"(xl), \"r\"(get_mod()));\n    val = m;\n    return *this;\n\
+    \  }\n  ArbitraryModInt &operator/=(const ArbitraryModInt &p) {\n    *this *=\
+    \ p.inverse();\n    return *this;\n  }\n  ArbitraryModInt operator-() const {\
+    \ return ArbitraryModInt(-val); }\n  ArbitraryModInt operator+(const ArbitraryModInt\
+    \ &p) const {\n    return ArbitraryModInt(*this) += p;\n  }\n  ArbitraryModInt\
+    \ operator-(const ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this)\
+    \ -= p;\n  }\n  ArbitraryModInt operator*(const ArbitraryModInt &p) const {\n\
+    \    return ArbitraryModInt(*this) *= p;\n  }\n  ArbitraryModInt operator/(const\
+    \ ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this) /= p;\n  }\n\
+    \  bool operator==(const ArbitraryModInt &p) const { return val == p.val; }\n\
+    \  bool operator!=(const ArbitraryModInt &p) const { return val != p.val; }\n\
+    \  ArbitraryModInt inverse() const {\n    int a = val, b = get_mod(), u = 1, v\
+    \ = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b), swap(u\
+    \ -= t * v, v);\n    }\n    return ArbitraryModInt(u);\n  }\n  ArbitraryModInt\
     \ pow(int64_t n) const {\n    ArbitraryModInt ret(1), mul(val);\n    while (n\
     \ > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n  \
     \  }\n    return ret;\n  }\n};\n\ntemplate<typename mint>\ntuple<mint, mint, mint>\
@@ -289,7 +290,7 @@ data:
   path: poly/poly_taylor_shift.hpp
   requiredBy:
   - seq/stirling_number_1.hpp
-  timestamp: '2022-01-13 04:16:58+09:00'
+  timestamp: '2022-01-13 04:29:06+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
