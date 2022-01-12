@@ -84,30 +84,28 @@ data:
     \ mint>\nmint C(ll n, ll k, bool large = false) {\n  assert(n >= 0);\n  if (k\
     \ < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n) * fact_inv<mint>(k)\
     \ * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n  FOR(i, k) {\n\
-    \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\ntemplate<typename\
-    \ mint>\nvc<mint> power_table(mint a, ll N) {\n  vc<mint> f(N, 1);\n  FOR(i, N\
-    \ - 1) f[i + 1] = a * f[i];\n  return f;\n}\n\nusing modint107 = modint<1'000'000'007>;\n\
-    using modint998 = modint<998'244'353>;\nusing amint = ArbitraryModInt;\n#line\
-    \ 1 \"other/discrete_log.hpp\"\ntemplate <typename X>\r\nll discrete_log(X a,\
-    \ X b, ll LIM, function<ll(X)> H, int lb = 0) {\r\n  // * \u304C\u5B9A\u7FA9\u3055\
-    \u308C\u305F\u30AF\u30E9\u30B9\u3001\u30CF\u30C3\u30B7\u30E5\u95A2\u6570 H \u3092\
-    \u6301\u305F\u305B\u308B\r\n  // lb \u4EE5\u4E0A\u306E\u89E3\u3092\u304B\u3048\
-    \u3059\r\n  {\r\n    int n = lb;\r\n    X p = a;\r\n    while (n) {\r\n      if\
-    \ (n & 1) b /= p;\r\n      p *= p;\r\n      n /= 2;\r\n    }\r\n  }\r\n\r\n  ll\
-    \ K = 1;\r\n  while (K * K < LIM) ++K;\r\n\r\n  unordered_map<ll, int> MP;\r\n\
-    \  MP.reserve(K + 1);\r\n  X p = 1;\r\n  FOR(k, K + 1) {\r\n    auto key = H(p);\r\
-    \n    if (!MP.count(key)) MP[key] = k;\r\n    if (k != K) p = p * a;\r\n  }\r\n\
-    \  p = X(1) / p;\r\n  FOR(k, K + 1) {\r\n    auto key = H(b);\r\n    if (MP.count(key))\
-    \ return k * K + MP[key] + lb;\r\n    b *= p;\r\n  }\r\n  return -1;\r\n}\r\n\
-    #line 3 \"mod/mod_log.hpp\"\n\r\nint mod_log(int mod, ll a, ll b) {\r\n  a = divmod(a,\
-    \ mod).se;\r\n  b = divmod(b, mod).se;\r\n  // \u307E\u305A\u7FA4\u306B\u5E30\u7740\
-    \u3059\u308B\u3002\u5C0F\u3055\u3044\u5834\u5408\u306F\u8ABF\u3079\u308B\r\n \
-    \ ll p = 1 % mod;\r\n  FOR(k, 32) {\r\n    if (p == b) return k;\r\n    p = p\
-    \ * a % mod;\r\n  }\r\n  if (a == 0 || b == 0) return -1;\r\n  ll g = gcd(mod,\
-    \ p);\r\n  if (b % g != 0) return -1;\r\n  mod /= g;\r\n  a %= mod, b %= mod;\r\
-    \n  if (gcd(b, mod) > 1) return -1;\r\n  // \u7FA4\u306B\u5E30\u7740\u3055\u308C\
-    \u305F\r\n  amint::set_mod(mod);\r\n  return discrete_log<amint>(\r\n      amint(a),\
-    \ amint(b), mod, [](auto x) { return x.val; }, 32);\r\n}\r\n"
+    \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\nusing\
+    \ modint107 = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n\
+    using amint = ArbitraryModInt;\n#line 1 \"other/discrete_log.hpp\"\ntemplate <typename\
+    \ X>\r\nll discrete_log(X a, X b, ll LIM, function<ll(X)> H, int lb = 0) {\r\n\
+    \  // * \u304C\u5B9A\u7FA9\u3055\u308C\u305F\u30AF\u30E9\u30B9\u3001\u30CF\u30C3\
+    \u30B7\u30E5\u95A2\u6570 H \u3092\u6301\u305F\u305B\u308B\r\n  // lb \u4EE5\u4E0A\
+    \u306E\u89E3\u3092\u304B\u3048\u3059\r\n  {\r\n    int n = lb;\r\n    X p = a;\r\
+    \n    while (n) {\r\n      if (n & 1) b /= p;\r\n      p *= p;\r\n      n /= 2;\r\
+    \n    }\r\n  }\r\n\r\n  ll K = 1;\r\n  while (K * K < LIM) ++K;\r\n\r\n  unordered_map<ll,\
+    \ int> MP;\r\n  MP.reserve(K + 1);\r\n  X p = 1;\r\n  FOR(k, K + 1) {\r\n    auto\
+    \ key = H(p);\r\n    if (!MP.count(key)) MP[key] = k;\r\n    if (k != K) p = p\
+    \ * a;\r\n  }\r\n  p = X(1) / p;\r\n  FOR(k, K + 1) {\r\n    auto key = H(b);\r\
+    \n    if (MP.count(key)) return k * K + MP[key] + lb;\r\n    b *= p;\r\n  }\r\n\
+    \  return -1;\r\n}\r\n#line 3 \"mod/mod_log.hpp\"\n\r\nint mod_log(int mod, ll\
+    \ a, ll b) {\r\n  a = divmod(a, mod).se;\r\n  b = divmod(b, mod).se;\r\n  // \u307E\
+    \u305A\u7FA4\u306B\u5E30\u7740\u3059\u308B\u3002\u5C0F\u3055\u3044\u5834\u5408\
+    \u306F\u8ABF\u3079\u308B\r\n  ll p = 1 % mod;\r\n  FOR(k, 32) {\r\n    if (p ==\
+    \ b) return k;\r\n    p = p * a % mod;\r\n  }\r\n  if (a == 0 || b == 0) return\
+    \ -1;\r\n  ll g = gcd(mod, p);\r\n  if (b % g != 0) return -1;\r\n  mod /= g;\r\
+    \n  a %= mod, b %= mod;\r\n  if (gcd(b, mod) > 1) return -1;\r\n  // \u7FA4\u306B\
+    \u5E30\u7740\u3055\u308C\u305F\r\n  amint::set_mod(mod);\r\n  return discrete_log<amint>(\r\
+    \n      amint(a), amint(b), mod, [](auto x) { return x.val; }, 32);\r\n}\r\n"
   code: "#include \"mod/modint.hpp\"\r\n#include \"other/discrete_log.hpp\"\r\n\r\n\
     int mod_log(int mod, ll a, ll b) {\r\n  a = divmod(a, mod).se;\r\n  b = divmod(b,\
     \ mod).se;\r\n  // \u307E\u305A\u7FA4\u306B\u5E30\u7740\u3059\u308B\u3002\u5C0F\
@@ -124,7 +122,7 @@ data:
   isVerificationFile: false
   path: mod/mod_log.hpp
   requiredBy: []
-  timestamp: '2022-01-12 07:59:37+09:00'
+  timestamp: '2022-01-13 04:04:32+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/math/discrete_logarithm_mod.test.cpp

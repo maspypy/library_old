@@ -224,19 +224,18 @@ data:
     \ mint>\nmint C(ll n, ll k, bool large = false) {\n  assert(n >= 0);\n  if (k\
     \ < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n) * fact_inv<mint>(k)\
     \ * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n  FOR(i, k) {\n\
-    \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\ntemplate<typename\
-    \ mint>\nvc<mint> power_table(mint a, ll N) {\n  vc<mint> f(N, 1);\n  FOR(i, N\
-    \ - 1) f[i + 1] = a * f[i];\n  return f;\n}\n\nusing modint107 = modint<1'000'000'007>;\n\
-    using modint998 = modint<998'244'353>;\nusing amint = ArbitraryModInt;\n#line\
-    \ 1 \"seq/find_linear_rec.hpp\"\ntemplate <typename mint>\r\nvector<mint> find_linear_rec(vector<mint>&\
-    \ A) {\r\n  int N = len(A);\r\n  vc<mint> B = {1}, C = {1};\r\n  int l = 0, m\
-    \ = 1;\r\n  mint p = 1;\r\n  FOR(i, N) {\r\n    mint d = A[i];\r\n    FOR3(j,\
-    \ 1, l + 1) { d += C[j] * A[i - j]; }\r\n    if (d == 0) {\r\n      ++m;\r\n \
-    \     continue;\r\n    }\r\n    auto tmp = C;\r\n    mint q = d / p;\r\n    if\
-    \ (len(C) < len(B) + m) C.insert(C.end(), len(B) + m - len(C), 0);\r\n    FOR(j,\
-    \ len(B)) C[j + m] -= q * B[j];\r\n    if (l + l <= i) {\r\n      B = tmp;\r\n\
-    \      l = i + 1 - l, m = 1;\r\n      p = d;\r\n    } else {\r\n      ++m;\r\n\
-    \    }\r\n  }\r\n  return C;\r\n}\r\n#line 6 \"test/library_checker/math/find_linear_recurrence.test.cpp\"\
+    \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\nusing\
+    \ modint107 = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n\
+    using amint = ArbitraryModInt;\n#line 1 \"seq/find_linear_rec.hpp\"\ntemplate\
+    \ <typename mint>\r\nvector<mint> find_linear_rec(vector<mint>& A) {\r\n  int\
+    \ N = len(A);\r\n  vc<mint> B = {1}, C = {1};\r\n  int l = 0, m = 1;\r\n  mint\
+    \ p = 1;\r\n  FOR(i, N) {\r\n    mint d = A[i];\r\n    FOR3(j, 1, l + 1) { d +=\
+    \ C[j] * A[i - j]; }\r\n    if (d == 0) {\r\n      ++m;\r\n      continue;\r\n\
+    \    }\r\n    auto tmp = C;\r\n    mint q = d / p;\r\n    if (len(C) < len(B)\
+    \ + m) C.insert(C.end(), len(B) + m - len(C), 0);\r\n    FOR(j, len(B)) C[j +\
+    \ m] -= q * B[j];\r\n    if (l + l <= i) {\r\n      B = tmp;\r\n      l = i +\
+    \ 1 - l, m = 1;\r\n      p = d;\r\n    } else {\r\n      ++m;\r\n    }\r\n  }\r\
+    \n  return C;\r\n}\r\n#line 6 \"test/library_checker/math/find_linear_recurrence.test.cpp\"\
     \n\r\nusing mint = modint998;\r\nvoid solve() {\r\n  LL(N);\r\n  VEC(mint, A,\
     \ N);\r\n  auto g = find_linear_rec(A);\r\n  g.erase(g.begin());\r\n  for (auto&&\
     \ x : g) x = -x;\r\n  print(len(g));\r\n  print(g);\r\n}\r\n\r\nsigned main()\
@@ -257,7 +256,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/math/find_linear_recurrence.test.cpp
   requiredBy: []
-  timestamp: '2022-01-13 03:05:54+09:00'
+  timestamp: '2022-01-13 04:04:32+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/math/find_linear_recurrence.test.cpp

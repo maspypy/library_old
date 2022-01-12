@@ -224,25 +224,23 @@ data:
     \ mint>\nmint C(ll n, ll k, bool large = false) {\n  assert(n >= 0);\n  if (k\
     \ < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n) * fact_inv<mint>(k)\
     \ * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n  FOR(i, k) {\n\
-    \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\ntemplate<typename\
-    \ mint>\nvc<mint> power_table(mint a, ll N) {\n  vc<mint> f(N, 1);\n  FOR(i, N\
-    \ - 1) f[i + 1] = a * f[i];\n  return f;\n}\n\nusing modint107 = modint<1'000'000'007>;\n\
-    using modint998 = modint<998'244'353>;\nusing amint = ArbitraryModInt;\n#line\
-    \ 1 \"linalg/mat_mul.hpp\"\ntemplate <class T, is_modint_t<T>* = nullptr>\r\n\
-    vc<vc<T>> mat_mul(const vc<vc<T>>& A, const vc<vc<T>>& B) {\r\n  // mod \u3092\
-    \u3068\u308B\u56DE\u6570\u3092\u6E1B\u3089\u3057\u3066\u307F\u308B\r\n  auto N\
-    \ = len(A), M = len(B), K = len(B[0]);\r\n  vv(T, C, N, K);\r\n  const ull MOD2\
-    \ = 8ull * T::get_mod() * T::get_mod();\r\n  FOR(n, N) {\r\n    vc<ull> tmp(K);\r\
-    \n    FOR(m, M) FOR(k, K) {\r\n      tmp[k] += ull(A[n][m].val) * B[m][k].val;\r\
-    \n      if (tmp[k] >= MOD2) tmp[k] -= MOD2;\r\n    }\r\n    FOR(k, K) C[n][k]\
-    \ = tmp[k];\r\n  }\r\n  return C;\r\n}\r\n\r\ntemplate <class T, is_not_modint_t<T>*\
-    \ = nullptr>\r\nvc<vc<T>> mat_mul(const vc<vc<T>>& A, const vc<vc<T>>& B) {\r\n\
-    \  auto N = len(A), M = len(B), K = len(B[0]);\r\n  vv(T, C, N, K);\r\n  FOR(n,\
-    \ N) FOR(m, M) FOR(k, K) C[n][k] += A[n][m] * B[m][k];\r\n  return C;\r\n}\r\n\
-    #line 6 \"test/library_checker/matrix/matrix_product.test.cpp\"\nusing mint =\
-    \ modint998;\r\n\r\nvoid solve() {\r\n  LL(N, M, K);\r\n  VV(mint, A, N, M);\r\
-    \n  VV(mint, B, M, K);\r\n  auto C = mat_mul(A, B);\r\n  FOR(n, len(C)) print(C[n]);\r\
-    \n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\nusing\
+    \ modint107 = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n\
+    using amint = ArbitraryModInt;\n#line 1 \"linalg/mat_mul.hpp\"\ntemplate <class\
+    \ T, is_modint_t<T>* = nullptr>\r\nvc<vc<T>> mat_mul(const vc<vc<T>>& A, const\
+    \ vc<vc<T>>& B) {\r\n  // mod \u3092\u3068\u308B\u56DE\u6570\u3092\u6E1B\u3089\
+    \u3057\u3066\u307F\u308B\r\n  auto N = len(A), M = len(B), K = len(B[0]);\r\n\
+    \  vv(T, C, N, K);\r\n  const ull MOD2 = 8ull * T::get_mod() * T::get_mod();\r\
+    \n  FOR(n, N) {\r\n    vc<ull> tmp(K);\r\n    FOR(m, M) FOR(k, K) {\r\n      tmp[k]\
+    \ += ull(A[n][m].val) * B[m][k].val;\r\n      if (tmp[k] >= MOD2) tmp[k] -= MOD2;\r\
+    \n    }\r\n    FOR(k, K) C[n][k] = tmp[k];\r\n  }\r\n  return C;\r\n}\r\n\r\n\
+    template <class T, is_not_modint_t<T>* = nullptr>\r\nvc<vc<T>> mat_mul(const vc<vc<T>>&\
+    \ A, const vc<vc<T>>& B) {\r\n  auto N = len(A), M = len(B), K = len(B[0]);\r\n\
+    \  vv(T, C, N, K);\r\n  FOR(n, N) FOR(m, M) FOR(k, K) C[n][k] += A[n][m] * B[m][k];\r\
+    \n  return C;\r\n}\r\n#line 6 \"test/library_checker/matrix/matrix_product.test.cpp\"\
+    \nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N, M, K);\r\n  VV(mint,\
+    \ A, N, M);\r\n  VV(mint, B, M, K);\r\n  auto C = mat_mul(A, B);\r\n  FOR(n, len(C))\
+    \ print(C[n]);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
     \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/matrix_product\"\r\n#include\
     \ \"my_template.hpp\"\r\n\r\n#include \"mod/modint.hpp\"\r\n#include \"linalg/mat_mul.hpp\"\
@@ -258,7 +256,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/matrix/matrix_product.test.cpp
   requiredBy: []
-  timestamp: '2022-01-13 03:05:54+09:00'
+  timestamp: '2022-01-13 04:04:32+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/matrix/matrix_product.test.cpp

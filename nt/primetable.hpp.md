@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: mod/powertable.hpp
+    title: mod/powertable.hpp
   _extendedVerifiedWith:
   - icon: ':x:'
     path: test/library_checker/math/enumerate_primes.test.cpp
@@ -31,7 +34,8 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: nt/primetable.hpp
-  requiredBy: []
+  requiredBy:
+  - mod/powertable.hpp
   timestamp: '2021-12-29 04:00:18+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:

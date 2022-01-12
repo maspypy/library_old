@@ -227,28 +227,26 @@ data:
     \ mint>\nmint C(ll n, ll k, bool large = false) {\n  assert(n >= 0);\n  if (k\
     \ < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n) * fact_inv<mint>(k)\
     \ * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n  FOR(i, k) {\n\
-    \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\ntemplate<typename\
-    \ mint>\nvc<mint> power_table(mint a, ll N) {\n  vc<mint> f(N, 1);\n  FOR(i, N\
-    \ - 1) f[i + 1] = a * f[i];\n  return f;\n}\n\nusing modint107 = modint<1'000'000'007>;\n\
-    using modint998 = modint<998'244'353>;\nusing amint = ArbitraryModInt;\n#line\
-    \ 2 \"setfunc/zeta.hpp\"\n\r\ntemplate <typename T>\r\nvoid superset_zeta(vc<T>&\
-    \ A) {\r\n  int log = topbit(len(A));\r\n  assert(1 << log == len(A));\r\n  FOR(n,\
-    \ log) FOR(s, 1 << log) {\r\n    int t = s ^ (1 << n);\r\n    if (s < t) A[s]\
-    \ += A[t];\r\n  }\r\n}\r\n\r\ntemplate <typename T>\r\nvoid superset_mobius(vc<T>&\
-    \ A) {\r\n  int log = topbit(len(A));\r\n  assert(1 << log == len(A));\r\n  FOR(n,\
-    \ log) FOR(s, 1 << log) {\r\n    int t = s ^ (1 << n);\r\n    if (s < t) A[s]\
-    \ -= A[t];\r\n  }\r\n}\r\n\r\ntemplate <typename T>\r\nvoid subset_zeta(vc<T>&\
-    \ A) {\r\n  int log = topbit(len(A));\r\n  assert(1 << log == len(A));\r\n  FOR(n,\
-    \ log) FOR(s, 1 << log) {\r\n    int t = s ^ (1 << n);\r\n    if (s > t) A[s]\
-    \ += A[t];\r\n  }\r\n}\r\n\r\ntemplate <typename T>\r\nvoid subset_mobius(vc<T>&\
-    \ A) {\r\n  int log = topbit(len(A));\r\n  assert(1 << log == len(A));\r\n  FOR(n,\
-    \ log) FOR(s, 1 << log) {\r\n    int t = s ^ (1 << n);\r\n    if (s > t) A[s]\
-    \ -= A[t];\r\n  }\r\n}\n#line 2 \"setfunc/or_convolution.hpp\"\ntemplate <typename\
-    \ T>\r\nvc<T> or_convolution(vc<T> A, vc<T> B) {\r\n  subset_zeta(A);\r\n  subset_zeta(B);\r\
-    \n  FOR(i, len(A)) A[i] *= B[i];\r\n  subset_mobius(A);\r\n  return A;\r\n}\r\n\
-    #line 6 \"test/library_checker/convolution/bitwise_or_convolution.test.cpp\"\n\
-    \r\nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N);\r\n  VEC(mint, A,\
-    \ 1<<N);\r\n  VEC(mint, B, 1<<N);\r\n  reverse(all(A));\r\n  reverse(all(B));\r\
+    \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\nusing\
+    \ modint107 = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n\
+    using amint = ArbitraryModInt;\n#line 2 \"setfunc/zeta.hpp\"\n\r\ntemplate <typename\
+    \ T>\r\nvoid superset_zeta(vc<T>& A) {\r\n  int log = topbit(len(A));\r\n  assert(1\
+    \ << log == len(A));\r\n  FOR(n, log) FOR(s, 1 << log) {\r\n    int t = s ^ (1\
+    \ << n);\r\n    if (s < t) A[s] += A[t];\r\n  }\r\n}\r\n\r\ntemplate <typename\
+    \ T>\r\nvoid superset_mobius(vc<T>& A) {\r\n  int log = topbit(len(A));\r\n  assert(1\
+    \ << log == len(A));\r\n  FOR(n, log) FOR(s, 1 << log) {\r\n    int t = s ^ (1\
+    \ << n);\r\n    if (s < t) A[s] -= A[t];\r\n  }\r\n}\r\n\r\ntemplate <typename\
+    \ T>\r\nvoid subset_zeta(vc<T>& A) {\r\n  int log = topbit(len(A));\r\n  assert(1\
+    \ << log == len(A));\r\n  FOR(n, log) FOR(s, 1 << log) {\r\n    int t = s ^ (1\
+    \ << n);\r\n    if (s > t) A[s] += A[t];\r\n  }\r\n}\r\n\r\ntemplate <typename\
+    \ T>\r\nvoid subset_mobius(vc<T>& A) {\r\n  int log = topbit(len(A));\r\n  assert(1\
+    \ << log == len(A));\r\n  FOR(n, log) FOR(s, 1 << log) {\r\n    int t = s ^ (1\
+    \ << n);\r\n    if (s > t) A[s] -= A[t];\r\n  }\r\n}\n#line 2 \"setfunc/or_convolution.hpp\"\
+    \ntemplate <typename T>\r\nvc<T> or_convolution(vc<T> A, vc<T> B) {\r\n  subset_zeta(A);\r\
+    \n  subset_zeta(B);\r\n  FOR(i, len(A)) A[i] *= B[i];\r\n  subset_mobius(A);\r\
+    \n  return A;\r\n}\r\n#line 6 \"test/library_checker/convolution/bitwise_or_convolution.test.cpp\"\
+    \n\r\nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N);\r\n  VEC(mint,\
+    \ A, 1<<N);\r\n  VEC(mint, B, 1<<N);\r\n  reverse(all(A));\r\n  reverse(all(B));\r\
     \n  auto ANS = or_convolution(A, B);\r\n  reverse(all(ANS));\r\n  print(ANS);\r\
     \n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
     \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
@@ -268,7 +266,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/convolution/bitwise_or_convolution.test.cpp
   requiredBy: []
-  timestamp: '2022-01-13 03:05:54+09:00'
+  timestamp: '2022-01-13 04:04:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/convolution/bitwise_or_convolution.test.cpp

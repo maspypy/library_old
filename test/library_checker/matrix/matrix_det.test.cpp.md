@@ -222,22 +222,20 @@ data:
     \ mint>\nmint C(ll n, ll k, bool large = false) {\n  assert(n >= 0);\n  if (k\
     \ < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n) * fact_inv<mint>(k)\
     \ * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n  FOR(i, k) {\n\
-    \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\ntemplate<typename\
-    \ mint>\nvc<mint> power_table(mint a, ll N) {\n  vc<mint> f(N, 1);\n  FOR(i, N\
-    \ - 1) f[i + 1] = a * f[i];\n  return f;\n}\n\nusing modint107 = modint<1'000'000'007>;\n\
-    using modint998 = modint<998'244'353>;\nusing amint = ArbitraryModInt;\n#line\
-    \ 1 \"linalg/det.hpp\"\ntemplate <typename T>\r\nT det(vc<vc<T>> A) {\r\n  T det\
-    \ = T(1);\r\n  while (len(A)) {\r\n    int n = len(A);\r\n    int k = n;\r\n \
-    \   FOR_R(i, n) if (A[i].back() != 0) {\r\n      k = i;\r\n      break;\r\n  \
-    \  }\r\n    if (k == n) return T(0);\r\n    if (k != n - 1) {\r\n      det *=\
-    \ (-1);\r\n      swap(A[k], A[n - 1]);\r\n    }\r\n    det *= A[n - 1][n - 1];\r\
-    \n    FOR(i, n - 1) {\r\n      T c = A[i].back() / A[n - 1].back();\r\n      A[i].pop_back();\r\
-    \n      FOR(j, n - 1) A[i][j] -= A[n - 1][j] * c;\r\n    }\r\n    A.pop_back();\r\
-    \n  }\r\n  return det;\r\n}\r\n#line 5 \"test/library_checker/matrix/matrix_det.test.cpp\"\
-    \n\r\nusing mint = modint998;\r\nvoid solve() {\r\n  LL(N);\r\n  VV(mint, A, N,\
-    \ N);\r\n  print(det(A));\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
-    \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
-    \n\r\n  return 0;\r\n}\r\n"
+    \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\nusing\
+    \ modint107 = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n\
+    using amint = ArbitraryModInt;\n#line 1 \"linalg/det.hpp\"\ntemplate <typename\
+    \ T>\r\nT det(vc<vc<T>> A) {\r\n  T det = T(1);\r\n  while (len(A)) {\r\n    int\
+    \ n = len(A);\r\n    int k = n;\r\n    FOR_R(i, n) if (A[i].back() != 0) {\r\n\
+    \      k = i;\r\n      break;\r\n    }\r\n    if (k == n) return T(0);\r\n   \
+    \ if (k != n - 1) {\r\n      det *= (-1);\r\n      swap(A[k], A[n - 1]);\r\n \
+    \   }\r\n    det *= A[n - 1][n - 1];\r\n    FOR(i, n - 1) {\r\n      T c = A[i].back()\
+    \ / A[n - 1].back();\r\n      A[i].pop_back();\r\n      FOR(j, n - 1) A[i][j]\
+    \ -= A[n - 1][j] * c;\r\n    }\r\n    A.pop_back();\r\n  }\r\n  return det;\r\n\
+    }\r\n#line 5 \"test/library_checker/matrix/matrix_det.test.cpp\"\n\r\nusing mint\
+    \ = modint998;\r\nvoid solve() {\r\n  LL(N);\r\n  VV(mint, A, N, N);\r\n  print(det(A));\r\
+    \n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/matrix_det\"\r\n#include\
     \ \"my_template.hpp\"\r\n#include \"mod/modint.hpp\"\r\n#include \"linalg/det.hpp\"\
     \r\n\r\nusing mint = modint998;\r\nvoid solve() {\r\n  LL(N);\r\n  VV(mint, A,\
@@ -252,7 +250,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/matrix/matrix_det.test.cpp
   requiredBy: []
-  timestamp: '2022-01-13 03:05:54+09:00'
+  timestamp: '2022-01-13 04:04:32+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/matrix/matrix_det.test.cpp

@@ -223,23 +223,21 @@ data:
     \ mint>\nmint C(ll n, ll k, bool large = false) {\n  assert(n >= 0);\n  if (k\
     \ < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n) * fact_inv<mint>(k)\
     \ * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n  FOR(i, k) {\n\
-    \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\ntemplate<typename\
-    \ mint>\nvc<mint> power_table(mint a, ll N) {\n  vc<mint> f(N, 1);\n  FOR(i, N\
-    \ - 1) f[i + 1] = a * f[i];\n  return f;\n}\n\nusing modint107 = modint<1'000'000'007>;\n\
-    using modint998 = modint<998'244'353>;\nusing amint = ArbitraryModInt;\n#line\
-    \ 1 \"linalg/mat_inv.hpp\"\ntemplate <typename T>\r\nvc<vc<T>> mat_inv(vc<vc<T>>\
-    \ A) {\r\n  int N = len(A);\r\n  vv(T, B, N, N);\r\n  FOR(n, N) B[n][n] = 1;\r\
-    \n  FOR(i, N) {\r\n    FOR3(k, i, N) if (A[k][i] != 0) {\r\n      if (k != i)\
-    \ swap(A[i], A[k]), swap(B[i], B[k]);\r\n      break;\r\n    }\r\n    if (A[i][i]\
-    \ == 0) return {};\r\n    T c = T(1) / A[i][i];\r\n    FOR(j, N) {\r\n      A[i][j]\
-    \ *= c;\r\n      B[i][j] *= c;\r\n    }\r\n    FOR(k, N) if (i != k) {\r\n   \
-    \   T c = A[k][i];\r\n      FOR(j, N) A[k][j] -= A[i][j] * c;\r\n      FOR(j,\
-    \ N) B[k][j] -= B[i][j] * c;\r\n    }\r\n  }\r\n  return B;\r\n}\r\n#line 5 \"\
-    test/library_checker/matrix/inverse_matrix.test.cpp\"\n\r\nusing mint = modint998;\r\
-    \nvoid solve() {\r\n  LL(N);\r\n  VV(mint, A, N, N);\r\n  auto B = mat_inv(A);\r\
-    \n  if (B.empty()) return print(-1);\r\n  FOR(n, N) print(B[n]);\r\n}\r\n\r\n\
-    signed main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n \
-    \ cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\nusing\
+    \ modint107 = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n\
+    using amint = ArbitraryModInt;\n#line 1 \"linalg/mat_inv.hpp\"\ntemplate <typename\
+    \ T>\r\nvc<vc<T>> mat_inv(vc<vc<T>> A) {\r\n  int N = len(A);\r\n  vv(T, B, N,\
+    \ N);\r\n  FOR(n, N) B[n][n] = 1;\r\n  FOR(i, N) {\r\n    FOR3(k, i, N) if (A[k][i]\
+    \ != 0) {\r\n      if (k != i) swap(A[i], A[k]), swap(B[i], B[k]);\r\n      break;\r\
+    \n    }\r\n    if (A[i][i] == 0) return {};\r\n    T c = T(1) / A[i][i];\r\n \
+    \   FOR(j, N) {\r\n      A[i][j] *= c;\r\n      B[i][j] *= c;\r\n    }\r\n   \
+    \ FOR(k, N) if (i != k) {\r\n      T c = A[k][i];\r\n      FOR(j, N) A[k][j] -=\
+    \ A[i][j] * c;\r\n      FOR(j, N) B[k][j] -= B[i][j] * c;\r\n    }\r\n  }\r\n\
+    \  return B;\r\n}\r\n#line 5 \"test/library_checker/matrix/inverse_matrix.test.cpp\"\
+    \n\r\nusing mint = modint998;\r\nvoid solve() {\r\n  LL(N);\r\n  VV(mint, A, N,\
+    \ N);\r\n  auto B = mat_inv(A);\r\n  if (B.empty()) return print(-1);\r\n  FOR(n,\
+    \ N) print(B[n]);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/inverse_matrix\"\r\n#include\
     \ \"my_template.hpp\"\r\n#include \"mod/modint.hpp\"\r\n#include \"linalg/mat_inv.hpp\"\
     \r\n\r\nusing mint = modint998;\r\nvoid solve() {\r\n  LL(N);\r\n  VV(mint, A,\
@@ -255,7 +253,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/matrix/inverse_matrix.test.cpp
   requiredBy: []
-  timestamp: '2022-01-13 03:05:54+09:00'
+  timestamp: '2022-01-13 04:04:32+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/matrix/inverse_matrix.test.cpp
