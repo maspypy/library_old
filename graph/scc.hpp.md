@@ -4,7 +4,10 @@ data:
   - icon: ':x:'
     path: graph/base.hpp
     title: graph/base.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: graph/twosat.hpp
+    title: graph/twosat.hpp
   _extendedVerifiedWith:
   - icon: ':x:'
     path: test/library_checker/graph/scc.test.cpp
@@ -72,7 +75,8 @@ data:
   - graph/base.hpp
   isVerificationFile: false
   path: graph/scc.hpp
-  requiredBy: []
+  requiredBy:
+  - graph/twosat.hpp
   timestamp: '2022-01-01 12:00:30+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:

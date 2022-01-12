@@ -53,6 +53,9 @@ data:
   - icon: ':x:'
     path: graph/treemonoid.hpp
     title: graph/treemonoid.hpp
+  - icon: ':warning:'
+    path: graph/twosat.hpp
+    title: graph/twosat.hpp
   _extendedVerifiedWith:
   - icon: ':x:'
     path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
@@ -169,6 +172,7 @@ data:
   path: graph/base.hpp
   requiredBy:
   - graph/treeabelgroup.hpp
+  - graph/twosat.hpp
   - graph/treemonoid.hpp
   - graph/tree_all_distances.hpp
   - graph/lazytreemonoid.hpp
