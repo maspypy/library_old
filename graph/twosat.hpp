@@ -1,11 +1,9 @@
+#include "graph/scc.hpp"
 struct TwoSat {
   vc<int> values;
 
-  Graph<int> G;
-  TwoSat(ll n) {
-    G = Graph<int>(2 * n, 1);
-    values.assign(n, -1);
-  }
+  Graph<int, 1> G;
+  TwoSat(ll n) : G(n + n), values(n, -1) {}
   void add(int a, int b) {
     a = (a >= 0 ? 2 * a + 1 : 2 * (~a));
     b = (b >= 0 ? 2 * b + 1 : 2 * (~b));
@@ -23,8 +21,9 @@ struct TwoSat {
   void implies(int a, int b) { add(~a, b); }
 
   bool calc() {
+    G.prepare();
     ll n = len(values);
-    SCC<Graph<int>> scc(G);
+    SCC<Graph<int, 1>> scc(G);
     FOR(i, n) {
       if (scc[2 * i] == scc[2 * i + 1]) return false;
       values[i] = scc[2 * i] < scc[2 * i + 1];
