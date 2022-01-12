@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: ds/cartesian_tree.hpp
     title: ds/cartesian_tree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/cartesian_tree
@@ -85,23 +85,24 @@ data:
     \ <class T>\r\n  void write(const vector<T> &val) {\r\n    auto n = val.size();\r\
     \n    for (size_t i = 0; i < n; i++) {\r\n      if (i) write(' ');\r\n      write(val[i]);\r\
     \n    }\r\n  }\r\n};\r\n\r\nScanner scanner = Scanner(stdin);\r\nPrinter printer\
-    \ = Printer(stdout);\r\n\r\nvoid print() { printer.write('\\n'); }\r\ntemplate\
-    \ <class Head, class... Tail>\r\nvoid print(Head &&head, Tail &&... tail) {\r\n\
-    \  printer.write(head);\r\n  if (sizeof...(Tail)) printer.write(' ');\r\n  print(forward<Tail>(tail)...);\r\
-    \n}\r\n\r\nvoid read() {}\r\ntemplate <class Head, class... Tail>\r\nvoid read(Head\
-    \ &head, Tail &... tail) {\r\n  scanner.read(head);\r\n  read(tail...);\r\n}\r\
-    \n\r\n#define INT(...)   \\\r\n  int __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\
-    #define LL(...)   \\\r\n  ll __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define\
-    \ STR(...)      \\\r\n  string __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define\
-    \ CHR(...)    \\\r\n  char __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define DBL(...)\
-    \           \\\r\n  long double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n\
-    #define VEC(type, name, size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\
-    \n#define VV(type, name, h, w)                     \\\r\n  vector<vector<type>>\
-    \ name(h, vector<type>(w)); \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t\
-    \ ? \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool\
-    \ t = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\
-    \nvoid yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1)\
-    \ { yes(!t); }\r\n#line 6 \"my_template.hpp\"\n\n\nusing ll = long long;\nusing\
+    \ = Printer(stdout);\r\n\r\nvoid flush() { printer.flush(); }\r\nvoid print()\
+    \ { printer.write('\\n'); }\r\ntemplate <class Head, class... Tail>\r\nvoid print(Head\
+    \ &&head, Tail &&... tail) {\r\n  printer.write(head);\r\n  if (sizeof...(Tail))\
+    \ printer.write(' ');\r\n  print(forward<Tail>(tail)...);\r\n}\r\n\r\nvoid read()\
+    \ {}\r\ntemplate <class Head, class... Tail>\r\nvoid read(Head &head, Tail &...\
+    \ tail) {\r\n  scanner.read(head);\r\n  read(tail...);\r\n}\r\n\r\n#define INT(...)\
+    \   \\\r\n  int __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define LL(...)   \\\
+    \r\n  ll __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define STR(...)      \\\r\n\
+    \  string __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define CHR(...)    \\\r\n\
+    \  char __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define DBL(...)           \\\
+    \r\n  long double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type,\
+    \ name, size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define\
+    \ VV(type, name, h, w)                     \\\r\n  vector<vector<type>> name(h,\
+    \ vector<type>(w)); \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ?\
+    \ \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t\
+    \ = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\n\
+    void yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) {\
+    \ yes(!t); }\r\n#line 6 \"my_template.hpp\"\n\n\nusing ll = long long;\nusing\
     \ ll8 = __int128;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint\
     \ = unsigned int;\nusing ull = unsigned long long;\n\ntemplate <class T>\nusing\
     \ vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\ntemplate <class\
@@ -144,33 +145,33 @@ data:
     \ a = b, 1 : 0);\n}\ntemplate <class T, class S>\ninline bool chmin(T &a, const\
     \ S &b) {\n  return (a > b ? a = b, 1 : 0);\n}\n\nvi s_to_vi(string S, char first_char\
     \ = 'a') {\n  vi A(S.size());\n  FOR(i, S.size()) { A[i] = S[i] - first_char;\
-    \ }\n  return A;\n}\n\ntemplate <typename T>\nvector<T> cumsum(vector<T> &A) {\n\
-    \  int N = A.size();\n  vector<T> B(N + 1);\n  FOR(i, N) { B[i + 1] = B[i] + A[i];\
-    \ }\n  return B;\n}\n\ntemplate<typename T>\nvc<int> bincount(vc<T> &A, int size)\
-    \ {\n  vc<int> C(size);\n  for (auto&& x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate\
-    \ <typename T>\nvector<int> argsort(vector<T> &A) {\n  // stable\n  vector<int>\
-    \ ids(A.size());\n  iota(all(ids), 0);\n  sort(all(ids), [&](int i, int j) { return\
-    \ A[i] < A[j] || (A[i] == A[j] && i < j); });\n  return ids;\n}\n#line 1 \"ds/cartesian_tree.hpp\"\
-    \ntemplate <typename T>\r\nstruct CartesianTree {\r\n  /*\r\n  \u8F9E\u66F8\u9806\
-    \u3067\u9AD8\u3055\u3092 unique \u3057\u3066\u3001\u6728\u306B\u3057\u3066\u3044\
-    \u308B\u3002\r\n  \u6975\u5927\u9577\u65B9\u5F62\u30A2\u30EB\u30B4\u30EA\u30BA\
-    \u30E0\u3067\u7DDA\u5F62\u6642\u9593\u69CB\u7BC9\u3002\r\n  */\r\n  int n;\r\n\
-    \  vc<T>& A;\r\n  vc<pair<int, int>> range;\r\n  vc<int> lch, rch, par;\r\n\r\n\
-    \  CartesianTree(vc<T> A) : n(len(A)), A(A) {\r\n    range.assign(n, {-1, -1});\r\
-    \n    lch.assign(n, -1);\r\n    rch.assign(n, -1);\r\n    par.assign(n, -1);\r\
-    \n    auto is_sm = [&](int i, int j) -> bool {\r\n      return (A[i] < A[j]) ||\
-    \ (A[i] == A[j] && i < j);\r\n    };\r\n    vc<int> st;\r\n    FOR(i, n) {\r\n\
-    \      while (!st.empty() && is_sm(i, st.back())) {\r\n        lch[i] = st.back();\r\
-    \n        st.pop_back();\r\n      }\r\n      range[i].fi = (st.empty() ? 0 : st.back()\
-    \ + 1);\r\n      st.eb(i);\r\n    }\r\n    st.clear();\r\n    FOR_R(i, n) {\r\n\
-    \      while (!st.empty() && is_sm(i, st.back())) {\r\n        rch[i] = st.back();\r\
-    \n        st.pop_back();\r\n      }\r\n      range[i].se = (st.empty() ? n : st.back());\r\
-    \n      st.eb(i);\r\n    }\r\n    FOR(i, n) if (lch[i] != -1) par[lch[i]] = i;\r\
-    \n    FOR(i, n) if (rch[i] != -1) par[rch[i]] = i;\r\n  }\r\n};\r\n#line 4 \"\
-    test/library_checker/tree/cartesian_tree.test.cpp\"\n\r\nvoid solve() {\r\n  LL(N);\r\
-    \n  VEC(int, A, N);\r\n  CartesianTree CT(A);\r\n  auto& ANS = CT.par;\r\n  FOR(i,\
-    \ N) if (ANS[i] == -1) ANS[i] = i;\r\n  print(ANS);\r\n}\r\n\r\nsigned main()\
-    \ {\r\n  solve();\r\n  return 0;\r\n}\r\n"
+    \ }\n  return A;\n}\n\ntemplate <typename T>\nvector<T> cumsum(vector<T> &A, int\
+    \ off = 1) {\n  int N = A.size();\n  vector<T> B(N + 1);\n  FOR(i, N) { B[i +\
+    \ 1] = B[i] + A[i]; }\n  if(off == 0) B.erase(B.begin());\n  return B;\n}\n\n\
+    template<typename T>\nvc<int> bincount(vc<T> &A, int size) {\n  vc<int> C(size);\n\
+    \  for (auto&& x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate <typename T>\nvector<int>\
+    \ argsort(vector<T> &A) {\n  // stable\n  vector<int> ids(A.size());\n  iota(all(ids),\
+    \ 0);\n  sort(all(ids), [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j]\
+    \ && i < j); });\n  return ids;\n}\n#line 1 \"ds/cartesian_tree.hpp\"\ntemplate\
+    \ <typename T>\r\nstruct CartesianTree {\r\n  /*\r\n  \u8F9E\u66F8\u9806\u3067\
+    \u9AD8\u3055\u3092 unique \u3057\u3066\u3001\u6728\u306B\u3057\u3066\u3044\u308B\
+    \u3002\r\n  \u6975\u5927\u9577\u65B9\u5F62\u30A2\u30EB\u30B4\u30EA\u30BA\u30E0\
+    \u3067\u7DDA\u5F62\u6642\u9593\u69CB\u7BC9\u3002\r\n  */\r\n  int n;\r\n  vc<T>&\
+    \ A;\r\n  vc<pair<int, int>> range;\r\n  vc<int> lch, rch, par;\r\n\r\n  CartesianTree(vc<T>\
+    \ A) : n(len(A)), A(A) {\r\n    range.assign(n, {-1, -1});\r\n    lch.assign(n,\
+    \ -1);\r\n    rch.assign(n, -1);\r\n    par.assign(n, -1);\r\n    auto is_sm =\
+    \ [&](int i, int j) -> bool {\r\n      return (A[i] < A[j]) || (A[i] == A[j] &&\
+    \ i < j);\r\n    };\r\n    vc<int> st;\r\n    FOR(i, n) {\r\n      while (!st.empty()\
+    \ && is_sm(i, st.back())) {\r\n        lch[i] = st.back();\r\n        st.pop_back();\r\
+    \n      }\r\n      range[i].fi = (st.empty() ? 0 : st.back() + 1);\r\n      st.eb(i);\r\
+    \n    }\r\n    st.clear();\r\n    FOR_R(i, n) {\r\n      while (!st.empty() &&\
+    \ is_sm(i, st.back())) {\r\n        rch[i] = st.back();\r\n        st.pop_back();\r\
+    \n      }\r\n      range[i].se = (st.empty() ? n : st.back());\r\n      st.eb(i);\r\
+    \n    }\r\n    FOR(i, n) if (lch[i] != -1) par[lch[i]] = i;\r\n    FOR(i, n) if\
+    \ (rch[i] != -1) par[rch[i]] = i;\r\n  }\r\n};\r\n#line 4 \"test/library_checker/tree/cartesian_tree.test.cpp\"\
+    \n\r\nvoid solve() {\r\n  LL(N);\r\n  VEC(int, A, N);\r\n  CartesianTree CT(A);\r\
+    \n  auto& ANS = CT.par;\r\n  FOR(i, N) if (ANS[i] == -1) ANS[i] = i;\r\n  print(ANS);\r\
+    \n}\r\n\r\nsigned main() {\r\n  solve();\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/cartesian_tree\"\r\n#include\
     \ \"my_template.hpp\"\r\n#include \"ds/cartesian_tree.hpp\"\r\n\r\nvoid solve()\
     \ {\r\n  LL(N);\r\n  VEC(int, A, N);\r\n  CartesianTree CT(A);\r\n  auto& ANS\
@@ -183,8 +184,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/tree/cartesian_tree.test.cpp
   requiredBy: []
-  timestamp: '2022-01-11 13:22:23+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-13 03:05:54+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/tree/cartesian_tree.test.cpp
 layout: document

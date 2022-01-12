@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
   _extendedRequiredBy: []
@@ -78,23 +78,24 @@ data:
     \ <class T>\r\n  void write(const vector<T> &val) {\r\n    auto n = val.size();\r\
     \n    for (size_t i = 0; i < n; i++) {\r\n      if (i) write(' ');\r\n      write(val[i]);\r\
     \n    }\r\n  }\r\n};\r\n\r\nScanner scanner = Scanner(stdin);\r\nPrinter printer\
-    \ = Printer(stdout);\r\n\r\nvoid print() { printer.write('\\n'); }\r\ntemplate\
-    \ <class Head, class... Tail>\r\nvoid print(Head &&head, Tail &&... tail) {\r\n\
-    \  printer.write(head);\r\n  if (sizeof...(Tail)) printer.write(' ');\r\n  print(forward<Tail>(tail)...);\r\
-    \n}\r\n\r\nvoid read() {}\r\ntemplate <class Head, class... Tail>\r\nvoid read(Head\
-    \ &head, Tail &... tail) {\r\n  scanner.read(head);\r\n  read(tail...);\r\n}\r\
-    \n\r\n#define INT(...)   \\\r\n  int __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\
-    #define LL(...)   \\\r\n  ll __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define\
-    \ STR(...)      \\\r\n  string __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define\
-    \ CHR(...)    \\\r\n  char __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define DBL(...)\
-    \           \\\r\n  long double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n\
-    #define VEC(type, name, size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\
-    \n#define VV(type, name, h, w)                     \\\r\n  vector<vector<type>>\
-    \ name(h, vector<type>(w)); \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t\
-    \ ? \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool\
-    \ t = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\
-    \nvoid yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1)\
-    \ { yes(!t); }\r\n#line 6 \"my_template.hpp\"\n\n\nusing ll = long long;\nusing\
+    \ = Printer(stdout);\r\n\r\nvoid flush() { printer.flush(); }\r\nvoid print()\
+    \ { printer.write('\\n'); }\r\ntemplate <class Head, class... Tail>\r\nvoid print(Head\
+    \ &&head, Tail &&... tail) {\r\n  printer.write(head);\r\n  if (sizeof...(Tail))\
+    \ printer.write(' ');\r\n  print(forward<Tail>(tail)...);\r\n}\r\n\r\nvoid read()\
+    \ {}\r\ntemplate <class Head, class... Tail>\r\nvoid read(Head &head, Tail &...\
+    \ tail) {\r\n  scanner.read(head);\r\n  read(tail...);\r\n}\r\n\r\n#define INT(...)\
+    \   \\\r\n  int __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define LL(...)   \\\
+    \r\n  ll __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define STR(...)      \\\r\n\
+    \  string __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define CHR(...)    \\\r\n\
+    \  char __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define DBL(...)           \\\
+    \r\n  long double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type,\
+    \ name, size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define\
+    \ VV(type, name, h, w)                     \\\r\n  vector<vector<type>> name(h,\
+    \ vector<type>(w)); \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ?\
+    \ \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t\
+    \ = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\n\
+    void yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) {\
+    \ yes(!t); }\r\n#line 6 \"my_template.hpp\"\n\n\nusing ll = long long;\nusing\
     \ ll8 = __int128;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing uint\
     \ = unsigned int;\nusing ull = unsigned long long;\n\ntemplate <class T>\nusing\
     \ vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\ntemplate <class\
@@ -137,30 +138,31 @@ data:
     \ a = b, 1 : 0);\n}\ntemplate <class T, class S>\ninline bool chmin(T &a, const\
     \ S &b) {\n  return (a > b ? a = b, 1 : 0);\n}\n\nvi s_to_vi(string S, char first_char\
     \ = 'a') {\n  vi A(S.size());\n  FOR(i, S.size()) { A[i] = S[i] - first_char;\
-    \ }\n  return A;\n}\n\ntemplate <typename T>\nvector<T> cumsum(vector<T> &A) {\n\
-    \  int N = A.size();\n  vector<T> B(N + 1);\n  FOR(i, N) { B[i + 1] = B[i] + A[i];\
-    \ }\n  return B;\n}\n\ntemplate<typename T>\nvc<int> bincount(vc<T> &A, int size)\
-    \ {\n  vc<int> C(size);\n  for (auto&& x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate\
-    \ <typename T>\nvector<int> argsort(vector<T> &A) {\n  // stable\n  vector<int>\
-    \ ids(A.size());\n  iota(all(ids), 0);\n  sort(all(ids), [&](int i, int j) { return\
-    \ A[i] < A[j] || (A[i] == A[j] && i < j); });\n  return ids;\n}\n#line 3 \"ds/lichao.hpp\"\
-    \n\r\ntemplate <typename T>\r\nstruct LiChaoTree {\r\n  struct Line {\r\n    T\
-    \ a, b;\r\n\r\n    Line(T a, T b) : a(a), b(b) {}\r\n\r\n    inline T get(T x)\
-    \ const { return a * x + b; }\r\n\r\n    inline bool over(const Line& b, const\
-    \ T& x) const {\r\n      return get(x) < b.get(x);\r\n    }\r\n  };\r\n\r\n  vector<T>\
-    \ xs;\r\n  vector<Line> seg;\r\n  int sz;\r\n\r\n  LiChaoTree(const vector<T>&\
-    \ x, T INF) : xs(x) {\r\n    sort(all(xs));\r\n    sz = 1;\r\n    while (sz <\
-    \ xs.size()) sz <<= 1;\r\n    while (xs.size() < sz) xs.push_back(xs.back() +\
-    \ 1);\r\n    seg.assign(2 * sz - 1, Line(0, INF));\r\n  }\r\n\r\n  void update(Line&\
-    \ x, int k, int l, int r) {\r\n    int mid = (l + r) >> 1;\r\n    auto latte =\
-    \ x.over(seg[k], xs[l]), malta = x.over(seg[k], xs[mid]);\r\n    if (malta) swap(seg[k],\
-    \ x);\r\n    if (l + 1 >= r)\r\n      return;\r\n    else if (latte != malta)\r\
-    \n      update(x, 2 * k + 1, l, mid);\r\n    else\r\n      update(x, 2 * k + 2,\
-    \ mid, r);\r\n  }\r\n\r\n  void update(T a, T b) {  // ax+b\r\n    Line l(a, b);\r\
-    \n    update(l, 0, 0, sz);\r\n  }\r\n\r\n  T query(T x) {\r\n    ll k = LB(xs,\
-    \ x);\r\n    k += sz - 1;\r\n    T ret = seg[k].get(x);\r\n    while (k > 0) {\r\
-    \n      k = (k - 1) >> 1;\r\n      ret = min(ret, seg[k].get(x));\r\n    }\r\n\
-    \    return ret;\r\n  }\r\n};\n"
+    \ }\n  return A;\n}\n\ntemplate <typename T>\nvector<T> cumsum(vector<T> &A, int\
+    \ off = 1) {\n  int N = A.size();\n  vector<T> B(N + 1);\n  FOR(i, N) { B[i +\
+    \ 1] = B[i] + A[i]; }\n  if(off == 0) B.erase(B.begin());\n  return B;\n}\n\n\
+    template<typename T>\nvc<int> bincount(vc<T> &A, int size) {\n  vc<int> C(size);\n\
+    \  for (auto&& x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate <typename T>\nvector<int>\
+    \ argsort(vector<T> &A) {\n  // stable\n  vector<int> ids(A.size());\n  iota(all(ids),\
+    \ 0);\n  sort(all(ids), [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j]\
+    \ && i < j); });\n  return ids;\n}\n#line 3 \"ds/lichao.hpp\"\n\r\ntemplate <typename\
+    \ T>\r\nstruct LiChaoTree {\r\n  struct Line {\r\n    T a, b;\r\n\r\n    Line(T\
+    \ a, T b) : a(a), b(b) {}\r\n\r\n    inline T get(T x) const { return a * x +\
+    \ b; }\r\n\r\n    inline bool over(const Line& b, const T& x) const {\r\n    \
+    \  return get(x) < b.get(x);\r\n    }\r\n  };\r\n\r\n  vector<T> xs;\r\n  vector<Line>\
+    \ seg;\r\n  int sz;\r\n\r\n  LiChaoTree(const vector<T>& x, T INF) : xs(x) {\r\
+    \n    sort(all(xs));\r\n    sz = 1;\r\n    while (sz < xs.size()) sz <<= 1;\r\n\
+    \    while (xs.size() < sz) xs.push_back(xs.back() + 1);\r\n    seg.assign(2 *\
+    \ sz - 1, Line(0, INF));\r\n  }\r\n\r\n  void update(Line& x, int k, int l, int\
+    \ r) {\r\n    int mid = (l + r) >> 1;\r\n    auto latte = x.over(seg[k], xs[l]),\
+    \ malta = x.over(seg[k], xs[mid]);\r\n    if (malta) swap(seg[k], x);\r\n    if\
+    \ (l + 1 >= r)\r\n      return;\r\n    else if (latte != malta)\r\n      update(x,\
+    \ 2 * k + 1, l, mid);\r\n    else\r\n      update(x, 2 * k + 2, mid, r);\r\n \
+    \ }\r\n\r\n  void update(T a, T b) {  // ax+b\r\n    Line l(a, b);\r\n    update(l,\
+    \ 0, 0, sz);\r\n  }\r\n\r\n  T query(T x) {\r\n    ll k = LB(xs, x);\r\n    k\
+    \ += sz - 1;\r\n    T ret = seg[k].get(x);\r\n    while (k > 0) {\r\n      k =\
+    \ (k - 1) >> 1;\r\n      ret = min(ret, seg[k].get(x));\r\n    }\r\n    return\
+    \ ret;\r\n  }\r\n};\n"
   code: "#pragma once\r\n#include \"my_template.hpp\"\r\n\r\ntemplate <typename T>\r\
     \nstruct LiChaoTree {\r\n  struct Line {\r\n    T a, b;\r\n\r\n    Line(T a, T\
     \ b) : a(a), b(b) {}\r\n\r\n    inline T get(T x) const { return a * x + b; }\r\
@@ -185,7 +187,7 @@ data:
   isVerificationFile: false
   path: ds/lichao.hpp
   requiredBy: []
-  timestamp: '2022-01-10 20:08:40+09:00'
+  timestamp: '2022-01-13 03:05:54+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: ds/lichao.hpp
