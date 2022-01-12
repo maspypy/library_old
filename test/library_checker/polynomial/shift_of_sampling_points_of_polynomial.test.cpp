@@ -8,7 +8,7 @@ using mint = modint998;
 void solve() {
   LL(N, M, c);
   VEC(mint, f, N);
-  print(lagrange_intepolate_iota(f, mint(c), M));
+  print(lagrange_interpolate_iota(f, mint(c), M));
 }
 
 signed main() {
