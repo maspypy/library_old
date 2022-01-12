@@ -307,6 +307,9 @@ data:
       path: other/monge_shortest_path.hpp
       title: other/monge_shortest_path.hpp
     - icon: ':heavy_check_mark:'
+      path: other/nim_product.hpp
+      title: other/nim_product.hpp
+    - icon: ':heavy_check_mark:'
       path: other/random.hpp
       title: other/random.hpp
     - icon: ':heavy_check_mark:'
@@ -605,6 +608,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
       title: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/math/nim_product.test.cpp
+      title: test/library_checker/math/nim_product.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/math/sharp_p_subset_sum.test.cpp
       title: test/library_checker/math/sharp_p_subset_sum.test.cpp

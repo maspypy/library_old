@@ -41,9 +41,9 @@ data:
   isVerificationFile: false
   path: alg/monoid_min.hpp
   requiredBy:
+  - alg/lazy_min_set.hpp
   - alg/lazy_min_add.hpp
   - alg/lazy_max_set.hpp
-  - alg/lazy_min_set.hpp
   timestamp: '2022-01-11 13:22:23+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

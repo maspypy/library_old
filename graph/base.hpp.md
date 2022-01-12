@@ -168,43 +168,43 @@ data:
   isVerificationFile: false
   path: graph/base.hpp
   requiredBy:
-  - graph/treegroup.hpp
-  - graph/hld.hpp
-  - graph/treemonoid.hpp
-  - graph/centroid.hpp
-  - graph/degree.hpp
-  - graph/tree_all_distances.hpp
-  - graph/dijkstra.hpp
-  - graph/mis.hpp
   - graph/treeabelgroup.hpp
-  - graph/bfs01.hpp
-  - graph/check_bipartite.hpp
-  - graph/scc.hpp
-  - graph/bipartite_coloring.hpp
-  - graph/functional.hpp
+  - graph/treemonoid.hpp
+  - graph/tree_all_distances.hpp
   - graph/lazytreemonoid.hpp
+  - graph/degree.hpp
+  - graph/centroid.hpp
+  - graph/scc.hpp
+  - graph/functional.hpp
+  - graph/check_bipartite.hpp
   - graph/eulerwalk.hpp
   - graph/bfsnumbering.hpp
+  - graph/treegroup.hpp
+  - graph/mis.hpp
+  - graph/bfs01.hpp
+  - graph/dijkstra.hpp
+  - graph/hld.hpp
+  - graph/bipartite_coloring.hpp
   timestamp: '2022-01-01 12:00:30+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/graph/cycle_detection.test.cpp
-  - test/library_checker/graph/maximum_independent_set.test.cpp
-  - test/library_checker/graph/chromatic_number.test.cpp
-  - test/library_checker/graph/scc.test.cpp
   - test/library_checker/graph/shortest_path.test.cpp
+  - test/library_checker/graph/scc.test.cpp
+  - test/library_checker/graph/maximum_independent_set.test.cpp
+  - test/library_checker/graph/cycle_detection.test.cpp
+  - test/library_checker/graph/chromatic_number.test.cpp
   - test/library_checker/tree/lca.test.cpp
   - test/library_checker/tree/lca_directed.test.cpp
   - test/library_checker/tree/frequency_table_of_tree_distance.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-  - test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
   - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
+  - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
+  - test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
+  - test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
   - test/yukicoder/899_bfsnumbering.test.cpp
-  - test/yukicoder/1002_centroid.test.cpp
   - test/yukicoder/1038_centroid.test.cpp
+  - test/yukicoder/1002_centroid.test.cpp
 documentation_of: graph/base.hpp
 layout: document
 redirect_from:

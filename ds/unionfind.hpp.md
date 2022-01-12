@@ -40,8 +40,8 @@ data:
   isVerificationFile: false
   path: ds/unionfind.hpp
   requiredBy:
-  - graph/check_bipartite.hpp
   - graph/functional.hpp
+  - graph/check_bipartite.hpp
   timestamp: '2022-01-12 05:33:30+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
