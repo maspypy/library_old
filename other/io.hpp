@@ -182,6 +182,7 @@ struct Printer {
 Scanner scanner = Scanner(stdin);
 Printer printer = Printer(stdout);
 
+void flush() { printer.flush(); }
 void print() { printer.write('\n'); }
 template <class Head, class... Tail>
 void print(Head &&head, Tail &&... tail) {
