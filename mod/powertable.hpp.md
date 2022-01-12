@@ -4,11 +4,23 @@ data:
   - icon: ':x:'
     path: nt/primetable.hpp
     title: nt/primetable.hpp
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _extendedRequiredBy:
+  - icon: ':x:'
+    path: poly/poly_taylor_shift.hpp
+    title: poly/poly_taylor_shift.hpp
+  - icon: ':x:'
+    path: seq/stirling_number_1.hpp
+    title: seq/stirling_number_1.hpp
+  _extendedVerifiedWith:
+  - icon: ':x:'
+    path: test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
+    title: test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
+  - icon: ':x:'
+    path: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
+    title: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 1 \"nt/primetable.hpp\"\ntemplate <int LIM = (1 << 20)>\nvc<int>\
@@ -43,10 +55,14 @@ data:
   - nt/primetable.hpp
   isVerificationFile: false
   path: mod/powertable.hpp
-  requiredBy: []
+  requiredBy:
+  - seq/stirling_number_1.hpp
+  - poly/poly_taylor_shift.hpp
   timestamp: '2022-01-13 04:04:32+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_WA
+  verifiedWith:
+  - test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
+  - test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
 documentation_of: mod/powertable.hpp
 layout: document
 redirect_from:

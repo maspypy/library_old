@@ -2,13 +2,25 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':x:'
     path: mod/powertable.hpp
     title: mod/powertable.hpp
+  - icon: ':x:'
+    path: poly/poly_taylor_shift.hpp
+    title: poly/poly_taylor_shift.hpp
+  - icon: ':x:'
+    path: seq/stirling_number_1.hpp
+    title: seq/stirling_number_1.hpp
   _extendedVerifiedWith:
   - icon: ':x:'
     path: test/library_checker/math/enumerate_primes.test.cpp
     title: test/library_checker/math/enumerate_primes.test.cpp
+  - icon: ':x:'
+    path: test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
+    title: test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
+  - icon: ':x:'
+    path: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
+    title: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
   _verificationStatusIcon: ':x:'
@@ -35,11 +47,15 @@ data:
   isVerificationFile: false
   path: nt/primetable.hpp
   requiredBy:
+  - seq/stirling_number_1.hpp
+  - poly/poly_taylor_shift.hpp
   - mod/powertable.hpp
   timestamp: '2021-12-29 04:00:18+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
+  - test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
   - test/library_checker/math/enumerate_primes.test.cpp
+  - test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
 documentation_of: nt/primetable.hpp
 layout: document
 redirect_from:
