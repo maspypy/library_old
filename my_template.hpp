@@ -109,10 +109,11 @@ vi s_to_vi(string S, char first_char = 'a') {
 }
 
 template <typename T>
-vector<T> cumsum(vector<T> &A) {
+vector<T> cumsum(vector<T> &A, int off = 1) {
   int N = A.size();
   vector<T> B(N + 1);
   FOR(i, N) { B[i + 1] = B[i] + A[i]; }
+  if(off == 0) B.erase(B.begin());
   return B;
 }
 
