@@ -21,7 +21,7 @@ ull nim_product(ull x, ull y) {
   static ull memo2[8][8][256];
   if (!prepared) {
     prepared = true;
-    FOR(x, 256) FOR(y, 256) memo1[x][y] = naive_nim_product(x, y);
+    FOR(x, 256) FOR(y, 256) memo1[x][y] = naive_nim_product(x, y, 4);
     FOR(a, 8) FOR(b, 8) {
       ull v = naive_nim_product(1ULL << (8 * a), 1ULL << (8 * b));
       FOR(x, 256) memo2[a][b][x] = naive_nim_product(v, x);
