@@ -177,6 +177,12 @@ struct Printer {
       write(val[i]);
     }
   }
+  template <class T, class U>
+  void write(const pair<T, U> &val) {
+    write(val.first);
+    write(' ');
+    write(val.second);
+  }
 };
 
 Scanner scanner = Scanner(stdin);
