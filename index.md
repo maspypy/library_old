@@ -399,7 +399,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: seq/interpolate_poly_exp_sum.hpp
       title: seq/interpolate_poly_exp_sum.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: seq/limit_poly_exp_sum.hpp
       title: seq/limit_poly_exp_sum.hpp
     - icon: ':heavy_check_mark:'
@@ -641,6 +641,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/math/sum_of_exp_times_poly.test.cpp
       title: test/library_checker/math/sum_of_exp_times_poly.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/math/sum_of_exp_times_poly_limit.test.cpp
+      title: test/library_checker/math/sum_of_exp_times_poly_limit.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/math/twosat.test.cpp
       title: test/library_checker/math/twosat.test.cpp

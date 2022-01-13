@@ -19,6 +19,9 @@ data:
     path: test/library_checker/math/sum_of_exp_times_poly.test.cpp
     title: test/library_checker/math/sum_of_exp_times_poly.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/library_checker/math/sum_of_exp_times_poly_limit.test.cpp
+    title: test/library_checker/math/sum_of_exp_times_poly_limit.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
     title: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
   _isVerificationFailed: false
@@ -66,6 +69,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
+  - test/library_checker/math/sum_of_exp_times_poly_limit.test.cpp
   - test/library_checker/math/sum_of_exp_times_poly.test.cpp
   - test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
 documentation_of: mod/powertable.hpp

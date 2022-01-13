@@ -5,10 +5,13 @@ data:
     path: mod/modint.hpp
     title: mod/modint.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/math/sum_of_exp_times_poly_limit.test.cpp
+    title: test/library_checker/math/sum_of_exp_times_poly_limit.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n\
@@ -105,8 +108,9 @@ data:
   path: seq/limit_poly_exp_sum.hpp
   requiredBy: []
   timestamp: '2022-01-13 04:29:52+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/library_checker/math/sum_of_exp_times_poly_limit.test.cpp
 documentation_of: seq/limit_poly_exp_sum.hpp
 layout: document
 redirect_from:
