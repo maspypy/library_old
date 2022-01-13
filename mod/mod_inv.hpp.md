@@ -1,11 +1,17 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: mod/mod_kth_root.hpp
+    title: mod/mod_kth_root.hpp
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/math/kth_root_mod.test.cpp
+    title: test/library_checker/math/kth_root_mod.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"mod/mod_inv.hpp\"\nll mod_inv(ll val, ll mod) {\r\n  int\
@@ -18,10 +24,12 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: mod/mod_inv.hpp
-  requiredBy: []
+  requiredBy:
+  - mod/mod_kth_root.hpp
   timestamp: '2022-01-14 01:43:46+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/library_checker/math/kth_root_mod.test.cpp
 documentation_of: mod/mod_inv.hpp
 layout: document
 redirect_from:

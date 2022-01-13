@@ -4,11 +4,20 @@ data:
   - icon: ':heavy_check_mark:'
     path: mod/fast_div.hpp
     title: mod/fast_div.hpp
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: mod/mod_kth_root.hpp
+    title: mod/mod_kth_root.hpp
+  - icon: ':heavy_check_mark:'
+    path: mod/primitive_root.hpp
+    title: mod/primitive_root.hpp
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/math/kth_root_mod.test.cpp
+    title: test/library_checker/math/kth_root_mod.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"mod/fast_div.hpp\"\nstruct fast_div {\r\n  // Min25 https://judge.yosupo.jp/submission/46090\r\
@@ -33,10 +42,13 @@ data:
   - mod/fast_div.hpp
   isVerificationFile: false
   path: mod/mod_pow.hpp
-  requiredBy: []
+  requiredBy:
+  - mod/mod_kth_root.hpp
+  - mod/primitive_root.hpp
   timestamp: '2022-01-14 02:04:58+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/library_checker/math/kth_root_mod.test.cpp
 documentation_of: mod/mod_pow.hpp
 layout: document
 redirect_from:

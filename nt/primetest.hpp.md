@@ -9,6 +9,12 @@ data:
     path: mod/binomial.hpp
     title: mod/binomial.hpp
   - icon: ':heavy_check_mark:'
+    path: mod/mod_kth_root.hpp
+    title: mod/mod_kth_root.hpp
+  - icon: ':heavy_check_mark:'
+    path: mod/primitive_root.hpp
+    title: mod/primitive_root.hpp
+  - icon: ':heavy_check_mark:'
     path: mod/tetration.hpp
     title: mod/tetration.hpp
   - icon: ':heavy_check_mark:'
@@ -24,6 +30,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/factorize.test.cpp
     title: test/library_checker/math/factorize.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/math/kth_root_mod.test.cpp
+    title: test/library_checker/math/kth_root_mod.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/tetration.test.cpp
     title: test/library_checker/math/tetration.test.cpp
@@ -102,8 +111,10 @@ data:
   isVerificationFile: false
   path: nt/primetest.hpp
   requiredBy:
+  - mod/mod_kth_root.hpp
   - mod/tetration.hpp
   - mod/binomial.hpp
+  - mod/primitive_root.hpp
   - graph/chromatic.hpp
   - nt/euler_phi.hpp
   - nt/factor.hpp
@@ -112,6 +123,7 @@ data:
   verifiedWith:
   - test/library_checker/graph/chromatic_number.test.cpp
   - test/library_checker/math/tetration.test.cpp
+  - test/library_checker/math/kth_root_mod.test.cpp
   - test/library_checker/math/factorize.test.cpp
 documentation_of: nt/primetest.hpp
 layout: document
