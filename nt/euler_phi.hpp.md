@@ -2,22 +2,16 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: nt/factor.hpp
+    title: nt/factor.hpp
+  - icon: ':heavy_check_mark:'
     path: nt/primetest.hpp
     title: nt/primetest.hpp
   _extendedRequiredBy:
-  - icon: ':warning:'
-    path: mod/binomial.hpp
-    title: mod/binomial.hpp
   - icon: ':heavy_check_mark:'
     path: mod/tetration.hpp
     title: mod/tetration.hpp
-  - icon: ':heavy_check_mark:'
-    path: nt/euler_phi.hpp
-    title: nt/euler_phi.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/math/factorize.test.cpp
-    title: test/library_checker/math/factorize.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/tetration.test.cpp
     title: test/library_checker/math/tetration.test.cpp
@@ -75,42 +69,26 @@ data:
     \      ll e = 0;\n      do {\n        n /= p, e += 1;\n      } while (n % p ==\
     \ 0);\n      pf.eb(p, e);\n    }\n  }\n  while (n > 1) {\n    ll p = find_prime_factor(n);\n\
     \    ll e = 0;\n    do {\n      n /= p, e += 1;\n    } while (n % p == 0);\n \
-    \   pf.eb(p, e);\n  }\n  sort(all(pf));\n  return pf;\n}\n"
-  code: "#pragma once\n#include \"nt/primetest.hpp\"\n\nmt19937_64 rng_mt{random_device{}()};\n\
-    ll rnd(ll n) { return uniform_int_distribution<ll>(0, n - 1)(rng_mt); }\n\nll\
-    \ rho(ll n, ll c) {\n  m64::set_mod(n);\n  assert(n > 1);\n  const m64 cc(c);\n\
-    \  auto f = [&](m64 x) { return x * x + cc; };\n  m64 x = 1, y = 2, z = 1, q =\
-    \ 1;\n  ll g = 1;\n  const ll m = 1LL << (__lg(n) / 5); // ?\n  for (ll r = 1;\
-    \ g == 1; r <<= 1) {\n    x = y;\n    FOR(_, r) y = f(y);\n    for (ll k = 0;\
-    \ k < r and g == 1; k += m) {\n      z = y;\n      FOR(_, min(m, r - k)) y = f(y),\
-    \ q *= x - y;\n      g = gcd(q.val(), n);\n    }\n  }\n  if (g == n)\n    do {\n\
-    \      z = f(z);\n      g = gcd((x - z).val(), n);\n    } while (g == 1);\n  return\
-    \ g;\n}\n\nll find_prime_factor(ll n) {\n  assert(n > 1);\n  if (primetest(n))\n\
-    \    return n;\n  FOR(_, 100) {\n    ll m = rho(n, rnd(n));\n    if (primetest(m))\n\
-    \      return m;\n    n = m;\n  }\n  cerr << \"failed\" << endl;\n  assert(false);\n\
-    \  return -1;\n}\n\nvc<pi> factor(ll n) {\n  assert(n >= 1);\n  vc<pi> pf;\n \
-    \ FOR3(p, 2, 100) {\n    if (p * p > n)\n      break;\n    if (n % p == 0) {\n\
-    \      ll e = 0;\n      do {\n        n /= p, e += 1;\n      } while (n % p ==\
-    \ 0);\n      pf.eb(p, e);\n    }\n  }\n  while (n > 1) {\n    ll p = find_prime_factor(n);\n\
-    \    ll e = 0;\n    do {\n      n /= p, e += 1;\n    } while (n % p == 0);\n \
-    \   pf.eb(p, e);\n  }\n  sort(all(pf));\n  return pf;\n}\n"
+    \   pf.eb(p, e);\n  }\n  sort(all(pf));\n  return pf;\n}\n#line 2 \"nt/euler_phi.hpp\"\
+    \nll euler_phi(ll n) {\r\n  auto pf = factor(n);\r\n  for (auto&& [p, e]: pf)\
+    \ n -= n / p;\r\n  return n;\r\n}\r\n"
+  code: "#include \"nt/factor.hpp\"\r\nll euler_phi(ll n) {\r\n  auto pf = factor(n);\r\
+    \n  for (auto&& [p, e]: pf) n -= n / p;\r\n  return n;\r\n}\r\n"
   dependsOn:
+  - nt/factor.hpp
   - nt/primetest.hpp
   isVerificationFile: false
-  path: nt/factor.hpp
+  path: nt/euler_phi.hpp
   requiredBy:
   - mod/tetration.hpp
-  - mod/binomial.hpp
-  - nt/euler_phi.hpp
-  timestamp: '2021-12-25 22:40:58+09:00'
+  timestamp: '2022-01-14 03:06:57+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/math/tetration.test.cpp
-  - test/library_checker/math/factorize.test.cpp
-documentation_of: nt/factor.hpp
+documentation_of: nt/euler_phi.hpp
 layout: document
 redirect_from:
-- /library/nt/factor.hpp
-- /library/nt/factor.hpp.html
-title: nt/factor.hpp
+- /library/nt/euler_phi.hpp
+- /library/nt/euler_phi.hpp.html
+title: nt/euler_phi.hpp
 ---

@@ -8,10 +8,16 @@ data:
   - icon: ':warning:'
     path: mod/mod_pow.hpp
     title: mod/mod_pow.hpp
-  _extendedVerifiedWith: []
+  - icon: ':heavy_check_mark:'
+    path: mod/tetration.hpp
+    title: mod/tetration.hpp
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/math/tetration.test.cpp
+    title: test/library_checker/math/tetration.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://judge.yosupo.jp/submission/46090
@@ -42,10 +48,12 @@ data:
   path: mod/fast_div.hpp
   requiredBy:
   - mod/mod_pow.hpp
+  - mod/tetration.hpp
   - mod/binomial.hpp
   timestamp: '2022-01-14 01:43:46+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/library_checker/math/tetration.test.cpp
 documentation_of: mod/fast_div.hpp
 layout: document
 redirect_from:
