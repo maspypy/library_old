@@ -5,6 +5,9 @@ data:
   - icon: ':warning:'
     path: mod/binomial.hpp
     title: mod/binomial.hpp
+  - icon: ':warning:'
+    path: mod/mod_pow.hpp
+    title: mod/mod_pow.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -38,6 +41,7 @@ data:
   isVerificationFile: false
   path: mod/fast_div.hpp
   requiredBy:
+  - mod/mod_pow.hpp
   - mod/binomial.hpp
   timestamp: '2022-01-14 01:43:46+09:00'
   verificationStatus: LIBRARY_NO_TESTS
