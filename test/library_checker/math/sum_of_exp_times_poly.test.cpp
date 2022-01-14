@@ -10,7 +10,7 @@ void solve() {
   scanner.read(r);
   LL(d, n);
   int L = d + 5;
-  vc<mint> a = powertable_2<mint, 10'000'000>(d, L);
+  vc<mint> a = powertable_2<mint>(d, L);
   mint p = 1;
   FOR(i, L) {
     a[i] *= p;

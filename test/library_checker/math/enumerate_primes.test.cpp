@@ -4,10 +4,8 @@
 #include "nt/primetable.hpp"
 
 void solve() {
-  const int LIM = 500'000'000;
-  auto primes = primetable<LIM>();
-
   LL(N, A, B);
+  auto& primes = primetable(N);
   int pi_N = UB(primes, N);
 
   vc<int> ANS;

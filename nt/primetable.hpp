@@ -1,9 +1,14 @@
-template <int LIM = (1 << 20)>
-vc<int> primetable() {
-  const int S = 32768, R = LIM / 2;
+vc<int>& primetable(int LIM) {
+  ++LIM;
+  const int S = 32768;
+  static int done = 2;
   static vc<int> primes = {2}, sieve(S + 1);
-  if(len(primes) > 1) return primes;  // already computed
 
+  if(done >= LIM) return primes;
+  done  = LIM;
+
+  primes = {2}, sieve.assign(S + 1, 0);
+  const int R = LIM / 2;  
   primes.reserve(int(LIM / log(LIM) * 1.1));
   vc<pi> cp;
   for (int i = 3; i <= S; i += 2) {
