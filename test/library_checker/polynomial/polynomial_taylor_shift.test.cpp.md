@@ -237,64 +237,64 @@ data:
     \ * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n  FOR(i, k) {\n\
     \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\nusing\
     \ modint107 = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n\
-    using amint = ArbitraryModInt;\n#line 1 \"nt/primetable.hpp\"\ntemplate <int LIM\
-    \ = (1 << 20)>\nvc<int> primetable() {\n  const int S = 32768, R = LIM / 2;\n\
-    \  static vc<int> primes = {2}, sieve(S + 1);\n  if(len(primes) > 1) return primes;\
-    \  // already computed\n\n  primes.reserve(int(LIM / log(LIM) * 1.1));\n  vc<pi>\
-    \ cp;\n  for (int i = 3; i <= S; i += 2) {\n    if (!sieve[i]) {\n      cp.eb(i,\
-    \ i * i / 2);\n      for (int j = i * i; j <= S; j += 2 * i) sieve[j] = 1;\n \
-    \   }\n  }\n  for (int L = 1; L <= R; L += S) {\n    array<bool, S> block{};\n\
-    \    for (auto& [p, idx]: cp)\n      for (int i = idx; i < S + L; idx = (i +=\
-    \ p)) block[i - L] = 1;\n    FOR(i, min(S, R - L)) if (!block[i]) primes.eb((L\
-    \ + i) * 2 + 1);\n  }\n  return primes;\n}\n#line 2 \"mod/powertable.hpp\"\n\r\
-    \ntemplate<typename mint>\r\nvc<mint> powertable_1(mint a, ll N) {\r\n  // table\
-    \ of a^i\r\n  vc<mint> f(N, 1);\r\n  FOR(i, N - 1) f[i + 1] = a * f[i];\r\n  return\
-    \ f;\r\n}\r\n\r\ntemplate<typename mint, int LIM>\r\nvc<mint> powertable_2(ll\
-    \ e, ll N) {\r\n  // table of i^e. LIM \u4EE5\u4E0B\u306E\u7D20\u6570\u30C6\u30FC\
-    \u30D6\u30EB\u3092\u5229\u7528\u3059\u308B. \r\n  auto primes = primetable<LIM>();\r\
+    using amint = ArbitraryModInt;\n#line 1 \"nt/primetable.hpp\"\nvc<int>& primetable(int\
+    \ LIM) {\n  ++LIM;\n  const int S = 32768;\n  static int done = 2;\n  static vc<int>\
+    \ primes = {2}, sieve(S + 1);\n\n  if(done >= LIM) return primes;\n  done  = LIM;\n\
+    \n  primes = {2}, sieve.assign(S + 1, 0);\n  const int R = LIM / 2;  \n  primes.reserve(int(LIM\
+    \ / log(LIM) * 1.1));\n  vc<pi> cp;\n  for (int i = 3; i <= S; i += 2) {\n   \
+    \ if (!sieve[i]) {\n      cp.eb(i, i * i / 2);\n      for (int j = i * i; j <=\
+    \ S; j += 2 * i) sieve[j] = 1;\n    }\n  }\n  for (int L = 1; L <= R; L += S)\
+    \ {\n    array<bool, S> block{};\n    for (auto& [p, idx]: cp)\n      for (int\
+    \ i = idx; i < S + L; idx = (i += p)) block[i - L] = 1;\n    FOR(i, min(S, R -\
+    \ L)) if (!block[i]) primes.eb((L + i) * 2 + 1);\n  }\n  return primes;\n}\n#line\
+    \ 2 \"mod/powertable.hpp\"\n\r\ntemplate<typename mint>\r\nvc<mint> powertable_1(mint\
+    \ a, ll N) {\r\n  // table of a^i\r\n  vc<mint> f(N, 1);\r\n  FOR(i, N - 1) f[i\
+    \ + 1] = a * f[i];\r\n  return f;\r\n}\r\n\r\ntemplate<typename mint>\r\nvc<mint>\
+    \ powertable_2(ll e, ll N) {\r\n  // table of i^e. N \u4EE5\u4E0B\u306E\u7D20\u6570\
+    \u30C6\u30FC\u30D6\u30EB\u3092\u5229\u7528\u3059\u308B. \r\n  auto& primes = primetable(N);\r\
     \n  vc<mint> f(N, 1);\r\n  f[0] = mint(0).pow(e);\r\n  for(auto&& p : primes){\r\
-    \n    mint xp = mint(p).pow(e);\r\n    ll pp = p;\r\n    while(pp < N){\r\n  \
-    \    ll i = pp;\r\n      while(i < N){\r\n        f[i] *= xp;\r\n        i +=\
-    \ pp;\r\n      }\r\n      pp *= p;\r\n    }\r\n  }\r\n  return f;\r\n}\r\n\r\n\
-    #line 3 \"poly/convolution.hpp\"\ntemplate <class T>\r\nvector<T> convolution_naive(const\
-    \ vector<T>& a, const vector<T>& b) {\r\n  int n = int(a.size()), m = int(b.size());\r\
-    \n  vector<T> ans(n + m - 1);\r\n  if (n < m) {\r\n    FOR(j, m) FOR(i, n) ans[i\
-    \ + j] += a[i] * b[j];\r\n  } else {\r\n    FOR(i, n) FOR(j, m) ans[i + j] +=\
-    \ a[i] * b[j];\r\n  }\r\n  return ans;\r\n}\r\n\r\ntemplate <class mint>\r\nstruct\
-    \ fft_info {\r\n  static constexpr int bsf_constexpr(unsigned int n) {\r\n   \
-    \ int x = 0;\r\n    while (!(n & (1 << x))) x++;\r\n    return x;\r\n  }\r\n\r\
-    \n  static constexpr int rank2 = bsf_constexpr(mint::get_mod() - 1);\r\n  array<mint,\
-    \ rank2 + 1> root;\r\n  array<mint, rank2 + 1> iroot;\r\n  array<mint, max(0,\
-    \ rank2 - 1)> rate2;\r\n  array<mint, max(0, rank2 - 1)> irate2;\r\n  array<mint,\
-    \ max(0, rank2 - 2)> rate3;\r\n  array<mint, max(0, rank2 - 2)> irate3;\r\n\r\n\
-    \  fft_info() {\r\n    int g = primitive_root(mint::get_mod());\r\n    root[rank2]\
-    \ = mint(g).pow((mint::get_mod() - 1) >> rank2);\r\n    iroot[rank2] = mint(1)\
-    \ / root[rank2];\r\n    FOR_R(i, rank2) {\r\n      root[i] = root[i + 1] * root[i\
-    \ + 1];\r\n      iroot[i] = iroot[i + 1] * iroot[i + 1];\r\n    }\r\n\r\n    {\r\
-    \n      mint prod = 1, iprod = 1;\r\n      for (int i = 0; i <= rank2 - 2; i++)\
-    \ {\r\n        rate2[i] = root[i + 2] * prod;\r\n        irate2[i] = iroot[i +\
-    \ 2] * iprod;\r\n        prod *= iroot[i + 2];\r\n        iprod *= root[i + 2];\r\
-    \n      }\r\n    }\r\n    {\r\n      mint prod = 1, iprod = 1;\r\n      for (int\
-    \ i = 0; i <= rank2 - 3; i++) {\r\n        rate3[i] = root[i + 3] * prod;\r\n\
-    \        irate3[i] = iroot[i + 3] * iprod;\r\n        prod *= iroot[i + 3];\r\n\
-    \        iprod *= root[i + 3];\r\n      }\r\n    }\r\n  }\r\n\r\n  constexpr int\
-    \ primitive_root(int m) {\r\n    if (m == 167772161) return 3;\r\n    if (m ==\
-    \ 469762049) return 3;\r\n    if (m == 754974721) return 11;\r\n    if (m == 880803841)\
-    \ return 26;\r\n    if (m == 998244353) return 3;\r\n  }\r\n};\r\n\r\ntemplate\
-    \ <class mint>\r\nvoid ntt(vector<mint>& a, bool inverse) {\r\n  int n = int(a.size());\r\
-    \n  int h = topbit(n);\r\n  assert(n == 1 << h);\r\n  static const fft_info<mint>\
-    \ info;\r\n  if (!inverse) {\r\n    int len = 0; // a[i, i+(n>>len), i+2*(n>>len),\
-    \ ..] is transformed\r\n    while (len < h) {\r\n      if (h - len == 1) {\r\n\
-    \        int p = 1 << (h - len - 1);\r\n        mint rot = 1;\r\n        FOR(s,\
-    \ 1 << len) {\r\n          int offset = s << (h - len);\r\n          FOR(i, p)\
-    \ {\r\n            auto l = a[i + offset];\r\n            auto r = a[i + offset\
-    \ + p] * rot;\r\n            a[i + offset] = l + r;\r\n            a[i + offset\
-    \ + p] = l - r;\r\n          }\r\n          rot *= info.rate2[topbit(~s & -~s)];\r\
-    \n        }\r\n        len++;\r\n      } else {\r\n        int p = 1 << (h - len\
-    \ - 2);\r\n        mint rot = 1, imag = info.root[2];\r\n        for (int s =\
-    \ 0; s < (1 << len); s++) {\r\n          mint rot2 = rot * rot;\r\n          mint\
-    \ rot3 = rot2 * rot;\r\n          int offset = s << (h - len);\r\n          for\
-    \ (int i = 0; i < p; i++) {\r\n            auto mod2 = 1ULL * mint::get_mod()\
+    \n    if(p > N) break;\r\n    mint xp = mint(p).pow(e);\r\n    ll pp = p;\r\n\
+    \    while(pp < N){\r\n      ll i = pp;\r\n      while(i < N){\r\n        f[i]\
+    \ *= xp;\r\n        i += pp;\r\n      }\r\n      pp *= p;\r\n    }\r\n  }\r\n\
+    \  return f;\r\n}\r\n\r\n#line 3 \"poly/convolution.hpp\"\ntemplate <class T>\r\
+    \nvector<T> convolution_naive(const vector<T>& a, const vector<T>& b) {\r\n  int\
+    \ n = int(a.size()), m = int(b.size());\r\n  vector<T> ans(n + m - 1);\r\n  if\
+    \ (n < m) {\r\n    FOR(j, m) FOR(i, n) ans[i + j] += a[i] * b[j];\r\n  } else\
+    \ {\r\n    FOR(i, n) FOR(j, m) ans[i + j] += a[i] * b[j];\r\n  }\r\n  return ans;\r\
+    \n}\r\n\r\ntemplate <class mint>\r\nstruct fft_info {\r\n  static constexpr int\
+    \ bsf_constexpr(unsigned int n) {\r\n    int x = 0;\r\n    while (!(n & (1 <<\
+    \ x))) x++;\r\n    return x;\r\n  }\r\n\r\n  static constexpr int rank2 = bsf_constexpr(mint::get_mod()\
+    \ - 1);\r\n  array<mint, rank2 + 1> root;\r\n  array<mint, rank2 + 1> iroot;\r\
+    \n  array<mint, max(0, rank2 - 1)> rate2;\r\n  array<mint, max(0, rank2 - 1)>\
+    \ irate2;\r\n  array<mint, max(0, rank2 - 2)> rate3;\r\n  array<mint, max(0, rank2\
+    \ - 2)> irate3;\r\n\r\n  fft_info() {\r\n    int g = primitive_root(mint::get_mod());\r\
+    \n    root[rank2] = mint(g).pow((mint::get_mod() - 1) >> rank2);\r\n    iroot[rank2]\
+    \ = mint(1) / root[rank2];\r\n    FOR_R(i, rank2) {\r\n      root[i] = root[i\
+    \ + 1] * root[i + 1];\r\n      iroot[i] = iroot[i + 1] * iroot[i + 1];\r\n   \
+    \ }\r\n\r\n    {\r\n      mint prod = 1, iprod = 1;\r\n      for (int i = 0; i\
+    \ <= rank2 - 2; i++) {\r\n        rate2[i] = root[i + 2] * prod;\r\n        irate2[i]\
+    \ = iroot[i + 2] * iprod;\r\n        prod *= iroot[i + 2];\r\n        iprod *=\
+    \ root[i + 2];\r\n      }\r\n    }\r\n    {\r\n      mint prod = 1, iprod = 1;\r\
+    \n      for (int i = 0; i <= rank2 - 3; i++) {\r\n        rate3[i] = root[i +\
+    \ 3] * prod;\r\n        irate3[i] = iroot[i + 3] * iprod;\r\n        prod *= iroot[i\
+    \ + 3];\r\n        iprod *= root[i + 3];\r\n      }\r\n    }\r\n  }\r\n\r\n  constexpr\
+    \ int primitive_root(int m) {\r\n    if (m == 167772161) return 3;\r\n    if (m\
+    \ == 469762049) return 3;\r\n    if (m == 754974721) return 11;\r\n    if (m ==\
+    \ 880803841) return 26;\r\n    if (m == 998244353) return 3;\r\n  }\r\n};\r\n\r\
+    \ntemplate <class mint>\r\nvoid ntt(vector<mint>& a, bool inverse) {\r\n  int\
+    \ n = int(a.size());\r\n  int h = topbit(n);\r\n  assert(n == 1 << h);\r\n  static\
+    \ const fft_info<mint> info;\r\n  if (!inverse) {\r\n    int len = 0; // a[i,\
+    \ i+(n>>len), i+2*(n>>len), ..] is transformed\r\n    while (len < h) {\r\n  \
+    \    if (h - len == 1) {\r\n        int p = 1 << (h - len - 1);\r\n        mint\
+    \ rot = 1;\r\n        FOR(s, 1 << len) {\r\n          int offset = s << (h - len);\r\
+    \n          FOR(i, p) {\r\n            auto l = a[i + offset];\r\n           \
+    \ auto r = a[i + offset + p] * rot;\r\n            a[i + offset] = l + r;\r\n\
+    \            a[i + offset + p] = l - r;\r\n          }\r\n          rot *= info.rate2[topbit(~s\
+    \ & -~s)];\r\n        }\r\n        len++;\r\n      } else {\r\n        int p =\
+    \ 1 << (h - len - 2);\r\n        mint rot = 1, imag = info.root[2];\r\n      \
+    \  for (int s = 0; s < (1 << len); s++) {\r\n          mint rot2 = rot * rot;\r\
+    \n          mint rot3 = rot2 * rot;\r\n          int offset = s << (h - len);\r\
+    \n          for (int i = 0; i < p; i++) {\r\n            auto mod2 = 1ULL * mint::get_mod()\
     \ * mint::get_mod();\r\n            auto a0 = 1ULL * a[i + offset].val;\r\n  \
     \          auto a1 = 1ULL * a[i + offset + p].val * rot.val;\r\n            auto\
     \ a2 = 1ULL * a[i + offset + 2 * p].val * rot2.val;\r\n            auto a3 = 1ULL\
@@ -436,7 +436,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
   requiredBy: []
-  timestamp: '2022-01-14 01:43:18+09:00'
+  timestamp: '2022-01-14 13:53:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp

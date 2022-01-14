@@ -457,40 +457,40 @@ data:
     \ mint(n));\r\n  mint c = 0;\r\n  int d = len(a) - 1;\r\n  mint p = 1;\r\n  FOR(i,\
     \ d + 1) {\r\n    c += a[d - i] * p * C<mint>(d, i);\r\n    p *= -r;\r\n  }\r\n\
     \  c /= (mint(1) - r).pow(d);\r\n  for (auto&& x: a) x -= c;\r\n  return interpolate_poly_exp(a,\
-    \ r, n) + c;\r\n}\r\n#line 1 \"nt/primetable.hpp\"\ntemplate <int LIM = (1 <<\
-    \ 20)>\nvc<int> primetable() {\n  const int S = 32768, R = LIM / 2;\n  static\
-    \ vc<int> primes = {2}, sieve(S + 1);\n  if(len(primes) > 1) return primes;  //\
-    \ already computed\n\n  primes.reserve(int(LIM / log(LIM) * 1.1));\n  vc<pi> cp;\n\
-    \  for (int i = 3; i <= S; i += 2) {\n    if (!sieve[i]) {\n      cp.eb(i, i *\
-    \ i / 2);\n      for (int j = i * i; j <= S; j += 2 * i) sieve[j] = 1;\n    }\n\
-    \  }\n  for (int L = 1; L <= R; L += S) {\n    array<bool, S> block{};\n    for\
-    \ (auto& [p, idx]: cp)\n      for (int i = idx; i < S + L; idx = (i += p)) block[i\
-    \ - L] = 1;\n    FOR(i, min(S, R - L)) if (!block[i]) primes.eb((L + i) * 2 +\
-    \ 1);\n  }\n  return primes;\n}\n#line 2 \"mod/powertable.hpp\"\n\r\ntemplate<typename\
-    \ mint>\r\nvc<mint> powertable_1(mint a, ll N) {\r\n  // table of a^i\r\n  vc<mint>\
-    \ f(N, 1);\r\n  FOR(i, N - 1) f[i + 1] = a * f[i];\r\n  return f;\r\n}\r\n\r\n\
-    template<typename mint, int LIM>\r\nvc<mint> powertable_2(ll e, ll N) {\r\n  //\
-    \ table of i^e. LIM \u4EE5\u4E0B\u306E\u7D20\u6570\u30C6\u30FC\u30D6\u30EB\u3092\
-    \u5229\u7528\u3059\u308B. \r\n  auto primes = primetable<LIM>();\r\n  vc<mint>\
-    \ f(N, 1);\r\n  f[0] = mint(0).pow(e);\r\n  for(auto&& p : primes){\r\n    mint\
-    \ xp = mint(p).pow(e);\r\n    ll pp = p;\r\n    while(pp < N){\r\n      ll i =\
-    \ pp;\r\n      while(i < N){\r\n        f[i] *= xp;\r\n        i += pp;\r\n  \
-    \    }\r\n      pp *= p;\r\n    }\r\n  }\r\n  return f;\r\n}\r\n\r\n#line 6 \"\
-    test/library_checker/math/sum_of_exp_times_poly.test.cpp\"\n\r\nusing mint = modint998;\r\
-    \nvoid solve() {\r\n  mint r;\r\n  scanner.read(r);\r\n  LL(d, n);\r\n  int L\
-    \ = d + 5;\r\n  vc<mint> a = powertable_2<mint, 10'000'000>(d, L);\r\n  mint p\
-    \ = 1;\r\n  FOR(i, L) {\r\n    a[i] *= p;\r\n    p *= r;\r\n  }\r\n  a = cumsum(a,\
-    \ 0);\r\n  if (n == 0) return print(0);\r\n  print(interpolate_poly_exp_sum(a,\
+    \ r, n) + c;\r\n}\r\n#line 1 \"nt/primetable.hpp\"\nvc<int>& primetable(int LIM)\
+    \ {\n  ++LIM;\n  const int S = 32768;\n  static int done = 2;\n  static vc<int>\
+    \ primes = {2}, sieve(S + 1);\n\n  if(done >= LIM) return primes;\n  done  = LIM;\n\
+    \n  primes = {2}, sieve.assign(S + 1, 0);\n  const int R = LIM / 2;  \n  primes.reserve(int(LIM\
+    \ / log(LIM) * 1.1));\n  vc<pi> cp;\n  for (int i = 3; i <= S; i += 2) {\n   \
+    \ if (!sieve[i]) {\n      cp.eb(i, i * i / 2);\n      for (int j = i * i; j <=\
+    \ S; j += 2 * i) sieve[j] = 1;\n    }\n  }\n  for (int L = 1; L <= R; L += S)\
+    \ {\n    array<bool, S> block{};\n    for (auto& [p, idx]: cp)\n      for (int\
+    \ i = idx; i < S + L; idx = (i += p)) block[i - L] = 1;\n    FOR(i, min(S, R -\
+    \ L)) if (!block[i]) primes.eb((L + i) * 2 + 1);\n  }\n  return primes;\n}\n#line\
+    \ 2 \"mod/powertable.hpp\"\n\r\ntemplate<typename mint>\r\nvc<mint> powertable_1(mint\
+    \ a, ll N) {\r\n  // table of a^i\r\n  vc<mint> f(N, 1);\r\n  FOR(i, N - 1) f[i\
+    \ + 1] = a * f[i];\r\n  return f;\r\n}\r\n\r\ntemplate<typename mint>\r\nvc<mint>\
+    \ powertable_2(ll e, ll N) {\r\n  // table of i^e. N \u4EE5\u4E0B\u306E\u7D20\u6570\
+    \u30C6\u30FC\u30D6\u30EB\u3092\u5229\u7528\u3059\u308B. \r\n  auto& primes = primetable(N);\r\
+    \n  vc<mint> f(N, 1);\r\n  f[0] = mint(0).pow(e);\r\n  for(auto&& p : primes){\r\
+    \n    if(p > N) break;\r\n    mint xp = mint(p).pow(e);\r\n    ll pp = p;\r\n\
+    \    while(pp < N){\r\n      ll i = pp;\r\n      while(i < N){\r\n        f[i]\
+    \ *= xp;\r\n        i += pp;\r\n      }\r\n      pp *= p;\r\n    }\r\n  }\r\n\
+    \  return f;\r\n}\r\n\r\n#line 6 \"test/library_checker/math/sum_of_exp_times_poly.test.cpp\"\
+    \n\r\nusing mint = modint998;\r\nvoid solve() {\r\n  mint r;\r\n  scanner.read(r);\r\
+    \n  LL(d, n);\r\n  int L = d + 5;\r\n  vc<mint> a = powertable_2<mint>(d, L);\r\
+    \n  mint p = 1;\r\n  FOR(i, L) {\r\n    a[i] *= p;\r\n    p *= r;\r\n  }\r\n \
+    \ a = cumsum(a, 0);\r\n  if (n == 0) return print(0);\r\n  print(interpolate_poly_exp_sum(a,\
     \ r, n - 1));\r\n}\r\n\r\nsigned main() {\r\n  solve();\r\n\r\n  return 0;\r\n\
     }\r\n"
   code: "#define PROBLEM \\\r\n  \"https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial\"\
     \r\n#include \"my_template.hpp\"\r\n#include \"seq/interpolate_poly_exp_sum.hpp\"\
     \r\n#include \"mod/powertable.hpp\"\r\n\r\nusing mint = modint998;\r\nvoid solve()\
     \ {\r\n  mint r;\r\n  scanner.read(r);\r\n  LL(d, n);\r\n  int L = d + 5;\r\n\
-    \  vc<mint> a = powertable_2<mint, 10'000'000>(d, L);\r\n  mint p = 1;\r\n  FOR(i,\
-    \ L) {\r\n    a[i] *= p;\r\n    p *= r;\r\n  }\r\n  a = cumsum(a, 0);\r\n  if\
-    \ (n == 0) return print(0);\r\n  print(interpolate_poly_exp_sum(a, r, n - 1));\r\
-    \n}\r\n\r\nsigned main() {\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \  vc<mint> a = powertable_2<mint>(d, L);\r\n  mint p = 1;\r\n  FOR(i, L) {\r\n\
+    \    a[i] *= p;\r\n    p *= r;\r\n  }\r\n  a = cumsum(a, 0);\r\n  if (n == 0)\
+    \ return print(0);\r\n  print(interpolate_poly_exp_sum(a, r, n - 1));\r\n}\r\n\
+    \r\nsigned main() {\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
@@ -506,7 +506,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/math/sum_of_exp_times_poly.test.cpp
   requiredBy: []
-  timestamp: '2022-01-14 01:43:18+09:00'
+  timestamp: '2022-01-14 13:53:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/math/sum_of_exp_times_poly.test.cpp

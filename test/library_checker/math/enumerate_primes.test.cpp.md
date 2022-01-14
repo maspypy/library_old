@@ -156,9 +156,10 @@ data:
     \ argsort(vector<T> &A) {\n  // stable\n  vector<int> ids(A.size());\n  iota(all(ids),\
     \ 0);\n  sort(all(ids), [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j]\
     \ && i < j); });\n  return ids;\n}\n#line 3 \"test/library_checker/math/enumerate_primes.test.cpp\"\
-    \n\n#line 1 \"nt/primetable.hpp\"\ntemplate <int LIM = (1 << 20)>\nvc<int> primetable()\
-    \ {\n  const int S = 32768, R = LIM / 2;\n  static vc<int> primes = {2}, sieve(S\
-    \ + 1);\n  if(len(primes) > 1) return primes;  // already computed\n\n  primes.reserve(int(LIM\
+    \n\n#line 1 \"nt/primetable.hpp\"\nvc<int>& primetable(int LIM) {\n  ++LIM;\n\
+    \  const int S = 32768;\n  static int done = 2;\n  static vc<int> primes = {2},\
+    \ sieve(S + 1);\n\n  if(done >= LIM) return primes;\n  done  = LIM;\n\n  primes\
+    \ = {2}, sieve.assign(S + 1, 0);\n  const int R = LIM / 2;  \n  primes.reserve(int(LIM\
     \ / log(LIM) * 1.1));\n  vc<pi> cp;\n  for (int i = 3; i <= S; i += 2) {\n   \
     \ if (!sieve[i]) {\n      cp.eb(i, i * i / 2);\n      for (int j = i * i; j <=\
     \ S; j += 2 * i) sieve[j] = 1;\n    }\n  }\n  for (int L = 1; L <= R; L += S)\
@@ -166,18 +167,17 @@ data:
     \ i = idx; i < S + L; idx = (i += p)) block[i - L] = 1;\n    FOR(i, min(S, R -\
     \ L)) if (!block[i]) primes.eb((L + i) * 2 + 1);\n  }\n  return primes;\n}\n#line\
     \ 5 \"test/library_checker/math/enumerate_primes.test.cpp\"\n\nvoid solve() {\n\
-    \  const int LIM = 500'000'000;\n  auto primes = primetable<LIM>();\n\n  LL(N,\
-    \ A, B);\n  int pi_N = UB(primes, N);\n\n  vc<int> ANS;\n  while (B < pi_N) {\n\
-    \    ANS.eb(primes[B]);\n    B += A;\n  }\n  print(pi_N, len(ANS));\n  print(ANS);\n\
-    }\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout\
-    \ << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
+    \  LL(N, A, B);\n  auto& primes = primetable(N);\n  int pi_N = UB(primes, N);\n\
+    \n  vc<int> ANS;\n  while (B < pi_N) {\n    ANS.eb(primes[B]);\n    B += A;\n\
+    \  }\n  print(pi_N, len(ANS));\n  print(ANS);\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
+    \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  solve();\n\n\
+    \  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/enumerate_primes\"\n#include\
-    \ \"my_template.hpp\"\n\n#include \"nt/primetable.hpp\"\n\nvoid solve() {\n  const\
-    \ int LIM = 500'000'000;\n  auto primes = primetable<LIM>();\n\n  LL(N, A, B);\n\
-    \  int pi_N = UB(primes, N);\n\n  vc<int> ANS;\n  while (B < pi_N) {\n    ANS.eb(primes[B]);\n\
-    \    B += A;\n  }\n  print(pi_N, len(ANS));\n  print(ANS);\n}\n\nsigned main()\
-    \ {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\
-    \n  solve();\n\n  return 0;\n}\n"
+    \ \"my_template.hpp\"\n\n#include \"nt/primetable.hpp\"\n\nvoid solve() {\n  LL(N,\
+    \ A, B);\n  auto& primes = primetable(N);\n  int pi_N = UB(primes, N);\n\n  vc<int>\
+    \ ANS;\n  while (B < pi_N) {\n    ANS.eb(primes[B]);\n    B += A;\n  }\n  print(pi_N,\
+    \ len(ANS));\n  print(ANS);\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
+    \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
@@ -185,7 +185,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/math/enumerate_primes.test.cpp
   requiredBy: []
-  timestamp: '2022-01-14 01:43:18+09:00'
+  timestamp: '2022-01-14 13:53:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/math/enumerate_primes.test.cpp

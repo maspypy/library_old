@@ -331,9 +331,6 @@ data:
       path: other/io.hpp
       title: other/io.hpp
     - icon: ':warning:'
-      path: other/isqrt.hpp
-      title: other/isqrt.hpp
-    - icon: ':warning:'
       path: other/monge_shortest_path.hpp
       title: other/monge_shortest_path.hpp
     - icon: ':heavy_check_mark:'
