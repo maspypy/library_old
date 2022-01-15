@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: geo/angle_sort.hpp
     title: geo/angle_sort.hpp
   - icon: ':x:'
@@ -12,12 +12,12 @@ data:
   - icon: ':x:'
     path: test/library_checker/geometry/convex_layers.test.cpp
     title: test/library_checker/geometry/convex_layers.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/geometry/sort_points_by_argument.test.cpp
     title: test/library_checker/geometry/sort_points_by_argument.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 1 \"geo/base.hpp\"\nstruct Point {\n  ll x, y;\n  Point operator-(Point\
@@ -39,7 +39,7 @@ data:
   - geo/angle_sort.hpp
   - geo/dynamicupperhull.hpp
   timestamp: '2022-01-15 18:40:41+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/geometry/sort_points_by_argument.test.cpp
   - test/library_checker/geometry/convex_layers.test.cpp

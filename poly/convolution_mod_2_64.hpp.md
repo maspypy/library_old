@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/convolution.hpp
     title: poly/convolution.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/convolution/contolution_mod_2_64.test.cpp
-    title: test/library_checker/convolution/contolution_mod_2_64.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: test/library_checker/convolution/convolution_mod_2_64.test.cpp
+    title: test/library_checker/convolution/convolution_mod_2_64.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n\
@@ -300,9 +300,9 @@ data:
   path: poly/convolution_mod_2_64.hpp
   requiredBy: []
   timestamp: '2022-01-15 19:02:18+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/library_checker/convolution/contolution_mod_2_64.test.cpp
+  - test/library_checker/convolution/convolution_mod_2_64.test.cpp
 documentation_of: poly/convolution_mod_2_64.hpp
 layout: document
 redirect_from:

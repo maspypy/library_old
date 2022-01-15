@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
   - icon: ':question:'
@@ -10,23 +10,23 @@ data:
   - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/convolution.hpp
     title: poly/convolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/convolution_mod_2_64.hpp
     title: poly/convolution_mod_2_64.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/convolution_mod_2_64
     links:
     - https://judge.yosupo.jp/problem/convolution_mod_2_64
-  bundledCode: "#line 1 \"test/library_checker/convolution/contolution_mod_2_64.test.cpp\"\
+  bundledCode: "#line 1 \"test/library_checker/convolution/convolution_mod_2_64.test.cpp\"\
     \n#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod_2_64\"\r\n\
     #line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
     \n#line 1 \"other/io.hpp\"\n// based on yosupo's fastio\r\n#include <unistd.h>\r\
@@ -136,13 +136,13 @@ data:
     #define LB(c, x) distance((c).begin(), lower_bound(all(c), (x)))\n#define UB(c,\
     \ x) distance((c).begin(), upper_bound(all(c), (x)))\n#define UNIQUE(x) sort(all(x)),\
     \ x.erase(unique(all(x)), x.end())\n\nint popcnt(int x) { return __builtin_popcount(x);\
-    \ }\nint popcnt(uint x) { return __builtin_popcount(x); }\nint popcnt(ll x) {\
-    \ return __builtin_popcountll(x); }\nint popcnt(u64 x) { return __builtin_popcountll(x);\
+    \ }\nint popcnt(u32 x) { return __builtin_popcount(x); }\nint popcnt(ll x) { return\
+    \ __builtin_popcountll(x); }\nint popcnt(u64 x) { return __builtin_popcountll(x);\
     \ }\n// (0, 1, 2, 3, 4) -> (-1, 0, 1, 1, 2)\nint topbit(int x) { return 31 - __builtin_clz(x);\
-    \ }\nint topbit(uint x) { return 31 - __builtin_clz(x); }\nint topbit(ll x) {\
-    \ return 63 - __builtin_clzll(x); }\nint topbit(u64 x) { return 63 - __builtin_clzll(x);\
+    \ }\nint topbit(u32 x) { return 31 - __builtin_clz(x); }\nint topbit(ll x) { return\
+    \ 63 - __builtin_clzll(x); }\nint topbit(u64 x) { return 63 - __builtin_clzll(x);\
     \ }\n// (0, 1, 2, 3, 4) -> (32 or 64, 0, 1, 0, 2)\nint lowbit(int x) { return\
-    \ 31 - __builtin_clz(x); }\nint lowbit(uint x) { return 31 - __builtin_clz(x);\
+    \ 31 - __builtin_clz(x); }\nint lowbit(u32 x) { return 31 - __builtin_clz(x);\
     \ }\nint lowbit(ll x) { return 63 - __builtin_clzll(x); }\nint lowbit(u64 x) {\
     \ return 63 - __builtin_clzll(x); }\n\nll ceil(ll x, ll y) { return (x > 0 ? (x\
     \ + y - 1) / y : x / y); }\nll floor(ll x, ll y) { return (x > 0 ? x / y : (x\
@@ -161,7 +161,7 @@ data:
     \  for (auto&& x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate <typename T>\nvector<int>\
     \ argsort(vector<T> &A) {\n  // stable\n  vector<int> ids(A.size());\n  iota(all(ids),\
     \ 0);\n  sort(all(ids), [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j]\
-    \ && i < j); });\n  return ids;\n}\n#line 3 \"test/library_checker/convolution/contolution_mod_2_64.test.cpp\"\
+    \ && i < j); });\n  return ids;\n}\n#line 3 \"test/library_checker/convolution/convolution_mod_2_64.test.cpp\"\
     \n\r\n#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n  static\
     \ constexpr bool is_modint = true;\n  int val;\n  constexpr modint(const ll val\
     \ = 0) noexcept\n      : val(val >= 0 ? val % mod : (mod - (-val) % mod) % mod)\
@@ -410,7 +410,7 @@ data:
     \ - M3(x1) * inv31 - M3(x2) * inv32).val;\r\n    ll x4 = (M4(a4[i] - x0) * inv40\
     \ - M4(x1) * inv41 - M4(x2) * inv42\r\n             - M4(x3) * inv43)\r\n    \
     \            .val;\r\n    c[i] = x0 + P0 * (x1 + P1 * (x2 + P2 * (x3 + P3 * u64(x4))));\r\
-    \n  }\r\n  return c;\r\n}\r\n#line 5 \"test/library_checker/convolution/contolution_mod_2_64.test.cpp\"\
+    \n  }\r\n  return c;\r\n}\r\n#line 5 \"test/library_checker/convolution/convolution_mod_2_64.test.cpp\"\
     \n\r\nvoid solve() {\r\n  LL(N, M);\r\n  VEC(u64, A, N);\r\n  VEC(u64, B, M);\r\
     \n  auto C = convolution_mod_2_64(A, B);\r\n  print(C);\r\n}\r\n\r\nsigned main()\
     \ {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
@@ -428,15 +428,15 @@ data:
   - poly/convolution.hpp
   - mod/modint.hpp
   isVerificationFile: true
-  path: test/library_checker/convolution/contolution_mod_2_64.test.cpp
+  path: test/library_checker/convolution/convolution_mod_2_64.test.cpp
   requiredBy: []
-  timestamp: '2022-01-15 23:08:07+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-16 03:38:30+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/library_checker/convolution/contolution_mod_2_64.test.cpp
+documentation_of: test/library_checker/convolution/convolution_mod_2_64.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/convolution/contolution_mod_2_64.test.cpp
-- /verify/test/library_checker/convolution/contolution_mod_2_64.test.cpp.html
-title: test/library_checker/convolution/contolution_mod_2_64.test.cpp
+- /verify/test/library_checker/convolution/convolution_mod_2_64.test.cpp
+- /verify/test/library_checker/convolution/convolution_mod_2_64.test.cpp.html
+title: test/library_checker/convolution/convolution_mod_2_64.test.cpp
 ---
