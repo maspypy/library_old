@@ -457,8 +457,8 @@ data:
     \ mint(n));\r\n  mint c = 0;\r\n  int d = len(a) - 1;\r\n  mint p = 1;\r\n  FOR(i,\
     \ d + 1) {\r\n    c += a[d - i] * p * C<mint>(d, i);\r\n    p *= -r;\r\n  }\r\n\
     \  c /= (mint(1) - r).pow(d);\r\n  for (auto&& x: a) x -= c;\r\n  return interpolate_poly_exp(a,\
-    \ r, n) + c;\r\n}\r\n#line 1 \"nt/primetable.hpp\"\nvc<int>& primetable(int LIM)\
-    \ {\n  ++LIM;\n  const int S = 32768;\n  static int done = 2;\n  static vc<int>\
+    \ r, n) + c;\r\n}\r\n#line 1 \"nt/primetable.hpp\"\nvc<ll>& primetable(int LIM)\
+    \ {\n  ++LIM;\n  const int S = 32768;\n  static int done = 2;\n  static vc<ll>\
     \ primes = {2}, sieve(S + 1);\n\n  if(done >= LIM) return primes;\n  done  = LIM;\n\
     \n  primes = {2}, sieve.assign(S + 1, 0);\n  const int R = LIM / 2;  \n  primes.reserve(int(LIM\
     \ / log(LIM) * 1.1));\n  vc<pi> cp;\n  for (int i = 3; i <= S; i += 2) {\n   \
@@ -506,7 +506,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/math/sum_of_exp_times_poly.test.cpp
   requiredBy: []
-  timestamp: '2022-01-15 18:21:08+09:00'
+  timestamp: '2022-01-15 22:35:49+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/math/sum_of_exp_times_poly.test.cpp

@@ -4,6 +4,9 @@ data:
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
+  - icon: ':heavy_check_mark:'
+    path: nt/primesum.hpp
+    title: nt/primesum.hpp
   - icon: ':question:'
     path: nt/primetable.hpp
     title: nt/primetable.hpp
@@ -17,34 +20,33 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/enumerate_primes
+    PROBLEM: https://judge.yosupo.jp/problem/counting_primes
     links:
-    - https://judge.yosupo.jp/problem/enumerate_primes
-  bundledCode: "#line 1 \"test/library_checker/math/enumerate_primes.test.cpp\"\n\
-    #define PROBLEM \"https://judge.yosupo.jp/problem/enumerate_primes\"\n#line 1\
-    \ \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\n#line\
-    \ 1 \"other/io.hpp\"\n// based on yosupo's fastio\r\n#include <unistd.h>\r\n\r\
-    \nnamespace detail {\r\ntemplate <typename T, decltype(&T::is_modint) = &T::is_modint>\r\
-    \nstd::true_type check_value(int);\r\ntemplate <typename T>\r\nstd::false_type\
-    \ check_value(long);\r\n} // namespace detail\r\n\r\ntemplate <typename T>\r\n\
-    struct is_modint : decltype(detail::check_value<T>(0)) {};\r\ntemplate <typename\
-    \ T>\r\nusing is_modint_t = enable_if_t<is_modint<T>::value>;\r\ntemplate <typename\
-    \ T>\r\nusing is_not_modint_t = enable_if_t<!is_modint<T>::value>;\r\n\r\nstruct\
-    \ Scanner {\r\n  int fd = -1;\r\n  char line[(1 << 15) + 1];\r\n  size_t st =\
-    \ 0, ed = 0;\r\n  void reread() {\r\n    memmove(line, line + st, ed - st);\r\n\
-    \    ed -= st;\r\n    st = 0;\r\n    ed += ::read(fd, line + ed, (1 << 15) - ed);\r\
-    \n    line[ed] = '\\0';\r\n  }\r\n  bool succ() {\r\n    while (true) {\r\n  \
-    \    if (st == ed) {\r\n        reread();\r\n        if (st == ed) return false;\r\
-    \n      }\r\n      while (st != ed && isspace(line[st])) st++;\r\n      if (st\
-    \ != ed) break;\r\n    }\r\n    if (ed - st <= 50) {\r\n      bool sep = false;\r\
-    \n      for (size_t i = st; i < ed; i++) {\r\n        if (isspace(line[i])) {\r\
-    \n          sep = true;\r\n          break;\r\n        }\r\n      }\r\n      if\
-    \ (!sep) reread();\r\n    }\r\n    return true;\r\n  }\r\n  template <class T,\
-    \ enable_if_t<is_same<T, string>::value, int> = 0>\r\n  bool read_single(T &ref)\
-    \ {\r\n    if (!succ()) return false;\r\n    while (true) {\r\n      size_t sz\
-    \ = 0;\r\n      while (st + sz < ed && !isspace(line[st + sz])) sz++;\r\n    \
-    \  ref.append(line + st, sz);\r\n      st += sz;\r\n      if (!sz || st != ed)\
-    \ break;\r\n      reread();\r\n    }\r\n    return true;\r\n  }\r\n  template\
+    - https://judge.yosupo.jp/problem/counting_primes
+  bundledCode: "#line 1 \"test/library_checker/math/counting_primes.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/counting_primes\"\r\n#line 1 \"my_template.hpp\"\
+    \n#include <bits/stdc++.h>\n\nusing namespace std;\n\n#line 1 \"other/io.hpp\"\
+    \n// based on yosupo's fastio\r\n#include <unistd.h>\r\n\r\nnamespace detail {\r\
+    \ntemplate <typename T, decltype(&T::is_modint) = &T::is_modint>\r\nstd::true_type\
+    \ check_value(int);\r\ntemplate <typename T>\r\nstd::false_type check_value(long);\r\
+    \n} // namespace detail\r\n\r\ntemplate <typename T>\r\nstruct is_modint : decltype(detail::check_value<T>(0))\
+    \ {};\r\ntemplate <typename T>\r\nusing is_modint_t = enable_if_t<is_modint<T>::value>;\r\
+    \ntemplate <typename T>\r\nusing is_not_modint_t = enable_if_t<!is_modint<T>::value>;\r\
+    \n\r\nstruct Scanner {\r\n  int fd = -1;\r\n  char line[(1 << 15) + 1];\r\n  size_t\
+    \ st = 0, ed = 0;\r\n  void reread() {\r\n    memmove(line, line + st, ed - st);\r\
+    \n    ed -= st;\r\n    st = 0;\r\n    ed += ::read(fd, line + ed, (1 << 15) -\
+    \ ed);\r\n    line[ed] = '\\0';\r\n  }\r\n  bool succ() {\r\n    while (true)\
+    \ {\r\n      if (st == ed) {\r\n        reread();\r\n        if (st == ed) return\
+    \ false;\r\n      }\r\n      while (st != ed && isspace(line[st])) st++;\r\n \
+    \     if (st != ed) break;\r\n    }\r\n    if (ed - st <= 50) {\r\n      bool\
+    \ sep = false;\r\n      for (size_t i = st; i < ed; i++) {\r\n        if (isspace(line[i]))\
+    \ {\r\n          sep = true;\r\n          break;\r\n        }\r\n      }\r\n \
+    \     if (!sep) reread();\r\n    }\r\n    return true;\r\n  }\r\n  template <class\
+    \ T, enable_if_t<is_same<T, string>::value, int> = 0>\r\n  bool read_single(T\
+    \ &ref) {\r\n    if (!succ()) return false;\r\n    while (true) {\r\n      size_t\
+    \ sz = 0;\r\n      while (st + sz < ed && !isspace(line[st + sz])) sz++;\r\n \
+    \     ref.append(line + st, sz);\r\n      st += sz;\r\n      if (!sz || st !=\
+    \ ed) break;\r\n      reread();\r\n    }\r\n    return true;\r\n  }\r\n  template\
     \ <class T, enable_if_t<is_integral<T>::value, int> = 0>\r\n  bool read_single(T\
     \ &ref) {\r\n    if (!succ()) return false;\r\n    bool neg = false;\r\n    if\
     \ (line[st] == '-') {\r\n      neg = true;\r\n      st++;\r\n    }\r\n    ref\
@@ -155,43 +157,59 @@ data:
     \  for (auto&& x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate <typename T>\nvector<int>\
     \ argsort(vector<T> &A) {\n  // stable\n  vector<int> ids(A.size());\n  iota(all(ids),\
     \ 0);\n  sort(all(ids), [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j]\
-    \ && i < j); });\n  return ids;\n}\n#line 3 \"test/library_checker/math/enumerate_primes.test.cpp\"\
-    \n\n#line 1 \"nt/primetable.hpp\"\nvc<ll>& primetable(int LIM) {\n  ++LIM;\n \
-    \ const int S = 32768;\n  static int done = 2;\n  static vc<ll> primes = {2},\
-    \ sieve(S + 1);\n\n  if(done >= LIM) return primes;\n  done  = LIM;\n\n  primes\
-    \ = {2}, sieve.assign(S + 1, 0);\n  const int R = LIM / 2;  \n  primes.reserve(int(LIM\
+    \ && i < j); });\n  return ids;\n}\n#line 1 \"nt/primetable.hpp\"\nvc<ll>& primetable(int\
+    \ LIM) {\n  ++LIM;\n  const int S = 32768;\n  static int done = 2;\n  static vc<ll>\
+    \ primes = {2}, sieve(S + 1);\n\n  if(done >= LIM) return primes;\n  done  = LIM;\n\
+    \n  primes = {2}, sieve.assign(S + 1, 0);\n  const int R = LIM / 2;  \n  primes.reserve(int(LIM\
     \ / log(LIM) * 1.1));\n  vc<pi> cp;\n  for (int i = 3; i <= S; i += 2) {\n   \
     \ if (!sieve[i]) {\n      cp.eb(i, i * i / 2);\n      for (int j = i * i; j <=\
     \ S; j += 2 * i) sieve[j] = 1;\n    }\n  }\n  for (int L = 1; L <= R; L += S)\
     \ {\n    array<bool, S> block{};\n    for (auto& [p, idx]: cp)\n      for (int\
     \ i = idx; i < S + L; idx = (i += p)) block[i - L] = 1;\n    FOR(i, min(S, R -\
     \ L)) if (!block[i]) primes.eb((L + i) * 2 + 1);\n  }\n  return primes;\n}\n#line\
-    \ 5 \"test/library_checker/math/enumerate_primes.test.cpp\"\n\nvoid solve() {\n\
-    \  LL(N, A, B);\n  auto& primes = primetable(N);\n  int pi_N = UB(primes, N);\n\
-    \n  vc<int> ANS;\n  while (B < pi_N) {\n    ANS.eb(primes[B]);\n    B += A;\n\
-    \  }\n  print(pi_N, len(ANS));\n  print(ANS);\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
-    \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  solve();\n\n\
-    \  return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/enumerate_primes\"\n#include\
-    \ \"my_template.hpp\"\n\n#include \"nt/primetable.hpp\"\n\nvoid solve() {\n  LL(N,\
-    \ A, B);\n  auto& primes = primetable(N);\n  int pi_N = UB(primes, N);\n\n  vc<int>\
-    \ ANS;\n  while (B < pi_N) {\n    ANS.eb(primes[B]);\n    B += A;\n  }\n  print(pi_N,\
-    \ len(ANS));\n  print(ANS);\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
-    \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
+    \ 2 \"nt/primesum.hpp\"\n\r\ntemplate <typename T>\r\npair<vc<T>, vc<T>> primesum_F(ll\
+    \ N, function<T(ll)> F) {\r\n  /*\r\n  N \u3068\u5B8C\u5168\u4E57\u6CD5\u7684\u95A2\
+    \u6570 f \u306E prefix sum \u95A2\u6570 F \u3092\u4E0E\u3048\u308B\u3002\r\n \
+    \ n = floor(N/d) \u3068\u306A\u308B n \u306B\u5BFE\u3059\u308B sum_{p <= n} f(p)\
+    \ \u3092\u8A08\u7B97\u3059\u308B\u3002\r\n\r\n  \u7279\u306B\u3001p^k \u306E\u548C\
+    \u3084\u3001mod m \u3054\u3068\u3067\u306E p^k \u306E\u548C\u304C\u8A08\u7B97\u3067\
+    \u304D\u308B\u3002\r\n\r\n  Complexity: O(N^{3/4}/logN) time, O(N^{1/2}) space.\r\
+    \n  */\r\n  ll sqN = sqrtl(N);\r\n  auto& primes = primetable(sqN);\r\n  vc<T>\
+    \ sum_lo(sqN + 1), sum_hi(sqN + 1);\r\n  FOR3(i, 1, sqN + 1) sum_lo[i] = F(i)\
+    \ - 1;\r\n  FOR3(i, 1, sqN + 1) sum_hi[i] = F(double(N) / i) - 1;\r\n  for (auto&&\
+    \ p: primes) {\r\n    ll pp = p * p;\r\n    if (pp > N) break;\r\n    ll R = min(sqN,\
+    \ N / pp);\r\n    ll M = sqN / p;\r\n    T x = sum_lo[p - 1];\r\n    T fp = sum_lo[p]\
+    \ - sum_lo[p - 1];\r\n    FOR3(i, 1, M + 1) sum_hi[i] -= fp * (sum_hi[i * p] -\
+    \ x);\r\n    FOR3(i, M + 1, R + 1) sum_hi[i] -= fp * (sum_lo[double(N) / (i *\
+    \ p)] - x);\r\n    FOR3_R(n, pp, sqN + 1) sum_lo[n] -= fp * (sum_lo[double(n)\
+    \ / p] - x);\r\n  }\r\n  return {sum_lo, sum_hi};\r\n}\r\n\r\ntemplate <typename\
+    \ T>\r\npair<vc<T>, vc<T>> primecnt(ll N) {\r\n  auto F = [&](ll N) -> T { return\
+    \ N; };\r\n  return primesum_F<T>(N, F);\r\n}\r\n\r\ntemplate <typename T>\r\n\
+    pair<vc<T>, vc<T>> primesum(ll N) {\r\n  auto F = [&](ll N) -> T {\r\n    return\
+    \ (N & 1 ? T((N + 1) / 2) * T(N) : T(N / 2) * T(N + 1));\r\n  };\r\n  return primesum_F<T>(N,\
+    \ F);\r\n}\r\n#line 4 \"test/library_checker/math/counting_primes.test.cpp\"\n\
+    \r\nvoid solve() {\r\n  LL(N);\r\n  auto [sum_lo, sum_hi] = primecnt<ll>(N);\r\
+    \n  print(sum_hi[1]);\r\n}\r\n\r\nsigned main() {\r\n  solve();\r\n\r\n  return\
+    \ 0;\r\n}\r\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/counting_primes\"\r\n#include\
+    \ \"my_template.hpp\"\r\n#include \"nt/primesum.hpp\"\r\n\r\nvoid solve() {\r\n\
+    \  LL(N);\r\n  auto [sum_lo, sum_hi] = primecnt<ll>(N);\r\n  print(sum_hi[1]);\r\
+    \n}\r\n\r\nsigned main() {\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
+  - nt/primesum.hpp
   - nt/primetable.hpp
   isVerificationFile: true
-  path: test/library_checker/math/enumerate_primes.test.cpp
+  path: test/library_checker/math/counting_primes.test.cpp
   requiredBy: []
   timestamp: '2022-01-15 22:35:49+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/library_checker/math/enumerate_primes.test.cpp
+documentation_of: test/library_checker/math/counting_primes.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/math/enumerate_primes.test.cpp
-- /verify/test/library_checker/math/enumerate_primes.test.cpp.html
-title: test/library_checker/math/enumerate_primes.test.cpp
+- /verify/test/library_checker/math/counting_primes.test.cpp
+- /verify/test/library_checker/math/counting_primes.test.cpp.html
+title: test/library_checker/math/counting_primes.test.cpp
 ---
