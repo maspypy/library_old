@@ -203,9 +203,9 @@ data:
     \ edge_type* end() const {\n      if (l == r) { return 0; }\n      return &G->csr_edges[r];\n\
     \    }\n\n  private:\n    int l, r;\n    const Graph* G;\n  };\n\n  bool is_prepared()\
     \ { return prepared; }\n  constexpr bool is_directed() { return directed; }\n\n\
-    \  Graph() {}\n  Graph(int N) : N(N), M(0), prepared(0) {}\n\n  void add(int frm,\
-    \ int to, T cost = 1, int i = -1) {\n    assert(!prepared);\n    assert(0 <= frm\
-    \ && frm < N && 0 <= to && to < N);\n    if (i == -1) i = M;\n    auto e = edge_type({frm,\
+    \  Graph() : N(0), M(0), prepared(0) {}\n\n  void add(int frm, int to, T cost\
+    \ = 1, int i = -1) {\n    assert(!prepared && 0 <= frm && 0 <= to);\n    chmax(N,\
+    \ frm + 1);\n    chmax(N, to + 1);\n    if (i == -1) i = M;\n    auto e = edge_type({frm,\
     \ to, cost, i});\n    edges.eb(e);\n    ++M;\n  }\n\n  void prepare() {\n    assert(!prepared);\n\
     \    prepared = true;\n    indptr.assign(N + 1, 0);\n    for (auto&& e: edges)\
     \ {\n      indptr[e.frm + 1]++;\n      if (!directed) indptr[e.to + 1]++;\n  \
@@ -218,50 +218,49 @@ data:
     frm to cost id\");\n      for (auto&& e: edges) print(e.frm, e.to, e.cost, e.id);\n\
     \    } else {\n      print(\"indptr\", indptr);\n      print(\"frm to cost id\"\
     );\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e.frm, e.to, e.cost, e.id);\n\
-    \    }\n  }\n\n  int size() { return N; }\n};\n#line 2 \"graph/centroid.hpp\"\n\
-    template <typename Graph, typename E = int>\r\nstruct CentroidDecomposition {\r\
-    \n  using edge_type = typename Graph::edge_type;\r\n  using F = function<E(E,\
-    \ edge_type)>;\r\n  Graph& G;\r\n  F f; // (E path value, edge e) -> E new_path_value\r\
-    \n  int N;\r\n  vector<int> cdep; // depth in centroid tree\r\n  vc<int> sz;\r\
-    \n  vc<int> par;\r\n\r\n  CentroidDecomposition(\r\n      Graph& G, F f = [](int\
-    \ x, edge_type e) { return x + e.cost; })\r\n      : G(G), N(G.N), f(f), sz(G.N),\
-    \ par(G.N), cdep(G.N, -1) {\r\n    build();\r\n  }\r\n\r\n  int find(int v) {\r\
-    \n    vc<int> V = {v};\r\n    par[v] = -1;\r\n    int p = 0;\r\n    while (p <\
-    \ len(V)) {\r\n      int v = V[p++];\r\n      sz[v] = 0;\r\n      for (auto&&\
-    \ e: G[v]) {\r\n        if (e.to == par[v] || cdep[e.to] != -1) continue;\r\n\
-    \        par[e.to] = v;\r\n        V.eb(e.to);\r\n      }\r\n    }\r\n    while\
-    \ (len(V)) {\r\n      int v = V.back();\r\n      V.pop_back();\r\n      sz[v]\
-    \ += 1;\r\n      if (p - sz[v] <= p / 2) return v;\r\n      sz[par[v]] += sz[v];\r\
-    \n    }\r\n    return -1;\r\n  }\r\n\r\n  void build() {\r\n    assert(G.is_prepared());\r\
-    \n    assert(!G.is_directed());\r\n    int N = G.N;\r\n\r\n    vc<pair<int, int>>\
-    \ st = {{0, 0}};\r\n    while (len(st)) {\r\n      auto [lv, v] = st.back();\r\
-    \n      st.pop_back();\r\n      auto c = find(v);\r\n      cdep[c] = lv;\r\n \
-    \     for (auto&& [frm, to, cost, id]: G[c]) {\r\n        if (cdep[to] == -1)\
-    \ st.eb(lv + 1, to);\r\n      }\r\n    }\r\n  }\r\n\r\n  vc<vc<pair<int, E>>>\
-    \ collect(int root, E root_val) {\r\n    /*\r\n    root \u3092\u91CD\u5FC3\u3068\
-    \u3059\u308B\u6728\u306B\u304A\u3044\u3066\u3001(v, path data v) \u306E vector\
-    \ \u3092\u3001\u65B9\u5411\u3054\u3068\u306B\u96C6\u3081\u3066\u8FD4\u3059\r\n\
-    \    \u30FB0 \u756A\u76EE\uFF1Aroot \u304B\u3089\u306E\u30D1\u30B9\u3059\u3079\
-    \u3066\uFF08root \u3092\u542B\u3080\uFF09\r\n    \u30FBi \u756A\u76EE\uFF1Ai \u756A\
-    \u76EE\u306E\u65B9\u5411\r\n    */\r\n    vc<vc<pair<int, E>>> res = {{{root,\
-    \ root_val}}};\r\n    for (auto&& e: G[root]) {\r\n      int nxt = e.to;\r\n \
-    \     if (cdep[nxt] < cdep[root]) continue;\r\n      vc<pair<int, E>> dat;\r\n\
-    \      int p = 0;\r\n      dat.eb(nxt, f(root_val, e));\r\n      par[nxt] = root;\r\
-    \n      while (p < len(dat)) {\r\n        auto [v, val] = dat[p++];\r\n      \
-    \  for (auto&& e: G[v]) {\r\n          if (e.to == par[v]) continue;\r\n     \
-    \     if (cdep[e.to] < cdep[root]) continue;\r\n          par[e.to] = v;\r\n \
-    \         dat.eb(e.to, f(val, e));\r\n        }\r\n      }\r\n      res.eb(dat);\r\
-    \n      res[0].insert(res[0].end(), all(dat));\r\n    }\r\n    return res;\r\n\
-    \  }\r\n};\r\n#line 6 \"test/yukicoder/1038_centroid.test.cpp\"\n\r\nvoid solve()\
-    \ {\r\n  LL(N, Q);\r\n  Graph<int> G(N);\r\n  FOR(_, N - 1) {\r\n    LL(a, b);\r\
-    \n    G.add(--a, --b);\r\n  }\r\n  G.prepare();\r\n\r\n  using T = tuple<ll, ll,\
-    \ ll>;\r\n  VEC(T, query, Q);\r\n  for (auto&& [a, b, c]: query) --a;\r\n\r\n\
-    \  // \u9802\u70B9 -> \u30AF\u30A8\u30EA\r\n  vc<vi> query_at(N);\r\n  FOR(q,\
-    \ Q) query_at[get<0>(query[q])].eb(q);\r\n\r\n  CentroidDecomposition CD(G);\r\
-    \n  vi ANS(Q);\r\n  FenwickTree<Group_Add<ll>> bit(N + 10);\r\n\r\n  FOR(root,\
-    \ N) {\r\n    auto dats = CD.collect(root, 0);\r\n    FOR(i, len(dats)) {\r\n\
-    \      auto dat = dats[i];\r\n      // qid, v, dv\r\n      vc<T> event;\r\n  \
-    \    for (auto&& [v, dv]: dat) {\r\n        for (auto&& q: query_at[v]) { event.eb(q,\
+    \    }\n  }\n};\n#line 2 \"graph/centroid.hpp\"\ntemplate <typename Graph, typename\
+    \ E = int>\r\nstruct CentroidDecomposition {\r\n  using edge_type = typename Graph::edge_type;\r\
+    \n  using F = function<E(E, edge_type)>;\r\n  Graph& G;\r\n  F f; // (E path value,\
+    \ edge e) -> E new_path_value\r\n  int N;\r\n  vector<int> cdep; // depth in centroid\
+    \ tree\r\n  vc<int> sz;\r\n  vc<int> par;\r\n\r\n  CentroidDecomposition(\r\n\
+    \      Graph& G, F f = [](int x, edge_type e) { return x + e.cost; })\r\n    \
+    \  : G(G), N(G.N), f(f), sz(G.N), par(G.N), cdep(G.N, -1) {\r\n    build();\r\n\
+    \  }\r\n\r\n  int find(int v) {\r\n    vc<int> V = {v};\r\n    par[v] = -1;\r\n\
+    \    int p = 0;\r\n    while (p < len(V)) {\r\n      int v = V[p++];\r\n     \
+    \ sz[v] = 0;\r\n      for (auto&& e: G[v]) {\r\n        if (e.to == par[v] ||\
+    \ cdep[e.to] != -1) continue;\r\n        par[e.to] = v;\r\n        V.eb(e.to);\r\
+    \n      }\r\n    }\r\n    while (len(V)) {\r\n      int v = V.back();\r\n    \
+    \  V.pop_back();\r\n      sz[v] += 1;\r\n      if (p - sz[v] <= p / 2) return\
+    \ v;\r\n      sz[par[v]] += sz[v];\r\n    }\r\n    return -1;\r\n  }\r\n\r\n \
+    \ void build() {\r\n    assert(G.is_prepared());\r\n    assert(!G.is_directed());\r\
+    \n    int N = G.N;\r\n\r\n    vc<pair<int, int>> st = {{0, 0}};\r\n    while (len(st))\
+    \ {\r\n      auto [lv, v] = st.back();\r\n      st.pop_back();\r\n      auto c\
+    \ = find(v);\r\n      cdep[c] = lv;\r\n      for (auto&& [frm, to, cost, id]:\
+    \ G[c]) {\r\n        if (cdep[to] == -1) st.eb(lv + 1, to);\r\n      }\r\n   \
+    \ }\r\n  }\r\n\r\n  vc<vc<pair<int, E>>> collect(int root, E root_val) {\r\n \
+    \   /*\r\n    root \u3092\u91CD\u5FC3\u3068\u3059\u308B\u6728\u306B\u304A\u3044\
+    \u3066\u3001(v, path data v) \u306E vector \u3092\u3001\u65B9\u5411\u3054\u3068\
+    \u306B\u96C6\u3081\u3066\u8FD4\u3059\r\n    \u30FB0 \u756A\u76EE\uFF1Aroot \u304B\
+    \u3089\u306E\u30D1\u30B9\u3059\u3079\u3066\uFF08root \u3092\u542B\u3080\uFF09\r\
+    \n    \u30FBi \u756A\u76EE\uFF1Ai \u756A\u76EE\u306E\u65B9\u5411\r\n    */\r\n\
+    \    vc<vc<pair<int, E>>> res = {{{root, root_val}}};\r\n    for (auto&& e: G[root])\
+    \ {\r\n      int nxt = e.to;\r\n      if (cdep[nxt] < cdep[root]) continue;\r\n\
+    \      vc<pair<int, E>> dat;\r\n      int p = 0;\r\n      dat.eb(nxt, f(root_val,\
+    \ e));\r\n      par[nxt] = root;\r\n      while (p < len(dat)) {\r\n        auto\
+    \ [v, val] = dat[p++];\r\n        for (auto&& e: G[v]) {\r\n          if (e.to\
+    \ == par[v]) continue;\r\n          if (cdep[e.to] < cdep[root]) continue;\r\n\
+    \          par[e.to] = v;\r\n          dat.eb(e.to, f(val, e));\r\n        }\r\
+    \n      }\r\n      res.eb(dat);\r\n      res[0].insert(res[0].end(), all(dat));\r\
+    \n    }\r\n    return res;\r\n  }\r\n};\r\n#line 6 \"test/yukicoder/1038_centroid.test.cpp\"\
+    \n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  Graph<int> G(N);\r\n  FOR(_, N - 1) {\r\
+    \n    LL(a, b);\r\n    G.add(--a, --b);\r\n  }\r\n  G.prepare();\r\n\r\n  using\
+    \ T = tuple<ll, ll, ll>;\r\n  VEC(T, query, Q);\r\n  for (auto&& [a, b, c]: query)\
+    \ --a;\r\n\r\n  // \u9802\u70B9 -> \u30AF\u30A8\u30EA\r\n  vc<vi> query_at(N);\r\
+    \n  FOR(q, Q) query_at[get<0>(query[q])].eb(q);\r\n\r\n  CentroidDecomposition\
+    \ CD(G);\r\n  vi ANS(Q);\r\n  FenwickTree<Group_Add<ll>> bit(N + 10);\r\n\r\n\
+    \  FOR(root, N) {\r\n    auto dats = CD.collect(root, 0);\r\n    FOR(i, len(dats))\
+    \ {\r\n      auto dat = dats[i];\r\n      // qid, v, dv\r\n      vc<T> event;\r\
+    \n      for (auto&& [v, dv]: dat) {\r\n        for (auto&& q: query_at[v]) { event.eb(q,\
     \ v, dv); }\r\n      }\r\n      sort(all(event));\r\n      for (auto&& [qid, v,\
     \ dv]: event) {\r\n        auto [_, y, z] = query[qid];\r\n        ll add = bit.sum(0,\
     \ dv + 1);\r\n        ANS[qid] += (i == 0 ? add : -add);\r\n        if (dv <=\
@@ -303,7 +302,7 @@ data:
   isVerificationFile: true
   path: test/yukicoder/1038_centroid.test.cpp
   requiredBy: []
-  timestamp: '2022-01-16 04:11:16+09:00'
+  timestamp: '2022-01-16 04:25:53+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yukicoder/1038_centroid.test.cpp

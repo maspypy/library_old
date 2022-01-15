@@ -172,9 +172,9 @@ data:
     \ {\n      if (l == r) { return 0; }\n      return &G->csr_edges[r];\n    }\n\n\
     \  private:\n    int l, r;\n    const Graph* G;\n  };\n\n  bool is_prepared()\
     \ { return prepared; }\n  constexpr bool is_directed() { return directed; }\n\n\
-    \  Graph() {}\n  Graph(int N) : N(N), M(0), prepared(0) {}\n\n  void add(int frm,\
-    \ int to, T cost = 1, int i = -1) {\n    assert(!prepared);\n    assert(0 <= frm\
-    \ && frm < N && 0 <= to && to < N);\n    if (i == -1) i = M;\n    auto e = edge_type({frm,\
+    \  Graph() : N(0), M(0), prepared(0) {}\n\n  void add(int frm, int to, T cost\
+    \ = 1, int i = -1) {\n    assert(!prepared && 0 <= frm && 0 <= to);\n    chmax(N,\
+    \ frm + 1);\n    chmax(N, to + 1);\n    if (i == -1) i = M;\n    auto e = edge_type({frm,\
     \ to, cost, i});\n    edges.eb(e);\n    ++M;\n  }\n\n  void prepare() {\n    assert(!prepared);\n\
     \    prepared = true;\n    indptr.assign(N + 1, 0);\n    for (auto&& e: edges)\
     \ {\n      indptr[e.frm + 1]++;\n      if (!directed) indptr[e.to + 1]++;\n  \
@@ -187,39 +187,39 @@ data:
     frm to cost id\");\n      for (auto&& e: edges) print(e.frm, e.to, e.cost, e.id);\n\
     \    } else {\n      print(\"indptr\", indptr);\n      print(\"frm to cost id\"\
     );\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e.frm, e.to, e.cost, e.id);\n\
-    \    }\n  }\n\n  int size() { return N; }\n};\n#line 3 \"graph/scc.hpp\"\n\ntemplate\
-    \ <typename Graph>\nstruct SCC {\n  Graph &G;\n  int N;\n  int cnt;\n  vc<int>\
-    \ comp;\n  vc<int> low;\n  vc<int> ord;\n  vc<int> visited;\n  int now = 0;\n\n\
-    \  SCC(Graph &G)\n      : G(G), N(G.N), cnt(0), comp(G.N, 0), low(G.N, 0), ord(G.N,\
-    \ -1) {\n    assert(G.is_directed());\n    assert(G.is_prepared());\n    build();\n\
-    \  }\n\n  int operator[](int v) { return comp[v]; }\n\n  void dfs(int v) {\n \
-    \   low[v] = now;\n    ord[v] = now;\n    ++now;\n    visited.eb(v);\n    for\
-    \ (auto &&[frm, to, cost, id]: G[v]) {\n      if (ord[to] == -1) {\n        dfs(to);\n\
-    \        chmin(low[v], low[to]);\n      } else {\n        chmin(low[v], ord[to]);\n\
-    \      }\n    }\n    if (low[v] == ord[v]) {\n      while (1) {\n        int u\
-    \ = visited.back();\n        visited.pop_back();\n        ord[u] = N;\n      \
-    \  comp[u] = cnt;\n        if (u == v) break;\n      }\n      ++cnt;\n    }\n\
-    \  }\n\n  void build() {\n    FOR(v, N) {\n      if (ord[v] == -1) dfs(v);\n \
-    \   }\n    FOR(v, N) comp[v] = cnt - 1 - comp[v];\n  }\n};\n#line 2 \"graph/twosat.hpp\"\
-    \nstruct TwoSat {\r\n  vc<int> values;\r\n\r\n  Graph<int, 1> G;\r\n  TwoSat(ll\
-    \ n) : G(n + n), values(n, -1) {}\r\n  void add(int a, int b) {\r\n    a = (a\
-    \ >= 0 ? 2 * a + 1 : 2 * (~a));\r\n    b = (b >= 0 ? 2 * b + 1 : 2 * (~b));\r\n\
-    \    G.add(a ^ 1, b);\r\n    G.add(b ^ 1, a);\r\n  }\r\n  void set(int a) {\r\n\
-    \    if (a >= 0)\r\n      values[a] = 1;\r\n    else\r\n      values[~a] = 0;\r\
-    \n    a = (a >= 0 ? 2 * a + 1 : 2 * (~a));\r\n    G.add(a ^ 1, a);\r\n  }\r\n\
-    \  void implies(int a, int b) { add(~a, b); }\r\n\r\n  bool calc() {\r\n    G.prepare();\r\
-    \n    ll n = len(values);\r\n    SCC<Graph<int, 1>> scc(G);\r\n    FOR(i, n) {\r\
-    \n      if (scc[2 * i] == scc[2 * i + 1]) return false;\r\n      values[i] = scc[2\
-    \ * i] < scc[2 * i + 1];\r\n    }\r\n    return true;\r\n  }\r\n};\n#line 4 \"\
-    test/library_checker/math/twosat.test.cpp\"\n\r\nvoid solve() {\r\n  STR(p, cnf);\r\
-    \n  LL(N, M);\r\n  TwoSat ts(N);\r\n  FOR(i, M) {\r\n    LL(a, b, c);\r\n    a\
-    \ = (a > 0 ? a - 1 : a);\r\n    b = (b > 0 ? b - 1 : b);\r\n    ts.add(a, b);\r\
-    \n  }\r\n  bool ok = ts.calc();\r\n  auto A = ts.values;\r\n  if (ok) {\r\n  \
-    \  print(\"s SATISFIABLE\");\r\n    vc<int> ANS(N);\r\n    FOR(i, N) ANS[i] =\
-    \ (A[i] ? i + 1 : -(i + 1));\r\n    print(\"v\", ANS, \"0\");\r\n  } else {\r\n\
-    \    print(\"s UNSATISFIABLE\");\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
-    \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  // LL(T);\r\
-    \n  ll T = 1;\r\n  FOR(_, T) solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \    }\n  }\n};\n#line 3 \"graph/scc.hpp\"\n\ntemplate <typename Graph>\nstruct\
+    \ SCC {\n  Graph &G;\n  int N;\n  int cnt;\n  vc<int> comp;\n  vc<int> low;\n\
+    \  vc<int> ord;\n  vc<int> visited;\n  int now = 0;\n\n  SCC(Graph &G)\n     \
+    \ : G(G), N(G.N), cnt(0), comp(G.N, 0), low(G.N, 0), ord(G.N, -1) {\n    assert(G.is_directed());\n\
+    \    assert(G.is_prepared());\n    build();\n  }\n\n  int operator[](int v) {\
+    \ return comp[v]; }\n\n  void dfs(int v) {\n    low[v] = now;\n    ord[v] = now;\n\
+    \    ++now;\n    visited.eb(v);\n    for (auto &&[frm, to, cost, id]: G[v]) {\n\
+    \      if (ord[to] == -1) {\n        dfs(to);\n        chmin(low[v], low[to]);\n\
+    \      } else {\n        chmin(low[v], ord[to]);\n      }\n    }\n    if (low[v]\
+    \ == ord[v]) {\n      while (1) {\n        int u = visited.back();\n        visited.pop_back();\n\
+    \        ord[u] = N;\n        comp[u] = cnt;\n        if (u == v) break;\n   \
+    \   }\n      ++cnt;\n    }\n  }\n\n  void build() {\n    FOR(v, N) {\n      if\
+    \ (ord[v] == -1) dfs(v);\n    }\n    FOR(v, N) comp[v] = cnt - 1 - comp[v];\n\
+    \  }\n};\n#line 2 \"graph/twosat.hpp\"\nstruct TwoSat {\r\n  vc<int> values;\r\
+    \n\r\n  Graph<int, 1> G;\r\n  TwoSat(ll n) : G(n + n), values(n, -1) {}\r\n  void\
+    \ add(int a, int b) {\r\n    a = (a >= 0 ? 2 * a + 1 : 2 * (~a));\r\n    b = (b\
+    \ >= 0 ? 2 * b + 1 : 2 * (~b));\r\n    G.add(a ^ 1, b);\r\n    G.add(b ^ 1, a);\r\
+    \n  }\r\n  void set(int a) {\r\n    if (a >= 0)\r\n      values[a] = 1;\r\n  \
+    \  else\r\n      values[~a] = 0;\r\n    a = (a >= 0 ? 2 * a + 1 : 2 * (~a));\r\
+    \n    G.add(a ^ 1, a);\r\n  }\r\n  void implies(int a, int b) { add(~a, b); }\r\
+    \n\r\n  bool calc() {\r\n    G.prepare();\r\n    ll n = len(values);\r\n    SCC<Graph<int,\
+    \ 1>> scc(G);\r\n    FOR(i, n) {\r\n      if (scc[2 * i] == scc[2 * i + 1]) return\
+    \ false;\r\n      values[i] = scc[2 * i] < scc[2 * i + 1];\r\n    }\r\n    return\
+    \ true;\r\n  }\r\n};\n#line 4 \"test/library_checker/math/twosat.test.cpp\"\n\r\
+    \nvoid solve() {\r\n  STR(p, cnf);\r\n  LL(N, M);\r\n  TwoSat ts(N);\r\n  FOR(i,\
+    \ M) {\r\n    LL(a, b, c);\r\n    a = (a > 0 ? a - 1 : a);\r\n    b = (b > 0 ?\
+    \ b - 1 : b);\r\n    ts.add(a, b);\r\n  }\r\n  bool ok = ts.calc();\r\n  auto\
+    \ A = ts.values;\r\n  if (ok) {\r\n    print(\"s SATISFIABLE\");\r\n    vc<int>\
+    \ ANS(N);\r\n    FOR(i, N) ANS[i] = (A[i] ? i + 1 : -(i + 1));\r\n    print(\"\
+    v\", ANS, \"0\");\r\n  } else {\r\n    print(\"s UNSATISFIABLE\");\r\n  }\r\n\
+    }\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \n  cout << setprecision(15);\r\n\r\n  // LL(T);\r\n  ll T = 1;\r\n  FOR(_, T)\
+    \ solve();\r\n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/two_sat\"\r\n#include \"\
     my_template.hpp\"\r\n#include \"graph/twosat.hpp\"\r\n\r\nvoid solve() {\r\n \
     \ STR(p, cnf);\r\n  LL(N, M);\r\n  TwoSat ts(N);\r\n  FOR(i, M) {\r\n    LL(a,\
@@ -240,7 +240,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/math/twosat.test.cpp
   requiredBy: []
-  timestamp: '2022-01-16 04:11:16+09:00'
+  timestamp: '2022-01-16 04:25:53+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/math/twosat.test.cpp
