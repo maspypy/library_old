@@ -1,31 +1,31 @@
 ---
 data:
   _extendedDependsOn:
+  - icon: ':x:'
+    path: geo/angle_sort.hpp
+    title: geo/angle_sort.hpp
+  - icon: ':x:'
+    path: geo/base.hpp
+    title: geo/base.hpp
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
-  - icon: ':heavy_check_mark:'
-    path: pds/array.hpp
-    title: pds/array.hpp
-  - icon: ':heavy_check_mark:'
-    path: pds/unionfind.hpp
-    title: pds/unionfind.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/persistent_unionfind
+    PROBLEM: https://judge.yosupo.jp/problem/sort_points_by_argument
     links:
-    - https://judge.yosupo.jp/problem/persistent_unionfind
-  bundledCode: "#line 1 \"test/library_checker/datastructure/persistent_unionfind.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/persistent_unionfind\"\r\n\
-    #line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
+    - https://judge.yosupo.jp/problem/sort_points_by_argument
+  bundledCode: "#line 1 \"test/library_checker/geometry/sort_points_by_argument.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/sort_points_by_argument\"\r\
+    \n#line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
     \n#line 1 \"other/io.hpp\"\n// based on yosupo's fastio\r\n#include <unistd.h>\r\
     \n\r\nnamespace detail {\r\ntemplate <typename T, decltype(&T::is_modint) = &T::is_modint>\r\
     \nstd::true_type check_value(int);\r\ntemplate <typename T>\r\nstd::false_type\
@@ -158,69 +158,46 @@ data:
     \  for (auto&& x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate <typename T>\nvector<int>\
     \ argsort(vector<T> &A) {\n  // stable\n  vector<int> ids(A.size());\n  iota(all(ids),\
     \ 0);\n  sort(all(ids), [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j]\
-    \ && i < j); });\n  return ids;\n}\n#line 3 \"test/library_checker/datastructure/persistent_unionfind.test.cpp\"\
-    \n\r\n#line 2 \"pds/array.hpp\"\n\r\ntemplate <typename T, int shift = 4>\r\n\
-    struct PersistentArray {\r\n  struct node;\r\n  using np = node*;\r\n  struct\
-    \ node {\r\n    T data;\r\n    np ch[1 << shift] = {};\r\n  };\r\n\r\n  static\
-    \ constexpr int mask = (1 << shift) - 1;\r\n  np root = nullptr;\r\n  PersistentArray()\
-    \ {}\r\n  np get_root() { return root; }\r\n  T get(int idx, np t) {\r\n    if\
-    \ (!t) return 0;\r\n    if (idx == 0) {\r\n      return t->data;\r\n    } else\
-    \ {\r\n      return get(idx >> shift, t->ch[idx & mask]);\r\n    }\r\n  }\r\n\r\
-    \n  void destructive_set(int idx, T val, np& t) {\r\n    // \u7834\u58CA\u7684\
-    \u306A\u5024\u306E\u5909\u66F4\u3002\u4E3B\u306B\u521D\u671F\u5316\u306B\u4F7F\
-    \u3046\u3002\r\n    if (!t) t = new node();\r\n    if (idx == 0)\r\n      t->data\
-    \ = val;\r\n    else {\r\n      destructive_set(idx >> shift, val, t->ch[idx &\
-    \ mask]);\r\n    }\r\n  }\r\n\r\n  np set(int idx, T val, const np& t) {\r\n \
-    \   // set \u3057\u305F\u3042\u3068\u306E\u6C38\u7D9A\u914D\u5217\u306E root node\
-    \ pointer \u3092\u8FD4\u3059\r\n    np res = new node();\r\n    if (t) {\r\n \
-    \     memcpy(res->ch, t->ch, sizeof(t->ch));\r\n      res->data = t->data;\r\n\
-    \    }\r\n    if (idx == 0) {\r\n      res->data = val;\r\n    } else {\r\n  \
-    \    res->ch[idx & mask] = set(idx >> shift, val, res->ch[idx & mask]);\r\n  \
-    \  }\r\n    return res;\r\n  }\r\n};\r\n#line 2 \"pds/unionfind.hpp\"\n\r\nstruct\
-    \ PersistentUnionFind {\r\n  using PA = PersistentArray<int>;\r\n  int n;\r\n\
-    \  PA data; // root OR (-size)\r\n  using np = PA::np;\r\n\r\n  PersistentUnionFind(int\
-    \ n) : n(n) {}\r\n  np init() {\r\n    np t = data.get_root();\r\n    FOR(i, n)\
-    \ data.destructive_set(i, -1, t);\r\n    return t;\r\n  }\r\n\r\n  pair<bool,\
-    \ np> merge(int x, int y, np t) {\r\n    x = root(x, t), y = root(y, t);\r\n \
-    \   if (x == y) return {0, t};\r\n    if (data.get(x, t) > data.get(y, t)) swap(x,\
-    \ y);\r\n    int new_sz = data.get(x, t) + data.get(y, t);\r\n    np set_x_sz\
-    \ = data.set(x, new_sz, t);\r\n    np set_y_par = data.set(y, x, set_x_sz);\r\n\
-    \    return {1, set_y_par};\r\n  }\r\n\r\n  int root(int x, np t) {\r\n    int\
-    \ par_or_sz = data.get(x, t);\r\n    if (par_or_sz < 0) return x;\r\n    return\
-    \ root(par_or_sz, t);\r\n  }\r\n\r\n  bool same(int x, int y, np t) { return root(x,\
-    \ t) == root(y, t); }\r\n  int size(int x, np t) { return -data.get(root(x, t),\
-    \ t); }\r\n};\n#line 5 \"test/library_checker/datastructure/persistent_unionfind.test.cpp\"\
-    \n\r\nvoid solve() {\r\n  LL(N, Q);\r\n\r\n  PersistentUnionFind uf(N);\r\n  using\
-    \ np = PersistentUnionFind::np;\r\n  vc<np> UFS;\r\n\r\n  UFS.reserve(Q + 1);\r\
-    \n  UFS.eb(uf.init());\r\n\r\n  FOR3(q, 1, Q + 1) {\r\n    LL(t, k, u, v);\r\n\
-    \    ++k;\r\n    if (t == 0) {\r\n      UFS.eb(uf.merge(u, v, UFS[k]).se);\r\n\
-    \    } else {\r\n      print(uf.same(u, v, UFS[k]));\r\n      UFS.eb(UFS[q - 1]);\r\
-    \n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/persistent_unionfind\"\r\
-    \n#include \"my_template.hpp\"\r\n\r\n#include \"pds/unionfind.hpp\"\r\n\r\nvoid\
-    \ solve() {\r\n  LL(N, Q);\r\n\r\n  PersistentUnionFind uf(N);\r\n  using np =\
-    \ PersistentUnionFind::np;\r\n  vc<np> UFS;\r\n\r\n  UFS.reserve(Q + 1);\r\n \
-    \ UFS.eb(uf.init());\r\n\r\n  FOR3(q, 1, Q + 1) {\r\n    LL(t, k, u, v);\r\n \
-    \   ++k;\r\n    if (t == 0) {\r\n      UFS.eb(uf.merge(u, v, UFS[k]).se);\r\n\
-    \    } else {\r\n      print(uf.same(u, v, UFS[k]));\r\n      UFS.eb(UFS[q - 1]);\r\
-    \n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \ && i < j); });\n  return ids;\n}\n#line 1 \"geo/base.hpp\"\nstruct Point {\n\
+    \  ll x, y;\n  Point operator-(Point p) const { return {x - p.x, y - p.y}; }\n\
+    \  ll det(Point p) const { return x * p.y - y * p.x; }\n  ll dot(Point p) const\
+    \ { return x * p.x + y * p.y; }\n  bool operator<(Point p) const {\n    if (x\
+    \ != p.x) return x < p.x;\n    return y < p.y;\n  }\n  bool operator==(Point p)\
+    \ const { return x == p.x && y == p.y; }\n  Point operator-() const { return {-x,\
+    \ -y}; }\n};\n#line 2 \"geo/angle_sort.hpp\"\n\r\nvector<int> angle_argsort(vector<Point>&\
+    \ P) {\r\n  auto is_lower = [](Point P) { return (P.y < 0) || (P.y == 0 && P.x\
+    \ > 0); };\r\n  vector<int> lower, origin, upper;\r\n  Point O = {0, 0};\r\n \
+    \ FOR(i, len(P)) {\r\n    if (P[i] == O) origin.eb(i);\r\n    elif (is_lower(P[i]))\
+    \ lower.eb(i);\r\n    else upper.eb(i);\r\n  }\r\n  sort(all(lower), [&](auto&\
+    \ i, auto& j) { return P[i].det(P[j]) > 0; });\r\n  sort(all(upper), [&](auto&\
+    \ i, auto& j) { return P[i].det(P[j]) > 0; });\r\n  auto& I = lower;\r\n  I.insert(I.end(),\
+    \ all(origin));\r\n  I.insert(I.end(), all(upper));\r\n  return I;\r\n}\r\n\r\n\
+    void angle_sort(vector<Point>& P) {\r\n  auto I = angle_argsort(P);\r\n  vc<Point>\
+    \ Q(len(P));\r\n  FOR(i, len(P)) Q[i] = P[I[i]];\r\n  P = Q;\r\n}\r\n#line 4 \"\
+    test/library_checker/geometry/sort_points_by_argument.test.cpp\"\n\r\nvoid solve()\
+    \ {\r\n  LL(N);\r\n  vc<Point> P(N);\r\n  FOR(i, N) read(P[i].x), read(P[i].y);\r\
+    \n  angle_sort(P);\r\n  FOR(i, N) print(P[i].x, P[i].y);\r\n}\r\n\r\nsigned main()\
+    \ {\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sort_points_by_argument\"\
+    \r\n#include \"my_template.hpp\"\r\n#include \"geo/angle_sort.hpp\"\r\n\r\nvoid\
+    \ solve() {\r\n  LL(N);\r\n  vc<Point> P(N);\r\n  FOR(i, N) read(P[i].x), read(P[i].y);\r\
+    \n  angle_sort(P);\r\n  FOR(i, N) print(P[i].x, P[i].y);\r\n}\r\n\r\nsigned main()\
+    \ {\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
-  - pds/unionfind.hpp
-  - pds/array.hpp
+  - geo/angle_sort.hpp
+  - geo/base.hpp
   isVerificationFile: true
-  path: test/library_checker/datastructure/persistent_unionfind.test.cpp
+  path: test/library_checker/geometry/sort_points_by_argument.test.cpp
   requiredBy: []
-  timestamp: '2022-01-15 18:21:08+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-15 18:40:41+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/library_checker/datastructure/persistent_unionfind.test.cpp
+documentation_of: test/library_checker/geometry/sort_points_by_argument.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/datastructure/persistent_unionfind.test.cpp
-- /verify/test/library_checker/datastructure/persistent_unionfind.test.cpp.html
-title: test/library_checker/datastructure/persistent_unionfind.test.cpp
+- /verify/test/library_checker/geometry/sort_points_by_argument.test.cpp
+- /verify/test/library_checker/geometry/sort_points_by_argument.test.cpp.html
+title: test/library_checker/geometry/sort_points_by_argument.test.cpp
 ---

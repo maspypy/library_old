@@ -1,33 +1,33 @@
 ---
 data:
   _extendedDependsOn:
+  - icon: ':x:'
+    path: geo/base.hpp
+    title: geo/base.hpp
+  - icon: ':x:'
+    path: geo/dynamicupperhull.hpp
+    title: geo/dynamicupperhull.hpp
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
-  - icon: ':heavy_check_mark:'
-    path: pds/array.hpp
-    title: pds/array.hpp
-  - icon: ':heavy_check_mark:'
-    path: pds/unionfind.hpp
-    title: pds/unionfind.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/persistent_unionfind
+    PROBLEM: https://judge.yosupo.jp/problem/convex_layers
     links:
-    - https://judge.yosupo.jp/problem/persistent_unionfind
-  bundledCode: "#line 1 \"test/library_checker/datastructure/persistent_unionfind.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/persistent_unionfind\"\r\n\
-    #line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
-    \n#line 1 \"other/io.hpp\"\n// based on yosupo's fastio\r\n#include <unistd.h>\r\
-    \n\r\nnamespace detail {\r\ntemplate <typename T, decltype(&T::is_modint) = &T::is_modint>\r\
+    - https://judge.yosupo.jp/problem/convex_layers
+  bundledCode: "#line 1 \"test/library_checker/geometry/convex_layers.test.cpp\"\n\
+    #define PROBLEM \"https://judge.yosupo.jp/problem/convex_layers\"\r\n#line 1 \"\
+    my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\n#line 1\
+    \ \"other/io.hpp\"\n// based on yosupo's fastio\r\n#include <unistd.h>\r\n\r\n\
+    namespace detail {\r\ntemplate <typename T, decltype(&T::is_modint) = &T::is_modint>\r\
     \nstd::true_type check_value(int);\r\ntemplate <typename T>\r\nstd::false_type\
     \ check_value(long);\r\n} // namespace detail\r\n\r\ntemplate <typename T>\r\n\
     struct is_modint : decltype(detail::check_value<T>(0)) {};\r\ntemplate <typename\
@@ -158,69 +158,105 @@ data:
     \  for (auto&& x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate <typename T>\nvector<int>\
     \ argsort(vector<T> &A) {\n  // stable\n  vector<int> ids(A.size());\n  iota(all(ids),\
     \ 0);\n  sort(all(ids), [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j]\
-    \ && i < j); });\n  return ids;\n}\n#line 3 \"test/library_checker/datastructure/persistent_unionfind.test.cpp\"\
-    \n\r\n#line 2 \"pds/array.hpp\"\n\r\ntemplate <typename T, int shift = 4>\r\n\
-    struct PersistentArray {\r\n  struct node;\r\n  using np = node*;\r\n  struct\
-    \ node {\r\n    T data;\r\n    np ch[1 << shift] = {};\r\n  };\r\n\r\n  static\
-    \ constexpr int mask = (1 << shift) - 1;\r\n  np root = nullptr;\r\n  PersistentArray()\
-    \ {}\r\n  np get_root() { return root; }\r\n  T get(int idx, np t) {\r\n    if\
-    \ (!t) return 0;\r\n    if (idx == 0) {\r\n      return t->data;\r\n    } else\
-    \ {\r\n      return get(idx >> shift, t->ch[idx & mask]);\r\n    }\r\n  }\r\n\r\
-    \n  void destructive_set(int idx, T val, np& t) {\r\n    // \u7834\u58CA\u7684\
-    \u306A\u5024\u306E\u5909\u66F4\u3002\u4E3B\u306B\u521D\u671F\u5316\u306B\u4F7F\
-    \u3046\u3002\r\n    if (!t) t = new node();\r\n    if (idx == 0)\r\n      t->data\
-    \ = val;\r\n    else {\r\n      destructive_set(idx >> shift, val, t->ch[idx &\
-    \ mask]);\r\n    }\r\n  }\r\n\r\n  np set(int idx, T val, const np& t) {\r\n \
-    \   // set \u3057\u305F\u3042\u3068\u306E\u6C38\u7D9A\u914D\u5217\u306E root node\
-    \ pointer \u3092\u8FD4\u3059\r\n    np res = new node();\r\n    if (t) {\r\n \
-    \     memcpy(res->ch, t->ch, sizeof(t->ch));\r\n      res->data = t->data;\r\n\
-    \    }\r\n    if (idx == 0) {\r\n      res->data = val;\r\n    } else {\r\n  \
-    \    res->ch[idx & mask] = set(idx >> shift, val, res->ch[idx & mask]);\r\n  \
-    \  }\r\n    return res;\r\n  }\r\n};\r\n#line 2 \"pds/unionfind.hpp\"\n\r\nstruct\
-    \ PersistentUnionFind {\r\n  using PA = PersistentArray<int>;\r\n  int n;\r\n\
-    \  PA data; // root OR (-size)\r\n  using np = PA::np;\r\n\r\n  PersistentUnionFind(int\
-    \ n) : n(n) {}\r\n  np init() {\r\n    np t = data.get_root();\r\n    FOR(i, n)\
-    \ data.destructive_set(i, -1, t);\r\n    return t;\r\n  }\r\n\r\n  pair<bool,\
-    \ np> merge(int x, int y, np t) {\r\n    x = root(x, t), y = root(y, t);\r\n \
-    \   if (x == y) return {0, t};\r\n    if (data.get(x, t) > data.get(y, t)) swap(x,\
-    \ y);\r\n    int new_sz = data.get(x, t) + data.get(y, t);\r\n    np set_x_sz\
-    \ = data.set(x, new_sz, t);\r\n    np set_y_par = data.set(y, x, set_x_sz);\r\n\
-    \    return {1, set_y_par};\r\n  }\r\n\r\n  int root(int x, np t) {\r\n    int\
-    \ par_or_sz = data.get(x, t);\r\n    if (par_or_sz < 0) return x;\r\n    return\
-    \ root(par_or_sz, t);\r\n  }\r\n\r\n  bool same(int x, int y, np t) { return root(x,\
-    \ t) == root(y, t); }\r\n  int size(int x, np t) { return -data.get(root(x, t),\
-    \ t); }\r\n};\n#line 5 \"test/library_checker/datastructure/persistent_unionfind.test.cpp\"\
-    \n\r\nvoid solve() {\r\n  LL(N, Q);\r\n\r\n  PersistentUnionFind uf(N);\r\n  using\
-    \ np = PersistentUnionFind::np;\r\n  vc<np> UFS;\r\n\r\n  UFS.reserve(Q + 1);\r\
-    \n  UFS.eb(uf.init());\r\n\r\n  FOR3(q, 1, Q + 1) {\r\n    LL(t, k, u, v);\r\n\
-    \    ++k;\r\n    if (t == 0) {\r\n      UFS.eb(uf.merge(u, v, UFS[k]).se);\r\n\
-    \    } else {\r\n      print(uf.same(u, v, UFS[k]));\r\n      UFS.eb(UFS[q - 1]);\r\
-    \n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/persistent_unionfind\"\r\
-    \n#include \"my_template.hpp\"\r\n\r\n#include \"pds/unionfind.hpp\"\r\n\r\nvoid\
-    \ solve() {\r\n  LL(N, Q);\r\n\r\n  PersistentUnionFind uf(N);\r\n  using np =\
-    \ PersistentUnionFind::np;\r\n  vc<np> UFS;\r\n\r\n  UFS.reserve(Q + 1);\r\n \
-    \ UFS.eb(uf.init());\r\n\r\n  FOR3(q, 1, Q + 1) {\r\n    LL(t, k, u, v);\r\n \
-    \   ++k;\r\n    if (t == 0) {\r\n      UFS.eb(uf.merge(u, v, UFS[k]).se);\r\n\
-    \    } else {\r\n      print(uf.same(u, v, UFS[k]));\r\n      UFS.eb(UFS[q - 1]);\r\
-    \n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \ && i < j); });\n  return ids;\n}\n#line 1 \"geo/base.hpp\"\nstruct Point {\n\
+    \  ll x, y;\n  Point operator-(Point p) const { return {x - p.x, y - p.y}; }\n\
+    \  ll det(Point p) const { return x * p.y - y * p.x; }\n  ll dot(Point p) const\
+    \ { return x * p.x + y * p.y; }\n  bool operator<(Point p) const {\n    if (x\
+    \ != p.x) return x < p.x;\n    return y < p.y;\n  }\n  bool operator==(Point p)\
+    \ const { return x == p.x && y == p.y; }\n  Point operator-() const { return {-x,\
+    \ -y}; }\n};\n#line 2 \"geo/dynamicupperhull.hpp\"\n\r\n/*\r\nhttps://codeforces.com/blog/entry/75929\r\
+    \n\u52D5\u7684\u51F8\u5305\u3002\r\nx \u5EA7\u6A19\u3067\u30BD\u30FC\u30C8\u3057\
+    \u3066\u5B8C\u5168\u4E8C\u5206\u6728\u306E\u30BB\u30B0\u6728\u306E\u5F62\u306B\
+    \u3057\u3066\u304A\u304F\u3002\r\n\u30BB\u30B0\u6728\u306E\u30DE\u30FC\u30B8\u90E8\
+    \u5206\uFF08\u6B21\u306E bridge \u3092\u6C42\u3081\u308B\uFF09\u3067\u4E8C\u5206\
+    \u63A2\u7D22\u3059\u308B\u3002\r\nbridge \u540C\u58EB\u306E 4 \u70B9\u3067\u306E\
+    \u4E0A\u5074\u51F8\u5305\u3092\u898B\u308C\u3070\u3001\u6B21\u306B\u63A2\u7D22\
+    \u3059\u308B\u3079\u304D\u533A\u9593\u5BFE\u304C\u5206\u304B\u308B\u3002\r\n\r\
+    \n\u69CB\u7BC9 O(NlogN)\u3001\u66F4\u65B0 O(Nlog^2N)\r\n\u5EA7\u6A19 10^9 \u4EE5\
+    \u4E0B\u306E\u6574\u6570\u3092\u4EEE\u5B9A\r\n*/\r\nstruct DynamicUpperHull {\r\
+    \n  struct node {\r\n    int l, r;   // \u7BC4\u56F2 (-1 if no vertex)\r\n   \
+    \ int bl, br; // bridge idx\r\n  };\r\n  int N, sz;\r\n  vc<Point> P;\r\n  vc<node>\
+    \ seg;\r\n  // \u53D7\u3051\u53D6\u3063\u305F\u30A4\u30F3\u30C7\u30C3\u30AF\u30B9\
+    \u3068\u306E\u5BFE\u5FDC\r\n  vc<int> to_original_idx, to_seg_idx;\r\n\r\n  DynamicUpperHull(vc<Point>\
+    \ P) : DynamicUpperHull(P, 0) {}\r\n  DynamicUpperHull(vc<Point> P, bool b)\r\n\
+    \      : DynamicUpperHull(P, vc<bool>(len(P), b)) {}\r\n\r\n  DynamicUpperHull(vc<Point>\
+    \ _P, vc<bool> isin) : N(len(_P)), P(_P) {\r\n    to_original_idx = argsort(P);\r\
+    \n    sort(all(P));\r\n    sz = 1;\r\n    while (sz < N) sz *= 2;\r\n    to_seg_idx.resize(N);\r\
+    \n    seg.assign(sz + sz, {-1, -1, -1, -1});\r\n    FOR(i, N) to_seg_idx[to_original_idx[i]]\
+    \ = i;\r\n    FOR(i, N) if (isin[to_original_idx[i]]) { seg[sz + i] = {i, i +\
+    \ 1, i, i}; }\r\n    FOR3_R(i, 1, sz) update(i);\r\n  }\r\n\r\n  void insert(int\
+    \ i) {\r\n    i = to_seg_idx[i];\r\n    seg[sz + i] = {i, i + 1, i, i};\r\n  \
+    \  i = (sz + i) / 2;\r\n    while (i) {\r\n      update(i);\r\n      i /= 2;\r\
+    \n    }\r\n  }\r\n\r\n  void erase(int i) {\r\n    i = to_seg_idx[i];\r\n    seg[sz\
+    \ + i] = {-1, -1, -1, -1};\r\n    i = (sz + i) / 2;\r\n    while (i) {\r\n   \
+    \   update(i);\r\n      i /= 2;\r\n    }\r\n  }\r\n\r\n  inline bool exist(int\
+    \ i) { return seg[i].r != -1; }\r\n\r\n  void update(int i) {\r\n    if (!exist(2\
+    \ * i + 0) && !exist(2 * i + 1)) {\r\n      seg[i].r = -1;\r\n      return;\r\n\
+    \    }\r\n    if (!exist(2 * i + 0)) {\r\n      seg[i] = seg[2 * i + 1];\r\n \
+    \     return;\r\n    }\r\n    if (!exist(2 * i + 1)) {\r\n      seg[i] = seg[2\
+    \ * i + 0];\r\n      return;\r\n    }\r\n    int p = 2 * i, q = 2 * i + 1;\r\n\
+    \    ll X = P[seg[q].l].x;\r\n    while (p < sz || q < sz) {\r\n      if (p <\
+    \ sz && !exist(2 * p + 0)) {\r\n        p = 2 * p + 1;\r\n        continue;\r\n\
+    \      }\r\n      if (p < sz && !exist(2 * p + 1)) {\r\n        p = 2 * p + 0;\r\
+    \n        continue;\r\n      }\r\n      if (q < sz && !exist(2 * q + 0)) {\r\n\
+    \        q = 2 * q + 1;\r\n        continue;\r\n      }\r\n      if (q < sz &&\
+    \ !exist(2 * q + 1)) {\r\n        q = 2 * q + 0;\r\n        continue;\r\n    \
+    \  }\r\n      int a = seg[p].bl, b = seg[p].br, c = seg[q].bl, d = seg[q].br;\r\
+    \n      if (a != b && (P[b] - P[a]).det(P[c] - P[a]) > 0) p = p * 2 + 0;\r\n \
+    \     elif (c != d && (P[c] - P[b]).det(P[d] - P[b]) > 0) q = 2 * q + 1;\r\n \
+    \     elif (a == b) q = 2 * q + 0;\r\n      elif (c == d) p = 2 * p + 1;\r\n \
+    \     else {\r\n        i128 c1 = (P[b] - P[a]).det(P[c] - P[a]);\r\n        i128\
+    \ c2 = (P[a] - P[b]).det(P[d] - P[b]);\r\n        if (c1 + c2 == 0 || c1 * P[d].x\
+    \ + c2 * P[c].x < X * (c1 + c2)) {\r\n          p = 2 * p + 1;\r\n        } else\
+    \ {\r\n          q = 2 * q + 0;\r\n        }\r\n      }\r\n    }\r\n    seg[i].l\
+    \ = seg[2 * i].l, seg[i].r = seg[2 * i + 1].r;\r\n    seg[i].bl = seg[p].l, seg[i].br\
+    \ = seg[q].l;\r\n  }\r\n\r\n  vc<int> get() {\r\n    // output sensitive complexity\r\
+    \n    vc<int> res;\r\n    auto dfs = [&](auto self, int k, int l, int r) -> void\
+    \ {\r\n      if (!exist(k) || l >= r) return;\r\n      if (k >= sz) {\r\n    \
+    \    res.eb(seg[k].l);\r\n        return;\r\n      }\r\n      if (!exist(2 * k\
+    \ + 0)) return self(self, 2 * k + 1, l, r);\r\n      if (!exist(2 * k + 1)) return\
+    \ self(self, 2 * k + 0, l, r);\r\n      if (r <= seg[k].bl) return self(self,\
+    \ 2 * k + 0, l, r);\r\n      if (seg[k].br <= l) return self(self, 2 * k + 1,\
+    \ l, r);\r\n      self(self, 2 * k + 0, l, seg[k].bl + 1);\r\n      self(self,\
+    \ 2 * k + 1, seg[k].br, r);\r\n    };\r\n    dfs(dfs, 1, 0, N);\r\n    for (auto&&\
+    \ i: res) i = to_original_idx[i];\r\n    return res;\r\n  }\r\n\r\n  void debug()\
+    \ {\r\n    print(\"points\");\r\n    FOR(i, len(P)) print(i, P[i].x, P[i].y);\r\
+    \n    print(\"seg\");\r\n    FOR(i, len(seg)) print(i, seg[i].l, seg[i].r, seg[i].bl,\
+    \ seg[i].br);\r\n    print(\"get\");\r\n    print(get());\r\n  }\r\n};\r\n#line\
+    \ 4 \"test/library_checker/geometry/convex_layers.test.cpp\"\n\r\nvoid solve()\
+    \ {\r\n  LL(N);\r\n  vc<Point> pts(N);\r\n  FOR(i, N) read(pts[i].x), read(pts[i].y);\r\
+    \n  DynamicUpperHull DUH(pts, 1);\r\n  FOR(i, N) pts[i] = -pts[i];\r\n  DynamicUpperHull\
+    \ DLH(pts, 1);\r\n  vc<int> ANS(N, -1);\r\n  int done = 0;\r\n  int k = 0;\r\n\
+    \  while (done < N) {\r\n    ++k;\r\n    auto A = DUH.get();\r\n    auto B = DLH.get();\r\
+    \n    A.insert(A.end(), all(B));\r\n    for (auto&& i: A)\r\n      if (ANS[i]\
+    \ == -1) {\r\n        ++done;\r\n        ANS[i] = k;\r\n        DUH.erase(i);\r\
+    \n        DLH.erase(i);\r\n      }\r\n  }\r\n  for (auto&& x: ANS) print(x);\r\
+    \n}\r\n\r\nsigned main() {\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convex_layers\"\r\n#include\
+    \ \"my_template.hpp\"\r\n#include \"geo/dynamicupperhull.hpp\"\r\n\r\nvoid solve()\
+    \ {\r\n  LL(N);\r\n  vc<Point> pts(N);\r\n  FOR(i, N) read(pts[i].x), read(pts[i].y);\r\
+    \n  DynamicUpperHull DUH(pts, 1);\r\n  FOR(i, N) pts[i] = -pts[i];\r\n  DynamicUpperHull\
+    \ DLH(pts, 1);\r\n  vc<int> ANS(N, -1);\r\n  int done = 0;\r\n  int k = 0;\r\n\
+    \  while (done < N) {\r\n    ++k;\r\n    auto A = DUH.get();\r\n    auto B = DLH.get();\r\
+    \n    A.insert(A.end(), all(B));\r\n    for (auto&& i: A)\r\n      if (ANS[i]\
+    \ == -1) {\r\n        ++done;\r\n        ANS[i] = k;\r\n        DUH.erase(i);\r\
+    \n        DLH.erase(i);\r\n      }\r\n  }\r\n  for (auto&& x: ANS) print(x);\r\
+    \n}\r\n\r\nsigned main() {\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
-  - pds/unionfind.hpp
-  - pds/array.hpp
+  - geo/dynamicupperhull.hpp
+  - geo/base.hpp
   isVerificationFile: true
-  path: test/library_checker/datastructure/persistent_unionfind.test.cpp
+  path: test/library_checker/geometry/convex_layers.test.cpp
   requiredBy: []
-  timestamp: '2022-01-15 18:21:08+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-15 18:40:41+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/library_checker/datastructure/persistent_unionfind.test.cpp
+documentation_of: test/library_checker/geometry/convex_layers.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/datastructure/persistent_unionfind.test.cpp
-- /verify/test/library_checker/datastructure/persistent_unionfind.test.cpp.html
-title: test/library_checker/datastructure/persistent_unionfind.test.cpp
+- /verify/test/library_checker/geometry/convex_layers.test.cpp
+- /verify/test/library_checker/geometry/convex_layers.test.cpp.html
+title: test/library_checker/geometry/convex_layers.test.cpp
 ---
