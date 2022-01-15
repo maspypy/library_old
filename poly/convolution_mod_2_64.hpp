@@ -1,5 +1,5 @@
 #include "poly/convolution.hpp"
-vector<ull> convolution_mod_2_64(const vector<ull>& a, const vector<ull>& b) {
+vector<u64> convolution_mod_2_64(const vector<u64>& a, const vector<u64>& b) {
   int n = len(a), m = len(b);
   if (!n || !m) return {};
   if (min(n, m) <= 60) return convolution_naive(a, b);
@@ -39,7 +39,7 @@ vector<ull> convolution_mod_2_64(const vector<ull>& a, const vector<ull>& b) {
                   inv30 = inv31 / M3(P0);
   static const M4 inv43 = M4(1) / M4(P3), inv42 = inv43 / M4(P2),
                   inv41 = inv42 / M4(P1), inv40 = inv41 / M4(P0);
-  vc<ull> c(len(a0));
+  vc<u64> c(len(a0));
   FOR(i, len(c)) {
     ll x0 = a0[i].val;
     ll x1 = (M1(a1[i] - x0) * inv10).val;
@@ -48,7 +48,7 @@ vector<ull> convolution_mod_2_64(const vector<ull>& a, const vector<ull>& b) {
     ll x4 = (M4(a4[i] - x0) * inv40 - M4(x1) * inv41 - M4(x2) * inv42
              - M4(x3) * inv43)
                 .val;
-    c[i] = x0 + P0 * (x1 + P1 * (x2 + P2 * (x3 + P3 * ull(x4))));
+    c[i] = x0 + P0 * (x1 + P1 * (x2 + P2 * (x3 + P3 * u64(x4))));
   }
   return c;
 }
