@@ -5,8 +5,8 @@
 
 void solve() {
   LL(N, M);
-  VEC(ull, A, N);
-  VEC(ull, B, M);
+  VEC(u64, A, N);
+  VEC(u64, B, M);
   auto C = convolution_mod_2_64(A, B);
   print(C);
 }

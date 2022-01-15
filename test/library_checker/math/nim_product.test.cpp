@@ -3,7 +3,7 @@
 #include "other/nim_product.hpp"
 
 void solve() {
-  ull a, b;
+  u64 a, b;
   scanner.read(a, b);
   print(nim_product(a, b));
 }
