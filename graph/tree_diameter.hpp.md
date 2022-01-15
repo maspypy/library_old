@@ -4,10 +4,13 @@ data:
   - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  _extendedRequiredBy:
   - icon: ':x:'
-    path: graph/tree_diameter.hpp
-    title: graph/tree_diameter.hpp
+    path: graph/bfs01.hpp
+    title: graph/bfs01.hpp
+  - icon: ':question:'
+    path: graph/restore_path.hpp
+    title: graph/restore_path.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':x:'
     path: test/library_checker/tree/tree_diameter.test.cpp
@@ -51,30 +54,36 @@ data:
     \ == -1 || dist[e.to] > dist[e.frm] + e.cost) {\n        dist[e.to] = dist[e.frm]\
     \ + e.cost;\n        par[e.to] = e.frm;\n        if (e.cost == 0)\n          que.push_front(e.to);\n\
     \        else\n          que.push_back(e.to);\n      }\n    }\n  }\n  return {dist,\
-    \ par};\n}\n"
-  code: "#pragma once\n#include \"graph/base.hpp\"\n\ntemplate<typename T>\npair<vc<T>,\
-    \ vc<int>> bfs01(Graph<T>& G, ll v) {\n  assert(G.is_prepared());\n  int N = G.N;\n\
-    \  vc<T> dist(N, -1);\n  vc<int> par(N, -1);\n  deque<int> que;\n\n  dist[v] =\
-    \ 0;\n  que.push_front(v);\n  while (!que.empty()) {\n    auto v = que.front();\n\
-    \    que.pop_front();\n    for (auto&& e : G[v]) {\n      if (dist[e.to] == -1\
-    \ || dist[e.to] > dist[e.frm] + e.cost) {\n        dist[e.to] = dist[e.frm] +\
-    \ e.cost;\n        par[e.to] = e.frm;\n        if (e.cost == 0)\n          que.push_front(e.to);\n\
-    \        else\n          que.push_back(e.to);\n      }\n    }\n  }\n  return {dist,\
-    \ par};\n}"
+    \ par};\n}\n#line 1 \"graph/restore_path.hpp\"\nvector<int> restore_path(vector<int>\
+    \ par, int t){\r\n  vector<int> pth = {t};\r\n  while (par[pth.back()] != -1)\
+    \ pth.eb(par[pth.back()]);\r\n  reverse(all(pth));\r\n  return pth;\r\n}\n#line\
+    \ 3 \"graph/tree_diameter.hpp\"\n\r\ntemplate <typename T>\r\npair<T, vc<int>>\
+    \ tree_diameter(Graph<T>& G) {\r\n  assert(G.is_prepared());\r\n  int A, B;\r\n\
+    \  {\r\n    auto [dist, par] = bfs01(G, 0);\r\n    A = max_element(all(dist))\
+    \ - dist.begin();\r\n  }\r\n  auto [dist, par] = bfs01(G, A);\r\n  B = max_element(all(dist))\
+    \ - dist.begin();\r\n  vc<int> P = restore_path(par, B);\r\n  return {dist[B],\
+    \ P};\r\n}\r\n"
+  code: "#include \"graph/bfs01.hpp\"\r\n#include \"graph/restore_path.hpp\"\r\n\r\
+    \ntemplate <typename T>\r\npair<T, vc<int>> tree_diameter(Graph<T>& G) {\r\n \
+    \ assert(G.is_prepared());\r\n  int A, B;\r\n  {\r\n    auto [dist, par] = bfs01(G,\
+    \ 0);\r\n    A = max_element(all(dist)) - dist.begin();\r\n  }\r\n  auto [dist,\
+    \ par] = bfs01(G, A);\r\n  B = max_element(all(dist)) - dist.begin();\r\n  vc<int>\
+    \ P = restore_path(par, B);\r\n  return {dist[B], P};\r\n}\r\n"
   dependsOn:
+  - graph/bfs01.hpp
   - graph/base.hpp
+  - graph/restore_path.hpp
   isVerificationFile: false
-  path: graph/bfs01.hpp
-  requiredBy:
-  - graph/tree_diameter.hpp
+  path: graph/tree_diameter.hpp
+  requiredBy: []
   timestamp: '2022-01-15 19:31:04+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/tree/tree_diameter.test.cpp
-documentation_of: graph/bfs01.hpp
+documentation_of: graph/tree_diameter.hpp
 layout: document
 redirect_from:
-- /library/graph/bfs01.hpp
-- /library/graph/bfs01.hpp.html
-title: graph/bfs01.hpp
+- /library/graph/tree_diameter.hpp
+- /library/graph/tree_diameter.hpp.html
+title: graph/tree_diameter.hpp
 ---

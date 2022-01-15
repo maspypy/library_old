@@ -2,6 +2,18 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
+    path: graph/base.hpp
+    title: graph/base.hpp
+  - icon: ':x:'
+    path: graph/bfs01.hpp
+    title: graph/bfs01.hpp
+  - icon: ':question:'
+    path: graph/restore_path.hpp
+    title: graph/restore_path.hpp
+  - icon: ':x:'
+    path: graph/tree_diameter.hpp
+    title: graph/tree_diameter.hpp
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   - icon: ':question:'
@@ -9,35 +21,38 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
-  _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _isVerificationFailed: true
+  _pathExtension: cpp
+  _verificationStatusIcon: ':x:'
   attributes:
+    '*NOT_SPECIAL_COMMENTS*': ''
+    PROBLEM: https://judge.yosupo.jp/problem/tree_diameter
     links:
-    - https://www.ioi-jp.org/camp/2017/2017-sp_camp-hide.pdf
-  bundledCode: "#line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace\
-    \ std;\n\n#line 1 \"other/io.hpp\"\n// based on yosupo's fastio\r\n#include <unistd.h>\r\
-    \n\r\nnamespace detail {\r\ntemplate <typename T, decltype(&T::is_modint) = &T::is_modint>\r\
-    \nstd::true_type check_value(int);\r\ntemplate <typename T>\r\nstd::false_type\
-    \ check_value(long);\r\n} // namespace detail\r\n\r\ntemplate <typename T>\r\n\
-    struct is_modint : decltype(detail::check_value<T>(0)) {};\r\ntemplate <typename\
-    \ T>\r\nusing is_modint_t = enable_if_t<is_modint<T>::value>;\r\ntemplate <typename\
-    \ T>\r\nusing is_not_modint_t = enable_if_t<!is_modint<T>::value>;\r\n\r\nstruct\
-    \ Scanner {\r\n  int fd = -1;\r\n  char line[(1 << 15) + 1];\r\n  size_t st =\
-    \ 0, ed = 0;\r\n  void reread() {\r\n    memmove(line, line + st, ed - st);\r\n\
-    \    ed -= st;\r\n    st = 0;\r\n    ed += ::read(fd, line + ed, (1 << 15) - ed);\r\
-    \n    line[ed] = '\\0';\r\n  }\r\n  bool succ() {\r\n    while (true) {\r\n  \
-    \    if (st == ed) {\r\n        reread();\r\n        if (st == ed) return false;\r\
-    \n      }\r\n      while (st != ed && isspace(line[st])) st++;\r\n      if (st\
-    \ != ed) break;\r\n    }\r\n    if (ed - st <= 50) {\r\n      bool sep = false;\r\
-    \n      for (size_t i = st; i < ed; i++) {\r\n        if (isspace(line[i])) {\r\
-    \n          sep = true;\r\n          break;\r\n        }\r\n      }\r\n      if\
-    \ (!sep) reread();\r\n    }\r\n    return true;\r\n  }\r\n  template <class T,\
-    \ enable_if_t<is_same<T, string>::value, int> = 0>\r\n  bool read_single(T &ref)\
-    \ {\r\n    if (!succ()) return false;\r\n    while (true) {\r\n      size_t sz\
-    \ = 0;\r\n      while (st + sz < ed && !isspace(line[st + sz])) sz++;\r\n    \
-    \  ref.append(line + st, sz);\r\n      st += sz;\r\n      if (!sz || st != ed)\
-    \ break;\r\n      reread();\r\n    }\r\n    return true;\r\n  }\r\n  template\
+    - https://judge.yosupo.jp/problem/tree_diameter
+  bundledCode: "#line 1 \"test/library_checker/tree/tree_diameter.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/tree_diameter\"\r\n#line 1 \"my_template.hpp\"\
+    \n#include <bits/stdc++.h>\n\nusing namespace std;\n\n#line 1 \"other/io.hpp\"\
+    \n// based on yosupo's fastio\r\n#include <unistd.h>\r\n\r\nnamespace detail {\r\
+    \ntemplate <typename T, decltype(&T::is_modint) = &T::is_modint>\r\nstd::true_type\
+    \ check_value(int);\r\ntemplate <typename T>\r\nstd::false_type check_value(long);\r\
+    \n} // namespace detail\r\n\r\ntemplate <typename T>\r\nstruct is_modint : decltype(detail::check_value<T>(0))\
+    \ {};\r\ntemplate <typename T>\r\nusing is_modint_t = enable_if_t<is_modint<T>::value>;\r\
+    \ntemplate <typename T>\r\nusing is_not_modint_t = enable_if_t<!is_modint<T>::value>;\r\
+    \n\r\nstruct Scanner {\r\n  int fd = -1;\r\n  char line[(1 << 15) + 1];\r\n  size_t\
+    \ st = 0, ed = 0;\r\n  void reread() {\r\n    memmove(line, line + st, ed - st);\r\
+    \n    ed -= st;\r\n    st = 0;\r\n    ed += ::read(fd, line + ed, (1 << 15) -\
+    \ ed);\r\n    line[ed] = '\\0';\r\n  }\r\n  bool succ() {\r\n    while (true)\
+    \ {\r\n      if (st == ed) {\r\n        reread();\r\n        if (st == ed) return\
+    \ false;\r\n      }\r\n      while (st != ed && isspace(line[st])) st++;\r\n \
+    \     if (st != ed) break;\r\n    }\r\n    if (ed - st <= 50) {\r\n      bool\
+    \ sep = false;\r\n      for (size_t i = st; i < ed; i++) {\r\n        if (isspace(line[i]))\
+    \ {\r\n          sep = true;\r\n          break;\r\n        }\r\n      }\r\n \
+    \     if (!sep) reread();\r\n    }\r\n    return true;\r\n  }\r\n  template <class\
+    \ T, enable_if_t<is_same<T, string>::value, int> = 0>\r\n  bool read_single(T\
+    \ &ref) {\r\n    if (!succ()) return false;\r\n    while (true) {\r\n      size_t\
+    \ sz = 0;\r\n      while (st + sz < ed && !isspace(line[st + sz])) sz++;\r\n \
+    \     ref.append(line + st, sz);\r\n      st += sz;\r\n      if (!sz || st !=\
+    \ ed) break;\r\n      reread();\r\n    }\r\n    return true;\r\n  }\r\n  template\
     \ <class T, enable_if_t<is_integral<T>::value, int> = 0>\r\n  bool read_single(T\
     \ &ref) {\r\n    if (!succ()) return false;\r\n    bool neg = false;\r\n    if\
     \ (line[st] == '-') {\r\n      neg = true;\r\n      st++;\r\n    }\r\n    ref\
@@ -148,46 +163,76 @@ data:
     \  for (auto&& x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate <typename T>\nvector<int>\
     \ argsort(vector<T> &A) {\n  // stable\n  vector<int> ids(A.size());\n  iota(all(ids),\
     \ 0);\n  sort(all(ids), [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j]\
-    \ && i < j); });\n  return ids;\n}\n#line 2 \"geo/geometry.hpp\"\n\ntemplate <typename\
-    \ T>\nstruct xy {\n  T x, y;\n  xy() {}\n  xy(pair<T, T> p) : x(p.fi), y(p.se)\
-    \ {}\n  xy(T x, T y) : x(x), y(y) {}\n  xy operator+(const xy rhs) { return xy(x\
-    \ + rhs.x, y + rhs.y); }\n  xy operator-(const xy rhs) { return xy(x - rhs.x,\
-    \ y - rhs.y); }\n  xy operator*(const T k) { return xy(x * k, y * k); }\n  T dot(const\
-    \ xy rhs) { return x * rhs.x + y * rhs.y; }\n  T det(const xy rhs) { return x\
-    \ * rhs.y - y * rhs.x; }\n};\n\ntemplate <typename T>\nint iSP(xy<T> A, xy<T>\
-    \ B, xy<T> C) {\n  // https://www.ioi-jp.org/camp/2017/2017-sp_camp-hide.pdf\n\
-    \  T d = (B - A).det(C - A);\n  if (d > 0) return 1;\n  if (d < 0) return -1;\n\
-    \  if ((B - A).dot(C - A) < 0) return -2;\n  if ((A - B).dot(C - B) < 0) return\
-    \ 2;\n  return 0;\n}\n\ntemplate <typename T>\nbool intersect_segment(xy<T> A,\
-    \ xy<T> B, xy<T> C, xy<T> D, bool strict = false) {\n  assert(!strict);\n  bool\
-    \ b1 = iSP(A, B, C) * iSP(A, B, D) <= 0;\n  bool b2 = iSP(C, D, A) * iSP(C, D,\
-    \ B) <= 0;\n  return b1 && b2;\n}\n"
-  code: "#include \"my_template.hpp\"\n\ntemplate <typename T>\nstruct xy {\n  T x,\
-    \ y;\n  xy() {}\n  xy(pair<T, T> p) : x(p.fi), y(p.se) {}\n  xy(T x, T y) : x(x),\
-    \ y(y) {}\n  xy operator+(const xy rhs) { return xy(x + rhs.x, y + rhs.y); }\n\
-    \  xy operator-(const xy rhs) { return xy(x - rhs.x, y - rhs.y); }\n  xy operator*(const\
-    \ T k) { return xy(x * k, y * k); }\n  T dot(const xy rhs) { return x * rhs.x\
-    \ + y * rhs.y; }\n  T det(const xy rhs) { return x * rhs.y - y * rhs.x; }\n};\n\
-    \ntemplate <typename T>\nint iSP(xy<T> A, xy<T> B, xy<T> C) {\n  // https://www.ioi-jp.org/camp/2017/2017-sp_camp-hide.pdf\n\
-    \  T d = (B - A).det(C - A);\n  if (d > 0) return 1;\n  if (d < 0) return -1;\n\
-    \  if ((B - A).dot(C - A) < 0) return -2;\n  if ((A - B).dot(C - B) < 0) return\
-    \ 2;\n  return 0;\n}\n\ntemplate <typename T>\nbool intersect_segment(xy<T> A,\
-    \ xy<T> B, xy<T> C, xy<T> D, bool strict = false) {\n  assert(!strict);\n  bool\
-    \ b1 = iSP(A, B, C) * iSP(A, B, D) <= 0;\n  bool b2 = iSP(C, D, A) * iSP(C, D,\
-    \ B) <= 0;\n  return b1 && b2;\n}"
+    \ && i < j); });\n  return ids;\n}\n#line 2 \"graph/base.hpp\"\n\ntemplate <typename\
+    \ T>\nstruct Edge {\n  int frm, to;\n  T cost;\n  int id;\n};\n\ntemplate <typename\
+    \ T = int, bool directed = false>\nstruct Graph {\n  int N, M;\n  using cost_type\
+    \ = T;\n  using edge_type = Edge<T>;\n  vector<edge_type> edges;\n  vector<int>\
+    \ indptr;\n  vector<edge_type> csr_edges;\n  bool prepared;\n\n  class OutgoingEdges\
+    \ {\n  public:\n    OutgoingEdges(const Graph* G, int l, int r) : G(G), l(l),\
+    \ r(r) {}\n\n    const edge_type* begin() const {\n      if (l == r) { return\
+    \ 0; }\n      return &G->csr_edges[l];\n    }\n\n    const edge_type* end() const\
+    \ {\n      if (l == r) { return 0; }\n      return &G->csr_edges[r];\n    }\n\n\
+    \  private:\n    int l, r;\n    const Graph* G;\n  };\n\n  bool is_prepared()\
+    \ { return prepared; }\n  constexpr bool is_directed() { return directed; }\n\n\
+    \  Graph() {}\n  Graph(int N) : N(N), M(0), prepared(0) {}\n\n  void add(int frm,\
+    \ int to, T cost = 1, int i = -1) {\n    assert(!prepared);\n    assert(0 <= frm\
+    \ && frm < N && 0 <= to && to < N);\n    if (i == -1) i = M;\n    auto e = edge_type({frm,\
+    \ to, cost, i});\n    edges.eb(e);\n    ++M;\n  }\n\n  void prepare() {\n    assert(!prepared);\n\
+    \    prepared = true;\n    indptr.assign(N + 1, 0);\n    for (auto&& e: edges)\
+    \ {\n      indptr[e.frm + 1]++;\n      if (!directed) indptr[e.to + 1]++;\n  \
+    \  }\n    FOR(v, N) indptr[v + 1] += indptr[v];\n    auto counter = indptr;\n\
+    \    csr_edges.resize(indptr.back() + 1);\n    for (auto&& e: edges) {\n     \
+    \ csr_edges[counter[e.frm]++] = e;\n      if (!directed)\n        csr_edges[counter[e.to]++]\
+    \ = edge_type({e.to, e.frm, e.cost, e.id});\n    }\n  }\n\n  OutgoingEdges operator[](int\
+    \ v) const {\n    assert(prepared);\n    return {this, indptr[v], indptr[v + 1]};\n\
+    \  }\n\n  void debug() {\n    print(\"Graph\");\n    if (!prepared) {\n      print(\"\
+    frm to cost id\");\n      for (auto&& e: edges) print(e.frm, e.to, e.cost, e.id);\n\
+    \    } else {\n      print(\"indptr\", indptr);\n      print(\"frm to cost id\"\
+    );\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e.frm, e.to, e.cost, e.id);\n\
+    \    }\n  }\n\n  int size() { return N; }\n};\n#line 3 \"graph/bfs01.hpp\"\n\n\
+    template<typename T>\npair<vc<T>, vc<int>> bfs01(Graph<T>& G, ll v) {\n  assert(G.is_prepared());\n\
+    \  int N = G.N;\n  vc<T> dist(N, -1);\n  vc<int> par(N, -1);\n  deque<int> que;\n\
+    \n  dist[v] = 0;\n  que.push_front(v);\n  while (!que.empty()) {\n    auto v =\
+    \ que.front();\n    que.pop_front();\n    for (auto&& e : G[v]) {\n      if (dist[e.to]\
+    \ == -1 || dist[e.to] > dist[e.frm] + e.cost) {\n        dist[e.to] = dist[e.frm]\
+    \ + e.cost;\n        par[e.to] = e.frm;\n        if (e.cost == 0)\n          que.push_front(e.to);\n\
+    \        else\n          que.push_back(e.to);\n      }\n    }\n  }\n  return {dist,\
+    \ par};\n}\n#line 1 \"graph/restore_path.hpp\"\nvector<int> restore_path(vector<int>\
+    \ par, int t){\r\n  vector<int> pth = {t};\r\n  while (par[pth.back()] != -1)\
+    \ pth.eb(par[pth.back()]);\r\n  reverse(all(pth));\r\n  return pth;\r\n}\n#line\
+    \ 3 \"graph/tree_diameter.hpp\"\n\r\ntemplate <typename T>\r\npair<T, vc<int>>\
+    \ tree_diameter(Graph<T>& G) {\r\n  assert(G.is_prepared());\r\n  int A, B;\r\n\
+    \  {\r\n    auto [dist, par] = bfs01(G, 0);\r\n    A = max_element(all(dist))\
+    \ - dist.begin();\r\n  }\r\n  auto [dist, par] = bfs01(G, A);\r\n  B = max_element(all(dist))\
+    \ - dist.begin();\r\n  vc<int> P = restore_path(par, B);\r\n  return {dist[B],\
+    \ P};\r\n}\r\n#line 4 \"test/library_checker/tree/tree_diameter.test.cpp\"\n\r\
+    \nvoid solve() {\r\n  LL(N);\r\n  Graph<ll> G(N);\r\n  FOR_(N - 1) {\r\n    LL(a,\
+    \ b, c);\r\n    G.add(a, b, c);\r\n  }\r\n  G.prepare();\r\n  auto [diam, P] =\
+    \ tree_diameter(G);\r\n  print(diam, len(P));\r\n  print(P);\r\n}\r\n\r\nsigned\
+    \ main() {\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/tree_diameter\"\r\n#include\
+    \ \"my_template.hpp\"\r\n#include \"graph/tree_diameter.hpp\"\r\n\r\nvoid solve()\
+    \ {\r\n  LL(N);\r\n  Graph<ll> G(N);\r\n  FOR_(N - 1) {\r\n    LL(a, b, c);\r\n\
+    \    G.add(a, b, c);\r\n  }\r\n  G.prepare();\r\n  auto [diam, P] = tree_diameter(G);\r\
+    \n  print(diam, len(P));\r\n  print(P);\r\n}\r\n\r\nsigned main() {\r\n  solve();\r\
+    \n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
-  isVerificationFile: false
-  path: geo/geometry.hpp
+  - graph/tree_diameter.hpp
+  - graph/bfs01.hpp
+  - graph/base.hpp
+  - graph/restore_path.hpp
+  isVerificationFile: true
+  path: test/library_checker/tree/tree_diameter.test.cpp
   requiredBy: []
-  timestamp: '2022-01-15 18:21:08+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
+  timestamp: '2022-01-15 19:31:04+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: geo/geometry.hpp
+documentation_of: test/library_checker/tree/tree_diameter.test.cpp
 layout: document
 redirect_from:
-- /library/geo/geometry.hpp
-- /library/geo/geometry.hpp.html
-title: geo/geometry.hpp
+- /verify/test/library_checker/tree/tree_diameter.test.cpp
+- /verify/test/library_checker/tree/tree_diameter.test.cpp.html
+title: test/library_checker/tree/tree_diameter.test.cpp
 ---

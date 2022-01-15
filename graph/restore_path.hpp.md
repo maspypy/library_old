@@ -1,14 +1,20 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':x:'
+    path: graph/tree_diameter.hpp
+    title: graph/tree_diameter.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/shortest_path.test.cpp
     title: test/library_checker/graph/shortest_path.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: test/library_checker/tree/tree_diameter.test.cpp
+    title: test/library_checker/tree/tree_diameter.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 1 \"graph/restore_path.hpp\"\nvector<int> restore_path(vector<int>\
@@ -20,11 +26,13 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: graph/restore_path.hpp
-  requiredBy: []
+  requiredBy:
+  - graph/tree_diameter.hpp
   timestamp: '2022-01-01 12:00:30+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/library_checker/graph/shortest_path.test.cpp
+  - test/library_checker/tree/tree_diameter.test.cpp
 documentation_of: graph/restore_path.hpp
 layout: document
 redirect_from:
