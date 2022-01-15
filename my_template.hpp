@@ -62,17 +62,17 @@ using pqg = priority_queue<T, vector<T>, greater<T>>;
 #define UNIQUE(x) sort(all(x)), x.erase(unique(all(x)), x.end())
 
 int popcnt(int x) { return __builtin_popcount(x); }
-int popcnt(uint x) { return __builtin_popcount(x); }
+int popcnt(u32 x) { return __builtin_popcount(x); }
 int popcnt(ll x) { return __builtin_popcountll(x); }
 int popcnt(u64 x) { return __builtin_popcountll(x); }
 // (0, 1, 2, 3, 4) -> (-1, 0, 1, 1, 2)
 int topbit(int x) { return 31 - __builtin_clz(x); }
-int topbit(uint x) { return 31 - __builtin_clz(x); }
+int topbit(u32 x) { return 31 - __builtin_clz(x); }
 int topbit(ll x) { return 63 - __builtin_clzll(x); }
 int topbit(u64 x) { return 63 - __builtin_clzll(x); }
 // (0, 1, 2, 3, 4) -> (32 or 64, 0, 1, 0, 2)
 int lowbit(int x) { return 31 - __builtin_clz(x); }
-int lowbit(uint x) { return 31 - __builtin_clz(x); }
+int lowbit(u32 x) { return 31 - __builtin_clz(x); }
 int lowbit(ll x) { return 63 - __builtin_clzll(x); }
 int lowbit(u64 x) { return 63 - __builtin_clzll(x); }
 
