@@ -6,11 +6,11 @@ using namespace std;
 
 
 using ll = long long;
-using ll8 = __int128;
 using pi = pair<ll, ll>;
 using vi = vector<ll>;
-using uint = unsigned int;
-using ull = unsigned long long;
+using u32 = unsigned int;
+using u64 = unsigned long long;
+using i128 = __int128;
 
 template <class T>
 using vc = vector<T>;
@@ -64,17 +64,17 @@ using pqg = priority_queue<T, vector<T>, greater<T>>;
 int popcnt(int x) { return __builtin_popcount(x); }
 int popcnt(uint x) { return __builtin_popcount(x); }
 int popcnt(ll x) { return __builtin_popcountll(x); }
-int popcnt(ull x) { return __builtin_popcountll(x); }
+int popcnt(u64 x) { return __builtin_popcountll(x); }
 // (0, 1, 2, 3, 4) -> (-1, 0, 1, 1, 2)
 int topbit(int x) { return 31 - __builtin_clz(x); }
 int topbit(uint x) { return 31 - __builtin_clz(x); }
 int topbit(ll x) { return 63 - __builtin_clzll(x); }
-int topbit(ull x) { return 63 - __builtin_clzll(x); }
+int topbit(u64 x) { return 63 - __builtin_clzll(x); }
 // (0, 1, 2, 3, 4) -> (32 or 64, 0, 1, 0, 2)
 int lowbit(int x) { return 31 - __builtin_clz(x); }
 int lowbit(uint x) { return 31 - __builtin_clz(x); }
 int lowbit(ll x) { return 63 - __builtin_clzll(x); }
-int lowbit(ull x) { return 63 - __builtin_clzll(x); }
+int lowbit(u64 x) { return 63 - __builtin_clzll(x); }
 
 ll ceil(ll x, ll y) { return (x > 0 ? (x + y - 1) / y : x / y); }
 ll floor(ll x, ll y) { return (x > 0 ? x / y : (x - y + 1) / y); }
