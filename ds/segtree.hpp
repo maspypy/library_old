@@ -17,6 +17,8 @@ struct SegTree {
     FOR3_R(i, 1, size) update(i);
   }
 
+  X operator[](int i) { return dat[size + i]; }
+
   void update(int i) { dat[i] = Monoid::op(dat[2 * i], dat[2 * i + 1]); }
 
   void set(int i, X x) {
