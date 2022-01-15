@@ -39,12 +39,12 @@ struct Graph {
   bool is_prepared() { return prepared; }
   constexpr bool is_directed() { return directed; }
 
-  Graph() {}
-  Graph(int N) : N(N), M(0), prepared(0) {}
+  Graph() : N(0), M(0), prepared(0) {}
 
   void add(int frm, int to, T cost = 1, int i = -1) {
-    assert(!prepared);
-    assert(0 <= frm && frm < N && 0 <= to && to < N);
+    assert(!prepared && 0 <= frm && 0 <= to);
+    chmax(N, frm + 1);
+    chmax(N, to + 1);
     if (i == -1) i = M;
     auto e = edge_type({frm, to, cost, i});
     edges.eb(e);
@@ -85,6 +85,4 @@ struct Graph {
       FOR(v, N) for (auto&& e: (*this)[v]) print(e.frm, e.to, e.cost, e.id);
     }
   }
-
-  int size() { return N; }
 };
