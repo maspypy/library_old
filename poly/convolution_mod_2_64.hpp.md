@@ -239,8 +239,8 @@ data:
     \ modint998>::value, vc<mint>> convolution(const vc<mint>& a, const vc<mint>&\
     \ b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return {};\r\n  if\
     \ (min(n, m) <= 60) return convolution_naive(a, b);\r\n  return convolution_garner(a,\
-    \ b);\r\n}\r\n#line 2 \"poly/convolution_mod_2_64.hpp\"\nvector<ull> convolution_mod_2_64(const\
-    \ vector<ull>& a, const vector<ull>& b) {\r\n  int n = len(a), m = len(b);\r\n\
+    \ b);\r\n}\r\n#line 2 \"poly/convolution_mod_2_64.hpp\"\nvector<u64> convolution_mod_2_64(const\
+    \ vector<u64>& a, const vector<u64>& b) {\r\n  int n = len(a), m = len(b);\r\n\
     \  if (!n || !m) return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a,\
     \ b);\r\n  constexpr int P0 = 998244353;\r\n  constexpr int P1 = 754974721;\r\n\
     \  constexpr int P2 = 167772161;\r\n  constexpr int P3 = 469762049;\r\n  constexpr\
@@ -259,15 +259,15 @@ data:
     \n  static const M3 inv32 = M3(1) / M3(P2), inv31 = inv32 / M3(P1),\r\n      \
     \            inv30 = inv31 / M3(P0);\r\n  static const M4 inv43 = M4(1) / M4(P3),\
     \ inv42 = inv43 / M4(P2),\r\n                  inv41 = inv42 / M4(P1), inv40 =\
-    \ inv41 / M4(P0);\r\n  vc<ull> c(len(a0));\r\n  FOR(i, len(c)) {\r\n    ll x0\
+    \ inv41 / M4(P0);\r\n  vc<u64> c(len(a0));\r\n  FOR(i, len(c)) {\r\n    ll x0\
     \ = a0[i].val;\r\n    ll x1 = (M1(a1[i] - x0) * inv10).val;\r\n    ll x2 = (M2(a2[i]\
     \ - x0) * inv20 - M2(x1) * inv21).val;\r\n    ll x3 = (M3(a3[i] - x0) * inv30\
     \ - M3(x1) * inv31 - M3(x2) * inv32).val;\r\n    ll x4 = (M4(a4[i] - x0) * inv40\
     \ - M4(x1) * inv41 - M4(x2) * inv42\r\n             - M4(x3) * inv43)\r\n    \
-    \            .val;\r\n    c[i] = x0 + P0 * (x1 + P1 * (x2 + P2 * (x3 + P3 * ull(x4))));\r\
+    \            .val;\r\n    c[i] = x0 + P0 * (x1 + P1 * (x2 + P2 * (x3 + P3 * u64(x4))));\r\
     \n  }\r\n  return c;\r\n}\r\n"
-  code: "#include \"poly/convolution.hpp\"\r\nvector<ull> convolution_mod_2_64(const\
-    \ vector<ull>& a, const vector<ull>& b) {\r\n  int n = len(a), m = len(b);\r\n\
+  code: "#include \"poly/convolution.hpp\"\r\nvector<u64> convolution_mod_2_64(const\
+    \ vector<u64>& a, const vector<u64>& b) {\r\n  int n = len(a), m = len(b);\r\n\
     \  if (!n || !m) return {};\r\n  if (min(n, m) <= 60) return convolution_naive(a,\
     \ b);\r\n  constexpr int P0 = 998244353;\r\n  constexpr int P1 = 754974721;\r\n\
     \  constexpr int P2 = 167772161;\r\n  constexpr int P3 = 469762049;\r\n  constexpr\
@@ -286,12 +286,12 @@ data:
     \n  static const M3 inv32 = M3(1) / M3(P2), inv31 = inv32 / M3(P1),\r\n      \
     \            inv30 = inv31 / M3(P0);\r\n  static const M4 inv43 = M4(1) / M4(P3),\
     \ inv42 = inv43 / M4(P2),\r\n                  inv41 = inv42 / M4(P1), inv40 =\
-    \ inv41 / M4(P0);\r\n  vc<ull> c(len(a0));\r\n  FOR(i, len(c)) {\r\n    ll x0\
+    \ inv41 / M4(P0);\r\n  vc<u64> c(len(a0));\r\n  FOR(i, len(c)) {\r\n    ll x0\
     \ = a0[i].val;\r\n    ll x1 = (M1(a1[i] - x0) * inv10).val;\r\n    ll x2 = (M2(a2[i]\
     \ - x0) * inv20 - M2(x1) * inv21).val;\r\n    ll x3 = (M3(a3[i] - x0) * inv30\
     \ - M3(x1) * inv31 - M3(x2) * inv32).val;\r\n    ll x4 = (M4(a4[i] - x0) * inv40\
     \ - M4(x1) * inv41 - M4(x2) * inv42\r\n             - M4(x3) * inv43)\r\n    \
-    \            .val;\r\n    c[i] = x0 + P0 * (x1 + P1 * (x2 + P2 * (x3 + P3 * ull(x4))));\r\
+    \            .val;\r\n    c[i] = x0 + P0 * (x1 + P1 * (x2 + P2 * (x3 + P3 * u64(x4))));\r\
     \n  }\r\n  return c;\r\n}\r\n"
   dependsOn:
   - poly/convolution.hpp
@@ -299,7 +299,7 @@ data:
   isVerificationFile: false
   path: poly/convolution_mod_2_64.hpp
   requiredBy: []
-  timestamp: '2022-01-13 04:04:32+09:00'
+  timestamp: '2022-01-15 19:02:18+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/convolution/contolution_mod_2_64.test.cpp

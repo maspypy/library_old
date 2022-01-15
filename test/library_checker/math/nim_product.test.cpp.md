@@ -154,21 +154,21 @@ data:
     \  for (auto&& x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate <typename T>\nvector<int>\
     \ argsort(vector<T> &A) {\n  // stable\n  vector<int> ids(A.size());\n  iota(all(ids),\
     \ 0);\n  sort(all(ids), [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j]\
-    \ && i < j); });\n  return ids;\n}\n#line 1 \"other/nim_product.hpp\"\null naive_nim_product(ull\
-    \ x, ull y, int k = 6) {\r\n  if (x == 0 || y == 0) return 0;\r\n  if (x == 1)\
-    \ return y;\r\n  if (y == 1) return x;\r\n  int B = 1 << (k - 1);\r\n  ull mask\
-    \ = (1ULL << B) - 1;\r\n  ull a = x >> B, b = x & mask;\r\n  ull c = y >> B, d\
+    \ && i < j); });\n  return ids;\n}\n#line 1 \"other/nim_product.hpp\"\nu64 naive_nim_product(u64\
+    \ x, u64 y, int k = 6) {\r\n  if (x == 0 || y == 0) return 0;\r\n  if (x == 1)\
+    \ return y;\r\n  if (y == 1) return x;\r\n  int B = 1 << (k - 1);\r\n  u64 mask\
+    \ = (1ULL << B) - 1;\r\n  u64 a = x >> B, b = x & mask;\r\n  u64 c = y >> B, d\
     \ = y & mask;\r\n  tie(a, b, c) = mt(naive_nim_product(a, c, k - 1),\r\n     \
     \               naive_nim_product(a ^ b, c ^ d, k - 1),\r\n                  \
     \  naive_nim_product(b, d, k - 1));\r\n  b = a ^ b ^ c;\r\n  return (a << B) ^\
-    \ naive_nim_product(1ULL << (B - 1), a, k - 1) ^ (b << B) ^ c;\r\n}\r\n\r\null\
-    \ nim_product(ull x, ull y) {\r\n  static bool prepared = false;\r\n  // x * y,\
-    \ 256\u4EE5\u4E0B\r\n  // 2^a * 2^b * x, 8, 8, 256\r\n  static ull memo1[256][256];\r\
-    \n  static ull memo2[8][8][256];\r\n  if (!prepared) {\r\n    prepared = true;\r\
+    \ naive_nim_product(1ULL << (B - 1), a, k - 1) ^ (b << B) ^ c;\r\n}\r\n\r\nu64\
+    \ nim_product(u64 x, u64 y) {\r\n  static bool prepared = false;\r\n  // x * y,\
+    \ 256\u4EE5\u4E0B\r\n  // 2^a * 2^b * x, 8, 8, 256\r\n  static u64 memo1[256][256];\r\
+    \n  static u64 memo2[8][8][256];\r\n  if (!prepared) {\r\n    prepared = true;\r\
     \n    FOR(x, 256) FOR(y, 256) memo1[x][y] = naive_nim_product(x, y, 4);\r\n  \
-    \  FOR(a, 8) FOR(b, 8) {\r\n      ull v = naive_nim_product(1ULL << (8 * a), 1ULL\
+    \  FOR(a, 8) FOR(b, 8) {\r\n      u64 v = naive_nim_product(1ULL << (8 * a), 1ULL\
     \ << (8 * b));\r\n      FOR(x, 256) memo2[a][b][x] = naive_nim_product(v, x);\r\
-    \n    }\r\n  } // end prepare\r\n\r\n  ull v = 0;\r\n  FOR(a, 8) FOR(b, 8) {\r\
+    \n    }\r\n  } // end prepare\r\n\r\n  u64 v = 0;\r\n  FOR(a, 8) FOR(b, 8) {\r\
     \n    v ^= memo2[a][b][memo1[(x >> (8 * a)) & 255][(y >> (8 * b)) & 255]];\r\n\
     \  }\r\n  return v;\r\n}\n#line 4 \"test/library_checker/math/nim_product.test.cpp\"\
     \n\r\nvoid solve() {\r\n  ull a, b;\r\n  scanner.read(a, b);\r\n  print(nim_product(a,\
@@ -186,7 +186,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/math/nim_product.test.cpp
   requiredBy: []
-  timestamp: '2022-01-15 18:21:08+09:00'
+  timestamp: '2022-01-15 19:02:18+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/math/nim_product.test.cpp
