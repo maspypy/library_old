@@ -38,23 +38,23 @@ data:
     \    } else {\n      print(\"indptr\", indptr);\n      print(\"frm to cost id\"\
     );\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e.frm, e.to, e.cost, e.id);\n\
     \    }\n  }\n};\n#line 2 \"graph/degree.hpp\"\n\r\ntemplate <typename Graph>\r\
-    \nvector<int> degree(Graph& G) {\r\n  vector<int> deg(N);\r\n  FOR(v, N) deg[v]\
-    \ = len(G[v]);\r\n  return deg;\r\n}\r\n\r\ntemplate <typename Graph>\r\npair<vector<int>,\
-    \ vector<int>> degree_inout(Graph& G) {\r\n  vector<int> indeg(N), outdeg(N);\r\
+    \nvector<int> degree(Graph& G) {\r\n  vector<int> deg(G.N);\r\n  for(auto&& e\
+    \ : G.edges) deg[e.frm]++, deg[e.to]++;\r\n  return deg;\r\n}\r\n\r\ntemplate\
+    \ <typename Graph>\r\npair<vector<int>, vector<int>> degree_inout(Graph& G) {\r\
+    \n  vector<int> indeg(G.N), outdeg(G.N);\r\n  for (auto&& e: G.edges) { indeg[e.to]++,\
+    \ outdeg[e.frm]++; }\r\n  return {indeg, outdeg};\r\n}\r\n"
+  code: "#include \"graph/base.hpp\"\r\n\r\ntemplate <typename Graph>\r\nvector<int>\
+    \ degree(Graph& G) {\r\n  vector<int> deg(G.N);\r\n  for(auto&& e : G.edges) deg[e.frm]++,\
+    \ deg[e.to]++;\r\n  return deg;\r\n}\r\n\r\ntemplate <typename Graph>\r\npair<vector<int>,\
+    \ vector<int>> degree_inout(Graph& G) {\r\n  vector<int> indeg(G.N), outdeg(G.N);\r\
     \n  for (auto&& e: G.edges) { indeg[e.to]++, outdeg[e.frm]++; }\r\n  return {indeg,\
     \ outdeg};\r\n}\r\n"
-  code: "#include \"graph/base.hpp\"\r\n\r\ntemplate <typename Graph>\r\nvector<int>\
-    \ degree(Graph& G) {\r\n  vector<int> deg(N);\r\n  FOR(v, N) deg[v] = len(G[v]);\r\
-    \n  return deg;\r\n}\r\n\r\ntemplate <typename Graph>\r\npair<vector<int>, vector<int>>\
-    \ degree_inout(Graph& G) {\r\n  vector<int> indeg(N), outdeg(N);\r\n  for (auto&&\
-    \ e: G.edges) { indeg[e.to]++, outdeg[e.frm]++; }\r\n  return {indeg, outdeg};\r\
-    \n}\r\n"
   dependsOn:
   - graph/base.hpp
   isVerificationFile: false
   path: graph/degree.hpp
   requiredBy: []
-  timestamp: '2022-01-16 04:25:53+09:00'
+  timestamp: '2022-01-16 05:23:43+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph/degree.hpp
