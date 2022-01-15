@@ -13,14 +13,14 @@ data:
   - icon: ':question:'
     path: poly/convolution.hpp
     title: poly/convolution.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: poly/convolution_mod_2_64.hpp
     title: poly/convolution_mod_2_64.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/convolution_mod_2_64
@@ -411,13 +411,13 @@ data:
     \ - M4(x1) * inv41 - M4(x2) * inv42\r\n             - M4(x3) * inv43)\r\n    \
     \            .val;\r\n    c[i] = x0 + P0 * (x1 + P1 * (x2 + P2 * (x3 + P3 * u64(x4))));\r\
     \n  }\r\n  return c;\r\n}\r\n#line 5 \"test/library_checker/convolution/contolution_mod_2_64.test.cpp\"\
-    \n\r\nvoid solve() {\r\n  LL(N, M);\r\n  VEC(ull, A, N);\r\n  VEC(ull, B, M);\r\
+    \n\r\nvoid solve() {\r\n  LL(N, M);\r\n  VEC(u64, A, N);\r\n  VEC(u64, B, M);\r\
     \n  auto C = convolution_mod_2_64(A, B);\r\n  print(C);\r\n}\r\n\r\nsigned main()\
     \ {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
     \n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convolution_mod_2_64\"\r\
     \n#include \"my_template.hpp\"\r\n\r\n#include \"poly/convolution_mod_2_64.hpp\"\
-    \r\n\r\nvoid solve() {\r\n  LL(N, M);\r\n  VEC(ull, A, N);\r\n  VEC(ull, B, M);\r\
+    \r\n\r\nvoid solve() {\r\n  LL(N, M);\r\n  VEC(u64, A, N);\r\n  VEC(u64, B, M);\r\
     \n  auto C = convolution_mod_2_64(A, B);\r\n  print(C);\r\n}\r\n\r\nsigned main()\
     \ {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
     \n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
@@ -430,8 +430,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/convolution/contolution_mod_2_64.test.cpp
   requiredBy: []
-  timestamp: '2022-01-15 19:02:18+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-01-15 23:08:07+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/convolution/contolution_mod_2_64.test.cpp
 layout: document

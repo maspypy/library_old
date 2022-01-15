@@ -7,14 +7,14 @@ data:
   - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: other/nim_product.hpp
     title: other/nim_product.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/nim_product_64
@@ -171,12 +171,12 @@ data:
     \n    }\r\n  } // end prepare\r\n\r\n  u64 v = 0;\r\n  FOR(a, 8) FOR(b, 8) {\r\
     \n    v ^= memo2[a][b][memo1[(x >> (8 * a)) & 255][(y >> (8 * b)) & 255]];\r\n\
     \  }\r\n  return v;\r\n}\n#line 4 \"test/library_checker/math/nim_product.test.cpp\"\
-    \n\r\nvoid solve() {\r\n  ull a, b;\r\n  scanner.read(a, b);\r\n  print(nim_product(a,\
+    \n\r\nvoid solve() {\r\n  u64 a, b;\r\n  scanner.read(a, b);\r\n  print(nim_product(a,\
     \ b));\r\n}\r\n\r\nsigned main() {\r\n  LL(T);\r\n  FOR_(T) solve();\r\n\r\n \
     \ return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/nim_product_64\"\r\n#include\
     \ \"my_template.hpp\"\r\n#include \"other/nim_product.hpp\"\r\n\r\nvoid solve()\
-    \ {\r\n  ull a, b;\r\n  scanner.read(a, b);\r\n  print(nim_product(a, b));\r\n\
+    \ {\r\n  u64 a, b;\r\n  scanner.read(a, b);\r\n  print(nim_product(a, b));\r\n\
     }\r\n\r\nsigned main() {\r\n  LL(T);\r\n  FOR_(T) solve();\r\n\r\n  return 0;\r\
     \n}\r\n"
   dependsOn:
@@ -186,8 +186,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/math/nim_product.test.cpp
   requiredBy: []
-  timestamp: '2022-01-15 19:02:18+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-01-15 23:08:07+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/math/nim_product.test.cpp
 layout: document
