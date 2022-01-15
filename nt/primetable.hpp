@@ -1,8 +1,8 @@
-vc<int>& primetable(int LIM) {
+vc<ll>& primetable(int LIM) {
   ++LIM;
   const int S = 32768;
   static int done = 2;
-  static vc<int> primes = {2}, sieve(S + 1);
+  static vc<ll> primes = {2}, sieve(S + 1);
 
   if(done >= LIM) return primes;
   done  = LIM;

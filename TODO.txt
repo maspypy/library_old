@@ -39,3 +39,7 @@ doubling で作ってもよいが
 ・bellman-ford
 
 ・2sat に atmostone を追加
+
+・木の直径：重みなしでよいので、辺の中点の追加とか中心を扱う
+
+・動的 convex hull：追加のみ、面積とか isin とか
