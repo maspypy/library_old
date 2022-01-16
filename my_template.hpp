@@ -4,7 +4,6 @@ using namespace std;
 
 #include "other/io.hpp"
 
-
 using ll = long long;
 using pi = pair<ll, ll>;
 using vi = vector<ll>;
@@ -36,7 +35,7 @@ using pqg = priority_queue<T, vector<T>, greater<T>>;
 #define vvvv(type, name, a, b, c, ...)       \
   vector<vector<vector<vector<type>>>> name( \
       a, vector<vector<vector<type>>>(       \
-            b, vector<vector<type>>(c, vector<type>(__VA_ARGS__))))
+             b, vector<vector<type>>(c, vector<type>(__VA_ARGS__))))
 
 #define FOR_(n) for (ll _ = 0; (_) < (ll)(n); ++(_))
 #define FOR(i, n) for (ll i = 0; (i) < (ll)(n); ++(i))
@@ -54,7 +53,12 @@ using pqg = priority_queue<T, vector<T>, greater<T>>;
 #define fi first
 #define se second
 
-#define SUM(v) accumulate(all(v), 0LL)
+template <typename T>
+T SUM(vector<T> &A) {
+  T sum = T(0);
+  for (auto &&a: A) sum += a;
+  return sum;
+}
 #define MIN(v) *min_element(all(v))
 #define MAX(v) *max_element(all(v))
 #define LB(c, x) distance((c).begin(), lower_bound(all(c), (x)))
@@ -76,10 +80,19 @@ int lowbit(u32 x) { return 31 - __builtin_clz(x); }
 int lowbit(ll x) { return 63 - __builtin_clzll(x); }
 int lowbit(u64 x) { return 63 - __builtin_clzll(x); }
 
-ll ceil(ll x, ll y) { return (x > 0 ? (x + y - 1) / y : x / y); }
-ll floor(ll x, ll y) { return (x > 0 ? x / y : (x - y + 1) / y); }
-pi divmod(ll x, ll y) {
-  ll q = floor(x, y);
+template <typename T, typename U>
+T ceil(T x, U y) {
+  return (x > 0 ? (x + y - 1) / y : x / y);
+}
+
+template <typename T, typename U>
+T floor(T x, U y) {
+  return (x > 0 ? x / y : (x - y + 1) / y);
+}
+
+template <typename T, typename U>
+pair<T, T> divmod(T x, U y) {
+  T q = floor(x, y);
   return {q, x - q * y};
 }
 
@@ -87,8 +100,10 @@ ll binary_search(function<bool(ll)> check, ll ok, ll ng) {
   assert(check(ok));
   while (abs(ok - ng) > 1) {
     auto x = (ng + ok) / 2;
-    if (check(x)) ok = x;
-    else ng = x;
+    if (check(x))
+      ok = x;
+    else
+      ng = x;
   }
   return ok;
 }
@@ -113,14 +128,14 @@ vector<T> cumsum(vector<T> &A, int off = 1) {
   int N = A.size();
   vector<T> B(N + 1);
   FOR(i, N) { B[i + 1] = B[i] + A[i]; }
-  if(off == 0) B.erase(B.begin());
+  if (off == 0) B.erase(B.begin());
   return B;
 }
 
-template<typename T>
+template <typename T>
 vc<int> bincount(vc<T> &A, int size) {
   vc<int> C(size);
-  for (auto&& x: A) { ++C[x]; }
+  for (auto &&x: A) { ++C[x]; }
   return C;
 }
 
@@ -129,6 +144,7 @@ vector<int> argsort(vector<T> &A) {
   // stable
   vector<int> ids(A.size());
   iota(all(ids), 0);
-  sort(all(ids), [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j] && i < j); });
+  sort(all(ids),
+       [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j] && i < j); });
   return ids;
 }
