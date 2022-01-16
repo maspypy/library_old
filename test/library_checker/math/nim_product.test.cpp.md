@@ -7,14 +7,14 @@ data:
   - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: other/nim_product.hpp
     title: other/nim_product.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/nim_product_64
@@ -104,8 +104,8 @@ data:
     ); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t = 1) { print(t ? \"\
     Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\nvoid yes(bool t = 1)\
     \ { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) { yes(!t); }\r\n#line\
-    \ 6 \"my_template.hpp\"\n\n\nusing ll = long long;\nusing pi = pair<ll, ll>;\n\
-    using vi = vector<ll>;\nusing u32 = unsigned int;\nusing u64 = unsigned long long;\n\
+    \ 6 \"my_template.hpp\"\n\nusing ll = long long;\nusing pi = pair<ll, ll>;\nusing\
+    \ vi = vector<ll>;\nusing u32 = unsigned int;\nusing u64 = unsigned long long;\n\
     using i128 = __int128;\n\ntemplate <class T>\nusing vc = vector<T>;\ntemplate\
     \ <class T>\nusing vvc = vector<vc<T>>;\ntemplate <class T>\nusing vvvc = vector<vvc<T>>;\n\
     template <class T>\nusing vvvvc = vector<vvvc<T>>;\ntemplate <class T>\nusing\
@@ -116,7 +116,7 @@ data:
     #define vvv(type, name, h, w, ...)   \\\n  vector<vector<vector<type>>> name(\
     \ \\\n      h, vector<vector<type>>(w, vector<type>(__VA_ARGS__)))\n#define vvvv(type,\
     \ name, a, b, c, ...)       \\\n  vector<vector<vector<vector<type>>>> name( \\\
-    \n      a, vector<vector<vector<type>>>(       \\\n            b, vector<vector<type>>(c,\
+    \n      a, vector<vector<vector<type>>>(       \\\n             b, vector<vector<type>>(c,\
     \ vector<type>(__VA_ARGS__))))\n\n#define FOR_(n) for (ll _ = 0; (_) < (ll)(n);\
     \ ++(_))\n#define FOR(i, n) for (ll i = 0; (i) < (ll)(n); ++(i))\n#define FOR3(i,\
     \ m, n) for (ll i = (m); (i) < (ll)(n); ++(i))\n#define FOR_R(i, n) for (ll i\
@@ -124,8 +124,9 @@ data:
     \ (i) >= (ll)(m); --(i))\n#define FOR_subset(t, s) for (ll t = s; t >= 0; t =\
     \ (t == 0 ? -1 : (t - 1) & s))\n#define all(x) x.begin(), x.end()\n#define len(x)\
     \ ll(x.size())\n#define elif else if\n\n#define eb emplace_back\n#define mp make_pair\n\
-    #define mt make_tuple\n#define fi first\n#define se second\n\n#define SUM(v) accumulate(all(v),\
-    \ 0LL)\n#define MIN(v) *min_element(all(v))\n#define MAX(v) *max_element(all(v))\n\
+    #define mt make_tuple\n#define fi first\n#define se second\n\ntemplate <typename\
+    \ T>\nT SUM(vector<T> &A) {\n  T sum = T(0);\n  for (auto &&a: A) sum += a;\n\
+    \  return sum;\n}\n#define MIN(v) *min_element(all(v))\n#define MAX(v) *max_element(all(v))\n\
     #define LB(c, x) distance((c).begin(), lower_bound(all(c), (x)))\n#define UB(c,\
     \ x) distance((c).begin(), upper_bound(all(c), (x)))\n#define UNIQUE(x) sort(all(x)),\
     \ x.erase(unique(all(x)), x.end())\n\nint popcnt(int x) { return __builtin_popcount(x);\
@@ -137,40 +138,41 @@ data:
     \ }\n// (0, 1, 2, 3, 4) -> (32 or 64, 0, 1, 0, 2)\nint lowbit(int x) { return\
     \ 31 - __builtin_clz(x); }\nint lowbit(u32 x) { return 31 - __builtin_clz(x);\
     \ }\nint lowbit(ll x) { return 63 - __builtin_clzll(x); }\nint lowbit(u64 x) {\
-    \ return 63 - __builtin_clzll(x); }\n\nll ceil(ll x, ll y) { return (x > 0 ? (x\
-    \ + y - 1) / y : x / y); }\nll floor(ll x, ll y) { return (x > 0 ? x / y : (x\
-    \ - y + 1) / y); }\npi divmod(ll x, ll y) {\n  ll q = floor(x, y);\n  return {q,\
-    \ x - q * y};\n}\n\nll binary_search(function<bool(ll)> check, ll ok, ll ng) {\n\
-    \  assert(check(ok));\n  while (abs(ok - ng) > 1) {\n    auto x = (ng + ok) /\
-    \ 2;\n    if (check(x)) ok = x;\n    else ng = x;\n  }\n  return ok;\n}\n\ntemplate\
-    \ <class T, class S>\ninline bool chmax(T &a, const S &b) {\n  return (a < b ?\
-    \ a = b, 1 : 0);\n}\ntemplate <class T, class S>\ninline bool chmin(T &a, const\
-    \ S &b) {\n  return (a > b ? a = b, 1 : 0);\n}\n\nvi s_to_vi(string S, char first_char\
-    \ = 'a') {\n  vi A(S.size());\n  FOR(i, S.size()) { A[i] = S[i] - first_char;\
-    \ }\n  return A;\n}\n\ntemplate <typename T>\nvector<T> cumsum(vector<T> &A, int\
-    \ off = 1) {\n  int N = A.size();\n  vector<T> B(N + 1);\n  FOR(i, N) { B[i +\
-    \ 1] = B[i] + A[i]; }\n  if(off == 0) B.erase(B.begin());\n  return B;\n}\n\n\
-    template<typename T>\nvc<int> bincount(vc<T> &A, int size) {\n  vc<int> C(size);\n\
-    \  for (auto&& x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate <typename T>\nvector<int>\
-    \ argsort(vector<T> &A) {\n  // stable\n  vector<int> ids(A.size());\n  iota(all(ids),\
-    \ 0);\n  sort(all(ids), [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j]\
-    \ && i < j); });\n  return ids;\n}\n#line 1 \"other/nim_product.hpp\"\nu64 naive_nim_product(u64\
-    \ x, u64 y, int k = 6) {\r\n  if (x == 0 || y == 0) return 0;\r\n  if (x == 1)\
-    \ return y;\r\n  if (y == 1) return x;\r\n  int B = 1 << (k - 1);\r\n  u64 mask\
-    \ = (1ULL << B) - 1;\r\n  u64 a = x >> B, b = x & mask;\r\n  u64 c = y >> B, d\
-    \ = y & mask;\r\n  tie(a, b, c) = mt(naive_nim_product(a, c, k - 1),\r\n     \
-    \               naive_nim_product(a ^ b, c ^ d, k - 1),\r\n                  \
-    \  naive_nim_product(b, d, k - 1));\r\n  b = a ^ b ^ c;\r\n  return (a << B) ^\
-    \ naive_nim_product(1ULL << (B - 1), a, k - 1) ^ (b << B) ^ c;\r\n}\r\n\r\nu64\
-    \ nim_product(u64 x, u64 y) {\r\n  static bool prepared = false;\r\n  // x * y,\
-    \ 256\u4EE5\u4E0B\r\n  // 2^a * 2^b * x, 8, 8, 256\r\n  static u64 memo1[256][256];\r\
-    \n  static u64 memo2[8][8][256];\r\n  if (!prepared) {\r\n    prepared = true;\r\
-    \n    FOR(x, 256) FOR(y, 256) memo1[x][y] = naive_nim_product(x, y, 4);\r\n  \
-    \  FOR(a, 8) FOR(b, 8) {\r\n      u64 v = naive_nim_product(1ULL << (8 * a), 1ULL\
-    \ << (8 * b));\r\n      FOR(x, 256) memo2[a][b][x] = naive_nim_product(v, x);\r\
-    \n    }\r\n  } // end prepare\r\n\r\n  u64 v = 0;\r\n  FOR(a, 8) FOR(b, 8) {\r\
-    \n    v ^= memo2[a][b][memo1[(x >> (8 * a)) & 255][(y >> (8 * b)) & 255]];\r\n\
-    \  }\r\n  return v;\r\n}\n#line 4 \"test/library_checker/math/nim_product.test.cpp\"\
+    \ return 63 - __builtin_clzll(x); }\n\ntemplate <typename T, typename U>\nT ceil(T\
+    \ x, U y) {\n  return (x > 0 ? (x + y - 1) / y : x / y);\n}\n\ntemplate <typename\
+    \ T, typename U>\nT floor(T x, U y) {\n  return (x > 0 ? x / y : (x - y + 1) /\
+    \ y);\n}\n\ntemplate <typename T, typename U>\npair<T, T> divmod(T x, U y) {\n\
+    \  T q = floor(x, y);\n  return {q, x - q * y};\n}\n\nll binary_search(function<bool(ll)>\
+    \ check, ll ok, ll ng) {\n  assert(check(ok));\n  while (abs(ok - ng) > 1) {\n\
+    \    auto x = (ng + ok) / 2;\n    if (check(x))\n      ok = x;\n    else\n   \
+    \   ng = x;\n  }\n  return ok;\n}\n\ntemplate <class T, class S>\ninline bool\
+    \ chmax(T &a, const S &b) {\n  return (a < b ? a = b, 1 : 0);\n}\ntemplate <class\
+    \ T, class S>\ninline bool chmin(T &a, const S &b) {\n  return (a > b ? a = b,\
+    \ 1 : 0);\n}\n\nvi s_to_vi(string S, char first_char = 'a') {\n  vi A(S.size());\n\
+    \  FOR(i, S.size()) { A[i] = S[i] - first_char; }\n  return A;\n}\n\ntemplate\
+    \ <typename T>\nvector<T> cumsum(vector<T> &A, int off = 1) {\n  int N = A.size();\n\
+    \  vector<T> B(N + 1);\n  FOR(i, N) { B[i + 1] = B[i] + A[i]; }\n  if (off ==\
+    \ 0) B.erase(B.begin());\n  return B;\n}\n\ntemplate <typename T>\nvc<int> bincount(vc<T>\
+    \ &A, int size) {\n  vc<int> C(size);\n  for (auto &&x: A) { ++C[x]; }\n  return\
+    \ C;\n}\n\ntemplate <typename T>\nvector<int> argsort(vector<T> &A) {\n  // stable\n\
+    \  vector<int> ids(A.size());\n  iota(all(ids), 0);\n  sort(all(ids),\n      \
+    \ [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j] && i < j); });\n  return\
+    \ ids;\n}\n#line 1 \"other/nim_product.hpp\"\nu64 naive_nim_product(u64 x, u64\
+    \ y, int k = 6) {\r\n  if (x == 0 || y == 0) return 0;\r\n  if (x == 1) return\
+    \ y;\r\n  if (y == 1) return x;\r\n  int B = 1 << (k - 1);\r\n  u64 mask = (1ULL\
+    \ << B) - 1;\r\n  u64 a = x >> B, b = x & mask;\r\n  u64 c = y >> B, d = y & mask;\r\
+    \n  tie(a, b, c) = mt(naive_nim_product(a, c, k - 1),\r\n                    naive_nim_product(a\
+    \ ^ b, c ^ d, k - 1),\r\n                    naive_nim_product(b, d, k - 1));\r\
+    \n  b = a ^ b ^ c;\r\n  return (a << B) ^ naive_nim_product(1ULL << (B - 1), a,\
+    \ k - 1) ^ (b << B) ^ c;\r\n}\r\n\r\nu64 nim_product(u64 x, u64 y) {\r\n  static\
+    \ bool prepared = false;\r\n  // x * y, 256\u4EE5\u4E0B\r\n  // 2^a * 2^b * x,\
+    \ 8, 8, 256\r\n  static u64 memo1[256][256];\r\n  static u64 memo2[8][8][256];\r\
+    \n  if (!prepared) {\r\n    prepared = true;\r\n    FOR(x, 256) FOR(y, 256) memo1[x][y]\
+    \ = naive_nim_product(x, y, 4);\r\n    FOR(a, 8) FOR(b, 8) {\r\n      u64 v =\
+    \ naive_nim_product(1ULL << (8 * a), 1ULL << (8 * b));\r\n      FOR(x, 256) memo2[a][b][x]\
+    \ = naive_nim_product(v, x);\r\n    }\r\n  } // end prepare\r\n\r\n  u64 v = 0;\r\
+    \n  FOR(a, 8) FOR(b, 8) {\r\n    v ^= memo2[a][b][memo1[(x >> (8 * a)) & 255][(y\
+    \ >> (8 * b)) & 255]];\r\n  }\r\n  return v;\r\n}\n#line 4 \"test/library_checker/math/nim_product.test.cpp\"\
     \n\r\nvoid solve() {\r\n  u64 a, b;\r\n  scanner.read(a, b);\r\n  print(nim_product(a,\
     \ b));\r\n}\r\n\r\nsigned main() {\r\n  LL(T);\r\n  FOR_(T) solve();\r\n\r\n \
     \ return 0;\r\n}\r\n"
@@ -186,8 +188,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/math/nim_product.test.cpp
   requiredBy: []
-  timestamp: '2022-01-16 04:38:40+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-01-16 15:38:13+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/math/nim_product.test.cpp
 layout: document

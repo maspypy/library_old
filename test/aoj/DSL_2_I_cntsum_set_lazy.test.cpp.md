@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: alg/group_cntsum.hpp
     title: alg/group_cntsum.hpp
   - icon: ':heavy_check_mark:'
@@ -114,8 +114,8 @@ data:
     ); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t = 1) { print(t ? \"\
     Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\nvoid yes(bool t = 1)\
     \ { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) { yes(!t); }\r\n#line\
-    \ 6 \"my_template.hpp\"\n\n\nusing ll = long long;\nusing pi = pair<ll, ll>;\n\
-    using vi = vector<ll>;\nusing u32 = unsigned int;\nusing u64 = unsigned long long;\n\
+    \ 6 \"my_template.hpp\"\n\nusing ll = long long;\nusing pi = pair<ll, ll>;\nusing\
+    \ vi = vector<ll>;\nusing u32 = unsigned int;\nusing u64 = unsigned long long;\n\
     using i128 = __int128;\n\ntemplate <class T>\nusing vc = vector<T>;\ntemplate\
     \ <class T>\nusing vvc = vector<vc<T>>;\ntemplate <class T>\nusing vvvc = vector<vvc<T>>;\n\
     template <class T>\nusing vvvvc = vector<vvvc<T>>;\ntemplate <class T>\nusing\
@@ -126,7 +126,7 @@ data:
     #define vvv(type, name, h, w, ...)   \\\n  vector<vector<vector<type>>> name(\
     \ \\\n      h, vector<vector<type>>(w, vector<type>(__VA_ARGS__)))\n#define vvvv(type,\
     \ name, a, b, c, ...)       \\\n  vector<vector<vector<vector<type>>>> name( \\\
-    \n      a, vector<vector<vector<type>>>(       \\\n            b, vector<vector<type>>(c,\
+    \n      a, vector<vector<vector<type>>>(       \\\n             b, vector<vector<type>>(c,\
     \ vector<type>(__VA_ARGS__))))\n\n#define FOR_(n) for (ll _ = 0; (_) < (ll)(n);\
     \ ++(_))\n#define FOR(i, n) for (ll i = 0; (i) < (ll)(n); ++(i))\n#define FOR3(i,\
     \ m, n) for (ll i = (m); (i) < (ll)(n); ++(i))\n#define FOR_R(i, n) for (ll i\
@@ -134,8 +134,9 @@ data:
     \ (i) >= (ll)(m); --(i))\n#define FOR_subset(t, s) for (ll t = s; t >= 0; t =\
     \ (t == 0 ? -1 : (t - 1) & s))\n#define all(x) x.begin(), x.end()\n#define len(x)\
     \ ll(x.size())\n#define elif else if\n\n#define eb emplace_back\n#define mp make_pair\n\
-    #define mt make_tuple\n#define fi first\n#define se second\n\n#define SUM(v) accumulate(all(v),\
-    \ 0LL)\n#define MIN(v) *min_element(all(v))\n#define MAX(v) *max_element(all(v))\n\
+    #define mt make_tuple\n#define fi first\n#define se second\n\ntemplate <typename\
+    \ T>\nT SUM(vector<T> &A) {\n  T sum = T(0);\n  for (auto &&a: A) sum += a;\n\
+    \  return sum;\n}\n#define MIN(v) *min_element(all(v))\n#define MAX(v) *max_element(all(v))\n\
     #define LB(c, x) distance((c).begin(), lower_bound(all(c), (x)))\n#define UB(c,\
     \ x) distance((c).begin(), upper_bound(all(c), (x)))\n#define UNIQUE(x) sort(all(x)),\
     \ x.erase(unique(all(x)), x.end())\n\nint popcnt(int x) { return __builtin_popcount(x);\
@@ -147,35 +148,37 @@ data:
     \ }\n// (0, 1, 2, 3, 4) -> (32 or 64, 0, 1, 0, 2)\nint lowbit(int x) { return\
     \ 31 - __builtin_clz(x); }\nint lowbit(u32 x) { return 31 - __builtin_clz(x);\
     \ }\nint lowbit(ll x) { return 63 - __builtin_clzll(x); }\nint lowbit(u64 x) {\
-    \ return 63 - __builtin_clzll(x); }\n\nll ceil(ll x, ll y) { return (x > 0 ? (x\
-    \ + y - 1) / y : x / y); }\nll floor(ll x, ll y) { return (x > 0 ? x / y : (x\
-    \ - y + 1) / y); }\npi divmod(ll x, ll y) {\n  ll q = floor(x, y);\n  return {q,\
-    \ x - q * y};\n}\n\nll binary_search(function<bool(ll)> check, ll ok, ll ng) {\n\
-    \  assert(check(ok));\n  while (abs(ok - ng) > 1) {\n    auto x = (ng + ok) /\
-    \ 2;\n    if (check(x)) ok = x;\n    else ng = x;\n  }\n  return ok;\n}\n\ntemplate\
-    \ <class T, class S>\ninline bool chmax(T &a, const S &b) {\n  return (a < b ?\
-    \ a = b, 1 : 0);\n}\ntemplate <class T, class S>\ninline bool chmin(T &a, const\
-    \ S &b) {\n  return (a > b ? a = b, 1 : 0);\n}\n\nvi s_to_vi(string S, char first_char\
-    \ = 'a') {\n  vi A(S.size());\n  FOR(i, S.size()) { A[i] = S[i] - first_char;\
-    \ }\n  return A;\n}\n\ntemplate <typename T>\nvector<T> cumsum(vector<T> &A, int\
-    \ off = 1) {\n  int N = A.size();\n  vector<T> B(N + 1);\n  FOR(i, N) { B[i +\
-    \ 1] = B[i] + A[i]; }\n  if(off == 0) B.erase(B.begin());\n  return B;\n}\n\n\
-    template<typename T>\nvc<int> bincount(vc<T> &A, int size) {\n  vc<int> C(size);\n\
-    \  for (auto&& x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate <typename T>\nvector<int>\
-    \ argsort(vector<T> &A) {\n  // stable\n  vector<int> ids(A.size());\n  iota(all(ids),\
-    \ 0);\n  sort(all(ids), [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j]\
-    \ && i < j); });\n  return ids;\n}\n#line 1 \"alg/group_cntsum.hpp\"\ntemplate\
-    \ <typename E = long long>\r\nstruct Group_CntSum {\r\n  using value_type = pair<E,E>;\r\
-    \n  using X = value_type;\r\n  static constexpr X op(const X &x, const X &y) {\
-    \ return {x.fi + y.fi, x.se + y.se}; }\r\n  static constexpr X inverse(const X\
-    \ &x) { return {-x.fi, -x.se}; }\r\n  static constexpr X unit = {0, 0};\r\n  static\
-    \ constexpr bool commute = true;\r\n};\r\n#line 1 \"alg/monoid_set.hpp\"\ntemplate\
-    \ <typename E, E none_val>\r\nstruct Monoid_Set {\r\n  using value_type = E;\r\
-    \n  using X = value_type;\r\n  static X op(X x, X y) { return (y == none_val ?\
-    \ x : y); }\r\n  static constexpr X unit = none_val;\r\n  static constexpr bool\
-    \ commute = false;\r\n};\n#line 3 \"alg/lazy_cntsum_set.hpp\"\n\r\ntemplate <typename\
-    \ E, E none_val>\r\nstruct Lazy_CntSum_Set {\r\n  using X_structure = Group_CntSum<E>;\r\
-    \n  using A_structure = Monoid_Set<E, none_val>;\r\n  using X = typename X_structure::value_type;\r\
+    \ return 63 - __builtin_clzll(x); }\n\ntemplate <typename T, typename U>\nT ceil(T\
+    \ x, U y) {\n  return (x > 0 ? (x + y - 1) / y : x / y);\n}\n\ntemplate <typename\
+    \ T, typename U>\nT floor(T x, U y) {\n  return (x > 0 ? x / y : (x - y + 1) /\
+    \ y);\n}\n\ntemplate <typename T, typename U>\npair<T, T> divmod(T x, U y) {\n\
+    \  T q = floor(x, y);\n  return {q, x - q * y};\n}\n\nll binary_search(function<bool(ll)>\
+    \ check, ll ok, ll ng) {\n  assert(check(ok));\n  while (abs(ok - ng) > 1) {\n\
+    \    auto x = (ng + ok) / 2;\n    if (check(x))\n      ok = x;\n    else\n   \
+    \   ng = x;\n  }\n  return ok;\n}\n\ntemplate <class T, class S>\ninline bool\
+    \ chmax(T &a, const S &b) {\n  return (a < b ? a = b, 1 : 0);\n}\ntemplate <class\
+    \ T, class S>\ninline bool chmin(T &a, const S &b) {\n  return (a > b ? a = b,\
+    \ 1 : 0);\n}\n\nvi s_to_vi(string S, char first_char = 'a') {\n  vi A(S.size());\n\
+    \  FOR(i, S.size()) { A[i] = S[i] - first_char; }\n  return A;\n}\n\ntemplate\
+    \ <typename T>\nvector<T> cumsum(vector<T> &A, int off = 1) {\n  int N = A.size();\n\
+    \  vector<T> B(N + 1);\n  FOR(i, N) { B[i + 1] = B[i] + A[i]; }\n  if (off ==\
+    \ 0) B.erase(B.begin());\n  return B;\n}\n\ntemplate <typename T>\nvc<int> bincount(vc<T>\
+    \ &A, int size) {\n  vc<int> C(size);\n  for (auto &&x: A) { ++C[x]; }\n  return\
+    \ C;\n}\n\ntemplate <typename T>\nvector<int> argsort(vector<T> &A) {\n  // stable\n\
+    \  vector<int> ids(A.size());\n  iota(all(ids), 0);\n  sort(all(ids),\n      \
+    \ [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j] && i < j); });\n  return\
+    \ ids;\n}\n#line 1 \"alg/group_cntsum.hpp\"\ntemplate <typename E = long long>\r\
+    \nstruct Group_CntSum {\r\n  using value_type = pair<E,E>;\r\n  using X = value_type;\r\
+    \n  static constexpr X op(const X &x, const X &y) { return {x.fi + y.fi, x.se\
+    \ + y.se}; }\r\n  static constexpr X inverse(const X &x) { return {-x.fi, -x.se};\
+    \ }\r\n  static constexpr X unit = {0, 0};\r\n  static constexpr bool commute\
+    \ = true;\r\n};\r\n#line 1 \"alg/monoid_set.hpp\"\ntemplate <typename E, E none_val>\r\
+    \nstruct Monoid_Set {\r\n  using value_type = E;\r\n  using X = value_type;\r\n\
+    \  static X op(X x, X y) { return (y == none_val ? x : y); }\r\n  static constexpr\
+    \ X unit = none_val;\r\n  static constexpr bool commute = false;\r\n};\n#line\
+    \ 3 \"alg/lazy_cntsum_set.hpp\"\n\r\ntemplate <typename E, E none_val>\r\nstruct\
+    \ Lazy_CntSum_Set {\r\n  using X_structure = Group_CntSum<E>;\r\n  using A_structure\
+    \ = Monoid_Set<E, none_val>;\r\n  using X = typename X_structure::value_type;\r\
     \n  using A = typename A_structure::value_type;\r\n  static constexpr X act(const\
     \ X &x, const A &a) {\r\n    if(a == A_structure::unit) return x;\r\n    return\
     \ {x.fi, x.fi * a};\r\n  }\r\n};\n#line 2 \"ds/lazysegtree.hpp\"\n\ntemplate <typename\
@@ -261,7 +264,7 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
   requiredBy: []
-  timestamp: '2022-01-16 04:38:40+09:00'
+  timestamp: '2022-01-16 15:38:13+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
