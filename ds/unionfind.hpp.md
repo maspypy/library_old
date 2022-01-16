@@ -2,7 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
+    path: flow/bipartite.hpp
+    title: flow/bipartite.hpp
+  - icon: ':heavy_check_mark:'
     path: graph/check_bipartite.hpp
     title: graph/check_bipartite.hpp
   - icon: ':warning:'
@@ -12,6 +15,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/unionfind.test.cpp
     title: test/library_checker/datastructure/unionfind.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/graph/bipartitematching.test.cpp
+    title: test/library_checker/graph/bipartitematching.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -42,9 +48,11 @@ data:
   requiredBy:
   - graph/functional.hpp
   - graph/check_bipartite.hpp
+  - flow/bipartite.hpp
   timestamp: '2022-01-12 05:33:30+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/library_checker/graph/bipartitematching.test.cpp
   - test/library_checker/datastructure/unionfind.test.cpp
 documentation_of: ds/unionfind.hpp
 layout: document

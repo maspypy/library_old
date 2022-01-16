@@ -4,14 +4,20 @@ data:
   - icon: ':heavy_check_mark:'
     path: ds/unionfind.hpp
     title: ds/unionfind.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: flow/bipartite.hpp
+    title: flow/bipartite.hpp
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/graph/bipartitematching.test.cpp
+    title: test/library_checker/graph/bipartitematching.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n\
@@ -77,10 +83,12 @@ data:
   - ds/unionfind.hpp
   isVerificationFile: false
   path: graph/check_bipartite.hpp
-  requiredBy: []
+  requiredBy:
+  - flow/bipartite.hpp
   timestamp: '2022-01-16 04:25:53+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/library_checker/graph/bipartitematching.test.cpp
 documentation_of: graph/check_bipartite.hpp
 layout: document
 redirect_from:
