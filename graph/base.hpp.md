@@ -20,12 +20,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/check_bipartite.hpp
     title: graph/check_bipartite.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: graph/degree.hpp
     title: graph/degree.hpp
   - icon: ':x:'
     path: graph/dijkstra.hpp
     title: graph/dijkstra.hpp
+  - icon: ':x:'
+    path: graph/enumerate_triangles.hpp
+    title: graph/enumerate_triangles.hpp
   - icon: ':warning:'
     path: graph/eulerwalk.hpp
     title: graph/eulerwalk.hpp
@@ -90,6 +93,9 @@ data:
   - icon: ':x:'
     path: test/library_checker/graph/cycle_detection.test.cpp
     title: test/library_checker/graph/cycle_detection.test.cpp
+  - icon: ':x:'
+    path: test/library_checker/graph/enumerate_triangles.test.cpp
+    title: test/library_checker/graph/enumerate_triangles.test.cpp
   - icon: ':x:'
     path: test/library_checker/graph/maximum_independent_set.test.cpp
     title: test/library_checker/graph/maximum_independent_set.test.cpp
@@ -191,6 +197,7 @@ data:
   - graph/treemonoid.hpp
   - graph/tree_all_distances.hpp
   - graph/lazytreemonoid.hpp
+  - graph/enumerate_triangles.hpp
   - graph/degree.hpp
   - graph/centroid.hpp
   - graph/tree_diameter.hpp
@@ -215,6 +222,7 @@ data:
   - test/library_checker/graph/maximum_independent_set.test.cpp
   - test/library_checker/graph/cycle_detection.test.cpp
   - test/library_checker/graph/chromatic_number.test.cpp
+  - test/library_checker/graph/enumerate_triangles.test.cpp
   - test/library_checker/tree/lca.test.cpp
   - test/library_checker/tree/lca_directed.test.cpp
   - test/library_checker/tree/frequency_table_of_tree_distance.test.cpp

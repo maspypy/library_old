@@ -4,10 +4,10 @@ data:
   - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  _extendedRequiredBy:
   - icon: ':x:'
-    path: graph/enumerate_triangles.hpp
-    title: graph/enumerate_triangles.hpp
+    path: graph/degree.hpp
+    title: graph/degree.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':x:'
     path: test/library_checker/graph/enumerate_triangles.test.cpp
@@ -48,27 +48,44 @@ data:
     \ : G.edges) deg[e.frm]++, deg[e.to]++;\r\n  return deg;\r\n}\r\n\r\ntemplate\
     \ <typename Graph>\r\npair<vector<int>, vector<int>> degree_inout(Graph& G) {\r\
     \n  vector<int> indeg(G.N), outdeg(G.N);\r\n  for (auto&& e: G.edges) { indeg[e.to]++,\
-    \ outdeg[e.frm]++; }\r\n  return {indeg, outdeg};\r\n}\r\n"
-  code: "#include \"graph/base.hpp\"\r\n\r\ntemplate <typename Graph>\r\nvector<int>\
-    \ degree(Graph& G) {\r\n  vector<int> deg(G.N);\r\n  for(auto&& e : G.edges) deg[e.frm]++,\
-    \ deg[e.to]++;\r\n  return deg;\r\n}\r\n\r\ntemplate <typename Graph>\r\npair<vector<int>,\
-    \ vector<int>> degree_inout(Graph& G) {\r\n  vector<int> indeg(G.N), outdeg(G.N);\r\
-    \n  for (auto&& e: G.edges) { indeg[e.to]++, outdeg[e.frm]++; }\r\n  return {indeg,\
-    \ outdeg};\r\n}\r\n"
+    \ outdeg[e.frm]++; }\r\n  return {indeg, outdeg};\r\n}\r\n#line 3 \"graph/enumerate_triangles.hpp\"\
+    \n\r\ntemplate <typename Gr, typename F>\r\nvoid enumerate_triangles(Gr& G, F\
+    \ query) {\r\n  int N = G.N;\r\n  auto deg = degree(G);\r\n  Graph<int, 1> H(N);\r\
+    \n  for (auto&& e: G.edges) {\r\n    // \u6CE8\u610F\uFF1A\u6B21\u6570\u6BD4\u8F03\
+    \u3060\u3051\u3060\u3068 DAG \u306B\u306A\u3089\u305A\u3001\u30B5\u30A4\u30AF\u30EB\
+    \u304C\u3067\u304D\u3066\u3057\u307E\u3046\r\n    if (mp(deg[e.frm], e.frm) <\
+    \ mp(deg[e.to], e.to))\r\n      H.add(e.frm, e.to);\r\n    else\r\n      H.add(e.to,\
+    \ e.frm);\r\n  }\r\n  H.prepare();\r\n\r\n  vc<bool> table(N);\r\n  FOR(a, N)\
+    \ {\r\n    for (auto&& e: H[a]) { table[e.to] = 1; }\r\n    for (auto&& e: H[a])\
+    \ {\r\n      int b = e.to;\r\n      for (auto&& f: H[b]) {\r\n        int c =\
+    \ f.to;\r\n        if (table[c]) query(a, b, c);\r\n      }\r\n    }\r\n    for\
+    \ (auto&& e: H[a]) { table[e.to] = 0; }\r\n  }\r\n}\r\n"
+  code: "#include \"graph/base.hpp\"\r\n#include \"graph/degree.hpp\"\r\n\r\ntemplate\
+    \ <typename Gr, typename F>\r\nvoid enumerate_triangles(Gr& G, F query) {\r\n\
+    \  int N = G.N;\r\n  auto deg = degree(G);\r\n  Graph<int, 1> H(N);\r\n  for (auto&&\
+    \ e: G.edges) {\r\n    // \u6CE8\u610F\uFF1A\u6B21\u6570\u6BD4\u8F03\u3060\u3051\
+    \u3060\u3068 DAG \u306B\u306A\u3089\u305A\u3001\u30B5\u30A4\u30AF\u30EB\u304C\u3067\
+    \u304D\u3066\u3057\u307E\u3046\r\n    if (mp(deg[e.frm], e.frm) < mp(deg[e.to],\
+    \ e.to))\r\n      H.add(e.frm, e.to);\r\n    else\r\n      H.add(e.to, e.frm);\r\
+    \n  }\r\n  H.prepare();\r\n\r\n  vc<bool> table(N);\r\n  FOR(a, N) {\r\n    for\
+    \ (auto&& e: H[a]) { table[e.to] = 1; }\r\n    for (auto&& e: H[a]) {\r\n    \
+    \  int b = e.to;\r\n      for (auto&& f: H[b]) {\r\n        int c = f.to;\r\n\
+    \        if (table[c]) query(a, b, c);\r\n      }\r\n    }\r\n    for (auto&&\
+    \ e: H[a]) { table[e.to] = 0; }\r\n  }\r\n}\r\n"
   dependsOn:
   - graph/base.hpp
+  - graph/degree.hpp
   isVerificationFile: false
-  path: graph/degree.hpp
-  requiredBy:
-  - graph/enumerate_triangles.hpp
-  timestamp: '2022-01-16 05:23:43+09:00'
+  path: graph/enumerate_triangles.hpp
+  requiredBy: []
+  timestamp: '2022-01-16 12:44:00+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/graph/enumerate_triangles.test.cpp
-documentation_of: graph/degree.hpp
+documentation_of: graph/enumerate_triangles.hpp
 layout: document
 redirect_from:
-- /library/graph/degree.hpp
-- /library/graph/degree.hpp.html
-title: graph/degree.hpp
+- /library/graph/enumerate_triangles.hpp
+- /library/graph/enumerate_triangles.hpp.html
+title: graph/enumerate_triangles.hpp
 ---
