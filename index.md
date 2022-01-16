@@ -267,22 +267,22 @@ data:
     - icon: ':warning:'
       path: mod/binomial.hpp
       title: mod/binomial.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: mod/fast_div.hpp
       title: mod/fast_div.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: mod/mod_inv.hpp
       title: mod/mod_inv.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: mod/mod_kth_root.hpp
       title: mod/mod_kth_root.hpp
     - icon: ':heavy_check_mark:'
       path: mod/mod_log.hpp
       title: mod/mod_log.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: mod/mod_pow.hpp
       title: mod/mod_pow.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: mod/mod_sqrt.hpp
       title: mod/mod_sqrt.hpp
     - icon: ':question:'
@@ -291,7 +291,7 @@ data:
     - icon: ':x:'
       path: mod/powertable.hpp
       title: mod/powertable.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: mod/primitive_root.hpp
       title: mod/primitive_root.hpp
     - icon: ':x:'
@@ -310,7 +310,7 @@ data:
     - icon: ':warning:'
       path: nt/extgcd.hpp
       title: nt/extgcd.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: nt/factor.hpp
       title: nt/factor.hpp
     - icon: ':heavy_check_mark:'
@@ -322,7 +322,7 @@ data:
     - icon: ':question:'
       path: nt/primetable.hpp
       title: nt/primetable.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: nt/primetest.hpp
       title: nt/primetest.hpp
     - icon: ':warning:'
@@ -339,7 +339,7 @@ data:
     - icon: ':warning:'
       path: other/for_quotient.hpp
       title: other/for_quotient.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other/integer_kth_root.hpp
       title: other/integer_kth_root.hpp
     - icon: ':question:'
@@ -348,10 +348,10 @@ data:
     - icon: ':warning:'
       path: other/monge_shortest_path.hpp
       title: other/monge_shortest_path.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other/nim_product.hpp
       title: other/nim_product.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: other/random.hpp
       title: other/random.hpp
     - icon: ':heavy_check_mark:'
@@ -360,7 +360,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: other/rectangleunion.hpp
       title: other/rectangleunion.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other/sharp_p_subset_sum.hpp
       title: other/sharp_p_subset_sum.hpp
   - name: pds
@@ -385,7 +385,7 @@ data:
     - icon: ':x:'
       path: poly/fps_composition.hpp
       title: poly/fps_composition.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: poly/fps_exp.hpp
       title: poly/fps_exp.hpp
     - icon: ':x:'
@@ -420,10 +420,10 @@ data:
       title: poly/poly_taylor_shift.hpp
   - name: seq
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: seq/coef_of_rational_fps.hpp
       title: seq/coef_of_rational_fps.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: seq/find_linear_rec.hpp
       title: seq/find_linear_rec.hpp
     - icon: ':warning:'
@@ -667,31 +667,31 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/math/discrete_logarithm_mod.test.cpp
       title: test/library_checker/math/discrete_logarithm_mod.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/math/enumerate_primes.test.cpp
       title: test/library_checker/math/enumerate_primes.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/math/factorize.test.cpp
       title: test/library_checker/math/factorize.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/math/find_linear_recurrence.test.cpp
       title: test/library_checker/math/find_linear_recurrence.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/math/kth_root_integer.test.cpp
       title: test/library_checker/math/kth_root_integer.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/math/kth_root_mod.test.cpp
       title: test/library_checker/math/kth_root_mod.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
       title: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/math/nim_product.test.cpp
       title: test/library_checker/math/nim_product.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/math/sharp_p_subset_sum.test.cpp
       title: test/library_checker/math/sharp_p_subset_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/math/sqrt_mod.test.cpp
       title: test/library_checker/math/sqrt_mod.test.cpp
     - icon: ':x:'
