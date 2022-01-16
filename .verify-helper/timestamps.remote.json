@@ -41,5 +41,14 @@
 "test/library_checker/graph/bipartitematching.test.cpp": "2022-01-16 15:38:13 +0900",
 "test/library_checker/math/binomial_coefficient.test.cpp": "2022-01-14 01:43:46 +0900",
 "test/library_checker/math/counting_primes.test.cpp": "2022-01-16 15:38:13 +0900",
-"test/library_checker/math/discrete_logarithm_mod.test.cpp": "2022-01-16 15:38:13 +0900"
+"test/library_checker/math/discrete_logarithm_mod.test.cpp": "2022-01-16 15:38:13 +0900",
+"test/library_checker/math/enumerate_primes.test.cpp": "2022-01-16 15:38:13 +0900",
+"test/library_checker/math/factorize.test.cpp": "2022-01-16 15:38:13 +0900",
+"test/library_checker/math/find_linear_recurrence.test.cpp": "2022-01-16 15:38:13 +0900",
+"test/library_checker/math/kth_root_integer.test.cpp": "2022-01-16 15:38:13 +0900",
+"test/library_checker/math/kth_root_mod.test.cpp": "2022-01-16 15:38:13 +0900",
+"test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp": "2022-01-16 15:38:13 +0900",
+"test/library_checker/math/nim_product.test.cpp": "2022-01-16 15:38:13 +0900",
+"test/library_checker/math/sharp_p_subset_sum.test.cpp": "2022-01-16 15:38:13 +0900",
+"test/library_checker/math/sqrt_mod.test.cpp": "2022-01-16 15:38:13 +0900"
 }
