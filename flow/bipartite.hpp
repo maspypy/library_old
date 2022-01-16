@@ -1,113 +1,108 @@
+#include "graph/base.hpp"
+#include "graph/check_bipartite.hpp"
+
+template <typename Graph>
 struct BipartiteMatching {
-  int n, m;
-  vector<vector<int>> graph;
-  vector<int> dist, match;
-  vector<bool> used, vv;
-  bool calculated;
+  int N;
+  Graph& G;
+  vc<int> color;
+  vc<int> dist, match;
+  vc<int> vis;
 
-  BipartiteMatching(int n, int m)
-      : n(n), m(m), graph(n), match(m, -1), used(n), calculated(false) {}
-
-  void add(int u, int v) {
-    graph[u].push_back(v);
-    calculated = false;
+  BipartiteMatching(Graph& G) : G(G), N(G.N), dist(G.N, -1), match(G.N, -1) {
+    color = check_bipartite(G);
+    assert(color[0] != -1);
+    while (1) {
+      bfs();
+      vis.assign(N, false);
+      int flow = 0;
+      FOR(v, N) if (!color[v] && match[v] == -1 && dfs(v))++ flow;
+      if (!flow) break;
+    }
   }
 
   void bfs() {
-    dist.assign(graph.size(), -1);
+    dist.assign(N, -1);
     queue<int> que;
-    for (int i = 0; i < graph.size(); i++) {
-      if (!used[i]) {
-        que.emplace(i);
-        dist[i] = 0;
-      }
-    }
-
+    FOR(v, N) if (!color[v] && match[v] == -1) que.emplace(v), dist[v] = 0;
     while (!que.empty()) {
-      int a = que.front();
+      int v = que.front();
       que.pop();
-      for (auto &b : graph[a]) {
-        int c = match[b];
-        if (c >= 0 && dist[c] == -1) {
-          dist[c] = dist[a] + 1;
-          que.emplace(c);
-        }
+      for (auto&& e: G[v]) {
+        int w = match[e.to];
+        if (w != -1 && dist[w] == -1) dist[w] = dist[v] + 1, que.emplace(w);
       }
     }
   }
 
-  bool dfs(int a) {
-    vv[a] = true;
-    for (auto &b : graph[a]) {
-      int c = match[b];
-      if (c < 0 || (!vv[c] && dist[c] == dist[a] + 1 && dfs(c))) {
-        match[b] = a;
-        used[a] = true;
-        return (true);
+  bool dfs(int v) {
+    vis[v] = 1;
+    for (auto&& e: G[v]) {
+      int w = match[e.to];
+      if (w == -1 || (!vis[w] && dist[w] == dist[v] + 1 && dfs(w))) {
+        match[e.to] = v, match[v] = e.to;
+        return true;
       }
     }
-    return (false);
+    return false;
   }
 
-  void calc() {
-    if (calculated) return;
-    while (true) {
-      bfs();
-      vv.assign(graph.size(), false);
-      int flow = 0;
-      for (int i = 0; i < graph.size(); i++) {
-        if (!used[i] && dfs(i)) ++flow;
+  vc<pair<int, int>> matching() {
+    vc<pair<int, int>> res;
+    FOR(v, N) if (v < match[v]) res.eb(v, match[v]);
+    return res;
+  }
+
+  vc<int> vertex_cover() {
+    vc<int> isin = color;
+    FOR(v, N) if (!color[v] && dist[v] == -1) {
+      isin[v] = 1;
+      for (auto&& e: G[v]) isin[e.to] = 0;
+    }
+    vc<int> res;
+    FOR(v, N) if (isin[v]) res.eb(v);
+    return res;
+  }
+
+  vc<int> independent_set() {
+    vc<int> isin = color;
+    FOR(v, N) if (!color[v] && dist[v] == -1) {
+      isin[v] = 1;
+      for (auto&& e: G[v]) isin[e.to] = 0;
+    }
+    vc<int> res;
+    FOR(v, N) if (!isin[v]) res.eb(v);
+    return res;
+  }
+
+  vc<int> edge_cover() {
+    vc<bool> done(N);
+    vc<int> res;
+    for (auto&& e: G.edges) {
+      if (done[e.frm] || done[e.to]) continue;
+      if (match[e.frm] == e.to) {
+        res.eb(e.id);
+        done[e.frm] = done[e.to] = 1;
       }
-      if (flow == 0) break;
     }
-    calculated = true;
+    for (auto&& e: G.edges) {
+      if (!done[e.frm]) {
+        res.eb(e.id);
+        done[e.frm] = 1;
+      }
+      if (!done[e.to]) {
+        res.eb(e.id);
+        done[e.to] = 1;
+      }
+    }
+    sort(all(res));
+    return res;
   }
 
-  vector<pair<int, int>> max_matching() {
-    calc();
-    vector<pair<int, int>> matching;
-    FOR(r, m) {
-      if (match[r] != -1) matching.eb(match[r], r);
-    }
-    return matching;
-  }
-
-  pair<vector<int>, vector<int>> min_vertex_cover() {
-    calc();
-    vector<bool> covered(m);
-    vector<int> A, B;
-    FOR(l, n) if (dist[l] != -1) {
-      A.eb(l);
-      FORIN(r, graph[l]) covered[r] = true;
-    }
-    FOR(r, m) if (!covered[r]) B.eb(r);
-    return {A, B};
-  }
-
-  pair<vector<int>, vector<int>> max_independent_set() {
-    calc();
-    vector<bool> covered(m);
-    vector<int> A, B;
-    FOR(l, n) if (dist[l] != -1) {
-      A.eb(l);
-      FORIN(r, graph[l]) covered[r] = true;
-    }
-    FOR(l, n) if (dist[l] == -1) A.eb(l);
-    FOR(r, m) if (covered[r]) B.eb(r);
-    return {A, B};
-  }
-
-  vector<pair<int, int>> min_edge_cover() {
-    auto E = max_matching();
-    vector<bool> done_l(n), done_r(m);
-    for (auto &&[l, r] : E) { done_l[l] = done_r[r] = true; }
-    FOR(l, n) FORIN(r, graph[l]) {
-      if (!done_l[l]) E.eb(l, r);
-      if (!done_r[r]) E.eb(l, r);
-      done_l[l] = done_r[r] = true;
-    }
-    FOR(l, n) if (!done_l[l]) return {};
-    FOR(r, m) if (!done_r[r]) return {};
-    return E;
+  void debug() {
+    print("match", match);
+    print("min vertex covor", vertex_cover());
+    print("max indep set", independent_set());
+    print("min edge cover", edge_cover());
   }
 };
