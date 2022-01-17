@@ -40,6 +40,7 @@ struct Graph {
   constexpr bool is_directed() { return directed; }
 
   Graph() : N(0), M(0), prepared(0) {}
+  Graph(int N) : N(N), M(0), prepared(0) {}
 
   void add(int frm, int to, T cost = 1, int i = -1) {
     assert(!prepared && 0 <= frm && 0 <= to);
