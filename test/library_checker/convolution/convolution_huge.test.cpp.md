@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
   - icon: ':question:'
@@ -10,7 +10,7 @@ data:
   - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/convolution.hpp
     title: poly/convolution.hpp
   - icon: ':heavy_check_mark:'
@@ -36,21 +36,21 @@ data:
     struct is_modint : decltype(detail::check_value<T>(0)) {};\r\ntemplate <typename\
     \ T>\r\nusing is_modint_t = enable_if_t<is_modint<T>::value>;\r\ntemplate <typename\
     \ T>\r\nusing is_not_modint_t = enable_if_t<!is_modint<T>::value>;\r\n\r\nstruct\
-    \ Scanner {\r\n  int fd = -1;\r\n  char line[(1 << 15) + 1];\r\n  size_t st =\
-    \ 0, ed = 0;\r\n  void reread() {\r\n    memmove(line, line + st, ed - st);\r\n\
-    \    ed -= st;\r\n    st = 0;\r\n    ed += ::read(fd, line + ed, (1 << 15) - ed);\r\
-    \n    line[ed] = '\\0';\r\n  }\r\n  bool succ() {\r\n    while (true) {\r\n  \
-    \    if (st == ed) {\r\n        reread();\r\n        if (st == ed) return false;\r\
-    \n      }\r\n      while (st != ed && isspace(line[st])) st++;\r\n      if (st\
-    \ != ed) break;\r\n    }\r\n    if (ed - st <= 50) {\r\n      bool sep = false;\r\
-    \n      for (size_t i = st; i < ed; i++) {\r\n        if (isspace(line[i])) {\r\
-    \n          sep = true;\r\n          break;\r\n        }\r\n      }\r\n      if\
-    \ (!sep) reread();\r\n    }\r\n    return true;\r\n  }\r\n  template <class T,\
-    \ enable_if_t<is_same<T, string>::value, int> = 0>\r\n  bool read_single(T &ref)\
-    \ {\r\n    if (!succ()) return false;\r\n    while (true) {\r\n      size_t sz\
-    \ = 0;\r\n      while (st + sz < ed && !isspace(line[st + sz])) sz++;\r\n    \
-    \  ref.append(line + st, sz);\r\n      st += sz;\r\n      if (!sz || st != ed)\
-    \ break;\r\n      reread();\r\n    }\r\n    return true;\r\n  }\r\n  template\
+    \ Scanner {\r\n  FILE* fp;\r\n  char line[(1 << 15) + 1];\r\n  size_t st = 0,\
+    \ ed = 0;\r\n  void reread() {\r\n    memmove(line, line + st, ed - st);\r\n \
+    \   ed -= st;\r\n    st = 0;\r\n    ed += fread(line + ed, 1, (1 << 15) - ed,\
+    \ fp);\r\n    line[ed] = '\\0';\r\n  }\r\n  bool succ() {\r\n    while (true)\
+    \ {\r\n      if (st == ed) {\r\n        reread();\r\n        if (st == ed) return\
+    \ false;\r\n      }\r\n      while (st != ed && isspace(line[st])) st++;\r\n \
+    \     if (st != ed) break;\r\n    }\r\n    if (ed - st <= 50) {\r\n      bool\
+    \ sep = false;\r\n      for (size_t i = st; i < ed; i++) {\r\n        if (isspace(line[i]))\
+    \ {\r\n          sep = true;\r\n          break;\r\n        }\r\n      }\r\n \
+    \     if (!sep) reread();\r\n    }\r\n    return true;\r\n  }\r\n  template <class\
+    \ T, enable_if_t<is_same<T, string>::value, int> = 0>\r\n  bool read_single(T\
+    \ &ref) {\r\n    if (!succ()) return false;\r\n    while (true) {\r\n      size_t\
+    \ sz = 0;\r\n      while (st + sz < ed && !isspace(line[st + sz])) sz++;\r\n \
+    \     ref.append(line + st, sz);\r\n      st += sz;\r\n      if (!sz || st !=\
+    \ ed) break;\r\n      reread();\r\n    }\r\n    return true;\r\n  }\r\n  template\
     \ <class T, enable_if_t<is_integral<T>::value, int> = 0>\r\n  bool read_single(T\
     \ &ref) {\r\n    if (!succ()) return false;\r\n    bool neg = false;\r\n    if\
     \ (line[st] == '-') {\r\n      neg = true;\r\n      st++;\r\n    }\r\n    ref\
@@ -71,12 +71,12 @@ data:
     \ && read_single(get<1>(p))\r\n            && read_single(get<2>(p)) && read_single(get<3>(p)));\r\
     \n  }\r\n  void read() {}\r\n  template <class H, class... T>\r\n  void read(H\
     \ &h, T &... t) {\r\n    bool f = read_single(h);\r\n    assert(f);\r\n    read(t...);\r\
-    \n  }\r\n  Scanner(FILE *fp) : fd(fileno(fp)) {}\r\n};\r\n\r\nstruct Printer {\r\
-    \n  Printer(FILE *_fp) : fp(_fp) {}\r\n  ~Printer() { flush(); }\r\n\r\n  static\
-    \ constexpr size_t SIZE = 1 << 15;\r\n  FILE *fp;\r\n  char line[SIZE], small[50];\r\
-    \n  size_t pos = 0;\r\n  void flush() {\r\n    fwrite(line, 1, pos, fp);\r\n \
-    \   pos = 0;\r\n  }\r\n  void write(const char &val) {\r\n    if (pos == SIZE)\
-    \ flush();\r\n    line[pos++] = val;\r\n  }\r\n  template <class T, enable_if_t<is_integral<T>::value,\
+    \n  }\r\n  Scanner(FILE *fp) : fp(fp) {}\r\n};\r\n\r\nstruct Printer {\r\n  Printer(FILE\
+    \ *_fp) : fp(_fp) {}\r\n  ~Printer() { flush(); }\r\n\r\n  static constexpr size_t\
+    \ SIZE = 1 << 15;\r\n  FILE *fp;\r\n  char line[SIZE], small[50];\r\n  size_t\
+    \ pos = 0;\r\n  void flush() {\r\n    fwrite(line, 1, pos, fp);\r\n    pos = 0;\r\
+    \n  }\r\n  void write(const char &val) {\r\n    if (pos == SIZE) flush();\r\n\
+    \    line[pos++] = val;\r\n  }\r\n  template <class T, enable_if_t<is_integral<T>::value,\
     \ int> = 0>\r\n  void write(T val) {\r\n    if (pos > (1 << 15) - 50) flush();\r\
     \n    if (val == 0) {\r\n      write('0');\r\n      return;\r\n    }\r\n    if\
     \ (val < 0) {\r\n      write('-');\r\n      val = -val; // todo min\r\n    }\r\
@@ -417,7 +417,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/convolution/convolution_huge.test.cpp
   requiredBy: []
-  timestamp: '2022-01-16 15:38:13+09:00'
+  timestamp: '2022-01-23 17:25:15+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/convolution/convolution_huge.test.cpp
