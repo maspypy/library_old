@@ -16,14 +16,14 @@ template <typename T>
 using is_not_modint_t = enable_if_t<!is_modint<T>::value>;
 
 struct Scanner {
-  int fd = -1;
+  FILE* fp;
   char line[(1 << 15) + 1];
   size_t st = 0, ed = 0;
   void reread() {
     memmove(line, line + st, ed - st);
     ed -= st;
     st = 0;
-    ed += ::read(fd, line + ed, (1 << 15) - ed);
+    ed += fread(line + ed, 1, (1 << 15) - ed, fp);
     line[ed] = '\0';
   }
   bool succ() {
@@ -114,7 +114,7 @@ struct Scanner {
     assert(f);
     read(t...);
   }
-  Scanner(FILE *fp) : fd(fileno(fp)) {}
+  Scanner(FILE *fp) : fp(fp) {}
 };
 
 struct Printer {
