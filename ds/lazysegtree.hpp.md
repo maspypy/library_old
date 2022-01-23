@@ -21,7 +21,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_4_A_rectangle_union.test.cpp
     title: test/aoj/DSL_4_A_rectangle_union.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
     title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
   - icon: ':x:'

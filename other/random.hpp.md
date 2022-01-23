@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/chromatic.hpp
     title: graph/chromatic.hpp
   - icon: ':x:'
@@ -21,7 +21,7 @@ data:
     path: string/rollinghash.hpp
     title: string/rollinghash.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/chromatic_number.test.cpp
     title: test/library_checker/graph/chromatic_number.test.cpp
   - icon: ':x:'
@@ -38,7 +38,7 @@ data:
     title: test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 1 \"other/random.hpp\"\nstruct RandomNumberGenerator {\n  mt19937\
@@ -62,7 +62,7 @@ data:
   - graph/chromatic.hpp
   - string/rollinghash.hpp
   timestamp: '2021-12-25 22:40:58+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/library_checker/matrix/sparse_matrix_det.test.cpp
   - test/library_checker/graph/chromatic_number.test.cpp
