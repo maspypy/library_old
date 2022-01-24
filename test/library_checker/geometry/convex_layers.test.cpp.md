@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: geo/base.hpp
     title: geo/base.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: geo/dynamicupperhull.hpp
     title: geo/dynamicupperhull.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: other/io.hpp
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/convex_layers
@@ -185,56 +185,57 @@ data:
     \      : DynamicUpperHull(P, vc<bool>(len(P), b)) {}\r\n\r\n  DynamicUpperHull(vc<Point>\
     \ _P, vc<bool> isin) : N(len(_P)), P(_P) {\r\n    to_original_idx = argsort(P);\r\
     \n    sort(all(P));\r\n    sz = 1;\r\n    while (sz < N) sz *= 2;\r\n    to_seg_idx.resize(N);\r\
-    \n    seg.assign(sz + sz, {-1, -1, -1, -1});\r\n    FOR(i, N) to_seg_idx[to_original_idx[i]]\
-    \ = i;\r\n    FOR(i, N) if (isin[to_original_idx[i]]) { seg[sz + i] = {i, i +\
-    \ 1, i, i}; }\r\n    FOR3_R(i, 1, sz) update(i);\r\n  }\r\n\r\n  void insert(int\
-    \ i) {\r\n    i = to_seg_idx[i];\r\n    seg[sz + i] = {i, i + 1, i, i};\r\n  \
-    \  i = (sz + i) / 2;\r\n    while (i) {\r\n      update(i);\r\n      i /= 2;\r\
-    \n    }\r\n  }\r\n\r\n  void erase(int i) {\r\n    i = to_seg_idx[i];\r\n    seg[sz\
-    \ + i] = {-1, -1, -1, -1};\r\n    i = (sz + i) / 2;\r\n    while (i) {\r\n   \
-    \   update(i);\r\n      i /= 2;\r\n    }\r\n  }\r\n\r\n  inline bool exist(int\
-    \ i) { return seg[i].r != -1; }\r\n\r\n  void update(int i) {\r\n    if (!exist(2\
-    \ * i + 0) && !exist(2 * i + 1)) {\r\n      seg[i].r = -1;\r\n      return;\r\n\
-    \    }\r\n    if (!exist(2 * i + 0)) {\r\n      seg[i] = seg[2 * i + 1];\r\n \
-    \     return;\r\n    }\r\n    if (!exist(2 * i + 1)) {\r\n      seg[i] = seg[2\
-    \ * i + 0];\r\n      return;\r\n    }\r\n    int p = 2 * i, q = 2 * i + 1;\r\n\
-    \    ll X = P[seg[q].l].x;\r\n    while (p < sz || q < sz) {\r\n      if (p <\
-    \ sz && !exist(2 * p + 0)) {\r\n        p = 2 * p + 1;\r\n        continue;\r\n\
-    \      }\r\n      if (p < sz && !exist(2 * p + 1)) {\r\n        p = 2 * p + 0;\r\
-    \n        continue;\r\n      }\r\n      if (q < sz && !exist(2 * q + 0)) {\r\n\
-    \        q = 2 * q + 1;\r\n        continue;\r\n      }\r\n      if (q < sz &&\
-    \ !exist(2 * q + 1)) {\r\n        q = 2 * q + 0;\r\n        continue;\r\n    \
-    \  }\r\n      int a = seg[p].bl, b = seg[p].br, c = seg[q].bl, d = seg[q].br;\r\
-    \n      if (a != b && (P[b] - P[a]).det(P[c] - P[a]) > 0) p = p * 2 + 0;\r\n \
-    \     elif (c != d && (P[c] - P[b]).det(P[d] - P[b]) > 0) q = 2 * q + 1;\r\n \
-    \     elif (a == b) q = 2 * q + 0;\r\n      elif (c == d) p = 2 * p + 1;\r\n \
-    \     else {\r\n        i128 c1 = (P[b] - P[a]).det(P[c] - P[a]);\r\n        i128\
-    \ c2 = (P[a] - P[b]).det(P[d] - P[b]);\r\n        if (c1 + c2 == 0 || c1 * P[d].x\
-    \ + c2 * P[c].x < X * (c1 + c2)) {\r\n          p = 2 * p + 1;\r\n        } else\
-    \ {\r\n          q = 2 * q + 0;\r\n        }\r\n      }\r\n    }\r\n    seg[i].l\
-    \ = seg[2 * i].l, seg[i].r = seg[2 * i + 1].r;\r\n    seg[i].bl = seg[p].l, seg[i].br\
-    \ = seg[q].l;\r\n  }\r\n\r\n  vc<int> get() {\r\n    // output sensitive complexity\r\
-    \n    vc<int> res;\r\n    auto dfs = [&](auto self, int k, int l, int r) -> void\
-    \ {\r\n      if (!exist(k) || l >= r) return;\r\n      if (k >= sz) {\r\n    \
-    \    res.eb(seg[k].l);\r\n        return;\r\n      }\r\n      if (!exist(2 * k\
-    \ + 0)) return self(self, 2 * k + 1, l, r);\r\n      if (!exist(2 * k + 1)) return\
-    \ self(self, 2 * k + 0, l, r);\r\n      if (r <= seg[k].bl) return self(self,\
-    \ 2 * k + 0, l, r);\r\n      if (seg[k].br <= l) return self(self, 2 * k + 1,\
-    \ l, r);\r\n      self(self, 2 * k + 0, l, seg[k].bl + 1);\r\n      self(self,\
-    \ 2 * k + 1, seg[k].br, r);\r\n    };\r\n    dfs(dfs, 1, 0, N);\r\n    for (auto&&\
-    \ i: res) i = to_original_idx[i];\r\n    return res;\r\n  }\r\n\r\n  void debug()\
-    \ {\r\n    print(\"points\");\r\n    FOR(i, len(P)) print(i, P[i].x, P[i].y);\r\
-    \n    print(\"seg\");\r\n    FOR(i, len(seg)) print(i, seg[i].l, seg[i].r, seg[i].bl,\
-    \ seg[i].br);\r\n    print(\"get\");\r\n    print(get());\r\n  }\r\n};\r\n#line\
-    \ 4 \"test/library_checker/geometry/convex_layers.test.cpp\"\n\r\nvoid solve()\
-    \ {\r\n  LL(N);\r\n  vc<Point> pts(N);\r\n  FOR(i, N) read(pts[i].x), read(pts[i].y);\r\
-    \n  DynamicUpperHull DUH(pts, 1);\r\n  FOR(i, N) pts[i] = -pts[i];\r\n  DynamicUpperHull\
-    \ DLH(pts, 1);\r\n  vc<int> ANS(N, -1);\r\n  int done = 0;\r\n  int k = 0;\r\n\
-    \  while (done < N) {\r\n    ++k;\r\n    auto A = DUH.get();\r\n    auto B = DLH.get();\r\
-    \n    A.insert(A.end(), all(B));\r\n    for (auto&& i: A)\r\n      if (ANS[i]\
-    \ == -1) {\r\n        ++done;\r\n        ANS[i] = k;\r\n        DUH.erase(i);\r\
-    \n        DLH.erase(i);\r\n      }\r\n  }\r\n  for (auto&& x: ANS) print(x);\r\
-    \n}\r\n\r\nsigned main() {\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \n    seg.assign(sz + sz, {-1, -1, -1, -1});\r\n    for (int i = 0; i < N; ++i)\
+    \ to_seg_idx[to_original_idx[i]] = i;\r\n    for (int i = 0; i < N; ++i)\r\n \
+    \     if (isin[to_original_idx[i]]) { seg[sz + i] = {i, i + 1, i, i}; }\r\n  \
+    \  FOR3_R(i, 1, sz) update(i);\r\n  }\r\n\r\n  void insert(int i) {\r\n    i =\
+    \ to_seg_idx[i];\r\n    seg[sz + i] = {i, i + 1, i, i};\r\n    i = (sz + i) /\
+    \ 2;\r\n    while (i) {\r\n      update(i);\r\n      i /= 2;\r\n    }\r\n  }\r\
+    \n\r\n  void erase(int i) {\r\n    i = to_seg_idx[i];\r\n    seg[sz + i] = {-1,\
+    \ -1, -1, -1};\r\n    i = (sz + i) / 2;\r\n    while (i) {\r\n      update(i);\r\
+    \n      i /= 2;\r\n    }\r\n  }\r\n\r\n  inline bool exist(int i) { return seg[i].r\
+    \ != -1; }\r\n\r\n  void update(int i) {\r\n    if (!exist(2 * i + 0) && !exist(2\
+    \ * i + 1)) {\r\n      seg[i].r = -1;\r\n      return;\r\n    }\r\n    if (!exist(2\
+    \ * i + 0)) {\r\n      seg[i] = seg[2 * i + 1];\r\n      return;\r\n    }\r\n\
+    \    if (!exist(2 * i + 1)) {\r\n      seg[i] = seg[2 * i + 0];\r\n      return;\r\
+    \n    }\r\n    int p = 2 * i, q = 2 * i + 1;\r\n    ll X = P[seg[q].l].x;\r\n\
+    \    while (p < sz || q < sz) {\r\n      if (p < sz && !exist(2 * p + 0)) {\r\n\
+    \        p = 2 * p + 1;\r\n        continue;\r\n      }\r\n      if (p < sz &&\
+    \ !exist(2 * p + 1)) {\r\n        p = 2 * p + 0;\r\n        continue;\r\n    \
+    \  }\r\n      if (q < sz && !exist(2 * q + 0)) {\r\n        q = 2 * q + 1;\r\n\
+    \        continue;\r\n      }\r\n      if (q < sz && !exist(2 * q + 1)) {\r\n\
+    \        q = 2 * q + 0;\r\n        continue;\r\n      }\r\n      int a = seg[p].bl,\
+    \ b = seg[p].br, c = seg[q].bl, d = seg[q].br;\r\n      if (a != b && (P[b] -\
+    \ P[a]).det(P[c] - P[a]) > 0) p = p * 2 + 0;\r\n      elif (c != d && (P[c] -\
+    \ P[b]).det(P[d] - P[b]) > 0) q = 2 * q + 1;\r\n      elif (a == b) q = 2 * q\
+    \ + 0;\r\n      elif (c == d) p = 2 * p + 1;\r\n      else {\r\n        i128 c1\
+    \ = (P[b] - P[a]).det(P[c] - P[a]);\r\n        i128 c2 = (P[a] - P[b]).det(P[d]\
+    \ - P[b]);\r\n        if (c1 + c2 == 0 || c1 * P[d].x + c2 * P[c].x < X * (c1\
+    \ + c2)) {\r\n          p = 2 * p + 1;\r\n        } else {\r\n          q = 2\
+    \ * q + 0;\r\n        }\r\n      }\r\n    }\r\n    seg[i].l = seg[2 * i].l, seg[i].r\
+    \ = seg[2 * i + 1].r;\r\n    seg[i].bl = seg[p].l, seg[i].br = seg[q].l;\r\n \
+    \ }\r\n\r\n  vc<int> get() {\r\n    // output sensitive complexity\r\n    vc<int>\
+    \ res;\r\n    auto dfs = [&](auto self, int k, int l, int r) -> void {\r\n   \
+    \   if (!exist(k) || l >= r) return;\r\n      if (k >= sz) {\r\n        res.eb(seg[k].l);\r\
+    \n        return;\r\n      }\r\n      if (!exist(2 * k + 0)) return self(self,\
+    \ 2 * k + 1, l, r);\r\n      if (!exist(2 * k + 1)) return self(self, 2 * k +\
+    \ 0, l, r);\r\n      if (r <= seg[k].bl) return self(self, 2 * k + 0, l, r);\r\
+    \n      if (seg[k].br <= l) return self(self, 2 * k + 1, l, r);\r\n      self(self,\
+    \ 2 * k + 0, l, seg[k].bl + 1);\r\n      self(self, 2 * k + 1, seg[k].br, r);\r\
+    \n    };\r\n    dfs(dfs, 1, 0, N);\r\n    for (auto&& i: res) i = to_original_idx[i];\r\
+    \n    return res;\r\n  }\r\n\r\n  void debug() {\r\n    print(\"points\");\r\n\
+    \    FOR(i, len(P)) print(i, P[i].x, P[i].y);\r\n    print(\"seg\");\r\n    FOR(i,\
+    \ len(seg)) print(i, seg[i].l, seg[i].r, seg[i].bl, seg[i].br);\r\n    print(\"\
+    get\");\r\n    print(get());\r\n  }\r\n};\r\n#line 4 \"test/library_checker/geometry/convex_layers.test.cpp\"\
+    \n\r\nvoid solve() {\r\n  LL(N);\r\n  vc<Point> pts(N);\r\n  FOR(i, N) read(pts[i].x),\
+    \ read(pts[i].y);\r\n  DynamicUpperHull DUH(pts, 1);\r\n  FOR(i, N) pts[i] = -pts[i];\r\
+    \n  DynamicUpperHull DLH(pts, 1);\r\n  vc<int> ANS(N, -1);\r\n  int done = 0;\r\
+    \n  int k = 0;\r\n  while (done < N) {\r\n    ++k;\r\n    auto A = DUH.get();\r\
+    \n    auto B = DLH.get();\r\n    A.insert(A.end(), all(B));\r\n    for (auto&&\
+    \ i: A)\r\n      if (ANS[i] == -1) {\r\n        ++done;\r\n        ANS[i] = k;\r\
+    \n        DUH.erase(i);\r\n        DLH.erase(i);\r\n      }\r\n  }\r\n  for (auto&&\
+    \ x: ANS) print(x);\r\n}\r\n\r\nsigned main() {\r\n  solve();\r\n\r\n  return\
+    \ 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convex_layers\"\r\n#include\
     \ \"my_template.hpp\"\r\n#include \"geo/dynamicupperhull.hpp\"\r\n\r\nvoid solve()\
     \ {\r\n  LL(N);\r\n  vc<Point> pts(N);\r\n  FOR(i, N) read(pts[i].x), read(pts[i].y);\r\
@@ -253,8 +254,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/geometry/convex_layers.test.cpp
   requiredBy: []
-  timestamp: '2022-01-23 17:25:15+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-01-25 04:43:11+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/geometry/convex_layers.test.cpp
 layout: document
