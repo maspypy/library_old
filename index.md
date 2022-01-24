@@ -264,7 +264,7 @@ data:
       title: linalg/spmat_min_poly.hpp
   - name: mod
     pages:
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: mod/binomial.hpp
       title: mod/binomial.hpp
     - icon: ':heavy_check_mark:'
