@@ -32,8 +32,9 @@ struct DynamicUpperHull {
     while (sz < N) sz *= 2;
     to_seg_idx.resize(N);
     seg.assign(sz + sz, {-1, -1, -1, -1});
-    FOR(i, N) to_seg_idx[to_original_idx[i]] = i;
-    FOR(i, N) if (isin[to_original_idx[i]]) { seg[sz + i] = {i, i + 1, i, i}; }
+    for (int i = 0; i < N; ++i) to_seg_idx[to_original_idx[i]] = i;
+    for (int i = 0; i < N; ++i)
+      if (isin[to_original_idx[i]]) { seg[sz + i] = {i, i + 1, i, i}; }
     FOR3_R(i, 1, sz) update(i);
   }
 
