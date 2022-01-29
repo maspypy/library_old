@@ -328,6 +328,9 @@ data:
     path: test/yukicoder/1038_centroid.test.cpp
     title: test/yukicoder/1038_centroid.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/yukicoder/1810_matpow.test.cpp
+    title: test/yukicoder/1810_matpow.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/899_bfsnumbering.test.cpp
     title: test/yukicoder/899_bfsnumbering.test.cpp
   _isVerificationFailed: false
@@ -536,6 +539,7 @@ data:
   timestamp: '2022-01-23 17:25:15+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/yukicoder/1810_matpow.test.cpp
   - test/yukicoder/1002_centroid.test.cpp
   - test/yukicoder/1038_centroid.test.cpp
   - test/yukicoder/899_bfsnumbering.test.cpp

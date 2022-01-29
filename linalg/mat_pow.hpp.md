@@ -5,13 +5,16 @@ data:
     path: linalg/mat_mul.hpp
     title: linalg/mat_mul.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/yukicoder/1810_matpow.test.cpp
+    title: test/yukicoder/1810_matpow.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"linalg/mat_mul.hpp\"\ntemplate <class T, is_modint_t<T>*\
+  bundledCode: "#line 2 \"linalg/mat_mul.hpp\"\n\r\ntemplate <class T, is_modint_t<T>*\
     \ = nullptr>\r\nvc<vc<T>> mat_mul(const vc<vc<T>>& A, const vc<vc<T>>& B) {\r\n\
     \  // mod \u3092\u3068\u308B\u56DE\u6570\u3092\u6E1B\u3089\u3057\u3066\u307F\u308B\
     \r\n  auto N = len(A), M = len(B), K = len(B[0]);\r\n  vv(T, C, N, K);\r\n  const\
@@ -35,9 +38,10 @@ data:
   isVerificationFile: false
   path: linalg/mat_pow.hpp
   requiredBy: []
-  timestamp: '2022-01-15 19:02:18+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2022-01-29 18:48:18+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/yukicoder/1810_matpow.test.cpp
 documentation_of: linalg/mat_pow.hpp
 layout: document
 redirect_from:

@@ -5,6 +5,9 @@ data:
     path: linalg/mat_mul.hpp
     title: linalg/mat_mul.hpp
   - icon: ':heavy_check_mark:'
+    path: linalg/mat_pow.hpp
+    title: linalg/mat_pow.hpp
+  - icon: ':heavy_check_mark:'
     path: mod/modint.hpp
     title: mod/modint.hpp
   - icon: ':heavy_check_mark:'
@@ -20,22 +23,21 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/matrix_product
+    PROBLEM: https://yukicoder.me/problems/no/1810
     links:
-    - https://judge.yosupo.jp/problem/matrix_product
-  bundledCode: "#line 1 \"test/library_checker/matrix/matrix_product.test.cpp\"\n\
-    #define PROBLEM \"https://judge.yosupo.jp/problem/matrix_product\"\r\n#line 1\
-    \ \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\n#line\
-    \ 1 \"other/io.hpp\"\n// based on yosupo's fastio\r\n#include <unistd.h>\r\n\r\
-    \nnamespace detail {\r\ntemplate <typename T, decltype(&T::is_modint) = &T::is_modint>\r\
-    \nstd::true_type check_value(int);\r\ntemplate <typename T>\r\nstd::false_type\
-    \ check_value(long);\r\n} // namespace detail\r\n\r\ntemplate <typename T>\r\n\
-    struct is_modint : decltype(detail::check_value<T>(0)) {};\r\ntemplate <typename\
-    \ T>\r\nusing is_modint_t = enable_if_t<is_modint<T>::value>;\r\ntemplate <typename\
-    \ T>\r\nusing is_not_modint_t = enable_if_t<!is_modint<T>::value>;\r\n\r\nstruct\
-    \ Scanner {\r\n  FILE* fp;\r\n  char line[(1 << 15) + 1];\r\n  size_t st = 0,\
-    \ ed = 0;\r\n  void reread() {\r\n    memmove(line, line + st, ed - st);\r\n \
-    \   ed -= st;\r\n    st = 0;\r\n    ed += fread(line + ed, 1, (1 << 15) - ed,\
+    - https://yukicoder.me/problems/no/1810
+  bundledCode: "#line 1 \"test/yukicoder/1810_matpow.test.cpp\"\n#define PROBLEM \"\
+    https://yukicoder.me/problems/no/1810\"\r\n#line 1 \"my_template.hpp\"\n#include\
+    \ <bits/stdc++.h>\n\nusing namespace std;\n\n#line 1 \"other/io.hpp\"\n// based\
+    \ on yosupo's fastio\r\n#include <unistd.h>\r\n\r\nnamespace detail {\r\ntemplate\
+    \ <typename T, decltype(&T::is_modint) = &T::is_modint>\r\nstd::true_type check_value(int);\r\
+    \ntemplate <typename T>\r\nstd::false_type check_value(long);\r\n} // namespace\
+    \ detail\r\n\r\ntemplate <typename T>\r\nstruct is_modint : decltype(detail::check_value<T>(0))\
+    \ {};\r\ntemplate <typename T>\r\nusing is_modint_t = enable_if_t<is_modint<T>::value>;\r\
+    \ntemplate <typename T>\r\nusing is_not_modint_t = enable_if_t<!is_modint<T>::value>;\r\
+    \n\r\nstruct Scanner {\r\n  FILE* fp;\r\n  char line[(1 << 15) + 1];\r\n  size_t\
+    \ st = 0, ed = 0;\r\n  void reread() {\r\n    memmove(line, line + st, ed - st);\r\
+    \n    ed -= st;\r\n    st = 0;\r\n    ed += fread(line + ed, 1, (1 << 15) - ed,\
     \ fp);\r\n    line[ed] = '\\0';\r\n  }\r\n  bool succ() {\r\n    while (true)\
     \ {\r\n      if (st == ed) {\r\n        reread();\r\n        if (st == ed) return\
     \ false;\r\n      }\r\n      while (st != ed && isspace(line[st])) st++;\r\n \
@@ -161,54 +163,69 @@ data:
     \ C;\n}\n\ntemplate <typename T>\nvector<int> argsort(vector<T> &A) {\n  // stable\n\
     \  vector<int> ids(A.size());\n  iota(all(ids), 0);\n  sort(all(ids),\n      \
     \ [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j] && i < j); });\n  return\
-    \ ids;\n}\n#line 3 \"test/library_checker/matrix/matrix_product.test.cpp\"\n\r\
-    \n#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n  static constexpr\
-    \ bool is_modint = true;\n  int val;\n  constexpr modint(const ll val = 0) noexcept\n\
-    \      : val(val >= 0 ? val % mod : (mod - (-val) % mod) % mod) {}\n  bool operator<(const\
-    \ modint &other) const {\n    return val < other.val;\n  } // To use std::map\n\
-    \  modint &operator+=(const modint &p) {\n    if ((val += p.val) >= mod) val -=\
-    \ mod;\n    return *this;\n  }\n  modint &operator-=(const modint &p) {\n    if\
-    \ ((val += mod - p.val) >= mod) val -= mod;\n    return *this;\n  }\n  modint\
-    \ &operator*=(const modint &p) {\n    val = (int)(1LL * val * p.val % mod);\n\
-    \    return *this;\n  }\n  modint &operator/=(const modint &p) {\n    *this *=\
-    \ p.inverse();\n    return *this;\n  }\n  modint operator-() const { return modint(-val);\
-    \ }\n  modint operator+(const modint &p) const { return modint(*this) += p; }\n\
-    \  modint operator-(const modint &p) const { return modint(*this) -= p; }\n  modint\
-    \ operator*(const modint &p) const { return modint(*this) *= p; }\n  modint operator/(const\
-    \ modint &p) const { return modint(*this) /= p; }\n  bool operator==(const modint\
-    \ &p) const { return val == p.val; }\n  bool operator!=(const modint &p) const\
-    \ { return val != p.val; }\n  modint inverse() const {\n    int a = val, b = mod,\
-    \ u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -= t *\
-    \ b, b), swap(u -= t * v, v);\n    }\n    return modint(u);\n  }\n  modint pow(int64_t\
-    \ n) const {\n    modint ret(1), mul(val);\n    while (n > 0) {\n      if (n &\
-    \ 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n    return ret;\n\
-    \  }\n  static constexpr int get_mod() { return mod; }\n};\n\nstruct ArbitraryModInt\
-    \ {\n  static constexpr bool is_modint = true;\n  int val;\n  ArbitraryModInt()\
-    \ : val(0) {}\n  ArbitraryModInt(int64_t y)\n      : val(y >= 0 ? y % get_mod()\n\
-    \                   : (get_mod() - (-y) % get_mod()) % get_mod()) {}\n  bool operator<(const\
-    \ ArbitraryModInt &other) const {\n    return val < other.val;\n  } // To use\
-    \ std::map<ArbitraryModInt, T>\n  static int &get_mod() {\n    static int mod\
-    \ = 0;\n    return mod;\n  }\n  static void set_mod(int md) { get_mod() = md;\
-    \ }\n  ArbitraryModInt &operator+=(const ArbitraryModInt &p) {\n    if ((val +=\
-    \ p.val) >= get_mod()) val -= get_mod();\n    return *this;\n  }\n  ArbitraryModInt\
-    \ &operator-=(const ArbitraryModInt &p) {\n    if ((val += get_mod() - p.val)\
-    \ >= get_mod()) val -= get_mod();\n    return *this;\n  }\n  ArbitraryModInt &operator*=(const\
-    \ ArbitraryModInt &p) {\n    unsigned long long a = (unsigned long long)val *\
-    \ p.val;\n    unsigned xh = (unsigned)(a >> 32), xl = (unsigned)a, d, m;\n   \
-    \ asm(\"divl %4; \\n\\t\" : \"=a\"(d), \"=d\"(m) : \"d\"(xh), \"a\"(xl), \"r\"\
-    (get_mod()));\n    val = m;\n    return *this;\n  }\n  ArbitraryModInt &operator/=(const\
-    \ ArbitraryModInt &p) {\n    *this *= p.inverse();\n    return *this;\n  }\n \
-    \ ArbitraryModInt operator-() const { return ArbitraryModInt(-val); }\n  ArbitraryModInt\
-    \ operator+(const ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this)\
-    \ += p;\n  }\n  ArbitraryModInt operator-(const ArbitraryModInt &p) const {\n\
-    \    return ArbitraryModInt(*this) -= p;\n  }\n  ArbitraryModInt operator*(const\
-    \ ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this) *= p;\n  }\n\
-    \  ArbitraryModInt operator/(const ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this)\
-    \ /= p;\n  }\n  bool operator==(const ArbitraryModInt &p) const { return val ==\
-    \ p.val; }\n  bool operator!=(const ArbitraryModInt &p) const { return val !=\
-    \ p.val; }\n  ArbitraryModInt inverse() const {\n    int a = val, b = get_mod(),\
-    \ u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -= t *\
-    \ b, b), swap(u -= t * v, v);\n    }\n    return ArbitraryModInt(u);\n  }\n  ArbitraryModInt\
+    \ ids;\n}\n#line 3 \"test/yukicoder/1810_matpow.test.cpp\"\n\r\n#line 2 \"linalg/mat_mul.hpp\"\
+    \n\r\ntemplate <class T, is_modint_t<T>* = nullptr>\r\nvc<vc<T>> mat_mul(const\
+    \ vc<vc<T>>& A, const vc<vc<T>>& B) {\r\n  // mod \u3092\u3068\u308B\u56DE\u6570\
+    \u3092\u6E1B\u3089\u3057\u3066\u307F\u308B\r\n  auto N = len(A), M = len(B), K\
+    \ = len(B[0]);\r\n  vv(T, C, N, K);\r\n  const u64 MOD2 = 8ull * T::get_mod()\
+    \ * T::get_mod();\r\n  FOR(n, N) {\r\n    vc<u64> tmp(K);\r\n    FOR(m, M) FOR(k,\
+    \ K) {\r\n      tmp[k] += u64(A[n][m].val) * B[m][k].val;\r\n      if (tmp[k]\
+    \ >= MOD2) tmp[k] -= MOD2;\r\n    }\r\n    FOR(k, K) C[n][k] = tmp[k];\r\n  }\r\
+    \n  return C;\r\n}\r\n\r\ntemplate <class T, is_not_modint_t<T>* = nullptr>\r\n\
+    vc<vc<T>> mat_mul(const vc<vc<T>>& A, const vc<vc<T>>& B) {\r\n  auto N = len(A),\
+    \ M = len(B), K = len(B[0]);\r\n  vv(T, C, N, K);\r\n  FOR(n, N) FOR(m, M) FOR(k,\
+    \ K) C[n][k] += A[n][m] * B[m][k];\r\n  return C;\r\n}\r\n#line 2 \"linalg/mat_pow.hpp\"\
+    \ntemplate<typename T>\r\nvc<vc<T>> mat_pow(vc<vc<T>> A, ll n){\r\n  int N = len(A);\r\
+    \n  vv(T, ret, N, N);\r\n  FOR(i, N) ret[i][i] = T(1);\r\n  while(n){\r\n    if(n\
+    \ & 1) ret = mat_mul(ret, A);\r\n    n /= 2;\r\n    if(n) A = mat_mul(A, A);\r\
+    \n  }\r\n  return ret;\r\n}\n#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\n\
+    struct modint {\n  static constexpr bool is_modint = true;\n  int val;\n  constexpr\
+    \ modint(const ll val = 0) noexcept\n      : val(val >= 0 ? val % mod : (mod -\
+    \ (-val) % mod) % mod) {}\n  bool operator<(const modint &other) const {\n   \
+    \ return val < other.val;\n  } // To use std::map\n  modint &operator+=(const\
+    \ modint &p) {\n    if ((val += p.val) >= mod) val -= mod;\n    return *this;\n\
+    \  }\n  modint &operator-=(const modint &p) {\n    if ((val += mod - p.val) >=\
+    \ mod) val -= mod;\n    return *this;\n  }\n  modint &operator*=(const modint\
+    \ &p) {\n    val = (int)(1LL * val * p.val % mod);\n    return *this;\n  }\n \
+    \ modint &operator/=(const modint &p) {\n    *this *= p.inverse();\n    return\
+    \ *this;\n  }\n  modint operator-() const { return modint(-val); }\n  modint operator+(const\
+    \ modint &p) const { return modint(*this) += p; }\n  modint operator-(const modint\
+    \ &p) const { return modint(*this) -= p; }\n  modint operator*(const modint &p)\
+    \ const { return modint(*this) *= p; }\n  modint operator/(const modint &p) const\
+    \ { return modint(*this) /= p; }\n  bool operator==(const modint &p) const { return\
+    \ val == p.val; }\n  bool operator!=(const modint &p) const { return val != p.val;\
+    \ }\n  modint inverse() const {\n    int a = val, b = mod, u = 1, v = 0, t;\n\
+    \    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b), swap(u -= t\
+    \ * v, v);\n    }\n    return modint(u);\n  }\n  modint pow(int64_t n) const {\n\
+    \    modint ret(1), mul(val);\n    while (n > 0) {\n      if (n & 1) ret *= mul;\n\
+    \      mul *= mul;\n      n >>= 1;\n    }\n    return ret;\n  }\n  static constexpr\
+    \ int get_mod() { return mod; }\n};\n\nstruct ArbitraryModInt {\n  static constexpr\
+    \ bool is_modint = true;\n  int val;\n  ArbitraryModInt() : val(0) {}\n  ArbitraryModInt(int64_t\
+    \ y)\n      : val(y >= 0 ? y % get_mod()\n                   : (get_mod() - (-y)\
+    \ % get_mod()) % get_mod()) {}\n  bool operator<(const ArbitraryModInt &other)\
+    \ const {\n    return val < other.val;\n  } // To use std::map<ArbitraryModInt,\
+    \ T>\n  static int &get_mod() {\n    static int mod = 0;\n    return mod;\n  }\n\
+    \  static void set_mod(int md) { get_mod() = md; }\n  ArbitraryModInt &operator+=(const\
+    \ ArbitraryModInt &p) {\n    if ((val += p.val) >= get_mod()) val -= get_mod();\n\
+    \    return *this;\n  }\n  ArbitraryModInt &operator-=(const ArbitraryModInt &p)\
+    \ {\n    if ((val += get_mod() - p.val) >= get_mod()) val -= get_mod();\n    return\
+    \ *this;\n  }\n  ArbitraryModInt &operator*=(const ArbitraryModInt &p) {\n   \
+    \ unsigned long long a = (unsigned long long)val * p.val;\n    unsigned xh = (unsigned)(a\
+    \ >> 32), xl = (unsigned)a, d, m;\n    asm(\"divl %4; \\n\\t\" : \"=a\"(d), \"\
+    =d\"(m) : \"d\"(xh), \"a\"(xl), \"r\"(get_mod()));\n    val = m;\n    return *this;\n\
+    \  }\n  ArbitraryModInt &operator/=(const ArbitraryModInt &p) {\n    *this *=\
+    \ p.inverse();\n    return *this;\n  }\n  ArbitraryModInt operator-() const {\
+    \ return ArbitraryModInt(-val); }\n  ArbitraryModInt operator+(const ArbitraryModInt\
+    \ &p) const {\n    return ArbitraryModInt(*this) += p;\n  }\n  ArbitraryModInt\
+    \ operator-(const ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this)\
+    \ -= p;\n  }\n  ArbitraryModInt operator*(const ArbitraryModInt &p) const {\n\
+    \    return ArbitraryModInt(*this) *= p;\n  }\n  ArbitraryModInt operator/(const\
+    \ ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this) /= p;\n  }\n\
+    \  bool operator==(const ArbitraryModInt &p) const { return val == p.val; }\n\
+    \  bool operator!=(const ArbitraryModInt &p) const { return val != p.val; }\n\
+    \  ArbitraryModInt inverse() const {\n    int a = val, b = get_mod(), u = 1, v\
+    \ = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b), swap(u\
+    \ -= t * v, v);\n    }\n    return ArbitraryModInt(u);\n  }\n  ArbitraryModInt\
     \ pow(int64_t n) const {\n    ArbitraryModInt ret(1), mul(val);\n    while (n\
     \ > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n  \
     \  }\n    return ret;\n  }\n};\n\ntemplate<typename mint>\ntuple<mint, mint, mint>\
@@ -230,43 +247,45 @@ data:
     \ * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n  FOR(i, k) {\n\
     \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\nusing\
     \ modint107 = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n\
-    using amint = ArbitraryModInt;\n#line 2 \"linalg/mat_mul.hpp\"\n\r\ntemplate <class\
-    \ T, is_modint_t<T>* = nullptr>\r\nvc<vc<T>> mat_mul(const vc<vc<T>>& A, const\
-    \ vc<vc<T>>& B) {\r\n  // mod \u3092\u3068\u308B\u56DE\u6570\u3092\u6E1B\u3089\
-    \u3057\u3066\u307F\u308B\r\n  auto N = len(A), M = len(B), K = len(B[0]);\r\n\
-    \  vv(T, C, N, K);\r\n  const u64 MOD2 = 8ull * T::get_mod() * T::get_mod();\r\
-    \n  FOR(n, N) {\r\n    vc<u64> tmp(K);\r\n    FOR(m, M) FOR(k, K) {\r\n      tmp[k]\
-    \ += u64(A[n][m].val) * B[m][k].val;\r\n      if (tmp[k] >= MOD2) tmp[k] -= MOD2;\r\
-    \n    }\r\n    FOR(k, K) C[n][k] = tmp[k];\r\n  }\r\n  return C;\r\n}\r\n\r\n\
-    template <class T, is_not_modint_t<T>* = nullptr>\r\nvc<vc<T>> mat_mul(const vc<vc<T>>&\
-    \ A, const vc<vc<T>>& B) {\r\n  auto N = len(A), M = len(B), K = len(B[0]);\r\n\
-    \  vv(T, C, N, K);\r\n  FOR(n, N) FOR(m, M) FOR(k, K) C[n][k] += A[n][m] * B[m][k];\r\
-    \n  return C;\r\n}\r\n#line 6 \"test/library_checker/matrix/matrix_product.test.cpp\"\
-    \nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N, M, K);\r\n  VV(mint,\
-    \ A, N, M);\r\n  VV(mint, B, M, K);\r\n  auto C = mat_mul(A, B);\r\n  FOR(n, len(C))\
-    \ print(C[n]);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/matrix_product\"\r\n#include\
-    \ \"my_template.hpp\"\r\n\r\n#include \"mod/modint.hpp\"\r\n#include \"linalg/mat_mul.hpp\"\
-    \r\nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N, M, K);\r\n  VV(mint,\
-    \ A, N, M);\r\n  VV(mint, B, M, K);\r\n  auto C = mat_mul(A, B);\r\n  FOR(n, len(C))\
-    \ print(C[n]);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+    using amint = ArbitraryModInt;\n#line 7 \"test/yukicoder/1810_matpow.test.cpp\"\
+    \n\r\nusing mint = modint107;\r\n\r\nvoid solve() {\r\n  mint A, B;\r\n  read(A),\
+    \ read(B);\r\n  vv(mint, P, 3, 3);\r\n  vv(mint, Q, 3, 3);\r\n  P[0] = {1, 0,\
+    \ 0};\r\n  P[1] = {0, 1, 0};\r\n  P[2] = {A, B, 1};\r\n  Q[0] = {0, 0, 1};\r\n\
+    \  Q[1] = {1, 0, 0};\r\n  Q[2] = {0, 0, 0};\r\n  auto QP = mat_mul(Q, P);\r\n\
+    \  LL(T);\r\n  FOR_(T) {\r\n    LL(t);\r\n    auto X = mat_pow(QP, t / 2);\r\n\
+    \    if (t & 1) X = mat_mul(P, X);\r\n    mint ANS = 0;\r\n    FOR(i, 3) FOR(j,\
+    \ 2) ANS += X[i][j];\r\n    print(ANS);\r\n  }\r\n}\r\n\r\nsigned main() {\r\n\
+    \  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
+    \n\r\n  ll T = 1;\r\n  // LL(T);\r\n  FOR(_, T) solve();\r\n\r\n  return 0;\r\n\
+    }\r\n"
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/1810\"\r\n#include \"\
+    my_template.hpp\"\r\n\r\n#include \"linalg/mat_mul.hpp\"\r\n#include \"linalg/mat_pow.hpp\"\
+    \r\n#include \"mod/modint.hpp\"\r\n\r\nusing mint = modint107;\r\n\r\nvoid solve()\
+    \ {\r\n  mint A, B;\r\n  read(A), read(B);\r\n  vv(mint, P, 3, 3);\r\n  vv(mint,\
+    \ Q, 3, 3);\r\n  P[0] = {1, 0, 0};\r\n  P[1] = {0, 1, 0};\r\n  P[2] = {A, B, 1};\r\
+    \n  Q[0] = {0, 0, 1};\r\n  Q[1] = {1, 0, 0};\r\n  Q[2] = {0, 0, 0};\r\n  auto\
+    \ QP = mat_mul(Q, P);\r\n  LL(T);\r\n  FOR_(T) {\r\n    LL(t);\r\n    auto X =\
+    \ mat_pow(QP, t / 2);\r\n    if (t & 1) X = mat_mul(P, X);\r\n    mint ANS = 0;\r\
+    \n    FOR(i, 3) FOR(j, 2) ANS += X[i][j];\r\n    print(ANS);\r\n  }\r\n}\r\n\r\
+    \nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n\
+    \  cout << setprecision(15);\r\n\r\n  ll T = 1;\r\n  // LL(T);\r\n  FOR(_, T)\
+    \ solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
-  - mod/modint.hpp
   - linalg/mat_mul.hpp
+  - linalg/mat_pow.hpp
+  - mod/modint.hpp
   isVerificationFile: true
-  path: test/library_checker/matrix/matrix_product.test.cpp
+  path: test/yukicoder/1810_matpow.test.cpp
   requiredBy: []
   timestamp: '2022-01-29 18:48:18+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/library_checker/matrix/matrix_product.test.cpp
+documentation_of: test/yukicoder/1810_matpow.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/matrix/matrix_product.test.cpp
-- /verify/test/library_checker/matrix/matrix_product.test.cpp.html
-title: test/library_checker/matrix/matrix_product.test.cpp
+- /verify/test/yukicoder/1810_matpow.test.cpp
+- /verify/test/yukicoder/1810_matpow.test.cpp.html
+title: test/yukicoder/1810_matpow.test.cpp
 ---
