@@ -1,11 +1,11 @@
 #pragma once
 #include "graph/base.hpp"
 
-template<typename T>
-pair<vc<T>, vc<int>> bfs01(Graph<T>& G, ll v) {
+template<typename Graph>
+pair<vc<ll>, vc<int>> bfs01(Graph& G, ll v) {
   assert(G.is_prepared());
   int N = G.N;
-  vc<T> dist(N, -1);
+  vc<ll> dist(N, -1);
   vc<int> par(N, -1);
   deque<int> que;
 
