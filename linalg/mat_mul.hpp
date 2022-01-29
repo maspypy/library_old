@@ -1,3 +1,5 @@
+#pragma once
+
 template <class T, is_modint_t<T>* = nullptr>
 vc<vc<T>> mat_mul(const vc<vc<T>>& A, const vc<vc<T>>& B) {
   // mod をとる回数を減らしてみる
