@@ -2,10 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/matrix/charactereistic_poly.test.cpp
+    title: test/library_checker/matrix/charactereistic_poly.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"linalg/characteristic_poly.hpp\"\ntemplate <typename T>\r\
@@ -63,8 +66,9 @@ data:
   path: linalg/characteristic_poly.hpp
   requiredBy: []
   timestamp: '2022-01-10 16:52:05+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/library_checker/matrix/charactereistic_poly.test.cpp
 documentation_of: linalg/characteristic_poly.hpp
 layout: document
 redirect_from:

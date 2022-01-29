@@ -160,6 +160,9 @@ data:
     path: test/library_checker/math/sum_of_exp_times_poly_limit.test.cpp
     title: test/library_checker/math/sum_of_exp_times_poly_limit.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/library_checker/matrix/charactereistic_poly.test.cpp
+    title: test/library_checker/matrix/charactereistic_poly.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/matrix/hafnian_of_matrix.test.cpp
     title: test/library_checker/matrix/hafnian_of_matrix.test.cpp
   - icon: ':heavy_check_mark:'
@@ -404,6 +407,7 @@ data:
   - test/library_checker/matrix/matrix_det.test.cpp
   - test/library_checker/matrix/inverse_matrix.test.cpp
   - test/library_checker/matrix/solve_linear.test.cpp
+  - test/library_checker/matrix/charactereistic_poly.test.cpp
   - test/library_checker/convolution/convolution_mod.test.cpp
   - test/library_checker/convolution/convolution_huge.test.cpp
   - test/library_checker/convolution/bitwise_or_convolution.test.cpp
