@@ -108,9 +108,6 @@ data:
       path: ds/lazysegtree_beats.hpp
       title: ds/lazysegtree_beats.hpp
     - icon: ':warning:'
-      path: ds/lazysegtree_fail.hpp
-      title: ds/lazysegtree_fail.hpp
-    - icon: ':warning:'
       path: ds/lichao.hpp
       title: ds/lichao.hpp
     - icon: ':heavy_check_mark:'
@@ -337,11 +334,11 @@ data:
       path: other/discrete_log.hpp
       title: other/discrete_log.hpp
     - icon: ':warning:'
+      path: other/floor_range.hpp
+      title: other/floor_range.hpp
+    - icon: ':warning:'
       path: other/for_nck.hpp
       title: other/for_nck.hpp
-    - icon: ':warning:'
-      path: other/for_quotient.hpp
-      title: other/for_quotient.hpp
     - icon: ':heavy_check_mark:'
       path: other/integer_kth_root.hpp
       title: other/integer_kth_root.hpp
