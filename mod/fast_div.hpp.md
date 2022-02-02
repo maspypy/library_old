@@ -59,17 +59,17 @@ data:
   isVerificationFile: false
   path: mod/fast_div.hpp
   requiredBy:
-  - mod/mod_pow.hpp
-  - mod/primitive_root.hpp
-  - mod/tetration.hpp
   - mod/binomial.hpp
   - mod/mod_kth_root.hpp
+  - mod/tetration.hpp
+  - mod/primitive_root.hpp
+  - mod/mod_pow.hpp
   timestamp: '2022-01-14 01:43:46+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/math/tetration.test.cpp
   - test/library_checker/math/binomial_coefficient.test.cpp
   - test/library_checker/math/kth_root_mod.test.cpp
+  - test/library_checker/math/tetration.test.cpp
 documentation_of: mod/fast_div.hpp
 layout: document
 redirect_from:

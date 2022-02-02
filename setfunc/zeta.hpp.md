@@ -50,13 +50,13 @@ data:
   isVerificationFile: false
   path: setfunc/zeta.hpp
   requiredBy:
-  - setfunc/or_convolution.hpp
   - setfunc/and_convolution.hpp
+  - setfunc/or_convolution.hpp
   timestamp: '2022-01-03 11:29:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/convolution/bitwise_or_convolution.test.cpp
   - test/library_checker/convolution/bitwise_and_convolution.test.cpp
+  - test/library_checker/convolution/bitwise_or_convolution.test.cpp
 documentation_of: setfunc/zeta.hpp
 layout: document
 redirect_from:

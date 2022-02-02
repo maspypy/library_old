@@ -47,14 +47,14 @@ data:
   isVerificationFile: false
   path: ds/swag.hpp
   requiredBy:
-  - poly/lagrange_interpolate_iota.hpp
   - seq/interpolate_poly_exp_sum.hpp
+  - poly/lagrange_interpolate_iota.hpp
   timestamp: '2021-12-28 08:12:08+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/datastructure/queue_operate_all_composite.test.cpp
   - test/library_checker/math/sum_of_exp_times_poly.test.cpp
   - test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
+  - test/library_checker/datastructure/queue_operate_all_composite.test.cpp
 documentation_of: ds/swag.hpp
 layout: document
 redirect_from:

@@ -39,9 +39,9 @@ data:
   isVerificationFile: false
   path: alg/group_mul.hpp
   requiredBy:
-  - poly/lagrange_interpolate_iota.hpp
   - seq/interpolate_poly_exp_sum.hpp
   - alg/lazy_add_mul.hpp
+  - poly/lagrange_interpolate_iota.hpp
   timestamp: '2022-01-11 13:22:23+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

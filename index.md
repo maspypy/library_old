@@ -4,9 +4,6 @@ data:
   - name: alg
     pages:
     - icon: ':heavy_check_mark:'
-      path: alg/beats_sample.hpp
-      title: alg/beats_sample.hpp
-    - icon: ':heavy_check_mark:'
       path: alg/group_add.hpp
       title: alg/group_add.hpp
     - icon: ':heavy_check_mark:'
@@ -68,6 +65,9 @@ data:
       title: alg/monoid_set.hpp
   - name: ds
     pages:
+    - icon: ':heavy_check_mark:'
+      path: ds/beats_summaxmin_chminchmax.hpp
+      title: ds/beats_summaxmin_chminchmax.hpp
     - icon: ':warning:'
       path: ds/binarytrie.hpp
       title: ds/binarytrie.hpp
@@ -105,6 +105,9 @@ data:
       path: ds/lazysegtree.hpp
       title: ds/lazysegtree.hpp
     - icon: ':heavy_check_mark:'
+      path: ds/lazysegtree_beats.hpp
+      title: ds/lazysegtree_beats.hpp
+    - icon: ':warning:'
       path: ds/lazysegtree_fail.hpp
       title: ds/lazysegtree_fail.hpp
     - icon: ':warning:'

@@ -99,34 +99,34 @@ data:
   isVerificationFile: false
   path: alg/group_add.hpp
   requiredBy:
-  - other/rectangleunion.hpp
-  - other/rectanglesums.hpp
-  - graph/treeabelgroup.hpp
-  - alg/lazy_min_add.hpp
-  - alg/lazy_cntminmincnt_add.hpp
-  - alg/lazy_add_mul.hpp
   - ds/fenwick.hpp
   - ds/fenwickraq.hpp
   - ds/fenwick2d.hpp
+  - alg/lazy_min_add.hpp
+  - alg/lazy_add_mul.hpp
+  - alg/lazy_cntminmincnt_add.hpp
+  - other/rectangleunion.hpp
+  - other/rectanglesums.hpp
+  - graph/treeabelgroup.hpp
   timestamp: '2022-01-11 13:22:23+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/1038_centroid.test.cpp
-  - test/yukicoder/899_bfsnumbering.test.cpp
-  - test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-  - test/library_checker/datastructure/point_add_range_sum.test.cpp
-  - test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
-  - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-  - test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
-  - test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-  - test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
+  - test/aoj/DSL_4_A_rectangle_union.test.cpp
   - test/aoj/DSL_2_E_fenwick_raq.test.cpp
   - test/aoj/DSL_2_G_fenwick_raq.test.cpp
-  - test/aoj/DSL_4_A_rectangle_union.test.cpp
   - test/aoj/DSL_2_H_min_add_lazy.test.cpp
+  - test/yukicoder/1038_centroid.test.cpp
+  - test/yukicoder/899_bfsnumbering.test.cpp
+  - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
+  - test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
+  - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
+  - test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
+  - test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
+  - test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
+  - test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
+  - test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
+  - test/library_checker/datastructure/point_add_range_sum.test.cpp
+  - test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
 documentation_of: alg/group_add.hpp
 layout: document
 redirect_from:

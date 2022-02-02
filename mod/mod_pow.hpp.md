@@ -43,8 +43,8 @@ data:
   isVerificationFile: false
   path: mod/mod_pow.hpp
   requiredBy:
-  - mod/primitive_root.hpp
   - mod/mod_kth_root.hpp
+  - mod/primitive_root.hpp
   timestamp: '2022-01-14 02:04:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

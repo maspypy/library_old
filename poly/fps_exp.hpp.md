@@ -293,8 +293,8 @@ data:
   isVerificationFile: false
   path: poly/fps_exp.hpp
   requiredBy:
-  - other/sharp_p_subset_sum.hpp
   - poly/fps_pow.hpp
+  - other/sharp_p_subset_sum.hpp
   timestamp: '2022-01-13 04:04:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

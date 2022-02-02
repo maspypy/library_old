@@ -41,8 +41,8 @@ data:
   timestamp: '2022-01-15 18:40:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/geometry/sort_points_by_argument.test.cpp
   - test/library_checker/geometry/convex_layers.test.cpp
+  - test/library_checker/geometry/sort_points_by_argument.test.cpp
 documentation_of: geo/base.hpp
 layout: document
 redirect_from:

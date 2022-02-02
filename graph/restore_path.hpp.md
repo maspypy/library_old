@@ -31,8 +31,8 @@ data:
   timestamp: '2022-01-01 12:00:30+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/graph/shortest_path.test.cpp
   - test/library_checker/tree/tree_diameter.test.cpp
+  - test/library_checker/graph/shortest_path.test.cpp
 documentation_of: graph/restore_path.hpp
 layout: document
 redirect_from:

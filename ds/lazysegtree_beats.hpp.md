@@ -1,33 +1,39 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: ds/beats_summaxmin_chminchmax.hpp
+    title: ds/beats_summaxmin_chminchmax.hpp
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/range_chmin_chmax_add_range_sum.test.cpp
+    title: test/library_checker/datastructure/range_chmin_chmax_add_range_sum.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"ds/lazysegtree_fail.hpp\"\n\ntemplate <typename Lazy>\n\
-    struct LazySegTreeFail {\n  using Monoid_X = typename Lazy::X_structure;\n  using\
+  bundledCode: "#line 2 \"ds/lazysegtree_beats.hpp\"\n\ntemplate <typename Lazy>\n\
+    struct LazySegTreeBeats {\n  using Monoid_X = typename Lazy::X_structure;\n  using\
     \ Monoid_A = typename Lazy::A_structure;\n  using X = typename Monoid_X::value_type;\n\
     \  using A = typename Monoid_A::value_type;\n  int n, log, size;\n  vc<X> dat;\n\
-    \  vc<A> laz;\n\n  LazySegTreeFail() : LazySegTreeFail(0) {}\n  LazySegTreeFail(int\
-    \ n) : LazySegTreeFail(vc<X>(n, Monoid_X::unit)) {}\n  LazySegTreeFail(vc<X> v)\
-    \ : n(len(v)) {\n    log = 1;\n    while ((1 << log) < n) ++log;\n    size = 1\
-    \ << log;\n    dat.assign(size << 1, Monoid_X::unit);\n    laz.assign(size, Monoid_A::unit);\n\
-    \    FOR(i, n) dat[size + i] = v[i];\n    FOR3_R(i, 1, size) update(i);\n  }\n\
-    \n  void update(int k) { dat[k] = Monoid_X::op(dat[2 * k], dat[2 * k + 1]); }\n\
-    \n  void all_apply(int k, A a) {\n    dat[k] = Lazy::act(dat[k], a);\n    if (k\
-    \ < size) {\n      laz[k] = Monoid_A::op(laz[k], a);\n      if (dat[k].fail) push(k),\
-    \ update(k);\n    }\n  }\n\n  void push(int k) {\n    all_apply(2 * k, laz[k]);\n\
-    \    all_apply(2 * k + 1, laz[k]);\n    laz[k] = Monoid_A::unit;\n  }\n\n  void\
-    \ set(int p, X x) {\n    assert(0 <= p && p < n);\n    p += size;\n    for (int\
-    \ i = log; i >= 1; i--) push(p >> i);\n    dat[p] = x;\n    for (int i = 1; i\
-    \ <= log; i++) update(p >> i);\n  }\n\n  X get(int p) {\n    assert(0 <= p &&\
-    \ p < n);\n    p += size;\n    for (int i = log; i >= 1; i--) push(p >> i);\n\
-    \    return dat[p];\n  }\n\n  vc<X> get_all() {\n    FOR(i, size) push(i);\n \
-    \   return {dat.begin() + size, dat.begin() + size + n};\n  }\n\n  X prod(int\
+    \  vc<A> laz;\n\n  LazySegTreeBeats() : LazySegTreeBeats(0) {}\n  LazySegTreeBeats(int\
+    \ n) : LazySegTreeBeats(vc<X>(n, Monoid_X::unit)) {}\n  LazySegTreeBeats(vc<X>\
+    \ v) : n(len(v)) {\n    log = 1;\n    while ((1 << log) < n) ++log;\n    size\
+    \ = 1 << log;\n    dat.assign(size << 1, Monoid_X::unit);\n    laz.assign(size,\
+    \ Monoid_A::unit);\n    FOR(i, n) dat[size + i] = v[i];\n    FOR3_R(i, 1, size)\
+    \ update(i);\n  }\n\n  void update(int k) { dat[k] = Monoid_X::op(dat[2 * k],\
+    \ dat[2 * k + 1]); }\n\n  void all_apply(int k, A a) {\n    dat[k] = Lazy::act(dat[k],\
+    \ a);\n    if (k < size) {\n      laz[k] = Monoid_A::op(laz[k], a);\n      if\
+    \ (dat[k].fail) push(k), update(k);\n    }\n  }\n\n  void push(int k) {\n    all_apply(2\
+    \ * k, laz[k]);\n    all_apply(2 * k + 1, laz[k]);\n    laz[k] = Monoid_A::unit;\n\
+    \  }\n\n  void set(int p, X x) {\n    assert(0 <= p && p < n);\n    p += size;\n\
+    \    for (int i = log; i >= 1; i--) push(p >> i);\n    dat[p] = x;\n    for (int\
+    \ i = 1; i <= log; i++) update(p >> i);\n  }\n\n  X get(int p) {\n    assert(0\
+    \ <= p && p < n);\n    p += size;\n    for (int i = log; i >= 1; i--) push(p >>\
+    \ i);\n    return dat[p];\n  }\n\n  vc<X> get_all() {\n    FOR(i, size) push(i);\n\
+    \    return {dat.begin() + size, dat.begin() + size + n};\n  }\n\n  X prod(int\
     \ l, int r) {\n    assert(0 <= l && l <= r && r <= n);\n    if (l == r) return\
     \ Monoid_X::unit;\n\n    l += size;\n    r += size;\n\n    for (int i = log; i\
     \ >= 1; i--) {\n      if (((l >> i) << i) != l) push(l >> i);\n      if (((r >>\
@@ -66,12 +72,12 @@ data:
     \      }\n      sm = Monoid_X::op(dat[r], sm);\n    } while ((r & -r) != r);\n\
     \    return 0;\n  }\n\n  void debug() { print(\"lazysegtree getall:\", get_all());\
     \ }\n};\n"
-  code: "#pragma once\n\ntemplate <typename Lazy>\nstruct LazySegTreeFail {\n  using\
+  code: "#pragma once\n\ntemplate <typename Lazy>\nstruct LazySegTreeBeats {\n  using\
     \ Monoid_X = typename Lazy::X_structure;\n  using Monoid_A = typename Lazy::A_structure;\n\
     \  using X = typename Monoid_X::value_type;\n  using A = typename Monoid_A::value_type;\n\
-    \  int n, log, size;\n  vc<X> dat;\n  vc<A> laz;\n\n  LazySegTreeFail() : LazySegTreeFail(0)\
-    \ {}\n  LazySegTreeFail(int n) : LazySegTreeFail(vc<X>(n, Monoid_X::unit)) {}\n\
-    \  LazySegTreeFail(vc<X> v) : n(len(v)) {\n    log = 1;\n    while ((1 << log)\
+    \  int n, log, size;\n  vc<X> dat;\n  vc<A> laz;\n\n  LazySegTreeBeats() : LazySegTreeBeats(0)\
+    \ {}\n  LazySegTreeBeats(int n) : LazySegTreeBeats(vc<X>(n, Monoid_X::unit)) {}\n\
+    \  LazySegTreeBeats(vc<X> v) : n(len(v)) {\n    log = 1;\n    while ((1 << log)\
     \ < n) ++log;\n    size = 1 << log;\n    dat.assign(size << 1, Monoid_X::unit);\n\
     \    laz.assign(size, Monoid_A::unit);\n    FOR(i, n) dat[size + i] = v[i];\n\
     \    FOR3_R(i, 1, size) update(i);\n  }\n\n  void update(int k) { dat[k] = Monoid_X::op(dat[2\
@@ -125,15 +131,17 @@ data:
     \ }\n};\n"
   dependsOn: []
   isVerificationFile: false
-  path: ds/lazysegtree_fail.hpp
-  requiredBy: []
-  timestamp: '2022-01-02 03:25:27+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
-documentation_of: ds/lazysegtree_fail.hpp
+  path: ds/lazysegtree_beats.hpp
+  requiredBy:
+  - ds/beats_summaxmin_chminchmax.hpp
+  timestamp: '2022-02-02 20:58:51+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/library_checker/datastructure/range_chmin_chmax_add_range_sum.test.cpp
+documentation_of: ds/lazysegtree_beats.hpp
 layout: document
 redirect_from:
-- /library/ds/lazysegtree_fail.hpp
-- /library/ds/lazysegtree_fail.hpp.html
-title: ds/lazysegtree_fail.hpp
+- /library/ds/lazysegtree_beats.hpp
+- /library/ds/lazysegtree_beats.hpp.html
+title: ds/lazysegtree_beats.hpp
 ---

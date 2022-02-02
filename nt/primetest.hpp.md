@@ -114,21 +114,21 @@ data:
   isVerificationFile: false
   path: nt/primetest.hpp
   requiredBy:
-  - mod/primitive_root.hpp
-  - mod/tetration.hpp
   - mod/binomial.hpp
   - mod/mod_kth_root.hpp
-  - graph/chromatic.hpp
-  - nt/euler_phi.hpp
+  - mod/tetration.hpp
+  - mod/primitive_root.hpp
   - nt/factor.hpp
+  - nt/euler_phi.hpp
+  - graph/chromatic.hpp
   timestamp: '2021-12-25 22:40:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/graph/chromatic_number.test.cpp
-  - test/library_checker/math/tetration.test.cpp
   - test/library_checker/math/binomial_coefficient.test.cpp
   - test/library_checker/math/factorize.test.cpp
   - test/library_checker/math/kth_root_mod.test.cpp
+  - test/library_checker/math/tetration.test.cpp
+  - test/library_checker/graph/chromatic_number.test.cpp
 documentation_of: nt/primetest.hpp
 layout: document
 redirect_from:

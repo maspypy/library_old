@@ -127,8 +127,8 @@ data:
   timestamp: '2022-01-17 12:32:51+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/1002_centroid.test.cpp
   - test/yukicoder/1038_centroid.test.cpp
+  - test/yukicoder/1002_centroid.test.cpp
   - test/library_checker/tree/frequency_table_of_tree_distance.test.cpp
 documentation_of: graph/centroid.hpp
 layout: document

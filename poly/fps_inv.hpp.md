@@ -300,23 +300,23 @@ data:
   isVerificationFile: false
   path: poly/fps_inv.hpp
   requiredBy:
-  - poly/fps_pow.hpp
-  - poly/fps_sqrt.hpp
   - poly/multipoint.hpp
-  - poly/poly_gcd.hpp
-  - poly/fps_log.hpp
   - poly/poly_divmod.hpp
+  - poly/fps_sqrt.hpp
+  - poly/poly_gcd.hpp
+  - poly/fps_pow.hpp
+  - poly/fps_log.hpp
   timestamp: '2022-01-13 04:04:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/library_checker/polynomial/log_of_fps.test.cpp
   - test/library_checker/polynomial/pow_of_fps.test.cpp
+  - test/library_checker/polynomial/sqrt_of_fps.test.cpp
+  - test/library_checker/polynomial/polynomial_division.test.cpp
+  - test/library_checker/polynomial/inv_of_polynomials.test.cpp
   - test/library_checker/polynomial/polynomial_interpolation.test.cpp
   - test/library_checker/polynomial/multipoint_evaluation.test.cpp
-  - test/library_checker/polynomial/sqrt_of_fps.test.cpp
   - test/library_checker/polynomial/inv_of_fps.test.cpp
-  - test/library_checker/polynomial/log_of_fps.test.cpp
-  - test/library_checker/polynomial/inv_of_polynomials.test.cpp
-  - test/library_checker/polynomial/polynomial_division.test.cpp
 documentation_of: poly/fps_inv.hpp
 layout: document
 redirect_from:

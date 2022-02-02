@@ -55,20 +55,20 @@ data:
   isVerificationFile: false
   path: other/random.hpp
   requiredBy:
-  - linalg/spmat_det.hpp
-  - linalg/spmat_min_poly.hpp
-  - poly/fps_sqrt.hpp
   - mod/mod_sqrt.hpp
-  - graph/chromatic.hpp
   - string/rollinghash.hpp
+  - poly/fps_sqrt.hpp
+  - linalg/spmat_min_poly.hpp
+  - linalg/spmat_det.hpp
+  - graph/chromatic.hpp
   timestamp: '2021-12-25 22:40:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/matrix/sparse_matrix_det.test.cpp
-  - test/library_checker/graph/chromatic_number.test.cpp
   - test/library_checker/math/sqrt_mod.test.cpp
   - test/library_checker/polynomial/sqrt_of_fps.test.cpp
+  - test/library_checker/matrix/sparse_matrix_det.test.cpp
   - test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
+  - test/library_checker/graph/chromatic_number.test.cpp
 documentation_of: other/random.hpp
 layout: document
 redirect_from:

@@ -45,14 +45,14 @@ data:
   isVerificationFile: false
   path: seq/find_linear_rec.hpp
   requiredBy:
-  - linalg/spmat_det.hpp
-  - linalg/spmat_min_poly.hpp
   - seq/interpolate_linear_rec.hpp
+  - linalg/spmat_min_poly.hpp
+  - linalg/spmat_det.hpp
   timestamp: '2022-01-11 14:06:44+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/matrix/sparse_matrix_det.test.cpp
   - test/library_checker/math/find_linear_recurrence.test.cpp
+  - test/library_checker/matrix/sparse_matrix_det.test.cpp
 documentation_of: seq/find_linear_rec.hpp
 layout: document
 redirect_from:

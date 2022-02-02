@@ -277,8 +277,8 @@ data:
   timestamp: '2022-01-13 04:04:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/polynomial/pow_of_fps.test.cpp
   - test/library_checker/polynomial/log_of_fps.test.cpp
+  - test/library_checker/polynomial/pow_of_fps.test.cpp
 documentation_of: poly/fps_log.hpp
 layout: document
 redirect_from:

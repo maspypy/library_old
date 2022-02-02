@@ -47,10 +47,10 @@ data:
   timestamp: '2022-01-11 13:22:23+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/datastructure/staticrmq_seg.test.cpp
-  - test/library_checker/datastructure/staticrmq_sparse.test.cpp
   - test/aoj/DSL_2_F_min_set_lazy.test.cpp
   - test/aoj/DSL_2_H_min_add_lazy.test.cpp
+  - test/library_checker/datastructure/staticrmq_sparse.test.cpp
+  - test/library_checker/datastructure/staticrmq_seg.test.cpp
 documentation_of: alg/monoid_min.hpp
 layout: document
 redirect_from:
