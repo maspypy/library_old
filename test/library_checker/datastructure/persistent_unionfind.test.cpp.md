@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: other/io.hpp
     title: other/io.hpp
   - icon: ':heavy_check_mark:'
@@ -166,38 +166,38 @@ data:
     struct PersistentArray {\r\n  struct node;\r\n  using np = node*;\r\n  struct\
     \ node {\r\n    T data;\r\n    np ch[1 << shift] = {};\r\n  };\r\n\r\n  static\
     \ constexpr int mask = (1 << shift) - 1;\r\n  np root = nullptr;\r\n  PersistentArray()\
-    \ {}\r\n  np get_root() { return root; }\r\n  T get(int idx, np t) {\r\n    if\
+    \ {}\r\n  np get_root() { return root; }\r\n  T get(np t, int idx) {\r\n    if\
     \ (!t) return 0;\r\n    if (idx == 0) {\r\n      return t->data;\r\n    } else\
-    \ {\r\n      return get(idx >> shift, t->ch[idx & mask]);\r\n    }\r\n  }\r\n\r\
-    \n  void destructive_set(int idx, T val, np& t) {\r\n    // \u7834\u58CA\u7684\
+    \ {\r\n      return get(t->ch[idx & mask], idx >> shift);\r\n    }\r\n  }\r\n\r\
+    \n  void destructive_set(np& t, int idx, T val) {\r\n    // \u7834\u58CA\u7684\
     \u306A\u5024\u306E\u5909\u66F4\u3002\u4E3B\u306B\u521D\u671F\u5316\u306B\u4F7F\
     \u3046\u3002\r\n    if (!t) t = new node();\r\n    if (idx == 0)\r\n      t->data\
-    \ = val;\r\n    else {\r\n      destructive_set(idx >> shift, val, t->ch[idx &\
-    \ mask]);\r\n    }\r\n  }\r\n\r\n  np set(int idx, T val, const np& t) {\r\n \
-    \   // set \u3057\u305F\u3042\u3068\u306E\u6C38\u7D9A\u914D\u5217\u306E root node\
+    \ = val;\r\n    else {\r\n      destructive_set(t->ch[idx & mask], idx >> shift,\
+    \ val);\r\n    }\r\n  }\r\n\r\n  np set(const np& t, int idx, T val) {\r\n   \
+    \ // set \u3057\u305F\u3042\u3068\u306E\u6C38\u7D9A\u914D\u5217\u306E root node\
     \ pointer \u3092\u8FD4\u3059\r\n    np res = new node();\r\n    if (t) {\r\n \
     \     memcpy(res->ch, t->ch, sizeof(t->ch));\r\n      res->data = t->data;\r\n\
     \    }\r\n    if (idx == 0) {\r\n      res->data = val;\r\n    } else {\r\n  \
-    \    res->ch[idx & mask] = set(idx >> shift, val, res->ch[idx & mask]);\r\n  \
+    \    res->ch[idx & mask] = set(res->ch[idx & mask], idx >> shift, val);\r\n  \
     \  }\r\n    return res;\r\n  }\r\n};\r\n#line 2 \"pds/unionfind.hpp\"\n\r\nstruct\
     \ PersistentUnionFind {\r\n  using PA = PersistentArray<int>;\r\n  int n;\r\n\
     \  PA data; // root OR (-size)\r\n  using np = PA::np;\r\n\r\n  PersistentUnionFind(int\
     \ n) : n(n) {}\r\n  np init() {\r\n    np t = data.get_root();\r\n    FOR(i, n)\
-    \ data.destructive_set(i, -1, t);\r\n    return t;\r\n  }\r\n\r\n  pair<bool,\
-    \ np> merge(int x, int y, np t) {\r\n    x = root(x, t), y = root(y, t);\r\n \
-    \   if (x == y) return {0, t};\r\n    if (data.get(x, t) > data.get(y, t)) swap(x,\
-    \ y);\r\n    int new_sz = data.get(x, t) + data.get(y, t);\r\n    np set_x_sz\
-    \ = data.set(x, new_sz, t);\r\n    np set_y_par = data.set(y, x, set_x_sz);\r\n\
-    \    return {1, set_y_par};\r\n  }\r\n\r\n  int root(int x, np t) {\r\n    int\
-    \ par_or_sz = data.get(x, t);\r\n    if (par_or_sz < 0) return x;\r\n    return\
-    \ root(par_or_sz, t);\r\n  }\r\n\r\n  bool same(int x, int y, np t) { return root(x,\
-    \ t) == root(y, t); }\r\n  int size(int x, np t) { return -data.get(root(x, t),\
-    \ t); }\r\n};\n#line 5 \"test/library_checker/datastructure/persistent_unionfind.test.cpp\"\
+    \ data.destructive_set(t, i, -1);\r\n    return t;\r\n  }\r\n\r\n  pair<bool,\
+    \ np> merge(np t, int x, int y) {\r\n    x = root(t, x), y = root(t, y);\r\n \
+    \   if (x == y) return {0, t};\r\n    if (data.get(t, x) > data.get(t, y)) swap(x,\
+    \ y);\r\n    int new_sz = data.get(t, x) + data.get(t, y);\r\n    np set_x_sz\
+    \ = data.set(t, x, new_sz);\r\n    np set_y_par = data.set(set_x_sz, y, x);\r\n\
+    \    return {1, set_y_par};\r\n  }\r\n\r\n  int root(np t, int x) {\r\n    int\
+    \ par_or_sz = data.get(t, x);\r\n    if (par_or_sz < 0) return x;\r\n    return\
+    \ root(t, par_or_sz);\r\n  }\r\n\r\n  bool same(np t, int x, int y) { return root(t,\
+    \ x) == root(t, y); }\r\n  int size(np t, int x) { return -data.get(t, root(t,\
+    \ x)); }\r\n};\n#line 5 \"test/library_checker/datastructure/persistent_unionfind.test.cpp\"\
     \n\r\nvoid solve() {\r\n  LL(N, Q);\r\n\r\n  PersistentUnionFind uf(N);\r\n  using\
     \ np = PersistentUnionFind::np;\r\n  vc<np> UFS;\r\n\r\n  UFS.reserve(Q + 1);\r\
     \n  UFS.eb(uf.init());\r\n\r\n  FOR3(q, 1, Q + 1) {\r\n    LL(t, k, u, v);\r\n\
-    \    ++k;\r\n    if (t == 0) {\r\n      UFS.eb(uf.merge(u, v, UFS[k]).se);\r\n\
-    \    } else {\r\n      print(uf.same(u, v, UFS[k]));\r\n      UFS.eb(UFS[q - 1]);\r\
+    \    ++k;\r\n    if (t == 0) {\r\n      UFS.eb(uf.merge(UFS[k], u, v).se);\r\n\
+    \    } else {\r\n      print(uf.same(UFS[k], u, v));\r\n      UFS.eb(UFS[q - 1]);\r\
     \n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
     \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/persistent_unionfind\"\r\
@@ -205,8 +205,8 @@ data:
     \ solve() {\r\n  LL(N, Q);\r\n\r\n  PersistentUnionFind uf(N);\r\n  using np =\
     \ PersistentUnionFind::np;\r\n  vc<np> UFS;\r\n\r\n  UFS.reserve(Q + 1);\r\n \
     \ UFS.eb(uf.init());\r\n\r\n  FOR3(q, 1, Q + 1) {\r\n    LL(t, k, u, v);\r\n \
-    \   ++k;\r\n    if (t == 0) {\r\n      UFS.eb(uf.merge(u, v, UFS[k]).se);\r\n\
-    \    } else {\r\n      print(uf.same(u, v, UFS[k]));\r\n      UFS.eb(UFS[q - 1]);\r\
+    \   ++k;\r\n    if (t == 0) {\r\n      UFS.eb(uf.merge(UFS[k], u, v).se);\r\n\
+    \    } else {\r\n      print(uf.same(UFS[k], u, v));\r\n      UFS.eb(UFS[q - 1]);\r\
     \n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
     \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
@@ -217,7 +217,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/persistent_unionfind.test.cpp
   requiredBy: []
-  timestamp: '2022-01-23 17:25:15+09:00'
+  timestamp: '2022-02-03 01:34:23+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/persistent_unionfind.test.cpp
