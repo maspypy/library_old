@@ -1,3 +1,4 @@
+// https://codeforces.com/contest/916/problem/E
 #include "ds/lazysegtree.hpp"
 #include "graph/hld.hpp"
 #include "alg/lazy_reverse.hpp"
@@ -41,12 +42,12 @@ struct LazyTreeMonoid {
 
   X prod_path(int u, int v) {
     auto pd = hld.get_path_decomposition(u, v, edge);
-    X val = Monoid::unit;
+    X val = MonoX::unit;
     for (auto &&[a, b]: pd) {
       X x = (a <= b ? seg.prod(a, b + 1)
-                    : (Monoid::commute ? seg.prod(b, a + 1)
+                    : (MonoX::commute ? seg.prod(b, a + 1)
                                        : seg_r.prod(b, a + 1)));
-      val = Monoid::op(val, x);
+      val = MonoX::op(val, x);
     }
     return val;
   }
@@ -56,12 +57,16 @@ struct LazyTreeMonoid {
     return seg.prod(l + edge, r);
   }
 
+  X prod_all() {
+    return seg.prod_all();
+  }
+
   void apply_path(int u, int v, A a) {
     auto pd = hld.get_path_decomposition(u, v, edge);
     for (auto &&[x, y]: pd) {
       int l = min(x, y), r = max(x, y);
       seg.apply(l, r + 1, a);
-      if(!Monoid::commute) seg_r.apply(l, r + 1, a);
+      if(!MonoX::commute) seg_r.apply(l, r + 1, a);
     }
   }
 
