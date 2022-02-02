@@ -2,30 +2,25 @@
   "https://judge.yosupo.jp/problem/range_chmin_chmax_add_range_sum"
 
 #include "my_template.hpp"
-
-#include "alg/beats_sample.hpp"
-#include "ds/lazysegtree_fail.hpp"
+#include "ds/beats_summaxmin_chminchmax.hpp"
 
 void solve() {
   LL(N, Q);
-  LazySegTreeFail<Lazy> seg(N);
-  FOR(i, N) {
-    LL(a);
-    seg.set(i, {1, a, a, a, 1, 1, a, a, 0});
-  }
+  VEC(ll, A, N);
+  Beats_SumMaxMin_ChminChmax seg(A);
   FOR(_, Q) {
     LL(t, L, R);
     if (t == 0) {
       LL(x);
-      seg.apply(L, R, {0, x, -INF});
+      seg.chmin(L, R, x);
     }
     elif (t == 1) {
       LL(x);
-      seg.apply(L, R, {0, INF, x});
+      seg.chmax(L, R, x);
     }
     elif (t == 2) {
       LL(x);
-      seg.apply(L, R, {x, INF, -INF});
+      seg.add(L, R, x);
     }
     elif (t == 3) {
       auto x = seg.prod(L, R);
