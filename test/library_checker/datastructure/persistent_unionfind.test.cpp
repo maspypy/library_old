@@ -17,9 +17,9 @@ void solve() {
     LL(t, k, u, v);
     ++k;
     if (t == 0) {
-      UFS.eb(uf.merge(u, v, UFS[k]).se);
+      UFS.eb(uf.merge(UFS[k], u, v).se);
     } else {
-      print(uf.same(u, v, UFS[k]));
+      print(uf.same(UFS[k], u, v));
       UFS.eb(UFS[q - 1]);
     }
   }

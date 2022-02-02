@@ -9,26 +9,26 @@ struct PersistentUnionFind {
   PersistentUnionFind(int n) : n(n) {}
   np init() {
     np t = data.get_root();
-    FOR(i, n) data.destructive_set(i, -1, t);
+    FOR(i, n) data.destructive_set(t, i, -1);
     return t;
   }
 
-  pair<bool, np> merge(int x, int y, np t) {
-    x = root(x, t), y = root(y, t);
+  pair<bool, np> merge(np t, int x, int y) {
+    x = root(t, x), y = root(t, y);
     if (x == y) return {0, t};
-    if (data.get(x, t) > data.get(y, t)) swap(x, y);
-    int new_sz = data.get(x, t) + data.get(y, t);
-    np set_x_sz = data.set(x, new_sz, t);
-    np set_y_par = data.set(y, x, set_x_sz);
+    if (data.get(t, x) > data.get(t, y)) swap(x, y);
+    int new_sz = data.get(t, x) + data.get(t, y);
+    np set_x_sz = data.set(t, x, new_sz);
+    np set_y_par = data.set(set_x_sz, y, x);
     return {1, set_y_par};
   }
 
-  int root(int x, np t) {
-    int par_or_sz = data.get(x, t);
+  int root(np t, int x) {
+    int par_or_sz = data.get(t, x);
     if (par_or_sz < 0) return x;
-    return root(par_or_sz, t);
+    return root(t, par_or_sz);
   }
 
-  bool same(int x, int y, np t) { return root(x, t) == root(y, t); }
-  int size(int x, np t) { return -data.get(root(x, t), t); }
+  bool same(np t, int x, int y) { return root(t, x) == root(t, y); }
+  int size(np t, int x) { return -data.get(t, root(t, x)); }
 };

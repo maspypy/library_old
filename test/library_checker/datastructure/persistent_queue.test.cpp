@@ -18,14 +18,14 @@ void solve() {
     if (t == 0) {
       LL(k, x);
       ++k;
-      PAS[q + 1] = array.set(R[k], x, PAS[k]);
+      PAS[q + 1] = array.set(PAS[k], R[k], x);
       L[q + 1] = L[k];
       R[q + 1] = R[k] + 1;
     }
     elif (t == 1) {
       LL(k);
       ++k;
-      print(array.get(L[k], PAS[k]));
+      print(array.get(PAS[k], L[k]));
       PAS[q + 1] = PAS[k];
       L[q + 1] = L[k] + 1;
       R[q + 1] = R[k];
