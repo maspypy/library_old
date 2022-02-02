@@ -22,12 +22,14 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    links: []
-  bundledCode: "#line 2 \"ds/lazysegtree.hpp\"\n\ntemplate <typename Lazy>\nstruct\
-    \ LazySegTree {\n  using Monoid_X = typename Lazy::X_structure;\n  using Monoid_A\
-    \ = typename Lazy::A_structure;\n  using X = typename Monoid_X::value_type;\n\
-    \  using A = typename Monoid_A::value_type;\n  int n, log, size;\n  vc<X> dat;\n\
-    \  vc<A> laz;\n\n  LazySegTree() : LazySegTree(0) {}\n  LazySegTree(int n) : LazySegTree(vc<X>(n,\
+    links:
+    - https://codeforces.com/contest/916/problem/E
+  bundledCode: "#line 1 \"graph/lazytreemonoid.hpp\"\n// https://codeforces.com/contest/916/problem/E\r\
+    \n#line 2 \"ds/lazysegtree.hpp\"\n\ntemplate <typename Lazy>\nstruct LazySegTree\
+    \ {\n  using Monoid_X = typename Lazy::X_structure;\n  using Monoid_A = typename\
+    \ Lazy::A_structure;\n  using X = typename Monoid_X::value_type;\n  using A =\
+    \ typename Monoid_A::value_type;\n  int n, log, size;\n  vc<X> dat;\n  vc<A> laz;\n\
+    \n  LazySegTree() : LazySegTree(0) {}\n  LazySegTree(int n) : LazySegTree(vc<X>(n,\
     \ Monoid_X::unit)) {}\n  LazySegTree(vc<X> v) : n(len(v)) {\n    log = 1;\n  \
     \  while ((1 << log) < n) ++log;\n    size = 1 << log;\n    dat.assign(size <<\
     \ 1, Monoid_X::unit);\n    laz.assign(size, Monoid_A::unit);\n    FOR(i, n) dat[size\
@@ -162,7 +164,7 @@ data:
     \ Lazy::X_structure>;\r\n  using MA = typename Lazy::A_structure;\r\n  using X_structure\
     \ = MX;\r\n  using A_structure = MA;\r\n  using X = typename MX::value_type;\r\
     \n  using A = typename MA::value_type;\r\n  static constexpr X act(const X &x,\
-    \ const A &a) { return Lazy::act(x, a); }\r\n};\r\n#line 4 \"graph/lazytreemonoid.hpp\"\
+    \ const A &a) { return Lazy::act(x, a); }\r\n};\r\n#line 5 \"graph/lazytreemonoid.hpp\"\
     \n\r\ntemplate <typename HLD, typename Lazy, bool edge = false>\r\nstruct LazyTreeMonoid\
     \ {\r\n  using MonoX = typename Lazy::X_structure;\r\n  using MonoA = typename\
     \ Lazy::A_structure;\r\n  using X = typename MonoX::value_type;\r\n  using A =\
@@ -178,54 +180,56 @@ data:
     \  void set(int i, X x) {\r\n    if (edge) i = hld.e_to_v(i);\r\n    i = hld.LID[i];\r\
     \n    seg.set(i, x);\r\n    if (!MonoX::commute) seg_r.set(i, x);\r\n  }\r\n\r\
     \n  X prod_path(int u, int v) {\r\n    auto pd = hld.get_path_decomposition(u,\
-    \ v, edge);\r\n    X val = Monoid::unit;\r\n    for (auto &&[a, b]: pd) {\r\n\
-    \      X x = (a <= b ? seg.prod(a, b + 1)\r\n                    : (Monoid::commute\
+    \ v, edge);\r\n    X val = MonoX::unit;\r\n    for (auto &&[a, b]: pd) {\r\n \
+    \     X x = (a <= b ? seg.prod(a, b + 1)\r\n                    : (MonoX::commute\
     \ ? seg.prod(b, a + 1)\r\n                                       : seg_r.prod(b,\
-    \ a + 1)));\r\n      val = Monoid::op(val, x);\r\n    }\r\n    return val;\r\n\
+    \ a + 1)));\r\n      val = MonoX::op(val, x);\r\n    }\r\n    return val;\r\n\
     \  }\r\n\r\n  X prod_subtree(int u) {\r\n    int l = hld.LID[u], r = hld.RID[u];\r\
-    \n    return seg.prod(l + edge, r);\r\n  }\r\n\r\n  void apply_path(int u, int\
-    \ v, A a) {\r\n    auto pd = hld.get_path_decomposition(u, v, edge);\r\n    for\
-    \ (auto &&[x, y]: pd) {\r\n      int l = min(x, y), r = max(x, y);\r\n      seg.apply(l,\
-    \ r + 1, a);\r\n      if(!Monoid::commute) seg_r.apply(l, r + 1, a);\r\n    }\r\
-    \n  }\r\n\r\n  void apply_subtree(int u, A a) {\r\n    int l = hld.LID[u], r =\
-    \ hld.RID[u];\r\n    return seg.apply(l + edge, r, a);\r\n  }\r\n\r\n  void debug()\
-    \ {\r\n    print(\"tree_monoid\");\r\n    hld.debug();\r\n    seg.debug();\r\n\
-    \    seg_r.debug();\r\n  }\r\n\r\n  void doc() {\r\n    print(\"HL\u5206\u89E3\
-    \ + \u30BB\u30B0\u6728\u3002\");\r\n    print(\"\u90E8\u5206\u6728\u30AF\u30A8\
-    \u30EA O(logN) \u6642\u9593\u3001\u30D1\u30B9\u30AF\u30A8\u30EA O(log^2N) \u6642\
-    \u9593\u3002\");\r\n  }\r\n};\r\n"
-  code: "#include \"ds/lazysegtree.hpp\"\r\n#include \"graph/hld.hpp\"\r\n#include\
-    \ \"alg/lazy_reverse.hpp\"\r\n\r\ntemplate <typename HLD, typename Lazy, bool\
-    \ edge = false>\r\nstruct LazyTreeMonoid {\r\n  using MonoX = typename Lazy::X_structure;\r\
-    \n  using MonoA = typename Lazy::A_structure;\r\n  using X = typename MonoX::value_type;\r\
-    \n  using A = typename MonoA::value_type;\r\n  using RevLazy = Lazy_Reverse<Lazy>;\r\
-    \n  HLD &hld;\r\n  int N;\r\n  LazySegTree<Lazy> seg;\r\n  LazySegTree<RevLazy>\
-    \ seg_r;\r\n\r\n  LazyTreeMonoid(HLD &hld) : hld(hld), N(hld.N), seg(hld.N) {\r\
-    \n    if (!MonoX::commute) seg_r = LazySegTree<RevLazy>(hld.N);\r\n  }\r\n\r\n\
-    \  LazyTreeMonoid(HLD &hld, vc<X> &dat) : hld(hld), N(hld.N) {\r\n    vc<X> seg_raw(N,\
-    \ MonoX::unit);\r\n    if (!edge) {\r\n      FOR(v, N) seg_raw[hld.LID[v]] = dat[v];\r\
-    \n    } else {\r\n      FOR(e, N - 1) {\r\n        int v = hld.e_to_v(e);\r\n\
-    \        seg_raw[hld.LID[v]] = dat[e];\r\n      }\r\n    }\r\n    seg = LazySegTree<Lazy>(seg_raw);\r\
+    \n    return seg.prod(l + edge, r);\r\n  }\r\n\r\n  X prod_all() {\r\n    return\
+    \ seg.prod_all();\r\n  }\r\n\r\n  void apply_path(int u, int v, A a) {\r\n   \
+    \ auto pd = hld.get_path_decomposition(u, v, edge);\r\n    for (auto &&[x, y]:\
+    \ pd) {\r\n      int l = min(x, y), r = max(x, y);\r\n      seg.apply(l, r + 1,\
+    \ a);\r\n      if(!MonoX::commute) seg_r.apply(l, r + 1, a);\r\n    }\r\n  }\r\
+    \n\r\n  void apply_subtree(int u, A a) {\r\n    int l = hld.LID[u], r = hld.RID[u];\r\
+    \n    return seg.apply(l + edge, r, a);\r\n  }\r\n\r\n  void debug() {\r\n   \
+    \ print(\"tree_monoid\");\r\n    hld.debug();\r\n    seg.debug();\r\n    seg_r.debug();\r\
+    \n  }\r\n\r\n  void doc() {\r\n    print(\"HL\u5206\u89E3 + \u30BB\u30B0\u6728\
+    \u3002\");\r\n    print(\"\u90E8\u5206\u6728\u30AF\u30A8\u30EA O(logN) \u6642\u9593\
+    \u3001\u30D1\u30B9\u30AF\u30A8\u30EA O(log^2N) \u6642\u9593\u3002\");\r\n  }\r\
+    \n};\r\n"
+  code: "// https://codeforces.com/contest/916/problem/E\r\n#include \"ds/lazysegtree.hpp\"\
+    \r\n#include \"graph/hld.hpp\"\r\n#include \"alg/lazy_reverse.hpp\"\r\n\r\ntemplate\
+    \ <typename HLD, typename Lazy, bool edge = false>\r\nstruct LazyTreeMonoid {\r\
+    \n  using MonoX = typename Lazy::X_structure;\r\n  using MonoA = typename Lazy::A_structure;\r\
+    \n  using X = typename MonoX::value_type;\r\n  using A = typename MonoA::value_type;\r\
+    \n  using RevLazy = Lazy_Reverse<Lazy>;\r\n  HLD &hld;\r\n  int N;\r\n  LazySegTree<Lazy>\
+    \ seg;\r\n  LazySegTree<RevLazy> seg_r;\r\n\r\n  LazyTreeMonoid(HLD &hld) : hld(hld),\
+    \ N(hld.N), seg(hld.N) {\r\n    if (!MonoX::commute) seg_r = LazySegTree<RevLazy>(hld.N);\r\
+    \n  }\r\n\r\n  LazyTreeMonoid(HLD &hld, vc<X> &dat) : hld(hld), N(hld.N) {\r\n\
+    \    vc<X> seg_raw(N, MonoX::unit);\r\n    if (!edge) {\r\n      FOR(v, N) seg_raw[hld.LID[v]]\
+    \ = dat[v];\r\n    } else {\r\n      FOR(e, N - 1) {\r\n        int v = hld.e_to_v(e);\r\
+    \n        seg_raw[hld.LID[v]] = dat[e];\r\n      }\r\n    }\r\n    seg = LazySegTree<Lazy>(seg_raw);\r\
     \n    if (!MonoX::commute) seg_r = LazySegTree<RevLazy>(seg_raw);\r\n  }\r\n\r\
     \n  void set(int i, X x) {\r\n    if (edge) i = hld.e_to_v(i);\r\n    i = hld.LID[i];\r\
     \n    seg.set(i, x);\r\n    if (!MonoX::commute) seg_r.set(i, x);\r\n  }\r\n\r\
     \n  X prod_path(int u, int v) {\r\n    auto pd = hld.get_path_decomposition(u,\
-    \ v, edge);\r\n    X val = Monoid::unit;\r\n    for (auto &&[a, b]: pd) {\r\n\
-    \      X x = (a <= b ? seg.prod(a, b + 1)\r\n                    : (Monoid::commute\
+    \ v, edge);\r\n    X val = MonoX::unit;\r\n    for (auto &&[a, b]: pd) {\r\n \
+    \     X x = (a <= b ? seg.prod(a, b + 1)\r\n                    : (MonoX::commute\
     \ ? seg.prod(b, a + 1)\r\n                                       : seg_r.prod(b,\
-    \ a + 1)));\r\n      val = Monoid::op(val, x);\r\n    }\r\n    return val;\r\n\
+    \ a + 1)));\r\n      val = MonoX::op(val, x);\r\n    }\r\n    return val;\r\n\
     \  }\r\n\r\n  X prod_subtree(int u) {\r\n    int l = hld.LID[u], r = hld.RID[u];\r\
-    \n    return seg.prod(l + edge, r);\r\n  }\r\n\r\n  void apply_path(int u, int\
-    \ v, A a) {\r\n    auto pd = hld.get_path_decomposition(u, v, edge);\r\n    for\
-    \ (auto &&[x, y]: pd) {\r\n      int l = min(x, y), r = max(x, y);\r\n      seg.apply(l,\
-    \ r + 1, a);\r\n      if(!Monoid::commute) seg_r.apply(l, r + 1, a);\r\n    }\r\
-    \n  }\r\n\r\n  void apply_subtree(int u, A a) {\r\n    int l = hld.LID[u], r =\
-    \ hld.RID[u];\r\n    return seg.apply(l + edge, r, a);\r\n  }\r\n\r\n  void debug()\
-    \ {\r\n    print(\"tree_monoid\");\r\n    hld.debug();\r\n    seg.debug();\r\n\
-    \    seg_r.debug();\r\n  }\r\n\r\n  void doc() {\r\n    print(\"HL\u5206\u89E3\
-    \ + \u30BB\u30B0\u6728\u3002\");\r\n    print(\"\u90E8\u5206\u6728\u30AF\u30A8\
-    \u30EA O(logN) \u6642\u9593\u3001\u30D1\u30B9\u30AF\u30A8\u30EA O(log^2N) \u6642\
-    \u9593\u3002\");\r\n  }\r\n};\r\n"
+    \n    return seg.prod(l + edge, r);\r\n  }\r\n\r\n  X prod_all() {\r\n    return\
+    \ seg.prod_all();\r\n  }\r\n\r\n  void apply_path(int u, int v, A a) {\r\n   \
+    \ auto pd = hld.get_path_decomposition(u, v, edge);\r\n    for (auto &&[x, y]:\
+    \ pd) {\r\n      int l = min(x, y), r = max(x, y);\r\n      seg.apply(l, r + 1,\
+    \ a);\r\n      if(!MonoX::commute) seg_r.apply(l, r + 1, a);\r\n    }\r\n  }\r\
+    \n\r\n  void apply_subtree(int u, A a) {\r\n    int l = hld.LID[u], r = hld.RID[u];\r\
+    \n    return seg.apply(l + edge, r, a);\r\n  }\r\n\r\n  void debug() {\r\n   \
+    \ print(\"tree_monoid\");\r\n    hld.debug();\r\n    seg.debug();\r\n    seg_r.debug();\r\
+    \n  }\r\n\r\n  void doc() {\r\n    print(\"HL\u5206\u89E3 + \u30BB\u30B0\u6728\
+    \u3002\");\r\n    print(\"\u90E8\u5206\u6728\u30AF\u30A8\u30EA O(logN) \u6642\u9593\
+    \u3001\u30D1\u30B9\u30AF\u30A8\u30EA O(log^2N) \u6642\u9593\u3002\");\r\n  }\r\
+    \n};\r\n"
   dependsOn:
   - ds/lazysegtree.hpp
   - graph/hld.hpp
@@ -235,7 +239,7 @@ data:
   isVerificationFile: false
   path: graph/lazytreemonoid.hpp
   requiredBy: []
-  timestamp: '2022-02-02 21:36:33+09:00'
+  timestamp: '2022-02-03 03:14:36+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph/lazytreemonoid.hpp
