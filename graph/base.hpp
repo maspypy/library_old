@@ -52,6 +52,21 @@ struct Graph {
     ++M;
   }
 
+  void read_tree(bool wt=false, int off=1){
+    FOR_(N - 1){
+      INT(a, b);
+      a -= off, b -= off;
+      if(!wt){
+        add(a, b);
+      } else {
+        T c;
+        read(c);
+        add(a, b, c);
+      }
+    }
+    prepare();
+  }
+
   void prepare() {
     assert(!prepared);
     prepared = true;
