@@ -218,6 +218,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/mis.hpp
       title: graph/mis.hpp
+    - icon: ':warning:'
+      path: graph/rerooting_dp.hpp
+      title: graph/rerooting_dp.hpp
     - icon: ':heavy_check_mark:'
       path: graph/restore_path.hpp
       title: graph/restore_path.hpp

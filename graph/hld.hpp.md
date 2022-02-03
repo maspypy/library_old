@@ -8,6 +8,9 @@ data:
   - icon: ':warning:'
     path: graph/lazytreemonoid.hpp
     title: graph/lazytreemonoid.hpp
+  - icon: ':warning:'
+    path: graph/rerooting_dp.hpp
+    title: graph/rerooting_dp.hpp
   - icon: ':heavy_check_mark:'
     path: graph/treeabelgroup.hpp
     title: graph/treeabelgroup.hpp
@@ -180,6 +183,7 @@ data:
   - graph/lazytreemonoid.hpp
   - graph/treemonoid.hpp
   - graph/treegroup.hpp
+  - graph/rerooting_dp.hpp
   timestamp: '2022-02-02 21:36:33+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
