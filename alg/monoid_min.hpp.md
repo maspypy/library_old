@@ -29,14 +29,14 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"alg/monoid_min.hpp\"\ntemplate <class X, X INF>\r\nstruct\
-    \ Monoid_Min {\r\n  using value_type = X;\r\n  static constexpr X op(const X &x,\
-    \ const X &y) noexcept { return min(x, y); }\r\n  static constexpr X unit = INF;\r\
-    \n  static constexpr bool commute = true;\r\n};\r\n"
-  code: "template <class X, X INF>\r\nstruct Monoid_Min {\r\n  using value_type =\
-    \ X;\r\n  static constexpr X op(const X &x, const X &y) noexcept { return min(x,\
-    \ y); }\r\n  static constexpr X unit = INF;\r\n  static constexpr bool commute\
-    \ = true;\r\n};\r\n"
+  bundledCode: "#line 1 \"alg/monoid_min.hpp\"\ntemplate <class X=long long, X INF=1LL<<60>\r\
+    \nstruct Monoid_Min {\r\n  using value_type = X;\r\n  static constexpr X op(const\
+    \ X &x, const X &y) noexcept { return min(x, y); }\r\n  static constexpr X unit\
+    \ = INF;\r\n  static constexpr bool commute = true;\r\n};\r\n"
+  code: "template <class X=long long, X INF=1LL<<60>\r\nstruct Monoid_Min {\r\n  using\
+    \ value_type = X;\r\n  static constexpr X op(const X &x, const X &y) noexcept\
+    \ { return min(x, y); }\r\n  static constexpr X unit = INF;\r\n  static constexpr\
+    \ bool commute = true;\r\n};\r\n"
   dependsOn: []
   isVerificationFile: false
   path: alg/monoid_min.hpp
@@ -44,7 +44,7 @@ data:
   - alg/lazy_min_add.hpp
   - alg/lazy_max_set.hpp
   - alg/lazy_min_set.hpp
-  timestamp: '2022-01-11 13:22:23+09:00'
+  timestamp: '2022-02-03 13:42:15+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DSL_2_F_min_set_lazy.test.cpp

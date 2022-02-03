@@ -14,10 +14,10 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"alg/monoid_min.hpp\"\ntemplate <class X, X INF>\r\nstruct\
-    \ Monoid_Min {\r\n  using value_type = X;\r\n  static constexpr X op(const X &x,\
-    \ const X &y) noexcept { return min(x, y); }\r\n  static constexpr X unit = INF;\r\
-    \n  static constexpr bool commute = true;\r\n};\r\n#line 1 \"alg/monoid_set.hpp\"\
+  bundledCode: "#line 1 \"alg/monoid_min.hpp\"\ntemplate <class X=long long, X INF=1LL<<60>\r\
+    \nstruct Monoid_Min {\r\n  using value_type = X;\r\n  static constexpr X op(const\
+    \ X &x, const X &y) noexcept { return min(x, y); }\r\n  static constexpr X unit\
+    \ = INF;\r\n  static constexpr bool commute = true;\r\n};\r\n#line 1 \"alg/monoid_set.hpp\"\
     \ntemplate <typename E, E none_val>\r\nstruct Monoid_Set {\r\n  using value_type\
     \ = E;\r\n  using X = value_type;\r\n  static X op(X x, X y) { return (y == none_val\
     \ ? x : y); }\r\n  static constexpr X unit = none_val;\r\n  static constexpr bool\
@@ -39,7 +39,7 @@ data:
   isVerificationFile: false
   path: alg/lazy_max_set.hpp
   requiredBy: []
-  timestamp: '2022-01-11 13:47:23+09:00'
+  timestamp: '2022-02-03 13:42:15+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: alg/lazy_max_set.hpp

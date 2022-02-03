@@ -49,20 +49,32 @@ data:
       path: alg/monoid_cntminmincnt.hpp
       title: alg/monoid_cntminmincnt.hpp
     - icon: ':warning:'
+      path: alg/monoid_cntsummax.hpp
+      title: alg/monoid_cntsummax.hpp
+    - icon: ':warning:'
       path: alg/monoid_max.hpp
       title: alg/monoid_max.hpp
+    - icon: ':warning:'
+      path: alg/monoid_max_idx.hpp
+      title: alg/monoid_max_idx.hpp
     - icon: ':warning:'
       path: alg/monoid_maxmin.hpp
       title: alg/monoid_maxmin.hpp
     - icon: ':heavy_check_mark:'
       path: alg/monoid_min.hpp
       title: alg/monoid_min.hpp
+    - icon: ':warning:'
+      path: alg/monoid_min_idx.hpp
+      title: alg/monoid_min_idx.hpp
     - icon: ':heavy_check_mark:'
       path: alg/monoid_reverse.hpp
       title: alg/monoid_reverse.hpp
     - icon: ':heavy_check_mark:'
       path: alg/monoid_set.hpp
       title: alg/monoid_set.hpp
+    - icon: ':warning:'
+      path: alg/monoid_xor.hpp
+      title: alg/monoid_xor.hpp
   - name: ds
     pages:
     - icon: ':heavy_check_mark:'

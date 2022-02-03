@@ -161,10 +161,10 @@ data:
     \  vector<int> ids(A.size());\n  iota(all(ids), 0);\n  sort(all(ids),\n      \
     \ [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j] && i < j); });\n  return\
     \ ids;\n}\n#line 3 \"test/library_checker/datastructure/staticrmq_sparse.test.cpp\"\
-    \n\n#line 1 \"alg/monoid_min.hpp\"\ntemplate <class X, X INF>\r\nstruct Monoid_Min\
-    \ {\r\n  using value_type = X;\r\n  static constexpr X op(const X &x, const X\
-    \ &y) noexcept { return min(x, y); }\r\n  static constexpr X unit = INF;\r\n \
-    \ static constexpr bool commute = true;\r\n};\r\n#line 1 \"ds/disjointsparse.hpp\"\
+    \n\n#line 1 \"alg/monoid_min.hpp\"\ntemplate <class X=long long, X INF=1LL<<60>\r\
+    \nstruct Monoid_Min {\r\n  using value_type = X;\r\n  static constexpr X op(const\
+    \ X &x, const X &y) noexcept { return min(x, y); }\r\n  static constexpr X unit\
+    \ = INF;\r\n  static constexpr bool commute = true;\r\n};\r\n#line 1 \"ds/disjointsparse.hpp\"\
     \ntemplate <class Monoid>\r\nstruct DisjointSparse {\r\n  using X = typename Monoid::value_type;\r\
     \n  using value_type = X;\r\n  int n, log;\r\n  vc<vc<X>> dat;\r\n\r\n  DisjointSparse(vc<X>&\
     \ A) : n(len(A)) {\r\n    log = 1;\r\n    while ((1 << log) < n) ++log;\r\n  \
@@ -195,7 +195,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/staticrmq_sparse.test.cpp
   requiredBy: []
-  timestamp: '2022-01-23 17:25:15+09:00'
+  timestamp: '2022-02-03 13:42:15+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/staticrmq_sparse.test.cpp
