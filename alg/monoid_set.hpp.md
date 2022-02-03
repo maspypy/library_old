@@ -6,6 +6,9 @@ data:
     path: alg/lazy_cntsum_set.hpp
     title: alg/lazy_cntsum_set.hpp
   - icon: ':warning:'
+    path: alg/lazy_cntsummax_set.hpp
+    title: alg/lazy_cntsummax_set.hpp
+  - icon: ':warning:'
     path: alg/lazy_max_set.hpp
     title: alg/lazy_max_set.hpp
   - icon: ':heavy_check_mark:'
@@ -40,6 +43,7 @@ data:
   requiredBy:
   - alg/lazy_cntsum_set.hpp
   - alg/lazy_max_set.hpp
+  - alg/lazy_cntsummax_set.hpp
   - alg/lazy_min_set.hpp
   timestamp: '2022-01-11 13:22:23+09:00'
   verificationStatus: LIBRARY_ALL_AC

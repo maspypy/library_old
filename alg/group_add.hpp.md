@@ -8,6 +8,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: alg/lazy_cntminmincnt_add.hpp
     title: alg/lazy_cntminmincnt_add.hpp
+  - icon: ':warning:'
+    path: alg/lazy_cntsum_add.hpp
+    title: alg/lazy_cntsum_add.hpp
   - icon: ':heavy_check_mark:'
     path: alg/lazy_min_add.hpp
     title: alg/lazy_min_add.hpp
@@ -105,6 +108,7 @@ data:
   - alg/lazy_min_add.hpp
   - alg/lazy_add_mul.hpp
   - alg/lazy_cntminmincnt_add.hpp
+  - alg/lazy_cntsum_add.hpp
   - other/rectangleunion.hpp
   - other/rectanglesums.hpp
   - graph/treeabelgroup.hpp

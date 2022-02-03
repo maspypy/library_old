@@ -8,6 +8,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/treemonoid.hpp
     title: graph/treemonoid.hpp
+  - icon: ':warning:'
+    path: other/uniqueproductquery.hpp
+    title: other/uniqueproductquery.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
@@ -99,6 +102,7 @@ data:
   isVerificationFile: false
   path: ds/segtree.hpp
   requiredBy:
+  - other/uniqueproductquery.hpp
   - graph/treemonoid.hpp
   - graph/treegroup.hpp
   timestamp: '2022-01-16 05:01:22+09:00'

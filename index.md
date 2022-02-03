@@ -24,12 +24,18 @@ data:
     - icon: ':heavy_check_mark:'
       path: alg/lazy_cntminmincnt_add.hpp
       title: alg/lazy_cntminmincnt_add.hpp
+    - icon: ':warning:'
+      path: alg/lazy_cntsum_add.hpp
+      title: alg/lazy_cntsum_add.hpp
     - icon: ':heavy_check_mark:'
       path: alg/lazy_cntsum_affine.hpp
       title: alg/lazy_cntsum_affine.hpp
     - icon: ':heavy_check_mark:'
       path: alg/lazy_cntsum_set.hpp
       title: alg/lazy_cntsum_set.hpp
+    - icon: ':warning:'
+      path: alg/lazy_cntsummax_set.hpp
+      title: alg/lazy_cntsummax_set.hpp
     - icon: ':warning:'
       path: alg/lazy_max_max.hpp
       title: alg/lazy_max_max.hpp
@@ -345,6 +351,12 @@ data:
       title: nt/zeta.hpp
   - name: other
     pages:
+    - icon: ':warning:'
+      path: other/ceil_range.hpp
+      title: other/ceil_range.hpp
+    - icon: ':warning:'
+      path: other/cumsum2d.hpp
+      title: other/cumsum2d.hpp
     - icon: ':heavy_check_mark:'
       path: other/discrete_log.hpp
       title: other/discrete_log.hpp
@@ -378,6 +390,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: other/sharp_p_subset_sum.hpp
       title: other/sharp_p_subset_sum.hpp
+    - icon: ':warning:'
+      path: other/uniqueproductquery.hpp
+      title: other/uniqueproductquery.hpp
   - name: pds
     pages:
     - icon: ':heavy_check_mark:'

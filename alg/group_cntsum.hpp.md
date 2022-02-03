@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: alg/lazy_cntsum_add.hpp
+    title: alg/lazy_cntsum_add.hpp
   - icon: ':heavy_check_mark:'
     path: alg/lazy_cntsum_affine.hpp
     title: alg/lazy_cntsum_affine.hpp
@@ -37,6 +40,7 @@ data:
   requiredBy:
   - alg/lazy_cntsum_set.hpp
   - alg/lazy_cntsum_affine.hpp
+  - alg/lazy_cntsum_add.hpp
   timestamp: '2022-01-11 13:22:23+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
