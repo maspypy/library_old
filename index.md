@@ -95,6 +95,9 @@ data:
     - icon: ':warning:'
       path: ds/cht_monotone.hpp
       title: ds/cht_monotone.hpp
+    - icon: ':warning:'
+      path: ds/cumsum2d.hpp
+      title: ds/cumsum2d.hpp
     - icon: ':heavy_check_mark:'
       path: ds/disjointsparse.hpp
       title: ds/disjointsparse.hpp
@@ -354,9 +357,6 @@ data:
     - icon: ':warning:'
       path: other/ceil_range.hpp
       title: other/ceil_range.hpp
-    - icon: ':warning:'
-      path: other/cumsum2d.hpp
-      title: other/cumsum2d.hpp
     - icon: ':heavy_check_mark:'
       path: other/discrete_log.hpp
       title: other/discrete_log.hpp
