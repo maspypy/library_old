@@ -15,7 +15,7 @@ struct Cumsum2D {
     FOR(x, H) FOR(y, W + 1) dat[x + 1][y] += dat[x][y];
   }
 
-  T get(int x1, int x2, int y1, int y2) {
+  T sum(int x1, int x2, int y1, int y2) {
     T val = T(0);
     val += dat[x1][y1];
     val -= dat[x1][y2];
