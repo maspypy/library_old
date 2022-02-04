@@ -3,23 +3,45 @@
 
 template <typename Graph>
 struct HLD {
+  void doc() {
+    print("HL分解。O(N) 時間構築。");
+    print("LCA, LA などは O(logN) 時間。");
+    print("木の問題では真っ先にこれを作る。");
+    print("→ 木DPや木クエリに派生。");
+    print("");
+    print("木以外、非連結でも使えるようにした。dfs順序や親がとれる。");
+    print("edge idx -> in_tree (辺が tree に入っているか) もとれる。");
+    print("LCA とかは今のところ壊れている。");
+  }
+
   Graph &G;
   int N;
-  vector<int> LID, RID, head, V, parent, depth;
+  vector<int> LID, RID, head, V, parent, depth, root;
+  vector<bool> in_tree;
 
-  HLD(Graph &G, int root = 0)
+  HLD(Graph &G, int r = -1)
       : G(G),
         N(G.N),
         LID(G.N),
         RID(G.N),
-        head(G.N, root),
+        head(G.N, r),
         V(G.N),
         parent(G.N, -1),
-        depth(G.N) {
+        depth(G.N, -1),
+        root(G.N, -1),
+        in_tree(G.M, 0) {
     assert(G.is_prepared());
     int t1 = 0;
-    dfs_sz(root, -1);
-    dfs_hld(root, -1, t1);
+    if (r != -1) {
+      dfs_sz(r, -1);
+      dfs_hld(r, -1, t1);
+    } else {
+      FOR(r, N) if (parent[r] == -1) {
+        dfs_sz(r, -1);
+        dfs_hld(r, -1, t1);
+      }
+    }
+    for (auto &&v: V) root[v] = (parent[v] == -1 ? v : root[parent[v]]);
   }
 
   void dfs_sz(int v, int p) {
@@ -29,14 +51,15 @@ struct HLD {
     sz[v] = 1;
     int l = G.indptr[v], r = G.indptr[v + 1];
     auto &csr = G.csr_edges;
-    if (l + 1 < r && csr[l].to == p) swap(csr[l], csr[l + 1]);
+    // 使う辺があれば先頭にする
+    FOR3_R(i, l, r - 1) {
+      if (depth[csr[i + 1].to] == -1) swap(csr[i], csr[i + 1]);
+    }
     int hld_sz = 0;
     for (int i = l; i < r; ++i) {
       auto e = csr[i];
-      if (e.to == p) {
-        assert(!G.is_directed());
-        continue;
-      }
+      if (depth[e.to] != -1) continue;
+      in_tree[e.id] = 1;
       dfs_sz(e.to, v);
       sz[v] += sz[e.to];
       if (chmax(hld_sz, sz[e.to]) && l < i) { swap(csr[l], csr[i]); }
@@ -49,7 +72,7 @@ struct HLD {
     V[LID[v]] = v;
     bool heavy = true;
     for (auto &&e: G[v]) {
-      if (e.to == p) continue;
+      if (!in_tree[e.id] || depth[e.to] <= depth[v]) continue;
       head[e.to] = (heavy ? head[v] : e.to);
       heavy = false;
       dfs_hld(e.to, v, times);
@@ -80,6 +103,8 @@ struct HLD {
       if (head[u] == head[v]) return u;
     }
   }
+
+  int subtree_size(int v) { return RID[v] - LID[v]; }
 
   int dist(int a, int b) {
     int c = LCA(a, b);
@@ -120,12 +145,7 @@ struct HLD {
     print("parent", parent);
     print("depth", depth);
     print("head", head);
-  }
-
-  void doc() {
-    print("HL分解。O(N) 時間構築。");
-    print("LCA, LA などは O(logN) 時間。");
-    print("木の問題では真っ先にこれを作る。");
-    print("→ 木DPや木クエリに派生。");
+    print("in_tree(edge)", in_tree);
+    print("root", root);
   }
 };
