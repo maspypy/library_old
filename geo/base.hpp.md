@@ -20,25 +20,29 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"geo/base.hpp\"\nstruct Point {\n  ll x, y;\n  Point operator-(Point\
-    \ p) const { return {x - p.x, y - p.y}; }\n  ll det(Point p) const { return x\
-    \ * p.y - y * p.x; }\n  ll dot(Point p) const { return x * p.x + y * p.y; }\n\
-    \  bool operator<(Point p) const {\n    if (x != p.x) return x < p.x;\n    return\
-    \ y < p.y;\n  }\n  bool operator==(Point p) const { return x == p.x && y == p.y;\
-    \ }\n  Point operator-() const { return {-x, -y}; }\n};\n"
-  code: "struct Point {\n  ll x, y;\n  Point operator-(Point p) const { return {x\
+  bundledCode: "#line 1 \"geo/base.hpp\"\nstruct Point {\n  ll x, y;\n  Point(ll x=0,\
+    \ ll y=0) : x(x), y(y) {}\n\n  template <typename S, typename T>\n  Point(pair<S,\
+    \ T> p) : x(p.fi), y(p.se) {}\n\n  Point operator-(Point p) const { return {x\
     \ - p.x, y - p.y}; }\n  ll det(Point p) const { return x * p.y - y * p.x; }\n\
     \  ll dot(Point p) const { return x * p.x + y * p.y; }\n  bool operator<(Point\
     \ p) const {\n    if (x != p.x) return x < p.x;\n    return y < p.y;\n  }\n  bool\
     \ operator==(Point p) const { return x == p.x && y == p.y; }\n  Point operator-()\
     \ const { return {-x, -y}; }\n};\n"
+  code: "struct Point {\n  ll x, y;\n  Point(ll x=0, ll y=0) : x(x), y(y) {}\n\n \
+    \ template <typename S, typename T>\n  Point(pair<S, T> p) : x(p.fi), y(p.se)\
+    \ {}\n\n  Point operator-(Point p) const { return {x - p.x, y - p.y}; }\n  ll\
+    \ det(Point p) const { return x * p.y - y * p.x; }\n  ll dot(Point p) const {\
+    \ return x * p.x + y * p.y; }\n  bool operator<(Point p) const {\n    if (x !=\
+    \ p.x) return x < p.x;\n    return y < p.y;\n  }\n  bool operator==(Point p) const\
+    \ { return x == p.x && y == p.y; }\n  Point operator-() const { return {-x, -y};\
+    \ }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: geo/base.hpp
   requiredBy:
   - geo/angle_sort.hpp
   - geo/dynamicupperhull.hpp
-  timestamp: '2022-01-15 18:40:41+09:00'
+  timestamp: '2022-02-04 11:52:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/geometry/convex_layers.test.cpp

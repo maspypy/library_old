@@ -187,6 +187,9 @@ data:
     path: test/library_checker/math/find_linear_recurrence.test.cpp
     title: test/library_checker/math/find_linear_recurrence.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/library_checker/math/gcd_convolution.test.cpp
+    title: test/library_checker/math/gcd_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/math/kth_root_integer.test.cpp
     title: test/library_checker/math/kth_root_integer.test.cpp
   - icon: ':heavy_check_mark:'
@@ -195,6 +198,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/math/lcm_convolution.test.cpp
+    title: test/library_checker/math/lcm_convolution.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/nim_product.test.cpp
     title: test/library_checker/math/nim_product.test.cpp
@@ -550,10 +556,12 @@ data:
   - test/yukicoder/1038_centroid.test.cpp
   - test/yukicoder/899_bfsnumbering.test.cpp
   - test/yukicoder/1002_centroid.test.cpp
+  - test/library_checker/math/lcm_convolution.test.cpp
   - test/library_checker/math/nim_product.test.cpp
   - test/library_checker/math/binomial_coefficient.test.cpp
   - test/library_checker/math/sum_of_exp_times_poly_limit.test.cpp
   - test/library_checker/math/factorize.test.cpp
+  - test/library_checker/math/gcd_convolution.test.cpp
   - test/library_checker/math/find_linear_recurrence.test.cpp
   - test/library_checker/math/sum_of_exp_times_poly.test.cpp
   - test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp

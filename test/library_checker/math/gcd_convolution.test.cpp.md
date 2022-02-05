@@ -2,14 +2,20 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: geo/angle_sort.hpp
-    title: geo/angle_sort.hpp
-  - icon: ':heavy_check_mark:'
-    path: geo/base.hpp
-    title: geo/base.hpp
+    path: mod/modint.hpp
+    title: mod/modint.hpp
   - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
+  - icon: ':heavy_check_mark:'
+    path: nt/gcd_convolution.hpp
+    title: nt/gcd_convolution.hpp
+  - icon: ':heavy_check_mark:'
+    path: nt/primetable.hpp
+    title: nt/primetable.hpp
+  - icon: ':heavy_check_mark:'
+    path: nt/zeta.hpp
+    title: nt/zeta.hpp
   - icon: ':heavy_check_mark:'
     path: other/io.hpp
     title: other/io.hpp
@@ -20,22 +26,21 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/sort_points_by_argument
+    PROBLEM: https://judge.yosupo.jp/problem/gcd_convolution
     links:
-    - https://judge.yosupo.jp/problem/sort_points_by_argument
-  bundledCode: "#line 1 \"test/library_checker/geometry/sort_points_by_argument.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/sort_points_by_argument\"\r\
-    \n#line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
-    \n#line 1 \"other/io.hpp\"\n// based on yosupo's fastio\r\n#include <unistd.h>\r\
-    \n\r\nnamespace detail {\r\ntemplate <typename T, decltype(&T::is_modint) = &T::is_modint>\r\
-    \nstd::true_type check_value(int);\r\ntemplate <typename T>\r\nstd::false_type\
-    \ check_value(long);\r\n} // namespace detail\r\n\r\ntemplate <typename T>\r\n\
-    struct is_modint : decltype(detail::check_value<T>(0)) {};\r\ntemplate <typename\
-    \ T>\r\nusing is_modint_t = enable_if_t<is_modint<T>::value>;\r\ntemplate <typename\
-    \ T>\r\nusing is_not_modint_t = enable_if_t<!is_modint<T>::value>;\r\n\r\nstruct\
-    \ Scanner {\r\n  FILE* fp;\r\n  char line[(1 << 15) + 1];\r\n  size_t st = 0,\
-    \ ed = 0;\r\n  void reread() {\r\n    memmove(line, line + st, ed - st);\r\n \
-    \   ed -= st;\r\n    st = 0;\r\n    ed += fread(line + ed, 1, (1 << 15) - ed,\
+    - https://judge.yosupo.jp/problem/gcd_convolution
+  bundledCode: "#line 1 \"test/library_checker/math/gcd_convolution.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/gcd_convolution\"\n#line 1 \"my_template.hpp\"\
+    \n#include <bits/stdc++.h>\n\nusing namespace std;\n\n#line 1 \"other/io.hpp\"\
+    \n// based on yosupo's fastio\r\n#include <unistd.h>\r\n\r\nnamespace detail {\r\
+    \ntemplate <typename T, decltype(&T::is_modint) = &T::is_modint>\r\nstd::true_type\
+    \ check_value(int);\r\ntemplate <typename T>\r\nstd::false_type check_value(long);\r\
+    \n} // namespace detail\r\n\r\ntemplate <typename T>\r\nstruct is_modint : decltype(detail::check_value<T>(0))\
+    \ {};\r\ntemplate <typename T>\r\nusing is_modint_t = enable_if_t<is_modint<T>::value>;\r\
+    \ntemplate <typename T>\r\nusing is_not_modint_t = enable_if_t<!is_modint<T>::value>;\r\
+    \n\r\nstruct Scanner {\r\n  FILE* fp;\r\n  char line[(1 << 15) + 1];\r\n  size_t\
+    \ st = 0, ed = 0;\r\n  void reread() {\r\n    memmove(line, line + st, ed - st);\r\
+    \n    ed -= st;\r\n    st = 0;\r\n    ed += fread(line + ed, 1, (1 << 15) - ed,\
     \ fp);\r\n    line[ed] = '\\0';\r\n  }\r\n  bool succ() {\r\n    while (true)\
     \ {\r\n      if (st == ed) {\r\n        reread();\r\n        if (st == ed) return\
     \ false;\r\n      }\r\n      while (st != ed && isspace(line[st])) st++;\r\n \
@@ -161,47 +166,126 @@ data:
     \ C;\n}\n\ntemplate <typename T>\nvector<int> argsort(vector<T> &A) {\n  // stable\n\
     \  vector<int> ids(A.size());\n  iota(all(ids), 0);\n  sort(all(ids),\n      \
     \ [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j] && i < j); });\n  return\
-    \ ids;\n}\n#line 1 \"geo/base.hpp\"\nstruct Point {\n  ll x, y;\n  Point(ll x=0,\
-    \ ll y=0) : x(x), y(y) {}\n\n  template <typename S, typename T>\n  Point(pair<S,\
-    \ T> p) : x(p.fi), y(p.se) {}\n\n  Point operator-(Point p) const { return {x\
-    \ - p.x, y - p.y}; }\n  ll det(Point p) const { return x * p.y - y * p.x; }\n\
-    \  ll dot(Point p) const { return x * p.x + y * p.y; }\n  bool operator<(Point\
-    \ p) const {\n    if (x != p.x) return x < p.x;\n    return y < p.y;\n  }\n  bool\
-    \ operator==(Point p) const { return x == p.x && y == p.y; }\n  Point operator-()\
-    \ const { return {-x, -y}; }\n};\n#line 2 \"geo/angle_sort.hpp\"\n\r\nvector<int>\
-    \ angle_argsort(vector<Point>& P) {\r\n  auto is_lower = [](Point P) { return\
-    \ (P.y < 0) || (P.y == 0 && P.x > 0); };\r\n  vector<int> lower, origin, upper;\r\
-    \n  Point O = {0, 0};\r\n  FOR(i, len(P)) {\r\n    if (P[i] == O) origin.eb(i);\r\
-    \n    elif (is_lower(P[i])) lower.eb(i);\r\n    else upper.eb(i);\r\n  }\r\n \
-    \ sort(all(lower), [&](auto& i, auto& j) { return P[i].det(P[j]) > 0; });\r\n\
-    \  sort(all(upper), [&](auto& i, auto& j) { return P[i].det(P[j]) > 0; });\r\n\
-    \  auto& I = lower;\r\n  I.insert(I.end(), all(origin));\r\n  I.insert(I.end(),\
-    \ all(upper));\r\n  return I;\r\n}\r\n\r\nvoid angle_sort(vector<Point>& P) {\r\
-    \n  auto I = angle_argsort(P);\r\n  vc<Point> Q(len(P));\r\n  FOR(i, len(P)) Q[i]\
-    \ = P[I[i]];\r\n  P = Q;\r\n}\r\n#line 4 \"test/library_checker/geometry/sort_points_by_argument.test.cpp\"\
-    \n\r\nvoid solve() {\r\n  LL(N);\r\n  vc<Point> P(N);\r\n  FOR(i, N) read(P[i].x),\
-    \ read(P[i].y);\r\n  angle_sort(P);\r\n  FOR(i, N) print(P[i].x, P[i].y);\r\n\
-    }\r\n\r\nsigned main() {\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sort_points_by_argument\"\
-    \r\n#include \"my_template.hpp\"\r\n#include \"geo/angle_sort.hpp\"\r\n\r\nvoid\
-    \ solve() {\r\n  LL(N);\r\n  vc<Point> P(N);\r\n  FOR(i, N) read(P[i].x), read(P[i].y);\r\
-    \n  angle_sort(P);\r\n  FOR(i, N) print(P[i].x, P[i].y);\r\n}\r\n\r\nsigned main()\
-    \ {\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \ ids;\n}\n#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n \
+    \ static constexpr bool is_modint = true;\n  int val;\n  constexpr modint(const\
+    \ ll val = 0) noexcept\n      : val(val >= 0 ? val % mod : (mod - (-val) % mod)\
+    \ % mod) {}\n  bool operator<(const modint &other) const {\n    return val < other.val;\n\
+    \  } // To use std::map\n  modint &operator+=(const modint &p) {\n    if ((val\
+    \ += p.val) >= mod) val -= mod;\n    return *this;\n  }\n  modint &operator-=(const\
+    \ modint &p) {\n    if ((val += mod - p.val) >= mod) val -= mod;\n    return *this;\n\
+    \  }\n  modint &operator*=(const modint &p) {\n    val = (int)(1LL * val * p.val\
+    \ % mod);\n    return *this;\n  }\n  modint &operator/=(const modint &p) {\n \
+    \   *this *= p.inverse();\n    return *this;\n  }\n  modint operator-() const\
+    \ { return modint(-val); }\n  modint operator+(const modint &p) const { return\
+    \ modint(*this) += p; }\n  modint operator-(const modint &p) const { return modint(*this)\
+    \ -= p; }\n  modint operator*(const modint &p) const { return modint(*this) *=\
+    \ p; }\n  modint operator/(const modint &p) const { return modint(*this) /= p;\
+    \ }\n  bool operator==(const modint &p) const { return val == p.val; }\n  bool\
+    \ operator!=(const modint &p) const { return val != p.val; }\n  modint inverse()\
+    \ const {\n    int a = val, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n \
+    \     t = a / b;\n      swap(a -= t * b, b), swap(u -= t * v, v);\n    }\n   \
+    \ return modint(u);\n  }\n  modint pow(int64_t n) const {\n    modint ret(1),\
+    \ mul(val);\n    while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n\
+    \      n >>= 1;\n    }\n    return ret;\n  }\n  static constexpr int get_mod()\
+    \ { return mod; }\n};\n\nstruct ArbitraryModInt {\n  static constexpr bool is_modint\
+    \ = true;\n  int val;\n  ArbitraryModInt() : val(0) {}\n  ArbitraryModInt(int64_t\
+    \ y)\n      : val(y >= 0 ? y % get_mod()\n                   : (get_mod() - (-y)\
+    \ % get_mod()) % get_mod()) {}\n  bool operator<(const ArbitraryModInt &other)\
+    \ const {\n    return val < other.val;\n  } // To use std::map<ArbitraryModInt,\
+    \ T>\n  static int &get_mod() {\n    static int mod = 0;\n    return mod;\n  }\n\
+    \  static void set_mod(int md) { get_mod() = md; }\n  ArbitraryModInt &operator+=(const\
+    \ ArbitraryModInt &p) {\n    if ((val += p.val) >= get_mod()) val -= get_mod();\n\
+    \    return *this;\n  }\n  ArbitraryModInt &operator-=(const ArbitraryModInt &p)\
+    \ {\n    if ((val += get_mod() - p.val) >= get_mod()) val -= get_mod();\n    return\
+    \ *this;\n  }\n  ArbitraryModInt &operator*=(const ArbitraryModInt &p) {\n   \
+    \ unsigned long long a = (unsigned long long)val * p.val;\n    unsigned xh = (unsigned)(a\
+    \ >> 32), xl = (unsigned)a, d, m;\n    asm(\"divl %4; \\n\\t\" : \"=a\"(d), \"\
+    =d\"(m) : \"d\"(xh), \"a\"(xl), \"r\"(get_mod()));\n    val = m;\n    return *this;\n\
+    \  }\n  ArbitraryModInt &operator/=(const ArbitraryModInt &p) {\n    *this *=\
+    \ p.inverse();\n    return *this;\n  }\n  ArbitraryModInt operator-() const {\
+    \ return ArbitraryModInt(-val); }\n  ArbitraryModInt operator+(const ArbitraryModInt\
+    \ &p) const {\n    return ArbitraryModInt(*this) += p;\n  }\n  ArbitraryModInt\
+    \ operator-(const ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this)\
+    \ -= p;\n  }\n  ArbitraryModInt operator*(const ArbitraryModInt &p) const {\n\
+    \    return ArbitraryModInt(*this) *= p;\n  }\n  ArbitraryModInt operator/(const\
+    \ ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this) /= p;\n  }\n\
+    \  bool operator==(const ArbitraryModInt &p) const { return val == p.val; }\n\
+    \  bool operator!=(const ArbitraryModInt &p) const { return val != p.val; }\n\
+    \  ArbitraryModInt inverse() const {\n    int a = val, b = get_mod(), u = 1, v\
+    \ = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b), swap(u\
+    \ -= t * v, v);\n    }\n    return ArbitraryModInt(u);\n  }\n  ArbitraryModInt\
+    \ pow(int64_t n) const {\n    ArbitraryModInt ret(1), mul(val);\n    while (n\
+    \ > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n  \
+    \  }\n    return ret;\n  }\n};\n\ntemplate<typename mint>\ntuple<mint, mint, mint>\
+    \ get_factorial_data(int n){\n  static constexpr int mod = mint::get_mod();\n\
+    \  assert(0 <= n && n < mod);\n  static vector<mint> fact = {1, 1};\n  static\
+    \ vector<mint> fact_inv = {1, 1};\n  static vector<mint> inv = {0, 1};\n  while(len(fact)\
+    \ <= n){\n    int k = len(fact);\n    fact.eb(fact[k - 1] * mint(k));\n    auto\
+    \ q = ceil(mod, k);\n    int r = k * q - mod;\n    inv.eb(inv[r] * mint(q));\n\
+    \    fact_inv.eb(fact_inv[k - 1] * inv[k]);\n  }\n  return {fact[n], fact_inv[n],\
+    \ inv[n]};\n}\n\ntemplate<typename mint>\nmint fact(int n){\n  static constexpr\
+    \ int mod = mint::get_mod();\n  assert(0 <= n);\n  if(n >= mod) return 0;\n  return\
+    \ get<0>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename mint>\nmint fact_inv(int\
+    \ n){\n  static constexpr int mod = mint::get_mod();\n  assert(0 <= n && n < mod);\n\
+    \  return get<1>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename mint>\n\
+    mint inv(int n){\n  static constexpr int mod = mint::get_mod();\n  assert(0 <=\
+    \ n && n < mod);\n  return get<2>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename\
+    \ mint>\nmint C(ll n, ll k, bool large = false) {\n  assert(n >= 0);\n  if (k\
+    \ < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n) * fact_inv<mint>(k)\
+    \ * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n  FOR(i, k) {\n\
+    \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\nusing\
+    \ modint107 = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n\
+    using amint = ArbitraryModInt;\n#line 1 \"nt/primetable.hpp\"\nvc<ll>& primetable(int\
+    \ LIM) {\n  ++LIM;\n  const int S = 32768;\n  static int done = 2;\n  static vc<ll>\
+    \ primes = {2}, sieve(S + 1);\n\n  if(done >= LIM) return primes;\n  done  = LIM;\n\
+    \n  primes = {2}, sieve.assign(S + 1, 0);\n  const int R = LIM / 2;  \n  primes.reserve(int(LIM\
+    \ / log(LIM) * 1.1));\n  vc<pi> cp;\n  for (int i = 3; i <= S; i += 2) {\n   \
+    \ if (!sieve[i]) {\n      cp.eb(i, i * i / 2);\n      for (int j = i * i; j <=\
+    \ S; j += 2 * i) sieve[j] = 1;\n    }\n  }\n  for (int L = 1; L <= R; L += S)\
+    \ {\n    array<bool, S> block{};\n    for (auto& [p, idx]: cp)\n      for (int\
+    \ i = idx; i < S + L; idx = (i += p)) block[i - L] = 1;\n    FOR(i, min(S, R -\
+    \ L)) if (!block[i]) primes.eb((L + i) * 2 + 1);\n  }\n  return primes;\n}\n#line\
+    \ 3 \"nt/zeta.hpp\"\n\r\ntemplate <typename T>\r\nvoid divisor_zeta(vc<T>& A)\
+    \ {\r\n  assert(A[0] == 0);\r\n  int N = len(A) - 1;\r\n  auto& P = primetable(N);\r\
+    \n  for (auto&& p: P) { FOR3(x, 1, N / p + 1) A[p * x] += A[x]; }\r\n}\r\n\r\n\
+    template <typename T>\r\nvoid divisor_mobius(vc<T>& A) {\r\n  assert(A[0] == 0);\r\
+    \n  int N = len(A) - 1;\r\n  auto& P = primetable(N);\r\n  for (auto&& p: P) {\
+    \ FOR3_R(x, 1, N / p + 1) A[p * x] -= A[x]; }\r\n}\r\n\r\ntemplate <typename T>\r\
+    \nvoid multiplier_zeta(vc<T>& A) {\r\n  assert(A[0] == 0);\r\n  int N = len(A)\
+    \ - 1;\r\n  auto& P = primetable(N);\r\n  for (auto&& p: P) { FOR3_R(x, 1, N /\
+    \ p + 1) A[x] += A[p * x]; }\r\n}\r\n\r\ntemplate <typename T>\r\nvoid multiplier_mobius(vc<T>&\
+    \ A) {\r\n  assert(A[0] == 0);\r\n  int N = len(A) - 1;\r\n  auto& P = primetable(N);\r\
+    \n  for (auto&& p: P) { FOR3(x, 1, N / p + 1) A[x] -= A[p * x]; }\r\n}\r\n#line\
+    \ 2 \"nt/gcd_convolution.hpp\"\n\ntemplate <typename T>\nvc<T> gcd_convolution(vc<T>\
+    \ A, vc<T>& B) {\n  assert(len(A) == len(B));\n  multiplier_zeta(A);\n  multiplier_zeta(B);\n\
+    \  FOR(i, len(A)) A[i] *= B[i];\n  multiplier_mobius(A);\n  return A;\n}\n#line\
+    \ 5 \"test/library_checker/math/gcd_convolution.test.cpp\"\n\nusing mint = modint998;\n\
+    void solve() {\n  LL(N);\n  VEC(mint, A, N);\n  VEC(mint, B, N);\n  A.insert(A.begin(),\
+    \ 0);\n  B.insert(B.begin(), 0);\n  A = gcd_convolution(A, B);\n  A.erase(A.begin());\n\
+    \  print(A);\n}\n\nsigned main() {\n  solve();\n\n  return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/gcd_convolution\"\n#include\
+    \ \"my_template.hpp\"\n#include \"mod/modint.hpp\"\n#include \"nt/gcd_convolution.hpp\"\
+    \n\nusing mint = modint998;\nvoid solve() {\n  LL(N);\n  VEC(mint, A, N);\n  VEC(mint,\
+    \ B, N);\n  A.insert(A.begin(), 0);\n  B.insert(B.begin(), 0);\n  A = gcd_convolution(A,\
+    \ B);\n  A.erase(A.begin());\n  print(A);\n}\n\nsigned main() {\n  solve();\n\n\
+    \  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
-  - geo/angle_sort.hpp
-  - geo/base.hpp
+  - mod/modint.hpp
+  - nt/gcd_convolution.hpp
+  - nt/zeta.hpp
+  - nt/primetable.hpp
   isVerificationFile: true
-  path: test/library_checker/geometry/sort_points_by_argument.test.cpp
+  path: test/library_checker/math/gcd_convolution.test.cpp
   requiredBy: []
-  timestamp: '2022-02-04 11:52:12+09:00'
+  timestamp: '2022-02-06 02:56:01+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/library_checker/geometry/sort_points_by_argument.test.cpp
+documentation_of: test/library_checker/math/gcd_convolution.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/geometry/sort_points_by_argument.test.cpp
-- /verify/test/library_checker/geometry/sort_points_by_argument.test.cpp.html
-title: test/library_checker/geometry/sort_points_by_argument.test.cpp
+- /verify/test/library_checker/math/gcd_convolution.test.cpp
+- /verify/test/library_checker/math/gcd_convolution.test.cpp.html
+title: test/library_checker/math/gcd_convolution.test.cpp
 ---

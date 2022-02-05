@@ -139,8 +139,14 @@ data:
     path: test/library_checker/math/find_linear_recurrence.test.cpp
     title: test/library_checker/math/find_linear_recurrence.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/library_checker/math/gcd_convolution.test.cpp
+    title: test/library_checker/math/gcd_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/math/lcm_convolution.test.cpp
+    title: test/library_checker/math/lcm_convolution.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/sharp_p_subset_sum.test.cpp
     title: test/library_checker/math/sharp_p_subset_sum.test.cpp
@@ -400,7 +406,9 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/1810_matpow.test.cpp
+  - test/library_checker/math/lcm_convolution.test.cpp
   - test/library_checker/math/sum_of_exp_times_poly_limit.test.cpp
+  - test/library_checker/math/gcd_convolution.test.cpp
   - test/library_checker/math/find_linear_recurrence.test.cpp
   - test/library_checker/math/sum_of_exp_times_poly.test.cpp
   - test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp

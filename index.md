@@ -338,6 +338,12 @@ data:
       path: nt/factor.hpp
       title: nt/factor.hpp
     - icon: ':heavy_check_mark:'
+      path: nt/gcd_convolution.hpp
+      title: nt/gcd_convolution.hpp
+    - icon: ':heavy_check_mark:'
+      path: nt/lcm_convolution.hpp
+      title: nt/lcm_convolution.hpp
+    - icon: ':heavy_check_mark:'
       path: nt/multiplicative_convolution_mod2n.hpp
       title: nt/multiplicative_convolution_mod2n.hpp
     - icon: ':heavy_check_mark:'
@@ -349,7 +355,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: nt/primetest.hpp
       title: nt/primetest.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: nt/zeta.hpp
       title: nt/zeta.hpp
   - name: other
@@ -707,6 +713,9 @@ data:
       path: test/library_checker/math/find_linear_recurrence.test.cpp
       title: test/library_checker/math/find_linear_recurrence.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/library_checker/math/gcd_convolution.test.cpp
+      title: test/library_checker/math/gcd_convolution.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/math/kth_root_integer.test.cpp
       title: test/library_checker/math/kth_root_integer.test.cpp
     - icon: ':heavy_check_mark:'
@@ -715,6 +724,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
       title: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/math/lcm_convolution.test.cpp
+      title: test/library_checker/math/lcm_convolution.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/math/nim_product.test.cpp
       title: test/library_checker/math/nim_product.test.cpp

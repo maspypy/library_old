@@ -6,9 +6,15 @@ data:
     path: mod/powertable.hpp
     title: mod/powertable.hpp
   - icon: ':heavy_check_mark:'
+    path: nt/gcd_convolution.hpp
+    title: nt/gcd_convolution.hpp
+  - icon: ':heavy_check_mark:'
+    path: nt/lcm_convolution.hpp
+    title: nt/lcm_convolution.hpp
+  - icon: ':heavy_check_mark:'
     path: nt/primesum.hpp
     title: nt/primesum.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: nt/zeta.hpp
     title: nt/zeta.hpp
   - icon: ':heavy_check_mark:'
@@ -24,6 +30,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/enumerate_primes.test.cpp
     title: test/library_checker/math/enumerate_primes.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/math/gcd_convolution.test.cpp
+    title: test/library_checker/math/gcd_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/math/lcm_convolution.test.cpp
+    title: test/library_checker/math/lcm_convolution.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
     title: test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
@@ -66,14 +78,18 @@ data:
   path: nt/primetable.hpp
   requiredBy:
   - mod/powertable.hpp
+  - nt/lcm_convolution.hpp
   - nt/primesum.hpp
   - nt/zeta.hpp
+  - nt/gcd_convolution.hpp
   - seq/stirling_number_1.hpp
   - poly/poly_taylor_shift.hpp
   timestamp: '2022-01-15 22:35:49+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/library_checker/math/lcm_convolution.test.cpp
   - test/library_checker/math/sum_of_exp_times_poly_limit.test.cpp
+  - test/library_checker/math/gcd_convolution.test.cpp
   - test/library_checker/math/sum_of_exp_times_poly.test.cpp
   - test/library_checker/math/counting_primes.test.cpp
   - test/library_checker/math/enumerate_primes.test.cpp

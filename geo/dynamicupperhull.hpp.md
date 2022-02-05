@@ -15,31 +15,33 @@ data:
   attributes:
     links:
     - https://codeforces.com/blog/entry/75929
-  bundledCode: "#line 1 \"geo/base.hpp\"\nstruct Point {\n  ll x, y;\n  Point operator-(Point\
-    \ p) const { return {x - p.x, y - p.y}; }\n  ll det(Point p) const { return x\
-    \ * p.y - y * p.x; }\n  ll dot(Point p) const { return x * p.x + y * p.y; }\n\
-    \  bool operator<(Point p) const {\n    if (x != p.x) return x < p.x;\n    return\
-    \ y < p.y;\n  }\n  bool operator==(Point p) const { return x == p.x && y == p.y;\
-    \ }\n  Point operator-() const { return {-x, -y}; }\n};\n#line 2 \"geo/dynamicupperhull.hpp\"\
-    \n\r\n/*\r\nhttps://codeforces.com/blog/entry/75929\r\n\u52D5\u7684\u51F8\u5305\
-    \u3002\r\nx \u5EA7\u6A19\u3067\u30BD\u30FC\u30C8\u3057\u3066\u5B8C\u5168\u4E8C\
-    \u5206\u6728\u306E\u30BB\u30B0\u6728\u306E\u5F62\u306B\u3057\u3066\u304A\u304F\
-    \u3002\r\n\u30BB\u30B0\u6728\u306E\u30DE\u30FC\u30B8\u90E8\u5206\uFF08\u6B21\u306E\
-    \ bridge \u3092\u6C42\u3081\u308B\uFF09\u3067\u4E8C\u5206\u63A2\u7D22\u3059\u308B\
-    \u3002\r\nbridge \u540C\u58EB\u306E 4 \u70B9\u3067\u306E\u4E0A\u5074\u51F8\u5305\
-    \u3092\u898B\u308C\u3070\u3001\u6B21\u306B\u63A2\u7D22\u3059\u308B\u3079\u304D\
-    \u533A\u9593\u5BFE\u304C\u5206\u304B\u308B\u3002\r\n\r\n\u69CB\u7BC9 O(NlogN)\u3001\
-    \u66F4\u65B0 O(Nlog^2N)\r\n\u5EA7\u6A19 10^9 \u4EE5\u4E0B\u306E\u6574\u6570\u3092\
-    \u4EEE\u5B9A\r\n*/\r\nstruct DynamicUpperHull {\r\n  struct node {\r\n    int\
-    \ l, r;   // \u7BC4\u56F2 (-1 if no vertex)\r\n    int bl, br; // bridge idx\r\
-    \n  };\r\n  int N, sz;\r\n  vc<Point> P;\r\n  vc<node> seg;\r\n  // \u53D7\u3051\
-    \u53D6\u3063\u305F\u30A4\u30F3\u30C7\u30C3\u30AF\u30B9\u3068\u306E\u5BFE\u5FDC\
-    \r\n  vc<int> to_original_idx, to_seg_idx;\r\n\r\n  DynamicUpperHull(vc<Point>\
-    \ P) : DynamicUpperHull(P, 0) {}\r\n  DynamicUpperHull(vc<Point> P, bool b)\r\n\
-    \      : DynamicUpperHull(P, vc<bool>(len(P), b)) {}\r\n\r\n  DynamicUpperHull(vc<Point>\
-    \ _P, vc<bool> isin) : N(len(_P)), P(_P) {\r\n    to_original_idx = argsort(P);\r\
-    \n    sort(all(P));\r\n    sz = 1;\r\n    while (sz < N) sz *= 2;\r\n    to_seg_idx.resize(N);\r\
-    \n    seg.assign(sz + sz, {-1, -1, -1, -1});\r\n    for (int i = 0; i < N; ++i)\
+  bundledCode: "#line 1 \"geo/base.hpp\"\nstruct Point {\n  ll x, y;\n  Point(ll x=0,\
+    \ ll y=0) : x(x), y(y) {}\n\n  template <typename S, typename T>\n  Point(pair<S,\
+    \ T> p) : x(p.fi), y(p.se) {}\n\n  Point operator-(Point p) const { return {x\
+    \ - p.x, y - p.y}; }\n  ll det(Point p) const { return x * p.y - y * p.x; }\n\
+    \  ll dot(Point p) const { return x * p.x + y * p.y; }\n  bool operator<(Point\
+    \ p) const {\n    if (x != p.x) return x < p.x;\n    return y < p.y;\n  }\n  bool\
+    \ operator==(Point p) const { return x == p.x && y == p.y; }\n  Point operator-()\
+    \ const { return {-x, -y}; }\n};\n#line 2 \"geo/dynamicupperhull.hpp\"\n\r\n/*\r\
+    \nhttps://codeforces.com/blog/entry/75929\r\n\u52D5\u7684\u51F8\u5305\u3002\r\n\
+    x \u5EA7\u6A19\u3067\u30BD\u30FC\u30C8\u3057\u3066\u5B8C\u5168\u4E8C\u5206\u6728\
+    \u306E\u30BB\u30B0\u6728\u306E\u5F62\u306B\u3057\u3066\u304A\u304F\u3002\r\n\u30BB\
+    \u30B0\u6728\u306E\u30DE\u30FC\u30B8\u90E8\u5206\uFF08\u6B21\u306E bridge \u3092\
+    \u6C42\u3081\u308B\uFF09\u3067\u4E8C\u5206\u63A2\u7D22\u3059\u308B\u3002\r\nbridge\
+    \ \u540C\u58EB\u306E 4 \u70B9\u3067\u306E\u4E0A\u5074\u51F8\u5305\u3092\u898B\u308C\
+    \u3070\u3001\u6B21\u306B\u63A2\u7D22\u3059\u308B\u3079\u304D\u533A\u9593\u5BFE\
+    \u304C\u5206\u304B\u308B\u3002\r\n\r\n\u69CB\u7BC9 O(NlogN)\u3001\u66F4\u65B0\
+    \ O(Nlog^2N)\r\n\u5EA7\u6A19 10^9 \u4EE5\u4E0B\u306E\u6574\u6570\u3092\u4EEE\u5B9A\
+    \r\n*/\r\nstruct DynamicUpperHull {\r\n  struct node {\r\n    int l, r;   // \u7BC4\
+    \u56F2 (-1 if no vertex)\r\n    int bl, br; // bridge idx\r\n  };\r\n  int N,\
+    \ sz;\r\n  vc<Point> P;\r\n  vc<node> seg;\r\n  // \u53D7\u3051\u53D6\u3063\u305F\
+    \u30A4\u30F3\u30C7\u30C3\u30AF\u30B9\u3068\u306E\u5BFE\u5FDC\r\n  vc<int> to_original_idx,\
+    \ to_seg_idx;\r\n\r\n  DynamicUpperHull(vc<Point> P) : DynamicUpperHull(P, 0)\
+    \ {}\r\n  DynamicUpperHull(vc<Point> P, bool b)\r\n      : DynamicUpperHull(P,\
+    \ vc<bool>(len(P), b)) {}\r\n\r\n  DynamicUpperHull(vc<Point> _P, vc<bool> isin)\
+    \ : N(len(_P)), P(_P) {\r\n    to_original_idx = argsort(P);\r\n    sort(all(P));\r\
+    \n    sz = 1;\r\n    while (sz < N) sz *= 2;\r\n    to_seg_idx.resize(N);\r\n\
+    \    seg.assign(sz + sz, {-1, -1, -1, -1});\r\n    for (int i = 0; i < N; ++i)\
     \ to_seg_idx[to_original_idx[i]] = i;\r\n    for (int i = 0; i < N; ++i)\r\n \
     \     if (isin[to_original_idx[i]]) { seg[sz + i] = {i, i + 1, i, i}; }\r\n  \
     \  FOR3_R(i, 1, sz) update(i);\r\n  }\r\n\r\n  void insert(int i) {\r\n    i =\
@@ -146,7 +148,7 @@ data:
   isVerificationFile: false
   path: geo/dynamicupperhull.hpp
   requiredBy: []
-  timestamp: '2022-01-25 04:43:11+09:00'
+  timestamp: '2022-02-04 11:52:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/geometry/convex_layers.test.cpp

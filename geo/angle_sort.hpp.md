@@ -14,15 +14,17 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"geo/base.hpp\"\nstruct Point {\n  ll x, y;\n  Point operator-(Point\
-    \ p) const { return {x - p.x, y - p.y}; }\n  ll det(Point p) const { return x\
-    \ * p.y - y * p.x; }\n  ll dot(Point p) const { return x * p.x + y * p.y; }\n\
-    \  bool operator<(Point p) const {\n    if (x != p.x) return x < p.x;\n    return\
-    \ y < p.y;\n  }\n  bool operator==(Point p) const { return x == p.x && y == p.y;\
-    \ }\n  Point operator-() const { return {-x, -y}; }\n};\n#line 2 \"geo/angle_sort.hpp\"\
-    \n\r\nvector<int> angle_argsort(vector<Point>& P) {\r\n  auto is_lower = [](Point\
-    \ P) { return (P.y < 0) || (P.y == 0 && P.x > 0); };\r\n  vector<int> lower, origin,\
-    \ upper;\r\n  Point O = {0, 0};\r\n  FOR(i, len(P)) {\r\n    if (P[i] == O) origin.eb(i);\r\
+  bundledCode: "#line 1 \"geo/base.hpp\"\nstruct Point {\n  ll x, y;\n  Point(ll x=0,\
+    \ ll y=0) : x(x), y(y) {}\n\n  template <typename S, typename T>\n  Point(pair<S,\
+    \ T> p) : x(p.fi), y(p.se) {}\n\n  Point operator-(Point p) const { return {x\
+    \ - p.x, y - p.y}; }\n  ll det(Point p) const { return x * p.y - y * p.x; }\n\
+    \  ll dot(Point p) const { return x * p.x + y * p.y; }\n  bool operator<(Point\
+    \ p) const {\n    if (x != p.x) return x < p.x;\n    return y < p.y;\n  }\n  bool\
+    \ operator==(Point p) const { return x == p.x && y == p.y; }\n  Point operator-()\
+    \ const { return {-x, -y}; }\n};\n#line 2 \"geo/angle_sort.hpp\"\n\r\nvector<int>\
+    \ angle_argsort(vector<Point>& P) {\r\n  auto is_lower = [](Point P) { return\
+    \ (P.y < 0) || (P.y == 0 && P.x > 0); };\r\n  vector<int> lower, origin, upper;\r\
+    \n  Point O = {0, 0};\r\n  FOR(i, len(P)) {\r\n    if (P[i] == O) origin.eb(i);\r\
     \n    elif (is_lower(P[i])) lower.eb(i);\r\n    else upper.eb(i);\r\n  }\r\n \
     \ sort(all(lower), [&](auto& i, auto& j) { return P[i].det(P[j]) > 0; });\r\n\
     \  sort(all(upper), [&](auto& i, auto& j) { return P[i].det(P[j]) > 0; });\r\n\
@@ -45,7 +47,7 @@ data:
   isVerificationFile: false
   path: geo/angle_sort.hpp
   requiredBy: []
-  timestamp: '2022-01-15 18:40:41+09:00'
+  timestamp: '2022-02-04 11:52:12+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/geometry/sort_points_by_argument.test.cpp

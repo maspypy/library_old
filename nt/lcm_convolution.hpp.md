@@ -4,17 +4,11 @@ data:
   - icon: ':heavy_check_mark:'
     path: nt/primetable.hpp
     title: nt/primetable.hpp
-  _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: nt/gcd_convolution.hpp
-    title: nt/gcd_convolution.hpp
-  - icon: ':heavy_check_mark:'
-    path: nt/lcm_convolution.hpp
-    title: nt/lcm_convolution.hpp
+    path: nt/zeta.hpp
+    title: nt/zeta.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/math/gcd_convolution.test.cpp
-    title: test/library_checker/math/gcd_convolution.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/lcm_convolution.test.cpp
     title: test/library_checker/math/lcm_convolution.test.cpp
@@ -43,35 +37,27 @@ data:
     \ - 1;\r\n  auto& P = primetable(N);\r\n  for (auto&& p: P) { FOR3_R(x, 1, N /\
     \ p + 1) A[x] += A[p * x]; }\r\n}\r\n\r\ntemplate <typename T>\r\nvoid multiplier_mobius(vc<T>&\
     \ A) {\r\n  assert(A[0] == 0);\r\n  int N = len(A) - 1;\r\n  auto& P = primetable(N);\r\
-    \n  for (auto&& p: P) { FOR3(x, 1, N / p + 1) A[x] -= A[p * x]; }\r\n}\r\n"
-  code: "#pragma once\r\n#include \"nt/primetable.hpp\"\r\n\r\ntemplate <typename\
-    \ T>\r\nvoid divisor_zeta(vc<T>& A) {\r\n  assert(A[0] == 0);\r\n  int N = len(A)\
-    \ - 1;\r\n  auto& P = primetable(N);\r\n  for (auto&& p: P) { FOR3(x, 1, N / p\
-    \ + 1) A[p * x] += A[x]; }\r\n}\r\n\r\ntemplate <typename T>\r\nvoid divisor_mobius(vc<T>&\
-    \ A) {\r\n  assert(A[0] == 0);\r\n  int N = len(A) - 1;\r\n  auto& P = primetable(N);\r\
-    \n  for (auto&& p: P) { FOR3_R(x, 1, N / p + 1) A[p * x] -= A[x]; }\r\n}\r\n\r\
-    \ntemplate <typename T>\r\nvoid multiplier_zeta(vc<T>& A) {\r\n  assert(A[0] ==\
-    \ 0);\r\n  int N = len(A) - 1;\r\n  auto& P = primetable(N);\r\n  for (auto&&\
-    \ p: P) { FOR3_R(x, 1, N / p + 1) A[x] += A[p * x]; }\r\n}\r\n\r\ntemplate <typename\
-    \ T>\r\nvoid multiplier_mobius(vc<T>& A) {\r\n  assert(A[0] == 0);\r\n  int N\
-    \ = len(A) - 1;\r\n  auto& P = primetable(N);\r\n  for (auto&& p: P) { FOR3(x,\
-    \ 1, N / p + 1) A[x] -= A[p * x]; }\r\n}\r\n"
+    \n  for (auto&& p: P) { FOR3(x, 1, N / p + 1) A[x] -= A[p * x]; }\r\n}\r\n#line\
+    \ 2 \"nt/lcm_convolution.hpp\"\n\ntemplate <typename T>\nvc<T> lcm_convolution(vc<T>\
+    \ A, vc<T>& B) {\n  assert(len(A) == len(B));\n  divisor_zeta(A);\n  divisor_zeta(B);\n\
+    \  FOR(i, len(A)) A[i] *= B[i];\n  divisor_mobius(A);\n  return A;\n}\n"
+  code: "#include \"nt/zeta.hpp\"\n\ntemplate <typename T>\nvc<T> lcm_convolution(vc<T>\
+    \ A, vc<T>& B) {\n  assert(len(A) == len(B));\n  divisor_zeta(A);\n  divisor_zeta(B);\n\
+    \  FOR(i, len(A)) A[i] *= B[i];\n  divisor_mobius(A);\n  return A;\n}\n"
   dependsOn:
+  - nt/zeta.hpp
   - nt/primetable.hpp
   isVerificationFile: false
-  path: nt/zeta.hpp
-  requiredBy:
-  - nt/lcm_convolution.hpp
-  - nt/gcd_convolution.hpp
+  path: nt/lcm_convolution.hpp
+  requiredBy: []
   timestamp: '2022-02-06 02:56:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/math/lcm_convolution.test.cpp
-  - test/library_checker/math/gcd_convolution.test.cpp
-documentation_of: nt/zeta.hpp
+documentation_of: nt/lcm_convolution.hpp
 layout: document
 redirect_from:
-- /library/nt/zeta.hpp
-- /library/nt/zeta.hpp.html
-title: nt/zeta.hpp
+- /library/nt/lcm_convolution.hpp
+- /library/nt/lcm_convolution.hpp.html
+title: nt/lcm_convolution.hpp
 ---
