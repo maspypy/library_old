@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: ds/unionfind.hpp
     title: ds/unionfind.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/base.hpp
     title: graph/base.hpp
   _extendedRequiredBy: []
@@ -38,10 +38,11 @@ data:
     \ {}\n\n  void add(int frm, int to, T cost = 1, int i = -1) {\n    assert(!prepared\
     \ && 0 <= frm && 0 <= to);\n    chmax(N, frm + 1);\n    chmax(N, to + 1);\n  \
     \  if (i == -1) i = M;\n    auto e = edge_type({frm, to, cost, i});\n    edges.eb(e);\n\
-    \    ++M;\n  }\n\n  void read_tree(bool wt=false, int off=1){\n    FOR_(N - 1){\n\
-    \      INT(a, b);\n      a -= off, b -= off;\n      if(!wt){\n        add(a, b);\n\
-    \      } else {\n        T c;\n        read(c);\n        add(a, b, c);\n     \
-    \ }\n    }\n    prepare();\n  }\n\n  void prepare() {\n    assert(!prepared);\n\
+    \    ++M;\n  }\n\n  void read_tree(bool wt=false, int off=1){\n    read_graph(N\
+    \ - 1, wt, off);\n  }\n\n  void read_graph(int M, bool wt=false, int off=1){\n\
+    \    FOR_(M){\n      INT(a, b);\n      a -= off, b -= off;\n      if(!wt){\n \
+    \       add(a, b);\n      } else {\n        T c;\n        read(c);\n        add(a,\
+    \ b, c);\n      }\n    }\n    prepare();\n  }\n\n  void prepare() {\n    assert(!prepared);\n\
     \    prepared = true;\n    indptr.assign(N + 1, 0);\n    for (auto&& e: edges)\
     \ {\n      indptr[e.frm + 1]++;\n      if (!directed) indptr[e.to + 1]++;\n  \
     \  }\n    FOR(v, N) indptr[v + 1] += indptr[v];\n    auto counter = indptr;\n\
@@ -92,7 +93,7 @@ data:
   isVerificationFile: false
   path: graph/functional.hpp
   requiredBy: []
-  timestamp: '2022-02-02 21:36:33+09:00'
+  timestamp: '2022-02-11 06:57:39+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph/functional.hpp

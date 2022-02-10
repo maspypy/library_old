@@ -14,7 +14,7 @@ data:
     \n    int W = (H == 0 ? 0 : len(A[0]));\r\n    dat.assign(H + 1, vc<T>(W + 1));\r\
     \n    FOR(x, H) FOR(y, W) dat[x + 1][y + 1] = A[x][y];\r\n    FOR(x, H + 1) FOR(y,\
     \ W) dat[x][y + 1] += dat[x][y];\r\n    FOR(x, H) FOR(y, W + 1) dat[x + 1][y]\
-    \ += dat[x][y];\r\n  }\r\n\r\n  T sum(int x1, int x2, int y1, int y2) {\r\n  \
+    \ += dat[x][y];\r\n  }\r\n\r\n  T sum(int x1, int y1, int x2, int y2) {\r\n  \
     \  T val = T(0);\r\n    val += dat[x1][y1];\r\n    val -= dat[x1][y2];\r\n   \
     \ val -= dat[x2][y1];\r\n    val += dat[x2][y2];\r\n    return val;\r\n  }\r\n\
     };\n"
@@ -24,14 +24,14 @@ data:
     \ 0 : len(A[0]));\r\n    dat.assign(H + 1, vc<T>(W + 1));\r\n    FOR(x, H) FOR(y,\
     \ W) dat[x + 1][y + 1] = A[x][y];\r\n    FOR(x, H + 1) FOR(y, W) dat[x][y + 1]\
     \ += dat[x][y];\r\n    FOR(x, H) FOR(y, W + 1) dat[x + 1][y] += dat[x][y];\r\n\
-    \  }\r\n\r\n  T sum(int x1, int x2, int y1, int y2) {\r\n    T val = T(0);\r\n\
+    \  }\r\n\r\n  T sum(int x1, int y1, int x2, int y2) {\r\n    T val = T(0);\r\n\
     \    val += dat[x1][y1];\r\n    val -= dat[x1][y2];\r\n    val -= dat[x2][y1];\r\
     \n    val += dat[x2][y2];\r\n    return val;\r\n  }\r\n};"
   dependsOn: []
   isVerificationFile: false
   path: ds/cumsum2d.hpp
   requiredBy: []
-  timestamp: '2022-02-04 11:51:45+09:00'
+  timestamp: '2022-02-11 06:55:37+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: ds/cumsum2d.hpp
