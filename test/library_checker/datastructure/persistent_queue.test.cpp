@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/persistent_queue"
 #include "my_template.hpp"
+#include "other/io.hpp"
 
 #include "pds/array.hpp"
 

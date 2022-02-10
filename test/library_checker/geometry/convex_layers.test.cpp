@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/convex_layers"
 #include "my_template.hpp"
+#include "other/io.hpp"
 #include "geo/dynamicupperhull.hpp"
 
 void solve() {

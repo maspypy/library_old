@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/bitwise_xor_convolution"
 #include "my_template.hpp"
+#include "other/io.hpp"
 
 #include "mod/modint.hpp"
 #include "setfunc/xor_convolution.hpp"

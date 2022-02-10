@@ -1,6 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/point_add_rectangle_sum"
 
 #include "my_template.hpp"
+#include "other/io.hpp"
 
 #include "ds/fenwick2d.hpp"
 

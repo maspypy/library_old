@@ -1,5 +1,6 @@
 #define PROBLEM "https://yukicoder.me/problems/no/1002"
 #include "my_template.hpp"
+#include "other/io.hpp"
 #include "graph/centroid.hpp"
 
 void solve() {

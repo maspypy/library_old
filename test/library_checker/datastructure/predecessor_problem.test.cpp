@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/predecessor_problem"
 #include "my_template.hpp"
+#include "other/io.hpp"
 #include "ds/fastset.hpp"
 
 void solve() {

@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/maximum_independent_set"
 #include "my_template.hpp"
+#include "other/io.hpp"
 
 #include "graph/mis.hpp"
 

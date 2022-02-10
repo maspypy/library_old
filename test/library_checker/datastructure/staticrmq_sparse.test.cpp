@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/staticrmq"
 #include "my_template.hpp"
+#include "other/io.hpp"
 
 #include "alg/monoid_min.hpp"
 #include "ds/disjointsparse.hpp"

@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/multipoint_evaluation"
 #include "my_template.hpp"
+#include "other/io.hpp"
 
 #include "poly/multipoint.hpp"
 

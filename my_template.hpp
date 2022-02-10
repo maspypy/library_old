@@ -2,8 +2,6 @@
 
 using namespace std;
 
-#include "other/io.hpp"
-
 using ll = long long;
 using pi = pair<ll, ll>;
 using vi = vector<ll>;

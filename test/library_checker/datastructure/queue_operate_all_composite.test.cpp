@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/queue_operate_all_composite"
 #include "my_template.hpp"
+#include "other/io.hpp"
 
 #include "alg/group_affine.hpp"
 #include "ds/swag.hpp"

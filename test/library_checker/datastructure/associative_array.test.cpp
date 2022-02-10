@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/associative_array"
 #include "my_template.hpp"
+#include "other/io.hpp"
 
 void sol_1() {
   LL(Q);

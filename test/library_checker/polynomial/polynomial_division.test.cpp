@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/division_of_polynomials"
 #include "my_template.hpp"
+#include "other/io.hpp"
 
 #include "mod/modint.hpp"
 #include "poly/poly_divmod.hpp"

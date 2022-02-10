@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/vertex_set_path_composite"
 #include "my_template.hpp"
+#include "other/io.hpp"
 
 #include "mod/modint.hpp"
 #include "graph/treegroup.hpp"

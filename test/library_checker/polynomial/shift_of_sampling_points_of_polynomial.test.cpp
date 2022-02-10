@@ -1,6 +1,7 @@
 #define PROBLEM \
   "https://judge.yosupo.jp/problem/shift_of_sampling_points_of_polynomial"
 #include "my_template.hpp"
+#include "other/io.hpp"
 
 #include "mod/modint.hpp"
 #include "poly/lagrange_interpolate_iota.hpp"

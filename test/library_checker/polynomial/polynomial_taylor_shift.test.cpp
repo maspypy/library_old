@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/polynomial_taylor_shift"
 #include "my_template.hpp"
+#include "other/io.hpp"
 
 #include "mod/modint.hpp"
 #include "poly/poly_taylor_shift.hpp"

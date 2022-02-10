@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/many_aplusb"
 #include "my_template.hpp"
+#include "other/io.hpp"
 
 void solve() {
   LL(T);

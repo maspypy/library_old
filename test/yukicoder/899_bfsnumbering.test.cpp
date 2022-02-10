@@ -1,5 +1,6 @@
 #define PROBLEM "https://yukicoder.me/problems/no/899"
 #include "my_template.hpp"
+#include "other/io.hpp"
 #include "graph/bfsnumbering.hpp"
 #include "ds/lazysegtree.hpp"
 #include "alg/lazy_add_mul.hpp"

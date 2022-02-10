@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/cartesian_tree"
 #include "my_template.hpp"
+#include "other/io.hpp"
 #include "ds/cartesian_tree.hpp"
 
 void solve() {

@@ -1,5 +1,6 @@
 #define PROBLEM "https://yukicoder.me/problems/no/1038"
 #include "my_template.hpp"
+#include "other/io.hpp"
 
 #include "ds/fenwick.hpp"
 #include "graph/centroid.hpp"

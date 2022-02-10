@@ -1,6 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/shortest_path"
 
 #include "my_template.hpp"
+#include "other/io.hpp"
 
 #include "graph/dijkstra.hpp"
 #include "graph/restore_path.hpp"

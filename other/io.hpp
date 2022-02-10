@@ -213,9 +213,6 @@ void read(Head &head, Tail &... tail) {
 #define STR(...)      \
   string __VA_ARGS__; \
   read(__VA_ARGS__)
-#define CHR(...)    \
-  char __VA_ARGS__; \
-  read(__VA_ARGS__)
 #define DBL(...)           \
   long double __VA_ARGS__; \
   read(__VA_ARGS__)

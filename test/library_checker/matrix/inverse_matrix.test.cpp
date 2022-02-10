@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/inverse_matrix"
 #include "my_template.hpp"
+#include "other/io.hpp"
 #include "mod/modint.hpp"
 #include "linalg/mat_inv.hpp"
 

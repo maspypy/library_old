@@ -1,5 +1,7 @@
-#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D"
+#define PROBLEM \
+  "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D"
 #include "my_template.hpp"
+#include "other/io.hpp"
 #include "ds/dualsegtree.hpp"
 #include "alg/monoid_set.hpp"
 

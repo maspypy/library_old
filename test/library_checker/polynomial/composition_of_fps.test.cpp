@@ -1,6 +1,7 @@
 #define PROBLEM \
   "https://judge.yosupo.jp/problem/composition_of_formal_power_series"
 #include "my_template.hpp"
+#include "other/io.hpp"
 #include "poly/fps_composition.hpp"
 
 using mint = modint998;

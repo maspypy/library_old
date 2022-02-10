@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/suffixarray"
 #include "my_template.hpp"
+#include "other/io.hpp"
 
 #include "string/suffixarray.hpp"
 

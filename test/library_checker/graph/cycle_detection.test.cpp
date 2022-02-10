@@ -1,6 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/cycle_detection"
 
 #include "my_template.hpp"
+#include "other/io.hpp"
 
 #include "graph/base.hpp"
 #include "graph/cycle_detection.hpp"

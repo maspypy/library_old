@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/binomial_coefficient"
 #include "my_template.hpp"
+#include "other/io.hpp"
 #include "mod/binomial.hpp"
 
 void solve() {

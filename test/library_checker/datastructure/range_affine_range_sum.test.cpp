@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/range_affine_range_sum"
 #include "my_template.hpp"
+#include "other/io.hpp"
 
 #include "alg/lazy_cntsum_affine.hpp"
 #include "ds/lazysegtree.hpp"

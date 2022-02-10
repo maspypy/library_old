@@ -1,5 +1,6 @@
 #define PROBLEM "https://yukicoder.me/problems/no/1810"
 #include "my_template.hpp"
+#include "other/io.hpp"
 
 #include "linalg/mat_mul.hpp"
 #include "linalg/mat_pow.hpp"

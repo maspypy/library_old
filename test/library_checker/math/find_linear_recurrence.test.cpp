@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/find_linear_recurrence"
 #include "my_template.hpp"
+#include "other/io.hpp"
 
 #include "mod/modint.hpp"
 #include "seq/find_linear_rec.hpp"
@@ -10,7 +11,7 @@ void solve() {
   VEC(mint, A, N);
   auto g = find_linear_rec(A);
   g.erase(g.begin());
-  for (auto&& x : g) x = -x;
+  for (auto&& x: g) x = -x;
   print(len(g));
   print(g);
 }

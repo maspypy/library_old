@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/scc"
 #include "my_template.hpp"
+#include "other/io.hpp"
 
 #include "graph/base.hpp"
 #include "graph/scc.hpp"
@@ -18,7 +19,7 @@ void solve() {
   vc<vc<int>> ANS(C);
   FOR(v, N) ANS[scc[v]].eb(v);
   print(len(ANS));
-  for (auto&& C : ANS) print(len(C), C);
+  for (auto&& C: ANS) print(len(C), C);
 }
 
 signed main() {

@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/static_range_inversions_query"
 #include "my_template.hpp"
+#include "other/io.hpp"
 
 #include "ds/fenwick.hpp"
 #include "ds/mo.hpp"
@@ -10,7 +11,7 @@ void solve() {
   vi key = A;
   UNIQUE(key);
 
-  for (auto&& x : A) x = LB(key, x);
+  for (auto&& x: A) x = LB(key, x);
   ll K = len(key);
   FenwickTree<Group_Add<int>> bit(K);
 
@@ -44,7 +45,7 @@ void solve() {
   };
   auto calc = [&](int i) -> void { ANS[i] = inv; };
   mo.build(add_l, add_r, rm_l, rm_r, calc);
-  for (auto&& x : ANS) print(x);
+  for (auto&& x: ANS) print(x);
 }
 
 signed main() {

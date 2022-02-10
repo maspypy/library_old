@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/matrix_det"
 #include "my_template.hpp"
+#include "other/io.hpp"
 #include "mod/modint.hpp"
 #include "linalg/det.hpp"
 

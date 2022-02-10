@@ -1,6 +1,8 @@
-#define PROBLEM "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_I"
+#define PROBLEM \
+  "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_I"
 
 #include "my_template.hpp"
+#include "other/io.hpp"
 #include "alg/lazy_cntsum_set.hpp"
 #include "ds/lazysegtree.hpp"
 

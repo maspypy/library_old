@@ -1,5 +1,6 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/exp_of_formal_power_series"
 #include "my_template.hpp"
+#include "other/io.hpp"
 
 #include "poly/fps_exp.hpp"
 
