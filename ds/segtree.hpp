@@ -76,7 +76,7 @@ struct SegTree {
       --R;
       while (R > 1 && (R % 2)) R >>= 1;
       if (!check(Monoid::op(dat[R], sm))) {
-        while (R < n) {
+        while (R < size) {
           R = 2 * R + 1;
           if (check(Monoid::op(dat[R], sm))) {
             sm = Monoid::op(dat[R], sm);
