@@ -336,7 +336,7 @@ vector<ll> convolution(const vector<ll>& a, const vector<ll>& b) {
   if (min(n, m) <= 60) return convolution_naive(a, b);
   ll abs_sum_a = 0, abs_sum_b = 0;
   FOR(i, n) abs_sum_a += abs(a[i]);
-  FOR(i, n) abs_sum_b += abs(b[i]);
+  FOR(i, m) abs_sum_b += abs(b[i]);
   assert(abs_sum_a * abs_sum_b < 1e15);
   vc<double> c = CFFT::convolution_fft(a, b);
   vc<ll> res(len(c));
