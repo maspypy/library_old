@@ -52,3 +52,19 @@ vc<mint> multivar_convolution(vi ns, vc<mint>& f, vc<mint>& g) {
   FOR(i, N) h[i] = hh[chi(i)][i];
   return h;
 }
+
+
+template <typename mint>
+vc<vc<mint>> multivar_convolution_2d(vc<vc<mint>>& f, vc<vc<mint>>& g) {
+  ll H = len(f);
+  ll W = len(f[0]);
+  assert(len(g) == H);
+  assert(len(g[0]) == W);
+  vc<mint> F(H * W), G(H * W);
+  FOR(x, H) FOR(y, W) F[x + H * y] = f[x][y];
+  FOR(x, H) FOR(y, W) G[x + H * y] = g[x][y];
+  F = multivar_convolution(vi({H, W}), F, G);
+  vv(mint, h, H, W);
+  FOR(x, H) FOR(y, W) h[x][y] = F[x + H * y];
+  return h;
+}
