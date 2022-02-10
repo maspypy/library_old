@@ -1,4 +1,5 @@
-// 要ると思った問題で使えなかったため、一度も動作確認していない！
+#include "alg/group_add.hpp"
+// https://codeforces.com/contest/707/problem/E
 template <typename AbelGroup>
 struct Fenwick2D_dense {
   using E = typename AbelGroup::value_type;
@@ -25,7 +26,6 @@ struct Fenwick2D_dense {
   }
 
   E sum_x(int x, int ly, int ry) {
-    ly++, ry++;
     E pos = AbelGroup::unit;
     E neg = AbelGroup::unit;
     while (ly < ry) {
@@ -40,7 +40,6 @@ struct Fenwick2D_dense {
   }
 
   E sum(int lx, int rx, int ly, int ry) {
-    lx++, rx++;
     E pos = AbelGroup::unit;
     E neg = AbelGroup::unit;
     while (lx < rx) {
