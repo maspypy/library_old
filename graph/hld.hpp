@@ -34,11 +34,11 @@ struct HLD {
     int t1 = 0;
     if (r != -1) {
       dfs_sz(r, -1);
-      dfs_hld(r, -1, t1);
+      dfs_hld(r, t1);
     } else {
       FOR(r, N) if (parent[r] == -1) {
         dfs_sz(r, -1);
-        dfs_hld(r, -1, t1);
+        dfs_hld(r, t1);
       }
     }
     for (auto &&v: V) root[v] = (parent[v] == -1 ? v : root[parent[v]]);
@@ -66,7 +66,7 @@ struct HLD {
     }
   }
 
-  void dfs_hld(int v, int p, int &times) {
+  void dfs_hld(int v, int &times) {
     LID[v] = times++;
     RID[v] += LID[v];
     V[LID[v]] = v;
@@ -75,7 +75,7 @@ struct HLD {
       if (!in_tree[e.id] || depth[e.to] <= depth[v]) continue;
       head[e.to] = (heavy ? head[v] : e.to);
       heavy = false;
-      dfs_hld(e.to, v, times);
+      dfs_hld(e.to, times);
     }
   }
 
