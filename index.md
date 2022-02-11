@@ -152,7 +152,7 @@ data:
     - icon: ':warning:'
       path: ds/slope.hpp
       title: ds/slope.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: ds/swag.hpp
       title: ds/swag.hpp
     - icon: ':heavy_check_mark:'
@@ -318,13 +318,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: mod/mod_pow.hpp
       title: mod/mod_pow.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: mod/mod_sqrt.hpp
       title: mod/mod_sqrt.hpp
     - icon: ':question:'
       path: mod/modint.hpp
       title: mod/modint.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: mod/powertable.hpp
       title: mod/powertable.hpp
     - icon: ':heavy_check_mark:'
@@ -361,7 +361,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: nt/primesum.hpp
       title: nt/primesum.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: nt/primetable.hpp
       title: nt/primetable.hpp
     - icon: ':heavy_check_mark:'
@@ -439,37 +439,37 @@ data:
     - icon: ':heavy_check_mark:'
       path: poly/fps_composition.hpp
       title: poly/fps_composition.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: poly/fps_exp.hpp
       title: poly/fps_exp.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: poly/fps_inv.hpp
       title: poly/fps_inv.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/fps_log.hpp
       title: poly/fps_log.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/fps_pow.hpp
       title: poly/fps_pow.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/fps_sqrt.hpp
       title: poly/fps_sqrt.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: poly/lagrange_interpolate_iota.hpp
       title: poly/lagrange_interpolate_iota.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/multipoint.hpp
       title: poly/multipoint.hpp
     - icon: ':heavy_check_mark:'
       path: poly/multivar_convolution.hpp
       title: poly/multivar_convolution.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/poly_divmod.hpp
       title: poly/poly_divmod.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: poly/poly_gcd.hpp
       title: poly/poly_gcd.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: poly/poly_taylor_shift.hpp
       title: poly/poly_taylor_shift.hpp
   - name: seq
@@ -520,22 +520,22 @@ data:
       title: setfunc/zeta.hpp
   - name: string
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/manacher.hpp
       title: string/manacher.hpp
     - icon: ':x:'
       path: string/rollinghash.hpp
       title: string/rollinghash.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: string/run_enumerate.hpp
       title: string/run_enumerate.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: string/suffixarray.hpp
       title: string/suffixarray.hpp
     - icon: ':warning:'
       path: string/trie.hpp
       title: string/trie.hpp
-    - icon: ':x:'
+    - icon: ':question:'
       path: string/zalgorithm.hpp
       title: string/zalgorithm.hpp
   verificationCategories:
@@ -809,50 +809,50 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/inv_of_fps.test.cpp
       title: test/library_checker/polynomial/inv_of_fps.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/inv_of_polynomials.test.cpp
       title: test/library_checker/polynomial/inv_of_polynomials.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/log_of_fps.test.cpp
       title: test/library_checker/polynomial/log_of_fps.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/multipoint_evaluation.test.cpp
       title: test/library_checker/polynomial/multipoint_evaluation.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/polynomial_division.test.cpp
       title: test/library_checker/polynomial/polynomial_division.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/polynomial_interpolation.test.cpp
       title: test/library_checker/polynomial/polynomial_interpolation.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
       title: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/pow_of_fps.test.cpp
       title: test/library_checker/polynomial/pow_of_fps.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
       title: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/polynomial/sqrt_of_fps.test.cpp
       title: test/library_checker/polynomial/sqrt_of_fps.test.cpp
   - name: test/library_checker/sample
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/sample/many_aplusb.test.cpp
       title: test/library_checker/sample/many_aplusb.test.cpp
   - name: test/library_checker/string
     pages:
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/string/enumerate_palindromes.test.cpp
       title: test/library_checker/string/enumerate_palindromes.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/string/number_of_substrings.test.cpp
       title: test/library_checker/string/number_of_substrings.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/string/run_enumerate.test.cpp
       title: test/library_checker/string/run_enumerate.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/string/run_enumerate_vec.test.cpp
       title: test/library_checker/string/run_enumerate_vec.test.cpp
     - icon: ':x:'
