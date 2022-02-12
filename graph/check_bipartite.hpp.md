@@ -70,7 +70,7 @@ data:
     \n  }\r\n\r\n  vc<int> color(2 * n, -1);\r\n  FOR(v, n) if (uf[v] == v && color[uf[v]]\
     \ < 0) {\r\n    color[uf[v]] = 0;\r\n    color[uf[v + n]] = 1;\r\n  }\r\n  FOR(v,\
     \ n) color[v] = color[uf[v]];\r\n  color.resize(n);\r\n  FOR(v, n) if (uf[v] ==\
-    \ uf[v + n]) color.assign(n, -1);\r\n  return color;\r\n}\r\n"
+    \ uf[v + n]) return {};\r\n  return color;\r\n}\r\n"
   code: "#include \"graph/base.hpp\"\r\n#include \"ds/unionfind.hpp\"\r\n\r\ntemplate\
     \ <typename Graph>\r\nvc<int> check_bipartite(Graph& G) {\r\n  // \u4E8C\u90E8\
     \u30B0\u30E9\u30D5\u5224\u5B9A + \u5FA9\u5143\r\n  // \u4E8C\u90E8\u30B0\u30E9\
@@ -81,8 +81,8 @@ data:
     \ + n, v), uf.merge(u, v + n);\r\n  }\r\n\r\n  vc<int> color(2 * n, -1);\r\n \
     \ FOR(v, n) if (uf[v] == v && color[uf[v]] < 0) {\r\n    color[uf[v]] = 0;\r\n\
     \    color[uf[v + n]] = 1;\r\n  }\r\n  FOR(v, n) color[v] = color[uf[v]];\r\n\
-    \  color.resize(n);\r\n  FOR(v, n) if (uf[v] == uf[v + n]) color.assign(n, -1);\r\
-    \n  return color;\r\n}\r\n"
+    \  color.resize(n);\r\n  FOR(v, n) if (uf[v] == uf[v + n]) return {};\r\n  return\
+    \ color;\r\n}\r\n"
   dependsOn:
   - graph/base.hpp
   - ds/unionfind.hpp
@@ -90,7 +90,7 @@ data:
   path: graph/check_bipartite.hpp
   requiredBy:
   - flow/bipartite.hpp
-  timestamp: '2022-02-11 06:57:39+09:00'
+  timestamp: '2022-02-12 20:42:14+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/graph/bipartitematching.test.cpp

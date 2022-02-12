@@ -215,11 +215,11 @@ data:
     \n  }\r\n\r\n  vc<int> color(2 * n, -1);\r\n  FOR(v, n) if (uf[v] == v && color[uf[v]]\
     \ < 0) {\r\n    color[uf[v]] = 0;\r\n    color[uf[v + n]] = 1;\r\n  }\r\n  FOR(v,\
     \ n) color[v] = color[uf[v]];\r\n  color.resize(n);\r\n  FOR(v, n) if (uf[v] ==\
-    \ uf[v + n]) color.assign(n, -1);\r\n  return color;\r\n}\r\n#line 3 \"flow/bipartite.hpp\"\
+    \ uf[v + n]) return {};\r\n  return color;\r\n}\r\n#line 3 \"flow/bipartite.hpp\"\
     \n\r\ntemplate <typename Graph>\r\nstruct BipartiteMatching {\r\n  int N;\r\n\
     \  Graph& G;\r\n  vc<int> color;\r\n  vc<int> dist, match;\r\n  vc<int> vis;\r\
     \n\r\n  BipartiteMatching(Graph& G) : G(G), N(G.N), dist(G.N, -1), match(G.N,\
-    \ -1) {\r\n    color = check_bipartite(G);\r\n    assert(color[0] != -1);\r\n\
+    \ -1) {\r\n    color = check_bipartite(G);\r\n    assert(!color.empty());\r\n\
     \    while (1) {\r\n      bfs();\r\n      vis.assign(N, false);\r\n      int flow\
     \ = 0;\r\n      FOR(v, N) if (!color[v] && match[v] == -1 && dfs(v))++ flow;\r\
     \n      if (!flow) break;\r\n    }\r\n  }\r\n\r\n  void bfs() {\r\n    dist.assign(N,\
@@ -272,7 +272,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/graph/bipartitematching.test.cpp
   requiredBy: []
-  timestamp: '2022-02-11 06:59:44+09:00'
+  timestamp: '2022-02-12 20:42:14+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/graph/bipartitematching.test.cpp
