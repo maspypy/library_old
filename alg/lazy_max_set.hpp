@@ -1,4 +1,4 @@
-#include "alg/monoid_min.hpp"
+#include "alg/monoid_max.hpp"
 #include "alg/monoid_set.hpp"
 
 template <typename E, E INF, E none_val>
