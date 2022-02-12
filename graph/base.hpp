@@ -71,6 +71,14 @@ struct Graph {
     prepare();
   }
 
+  void read_parent(int off=1){
+    FOR3(v, 1, N){
+      INT(p);
+      add(p, v);
+    }
+    prepare();
+  }
+
   void prepare() {
     assert(!prepared);
     prepared = true;
