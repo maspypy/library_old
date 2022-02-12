@@ -11,7 +11,7 @@ struct BipartiteMatching {
 
   BipartiteMatching(Graph& G) : G(G), N(G.N), dist(G.N, -1), match(G.N, -1) {
     color = check_bipartite(G);
-    assert(color[0] != -1);
+    assert(!color.empty());
     while (1) {
       bfs();
       vis.assign(N, false);

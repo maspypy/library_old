@@ -22,6 +22,6 @@ vc<int> check_bipartite(Graph& G) {
   }
   FOR(v, n) color[v] = color[uf[v]];
   color.resize(n);
-  FOR(v, n) if (uf[v] == uf[v + n]) color.assign(n, -1);
+  FOR(v, n) if (uf[v] == uf[v + n]) return {};
   return color;
 }
