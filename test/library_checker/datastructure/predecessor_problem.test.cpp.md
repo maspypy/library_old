@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: ds/fastset.hpp
     title: ds/fastset.hpp
   - icon: ':question:'
@@ -12,9 +12,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/predecessor_problem
@@ -149,35 +149,35 @@ data:
     \  int __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define LL(...)   \\\r\n  ll\
     \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define STR(...)      \\\r\n  string\
     \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define DBL(...)           \\\r\n\
-    \  long double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type,\
-    \ name, size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define\
-    \ VV(type, name, h, w)                     \\\r\n  vector<vector<type>> name(h,\
-    \ vector<type>(w)); \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ?\
-    \ \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t\
-    \ = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\n\
-    void yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) {\
-    \ yes(!t); }\r\n#line 1 \"ds/fastset.hpp\"\nstruct FastSet {\r\n  using uint =\
-    \ unsigned;\r\n  using ull = unsigned long long;\r\n\r\n  int bsr(ull x) { return\
-    \ 63 - __builtin_clzll(x); }\r\n  int bsf(ull x) { return __builtin_ctzll(x);\
-    \ }\r\n\r\n  static constexpr uint B = 64;\r\n  int n, lg;\r\n  vc<vc<ull>> seg;\r\
-    \n  FastSet(int _n) : n(_n) {\r\n    do {\r\n      seg.push_back(vc<ull>((_n +\
-    \ B - 1) / B));\r\n      _n = (_n + B - 1) / B;\r\n    } while (_n > 1);\r\n \
-    \   lg = int(seg.size());\r\n  }\r\n  bool operator[](int i) const { return (seg[0][i\
-    \ / B] >> (i % B) & 1) != 0; }\r\n  void insert(int i) {\r\n    for (int h = 0;\
-    \ h < lg; h++) {\r\n      seg[h][i / B] |= 1ULL << (i % B);\r\n      i /= B;\r\
-    \n    }\r\n  }\r\n  void erase(int i) {\r\n    for (int h = 0; h < lg; h++) {\r\
-    \n      seg[h][i / B] &= ~(1ULL << (i % B));\r\n      if (seg[h][i / B])\r\n \
-    \       break;\r\n      i /= B;\r\n    }\r\n  }\r\n  // x\u4EE5\u4E0A\u6700\u5C0F\
-    \u306E\u8981\u7D20\r\n  int next(int i) {\r\n    for (int h = 0; h < lg; h++)\
-    \ {\r\n      if (i / B == seg[h].size())\r\n        break;\r\n      ull d = seg[h][i\
-    \ / B] >> (i % B);\r\n      if (!d) {\r\n        i = i / B + 1;\r\n        continue;\r\
-    \n      }\r\n      // find\r\n      i += bsf(d);\r\n      for (int g = h - 1;\
-    \ g >= 0; g--) {\r\n        i *= B;\r\n        i += bsf(seg[g][i / B]);\r\n  \
-    \    }\r\n      return i;\r\n    }\r\n    return n;\r\n  }\r\n  // x\u4EE5\u4E0B\
-    \u6700\u5927\u306E\u8981\u7D20\r\n  int prev(int i) {\r\n    if(i < 0) return\
-    \ -1;\r\n    chmin(i, n - 1);\r\n    for (int h = 0; h < lg; h++) {\r\n      if\
-    \ (i == -1)\r\n        break;\r\n      ull d = seg[h][i / B] << (63 - i % 64);\r\
-    \n      if (!d) {\r\n        i = i / B - 1;\r\n        continue;\r\n      }\r\n\
+    \  double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type, name,\
+    \ size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define VV(type,\
+    \ name, h, w)                     \\\r\n  vector<vector<type>> name(h, vector<type>(w));\
+    \ \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ? \"YES\" : \"NO\"\
+    ); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t = 1) { print(t ? \"\
+    Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\nvoid yes(bool t = 1)\
+    \ { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) { yes(!t); }\r\n#line\
+    \ 1 \"ds/fastset.hpp\"\nstruct FastSet {\r\n  using uint = unsigned;\r\n  using\
+    \ ull = unsigned long long;\r\n\r\n  int bsr(ull x) { return 63 - __builtin_clzll(x);\
+    \ }\r\n  int bsf(ull x) { return __builtin_ctzll(x); }\r\n\r\n  static constexpr\
+    \ uint B = 64;\r\n  int n, lg;\r\n  vc<vc<ull>> seg;\r\n  FastSet(int _n) : n(_n)\
+    \ {\r\n    do {\r\n      seg.push_back(vc<ull>((_n + B - 1) / B));\r\n      _n\
+    \ = (_n + B - 1) / B;\r\n    } while (_n > 1);\r\n    lg = int(seg.size());\r\n\
+    \  }\r\n  bool operator[](int i) const { return (seg[0][i / B] >> (i % B) & 1)\
+    \ != 0; }\r\n  void insert(int i) {\r\n    for (int h = 0; h < lg; h++) {\r\n\
+    \      seg[h][i / B] |= 1ULL << (i % B);\r\n      i /= B;\r\n    }\r\n  }\r\n\
+    \  void erase(int i) {\r\n    for (int h = 0; h < lg; h++) {\r\n      seg[h][i\
+    \ / B] &= ~(1ULL << (i % B));\r\n      if (seg[h][i / B])\r\n        break;\r\n\
+    \      i /= B;\r\n    }\r\n  }\r\n  // x\u4EE5\u4E0A\u6700\u5C0F\u306E\u8981\u7D20\
+    \r\n  int next(int i) {\r\n    for (int h = 0; h < lg; h++) {\r\n      if (i /\
+    \ B == seg[h].size())\r\n        break;\r\n      ull d = seg[h][i / B] >> (i %\
+    \ B);\r\n      if (!d) {\r\n        i = i / B + 1;\r\n        continue;\r\n  \
+    \    }\r\n      // find\r\n      i += bsf(d);\r\n      for (int g = h - 1; g >=\
+    \ 0; g--) {\r\n        i *= B;\r\n        i += bsf(seg[g][i / B]);\r\n      }\r\
+    \n      return i;\r\n    }\r\n    return n;\r\n  }\r\n  // x\u4EE5\u4E0B\u6700\
+    \u5927\u306E\u8981\u7D20\r\n  int prev(int i) {\r\n    if(i < 0) return -1;\r\n\
+    \    chmin(i, n - 1);\r\n    for (int h = 0; h < lg; h++) {\r\n      if (i ==\
+    \ -1)\r\n        break;\r\n      ull d = seg[h][i / B] << (63 - i % 64);\r\n \
+    \     if (!d) {\r\n        i = i / B - 1;\r\n        continue;\r\n      }\r\n\
     \      // find\r\n      i += bsr(d) - (B - 1);\r\n      for (int g = h - 1; g\
     \ >= 0; g--) {\r\n        i *= B;\r\n        i += bsr(seg[g][i / B]);\r\n    \
     \  }\r\n      return i;\r\n    }\r\n    return -1;\r\n  }\r\n  void debug(){\r\
@@ -206,8 +206,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/predecessor_problem.test.cpp
   requiredBy: []
-  timestamp: '2022-02-11 06:59:44+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-02-13 05:24:17+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/predecessor_problem.test.cpp
 layout: document

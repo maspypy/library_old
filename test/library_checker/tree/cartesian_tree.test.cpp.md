@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: ds/cartesian_tree.hpp
     title: ds/cartesian_tree.hpp
   - icon: ':question:'
@@ -12,9 +12,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/cartesian_tree
@@ -149,20 +149,20 @@ data:
     \  int __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define LL(...)   \\\r\n  ll\
     \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define STR(...)      \\\r\n  string\
     \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define DBL(...)           \\\r\n\
-    \  long double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type,\
-    \ name, size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define\
-    \ VV(type, name, h, w)                     \\\r\n  vector<vector<type>> name(h,\
-    \ vector<type>(w)); \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ?\
-    \ \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t\
-    \ = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\n\
-    void yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) {\
-    \ yes(!t); }\r\n#line 1 \"ds/cartesian_tree.hpp\"\ntemplate <typename T>\r\nstruct\
-    \ CartesianTree {\r\n  /*\r\n  \u8F9E\u66F8\u9806\u3067\u9AD8\u3055\u3092 unique\
-    \ \u3057\u3066\u3001\u6728\u306B\u3057\u3066\u3044\u308B\u3002\r\n  \u6975\u5927\
-    \u9577\u65B9\u5F62\u30A2\u30EB\u30B4\u30EA\u30BA\u30E0\u3067\u7DDA\u5F62\u6642\
-    \u9593\u69CB\u7BC9\u3002\r\n  */\r\n  int n;\r\n  vc<T>& A;\r\n  vc<pair<int,\
-    \ int>> range;\r\n  vc<int> lch, rch, par;\r\n\r\n  CartesianTree(vc<T> A) : n(len(A)),\
-    \ A(A) {\r\n    range.assign(n, {-1, -1});\r\n    lch.assign(n, -1);\r\n    rch.assign(n,\
+    \  double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type, name,\
+    \ size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define VV(type,\
+    \ name, h, w)                     \\\r\n  vector<vector<type>> name(h, vector<type>(w));\
+    \ \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ? \"YES\" : \"NO\"\
+    ); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t = 1) { print(t ? \"\
+    Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\nvoid yes(bool t = 1)\
+    \ { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) { yes(!t); }\r\n#line\
+    \ 1 \"ds/cartesian_tree.hpp\"\ntemplate <typename T>\r\nstruct CartesianTree {\r\
+    \n  /*\r\n  \u8F9E\u66F8\u9806\u3067\u9AD8\u3055\u3092 unique \u3057\u3066\u3001\
+    \u6728\u306B\u3057\u3066\u3044\u308B\u3002\r\n  \u6975\u5927\u9577\u65B9\u5F62\
+    \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0\u3067\u7DDA\u5F62\u6642\u9593\u69CB\u7BC9\
+    \u3002\r\n  */\r\n  int n;\r\n  vc<T>& A;\r\n  vc<pair<int, int>> range;\r\n \
+    \ vc<int> lch, rch, par;\r\n\r\n  CartesianTree(vc<T> A) : n(len(A)), A(A) {\r\
+    \n    range.assign(n, {-1, -1});\r\n    lch.assign(n, -1);\r\n    rch.assign(n,\
     \ -1);\r\n    par.assign(n, -1);\r\n    auto is_sm = [&](int i, int j) -> bool\
     \ {\r\n      return (A[i] < A[j]) || (A[i] == A[j] && i < j);\r\n    };\r\n  \
     \  vc<int> st;\r\n    FOR(i, n) {\r\n      while (!st.empty() && is_sm(i, st.back()))\
@@ -188,8 +188,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/tree/cartesian_tree.test.cpp
   requiredBy: []
-  timestamp: '2022-02-11 06:59:44+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-02-13 05:24:17+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/tree/cartesian_tree.test.cpp
 layout: document

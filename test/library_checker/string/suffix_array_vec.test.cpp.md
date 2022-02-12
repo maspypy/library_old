@@ -7,14 +7,14 @@ data:
   - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: string/suffixarray.hpp
     title: string/suffixarray.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/suffixarray
@@ -149,18 +149,18 @@ data:
     \  int __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define LL(...)   \\\r\n  ll\
     \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define STR(...)      \\\r\n  string\
     \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define DBL(...)           \\\r\n\
-    \  long double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type,\
-    \ name, size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define\
-    \ VV(type, name, h, w)                     \\\r\n  vector<vector<type>> name(h,\
-    \ vector<type>(w)); \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ?\
-    \ \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t\
-    \ = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\n\
-    void yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) {\
-    \ yes(!t); }\r\n#line 4 \"test/library_checker/string/suffix_array_vec.test.cpp\"\
-    \n\r\n#line 2 \"string/suffixarray.hpp\"\nusing namespace std;\n\n#define int\
-    \ long long\nstruct SuffixArray {\n  vector<int> SA;\n  vector<int> ISA;\n  vector<int>\
-    \ LCP;\n\n  SuffixArray(string& s, const char first = 'a', const char last = 'z')\
-    \ {\n    SA = calc_suffix_array(s, first, last);\n    calc_LCP(s);\n  }\n\n  SuffixArray(vector<int>&\
+    \  double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type, name,\
+    \ size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define VV(type,\
+    \ name, h, w)                     \\\r\n  vector<vector<type>> name(h, vector<type>(w));\
+    \ \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ? \"YES\" : \"NO\"\
+    ); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t = 1) { print(t ? \"\
+    Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\nvoid yes(bool t = 1)\
+    \ { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) { yes(!t); }\r\n#line\
+    \ 4 \"test/library_checker/string/suffix_array_vec.test.cpp\"\n\r\n#line 2 \"\
+    string/suffixarray.hpp\"\nusing namespace std;\n\n#define int long long\nstruct\
+    \ SuffixArray {\n  vector<int> SA;\n  vector<int> ISA;\n  vector<int> LCP;\n\n\
+    \  SuffixArray(string& s, const char first = 'a', const char last = 'z') {\n \
+    \   SA = calc_suffix_array(s, first, last);\n    calc_LCP(s);\n  }\n\n  SuffixArray(vector<int>&\
     \ s) {\n    SA = calc_suffix_array(s);\n    calc_LCP(s);\n  }\n\n  void induced_sort(const\
     \ std::vector<int>& vect, int val_range, std::vector<int>& SA, const std::vector<bool>&\
     \ sl,\n                    const std::vector<int>& lms_idx) {\n    std::vector<int>\
@@ -234,8 +234,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/string/suffix_array_vec.test.cpp
   requiredBy: []
-  timestamp: '2022-02-11 06:59:44+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-02-13 05:24:17+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/string/suffix_array_vec.test.cpp
 layout: document

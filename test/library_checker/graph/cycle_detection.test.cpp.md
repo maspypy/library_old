@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':x:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/cycle_detection.hpp
     title: graph/cycle_detection.hpp
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/cycle_detection
@@ -152,62 +152,61 @@ data:
     \  int __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define LL(...)   \\\r\n  ll\
     \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define STR(...)      \\\r\n  string\
     \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define DBL(...)           \\\r\n\
-    \  long double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type,\
-    \ name, size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define\
-    \ VV(type, name, h, w)                     \\\r\n  vector<vector<type>> name(h,\
-    \ vector<type>(w)); \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ?\
-    \ \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t\
-    \ = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\n\
-    void yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) {\
-    \ yes(!t); }\r\n#line 5 \"test/library_checker/graph/cycle_detection.test.cpp\"\
-    \n\r\n#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n  int\
-    \ frm, to;\n  T cost;\n  int id;\n};\n\ntemplate <typename T = int, bool directed\
-    \ = false>\nstruct Graph {\n  int N, M;\n  using cost_type = T;\n  using edge_type\
-    \ = Edge<T>;\n  vector<edge_type> edges;\n  vector<int> indptr;\n  vector<edge_type>\
-    \ csr_edges;\n  bool prepared;\n\n  class OutgoingEdges {\n  public:\n    OutgoingEdges(const\
-    \ Graph* G, int l, int r) : G(G), l(l), r(r) {}\n\n    const edge_type* begin()\
-    \ const {\n      if (l == r) { return 0; }\n      return &G->csr_edges[l];\n \
-    \   }\n\n    const edge_type* end() const {\n      if (l == r) { return 0; }\n\
-    \      return &G->csr_edges[r];\n    }\n\n  private:\n    int l, r;\n    const\
-    \ Graph* G;\n  };\n\n  bool is_prepared() { return prepared; }\n  constexpr bool\
-    \ is_directed() { return directed; }\n\n  Graph() : N(0), M(0), prepared(0) {}\n\
-    \  Graph(int N) : N(N), M(0), prepared(0) {}\n\n  void add(int frm, int to, T\
-    \ cost = 1, int i = -1) {\n    assert(!prepared && 0 <= frm && 0 <= to);\n   \
-    \ chmax(N, frm + 1);\n    chmax(N, to + 1);\n    if (i == -1) i = M;\n    auto\
-    \ e = edge_type({frm, to, cost, i});\n    edges.eb(e);\n    ++M;\n  }\n\n  void\
-    \ read_tree(bool wt=false, int off=1){\n    read_graph(N - 1, wt, off);\n  }\n\
-    \n  void read_graph(int M, bool wt=false, int off=1){\n    FOR_(M){\n      INT(a,\
-    \ b);\n      a -= off, b -= off;\n      if(!wt){\n        add(a, b);\n      }\
-    \ else {\n        T c;\n        read(c);\n        add(a, b, c);\n      }\n   \
-    \ }\n    prepare();\n  }\n\n  void read_parent(int off=1){\n    FOR3(v, 1, N){\n\
-    \      INT(p);\n      add(p, v);\n    }\n    prepare();\n  }\n\n  void prepare()\
-    \ {\n    assert(!prepared);\n    prepared = true;\n    indptr.assign(N + 1, 0);\n\
-    \    for (auto&& e: edges) {\n      indptr[e.frm + 1]++;\n      if (!directed)\
-    \ indptr[e.to + 1]++;\n    }\n    FOR(v, N) indptr[v + 1] += indptr[v];\n    auto\
-    \ counter = indptr;\n    csr_edges.resize(indptr.back() + 1);\n    for (auto&&\
-    \ e: edges) {\n      csr_edges[counter[e.frm]++] = e;\n      if (!directed)\n\
-    \        csr_edges[counter[e.to]++] = edge_type({e.to, e.frm, e.cost, e.id});\n\
-    \    }\n  }\n\n  OutgoingEdges operator[](int v) const {\n    assert(prepared);\n\
-    \    return {this, indptr[v], indptr[v + 1]};\n  }\n\n  void debug() {\n    print(\"\
-    Graph\");\n    if (!prepared) {\n      print(\"frm to cost id\");\n      for (auto&&\
-    \ e: edges) print(e.frm, e.to, e.cost, e.id);\n    } else {\n      print(\"indptr\"\
-    , indptr);\n      print(\"frm to cost id\");\n      FOR(v, N) for (auto&& e: (*this)[v])\
-    \ print(e.frm, e.to, e.cost, e.id);\n    }\n  }\n};\n#line 1 \"graph/cycle_detection.hpp\"\
-    \ntemplate <typename Graph>\r\nvc<int> cycle_detection(Graph& G, bool is_edge)\
-    \ {\r\n  assert(G.is_directed());\r\n  assert(G.is_prepared());\r\n  if (!is_edge)\
-    \ {\r\n    auto C = cycle_detection(G, true);\r\n    if (len(C) == 0) return C;\r\
-    \n    vc<int> ANS(len(C) + 1);\r\n    FOR(i, len(C)) {\r\n      auto e = G.edges[C[i]];\r\
-    \n      ANS[i + 0] = e.frm;\r\n      ANS[i + 1] = e.to;\r\n    }\r\n    return\
-    \ ANS;\r\n  }\r\n\r\n  int N = G.N;\r\n  vc<int> used(N);\r\n  vc<int> path; //\
-    \ edge\r\n  vc<pair<int, int>> par(N);\r\n  vector<int> ANS;\r\n\r\n  auto dfs\
-    \ = [&](auto self, int v) -> void {\r\n    used[v] = 1;\r\n    for (auto&& e:\
-    \ G[v]) {\r\n      if (len(ANS)) return;\r\n      if (!used[e.to]) {\r\n     \
-    \   par[e.to] = {v, e.id};\r\n        self(self, e.to);\r\n      }\r\n      elif\
-    \ (used[e.to] == 1) {\r\n        ANS = {e.id};\r\n        int cur = v;\r\n   \
-    \     while (cur != e.to) {\r\n          ANS.eb(par[cur].se);\r\n          cur\
-    \ = par[cur].fi;\r\n        }\r\n        reverse(all(ANS));\r\n        return;\r\
-    \n      }\r\n    }\r\n    used[v] = 2;\r\n  };\r\n  FOR(v, N) if (!used[v]) dfs(dfs,\
-    \ v);\r\n  return ANS;\r\n}\n#line 8 \"test/library_checker/graph/cycle_detection.test.cpp\"\
+    \  double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type, name,\
+    \ size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define VV(type,\
+    \ name, h, w)                     \\\r\n  vector<vector<type>> name(h, vector<type>(w));\
+    \ \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ? \"YES\" : \"NO\"\
+    ); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t = 1) { print(t ? \"\
+    Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\nvoid yes(bool t = 1)\
+    \ { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) { yes(!t); }\r\n#line\
+    \ 5 \"test/library_checker/graph/cycle_detection.test.cpp\"\n\r\n#line 2 \"graph/base.hpp\"\
+    \n\ntemplate <typename T>\nstruct Edge {\n  int frm, to;\n  T cost;\n  int id;\n\
+    };\n\ntemplate <typename T = int, bool directed = false>\nstruct Graph {\n  int\
+    \ N, M;\n  using cost_type = T;\n  using edge_type = Edge<T>;\n  vector<edge_type>\
+    \ edges;\n  vector<int> indptr;\n  vector<edge_type> csr_edges;\n  bool prepared;\n\
+    \n  class OutgoingEdges {\n  public:\n    OutgoingEdges(const Graph* G, int l,\
+    \ int r) : G(G), l(l), r(r) {}\n\n    const edge_type* begin() const {\n     \
+    \ if (l == r) { return 0; }\n      return &G->csr_edges[l];\n    }\n\n    const\
+    \ edge_type* end() const {\n      if (l == r) { return 0; }\n      return &G->csr_edges[r];\n\
+    \    }\n\n  private:\n    int l, r;\n    const Graph* G;\n  };\n\n  bool is_prepared()\
+    \ { return prepared; }\n  constexpr bool is_directed() { return directed; }\n\n\
+    \  Graph() : N(0), M(0), prepared(0) {}\n  Graph(int N) : N(N), M(0), prepared(0)\
+    \ {}\n\n  void add(int frm, int to, T cost = 1, int i = -1) {\n    assert(!prepared\
+    \ && 0 <= frm && 0 <= to);\n    chmax(N, frm + 1);\n    chmax(N, to + 1);\n  \
+    \  if (i == -1) i = M;\n    auto e = edge_type({frm, to, cost, i});\n    edges.eb(e);\n\
+    \    ++M;\n  }\n\n  void read_tree(bool wt=false, int off=1){\n    read_graph(N\
+    \ - 1, wt, off);\n  }\n\n  void read_graph(int M, bool wt=false, int off=1){\n\
+    \    FOR_(M){\n      INT(a, b);\n      a -= off, b -= off;\n      if(!wt){\n \
+    \       add(a, b);\n      } else {\n        T c;\n        read(c);\n        add(a,\
+    \ b, c);\n      }\n    }\n    prepare();\n  }\n\n  void read_parent(int off=1){\n\
+    \    FOR3(v, 1, N){\n      INT(p);\n      add(p, v);\n    }\n    prepare();\n\
+    \  }\n\n  void prepare() {\n    assert(!prepared);\n    prepared = true;\n   \
+    \ indptr.assign(N + 1, 0);\n    for (auto&& e: edges) {\n      indptr[e.frm +\
+    \ 1]++;\n      if (!directed) indptr[e.to + 1]++;\n    }\n    FOR(v, N) indptr[v\
+    \ + 1] += indptr[v];\n    auto counter = indptr;\n    csr_edges.resize(indptr.back()\
+    \ + 1);\n    for (auto&& e: edges) {\n      csr_edges[counter[e.frm]++] = e;\n\
+    \      if (!directed)\n        csr_edges[counter[e.to]++] = edge_type({e.to, e.frm,\
+    \ e.cost, e.id});\n    }\n  }\n\n  OutgoingEdges operator[](int v) const {\n \
+    \   assert(prepared);\n    return {this, indptr[v], indptr[v + 1]};\n  }\n\n \
+    \ void debug() {\n    print(\"Graph\");\n    if (!prepared) {\n      print(\"\
+    frm to cost id\");\n      for (auto&& e: edges) print(e.frm, e.to, e.cost, e.id);\n\
+    \    } else {\n      print(\"indptr\", indptr);\n      print(\"frm to cost id\"\
+    );\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e.frm, e.to, e.cost, e.id);\n\
+    \    }\n  }\n};\n#line 1 \"graph/cycle_detection.hpp\"\ntemplate <typename Graph>\r\
+    \nvc<int> cycle_detection(Graph& G, bool is_edge) {\r\n  assert(G.is_directed());\r\
+    \n  assert(G.is_prepared());\r\n  if (!is_edge) {\r\n    auto C = cycle_detection(G,\
+    \ true);\r\n    if (len(C) == 0) return C;\r\n    vc<int> ANS(len(C) + 1);\r\n\
+    \    FOR(i, len(C)) {\r\n      auto e = G.edges[C[i]];\r\n      ANS[i + 0] = e.frm;\r\
+    \n      ANS[i + 1] = e.to;\r\n    }\r\n    return ANS;\r\n  }\r\n\r\n  int N =\
+    \ G.N;\r\n  vc<int> used(N);\r\n  vc<int> path; // edge\r\n  vc<pair<int, int>>\
+    \ par(N);\r\n  vector<int> ANS;\r\n\r\n  auto dfs = [&](auto self, int v) -> void\
+    \ {\r\n    used[v] = 1;\r\n    for (auto&& e: G[v]) {\r\n      if (len(ANS)) return;\r\
+    \n      if (!used[e.to]) {\r\n        par[e.to] = {v, e.id};\r\n        self(self,\
+    \ e.to);\r\n      }\r\n      elif (used[e.to] == 1) {\r\n        ANS = {e.id};\r\
+    \n        int cur = v;\r\n        while (cur != e.to) {\r\n          ANS.eb(par[cur].se);\r\
+    \n          cur = par[cur].fi;\r\n        }\r\n        reverse(all(ANS));\r\n\
+    \        return;\r\n      }\r\n    }\r\n    used[v] = 2;\r\n  };\r\n  FOR(v, N)\
+    \ if (!used[v]) dfs(dfs, v);\r\n  return ANS;\r\n}\n#line 8 \"test/library_checker/graph/cycle_detection.test.cpp\"\
     \n\r\nvoid solve() {\r\n  LL(N, M);\r\n  Graph<int, 1> G(N);\r\n  FOR(_, M) {\r\
     \n    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n  G.prepare();\r\n\r\n  auto C =\
     \ cycle_detection(G, true);\r\n  if (len(C) == 0) {\r\n    print(-1);\r\n  } else\
@@ -231,8 +230,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/graph/cycle_detection.test.cpp
   requiredBy: []
-  timestamp: '2022-02-12 21:55:04+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-02-13 05:24:17+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/graph/cycle_detection.test.cpp
 layout: document

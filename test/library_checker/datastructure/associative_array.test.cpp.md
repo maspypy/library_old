@@ -9,9 +9,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/associative_array
@@ -146,17 +146,17 @@ data:
     \  int __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define LL(...)   \\\r\n  ll\
     \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define STR(...)      \\\r\n  string\
     \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define DBL(...)           \\\r\n\
-    \  long double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type,\
-    \ name, size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define\
-    \ VV(type, name, h, w)                     \\\r\n  vector<vector<type>> name(h,\
-    \ vector<type>(w)); \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ?\
-    \ \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t\
-    \ = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\n\
-    void yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) {\
-    \ yes(!t); }\r\n#line 4 \"test/library_checker/datastructure/associative_array.test.cpp\"\
-    \n\nvoid sol_1() {\n  LL(Q);\n  map<ll, ll> A;\n  FOR(_, Q) {\n    LL(t);\n  \
-    \  if (t == 0) {\n      LL(k, v);\n      A[k] = v;\n    } else {\n      LL(k);\n\
-    \      print(A[k]);\n    }\n  }\n}\n\nvoid sol_2() {\n  LL(Q);\n  unordered_map<ll,\
+    \  double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type, name,\
+    \ size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define VV(type,\
+    \ name, h, w)                     \\\r\n  vector<vector<type>> name(h, vector<type>(w));\
+    \ \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ? \"YES\" : \"NO\"\
+    ); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t = 1) { print(t ? \"\
+    Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\nvoid yes(bool t = 1)\
+    \ { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) { yes(!t); }\r\n#line\
+    \ 4 \"test/library_checker/datastructure/associative_array.test.cpp\"\n\nvoid\
+    \ sol_1() {\n  LL(Q);\n  map<ll, ll> A;\n  FOR(_, Q) {\n    LL(t);\n    if (t\
+    \ == 0) {\n      LL(k, v);\n      A[k] = v;\n    } else {\n      LL(k);\n    \
+    \  print(A[k]);\n    }\n  }\n}\n\nvoid sol_2() {\n  LL(Q);\n  unordered_map<ll,\
     \ ll> A;\n  A.reserve(Q);\n  FOR(_, Q) {\n    LL(t);\n    if (t == 0) {\n    \
     \  LL(k, v);\n      A[k] = v;\n    } else {\n      LL(k);\n      print(A[k]);\n\
     \    }\n  }\n}\n\nvoid sol_3() {\n  LL(Q);\n  using T = tuple<ll, ll, ll>;\n \
@@ -190,8 +190,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/associative_array.test.cpp
   requiredBy: []
-  timestamp: '2022-02-11 06:59:44+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-02-13 05:24:17+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/associative_array.test.cpp
 layout: document

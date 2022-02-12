@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: ds/unionfind.hpp
     title: ds/unionfind.hpp
   - icon: ':question:'
@@ -12,9 +12,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/unionfind
@@ -149,27 +149,26 @@ data:
     \  int __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define LL(...)   \\\r\n  ll\
     \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define STR(...)      \\\r\n  string\
     \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define DBL(...)           \\\r\n\
-    \  long double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type,\
-    \ name, size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define\
-    \ VV(type, name, h, w)                     \\\r\n  vector<vector<type>> name(h,\
-    \ vector<type>(w)); \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ?\
-    \ \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t\
-    \ = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\n\
-    void yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) {\
-    \ yes(!t); }\r\n#line 4 \"test/library_checker/datastructure/unionfind.test.cpp\"\
-    \n\n#line 2 \"ds/unionfind.hpp\"\n\nstruct UnionFind {\n  int num;\n  int comp;\n\
-    \  vc<int> size, par;\n  UnionFind(int n) : num(n), comp(n), size(n, 1), par(n)\
-    \ {\n    iota(par.begin(), par.end(), 0);\n  }\n  int find(int x) {\n    while\
-    \ (par[x] != x) {\n      par[x] = par[par[x]];\n      x = par[x];\n    }\n   \
-    \ return x;\n  }\n\n  int operator[](int x) { return find(x); }\n\n  bool merge(ll\
-    \ x, ll y) {\n    x = find(x);\n    y = find(y);\n    if (x == y) { return false;\
-    \ }\n    comp--;\n    if (size[x] < size[y]) swap(x, y);\n    size[x] += size[y];\n\
-    \    size[y] = 0;\n    par[y] = x;\n    return true;\n  }\n\n  vc<int> find_all()\
-    \ {\n    vc<int> A(num);\n    FOR(i, num) A[i] = find(i);\n    return A;\n  }\n\
-    };\n#line 6 \"test/library_checker/datastructure/unionfind.test.cpp\"\n\nvoid\
-    \ solve() {\n  LL(N, Q);\n  UnionFind uf(N);\n  FOR(_, Q) {\n    LL(t, a, b);\n\
-    \    if (t == 0) {\n      uf.merge(a, b);\n    } else {\n      print(uf[a] ==\
-    \ uf[b]);\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
+    \  double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type, name,\
+    \ size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define VV(type,\
+    \ name, h, w)                     \\\r\n  vector<vector<type>> name(h, vector<type>(w));\
+    \ \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ? \"YES\" : \"NO\"\
+    ); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t = 1) { print(t ? \"\
+    Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\nvoid yes(bool t = 1)\
+    \ { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) { yes(!t); }\r\n#line\
+    \ 4 \"test/library_checker/datastructure/unionfind.test.cpp\"\n\n#line 2 \"ds/unionfind.hpp\"\
+    \n\nstruct UnionFind {\n  int num;\n  int comp;\n  vc<int> size, par;\n  UnionFind(int\
+    \ n) : num(n), comp(n), size(n, 1), par(n) {\n    iota(par.begin(), par.end(),\
+    \ 0);\n  }\n  int find(int x) {\n    while (par[x] != x) {\n      par[x] = par[par[x]];\n\
+    \      x = par[x];\n    }\n    return x;\n  }\n\n  int operator[](int x) { return\
+    \ find(x); }\n\n  bool merge(ll x, ll y) {\n    x = find(x);\n    y = find(y);\n\
+    \    if (x == y) { return false; }\n    comp--;\n    if (size[x] < size[y]) swap(x,\
+    \ y);\n    size[x] += size[y];\n    size[y] = 0;\n    par[y] = x;\n    return\
+    \ true;\n  }\n\n  vc<int> find_all() {\n    vc<int> A(num);\n    FOR(i, num) A[i]\
+    \ = find(i);\n    return A;\n  }\n};\n#line 6 \"test/library_checker/datastructure/unionfind.test.cpp\"\
+    \n\nvoid solve() {\n  LL(N, Q);\n  UnionFind uf(N);\n  FOR(_, Q) {\n    LL(t,\
+    \ a, b);\n    if (t == 0) {\n      uf.merge(a, b);\n    } else {\n      print(uf[a]\
+    \ == uf[b]);\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
     \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/unionfind\"\n#include \"\
     my_template.hpp\"\n#include \"other/io.hpp\"\n\n#include \"ds/unionfind.hpp\"\n\
@@ -184,8 +183,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/unionfind.test.cpp
   requiredBy: []
-  timestamp: '2022-02-11 06:59:44+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-02-13 05:24:17+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/unionfind.test.cpp
 layout: document

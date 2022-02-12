@@ -15,9 +15,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/point_add_range_sum
@@ -152,42 +152,42 @@ data:
     \  int __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define LL(...)   \\\r\n  ll\
     \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define STR(...)      \\\r\n  string\
     \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define DBL(...)           \\\r\n\
-    \  long double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type,\
-    \ name, size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define\
-    \ VV(type, name, h, w)                     \\\r\n  vector<vector<type>> name(h,\
-    \ vector<type>(w)); \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ?\
-    \ \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t\
-    \ = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\n\
-    void yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) {\
-    \ yes(!t); }\r\n#line 4 \"test/library_checker/datastructure/point_add_range_sum.test.cpp\"\
-    \n\n#line 2 \"alg/group_add.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\nstruct\
-    \ Group_Add {\r\n  using value_type = X;\r\n  static constexpr X op(const X &x,\
-    \ const X &y) noexcept { return x + y; }\r\n  static constexpr X inverse(const\
-    \ X &x) noexcept { return -x; }\r\n  static constexpr X power(const X &x, ll n)\
-    \ noexcept { return n * x; }\r\n  static constexpr X unit = ZERO;\r\n  static\
-    \ constexpr bool commute = true;\r\n};\r\n#line 3 \"ds/fenwick.hpp\"\n\ntemplate\
-    \ <typename AbelGroup>\nstruct FenwickTree {\n  using E = typename AbelGroup::value_type;\n\
-    \  int n;\n  vector<E> dat;\n  E total;\n\n  FenwickTree() : FenwickTree(0) {}\n\
-    \  FenwickTree(int n) : n(n), total(AbelGroup::unit) {\n    assert(AbelGroup::commute);\n\
-    \    dat.assign(n, AbelGroup::unit);\n  }\n  FenwickTree(vc<E> v) : n(len(v)),\
-    \ total(AbelGroup::unit) {\n    assert(AbelGroup::commute);\n    dat = v;\n  \
-    \  FOR3(i, 1, n + 1) {\n      int j = i + (i & -i);\n      if (j <= n) dat[j -\
-    \ 1] = AbelGroup::op(dat[i - 1], dat[j - 1]);\n    }\n  }\n\n  E sum(int k) {\n\
-    \    E ret = AbelGroup::unit;\n    for (; k > 0; k -= k & -k) ret = AbelGroup::op(ret,\
-    \ dat[k - 1]);\n    return ret;\n  }\n\n  E sum(int L, int R) {\n    E pos = AbelGroup::unit;\n\
-    \    while (L < R) {\n      pos = AbelGroup::op(pos, dat[R - 1]);\n      R -=\
-    \ R & -R;\n    }\n    E neg = AbelGroup::unit;\n    while (R < L) {\n      neg\
-    \ = AbelGroup::op(neg, dat[L - 1]);\n      L -= L & -L;\n    }\n    return AbelGroup::op(pos,\
-    \ AbelGroup::inverse(neg));\n  }\n\n  E sum_all() { return total; }\n\n  void\
-    \ add(int k, E x) {\n    total = AbelGroup::op(total, x);\n    for (++k; k <=\
-    \ n; k += k & -k) dat[k - 1] = AbelGroup::op(dat[k - 1], x);\n  }\n\n  template\
-    \ <class F>\n  int max_right(F& check) {\n    assert(f(E(0)));\n    ll i = 0;\n\
-    \    E s = AbelGroup::unit;\n    int k = 1;\n    int N = len(dat) + 1;\n    while\
-    \ (2 * k < N) k *= 2;\n    while (k) {\n      if (i + k < N && check(AbelGroup::op(s,\
-    \ dat[i + k - 1]))) {\n        i += k;\n        s = AbelGroup::op(s, dat[i - 1]);\n\
-    \      }\n      k >>= 1;\n    }\n    return i;\n  }\n\n  int find_kth(E k) {\n\
-    \    auto check = [&](E x) -> bool { return x <= k; };\n    return max_right(check);\n\
-    \  }\n\n  void debug() { print(\"fenwick\", dat); }\n};\n#line 6 \"test/library_checker/datastructure/point_add_range_sum.test.cpp\"\
+    \  double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type, name,\
+    \ size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define VV(type,\
+    \ name, h, w)                     \\\r\n  vector<vector<type>> name(h, vector<type>(w));\
+    \ \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ? \"YES\" : \"NO\"\
+    ); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t = 1) { print(t ? \"\
+    Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\nvoid yes(bool t = 1)\
+    \ { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) { yes(!t); }\r\n#line\
+    \ 4 \"test/library_checker/datastructure/point_add_range_sum.test.cpp\"\n\n#line\
+    \ 2 \"alg/group_add.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\nstruct Group_Add\
+    \ {\r\n  using value_type = X;\r\n  static constexpr X op(const X &x, const X\
+    \ &y) noexcept { return x + y; }\r\n  static constexpr X inverse(const X &x) noexcept\
+    \ { return -x; }\r\n  static constexpr X power(const X &x, ll n) noexcept { return\
+    \ n * x; }\r\n  static constexpr X unit = ZERO;\r\n  static constexpr bool commute\
+    \ = true;\r\n};\r\n#line 3 \"ds/fenwick.hpp\"\n\ntemplate <typename AbelGroup>\n\
+    struct FenwickTree {\n  using E = typename AbelGroup::value_type;\n  int n;\n\
+    \  vector<E> dat;\n  E total;\n\n  FenwickTree() : FenwickTree(0) {}\n  FenwickTree(int\
+    \ n) : n(n), total(AbelGroup::unit) {\n    assert(AbelGroup::commute);\n    dat.assign(n,\
+    \ AbelGroup::unit);\n  }\n  FenwickTree(vc<E> v) : n(len(v)), total(AbelGroup::unit)\
+    \ {\n    assert(AbelGroup::commute);\n    dat = v;\n    FOR3(i, 1, n + 1) {\n\
+    \      int j = i + (i & -i);\n      if (j <= n) dat[j - 1] = AbelGroup::op(dat[i\
+    \ - 1], dat[j - 1]);\n    }\n  }\n\n  E sum(int k) {\n    E ret = AbelGroup::unit;\n\
+    \    for (; k > 0; k -= k & -k) ret = AbelGroup::op(ret, dat[k - 1]);\n    return\
+    \ ret;\n  }\n\n  E sum(int L, int R) {\n    E pos = AbelGroup::unit;\n    while\
+    \ (L < R) {\n      pos = AbelGroup::op(pos, dat[R - 1]);\n      R -= R & -R;\n\
+    \    }\n    E neg = AbelGroup::unit;\n    while (R < L) {\n      neg = AbelGroup::op(neg,\
+    \ dat[L - 1]);\n      L -= L & -L;\n    }\n    return AbelGroup::op(pos, AbelGroup::inverse(neg));\n\
+    \  }\n\n  E sum_all() { return total; }\n\n  void add(int k, E x) {\n    total\
+    \ = AbelGroup::op(total, x);\n    for (++k; k <= n; k += k & -k) dat[k - 1] =\
+    \ AbelGroup::op(dat[k - 1], x);\n  }\n\n  template <class F>\n  int max_right(F&\
+    \ check) {\n    assert(f(E(0)));\n    ll i = 0;\n    E s = AbelGroup::unit;\n\
+    \    int k = 1;\n    int N = len(dat) + 1;\n    while (2 * k < N) k *= 2;\n  \
+    \  while (k) {\n      if (i + k < N && check(AbelGroup::op(s, dat[i + k - 1])))\
+    \ {\n        i += k;\n        s = AbelGroup::op(s, dat[i - 1]);\n      }\n   \
+    \   k >>= 1;\n    }\n    return i;\n  }\n\n  int find_kth(E k) {\n    auto check\
+    \ = [&](E x) -> bool { return x <= k; };\n    return max_right(check);\n  }\n\n\
+    \  void debug() { print(\"fenwick\", dat); }\n};\n#line 6 \"test/library_checker/datastructure/point_add_range_sum.test.cpp\"\
     \n\nvoid solve() {\n  LL(N, Q);\n  VEC(ll, A, N);\n  FenwickTree<Group_Add<ll>>\
     \ bit(A);\n\n  FOR(_, Q) {\n    LL(t, a, b);\n    if (t == 0) {\n      bit.add(a,\
     \ b);\n    } else {\n      print(bit.sum(a, b));\n    }\n  }\n}\n\nsigned main()\
@@ -208,8 +208,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/point_add_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-02-12 15:43:23+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-02-13 05:24:17+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/point_add_range_sum.test.cpp
 layout: document

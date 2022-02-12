@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: geo/angle_sort.hpp
     title: geo/angle_sort.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: geo/base.hpp
     title: geo/base.hpp
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sort_points_by_argument
@@ -152,34 +152,34 @@ data:
     \  int __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define LL(...)   \\\r\n  ll\
     \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define STR(...)      \\\r\n  string\
     \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define DBL(...)           \\\r\n\
-    \  long double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type,\
-    \ name, size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define\
-    \ VV(type, name, h, w)                     \\\r\n  vector<vector<type>> name(h,\
-    \ vector<type>(w)); \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ?\
-    \ \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t\
-    \ = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\n\
-    void yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) {\
-    \ yes(!t); }\r\n#line 1 \"geo/base.hpp\"\nstruct Point {\n  ll x, y;\n  Point(ll\
-    \ x=0, ll y=0) : x(x), y(y) {}\n\n  template <typename S, typename T>\n  Point(pair<S,\
-    \ T> p) : x(p.fi), y(p.se) {}\n\n  Point operator-(Point p) const { return {x\
-    \ - p.x, y - p.y}; }\n  ll det(Point p) const { return x * p.y - y * p.x; }\n\
-    \  ll dot(Point p) const { return x * p.x + y * p.y; }\n  bool operator<(Point\
-    \ p) const {\n    if (x != p.x) return x < p.x;\n    return y < p.y;\n  }\n  bool\
-    \ operator==(Point p) const { return x == p.x && y == p.y; }\n  Point operator-()\
-    \ const { return {-x, -y}; }\n};\n#line 2 \"geo/angle_sort.hpp\"\n\r\nvector<int>\
-    \ angle_argsort(vector<Point>& P) {\r\n  auto is_lower = [](Point P) { return\
-    \ (P.y < 0) || (P.y == 0 && P.x > 0); };\r\n  vector<int> lower, origin, upper;\r\
-    \n  Point O = {0, 0};\r\n  FOR(i, len(P)) {\r\n    if (P[i] == O) origin.eb(i);\r\
-    \n    elif (is_lower(P[i])) lower.eb(i);\r\n    else upper.eb(i);\r\n  }\r\n \
-    \ sort(all(lower), [&](auto& i, auto& j) { return P[i].det(P[j]) > 0; });\r\n\
-    \  sort(all(upper), [&](auto& i, auto& j) { return P[i].det(P[j]) > 0; });\r\n\
-    \  auto& I = lower;\r\n  I.insert(I.end(), all(origin));\r\n  I.insert(I.end(),\
-    \ all(upper));\r\n  return I;\r\n}\r\n\r\nvoid angle_sort(vector<Point>& P) {\r\
-    \n  auto I = angle_argsort(P);\r\n  vc<Point> Q(len(P));\r\n  FOR(i, len(P)) Q[i]\
-    \ = P[I[i]];\r\n  P = Q;\r\n}\r\n#line 5 \"test/library_checker/geometry/sort_points_by_argument.test.cpp\"\
-    \n\r\nvoid solve() {\r\n  LL(N);\r\n  vc<Point> P(N);\r\n  FOR(i, N) read(P[i].x),\
-    \ read(P[i].y);\r\n  angle_sort(P);\r\n  FOR(i, N) print(P[i].x, P[i].y);\r\n\
-    }\r\n\r\nsigned main() {\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \  double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type, name,\
+    \ size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define VV(type,\
+    \ name, h, w)                     \\\r\n  vector<vector<type>> name(h, vector<type>(w));\
+    \ \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ? \"YES\" : \"NO\"\
+    ); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t = 1) { print(t ? \"\
+    Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\nvoid yes(bool t = 1)\
+    \ { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) { yes(!t); }\r\n#line\
+    \ 1 \"geo/base.hpp\"\nstruct Point {\n  ll x, y;\n  Point(ll x=0, ll y=0) : x(x),\
+    \ y(y) {}\n\n  template <typename S, typename T>\n  Point(pair<S, T> p) : x(p.fi),\
+    \ y(p.se) {}\n\n  Point operator-(Point p) const { return {x - p.x, y - p.y};\
+    \ }\n  ll det(Point p) const { return x * p.y - y * p.x; }\n  ll dot(Point p)\
+    \ const { return x * p.x + y * p.y; }\n  bool operator<(Point p) const {\n   \
+    \ if (x != p.x) return x < p.x;\n    return y < p.y;\n  }\n  bool operator==(Point\
+    \ p) const { return x == p.x && y == p.y; }\n  Point operator-() const { return\
+    \ {-x, -y}; }\n};\n#line 2 \"geo/angle_sort.hpp\"\n\r\nvector<int> angle_argsort(vector<Point>&\
+    \ P) {\r\n  auto is_lower = [](Point P) { return (P.y < 0) || (P.y == 0 && P.x\
+    \ > 0); };\r\n  vector<int> lower, origin, upper;\r\n  Point O = {0, 0};\r\n \
+    \ FOR(i, len(P)) {\r\n    if (P[i] == O) origin.eb(i);\r\n    elif (is_lower(P[i]))\
+    \ lower.eb(i);\r\n    else upper.eb(i);\r\n  }\r\n  sort(all(lower), [&](auto&\
+    \ i, auto& j) { return P[i].det(P[j]) > 0; });\r\n  sort(all(upper), [&](auto&\
+    \ i, auto& j) { return P[i].det(P[j]) > 0; });\r\n  auto& I = lower;\r\n  I.insert(I.end(),\
+    \ all(origin));\r\n  I.insert(I.end(), all(upper));\r\n  return I;\r\n}\r\n\r\n\
+    void angle_sort(vector<Point>& P) {\r\n  auto I = angle_argsort(P);\r\n  vc<Point>\
+    \ Q(len(P));\r\n  FOR(i, len(P)) Q[i] = P[I[i]];\r\n  P = Q;\r\n}\r\n#line 5 \"\
+    test/library_checker/geometry/sort_points_by_argument.test.cpp\"\n\r\nvoid solve()\
+    \ {\r\n  LL(N);\r\n  vc<Point> P(N);\r\n  FOR(i, N) read(P[i].x), read(P[i].y);\r\
+    \n  angle_sort(P);\r\n  FOR(i, N) print(P[i].x, P[i].y);\r\n}\r\n\r\nsigned main()\
+    \ {\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sort_points_by_argument\"\
     \r\n#include \"my_template.hpp\"\r\n#include \"other/io.hpp\"\r\n#include \"geo/angle_sort.hpp\"\
     \r\n\r\nvoid solve() {\r\n  LL(N);\r\n  vc<Point> P(N);\r\n  FOR(i, N) read(P[i].x),\
@@ -193,8 +193,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/geometry/sort_points_by_argument.test.cpp
   requiredBy: []
-  timestamp: '2022-02-11 06:59:44+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-02-13 05:24:17+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/geometry/sort_points_by_argument.test.cpp
 layout: document

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: alg/group_cntsum.hpp
     title: alg/group_cntsum.hpp
   - icon: ':heavy_check_mark:'
@@ -158,25 +158,25 @@ data:
     \  int __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define LL(...)   \\\r\n  ll\
     \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define STR(...)      \\\r\n  string\
     \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define DBL(...)           \\\r\n\
-    \  long double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type,\
-    \ name, size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define\
-    \ VV(type, name, h, w)                     \\\r\n  vector<vector<type>> name(h,\
-    \ vector<type>(w)); \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ?\
-    \ \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t\
-    \ = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\n\
-    void yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) {\
-    \ yes(!t); }\r\n#line 1 \"alg/group_cntsum.hpp\"\ntemplate <typename E = long\
-    \ long>\r\nstruct Group_CntSum {\r\n  using value_type = pair<E,E>;\r\n  using\
-    \ X = value_type;\r\n  static constexpr X op(const X &x, const X &y) { return\
-    \ {x.fi + y.fi, x.se + y.se}; }\r\n  static constexpr X inverse(const X &x) {\
-    \ return {-x.fi, -x.se}; }\r\n  static constexpr X unit = {0, 0};\r\n  static\
-    \ constexpr bool commute = true;\r\n};\r\n#line 1 \"alg/monoid_set.hpp\"\ntemplate\
-    \ <typename E, E none_val>\r\nstruct Monoid_Set {\r\n  using value_type = E;\r\
-    \n  using X = value_type;\r\n  static X op(X x, X y) { return (y == none_val ?\
-    \ x : y); }\r\n  static constexpr X unit = none_val;\r\n  static constexpr bool\
-    \ commute = false;\r\n};\n#line 3 \"alg/lazy_cntsum_set.hpp\"\n\r\ntemplate <typename\
-    \ E, E none_val>\r\nstruct Lazy_CntSum_Set {\r\n  using X_structure = Group_CntSum<E>;\r\
-    \n  using A_structure = Monoid_Set<E, none_val>;\r\n  using X = typename X_structure::value_type;\r\
+    \  double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type, name,\
+    \ size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define VV(type,\
+    \ name, h, w)                     \\\r\n  vector<vector<type>> name(h, vector<type>(w));\
+    \ \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ? \"YES\" : \"NO\"\
+    ); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t = 1) { print(t ? \"\
+    Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\nvoid yes(bool t = 1)\
+    \ { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) { yes(!t); }\r\n#line\
+    \ 1 \"alg/group_cntsum.hpp\"\ntemplate <typename E = long long>\r\nstruct Group_CntSum\
+    \ {\r\n  using value_type = pair<E,E>;\r\n  using X = value_type;\r\n  static\
+    \ constexpr X op(const X &x, const X &y) { return {x.fi + y.fi, x.se + y.se};\
+    \ }\r\n  static constexpr X inverse(const X &x) { return {-x.fi, -x.se}; }\r\n\
+    \  static constexpr X unit = {0, 0};\r\n  static constexpr bool commute = true;\r\
+    \n};\r\n#line 1 \"alg/monoid_set.hpp\"\ntemplate <typename E, E none_val>\r\n\
+    struct Monoid_Set {\r\n  using value_type = E;\r\n  using X = value_type;\r\n\
+    \  static X op(X x, X y) { return (y == none_val ? x : y); }\r\n  static constexpr\
+    \ X unit = none_val;\r\n  static constexpr bool commute = false;\r\n};\n#line\
+    \ 3 \"alg/lazy_cntsum_set.hpp\"\n\r\ntemplate <typename E, E none_val>\r\nstruct\
+    \ Lazy_CntSum_Set {\r\n  using X_structure = Group_CntSum<E>;\r\n  using A_structure\
+    \ = Monoid_Set<E, none_val>;\r\n  using X = typename X_structure::value_type;\r\
     \n  using A = typename A_structure::value_type;\r\n  static constexpr X act(const\
     \ X &x, const A &a) {\r\n    if(a == A_structure::unit) return x;\r\n    return\
     \ {x.fi, x.fi * a};\r\n  }\r\n};\n#line 2 \"ds/lazysegtree.hpp\"\n\ntemplate <typename\
@@ -262,7 +262,7 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
   requiredBy: []
-  timestamp: '2022-02-11 06:59:44+09:00'
+  timestamp: '2022-02-13 05:24:17+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp

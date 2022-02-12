@@ -4,10 +4,10 @@ data:
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: nt/factor.hpp
     title: nt/factor.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: nt/primetest.hpp
     title: nt/primetest.hpp
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/factorize
@@ -152,27 +152,27 @@ data:
     \  int __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define LL(...)   \\\r\n  ll\
     \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define STR(...)      \\\r\n  string\
     \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define DBL(...)           \\\r\n\
-    \  long double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type,\
-    \ name, size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define\
-    \ VV(type, name, h, w)                     \\\r\n  vector<vector<type>> name(h,\
-    \ vector<type>(w)); \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ?\
-    \ \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t\
-    \ = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\n\
-    void yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) {\
-    \ yes(!t); }\r\n#line 4 \"test/library_checker/math/factorize.test.cpp\"\n\n#line\
-    \ 2 \"nt/primetest.hpp\"\nstruct m64 {\r\n    using i64 = int64_t;\r\n    using\
-    \ u64 = uint64_t;\r\n    using u128 = __uint128_t;\r\n\r\n    inline static u64\
-    \ m, r, n2; // r * m = -1 (mod 1<<64), n2 = 1<<128 (mod m)\r\n    static void\
-    \ set_mod(u64 m) {\r\n        assert(m < (1ull << 62));\r\n        assert((m &\
-    \ 1) == 1);\r\n        m64::m = m;\r\n        n2 = -u128(m) % m;\r\n        r\
-    \ = m;\r\n        FOR (_, 5) r *= 2 - m*r;\r\n        r = -r;\r\n        assert(r\
-    \ * m == -1ull);\r\n    }\r\n    static u64 reduce(u128 b) { return (b + u128(u64(b)\
-    \ * r) * m) >> 64; }\r\n\r\n    u64 x;\r\n    m64() : x(0) {}\r\n    m64(u64 x)\
-    \ : x(reduce(u128(x) * n2)){};\r\n    u64 val() const { u64 y = reduce(x); return\
-    \ y >= m ? y-m : y; }\r\n    m64 &operator+=(m64 y) {\r\n        x += y.x - (m\
-    \ << 1);\r\n        x = (i64(x) < 0 ? x + (m << 1) : x);\r\n        return *this;\r\
-    \n    }\r\n    m64 &operator-=(m64 y) {\r\n        x -= y.x;\r\n        x = (i64(x)\
-    \ < 0 ? x + (m << 1) : x);\r\n        return *this;\r\n    }\r\n    m64 &operator*=(m64\
+    \  double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type, name,\
+    \ size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define VV(type,\
+    \ name, h, w)                     \\\r\n  vector<vector<type>> name(h, vector<type>(w));\
+    \ \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ? \"YES\" : \"NO\"\
+    ); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t = 1) { print(t ? \"\
+    Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\nvoid yes(bool t = 1)\
+    \ { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) { yes(!t); }\r\n#line\
+    \ 4 \"test/library_checker/math/factorize.test.cpp\"\n\n#line 2 \"nt/primetest.hpp\"\
+    \nstruct m64 {\r\n    using i64 = int64_t;\r\n    using u64 = uint64_t;\r\n  \
+    \  using u128 = __uint128_t;\r\n\r\n    inline static u64 m, r, n2; // r * m =\
+    \ -1 (mod 1<<64), n2 = 1<<128 (mod m)\r\n    static void set_mod(u64 m) {\r\n\
+    \        assert(m < (1ull << 62));\r\n        assert((m & 1) == 1);\r\n      \
+    \  m64::m = m;\r\n        n2 = -u128(m) % m;\r\n        r = m;\r\n        FOR\
+    \ (_, 5) r *= 2 - m*r;\r\n        r = -r;\r\n        assert(r * m == -1ull);\r\
+    \n    }\r\n    static u64 reduce(u128 b) { return (b + u128(u64(b) * r) * m) >>\
+    \ 64; }\r\n\r\n    u64 x;\r\n    m64() : x(0) {}\r\n    m64(u64 x) : x(reduce(u128(x)\
+    \ * n2)){};\r\n    u64 val() const { u64 y = reduce(x); return y >= m ? y-m :\
+    \ y; }\r\n    m64 &operator+=(m64 y) {\r\n        x += y.x - (m << 1);\r\n   \
+    \     x = (i64(x) < 0 ? x + (m << 1) : x);\r\n        return *this;\r\n    }\r\
+    \n    m64 &operator-=(m64 y) {\r\n        x -= y.x;\r\n        x = (i64(x) < 0\
+    \ ? x + (m << 1) : x);\r\n        return *this;\r\n    }\r\n    m64 &operator*=(m64\
     \ y) { x = reduce(u128(x) * y.x); return *this; }\r\n    m64 operator+(m64 y)\
     \ const { return m64(*this) += y; }\r\n    m64 operator-(m64 y) const { return\
     \ m64(*this) -= y; }\r\n    m64 operator*(m64 y) const { return m64(*this) *=\
@@ -230,8 +230,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/math/factorize.test.cpp
   requiredBy: []
-  timestamp: '2022-02-11 06:59:44+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-02-13 05:24:17+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/math/factorize.test.cpp
 layout: document

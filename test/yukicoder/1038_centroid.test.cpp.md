@@ -7,10 +7,10 @@ data:
   - icon: ':question:'
     path: ds/fenwick.hpp
     title: ds/fenwick.hpp
-  - icon: ':question:'
+  - icon: ':x:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':question:'
+  - icon: ':x:'
     path: graph/centroid.hpp
     title: graph/centroid.hpp
   - icon: ':question:'
@@ -158,23 +158,23 @@ data:
     \  int __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define LL(...)   \\\r\n  ll\
     \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define STR(...)      \\\r\n  string\
     \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define DBL(...)           \\\r\n\
-    \  long double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type,\
-    \ name, size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define\
-    \ VV(type, name, h, w)                     \\\r\n  vector<vector<type>> name(h,\
-    \ vector<type>(w)); \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ?\
-    \ \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t\
-    \ = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\n\
-    void yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) {\
-    \ yes(!t); }\r\n#line 4 \"test/yukicoder/1038_centroid.test.cpp\"\n\r\n#line 2\
-    \ \"alg/group_add.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\nstruct Group_Add\
-    \ {\r\n  using value_type = X;\r\n  static constexpr X op(const X &x, const X\
-    \ &y) noexcept { return x + y; }\r\n  static constexpr X inverse(const X &x) noexcept\
-    \ { return -x; }\r\n  static constexpr X power(const X &x, ll n) noexcept { return\
-    \ n * x; }\r\n  static constexpr X unit = ZERO;\r\n  static constexpr bool commute\
-    \ = true;\r\n};\r\n#line 3 \"ds/fenwick.hpp\"\n\ntemplate <typename AbelGroup>\n\
-    struct FenwickTree {\n  using E = typename AbelGroup::value_type;\n  int n;\n\
-    \  vector<E> dat;\n  E total;\n\n  FenwickTree() : FenwickTree(0) {}\n  FenwickTree(int\
-    \ n) : n(n), total(AbelGroup::unit) {\n    assert(AbelGroup::commute);\n    dat.assign(n,\
+    \  double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type, name,\
+    \ size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define VV(type,\
+    \ name, h, w)                     \\\r\n  vector<vector<type>> name(h, vector<type>(w));\
+    \ \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ? \"YES\" : \"NO\"\
+    ); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t = 1) { print(t ? \"\
+    Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\nvoid yes(bool t = 1)\
+    \ { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) { yes(!t); }\r\n#line\
+    \ 4 \"test/yukicoder/1038_centroid.test.cpp\"\n\r\n#line 2 \"alg/group_add.hpp\"\
+    \ntemplate <class X, X ZERO = X(0)>\r\nstruct Group_Add {\r\n  using value_type\
+    \ = X;\r\n  static constexpr X op(const X &x, const X &y) noexcept { return x\
+    \ + y; }\r\n  static constexpr X inverse(const X &x) noexcept { return -x; }\r\
+    \n  static constexpr X power(const X &x, ll n) noexcept { return n * x; }\r\n\
+    \  static constexpr X unit = ZERO;\r\n  static constexpr bool commute = true;\r\
+    \n};\r\n#line 3 \"ds/fenwick.hpp\"\n\ntemplate <typename AbelGroup>\nstruct FenwickTree\
+    \ {\n  using E = typename AbelGroup::value_type;\n  int n;\n  vector<E> dat;\n\
+    \  E total;\n\n  FenwickTree() : FenwickTree(0) {}\n  FenwickTree(int n) : n(n),\
+    \ total(AbelGroup::unit) {\n    assert(AbelGroup::commute);\n    dat.assign(n,\
     \ AbelGroup::unit);\n  }\n  FenwickTree(vc<E> v) : n(len(v)), total(AbelGroup::unit)\
     \ {\n    assert(AbelGroup::commute);\n    dat = v;\n    FOR3(i, 1, n + 1) {\n\
     \      int j = i + (i & -i);\n      if (j <= n) dat[j - 1] = AbelGroup::op(dat[i\
@@ -311,7 +311,7 @@ data:
   isVerificationFile: true
   path: test/yukicoder/1038_centroid.test.cpp
   requiredBy: []
-  timestamp: '2022-02-12 21:55:04+09:00'
+  timestamp: '2022-02-13 05:24:17+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yukicoder/1038_centroid.test.cpp

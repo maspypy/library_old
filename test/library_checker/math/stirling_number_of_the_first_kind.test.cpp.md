@@ -1,35 +1,35 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: mod/powertable.hpp
     title: mod/powertable.hpp
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: nt/primetable.hpp
     title: nt/primetable.hpp
   - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/convolution.hpp
     title: poly/convolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/poly_taylor_shift.hpp
     title: poly/poly_taylor_shift.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: seq/stirling_number_1.hpp
     title: seq/stirling_number_1.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind
@@ -164,28 +164,28 @@ data:
     \  int __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define LL(...)   \\\r\n  ll\
     \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define STR(...)      \\\r\n  string\
     \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define DBL(...)           \\\r\n\
-    \  long double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type,\
-    \ name, size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define\
-    \ VV(type, name, h, w)                     \\\r\n  vector<vector<type>> name(h,\
-    \ vector<type>(w)); \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ?\
-    \ \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t\
-    \ = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\n\
-    void yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) {\
-    \ yes(!t); }\r\n#line 1 \"nt/primetable.hpp\"\nvc<ll>& primetable(int LIM) {\n\
-    \  ++LIM;\n  const int S = 32768;\n  static int done = 2;\n  static vc<ll> primes\
-    \ = {2}, sieve(S + 1);\n\n  if(done >= LIM) return primes;\n  done  = LIM;\n\n\
-    \  primes = {2}, sieve.assign(S + 1, 0);\n  const int R = LIM / 2;  \n  primes.reserve(int(LIM\
-    \ / log(LIM) * 1.1));\n  vc<pi> cp;\n  for (int i = 3; i <= S; i += 2) {\n   \
-    \ if (!sieve[i]) {\n      cp.eb(i, i * i / 2);\n      for (int j = i * i; j <=\
-    \ S; j += 2 * i) sieve[j] = 1;\n    }\n  }\n  for (int L = 1; L <= R; L += S)\
-    \ {\n    array<bool, S> block{};\n    for (auto& [p, idx]: cp)\n      for (int\
-    \ i = idx; i < S + L; idx = (i += p)) block[i - L] = 1;\n    FOR(i, min(S, R -\
-    \ L)) if (!block[i]) primes.eb((L + i) * 2 + 1);\n  }\n  return primes;\n}\n#line\
-    \ 2 \"mod/powertable.hpp\"\n\r\ntemplate<typename mint>\r\nvc<mint> powertable_1(mint\
-    \ a, ll N) {\r\n  // table of a^i\r\n  vc<mint> f(N, 1);\r\n  FOR(i, N - 1) f[i\
-    \ + 1] = a * f[i];\r\n  return f;\r\n}\r\n\r\ntemplate<typename mint>\r\nvc<mint>\
-    \ powertable_2(ll e, ll N) {\r\n  // table of i^e. N \u4EE5\u4E0B\u306E\u7D20\u6570\
-    \u30C6\u30FC\u30D6\u30EB\u3092\u5229\u7528\u3059\u308B. \r\n  auto& primes = primetable(N);\r\
+    \  double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type, name,\
+    \ size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define VV(type,\
+    \ name, h, w)                     \\\r\n  vector<vector<type>> name(h, vector<type>(w));\
+    \ \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ? \"YES\" : \"NO\"\
+    ); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t = 1) { print(t ? \"\
+    Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\nvoid yes(bool t = 1)\
+    \ { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) { yes(!t); }\r\n#line\
+    \ 1 \"nt/primetable.hpp\"\nvc<ll>& primetable(int LIM) {\n  ++LIM;\n  const int\
+    \ S = 32768;\n  static int done = 2;\n  static vc<ll> primes = {2}, sieve(S +\
+    \ 1);\n\n  if(done >= LIM) return primes;\n  done  = LIM;\n\n  primes = {2}, sieve.assign(S\
+    \ + 1, 0);\n  const int R = LIM / 2;  \n  primes.reserve(int(LIM / log(LIM) *\
+    \ 1.1));\n  vc<pi> cp;\n  for (int i = 3; i <= S; i += 2) {\n    if (!sieve[i])\
+    \ {\n      cp.eb(i, i * i / 2);\n      for (int j = i * i; j <= S; j += 2 * i)\
+    \ sieve[j] = 1;\n    }\n  }\n  for (int L = 1; L <= R; L += S) {\n    array<bool,\
+    \ S> block{};\n    for (auto& [p, idx]: cp)\n      for (int i = idx; i < S + L;\
+    \ idx = (i += p)) block[i - L] = 1;\n    FOR(i, min(S, R - L)) if (!block[i])\
+    \ primes.eb((L + i) * 2 + 1);\n  }\n  return primes;\n}\n#line 2 \"mod/powertable.hpp\"\
+    \n\r\ntemplate<typename mint>\r\nvc<mint> powertable_1(mint a, ll N) {\r\n  //\
+    \ table of a^i\r\n  vc<mint> f(N, 1);\r\n  FOR(i, N - 1) f[i + 1] = a * f[i];\r\
+    \n  return f;\r\n}\r\n\r\ntemplate<typename mint>\r\nvc<mint> powertable_2(ll\
+    \ e, ll N) {\r\n  // table of i^e. N \u4EE5\u4E0B\u306E\u7D20\u6570\u30C6\u30FC\
+    \u30D6\u30EB\u3092\u5229\u7528\u3059\u308B. \r\n  auto& primes = primetable(N);\r\
     \n  vc<mint> f(N, 1);\r\n  f[0] = mint(0).pow(e);\r\n  for(auto&& p : primes){\r\
     \n    if(p > N) break;\r\n    mint xp = mint(p).pow(e);\r\n    ll pp = p;\r\n\
     \    while(pp < N){\r\n      ll i = pp;\r\n      while(i < N){\r\n        f[i]\
@@ -445,8 +445,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
   requiredBy: []
-  timestamp: '2022-02-11 06:59:44+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-02-13 05:24:17+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
 layout: document

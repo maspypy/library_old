@@ -7,14 +7,14 @@ data:
   - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: pds/array.hpp
     title: pds/array.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/persistent_queue
@@ -149,32 +149,31 @@ data:
     \  int __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define LL(...)   \\\r\n  ll\
     \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define STR(...)      \\\r\n  string\
     \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define DBL(...)           \\\r\n\
-    \  long double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type,\
-    \ name, size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define\
-    \ VV(type, name, h, w)                     \\\r\n  vector<vector<type>> name(h,\
-    \ vector<type>(w)); \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ?\
-    \ \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t\
-    \ = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\n\
-    void yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) {\
-    \ yes(!t); }\r\n#line 4 \"test/library_checker/datastructure/persistent_queue.test.cpp\"\
-    \n\r\n#line 2 \"pds/array.hpp\"\n\r\ntemplate <typename T, int shift = 4>\r\n\
-    struct PersistentArray {\r\n  struct node;\r\n  using np = node*;\r\n  struct\
-    \ node {\r\n    T data;\r\n    np ch[1 << shift] = {};\r\n  };\r\n\r\n  static\
-    \ constexpr int mask = (1 << shift) - 1;\r\n  np root = nullptr;\r\n  PersistentArray()\
-    \ {}\r\n  np get_root() { return root; }\r\n  T get(np t, int idx) {\r\n    if\
-    \ (!t) return 0;\r\n    if (idx == 0) {\r\n      return t->data;\r\n    } else\
-    \ {\r\n      return get(t->ch[idx & mask], idx >> shift);\r\n    }\r\n  }\r\n\r\
-    \n  void destructive_set(np& t, int idx, T val) {\r\n    // \u7834\u58CA\u7684\
-    \u306A\u5024\u306E\u5909\u66F4\u3002\u4E3B\u306B\u521D\u671F\u5316\u306B\u4F7F\
-    \u3046\u3002\r\n    if (!t) t = new node();\r\n    if (idx == 0)\r\n      t->data\
-    \ = val;\r\n    else {\r\n      destructive_set(t->ch[idx & mask], idx >> shift,\
-    \ val);\r\n    }\r\n  }\r\n\r\n  np set(const np& t, int idx, T val) {\r\n   \
-    \ // set \u3057\u305F\u3042\u3068\u306E\u6C38\u7D9A\u914D\u5217\u306E root node\
-    \ pointer \u3092\u8FD4\u3059\r\n    np res = new node();\r\n    if (t) {\r\n \
-    \     memcpy(res->ch, t->ch, sizeof(t->ch));\r\n      res->data = t->data;\r\n\
-    \    }\r\n    if (idx == 0) {\r\n      res->data = val;\r\n    } else {\r\n  \
-    \    res->ch[idx & mask] = set(res->ch[idx & mask], idx >> shift, val);\r\n  \
-    \  }\r\n    return res;\r\n  }\r\n};\r\n#line 6 \"test/library_checker/datastructure/persistent_queue.test.cpp\"\
+    \  double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type, name,\
+    \ size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define VV(type,\
+    \ name, h, w)                     \\\r\n  vector<vector<type>> name(h, vector<type>(w));\
+    \ \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ? \"YES\" : \"NO\"\
+    ); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t = 1) { print(t ? \"\
+    Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\nvoid yes(bool t = 1)\
+    \ { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) { yes(!t); }\r\n#line\
+    \ 4 \"test/library_checker/datastructure/persistent_queue.test.cpp\"\n\r\n#line\
+    \ 2 \"pds/array.hpp\"\n\r\ntemplate <typename T, int shift = 4>\r\nstruct PersistentArray\
+    \ {\r\n  struct node;\r\n  using np = node*;\r\n  struct node {\r\n    T data;\r\
+    \n    np ch[1 << shift] = {};\r\n  };\r\n\r\n  static constexpr int mask = (1\
+    \ << shift) - 1;\r\n  np root = nullptr;\r\n  PersistentArray() {}\r\n  np get_root()\
+    \ { return root; }\r\n  T get(np t, int idx) {\r\n    if (!t) return 0;\r\n  \
+    \  if (idx == 0) {\r\n      return t->data;\r\n    } else {\r\n      return get(t->ch[idx\
+    \ & mask], idx >> shift);\r\n    }\r\n  }\r\n\r\n  void destructive_set(np& t,\
+    \ int idx, T val) {\r\n    // \u7834\u58CA\u7684\u306A\u5024\u306E\u5909\u66F4\
+    \u3002\u4E3B\u306B\u521D\u671F\u5316\u306B\u4F7F\u3046\u3002\r\n    if (!t) t\
+    \ = new node();\r\n    if (idx == 0)\r\n      t->data = val;\r\n    else {\r\n\
+    \      destructive_set(t->ch[idx & mask], idx >> shift, val);\r\n    }\r\n  }\r\
+    \n\r\n  np set(const np& t, int idx, T val) {\r\n    // set \u3057\u305F\u3042\
+    \u3068\u306E\u6C38\u7D9A\u914D\u5217\u306E root node pointer \u3092\u8FD4\u3059\
+    \r\n    np res = new node();\r\n    if (t) {\r\n      memcpy(res->ch, t->ch, sizeof(t->ch));\r\
+    \n      res->data = t->data;\r\n    }\r\n    if (idx == 0) {\r\n      res->data\
+    \ = val;\r\n    } else {\r\n      res->ch[idx & mask] = set(res->ch[idx & mask],\
+    \ idx >> shift, val);\r\n    }\r\n    return res;\r\n  }\r\n};\r\n#line 6 \"test/library_checker/datastructure/persistent_queue.test.cpp\"\
     \n\r\nvoid solve() {\r\n  LL(Q);\r\n  vi L(Q + 1), R(Q + 1);\r\n\r\n  using PA\
     \ = PersistentArray<int>;\r\n  using np = PA::np;\r\n  vc<np> PAS(Q + 1);\r\n\
     \  PA array;\r\n  PAS[0] = array.get_root();\r\n  L[0] = 0, R[0] = 0;\r\n  FOR(q,\
@@ -204,8 +203,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/persistent_queue.test.cpp
   requiredBy: []
-  timestamp: '2022-02-11 06:59:44+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-02-13 05:24:17+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/persistent_queue.test.cpp
 layout: document
