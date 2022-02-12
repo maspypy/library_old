@@ -67,8 +67,8 @@ struct FenwickTree {
     return i;
   }
 
-  int find_kth_element(E k) {
-    auto check = [&](E x) -> bool { return x < k; };
+  int find_kth(E k) {
+    auto check = [&](E x) -> bool { return x <= k; };
     return max_right(check);
   }
 
