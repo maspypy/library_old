@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: alg/group_add.hpp
     title: alg/group_add.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/fenwick.hpp
     title: ds/fenwick.hpp
   - icon: ':heavy_check_mark:'
     path: ds/fenwickraq.hpp
     title: ds/fenwickraq.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: other/io.hpp
     title: other/io.hpp
   _extendedRequiredBy: []
@@ -187,8 +187,8 @@ data:
     \    E s = AbelGroup::unit;\n    int k = 1;\n    int N = len(dat) + 1;\n    while\
     \ (2 * k < N) k *= 2;\n    while (k) {\n      if (i + k < N && check(AbelGroup::op(s,\
     \ dat[i + k - 1]))) {\n        i += k;\n        s = AbelGroup::op(s, dat[i - 1]);\n\
-    \      }\n      k >>= 1;\n    }\n    return i;\n  }\n\n  int find_kth_element(E\
-    \ k) {\n    auto check = [&](E x) -> bool { return x < k; };\n    return max_right(check);\n\
+    \      }\n      k >>= 1;\n    }\n    return i;\n  }\n\n  int find_kth(E k) {\n\
+    \    auto check = [&](E x) -> bool { return x <= k; };\n    return max_right(check);\n\
     \  }\n\n  void debug() { print(\"fenwick\", dat); }\n};\n#line 2 \"ds/fenwickraq.hpp\"\
     \ntemplate <typename AbelGroup>\r\nstruct FenwickRAQ {\r\n  using E = typename\
     \ AbelGroup::value_type;\r\n  int n;\r\n  FenwickTree<AbelGroup> bit0;\r\n  FenwickTree<AbelGroup>\
@@ -224,7 +224,7 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_E_fenwick_raq.test.cpp
   requiredBy: []
-  timestamp: '2022-02-11 06:59:44+09:00'
+  timestamp: '2022-02-12 15:43:23+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_E_fenwick_raq.test.cpp

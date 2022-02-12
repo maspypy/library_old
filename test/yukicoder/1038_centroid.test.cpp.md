@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: alg/group_add.hpp
     title: alg/group_add.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/fenwick.hpp
     title: ds/fenwick.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/centroid.hpp
     title: graph/centroid.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: other/io.hpp
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/1038
@@ -191,10 +191,10 @@ data:
     \    int k = 1;\n    int N = len(dat) + 1;\n    while (2 * k < N) k *= 2;\n  \
     \  while (k) {\n      if (i + k < N && check(AbelGroup::op(s, dat[i + k - 1])))\
     \ {\n        i += k;\n        s = AbelGroup::op(s, dat[i - 1]);\n      }\n   \
-    \   k >>= 1;\n    }\n    return i;\n  }\n\n  int find_kth_element(E k) {\n   \
-    \ auto check = [&](E x) -> bool { return x < k; };\n    return max_right(check);\n\
-    \  }\n\n  void debug() { print(\"fenwick\", dat); }\n};\n#line 2 \"graph/base.hpp\"\
-    \n\ntemplate <typename T>\nstruct Edge {\n  int frm, to;\n  T cost;\n  int id;\n\
+    \   k >>= 1;\n    }\n    return i;\n  }\n\n  int find_kth(E k) {\n    auto check\
+    \ = [&](E x) -> bool { return x <= k; };\n    return max_right(check);\n  }\n\n\
+    \  void debug() { print(\"fenwick\", dat); }\n};\n#line 2 \"graph/base.hpp\"\n\
+    \ntemplate <typename T>\nstruct Edge {\n  int frm, to;\n  T cost;\n  int id;\n\
     };\n\ntemplate <typename T = int, bool directed = false>\nstruct Graph {\n  int\
     \ N, M;\n  using cost_type = T;\n  using edge_type = Edge<T>;\n  vector<edge_type>\
     \ edges;\n  vector<int> indptr;\n  vector<edge_type> csr_edges;\n  bool prepared;\n\
@@ -309,8 +309,8 @@ data:
   isVerificationFile: true
   path: test/yukicoder/1038_centroid.test.cpp
   requiredBy: []
-  timestamp: '2022-02-11 06:59:44+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-02-12 15:43:23+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yukicoder/1038_centroid.test.cpp
 layout: document

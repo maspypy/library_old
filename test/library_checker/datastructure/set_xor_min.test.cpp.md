@@ -2,14 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: linalg/mat_mul.hpp
-    title: linalg/mat_mul.hpp
-  - icon: ':heavy_check_mark:'
-    path: linalg/mat_pow.hpp
-    title: linalg/mat_pow.hpp
-  - icon: ':heavy_check_mark:'
-    path: mod/modint.hpp
-    title: mod/modint.hpp
+    path: ds/binarytrie.hpp
+    title: ds/binarytrie.hpp
   - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
@@ -23,19 +17,19 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://yukicoder.me/problems/no/1810
+    PROBLEM: https://judge.yosupo.jp/problem/set_xor_min
     links:
-    - https://yukicoder.me/problems/no/1810
-  bundledCode: "#line 1 \"test/yukicoder/1810_matpow.test.cpp\"\n#define PROBLEM \"\
-    https://yukicoder.me/problems/no/1810\"\r\n#line 1 \"my_template.hpp\"\n#include\
-    \ <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\nusing pi =\
-    \ pair<ll, ll>;\nusing vi = vector<ll>;\nusing u32 = unsigned int;\nusing u64\
-    \ = unsigned long long;\nusing i128 = __int128;\n\ntemplate <class T>\nusing vc\
-    \ = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\ntemplate <class\
-    \ T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc = vector<vvvc<T>>;\n\
-    template <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate <class T>\nusing\
-    \ pq = priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T, vector<T>,\
-    \ greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
+    - https://judge.yosupo.jp/problem/set_xor_min
+  bundledCode: "#line 1 \"test/library_checker/datastructure/set_xor_min.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/set_xor_min\"\n#line 1 \"\
+    my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll\
+    \ = long long;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing u32 =\
+    \ unsigned int;\nusing u64 = unsigned long long;\nusing i128 = __int128;\n\ntemplate\
+    \ <class T>\nusing vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\n\
+    template <class T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc\
+    \ = vector<vvvc<T>>;\ntemplate <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate\
+    \ <class T>\nusing pq = priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T,\
+    \ vector<T>, greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
     #define vv(type, name, h, ...) \\\n  vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n\
     #define vvv(type, name, h, w, ...)   \\\n  vector<vector<vector<type>>> name(\
     \ \\\n      h, vector<vector<type>>(w, vector<type>(__VA_ARGS__)))\n#define vvvv(type,\
@@ -162,129 +156,60 @@ data:
     \ \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t\
     \ = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\n\
     void yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) {\
-    \ yes(!t); }\r\n#line 4 \"test/yukicoder/1810_matpow.test.cpp\"\n\r\n#line 2 \"\
-    linalg/mat_mul.hpp\"\n\r\ntemplate <class T, is_modint_t<T>* = nullptr>\r\nvc<vc<T>>\
-    \ mat_mul(const vc<vc<T>>& A, const vc<vc<T>>& B) {\r\n  // mod \u3092\u3068\u308B\
-    \u56DE\u6570\u3092\u6E1B\u3089\u3057\u3066\u307F\u308B\r\n  auto N = len(A), M\
-    \ = len(B), K = len(B[0]);\r\n  vv(T, C, N, K);\r\n  const u64 MOD2 = 8ull * T::get_mod()\
-    \ * T::get_mod();\r\n  FOR(n, N) {\r\n    vc<u64> tmp(K);\r\n    FOR(m, M) FOR(k,\
-    \ K) {\r\n      tmp[k] += u64(A[n][m].val) * B[m][k].val;\r\n      if (tmp[k]\
-    \ >= MOD2) tmp[k] -= MOD2;\r\n    }\r\n    FOR(k, K) C[n][k] = tmp[k];\r\n  }\r\
-    \n  return C;\r\n}\r\n\r\ntemplate <class T, is_not_modint_t<T>* = nullptr>\r\n\
-    vc<vc<T>> mat_mul(const vc<vc<T>>& A, const vc<vc<T>>& B) {\r\n  auto N = len(A),\
-    \ M = len(B), K = len(B[0]);\r\n  vv(T, C, N, K);\r\n  FOR(n, N) FOR(m, M) FOR(k,\
-    \ K) C[n][k] += A[n][m] * B[m][k];\r\n  return C;\r\n}\r\n#line 2 \"linalg/mat_pow.hpp\"\
-    \ntemplate<typename T>\r\nvc<vc<T>> mat_pow(vc<vc<T>> A, ll n){\r\n  int N = len(A);\r\
-    \n  vv(T, ret, N, N);\r\n  FOR(i, N) ret[i][i] = T(1);\r\n  while(n){\r\n    if(n\
-    \ & 1) ret = mat_mul(ret, A);\r\n    n /= 2;\r\n    if(n) A = mat_mul(A, A);\r\
-    \n  }\r\n  return ret;\r\n}\n#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\n\
-    struct modint {\n  static constexpr bool is_modint = true;\n  int val;\n  constexpr\
-    \ modint(const ll val = 0) noexcept\n      : val(val >= 0 ? val % mod : (mod -\
-    \ (-val) % mod) % mod) {}\n  bool operator<(const modint &other) const {\n   \
-    \ return val < other.val;\n  } // To use std::map\n  modint &operator+=(const\
-    \ modint &p) {\n    if ((val += p.val) >= mod) val -= mod;\n    return *this;\n\
-    \  }\n  modint &operator-=(const modint &p) {\n    if ((val += mod - p.val) >=\
-    \ mod) val -= mod;\n    return *this;\n  }\n  modint &operator*=(const modint\
-    \ &p) {\n    val = (int)(1LL * val * p.val % mod);\n    return *this;\n  }\n \
-    \ modint &operator/=(const modint &p) {\n    *this *= p.inverse();\n    return\
-    \ *this;\n  }\n  modint operator-() const { return modint(-val); }\n  modint operator+(const\
-    \ modint &p) const { return modint(*this) += p; }\n  modint operator-(const modint\
-    \ &p) const { return modint(*this) -= p; }\n  modint operator*(const modint &p)\
-    \ const { return modint(*this) *= p; }\n  modint operator/(const modint &p) const\
-    \ { return modint(*this) /= p; }\n  bool operator==(const modint &p) const { return\
-    \ val == p.val; }\n  bool operator!=(const modint &p) const { return val != p.val;\
-    \ }\n  modint inverse() const {\n    int a = val, b = mod, u = 1, v = 0, t;\n\
-    \    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b), swap(u -= t\
-    \ * v, v);\n    }\n    return modint(u);\n  }\n  modint pow(int64_t n) const {\n\
-    \    modint ret(1), mul(val);\n    while (n > 0) {\n      if (n & 1) ret *= mul;\n\
-    \      mul *= mul;\n      n >>= 1;\n    }\n    return ret;\n  }\n  static constexpr\
-    \ int get_mod() { return mod; }\n};\n\nstruct ArbitraryModInt {\n  static constexpr\
-    \ bool is_modint = true;\n  int val;\n  ArbitraryModInt() : val(0) {}\n  ArbitraryModInt(int64_t\
-    \ y)\n      : val(y >= 0 ? y % get_mod()\n                   : (get_mod() - (-y)\
-    \ % get_mod()) % get_mod()) {}\n  bool operator<(const ArbitraryModInt &other)\
-    \ const {\n    return val < other.val;\n  } // To use std::map<ArbitraryModInt,\
-    \ T>\n  static int &get_mod() {\n    static int mod = 0;\n    return mod;\n  }\n\
-    \  static void set_mod(int md) { get_mod() = md; }\n  ArbitraryModInt &operator+=(const\
-    \ ArbitraryModInt &p) {\n    if ((val += p.val) >= get_mod()) val -= get_mod();\n\
-    \    return *this;\n  }\n  ArbitraryModInt &operator-=(const ArbitraryModInt &p)\
-    \ {\n    if ((val += get_mod() - p.val) >= get_mod()) val -= get_mod();\n    return\
-    \ *this;\n  }\n  ArbitraryModInt &operator*=(const ArbitraryModInt &p) {\n   \
-    \ unsigned long long a = (unsigned long long)val * p.val;\n    unsigned xh = (unsigned)(a\
-    \ >> 32), xl = (unsigned)a, d, m;\n    asm(\"divl %4; \\n\\t\" : \"=a\"(d), \"\
-    =d\"(m) : \"d\"(xh), \"a\"(xl), \"r\"(get_mod()));\n    val = m;\n    return *this;\n\
-    \  }\n  ArbitraryModInt &operator/=(const ArbitraryModInt &p) {\n    *this *=\
-    \ p.inverse();\n    return *this;\n  }\n  ArbitraryModInt operator-() const {\
-    \ return ArbitraryModInt(-val); }\n  ArbitraryModInt operator+(const ArbitraryModInt\
-    \ &p) const {\n    return ArbitraryModInt(*this) += p;\n  }\n  ArbitraryModInt\
-    \ operator-(const ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this)\
-    \ -= p;\n  }\n  ArbitraryModInt operator*(const ArbitraryModInt &p) const {\n\
-    \    return ArbitraryModInt(*this) *= p;\n  }\n  ArbitraryModInt operator/(const\
-    \ ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this) /= p;\n  }\n\
-    \  bool operator==(const ArbitraryModInt &p) const { return val == p.val; }\n\
-    \  bool operator!=(const ArbitraryModInt &p) const { return val != p.val; }\n\
-    \  ArbitraryModInt inverse() const {\n    int a = val, b = get_mod(), u = 1, v\
-    \ = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b), swap(u\
-    \ -= t * v, v);\n    }\n    return ArbitraryModInt(u);\n  }\n  ArbitraryModInt\
-    \ pow(int64_t n) const {\n    ArbitraryModInt ret(1), mul(val);\n    while (n\
-    \ > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n  \
-    \  }\n    return ret;\n  }\n};\n\ntemplate<typename mint>\ntuple<mint, mint, mint>\
-    \ get_factorial_data(int n){\n  static constexpr int mod = mint::get_mod();\n\
-    \  assert(0 <= n && n < mod);\n  static vector<mint> fact = {1, 1};\n  static\
-    \ vector<mint> fact_inv = {1, 1};\n  static vector<mint> inv = {0, 1};\n  while(len(fact)\
-    \ <= n){\n    int k = len(fact);\n    fact.eb(fact[k - 1] * mint(k));\n    auto\
-    \ q = ceil(mod, k);\n    int r = k * q - mod;\n    inv.eb(inv[r] * mint(q));\n\
-    \    fact_inv.eb(fact_inv[k - 1] * inv[k]);\n  }\n  return {fact[n], fact_inv[n],\
-    \ inv[n]};\n}\n\ntemplate<typename mint>\nmint fact(int n){\n  static constexpr\
-    \ int mod = mint::get_mod();\n  assert(0 <= n);\n  if(n >= mod) return 0;\n  return\
-    \ get<0>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename mint>\nmint fact_inv(int\
-    \ n){\n  static constexpr int mod = mint::get_mod();\n  assert(0 <= n && n < mod);\n\
-    \  return get<1>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename mint>\n\
-    mint inv(int n){\n  static constexpr int mod = mint::get_mod();\n  assert(0 <=\
-    \ n && n < mod);\n  return get<2>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename\
-    \ mint>\nmint C(ll n, ll k, bool large = false) {\n  assert(n >= 0);\n  if (k\
-    \ < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n) * fact_inv<mint>(k)\
-    \ * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n  FOR(i, k) {\n\
-    \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\nusing\
-    \ modint107 = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n\
-    using amint = ArbitraryModInt;\n#line 8 \"test/yukicoder/1810_matpow.test.cpp\"\
-    \n\r\nusing mint = modint107;\r\n\r\nvoid solve() {\r\n  mint A, B;\r\n  read(A),\
-    \ read(B);\r\n  vv(mint, P, 3, 3);\r\n  vv(mint, Q, 3, 3);\r\n  P[0] = {1, 0,\
-    \ 0};\r\n  P[1] = {0, 1, 0};\r\n  P[2] = {A, B, 1};\r\n  Q[0] = {0, 0, 1};\r\n\
-    \  Q[1] = {1, 0, 0};\r\n  Q[2] = {0, 0, 0};\r\n  auto QP = mat_mul(Q, P);\r\n\
-    \  LL(T);\r\n  FOR_(T) {\r\n    LL(t);\r\n    auto X = mat_pow(QP, t / 2);\r\n\
-    \    if (t & 1) X = mat_mul(P, X);\r\n    mint ANS = 0;\r\n    FOR(i, 3) FOR(j,\
-    \ 2) ANS += X[i][j];\r\n    print(ANS);\r\n  }\r\n}\r\n\r\nsigned main() {\r\n\
-    \  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
-    \n\r\n  ll T = 1;\r\n  // LL(T);\r\n  FOR(_, T) solve();\r\n\r\n  return 0;\r\n\
-    }\r\n"
-  code: "#define PROBLEM \"https://yukicoder.me/problems/no/1810\"\r\n#include \"\
-    my_template.hpp\"\r\n#include \"other/io.hpp\"\r\n\r\n#include \"linalg/mat_mul.hpp\"\
-    \r\n#include \"linalg/mat_pow.hpp\"\r\n#include \"mod/modint.hpp\"\r\n\r\nusing\
-    \ mint = modint107;\r\n\r\nvoid solve() {\r\n  mint A, B;\r\n  read(A), read(B);\r\
-    \n  vv(mint, P, 3, 3);\r\n  vv(mint, Q, 3, 3);\r\n  P[0] = {1, 0, 0};\r\n  P[1]\
-    \ = {0, 1, 0};\r\n  P[2] = {A, B, 1};\r\n  Q[0] = {0, 0, 1};\r\n  Q[1] = {1, 0,\
-    \ 0};\r\n  Q[2] = {0, 0, 0};\r\n  auto QP = mat_mul(Q, P);\r\n  LL(T);\r\n  FOR_(T)\
-    \ {\r\n    LL(t);\r\n    auto X = mat_pow(QP, t / 2);\r\n    if (t & 1) X = mat_mul(P,\
-    \ X);\r\n    mint ANS = 0;\r\n    FOR(i, 3) FOR(j, 2) ANS += X[i][j];\r\n    print(ANS);\r\
-    \n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  ll T = 1;\r\n  // LL(T);\r\n  FOR(_, T)\
-    \ solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \ yes(!t); }\r\n#line 1 \"ds/binarytrie.hpp\"\ntemplate <int LOG = 30>\nstruct\
+    \ BinaryTrie {\n  struct Node {\n    ll cnt = 0;\n    int ch[2] = {-1, -1};\n\
+    \  };\n  vector<Node> ns;\n\n  BinaryTrie() : ns(1) {}\n\n  ll size() const {\
+    \ return ns[0].cnt; }\n  ll operator[](int k) const { return find_kth(k, 0); }\n\
+    \  ll find_kth(ll k, ll xor_add = 0) const {\n    assert(0 <= k && k < size());\n\
+    \    ll idx = 0;\n    ll val = 0;\n    FOR_R(i, LOG) {\n      ll c = xor_add >>\
+    \ i & 1;\n      ll low_ch = ns[idx].ch[c];\n      ll low_cnt = (low_ch >= 0 ?\
+    \ ns[low_ch].cnt : 0);\n      if (k < low_cnt) {\n        idx = low_ch;\n    \
+    \  } else {\n        k -= low_cnt;\n        idx = ns[idx].ch[c ^ 1];\n       \
+    \ val ^= 1LL << i;\n      }\n      assert(idx >= 0);\n    }\n    return val;\n\
+    \  }\n\n  void add(ll val, ll cnt = 1) {\n    assert(0 <= val && val < (1LL <<\
+    \ LOG));\n    int idx = 0;\n    FOR_R(i, LOG) {\n      ns[idx].cnt += cnt;\n \
+    \     assert(ns[idx].cnt >= 0);\n      int &nxt = ns[idx].ch[val >> i & 1];\n\
+    \      if (nxt == -1) {\n        idx = nxt = ns.size();\n        ns.emplace_back();\n\
+    \      } else {\n        idx = nxt;\n      }\n    }\n    ns[idx].cnt += cnt;\n\
+    \    assert(ns[idx].cnt >= 0);\n    return;\n  }\n\n  ll lower_bound(ll val, ll\
+    \ xor_add = 0) {\n    assert(0 <= val);\n    if (val >= (1LL << LOG)) return size();\n\
+    \    int idx = 0;\n    ll cnt = 0;\n    FOR_R(i, LOG) {\n      int b = val >>\
+    \ i & 1, c = xor_add >> i & 1;\n      int ch = ns[idx].ch[c];\n      cnt += (b\
+    \ & (ch >= 0) ? ns[ch].cnt : 0);\n      idx = ns[idx].ch[b ^ c];\n      if (idx\
+    \ < 0 or ns[idx].cnt == 0) break;\n    }\n    return cnt;\n  }\n\n  ll count(ll\
+    \ val) const {\n    assert(0 <= val && val < (1LL << LOG));\n    int idx = 0;\n\
+    \    FOR_R(i, LOG) {\n      idx = ns[idx].ch[val >> i & 1];\n      if (idx < 0\
+    \ or ns[idx].cnt == 0) return 0;\n    }\n    return ns[idx].cnt;\n  }\n\n  ll\
+    \ count(ll L, ll R, ll xor_add = 0) {\n    assert(0 <= L && L <= R && R <= (1LL\
+    \ << LOG));\n    return lower_bound(R, xor_add) - lower_bound(L, xor_add);\n \
+    \ }\n\n  ll min(ll xor_add = 0) { return find_kth(0, xor_add); }\n  ll max(ll\
+    \ xor_add = 0) { return find_kth(size() - 1, xor_add); }\n\n  void debug() {\n\
+    \    FOR(i, len(ns)) print(i, \"cnt\", ns[i].cnt, \"ch\", ns[i].ch[0], ns[i].ch[1]);\n\
+    \  }\n};\n#line 5 \"test/library_checker/datastructure/set_xor_min.test.cpp\"\n\
+    \nvoid solve() {\n  LL(Q);\n  BinaryTrie<30> trie;\n  FOR_(Q) {\n    LL(t, x);\n\
+    \    if (t == 0 && trie.count(x) == 0) trie.add(x, 1);\n    if (t == 1 && trie.count(x)\
+    \ == 1) trie.add(x, -1);\n    if (t == 2) { print(trie.min(x)); }\n  }\n}\n\n\
+    signed main() {\n  solve();\n\n  return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/set_xor_min\"\n#include\
+    \ \"my_template.hpp\"\n#include \"other/io.hpp\"\n#include \"ds/binarytrie.hpp\"\
+    \n\nvoid solve() {\n  LL(Q);\n  BinaryTrie<30> trie;\n  FOR_(Q) {\n    LL(t, x);\n\
+    \    if (t == 0 && trie.count(x) == 0) trie.add(x, 1);\n    if (t == 1 && trie.count(x)\
+    \ == 1) trie.add(x, -1);\n    if (t == 2) { print(trie.min(x)); }\n  }\n}\n\n\
+    signed main() {\n  solve();\n\n  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
-  - linalg/mat_mul.hpp
-  - linalg/mat_pow.hpp
-  - mod/modint.hpp
+  - ds/binarytrie.hpp
   isVerificationFile: true
-  path: test/yukicoder/1810_matpow.test.cpp
+  path: test/library_checker/datastructure/set_xor_min.test.cpp
   requiredBy: []
-  timestamp: '2022-02-11 06:59:44+09:00'
+  timestamp: '2022-02-12 15:44:26+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/yukicoder/1810_matpow.test.cpp
+documentation_of: test/library_checker/datastructure/set_xor_min.test.cpp
 layout: document
 redirect_from:
-- /verify/test/yukicoder/1810_matpow.test.cpp
-- /verify/test/yukicoder/1810_matpow.test.cpp.html
-title: test/yukicoder/1810_matpow.test.cpp
+- /verify/test/library_checker/datastructure/set_xor_min.test.cpp
+- /verify/test/library_checker/datastructure/set_xor_min.test.cpp.html
+title: test/library_checker/datastructure/set_xor_min.test.cpp
 ---

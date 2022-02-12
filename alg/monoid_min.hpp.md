@@ -8,6 +8,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: alg/lazy_min_add.hpp
     title: alg/lazy_min_add.hpp
+  - icon: ':warning:'
+    path: alg/lazy_min_min.hpp
+    title: alg/lazy_min_min.hpp
   - icon: ':heavy_check_mark:'
     path: alg/lazy_min_set.hpp
     title: alg/lazy_min_set.hpp
@@ -41,6 +44,7 @@ data:
   isVerificationFile: false
   path: alg/monoid_min.hpp
   requiredBy:
+  - alg/lazy_min_min.hpp
   - alg/lazy_min_add.hpp
   - alg/lazy_max_set.hpp
   - alg/lazy_min_set.hpp

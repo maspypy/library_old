@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: alg/group_add.hpp
     title: alg/group_add.hpp
   _extendedRequiredBy:
@@ -33,12 +33,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
     title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1038_centroid.test.cpp
     title: test/yukicoder/1038_centroid.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"alg/group_add.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\
@@ -66,8 +66,8 @@ data:
     \    E s = AbelGroup::unit;\n    int k = 1;\n    int N = len(dat) + 1;\n    while\
     \ (2 * k < N) k *= 2;\n    while (k) {\n      if (i + k < N && check(AbelGroup::op(s,\
     \ dat[i + k - 1]))) {\n        i += k;\n        s = AbelGroup::op(s, dat[i - 1]);\n\
-    \      }\n      k >>= 1;\n    }\n    return i;\n  }\n\n  int find_kth_element(E\
-    \ k) {\n    auto check = [&](E x) -> bool { return x < k; };\n    return max_right(check);\n\
+    \      }\n      k >>= 1;\n    }\n    return i;\n  }\n\n  int find_kth(E k) {\n\
+    \    auto check = [&](E x) -> bool { return x <= k; };\n    return max_right(check);\n\
     \  }\n\n  void debug() { print(\"fenwick\", dat); }\n};\n"
   code: "#pragma once\n#include \"alg/group_add.hpp\"\n\ntemplate <typename AbelGroup>\n\
     struct FenwickTree {\n  using E = typename AbelGroup::value_type;\n  int n;\n\
@@ -89,9 +89,9 @@ data:
     \    int k = 1;\n    int N = len(dat) + 1;\n    while (2 * k < N) k *= 2;\n  \
     \  while (k) {\n      if (i + k < N && check(AbelGroup::op(s, dat[i + k - 1])))\
     \ {\n        i += k;\n        s = AbelGroup::op(s, dat[i - 1]);\n      }\n   \
-    \   k >>= 1;\n    }\n    return i;\n  }\n\n  int find_kth_element(E k) {\n   \
-    \ auto check = [&](E x) -> bool { return x < k; };\n    return max_right(check);\n\
-    \  }\n\n  void debug() { print(\"fenwick\", dat); }\n};"
+    \   k >>= 1;\n    }\n    return i;\n  }\n\n  int find_kth(E k) {\n    auto check\
+    \ = [&](E x) -> bool { return x <= k; };\n    return max_right(check);\n  }\n\n\
+    \  void debug() { print(\"fenwick\", dat); }\n};"
   dependsOn:
   - alg/group_add.hpp
   isVerificationFile: false
@@ -100,8 +100,8 @@ data:
   - ds/fenwickraq.hpp
   - other/rectanglesums.hpp
   - graph/treeabelgroup.hpp
-  timestamp: '2022-01-11 13:47:23+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2022-02-12 15:43:23+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DSL_2_E_fenwick_raq.test.cpp
   - test/aoj/DSL_2_G_fenwick_raq.test.cpp

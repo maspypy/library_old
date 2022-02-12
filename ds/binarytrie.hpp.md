@@ -2,57 +2,81 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/set_xor_min.test.cpp
+    title: test/library_checker/datastructure/set_xor_min.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"ds/binarytrie.hpp\"\ntemplate <int dep>\nstruct BinaryTrie\
-    \ {\n  struct Node {\n    ll cnt;\n    int ch[2];\n    Node() {\n      cnt = 0;\n\
-    \      ch[0] = ch[1] = -1;\n    }\n  };\n\n  vector<Node> data;\n  BinaryTrie()\
-    \ { data.eb(Node()); }\n\n  void insert(ll x, ll cnt = 1) {\n    int p = 0;\n\
-    \    for (int i = dep - 1; i >= 0; --i) {\n      data[p].cnt += cnt;\n      int\
-    \ e = (x >> i) & 1;\n      if (data[p].ch[e] == -1) {\n        data[p].ch[e] =\
-    \ data.size();\n        data.eb(Node());\n      }\n      p = data[p].ch[e];\n\
-    \    }\n    data[p].cnt += cnt;\n  }\n\n  ll lower_bound(ll x, ll xor_val = 0)\
-    \ {\n    // xor \u3057\u305F\u7D50\u679C\u3001x \u672A\u6E80\u304C\u3044\u304F\
-    \u3064\u306B\u306A\u308B\u304B\n    int p = 0;\n    ll ret = 0;\n    for (int\
-    \ i = dep - 1; i >= 0; i--) {\n      int e = (x >> i) & 1;\n      int f = (xor_val\
-    \ >> i) & 1;\n      if (e != f && data[p].ch[f] != -1) ret += data[data[p].ch[f]].cnt;\n\
-    \      if (data[p].ch[e] == -1) break;\n      p = data[p].ch[e];\n    }\n    return\
-    \ ret;\n  }\n\n  ll find_kth(ll k, ll xor_val = 0) {\n    if (k <= 0 || data[0].cnt\
-    \ < k) return -1;\n    int p = 0;\n    ll ret = 0;\n    for (int i = dep - 1;\
-    \ i >= 0; --i) {\n      int e = (xor_val >> i) & 1;\n      if (data[p].ch[e] ==\
-    \ -1 || data[data[p].ch[e]].cnt < k) {\n        k -= (data[p].ch[e] == -1 ? 0\
-    \ : data[data[p].ch[e]].cnt);\n        e ^= 1;\n      }\n      p = data[p].ch[e];\n\
-    \      ret |= (ll(e)) << i;\n    }\n    return ret;\n  }\n};\n"
-  code: "template <int dep>\nstruct BinaryTrie {\n  struct Node {\n    ll cnt;\n \
-    \   int ch[2];\n    Node() {\n      cnt = 0;\n      ch[0] = ch[1] = -1;\n    }\n\
-    \  };\n\n  vector<Node> data;\n  BinaryTrie() { data.eb(Node()); }\n\n  void insert(ll\
-    \ x, ll cnt = 1) {\n    int p = 0;\n    for (int i = dep - 1; i >= 0; --i) {\n\
-    \      data[p].cnt += cnt;\n      int e = (x >> i) & 1;\n      if (data[p].ch[e]\
-    \ == -1) {\n        data[p].ch[e] = data.size();\n        data.eb(Node());\n \
-    \     }\n      p = data[p].ch[e];\n    }\n    data[p].cnt += cnt;\n  }\n\n  ll\
-    \ lower_bound(ll x, ll xor_val = 0) {\n    // xor \u3057\u305F\u7D50\u679C\u3001\
-    x \u672A\u6E80\u304C\u3044\u304F\u3064\u306B\u306A\u308B\u304B\n    int p = 0;\n\
-    \    ll ret = 0;\n    for (int i = dep - 1; i >= 0; i--) {\n      int e = (x >>\
-    \ i) & 1;\n      int f = (xor_val >> i) & 1;\n      if (e != f && data[p].ch[f]\
-    \ != -1) ret += data[data[p].ch[f]].cnt;\n      if (data[p].ch[e] == -1) break;\n\
-    \      p = data[p].ch[e];\n    }\n    return ret;\n  }\n\n  ll find_kth(ll k,\
-    \ ll xor_val = 0) {\n    if (k <= 0 || data[0].cnt < k) return -1;\n    int p\
-    \ = 0;\n    ll ret = 0;\n    for (int i = dep - 1; i >= 0; --i) {\n      int e\
-    \ = (xor_val >> i) & 1;\n      if (data[p].ch[e] == -1 || data[data[p].ch[e]].cnt\
-    \ < k) {\n        k -= (data[p].ch[e] == -1 ? 0 : data[data[p].ch[e]].cnt);\n\
-    \        e ^= 1;\n      }\n      p = data[p].ch[e];\n      ret |= (ll(e)) << i;\n\
-    \    }\n    return ret;\n  }\n};\n"
+  bundledCode: "#line 1 \"ds/binarytrie.hpp\"\ntemplate <int LOG = 30>\nstruct BinaryTrie\
+    \ {\n  struct Node {\n    ll cnt = 0;\n    int ch[2] = {-1, -1};\n  };\n  vector<Node>\
+    \ ns;\n\n  BinaryTrie() : ns(1) {}\n\n  ll size() const { return ns[0].cnt; }\n\
+    \  ll operator[](int k) const { return find_kth(k, 0); }\n  ll find_kth(ll k,\
+    \ ll xor_add = 0) const {\n    assert(0 <= k && k < size());\n    ll idx = 0;\n\
+    \    ll val = 0;\n    FOR_R(i, LOG) {\n      ll c = xor_add >> i & 1;\n      ll\
+    \ low_ch = ns[idx].ch[c];\n      ll low_cnt = (low_ch >= 0 ? ns[low_ch].cnt :\
+    \ 0);\n      if (k < low_cnt) {\n        idx = low_ch;\n      } else {\n     \
+    \   k -= low_cnt;\n        idx = ns[idx].ch[c ^ 1];\n        val ^= 1LL << i;\n\
+    \      }\n      assert(idx >= 0);\n    }\n    return val;\n  }\n\n  void add(ll\
+    \ val, ll cnt = 1) {\n    assert(0 <= val && val < (1LL << LOG));\n    int idx\
+    \ = 0;\n    FOR_R(i, LOG) {\n      ns[idx].cnt += cnt;\n      assert(ns[idx].cnt\
+    \ >= 0);\n      int &nxt = ns[idx].ch[val >> i & 1];\n      if (nxt == -1) {\n\
+    \        idx = nxt = ns.size();\n        ns.emplace_back();\n      } else {\n\
+    \        idx = nxt;\n      }\n    }\n    ns[idx].cnt += cnt;\n    assert(ns[idx].cnt\
+    \ >= 0);\n    return;\n  }\n\n  ll lower_bound(ll val, ll xor_add = 0) {\n   \
+    \ assert(0 <= val);\n    if (val >= (1LL << LOG)) return size();\n    int idx\
+    \ = 0;\n    ll cnt = 0;\n    FOR_R(i, LOG) {\n      int b = val >> i & 1, c =\
+    \ xor_add >> i & 1;\n      int ch = ns[idx].ch[c];\n      cnt += (b & (ch >= 0)\
+    \ ? ns[ch].cnt : 0);\n      idx = ns[idx].ch[b ^ c];\n      if (idx < 0 or ns[idx].cnt\
+    \ == 0) break;\n    }\n    return cnt;\n  }\n\n  ll count(ll val) const {\n  \
+    \  assert(0 <= val && val < (1LL << LOG));\n    int idx = 0;\n    FOR_R(i, LOG)\
+    \ {\n      idx = ns[idx].ch[val >> i & 1];\n      if (idx < 0 or ns[idx].cnt ==\
+    \ 0) return 0;\n    }\n    return ns[idx].cnt;\n  }\n\n  ll count(ll L, ll R,\
+    \ ll xor_add = 0) {\n    assert(0 <= L && L <= R && R <= (1LL << LOG));\n    return\
+    \ lower_bound(R, xor_add) - lower_bound(L, xor_add);\n  }\n\n  ll min(ll xor_add\
+    \ = 0) { return find_kth(0, xor_add); }\n  ll max(ll xor_add = 0) { return find_kth(size()\
+    \ - 1, xor_add); }\n\n  void debug() {\n    FOR(i, len(ns)) print(i, \"cnt\",\
+    \ ns[i].cnt, \"ch\", ns[i].ch[0], ns[i].ch[1]);\n  }\n};\n"
+  code: "template <int LOG = 30>\nstruct BinaryTrie {\n  struct Node {\n    ll cnt\
+    \ = 0;\n    int ch[2] = {-1, -1};\n  };\n  vector<Node> ns;\n\n  BinaryTrie()\
+    \ : ns(1) {}\n\n  ll size() const { return ns[0].cnt; }\n  ll operator[](int k)\
+    \ const { return find_kth(k, 0); }\n  ll find_kth(ll k, ll xor_add = 0) const\
+    \ {\n    assert(0 <= k && k < size());\n    ll idx = 0;\n    ll val = 0;\n   \
+    \ FOR_R(i, LOG) {\n      ll c = xor_add >> i & 1;\n      ll low_ch = ns[idx].ch[c];\n\
+    \      ll low_cnt = (low_ch >= 0 ? ns[low_ch].cnt : 0);\n      if (k < low_cnt)\
+    \ {\n        idx = low_ch;\n      } else {\n        k -= low_cnt;\n        idx\
+    \ = ns[idx].ch[c ^ 1];\n        val ^= 1LL << i;\n      }\n      assert(idx >=\
+    \ 0);\n    }\n    return val;\n  }\n\n  void add(ll val, ll cnt = 1) {\n    assert(0\
+    \ <= val && val < (1LL << LOG));\n    int idx = 0;\n    FOR_R(i, LOG) {\n    \
+    \  ns[idx].cnt += cnt;\n      assert(ns[idx].cnt >= 0);\n      int &nxt = ns[idx].ch[val\
+    \ >> i & 1];\n      if (nxt == -1) {\n        idx = nxt = ns.size();\n       \
+    \ ns.emplace_back();\n      } else {\n        idx = nxt;\n      }\n    }\n   \
+    \ ns[idx].cnt += cnt;\n    assert(ns[idx].cnt >= 0);\n    return;\n  }\n\n  ll\
+    \ lower_bound(ll val, ll xor_add = 0) {\n    assert(0 <= val);\n    if (val >=\
+    \ (1LL << LOG)) return size();\n    int idx = 0;\n    ll cnt = 0;\n    FOR_R(i,\
+    \ LOG) {\n      int b = val >> i & 1, c = xor_add >> i & 1;\n      int ch = ns[idx].ch[c];\n\
+    \      cnt += (b & (ch >= 0) ? ns[ch].cnt : 0);\n      idx = ns[idx].ch[b ^ c];\n\
+    \      if (idx < 0 or ns[idx].cnt == 0) break;\n    }\n    return cnt;\n  }\n\n\
+    \  ll count(ll val) const {\n    assert(0 <= val && val < (1LL << LOG));\n   \
+    \ int idx = 0;\n    FOR_R(i, LOG) {\n      idx = ns[idx].ch[val >> i & 1];\n \
+    \     if (idx < 0 or ns[idx].cnt == 0) return 0;\n    }\n    return ns[idx].cnt;\n\
+    \  }\n\n  ll count(ll L, ll R, ll xor_add = 0) {\n    assert(0 <= L && L <= R\
+    \ && R <= (1LL << LOG));\n    return lower_bound(R, xor_add) - lower_bound(L,\
+    \ xor_add);\n  }\n\n  ll min(ll xor_add = 0) { return find_kth(0, xor_add); }\n\
+    \  ll max(ll xor_add = 0) { return find_kth(size() - 1, xor_add); }\n\n  void\
+    \ debug() {\n    FOR(i, len(ns)) print(i, \"cnt\", ns[i].cnt, \"ch\", ns[i].ch[0],\
+    \ ns[i].ch[1]);\n  }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: ds/binarytrie.hpp
   requiredBy: []
-  timestamp: '2021-12-25 22:40:58+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2022-02-12 15:44:26+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/library_checker/datastructure/set_xor_min.test.cpp
 documentation_of: ds/binarytrie.hpp
 layout: document
 redirect_from:
