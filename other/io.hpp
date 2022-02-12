@@ -214,7 +214,7 @@ void read(Head &head, Tail &... tail) {
   string __VA_ARGS__; \
   read(__VA_ARGS__)
 #define DBL(...)           \
-  long double __VA_ARGS__; \
+  double __VA_ARGS__; \
   read(__VA_ARGS__)
 
 #define VEC(type, name, size) \
