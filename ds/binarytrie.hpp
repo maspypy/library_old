@@ -1,58 +1,88 @@
-template <int dep>
+template <int LOG = 30>
 struct BinaryTrie {
   struct Node {
-    ll cnt;
-    int ch[2];
-    Node() {
-      cnt = 0;
-      ch[0] = ch[1] = -1;
-    }
+    ll cnt = 0;
+    int ch[2] = {-1, -1};
   };
+  vector<Node> ns;
 
-  vector<Node> data;
-  BinaryTrie() { data.eb(Node()); }
+  BinaryTrie() : ns(1) {}
 
-  void insert(ll x, ll cnt = 1) {
-    int p = 0;
-    for (int i = dep - 1; i >= 0; --i) {
-      data[p].cnt += cnt;
-      int e = (x >> i) & 1;
-      if (data[p].ch[e] == -1) {
-        data[p].ch[e] = data.size();
-        data.eb(Node());
+  ll size() const { return ns[0].cnt; }
+  ll operator[](int k) const { return find_kth(k, 0); }
+  ll find_kth(ll k, ll xor_add = 0) const {
+    assert(0 <= k && k < size());
+    ll idx = 0;
+    ll val = 0;
+    FOR_R(i, LOG) {
+      ll c = xor_add >> i & 1;
+      ll low_ch = ns[idx].ch[c];
+      ll low_cnt = (low_ch >= 0 ? ns[low_ch].cnt : 0);
+      if (k < low_cnt) {
+        idx = low_ch;
+      } else {
+        k -= low_cnt;
+        idx = ns[idx].ch[c ^ 1];
+        val ^= 1LL << i;
       }
-      p = data[p].ch[e];
+      assert(idx >= 0);
     }
-    data[p].cnt += cnt;
+    return val;
   }
 
-  ll lower_bound(ll x, ll xor_val = 0) {
-    // xor した結果、x 未満がいくつになるか
-    int p = 0;
-    ll ret = 0;
-    for (int i = dep - 1; i >= 0; i--) {
-      int e = (x >> i) & 1;
-      int f = (xor_val >> i) & 1;
-      if (e != f && data[p].ch[f] != -1) ret += data[data[p].ch[f]].cnt;
-      if (data[p].ch[e] == -1) break;
-      p = data[p].ch[e];
+  void add(ll val, ll cnt = 1) {
+    assert(0 <= val && val < (1LL << LOG));
+    int idx = 0;
+    FOR_R(i, LOG) {
+      ns[idx].cnt += cnt;
+      assert(ns[idx].cnt >= 0);
+      int &nxt = ns[idx].ch[val >> i & 1];
+      if (nxt == -1) {
+        idx = nxt = ns.size();
+        ns.emplace_back();
+      } else {
+        idx = nxt;
+      }
     }
-    return ret;
+    ns[idx].cnt += cnt;
+    assert(ns[idx].cnt >= 0);
+    return;
   }
 
-  ll find_kth(ll k, ll xor_val = 0) {
-    if (k <= 0 || data[0].cnt < k) return -1;
-    int p = 0;
-    ll ret = 0;
-    for (int i = dep - 1; i >= 0; --i) {
-      int e = (xor_val >> i) & 1;
-      if (data[p].ch[e] == -1 || data[data[p].ch[e]].cnt < k) {
-        k -= (data[p].ch[e] == -1 ? 0 : data[data[p].ch[e]].cnt);
-        e ^= 1;
-      }
-      p = data[p].ch[e];
-      ret |= (ll(e)) << i;
+  ll lower_bound(ll val, ll xor_add = 0) {
+    assert(0 <= val);
+    if (val >= (1LL << LOG)) return size();
+    int idx = 0;
+    ll cnt = 0;
+    FOR_R(i, LOG) {
+      int b = val >> i & 1, c = xor_add >> i & 1;
+      int ch = ns[idx].ch[c];
+      cnt += (b & (ch >= 0) ? ns[ch].cnt : 0);
+      idx = ns[idx].ch[b ^ c];
+      if (idx < 0 or ns[idx].cnt == 0) break;
     }
-    return ret;
+    return cnt;
+  }
+
+  ll count(ll val) const {
+    assert(0 <= val && val < (1LL << LOG));
+    int idx = 0;
+    FOR_R(i, LOG) {
+      idx = ns[idx].ch[val >> i & 1];
+      if (idx < 0 or ns[idx].cnt == 0) return 0;
+    }
+    return ns[idx].cnt;
+  }
+
+  ll count(ll L, ll R, ll xor_add = 0) {
+    assert(0 <= L && L <= R && R <= (1LL << LOG));
+    return lower_bound(R, xor_add) - lower_bound(L, xor_add);
+  }
+
+  ll min(ll xor_add = 0) { return find_kth(0, xor_add); }
+  ll max(ll xor_add = 0) { return find_kth(size() - 1, xor_add); }
+
+  void debug() {
+    FOR(i, len(ns)) print(i, "cnt", ns[i].cnt, "ch", ns[i].ch[0], ns[i].ch[1]);
   }
 };
