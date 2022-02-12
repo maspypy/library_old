@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
   - icon: ':heavy_check_mark:'
     path: graph/cycle_detection.hpp
     title: graph/cycle_detection.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
   _extendedRequiredBy: []
@@ -179,33 +179,35 @@ data:
     \n  void read_graph(int M, bool wt=false, int off=1){\n    FOR_(M){\n      INT(a,\
     \ b);\n      a -= off, b -= off;\n      if(!wt){\n        add(a, b);\n      }\
     \ else {\n        T c;\n        read(c);\n        add(a, b, c);\n      }\n   \
-    \ }\n    prepare();\n  }\n\n  void prepare() {\n    assert(!prepared);\n    prepared\
-    \ = true;\n    indptr.assign(N + 1, 0);\n    for (auto&& e: edges) {\n      indptr[e.frm\
-    \ + 1]++;\n      if (!directed) indptr[e.to + 1]++;\n    }\n    FOR(v, N) indptr[v\
-    \ + 1] += indptr[v];\n    auto counter = indptr;\n    csr_edges.resize(indptr.back()\
-    \ + 1);\n    for (auto&& e: edges) {\n      csr_edges[counter[e.frm]++] = e;\n\
-    \      if (!directed)\n        csr_edges[counter[e.to]++] = edge_type({e.to, e.frm,\
-    \ e.cost, e.id});\n    }\n  }\n\n  OutgoingEdges operator[](int v) const {\n \
-    \   assert(prepared);\n    return {this, indptr[v], indptr[v + 1]};\n  }\n\n \
-    \ void debug() {\n    print(\"Graph\");\n    if (!prepared) {\n      print(\"\
-    frm to cost id\");\n      for (auto&& e: edges) print(e.frm, e.to, e.cost, e.id);\n\
-    \    } else {\n      print(\"indptr\", indptr);\n      print(\"frm to cost id\"\
-    );\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e.frm, e.to, e.cost, e.id);\n\
-    \    }\n  }\n};\n#line 1 \"graph/cycle_detection.hpp\"\ntemplate <typename Graph>\r\
-    \nvc<int> cycle_detection(Graph& G, bool is_edge) {\r\n  assert(G.is_directed());\r\
-    \n  assert(G.is_prepared());\r\n  if (!is_edge) {\r\n    auto C = cycle_detection(G,\
-    \ true);\r\n    if (len(C) == 0) return C;\r\n    vc<int> ANS(len(C) + 1);\r\n\
-    \    FOR(i, len(C)) {\r\n      auto e = G.edges[C[i]];\r\n      ANS[i + 0] = e.frm;\r\
-    \n      ANS[i + 1] = e.to;\r\n    }\r\n    return ANS;\r\n  }\r\n\r\n  int N =\
-    \ G.N;\r\n  vc<int> used(N);\r\n  vc<int> path; // edge\r\n  vc<pair<int, int>>\
-    \ par(N);\r\n  vector<int> ANS;\r\n\r\n  auto dfs = [&](auto self, int v) -> void\
-    \ {\r\n    used[v] = 1;\r\n    for (auto&& e: G[v]) {\r\n      if (len(ANS)) return;\r\
-    \n      if (!used[e.to]) {\r\n        par[e.to] = {v, e.id};\r\n        self(self,\
-    \ e.to);\r\n      }\r\n      elif (used[e.to] == 1) {\r\n        ANS = {e.id};\r\
-    \n        int cur = v;\r\n        while (cur != e.to) {\r\n          ANS.eb(par[cur].se);\r\
-    \n          cur = par[cur].fi;\r\n        }\r\n        reverse(all(ANS));\r\n\
-    \        return;\r\n      }\r\n    }\r\n    used[v] = 2;\r\n  };\r\n  FOR(v, N)\
-    \ if (!used[v]) dfs(dfs, v);\r\n  return ANS;\r\n}\n#line 8 \"test/library_checker/graph/cycle_detection.test.cpp\"\
+    \ }\n    prepare();\n  }\n\n  void read_parent(int off=1){\n    FOR3(v, 1, N){\n\
+    \      INT(p);\n      add(p, v);\n    }\n    prepare();\n  }\n\n  void prepare()\
+    \ {\n    assert(!prepared);\n    prepared = true;\n    indptr.assign(N + 1, 0);\n\
+    \    for (auto&& e: edges) {\n      indptr[e.frm + 1]++;\n      if (!directed)\
+    \ indptr[e.to + 1]++;\n    }\n    FOR(v, N) indptr[v + 1] += indptr[v];\n    auto\
+    \ counter = indptr;\n    csr_edges.resize(indptr.back() + 1);\n    for (auto&&\
+    \ e: edges) {\n      csr_edges[counter[e.frm]++] = e;\n      if (!directed)\n\
+    \        csr_edges[counter[e.to]++] = edge_type({e.to, e.frm, e.cost, e.id});\n\
+    \    }\n  }\n\n  OutgoingEdges operator[](int v) const {\n    assert(prepared);\n\
+    \    return {this, indptr[v], indptr[v + 1]};\n  }\n\n  void debug() {\n    print(\"\
+    Graph\");\n    if (!prepared) {\n      print(\"frm to cost id\");\n      for (auto&&\
+    \ e: edges) print(e.frm, e.to, e.cost, e.id);\n    } else {\n      print(\"indptr\"\
+    , indptr);\n      print(\"frm to cost id\");\n      FOR(v, N) for (auto&& e: (*this)[v])\
+    \ print(e.frm, e.to, e.cost, e.id);\n    }\n  }\n};\n#line 1 \"graph/cycle_detection.hpp\"\
+    \ntemplate <typename Graph>\r\nvc<int> cycle_detection(Graph& G, bool is_edge)\
+    \ {\r\n  assert(G.is_directed());\r\n  assert(G.is_prepared());\r\n  if (!is_edge)\
+    \ {\r\n    auto C = cycle_detection(G, true);\r\n    if (len(C) == 0) return C;\r\
+    \n    vc<int> ANS(len(C) + 1);\r\n    FOR(i, len(C)) {\r\n      auto e = G.edges[C[i]];\r\
+    \n      ANS[i + 0] = e.frm;\r\n      ANS[i + 1] = e.to;\r\n    }\r\n    return\
+    \ ANS;\r\n  }\r\n\r\n  int N = G.N;\r\n  vc<int> used(N);\r\n  vc<int> path; //\
+    \ edge\r\n  vc<pair<int, int>> par(N);\r\n  vector<int> ANS;\r\n\r\n  auto dfs\
+    \ = [&](auto self, int v) -> void {\r\n    used[v] = 1;\r\n    for (auto&& e:\
+    \ G[v]) {\r\n      if (len(ANS)) return;\r\n      if (!used[e.to]) {\r\n     \
+    \   par[e.to] = {v, e.id};\r\n        self(self, e.to);\r\n      }\r\n      elif\
+    \ (used[e.to] == 1) {\r\n        ANS = {e.id};\r\n        int cur = v;\r\n   \
+    \     while (cur != e.to) {\r\n          ANS.eb(par[cur].se);\r\n          cur\
+    \ = par[cur].fi;\r\n        }\r\n        reverse(all(ANS));\r\n        return;\r\
+    \n      }\r\n    }\r\n    used[v] = 2;\r\n  };\r\n  FOR(v, N) if (!used[v]) dfs(dfs,\
+    \ v);\r\n  return ANS;\r\n}\n#line 8 \"test/library_checker/graph/cycle_detection.test.cpp\"\
     \n\r\nvoid solve() {\r\n  LL(N, M);\r\n  Graph<int, 1> G(N);\r\n  FOR(_, M) {\r\
     \n    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n  G.prepare();\r\n\r\n  auto C =\
     \ cycle_detection(G, true);\r\n  if (len(C) == 0) {\r\n    print(-1);\r\n  } else\
@@ -229,7 +231,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/graph/cycle_detection.test.cpp
   requiredBy: []
-  timestamp: '2022-02-11 06:59:44+09:00'
+  timestamp: '2022-02-12 21:55:04+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/graph/cycle_detection.test.cpp

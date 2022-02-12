@@ -2,9 +2,6 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
-    path: alg/lazy_max_set.hpp
-    title: alg/lazy_max_set.hpp
   - icon: ':heavy_check_mark:'
     path: alg/lazy_min_add.hpp
     title: alg/lazy_min_add.hpp
@@ -46,7 +43,6 @@ data:
   requiredBy:
   - alg/lazy_min_min.hpp
   - alg/lazy_min_add.hpp
-  - alg/lazy_max_set.hpp
   - alg/lazy_min_set.hpp
   timestamp: '2022-02-03 13:42:15+09:00'
   verificationStatus: LIBRARY_ALL_AC

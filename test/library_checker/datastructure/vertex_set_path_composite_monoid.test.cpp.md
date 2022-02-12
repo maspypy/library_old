@@ -10,7 +10,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
   - icon: ':heavy_check_mark:'
@@ -22,10 +22,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
   _extendedRequiredBy: []
@@ -298,15 +298,17 @@ data:
     \ - 1, wt, off);\n  }\n\n  void read_graph(int M, bool wt=false, int off=1){\n\
     \    FOR_(M){\n      INT(a, b);\n      a -= off, b -= off;\n      if(!wt){\n \
     \       add(a, b);\n      } else {\n        T c;\n        read(c);\n        add(a,\
-    \ b, c);\n      }\n    }\n    prepare();\n  }\n\n  void prepare() {\n    assert(!prepared);\n\
-    \    prepared = true;\n    indptr.assign(N + 1, 0);\n    for (auto&& e: edges)\
-    \ {\n      indptr[e.frm + 1]++;\n      if (!directed) indptr[e.to + 1]++;\n  \
-    \  }\n    FOR(v, N) indptr[v + 1] += indptr[v];\n    auto counter = indptr;\n\
-    \    csr_edges.resize(indptr.back() + 1);\n    for (auto&& e: edges) {\n     \
-    \ csr_edges[counter[e.frm]++] = e;\n      if (!directed)\n        csr_edges[counter[e.to]++]\
-    \ = edge_type({e.to, e.frm, e.cost, e.id});\n    }\n  }\n\n  OutgoingEdges operator[](int\
-    \ v) const {\n    assert(prepared);\n    return {this, indptr[v], indptr[v + 1]};\n\
-    \  }\n\n  void debug() {\n    print(\"Graph\");\n    if (!prepared) {\n      print(\"\
+    \ b, c);\n      }\n    }\n    prepare();\n  }\n\n  void read_parent(int off=1){\n\
+    \    FOR3(v, 1, N){\n      INT(p);\n      add(p, v);\n    }\n    prepare();\n\
+    \  }\n\n  void prepare() {\n    assert(!prepared);\n    prepared = true;\n   \
+    \ indptr.assign(N + 1, 0);\n    for (auto&& e: edges) {\n      indptr[e.frm +\
+    \ 1]++;\n      if (!directed) indptr[e.to + 1]++;\n    }\n    FOR(v, N) indptr[v\
+    \ + 1] += indptr[v];\n    auto counter = indptr;\n    csr_edges.resize(indptr.back()\
+    \ + 1);\n    for (auto&& e: edges) {\n      csr_edges[counter[e.frm]++] = e;\n\
+    \      if (!directed)\n        csr_edges[counter[e.to]++] = edge_type({e.to, e.frm,\
+    \ e.cost, e.id});\n    }\n  }\n\n  OutgoingEdges operator[](int v) const {\n \
+    \   assert(prepared);\n    return {this, indptr[v], indptr[v + 1]};\n  }\n\n \
+    \ void debug() {\n    print(\"Graph\");\n    if (!prepared) {\n      print(\"\
     frm to cost id\");\n      for (auto&& e: edges) print(e.frm, e.to, e.cost, e.id);\n\
     \    } else {\n      print(\"indptr\", indptr);\n      print(\"frm to cost id\"\
     );\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e.frm, e.to, e.cost, e.id);\n\
@@ -446,7 +448,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   requiredBy: []
-  timestamp: '2022-02-11 06:59:44+09:00'
+  timestamp: '2022-02-12 21:55:04+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
