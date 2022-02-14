@@ -2,8 +2,8 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: ds/cartesian_tree.hpp
-    title: ds/cartesian_tree.hpp
+    path: flow/maxflow.hpp
+    title: flow/maxflow.hpp
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
@@ -17,19 +17,19 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/cartesian_tree
+    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A
     links:
-    - https://judge.yosupo.jp/problem/cartesian_tree
-  bundledCode: "#line 1 \"test/library_checker/tree/cartesian_tree.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/cartesian_tree\"\r\n#line 1 \"my_template.hpp\"\
-    \n#include <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\n\
-    using pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing u32 = unsigned int;\n\
-    using u64 = unsigned long long;\nusing i128 = __int128;\n\ntemplate <class T>\n\
-    using vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\ntemplate\
-    \ <class T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc = vector<vvvc<T>>;\n\
-    template <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate <class T>\nusing\
-    \ pq = priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T, vector<T>,\
-    \ greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
+    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A
+  bundledCode: "#line 1 \"test/aoj/GRL_6_A_maxflow.test.cpp\"\n#define PROBLEM \\\r\
+    \n  \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A\"\r\n\
+    #line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
+    \nusing ll = long long;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing\
+    \ u32 = unsigned int;\nusing u64 = unsigned long long;\nusing i128 = __int128;\n\
+    \ntemplate <class T>\nusing vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\n\
+    template <class T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc\
+    \ = vector<vvvc<T>>;\ntemplate <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate\
+    \ <class T>\nusing pq = priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T,\
+    \ vector<T>, greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
     #define vv(type, name, h, ...) \\\n  vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n\
     #define vvv(type, name, h, w, ...)   \\\n  vector<vector<vector<type>>> name(\
     \ \\\n      h, vector<vector<type>>(w, vector<type>(__VA_ARGS__)))\n#define vvvv(type,\
@@ -156,45 +156,68 @@ data:
     ); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t = 1) { print(t ? \"\
     Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\nvoid yes(bool t = 1)\
     \ { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) { yes(!t); }\r\n#line\
-    \ 1 \"ds/cartesian_tree.hpp\"\ntemplate <typename T>\r\nstruct CartesianTree {\r\
-    \n  /*\r\n  \u8F9E\u66F8\u9806\u3067\u9AD8\u3055\u3092 unique \u3057\u3066\u3001\
-    \u6728\u306B\u3057\u3066\u3044\u308B\u3002\r\n  \u6975\u5927\u9577\u65B9\u5F62\
-    \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0\u3067\u7DDA\u5F62\u6642\u9593\u69CB\u7BC9\
-    \u3002\r\n  */\r\n  int n;\r\n  vc<T>& A;\r\n  vc<pair<int, int>> range;\r\n \
-    \ vc<int> lch, rch, par;\r\n\r\n  CartesianTree(vc<T> A) : n(len(A)), A(A) {\r\
-    \n    range.assign(n, {-1, -1});\r\n    lch.assign(n, -1);\r\n    rch.assign(n,\
-    \ -1);\r\n    par.assign(n, -1);\r\n    auto is_sm = [&](int i, int j) -> bool\
-    \ {\r\n      return (A[i] < A[j]) || (A[i] == A[j] && i < j);\r\n    };\r\n  \
-    \  vc<int> st;\r\n    FOR(i, n) {\r\n      while (!st.empty() && is_sm(i, st.back()))\
-    \ {\r\n        lch[i] = st.back();\r\n        st.pop_back();\r\n      }\r\n  \
-    \    range[i].fi = (st.empty() ? 0 : st.back() + 1);\r\n      st.eb(i);\r\n  \
-    \  }\r\n    st.clear();\r\n    FOR_R(i, n) {\r\n      while (!st.empty() && is_sm(i,\
-    \ st.back())) {\r\n        rch[i] = st.back();\r\n        st.pop_back();\r\n \
-    \     }\r\n      range[i].se = (st.empty() ? n : st.back());\r\n      st.eb(i);\r\
-    \n    }\r\n    FOR(i, n) if (lch[i] != -1) par[lch[i]] = i;\r\n    FOR(i, n) if\
-    \ (rch[i] != -1) par[rch[i]] = i;\r\n  }\r\n};\r\n#line 5 \"test/library_checker/tree/cartesian_tree.test.cpp\"\
-    \n\r\nvoid solve() {\r\n  LL(N);\r\n  VEC(int, A, N);\r\n  CartesianTree CT(A);\r\
-    \n  auto& ANS = CT.par;\r\n  FOR(i, N) if (ANS[i] == -1) ANS[i] = i;\r\n  print(ANS);\r\
-    \n}\r\n\r\nsigned main() {\r\n  solve();\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/cartesian_tree\"\r\n#include\
-    \ \"my_template.hpp\"\r\n#include \"other/io.hpp\"\r\n#include \"ds/cartesian_tree.hpp\"\
-    \r\n\r\nvoid solve() {\r\n  LL(N);\r\n  VEC(int, A, N);\r\n  CartesianTree CT(A);\r\
-    \n  auto& ANS = CT.par;\r\n  FOR(i, N) if (ANS[i] == -1) ANS[i] = i;\r\n  print(ANS);\r\
-    \n}\r\n\r\nsigned main() {\r\n  solve();\r\n  return 0;\r\n}\r\n"
+    \ 5 \"test/aoj/GRL_6_A_maxflow.test.cpp\"\n\r\n#line 1 \"flow/maxflow.hpp\"\n\
+    template <typename Cap = int>\nstruct MaxFlowGraph {\n  const Cap INF;\n\n  struct\
+    \ Edge {\n    int frm, to;\n    Cap cap;\n    int idx;\n  };\n\n  int N;\n  vc<int>\
+    \ indptr;\n  vc<Edge> edges;\n  vc<Cap> edge_flow;\n\n  vc<Edge> csr_edges;\n\
+    \  vc<int> rev;\n  vc<int> level, deq;\n  bool calculated;\n\n  MaxFlowGraph()\
+    \ : INF(numeric_limits<Cap>::max()), N(0), calculated(0) {}\n\n  void add(int\
+    \ frm, int to, Cap cap) {\n    chmax(N, frm + 1);\n    chmax(N, to + 1);\n   \
+    \ edges.eb(Edge({frm, to, cap, int(edges.size())}));\n  }\n\n  void _build() {\n\
+    \    indptr.resize(N + 1);\n    level.resize(N);\n    deq.resize(N);\n    int\
+    \ M = len(edges);\n    for (auto&& e: edges) { indptr[e.frm + 1]++, indptr[e.to\
+    \ + 1]++; }\n    FOR(v, N) indptr[v + 1] += indptr[v];\n    auto counter = indptr;\n\
+    \n    edge_flow.resize(M);\n    csr_edges.resize(2 * M);\n    rev.resize(2 * M);\n\
+    \    for (auto&& e: edges) {\n      int i = counter[e.frm], j = counter[e.to];\n\
+    \      rev[i] = j, rev[j] = i;\n      csr_edges[i] = {e.frm, e.to, e.cap, e.idx};\n\
+    \      csr_edges[j] = {e.to, e.frm, Cap(0), ~e.idx};\n      counter[e.frm]++,\
+    \ counter[e.to]++;\n    }\n  }\n\n  bool set_level(int source, int sink) {\n \
+    \   // bfs\n    fill(all(level), -1);\n    int l = 0, r = 0;\n    deq[r++] = source;\n\
+    \    level[source] = 0;\n    while (l < r) {\n      int v = deq[l++];\n      FOR3(i,\
+    \ indptr[v], indptr[v + 1]) {\n        auto& e = csr_edges[i];\n        if (e.cap\
+    \ == 0 || level[e.to] >= 0) continue;\n        level[e.to] = level[v] + 1;\n \
+    \       if (e.to == sink) return true;\n        deq[r++] = e.to;\n      }\n  \
+    \  }\n    return false;\n  }\n\n  Cap flow_dfs(int v, int sink, Cap lim) {\n \
+    \   if (v == sink) return lim;\n    FOR3(i, indptr[v], indptr[v + 1]) {\n    \
+    \  auto& e = csr_edges[i];\n      if (e.cap == 0 || level[v] >= level[e.to]) continue;\n\
+    \      Cap x = flow_dfs(e.to, sink, min(lim, e.cap));\n      if (x > Cap(0)) {\n\
+    \        e.cap -= x;\n        int j = rev[i];\n        csr_edges[j].cap += x;\n\
+    \        if (e.idx >= 0)\n          edge_flow[e.idx] += x;\n        else\n   \
+    \       edge_flow[~e.idx] -= x;\n        return x;\n      }\n    }\n    return\
+    \ 0;\n  }\n\n  Cap flow(int source, int sink) {\n    assert(!calculated);\n  \
+    \  calculated = true;\n    _build();\n    Cap f = 0;\n    while (set_level(source,\
+    \ sink)) {\n      while (1) {\n        Cap x = flow_dfs(source, sink, INF);\n\
+    \        if (x == 0) break;\n        f += x;\n      }\n    }\n    return f;\n\
+    \  }\n\n  vc<tuple<int, int, Cap>> get_edges() {\n    vc<tuple<int, int, Cap>>\
+    \ res;\n    for (auto&& e: edges) {\n      Cap f = edge_flow[e.idx];\n      if\
+    \ (f > Cap(0)) res.eb(e.frm, e.to, f);\n    }\n    return res;\n  }\n\n  void\
+    \ debug() {\n    for (auto&& e: edges) print(e.frm, e.to, e.cap);\n  }\n};\n#line\
+    \ 7 \"test/aoj/GRL_6_A_maxflow.test.cpp\"\n\r\nvoid solve() {\r\n  LL(N, M);\r\
+    \n  MaxFlowGraph<int> G;\r\n  FOR_(M) {\r\n    LL(a, b, c);\r\n    G.add(a, b,\
+    \ c);\r\n  }\r\n  print(G.flow(0, N - 1));\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
+    \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  ll T\
+    \ = 1;\r\n  // LL(T);\r\n  FOR(_, T) solve();\r\n\r\n  return 0;\r\n}\r\n"
+  code: "#define PROBLEM \\\r\n  \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A\"\
+    \r\n#include \"my_template.hpp\"\r\n#include \"other/io.hpp\"\r\n\r\n#include\
+    \ \"flow/maxflow.hpp\"\r\n\r\nvoid solve() {\r\n  LL(N, M);\r\n  MaxFlowGraph<int>\
+    \ G;\r\n  FOR_(M) {\r\n    LL(a, b, c);\r\n    G.add(a, b, c);\r\n  }\r\n  print(G.flow(0,\
+    \ N - 1));\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \n  cout << setprecision(15);\r\n\r\n  ll T = 1;\r\n  // LL(T);\r\n  FOR(_, T)\
+    \ solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
-  - ds/cartesian_tree.hpp
+  - flow/maxflow.hpp
   isVerificationFile: true
-  path: test/library_checker/tree/cartesian_tree.test.cpp
+  path: test/aoj/GRL_6_A_maxflow.test.cpp
   requiredBy: []
-  timestamp: '2022-02-13 05:24:17+09:00'
+  timestamp: '2022-02-14 19:56:19+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/library_checker/tree/cartesian_tree.test.cpp
+documentation_of: test/aoj/GRL_6_A_maxflow.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/tree/cartesian_tree.test.cpp
-- /verify/test/library_checker/tree/cartesian_tree.test.cpp.html
-title: test/library_checker/tree/cartesian_tree.test.cpp
+- /verify/test/aoj/GRL_6_A_maxflow.test.cpp
+- /verify/test/aoj/GRL_6_A_maxflow.test.cpp.html
+title: test/aoj/GRL_6_A_maxflow.test.cpp
 ---

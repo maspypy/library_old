@@ -2,117 +2,94 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_6_A_maxflow.test.cpp
+    title: test/aoj/GRL_6_A_maxflow.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"flow/maxflow.hpp\"\n\ntemplate <class T>\nstruct simple_queue\
-    \ {\n  std::vector<T> payload;\n  int pos = 0;\n  void reserve(int n) { payload.reserve(n);\
-    \ }\n  int size() const { return int(payload.size()) - pos; }\n  bool empty()\
-    \ const { return pos == int(payload.size()); }\n  void push(const T& t) { payload.push_back(t);\
-    \ }\n  T& front() { return payload[pos]; }\n  void clear() {\n    payload.clear();\n\
-    \    pos = 0;\n  }\n  void pop() { pos++; }\n};\n\ntemplate <class Cap>\nstruct\
-    \ mf_graph {\n public:\n  mf_graph() : _n(0) {}\n  explicit mf_graph(int n) :\
-    \ _n(n), g(n) {}\n\n  int add(int frm, int to, Cap cap) {\n    assert(0 <= frm\
-    \ && frm < _n);\n    assert(0 <= to && to < _n);\n    assert(0 <= cap);\n    int\
-    \ m = int(pos.size());\n    pos.push_back({frm, int(g[frm].size())});\n    int\
-    \ frm_id = int(g[frm].size());\n    int to_id = int(g[to].size());\n    if (frm\
-    \ == to) to_id++;\n    g[frm].push_back(_edge{to, to_id, cap});\n    g[to].push_back(_edge{frm,\
-    \ frm_id, 0});\n    return m;\n  }\n\n  struct edge {\n    int frm, to;\n    Cap\
-    \ cap, flow;\n  };\n\n  edge get_edge(int i) {\n    int m = int(pos.size());\n\
-    \    assert(0 <= i && i < m);\n    auto _e = g[pos[i].first][pos[i].second];\n\
-    \    auto _re = g[_e.to][_e.rev];\n    return edge{pos[i].first, _e.to, _e.cap\
-    \ + _re.cap, _re.cap};\n  }\n  std::vector<edge> edges() {\n    int m = int(pos.size());\n\
-    \    std::vector<edge> result;\n    for (int i = 0; i < m; i++) {\n      result.push_back(get_edge(i));\n\
-    \    }\n    return result;\n  }\n  void change_edge(int i, Cap new_cap, Cap new_flow)\
-    \ {\n    int m = int(pos.size());\n    assert(0 <= i && i < m);\n    assert(0\
-    \ <= new_flow && new_flow <= new_cap);\n    auto& _e = g[pos[i].first][pos[i].second];\n\
-    \    auto& _re = g[_e.to][_e.rev];\n    _e.cap = new_cap - new_flow;\n    _re.cap\
-    \ = new_flow;\n  }\n\n  Cap flow(int s, int t) { return flow(s, t, std::numeric_limits<Cap>::max());\
-    \ }\n  Cap flow(int s, int t, Cap flow_limit) {\n    assert(0 <= s && s < _n);\n\
-    \    assert(0 <= t && t < _n);\n    assert(s != t);\n\n    std::vector<int> level(_n),\
-    \ iter(_n);\n    simple_queue<int> que;\n\n    auto bfs = [&]() {\n      std::fill(level.begin(),\
-    \ level.end(), -1);\n      level[s] = 0;\n      que.clear();\n      que.push(s);\n\
-    \      while (!que.empty()) {\n        int v = que.front();\n        que.pop();\n\
-    \        for (auto e : g[v]) {\n          if (e.cap == 0 || level[e.to] >= 0)\
-    \ continue;\n          level[e.to] = level[v] + 1;\n          if (e.to == t) return;\n\
-    \          que.push(e.to);\n        }\n      }\n    };\n    auto dfs = [&](auto\
-    \ self, int v, Cap up) {\n      if (v == s) return up;\n      Cap res = 0;\n \
-    \     int level_v = level[v];\n      for (int& i = iter[v]; i < int(g[v].size());\
-    \ i++) {\n        _edge& e = g[v][i];\n        if (level_v <= level[e.to] || g[e.to][e.rev].cap\
-    \ == 0) continue;\n        Cap d = self(self, e.to, std::min(up - res, g[e.to][e.rev].cap));\n\
-    \        if (d <= 0) continue;\n        g[v][i].cap += d;\n        g[e.to][e.rev].cap\
-    \ -= d;\n        res += d;\n        if (res == up) return res;\n      }\n    \
-    \  level[v] = _n;\n      return res;\n    };\n\n    Cap flow = 0;\n    while (flow\
-    \ < flow_limit) {\n      bfs();\n      if (level[t] == -1) break;\n      std::fill(iter.begin(),\
-    \ iter.end(), 0);\n      Cap f = dfs(dfs, t, flow_limit - flow);\n      if (!f)\
-    \ break;\n      flow += f;\n    }\n    return flow;\n  }\n\n  std::vector<bool>\
-    \ min_cut(int s) {\n    std::vector<bool> visited(_n);\n    simple_queue<int>\
-    \ que;\n    que.push(s);\n    while (!que.empty()) {\n      int p = que.front();\n\
-    \      que.pop();\n      visited[p] = true;\n      for (auto e : g[p]) {\n   \
-    \     if (e.cap && !visited[e.to]) {\n          visited[e.to] = true;\n      \
-    \    que.push(e.to);\n        }\n      }\n    }\n    return visited;\n  }\n\n\
-    \ private:\n  int _n;\n  struct _edge {\n    int to, rev;\n    Cap cap;\n  };\n\
-    \  std::vector<std::pair<int, int>> pos;\n  std::vector<std::vector<_edge>> g;\n\
+  bundledCode: "#line 1 \"flow/maxflow.hpp\"\ntemplate <typename Cap = int>\nstruct\
+    \ MaxFlowGraph {\n  const Cap INF;\n\n  struct Edge {\n    int frm, to;\n    Cap\
+    \ cap;\n    int idx;\n  };\n\n  int N;\n  vc<int> indptr;\n  vc<Edge> edges;\n\
+    \  vc<Cap> edge_flow;\n\n  vc<Edge> csr_edges;\n  vc<int> rev;\n  vc<int> level,\
+    \ deq;\n  bool calculated;\n\n  MaxFlowGraph() : INF(numeric_limits<Cap>::max()),\
+    \ N(0), calculated(0) {}\n\n  void add(int frm, int to, Cap cap) {\n    chmax(N,\
+    \ frm + 1);\n    chmax(N, to + 1);\n    edges.eb(Edge({frm, to, cap, int(edges.size())}));\n\
+    \  }\n\n  void _build() {\n    indptr.resize(N + 1);\n    level.resize(N);\n \
+    \   deq.resize(N);\n    int M = len(edges);\n    for (auto&& e: edges) { indptr[e.frm\
+    \ + 1]++, indptr[e.to + 1]++; }\n    FOR(v, N) indptr[v + 1] += indptr[v];\n \
+    \   auto counter = indptr;\n\n    edge_flow.resize(M);\n    csr_edges.resize(2\
+    \ * M);\n    rev.resize(2 * M);\n    for (auto&& e: edges) {\n      int i = counter[e.frm],\
+    \ j = counter[e.to];\n      rev[i] = j, rev[j] = i;\n      csr_edges[i] = {e.frm,\
+    \ e.to, e.cap, e.idx};\n      csr_edges[j] = {e.to, e.frm, Cap(0), ~e.idx};\n\
+    \      counter[e.frm]++, counter[e.to]++;\n    }\n  }\n\n  bool set_level(int\
+    \ source, int sink) {\n    // bfs\n    fill(all(level), -1);\n    int l = 0, r\
+    \ = 0;\n    deq[r++] = source;\n    level[source] = 0;\n    while (l < r) {\n\
+    \      int v = deq[l++];\n      FOR3(i, indptr[v], indptr[v + 1]) {\n        auto&\
+    \ e = csr_edges[i];\n        if (e.cap == 0 || level[e.to] >= 0) continue;\n \
+    \       level[e.to] = level[v] + 1;\n        if (e.to == sink) return true;\n\
+    \        deq[r++] = e.to;\n      }\n    }\n    return false;\n  }\n\n  Cap flow_dfs(int\
+    \ v, int sink, Cap lim) {\n    if (v == sink) return lim;\n    FOR3(i, indptr[v],\
+    \ indptr[v + 1]) {\n      auto& e = csr_edges[i];\n      if (e.cap == 0 || level[v]\
+    \ >= level[e.to]) continue;\n      Cap x = flow_dfs(e.to, sink, min(lim, e.cap));\n\
+    \      if (x > Cap(0)) {\n        e.cap -= x;\n        int j = rev[i];\n     \
+    \   csr_edges[j].cap += x;\n        if (e.idx >= 0)\n          edge_flow[e.idx]\
+    \ += x;\n        else\n          edge_flow[~e.idx] -= x;\n        return x;\n\
+    \      }\n    }\n    return 0;\n  }\n\n  Cap flow(int source, int sink) {\n  \
+    \  assert(!calculated);\n    calculated = true;\n    _build();\n    Cap f = 0;\n\
+    \    while (set_level(source, sink)) {\n      while (1) {\n        Cap x = flow_dfs(source,\
+    \ sink, INF);\n        if (x == 0) break;\n        f += x;\n      }\n    }\n \
+    \   return f;\n  }\n\n  vc<tuple<int, int, Cap>> get_edges() {\n    vc<tuple<int,\
+    \ int, Cap>> res;\n    for (auto&& e: edges) {\n      Cap f = edge_flow[e.idx];\n\
+    \      if (f > Cap(0)) res.eb(e.frm, e.to, f);\n    }\n    return res;\n  }\n\n\
+    \  void debug() {\n    for (auto&& e: edges) print(e.frm, e.to, e.cap);\n  }\n\
     };\n"
-  code: "\ntemplate <class T>\nstruct simple_queue {\n  std::vector<T> payload;\n\
-    \  int pos = 0;\n  void reserve(int n) { payload.reserve(n); }\n  int size() const\
-    \ { return int(payload.size()) - pos; }\n  bool empty() const { return pos ==\
-    \ int(payload.size()); }\n  void push(const T& t) { payload.push_back(t); }\n\
-    \  T& front() { return payload[pos]; }\n  void clear() {\n    payload.clear();\n\
-    \    pos = 0;\n  }\n  void pop() { pos++; }\n};\n\ntemplate <class Cap>\nstruct\
-    \ mf_graph {\n public:\n  mf_graph() : _n(0) {}\n  explicit mf_graph(int n) :\
-    \ _n(n), g(n) {}\n\n  int add(int frm, int to, Cap cap) {\n    assert(0 <= frm\
-    \ && frm < _n);\n    assert(0 <= to && to < _n);\n    assert(0 <= cap);\n    int\
-    \ m = int(pos.size());\n    pos.push_back({frm, int(g[frm].size())});\n    int\
-    \ frm_id = int(g[frm].size());\n    int to_id = int(g[to].size());\n    if (frm\
-    \ == to) to_id++;\n    g[frm].push_back(_edge{to, to_id, cap});\n    g[to].push_back(_edge{frm,\
-    \ frm_id, 0});\n    return m;\n  }\n\n  struct edge {\n    int frm, to;\n    Cap\
-    \ cap, flow;\n  };\n\n  edge get_edge(int i) {\n    int m = int(pos.size());\n\
-    \    assert(0 <= i && i < m);\n    auto _e = g[pos[i].first][pos[i].second];\n\
-    \    auto _re = g[_e.to][_e.rev];\n    return edge{pos[i].first, _e.to, _e.cap\
-    \ + _re.cap, _re.cap};\n  }\n  std::vector<edge> edges() {\n    int m = int(pos.size());\n\
-    \    std::vector<edge> result;\n    for (int i = 0; i < m; i++) {\n      result.push_back(get_edge(i));\n\
-    \    }\n    return result;\n  }\n  void change_edge(int i, Cap new_cap, Cap new_flow)\
-    \ {\n    int m = int(pos.size());\n    assert(0 <= i && i < m);\n    assert(0\
-    \ <= new_flow && new_flow <= new_cap);\n    auto& _e = g[pos[i].first][pos[i].second];\n\
-    \    auto& _re = g[_e.to][_e.rev];\n    _e.cap = new_cap - new_flow;\n    _re.cap\
-    \ = new_flow;\n  }\n\n  Cap flow(int s, int t) { return flow(s, t, std::numeric_limits<Cap>::max());\
-    \ }\n  Cap flow(int s, int t, Cap flow_limit) {\n    assert(0 <= s && s < _n);\n\
-    \    assert(0 <= t && t < _n);\n    assert(s != t);\n\n    std::vector<int> level(_n),\
-    \ iter(_n);\n    simple_queue<int> que;\n\n    auto bfs = [&]() {\n      std::fill(level.begin(),\
-    \ level.end(), -1);\n      level[s] = 0;\n      que.clear();\n      que.push(s);\n\
-    \      while (!que.empty()) {\n        int v = que.front();\n        que.pop();\n\
-    \        for (auto e : g[v]) {\n          if (e.cap == 0 || level[e.to] >= 0)\
-    \ continue;\n          level[e.to] = level[v] + 1;\n          if (e.to == t) return;\n\
-    \          que.push(e.to);\n        }\n      }\n    };\n    auto dfs = [&](auto\
-    \ self, int v, Cap up) {\n      if (v == s) return up;\n      Cap res = 0;\n \
-    \     int level_v = level[v];\n      for (int& i = iter[v]; i < int(g[v].size());\
-    \ i++) {\n        _edge& e = g[v][i];\n        if (level_v <= level[e.to] || g[e.to][e.rev].cap\
-    \ == 0) continue;\n        Cap d = self(self, e.to, std::min(up - res, g[e.to][e.rev].cap));\n\
-    \        if (d <= 0) continue;\n        g[v][i].cap += d;\n        g[e.to][e.rev].cap\
-    \ -= d;\n        res += d;\n        if (res == up) return res;\n      }\n    \
-    \  level[v] = _n;\n      return res;\n    };\n\n    Cap flow = 0;\n    while (flow\
-    \ < flow_limit) {\n      bfs();\n      if (level[t] == -1) break;\n      std::fill(iter.begin(),\
-    \ iter.end(), 0);\n      Cap f = dfs(dfs, t, flow_limit - flow);\n      if (!f)\
-    \ break;\n      flow += f;\n    }\n    return flow;\n  }\n\n  std::vector<bool>\
-    \ min_cut(int s) {\n    std::vector<bool> visited(_n);\n    simple_queue<int>\
-    \ que;\n    que.push(s);\n    while (!que.empty()) {\n      int p = que.front();\n\
-    \      que.pop();\n      visited[p] = true;\n      for (auto e : g[p]) {\n   \
-    \     if (e.cap && !visited[e.to]) {\n          visited[e.to] = true;\n      \
-    \    que.push(e.to);\n        }\n      }\n    }\n    return visited;\n  }\n\n\
-    \ private:\n  int _n;\n  struct _edge {\n    int to, rev;\n    Cap cap;\n  };\n\
-    \  std::vector<std::pair<int, int>> pos;\n  std::vector<std::vector<_edge>> g;\n\
-    };\n"
+  code: "template <typename Cap = int>\nstruct MaxFlowGraph {\n  const Cap INF;\n\n\
+    \  struct Edge {\n    int frm, to;\n    Cap cap;\n    int idx;\n  };\n\n  int\
+    \ N;\n  vc<int> indptr;\n  vc<Edge> edges;\n  vc<Cap> edge_flow;\n\n  vc<Edge>\
+    \ csr_edges;\n  vc<int> rev;\n  vc<int> level, deq;\n  bool calculated;\n\n  MaxFlowGraph()\
+    \ : INF(numeric_limits<Cap>::max()), N(0), calculated(0) {}\n\n  void add(int\
+    \ frm, int to, Cap cap) {\n    chmax(N, frm + 1);\n    chmax(N, to + 1);\n   \
+    \ edges.eb(Edge({frm, to, cap, int(edges.size())}));\n  }\n\n  void _build() {\n\
+    \    indptr.resize(N + 1);\n    level.resize(N);\n    deq.resize(N);\n    int\
+    \ M = len(edges);\n    for (auto&& e: edges) { indptr[e.frm + 1]++, indptr[e.to\
+    \ + 1]++; }\n    FOR(v, N) indptr[v + 1] += indptr[v];\n    auto counter = indptr;\n\
+    \n    edge_flow.resize(M);\n    csr_edges.resize(2 * M);\n    rev.resize(2 * M);\n\
+    \    for (auto&& e: edges) {\n      int i = counter[e.frm], j = counter[e.to];\n\
+    \      rev[i] = j, rev[j] = i;\n      csr_edges[i] = {e.frm, e.to, e.cap, e.idx};\n\
+    \      csr_edges[j] = {e.to, e.frm, Cap(0), ~e.idx};\n      counter[e.frm]++,\
+    \ counter[e.to]++;\n    }\n  }\n\n  bool set_level(int source, int sink) {\n \
+    \   // bfs\n    fill(all(level), -1);\n    int l = 0, r = 0;\n    deq[r++] = source;\n\
+    \    level[source] = 0;\n    while (l < r) {\n      int v = deq[l++];\n      FOR3(i,\
+    \ indptr[v], indptr[v + 1]) {\n        auto& e = csr_edges[i];\n        if (e.cap\
+    \ == 0 || level[e.to] >= 0) continue;\n        level[e.to] = level[v] + 1;\n \
+    \       if (e.to == sink) return true;\n        deq[r++] = e.to;\n      }\n  \
+    \  }\n    return false;\n  }\n\n  Cap flow_dfs(int v, int sink, Cap lim) {\n \
+    \   if (v == sink) return lim;\n    FOR3(i, indptr[v], indptr[v + 1]) {\n    \
+    \  auto& e = csr_edges[i];\n      if (e.cap == 0 || level[v] >= level[e.to]) continue;\n\
+    \      Cap x = flow_dfs(e.to, sink, min(lim, e.cap));\n      if (x > Cap(0)) {\n\
+    \        e.cap -= x;\n        int j = rev[i];\n        csr_edges[j].cap += x;\n\
+    \        if (e.idx >= 0)\n          edge_flow[e.idx] += x;\n        else\n   \
+    \       edge_flow[~e.idx] -= x;\n        return x;\n      }\n    }\n    return\
+    \ 0;\n  }\n\n  Cap flow(int source, int sink) {\n    assert(!calculated);\n  \
+    \  calculated = true;\n    _build();\n    Cap f = 0;\n    while (set_level(source,\
+    \ sink)) {\n      while (1) {\n        Cap x = flow_dfs(source, sink, INF);\n\
+    \        if (x == 0) break;\n        f += x;\n      }\n    }\n    return f;\n\
+    \  }\n\n  vc<tuple<int, int, Cap>> get_edges() {\n    vc<tuple<int, int, Cap>>\
+    \ res;\n    for (auto&& e: edges) {\n      Cap f = edge_flow[e.idx];\n      if\
+    \ (f > Cap(0)) res.eb(e.frm, e.to, f);\n    }\n    return res;\n  }\n\n  void\
+    \ debug() {\n    for (auto&& e: edges) print(e.frm, e.to, e.cap);\n  }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: flow/maxflow.hpp
   requiredBy: []
-  timestamp: '2021-12-25 22:40:58+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2022-02-14 19:56:19+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/aoj/GRL_6_A_maxflow.test.cpp
 documentation_of: flow/maxflow.hpp
 layout: document
 redirect_from:

@@ -156,7 +156,7 @@ data:
     ); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t = 1) { print(t ? \"\
     Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\nvoid yes(bool t = 1)\
     \ { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) { yes(!t); }\r\n#line\
-    \ 4 \"test/library_checker/math/enumerate_primes.test.cpp\"\n\n#line 1 \"nt/primetable.hpp\"\
+    \ 4 \"test/library_checker/math/enumerate_primes.test.cpp\"\n\n#line 2 \"nt/primetable.hpp\"\
     \nvc<ll>& primetable(int LIM) {\n  ++LIM;\n  const int S = 32768;\n  static int\
     \ done = 2;\n  static vc<ll> primes = {2}, sieve(S + 1);\n\n  if(done >= LIM)\
     \ return primes;\n  done  = LIM;\n\n  primes = {2}, sieve.assign(S + 1, 0);\n\
@@ -186,7 +186,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/math/enumerate_primes.test.cpp
   requiredBy: []
-  timestamp: '2022-02-13 05:24:17+09:00'
+  timestamp: '2022-02-14 19:55:20+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/math/enumerate_primes.test.cpp

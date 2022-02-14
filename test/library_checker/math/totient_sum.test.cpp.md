@@ -1,12 +1,18 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: ds/cartesian_tree.hpp
-    title: ds/cartesian_tree.hpp
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
+  - icon: ':heavy_check_mark:'
+    path: nt/multiplicative_sum.hpp
+    title: nt/multiplicative_sum.hpp
+  - icon: ':heavy_check_mark:'
+    path: nt/primesum.hpp
+    title: nt/primesum.hpp
+  - icon: ':heavy_check_mark:'
+    path: nt/primetable.hpp
+    title: nt/primetable.hpp
   - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
@@ -17,19 +23,19 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/cartesian_tree
+    PROBLEM: https://judge.yosupo.jp/problem/sum_of_totient_function
     links:
-    - https://judge.yosupo.jp/problem/cartesian_tree
-  bundledCode: "#line 1 \"test/library_checker/tree/cartesian_tree.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/cartesian_tree\"\r\n#line 1 \"my_template.hpp\"\
-    \n#include <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\n\
-    using pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing u32 = unsigned int;\n\
-    using u64 = unsigned long long;\nusing i128 = __int128;\n\ntemplate <class T>\n\
-    using vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\ntemplate\
-    \ <class T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc = vector<vvvc<T>>;\n\
-    template <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate <class T>\nusing\
-    \ pq = priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T, vector<T>,\
-    \ greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
+    - https://judge.yosupo.jp/problem/sum_of_totient_function
+  bundledCode: "#line 1 \"test/library_checker/math/totient_sum.test.cpp\"\n#define\
+    \ PROBLEM \"https://judge.yosupo.jp/problem/sum_of_totient_function\"\n#line 1\
+    \ \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\nusing\
+    \ ll = long long;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing u32\
+    \ = unsigned int;\nusing u64 = unsigned long long;\nusing i128 = __int128;\n\n\
+    template <class T>\nusing vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\n\
+    template <class T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc\
+    \ = vector<vvvc<T>>;\ntemplate <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate\
+    \ <class T>\nusing pq = priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T,\
+    \ vector<T>, greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
     #define vv(type, name, h, ...) \\\n  vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n\
     #define vvv(type, name, h, w, ...)   \\\n  vector<vector<vector<type>>> name(\
     \ \\\n      h, vector<vector<type>>(w, vector<type>(__VA_ARGS__)))\n#define vvvv(type,\
@@ -156,45 +162,86 @@ data:
     ); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t = 1) { print(t ? \"\
     Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\nvoid yes(bool t = 1)\
     \ { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) { yes(!t); }\r\n#line\
-    \ 1 \"ds/cartesian_tree.hpp\"\ntemplate <typename T>\r\nstruct CartesianTree {\r\
-    \n  /*\r\n  \u8F9E\u66F8\u9806\u3067\u9AD8\u3055\u3092 unique \u3057\u3066\u3001\
-    \u6728\u306B\u3057\u3066\u3044\u308B\u3002\r\n  \u6975\u5927\u9577\u65B9\u5F62\
-    \u30A2\u30EB\u30B4\u30EA\u30BA\u30E0\u3067\u7DDA\u5F62\u6642\u9593\u69CB\u7BC9\
-    \u3002\r\n  */\r\n  int n;\r\n  vc<T>& A;\r\n  vc<pair<int, int>> range;\r\n \
-    \ vc<int> lch, rch, par;\r\n\r\n  CartesianTree(vc<T> A) : n(len(A)), A(A) {\r\
-    \n    range.assign(n, {-1, -1});\r\n    lch.assign(n, -1);\r\n    rch.assign(n,\
-    \ -1);\r\n    par.assign(n, -1);\r\n    auto is_sm = [&](int i, int j) -> bool\
-    \ {\r\n      return (A[i] < A[j]) || (A[i] == A[j] && i < j);\r\n    };\r\n  \
-    \  vc<int> st;\r\n    FOR(i, n) {\r\n      while (!st.empty() && is_sm(i, st.back()))\
-    \ {\r\n        lch[i] = st.back();\r\n        st.pop_back();\r\n      }\r\n  \
-    \    range[i].fi = (st.empty() ? 0 : st.back() + 1);\r\n      st.eb(i);\r\n  \
-    \  }\r\n    st.clear();\r\n    FOR_R(i, n) {\r\n      while (!st.empty() && is_sm(i,\
-    \ st.back())) {\r\n        rch[i] = st.back();\r\n        st.pop_back();\r\n \
-    \     }\r\n      range[i].se = (st.empty() ? n : st.back());\r\n      st.eb(i);\r\
-    \n    }\r\n    FOR(i, n) if (lch[i] != -1) par[lch[i]] = i;\r\n    FOR(i, n) if\
-    \ (rch[i] != -1) par[rch[i]] = i;\r\n  }\r\n};\r\n#line 5 \"test/library_checker/tree/cartesian_tree.test.cpp\"\
-    \n\r\nvoid solve() {\r\n  LL(N);\r\n  VEC(int, A, N);\r\n  CartesianTree CT(A);\r\
-    \n  auto& ANS = CT.par;\r\n  FOR(i, N) if (ANS[i] == -1) ANS[i] = i;\r\n  print(ANS);\r\
-    \n}\r\n\r\nsigned main() {\r\n  solve();\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/cartesian_tree\"\r\n#include\
-    \ \"my_template.hpp\"\r\n#include \"other/io.hpp\"\r\n#include \"ds/cartesian_tree.hpp\"\
-    \r\n\r\nvoid solve() {\r\n  LL(N);\r\n  VEC(int, A, N);\r\n  CartesianTree CT(A);\r\
-    \n  auto& ANS = CT.par;\r\n  FOR(i, N) if (ANS[i] == -1) ANS[i] = i;\r\n  print(ANS);\r\
-    \n}\r\n\r\nsigned main() {\r\n  solve();\r\n  return 0;\r\n}\r\n"
+    \ 4 \"test/library_checker/math/totient_sum.test.cpp\"\n\n#line 2 \"nt/primetable.hpp\"\
+    \nvc<ll>& primetable(int LIM) {\n  ++LIM;\n  const int S = 32768;\n  static int\
+    \ done = 2;\n  static vc<ll> primes = {2}, sieve(S + 1);\n\n  if(done >= LIM)\
+    \ return primes;\n  done  = LIM;\n\n  primes = {2}, sieve.assign(S + 1, 0);\n\
+    \  const int R = LIM / 2;  \n  primes.reserve(int(LIM / log(LIM) * 1.1));\n  vc<pi>\
+    \ cp;\n  for (int i = 3; i <= S; i += 2) {\n    if (!sieve[i]) {\n      cp.eb(i,\
+    \ i * i / 2);\n      for (int j = i * i; j <= S; j += 2 * i) sieve[j] = 1;\n \
+    \   }\n  }\n  for (int L = 1; L <= R; L += S) {\n    array<bool, S> block{};\n\
+    \    for (auto& [p, idx]: cp)\n      for (int i = idx; i < S + L; idx = (i +=\
+    \ p)) block[i - L] = 1;\n    FOR(i, min(S, R - L)) if (!block[i]) primes.eb((L\
+    \ + i) * 2 + 1);\n  }\n  return primes;\n}\n#line 2 \"nt/primesum.hpp\"\n\r\n\
+    template <typename T>\r\npair<vc<T>, vc<T>> primesum_F(ll N, function<T(ll)> F)\
+    \ {\r\n  /*\r\n  N \u3068\u5B8C\u5168\u4E57\u6CD5\u7684\u95A2\u6570 f \u306E prefix\
+    \ sum \u95A2\u6570 F \u3092\u4E0E\u3048\u308B\u3002\r\n  n = floor(N/d) \u3068\
+    \u306A\u308B n \u306B\u5BFE\u3059\u308B sum_{p <= n} f(p) \u3092\u8A08\u7B97\u3059\
+    \u308B\u3002\r\n\r\n  \u7279\u306B\u3001p^k \u306E\u548C\u3084\u3001mod m \u3054\
+    \u3068\u3067\u306E p^k \u306E\u548C\u304C\u8A08\u7B97\u3067\u304D\u308B\u3002\r\
+    \n\r\n  Complexity: O(N^{3/4}/logN) time, O(N^{1/2}) space.\r\n  */\r\n  ll sqN\
+    \ = sqrtl(N);\r\n  auto& primes = primetable(sqN);\r\n  vc<T> sum_lo(sqN + 1),\
+    \ sum_hi(sqN + 1);\r\n  FOR3(i, 1, sqN + 1) sum_lo[i] = F(i) - 1;\r\n  FOR3(i,\
+    \ 1, sqN + 1) sum_hi[i] = F(double(N) / i) - 1;\r\n  for (auto&& p: primes) {\r\
+    \n    ll pp = p * p;\r\n    if (pp > N) break;\r\n    ll R = min(sqN, N / pp);\r\
+    \n    ll M = sqN / p;\r\n    T x = sum_lo[p - 1];\r\n    T fp = sum_lo[p] - sum_lo[p\
+    \ - 1];\r\n    FOR3(i, 1, M + 1) sum_hi[i] -= fp * (sum_hi[i * p] - x);\r\n  \
+    \  FOR3(i, M + 1, R + 1) sum_hi[i] -= fp * (sum_lo[double(N) / (i * p)] - x);\r\
+    \n    FOR3_R(n, pp, sqN + 1) sum_lo[n] -= fp * (sum_lo[double(n) / p] - x);\r\n\
+    \  }\r\n  return {sum_lo, sum_hi};\r\n}\r\n\r\ntemplate <typename T>\r\npair<vc<T>,\
+    \ vc<T>> primecnt(ll N) {\r\n  auto F = [&](ll N) -> T { return N; };\r\n  return\
+    \ primesum_F<T>(N, F);\r\n}\r\n\r\ntemplate <typename T>\r\npair<vc<T>, vc<T>>\
+    \ primesum(ll N) {\r\n  auto F = [&](ll N) -> T {\r\n    return (N & 1 ? T((N\
+    \ + 1) / 2) * T(N) : T(N / 2) * T(N + 1));\r\n  };\r\n  return primesum_F<T>(N,\
+    \ F);\r\n}\r\n#line 2 \"nt/multiplicative_sum.hpp\"\ntemplate <typename T, typename\
+    \ FUNC>\r\nT multiplicative_sum(ll N, FUNC F, vc<T>& sum_lo, vc<T>& sum_hi) {\r\
+    \n  // F(p^e) \u3092\u4E0E\u3048\u308B\u95A2\u6570\u306B\u52A0\u3048\u3001\u4E8B\
+    \u524D\u306B\u8A08\u7B97\u3057\u305F prime sum \u3092\u6301\u305F\u305B\u308B\r\
+    \n  // black algorithm in\r\n  // http://baihacker.github.io/main/2020/The_prefix-sum_of_multiplicative_function_the_black_algorithm.html\r\
+    \n  ll sqN = sqrtl(N);\r\n  auto& P = primetable(sqN);\r\n  auto get = [&](ll\
+    \ d) -> T {\r\n    return (d <= sqN ? sum_lo[d] : sum_hi[double(N) / d]);\r\n\
+    \  };\r\n\r\n  T ANS = T(1) + get(N); // 1 and prime\r\n\r\n  // t = up_i^k \u306E\
+    \u3068\u304D\u306B\u3001(t, i, k, f(t), f(u)) \u3092\u6301\u305F\u305B\u308B\r\
+    \n\r\n  auto dfs = [&](auto self, ll t, ll i, ll k, T ft, T fu) -> void {\r\n\
+    \    T f_nxt = fu * F(P[i], k + 1);\r\n    // \u5B50\u30CE\u30FC\u30C9\u3092\u5168\
+    \u90E8\u52A0\u7B97\r\n    ANS += f_nxt;\r\n    ANS += ft * (get(double(N) / t)\
+    \ - get(P[i]));\r\n\r\n    ll lim = sqrtl(double(N) / t);\r\n    if (P[i] <= lim)\
+    \ { self(self, t * P[i], i, k + 1, f_nxt, fu); }\r\n    FOR3(j, i + 1, len(P))\
+    \ {\r\n      if (P[j] > lim) break;\r\n      self(self, t * P[j], j, 1, ft * F(P[j],\
+    \ 1), ft);\r\n    }\r\n  };\r\n  FOR(i, len(P)) if (P[i] <= sqN) dfs(dfs, P[i],\
+    \ i, 1, F(P[i], 1), 1);\r\n  return ANS;\r\n}\n#line 7 \"test/library_checker/math/totient_sum.test.cpp\"\
+    \n\nvoid solve() {\n  LL(N);\n  auto [sum_lo_0, sum_hi_0] = primecnt<ll>(N);\n\
+    \  auto [sum_lo, sum_hi] = primesum<i128>(N);\n  ll m = len(sum_lo_0);\n  FOR(i,\
+    \ m) sum_lo[i] -= sum_lo_0[i];\n  FOR(i, m) sum_hi[i] -= sum_hi_0[i];\n  auto\
+    \ f = [&](ll p, ll e) -> i128 {\n    ll x = p - 1;\n    FOR_(e - 1) x *= p;\n\
+    \    return x;\n  };\n  int mod = 998244353;\n  print(int(multiplicative_sum(N,\
+    \ f, sum_lo, sum_hi) % mod));\n}\n\nsigned main() {\n  solve();\n\n  return 0;\n\
+    }\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_totient_function\"\
+    \n#include \"my_template.hpp\"\n#include \"other/io.hpp\"\n\n#include \"nt/primesum.hpp\"\
+    \n#include \"nt/multiplicative_sum.hpp\"\n\nvoid solve() {\n  LL(N);\n  auto [sum_lo_0,\
+    \ sum_hi_0] = primecnt<ll>(N);\n  auto [sum_lo, sum_hi] = primesum<i128>(N);\n\
+    \  ll m = len(sum_lo_0);\n  FOR(i, m) sum_lo[i] -= sum_lo_0[i];\n  FOR(i, m) sum_hi[i]\
+    \ -= sum_hi_0[i];\n  auto f = [&](ll p, ll e) -> i128 {\n    ll x = p - 1;\n \
+    \   FOR_(e - 1) x *= p;\n    return x;\n  };\n  int mod = 998244353;\n  print(int(multiplicative_sum(N,\
+    \ f, sum_lo, sum_hi) % mod));\n}\n\nsigned main() {\n  solve();\n\n  return 0;\n\
+    }\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
-  - ds/cartesian_tree.hpp
+  - nt/primesum.hpp
+  - nt/primetable.hpp
+  - nt/multiplicative_sum.hpp
   isVerificationFile: true
-  path: test/library_checker/tree/cartesian_tree.test.cpp
+  path: test/library_checker/math/totient_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-02-13 05:24:17+09:00'
+  timestamp: '2022-02-14 19:55:51+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/library_checker/tree/cartesian_tree.test.cpp
+documentation_of: test/library_checker/math/totient_sum.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/tree/cartesian_tree.test.cpp
-- /verify/test/library_checker/tree/cartesian_tree.test.cpp.html
-title: test/library_checker/tree/cartesian_tree.test.cpp
+- /verify/test/library_checker/math/totient_sum.test.cpp
+- /verify/test/library_checker/math/totient_sum.test.cpp.html
+title: test/library_checker/math/totient_sum.test.cpp
 ---
