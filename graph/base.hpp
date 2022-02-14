@@ -74,6 +74,7 @@ struct Graph {
   void read_parent(int off=1){
     FOR3(v, 1, N){
       INT(p);
+      p -= off;
       add(p, v);
     }
     prepare();
