@@ -1,5 +1,6 @@
 #include "ds/unionfind.hpp"
 #include "graph/base.hpp"
+#include "graph/hld.hpp"
 
 template <typename T = int>
 struct FunctionalGraph {
