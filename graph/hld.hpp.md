@@ -6,6 +6,9 @@ data:
     title: graph/base.hpp
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: graph/functional.hpp
+    title: graph/functional.hpp
+  - icon: ':warning:'
     path: graph/lazytreemonoid.hpp
     title: graph/lazytreemonoid.hpp
   - icon: ':warning:'
@@ -76,12 +79,12 @@ data:
     \ b);\n      a -= off, b -= off;\n      if(!wt){\n        add(a, b);\n      }\
     \ else {\n        T c;\n        read(c);\n        add(a, b, c);\n      }\n   \
     \ }\n    prepare();\n  }\n\n  void read_parent(int off=1){\n    FOR3(v, 1, N){\n\
-    \      INT(p);\n      add(p, v);\n    }\n    prepare();\n  }\n\n  void prepare()\
-    \ {\n    assert(!prepared);\n    prepared = true;\n    indptr.assign(N + 1, 0);\n\
-    \    for (auto&& e: edges) {\n      indptr[e.frm + 1]++;\n      if (!directed)\
-    \ indptr[e.to + 1]++;\n    }\n    FOR(v, N) indptr[v + 1] += indptr[v];\n    auto\
-    \ counter = indptr;\n    csr_edges.resize(indptr.back() + 1);\n    for (auto&&\
-    \ e: edges) {\n      csr_edges[counter[e.frm]++] = e;\n      if (!directed)\n\
+    \      INT(p);\n      p -= off;\n      add(p, v);\n    }\n    prepare();\n  }\n\
+    \n  void prepare() {\n    assert(!prepared);\n    prepared = true;\n    indptr.assign(N\
+    \ + 1, 0);\n    for (auto&& e: edges) {\n      indptr[e.frm + 1]++;\n      if\
+    \ (!directed) indptr[e.to + 1]++;\n    }\n    FOR(v, N) indptr[v + 1] += indptr[v];\n\
+    \    auto counter = indptr;\n    csr_edges.resize(indptr.back() + 1);\n    for\
+    \ (auto&& e: edges) {\n      csr_edges[counter[e.frm]++] = e;\n      if (!directed)\n\
     \        csr_edges[counter[e.to]++] = edge_type({e.to, e.frm, e.cost, e.id});\n\
     \    }\n  }\n\n  OutgoingEdges operator[](int v) const {\n    assert(prepared);\n\
     \    return {this, indptr[v], indptr[v + 1]};\n  }\n\n  void debug() {\n    print(\"\
@@ -214,12 +217,13 @@ data:
   path: graph/hld.hpp
   requiredBy:
   - graph/treeabelgroup.hpp
+  - graph/functional.hpp
   - graph/lazytreemonoid.hpp
   - graph/treemonoid.hpp
   - graph/treegroup.hpp
   - graph/rerooting_dp.hpp
   - graph/two_edge_component.hpp
-  timestamp: '2022-02-12 21:55:04+09:00'
+  timestamp: '2022-02-14 14:30:41+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/library_checker/tree/lca_directed.test.cpp

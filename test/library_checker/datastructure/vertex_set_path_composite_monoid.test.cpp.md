@@ -299,10 +299,10 @@ data:
     \    FOR_(M){\n      INT(a, b);\n      a -= off, b -= off;\n      if(!wt){\n \
     \       add(a, b);\n      } else {\n        T c;\n        read(c);\n        add(a,\
     \ b, c);\n      }\n    }\n    prepare();\n  }\n\n  void read_parent(int off=1){\n\
-    \    FOR3(v, 1, N){\n      INT(p);\n      add(p, v);\n    }\n    prepare();\n\
-    \  }\n\n  void prepare() {\n    assert(!prepared);\n    prepared = true;\n   \
-    \ indptr.assign(N + 1, 0);\n    for (auto&& e: edges) {\n      indptr[e.frm +\
-    \ 1]++;\n      if (!directed) indptr[e.to + 1]++;\n    }\n    FOR(v, N) indptr[v\
+    \    FOR3(v, 1, N){\n      INT(p);\n      p -= off;\n      add(p, v);\n    }\n\
+    \    prepare();\n  }\n\n  void prepare() {\n    assert(!prepared);\n    prepared\
+    \ = true;\n    indptr.assign(N + 1, 0);\n    for (auto&& e: edges) {\n      indptr[e.frm\
+    \ + 1]++;\n      if (!directed) indptr[e.to + 1]++;\n    }\n    FOR(v, N) indptr[v\
     \ + 1] += indptr[v];\n    auto counter = indptr;\n    csr_edges.resize(indptr.back()\
     \ + 1);\n    for (auto&& e: edges) {\n      csr_edges[counter[e.frm]++] = e;\n\
     \      if (!directed)\n        csr_edges[counter[e.to]++] = edge_type({e.to, e.frm,\
@@ -448,7 +448,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   requiredBy: []
-  timestamp: '2022-02-13 05:24:17+09:00'
+  timestamp: '2022-02-14 14:30:41+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp

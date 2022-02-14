@@ -7,6 +7,9 @@ data:
   - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
+  - icon: ':question:'
+    path: graph/hld.hpp
+    title: graph/hld.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
@@ -43,10 +46,10 @@ data:
     \    FOR_(M){\n      INT(a, b);\n      a -= off, b -= off;\n      if(!wt){\n \
     \       add(a, b);\n      } else {\n        T c;\n        read(c);\n        add(a,\
     \ b, c);\n      }\n    }\n    prepare();\n  }\n\n  void read_parent(int off=1){\n\
-    \    FOR3(v, 1, N){\n      INT(p);\n      add(p, v);\n    }\n    prepare();\n\
-    \  }\n\n  void prepare() {\n    assert(!prepared);\n    prepared = true;\n   \
-    \ indptr.assign(N + 1, 0);\n    for (auto&& e: edges) {\n      indptr[e.frm +\
-    \ 1]++;\n      if (!directed) indptr[e.to + 1]++;\n    }\n    FOR(v, N) indptr[v\
+    \    FOR3(v, 1, N){\n      INT(p);\n      p -= off;\n      add(p, v);\n    }\n\
+    \    prepare();\n  }\n\n  void prepare() {\n    assert(!prepared);\n    prepared\
+    \ = true;\n    indptr.assign(N + 1, 0);\n    for (auto&& e: edges) {\n      indptr[e.frm\
+    \ + 1]++;\n      if (!directed) indptr[e.to + 1]++;\n    }\n    FOR(v, N) indptr[v\
     \ + 1] += indptr[v];\n    auto counter = indptr;\n    csr_edges.resize(indptr.back()\
     \ + 1);\n    for (auto&& e: edges) {\n      csr_edges[counter[e.frm]++] = e;\n\
     \      if (!directed)\n        csr_edges[counter[e.to]++] = edge_type({e.to, e.frm,\
@@ -56,23 +59,66 @@ data:
     frm to cost id\");\n      for (auto&& e: edges) print(e.frm, e.to, e.cost, e.id);\n\
     \    } else {\n      print(\"indptr\", indptr);\n      print(\"frm to cost id\"\
     );\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e.frm, e.to, e.cost, e.id);\n\
-    \    }\n  }\n};\n#line 3 \"graph/functional.hpp\"\n\r\ntemplate <typename T =\
-    \ int>\r\nstruct FunctionalGraph {\r\n  int N, M;\r\n  Graph<T, 1> tree; // \u65B0\
-    \u3057\u3044\u9802\u70B9 N \u3092\u6839\u3068\u3057\u3066\u8FFD\u52A0\u3057\u305F\
-    \u6709\u5411\u6728\u3002\u9006\u5411\u304D\u306E\u8FBA\u306B\u306A\u308B\u3002\
-    \r\n  // HLD<Graph<T, 1>> hld;\r\n  vc<int> TO;\r\n  vc<T> wt;\r\n  vc<int> root;\r\
-    \n\r\n  FunctionalGraph() {}\r\n  FunctionalGraph(int N) : N(N), M(0), TO(N, -1),\
-    \ wt(N), root(N, -1) {}\r\n\r\n  void add(int a, int b, T c = 1) {\r\n    assert(0\
-    \ <= a && a < N);\r\n    assert(TO[a] == -1);\r\n    ++M;\r\n    TO[a] = b;\r\n\
-    \    wt[a] = c;\r\n  }\r\n\r\n  void build() {\r\n    assert(N == M);\r\n    UnionFind\
-    \ uf(N);\r\n    FOR(v, N) if (!uf.merge(v, TO[v])) { root[v] = v; }\r\n    FOR(v,\
-    \ N) if (root[v] == v) root[uf[v]] = v;\r\n    FOR(v, N) root[v] = root[uf[v]];\r\
-    \n\r\n    tree = Graph<T, 1>(N + 1);\r\n    FOR(v, N) {\r\n      if (root[v] !=\
-    \ v)\r\n        tree.add(TO[v], v);\r\n      else\r\n        tree.add(N, v);\r\
-    \n    }\r\n    tree.prepare();\r\n  }\r\n\r\n  void debug() {\r\n    print(\"\
-    TO\", TO);\r\n    print(\"root\");\r\n    print(root);\r\n    print(\"\u6839\u3092\
-    \u8FFD\u52A0\u3057\u305F\u6728 tree\");\r\n    tree.debug();\r\n  }\r\n};\r\n"
-  code: "#include \"ds/unionfind.hpp\"\r\n#include \"graph/base.hpp\"\r\n\r\ntemplate\
+    \    }\n  }\n};\n#line 3 \"graph/hld.hpp\"\n\r\ntemplate <typename Graph>\r\n\
+    struct HLD {\r\n  void doc() {\r\n    print(\"HL\u5206\u89E3\u3002O(N) \u6642\u9593\
+    \u69CB\u7BC9\u3002\");\r\n    print(\"LCA, LA \u306A\u3069\u306F O(logN) \u6642\
+    \u9593\u3002\");\r\n    print(\"\u6728\u306E\u554F\u984C\u3067\u306F\u771F\u3063\
+    \u5148\u306B\u3053\u308C\u3092\u4F5C\u308B\u3002\");\r\n    print(\"\u2192 \u6728\
+    DP\u3084\u6728\u30AF\u30A8\u30EA\u306B\u6D3E\u751F\u3002\");\r\n    print(\"\"\
+    );\r\n    print(\"\u6728\u4EE5\u5916\u3001\u975E\u9023\u7D50\u3067\u3082\u4F7F\
+    \u3048\u308B\u3088\u3046\u306B\u3057\u305F\u3002dfs\u9806\u5E8F\u3084\u89AA\u304C\
+    \u3068\u308C\u308B\u3002\");\r\n    print(\"edge idx -> in_tree (\u8FBA\u304C\
+    \ tree \u306B\u5165\u3063\u3066\u3044\u308B\u304B) \u3082\u3068\u308C\u308B\u3002\
+    \");\r\n    print(\"LCA \u3068\u304B\u306F\u4ECA\u306E\u3068\u3053\u308D\u58CA\
+    \u308C\u3066\u3044\u308B\u3002\");\r\n  }\r\n\r\n  Graph &G;\r\n  int N;\r\n \
+    \ vector<int> LID, RID, head, V, parent, depth, root;\r\n  vector<bool> in_tree;\r\
+    \n\r\n  HLD(Graph &G, int r = -1)\r\n      : G(G),\r\n        N(G.N),\r\n    \
+    \    LID(G.N),\r\n        RID(G.N),\r\n        head(G.N, r),\r\n        V(G.N),\r\
+    \n        parent(G.N, -1),\r\n        depth(G.N, -1),\r\n        root(G.N, -1),\r\
+    \n        in_tree(G.M, 0) {\r\n    assert(G.is_prepared());\r\n    int t1 = 0;\r\
+    \n    if (r != -1) {\r\n      dfs_sz(r, -1);\r\n      dfs_hld(r, t1);\r\n    }\
+    \ else {\r\n      FOR(r, N) if (parent[r] == -1) {\r\n        dfs_sz(r, -1);\r\
+    \n        dfs_hld(r, t1);\r\n      }\r\n    }\r\n    for (auto &&v: V) root[v]\
+    \ = (parent[v] == -1 ? v : root[parent[v]]);\r\n  }\r\n\r\n  void dfs_sz(int v,\
+    \ int p) {\r\n    auto &sz = RID;\r\n    parent[v] = p;\r\n    depth[v] = (p ==\
+    \ -1 ? 0 : depth[p] + 1);\r\n    sz[v] = 1;\r\n    int l = G.indptr[v], r = G.indptr[v\
+    \ + 1];\r\n    auto &csr = G.csr_edges;\r\n    // \u4F7F\u3046\u8FBA\u304C\u3042\
+    \u308C\u3070\u5148\u982D\u306B\u3059\u308B\r\n    FOR3_R(i, l, r - 1) {\r\n  \
+    \    if (depth[csr[i + 1].to] == -1) swap(csr[i], csr[i + 1]);\r\n    }\r\n  \
+    \  int hld_sz = 0;\r\n    for (int i = l; i < r; ++i) {\r\n      auto e = csr[i];\r\
+    \n      if (depth[e.to] != -1) continue;\r\n      in_tree[e.id] = 1;\r\n     \
+    \ dfs_sz(e.to, v);\r\n      sz[v] += sz[e.to];\r\n      if (chmax(hld_sz, sz[e.to])\
+    \ && l < i) { swap(csr[l], csr[i]); }\r\n    }\r\n  }\r\n\r\n  void dfs_hld(int\
+    \ v, int &times) {\r\n    LID[v] = times++;\r\n    RID[v] += LID[v];\r\n    V[LID[v]]\
+    \ = v;\r\n    bool heavy = true;\r\n    for (auto &&e: G[v]) {\r\n      if (!in_tree[e.id]\
+    \ || depth[e.to] <= depth[v]) continue;\r\n      head[e.to] = (heavy ? head[v]\
+    \ : e.to);\r\n      heavy = false;\r\n      dfs_hld(e.to, times);\r\n    }\r\n\
+    \  }\r\n\r\n  int e_to_v(int eid) {\r\n    auto e = G.edges[eid];\r\n    return\
+    \ (parent[e.frm] == e.to ? e.frm : e.to);\r\n  }\r\n\r\n  int ELID(int v) { return\
+    \ 2 * LID[v] - depth[v]; }\r\n  int ERID(int v) { return 2 * RID[v] - depth[v]\
+    \ - 1; }\r\n\r\n  /* k: 0-indexed */\r\n  int LA(int v, int k) {\r\n    while\
+    \ (1) {\r\n      int u = head[v];\r\n      if (LID[v] - k >= LID[u]) return V[LID[v]\
+    \ - k];\r\n      k -= LID[v] - LID[u] + 1;\r\n      v = parent[u];\r\n    }\r\n\
+    \  }\r\n\r\n  int LCA(int u, int v) {\r\n    for (;; v = parent[head[v]]) {\r\n\
+    \      if (LID[u] > LID[v]) swap(u, v);\r\n      if (head[u] == head[v]) return\
+    \ u;\r\n    }\r\n  }\r\n\r\n  int subtree_size(int v) { return RID[v] - LID[v];\
+    \ }\r\n\r\n  int dist(int a, int b) {\r\n    int c = LCA(a, b);\r\n    return\
+    \ depth[a] + depth[b] - 2 * depth[c];\r\n  }\r\n\r\n  bool in_subtree(int a, int\
+    \ b) { return LID[b] <= LID[a] && LID[a] < RID[b]; }\r\n\r\n  int move(int a,\
+    \ int b) {\r\n    assert(a != b);\r\n    return (in_subtree(b, a) ? LA(b, depth[b]\
+    \ - depth[a] - 1) : parent[a]);\r\n  }\r\n\r\n  vc<pair<int, int>> get_path_decomposition(int\
+    \ u, int v, bool edge) {\r\n    // [\u59CB\u70B9, \u7D42\u70B9] \u306E\"\u9589\
+    \"\u533A\u9593\u5217\u3002\r\n    vc<pair<int, int>> up, down;\r\n    while (1)\
+    \ {\r\n      if (head[u] == head[v]) break;\r\n      if (LID[u] < LID[v]) {\r\n\
+    \        down.eb(LID[head[v]], LID[v]);\r\n        v = parent[head[v]];\r\n  \
+    \    } else {\r\n        up.eb(LID[u], LID[head[u]]);\r\n        u = parent[head[u]];\r\
+    \n      }\r\n    }\r\n    if (LID[u] < LID[v]) down.eb(LID[u] + edge, LID[v]);\r\
+    \n    elif (LID[v] + edge <= LID[u]) up.eb(LID[u], LID[v] + edge);\r\n    reverse(all(down));\r\
+    \n    up.insert(up.end(), all(down));\r\n    return up;\r\n  }\r\n\r\n  void debug()\
+    \ {\r\n    print(\"V\", V);\r\n    print(\"LID\", LID);\r\n    print(\"RID\",\
+    \ RID);\r\n    print(\"parent\", parent);\r\n    print(\"depth\", depth);\r\n\
+    \    print(\"head\", head);\r\n    print(\"in_tree(edge)\", in_tree);\r\n    print(\"\
+    root\", root);\r\n  }\r\n};\r\n#line 4 \"graph/functional.hpp\"\n\r\ntemplate\
     \ <typename T = int>\r\nstruct FunctionalGraph {\r\n  int N, M;\r\n  Graph<T,\
     \ 1> tree; // \u65B0\u3057\u3044\u9802\u70B9 N \u3092\u6839\u3068\u3057\u3066\u8FFD\
     \u52A0\u3057\u305F\u6709\u5411\u6728\u3002\u9006\u5411\u304D\u306E\u8FBA\u306B\
@@ -89,13 +135,31 @@ data:
     \n\r\n  void debug() {\r\n    print(\"TO\", TO);\r\n    print(\"root\");\r\n \
     \   print(root);\r\n    print(\"\u6839\u3092\u8FFD\u52A0\u3057\u305F\u6728 tree\"\
     );\r\n    tree.debug();\r\n  }\r\n};\r\n"
+  code: "#include \"ds/unionfind.hpp\"\r\n#include \"graph/base.hpp\"\r\n#include\
+    \ \"graph/hld.hpp\"\r\n\r\ntemplate <typename T = int>\r\nstruct FunctionalGraph\
+    \ {\r\n  int N, M;\r\n  Graph<T, 1> tree; // \u65B0\u3057\u3044\u9802\u70B9 N\
+    \ \u3092\u6839\u3068\u3057\u3066\u8FFD\u52A0\u3057\u305F\u6709\u5411\u6728\u3002\
+    \u9006\u5411\u304D\u306E\u8FBA\u306B\u306A\u308B\u3002\r\n  // HLD<Graph<T, 1>>\
+    \ hld;\r\n  vc<int> TO;\r\n  vc<T> wt;\r\n  vc<int> root;\r\n\r\n  FunctionalGraph()\
+    \ {}\r\n  FunctionalGraph(int N) : N(N), M(0), TO(N, -1), wt(N), root(N, -1) {}\r\
+    \n\r\n  void add(int a, int b, T c = 1) {\r\n    assert(0 <= a && a < N);\r\n\
+    \    assert(TO[a] == -1);\r\n    ++M;\r\n    TO[a] = b;\r\n    wt[a] = c;\r\n\
+    \  }\r\n\r\n  void build() {\r\n    assert(N == M);\r\n    UnionFind uf(N);\r\n\
+    \    FOR(v, N) if (!uf.merge(v, TO[v])) { root[v] = v; }\r\n    FOR(v, N) if (root[v]\
+    \ == v) root[uf[v]] = v;\r\n    FOR(v, N) root[v] = root[uf[v]];\r\n\r\n    tree\
+    \ = Graph<T, 1>(N + 1);\r\n    FOR(v, N) {\r\n      if (root[v] != v)\r\n    \
+    \    tree.add(TO[v], v);\r\n      else\r\n        tree.add(N, v);\r\n    }\r\n\
+    \    tree.prepare();\r\n  }\r\n\r\n  void debug() {\r\n    print(\"TO\", TO);\r\
+    \n    print(\"root\");\r\n    print(root);\r\n    print(\"\u6839\u3092\u8FFD\u52A0\
+    \u3057\u305F\u6728 tree\");\r\n    tree.debug();\r\n  }\r\n};\r\n"
   dependsOn:
   - ds/unionfind.hpp
   - graph/base.hpp
+  - graph/hld.hpp
   isVerificationFile: false
   path: graph/functional.hpp
   requiredBy: []
-  timestamp: '2022-02-12 21:55:04+09:00'
+  timestamp: '2022-02-14 14:30:41+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph/functional.hpp
