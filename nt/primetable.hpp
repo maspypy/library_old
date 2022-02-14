@@ -1,3 +1,4 @@
+#pragma once
 vc<ll>& primetable(int LIM) {
   ++LIM;
   const int S = 32768;
