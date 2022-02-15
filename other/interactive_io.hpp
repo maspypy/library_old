@@ -13,6 +13,14 @@
 #define DBL(...) \
   long double __VA_ARGS__; \
   IN(__VA_ARGS__)
+
+#define VEC(type, name, size) \
+  vector<type> name(size);    \
+  scan(name)
+#define VV(type, name, h, w)                     \
+  vector<vector<type>> name(h, vector<type>(w)); \
+  scan(name)
+
 void scan(int &a) { cin >> a; }
 void scan(long long &a) { cin >> a; }
 void scan(char &a) { cin >> a; }
