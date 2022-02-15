@@ -34,6 +34,9 @@ data:
     path: test/aoj/ITP2_11_D_for_nCk.test.cpp
     title: test/aoj/ITP2_11_D_for_nCk.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/NTL_1_E_extgcd.test.cpp
+    title: test/aoj/NTL_1_E_extgcd.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/convolution/bitwise_and_convolution.test.cpp
     title: test/library_checker/convolution/bitwise_and_convolution.test.cpp
   - icon: ':heavy_check_mark:'
@@ -521,6 +524,7 @@ data:
   timestamp: '2022-02-13 05:24:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/aoj/NTL_1_E_extgcd.test.cpp
   - test/aoj/DSL_4_A_rectangle_union.test.cpp
   - test/aoj/DSL_2_D_dualsegtree.test.cpp
   - test/aoj/ITP2_11_D_for_nCk.test.cpp

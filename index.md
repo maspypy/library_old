@@ -349,7 +349,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: nt/euler_phi.hpp
       title: nt/euler_phi.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: nt/extgcd.hpp
       title: nt/extgcd.hpp
     - icon: ':heavy_check_mark:'
@@ -586,6 +586,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/ITP2_11_D_for_nCk.test.cpp
       title: test/aoj/ITP2_11_D_for_nCk.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/NTL_1_E_extgcd.test.cpp
+      title: test/aoj/NTL_1_E_extgcd.test.cpp
   - name: test
     pages:
     - icon: ':heavy_check_mark:'
