@@ -30,12 +30,18 @@ data:
     path: graph/treeabelgroup.hpp
     title: graph/treeabelgroup.hpp
   - icon: ':heavy_check_mark:'
+    path: other/inversion.hpp
+    title: other/inversion.hpp
+  - icon: ':heavy_check_mark:'
     path: other/rectanglesums.hpp
     title: other/rectanglesums.hpp
   - icon: ':heavy_check_mark:'
     path: other/rectangleunion.hpp
     title: other/rectangleunion.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/ALDS1_5_inversion.test.cpp
+    title: test/aoj/ALDS1_5_inversion.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_E_fenwick_raq.test.cpp
     title: test/aoj/DSL_2_E_fenwick_raq.test.cpp
@@ -114,6 +120,7 @@ data:
   - alg/lazy_cntminmincnt_add.hpp
   - alg/lazy_cntsum_add.hpp
   - other/rectangleunion.hpp
+  - other/inversion.hpp
   - other/rectanglesums.hpp
   - graph/treeabelgroup.hpp
   timestamp: '2022-01-11 13:22:23+09:00'
@@ -121,6 +128,7 @@ data:
   verifiedWith:
   - test/aoj/DSL_4_A_rectangle_union.test.cpp
   - test/aoj/DSL_2_E_fenwick_raq.test.cpp
+  - test/aoj/ALDS1_5_inversion.test.cpp
   - test/aoj/DSL_2_G_fenwick_raq.test.cpp
   - test/aoj/DSL_2_H_min_add_lazy.test.cpp
   - test/yukicoder/1038_centroid.test.cpp

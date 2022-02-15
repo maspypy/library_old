@@ -12,9 +12,15 @@ data:
     path: graph/treeabelgroup.hpp
     title: graph/treeabelgroup.hpp
   - icon: ':heavy_check_mark:'
+    path: other/inversion.hpp
+    title: other/inversion.hpp
+  - icon: ':heavy_check_mark:'
     path: other/rectanglesums.hpp
     title: other/rectanglesums.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/ALDS1_5_inversion.test.cpp
+    title: test/aoj/ALDS1_5_inversion.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_E_fenwick_raq.test.cpp
     title: test/aoj/DSL_2_E_fenwick_raq.test.cpp
@@ -98,12 +104,14 @@ data:
   path: ds/fenwick.hpp
   requiredBy:
   - ds/fenwickraq.hpp
+  - other/inversion.hpp
   - other/rectanglesums.hpp
   - graph/treeabelgroup.hpp
   timestamp: '2022-02-12 15:43:23+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DSL_2_E_fenwick_raq.test.cpp
+  - test/aoj/ALDS1_5_inversion.test.cpp
   - test/aoj/DSL_2_G_fenwick_raq.test.cpp
   - test/yukicoder/1038_centroid.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp

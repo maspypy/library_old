@@ -188,7 +188,7 @@ data:
       title: geo/dynamicupperhull.hpp
   - name: graph
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/base.hpp
       title: graph/base.hpp
     - icon: ':heavy_check_mark:'
@@ -215,7 +215,7 @@ data:
     - icon: ':warning:'
       path: graph/decompose_complete.hpp
       title: graph/decompose_complete.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/degree.hpp
       title: graph/degree.hpp
     - icon: ':heavy_check_mark:'
@@ -248,7 +248,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/scc.hpp
       title: graph/scc.hpp
-    - icon: ':x:'
+    - icon: ':warning:'
       path: graph/toposort.hpp
       title: graph/toposort.hpp
     - icon: ':heavy_check_mark:'
@@ -341,7 +341,7 @@ data:
       title: mod/tetration.hpp
   - name: .
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: my_template.hpp
       title: my_template.hpp
   - name: nt
@@ -399,7 +399,10 @@ data:
     - icon: ':warning:'
       path: other/interactive_io.hpp
       title: other/interactive_io.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
+      path: other/inversion.hpp
+      title: other/inversion.hpp
+    - icon: ':heavy_check_mark:'
       path: other/io.hpp
       title: other/io.hpp
     - icon: ':warning:'
@@ -554,6 +557,9 @@ data:
   - name: test/aoj
     pages:
     - icon: ':heavy_check_mark:'
+      path: test/aoj/ALDS1_5_inversion.test.cpp
+      title: test/aoj/ALDS1_5_inversion.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_2_D_dualsegtree.test.cpp
       title: test/aoj/DSL_2_D_dualsegtree.test.cpp
     - icon: ':heavy_check_mark:'
@@ -574,9 +580,6 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_4_A_rectangle_union.test.cpp
       title: test/aoj/DSL_4_A_rectangle_union.test.cpp
-    - icon: ':x:'
-      path: test/aoj/GRL_4_B_toposort.test.cpp
-      title: test/aoj/GRL_4_B_toposort.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/GRL_6_A_maxflow.test.cpp
       title: test/aoj/GRL_6_A_maxflow.test.cpp
