@@ -6,6 +6,10 @@ vc<T> xor_convolution(vc<T> A, vc<T> B) {
   FOR(i, len(A)) A[i] *= B[i];
   hadamard(A);
   T c = T(1) / T(len(A));
-  FOR(i, len(A)) A[i] *= c;
+  if (c != T(0)) {
+    FOR(i, len(A)) A[i] *= c;
+  } else {
+    FOR(i, len(A)) A[i] /= len(A);
+  }
   return A;
 }
