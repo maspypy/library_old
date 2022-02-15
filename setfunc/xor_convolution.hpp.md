@@ -20,18 +20,20 @@ data:
     \    if (s < t) tie(A[s], A[t]) = mp(A[s] + A[t], A[s] - A[t]);  \r\n  }\r\n}\n\
     #line 2 \"setfunc/xor_convolution.hpp\"\ntemplate <typename T>\r\nvc<T> xor_convolution(vc<T>\
     \ A, vc<T> B) {\r\n  hadamard(A);\r\n  hadamard(B);\r\n  FOR(i, len(A)) A[i] *=\
-    \ B[i];\r\n  hadamard(A);\r\n  T c = T(1) / T(len(A));\r\n  FOR(i, len(A)) A[i]\
-    \ *= c;\r\n  return A;\r\n}\r\n"
+    \ B[i];\r\n  hadamard(A);\r\n  T c = T(1) / T(len(A));\r\n  if (c != T(0)) {\r\
+    \n    FOR(i, len(A)) A[i] *= c;\r\n  } else {\r\n    FOR(i, len(A)) A[i] /= len(A);\r\
+    \n  }\r\n  return A;\r\n}\r\n"
   code: "#include \"setfunc/hadamard.hpp\"\r\ntemplate <typename T>\r\nvc<T> xor_convolution(vc<T>\
     \ A, vc<T> B) {\r\n  hadamard(A);\r\n  hadamard(B);\r\n  FOR(i, len(A)) A[i] *=\
-    \ B[i];\r\n  hadamard(A);\r\n  T c = T(1) / T(len(A));\r\n  FOR(i, len(A)) A[i]\
-    \ *= c;\r\n  return A;\r\n}\r\n"
+    \ B[i];\r\n  hadamard(A);\r\n  T c = T(1) / T(len(A));\r\n  if (c != T(0)) {\r\
+    \n    FOR(i, len(A)) A[i] *= c;\r\n  } else {\r\n    FOR(i, len(A)) A[i] /= len(A);\r\
+    \n  }\r\n  return A;\r\n}\r\n"
   dependsOn:
   - setfunc/hadamard.hpp
   isVerificationFile: false
   path: setfunc/xor_convolution.hpp
   requiredBy: []
-  timestamp: '2022-01-06 02:25:41+09:00'
+  timestamp: '2022-02-15 18:38:17+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/convolution/bitwise_xor_convolution.test.cpp

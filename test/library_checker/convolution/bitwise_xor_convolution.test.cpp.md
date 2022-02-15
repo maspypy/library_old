@@ -238,7 +238,8 @@ data:
     \ A[t]);  \r\n  }\r\n}\n#line 2 \"setfunc/xor_convolution.hpp\"\ntemplate <typename\
     \ T>\r\nvc<T> xor_convolution(vc<T> A, vc<T> B) {\r\n  hadamard(A);\r\n  hadamard(B);\r\
     \n  FOR(i, len(A)) A[i] *= B[i];\r\n  hadamard(A);\r\n  T c = T(1) / T(len(A));\r\
-    \n  FOR(i, len(A)) A[i] *= c;\r\n  return A;\r\n}\r\n#line 7 \"test/library_checker/convolution/bitwise_xor_convolution.test.cpp\"\
+    \n  if (c != T(0)) {\r\n    FOR(i, len(A)) A[i] *= c;\r\n  } else {\r\n    FOR(i,\
+    \ len(A)) A[i] /= len(A);\r\n  }\r\n  return A;\r\n}\r\n#line 7 \"test/library_checker/convolution/bitwise_xor_convolution.test.cpp\"\
     \n\r\nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N);\r\n  VEC(mint,\
     \ A, 1 << N);\r\n  VEC(mint, B, 1 << N);\r\n  auto C = xor_convolution(A, B);\r\
     \n  print(C);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
@@ -259,7 +260,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/convolution/bitwise_xor_convolution.test.cpp
   requiredBy: []
-  timestamp: '2022-02-13 05:24:17+09:00'
+  timestamp: '2022-02-15 18:38:17+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/convolution/bitwise_xor_convolution.test.cpp
