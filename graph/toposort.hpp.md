@@ -4,20 +4,17 @@ data:
   - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':heavy_check_mark:'
-    path: graph/bfs01.hpp
-    title: graph/bfs01.hpp
-  - icon: ':heavy_check_mark:'
-    path: graph/restore_path.hpp
-    title: graph/restore_path.hpp
+  - icon: ':question:'
+    path: graph/degree.hpp
+    title: graph/degree.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/tree/tree_diameter.test.cpp
-    title: test/library_checker/tree/tree_diameter.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: test/aoj/GRL_4_B_toposort.test.cpp
+    title: test/aoj/GRL_4_B_toposort.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n\
@@ -52,44 +49,40 @@ data:
     Graph\");\n    if (!prepared) {\n      print(\"frm to cost id\");\n      for (auto&&\
     \ e: edges) print(e.frm, e.to, e.cost, e.id);\n    } else {\n      print(\"indptr\"\
     , indptr);\n      print(\"frm to cost id\");\n      FOR(v, N) for (auto&& e: (*this)[v])\
-    \ print(e.frm, e.to, e.cost, e.id);\n    }\n  }\n};\n#line 3 \"graph/bfs01.hpp\"\
-    \n\ntemplate<typename Graph>\npair<vc<ll>, vc<int>> bfs01(Graph& G, ll v) {\n\
-    \  assert(G.is_prepared());\n  int N = G.N;\n  vc<ll> dist(N, -1);\n  vc<int>\
-    \ par(N, -1);\n  deque<int> que;\n\n  dist[v] = 0;\n  que.push_front(v);\n  while\
-    \ (!que.empty()) {\n    auto v = que.front();\n    que.pop_front();\n    for (auto&&\
-    \ e : G[v]) {\n      if (dist[e.to] == -1 || dist[e.to] > dist[e.frm] + e.cost)\
-    \ {\n        dist[e.to] = dist[e.frm] + e.cost;\n        par[e.to] = e.frm;\n\
-    \        if (e.cost == 0)\n          que.push_front(e.to);\n        else\n   \
-    \       que.push_back(e.to);\n      }\n    }\n  }\n  return {dist, par};\n}\n\
-    #line 1 \"graph/restore_path.hpp\"\nvector<int> restore_path(vector<int> par,\
-    \ int t){\r\n  vector<int> pth = {t};\r\n  while (par[pth.back()] != -1) pth.eb(par[pth.back()]);\r\
-    \n  reverse(all(pth));\r\n  return pth;\r\n}\n#line 3 \"graph/tree_diameter.hpp\"\
-    \n\r\ntemplate <typename T>\r\npair<T, vc<int>> tree_diameter(Graph<T>& G) {\r\
-    \n  assert(G.is_prepared());\r\n  int A, B;\r\n  {\r\n    auto [dist, par] = bfs01(G,\
-    \ 0);\r\n    A = max_element(all(dist)) - dist.begin();\r\n  }\r\n  auto [dist,\
-    \ par] = bfs01(G, A);\r\n  B = max_element(all(dist)) - dist.begin();\r\n  vc<int>\
-    \ P = restore_path(par, B);\r\n  return {dist[B], P};\r\n}\r\n"
-  code: "#include \"graph/bfs01.hpp\"\r\n#include \"graph/restore_path.hpp\"\r\n\r\
-    \ntemplate <typename T>\r\npair<T, vc<int>> tree_diameter(Graph<T>& G) {\r\n \
-    \ assert(G.is_prepared());\r\n  int A, B;\r\n  {\r\n    auto [dist, par] = bfs01(G,\
-    \ 0);\r\n    A = max_element(all(dist)) - dist.begin();\r\n  }\r\n  auto [dist,\
-    \ par] = bfs01(G, A);\r\n  B = max_element(all(dist)) - dist.begin();\r\n  vc<int>\
-    \ P = restore_path(par, B);\r\n  return {dist[B], P};\r\n}\r\n"
+    \ print(e.frm, e.to, e.cost, e.id);\n    }\n  }\n};\n#line 2 \"graph/degree.hpp\"\
+    \n\r\ntemplate <typename Graph>\r\nvector<int> degree(Graph& G) {\r\n  vector<int>\
+    \ deg(G.N);\r\n  for(auto&& e : G.edges) deg[e.frm]++, deg[e.to]++;\r\n  return\
+    \ deg;\r\n}\r\n\r\ntemplate <typename Graph>\r\npair<vector<int>, vector<int>>\
+    \ degree_inout(Graph& G) {\r\n  vector<int> indeg(G.N), outdeg(G.N);\r\n  for\
+    \ (auto&& e: G.edges) { indeg[e.to]++, outdeg[e.frm]++; }\r\n  return {indeg,\
+    \ outdeg};\r\n}\r\n#line 3 \"graph/toposort.hpp\"\n\ntemplate <typename Graph>\n\
+    vc<int> toposort(Graph& G) {\n  // DAG \u3058\u3083\u306A\u304B\u3063\u305F\u3089\
+    \u30A8\u30E9\u30FC\n  assert(G.is_prepared());\n  assert(G.is_directed());\n \
+    \ auto [indeg, outdeg] = degree_inout(G);\n  vc<int> V;\n  ll N = G.N;\n  FOR(v,\
+    \ N) if (indeg[v] == 0) V.eb(v);\n  ll p = 0;\n  while (p < len(V)) {\n    auto\
+    \ v = V[p++];\n    for (auto&& e: G[v]) {\n      if (--indeg[e.to] == 0) V.eb(e.to);\n\
+    \    }\n  }\n  assert(len(V) == N);\n  return V;\n}\n"
+  code: "#include \"graph/base.hpp\"\n#include \"graph/degree.hpp\"\n\ntemplate <typename\
+    \ Graph>\nvc<int> toposort(Graph& G) {\n  // DAG \u3058\u3083\u306A\u304B\u3063\
+    \u305F\u3089\u30A8\u30E9\u30FC\n  assert(G.is_prepared());\n  assert(G.is_directed());\n\
+    \  auto [indeg, outdeg] = degree_inout(G);\n  vc<int> V;\n  ll N = G.N;\n  FOR(v,\
+    \ N) if (indeg[v] == 0) V.eb(v);\n  ll p = 0;\n  while (p < len(V)) {\n    auto\
+    \ v = V[p++];\n    for (auto&& e: G[v]) {\n      if (--indeg[e.to] == 0) V.eb(e.to);\n\
+    \    }\n  }\n  assert(len(V) == N);\n  return V;\n}\n"
   dependsOn:
-  - graph/bfs01.hpp
   - graph/base.hpp
-  - graph/restore_path.hpp
+  - graph/degree.hpp
   isVerificationFile: false
-  path: graph/tree_diameter.hpp
+  path: graph/toposort.hpp
   requiredBy: []
-  timestamp: '2022-02-14 14:30:41+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-02-15 15:17:39+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/library_checker/tree/tree_diameter.test.cpp
-documentation_of: graph/tree_diameter.hpp
+  - test/aoj/GRL_4_B_toposort.test.cpp
+documentation_of: graph/toposort.hpp
 layout: document
 redirect_from:
-- /library/graph/tree_diameter.hpp
-- /library/graph/tree_diameter.hpp.html
-title: graph/tree_diameter.hpp
+- /library/graph/toposort.hpp
+- /library/graph/toposort.hpp.html
+title: graph/toposort.hpp
 ---
