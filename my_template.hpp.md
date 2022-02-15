@@ -37,6 +37,9 @@ data:
     path: test/aoj/GRL_6_A_maxflow.test.cpp
     title: test/aoj/GRL_6_A_maxflow.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/ITP2_11_D_for_nCk.test.cpp
+    title: test/aoj/ITP2_11_D_for_nCk.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/convolution/bitwise_and_convolution.test.cpp
     title: test/library_checker/convolution/bitwise_and_convolution.test.cpp
   - icon: ':heavy_check_mark:'
@@ -475,6 +478,7 @@ data:
   verifiedWith:
   - test/aoj/DSL_4_A_rectangle_union.test.cpp
   - test/aoj/DSL_2_D_dualsegtree.test.cpp
+  - test/aoj/ITP2_11_D_for_nCk.test.cpp
   - test/aoj/DSL_2_E_fenwick_raq.test.cpp
   - test/aoj/GRL_6_A_maxflow.test.cpp
   - test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp

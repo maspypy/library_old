@@ -2,10 +2,13 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/ITP2_11_D_for_nCk.test.cpp
+    title: test/aoj/ITP2_11_D_for_nCk.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"other/for_nck.hpp\"\n#define FOR_nCk(s, n, k) \\\r\n  for\
@@ -20,8 +23,9 @@ data:
   path: other/for_nck.hpp
   requiredBy: []
   timestamp: '2021-12-27 17:06:22+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/aoj/ITP2_11_D_for_nCk.test.cpp
 documentation_of: other/for_nck.hpp
 layout: document
 redirect_from:

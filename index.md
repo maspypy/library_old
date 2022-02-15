@@ -390,7 +390,7 @@ data:
     - icon: ':warning:'
       path: other/floor_range.hpp
       title: other/floor_range.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: other/for_nck.hpp
       title: other/for_nck.hpp
     - icon: ':heavy_check_mark:'
@@ -583,6 +583,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/GRL_6_A_maxflow.test.cpp
       title: test/aoj/GRL_6_A_maxflow.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/ITP2_11_D_for_nCk.test.cpp
+      title: test/aoj/ITP2_11_D_for_nCk.test.cpp
   - name: test
     pages:
     - icon: ':heavy_check_mark:'
