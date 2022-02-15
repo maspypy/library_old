@@ -15,6 +15,7 @@ struct FenwickTree {
   }
   FenwickTree(vc<E> v) : n(len(v)), total(AbelGroup::unit) {
     assert(AbelGroup::commute);
+    FOR(i, n) total = AbelGroup::op(total, v[i]);
     dat = v;
     FOR3(i, 1, n + 1) {
       int j = i + (i & -i);
@@ -51,7 +52,7 @@ struct FenwickTree {
 
   template <class F>
   int max_right(F& check) {
-    assert(f(E(0)));
+    assert(check(E(0)));
     ll i = 0;
     E s = AbelGroup::unit;
     int k = 1;
