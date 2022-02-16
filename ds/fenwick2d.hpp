@@ -117,7 +117,7 @@ struct Fenwick2D {
     return AbelGroup::op(pos, AbelGroup::inverse(neg));
   }
 
-  E sum(ll lx, ll rx, ll ly, ll ry) {
+  E sum(ll lx, ll ly, ll rx, ll ry) {
     E ret = 0;
     int L = xtoi(lx) - 1;
     int R = xtoi(rx) - 1;

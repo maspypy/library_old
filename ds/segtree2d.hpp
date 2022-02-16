@@ -106,7 +106,7 @@ struct SegTree2D {
     return val;
   }
 
-  S prod(XY lx, XY rx, XY ly, XY ry) {
+  S prod(XY lx, XY ly, XY rx, XY ry) {
     int L = xtoi(lx);
     int R = xtoi(rx);
     L += N;

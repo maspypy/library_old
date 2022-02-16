@@ -1,5 +1,3 @@
-#include "alg/group_add.hpp"
-// https://codeforces.com/contest/707/problem/E
 template <typename AbelGroup>
 struct Fenwick2D_dense {
   using E = typename AbelGroup::value_type;
@@ -39,7 +37,7 @@ struct Fenwick2D_dense {
     return AbelGroup::op(pos, AbelGroup::inverse(neg));
   }
 
-  E sum(int lx, int rx, int ly, int ry) {
+  E sum(int lx, int ly, int rx, int ry) {
     E pos = AbelGroup::unit;
     E neg = AbelGroup::unit;
     while (lx < rx) {
@@ -51,5 +49,10 @@ struct Fenwick2D_dense {
       lx -= lx & -lx;
     }
     return AbelGroup::op(pos, AbelGroup::inverse(neg));
+  }
+
+  void debug(){
+    print("Fenwick2d dat");
+    FOR(x, H + 1) print(dat[x]);
   }
 };
