@@ -130,9 +130,9 @@ vector<T> cumsum(vector<T> &A, int off = 1) {
   return B;
 }
 
-template <typename T>
-vc<int> bincount(vc<T> &A, int size) {
-  vc<int> C(size);
+template <typename T, typename CNT = int>
+vc<CNT> bincount(vc<T> &A, int size) {
+  vc<CNT> C(size);
   for (auto &&x: A) { ++C[x]; }
   return C;
 }
