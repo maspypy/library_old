@@ -21,6 +21,9 @@ data:
     path: ds/fenwick2d.hpp
     title: ds/fenwick2d.hpp
   - icon: ':heavy_check_mark:'
+    path: ds/fenwick2d_dense.hpp
+    title: ds/fenwick2d_dense.hpp
+  - icon: ':heavy_check_mark:'
     path: ds/fenwickraq.hpp
     title: ds/fenwickraq.hpp
   - icon: ':heavy_check_mark:'
@@ -36,6 +39,9 @@ data:
     path: other/rectangleunion.hpp
     title: other/rectangleunion.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/2842_fenwick2d_dense.test.cpp
+    title: test/aoj/2842_fenwick2d_dense.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_5_inversion.test.cpp
     title: test/aoj/ALDS1_5_inversion.test.cpp
@@ -110,6 +116,7 @@ data:
   requiredBy:
   - ds/fenwick.hpp
   - ds/fenwickraq.hpp
+  - ds/fenwick2d_dense.hpp
   - ds/fenwick2d.hpp
   - alg/lazy_min_add.hpp
   - alg/lazy_add_mul.hpp
@@ -125,6 +132,7 @@ data:
   - test/aoj/DSL_4_A_rectangle_union.test.cpp
   - test/aoj/DSL_2_E_fenwick_raq.test.cpp
   - test/aoj/ALDS1_5_inversion.test.cpp
+  - test/aoj/2842_fenwick2d_dense.test.cpp
   - test/aoj/DSL_2_G_fenwick_raq.test.cpp
   - test/aoj/DSL_2_H_min_add_lazy.test.cpp
   - test/yukicoder/1038_centroid.test.cpp
