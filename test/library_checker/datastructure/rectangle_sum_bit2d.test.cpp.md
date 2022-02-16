@@ -7,10 +7,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: ds/fenwick2d.hpp
     title: ds/fenwick2d.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
   _extendedRequiredBy: []
@@ -205,7 +205,7 @@ data:
     \n    while (L < R) {\r\n      pos = AbelGroup::op(pos, dat[LID + R]);\r\n   \
     \   R = prev(R);\r\n    }\r\n    while (R < L) {\r\n      neg = AbelGroup::op(neg,\
     \ dat[LID + L]);\r\n      L = prev(L);\r\n    }\r\n    return AbelGroup::op(pos,\
-    \ AbelGroup::inverse(neg));\r\n  }\r\n\r\n  E sum(ll lx, ll rx, ll ly, ll ry)\
+    \ AbelGroup::inverse(neg));\r\n  }\r\n\r\n  E sum(ll lx, ll ly, ll rx, ll ry)\
     \ {\r\n    E ret = 0;\r\n    int L = xtoi(lx) - 1;\r\n    int R = xtoi(rx) - 1;\r\
     \n    while (L < R) {\r\n      ret += sum_i(R, ly, ry);\r\n      R = prev(R);\r\
     \n    }\r\n    while (R < L) {\r\n      ret -= sum_i(L, ly, ry);\r\n      L =\
@@ -214,14 +214,14 @@ data:
     \n    print(\"dat\", dat);\r\n  }\r\n};\n#line 7 \"test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp\"\
     \n\nvoid solve() {\n  LL(N, Q);\n  vi X(N), Y(N), W(N);\n  FOR(i, N) {\n    LL(x,\
     \ y, w);\n    X[i] = x, Y[i] = y, W[i] = w;\n  }\n  Fenwick2D<Group_Add<ll>, false>\
-    \ bit(X, Y, W);\n  FOR(_, Q) {\n    LL(l, d, r, u);\n    print(bit.sum(l, r, d,\
+    \ bit(X, Y, W);\n  FOR(_, Q) {\n    LL(l, d, r, u);\n    print(bit.sum(l, d, r,\
     \ u));\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
     \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/rectangle_sum\"\n\n#include\
     \ \"my_template.hpp\"\n#include \"other/io.hpp\"\n\n#include \"ds/fenwick2d.hpp\"\
     \n\nvoid solve() {\n  LL(N, Q);\n  vi X(N), Y(N), W(N);\n  FOR(i, N) {\n    LL(x,\
     \ y, w);\n    X[i] = x, Y[i] = y, W[i] = w;\n  }\n  Fenwick2D<Group_Add<ll>, false>\
-    \ bit(X, Y, W);\n  FOR(_, Q) {\n    LL(l, d, r, u);\n    print(bit.sum(l, r, d,\
+    \ bit(X, Y, W);\n  FOR(_, Q) {\n    LL(l, d, r, u);\n    print(bit.sum(l, d, r,\
     \ u));\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
     \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
   dependsOn:
@@ -232,7 +232,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
   requiredBy: []
-  timestamp: '2022-02-13 05:24:17+09:00'
+  timestamp: '2022-02-16 13:38:20+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp

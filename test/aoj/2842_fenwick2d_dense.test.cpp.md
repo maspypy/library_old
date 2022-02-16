@@ -1,37 +1,31 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: mod/modint.hpp
-    title: mod/modint.hpp
+  - icon: ':x:'
+    path: ds/fenwick2d_dense.hpp
+    title: ds/fenwick2d_dense.hpp
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
-  - icon: ':heavy_check_mark:'
-    path: setfunc/and_convolution.hpp
-    title: setfunc/and_convolution.hpp
-  - icon: ':heavy_check_mark:'
-    path: setfunc/zeta.hpp
-    title: setfunc/zeta.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/bitwise_and_convolution
+    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2842
     links:
-    - https://judge.yosupo.jp/problem/bitwise_and_convolution
-  bundledCode: "#line 1 \"test/library_checker/convolution/bitwise_and_convolution.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/bitwise_and_convolution\"\r\
-    \n#line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
-    \nusing ll = long long;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing\
-    \ u32 = unsigned int;\nusing u64 = unsigned long long;\nusing i128 = __int128;\n\
-    \ntemplate <class T>\nusing vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\n\
+    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2842
+  bundledCode: "#line 1 \"test/aoj/2842_fenwick2d_dense.test.cpp\"\n#define PROBLEM\
+    \ \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2842\"\n#line 1\
+    \ \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\nusing\
+    \ ll = long long;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing u32\
+    \ = unsigned int;\nusing u64 = unsigned long long;\nusing i128 = __int128;\n\n\
+    template <class T>\nusing vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\n\
     template <class T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc\
     \ = vector<vvvc<T>>;\ntemplate <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate\
     \ <class T>\nusing pq = priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T,\
@@ -162,118 +156,65 @@ data:
     ); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t = 1) { print(t ? \"\
     Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\nvoid yes(bool t = 1)\
     \ { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) { yes(!t); }\r\n#line\
-    \ 4 \"test/library_checker/convolution/bitwise_and_convolution.test.cpp\"\n\r\n\
-    #line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n  static constexpr\
-    \ bool is_modint = true;\n  int val;\n  constexpr modint(const ll val = 0) noexcept\n\
-    \      : val(val >= 0 ? val % mod : (mod - (-val) % mod) % mod) {}\n  bool operator<(const\
-    \ modint &other) const {\n    return val < other.val;\n  } // To use std::map\n\
-    \  modint &operator+=(const modint &p) {\n    if ((val += p.val) >= mod) val -=\
-    \ mod;\n    return *this;\n  }\n  modint &operator-=(const modint &p) {\n    if\
-    \ ((val += mod - p.val) >= mod) val -= mod;\n    return *this;\n  }\n  modint\
-    \ &operator*=(const modint &p) {\n    val = (int)(1LL * val * p.val % mod);\n\
-    \    return *this;\n  }\n  modint &operator/=(const modint &p) {\n    *this *=\
-    \ p.inverse();\n    return *this;\n  }\n  modint operator-() const { return modint(-val);\
-    \ }\n  modint operator+(const modint &p) const { return modint(*this) += p; }\n\
-    \  modint operator-(const modint &p) const { return modint(*this) -= p; }\n  modint\
-    \ operator*(const modint &p) const { return modint(*this) *= p; }\n  modint operator/(const\
-    \ modint &p) const { return modint(*this) /= p; }\n  bool operator==(const modint\
-    \ &p) const { return val == p.val; }\n  bool operator!=(const modint &p) const\
-    \ { return val != p.val; }\n  modint inverse() const {\n    int a = val, b = mod,\
-    \ u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -= t *\
-    \ b, b), swap(u -= t * v, v);\n    }\n    return modint(u);\n  }\n  modint pow(int64_t\
-    \ n) const {\n    modint ret(1), mul(val);\n    while (n > 0) {\n      if (n &\
-    \ 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n    return ret;\n\
-    \  }\n  static constexpr int get_mod() { return mod; }\n};\n\nstruct ArbitraryModInt\
-    \ {\n  static constexpr bool is_modint = true;\n  int val;\n  ArbitraryModInt()\
-    \ : val(0) {}\n  ArbitraryModInt(int64_t y)\n      : val(y >= 0 ? y % get_mod()\n\
-    \                   : (get_mod() - (-y) % get_mod()) % get_mod()) {}\n  bool operator<(const\
-    \ ArbitraryModInt &other) const {\n    return val < other.val;\n  } // To use\
-    \ std::map<ArbitraryModInt, T>\n  static int &get_mod() {\n    static int mod\
-    \ = 0;\n    return mod;\n  }\n  static void set_mod(int md) { get_mod() = md;\
-    \ }\n  ArbitraryModInt &operator+=(const ArbitraryModInt &p) {\n    if ((val +=\
-    \ p.val) >= get_mod()) val -= get_mod();\n    return *this;\n  }\n  ArbitraryModInt\
-    \ &operator-=(const ArbitraryModInt &p) {\n    if ((val += get_mod() - p.val)\
-    \ >= get_mod()) val -= get_mod();\n    return *this;\n  }\n  ArbitraryModInt &operator*=(const\
-    \ ArbitraryModInt &p) {\n    unsigned long long a = (unsigned long long)val *\
-    \ p.val;\n    unsigned xh = (unsigned)(a >> 32), xl = (unsigned)a, d, m;\n   \
-    \ asm(\"divl %4; \\n\\t\" : \"=a\"(d), \"=d\"(m) : \"d\"(xh), \"a\"(xl), \"r\"\
-    (get_mod()));\n    val = m;\n    return *this;\n  }\n  ArbitraryModInt &operator/=(const\
-    \ ArbitraryModInt &p) {\n    *this *= p.inverse();\n    return *this;\n  }\n \
-    \ ArbitraryModInt operator-() const { return ArbitraryModInt(-val); }\n  ArbitraryModInt\
-    \ operator+(const ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this)\
-    \ += p;\n  }\n  ArbitraryModInt operator-(const ArbitraryModInt &p) const {\n\
-    \    return ArbitraryModInt(*this) -= p;\n  }\n  ArbitraryModInt operator*(const\
-    \ ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this) *= p;\n  }\n\
-    \  ArbitraryModInt operator/(const ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this)\
-    \ /= p;\n  }\n  bool operator==(const ArbitraryModInt &p) const { return val ==\
-    \ p.val; }\n  bool operator!=(const ArbitraryModInt &p) const { return val !=\
-    \ p.val; }\n  ArbitraryModInt inverse() const {\n    int a = val, b = get_mod(),\
-    \ u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -= t *\
-    \ b, b), swap(u -= t * v, v);\n    }\n    return ArbitraryModInt(u);\n  }\n  ArbitraryModInt\
-    \ pow(int64_t n) const {\n    ArbitraryModInt ret(1), mul(val);\n    while (n\
-    \ > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n  \
-    \  }\n    return ret;\n  }\n};\n\ntemplate<typename mint>\ntuple<mint, mint, mint>\
-    \ get_factorial_data(int n){\n  static constexpr int mod = mint::get_mod();\n\
-    \  assert(0 <= n && n < mod);\n  static vector<mint> fact = {1, 1};\n  static\
-    \ vector<mint> fact_inv = {1, 1};\n  static vector<mint> inv = {0, 1};\n  while(len(fact)\
-    \ <= n){\n    int k = len(fact);\n    fact.eb(fact[k - 1] * mint(k));\n    auto\
-    \ q = ceil(mod, k);\n    int r = k * q - mod;\n    inv.eb(inv[r] * mint(q));\n\
-    \    fact_inv.eb(fact_inv[k - 1] * inv[k]);\n  }\n  return {fact[n], fact_inv[n],\
-    \ inv[n]};\n}\n\ntemplate<typename mint>\nmint fact(int n){\n  static constexpr\
-    \ int mod = mint::get_mod();\n  assert(0 <= n);\n  if(n >= mod) return 0;\n  return\
-    \ get<0>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename mint>\nmint fact_inv(int\
-    \ n){\n  static constexpr int mod = mint::get_mod();\n  assert(0 <= n && n < mod);\n\
-    \  return get<1>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename mint>\n\
-    mint inv(int n){\n  static constexpr int mod = mint::get_mod();\n  assert(0 <=\
-    \ n && n < mod);\n  return get<2>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename\
-    \ mint>\nmint C(ll n, ll k, bool large = false) {\n  assert(n >= 0);\n  if (k\
-    \ < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n) * fact_inv<mint>(k)\
-    \ * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n  FOR(i, k) {\n\
-    \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\nusing\
-    \ modint107 = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n\
-    using amint = ArbitraryModInt;\n#line 2 \"setfunc/zeta.hpp\"\n\r\ntemplate <typename\
-    \ T>\r\nvoid superset_zeta(vc<T>& A) {\r\n  int log = topbit(len(A));\r\n  assert(1\
-    \ << log == len(A));\r\n  FOR(n, log) FOR(s, 1 << log) {\r\n    int t = s ^ (1\
-    \ << n);\r\n    if (s < t) A[s] += A[t];\r\n  }\r\n}\r\n\r\ntemplate <typename\
-    \ T>\r\nvoid superset_mobius(vc<T>& A) {\r\n  int log = topbit(len(A));\r\n  assert(1\
-    \ << log == len(A));\r\n  FOR(n, log) FOR(s, 1 << log) {\r\n    int t = s ^ (1\
-    \ << n);\r\n    if (s < t) A[s] -= A[t];\r\n  }\r\n}\r\n\r\ntemplate <typename\
-    \ T>\r\nvoid subset_zeta(vc<T>& A) {\r\n  int log = topbit(len(A));\r\n  assert(1\
-    \ << log == len(A));\r\n  FOR(n, log) FOR(s, 1 << log) {\r\n    int t = s ^ (1\
-    \ << n);\r\n    if (s > t) A[s] += A[t];\r\n  }\r\n}\r\n\r\ntemplate <typename\
-    \ T>\r\nvoid subset_mobius(vc<T>& A) {\r\n  int log = topbit(len(A));\r\n  assert(1\
-    \ << log == len(A));\r\n  FOR(n, log) FOR(s, 1 << log) {\r\n    int t = s ^ (1\
-    \ << n);\r\n    if (s > t) A[s] -= A[t];\r\n  }\r\n}\n#line 2 \"setfunc/and_convolution.hpp\"\
-    \ntemplate <typename T>\r\nvc<T> and_convolution(vc<T> A, vc<T> B) {\r\n  superset_zeta(A);\r\
-    \n  superset_zeta(B);\r\n  FOR(i, len(A)) A[i] *= B[i];\r\n  superset_mobius(A);\r\
-    \n  return A;\r\n}\r\n#line 7 \"test/library_checker/convolution/bitwise_and_convolution.test.cpp\"\
-    \n\r\nusing mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N);\r\n  VEC(mint,\
-    \ A, 1 << N);\r\n  VEC(mint, B, 1 << N);\r\n  auto ANS = and_convolution(A, B);\r\
-    \n  print(ANS);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/bitwise_and_convolution\"\
-    \r\n#include \"my_template.hpp\"\r\n#include \"other/io.hpp\"\r\n\r\n#include\
-    \ \"mod/modint.hpp\"\r\n#include \"setfunc/and_convolution.hpp\"\r\n\r\nusing\
-    \ mint = modint998;\r\n\r\nvoid solve() {\r\n  LL(N);\r\n  VEC(mint, A, 1 << N);\r\
-    \n  VEC(mint, B, 1 << N);\r\n  auto ANS = and_convolution(A, B);\r\n  print(ANS);\r\
-    \n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \ 1 \"ds/fenwick2d_dense.hpp\"\ntemplate <typename AbelGroup>\r\nstruct Fenwick2D_dense\
+    \ {\r\n  using E = typename AbelGroup::value_type;\r\n  int H, W;\r\n  vc<vc<E>>\
+    \ dat;\r\n\r\n  Fenwick2D_dense() {}\r\n  Fenwick2D_dense(int H, int W) : H(H),\
+    \ W(W), dat(H + 1, vc<E>(W + 1)) {}\r\n\r\n  void add_x(int x, int y, E val) {\r\
+    \n    ++y;\r\n    while (y <= W) {\r\n      dat[x][y] = AbelGroup::op(dat[x][y],\
+    \ val);\r\n      y += y & -y;\r\n    }\r\n  }\r\n\r\n  void add(int x, int y,\
+    \ E val) {\r\n    ++x;\r\n    while (x <= H) {\r\n      add_x(x, y, val);\r\n\
+    \      x += x & -x;\r\n    }\r\n  }\r\n\r\n  E sum_x(int x, int ly, int ry) {\r\
+    \n    E pos = AbelGroup::unit;\r\n    E neg = AbelGroup::unit;\r\n    while (ly\
+    \ < ry) {\r\n      pos = AbelGroup::op(pos, dat[x][ry]);\r\n      ry -= ry & -ry;\r\
+    \n    }\r\n    while (ry < ly) {\r\n      neg = AbelGroup::op(neg, dat[x][ly]);\r\
+    \n      ly -= ly & -ly;\r\n    }\r\n    return AbelGroup::op(pos, AbelGroup::inverse(neg));\r\
+    \n  }\r\n\r\n  E sum(int lx, int ly, int rx, int ry) {\r\n    E pos = AbelGroup::unit;\r\
+    \n    E neg = AbelGroup::unit;\r\n    while (lx < rx) {\r\n      pos = AbelGroup::op(pos,\
+    \ sum_x(rx, ly, ry));\r\n      rx -= rx & -rx;\r\n    }\r\n    while (rx < lx)\
+    \ {\r\n      neg = AbelGroup::op(neg, sum_x(lx, ly, ry));\r\n      lx -= lx &\
+    \ -lx;\r\n    }\r\n    return AbelGroup::op(pos, AbelGroup::inverse(neg));\r\n\
+    \  }\r\n\r\n  void debug(){\r\n    print(\"Fenwick2d dat\");\r\n    FOR(x, H +\
+    \ 1) print(dat[x]);\r\n  }\r\n};\r\n#line 5 \"test/aoj/2842_fenwick2d_dense.test.cpp\"\
+    \n\nvoid solve() {\n  LL(H, W, T, Q);\n  deque<tuple<ll, ll, ll>> que;\n  const\
+    \ ll INF = 1LL << 60;\n  vv(ll, time, H, W, INF);\n\n  Fenwick2D_dense<Group_Add<ll>>\
+    \ A(H, W);\n  Fenwick2D_dense<Group_Add<ll>> B(H, W);\n\n  deque<tuple<ll, ll,\
+    \ ll>> end;\n\n  FOR_(Q) {\n    LL(t, c, x, y);\n    --x, --y;\n    while (len(end)\
+    \ && get<2>(end.front()) <= t) {\n      auto [x, y, t] = end.front();\n      end.pop_front();\n\
+    \      A.add(x, y, 1);\n      B.add(x, y, -1);\n    }\n    if (c == 0) {\n   \
+    \   B.add(x, y, 1);\n      end.eb(x, y, t + T);\n    }\n    elif (c == 1) {\n\
+    \      if (A.sum(x, y, x + 1, y + 1)) A.add(x, y, -1);\n    }\n    elif (c ==\
+    \ 2) {\n      LL(x2, y2);\n      print(A.sum(x, y, x2, y2), B.sum(x, y, x2, y2));\n\
+    \    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
+    \  cout << setprecision(15);\n\n  ll T = 1;\n  // LL(T);\n  FOR(_, T) solve();\n\
+    \n  return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2842\"\
+    \n#include \"my_template.hpp\"\n#include \"other/io.hpp\"\n#include \"ds/fenwick2d_dense.hpp\"\
+    \n\nvoid solve() {\n  LL(H, W, T, Q);\n  deque<tuple<ll, ll, ll>> que;\n  const\
+    \ ll INF = 1LL << 60;\n  vv(ll, time, H, W, INF);\n\n  Fenwick2D_dense<Group_Add<ll>>\
+    \ A(H, W);\n  Fenwick2D_dense<Group_Add<ll>> B(H, W);\n\n  deque<tuple<ll, ll,\
+    \ ll>> end;\n\n  FOR_(Q) {\n    LL(t, c, x, y);\n    --x, --y;\n    while (len(end)\
+    \ && get<2>(end.front()) <= t) {\n      auto [x, y, t] = end.front();\n      end.pop_front();\n\
+    \      A.add(x, y, 1);\n      B.add(x, y, -1);\n    }\n    if (c == 0) {\n   \
+    \   B.add(x, y, 1);\n      end.eb(x, y, t + T);\n    }\n    elif (c == 1) {\n\
+    \      if (A.sum(x, y, x + 1, y + 1)) A.add(x, y, -1);\n    }\n    elif (c ==\
+    \ 2) {\n      LL(x2, y2);\n      print(A.sum(x, y, x2, y2), B.sum(x, y, x2, y2));\n\
+    \    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
+    \  cout << setprecision(15);\n\n  ll T = 1;\n  // LL(T);\n  FOR(_, T) solve();\n\
+    \n  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
-  - mod/modint.hpp
-  - setfunc/and_convolution.hpp
-  - setfunc/zeta.hpp
+  - ds/fenwick2d_dense.hpp
   isVerificationFile: true
-  path: test/library_checker/convolution/bitwise_and_convolution.test.cpp
+  path: test/aoj/2842_fenwick2d_dense.test.cpp
   requiredBy: []
-  timestamp: '2022-02-13 05:24:17+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-02-16 13:38:20+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/library_checker/convolution/bitwise_and_convolution.test.cpp
+documentation_of: test/aoj/2842_fenwick2d_dense.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/convolution/bitwise_and_convolution.test.cpp
-- /verify/test/library_checker/convolution/bitwise_and_convolution.test.cpp.html
-title: test/library_checker/convolution/bitwise_and_convolution.test.cpp
+- /verify/test/aoj/2842_fenwick2d_dense.test.cpp
+- /verify/test/aoj/2842_fenwick2d_dense.test.cpp.html
+title: test/aoj/2842_fenwick2d_dense.test.cpp
 ---

@@ -7,10 +7,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: ds/fenwick2d.hpp
     title: ds/fenwick2d.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
   _extendedRequiredBy: []
@@ -206,7 +206,7 @@ data:
     \ dat[LID + R]);\r\n      R = prev(R);\r\n    }\r\n    while (R < L) {\r\n   \
     \   neg = AbelGroup::op(neg, dat[LID + L]);\r\n      L = prev(L);\r\n    }\r\n\
     \    return AbelGroup::op(pos, AbelGroup::inverse(neg));\r\n  }\r\n\r\n  E sum(ll\
-    \ lx, ll rx, ll ly, ll ry) {\r\n    E ret = 0;\r\n    int L = xtoi(lx) - 1;\r\n\
+    \ lx, ll ly, ll rx, ll ry) {\r\n    E ret = 0;\r\n    int L = xtoi(lx) - 1;\r\n\
     \    int R = xtoi(rx) - 1;\r\n    while (L < R) {\r\n      ret += sum_i(R, ly,\
     \ ry);\r\n      R = prev(R);\r\n    }\r\n    while (R < L) {\r\n      ret -= sum_i(L,\
     \ ly, ry);\r\n      L = prev(L);\r\n    }\r\n    return ret;\r\n  }\r\n\r\n  void\
@@ -218,7 +218,7 @@ data:
     \ tuple<ll, ll, ll, ll>;\r\n  vc<QQ> query(Q);\r\n  FOR(q, Q) {\r\n    LL(t);\r\
     \n    if (t == 0) {\r\n      LL(x, y, w);\r\n      X.eb(x);\r\n      Y.eb(y);\r\
     \n      W.eb(0);\r\n      query[q] = mt(-1, x, y, w);\r\n    } else {\r\n    \
-    \  LL(a, b, c, d);\r\n      query[q] = mt(a, c, b, d);\r\n    }\r\n  }\r\n\r\n\
+    \  LL(a, b, c, d);\r\n      query[q] = mt(a, b, c, d);\r\n    }\r\n  }\r\n\r\n\
     \  Fenwick2D<Group_Add<ll>, false> bit(X, Y, W);\r\n  FOR(q, Q) {\r\n    auto\
     \ [a, b, c, d] = query[q];\r\n    if (a == -1) {\r\n      bit.add(b, c, d);\r\n\
     \    } else {\r\n      print(bit.sum(a, b, c, d));\r\n    }\r\n  }\r\n}\r\n\r\n\
@@ -231,8 +231,8 @@ data:
     \ w;\r\n  }\r\n  using QQ = tuple<ll, ll, ll, ll>;\r\n  vc<QQ> query(Q);\r\n \
     \ FOR(q, Q) {\r\n    LL(t);\r\n    if (t == 0) {\r\n      LL(x, y, w);\r\n   \
     \   X.eb(x);\r\n      Y.eb(y);\r\n      W.eb(0);\r\n      query[q] = mt(-1, x,\
-    \ y, w);\r\n    } else {\r\n      LL(a, b, c, d);\r\n      query[q] = mt(a, c,\
-    \ b, d);\r\n    }\r\n  }\r\n\r\n  Fenwick2D<Group_Add<ll>, false> bit(X, Y, W);\r\
+    \ y, w);\r\n    } else {\r\n      LL(a, b, c, d);\r\n      query[q] = mt(a, b,\
+    \ c, d);\r\n    }\r\n  }\r\n\r\n  Fenwick2D<Group_Add<ll>, false> bit(X, Y, W);\r\
     \n  FOR(q, Q) {\r\n    auto [a, b, c, d] = query[q];\r\n    if (a == -1) {\r\n\
     \      bit.add(b, c, d);\r\n    } else {\r\n      print(bit.sum(a, b, c, d));\r\
     \n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
@@ -245,7 +245,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
   requiredBy: []
-  timestamp: '2022-02-13 05:24:17+09:00'
+  timestamp: '2022-02-16 13:38:20+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp

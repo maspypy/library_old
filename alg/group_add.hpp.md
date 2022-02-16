@@ -20,9 +20,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: ds/fenwick2d.hpp
     title: ds/fenwick2d.hpp
-  - icon: ':warning:'
-    path: ds/fenwick2d_dense.hpp
-    title: ds/fenwick2d_dense.hpp
   - icon: ':heavy_check_mark:'
     path: ds/fenwickraq.hpp
     title: ds/fenwickraq.hpp
@@ -113,7 +110,6 @@ data:
   requiredBy:
   - ds/fenwick.hpp
   - ds/fenwickraq.hpp
-  - ds/fenwick2d_dense.hpp
   - ds/fenwick2d.hpp
   - alg/lazy_min_add.hpp
   - alg/lazy_add_mul.hpp

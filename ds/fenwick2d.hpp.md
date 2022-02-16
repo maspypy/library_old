@@ -63,7 +63,7 @@ data:
     \ dat[LID + R]);\r\n      R = prev(R);\r\n    }\r\n    while (R < L) {\r\n   \
     \   neg = AbelGroup::op(neg, dat[LID + L]);\r\n      L = prev(L);\r\n    }\r\n\
     \    return AbelGroup::op(pos, AbelGroup::inverse(neg));\r\n  }\r\n\r\n  E sum(ll\
-    \ lx, ll rx, ll ly, ll ry) {\r\n    E ret = 0;\r\n    int L = xtoi(lx) - 1;\r\n\
+    \ lx, ll ly, ll rx, ll ry) {\r\n    E ret = 0;\r\n    int L = xtoi(lx) - 1;\r\n\
     \    int R = xtoi(rx) - 1;\r\n    while (L < R) {\r\n      ret += sum_i(R, ly,\
     \ ry);\r\n      R = prev(R);\r\n    }\r\n    while (R < L) {\r\n      ret -= sum_i(L,\
     \ ly, ry);\r\n      L = prev(L);\r\n    }\r\n    return ret;\r\n  }\r\n\r\n  void\
@@ -109,7 +109,7 @@ data:
     \n    while (L < R) {\r\n      pos = AbelGroup::op(pos, dat[LID + R]);\r\n   \
     \   R = prev(R);\r\n    }\r\n    while (R < L) {\r\n      neg = AbelGroup::op(neg,\
     \ dat[LID + L]);\r\n      L = prev(L);\r\n    }\r\n    return AbelGroup::op(pos,\
-    \ AbelGroup::inverse(neg));\r\n  }\r\n\r\n  E sum(ll lx, ll rx, ll ly, ll ry)\
+    \ AbelGroup::inverse(neg));\r\n  }\r\n\r\n  E sum(ll lx, ll ly, ll rx, ll ry)\
     \ {\r\n    E ret = 0;\r\n    int L = xtoi(lx) - 1;\r\n    int R = xtoi(rx) - 1;\r\
     \n    while (L < R) {\r\n      ret += sum_i(R, ly, ry);\r\n      R = prev(R);\r\
     \n    }\r\n    while (R < L) {\r\n      ret -= sum_i(L, ly, ry);\r\n      L =\
@@ -121,7 +121,7 @@ data:
   isVerificationFile: false
   path: ds/fenwick2d.hpp
   requiredBy: []
-  timestamp: '2022-01-11 13:47:23+09:00'
+  timestamp: '2022-02-16 13:38:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp

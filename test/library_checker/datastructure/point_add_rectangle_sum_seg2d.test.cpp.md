@@ -7,10 +7,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: ds/segtree2d.hpp
     title: ds/segtree2d.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
   _extendedRequiredBy: []
@@ -204,7 +204,7 @@ data:
     \   L += n;\r\n    R += n;\r\n    S val = Monoid::unit;\r\n    while (L < R) {\r\
     \n      if (L & 1) val = Monoid::op(val, dat[off + (L++)]);\r\n      if (R & 1)\
     \ val = Monoid::op(dat[off + (--R)], val);\r\n      L >>= 1;\r\n      R >>= 1;\r\
-    \n    }\r\n    return val;\r\n  }\r\n\r\n  S prod(XY lx, XY rx, XY ly, XY ry)\
+    \n    }\r\n    return val;\r\n  }\r\n\r\n  S prod(XY lx, XY ly, XY rx, XY ry)\
     \ {\r\n    int L = xtoi(lx);\r\n    int R = xtoi(rx);\r\n    L += N;\r\n    R\
     \ += N;\r\n    S val = Monoid::unit;\r\n    while (L < R) {\r\n      if (L & 1)\
     \ val = Monoid::op(val, prod_i(L++, ly, ry));\r\n      if (R & 1) val = Monoid::op(prod_i(--R,\
@@ -217,7 +217,7 @@ data:
     \n  using QQ = tuple<ll, ll, ll, ll>;\r\n  vc<QQ> query(Q);\r\n  FOR(q, Q) {\r\
     \n    LL(t);\r\n    if (t == 0) {\r\n      LL(x, y, w);\r\n      X.eb(x);\r\n\
     \      Y.eb(y);\r\n      W.eb(0);\r\n      query[q] = mt(-1, x, y, w);\r\n   \
-    \ } else {\r\n      LL(a, b, c, d);\r\n      query[q] = mt(a, c, b, d);\r\n  \
+    \ } else {\r\n      LL(a, b, c, d);\r\n      query[q] = mt(a, b, c, d);\r\n  \
     \  }\r\n  }\r\n\r\n  using Mono = Group_Add<ll>;\r\n\r\n  SegTree2D<Mono, int,\
     \ false> seg(X, Y, W);\r\n\r\n  FOR(q, Q) {\r\n    auto [a, b, c, d] = query[q];\r\
     \n    if (a == -1) {\r\n      seg.multiply(b, c, d);\r\n    } else {\r\n     \
@@ -232,7 +232,7 @@ data:
     \ ll, ll, ll>;\r\n  vc<QQ> query(Q);\r\n  FOR(q, Q) {\r\n    LL(t);\r\n    if\
     \ (t == 0) {\r\n      LL(x, y, w);\r\n      X.eb(x);\r\n      Y.eb(y);\r\n   \
     \   W.eb(0);\r\n      query[q] = mt(-1, x, y, w);\r\n    } else {\r\n      LL(a,\
-    \ b, c, d);\r\n      query[q] = mt(a, c, b, d);\r\n    }\r\n  }\r\n\r\n  using\
+    \ b, c, d);\r\n      query[q] = mt(a, b, c, d);\r\n    }\r\n  }\r\n\r\n  using\
     \ Mono = Group_Add<ll>;\r\n\r\n  SegTree2D<Mono, int, false> seg(X, Y, W);\r\n\
     \r\n  FOR(q, Q) {\r\n    auto [a, b, c, d] = query[q];\r\n    if (a == -1) {\r\
     \n      seg.multiply(b, c, d);\r\n    } else {\r\n      print(seg.prod(a, b, c,\
@@ -247,7 +247,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
   requiredBy: []
-  timestamp: '2022-02-13 05:24:17+09:00'
+  timestamp: '2022-02-16 13:38:20+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp

@@ -125,7 +125,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: ds/fenwick2d.hpp
       title: ds/fenwick2d.hpp
-    - icon: ':warning:'
+    - icon: ':x:'
       path: ds/fenwick2d_dense.hpp
       title: ds/fenwick2d_dense.hpp
     - icon: ':heavy_check_mark:'
@@ -341,7 +341,7 @@ data:
       title: mod/tetration.hpp
   - name: .
     pages:
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: my_template.hpp
       title: my_template.hpp
   - name: nt
@@ -402,7 +402,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: other/inversion.hpp
       title: other/inversion.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: other/io.hpp
       title: other/io.hpp
     - icon: ':warning:'
@@ -556,6 +556,9 @@ data:
   verificationCategories:
   - name: test/aoj
     pages:
+    - icon: ':x:'
+      path: test/aoj/2842_fenwick2d_dense.test.cpp
+      title: test/aoj/2842_fenwick2d_dense.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/ALDS1_5_inversion.test.cpp
       title: test/aoj/ALDS1_5_inversion.test.cpp

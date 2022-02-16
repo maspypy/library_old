@@ -50,7 +50,7 @@ data:
     \ Monoid::unit;\r\n    while (L < R) {\r\n      if (L & 1) val = Monoid::op(val,\
     \ dat[off + (L++)]);\r\n      if (R & 1) val = Monoid::op(dat[off + (--R)], val);\r\
     \n      L >>= 1;\r\n      R >>= 1;\r\n    }\r\n    return val;\r\n  }\r\n\r\n\
-    \  S prod(XY lx, XY rx, XY ly, XY ry) {\r\n    int L = xtoi(lx);\r\n    int R\
+    \  S prod(XY lx, XY ly, XY rx, XY ry) {\r\n    int L = xtoi(lx);\r\n    int R\
     \ = xtoi(rx);\r\n    L += N;\r\n    R += N;\r\n    S val = Monoid::unit;\r\n \
     \   while (L < R) {\r\n      if (L & 1) val = Monoid::op(val, prod_i(L++, ly,\
     \ ry));\r\n      if (R & 1) val = Monoid::op(prod_i(--R, ly, ry), val);\r\n  \
@@ -95,7 +95,7 @@ data:
     \   L += n;\r\n    R += n;\r\n    S val = Monoid::unit;\r\n    while (L < R) {\r\
     \n      if (L & 1) val = Monoid::op(val, dat[off + (L++)]);\r\n      if (R & 1)\
     \ val = Monoid::op(dat[off + (--R)], val);\r\n      L >>= 1;\r\n      R >>= 1;\r\
-    \n    }\r\n    return val;\r\n  }\r\n\r\n  S prod(XY lx, XY rx, XY ly, XY ry)\
+    \n    }\r\n    return val;\r\n  }\r\n\r\n  S prod(XY lx, XY ly, XY rx, XY ry)\
     \ {\r\n    int L = xtoi(lx);\r\n    int R = xtoi(rx);\r\n    L += N;\r\n    R\
     \ += N;\r\n    S val = Monoid::unit;\r\n    while (L < R) {\r\n      if (L & 1)\
     \ val = Monoid::op(val, prod_i(L++, ly, ry));\r\n      if (R & 1) val = Monoid::op(prod_i(--R,\
@@ -107,7 +107,7 @@ data:
   isVerificationFile: false
   path: ds/segtree2d.hpp
   requiredBy: []
-  timestamp: '2021-12-28 17:04:46+09:00'
+  timestamp: '2022-02-16 13:38:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
