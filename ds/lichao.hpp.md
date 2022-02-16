@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
@@ -59,19 +59,19 @@ data:
     \  FOR(i, S.size()) { A[i] = S[i] - first_char; }\n  return A;\n}\n\ntemplate\
     \ <typename T>\nvector<T> cumsum(vector<T> &A, int off = 1) {\n  int N = A.size();\n\
     \  vector<T> B(N + 1);\n  FOR(i, N) { B[i + 1] = B[i] + A[i]; }\n  if (off ==\
-    \ 0) B.erase(B.begin());\n  return B;\n}\n\ntemplate <typename T>\nvc<int> bincount(vc<T>\
-    \ &A, int size) {\n  vc<int> C(size);\n  for (auto &&x: A) { ++C[x]; }\n  return\
-    \ C;\n}\n\ntemplate <typename T>\nvector<int> argsort(vector<T> &A) {\n  // stable\n\
-    \  vector<int> ids(A.size());\n  iota(all(ids), 0);\n  sort(all(ids),\n      \
-    \ [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j] && i < j); });\n  return\
-    \ ids;\n}\n#line 3 \"ds/lichao.hpp\"\n\r\ntemplate <typename T>\r\nstruct LiChaoTree\
-    \ {\r\n  struct Line {\r\n    T a, b;\r\n\r\n    Line(T a, T b) : a(a), b(b) {}\r\
-    \n\r\n    inline T get(T x) const { return a * x + b; }\r\n\r\n    inline bool\
-    \ over(const Line& b, const T& x) const {\r\n      return get(x) < b.get(x);\r\
-    \n    }\r\n  };\r\n\r\n  vector<T> xs;\r\n  vector<Line> seg;\r\n  int sz;\r\n\
-    \r\n  LiChaoTree(const vector<T>& x, T INF) : xs(x) {\r\n    sort(all(xs));\r\n\
-    \    sz = 1;\r\n    while (sz < xs.size()) sz <<= 1;\r\n    while (xs.size() <\
-    \ sz) xs.push_back(xs.back() + 1);\r\n    seg.assign(2 * sz - 1, Line(0, INF));\r\
+    \ 0) B.erase(B.begin());\n  return B;\n}\n\ntemplate <typename T, typename CNT\
+    \ = int>\nvc<CNT> bincount(vc<T> &A, int size) {\n  vc<CNT> C(size);\n  for (auto\
+    \ &&x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate <typename T>\nvector<int> argsort(vector<T>\
+    \ &A) {\n  // stable\n  vector<int> ids(A.size());\n  iota(all(ids), 0);\n  sort(all(ids),\n\
+    \       [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j] && i < j); });\n\
+    \  return ids;\n}\n#line 3 \"ds/lichao.hpp\"\n\r\ntemplate <typename T>\r\nstruct\
+    \ LiChaoTree {\r\n  struct Line {\r\n    T a, b;\r\n\r\n    Line(T a, T b) : a(a),\
+    \ b(b) {}\r\n\r\n    inline T get(T x) const { return a * x + b; }\r\n\r\n   \
+    \ inline bool over(const Line& b, const T& x) const {\r\n      return get(x) <\
+    \ b.get(x);\r\n    }\r\n  };\r\n\r\n  vector<T> xs;\r\n  vector<Line> seg;\r\n\
+    \  int sz;\r\n\r\n  LiChaoTree(const vector<T>& x, T INF) : xs(x) {\r\n    sort(all(xs));\r\
+    \n    sz = 1;\r\n    while (sz < xs.size()) sz <<= 1;\r\n    while (xs.size()\
+    \ < sz) xs.push_back(xs.back() + 1);\r\n    seg.assign(2 * sz - 1, Line(0, INF));\r\
     \n  }\r\n\r\n  void update(Line& x, int k, int l, int r) {\r\n    int mid = (l\
     \ + r) >> 1;\r\n    auto latte = x.over(seg[k], xs[l]), malta = x.over(seg[k],\
     \ xs[mid]);\r\n    if (malta) swap(seg[k], x);\r\n    if (l + 1 >= r)\r\n    \
@@ -104,7 +104,7 @@ data:
   isVerificationFile: false
   path: ds/lichao.hpp
   requiredBy: []
-  timestamp: '2022-02-11 06:59:44+09:00'
+  timestamp: '2022-02-17 06:06:40+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: ds/lichao.hpp
