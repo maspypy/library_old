@@ -59,6 +59,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/tree_diameter.hpp
     title: graph/tree_diameter.hpp
+  - icon: ':warning:'
+    path: graph/tree_dp.hpp
+    title: graph/tree_dp.hpp
   - icon: ':heavy_check_mark:'
     path: graph/treeabelgroup.hpp
     title: graph/treeabelgroup.hpp
@@ -233,6 +236,7 @@ data:
   - graph/treegroup.hpp
   - graph/tree_diameter.hpp
   - graph/eulerwalk.hpp
+  - graph/tree_dp.hpp
   - graph/scc.hpp
   - graph/rerooting_dp.hpp
   - graph/dijkstra.hpp
