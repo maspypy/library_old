@@ -5,14 +5,14 @@ data:
   - icon: ':x:'
     path: alg/lazy_add_mul.hpp
     title: alg/lazy_add_mul.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: poly/lagrange_interpolate_iota.hpp
     title: poly/lagrange_interpolate_iota.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: seq/interpolate_poly_exp_sum.hpp
     title: seq/interpolate_poly_exp_sum.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/math/sum_of_exp_times_poly.test.cpp
     title: test/library_checker/math/sum_of_exp_times_poly.test.cpp
   - icon: ':x:'
@@ -23,7 +23,7 @@ data:
     title: test/yukicoder/899_bfsnumbering.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 1 \"alg/group_mul.hpp\"\ntemplate <class X>\r\nstruct Group_Mul\
@@ -43,7 +43,7 @@ data:
   - alg/lazy_add_mul.hpp
   - poly/lagrange_interpolate_iota.hpp
   timestamp: '2022-01-11 13:22:23+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/899_bfsnumbering.test.cpp
   - test/library_checker/math/sum_of_exp_times_poly.test.cpp

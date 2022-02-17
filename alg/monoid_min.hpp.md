@@ -11,6 +11,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: alg/lazy_min_set.hpp
     title: alg/lazy_min_set.hpp
+  - icon: ':warning:'
+    path: ds/range_mex_query.hpp
+    title: ds/range_mex_query.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_F_min_set_lazy.test.cpp
@@ -41,6 +44,7 @@ data:
   isVerificationFile: false
   path: alg/monoid_min.hpp
   requiredBy:
+  - ds/range_mex_query.hpp
   - alg/lazy_min_min.hpp
   - alg/lazy_min_add.hpp
   - alg/lazy_min_set.hpp

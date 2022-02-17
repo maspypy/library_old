@@ -2,6 +2,9 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: ds/range_mex_query.hpp
+    title: ds/range_mex_query.hpp
   - icon: ':heavy_check_mark:'
     path: graph/treegroup.hpp
     title: graph/treegroup.hpp
@@ -102,6 +105,7 @@ data:
   isVerificationFile: false
   path: ds/segtree.hpp
   requiredBy:
+  - ds/range_mex_query.hpp
   - other/uniqueproductquery.hpp
   - graph/treemonoid.hpp
   - graph/treegroup.hpp
