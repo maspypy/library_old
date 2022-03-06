@@ -51,6 +51,8 @@ using pqg = priority_queue<T, vector<T>, greater<T>>;
 #define fi first
 #define se second
 
+#define stoi stoll
+
 template <typename T>
 T SUM(vector<T> &A) {
   T sum = T(0);
