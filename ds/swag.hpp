@@ -2,18 +2,25 @@ template <class Monoid>
 struct SWAG {
   using X = typename Monoid::value_type;
   using value_type = X;
+  int sz = 0;
   vc<X> dat;
   vc<X> cum_l;
   X cum_r;
 
   SWAG() : cum_l({Monoid::unit}), cum_r(Monoid::unit) {}
 
+  int size(){
+    return sz;
+  }
+
   void push(X x) {
+    ++sz;
     cum_r = Monoid::op(cum_r, x);
     dat.eb(x);
   }
 
   void pop() {
+    --sz;
     cum_l.pop_back();
     if (len(cum_l) == 0) {
       cum_l = {Monoid::unit};
