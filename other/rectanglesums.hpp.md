@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: alg/group_add.hpp
     title: alg/group_add.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ds/fenwick.hpp
     title: ds/fenwick.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
     title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"alg/group_add.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\
@@ -62,7 +62,7 @@ data:
     \ - min_x + 2);\r\n      FOR(i, N) {\r\n        ll x = X[i], y = Y[i], w = wt[i];\r\
     \n        x -= min_x, y -= min_y;\r\n        add[x].eb(y, w);\r\n      }\r\n \
     \   }\r\n    query_l.resize(len(add));\r\n    query_r.resize(len(add));\r\n  }\r\
-    \n\r\n  void add_rect(ll xl, ll xr, ll yl, ll yr) {\r\n    assert(n == N);\r\n\
+    \n\r\n  void add_rect(ll xl, ll yl, ll xr, ll yr) {\r\n    assert(n == N);\r\n\
     \    if (!SMALL) {\r\n      xl = LB(keyX, xl), xr = LB(keyX, xr);\r\n      yl\
     \ = LB(keyY, yl), yr = LB(keyY, yr);\r\n    } else {\r\n      xl -= min_x, xr\
     \ -= min_x;\r\n      yl -= min_y, yr -= min_y;\r\n      xl = clamp(xl, 0LL, max_x\
@@ -99,8 +99,8 @@ data:
     \ = (N == 0 ? 0 : MAX(Y));\r\n      add.resize(max_x - min_x + 2);\r\n      FOR(i,\
     \ N) {\r\n        ll x = X[i], y = Y[i], w = wt[i];\r\n        x -= min_x, y -=\
     \ min_y;\r\n        add[x].eb(y, w);\r\n      }\r\n    }\r\n    query_l.resize(len(add));\r\
-    \n    query_r.resize(len(add));\r\n  }\r\n\r\n  void add_rect(ll xl, ll xr, ll\
-    \ yl, ll yr) {\r\n    assert(n == N);\r\n    if (!SMALL) {\r\n      xl = LB(keyX,\
+    \n    query_r.resize(len(add));\r\n  }\r\n\r\n  void add_rect(ll xl, ll yl, ll\
+    \ xr, ll yr) {\r\n    assert(n == N);\r\n    if (!SMALL) {\r\n      xl = LB(keyX,\
     \ xl), xr = LB(keyX, xr);\r\n      yl = LB(keyY, yl), yr = LB(keyY, yr);\r\n \
     \   } else {\r\n      xl -= min_x, xr -= min_x;\r\n      yl -= min_y, yr -= min_y;\r\
     \n      xl = clamp(xl, 0LL, max_x - min_x + 1);\r\n      xr = clamp(xr, 0LL, max_x\
@@ -126,8 +126,8 @@ data:
   isVerificationFile: false
   path: other/rectanglesums.hpp
   requiredBy: []
-  timestamp: '2022-02-16 02:43:16+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-03-08 00:35:00+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
 documentation_of: other/rectanglesums.hpp
