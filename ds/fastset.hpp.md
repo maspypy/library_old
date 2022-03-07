@@ -36,8 +36,8 @@ data:
     \      // find\r\n      i += bsr(d) - (B - 1);\r\n      for (int g = h - 1; g\
     \ >= 0; g--) {\r\n        i *= B;\r\n        i += bsr(seg[g][i / B]);\r\n    \
     \  }\r\n      return i;\r\n    }\r\n    return -1;\r\n  }\r\n  void debug(){\r\
-    \n    for(int i=0;i<n;++i) cout << (*this)[i];\r\n    cout << endl;\r\n  }\r\n\
-    };\n"
+    \n    string s;\r\n    FOR(i, n) s += ((*this)[i] ? '1' : '0');\r\n    print(s);\r\
+    \n  }\r\n};\n"
   code: "struct FastSet {\r\n  using uint = unsigned;\r\n  using ull = unsigned long\
     \ long;\r\n\r\n  int bsr(ull x) { return 63 - __builtin_clzll(x); }\r\n  int bsf(ull\
     \ x) { return __builtin_ctzll(x); }\r\n\r\n  static constexpr uint B = 64;\r\n\
@@ -62,13 +62,13 @@ data:
     \ = i / B - 1;\r\n        continue;\r\n      }\r\n      // find\r\n      i +=\
     \ bsr(d) - (B - 1);\r\n      for (int g = h - 1; g >= 0; g--) {\r\n        i *=\
     \ B;\r\n        i += bsr(seg[g][i / B]);\r\n      }\r\n      return i;\r\n   \
-    \ }\r\n    return -1;\r\n  }\r\n  void debug(){\r\n    for(int i=0;i<n;++i) cout\
-    \ << (*this)[i];\r\n    cout << endl;\r\n  }\r\n};"
+    \ }\r\n    return -1;\r\n  }\r\n  void debug(){\r\n    string s;\r\n    FOR(i,\
+    \ n) s += ((*this)[i] ? '1' : '0');\r\n    print(s);\r\n  }\r\n};"
   dependsOn: []
   isVerificationFile: false
   path: ds/fastset.hpp
   requiredBy: []
-  timestamp: '2022-01-04 19:49:31+09:00'
+  timestamp: '2022-03-07 12:11:10+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/datastructure/predecessor_problem.test.cpp
