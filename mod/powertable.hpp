@@ -1,3 +1,4 @@
+#pragma once
 #include "nt/primetable.hpp"
 
 template<typename mint>
