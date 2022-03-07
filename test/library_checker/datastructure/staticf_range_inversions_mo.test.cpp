@@ -44,7 +44,7 @@ void solve() {
     inv -= bit.sum_all() - bit.sum(x + 1);
   };
   auto calc = [&](int i) -> void { ANS[i] = inv; };
-  mo.build(add_l, add_r, rm_l, rm_r, calc);
+  mo.calc(add_l, add_r, rm_l, rm_r, calc);
   for (auto&& x: ANS) print(x);
 }
 
