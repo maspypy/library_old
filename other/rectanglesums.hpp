@@ -46,7 +46,7 @@ struct RectangleSums {
     query_r.resize(len(add));
   }
 
-  void add_rect(ll xl, ll xr, ll yl, ll yr) {
+  void add_rect(ll xl, ll yl, ll xr, ll yr) {
     assert(n == N);
     if (!SMALL) {
       xl = LB(keyX, xl), xr = LB(keyX, xr);
