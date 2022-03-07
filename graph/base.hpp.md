@@ -8,7 +8,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/bfs01.hpp
     title: graph/bfs01.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/bfsnumbering.hpp
     title: graph/bfsnumbering.hpp
   - icon: ':warning:'
@@ -44,6 +44,9 @@ data:
   - icon: ':warning:'
     path: graph/lazytreemonoid.hpp
     title: graph/lazytreemonoid.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/mincostcycle.hpp
+    title: graph/mincostcycle.hpp
   - icon: ':heavy_check_mark:'
     path: graph/mis.hpp
     title: graph/mis.hpp
@@ -147,12 +150,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1038_centroid.test.cpp
     title: test/yukicoder/1038_centroid.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
+    path: test/yukicoder/1320_mincostcycle.test.cpp
+    title: test/yukicoder/1320_mincostcycle.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/899_bfsnumbering.test.cpp
     title: test/yukicoder/899_bfsnumbering.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n\
@@ -230,6 +236,7 @@ data:
   - graph/hld.hpp
   - graph/degree.hpp
   - graph/bipartite_coloring.hpp
+  - graph/mincostcycle.hpp
   - graph/treeabelgroup.hpp
   - graph/functional.hpp
   - graph/lazytreemonoid.hpp
@@ -252,11 +259,12 @@ data:
   - graph/centroid.hpp
   - graph/bfsnumbering.hpp
   timestamp: '2022-02-14 14:30:41+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/ALDS1_12_B_dial.test.cpp
   - test/yukicoder/1038_centroid.test.cpp
   - test/yukicoder/899_bfsnumbering.test.cpp
+  - test/yukicoder/1320_mincostcycle.test.cpp
   - test/yukicoder/1002_centroid.test.cpp
   - test/library_checker/math/twosat.test.cpp
   - test/library_checker/tree/lca_directed.test.cpp

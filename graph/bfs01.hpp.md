@@ -1,10 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/base.hpp
     title: graph/base.hpp
   _extendedRequiredBy:
+  - icon: ':heavy_check_mark:'
+    path: graph/mincostcycle.hpp
+    title: graph/mincostcycle.hpp
   - icon: ':heavy_check_mark:'
     path: graph/tree_diameter.hpp
     title: graph/tree_diameter.hpp
@@ -12,6 +15,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/tree/tree_diameter.test.cpp
     title: test/library_checker/tree/tree_diameter.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/yukicoder/1320_mincostcycle.test.cpp
+    title: test/yukicoder/1320_mincostcycle.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
   _verificationStatusIcon: ':heavy_check_mark:'
@@ -72,10 +78,12 @@ data:
   isVerificationFile: false
   path: graph/bfs01.hpp
   requiredBy:
+  - graph/mincostcycle.hpp
   - graph/tree_diameter.hpp
   timestamp: '2022-02-14 14:30:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/yukicoder/1320_mincostcycle.test.cpp
   - test/library_checker/tree/tree_diameter.test.cpp
 documentation_of: graph/bfs01.hpp
 layout: document

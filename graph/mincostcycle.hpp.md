@@ -4,14 +4,14 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/base.hpp
     title: graph/base.hpp
-  _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: graph/mincostcycle.hpp
-    title: graph/mincostcycle.hpp
+    path: graph/bfs01.hpp
+    title: graph/bfs01.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/dijkstra.hpp
+    title: graph/dijkstra.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/graph/shortest_path.test.cpp
-    title: test/library_checker/graph/shortest_path.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1320_mincostcycle.test.cpp
     title: test/yukicoder/1320_mincostcycle.test.cpp
@@ -61,32 +61,50 @@ data:
     \    if (dv > dist[v]) continue;\n    for (auto&& e: G[v]) {\n      if (dist[e.to]\
     \ == -1 || dist[e.to] > dist[e.frm] + e.cost) {\n        dist[e.to] = dist[e.frm]\
     \ + e.cost;\n        par[e.to] = e.frm;\n        que.push(mp(dist[e.to], e.to));\n\
-    \      }\n    }\n  }\n  return mp(dist, par);\n}\n"
-  code: "#pragma once\n#include \"graph/base.hpp\"\n\ntemplate <typename Graph>\n\
-    pair<vector<typename Graph::cost_type>, vector<int>> dijkstra(Graph& G, int v)\
-    \ {\n  auto N = G.N;\n  using T = typename Graph::cost_type;\n  vector<T> dist(N,\
-    \ -1);\n  vector<int> par(N, -1);\n  using P = pair<T, int>;\n\n  priority_queue<P,\
-    \ vector<P>, greater<P>> que;\n\n  dist[v] = 0;\n  que.push(mp(T(0), v));\n  while\
-    \ (!que.empty()) {\n    auto [dv, v] = que.top();\n    que.pop();\n    if (dv\
-    \ > dist[v]) continue;\n    for (auto&& e: G[v]) {\n      if (dist[e.to] == -1\
-    \ || dist[e.to] > dist[e.frm] + e.cost) {\n        dist[e.to] = dist[e.frm] +\
-    \ e.cost;\n        par[e.to] = e.frm;\n        que.push(mp(dist[e.to], e.to));\n\
-    \      }\n    }\n  }\n  return mp(dist, par);\n}\n"
+    \      }\n    }\n  }\n  return mp(dist, par);\n}\n#line 3 \"graph/bfs01.hpp\"\n\
+    \ntemplate<typename Graph>\npair<vc<ll>, vc<int>> bfs01(Graph& G, ll v) {\n  assert(G.is_prepared());\n\
+    \  int N = G.N;\n  vc<ll> dist(N, -1);\n  vc<int> par(N, -1);\n  deque<int> que;\n\
+    \n  dist[v] = 0;\n  que.push_front(v);\n  while (!que.empty()) {\n    auto v =\
+    \ que.front();\n    que.pop_front();\n    for (auto&& e : G[v]) {\n      if (dist[e.to]\
+    \ == -1 || dist[e.to] > dist[e.frm] + e.cost) {\n        dist[e.to] = dist[e.frm]\
+    \ + e.cost;\n        par[e.to] = e.frm;\n        if (e.cost == 0)\n          que.push_front(e.to);\n\
+    \        else\n          que.push_back(e.to);\n      }\n    }\n  }\n  return {dist,\
+    \ par};\n}\n#line 3 \"graph/mincostcycle.hpp\"\n\r\ntemplate <typename Graph>\r\
+    \ntypename Graph::cost_type MinCostCycle(Graph& G) {\r\n  using T = typename Graph::cost_type;\r\
+    \n  int M = G.M;\r\n  int N = G.N;\r\n  T mx = 0;\r\n  T INF = 1;\r\n  for (auto&&\
+    \ e: G.edges) chmax(mx, e.cost), INF += e.cost;\r\n  T res = INF;\r\n\r\n  FOR(i,\
+    \ M) {\r\n    auto& e = G.edges[i];\r\n    T cost = e.cost;\r\n    int frm = e.to,\
+    \ to = e.frm;\r\n    Graph Gi(N);\r\n    FOR(j, M) if (i != j) {\r\n      auto&\
+    \ e = G.edges[j];\r\n      Gi.add(e.frm, e.to, e.cost);\r\n    }\r\n    Gi.prepare();\r\
+    \n    T x = (mx <= 1 ? bfs01(Gi, frm).fi[to] : dijkstra(Gi, frm).fi[to]);\r\n\
+    \    if (x == -1) x = INF;\r\n    chmin(res, cost + x);\r\n  }\r\n  if (res ==\
+    \ INF) res = -1;\r\n  return res;\r\n}\n"
+  code: "#include \"graph/dijkstra.hpp\"\r\n#include \"graph/bfs01.hpp\"\r\n\r\ntemplate\
+    \ <typename Graph>\r\ntypename Graph::cost_type MinCostCycle(Graph& G) {\r\n \
+    \ using T = typename Graph::cost_type;\r\n  int M = G.M;\r\n  int N = G.N;\r\n\
+    \  T mx = 0;\r\n  T INF = 1;\r\n  for (auto&& e: G.edges) chmax(mx, e.cost), INF\
+    \ += e.cost;\r\n  T res = INF;\r\n\r\n  FOR(i, M) {\r\n    auto& e = G.edges[i];\r\
+    \n    T cost = e.cost;\r\n    int frm = e.to, to = e.frm;\r\n    Graph Gi(N);\r\
+    \n    FOR(j, M) if (i != j) {\r\n      auto& e = G.edges[j];\r\n      Gi.add(e.frm,\
+    \ e.to, e.cost);\r\n    }\r\n    Gi.prepare();\r\n    T x = (mx <= 1 ? bfs01(Gi,\
+    \ frm).fi[to] : dijkstra(Gi, frm).fi[to]);\r\n    if (x == -1) x = INF;\r\n  \
+    \  chmin(res, cost + x);\r\n  }\r\n  if (res == INF) res = -1;\r\n  return res;\r\
+    \n}"
   dependsOn:
+  - graph/dijkstra.hpp
   - graph/base.hpp
+  - graph/bfs01.hpp
   isVerificationFile: false
-  path: graph/dijkstra.hpp
-  requiredBy:
-  - graph/mincostcycle.hpp
-  timestamp: '2022-02-14 14:30:41+09:00'
+  path: graph/mincostcycle.hpp
+  requiredBy: []
+  timestamp: '2022-03-07 21:08:43+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/1320_mincostcycle.test.cpp
-  - test/library_checker/graph/shortest_path.test.cpp
-documentation_of: graph/dijkstra.hpp
+documentation_of: graph/mincostcycle.hpp
 layout: document
 redirect_from:
-- /library/graph/dijkstra.hpp
-- /library/graph/dijkstra.hpp.html
-title: graph/dijkstra.hpp
+- /library/graph/mincostcycle.hpp
+- /library/graph/mincostcycle.hpp.html
+title: graph/mincostcycle.hpp
 ---

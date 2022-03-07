@@ -2,17 +2,20 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
+    path: graph/base.hpp
+    title: graph/base.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/bfs01.hpp
+    title: graph/bfs01.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/dijkstra.hpp
+    title: graph/dijkstra.hpp
+  - icon: ':heavy_check_mark:'
+    path: graph/mincostcycle.hpp
+    title: graph/mincostcycle.hpp
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
-    path: nt/multiplicative_sum.hpp
-    title: nt/multiplicative_sum.hpp
-  - icon: ':heavy_check_mark:'
-    path: nt/primesum.hpp
-    title: nt/primesum.hpp
-  - icon: ':heavy_check_mark:'
-    path: nt/primetable.hpp
-    title: nt/primetable.hpp
   - icon: ':heavy_check_mark:'
     path: other/io.hpp
     title: other/io.hpp
@@ -23,19 +26,19 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/sum_of_totient_function
+    PROBLEM: https://yukicoder.me/problems/no/1320
     links:
-    - https://judge.yosupo.jp/problem/sum_of_totient_function
-  bundledCode: "#line 1 \"test/library_checker/math/totient_sum.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/sum_of_totient_function\"\n#line 1\
-    \ \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\nusing\
-    \ ll = long long;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing u32\
-    \ = unsigned int;\nusing u64 = unsigned long long;\nusing i128 = __int128;\n\n\
-    template <class T>\nusing vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\n\
-    template <class T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc\
-    \ = vector<vvvc<T>>;\ntemplate <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate\
-    \ <class T>\nusing pq = priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T,\
-    \ vector<T>, greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
+    - https://yukicoder.me/problems/no/1320
+  bundledCode: "#line 1 \"test/yukicoder/1320_mincostcycle.test.cpp\"\n#define PROBLEM\
+    \ \"https://yukicoder.me/problems/no/1320\"\r\n#line 1 \"my_template.hpp\"\n#include\
+    \ <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\nusing pi =\
+    \ pair<ll, ll>;\nusing vi = vector<ll>;\nusing u32 = unsigned int;\nusing u64\
+    \ = unsigned long long;\nusing i128 = __int128;\n\ntemplate <class T>\nusing vc\
+    \ = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\ntemplate <class\
+    \ T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc = vector<vvvc<T>>;\n\
+    template <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate <class T>\nusing\
+    \ pq = priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T, vector<T>,\
+    \ greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
     #define vv(type, name, h, ...) \\\n  vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n\
     #define vvv(type, name, h, w, ...)   \\\n  vector<vector<vector<type>>> name(\
     \ \\\n      h, vector<vector<type>>(w, vector<type>(__VA_ARGS__)))\n#define vvvv(type,\
@@ -163,86 +166,96 @@ data:
     ); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t = 1) { print(t ? \"\
     Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\nvoid yes(bool t = 1)\
     \ { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) { yes(!t); }\r\n#line\
-    \ 4 \"test/library_checker/math/totient_sum.test.cpp\"\n\n#line 2 \"nt/primetable.hpp\"\
-    \nvc<ll>& primetable(int LIM) {\n  ++LIM;\n  const int S = 32768;\n  static int\
-    \ done = 2;\n  static vc<ll> primes = {2}, sieve(S + 1);\n\n  if(done >= LIM)\
-    \ return primes;\n  done  = LIM;\n\n  primes = {2}, sieve.assign(S + 1, 0);\n\
-    \  const int R = LIM / 2;  \n  primes.reserve(int(LIM / log(LIM) * 1.1));\n  vc<pi>\
-    \ cp;\n  for (int i = 3; i <= S; i += 2) {\n    if (!sieve[i]) {\n      cp.eb(i,\
-    \ i * i / 2);\n      for (int j = i * i; j <= S; j += 2 * i) sieve[j] = 1;\n \
-    \   }\n  }\n  for (int L = 1; L <= R; L += S) {\n    array<bool, S> block{};\n\
-    \    for (auto& [p, idx]: cp)\n      for (int i = idx; i < S + L; idx = (i +=\
-    \ p)) block[i - L] = 1;\n    FOR(i, min(S, R - L)) if (!block[i]) primes.eb((L\
-    \ + i) * 2 + 1);\n  }\n  return primes;\n}\n#line 2 \"nt/primesum.hpp\"\n\r\n\
-    template <typename T>\r\npair<vc<T>, vc<T>> primesum_F(ll N, function<T(ll)> F)\
-    \ {\r\n  /*\r\n  N \u3068\u5B8C\u5168\u4E57\u6CD5\u7684\u95A2\u6570 f \u306E prefix\
-    \ sum \u95A2\u6570 F \u3092\u4E0E\u3048\u308B\u3002\r\n  n = floor(N/d) \u3068\
-    \u306A\u308B n \u306B\u5BFE\u3059\u308B sum_{p <= n} f(p) \u3092\u8A08\u7B97\u3059\
-    \u308B\u3002\r\n\r\n  \u7279\u306B\u3001p^k \u306E\u548C\u3084\u3001mod m \u3054\
-    \u3068\u3067\u306E p^k \u306E\u548C\u304C\u8A08\u7B97\u3067\u304D\u308B\u3002\r\
-    \n\r\n  Complexity: O(N^{3/4}/logN) time, O(N^{1/2}) space.\r\n  */\r\n  ll sqN\
-    \ = sqrtl(N);\r\n  auto& primes = primetable(sqN);\r\n  vc<T> sum_lo(sqN + 1),\
-    \ sum_hi(sqN + 1);\r\n  FOR3(i, 1, sqN + 1) sum_lo[i] = F(i) - 1;\r\n  FOR3(i,\
-    \ 1, sqN + 1) sum_hi[i] = F(double(N) / i) - 1;\r\n  for (auto&& p: primes) {\r\
-    \n    ll pp = p * p;\r\n    if (pp > N) break;\r\n    ll R = min(sqN, N / pp);\r\
-    \n    ll M = sqN / p;\r\n    T x = sum_lo[p - 1];\r\n    T fp = sum_lo[p] - sum_lo[p\
-    \ - 1];\r\n    FOR3(i, 1, M + 1) sum_hi[i] -= fp * (sum_hi[i * p] - x);\r\n  \
-    \  FOR3(i, M + 1, R + 1) sum_hi[i] -= fp * (sum_lo[double(N) / (i * p)] - x);\r\
-    \n    FOR3_R(n, pp, sqN + 1) sum_lo[n] -= fp * (sum_lo[double(n) / p] - x);\r\n\
-    \  }\r\n  return {sum_lo, sum_hi};\r\n}\r\n\r\ntemplate <typename T>\r\npair<vc<T>,\
-    \ vc<T>> primecnt(ll N) {\r\n  auto F = [&](ll N) -> T { return N; };\r\n  return\
-    \ primesum_F<T>(N, F);\r\n}\r\n\r\ntemplate <typename T>\r\npair<vc<T>, vc<T>>\
-    \ primesum(ll N) {\r\n  auto F = [&](ll N) -> T {\r\n    return (N & 1 ? T((N\
-    \ + 1) / 2) * T(N) : T(N / 2) * T(N + 1));\r\n  };\r\n  return primesum_F<T>(N,\
-    \ F);\r\n}\r\n#line 2 \"nt/multiplicative_sum.hpp\"\ntemplate <typename T, typename\
-    \ FUNC>\r\nT multiplicative_sum(ll N, FUNC F, vc<T>& sum_lo, vc<T>& sum_hi) {\r\
-    \n  // F(p^e) \u3092\u4E0E\u3048\u308B\u95A2\u6570\u306B\u52A0\u3048\u3001\u4E8B\
-    \u524D\u306B\u8A08\u7B97\u3057\u305F prime sum \u3092\u6301\u305F\u305B\u308B\r\
-    \n  // black algorithm in\r\n  // http://baihacker.github.io/main/2020/The_prefix-sum_of_multiplicative_function_the_black_algorithm.html\r\
-    \n  ll sqN = sqrtl(N);\r\n  auto& P = primetable(sqN);\r\n  auto get = [&](ll\
-    \ d) -> T {\r\n    return (d <= sqN ? sum_lo[d] : sum_hi[double(N) / d]);\r\n\
-    \  };\r\n\r\n  T ANS = T(1) + get(N); // 1 and prime\r\n\r\n  // t = up_i^k \u306E\
-    \u3068\u304D\u306B\u3001(t, i, k, f(t), f(u)) \u3092\u6301\u305F\u305B\u308B\r\
-    \n\r\n  auto dfs = [&](auto self, ll t, ll i, ll k, T ft, T fu) -> void {\r\n\
-    \    T f_nxt = fu * F(P[i], k + 1);\r\n    // \u5B50\u30CE\u30FC\u30C9\u3092\u5168\
-    \u90E8\u52A0\u7B97\r\n    ANS += f_nxt;\r\n    ANS += ft * (get(double(N) / t)\
-    \ - get(P[i]));\r\n\r\n    ll lim = sqrtl(double(N) / t);\r\n    if (P[i] <= lim)\
-    \ { self(self, t * P[i], i, k + 1, f_nxt, fu); }\r\n    FOR3(j, i + 1, len(P))\
-    \ {\r\n      if (P[j] > lim) break;\r\n      self(self, t * P[j], j, 1, ft * F(P[j],\
-    \ 1), ft);\r\n    }\r\n  };\r\n  FOR(i, len(P)) if (P[i] <= sqN) dfs(dfs, P[i],\
-    \ i, 1, F(P[i], 1), 1);\r\n  return ANS;\r\n}\n#line 7 \"test/library_checker/math/totient_sum.test.cpp\"\
-    \n\nvoid solve() {\n  LL(N);\n  auto [sum_lo_0, sum_hi_0] = primecnt<ll>(N);\n\
-    \  auto [sum_lo, sum_hi] = primesum<i128>(N);\n  ll m = len(sum_lo_0);\n  FOR(i,\
-    \ m) sum_lo[i] -= sum_lo_0[i];\n  FOR(i, m) sum_hi[i] -= sum_hi_0[i];\n  auto\
-    \ f = [&](ll p, ll e) -> i128 {\n    ll x = p - 1;\n    FOR_(e - 1) x *= p;\n\
-    \    return x;\n  };\n  int mod = 998244353;\n  print(int(multiplicative_sum(N,\
-    \ f, sum_lo, sum_hi) % mod));\n}\n\nsigned main() {\n  solve();\n\n  return 0;\n\
-    }\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/sum_of_totient_function\"\
-    \n#include \"my_template.hpp\"\n#include \"other/io.hpp\"\n\n#include \"nt/primesum.hpp\"\
-    \n#include \"nt/multiplicative_sum.hpp\"\n\nvoid solve() {\n  LL(N);\n  auto [sum_lo_0,\
-    \ sum_hi_0] = primecnt<ll>(N);\n  auto [sum_lo, sum_hi] = primesum<i128>(N);\n\
-    \  ll m = len(sum_lo_0);\n  FOR(i, m) sum_lo[i] -= sum_lo_0[i];\n  FOR(i, m) sum_hi[i]\
-    \ -= sum_hi_0[i];\n  auto f = [&](ll p, ll e) -> i128 {\n    ll x = p - 1;\n \
-    \   FOR_(e - 1) x *= p;\n    return x;\n  };\n  int mod = 998244353;\n  print(int(multiplicative_sum(N,\
-    \ f, sum_lo, sum_hi) % mod));\n}\n\nsigned main() {\n  solve();\n\n  return 0;\n\
-    }\n"
+    \ 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n  int frm, to;\n\
+    \  T cost;\n  int id;\n};\n\ntemplate <typename T = int, bool directed = false>\n\
+    struct Graph {\n  int N, M;\n  using cost_type = T;\n  using edge_type = Edge<T>;\n\
+    \  vector<edge_type> edges;\n  vector<int> indptr;\n  vector<edge_type> csr_edges;\n\
+    \  bool prepared;\n\n  class OutgoingEdges {\n  public:\n    OutgoingEdges(const\
+    \ Graph* G, int l, int r) : G(G), l(l), r(r) {}\n\n    const edge_type* begin()\
+    \ const {\n      if (l == r) { return 0; }\n      return &G->csr_edges[l];\n \
+    \   }\n\n    const edge_type* end() const {\n      if (l == r) { return 0; }\n\
+    \      return &G->csr_edges[r];\n    }\n\n  private:\n    int l, r;\n    const\
+    \ Graph* G;\n  };\n\n  bool is_prepared() { return prepared; }\n  constexpr bool\
+    \ is_directed() { return directed; }\n\n  Graph() : N(0), M(0), prepared(0) {}\n\
+    \  Graph(int N) : N(N), M(0), prepared(0) {}\n\n  void add(int frm, int to, T\
+    \ cost = 1, int i = -1) {\n    assert(!prepared && 0 <= frm && 0 <= to);\n   \
+    \ chmax(N, frm + 1);\n    chmax(N, to + 1);\n    if (i == -1) i = M;\n    auto\
+    \ e = edge_type({frm, to, cost, i});\n    edges.eb(e);\n    ++M;\n  }\n\n  void\
+    \ read_tree(bool wt=false, int off=1){\n    read_graph(N - 1, wt, off);\n  }\n\
+    \n  void read_graph(int M, bool wt=false, int off=1){\n    FOR_(M){\n      INT(a,\
+    \ b);\n      a -= off, b -= off;\n      if(!wt){\n        add(a, b);\n      }\
+    \ else {\n        T c;\n        read(c);\n        add(a, b, c);\n      }\n   \
+    \ }\n    prepare();\n  }\n\n  void read_parent(int off=1){\n    FOR3(v, 1, N){\n\
+    \      INT(p);\n      p -= off;\n      add(p, v);\n    }\n    prepare();\n  }\n\
+    \n  void prepare() {\n    assert(!prepared);\n    prepared = true;\n    indptr.assign(N\
+    \ + 1, 0);\n    for (auto&& e: edges) {\n      indptr[e.frm + 1]++;\n      if\
+    \ (!directed) indptr[e.to + 1]++;\n    }\n    FOR(v, N) indptr[v + 1] += indptr[v];\n\
+    \    auto counter = indptr;\n    csr_edges.resize(indptr.back() + 1);\n    for\
+    \ (auto&& e: edges) {\n      csr_edges[counter[e.frm]++] = e;\n      if (!directed)\n\
+    \        csr_edges[counter[e.to]++] = edge_type({e.to, e.frm, e.cost, e.id});\n\
+    \    }\n  }\n\n  OutgoingEdges operator[](int v) const {\n    assert(prepared);\n\
+    \    return {this, indptr[v], indptr[v + 1]};\n  }\n\n  void debug() {\n    print(\"\
+    Graph\");\n    if (!prepared) {\n      print(\"frm to cost id\");\n      for (auto&&\
+    \ e: edges) print(e.frm, e.to, e.cost, e.id);\n    } else {\n      print(\"indptr\"\
+    , indptr);\n      print(\"frm to cost id\");\n      FOR(v, N) for (auto&& e: (*this)[v])\
+    \ print(e.frm, e.to, e.cost, e.id);\n    }\n  }\n};\n#line 3 \"graph/dijkstra.hpp\"\
+    \n\ntemplate <typename Graph>\npair<vector<typename Graph::cost_type>, vector<int>>\
+    \ dijkstra(Graph& G, int v) {\n  auto N = G.N;\n  using T = typename Graph::cost_type;\n\
+    \  vector<T> dist(N, -1);\n  vector<int> par(N, -1);\n  using P = pair<T, int>;\n\
+    \n  priority_queue<P, vector<P>, greater<P>> que;\n\n  dist[v] = 0;\n  que.push(mp(T(0),\
+    \ v));\n  while (!que.empty()) {\n    auto [dv, v] = que.top();\n    que.pop();\n\
+    \    if (dv > dist[v]) continue;\n    for (auto&& e: G[v]) {\n      if (dist[e.to]\
+    \ == -1 || dist[e.to] > dist[e.frm] + e.cost) {\n        dist[e.to] = dist[e.frm]\
+    \ + e.cost;\n        par[e.to] = e.frm;\n        que.push(mp(dist[e.to], e.to));\n\
+    \      }\n    }\n  }\n  return mp(dist, par);\n}\n#line 3 \"graph/bfs01.hpp\"\n\
+    \ntemplate<typename Graph>\npair<vc<ll>, vc<int>> bfs01(Graph& G, ll v) {\n  assert(G.is_prepared());\n\
+    \  int N = G.N;\n  vc<ll> dist(N, -1);\n  vc<int> par(N, -1);\n  deque<int> que;\n\
+    \n  dist[v] = 0;\n  que.push_front(v);\n  while (!que.empty()) {\n    auto v =\
+    \ que.front();\n    que.pop_front();\n    for (auto&& e : G[v]) {\n      if (dist[e.to]\
+    \ == -1 || dist[e.to] > dist[e.frm] + e.cost) {\n        dist[e.to] = dist[e.frm]\
+    \ + e.cost;\n        par[e.to] = e.frm;\n        if (e.cost == 0)\n          que.push_front(e.to);\n\
+    \        else\n          que.push_back(e.to);\n      }\n    }\n  }\n  return {dist,\
+    \ par};\n}\n#line 3 \"graph/mincostcycle.hpp\"\n\r\ntemplate <typename Graph>\r\
+    \ntypename Graph::cost_type MinCostCycle(Graph& G) {\r\n  using T = typename Graph::cost_type;\r\
+    \n  int M = G.M;\r\n  int N = G.N;\r\n  T mx = 0;\r\n  T INF = 1;\r\n  for (auto&&\
+    \ e: G.edges) chmax(mx, e.cost), INF += e.cost;\r\n  T res = INF;\r\n\r\n  FOR(i,\
+    \ M) {\r\n    auto& e = G.edges[i];\r\n    T cost = e.cost;\r\n    int frm = e.to,\
+    \ to = e.frm;\r\n    Graph Gi(N);\r\n    FOR(j, M) if (i != j) {\r\n      auto&\
+    \ e = G.edges[j];\r\n      Gi.add(e.frm, e.to, e.cost);\r\n    }\r\n    Gi.prepare();\r\
+    \n    T x = (mx <= 1 ? bfs01(Gi, frm).fi[to] : dijkstra(Gi, frm).fi[to]);\r\n\
+    \    if (x == -1) x = INF;\r\n    chmin(res, cost + x);\r\n  }\r\n  if (res ==\
+    \ INF) res = -1;\r\n  return res;\r\n}\n#line 5 \"test/yukicoder/1320_mincostcycle.test.cpp\"\
+    \n\r\nvoid solve() {\r\n  LL(T, N, M);\r\n  if (T == 0) {\r\n    Graph<ll, 0>\
+    \ G(N);\r\n    G.read_graph(M, true);\r\n    print(MinCostCycle(G));\r\n  } else\
+    \ {\r\n    Graph<ll, 1> G(N);\r\n    G.read_graph(M, true);\r\n    print(MinCostCycle(G));\r\
+    \n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \n  cout << setprecision(15);\r\n\r\n  ll T = 1;\r\n  // LL(T);\r\n  FOR(_, T)\
+    \ solve();\r\n\r\n  return 0;\r\n}\r\n"
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/1320\"\r\n#include \"\
+    my_template.hpp\"\r\n#include \"other/io.hpp\"\r\n#include \"graph/mincostcycle.hpp\"\
+    \r\n\r\nvoid solve() {\r\n  LL(T, N, M);\r\n  if (T == 0) {\r\n    Graph<ll, 0>\
+    \ G(N);\r\n    G.read_graph(M, true);\r\n    print(MinCostCycle(G));\r\n  } else\
+    \ {\r\n    Graph<ll, 1> G(N);\r\n    G.read_graph(M, true);\r\n    print(MinCostCycle(G));\r\
+    \n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \n  cout << setprecision(15);\r\n\r\n  ll T = 1;\r\n  // LL(T);\r\n  FOR(_, T)\
+    \ solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
-  - nt/primesum.hpp
-  - nt/primetable.hpp
-  - nt/multiplicative_sum.hpp
+  - graph/mincostcycle.hpp
+  - graph/dijkstra.hpp
+  - graph/base.hpp
+  - graph/bfs01.hpp
   isVerificationFile: true
-  path: test/library_checker/math/totient_sum.test.cpp
+  path: test/yukicoder/1320_mincostcycle.test.cpp
   requiredBy: []
-  timestamp: '2022-03-07 01:03:26+09:00'
+  timestamp: '2022-03-07 21:08:43+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/library_checker/math/totient_sum.test.cpp
+documentation_of: test/yukicoder/1320_mincostcycle.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/math/totient_sum.test.cpp
-- /verify/test/library_checker/math/totient_sum.test.cpp.html
-title: test/library_checker/math/totient_sum.test.cpp
+- /verify/test/yukicoder/1320_mincostcycle.test.cpp
+- /verify/test/yukicoder/1320_mincostcycle.test.cpp.html
+title: test/yukicoder/1320_mincostcycle.test.cpp
 ---
