@@ -4,10 +4,10 @@ data:
   - icon: ':question:'
     path: alg/group_add.hpp
     title: alg/group_add.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/fenwick.hpp
     title: ds/fenwick.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: ds/mo.hpp
     title: ds/mo.hpp
   - icon: ':question:'
@@ -18,9 +18,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/static_range_inversions_query
@@ -221,7 +221,7 @@ data:
     \ bit.sum_all() - bit.sum(x + 1);\r\n    bit.add(x, +1);\r\n  };\r\n  auto rm_r\
     \ = [&](int i) -> void {\r\n    int x = A[i];\r\n    bit.add(x, -1);\r\n    inv\
     \ -= bit.sum_all() - bit.sum(x + 1);\r\n  };\r\n  auto calc = [&](int i) -> void\
-    \ { ANS[i] = inv; };\r\n  mo.build(add_l, add_r, rm_l, rm_r, calc);\r\n  for (auto&&\
+    \ { ANS[i] = inv; };\r\n  mo.calc(add_l, add_r, rm_l, rm_r, calc);\r\n  for (auto&&\
     \ x: ANS) print(x);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
     \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/static_range_inversions_query\"\
@@ -237,7 +237,7 @@ data:
     \ {\r\n    int x = A[i];\r\n    inv += bit.sum_all() - bit.sum(x + 1);\r\n   \
     \ bit.add(x, +1);\r\n  };\r\n  auto rm_r = [&](int i) -> void {\r\n    int x =\
     \ A[i];\r\n    bit.add(x, -1);\r\n    inv -= bit.sum_all() - bit.sum(x + 1);\r\
-    \n  };\r\n  auto calc = [&](int i) -> void { ANS[i] = inv; };\r\n  mo.build(add_l,\
+    \n  };\r\n  auto calc = [&](int i) -> void { ANS[i] = inv; };\r\n  mo.calc(add_l,\
     \ add_r, rm_l, rm_r, calc);\r\n  for (auto&& x: ANS) print(x);\r\n}\r\n\r\nsigned\
     \ main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout\
     \ << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
@@ -250,8 +250,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
   requiredBy: []
-  timestamp: '2022-03-07 01:03:26+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-03-07 20:01:26+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
 layout: document
