@@ -7,17 +7,17 @@ data:
   - icon: ':question:'
     path: poly/convolution.hpp
     title: poly/convolution.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: poly/fps_exp.hpp
     title: poly/fps_exp.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/math/sharp_p_subset_sum.test.cpp
     title: test/library_checker/math/sharp_p_subset_sum.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n\
@@ -280,7 +280,7 @@ data:
   path: other/sharp_p_subset_sum.hpp
   requiredBy: []
   timestamp: '2022-02-11 06:59:08+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/math/sharp_p_subset_sum.test.cpp
 documentation_of: other/sharp_p_subset_sum.hpp

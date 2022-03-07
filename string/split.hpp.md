@@ -11,15 +11,21 @@ data:
   bundledCode: "#line 1 \"string/split.hpp\"\nvc<string> split(string S, char sep\
     \ = ',') {\r\n  vc<string> res = {\"\"};\r\n  for (auto&& s: S) {\r\n    if (s\
     \ == sep)\r\n      res.eb(\"\");\r\n    else\r\n      res.back() += s;\r\n  }\r\
-    \n  return res;\r\n}\r\n"
+    \n  return res;\r\n}\r\n\r\nvc<string> split(string S, string seps = \" ,\") {\r\
+    \n  vc<string> res = {\"\"};\r\n  for (auto&& s: S) {\r\n    if (count(all(seps),\
+    \ s))\r\n      res.eb(\"\");\r\n    else\r\n      res.back() += s;\r\n  }\r\n\
+    \  return res;\r\n}\r\n"
   code: "vc<string> split(string S, char sep = ',') {\r\n  vc<string> res = {\"\"\
     };\r\n  for (auto&& s: S) {\r\n    if (s == sep)\r\n      res.eb(\"\");\r\n  \
-    \  else\r\n      res.back() += s;\r\n  }\r\n  return res;\r\n}\r\n"
+    \  else\r\n      res.back() += s;\r\n  }\r\n  return res;\r\n}\r\n\r\nvc<string>\
+    \ split(string S, string seps = \" ,\") {\r\n  vc<string> res = {\"\"};\r\n  for\
+    \ (auto&& s: S) {\r\n    if (count(all(seps), s))\r\n      res.eb(\"\");\r\n \
+    \   else\r\n      res.back() += s;\r\n  }\r\n  return res;\r\n}\r\n"
   dependsOn: []
   isVerificationFile: false
   path: string/split.hpp
   requiredBy: []
-  timestamp: '2022-02-14 23:27:28+09:00'
+  timestamp: '2022-03-07 12:48:59+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: string/split.hpp

@@ -2,17 +2,17 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':question:'
     path: poly/lagrange_interpolate_iota.hpp
     title: poly/lagrange_interpolate_iota.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: seq/interpolate_poly_exp_sum.hpp
     title: seq/interpolate_poly_exp_sum.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
     title: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/math/sum_of_exp_times_poly.test.cpp
     title: test/library_checker/math/sum_of_exp_times_poly.test.cpp
   - icon: ':x:'
@@ -24,19 +24,21 @@ data:
   attributes:
     links: []
   bundledCode: "#line 1 \"ds/swag.hpp\"\ntemplate <class Monoid>\nstruct SWAG {\n\
-    \  using X = typename Monoid::value_type;\n  using value_type = X;\n  vc<X> dat;\n\
-    \  vc<X> cum_l;\n  X cum_r;\n\n  SWAG() : cum_l({Monoid::unit}), cum_r(Monoid::unit)\
-    \ {}\n\n  void push(X x) {\n    cum_r = Monoid::op(cum_r, x);\n    dat.eb(x);\n\
-    \  }\n\n  void pop() {\n    cum_l.pop_back();\n    if (len(cum_l) == 0) {\n  \
-    \    cum_l = {Monoid::unit};\n      cum_r = Monoid::unit;\n      while (len(dat)\
+    \  using X = typename Monoid::value_type;\n  using value_type = X;\n  int sz =\
+    \ 0;\n  vc<X> dat;\n  vc<X> cum_l;\n  X cum_r;\n\n  SWAG() : cum_l({Monoid::unit}),\
+    \ cum_r(Monoid::unit) {}\n\n  int size(){\n    return sz;\n  }\n\n  void push(X\
+    \ x) {\n    ++sz;\n    cum_r = Monoid::op(cum_r, x);\n    dat.eb(x);\n  }\n\n\
+    \  void pop() {\n    --sz;\n    cum_l.pop_back();\n    if (len(cum_l) == 0) {\n\
+    \      cum_l = {Monoid::unit};\n      cum_r = Monoid::unit;\n      while (len(dat)\
     \ > 1) {\n        cum_l.eb(Monoid::op(dat.back(), cum_l.back()));\n        dat.pop_back();\n\
     \      }\n      dat.pop_back();\n    }\n  }\n\n  X prod() { return Monoid::op(cum_l.back(),\
     \ cum_r); }\n\n  void debug() {\n    print(\"swag\");\n    print(\"dat\", dat);\n\
     \    print(\"cum_l\", cum_l);\n    print(\"cum_r\", cum_r);\n  }\n};\n"
   code: "template <class Monoid>\nstruct SWAG {\n  using X = typename Monoid::value_type;\n\
-    \  using value_type = X;\n  vc<X> dat;\n  vc<X> cum_l;\n  X cum_r;\n\n  SWAG()\
-    \ : cum_l({Monoid::unit}), cum_r(Monoid::unit) {}\n\n  void push(X x) {\n    cum_r\
-    \ = Monoid::op(cum_r, x);\n    dat.eb(x);\n  }\n\n  void pop() {\n    cum_l.pop_back();\n\
+    \  using value_type = X;\n  int sz = 0;\n  vc<X> dat;\n  vc<X> cum_l;\n  X cum_r;\n\
+    \n  SWAG() : cum_l({Monoid::unit}), cum_r(Monoid::unit) {}\n\n  int size(){\n\
+    \    return sz;\n  }\n\n  void push(X x) {\n    ++sz;\n    cum_r = Monoid::op(cum_r,\
+    \ x);\n    dat.eb(x);\n  }\n\n  void pop() {\n    --sz;\n    cum_l.pop_back();\n\
     \    if (len(cum_l) == 0) {\n      cum_l = {Monoid::unit};\n      cum_r = Monoid::unit;\n\
     \      while (len(dat) > 1) {\n        cum_l.eb(Monoid::op(dat.back(), cum_l.back()));\n\
     \        dat.pop_back();\n      }\n      dat.pop_back();\n    }\n  }\n\n  X prod()\
@@ -49,7 +51,7 @@ data:
   requiredBy:
   - seq/interpolate_poly_exp_sum.hpp
   - poly/lagrange_interpolate_iota.hpp
-  timestamp: '2021-12-28 08:12:08+09:00'
+  timestamp: '2022-03-07 12:56:22+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/library_checker/math/sum_of_exp_times_poly.test.cpp
