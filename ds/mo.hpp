@@ -1,8 +1,6 @@
 struct Mo {
   vector<pair<int, int> > lr;
 
-  explicit Mo() {}
-
   void add(int l, int r) { /* [l, r) */
     lr.emplace_back(l, r);
   }
@@ -10,6 +8,8 @@ struct Mo {
   template <typename AL, typename AR, typename EL, typename ER, typename O>
   void calc(const AL &add_left, const AR &add_right, const EL &erase_left,
             const ER &erase_right, const O &out) {
+    int n = 1;
+    for (auto &&[l, r]: lr) chmax(n, r);
     int q = (int)lr.size();
     int bs = n / min<int>(n, sqrt(q));
     vector<int> ord(q);

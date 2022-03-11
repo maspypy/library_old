@@ -15,7 +15,7 @@ void solve() {
   ll K = len(key);
   FenwickTree<Group_Add<int>> bit(K);
 
-  Mo mo(N);
+  Mo mo;
   vi ANS(Q);
   FOR(_, Q) {
     LL(L, R);
