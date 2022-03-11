@@ -1,8 +1,7 @@
 struct Mo {
-  int n;
   vector<pair<int, int> > lr;
 
-  explicit Mo(int n) : n(n) {}
+  explicit Mo() {}
 
   void add(int l, int r) { /* [l, r) */
     lr.emplace_back(l, r);
