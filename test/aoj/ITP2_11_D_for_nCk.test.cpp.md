@@ -158,8 +158,8 @@ data:
     Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\nvoid yes(bool t = 1)\
     \ { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) { yes(!t); }\r\n#line\
     \ 1 \"other/for_nck.hpp\"\n#define FOR_nCk(s, n, k) \\\r\n  for (ll s = (1LL <<\
-    \ k) - 1, tmp_var = 0; s < (1LL << n); \\\r\n       tmp_var = s | (s - 1), s =\
-    \ (tmp_var + 1) | (((~tmp_var & -~tmp_var) - 1) >> (__builtin_ctzll(s) + 1)))\r\
+    \ (k)) - 1, tmp_var = 0; s < (1LL << (n)); \\\r\n       tmp_var = s | (s - 1),\
+    \ s = (tmp_var + 1) | (((~tmp_var & -~tmp_var) - 1) >> (__builtin_ctzll(s) + 1)))\r\
     \n#line 6 \"test/aoj/ITP2_11_D_for_nCk.test.cpp\"\n\nvoid solve() {\n  LL(N, K);\n\
     \  FOR_nCk(s, N, K) {\n    vi I;\n    FOR(i, N) if (s & 1 << i) I.eb(i);\n   \
     \ print(to_string(s) + \":\", I);\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
@@ -178,7 +178,7 @@ data:
   isVerificationFile: true
   path: test/aoj/ITP2_11_D_for_nCk.test.cpp
   requiredBy: []
-  timestamp: '2022-03-07 01:03:26+09:00'
+  timestamp: '2022-03-12 04:19:44+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/ITP2_11_D_for_nCk.test.cpp

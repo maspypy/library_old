@@ -168,6 +168,9 @@ data:
       path: ds/segtree2d.hpp
       title: ds/segtree2d.hpp
     - icon: ':warning:'
+      path: ds/segtree2d_dense.hpp
+      title: ds/segtree2d_dense.hpp
+    - icon: ':warning:'
       path: ds/slope.hpp
       title: ds/slope.hpp
     - icon: ':heavy_check_mark:'
