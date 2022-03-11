@@ -12,6 +12,9 @@ data:
     path: graph/treemonoid.hpp
     title: graph/treemonoid.hpp
   - icon: ':warning:'
+    path: mod/modular_subset_sum.hpp
+    title: mod/modular_subset_sum.hpp
+  - icon: ':warning:'
     path: other/uniqueproductquery.hpp
     title: other/uniqueproductquery.hpp
   _extendedVerifiedWith:
@@ -105,6 +108,7 @@ data:
   isVerificationFile: false
   path: ds/segtree.hpp
   requiredBy:
+  - mod/modular_subset_sum.hpp
   - ds/range_mex_query.hpp
   - other/uniqueproductquery.hpp
   - graph/treemonoid.hpp

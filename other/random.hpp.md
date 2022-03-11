@@ -14,6 +14,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: mod/mod_sqrt.hpp
     title: mod/mod_sqrt.hpp
+  - icon: ':warning:'
+    path: mod/modular_subset_sum.hpp
+    title: mod/modular_subset_sum.hpp
   - icon: ':heavy_check_mark:'
     path: poly/fps_sqrt.hpp
     title: poly/fps_sqrt.hpp
@@ -55,6 +58,7 @@ data:
   isVerificationFile: false
   path: other/random.hpp
   requiredBy:
+  - mod/modular_subset_sum.hpp
   - mod/mod_sqrt.hpp
   - string/rollinghash.hpp
   - poly/fps_sqrt.hpp

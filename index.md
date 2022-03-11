@@ -87,6 +87,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: alg/monoid_reverse.hpp
       title: alg/monoid_reverse.hpp
+    - icon: ':warning:'
+      path: alg/monoid_rollinghash.hpp
+      title: alg/monoid_rollinghash.hpp
     - icon: ':heavy_check_mark:'
       path: alg/monoid_set.hpp
       title: alg/monoid_set.hpp
@@ -354,6 +357,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: mod/modint.hpp
       title: mod/modint.hpp
+    - icon: ':warning:'
+      path: mod/modular_subset_sum.hpp
+      title: mod/modular_subset_sum.hpp
     - icon: ':heavy_check_mark:'
       path: mod/powertable.hpp
       title: mod/powertable.hpp
