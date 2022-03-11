@@ -83,6 +83,7 @@ struct MaxFlowGraph {
         return x;
       }
     }
+    level[v] = -1;
     return 0;
   }
 
