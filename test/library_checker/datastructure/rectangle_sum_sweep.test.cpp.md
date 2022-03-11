@@ -13,14 +13,14 @@ data:
   - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: other/rectanglesums.hpp
     title: other/rectanglesums.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/rectangle_sum
@@ -231,14 +231,14 @@ data:
     \u3044\u305F\u3081\u5C11\u3057\u9AD8\u901F\");\r\n  }\r\n};\r\n#line 8 \"test/library_checker/datastructure/rectangle_sum_sweep.test.cpp\"\
     \n\nvoid solve() {\n  LL(N, Q);\n  RectangleSums RS(N);\n  FOR(_, N) {\n    LL(x,\
     \ y, w);\n    RS.add_pt(x, y, w);\n  }\n  FOR(_, Q) {\n    LL(l, d, r, u);\n \
-    \   RS.add_rect(l, r, d, u);\n  }\n  auto ANS = RS.calc();\n  for (auto&& x: ANS)\
+    \   RS.add_rect(l, d, r, u);\n  }\n  auto ANS = RS.calc();\n  for (auto&& x: ANS)\
     \ print(x);\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
     \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/rectangle_sum\"\n\n#include\
     \ \"my_template.hpp\"\n#include \"other/io.hpp\"\n\n#include \"ds/fenwick.hpp\"\
     \n#include \"other/rectanglesums.hpp\"\n\nvoid solve() {\n  LL(N, Q);\n  RectangleSums\
     \ RS(N);\n  FOR(_, N) {\n    LL(x, y, w);\n    RS.add_pt(x, y, w);\n  }\n  FOR(_,\
-    \ Q) {\n    LL(l, d, r, u);\n    RS.add_rect(l, r, d, u);\n  }\n  auto ANS = RS.calc();\n\
+    \ Q) {\n    LL(l, d, r, u);\n    RS.add_rect(l, d, r, u);\n  }\n  auto ANS = RS.calc();\n\
     \  for (auto&& x: ANS) print(x);\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
     \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  solve();\n\n\
     \  return 0;\n}\n"
@@ -251,8 +251,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
   requiredBy: []
-  timestamp: '2022-03-08 00:35:00+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-03-11 21:00:41+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
 layout: document

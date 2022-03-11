@@ -85,6 +85,9 @@ data:
     path: test/library_checker/datastructure/associative_array.test.cpp
     title: test/library_checker/datastructure/associative_array.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/associative_array_hashmap.test.cpp
+    title: test/library_checker/datastructure/associative_array_hashmap.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/persistent_queue.test.cpp
     title: test/library_checker/datastructure/persistent_queue.test.cpp
   - icon: ':heavy_check_mark:'
@@ -117,7 +120,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
     title: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
     title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
   - icon: ':heavy_check_mark:'
@@ -126,7 +129,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/static_range_sum.test.cpp
     title: test/library_checker/datastructure/static_range_sum.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
     title: test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
   - icon: ':heavy_check_mark:'
@@ -622,6 +625,7 @@ data:
   - test/library_checker/tree/frequency_table_of_tree_distance.test.cpp
   - test/library_checker/tree/tree_diameter.test.cpp
   - test/library_checker/tree/cartesian_tree.test.cpp
+  - test/library_checker/datastructure/associative_array_hashmap.test.cpp
   - test/library_checker/datastructure/associative_array.test.cpp
   - test/library_checker/datastructure/staticrmq_sparse.test.cpp
   - test/library_checker/datastructure/queue_operate_all_composite.test.cpp

@@ -134,6 +134,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: ds/fenwickraq.hpp
       title: ds/fenwickraq.hpp
+    - icon: ':heavy_check_mark:'
+      path: ds/hashmap.hpp
+      title: ds/hashmap.hpp
     - icon: ':warning:'
       path: ds/intervals.hpp
       title: ds/intervals.hpp
@@ -146,9 +149,12 @@ data:
     - icon: ':warning:'
       path: ds/lichao.hpp
       title: ds/lichao.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: ds/mo.hpp
       title: ds/mo.hpp
+    - icon: ':warning:'
+      path: ds/mo_3d.hpp
+      title: ds/mo_3d.hpp
     - icon: ':warning:'
       path: ds/range_mex_query.hpp
       title: ds/range_mex_query.hpp
@@ -432,7 +438,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: other/random.hpp
       title: other/random.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: other/rectanglesums.hpp
       title: other/rectanglesums.hpp
     - icon: ':heavy_check_mark:'
@@ -449,6 +455,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: pds/array.hpp
       title: pds/array.hpp
+    - icon: ':warning:'
+      path: pds/rollbackunionfind.hpp
+      title: pds/rollbackunionfind.hpp
     - icon: ':heavy_check_mark:'
       path: pds/unionfind.hpp
       title: pds/unionfind.hpp
@@ -674,6 +683,9 @@ data:
       path: test/library_checker/datastructure/associative_array.test.cpp
       title: test/library_checker/datastructure/associative_array.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/library_checker/datastructure/associative_array_hashmap.test.cpp
+      title: test/library_checker/datastructure/associative_array_hashmap.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/persistent_queue.test.cpp
       title: test/library_checker/datastructure/persistent_queue.test.cpp
     - icon: ':heavy_check_mark:'
@@ -706,7 +718,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
       title: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
       title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
     - icon: ':heavy_check_mark:'
@@ -715,7 +727,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/static_range_sum.test.cpp
       title: test/library_checker/datastructure/static_range_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
       title: test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
     - icon: ':heavy_check_mark:'
