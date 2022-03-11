@@ -15,7 +15,7 @@ void solve() {
   }
   FOR(_, Q) {
     LL(l, d, r, u);
-    RS.add_rect(l, r, d, u);
+    RS.add_rect(l, d, r, u);
   }
   auto ANS = RS.calc();
   for (auto&& x: ANS) print(x);
