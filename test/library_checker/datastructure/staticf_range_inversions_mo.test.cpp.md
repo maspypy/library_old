@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: alg/group_add.hpp
     title: alg/group_add.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/fenwick.hpp
     title: ds/fenwick.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: ds/mo.hpp
     title: ds/mo.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: other/io.hpp
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/static_range_inversions_query
@@ -193,44 +193,44 @@ data:
     \   k >>= 1;\n    }\n    return i;\n  }\n\n  int find_kth(E k) {\n    auto check\
     \ = [&](E x) -> bool { return x <= k; };\n    return max_right(check);\n  }\n\n\
     \  void debug() { print(\"fenwick\", dat); }\n};\n#line 1 \"ds/mo.hpp\"\nstruct\
-    \ Mo {\r\n  vector<pair<int, int> > lr;\r\n\r\n  explicit Mo() {}\r\n\r\n  void\
-    \ add(int l, int r) { /* [l, r) */\r\n    lr.emplace_back(l, r);\r\n  }\r\n\r\n\
-    \  template <typename AL, typename AR, typename EL, typename ER, typename O>\r\
-    \n  void calc(const AL &add_left, const AR &add_right, const EL &erase_left,\r\
-    \n            const ER &erase_right, const O &out) {\r\n    int q = (int)lr.size();\r\
-    \n    int bs = n / min<int>(n, sqrt(q));\r\n    vector<int> ord(q);\r\n    iota(begin(ord),\
-    \ end(ord), 0);\r\n    sort(begin(ord), end(ord), [&](int a, int b) {\r\n    \
-    \  int ablock = lr[a].first / bs, bblock = lr[b].first / bs;\r\n      if (ablock\
-    \ != bblock) return ablock < bblock;\r\n      return (ablock & 1) ? lr[a].second\
-    \ > lr[b].second\r\n                          : lr[a].second < lr[b].second;\r\
-    \n    });\r\n    int l = 0, r = 0;\r\n    for (auto idx: ord) {\r\n      while\
-    \ (l > lr[idx].first) add_left(--l);\r\n      while (r < lr[idx].second) add_right(r++);\r\
-    \n      while (l < lr[idx].first) erase_left(l++);\r\n      while (r > lr[idx].second)\
-    \ erase_right(--r);\r\n      out(idx);\r\n    }\r\n  }\r\n\r\n  template <typename\
-    \ A, typename E, typename O>\r\n  void calc(const A &add, const E &erase, const\
-    \ O &out) {\r\n    calc(add, add, erase, erase, out);\r\n  }\r\n};\n#line 7 \"\
-    test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp\"\n\r\n\
-    void solve() {\r\n  LL(N, Q);\r\n  VEC(ll, A, N);\r\n  vi key = A;\r\n  UNIQUE(key);\r\
-    \n\r\n  for (auto&& x: A) x = LB(key, x);\r\n  ll K = len(key);\r\n  FenwickTree<Group_Add<int>>\
-    \ bit(K);\r\n\r\n  Mo mo(N);\r\n  vi ANS(Q);\r\n  FOR(_, Q) {\r\n    LL(L, R);\r\
-    \n    mo.add(L, R);\r\n  }\r\n\r\n  ll inv = 0;\r\n  auto add_l = [&](int i) ->\
-    \ void {\r\n    int x = A[i];\r\n    inv += bit.sum(x);\r\n    bit.add(x, +1);\r\
-    \n  };\r\n  auto rm_l = [&](int i) -> void {\r\n    int x = A[i];\r\n    bit.add(x,\
-    \ -1);\r\n    inv -= bit.sum(x);\r\n  };\r\n  auto add_r = [&](int i) -> void\
-    \ {\r\n    int x = A[i];\r\n    inv += bit.sum_all() - bit.sum(x + 1);\r\n   \
-    \ bit.add(x, +1);\r\n  };\r\n  auto rm_r = [&](int i) -> void {\r\n    int x =\
-    \ A[i];\r\n    bit.add(x, -1);\r\n    inv -= bit.sum_all() - bit.sum(x + 1);\r\
-    \n  };\r\n  auto calc = [&](int i) -> void { ANS[i] = inv; };\r\n  mo.calc(add_l,\
-    \ add_r, rm_l, rm_r, calc);\r\n  for (auto&& x: ANS) print(x);\r\n}\r\n\r\nsigned\
-    \ main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout\
-    \ << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \ Mo {\r\n  vector<pair<int, int> > lr;\r\n\r\n  void add(int l, int r) { /* [l,\
+    \ r) */\r\n    lr.emplace_back(l, r);\r\n  }\r\n\r\n  template <typename AL, typename\
+    \ AR, typename EL, typename ER, typename O>\r\n  void calc(const AL &add_left,\
+    \ const AR &add_right, const EL &erase_left,\r\n            const ER &erase_right,\
+    \ const O &out) {\r\n    int n = 1;\r\n    for (auto &&[l, r]: lr) chmax(n, r);\r\
+    \n    int q = (int)lr.size();\r\n    int bs = n / min<int>(n, sqrt(q));\r\n  \
+    \  vector<int> ord(q);\r\n    iota(begin(ord), end(ord), 0);\r\n    sort(begin(ord),\
+    \ end(ord), [&](int a, int b) {\r\n      int ablock = lr[a].first / bs, bblock\
+    \ = lr[b].first / bs;\r\n      if (ablock != bblock) return ablock < bblock;\r\
+    \n      return (ablock & 1) ? lr[a].second > lr[b].second\r\n                \
+    \          : lr[a].second < lr[b].second;\r\n    });\r\n    int l = 0, r = 0;\r\
+    \n    for (auto idx: ord) {\r\n      while (l > lr[idx].first) add_left(--l);\r\
+    \n      while (r < lr[idx].second) add_right(r++);\r\n      while (l < lr[idx].first)\
+    \ erase_left(l++);\r\n      while (r > lr[idx].second) erase_right(--r);\r\n \
+    \     out(idx);\r\n    }\r\n  }\r\n\r\n  template <typename A, typename E, typename\
+    \ O>\r\n  void calc(const A &add, const E &erase, const O &out) {\r\n    calc(add,\
+    \ add, erase, erase, out);\r\n  }\r\n};\n#line 7 \"test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp\"\
+    \n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  VEC(ll, A, N);\r\n  vi key = A;\r\n \
+    \ UNIQUE(key);\r\n\r\n  for (auto&& x: A) x = LB(key, x);\r\n  ll K = len(key);\r\
+    \n  FenwickTree<Group_Add<int>> bit(K);\r\n\r\n  Mo mo;\r\n  vi ANS(Q);\r\n  FOR(_,\
+    \ Q) {\r\n    LL(L, R);\r\n    mo.add(L, R);\r\n  }\r\n\r\n  ll inv = 0;\r\n \
+    \ auto add_l = [&](int i) -> void {\r\n    int x = A[i];\r\n    inv += bit.sum(x);\r\
+    \n    bit.add(x, +1);\r\n  };\r\n  auto rm_l = [&](int i) -> void {\r\n    int\
+    \ x = A[i];\r\n    bit.add(x, -1);\r\n    inv -= bit.sum(x);\r\n  };\r\n  auto\
+    \ add_r = [&](int i) -> void {\r\n    int x = A[i];\r\n    inv += bit.sum_all()\
+    \ - bit.sum(x + 1);\r\n    bit.add(x, +1);\r\n  };\r\n  auto rm_r = [&](int i)\
+    \ -> void {\r\n    int x = A[i];\r\n    bit.add(x, -1);\r\n    inv -= bit.sum_all()\
+    \ - bit.sum(x + 1);\r\n  };\r\n  auto calc = [&](int i) -> void { ANS[i] = inv;\
+    \ };\r\n  mo.calc(add_l, add_r, rm_l, rm_r, calc);\r\n  for (auto&& x: ANS) print(x);\r\
+    \n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/static_range_inversions_query\"\
     \r\n#include \"my_template.hpp\"\r\n#include \"other/io.hpp\"\r\n\r\n#include\
     \ \"ds/fenwick.hpp\"\r\n#include \"ds/mo.hpp\"\r\n\r\nvoid solve() {\r\n  LL(N,\
     \ Q);\r\n  VEC(ll, A, N);\r\n  vi key = A;\r\n  UNIQUE(key);\r\n\r\n  for (auto&&\
     \ x: A) x = LB(key, x);\r\n  ll K = len(key);\r\n  FenwickTree<Group_Add<int>>\
-    \ bit(K);\r\n\r\n  Mo mo(N);\r\n  vi ANS(Q);\r\n  FOR(_, Q) {\r\n    LL(L, R);\r\
-    \n    mo.add(L, R);\r\n  }\r\n\r\n  ll inv = 0;\r\n  auto add_l = [&](int i) ->\
+    \ bit(K);\r\n\r\n  Mo mo;\r\n  vi ANS(Q);\r\n  FOR(_, Q) {\r\n    LL(L, R);\r\n\
+    \    mo.add(L, R);\r\n  }\r\n\r\n  ll inv = 0;\r\n  auto add_l = [&](int i) ->\
     \ void {\r\n    int x = A[i];\r\n    inv += bit.sum(x);\r\n    bit.add(x, +1);\r\
     \n  };\r\n  auto rm_l = [&](int i) -> void {\r\n    int x = A[i];\r\n    bit.add(x,\
     \ -1);\r\n    inv -= bit.sum(x);\r\n  };\r\n  auto add_r = [&](int i) -> void\
@@ -250,8 +250,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
   requiredBy: []
-  timestamp: '2022-03-11 20:59:00+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-03-11 22:29:24+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
 layout: document

@@ -4,10 +4,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: flow/maxflow.hpp
     title: flow/maxflow.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: other/io.hpp
     title: other/io.hpp
   _extendedRequiredBy: []
@@ -184,9 +184,9 @@ data:
     \      Cap x = flow_dfs(e.to, sink, min(lim, e.cap));\n      if (x > Cap(0)) {\n\
     \        e.cap -= x;\n        int j = rev[i];\n        csr_edges[j].cap += x;\n\
     \        if (e.idx >= 0)\n          edge_flow[e.idx] += x;\n        else\n   \
-    \       edge_flow[~e.idx] -= x;\n        return x;\n      }\n    }\n    return\
-    \ 0;\n  }\n\n  Cap flow(int source, int sink) {\n    assert(!calculated);\n  \
-    \  calculated = true;\n    _build();\n    Cap f = 0;\n    while (set_level(source,\
+    \       edge_flow[~e.idx] -= x;\n        return x;\n      }\n    }\n    level[v]\
+    \ = -1;\n    return 0;\n  }\n\n  Cap flow(int source, int sink) {\n    assert(!calculated);\n\
+    \    calculated = true;\n    _build();\n    Cap f = 0;\n    while (set_level(source,\
     \ sink)) {\n      while (1) {\n        Cap x = flow_dfs(source, sink, INF);\n\
     \        if (x == 0) break;\n        f += x;\n      }\n    }\n    return f;\n\
     \  }\n\n  vc<tuple<int, int, Cap>> get_edges() {\n    vc<tuple<int, int, Cap>>\
@@ -212,7 +212,7 @@ data:
   isVerificationFile: true
   path: test/aoj/GRL_6_A_maxflow.test.cpp
   requiredBy: []
-  timestamp: '2022-03-07 01:03:26+09:00'
+  timestamp: '2022-03-11 22:30:32+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/GRL_6_A_maxflow.test.cpp

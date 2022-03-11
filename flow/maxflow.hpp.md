@@ -38,15 +38,15 @@ data:
     \      if (x > Cap(0)) {\n        e.cap -= x;\n        int j = rev[i];\n     \
     \   csr_edges[j].cap += x;\n        if (e.idx >= 0)\n          edge_flow[e.idx]\
     \ += x;\n        else\n          edge_flow[~e.idx] -= x;\n        return x;\n\
-    \      }\n    }\n    return 0;\n  }\n\n  Cap flow(int source, int sink) {\n  \
-    \  assert(!calculated);\n    calculated = true;\n    _build();\n    Cap f = 0;\n\
-    \    while (set_level(source, sink)) {\n      while (1) {\n        Cap x = flow_dfs(source,\
-    \ sink, INF);\n        if (x == 0) break;\n        f += x;\n      }\n    }\n \
-    \   return f;\n  }\n\n  vc<tuple<int, int, Cap>> get_edges() {\n    vc<tuple<int,\
-    \ int, Cap>> res;\n    for (auto&& e: edges) {\n      Cap f = edge_flow[e.idx];\n\
-    \      if (f > Cap(0)) res.eb(e.frm, e.to, f);\n    }\n    return res;\n  }\n\n\
-    \  void debug() {\n    for (auto&& e: edges) print(e.frm, e.to, e.cap);\n  }\n\
-    };\n"
+    \      }\n    }\n    level[v] = -1;\n    return 0;\n  }\n\n  Cap flow(int source,\
+    \ int sink) {\n    assert(!calculated);\n    calculated = true;\n    _build();\n\
+    \    Cap f = 0;\n    while (set_level(source, sink)) {\n      while (1) {\n  \
+    \      Cap x = flow_dfs(source, sink, INF);\n        if (x == 0) break;\n    \
+    \    f += x;\n      }\n    }\n    return f;\n  }\n\n  vc<tuple<int, int, Cap>>\
+    \ get_edges() {\n    vc<tuple<int, int, Cap>> res;\n    for (auto&& e: edges)\
+    \ {\n      Cap f = edge_flow[e.idx];\n      if (f > Cap(0)) res.eb(e.frm, e.to,\
+    \ f);\n    }\n    return res;\n  }\n\n  void debug() {\n    for (auto&& e: edges)\
+    \ print(e.frm, e.to, e.cap);\n  }\n};\n"
   code: "template <typename Cap = int>\nstruct MaxFlowGraph {\n  const Cap INF;\n\n\
     \  struct Edge {\n    int frm, to;\n    Cap cap;\n    int idx;\n  };\n\n  int\
     \ N;\n  vc<int> indptr;\n  vc<Edge> edges;\n  vc<Cap> edge_flow;\n\n  vc<Edge>\
@@ -73,9 +73,9 @@ data:
     \      Cap x = flow_dfs(e.to, sink, min(lim, e.cap));\n      if (x > Cap(0)) {\n\
     \        e.cap -= x;\n        int j = rev[i];\n        csr_edges[j].cap += x;\n\
     \        if (e.idx >= 0)\n          edge_flow[e.idx] += x;\n        else\n   \
-    \       edge_flow[~e.idx] -= x;\n        return x;\n      }\n    }\n    return\
-    \ 0;\n  }\n\n  Cap flow(int source, int sink) {\n    assert(!calculated);\n  \
-    \  calculated = true;\n    _build();\n    Cap f = 0;\n    while (set_level(source,\
+    \       edge_flow[~e.idx] -= x;\n        return x;\n      }\n    }\n    level[v]\
+    \ = -1;\n    return 0;\n  }\n\n  Cap flow(int source, int sink) {\n    assert(!calculated);\n\
+    \    calculated = true;\n    _build();\n    Cap f = 0;\n    while (set_level(source,\
     \ sink)) {\n      while (1) {\n        Cap x = flow_dfs(source, sink, INF);\n\
     \        if (x == 0) break;\n        f += x;\n      }\n    }\n    return f;\n\
     \  }\n\n  vc<tuple<int, int, Cap>> get_edges() {\n    vc<tuple<int, int, Cap>>\
@@ -86,7 +86,7 @@ data:
   isVerificationFile: false
   path: flow/maxflow.hpp
   requiredBy: []
-  timestamp: '2022-02-14 19:56:19+09:00'
+  timestamp: '2022-03-11 22:30:32+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/GRL_6_A_maxflow.test.cpp

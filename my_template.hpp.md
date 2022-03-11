@@ -135,7 +135,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/static_range_sum.test.cpp
     title: test/library_checker/datastructure/static_range_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
     title: test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
   - icon: ':heavy_check_mark:'
@@ -372,9 +372,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/899_bfsnumbering.test.cpp
     title: test/yukicoder/899_bfsnumbering.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace\
@@ -494,7 +494,7 @@ data:
   - ds/lichao.hpp
   - graph/bipartite_coloring.hpp
   timestamp: '2022-03-07 01:03:26+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/NTL_1_E_extgcd.test.cpp
   - test/aoj/DSL_4_A_rectangle_union.test.cpp

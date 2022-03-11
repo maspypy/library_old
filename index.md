@@ -3,7 +3,7 @@ data:
   libraryCategories:
   - name: alg
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: alg/group_add.hpp
       title: alg/group_add.hpp
     - icon: ':heavy_check_mark:'
@@ -122,7 +122,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: ds/fastset.hpp
       title: ds/fastset.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: ds/fenwick.hpp
       title: ds/fenwick.hpp
     - icon: ':heavy_check_mark:'
@@ -149,7 +149,7 @@ data:
     - icon: ':warning:'
       path: ds/lichao.hpp
       title: ds/lichao.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: ds/mo.hpp
       title: ds/mo.hpp
     - icon: ':warning:'
@@ -365,7 +365,7 @@ data:
       title: mod/tetration.hpp
   - name: .
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: my_template.hpp
       title: my_template.hpp
   - name: nt
@@ -423,7 +423,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: other/inversion.hpp
       title: other/inversion.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: other/io.hpp
       title: other/io.hpp
     - icon: ':warning:'
@@ -727,7 +727,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/static_range_sum.test.cpp
       title: test/library_checker/datastructure/static_range_sum.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
       title: test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
     - icon: ':heavy_check_mark:'
