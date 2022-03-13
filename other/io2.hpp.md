@@ -13,16 +13,16 @@ data:
     \n#define STR(...) \\\r\n  string __VA_ARGS__; \\\r\n  IN(__VA_ARGS__)\r\n#define\
     \ CHR(...) \\\r\n  char __VA_ARGS__; \\\r\n  IN(__VA_ARGS__)\r\n#define DBL(...)\
     \ \\\r\n  long double __VA_ARGS__; \\\r\n  IN(__VA_ARGS__)\r\n\r\n#define VEC(type,\
-    \ name, size) \\\r\n  vector<type> name(size);    \\\r\n  scan(name)\r\n#define\
+    \ name, size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define\
     \ VV(type, name, h, w)                     \\\r\n  vector<vector<type>> name(h,\
-    \ vector<type>(w)); \\\r\n  scan(name)\r\n\r\nvoid scan(int &a) { cin >> a; }\r\
-    \nvoid scan(long long &a) { cin >> a; }\r\nvoid scan(char &a) { cin >> a; }\r\n\
-    void scan(double &a) { cin >> a; }\r\nvoid scan(long double &a) { cin >> a; }\r\
-    \nvoid scan(string &a) { cin >> a; }\r\ntemplate <class T, class S> void scan(pair<T,\
-    \ S> &p) { scan(p.first), scan(p.second); }\r\ntemplate <class T> void scan(vector<T>\
-    \ &a) {for(auto &i : a) scan(i);}\r\ntemplate <class T> void scan(T &a) { cin\
+    \ vector<type>(w)); \\\r\n  read(name)\r\n\r\nvoid read(int &a) { cin >> a; }\r\
+    \nvoid read(long long &a) { cin >> a; }\r\nvoid read(char &a) { cin >> a; }\r\n\
+    void read(double &a) { cin >> a; }\r\nvoid read(long double &a) { cin >> a; }\r\
+    \nvoid read(string &a) { cin >> a; }\r\ntemplate <class T, class S> void read(pair<T,\
+    \ S> &p) { read(p.first), read(p.second); }\r\ntemplate <class T> void read(vector<T>\
+    \ &a) {for(auto &i : a) read(i);}\r\ntemplate <class T> void read(T &a) { cin\
     \ >> a; }\r\nvoid IN() {}\r\ntemplate <class Head, class... Tail> void IN(Head\
-    \ &head, Tail &...tail) {\r\n  scan(head);\r\n  IN(tail...);\r\n}\r\n\r\ntemplate\
+    \ &head, Tail &...tail) {\r\n  read(head);\r\n  IN(tail...);\r\n}\r\n\r\ntemplate\
     \ <typename T, typename U>\r\nostream& operator<<(ostream& os, const pair<T, U>&\
     \ A) {\r\n  os << A.fi << \" \" << A.se;\r\n  return os;\r\n}\r\n\r\ntemplate\
     \ <typename T>\r\nostream& operator<<(ostream& os, const vector<T>& A) {\r\n \
@@ -36,16 +36,16 @@ data:
     \ \\\r\n  string __VA_ARGS__; \\\r\n  IN(__VA_ARGS__)\r\n#define CHR(...) \\\r\
     \n  char __VA_ARGS__; \\\r\n  IN(__VA_ARGS__)\r\n#define DBL(...) \\\r\n  long\
     \ double __VA_ARGS__; \\\r\n  IN(__VA_ARGS__)\r\n\r\n#define VEC(type, name, size)\
-    \ \\\r\n  vector<type> name(size);    \\\r\n  scan(name)\r\n#define VV(type, name,\
+    \ \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define VV(type, name,\
     \ h, w)                     \\\r\n  vector<vector<type>> name(h, vector<type>(w));\
-    \ \\\r\n  scan(name)\r\n\r\nvoid scan(int &a) { cin >> a; }\r\nvoid scan(long\
-    \ long &a) { cin >> a; }\r\nvoid scan(char &a) { cin >> a; }\r\nvoid scan(double\
-    \ &a) { cin >> a; }\r\nvoid scan(long double &a) { cin >> a; }\r\nvoid scan(string\
-    \ &a) { cin >> a; }\r\ntemplate <class T, class S> void scan(pair<T, S> &p) {\
-    \ scan(p.first), scan(p.second); }\r\ntemplate <class T> void scan(vector<T> &a)\
-    \ {for(auto &i : a) scan(i);}\r\ntemplate <class T> void scan(T &a) { cin >> a;\
+    \ \\\r\n  read(name)\r\n\r\nvoid read(int &a) { cin >> a; }\r\nvoid read(long\
+    \ long &a) { cin >> a; }\r\nvoid read(char &a) { cin >> a; }\r\nvoid read(double\
+    \ &a) { cin >> a; }\r\nvoid read(long double &a) { cin >> a; }\r\nvoid read(string\
+    \ &a) { cin >> a; }\r\ntemplate <class T, class S> void read(pair<T, S> &p) {\
+    \ read(p.first), read(p.second); }\r\ntemplate <class T> void read(vector<T> &a)\
+    \ {for(auto &i : a) read(i);}\r\ntemplate <class T> void read(T &a) { cin >> a;\
     \ }\r\nvoid IN() {}\r\ntemplate <class Head, class... Tail> void IN(Head &head,\
-    \ Tail &...tail) {\r\n  scan(head);\r\n  IN(tail...);\r\n}\r\n\r\ntemplate <typename\
+    \ Tail &...tail) {\r\n  read(head);\r\n  IN(tail...);\r\n}\r\n\r\ntemplate <typename\
     \ T, typename U>\r\nostream& operator<<(ostream& os, const pair<T, U>& A) {\r\n\
     \  os << A.fi << \" \" << A.se;\r\n  return os;\r\n}\r\n\r\ntemplate <typename\
     \ T>\r\nostream& operator<<(ostream& os, const vector<T>& A) {\r\n  for (size_t\
@@ -58,7 +58,7 @@ data:
   isVerificationFile: false
   path: other/io2.hpp
   requiredBy: []
-  timestamp: '2022-03-07 01:01:38+09:00'
+  timestamp: '2022-03-14 00:24:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: other/io2.hpp
