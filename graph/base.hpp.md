@@ -26,9 +26,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/dial.hpp
     title: graph/dial.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: graph/dijkstra.hpp
     title: graph/dijkstra.hpp
+  - icon: ':warning:'
+    path: graph/dualtreemonoid.hpp
+    title: graph/dualtreemonoid.hpp
   - icon: ':heavy_check_mark:'
     path: graph/enumerate_triangles.hpp
     title: graph/enumerate_triangles.hpp
@@ -56,7 +59,7 @@ data:
   - icon: ':warning:'
     path: graph/reverse_graph.hpp
     title: graph/reverse_graph.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/scc.hpp
     title: graph/scc.hpp
   - icon: ':warning:'
@@ -83,10 +86,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/treemonoid.hpp
     title: graph/treemonoid.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/two_edge_component.hpp
     title: graph/two_edge_component.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/twosat.hpp
     title: graph/twosat.hpp
   _extendedVerifiedWith:
@@ -126,16 +129,16 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/maximum_independent_set.test.cpp
     title: test/library_checker/graph/maximum_independent_set.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/scc.test.cpp
     title: test/library_checker/graph/scc.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/shortest_path.test.cpp
     title: test/library_checker/graph/shortest_path.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/two_edge_component.test.cpp
     title: test/library_checker/graph/two_edge_component.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/math/twosat.test.cpp
     title: test/library_checker/math/twosat.test.cpp
   - icon: ':x:'
@@ -252,6 +255,7 @@ data:
   - graph/dial.hpp
   - graph/solve_dag_game.hpp
   - graph/toposort.hpp
+  - graph/dualtreemonoid.hpp
   - graph/check_bipartite.hpp
   - graph/treemonoid.hpp
   - graph/tree_all_distances.hpp

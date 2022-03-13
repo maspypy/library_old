@@ -3,6 +3,9 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
+    path: graph/dualtreemonoid.hpp
+    title: graph/dualtreemonoid.hpp
+  - icon: ':warning:'
     path: graph/lazytreemonoid.hpp
     title: graph/lazytreemonoid.hpp
   - icon: ':heavy_check_mark:'
@@ -148,6 +151,7 @@ data:
   requiredBy:
   - other/rectangleunion.hpp
   - graph/lazytreemonoid.hpp
+  - graph/dualtreemonoid.hpp
   timestamp: '2022-01-02 01:47:55+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:

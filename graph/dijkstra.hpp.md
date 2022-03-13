@@ -9,7 +9,7 @@ data:
     path: graph/mincostcycle.hpp
     title: graph/mincostcycle.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/shortest_path.test.cpp
     title: test/library_checker/graph/shortest_path.test.cpp
   - icon: ':x:'
@@ -17,7 +17,7 @@ data:
     title: test/yukicoder/1320_mincostcycle.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n\
@@ -80,7 +80,7 @@ data:
   requiredBy:
   - graph/mincostcycle.hpp
   timestamp: '2022-03-14 00:26:36+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1320_mincostcycle.test.cpp
   - test/library_checker/graph/shortest_path.test.cpp
