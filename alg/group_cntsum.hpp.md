@@ -5,7 +5,7 @@ data:
   - icon: ':warning:'
     path: alg/lazy_cntsum_add.hpp
     title: alg/lazy_cntsum_add.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: alg/lazy_cntsum_affine.hpp
     title: alg/lazy_cntsum_affine.hpp
   - icon: ':heavy_check_mark:'
@@ -15,12 +15,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
     title: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
     title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 1 \"alg/group_cntsum.hpp\"\ntemplate <typename E = long long>\r\
@@ -42,7 +42,7 @@ data:
   - alg/lazy_cntsum_affine.hpp
   - alg/lazy_cntsum_add.hpp
   timestamp: '2022-01-11 13:22:23+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
   - test/library_checker/datastructure/range_affine_range_sum.test.cpp

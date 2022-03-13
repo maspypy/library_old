@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
@@ -40,39 +40,40 @@ data:
     \ { return __builtin_popcount(x); }\nint popcnt(u32 x) { return __builtin_popcount(x);\
     \ }\nint popcnt(ll x) { return __builtin_popcountll(x); }\nint popcnt(u64 x) {\
     \ return __builtin_popcountll(x); }\n// (0, 1, 2, 3, 4) -> (-1, 0, 1, 1, 2)\n\
-    int topbit(int x) { return 31 - __builtin_clz(x); }\nint topbit(u32 x) { return\
-    \ 31 - __builtin_clz(x); }\nint topbit(ll x) { return 63 - __builtin_clzll(x);\
-    \ }\nint topbit(u64 x) { return 63 - __builtin_clzll(x); }\n// (0, 1, 2, 3, 4)\
-    \ -> (32 or 64, 0, 1, 0, 2)\nint lowbit(int x) { return 31 - __builtin_clz(x);\
-    \ }\nint lowbit(u32 x) { return 31 - __builtin_clz(x); }\nint lowbit(ll x) { return\
-    \ 63 - __builtin_clzll(x); }\nint lowbit(u64 x) { return 63 - __builtin_clzll(x);\
-    \ }\n\ntemplate <typename T, typename U>\nT ceil(T x, U y) {\n  return (x > 0\
-    \ ? (x + y - 1) / y : x / y);\n}\n\ntemplate <typename T, typename U>\nT floor(T\
-    \ x, U y) {\n  return (x > 0 ? x / y : (x - y + 1) / y);\n}\n\ntemplate <typename\
-    \ T, typename U>\npair<T, T> divmod(T x, U y) {\n  T q = floor(x, y);\n  return\
-    \ {q, x - q * y};\n}\n\nll binary_search(function<bool(ll)> check, ll ok, ll ng)\
-    \ {\n  assert(check(ok));\n  while (abs(ok - ng) > 1) {\n    auto x = (ng + ok)\
-    \ / 2;\n    if (check(x))\n      ok = x;\n    else\n      ng = x;\n  }\n  return\
-    \ ok;\n}\n\ntemplate <class T, class S>\ninline bool chmax(T &a, const S &b) {\n\
-    \  return (a < b ? a = b, 1 : 0);\n}\ntemplate <class T, class S>\ninline bool\
-    \ chmin(T &a, const S &b) {\n  return (a > b ? a = b, 1 : 0);\n}\n\nvi s_to_vi(string\
-    \ S, char first_char = 'a') {\n  vi A(S.size());\n  FOR(i, S.size()) { A[i] =\
-    \ S[i] - first_char; }\n  return A;\n}\n\ntemplate <typename T>\nvector<T> cumsum(vector<T>\
-    \ &A, int off = 1) {\n  int N = A.size();\n  vector<T> B(N + 1);\n  FOR(i, N)\
-    \ { B[i + 1] = B[i] + A[i]; }\n  if (off == 0) B.erase(B.begin());\n  return B;\n\
-    }\n\ntemplate <typename T, typename CNT = int>\nvc<CNT> bincount(vc<T> &A, int\
-    \ size) {\n  vc<CNT> C(size);\n  for (auto &&x: A) { ++C[x]; }\n  return C;\n\
-    }\n\ntemplate <typename T>\nvector<int> argsort(vector<T> &A) {\n  // stable\n\
-    \  vector<int> ids(A.size());\n  iota(all(ids), 0);\n  sort(all(ids),\n      \
-    \ [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j] && i < j); });\n  return\
-    \ ids;\n}\n#line 3 \"ds/lichao.hpp\"\n\r\ntemplate <typename T>\r\nstruct LiChaoTree\
-    \ {\r\n  struct Line {\r\n    T a, b;\r\n\r\n    Line(T a, T b) : a(a), b(b) {}\r\
-    \n\r\n    inline T get(T x) const { return a * x + b; }\r\n\r\n    inline bool\
-    \ over(const Line& b, const T& x) const {\r\n      return get(x) < b.get(x);\r\
-    \n    }\r\n  };\r\n\r\n  vector<T> xs;\r\n  vector<Line> seg;\r\n  int sz;\r\n\
-    \r\n  LiChaoTree(const vector<T>& x, T INF) : xs(x) {\r\n    sort(all(xs));\r\n\
-    \    sz = 1;\r\n    while (sz < xs.size()) sz <<= 1;\r\n    while (xs.size() <\
-    \ sz) xs.push_back(xs.back() + 1);\r\n    seg.assign(2 * sz - 1, Line(0, INF));\r\
+    int topbit(int x) { return (x==0 ? -1 : 31 - __builtin_clz(x)); }\nint topbit(u32\
+    \ x) { return (x==0 ? -1 : 31 - __builtin_clz(x)); }\nint topbit(ll x) { return\
+    \ (x==0 ? -1 : 63 - __builtin_clzll(x)); }\nint topbit(u64 x) { return (x==0 ?\
+    \ -1 : 63 - __builtin_clzll(x)); }\n// (0, 1, 2, 3, 4) -> (-1, 0, 1, 0, 2)\nint\
+    \ lowbit(int x) { return (x==0 ? -1 : 31 - __builtin_clz(x)); }\nint lowbit(u32\
+    \ x) { return (x==0 ? -1 : 31 - __builtin_clz(x)); }\nint lowbit(ll x) { return\
+    \ (x==0 ? -1 : 63 - __builtin_clzll(x)); }\nint lowbit(u64 x) { return (x==0 ?\
+    \ -1 : 63 - __builtin_clzll(x)); }\n\ntemplate <typename T, typename U>\nT ceil(T\
+    \ x, U y) {\n  return (x > 0 ? (x + y - 1) / y : x / y);\n}\n\ntemplate <typename\
+    \ T, typename U>\nT floor(T x, U y) {\n  return (x > 0 ? x / y : (x - y + 1) /\
+    \ y);\n}\n\ntemplate <typename T, typename U>\npair<T, T> divmod(T x, U y) {\n\
+    \  T q = floor(x, y);\n  return {q, x - q * y};\n}\n\nll binary_search(function<bool(ll)>\
+    \ check, ll ok, ll ng) {\n  assert(check(ok));\n  while (abs(ok - ng) > 1) {\n\
+    \    auto x = (ng + ok) / 2;\n    if (check(x))\n      ok = x;\n    else\n   \
+    \   ng = x;\n  }\n  return ok;\n}\n\ntemplate <class T, class S>\ninline bool\
+    \ chmax(T &a, const S &b) {\n  return (a < b ? a = b, 1 : 0);\n}\ntemplate <class\
+    \ T, class S>\ninline bool chmin(T &a, const S &b) {\n  return (a > b ? a = b,\
+    \ 1 : 0);\n}\n\nvi s_to_vi(string S, char first_char = 'a') {\n  vi A(S.size());\n\
+    \  FOR(i, S.size()) { A[i] = S[i] - first_char; }\n  return A;\n}\n\ntemplate\
+    \ <typename T>\nvector<T> cumsum(vector<T> &A, int off = 1) {\n  int N = A.size();\n\
+    \  vector<T> B(N + 1);\n  FOR(i, N) { B[i + 1] = B[i] + A[i]; }\n  if (off ==\
+    \ 0) B.erase(B.begin());\n  return B;\n}\n\ntemplate <typename T, typename CNT\
+    \ = int>\nvc<CNT> bincount(vc<T> &A, int size) {\n  vc<CNT> C(size);\n  for (auto\
+    \ &&x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate <typename T>\nvector<int> argsort(vector<T>\
+    \ &A) {\n  // stable\n  vector<int> ids(A.size());\n  iota(all(ids), 0);\n  sort(all(ids),\n\
+    \       [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j] && i < j); });\n\
+    \  return ids;\n}\n#line 3 \"ds/lichao.hpp\"\n\r\ntemplate <typename T>\r\nstruct\
+    \ LiChaoTree {\r\n  struct Line {\r\n    T a, b;\r\n\r\n    Line(T a, T b) : a(a),\
+    \ b(b) {}\r\n\r\n    inline T get(T x) const { return a * x + b; }\r\n\r\n   \
+    \ inline bool over(const Line& b, const T& x) const {\r\n      return get(x) <\
+    \ b.get(x);\r\n    }\r\n  };\r\n\r\n  vector<T> xs;\r\n  vector<Line> seg;\r\n\
+    \  int sz;\r\n\r\n  LiChaoTree(const vector<T>& x, T INF) : xs(x) {\r\n    sort(all(xs));\r\
+    \n    sz = 1;\r\n    while (sz < xs.size()) sz <<= 1;\r\n    while (xs.size()\
+    \ < sz) xs.push_back(xs.back() + 1);\r\n    seg.assign(2 * sz - 1, Line(0, INF));\r\
     \n  }\r\n\r\n  void update(Line& x, int k, int l, int r) {\r\n    int mid = (l\
     \ + r) >> 1;\r\n    auto latte = x.over(seg[k], xs[l]), malta = x.over(seg[k],\
     \ xs[mid]);\r\n    if (malta) swap(seg[k], x);\r\n    if (l + 1 >= r)\r\n    \
@@ -105,7 +106,7 @@ data:
   isVerificationFile: false
   path: ds/lichao.hpp
   requiredBy: []
-  timestamp: '2022-03-07 01:03:26+09:00'
+  timestamp: '2022-03-14 04:45:03+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: ds/lichao.hpp

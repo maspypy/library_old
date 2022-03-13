@@ -3,12 +3,12 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/datastructure/predecessor_problem.test.cpp
     title: test/library_checker/datastructure/predecessor_problem.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 1 \"ds/fastset.hpp\"\n/* 64\u5206\u6728\u3002\r\ninsert, erase\r\
@@ -40,7 +40,7 @@ data:
     \ >= 0; g--) {\r\n        i *= B;\r\n        i += bsr(seg[g][i / B]);\r\n    \
     \  }\r\n      return i;\r\n    }\r\n    return -1;\r\n  }\r\n\r\n  void debug(){\r\
     \n    string s;\r\n    FOR(i, n) s += ((*this)[i] ? '1' : '0');\r\n    print(s);\r\
-    \n  }\r\n};\n"
+    \n  }\r\n};\r\n\r\n// for mistype\r\nusing FaceSet = FastSet;\n"
   code: "/* 64\u5206\u6728\u3002\r\ninsert, erase\r\n[]\u3067\u306E\u5B58\u5728\u5224\
     \u5B9A\r\nnext, prev\r\n*/\r\nstruct FastSet {\r\n  using uint = unsigned;\r\n\
     \  using ull = unsigned long long;\r\n\r\n  int bsr(ull x) { return 63 - __builtin_clzll(x);\
@@ -70,13 +70,13 @@ data:
     \ {\r\n        i *= B;\r\n        i += bsr(seg[g][i / B]);\r\n      }\r\n    \
     \  return i;\r\n    }\r\n    return -1;\r\n  }\r\n\r\n  void debug(){\r\n    string\
     \ s;\r\n    FOR(i, n) s += ((*this)[i] ? '1' : '0');\r\n    print(s);\r\n  }\r\
-    \n};"
+    \n};\r\n\r\n// for mistype\r\nusing FaceSet = FastSet;"
   dependsOn: []
   isVerificationFile: false
   path: ds/fastset.hpp
   requiredBy: []
-  timestamp: '2022-03-14 00:11:51+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-03-14 04:44:44+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/datastructure/predecessor_problem.test.cpp
 documentation_of: ds/fastset.hpp

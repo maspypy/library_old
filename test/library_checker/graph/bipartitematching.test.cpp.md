@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: ds/unionfind.hpp
     title: ds/unionfind.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: flow/bipartite.hpp
     title: flow/bipartite.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/check_bipartite.hpp
     title: graph/check_bipartite.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/bipartitematching
@@ -60,41 +60,42 @@ data:
     \ { return __builtin_popcount(x); }\nint popcnt(u32 x) { return __builtin_popcount(x);\
     \ }\nint popcnt(ll x) { return __builtin_popcountll(x); }\nint popcnt(u64 x) {\
     \ return __builtin_popcountll(x); }\n// (0, 1, 2, 3, 4) -> (-1, 0, 1, 1, 2)\n\
-    int topbit(int x) { return 31 - __builtin_clz(x); }\nint topbit(u32 x) { return\
-    \ 31 - __builtin_clz(x); }\nint topbit(ll x) { return 63 - __builtin_clzll(x);\
-    \ }\nint topbit(u64 x) { return 63 - __builtin_clzll(x); }\n// (0, 1, 2, 3, 4)\
-    \ -> (32 or 64, 0, 1, 0, 2)\nint lowbit(int x) { return 31 - __builtin_clz(x);\
-    \ }\nint lowbit(u32 x) { return 31 - __builtin_clz(x); }\nint lowbit(ll x) { return\
-    \ 63 - __builtin_clzll(x); }\nint lowbit(u64 x) { return 63 - __builtin_clzll(x);\
-    \ }\n\ntemplate <typename T, typename U>\nT ceil(T x, U y) {\n  return (x > 0\
-    \ ? (x + y - 1) / y : x / y);\n}\n\ntemplate <typename T, typename U>\nT floor(T\
-    \ x, U y) {\n  return (x > 0 ? x / y : (x - y + 1) / y);\n}\n\ntemplate <typename\
-    \ T, typename U>\npair<T, T> divmod(T x, U y) {\n  T q = floor(x, y);\n  return\
-    \ {q, x - q * y};\n}\n\nll binary_search(function<bool(ll)> check, ll ok, ll ng)\
-    \ {\n  assert(check(ok));\n  while (abs(ok - ng) > 1) {\n    auto x = (ng + ok)\
-    \ / 2;\n    if (check(x))\n      ok = x;\n    else\n      ng = x;\n  }\n  return\
-    \ ok;\n}\n\ntemplate <class T, class S>\ninline bool chmax(T &a, const S &b) {\n\
-    \  return (a < b ? a = b, 1 : 0);\n}\ntemplate <class T, class S>\ninline bool\
-    \ chmin(T &a, const S &b) {\n  return (a > b ? a = b, 1 : 0);\n}\n\nvi s_to_vi(string\
-    \ S, char first_char = 'a') {\n  vi A(S.size());\n  FOR(i, S.size()) { A[i] =\
-    \ S[i] - first_char; }\n  return A;\n}\n\ntemplate <typename T>\nvector<T> cumsum(vector<T>\
-    \ &A, int off = 1) {\n  int N = A.size();\n  vector<T> B(N + 1);\n  FOR(i, N)\
-    \ { B[i + 1] = B[i] + A[i]; }\n  if (off == 0) B.erase(B.begin());\n  return B;\n\
-    }\n\ntemplate <typename T, typename CNT = int>\nvc<CNT> bincount(vc<T> &A, int\
-    \ size) {\n  vc<CNT> C(size);\n  for (auto &&x: A) { ++C[x]; }\n  return C;\n\
-    }\n\ntemplate <typename T>\nvector<int> argsort(vector<T> &A) {\n  // stable\n\
-    \  vector<int> ids(A.size());\n  iota(all(ids), 0);\n  sort(all(ids),\n      \
-    \ [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j] && i < j); });\n  return\
-    \ ids;\n}\n#line 1 \"other/io.hpp\"\n// based on yosupo's fastio\r\n#include <unistd.h>\r\
-    \n\r\nnamespace detail {\r\ntemplate <typename T, decltype(&T::is_modint) = &T::is_modint>\r\
-    \nstd::true_type check_value(int);\r\ntemplate <typename T>\r\nstd::false_type\
-    \ check_value(long);\r\n} // namespace detail\r\n\r\ntemplate <typename T>\r\n\
-    struct is_modint : decltype(detail::check_value<T>(0)) {};\r\ntemplate <typename\
-    \ T>\r\nusing is_modint_t = enable_if_t<is_modint<T>::value>;\r\ntemplate <typename\
-    \ T>\r\nusing is_not_modint_t = enable_if_t<!is_modint<T>::value>;\r\n\r\nstruct\
-    \ Scanner {\r\n  FILE* fp;\r\n  char line[(1 << 15) + 1];\r\n  size_t st = 0,\
-    \ ed = 0;\r\n  void reread() {\r\n    memmove(line, line + st, ed - st);\r\n \
-    \   ed -= st;\r\n    st = 0;\r\n    ed += fread(line + ed, 1, (1 << 15) - ed,\
+    int topbit(int x) { return (x==0 ? -1 : 31 - __builtin_clz(x)); }\nint topbit(u32\
+    \ x) { return (x==0 ? -1 : 31 - __builtin_clz(x)); }\nint topbit(ll x) { return\
+    \ (x==0 ? -1 : 63 - __builtin_clzll(x)); }\nint topbit(u64 x) { return (x==0 ?\
+    \ -1 : 63 - __builtin_clzll(x)); }\n// (0, 1, 2, 3, 4) -> (-1, 0, 1, 0, 2)\nint\
+    \ lowbit(int x) { return (x==0 ? -1 : 31 - __builtin_clz(x)); }\nint lowbit(u32\
+    \ x) { return (x==0 ? -1 : 31 - __builtin_clz(x)); }\nint lowbit(ll x) { return\
+    \ (x==0 ? -1 : 63 - __builtin_clzll(x)); }\nint lowbit(u64 x) { return (x==0 ?\
+    \ -1 : 63 - __builtin_clzll(x)); }\n\ntemplate <typename T, typename U>\nT ceil(T\
+    \ x, U y) {\n  return (x > 0 ? (x + y - 1) / y : x / y);\n}\n\ntemplate <typename\
+    \ T, typename U>\nT floor(T x, U y) {\n  return (x > 0 ? x / y : (x - y + 1) /\
+    \ y);\n}\n\ntemplate <typename T, typename U>\npair<T, T> divmod(T x, U y) {\n\
+    \  T q = floor(x, y);\n  return {q, x - q * y};\n}\n\nll binary_search(function<bool(ll)>\
+    \ check, ll ok, ll ng) {\n  assert(check(ok));\n  while (abs(ok - ng) > 1) {\n\
+    \    auto x = (ng + ok) / 2;\n    if (check(x))\n      ok = x;\n    else\n   \
+    \   ng = x;\n  }\n  return ok;\n}\n\ntemplate <class T, class S>\ninline bool\
+    \ chmax(T &a, const S &b) {\n  return (a < b ? a = b, 1 : 0);\n}\ntemplate <class\
+    \ T, class S>\ninline bool chmin(T &a, const S &b) {\n  return (a > b ? a = b,\
+    \ 1 : 0);\n}\n\nvi s_to_vi(string S, char first_char = 'a') {\n  vi A(S.size());\n\
+    \  FOR(i, S.size()) { A[i] = S[i] - first_char; }\n  return A;\n}\n\ntemplate\
+    \ <typename T>\nvector<T> cumsum(vector<T> &A, int off = 1) {\n  int N = A.size();\n\
+    \  vector<T> B(N + 1);\n  FOR(i, N) { B[i + 1] = B[i] + A[i]; }\n  if (off ==\
+    \ 0) B.erase(B.begin());\n  return B;\n}\n\ntemplate <typename T, typename CNT\
+    \ = int>\nvc<CNT> bincount(vc<T> &A, int size) {\n  vc<CNT> C(size);\n  for (auto\
+    \ &&x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate <typename T>\nvector<int> argsort(vector<T>\
+    \ &A) {\n  // stable\n  vector<int> ids(A.size());\n  iota(all(ids), 0);\n  sort(all(ids),\n\
+    \       [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j] && i < j); });\n\
+    \  return ids;\n}\n#line 1 \"other/io.hpp\"\n// based on yosupo's fastio\r\n#include\
+    \ <unistd.h>\r\n\r\nnamespace detail {\r\ntemplate <typename T, decltype(&T::is_modint)\
+    \ = &T::is_modint>\r\nstd::true_type check_value(int);\r\ntemplate <typename T>\r\
+    \nstd::false_type check_value(long);\r\n} // namespace detail\r\n\r\ntemplate\
+    \ <typename T>\r\nstruct is_modint : decltype(detail::check_value<T>(0)) {};\r\
+    \ntemplate <typename T>\r\nusing is_modint_t = enable_if_t<is_modint<T>::value>;\r\
+    \ntemplate <typename T>\r\nusing is_not_modint_t = enable_if_t<!is_modint<T>::value>;\r\
+    \n\r\nstruct Scanner {\r\n  FILE* fp;\r\n  char line[(1 << 15) + 1];\r\n  size_t\
+    \ st = 0, ed = 0;\r\n  void reread() {\r\n    memmove(line, line + st, ed - st);\r\
+    \n    ed -= st;\r\n    st = 0;\r\n    ed += fread(line + ed, 1, (1 << 15) - ed,\
     \ fp);\r\n    line[ed] = '\\0';\r\n  }\r\n  bool succ() {\r\n    while (true)\
     \ {\r\n      if (st == ed) {\r\n        reread();\r\n        if (st == ed) return\
     \ false;\r\n      }\r\n      while (st != ed && isspace(line[st])) st++;\r\n \
@@ -275,8 +276,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/graph/bipartitematching.test.cpp
   requiredBy: []
-  timestamp: '2022-03-14 00:26:36+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-03-14 04:45:03+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/graph/bipartitematching.test.cpp
 layout: document

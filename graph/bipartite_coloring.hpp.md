@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
@@ -77,32 +77,33 @@ data:
     \ { return __builtin_popcount(x); }\nint popcnt(u32 x) { return __builtin_popcount(x);\
     \ }\nint popcnt(ll x) { return __builtin_popcountll(x); }\nint popcnt(u64 x) {\
     \ return __builtin_popcountll(x); }\n// (0, 1, 2, 3, 4) -> (-1, 0, 1, 1, 2)\n\
-    int topbit(int x) { return 31 - __builtin_clz(x); }\nint topbit(u32 x) { return\
-    \ 31 - __builtin_clz(x); }\nint topbit(ll x) { return 63 - __builtin_clzll(x);\
-    \ }\nint topbit(u64 x) { return 63 - __builtin_clzll(x); }\n// (0, 1, 2, 3, 4)\
-    \ -> (32 or 64, 0, 1, 0, 2)\nint lowbit(int x) { return 31 - __builtin_clz(x);\
-    \ }\nint lowbit(u32 x) { return 31 - __builtin_clz(x); }\nint lowbit(ll x) { return\
-    \ 63 - __builtin_clzll(x); }\nint lowbit(u64 x) { return 63 - __builtin_clzll(x);\
-    \ }\n\ntemplate <typename T, typename U>\nT ceil(T x, U y) {\n  return (x > 0\
-    \ ? (x + y - 1) / y : x / y);\n}\n\ntemplate <typename T, typename U>\nT floor(T\
-    \ x, U y) {\n  return (x > 0 ? x / y : (x - y + 1) / y);\n}\n\ntemplate <typename\
-    \ T, typename U>\npair<T, T> divmod(T x, U y) {\n  T q = floor(x, y);\n  return\
-    \ {q, x - q * y};\n}\n\nll binary_search(function<bool(ll)> check, ll ok, ll ng)\
-    \ {\n  assert(check(ok));\n  while (abs(ok - ng) > 1) {\n    auto x = (ng + ok)\
-    \ / 2;\n    if (check(x))\n      ok = x;\n    else\n      ng = x;\n  }\n  return\
-    \ ok;\n}\n\ntemplate <class T, class S>\ninline bool chmax(T &a, const S &b) {\n\
-    \  return (a < b ? a = b, 1 : 0);\n}\ntemplate <class T, class S>\ninline bool\
-    \ chmin(T &a, const S &b) {\n  return (a > b ? a = b, 1 : 0);\n}\n\nvi s_to_vi(string\
-    \ S, char first_char = 'a') {\n  vi A(S.size());\n  FOR(i, S.size()) { A[i] =\
-    \ S[i] - first_char; }\n  return A;\n}\n\ntemplate <typename T>\nvector<T> cumsum(vector<T>\
-    \ &A, int off = 1) {\n  int N = A.size();\n  vector<T> B(N + 1);\n  FOR(i, N)\
-    \ { B[i + 1] = B[i] + A[i]; }\n  if (off == 0) B.erase(B.begin());\n  return B;\n\
-    }\n\ntemplate <typename T, typename CNT = int>\nvc<CNT> bincount(vc<T> &A, int\
-    \ size) {\n  vc<CNT> C(size);\n  for (auto &&x: A) { ++C[x]; }\n  return C;\n\
-    }\n\ntemplate <typename T>\nvector<int> argsort(vector<T> &A) {\n  // stable\n\
-    \  vector<int> ids(A.size());\n  iota(all(ids), 0);\n  sort(all(ids),\n      \
-    \ [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j] && i < j); });\n  return\
-    \ ids;\n}\n#line 4 \"graph/bipartite_coloring.hpp\"\n\npair<int, vi> bipartite_edge_coloring(Graph<ll>&\
+    int topbit(int x) { return (x==0 ? -1 : 31 - __builtin_clz(x)); }\nint topbit(u32\
+    \ x) { return (x==0 ? -1 : 31 - __builtin_clz(x)); }\nint topbit(ll x) { return\
+    \ (x==0 ? -1 : 63 - __builtin_clzll(x)); }\nint topbit(u64 x) { return (x==0 ?\
+    \ -1 : 63 - __builtin_clzll(x)); }\n// (0, 1, 2, 3, 4) -> (-1, 0, 1, 0, 2)\nint\
+    \ lowbit(int x) { return (x==0 ? -1 : 31 - __builtin_clz(x)); }\nint lowbit(u32\
+    \ x) { return (x==0 ? -1 : 31 - __builtin_clz(x)); }\nint lowbit(ll x) { return\
+    \ (x==0 ? -1 : 63 - __builtin_clzll(x)); }\nint lowbit(u64 x) { return (x==0 ?\
+    \ -1 : 63 - __builtin_clzll(x)); }\n\ntemplate <typename T, typename U>\nT ceil(T\
+    \ x, U y) {\n  return (x > 0 ? (x + y - 1) / y : x / y);\n}\n\ntemplate <typename\
+    \ T, typename U>\nT floor(T x, U y) {\n  return (x > 0 ? x / y : (x - y + 1) /\
+    \ y);\n}\n\ntemplate <typename T, typename U>\npair<T, T> divmod(T x, U y) {\n\
+    \  T q = floor(x, y);\n  return {q, x - q * y};\n}\n\nll binary_search(function<bool(ll)>\
+    \ check, ll ok, ll ng) {\n  assert(check(ok));\n  while (abs(ok - ng) > 1) {\n\
+    \    auto x = (ng + ok) / 2;\n    if (check(x))\n      ok = x;\n    else\n   \
+    \   ng = x;\n  }\n  return ok;\n}\n\ntemplate <class T, class S>\ninline bool\
+    \ chmax(T &a, const S &b) {\n  return (a < b ? a = b, 1 : 0);\n}\ntemplate <class\
+    \ T, class S>\ninline bool chmin(T &a, const S &b) {\n  return (a > b ? a = b,\
+    \ 1 : 0);\n}\n\nvi s_to_vi(string S, char first_char = 'a') {\n  vi A(S.size());\n\
+    \  FOR(i, S.size()) { A[i] = S[i] - first_char; }\n  return A;\n}\n\ntemplate\
+    \ <typename T>\nvector<T> cumsum(vector<T> &A, int off = 1) {\n  int N = A.size();\n\
+    \  vector<T> B(N + 1);\n  FOR(i, N) { B[i + 1] = B[i] + A[i]; }\n  if (off ==\
+    \ 0) B.erase(B.begin());\n  return B;\n}\n\ntemplate <typename T, typename CNT\
+    \ = int>\nvc<CNT> bincount(vc<T> &A, int size) {\n  vc<CNT> C(size);\n  for (auto\
+    \ &&x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate <typename T>\nvector<int> argsort(vector<T>\
+    \ &A) {\n  // stable\n  vector<int> ids(A.size());\n  iota(all(ids), 0);\n  sort(all(ids),\n\
+    \       [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j] && i < j); });\n\
+    \  return ids;\n}\n#line 4 \"graph/bipartite_coloring.hpp\"\n\npair<int, vi> bipartite_edge_coloring(Graph<ll>&\
     \ G) {\n  auto N = G.N;\n  vi deg(N);\n  vi ANS(G.M, -1);\n  FORIN(e, G.edges)\
     \ {\n    ++deg[e.frm];\n    ++deg[e.to];\n  }\n  ll C = MAX(deg);\n  // \u9802\
     \u70B9, \u8272 -> \u8FBA\u756A\u53F7\n  vv(int, TO, N, C, -1);\n\n  FOR(id, G.M)\
@@ -139,7 +140,7 @@ data:
   isVerificationFile: false
   path: graph/bipartite_coloring.hpp
   requiredBy: []
-  timestamp: '2022-03-14 00:26:36+09:00'
+  timestamp: '2022-03-14 04:45:03+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph/bipartite_coloring.hpp
