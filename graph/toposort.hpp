@@ -3,7 +3,7 @@
 
 template <typename Graph>
 vc<int> toposort(Graph& G) {
-  // DAG じゃなかったらエラー
+  // DAG じゃなかったら空配列
   assert(G.is_prepared());
   assert(G.is_directed());
   auto [indeg, outdeg] = degree_inout(G);
@@ -17,6 +17,8 @@ vc<int> toposort(Graph& G) {
       if (--indeg[e.to] == 0) V.eb(e.to);
     }
   }
-  assert(len(V) == N);
+  if(len(V) < N) {
+    V.clear();
+  }
   return V;
 }
