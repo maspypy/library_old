@@ -5,7 +5,7 @@
 
 void solve() {
   LL(N);
-  vc<Point> pts(N);
+  vc<Point<ll>> pts(N);
   FOR(i, N) read(pts[i].x), read(pts[i].y);
   DynamicUpperHull DUH(pts, 1);
   FOR(i, N) pts[i] = -pts[i];
