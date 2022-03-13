@@ -63,6 +63,7 @@ struct fft_info {
     if (m == 754974721) return 11;
     if (m == 880803841) return 26;
     if (m == 998244353) return 3;
+    return -1;
   }
 };
 
