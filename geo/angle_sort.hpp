@@ -1,5 +1,6 @@
 #include "geo/base.hpp"
 
+template<typename Point>
 vector<int> angle_argsort(vector<Point>& P) {
   auto is_lower = [](Point P) { return (P.y < 0) || (P.y == 0 && P.x > 0); };
   vector<int> lower, origin, upper;
@@ -17,6 +18,7 @@ vector<int> angle_argsort(vector<Point>& P) {
   return I;
 }
 
+template<typename Point>
 void angle_sort(vector<Point>& P) {
   auto I = angle_argsort(P);
   vc<Point> Q(len(P));

@@ -10,6 +10,7 @@ bridge 同士の 4 点での上側凸包を見れば、次に探索するべき�
 構築 O(NlogN)、更新 O(Nlog^2N)
 座標 10^9 以下の整数を仮定
 */
+template<typename Point>
 struct DynamicUpperHull {
   struct node {
     int l, r;   // 範囲 (-1 if no vertex)
