@@ -52,15 +52,14 @@ struct Graph {
     ++M;
   }
 
-  void read_tree(bool wt=false, int off=1){
-    read_graph(N - 1, wt, off);
-  }
+  // wt, off
+  void read_tree(bool wt = false, int off = 1) { read_graph(N - 1, wt, off); }
 
-  void read_graph(int M, bool wt=false, int off=1){
-    FOR_(M){
+  void read_graph(int M, bool wt = false, int off = 1) {
+    FOR_(M) {
       INT(a, b);
       a -= off, b -= off;
-      if(!wt){
+      if (!wt) {
         add(a, b);
       } else {
         T c;
@@ -71,8 +70,8 @@ struct Graph {
     prepare();
   }
 
-  void read_parent(int off=1){
-    FOR3(v, 1, N){
+  void read_parent(int off = 1) {
+    FOR3(v, 1, N) {
       INT(p);
       p -= off;
       add(p, v);
