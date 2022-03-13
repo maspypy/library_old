@@ -16,23 +16,23 @@
 
 #define VEC(type, name, size) \
   vector<type> name(size);    \
-  scan(name)
+  read(name)
 #define VV(type, name, h, w)                     \
   vector<vector<type>> name(h, vector<type>(w)); \
-  scan(name)
+  read(name)
 
-void scan(int &a) { cin >> a; }
-void scan(long long &a) { cin >> a; }
-void scan(char &a) { cin >> a; }
-void scan(double &a) { cin >> a; }
-void scan(long double &a) { cin >> a; }
-void scan(string &a) { cin >> a; }
-template <class T, class S> void scan(pair<T, S> &p) { scan(p.first), scan(p.second); }
-template <class T> void scan(vector<T> &a) {for(auto &i : a) scan(i);}
-template <class T> void scan(T &a) { cin >> a; }
+void read(int &a) { cin >> a; }
+void read(long long &a) { cin >> a; }
+void read(char &a) { cin >> a; }
+void read(double &a) { cin >> a; }
+void read(long double &a) { cin >> a; }
+void read(string &a) { cin >> a; }
+template <class T, class S> void read(pair<T, S> &p) { read(p.first), read(p.second); }
+template <class T> void read(vector<T> &a) {for(auto &i : a) read(i);}
+template <class T> void read(T &a) { cin >> a; }
 void IN() {}
 template <class Head, class... Tail> void IN(Head &head, Tail &...tail) {
-  scan(head);
+  read(head);
   IN(tail...);
 }
 
