@@ -8,6 +8,9 @@ data:
   - icon: ':warning:'
     path: graph/lazytreemonoid.hpp
     title: graph/lazytreemonoid.hpp
+  - icon: ':warning:'
+    path: graph/minimum_spanning_tree.hpp
+    title: graph/minimum_spanning_tree.hpp
   - icon: ':x:'
     path: graph/treemonoid.hpp
     title: graph/treemonoid.hpp
@@ -43,6 +46,7 @@ data:
   - alg/lazy_reverse.hpp
   - graph/lazytreemonoid.hpp
   - graph/treemonoid.hpp
+  - graph/minimum_spanning_tree.hpp
   timestamp: '2022-01-11 13:22:23+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:

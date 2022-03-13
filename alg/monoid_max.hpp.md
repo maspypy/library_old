@@ -8,6 +8,9 @@ data:
   - icon: ':warning:'
     path: alg/lazy_max_set.hpp
     title: alg/lazy_max_set.hpp
+  - icon: ':warning:'
+    path: graph/minimum_spanning_tree.hpp
+    title: graph/minimum_spanning_tree.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -28,6 +31,7 @@ data:
   requiredBy:
   - alg/lazy_max_max.hpp
   - alg/lazy_max_set.hpp
+  - graph/minimum_spanning_tree.hpp
   timestamp: '2022-02-03 13:42:15+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

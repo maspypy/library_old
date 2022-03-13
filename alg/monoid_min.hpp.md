@@ -14,6 +14,9 @@ data:
   - icon: ':warning:'
     path: ds/range_mex_query.hpp
     title: ds/range_mex_query.hpp
+  - icon: ':warning:'
+    path: graph/minimum_spanning_tree.hpp
+    title: graph/minimum_spanning_tree.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_F_min_set_lazy.test.cpp
@@ -48,6 +51,7 @@ data:
   - alg/lazy_min_min.hpp
   - alg/lazy_min_add.hpp
   - alg/lazy_min_set.hpp
+  - graph/minimum_spanning_tree.hpp
   timestamp: '2022-02-03 13:42:15+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:

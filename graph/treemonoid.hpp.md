@@ -4,7 +4,7 @@ data:
   - icon: ':x:'
     path: alg/monoid_reverse.hpp
     title: alg/monoid_reverse.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
   - icon: ':question:'
@@ -13,7 +13,10 @@ data:
   - icon: ':x:'
     path: graph/hld.hpp
     title: graph/hld.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: graph/minimum_spanning_tree.hpp
+    title: graph/minimum_spanning_tree.hpp
   _extendedVerifiedWith:
   - icon: ':x:'
     path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
@@ -239,7 +242,8 @@ data:
   - alg/monoid_reverse.hpp
   isVerificationFile: false
   path: graph/treemonoid.hpp
-  requiredBy: []
+  requiredBy:
+  - graph/minimum_spanning_tree.hpp
   timestamp: '2022-03-14 00:26:36+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:

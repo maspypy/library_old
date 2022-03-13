@@ -13,7 +13,10 @@ data:
   - icon: ':x:'
     path: graph/hld.hpp
     title: graph/hld.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: graph/minimum_spanning_tree.hpp
+    title: graph/minimum_spanning_tree.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -224,7 +227,8 @@ data:
   - ds/dualsegtree.hpp
   isVerificationFile: false
   path: graph/dualtreemonoid.hpp
-  requiredBy: []
+  requiredBy:
+  - graph/minimum_spanning_tree.hpp
   timestamp: '2022-03-14 02:08:32+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

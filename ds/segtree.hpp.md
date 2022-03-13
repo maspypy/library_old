@@ -8,6 +8,9 @@ data:
   - icon: ':warning:'
     path: geo/manhattan_nns.hpp
     title: geo/manhattan_nns.hpp
+  - icon: ':warning:'
+    path: graph/minimum_spanning_tree.hpp
+    title: graph/minimum_spanning_tree.hpp
   - icon: ':x:'
     path: graph/treegroup.hpp
     title: graph/treegroup.hpp
@@ -21,7 +24,7 @@ data:
     path: other/uniqueproductquery.hpp
     title: other/uniqueproductquery.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
     title: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
   - icon: ':x:'
@@ -44,7 +47,7 @@ data:
     title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"ds/segtree.hpp\"\ntemplate <class Monoid>\nstruct SegTree\
@@ -117,8 +120,9 @@ data:
   - other/uniqueproductquery.hpp
   - graph/treemonoid.hpp
   - graph/treegroup.hpp
+  - graph/minimum_spanning_tree.hpp
   timestamp: '2022-02-11 06:56:22+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp

@@ -50,6 +50,9 @@ data:
   - icon: ':x:'
     path: graph/mincostcycle.hpp
     title: graph/mincostcycle.hpp
+  - icon: ':warning:'
+    path: graph/minimum_spanning_tree.hpp
+    title: graph/minimum_spanning_tree.hpp
   - icon: ':x:'
     path: graph/mis.hpp
     title: graph/mis.hpp
@@ -272,6 +275,7 @@ data:
   - graph/bfs01.hpp
   - graph/centroid.hpp
   - graph/bfsnumbering.hpp
+  - graph/minimum_spanning_tree.hpp
   timestamp: '2022-03-14 00:26:36+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:

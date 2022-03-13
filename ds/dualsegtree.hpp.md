@@ -5,6 +5,9 @@ data:
   - icon: ':warning:'
     path: graph/dualtreemonoid.hpp
     title: graph/dualtreemonoid.hpp
+  - icon: ':warning:'
+    path: graph/minimum_spanning_tree.hpp
+    title: graph/minimum_spanning_tree.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_D_dualsegtree.test.cpp
@@ -56,6 +59,7 @@ data:
   path: ds/dualsegtree.hpp
   requiredBy:
   - graph/dualtreemonoid.hpp
+  - graph/minimum_spanning_tree.hpp
   timestamp: '2022-01-01 20:04:54+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

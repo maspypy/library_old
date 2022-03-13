@@ -11,6 +11,9 @@ data:
   - icon: ':warning:'
     path: graph/functional.hpp
     title: graph/functional.hpp
+  - icon: ':warning:'
+    path: graph/minimum_spanning_tree.hpp
+    title: graph/minimum_spanning_tree.hpp
   _extendedVerifiedWith:
   - icon: ':x:'
     path: test/library_checker/datastructure/unionfind.test.cpp
@@ -49,6 +52,7 @@ data:
   - flow/bipartite.hpp
   - graph/functional.hpp
   - graph/check_bipartite.hpp
+  - graph/minimum_spanning_tree.hpp
   timestamp: '2022-01-12 05:33:30+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:

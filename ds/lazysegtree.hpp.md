@@ -8,6 +8,9 @@ data:
   - icon: ':warning:'
     path: graph/lazytreemonoid.hpp
     title: graph/lazytreemonoid.hpp
+  - icon: ':warning:'
+    path: graph/minimum_spanning_tree.hpp
+    title: graph/minimum_spanning_tree.hpp
   - icon: ':heavy_check_mark:'
     path: other/rectangleunion.hpp
     title: other/rectangleunion.hpp
@@ -24,7 +27,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_4_A_rectangle_union.test.cpp
     title: test/aoj/DSL_4_A_rectangle_union.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
     title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
   - icon: ':x:'
@@ -152,6 +155,7 @@ data:
   - other/rectangleunion.hpp
   - graph/lazytreemonoid.hpp
   - graph/dualtreemonoid.hpp
+  - graph/minimum_spanning_tree.hpp
   timestamp: '2022-01-02 01:47:55+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
