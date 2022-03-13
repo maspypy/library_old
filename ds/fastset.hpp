@@ -1,3 +1,8 @@
+/* 64分木。
+insert, erase
+[]での存在判定
+next, prev
+*/
 struct FastSet {
   using uint = unsigned;
   using ull = unsigned long long;
@@ -30,7 +35,8 @@ struct FastSet {
       i /= B;
     }
   }
-  // x以上最小の要素
+
+  // x以上最小の要素を返す。存在しなければ n。
   int next(int i) {
     for (int h = 0; h < lg; h++) {
       if (i / B == seg[h].size())
@@ -50,7 +56,8 @@ struct FastSet {
     }
     return n;
   }
-  // x以下最大の要素
+
+  // x以下最大の要素を返す。存在しなければ -1。
   int prev(int i) {
     if(i < 0) return -1;
     chmin(i, n - 1);
@@ -72,6 +79,7 @@ struct FastSet {
     }
     return -1;
   }
+
   void debug(){
     string s;
     FOR(i, n) s += ((*this)[i] ? '1' : '0');
