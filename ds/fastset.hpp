@@ -86,3 +86,6 @@ struct FastSet {
     print(s);
   }
 };
+
+// for mistype
+using FaceSet = FastSet;
