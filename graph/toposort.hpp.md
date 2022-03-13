@@ -54,25 +54,25 @@ data:
     \ (auto&& e: G.edges) { indeg[e.to]++, outdeg[e.frm]++; }\r\n  return {indeg,\
     \ outdeg};\r\n}\r\n#line 3 \"graph/toposort.hpp\"\n\ntemplate <typename Graph>\n\
     vc<int> toposort(Graph& G) {\n  // DAG \u3058\u3083\u306A\u304B\u3063\u305F\u3089\
-    \u30A8\u30E9\u30FC\n  assert(G.is_prepared());\n  assert(G.is_directed());\n \
+    \u7A7A\u914D\u5217\n  assert(G.is_prepared());\n  assert(G.is_directed());\n \
     \ auto [indeg, outdeg] = degree_inout(G);\n  vc<int> V;\n  ll N = G.N;\n  FOR(v,\
     \ N) if (indeg[v] == 0) V.eb(v);\n  ll p = 0;\n  while (p < len(V)) {\n    auto\
     \ v = V[p++];\n    for (auto&& e: G[v]) {\n      if (--indeg[e.to] == 0) V.eb(e.to);\n\
-    \    }\n  }\n  assert(len(V) == N);\n  return V;\n}\n"
+    \    }\n  }\n  if(len(V) < N) {\n    V.clear();\n  }\n  return V;\n}\n"
   code: "#include \"graph/base.hpp\"\n#include \"graph/degree.hpp\"\n\ntemplate <typename\
     \ Graph>\nvc<int> toposort(Graph& G) {\n  // DAG \u3058\u3083\u306A\u304B\u3063\
-    \u305F\u3089\u30A8\u30E9\u30FC\n  assert(G.is_prepared());\n  assert(G.is_directed());\n\
+    \u305F\u3089\u7A7A\u914D\u5217\n  assert(G.is_prepared());\n  assert(G.is_directed());\n\
     \  auto [indeg, outdeg] = degree_inout(G);\n  vc<int> V;\n  ll N = G.N;\n  FOR(v,\
     \ N) if (indeg[v] == 0) V.eb(v);\n  ll p = 0;\n  while (p < len(V)) {\n    auto\
     \ v = V[p++];\n    for (auto&& e: G[v]) {\n      if (--indeg[e.to] == 0) V.eb(e.to);\n\
-    \    }\n  }\n  assert(len(V) == N);\n  return V;\n}\n"
+    \    }\n  }\n  if(len(V) < N) {\n    V.clear();\n  }\n  return V;\n}\n"
   dependsOn:
   - graph/base.hpp
   - graph/degree.hpp
   isVerificationFile: false
   path: graph/toposort.hpp
   requiredBy: []
-  timestamp: '2022-02-15 15:17:39+09:00'
+  timestamp: '2022-03-14 00:15:10+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph/toposort.hpp

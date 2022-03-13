@@ -56,23 +56,40 @@ data:
     \ e: edges) print(e.frm, e.to, e.cost, e.id);\n    } else {\n      print(\"indptr\"\
     , indptr);\n      print(\"frm to cost id\");\n      FOR(v, N) for (auto&& e: (*this)[v])\
     \ print(e.frm, e.to, e.cost, e.id);\n    }\n  }\n};\n#line 3 \"graph/bfs01.hpp\"\
-    \n\ntemplate<typename Graph>\npair<vc<ll>, vc<int>> bfs01(Graph& G, ll v) {\n\
+    \n\ntemplate <typename Graph>\npair<vc<ll>, vc<int>> bfs01(Graph& G, ll v) {\n\
     \  assert(G.is_prepared());\n  int N = G.N;\n  vc<ll> dist(N, -1);\n  vc<int>\
     \ par(N, -1);\n  deque<int> que;\n\n  dist[v] = 0;\n  que.push_front(v);\n  while\
     \ (!que.empty()) {\n    auto v = que.front();\n    que.pop_front();\n    for (auto&&\
-    \ e : G[v]) {\n      if (dist[e.to] == -1 || dist[e.to] > dist[e.frm] + e.cost)\
+    \ e: G[v]) {\n      if (dist[e.to] == -1 || dist[e.to] > dist[e.frm] + e.cost)\
     \ {\n        dist[e.to] = dist[e.frm] + e.cost;\n        par[e.to] = e.frm;\n\
     \        if (e.cost == 0)\n          que.push_front(e.to);\n        else\n   \
-    \       que.push_back(e.to);\n      }\n    }\n  }\n  return {dist, par};\n}\n"
-  code: "#pragma once\n#include \"graph/base.hpp\"\n\ntemplate<typename Graph>\npair<vc<ll>,\
-    \ vc<int>> bfs01(Graph& G, ll v) {\n  assert(G.is_prepared());\n  int N = G.N;\n\
-    \  vc<ll> dist(N, -1);\n  vc<int> par(N, -1);\n  deque<int> que;\n\n  dist[v]\
-    \ = 0;\n  que.push_front(v);\n  while (!que.empty()) {\n    auto v = que.front();\n\
-    \    que.pop_front();\n    for (auto&& e : G[v]) {\n      if (dist[e.to] == -1\
+    \       que.push_back(e.to);\n      }\n    }\n  }\n  return {dist, par};\n}\n\n\
+    template <typename Graph>\npair<vc<ll>, vc<int>> bfs01(Graph& G, vc<int> vs) {\n\
+    \  assert(G.is_prepared());\n  int N = G.N;\n  vc<ll> dist(N, -1);\n  vc<int>\
+    \ par(N, -1);\n  deque<int> que;\n\n  for (auto&& v: vs) {\n    dist[v] = 0;\n\
+    \    que.push_front(v);\n  }\n\n  while (!que.empty()) {\n    auto v = que.front();\n\
+    \    que.pop_front();\n    for (auto&& e: G[v]) {\n      if (dist[e.to] == -1\
     \ || dist[e.to] > dist[e.frm] + e.cost) {\n        dist[e.to] = dist[e.frm] +\
     \ e.cost;\n        par[e.to] = e.frm;\n        if (e.cost == 0)\n          que.push_front(e.to);\n\
     \        else\n          que.push_back(e.to);\n      }\n    }\n  }\n  return {dist,\
-    \ par};\n}"
+    \ par};\n}\n"
+  code: "#pragma once\n#include \"graph/base.hpp\"\n\ntemplate <typename Graph>\n\
+    pair<vc<ll>, vc<int>> bfs01(Graph& G, ll v) {\n  assert(G.is_prepared());\n  int\
+    \ N = G.N;\n  vc<ll> dist(N, -1);\n  vc<int> par(N, -1);\n  deque<int> que;\n\n\
+    \  dist[v] = 0;\n  que.push_front(v);\n  while (!que.empty()) {\n    auto v =\
+    \ que.front();\n    que.pop_front();\n    for (auto&& e: G[v]) {\n      if (dist[e.to]\
+    \ == -1 || dist[e.to] > dist[e.frm] + e.cost) {\n        dist[e.to] = dist[e.frm]\
+    \ + e.cost;\n        par[e.to] = e.frm;\n        if (e.cost == 0)\n          que.push_front(e.to);\n\
+    \        else\n          que.push_back(e.to);\n      }\n    }\n  }\n  return {dist,\
+    \ par};\n}\n\ntemplate <typename Graph>\npair<vc<ll>, vc<int>> bfs01(Graph& G,\
+    \ vc<int> vs) {\n  assert(G.is_prepared());\n  int N = G.N;\n  vc<ll> dist(N,\
+    \ -1);\n  vc<int> par(N, -1);\n  deque<int> que;\n\n  for (auto&& v: vs) {\n \
+    \   dist[v] = 0;\n    que.push_front(v);\n  }\n\n  while (!que.empty()) {\n  \
+    \  auto v = que.front();\n    que.pop_front();\n    for (auto&& e: G[v]) {\n \
+    \     if (dist[e.to] == -1 || dist[e.to] > dist[e.frm] + e.cost) {\n        dist[e.to]\
+    \ = dist[e.frm] + e.cost;\n        par[e.to] = e.frm;\n        if (e.cost == 0)\n\
+    \          que.push_front(e.to);\n        else\n          que.push_back(e.to);\n\
+    \      }\n    }\n  }\n  return {dist, par};\n}"
   dependsOn:
   - graph/base.hpp
   isVerificationFile: false
@@ -80,7 +97,7 @@ data:
   requiredBy:
   - graph/mincostcycle.hpp
   - graph/tree_diameter.hpp
-  timestamp: '2022-02-14 14:30:41+09:00'
+  timestamp: '2022-03-14 00:14:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/1320_mincostcycle.test.cpp

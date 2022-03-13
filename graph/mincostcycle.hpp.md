@@ -62,15 +62,24 @@ data:
     \ == -1 || dist[e.to] > dist[e.frm] + e.cost) {\n        dist[e.to] = dist[e.frm]\
     \ + e.cost;\n        par[e.to] = e.frm;\n        que.push(mp(dist[e.to], e.to));\n\
     \      }\n    }\n  }\n  return mp(dist, par);\n}\n#line 3 \"graph/bfs01.hpp\"\n\
-    \ntemplate<typename Graph>\npair<vc<ll>, vc<int>> bfs01(Graph& G, ll v) {\n  assert(G.is_prepared());\n\
+    \ntemplate <typename Graph>\npair<vc<ll>, vc<int>> bfs01(Graph& G, ll v) {\n \
+    \ assert(G.is_prepared());\n  int N = G.N;\n  vc<ll> dist(N, -1);\n  vc<int> par(N,\
+    \ -1);\n  deque<int> que;\n\n  dist[v] = 0;\n  que.push_front(v);\n  while (!que.empty())\
+    \ {\n    auto v = que.front();\n    que.pop_front();\n    for (auto&& e: G[v])\
+    \ {\n      if (dist[e.to] == -1 || dist[e.to] > dist[e.frm] + e.cost) {\n    \
+    \    dist[e.to] = dist[e.frm] + e.cost;\n        par[e.to] = e.frm;\n        if\
+    \ (e.cost == 0)\n          que.push_front(e.to);\n        else\n          que.push_back(e.to);\n\
+    \      }\n    }\n  }\n  return {dist, par};\n}\n\ntemplate <typename Graph>\n\
+    pair<vc<ll>, vc<int>> bfs01(Graph& G, vc<int> vs) {\n  assert(G.is_prepared());\n\
     \  int N = G.N;\n  vc<ll> dist(N, -1);\n  vc<int> par(N, -1);\n  deque<int> que;\n\
-    \n  dist[v] = 0;\n  que.push_front(v);\n  while (!que.empty()) {\n    auto v =\
-    \ que.front();\n    que.pop_front();\n    for (auto&& e : G[v]) {\n      if (dist[e.to]\
-    \ == -1 || dist[e.to] > dist[e.frm] + e.cost) {\n        dist[e.to] = dist[e.frm]\
-    \ + e.cost;\n        par[e.to] = e.frm;\n        if (e.cost == 0)\n          que.push_front(e.to);\n\
-    \        else\n          que.push_back(e.to);\n      }\n    }\n  }\n  return {dist,\
-    \ par};\n}\n#line 3 \"graph/mincostcycle.hpp\"\n\r\ntemplate <typename Graph>\r\
-    \ntypename Graph::cost_type MinCostCycle(Graph& G) {\r\n  using T = typename Graph::cost_type;\r\
+    \n  for (auto&& v: vs) {\n    dist[v] = 0;\n    que.push_front(v);\n  }\n\n  while\
+    \ (!que.empty()) {\n    auto v = que.front();\n    que.pop_front();\n    for (auto&&\
+    \ e: G[v]) {\n      if (dist[e.to] == -1 || dist[e.to] > dist[e.frm] + e.cost)\
+    \ {\n        dist[e.to] = dist[e.frm] + e.cost;\n        par[e.to] = e.frm;\n\
+    \        if (e.cost == 0)\n          que.push_front(e.to);\n        else\n   \
+    \       que.push_back(e.to);\n      }\n    }\n  }\n  return {dist, par};\n}\n\
+    #line 3 \"graph/mincostcycle.hpp\"\n\r\ntemplate <typename Graph>\r\ntypename\
+    \ Graph::cost_type MinCostCycle(Graph& G) {\r\n  using T = typename Graph::cost_type;\r\
     \n  int M = G.M;\r\n  int N = G.N;\r\n  T mx = 0;\r\n  T INF = 1;\r\n  for (auto&&\
     \ e: G.edges) chmax(mx, e.cost), INF += e.cost;\r\n  T res = INF;\r\n\r\n  FOR(i,\
     \ M) {\r\n    auto& e = G.edges[i];\r\n    T cost = e.cost;\r\n    int frm = e.to,\
@@ -97,7 +106,7 @@ data:
   isVerificationFile: false
   path: graph/mincostcycle.hpp
   requiredBy: []
-  timestamp: '2022-03-07 21:08:43+09:00'
+  timestamp: '2022-03-14 00:14:24+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/1320_mincostcycle.test.cpp
