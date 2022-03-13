@@ -2,9 +2,15 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
+  - icon: ':warning:'
+    path: ds/cht_xy.hpp
+    title: ds/cht_xy.hpp
   - icon: ':x:'
     path: geo/angle_sort.hpp
     title: geo/angle_sort.hpp
+  - icon: ':warning:'
+    path: geo/convexhull.hpp
+    title: geo/convexhull.hpp
   - icon: ':x:'
     path: geo/dynamicupperhull.hpp
     title: geo/dynamicupperhull.hpp
@@ -40,8 +46,10 @@ data:
   isVerificationFile: false
   path: geo/base.hpp
   requiredBy:
+  - ds/cht_xy.hpp
   - geo/angle_sort.hpp
   - geo/dynamicupperhull.hpp
+  - geo/convexhull.hpp
   timestamp: '2022-03-14 00:13:01+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:

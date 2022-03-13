@@ -177,16 +177,16 @@ data:
     \u3070\u3001\u6B21\u306B\u63A2\u7D22\u3059\u308B\u3079\u304D\u533A\u9593\u5BFE\
     \u304C\u5206\u304B\u308B\u3002\r\n\r\n\u69CB\u7BC9 O(NlogN)\u3001\u66F4\u65B0\
     \ O(Nlog^2N)\r\n\u5EA7\u6A19 10^9 \u4EE5\u4E0B\u306E\u6574\u6570\u3092\u4EEE\u5B9A\
-    \r\n*/\r\nstruct DynamicUpperHull {\r\n  struct node {\r\n    int l, r;   // \u7BC4\
-    \u56F2 (-1 if no vertex)\r\n    int bl, br; // bridge idx\r\n  };\r\n  int N,\
-    \ sz;\r\n  vc<Point> P;\r\n  vc<node> seg;\r\n  // \u53D7\u3051\u53D6\u3063\u305F\
-    \u30A4\u30F3\u30C7\u30C3\u30AF\u30B9\u3068\u306E\u5BFE\u5FDC\r\n  vc<int> to_original_idx,\
-    \ to_seg_idx;\r\n\r\n  DynamicUpperHull(vc<Point> P) : DynamicUpperHull(P, 0)\
-    \ {}\r\n  DynamicUpperHull(vc<Point> P, bool b)\r\n      : DynamicUpperHull(P,\
-    \ vc<bool>(len(P), b)) {}\r\n\r\n  DynamicUpperHull(vc<Point> _P, vc<bool> isin)\
-    \ : N(len(_P)), P(_P) {\r\n    to_original_idx = argsort(P);\r\n    sort(all(P));\r\
-    \n    sz = 1;\r\n    while (sz < N) sz *= 2;\r\n    to_seg_idx.resize(N);\r\n\
-    \    seg.assign(sz + sz, {-1, -1, -1, -1});\r\n    for (int i = 0; i < N; ++i)\
+    \r\n*/\r\ntemplate<typename Point>\r\nstruct DynamicUpperHull {\r\n  struct node\
+    \ {\r\n    int l, r;   // \u7BC4\u56F2 (-1 if no vertex)\r\n    int bl, br; //\
+    \ bridge idx\r\n  };\r\n  int N, sz;\r\n  vc<Point> P;\r\n  vc<node> seg;\r\n\
+    \  // \u53D7\u3051\u53D6\u3063\u305F\u30A4\u30F3\u30C7\u30C3\u30AF\u30B9\u3068\
+    \u306E\u5BFE\u5FDC\r\n  vc<int> to_original_idx, to_seg_idx;\r\n\r\n  DynamicUpperHull(vc<Point>\
+    \ P) : DynamicUpperHull(P, 0) {}\r\n  DynamicUpperHull(vc<Point> P, bool b)\r\n\
+    \      : DynamicUpperHull(P, vc<bool>(len(P), b)) {}\r\n\r\n  DynamicUpperHull(vc<Point>\
+    \ _P, vc<bool> isin) : N(len(_P)), P(_P) {\r\n    to_original_idx = argsort(P);\r\
+    \n    sort(all(P));\r\n    sz = 1;\r\n    while (sz < N) sz *= 2;\r\n    to_seg_idx.resize(N);\r\
+    \n    seg.assign(sz + sz, {-1, -1, -1, -1});\r\n    for (int i = 0; i < N; ++i)\
     \ to_seg_idx[to_original_idx[i]] = i;\r\n    for (int i = 0; i < N; ++i)\r\n \
     \     if (isin[to_original_idx[i]]) { seg[sz + i] = {i, i + 1, i, i}; }\r\n  \
     \  FOR3_R(i, 1, sz) update(i);\r\n  }\r\n\r\n  void insert(int i) {\r\n    i =\
@@ -228,7 +228,7 @@ data:
     \    FOR(i, len(P)) print(i, P[i].x, P[i].y);\r\n    print(\"seg\");\r\n    FOR(i,\
     \ len(seg)) print(i, seg[i].l, seg[i].r, seg[i].bl, seg[i].br);\r\n    print(\"\
     get\");\r\n    print(get());\r\n  }\r\n};\r\n#line 5 \"test/library_checker/geometry/convex_layers.test.cpp\"\
-    \n\r\nvoid solve() {\r\n  LL(N);\r\n  vc<Point> pts(N);\r\n  FOR(i, N) read(pts[i].x),\
+    \n\r\nvoid solve() {\r\n  LL(N);\r\n  vc<Point<ll>> pts(N);\r\n  FOR(i, N) read(pts[i].x),\
     \ read(pts[i].y);\r\n  DynamicUpperHull DUH(pts, 1);\r\n  FOR(i, N) pts[i] = -pts[i];\r\
     \n  DynamicUpperHull DLH(pts, 1);\r\n  vc<int> ANS(N, -1);\r\n  int done = 0;\r\
     \n  int k = 0;\r\n  while (done < N) {\r\n    ++k;\r\n    auto A = DUH.get();\r\
@@ -239,7 +239,7 @@ data:
     \ 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/convex_layers\"\r\n#include\
     \ \"my_template.hpp\"\r\n#include \"other/io.hpp\"\r\n#include \"geo/dynamicupperhull.hpp\"\
-    \r\n\r\nvoid solve() {\r\n  LL(N);\r\n  vc<Point> pts(N);\r\n  FOR(i, N) read(pts[i].x),\
+    \r\n\r\nvoid solve() {\r\n  LL(N);\r\n  vc<Point<ll>> pts(N);\r\n  FOR(i, N) read(pts[i].x),\
     \ read(pts[i].y);\r\n  DynamicUpperHull DUH(pts, 1);\r\n  FOR(i, N) pts[i] = -pts[i];\r\
     \n  DynamicUpperHull DLH(pts, 1);\r\n  vc<int> ANS(N, -1);\r\n  int done = 0;\r\
     \n  int k = 0;\r\n  while (done < N) {\r\n    ++k;\r\n    auto A = DUH.get();\r\
@@ -256,7 +256,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/geometry/convex_layers.test.cpp
   requiredBy: []
-  timestamp: '2022-03-14 00:13:01+09:00'
+  timestamp: '2022-03-14 00:34:33+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/geometry/convex_layers.test.cpp

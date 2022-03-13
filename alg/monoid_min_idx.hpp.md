@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: geo/manhattan_nns.hpp
+    title: geo/manhattan_nns.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -20,7 +23,8 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: alg/monoid_min_idx.hpp
-  requiredBy: []
+  requiredBy:
+  - geo/manhattan_nns.hpp
   timestamp: '2022-02-03 13:42:15+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

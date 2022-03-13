@@ -5,19 +5,13 @@ data:
     path: graph/base.hpp
     title: graph/base.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
-    path: graph/mincostcycle.hpp
-    title: graph/mincostcycle.hpp
-  _extendedVerifiedWith:
-  - icon: ':x:'
-    path: test/library_checker/graph/shortest_path.test.cpp
-    title: test/library_checker/graph/shortest_path.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/1320_mincostcycle.test.cpp
-    title: test/yukicoder/1320_mincostcycle.test.cpp
-  _isVerificationFailed: true
+  - icon: ':warning:'
+    path: graph/solve_dag_game.hpp
+    title: graph/solve_dag_game.hpp
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n\
@@ -53,41 +47,27 @@ data:
     frm to cost id\");\n      for (auto&& e: edges) print(e.frm, e.to, e.cost, e.id);\n\
     \    } else {\n      print(\"indptr\", indptr);\n      print(\"frm to cost id\"\
     );\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e.frm, e.to, e.cost, e.id);\n\
-    \    }\n  }\n};\n#line 3 \"graph/dijkstra.hpp\"\n\ntemplate <typename Graph>\n\
-    pair<vector<typename Graph::cost_type>, vector<int>> dijkstra(Graph& G, int v)\
-    \ {\n  auto N = G.N;\n  using T = typename Graph::cost_type;\n  vector<T> dist(N,\
-    \ -1);\n  vector<int> par(N, -1);\n  using P = pair<T, int>;\n\n  priority_queue<P,\
-    \ vector<P>, greater<P>> que;\n\n  dist[v] = 0;\n  que.push(mp(T(0), v));\n  while\
-    \ (!que.empty()) {\n    auto [dv, v] = que.top();\n    que.pop();\n    if (dv\
-    \ > dist[v]) continue;\n    for (auto&& e: G[v]) {\n      if (dist[e.to] == -1\
-    \ || dist[e.to] > dist[e.frm] + e.cost) {\n        dist[e.to] = dist[e.frm] +\
-    \ e.cost;\n        par[e.to] = e.frm;\n        que.push(mp(dist[e.to], e.to));\n\
-    \      }\n    }\n  }\n  return mp(dist, par);\n}\n"
-  code: "#pragma once\n#include \"graph/base.hpp\"\n\ntemplate <typename Graph>\n\
-    pair<vector<typename Graph::cost_type>, vector<int>> dijkstra(Graph& G, int v)\
-    \ {\n  auto N = G.N;\n  using T = typename Graph::cost_type;\n  vector<T> dist(N,\
-    \ -1);\n  vector<int> par(N, -1);\n  using P = pair<T, int>;\n\n  priority_queue<P,\
-    \ vector<P>, greater<P>> que;\n\n  dist[v] = 0;\n  que.push(mp(T(0), v));\n  while\
-    \ (!que.empty()) {\n    auto [dv, v] = que.top();\n    que.pop();\n    if (dv\
-    \ > dist[v]) continue;\n    for (auto&& e: G[v]) {\n      if (dist[e.to] == -1\
-    \ || dist[e.to] > dist[e.frm] + e.cost) {\n        dist[e.to] = dist[e.frm] +\
-    \ e.cost;\n        par[e.to] = e.frm;\n        que.push(mp(dist[e.to], e.to));\n\
-    \      }\n    }\n  }\n  return mp(dist, par);\n}\n"
+    \    }\n  }\n};\n#line 2 \"graph/reverse_graph.hpp\"\ntemplate <typename Graph>\r\
+    \nGraph reverse_graph(Graph& G) {\r\n  assert(G.is_directed());\r\n  Graph G1(G.N);\r\
+    \n  for (auto&& e: G.edges) { G1.add(e.to, e.frm, e.cost, e.id); }\r\n  G1.prepare();\r\
+    \n  return G1;\r\n}\r\n"
+  code: "#include \"graph/base.hpp\"\r\ntemplate <typename Graph>\r\nGraph reverse_graph(Graph&\
+    \ G) {\r\n  assert(G.is_directed());\r\n  Graph G1(G.N);\r\n  for (auto&& e: G.edges)\
+    \ { G1.add(e.to, e.frm, e.cost, e.id); }\r\n  G1.prepare();\r\n  return G1;\r\n\
+    }\r\n"
   dependsOn:
   - graph/base.hpp
   isVerificationFile: false
-  path: graph/dijkstra.hpp
+  path: graph/reverse_graph.hpp
   requiredBy:
-  - graph/mincostcycle.hpp
-  timestamp: '2022-03-14 00:26:36+09:00'
-  verificationStatus: LIBRARY_ALL_WA
-  verifiedWith:
-  - test/yukicoder/1320_mincostcycle.test.cpp
-  - test/library_checker/graph/shortest_path.test.cpp
-documentation_of: graph/dijkstra.hpp
+  - graph/solve_dag_game.hpp
+  timestamp: '2022-03-14 00:29:47+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: graph/reverse_graph.hpp
 layout: document
 redirect_from:
-- /library/graph/dijkstra.hpp
-- /library/graph/dijkstra.hpp.html
-title: graph/dijkstra.hpp
+- /library/graph/reverse_graph.hpp
+- /library/graph/reverse_graph.hpp.html
+title: graph/reverse_graph.hpp
 ---

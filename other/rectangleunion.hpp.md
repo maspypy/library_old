@@ -4,10 +4,10 @@ data:
   - icon: ':question:'
     path: alg/group_add.hpp
     title: alg/group_add.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: alg/lazy_cntminmincnt_add.hpp
     title: alg/lazy_cntminmincnt_add.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: alg/monoid_cntminmincnt.hpp
     title: alg/monoid_cntminmincnt.hpp
   - icon: ':question:'
@@ -15,12 +15,12 @@ data:
     title: ds/lazysegtree.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_4_A_rectangle_union.test.cpp
     title: test/aoj/DSL_4_A_rectangle_union.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"ds/lazysegtree.hpp\"\n\ntemplate <typename Lazy>\nstruct\
@@ -99,7 +99,7 @@ data:
     \ xmincnt] = x;\r\n    return {xcnt, min(INF, xmin + a), xmincnt};\r\n  }\r\n\
     };\n#line 3 \"other/rectangleunion.hpp\"\n\r\nstruct RectangleUnion {\r\n  using\
     \ RECT = tuple<ll, ll, ll, ll>;\r\n  vc<RECT> rectangles;\r\n  vi X, Y;\r\n\r\n\
-    \  void add_rect(ll xl, ll xr, ll yl, ll yr) {\r\n    assert(xl < xr && yl < yr);\r\
+    \  void add_rect(ll xl, ll yl, ll xr, ll yr) {\r\n    assert(xl < xr && yl < yr);\r\
     \n    X.eb(xl), X.eb(xr), Y.eb(yl), Y.eb(yr);\r\n    rectangles.eb(xl, xr, yl,\
     \ yr);\r\n  }\r\n\r\n  ll calc() {\r\n    UNIQUE(X), UNIQUE(Y);\r\n    ll N =\
     \ len(X);\r\n    vc<vc<pi>> add(N), rm(N);\r\n    for (auto &&[xl, xr, yl, yr]:\
@@ -115,7 +115,7 @@ data:
     \      ANS += n * dx;\r\n    }\r\n    return ANS;\r\n  }\r\n};\r\n"
   code: "#include \"ds/lazysegtree.hpp\"\r\n#include \"alg/lazy_cntminmincnt_add.hpp\"\
     \r\n\r\nstruct RectangleUnion {\r\n  using RECT = tuple<ll, ll, ll, ll>;\r\n \
-    \ vc<RECT> rectangles;\r\n  vi X, Y;\r\n\r\n  void add_rect(ll xl, ll xr, ll yl,\
+    \ vc<RECT> rectangles;\r\n  vi X, Y;\r\n\r\n  void add_rect(ll xl, ll yl, ll xr,\
     \ ll yr) {\r\n    assert(xl < xr && yl < yr);\r\n    X.eb(xl), X.eb(xr), Y.eb(yl),\
     \ Y.eb(yr);\r\n    rectangles.eb(xl, xr, yl, yr);\r\n  }\r\n\r\n  ll calc() {\r\
     \n    UNIQUE(X), UNIQUE(Y);\r\n    ll N = len(X);\r\n    vc<vc<pi>> add(N), rm(N);\r\
@@ -138,8 +138,8 @@ data:
   isVerificationFile: false
   path: other/rectangleunion.hpp
   requiredBy: []
-  timestamp: '2022-01-11 14:06:44+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-03-14 00:24:27+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DSL_4_A_rectangle_union.test.cpp
 documentation_of: other/rectangleunion.hpp
