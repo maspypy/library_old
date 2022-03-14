@@ -6,6 +6,9 @@ data:
     path: alg/lazy_max_max.hpp
     title: alg/lazy_max_max.hpp
   - icon: ':warning:'
+    path: alg/lazy_max_min.hpp
+    title: alg/lazy_max_min.hpp
+  - icon: ':warning:'
     path: alg/lazy_max_set.hpp
     title: alg/lazy_max_set.hpp
   - icon: ':warning:'
@@ -31,6 +34,7 @@ data:
   requiredBy:
   - alg/lazy_max_max.hpp
   - alg/lazy_max_set.hpp
+  - alg/lazy_max_min.hpp
   - graph/minimum_spanning_tree.hpp
   timestamp: '2022-02-03 13:42:15+09:00'
   verificationStatus: LIBRARY_NO_TESTS
