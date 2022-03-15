@@ -11,6 +11,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: nt/lcm_convolution.hpp
     title: nt/lcm_convolution.hpp
+  - icon: ':warning:'
+    path: nt/mobius_table.hpp
+    title: nt/mobius_table.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/gcd_convolution.test.cpp
@@ -62,6 +65,7 @@ data:
   path: nt/zeta.hpp
   requiredBy:
   - nt/lcm_convolution.hpp
+  - nt/mobius_table.hpp
   - nt/gcd_convolution.hpp
   timestamp: '2022-02-14 19:55:20+09:00'
   verificationStatus: LIBRARY_ALL_AC
