@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: ds/fastset.hpp
     title: ds/fastset.hpp
   - icon: ':question:'
@@ -12,9 +12,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/predecessor_problem
@@ -187,7 +187,7 @@ data:
     \ >= 0; g--) {\r\n        i *= B;\r\n        i += bsr(seg[g][i / B]);\r\n    \
     \  }\r\n      return i;\r\n    }\r\n    return -1;\r\n  }\r\n\r\n  void debug(){\r\
     \n    string s;\r\n    FOR(i, n) s += ((*this)[i] ? '1' : '0');\r\n    print(s);\r\
-    \n  }\r\n};\r\n\r\n// for mistype\r\nusing FaceSet = FastSet;\n#line 5 \"test/library_checker/datastructure/predecessor_problem.test.cpp\"\
+    \n  }\r\n};\r\n\r\n// for mistype\r\nusing FaseSet = FastSet;\n#line 5 \"test/library_checker/datastructure/predecessor_problem.test.cpp\"\
     \n\nvoid solve() {\n  LL(N, Q);\n  FastSet ss(N);\n  STR(S);\n  FOR(x, N) {\n\
     \    if (S[x] == '1') ss.insert(x);\n  }\n\n  FOR(_, Q) {\n    LL(t, k);\n   \
     \ if (t == 0) { ss.insert(k); }\n    elif (t == 1) { ss.erase(k); }\n    elif\
@@ -211,8 +211,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/predecessor_problem.test.cpp
   requiredBy: []
-  timestamp: '2022-03-14 04:45:03+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-03-17 18:02:13+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/predecessor_problem.test.cpp
 layout: document

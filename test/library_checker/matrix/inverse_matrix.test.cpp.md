@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linalg/mat_inv.hpp
     title: linalg/mat_inv.hpp
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/inverse_matrix
@@ -228,8 +228,8 @@ data:
     \ < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n) * fact_inv<mint>(k)\
     \ * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n  FOR(i, k) {\n\
     \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\nusing\
-    \ modint107 = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n\
-    using amint = ArbitraryModInt;\n#line 1 \"linalg/mat_inv.hpp\"\ntemplate <typename\
+    \ modint107 = modint<1000000007>;\nusing modint998 = modint<998244353>;\nusing\
+    \ amint = ArbitraryModInt;\n#line 1 \"linalg/mat_inv.hpp\"\ntemplate <typename\
     \ T>\r\nvc<vc<T>> mat_inv(vc<vc<T>> A) {\r\n  int N = len(A);\r\n  vv(T, B, N,\
     \ N);\r\n  FOR(n, N) B[n][n] = 1;\r\n  FOR(i, N) {\r\n    FOR3(k, i, N) if (A[k][i]\
     \ != 0) {\r\n      if (k != i) swap(A[i], A[k]), swap(B[i], B[k]);\r\n      break;\r\
@@ -257,8 +257,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/matrix/inverse_matrix.test.cpp
   requiredBy: []
-  timestamp: '2022-03-14 04:45:03+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-03-17 18:01:38+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/matrix/inverse_matrix.test.cpp
 layout: document

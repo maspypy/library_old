@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':x:'
     path: linalg/mat_mul.hpp
     title: linalg/mat_mul.hpp
   - icon: ':x:'
@@ -247,9 +247,9 @@ data:
     \ < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n) * fact_inv<mint>(k)\
     \ * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n  FOR(i, k) {\n\
     \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\nusing\
-    \ modint107 = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n\
-    using amint = ArbitraryModInt;\n#line 8 \"test/yukicoder/1810_matpow.test.cpp\"\
-    \n\r\nusing mint = modint107;\r\n\r\nvoid solve() {\r\n  mint A, B;\r\n  read(A),\
+    \ modint107 = modint<1000000007>;\nusing modint998 = modint<998244353>;\nusing\
+    \ amint = ArbitraryModInt;\n#line 8 \"test/yukicoder/1810_matpow.test.cpp\"\n\r\
+    \nusing mint = modint107;\r\n\r\nvoid solve() {\r\n  mint A, B;\r\n  read(A),\
     \ read(B);\r\n  vv(mint, P, 3, 3);\r\n  vv(mint, Q, 3, 3);\r\n  P[0] = {1, 0,\
     \ 0};\r\n  P[1] = {0, 1, 0};\r\n  P[2] = {A, B, 1};\r\n  Q[0] = {0, 0, 1};\r\n\
     \  Q[1] = {1, 0, 0};\r\n  Q[2] = {0, 0, 0};\r\n  auto QP = mat_mul(Q, P);\r\n\
@@ -280,7 +280,7 @@ data:
   isVerificationFile: true
   path: test/yukicoder/1810_matpow.test.cpp
   requiredBy: []
-  timestamp: '2022-03-14 04:45:03+09:00'
+  timestamp: '2022-03-17 18:01:38+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yukicoder/1810_matpow.test.cpp

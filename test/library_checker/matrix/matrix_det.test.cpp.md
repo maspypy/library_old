@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linalg/det.hpp
     title: linalg/det.hpp
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/matrix_det
@@ -228,13 +228,13 @@ data:
     \ < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n) * fact_inv<mint>(k)\
     \ * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n  FOR(i, k) {\n\
     \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\nusing\
-    \ modint107 = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n\
-    using amint = ArbitraryModInt;\n#line 1 \"linalg/det.hpp\"\ntemplate <typename\
-    \ T>\r\nT det(vc<vc<T>> A) {\r\n  T det = T(1);\r\n  while (len(A)) {\r\n    int\
-    \ n = len(A);\r\n    int k = n;\r\n    FOR_R(i, n) if (A[i].back() != 0) {\r\n\
-    \      k = i;\r\n      break;\r\n    }\r\n    if (k == n) return T(0);\r\n   \
-    \ if (k != n - 1) {\r\n      det *= (-1);\r\n      swap(A[k], A[n - 1]);\r\n \
-    \   }\r\n    det *= A[n - 1][n - 1];\r\n    FOR(i, n - 1) {\r\n      T c = A[i].back()\
+    \ modint107 = modint<1000000007>;\nusing modint998 = modint<998244353>;\nusing\
+    \ amint = ArbitraryModInt;\n#line 1 \"linalg/det.hpp\"\ntemplate <typename T>\r\
+    \nT det(vc<vc<T>> A) {\r\n  T det = T(1);\r\n  while (len(A)) {\r\n    int n =\
+    \ len(A);\r\n    int k = n;\r\n    FOR_R(i, n) if (A[i].back() != 0) {\r\n   \
+    \   k = i;\r\n      break;\r\n    }\r\n    if (k == n) return T(0);\r\n    if\
+    \ (k != n - 1) {\r\n      det *= (-1);\r\n      swap(A[k], A[n - 1]);\r\n    }\r\
+    \n    det *= A[n - 1][n - 1];\r\n    FOR(i, n - 1) {\r\n      T c = A[i].back()\
     \ / A[n - 1].back();\r\n      A[i].pop_back();\r\n      FOR(j, n - 1) A[i][j]\
     \ -= A[n - 1][j] * c;\r\n    }\r\n    A.pop_back();\r\n  }\r\n  return det;\r\n\
     }\r\n#line 6 \"test/library_checker/matrix/matrix_det.test.cpp\"\n\r\nusing mint\
@@ -255,8 +255,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/matrix/matrix_det.test.cpp
   requiredBy: []
-  timestamp: '2022-03-14 04:45:03+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-03-17 18:01:38+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/matrix/matrix_det.test.cpp
 layout: document

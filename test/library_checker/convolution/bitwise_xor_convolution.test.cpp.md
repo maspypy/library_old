@@ -232,13 +232,13 @@ data:
     \ < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n) * fact_inv<mint>(k)\
     \ * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n  FOR(i, k) {\n\
     \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\nusing\
-    \ modint107 = modint<1'000'000'007>;\nusing modint998 = modint<998'244'353>;\n\
-    using amint = ArbitraryModInt;\n#line 2 \"setfunc/hadamard.hpp\"\n\r\ntemplate\
-    \ <typename T>\r\nvoid hadamard(vc<T>& A) {\r\n  int log = topbit(len(A));\r\n\
-    \  assert(1 << log == len(A));\r\n  FOR(n, log) FOR(s, 1 << log) {\r\n    int\
-    \ t = s ^ (1 << n);\r\n    if (s < t) tie(A[s], A[t]) = mp(A[s] + A[t], A[s] -\
-    \ A[t]);  \r\n  }\r\n}\n#line 2 \"setfunc/xor_convolution.hpp\"\ntemplate <typename\
-    \ T>\r\nvc<T> xor_convolution(vc<T> A, vc<T> B) {\r\n  hadamard(A);\r\n  hadamard(B);\r\
+    \ modint107 = modint<1000000007>;\nusing modint998 = modint<998244353>;\nusing\
+    \ amint = ArbitraryModInt;\n#line 2 \"setfunc/hadamard.hpp\"\n\r\ntemplate <typename\
+    \ T>\r\nvoid hadamard(vc<T>& A) {\r\n  int log = topbit(len(A));\r\n  assert(1\
+    \ << log == len(A));\r\n  FOR(n, log) FOR(s, 1 << log) {\r\n    int t = s ^ (1\
+    \ << n);\r\n    if (s < t) tie(A[s], A[t]) = mp(A[s] + A[t], A[s] - A[t]);  \r\
+    \n  }\r\n}\n#line 2 \"setfunc/xor_convolution.hpp\"\ntemplate <typename T>\r\n\
+    vc<T> xor_convolution(vc<T> A, vc<T> B) {\r\n  hadamard(A);\r\n  hadamard(B);\r\
     \n  FOR(i, len(A)) A[i] *= B[i];\r\n  hadamard(A);\r\n  T c = T(1) / T(len(A));\r\
     \n  if (c != T(0)) {\r\n    FOR(i, len(A)) A[i] *= c;\r\n  } else {\r\n    FOR(i,\
     \ len(A)) A[i] /= len(A);\r\n  }\r\n  return A;\r\n}\r\n#line 7 \"test/library_checker/convolution/bitwise_xor_convolution.test.cpp\"\
@@ -262,7 +262,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/convolution/bitwise_xor_convolution.test.cpp
   requiredBy: []
-  timestamp: '2022-03-14 04:45:03+09:00'
+  timestamp: '2022-03-17 18:01:38+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/convolution/bitwise_xor_convolution.test.cpp
