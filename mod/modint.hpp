@@ -173,6 +173,6 @@ mint C(ll n, ll k, bool large = false) {
   return x;
 }
 
-using modint107 = modint<1'000'000'007>;
-using modint998 = modint<998'244'353>;
+using modint107 = modint<1000000007>;
+using modint998 = modint<998244353>;
 using amint = ArbitraryModInt;
