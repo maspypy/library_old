@@ -39,26 +39,25 @@ data:
     \ {\n    array<bool, S> block{};\n    for (auto& [p, idx]: cp)\n      for (int\
     \ i = idx; i < S + L; idx = (i += p)) block[i - L] = 1;\n    FOR(i, min(S, R -\
     \ L)) if (!block[i]) primes.eb((L + i) * 2 + 1);\n  }\n  return primes;\n}\n#line\
-    \ 3 \"mod/powertable.hpp\"\n\r\ntemplate<typename mint>\r\nvc<mint> powertable_1(mint\
-    \ a, ll N) {\r\n  // table of a^i\r\n  vc<mint> f(N, 1);\r\n  FOR(i, N - 1) f[i\
-    \ + 1] = a * f[i];\r\n  return f;\r\n}\r\n\r\ntemplate<typename mint>\r\nvc<mint>\
-    \ powertable_2(ll e, ll N) {\r\n  // table of i^e. N \u4EE5\u4E0B\u306E\u7D20\u6570\
-    \u30C6\u30FC\u30D6\u30EB\u3092\u5229\u7528\u3059\u308B. \r\n  auto& primes = primetable(N);\r\
-    \n  vc<mint> f(N, 1);\r\n  f[0] = mint(0).pow(e);\r\n  for(auto&& p : primes){\r\
-    \n    if(p > N) break;\r\n    mint xp = mint(p).pow(e);\r\n    ll pp = p;\r\n\
-    \    while(pp < N){\r\n      ll i = pp;\r\n      while(i < N){\r\n        f[i]\
-    \ *= xp;\r\n        i += pp;\r\n      }\r\n      pp *= p;\r\n    }\r\n  }\r\n\
-    \  return f;\r\n}\r\n\r\n"
-  code: "#pragma once\r\n#include \"nt/primetable.hpp\"\r\n\r\ntemplate<typename mint>\r\
+    \ 3 \"mod/powertable.hpp\"\n\r\n// a^0, ..., a^{N-1}\r\ntemplate <typename mint>\r\
     \nvc<mint> powertable_1(mint a, ll N) {\r\n  // table of a^i\r\n  vc<mint> f(N,\
-    \ 1);\r\n  FOR(i, N - 1) f[i + 1] = a * f[i];\r\n  return f;\r\n}\r\n\r\ntemplate<typename\
-    \ mint>\r\nvc<mint> powertable_2(ll e, ll N) {\r\n  // table of i^e. N \u4EE5\u4E0B\
-    \u306E\u7D20\u6570\u30C6\u30FC\u30D6\u30EB\u3092\u5229\u7528\u3059\u308B. \r\n\
-    \  auto& primes = primetable(N);\r\n  vc<mint> f(N, 1);\r\n  f[0] = mint(0).pow(e);\r\
-    \n  for(auto&& p : primes){\r\n    if(p > N) break;\r\n    mint xp = mint(p).pow(e);\r\
-    \n    ll pp = p;\r\n    while(pp < N){\r\n      ll i = pp;\r\n      while(i <\
-    \ N){\r\n        f[i] *= xp;\r\n        i += pp;\r\n      }\r\n      pp *= p;\r\
-    \n    }\r\n  }\r\n  return f;\r\n}\r\n\r\n"
+    \ 1);\r\n  FOR(i, N - 1) f[i + 1] = a * f[i];\r\n  return f;\r\n}\r\n\r\n// 0^e,\
+    \ ..., (N-1)^e\r\ntemplate <typename mint>\r\nvc<mint> powertable_2(ll e, ll N)\
+    \ {\r\n  auto& primes = primetable(N);\r\n  vc<mint> f(N, 1);\r\n  f[0] = mint(0).pow(e);\r\
+    \n  for (auto&& p: primes) {\r\n    if (p > N) break;\r\n    mint xp = mint(p).pow(e);\r\
+    \n    ll pp = p;\r\n    while (pp < N) {\r\n      ll i = pp;\r\n      while (i\
+    \ < N) {\r\n        f[i] *= xp;\r\n        i += pp;\r\n      }\r\n      pp *=\
+    \ p;\r\n    }\r\n  }\r\n  return f;\r\n}\r\n"
+  code: "#pragma once\r\n#include \"nt/primetable.hpp\"\r\n\r\n// a^0, ..., a^{N-1}\r\
+    \ntemplate <typename mint>\r\nvc<mint> powertable_1(mint a, ll N) {\r\n  // table\
+    \ of a^i\r\n  vc<mint> f(N, 1);\r\n  FOR(i, N - 1) f[i + 1] = a * f[i];\r\n  return\
+    \ f;\r\n}\r\n\r\n// 0^e, ..., (N-1)^e\r\ntemplate <typename mint>\r\nvc<mint>\
+    \ powertable_2(ll e, ll N) {\r\n  auto& primes = primetable(N);\r\n  vc<mint>\
+    \ f(N, 1);\r\n  f[0] = mint(0).pow(e);\r\n  for (auto&& p: primes) {\r\n    if\
+    \ (p > N) break;\r\n    mint xp = mint(p).pow(e);\r\n    ll pp = p;\r\n    while\
+    \ (pp < N) {\r\n      ll i = pp;\r\n      while (i < N) {\r\n        f[i] *= xp;\r\
+    \n        i += pp;\r\n      }\r\n      pp *= p;\r\n    }\r\n  }\r\n  return f;\r\
+    \n}\r\n"
   dependsOn:
   - nt/primetable.hpp
   isVerificationFile: false
@@ -66,7 +65,7 @@ data:
   requiredBy:
   - seq/stirling_number_1.hpp
   - poly/poly_taylor_shift.hpp
-  timestamp: '2022-03-07 17:25:40+09:00'
+  timestamp: '2022-03-19 16:17:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/math/sum_of_exp_times_poly_limit.test.cpp
