@@ -67,7 +67,7 @@ struct Graph {
         add(a, b, c);
       }
     }
-    prepare();
+    build();
   }
 
   void read_parent(int off = 1) {
@@ -76,10 +76,10 @@ struct Graph {
       p -= off;
       add(p, v);
     }
-    prepare();
+    build();
   }
 
-  void prepare() {
+  void build() {
     assert(!prepared);
     prepared = true;
     indptr.assign(N + 1, 0);
