@@ -355,6 +355,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: linalg/spmat_min_poly.hpp
       title: linalg/spmat_min_poly.hpp
+    - icon: ':warning:'
+      path: linalg/vectorspace.hpp
+      title: linalg/vectorspace.hpp
   - name: mod
     pages:
     - icon: ':heavy_check_mark:'
