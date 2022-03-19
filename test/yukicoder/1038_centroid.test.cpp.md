@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: alg/group_add.hpp
     title: alg/group_add.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/fenwick.hpp
     title: ds/fenwick.hpp
   - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/centroid.hpp
     title: graph/centroid.hpp
   - icon: ':question:'
@@ -21,9 +21,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/1038
@@ -262,11 +262,10 @@ data:
     \          par[e.to] = v;\r\n          dat.eb(e.to, f(val, e));\r\n        }\r\
     \n      }\r\n      res.eb(dat);\r\n      res[0].insert(res[0].end(), all(dat));\r\
     \n    }\r\n    return res;\r\n  }\r\n};\r\n#line 7 \"test/yukicoder/1038_centroid.test.cpp\"\
-    \n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  Graph<int> G(N);\r\n  FOR(_, N - 1) {\r\
-    \n    LL(a, b);\r\n    G.add(--a, --b);\r\n  }\r\n  G.prepare();\r\n\r\n  using\
-    \ T = tuple<ll, ll, ll>;\r\n  VEC(T, query, Q);\r\n  for (auto&& [a, b, c]: query)\
-    \ --a;\r\n\r\n  // \u9802\u70B9 -> \u30AF\u30A8\u30EA\r\n  vc<vi> query_at(N);\r\
-    \n  FOR(q, Q) query_at[get<0>(query[q])].eb(q);\r\n\r\n  CentroidDecomposition\
+    \n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  Graph<int> G(N);\r\n  G.read_tree();\r\
+    \n\r\n  using T = tuple<ll, ll, ll>;\r\n  VEC(T, query, Q);\r\n  for (auto&& [a,\
+    \ b, c]: query) --a;\r\n\r\n  // \u9802\u70B9 -> \u30AF\u30A8\u30EA\r\n  vc<vi>\
+    \ query_at(N);\r\n  FOR(q, Q) query_at[get<0>(query[q])].eb(q);\r\n\r\n  CentroidDecomposition\
     \ CD(G);\r\n  vi ANS(Q);\r\n  FenwickTree<Group_Add<ll>> bit(N + 10);\r\n\r\n\
     \  FOR(root, N) {\r\n    auto dats = CD.collect(root, 0);\r\n    FOR(i, len(dats))\
     \ {\r\n      auto dat = dats[i];\r\n      // qid, v, dv\r\n      vc<T> event;\r\
@@ -284,10 +283,9 @@ data:
   code: "#define PROBLEM \"https://yukicoder.me/problems/no/1038\"\r\n#include \"\
     my_template.hpp\"\r\n#include \"other/io.hpp\"\r\n\r\n#include \"ds/fenwick.hpp\"\
     \r\n#include \"graph/centroid.hpp\"\r\n\r\nvoid solve() {\r\n  LL(N, Q);\r\n \
-    \ Graph<int> G(N);\r\n  FOR(_, N - 1) {\r\n    LL(a, b);\r\n    G.add(--a, --b);\r\
-    \n  }\r\n  G.prepare();\r\n\r\n  using T = tuple<ll, ll, ll>;\r\n  VEC(T, query,\
-    \ Q);\r\n  for (auto&& [a, b, c]: query) --a;\r\n\r\n  // \u9802\u70B9 -> \u30AF\
-    \u30A8\u30EA\r\n  vc<vi> query_at(N);\r\n  FOR(q, Q) query_at[get<0>(query[q])].eb(q);\r\
+    \ Graph<int> G(N);\r\n  G.read_tree();\r\n\r\n  using T = tuple<ll, ll, ll>;\r\
+    \n  VEC(T, query, Q);\r\n  for (auto&& [a, b, c]: query) --a;\r\n\r\n  // \u9802\
+    \u70B9 -> \u30AF\u30A8\u30EA\r\n  vc<vi> query_at(N);\r\n  FOR(q, Q) query_at[get<0>(query[q])].eb(q);\r\
     \n\r\n  CentroidDecomposition CD(G);\r\n  vi ANS(Q);\r\n  FenwickTree<Group_Add<ll>>\
     \ bit(N + 10);\r\n\r\n  FOR(root, N) {\r\n    auto dats = CD.collect(root, 0);\r\
     \n    FOR(i, len(dats)) {\r\n      auto dat = dats[i];\r\n      // qid, v, dv\r\
@@ -313,8 +311,8 @@ data:
   isVerificationFile: true
   path: test/yukicoder/1038_centroid.test.cpp
   requiredBy: []
-  timestamp: '2022-03-19 16:40:52+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-03-19 18:32:22+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yukicoder/1038_centroid.test.cpp
 layout: document

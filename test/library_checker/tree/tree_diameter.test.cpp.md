@@ -4,13 +4,13 @@ data:
   - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: graph/bfs01.hpp
     title: graph/bfs01.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/restore_path.hpp
     title: graph/restore_path.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/tree_diameter.hpp
     title: graph/tree_diameter.hpp
   - icon: ':question:'
@@ -21,9 +21,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/tree_diameter
@@ -225,16 +225,14 @@ data:
     \ - dist.begin();\r\n  }\r\n  auto [dist, par] = bfs01(G, A);\r\n  B = max_element(all(dist))\
     \ - dist.begin();\r\n  vc<int> P = restore_path(par, B);\r\n  return {dist[B],\
     \ P};\r\n}\r\n#line 5 \"test/library_checker/tree/tree_diameter.test.cpp\"\n\r\
-    \nvoid solve() {\r\n  LL(N);\r\n  Graph<ll> G(N);\r\n  FOR_(N - 1) {\r\n    LL(a,\
-    \ b, c);\r\n    G.add(a, b, c);\r\n  }\r\n  G.prepare();\r\n  auto [diam, P] =\
-    \ tree_diameter(G);\r\n  print(diam, len(P));\r\n  print(P);\r\n}\r\n\r\nsigned\
-    \ main() {\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \nvoid solve() {\r\n  LL(N);\r\n  Graph<ll> G(N);\r\n  G.read_tree(1, 0);\r\n\
+    \  auto [diam, P] = tree_diameter(G);\r\n  print(diam, len(P));\r\n  print(P);\r\
+    \n}\r\n\r\nsigned main() {\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/tree_diameter\"\r\n#include\
     \ \"my_template.hpp\"\r\n#include \"other/io.hpp\"\r\n#include \"graph/tree_diameter.hpp\"\
-    \r\n\r\nvoid solve() {\r\n  LL(N);\r\n  Graph<ll> G(N);\r\n  FOR_(N - 1) {\r\n\
-    \    LL(a, b, c);\r\n    G.add(a, b, c);\r\n  }\r\n  G.prepare();\r\n  auto [diam,\
-    \ P] = tree_diameter(G);\r\n  print(diam, len(P));\r\n  print(P);\r\n}\r\n\r\n\
-    signed main() {\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \r\n\r\nvoid solve() {\r\n  LL(N);\r\n  Graph<ll> G(N);\r\n  G.read_tree(1, 0);\r\
+    \n  auto [diam, P] = tree_diameter(G);\r\n  print(diam, len(P));\r\n  print(P);\r\
+    \n}\r\n\r\nsigned main() {\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
@@ -245,8 +243,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/tree/tree_diameter.test.cpp
   requiredBy: []
-  timestamp: '2022-03-19 16:40:52+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-03-19 18:32:22+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/tree/tree_diameter.test.cpp
 layout: document

@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/hld.hpp
     title: graph/hld.hpp
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/lca
@@ -255,15 +255,15 @@ data:
     \n    print(\"depth\", depth);\r\n    print(\"head\", head);\r\n    print(\"in_tree(edge)\"\
     , in_tree);\r\n    print(\"root\", root);\r\n  }\r\n};\r\n#line 6 \"test/library_checker/tree/lca_directed.test.cpp\"\
     \n\nvoid solve() {\n  LL(N, Q);\n  Graph<int, 1> G(N);\n  FOR3(v, 1, N) {\n  \
-    \  LL(p);\n    G.add(p, v);\n  }\n  G.prepare();\n  HLD hld(G);\n\n  FOR(_, Q)\
-    \ {\n    LL(a, b);\n    print(hld.LCA(a, b));\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
+    \  LL(p);\n    G.add(p, v);\n  }\n  G.build();\n  HLD hld(G);\n\n  FOR(_, Q) {\n\
+    \    LL(a, b);\n    print(hld.LCA(a, b));\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
     \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  solve();\n \
     \ return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/lca\"\n#include \"my_template.hpp\"\
     \n#include \"other/io.hpp\"\n\n#include \"graph/hld.hpp\"\n\nvoid solve() {\n\
     \  LL(N, Q);\n  Graph<int, 1> G(N);\n  FOR3(v, 1, N) {\n    LL(p);\n    G.add(p,\
-    \ v);\n  }\n  G.prepare();\n  HLD hld(G);\n\n  FOR(_, Q) {\n    LL(a, b);\n  \
-    \  print(hld.LCA(a, b));\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
+    \ v);\n  }\n  G.build();\n  HLD hld(G);\n\n  FOR(_, Q) {\n    LL(a, b);\n    print(hld.LCA(a,\
+    \ b));\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
     \  cout << setprecision(15);\n\n  solve();\n  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
@@ -273,8 +273,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/tree/lca_directed.test.cpp
   requiredBy: []
-  timestamp: '2022-03-19 16:40:52+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-03-19 18:32:22+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/tree/lca_directed.test.cpp
 layout: document

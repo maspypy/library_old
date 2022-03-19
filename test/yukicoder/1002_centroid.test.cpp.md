@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/centroid.hpp
     title: graph/centroid.hpp
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/1002
@@ -228,36 +228,35 @@ data:
     \          par[e.to] = v;\r\n          dat.eb(e.to, f(val, e));\r\n        }\r\
     \n      }\r\n      res.eb(dat);\r\n      res[0].insert(res[0].end(), all(dat));\r\
     \n    }\r\n    return res;\r\n  }\r\n};\r\n#line 5 \"test/yukicoder/1002_centroid.test.cpp\"\
-    \n\r\nvoid solve() {\r\n  LL(N, K);\r\n  Graph<int> G(N);\r\n  FOR(_, N - 1) {\r\
-    \n    LL(a, b, c);\r\n    G.add(--a, --b, c);\r\n  }\r\n  G.prepare();\r\n\r\n\
-    \  using T = pi;\r\n  // -1 : no color\r\n  // -2 : many color\r\n  auto f = [&](T\
-    \ t, auto e) -> T {\r\n    ll c = e.cost;\r\n    if (t.fi == -2) return t;\r\n\
-    \    if (t.fi == c || t.se == c) return t;\r\n    if (t.fi == -1) t.fi = c;\r\n\
-    \    elif (t.se == -1) t.se = c;\r\n    else t = {-2, -2};\r\n    if (t.se >=\
-    \ 0 && t.fi > t.se) swap(t.fi, t.se);\r\n    return t;\r\n  };\r\n\r\n  CentroidDecomposition<Graph<int>,\
-    \ T> CD(G, f);\r\n\r\n  ll ANS = 0;\r\n  FOR(root, N) {\r\n    auto dats = CD.collect(root,\
-    \ {-1, -1});\r\n    FOR(i, len(dats)) {\r\n      auto& dat = dats[i];\r\n    \
-    \  ll x0 = 0, x1 = 0, x2 = 0;\r\n      map<ll, ll> MP1;\r\n      map<pi, ll> MP2;\r\
-    \n      for (auto&& [v, p]: dat) {\r\n        if (p.fi == -2) continue;\r\n  \
-    \      if (p.fi == -1) x0 += 1;\r\n        elif (p.se < 0) {\r\n          ++x1;\r\
-    \n          MP1[p.fi]++;\r\n        }\r\n        else {\r\n          ++x2;\r\n\
-    \          MP2[p]++;\r\n        }\r\n      }\r\n      ll x00 = 0, x01 = 0, x02\
-    \ = 0, x11 = 0, x12 = 0, x22 = 0;\r\n      x00 = x0 * x0;\r\n      x01 = 2 * x0\
-    \ * x1;\r\n      x02 = 2 * x0 * x2;\r\n      for (auto&& [v, p]: dat) {\r\n  \
-    \      if (p.fi < 0) continue;\r\n        if (p.se < 0) {\r\n          x11 +=\
-    \ x1 - MP1[p.fi];\r\n        } else {\r\n          x12 += 2 * MP1[p.fi];\r\n \
-    \         x12 += 2 * MP1[p.se];\r\n          x22 += MP2[p];\r\n        }\r\n \
-    \     }\r\n      // ll x = x00 + x01 + x02 + x11 + x12 + x22;\r\n      ll x =\
-    \ x02 + x11 + x12 + x22;\r\n      ANS += (i == 0 ? x : -x);\r\n    }\r\n  }\r\n\
-    \  print(ANS / 2);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  ll T = 1;\r\n  // LL(T);\r\n  FOR(_, T)\
-    \ solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \n\r\nvoid solve() {\r\n  LL(N, K);\r\n  Graph<int> G(N);\r\n  G.read_tree(1);\r\
+    \n\r\n  using T = pi;\r\n  // -1 : no color\r\n  // -2 : many color\r\n  auto\
+    \ f = [&](T t, auto e) -> T {\r\n    ll c = e.cost;\r\n    if (t.fi == -2) return\
+    \ t;\r\n    if (t.fi == c || t.se == c) return t;\r\n    if (t.fi == -1) t.fi\
+    \ = c;\r\n    elif (t.se == -1) t.se = c;\r\n    else t = {-2, -2};\r\n    if\
+    \ (t.se >= 0 && t.fi > t.se) swap(t.fi, t.se);\r\n    return t;\r\n  };\r\n\r\n\
+    \  CentroidDecomposition<Graph<int>, T> CD(G, f);\r\n\r\n  ll ANS = 0;\r\n  FOR(root,\
+    \ N) {\r\n    auto dats = CD.collect(root, {-1, -1});\r\n    FOR(i, len(dats))\
+    \ {\r\n      auto& dat = dats[i];\r\n      ll x0 = 0, x1 = 0, x2 = 0;\r\n    \
+    \  map<ll, ll> MP1;\r\n      map<pi, ll> MP2;\r\n      for (auto&& [v, p]: dat)\
+    \ {\r\n        if (p.fi == -2) continue;\r\n        if (p.fi == -1) x0 += 1;\r\
+    \n        elif (p.se < 0) {\r\n          ++x1;\r\n          MP1[p.fi]++;\r\n \
+    \       }\r\n        else {\r\n          ++x2;\r\n          MP2[p]++;\r\n    \
+    \    }\r\n      }\r\n      ll x00 = 0, x01 = 0, x02 = 0, x11 = 0, x12 = 0, x22\
+    \ = 0;\r\n      x00 = x0 * x0;\r\n      x01 = 2 * x0 * x1;\r\n      x02 = 2 *\
+    \ x0 * x2;\r\n      for (auto&& [v, p]: dat) {\r\n        if (p.fi < 0) continue;\r\
+    \n        if (p.se < 0) {\r\n          x11 += x1 - MP1[p.fi];\r\n        } else\
+    \ {\r\n          x12 += 2 * MP1[p.fi];\r\n          x12 += 2 * MP1[p.se];\r\n\
+    \          x22 += MP2[p];\r\n        }\r\n      }\r\n      // ll x = x00 + x01\
+    \ + x02 + x11 + x12 + x22;\r\n      ll x = x02 + x11 + x12 + x22;\r\n      ANS\
+    \ += (i == 0 ? x : -x);\r\n    }\r\n  }\r\n  print(ANS / 2);\r\n}\r\n\r\nsigned\
+    \ main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout\
+    \ << setprecision(15);\r\n\r\n  ll T = 1;\r\n  // LL(T);\r\n  FOR(_, T) solve();\r\
+    \n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://yukicoder.me/problems/no/1002\"\r\n#include \"\
     my_template.hpp\"\r\n#include \"other/io.hpp\"\r\n#include \"graph/centroid.hpp\"\
-    \r\n\r\nvoid solve() {\r\n  LL(N, K);\r\n  Graph<int> G(N);\r\n  FOR(_, N - 1)\
-    \ {\r\n    LL(a, b, c);\r\n    G.add(--a, --b, c);\r\n  }\r\n  G.prepare();\r\n\
-    \r\n  using T = pi;\r\n  // -1 : no color\r\n  // -2 : many color\r\n  auto f\
-    \ = [&](T t, auto e) -> T {\r\n    ll c = e.cost;\r\n    if (t.fi == -2) return\
+    \r\n\r\nvoid solve() {\r\n  LL(N, K);\r\n  Graph<int> G(N);\r\n  G.read_tree(1);\r\
+    \n\r\n  using T = pi;\r\n  // -1 : no color\r\n  // -2 : many color\r\n  auto\
+    \ f = [&](T t, auto e) -> T {\r\n    ll c = e.cost;\r\n    if (t.fi == -2) return\
     \ t;\r\n    if (t.fi == c || t.se == c) return t;\r\n    if (t.fi == -1) t.fi\
     \ = c;\r\n    elif (t.se == -1) t.se = c;\r\n    else t = {-2, -2};\r\n    if\
     \ (t.se >= 0 && t.fi > t.se) swap(t.fi, t.se);\r\n    return t;\r\n  };\r\n\r\n\
@@ -287,8 +286,8 @@ data:
   isVerificationFile: true
   path: test/yukicoder/1002_centroid.test.cpp
   requiredBy: []
-  timestamp: '2022-03-19 16:40:52+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-03-19 18:32:22+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yukicoder/1002_centroid.test.cpp
 layout: document
