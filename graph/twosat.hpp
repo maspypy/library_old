@@ -21,7 +21,7 @@ struct TwoSat {
   void implies(int a, int b) { add(~a, b); }
 
   bool calc() {
-    G.prepare();
+    G.build();
     ll n = len(values);
     SCC<Graph<int, 1>> scc(G);
     FOR(i, n) {

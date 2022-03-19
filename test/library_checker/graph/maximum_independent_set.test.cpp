@@ -7,11 +7,7 @@
 void solve() {
   LL(N, M);
   Graph<int> G(N);
-  FOR(_, M) {
-    LL(a, b);
-    G.add(a, b);
-  }
-  G.prepare();
+  G.read_graph(M, 0, 0);
   auto mis = maximum_independent_set(G);
   print(len(mis));
   print(mis);

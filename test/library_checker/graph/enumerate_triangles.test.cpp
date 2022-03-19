@@ -7,10 +7,7 @@ void solve() {
   LL(N, M);
   VEC(int, A, N);
   Graph G(N);
-  FOR_(M) {
-    LL(a, b);
-    G.add(a, b);
-  }
+  G.read_graph(M, 0, 0);
   i128 sum = 0;
   auto query
       = [&](int a, int b, int c) -> void { sum += i128(A[a]) * A[b] * A[c]; };

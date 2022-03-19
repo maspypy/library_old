@@ -9,11 +9,7 @@
 void solve() {
   LL(N, M, s, t);
   Graph<ll, true> G(N);
-  FOR(_, M) {
-    LL(a, b, c);
-    G.add(a, b, c);
-  }
-  G.prepare();
+  G.read_graph(M, 1, 0);
 
   auto [dist, par] = dijkstra(G, s);
   if (dist[t] == -1) return print(-1);

@@ -8,11 +8,7 @@
 void solve() {
   LL(N, M);
   Graph<int, 1> G(N);
-  FOR(_, M) {
-    LL(a, b);
-    G.add(a, b);
-  }
-  G.prepare();
+  G.read_graph(M, 0, 0);
 
   SCC scc(G);
   auto C = scc.cnt;

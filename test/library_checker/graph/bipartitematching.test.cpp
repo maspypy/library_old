@@ -10,7 +10,7 @@ void solve() {
     LL(a, b);
     G.add(a, b + L);
   }
-  G.prepare();
+  G.build();
   BipartiteMatching BM(G);
 
   auto match = BM.matching();
