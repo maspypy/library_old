@@ -215,19 +215,17 @@ data:
     \ f.to;\r\n        if (table[c]) query(a, b, c);\r\n      }\r\n    }\r\n    for\
     \ (auto&& e: H[a]) { table[e.to] = 0; }\r\n  }\r\n}\r\n#line 5 \"test/library_checker/graph/enumerate_triangles.test.cpp\"\
     \n\r\nvoid solve() {\r\n  LL(N, M);\r\n  VEC(int, A, N);\r\n  Graph G(N);\r\n\
-    \  FOR_(M) {\r\n    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n  i128 sum = 0;\r\n\
-    \  auto query\r\n      = [&](int a, int b, int c) -> void { sum += i128(A[a])\
-    \ * A[b] * A[c]; };\r\n  enumerate_triangles(G, query);\r\n  int ANS = sum % 998244353;\r\
-    \n  print(ANS);\r\n}\r\n\r\nsigned main() {\r\n  solve();\r\n\r\n  return 0;\r\
-    \n}\r\n"
+    \  G.read_graph(M, 0, 0);\r\n  i128 sum = 0;\r\n  auto query\r\n      = [&](int\
+    \ a, int b, int c) -> void { sum += i128(A[a]) * A[b] * A[c]; };\r\n  enumerate_triangles(G,\
+    \ query);\r\n  int ANS = sum % 998244353;\r\n  print(ANS);\r\n}\r\n\r\nsigned\
+    \ main() {\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/enumerate_triangles\"\r\
     \n#include \"my_template.hpp\"\r\n#include \"other/io.hpp\"\r\n#include \"graph/enumerate_triangles.hpp\"\
     \r\n\r\nvoid solve() {\r\n  LL(N, M);\r\n  VEC(int, A, N);\r\n  Graph G(N);\r\n\
-    \  FOR_(M) {\r\n    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n  i128 sum = 0;\r\n\
-    \  auto query\r\n      = [&](int a, int b, int c) -> void { sum += i128(A[a])\
-    \ * A[b] * A[c]; };\r\n  enumerate_triangles(G, query);\r\n  int ANS = sum % 998244353;\r\
-    \n  print(ANS);\r\n}\r\n\r\nsigned main() {\r\n  solve();\r\n\r\n  return 0;\r\
-    \n}\r\n"
+    \  G.read_graph(M, 0, 0);\r\n  i128 sum = 0;\r\n  auto query\r\n      = [&](int\
+    \ a, int b, int c) -> void { sum += i128(A[a]) * A[b] * A[c]; };\r\n  enumerate_triangles(G,\
+    \ query);\r\n  int ANS = sum % 998244353;\r\n  print(ANS);\r\n}\r\n\r\nsigned\
+    \ main() {\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
@@ -237,7 +235,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/graph/enumerate_triangles.test.cpp
   requiredBy: []
-  timestamp: '2022-03-19 16:40:52+09:00'
+  timestamp: '2022-03-19 17:45:04+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/graph/enumerate_triangles.test.cpp

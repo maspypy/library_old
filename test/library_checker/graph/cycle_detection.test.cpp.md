@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/cycle_detection.hpp
     title: graph/cycle_detection.hpp
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/cycle_detection
@@ -209,21 +209,19 @@ data:
     \n          cur = par[cur].fi;\r\n        }\r\n        reverse(all(ANS));\r\n\
     \        return;\r\n      }\r\n    }\r\n    used[v] = 2;\r\n  };\r\n  FOR(v, N)\
     \ if (!used[v]) dfs(dfs, v);\r\n  return ANS;\r\n}\n#line 8 \"test/library_checker/graph/cycle_detection.test.cpp\"\
-    \n\r\nvoid solve() {\r\n  LL(N, M);\r\n  Graph<int, 1> G(N);\r\n  FOR(_, M) {\r\
-    \n    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n  G.prepare();\r\n\r\n  auto C =\
-    \ cycle_detection(G, true);\r\n  if (len(C) == 0) {\r\n    print(-1);\r\n  } else\
-    \ {\r\n    print(len(C));\r\n    for (auto&& i: C) print(i);\r\n  }\r\n}\r\n\r\
-    \nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n\
-    \  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\n"
+    \n\r\nvoid solve() {\r\n  LL(N, M);\r\n  Graph<int, 1> G(N);\r\n  G.read_graph(M,\
+    \ 0, 0);\r\n\r\n  auto C = cycle_detection(G, true);\r\n  if (len(C) == 0) {\r\
+    \n    print(-1);\r\n  } else {\r\n    print(len(C));\r\n    for (auto&& i: C)\
+    \ print(i);\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/cycle_detection\"\r\n\r\
     \n#include \"my_template.hpp\"\r\n#include \"other/io.hpp\"\r\n\r\n#include \"\
     graph/base.hpp\"\r\n#include \"graph/cycle_detection.hpp\"\r\n\r\nvoid solve()\
-    \ {\r\n  LL(N, M);\r\n  Graph<int, 1> G(N);\r\n  FOR(_, M) {\r\n    LL(a, b);\r\
-    \n    G.add(a, b);\r\n  }\r\n  G.prepare();\r\n\r\n  auto C = cycle_detection(G,\
-    \ true);\r\n  if (len(C) == 0) {\r\n    print(-1);\r\n  } else {\r\n    print(len(C));\r\
-    \n    for (auto&& i: C) print(i);\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
-    \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
-    \n\r\n  return 0;\r\n}"
+    \ {\r\n  LL(N, M);\r\n  Graph<int, 1> G(N);\r\n  G.read_graph(M, 0, 0);\r\n\r\n\
+    \  auto C = cycle_detection(G, true);\r\n  if (len(C) == 0) {\r\n    print(-1);\r\
+    \n  } else {\r\n    print(len(C));\r\n    for (auto&& i: C) print(i);\r\n  }\r\
+    \n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
@@ -232,8 +230,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/graph/cycle_detection.test.cpp
   requiredBy: []
-  timestamp: '2022-03-19 16:40:52+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-03-19 17:45:04+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/graph/cycle_detection.test.cpp
 layout: document

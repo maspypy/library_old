@@ -4,10 +4,10 @@ data:
   - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/scc.hpp
     title: graph/scc.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/twosat.hpp
     title: graph/twosat.hpp
   - icon: ':question:'
@@ -18,9 +18,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/two_sat
@@ -217,7 +217,7 @@ data:
     \n  }\r\n  void set(int a) {\r\n    if (a >= 0)\r\n      values[a] = 1;\r\n  \
     \  else\r\n      values[~a] = 0;\r\n    a = (a >= 0 ? 2 * a + 1 : 2 * (~a));\r\
     \n    G.add(a ^ 1, a);\r\n  }\r\n  void implies(int a, int b) { add(~a, b); }\r\
-    \n\r\n  bool calc() {\r\n    G.prepare();\r\n    ll n = len(values);\r\n    SCC<Graph<int,\
+    \n\r\n  bool calc() {\r\n    G.build();\r\n    ll n = len(values);\r\n    SCC<Graph<int,\
     \ 1>> scc(G);\r\n    FOR(i, n) {\r\n      if (scc[2 * i] == scc[2 * i + 1]) return\
     \ false;\r\n      values[i] = scc[2 * i] < scc[2 * i + 1];\r\n    }\r\n    return\
     \ true;\r\n  }\r\n};\n#line 5 \"test/library_checker/math/twosat.test.cpp\"\n\r\
@@ -250,8 +250,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/math/twosat.test.cpp
   requiredBy: []
-  timestamp: '2022-03-19 16:40:52+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-03-19 17:45:04+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/math/twosat.test.cpp
 layout: document

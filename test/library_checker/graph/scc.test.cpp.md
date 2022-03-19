@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/scc.hpp
     title: graph/scc.hpp
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/scc
@@ -208,19 +208,18 @@ data:
     \   }\n      ++cnt;\n    }\n  }\n\n  void build() {\n    FOR(v, N) {\n      if\
     \ (ord[v] == -1) dfs(v);\n    }\n    FOR(v, N) comp[v] = cnt - 1 - comp[v];\n\
     \  }\n};\n#line 7 \"test/library_checker/graph/scc.test.cpp\"\n\nvoid solve()\
-    \ {\n  LL(N, M);\n  Graph<int, 1> G(N);\n  FOR(_, M) {\n    LL(a, b);\n    G.add(a,\
-    \ b);\n  }\n  G.prepare();\n\n  SCC scc(G);\n  auto C = scc.cnt;\n  vc<vc<int>>\
-    \ ANS(C);\n  FOR(v, N) ANS[scc[v]].eb(v);\n  print(len(ANS));\n  for (auto&& C:\
-    \ ANS) print(len(C), C);\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
-    \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
+    \ {\n  LL(N, M);\n  Graph<int, 1> G(N);\n  G.read_graph(M, 0, 0);\n\n  SCC scc(G);\n\
+    \  auto C = scc.cnt;\n  vc<vc<int>> ANS(C);\n  FOR(v, N) ANS[scc[v]].eb(v);\n\
+    \  print(len(ANS));\n  for (auto&& C: ANS) print(len(C), C);\n}\n\nsigned main()\
+    \ {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\
+    \n  solve();\n\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/scc\"\n#include \"my_template.hpp\"\
     \n#include \"other/io.hpp\"\n\n#include \"graph/base.hpp\"\n#include \"graph/scc.hpp\"\
-    \n\nvoid solve() {\n  LL(N, M);\n  Graph<int, 1> G(N);\n  FOR(_, M) {\n    LL(a,\
-    \ b);\n    G.add(a, b);\n  }\n  G.prepare();\n\n  SCC scc(G);\n  auto C = scc.cnt;\n\
-    \  vc<vc<int>> ANS(C);\n  FOR(v, N) ANS[scc[v]].eb(v);\n  print(len(ANS));\n \
-    \ for (auto&& C: ANS) print(len(C), C);\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
-    \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  solve();\n\n\
-    \  return 0;\n}\n"
+    \n\nvoid solve() {\n  LL(N, M);\n  Graph<int, 1> G(N);\n  G.read_graph(M, 0, 0);\n\
+    \n  SCC scc(G);\n  auto C = scc.cnt;\n  vc<vc<int>> ANS(C);\n  FOR(v, N) ANS[scc[v]].eb(v);\n\
+    \  print(len(ANS));\n  for (auto&& C: ANS) print(len(C), C);\n}\n\nsigned main()\
+    \ {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\
+    \n  solve();\n\n  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
@@ -229,8 +228,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/graph/scc.test.cpp
   requiredBy: []
-  timestamp: '2022-03-19 16:40:52+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-03-19 17:45:04+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/graph/scc.test.cpp
 layout: document

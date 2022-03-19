@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: alg/group_affine.hpp
     title: alg/group_affine.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: alg/monoid_reverse.hpp
     title: alg/monoid_reverse.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
   - icon: ':question:'
@@ -16,7 +16,7 @@ data:
   - icon: ':question:'
     path: graph/hld.hpp
     title: graph/hld.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/treemonoid.hpp
     title: graph/treemonoid.hpp
   - icon: ':question:'
@@ -30,9 +30,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_set_path_composite
@@ -418,25 +418,25 @@ data:
     \n};\r\n#line 9 \"test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp\"\
     \n\nusing mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using Mono = Group_Affine<mint>;\n\
     \  using E = pair<mint, mint>;\n  vc<E> A(N);\n  FOR(i, N) {\n    LL(a, b);\n\
-    \    A[i] = E({a, b});\n  }\n\n  Graph<int> G(N);\n  FOR(_, N - 1) {\n    LL(a,\
-    \ b);\n    G.add(a, b);\n  }\n  G.prepare();\n\n  HLD hld(G);\n  TreeMonoid<decltype(hld),\
-    \ Mono, false> TM(hld, A);\n\n  FOR(_, Q) {\n    LL(t);\n    if (t == 0) {\n \
-    \     LL(v, c, d);\n      TM.set(v, E({mint(c), mint(d)}));\n    } else {\n  \
-    \    LL(u, v, x);\n      auto e = TM.prod_path(u, v);\n      print(Mono::eval(e,\
-    \ mint(x)));\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
-    \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
+    \    A[i] = E({a, b});\n  }\n\n  Graph<int> G(N);\n  G.read_tree(0, 0);\n\n  HLD\
+    \ hld(G);\n  TreeMonoid<decltype(hld), Mono, false> TM(hld, A);\n\n  FOR(_, Q)\
+    \ {\n    LL(t);\n    if (t == 0) {\n      LL(v, c, d);\n      TM.set(v, E({mint(c),\
+    \ mint(d)}));\n    } else {\n      LL(u, v, x);\n      auto e = TM.prod_path(u,\
+    \ v);\n      print(Mono::eval(e, mint(x)));\n    }\n  }\n}\n\nsigned main() {\n\
+    \  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\
+    \n  solve();\n\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_set_path_composite\"\
     \n\n#include \"my_template.hpp\"\n#include \"other/io.hpp\"\n\n#include \"alg/group_affine.hpp\"\
     \n#include \"mod/modint.hpp\"\n#include \"graph/treemonoid.hpp\"\n\nusing mint\
     \ = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using Mono = Group_Affine<mint>;\n\
     \  using E = pair<mint, mint>;\n  vc<E> A(N);\n  FOR(i, N) {\n    LL(a, b);\n\
-    \    A[i] = E({a, b});\n  }\n\n  Graph<int> G(N);\n  FOR(_, N - 1) {\n    LL(a,\
-    \ b);\n    G.add(a, b);\n  }\n  G.prepare();\n\n  HLD hld(G);\n  TreeMonoid<decltype(hld),\
-    \ Mono, false> TM(hld, A);\n\n  FOR(_, Q) {\n    LL(t);\n    if (t == 0) {\n \
-    \     LL(v, c, d);\n      TM.set(v, E({mint(c), mint(d)}));\n    } else {\n  \
-    \    LL(u, v, x);\n      auto e = TM.prod_path(u, v);\n      print(Mono::eval(e,\
-    \ mint(x)));\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
-    \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
+    \    A[i] = E({a, b});\n  }\n\n  Graph<int> G(N);\n  G.read_tree(0, 0);\n\n  HLD\
+    \ hld(G);\n  TreeMonoid<decltype(hld), Mono, false> TM(hld, A);\n\n  FOR(_, Q)\
+    \ {\n    LL(t);\n    if (t == 0) {\n      LL(v, c, d);\n      TM.set(v, E({mint(c),\
+    \ mint(d)}));\n    } else {\n      LL(u, v, x);\n      auto e = TM.prod_path(u,\
+    \ v);\n      print(Mono::eval(e, mint(x)));\n    }\n  }\n}\n\nsigned main() {\n\
+    \  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\
+    \n  solve();\n\n  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
@@ -450,8 +450,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   requiredBy: []
-  timestamp: '2022-03-19 16:40:52+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-03-19 17:41:40+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
 layout: document

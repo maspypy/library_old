@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/unionfind.hpp
     title: ds/unionfind.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: flow/bipartite.hpp
     title: flow/bipartite.hpp
   - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/check_bipartite.hpp
     title: graph/check_bipartite.hpp
   - icon: ':question:'
@@ -21,9 +21,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/bipartitematching
@@ -255,17 +255,17 @@ data:
     min vertex covor\", vertex_cover());\r\n    print(\"max indep set\", independent_set());\r\
     \n    print(\"min edge cover\", edge_cover());\r\n  }\r\n};\n#line 5 \"test/library_checker/graph/bipartitematching.test.cpp\"\
     \n\r\nvoid solve() {\r\n  LL(L, R, M);\r\n  Graph G;\r\n  FOR_(M) {\r\n    LL(a,\
-    \ b);\r\n    G.add(a, b + L);\r\n  }\r\n  G.prepare();\r\n  BipartiteMatching\
-    \ BM(G);\r\n\r\n  auto match = BM.matching();\r\n  print(len(match));\r\n  for\
-    \ (auto&& [a, b]: match) print(a, b - L);\r\n}\r\n\r\nsigned main() {\r\n  solve();\r\
-    \n\r\n  return 0;\r\n}\r\n"
+    \ b);\r\n    G.add(a, b + L);\r\n  }\r\n  G.build();\r\n  BipartiteMatching BM(G);\r\
+    \n\r\n  auto match = BM.matching();\r\n  print(len(match));\r\n  for (auto&& [a,\
+    \ b]: match) print(a, b - L);\r\n}\r\n\r\nsigned main() {\r\n  solve();\r\n\r\n\
+    \  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/bipartitematching\"\r\n\
     #include \"my_template.hpp\"\r\n#include \"other/io.hpp\"\r\n#include \"flow/bipartite.hpp\"\
     \r\n\r\nvoid solve() {\r\n  LL(L, R, M);\r\n  Graph G;\r\n  FOR_(M) {\r\n    LL(a,\
-    \ b);\r\n    G.add(a, b + L);\r\n  }\r\n  G.prepare();\r\n  BipartiteMatching\
-    \ BM(G);\r\n\r\n  auto match = BM.matching();\r\n  print(len(match));\r\n  for\
-    \ (auto&& [a, b]: match) print(a, b - L);\r\n}\r\n\r\nsigned main() {\r\n  solve();\r\
-    \n\r\n  return 0;\r\n}\r\n"
+    \ b);\r\n    G.add(a, b + L);\r\n  }\r\n  G.build();\r\n  BipartiteMatching BM(G);\r\
+    \n\r\n  auto match = BM.matching();\r\n  print(len(match));\r\n  for (auto&& [a,\
+    \ b]: match) print(a, b - L);\r\n}\r\n\r\nsigned main() {\r\n  solve();\r\n\r\n\
+    \  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
@@ -276,8 +276,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/graph/bipartitematching.test.cpp
   requiredBy: []
-  timestamp: '2022-03-19 16:40:52+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-03-19 17:45:04+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/graph/bipartitematching.test.cpp
 layout: document

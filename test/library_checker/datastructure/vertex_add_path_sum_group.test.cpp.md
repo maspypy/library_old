@@ -4,10 +4,10 @@ data:
   - icon: ':question:'
     path: alg/group_add.hpp
     title: alg/group_add.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: alg/group_reverse.hpp
     title: alg/group_reverse.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
   - icon: ':question:'
@@ -16,7 +16,7 @@ data:
   - icon: ':question:'
     path: graph/hld.hpp
     title: graph/hld.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/treegroup.hpp
     title: graph/treegroup.hpp
   - icon: ':question:'
@@ -27,9 +27,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_add_path_sum
@@ -352,25 +352,25 @@ data:
     \ \u6642\u9593\u3067\u884C\u3046\u3002\");\r\n    print(\"\u90E8\u5206\u6728\u30AF\
     \u30A8\u30EA O(logN) \u6642\u9593\u3001\u30D1\u30B9\u30AF\u30A8\u30EA O(logN)\
     \ \u6642\u9593\u3002\");\r\n  }\r\n};\n#line 8 \"test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp\"\
-    \n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  VEC(ll, A, N);\r\n  Graph<int> G(N);\r\
-    \n  FOR(_, N - 1) {\r\n    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n  G.prepare();\r\
-    \n\r\n  HLD<Graph<int>> hld(G);\r\n  using Group = Group_Add<ll>;\r\n  TreeGroup<decltype(hld),\
-    \ Group, false, true, false> TG(hld, A);\r\n\r\n  FOR(_, Q) {\r\n    LL(t);\r\n\
-    \    if (t == 0) {\r\n      LL(v, x);\r\n      A[v] += x;\r\n      TG.set(v, A[v]);\r\
-    \n    } else {\r\n      LL(u, v);\r\n      print(TG.prod_path(u, v));\r\n    }\r\
-    \n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  VEC(ll, A, N);\r\n  Graph G(N);\r\n \
+    \ G.read_tree(0, 0);\r\n\r\n  HLD<Graph<int>> hld(G);\r\n  using Group = Group_Add<ll>;\r\
+    \n  TreeGroup<decltype(hld), Group, false, true, false> TG(hld, A);\r\n\r\n  FOR(_,\
+    \ Q) {\r\n    LL(t);\r\n    if (t == 0) {\r\n      LL(v, x);\r\n      A[v] +=\
+    \ x;\r\n      TG.set(v, A[v]);\r\n    } else {\r\n      LL(u, v);\r\n      print(TG.prod_path(u,\
+    \ v));\r\n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n\
+    \  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
+    \n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_add_path_sum\"\r\
     \n#include \"my_template.hpp\"\r\n#include \"other/io.hpp\"\r\n\r\n#include \"\
     alg/group_add.hpp\"\r\n#include \"ds/segtree.hpp\"\r\n#include \"graph/treegroup.hpp\"\
-    \r\n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  VEC(ll, A, N);\r\n  Graph<int> G(N);\r\
-    \n  FOR(_, N - 1) {\r\n    LL(a, b);\r\n    G.add(a, b);\r\n  }\r\n  G.prepare();\r\
-    \n\r\n  HLD<Graph<int>> hld(G);\r\n  using Group = Group_Add<ll>;\r\n  TreeGroup<decltype(hld),\
-    \ Group, false, true, false> TG(hld, A);\r\n\r\n  FOR(_, Q) {\r\n    LL(t);\r\n\
-    \    if (t == 0) {\r\n      LL(v, x);\r\n      A[v] += x;\r\n      TG.set(v, A[v]);\r\
-    \n    } else {\r\n      LL(u, v);\r\n      print(TG.prod_path(u, v));\r\n    }\r\
-    \n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \r\n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  VEC(ll, A, N);\r\n  Graph G(N);\r\n\
+    \  G.read_tree(0, 0);\r\n\r\n  HLD<Graph<int>> hld(G);\r\n  using Group = Group_Add<ll>;\r\
+    \n  TreeGroup<decltype(hld), Group, false, true, false> TG(hld, A);\r\n\r\n  FOR(_,\
+    \ Q) {\r\n    LL(t);\r\n    if (t == 0) {\r\n      LL(v, x);\r\n      A[v] +=\
+    \ x;\r\n      TG.set(v, A[v]);\r\n    } else {\r\n      LL(u, v);\r\n      print(TG.prod_path(u,\
+    \ v));\r\n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n\
+    \  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
+    \n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
@@ -383,8 +383,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
   requiredBy: []
-  timestamp: '2022-03-19 16:40:52+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-03-19 17:41:40+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
 layout: document
