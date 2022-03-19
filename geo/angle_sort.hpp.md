@@ -22,34 +22,38 @@ data:
     \ operator<(Point p) const {\n    if (x != p.x) return x < p.x;\n    return y\
     \ < p.y;\n  }\n  bool operator==(Point p) const { return x == p.x && y == p.y;\
     \ }\n  Point operator-() const { return {-x, -y}; }\n};\n#line 2 \"geo/angle_sort.hpp\"\
-    \n\r\ntemplate<typename Point>\r\nvector<int> angle_argsort(vector<Point>& P)\
-    \ {\r\n  auto is_lower = [](Point P) { return (P.y < 0) || (P.y == 0 && P.x >\
-    \ 0); };\r\n  vector<int> lower, origin, upper;\r\n  Point O = {0, 0};\r\n  FOR(i,\
-    \ len(P)) {\r\n    if (P[i] == O) origin.eb(i);\r\n    elif (is_lower(P[i])) lower.eb(i);\r\
-    \n    else upper.eb(i);\r\n  }\r\n  sort(all(lower), [&](auto& i, auto& j) { return\
-    \ P[i].det(P[j]) > 0; });\r\n  sort(all(upper), [&](auto& i, auto& j) { return\
-    \ P[i].det(P[j]) > 0; });\r\n  auto& I = lower;\r\n  I.insert(I.end(), all(origin));\r\
-    \n  I.insert(I.end(), all(upper));\r\n  return I;\r\n}\r\n\r\ntemplate<typename\
-    \ Point>\r\nvoid angle_sort(vector<Point>& P) {\r\n  auto I = angle_argsort(P);\r\
-    \n  vc<Point> Q(len(P));\r\n  FOR(i, len(P)) Q[i] = P[I[i]];\r\n  P = Q;\r\n}\r\
-    \n"
-  code: "#include \"geo/base.hpp\"\r\n\r\ntemplate<typename Point>\r\nvector<int>\
-    \ angle_argsort(vector<Point>& P) {\r\n  auto is_lower = [](Point P) { return\
-    \ (P.y < 0) || (P.y == 0 && P.x > 0); };\r\n  vector<int> lower, origin, upper;\r\
-    \n  Point O = {0, 0};\r\n  FOR(i, len(P)) {\r\n    if (P[i] == O) origin.eb(i);\r\
-    \n    elif (is_lower(P[i])) lower.eb(i);\r\n    else upper.eb(i);\r\n  }\r\n \
-    \ sort(all(lower), [&](auto& i, auto& j) { return P[i].det(P[j]) > 0; });\r\n\
-    \  sort(all(upper), [&](auto& i, auto& j) { return P[i].det(P[j]) > 0; });\r\n\
-    \  auto& I = lower;\r\n  I.insert(I.end(), all(origin));\r\n  I.insert(I.end(),\
-    \ all(upper));\r\n  return I;\r\n}\r\n\r\ntemplate<typename Point>\r\nvoid angle_sort(vector<Point>&\
-    \ P) {\r\n  auto I = angle_argsort(P);\r\n  vc<Point> Q(len(P));\r\n  FOR(i, len(P))\
-    \ Q[i] = P[I[i]];\r\n  P = Q;\r\n}\r\n"
+    \n\r\n// \u504F\u89D2\u30BD\u30FC\u30C8\u306B\u5BFE\u3059\u308B argsort\r\ntemplate<typename\
+    \ Point>\r\nvector<int> angle_argsort(vector<Point>& P) {\r\n  auto is_lower =\
+    \ [](Point P) { return (P.y < 0) || (P.y == 0 && P.x > 0); };\r\n  vector<int>\
+    \ lower, origin, upper;\r\n  Point O = {0, 0};\r\n  FOR(i, len(P)) {\r\n    if\
+    \ (P[i] == O) origin.eb(i);\r\n    elif (is_lower(P[i])) lower.eb(i);\r\n    else\
+    \ upper.eb(i);\r\n  }\r\n  sort(all(lower), [&](auto& i, auto& j) { return P[i].det(P[j])\
+    \ > 0; });\r\n  sort(all(upper), [&](auto& i, auto& j) { return P[i].det(P[j])\
+    \ > 0; });\r\n  auto& I = lower;\r\n  I.insert(I.end(), all(origin));\r\n  I.insert(I.end(),\
+    \ all(upper));\r\n  return I;\r\n}\r\n\r\n// inplace \u306B\u504F\u89D2\u30BD\u30FC\
+    \u30C8\u3059\u308B\r\n// index \u304C\u6B32\u3057\u3044\u5834\u5408\u306F angle_argsort\r\
+    \ntemplate<typename Point>\r\nvoid angle_sort(vector<Point>& P) {\r\n  auto I\
+    \ = angle_argsort(P);\r\n  vc<Point> Q(len(P));\r\n  FOR(i, len(P)) Q[i] = P[I[i]];\r\
+    \n  P = Q;\r\n}\r\n"
+  code: "#include \"geo/base.hpp\"\r\n\r\n// \u504F\u89D2\u30BD\u30FC\u30C8\u306B\u5BFE\
+    \u3059\u308B argsort\r\ntemplate<typename Point>\r\nvector<int> angle_argsort(vector<Point>&\
+    \ P) {\r\n  auto is_lower = [](Point P) { return (P.y < 0) || (P.y == 0 && P.x\
+    \ > 0); };\r\n  vector<int> lower, origin, upper;\r\n  Point O = {0, 0};\r\n \
+    \ FOR(i, len(P)) {\r\n    if (P[i] == O) origin.eb(i);\r\n    elif (is_lower(P[i]))\
+    \ lower.eb(i);\r\n    else upper.eb(i);\r\n  }\r\n  sort(all(lower), [&](auto&\
+    \ i, auto& j) { return P[i].det(P[j]) > 0; });\r\n  sort(all(upper), [&](auto&\
+    \ i, auto& j) { return P[i].det(P[j]) > 0; });\r\n  auto& I = lower;\r\n  I.insert(I.end(),\
+    \ all(origin));\r\n  I.insert(I.end(), all(upper));\r\n  return I;\r\n}\r\n\r\n\
+    // inplace \u306B\u504F\u89D2\u30BD\u30FC\u30C8\u3059\u308B\r\n// index \u304C\
+    \u6B32\u3057\u3044\u5834\u5408\u306F angle_argsort\r\ntemplate<typename Point>\r\
+    \nvoid angle_sort(vector<Point>& P) {\r\n  auto I = angle_argsort(P);\r\n  vc<Point>\
+    \ Q(len(P));\r\n  FOR(i, len(P)) Q[i] = P[I[i]];\r\n  P = Q;\r\n}\r\n"
   dependsOn:
   - geo/base.hpp
   isVerificationFile: false
   path: geo/angle_sort.hpp
   requiredBy: []
-  timestamp: '2022-03-14 00:34:33+09:00'
+  timestamp: '2022-03-19 15:06:41+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/geometry/sort_points_by_argument.test.cpp
