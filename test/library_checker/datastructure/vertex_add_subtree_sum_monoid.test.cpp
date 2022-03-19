@@ -13,7 +13,7 @@ void solve() {
     LL(p);
     G.add(p, v);
   }
-  G.prepare();
+  G.build();
 
   HLD hld(G);
   using Mono = Group_Add<ll>;

@@ -20,11 +20,7 @@ void solve() {
   }
 
   Graph<int> G(N);
-  FOR(_, N - 1) {
-    LL(a, b);
-    G.add(a, b);
-  }
-  G.prepare();
+  G.read_tree(0, 0);
 
   HLD hld(G);
   TreeMonoid<decltype(hld), Mono, false> TM(hld, A);

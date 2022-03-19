@@ -8,12 +8,8 @@
 void solve() {
   LL(N, Q);
   VEC(ll, A, N);
-  Graph<int> G(N);
-  FOR(_, N - 1) {
-    LL(a, b);
-    G.add(a, b);
-  }
-  G.prepare();
+  Graph G(N);
+  G.read_tree(0, 0);
 
   HLD hld(G);
   TreeAbelGroup<decltype(hld), Group_Add<ll>, false, true, false> TA(hld, A);
