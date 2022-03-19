@@ -6,11 +6,7 @@
 void solve() {
   LL(N);
   Graph<ll> G(N);
-  FOR_(N - 1) {
-    LL(a, b, c);
-    G.add(a, b, c);
-  }
-  G.prepare();
+  G.read_tree(1, 0);
   auto [diam, P] = tree_diameter(G);
   print(diam, len(P));
   print(P);

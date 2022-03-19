@@ -8,11 +8,7 @@
 void solve() {
   LL(N);
   Graph<int> G(N);
-  FOR(_, N - 1) {
-    LL(a, b);
-    G.add(a, b);
-  }
-  G.prepare();
+  G.read_tree(0, 0);
 
   vi ANS = tree_all_distances(G);
   ANS.erase(ANS.begin());

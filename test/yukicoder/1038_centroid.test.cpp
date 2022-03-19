@@ -8,11 +8,7 @@
 void solve() {
   LL(N, Q);
   Graph<int> G(N);
-  FOR(_, N - 1) {
-    LL(a, b);
-    G.add(--a, --b);
-  }
-  G.prepare();
+  G.read_tree();
 
   using T = tuple<ll, ll, ll>;
   VEC(T, query, Q);

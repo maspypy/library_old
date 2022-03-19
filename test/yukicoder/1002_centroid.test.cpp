@@ -6,11 +6,7 @@
 void solve() {
   LL(N, K);
   Graph<int> G(N);
-  FOR(_, N - 1) {
-    LL(a, b, c);
-    G.add(--a, --b, c);
-  }
-  G.prepare();
+  G.read_tree(1);
 
   using T = pi;
   // -1 : no color
