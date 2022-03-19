@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/dial.hpp
     title: graph/dial.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: other/io.hpp
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_12_B
@@ -214,7 +214,7 @@ data:
     \ par};\r\n}\n#line 6 \"test/aoj/ALDS1_12_B_dial.test.cpp\"\n\nvoid solve() {\n\
     \  LL(N);\n  Graph<int, 1> G(N);\n  FOR(v, N) {\n    LL(u);\n    assert(u == v);\n\
     \    LL(k);\n    FOR_(k) {\n      LL(a, b);\n      G.add(v, a, b);\n    }\n  }\n\
-    \  G.prepare();\n  auto [dist, par] = dial(G, 0);\n  FOR(v, N) print(v, dist[v]);\n\
+    \  G.build();\n  auto [dist, par] = dial(G, 0);\n  FOR(v, N) print(v, dist[v]);\n\
     }\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout\
     \ << setprecision(15);\n\n  ll T = 1;\n  // LL(T);\n  FOR(_, T) solve();\n\n \
     \ return 0;\n}\n"
@@ -222,7 +222,7 @@ data:
     \n#include \"my_template.hpp\"\n#include \"other/io.hpp\"\n#include \"graph/dial.hpp\"\
     \n\nvoid solve() {\n  LL(N);\n  Graph<int, 1> G(N);\n  FOR(v, N) {\n    LL(u);\n\
     \    assert(u == v);\n    LL(k);\n    FOR_(k) {\n      LL(a, b);\n      G.add(v,\
-    \ a, b);\n    }\n  }\n  G.prepare();\n  auto [dist, par] = dial(G, 0);\n  FOR(v,\
+    \ a, b);\n    }\n  }\n  G.build();\n  auto [dist, par] = dial(G, 0);\n  FOR(v,\
     \ N) print(v, dist[v]);\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
     \  cout << setprecision(15);\n\n  ll T = 1;\n  // LL(T);\n  FOR(_, T) solve();\n\
     \n  return 0;\n}\n"
@@ -234,8 +234,8 @@ data:
   isVerificationFile: true
   path: test/aoj/ALDS1_12_B_dial.test.cpp
   requiredBy: []
-  timestamp: '2022-03-19 16:40:52+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-03-19 19:05:29+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/ALDS1_12_B_dial.test.cpp
 layout: document

@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/degree.hpp
     title: graph/degree.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/enumerate_triangles.hpp
     title: graph/enumerate_triangles.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: other/io.hpp
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/enumerate_triangles
@@ -209,11 +209,11 @@ data:
     \u3060\u3051\u3060\u3068 DAG \u306B\u306A\u3089\u305A\u3001\u30B5\u30A4\u30AF\u30EB\
     \u304C\u3067\u304D\u3066\u3057\u307E\u3046\r\n    if (mp(deg[e.frm], e.frm) <\
     \ mp(deg[e.to], e.to))\r\n      H.add(e.frm, e.to);\r\n    else\r\n      H.add(e.to,\
-    \ e.frm);\r\n  }\r\n  H.prepare();\r\n\r\n  vc<bool> table(N);\r\n  FOR(a, N)\
-    \ {\r\n    for (auto&& e: H[a]) { table[e.to] = 1; }\r\n    for (auto&& e: H[a])\
-    \ {\r\n      int b = e.to;\r\n      for (auto&& f: H[b]) {\r\n        int c =\
-    \ f.to;\r\n        if (table[c]) query(a, b, c);\r\n      }\r\n    }\r\n    for\
-    \ (auto&& e: H[a]) { table[e.to] = 0; }\r\n  }\r\n}\r\n#line 5 \"test/library_checker/graph/enumerate_triangles.test.cpp\"\
+    \ e.frm);\r\n  }\r\n  H.build();\r\n\r\n  vc<bool> table(N);\r\n  FOR(a, N) {\r\
+    \n    for (auto&& e: H[a]) { table[e.to] = 1; }\r\n    for (auto&& e: H[a]) {\r\
+    \n      int b = e.to;\r\n      for (auto&& f: H[b]) {\r\n        int c = f.to;\r\
+    \n        if (table[c]) query(a, b, c);\r\n      }\r\n    }\r\n    for (auto&&\
+    \ e: H[a]) { table[e.to] = 0; }\r\n  }\r\n}\r\n#line 5 \"test/library_checker/graph/enumerate_triangles.test.cpp\"\
     \n\r\nvoid solve() {\r\n  LL(N, M);\r\n  VEC(int, A, N);\r\n  Graph G(N);\r\n\
     \  G.read_graph(M, 0, 0);\r\n  i128 sum = 0;\r\n  auto query\r\n      = [&](int\
     \ a, int b, int c) -> void { sum += i128(A[a]) * A[b] * A[c]; };\r\n  enumerate_triangles(G,\
@@ -235,8 +235,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/graph/enumerate_triangles.test.cpp
   requiredBy: []
-  timestamp: '2022-03-19 17:45:04+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-03-19 19:04:50+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/graph/enumerate_triangles.test.cpp
 layout: document

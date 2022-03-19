@@ -12,7 +12,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2842_fenwick2d_dense.test.cpp
     title: test/aoj/2842_fenwick2d_dense.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_12_B_dial.test.cpp
     title: test/aoj/ALDS1_12_B_dial.test.cpp
   - icon: ':heavy_check_mark:'
@@ -180,7 +180,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/cycle_detection.test.cpp
     title: test/library_checker/graph/cycle_detection.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/enumerate_triangles.test.cpp
     title: test/library_checker/graph/enumerate_triangles.test.cpp
   - icon: ':heavy_check_mark:'
@@ -363,7 +363,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1038_centroid.test.cpp
     title: test/yukicoder/1038_centroid.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1320_mincostcycle.test.cpp
     title: test/yukicoder/1320_mincostcycle.test.cpp
   - icon: ':heavy_check_mark:'
@@ -372,9 +372,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/899_bfsnumbering.test.cpp
     title: test/yukicoder/899_bfsnumbering.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace\
@@ -496,7 +496,7 @@ data:
   - ds/lichao.hpp
   - graph/bipartite_coloring.hpp
   timestamp: '2022-03-14 04:45:03+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/NTL_1_E_extgcd.test.cpp
   - test/aoj/DSL_4_A_rectangle_union.test.cpp

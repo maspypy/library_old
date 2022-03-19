@@ -221,10 +221,10 @@ data:
       title: geo/manhattan_nns.hpp
   - name: graph
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/base.hpp
       title: graph/base.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/bfs01.hpp
       title: graph/bfs01.hpp
     - icon: ':heavy_check_mark:'
@@ -248,19 +248,19 @@ data:
     - icon: ':warning:'
       path: graph/decompose_complete.hpp
       title: graph/decompose_complete.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/degree.hpp
       title: graph/degree.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/dial.hpp
       title: graph/dial.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/dijkstra.hpp
       title: graph/dijkstra.hpp
     - icon: ':warning:'
       path: graph/dualtreemonoid.hpp
       title: graph/dualtreemonoid.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/enumerate_triangles.hpp
       title: graph/enumerate_triangles.hpp
     - icon: ':warning:'
@@ -275,7 +275,7 @@ data:
     - icon: ':warning:'
       path: graph/lazytreemonoid.hpp
       title: graph/lazytreemonoid.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/mincostcycle.hpp
       title: graph/mincostcycle.hpp
     - icon: ':warning:'
@@ -398,7 +398,7 @@ data:
       title: mod/tetration.hpp
   - name: .
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: my_template.hpp
       title: my_template.hpp
   - name: nt
@@ -462,7 +462,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: other/inversion.hpp
       title: other/inversion.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: other/io.hpp
       title: other/io.hpp
     - icon: ':warning:'
@@ -637,7 +637,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/2842_fenwick2d_dense.test.cpp
       title: test/aoj/2842_fenwick2d_dense.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/aoj/ALDS1_12_B_dial.test.cpp
       title: test/aoj/ALDS1_12_B_dial.test.cpp
     - icon: ':heavy_check_mark:'
@@ -818,7 +818,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/graph/cycle_detection.test.cpp
       title: test/library_checker/graph/cycle_detection.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/graph/enumerate_triangles.test.cpp
       title: test/library_checker/graph/enumerate_triangles.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1015,7 +1015,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1038_centroid.test.cpp
       title: test/yukicoder/1038_centroid.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1320_mincostcycle.test.cpp
       title: test/yukicoder/1320_mincostcycle.test.cpp
     - icon: ':heavy_check_mark:'

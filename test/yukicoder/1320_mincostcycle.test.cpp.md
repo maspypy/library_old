@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/bfs01.hpp
     title: graph/bfs01.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/dijkstra.hpp
     title: graph/dijkstra.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/mincostcycle.hpp
     title: graph/mincostcycle.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: other/io.hpp
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/1320
@@ -232,7 +232,7 @@ data:
     \ e: G.edges) chmax(mx, e.cost), INF += e.cost;\r\n  T res = INF;\r\n\r\n  FOR(i,\
     \ M) {\r\n    auto& e = G.edges[i];\r\n    T cost = e.cost;\r\n    int frm = e.to,\
     \ to = e.frm;\r\n    Graph Gi(N);\r\n    FOR(j, M) if (i != j) {\r\n      auto&\
-    \ e = G.edges[j];\r\n      Gi.add(e.frm, e.to, e.cost);\r\n    }\r\n    Gi.prepare();\r\
+    \ e = G.edges[j];\r\n      Gi.add(e.frm, e.to, e.cost);\r\n    }\r\n    Gi.build();\r\
     \n    T x = (mx <= 1 ? bfs01(Gi, frm).fi[to] : dijkstra(Gi, frm).fi[to]);\r\n\
     \    if (x == -1) x = INF;\r\n    chmin(res, cost + x);\r\n  }\r\n  if (res ==\
     \ INF) res = -1;\r\n  return res;\r\n}\n#line 5 \"test/yukicoder/1320_mincostcycle.test.cpp\"\
@@ -260,8 +260,8 @@ data:
   isVerificationFile: true
   path: test/yukicoder/1320_mincostcycle.test.cpp
   requiredBy: []
-  timestamp: '2022-03-19 16:40:52+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-03-19 19:04:50+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yukicoder/1320_mincostcycle.test.cpp
 layout: document

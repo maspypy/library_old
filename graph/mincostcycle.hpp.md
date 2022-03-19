@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/bfs01.hpp
     title: graph/bfs01.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/dijkstra.hpp
     title: graph/dijkstra.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1320_mincostcycle.test.cpp
     title: test/yukicoder/1320_mincostcycle.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n\
@@ -85,7 +85,7 @@ data:
     \ e: G.edges) chmax(mx, e.cost), INF += e.cost;\r\n  T res = INF;\r\n\r\n  FOR(i,\
     \ M) {\r\n    auto& e = G.edges[i];\r\n    T cost = e.cost;\r\n    int frm = e.to,\
     \ to = e.frm;\r\n    Graph Gi(N);\r\n    FOR(j, M) if (i != j) {\r\n      auto&\
-    \ e = G.edges[j];\r\n      Gi.add(e.frm, e.to, e.cost);\r\n    }\r\n    Gi.prepare();\r\
+    \ e = G.edges[j];\r\n      Gi.add(e.frm, e.to, e.cost);\r\n    }\r\n    Gi.build();\r\
     \n    T x = (mx <= 1 ? bfs01(Gi, frm).fi[to] : dijkstra(Gi, frm).fi[to]);\r\n\
     \    if (x == -1) x = INF;\r\n    chmin(res, cost + x);\r\n  }\r\n  if (res ==\
     \ INF) res = -1;\r\n  return res;\r\n}\n"
@@ -96,7 +96,7 @@ data:
     \ += e.cost;\r\n  T res = INF;\r\n\r\n  FOR(i, M) {\r\n    auto& e = G.edges[i];\r\
     \n    T cost = e.cost;\r\n    int frm = e.to, to = e.frm;\r\n    Graph Gi(N);\r\
     \n    FOR(j, M) if (i != j) {\r\n      auto& e = G.edges[j];\r\n      Gi.add(e.frm,\
-    \ e.to, e.cost);\r\n    }\r\n    Gi.prepare();\r\n    T x = (mx <= 1 ? bfs01(Gi,\
+    \ e.to, e.cost);\r\n    }\r\n    Gi.build();\r\n    T x = (mx <= 1 ? bfs01(Gi,\
     \ frm).fi[to] : dijkstra(Gi, frm).fi[to]);\r\n    if (x == -1) x = INF;\r\n  \
     \  chmin(res, cost + x);\r\n  }\r\n  if (res == INF) res = -1;\r\n  return res;\r\
     \n}"
@@ -107,8 +107,8 @@ data:
   isVerificationFile: false
   path: graph/mincostcycle.hpp
   requiredBy: []
-  timestamp: '2022-03-19 16:40:52+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-03-19 19:04:50+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/1320_mincostcycle.test.cpp
 documentation_of: graph/mincostcycle.hpp

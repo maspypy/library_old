@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/degree.hpp
     title: graph/degree.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/enumerate_triangles.test.cpp
     title: test/library_checker/graph/enumerate_triangles.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n\
@@ -62,11 +62,11 @@ data:
     \u3060\u3051\u3060\u3068 DAG \u306B\u306A\u3089\u305A\u3001\u30B5\u30A4\u30AF\u30EB\
     \u304C\u3067\u304D\u3066\u3057\u307E\u3046\r\n    if (mp(deg[e.frm], e.frm) <\
     \ mp(deg[e.to], e.to))\r\n      H.add(e.frm, e.to);\r\n    else\r\n      H.add(e.to,\
-    \ e.frm);\r\n  }\r\n  H.prepare();\r\n\r\n  vc<bool> table(N);\r\n  FOR(a, N)\
-    \ {\r\n    for (auto&& e: H[a]) { table[e.to] = 1; }\r\n    for (auto&& e: H[a])\
-    \ {\r\n      int b = e.to;\r\n      for (auto&& f: H[b]) {\r\n        int c =\
-    \ f.to;\r\n        if (table[c]) query(a, b, c);\r\n      }\r\n    }\r\n    for\
-    \ (auto&& e: H[a]) { table[e.to] = 0; }\r\n  }\r\n}\r\n"
+    \ e.frm);\r\n  }\r\n  H.build();\r\n\r\n  vc<bool> table(N);\r\n  FOR(a, N) {\r\
+    \n    for (auto&& e: H[a]) { table[e.to] = 1; }\r\n    for (auto&& e: H[a]) {\r\
+    \n      int b = e.to;\r\n      for (auto&& f: H[b]) {\r\n        int c = f.to;\r\
+    \n        if (table[c]) query(a, b, c);\r\n      }\r\n    }\r\n    for (auto&&\
+    \ e: H[a]) { table[e.to] = 0; }\r\n  }\r\n}\r\n"
   code: "#include \"graph/base.hpp\"\r\n#include \"graph/degree.hpp\"\r\n\r\ntemplate\
     \ <typename Gr, typename F>\r\nvoid enumerate_triangles(Gr& G, F query) {\r\n\
     \  int N = G.N;\r\n  auto deg = degree(G);\r\n  Graph<int, 1> H(N);\r\n  for (auto&&\
@@ -74,7 +74,7 @@ data:
     \u3060\u3068 DAG \u306B\u306A\u3089\u305A\u3001\u30B5\u30A4\u30AF\u30EB\u304C\u3067\
     \u304D\u3066\u3057\u307E\u3046\r\n    if (mp(deg[e.frm], e.frm) < mp(deg[e.to],\
     \ e.to))\r\n      H.add(e.frm, e.to);\r\n    else\r\n      H.add(e.to, e.frm);\r\
-    \n  }\r\n  H.prepare();\r\n\r\n  vc<bool> table(N);\r\n  FOR(a, N) {\r\n    for\
+    \n  }\r\n  H.build();\r\n\r\n  vc<bool> table(N);\r\n  FOR(a, N) {\r\n    for\
     \ (auto&& e: H[a]) { table[e.to] = 1; }\r\n    for (auto&& e: H[a]) {\r\n    \
     \  int b = e.to;\r\n      for (auto&& f: H[b]) {\r\n        int c = f.to;\r\n\
     \        if (table[c]) query(a, b, c);\r\n      }\r\n    }\r\n    for (auto&&\
@@ -85,8 +85,8 @@ data:
   isVerificationFile: false
   path: graph/enumerate_triangles.hpp
   requiredBy: []
-  timestamp: '2022-03-19 16:40:52+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-03-19 19:04:50+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/graph/enumerate_triangles.test.cpp
 documentation_of: graph/enumerate_triangles.hpp

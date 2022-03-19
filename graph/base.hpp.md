@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: flow/bipartite.hpp
     title: flow/bipartite.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/bfs01.hpp
     title: graph/bfs01.hpp
   - icon: ':heavy_check_mark:'
@@ -20,19 +20,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/check_bipartite.hpp
     title: graph/check_bipartite.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/degree.hpp
     title: graph/degree.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/dial.hpp
     title: graph/dial.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/dijkstra.hpp
     title: graph/dijkstra.hpp
   - icon: ':warning:'
     path: graph/dualtreemonoid.hpp
     title: graph/dualtreemonoid.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/enumerate_triangles.hpp
     title: graph/enumerate_triangles.hpp
   - icon: ':warning:'
@@ -47,7 +47,7 @@ data:
   - icon: ':warning:'
     path: graph/lazytreemonoid.hpp
     title: graph/lazytreemonoid.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/mincostcycle.hpp
     title: graph/mincostcycle.hpp
   - icon: ':warning:'
@@ -96,7 +96,7 @@ data:
     path: graph/twosat.hpp
     title: graph/twosat.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_12_B_dial.test.cpp
     title: test/aoj/ALDS1_12_B_dial.test.cpp
   - icon: ':heavy_check_mark:'
@@ -126,7 +126,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/cycle_detection.test.cpp
     title: test/library_checker/graph/cycle_detection.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/enumerate_triangles.test.cpp
     title: test/library_checker/graph/enumerate_triangles.test.cpp
   - icon: ':heavy_check_mark:'
@@ -162,15 +162,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1038_centroid.test.cpp
     title: test/yukicoder/1038_centroid.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/1320_mincostcycle.test.cpp
     title: test/yukicoder/1320_mincostcycle.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/899_bfsnumbering.test.cpp
     title: test/yukicoder/899_bfsnumbering.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n\
@@ -277,7 +277,7 @@ data:
   - graph/bfsnumbering.hpp
   - graph/minimum_spanning_tree.hpp
   timestamp: '2022-03-19 16:40:52+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/ALDS1_12_B_dial.test.cpp
   - test/yukicoder/1038_centroid.test.cpp
