@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
   _extendedRequiredBy:
@@ -33,12 +33,12 @@ data:
     \ wt, off); }\n\n  void read_graph(int M, bool wt = false, int off = 1) {\n  \
     \  FOR_(M) {\n      INT(a, b);\n      a -= off, b -= off;\n      if (!wt) {\n\
     \        add(a, b);\n      } else {\n        T c;\n        read(c);\n        add(a,\
-    \ b, c);\n      }\n    }\n    prepare();\n  }\n\n  void read_parent(int off =\
-    \ 1) {\n    FOR3(v, 1, N) {\n      INT(p);\n      p -= off;\n      add(p, v);\n\
-    \    }\n    prepare();\n  }\n\n  void prepare() {\n    assert(!prepared);\n  \
-    \  prepared = true;\n    indptr.assign(N + 1, 0);\n    for (auto&& e: edges) {\n\
-    \      indptr[e.frm + 1]++;\n      if (!directed) indptr[e.to + 1]++;\n    }\n\
-    \    FOR(v, N) indptr[v + 1] += indptr[v];\n    auto counter = indptr;\n    csr_edges.resize(indptr.back()\
+    \ b, c);\n      }\n    }\n    build();\n  }\n\n  void read_parent(int off = 1)\
+    \ {\n    FOR3(v, 1, N) {\n      INT(p);\n      p -= off;\n      add(p, v);\n \
+    \   }\n    build();\n  }\n\n  void build() {\n    assert(!prepared);\n    prepared\
+    \ = true;\n    indptr.assign(N + 1, 0);\n    for (auto&& e: edges) {\n      indptr[e.frm\
+    \ + 1]++;\n      if (!directed) indptr[e.to + 1]++;\n    }\n    FOR(v, N) indptr[v\
+    \ + 1] += indptr[v];\n    auto counter = indptr;\n    csr_edges.resize(indptr.back()\
     \ + 1);\n    for (auto&& e: edges) {\n      csr_edges[counter[e.frm]++] = e;\n\
     \      if (!directed)\n        csr_edges[counter[e.to]++] = edge_type({e.to, e.frm,\
     \ e.cost, e.id});\n    }\n  }\n\n  OutgoingEdges operator[](int v) const {\n \
@@ -61,7 +61,7 @@ data:
   path: graph/reverse_graph.hpp
   requiredBy:
   - graph/solve_dag_game.hpp
-  timestamp: '2022-03-14 00:29:47+09:00'
+  timestamp: '2022-03-19 16:40:52+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph/reverse_graph.hpp
