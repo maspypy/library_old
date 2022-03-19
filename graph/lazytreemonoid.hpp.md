@@ -130,70 +130,70 @@ data:
     \n        parent(G.N, -1),\r\n        depth(G.N, -1),\r\n        root(G.N, -1),\r\
     \n        in_tree(G.M, 0) {\r\n    assert(G.is_prepared());\r\n    int t1 = 0;\r\
     \n    if (r != -1) {\r\n      dfs_sz(r, -1);\r\n      dfs_hld(r, t1);\r\n    }\
-    \ else {\r\n      FOR(r, N) if (parent[r] == -1) {\r\n        dfs_sz(r, -1);\r\
-    \n        dfs_hld(r, t1);\r\n      }\r\n    }\r\n    for (auto &&v: V) root[v]\
-    \ = (parent[v] == -1 ? v : root[parent[v]]);\r\n  }\r\n\r\n  void dfs_sz(int v,\
-    \ int p) {\r\n    auto &sz = RID;\r\n    parent[v] = p;\r\n    depth[v] = (p ==\
-    \ -1 ? 0 : depth[p] + 1);\r\n    sz[v] = 1;\r\n    int l = G.indptr[v], r = G.indptr[v\
-    \ + 1];\r\n    auto &csr = G.csr_edges;\r\n    // \u4F7F\u3046\u8FBA\u304C\u3042\
-    \u308C\u3070\u5148\u982D\u306B\u3059\u308B\r\n    FOR3_R(i, l, r - 1) {\r\n  \
-    \    if (depth[csr[i + 1].to] == -1) swap(csr[i], csr[i + 1]);\r\n    }\r\n  \
-    \  int hld_sz = 0;\r\n    for (int i = l; i < r; ++i) {\r\n      auto e = csr[i];\r\
-    \n      if (depth[e.to] != -1) continue;\r\n      in_tree[e.id] = 1;\r\n     \
-    \ dfs_sz(e.to, v);\r\n      sz[v] += sz[e.to];\r\n      if (chmax(hld_sz, sz[e.to])\
-    \ && l < i) { swap(csr[l], csr[i]); }\r\n    }\r\n  }\r\n\r\n  void dfs_hld(int\
-    \ v, int &times) {\r\n    LID[v] = times++;\r\n    RID[v] += LID[v];\r\n    V[LID[v]]\
-    \ = v;\r\n    bool heavy = true;\r\n    for (auto &&e: G[v]) {\r\n      if (!in_tree[e.id]\
-    \ || depth[e.to] <= depth[v]) continue;\r\n      head[e.to] = (heavy ? head[v]\
-    \ : e.to);\r\n      heavy = false;\r\n      dfs_hld(e.to, times);\r\n    }\r\n\
-    \  }\r\n\r\n  int e_to_v(int eid) {\r\n    auto e = G.edges[eid];\r\n    return\
-    \ (parent[e.frm] == e.to ? e.frm : e.to);\r\n  }\r\n\r\n  int ELID(int v) { return\
-    \ 2 * LID[v] - depth[v]; }\r\n  int ERID(int v) { return 2 * RID[v] - depth[v]\
-    \ - 1; }\r\n\r\n  /* k: 0-indexed */\r\n  int LA(int v, int k) {\r\n    while\
-    \ (1) {\r\n      int u = head[v];\r\n      if (LID[v] - k >= LID[u]) return V[LID[v]\
-    \ - k];\r\n      k -= LID[v] - LID[u] + 1;\r\n      v = parent[u];\r\n    }\r\n\
-    \  }\r\n\r\n  int LCA(int u, int v) {\r\n    for (;; v = parent[head[v]]) {\r\n\
-    \      if (LID[u] > LID[v]) swap(u, v);\r\n      if (head[u] == head[v]) return\
-    \ u;\r\n    }\r\n  }\r\n\r\n  int subtree_size(int v) { return RID[v] - LID[v];\
-    \ }\r\n\r\n  int dist(int a, int b) {\r\n    int c = LCA(a, b);\r\n    return\
-    \ depth[a] + depth[b] - 2 * depth[c];\r\n  }\r\n\r\n  bool in_subtree(int a, int\
-    \ b) { return LID[b] <= LID[a] && LID[a] < RID[b]; }\r\n\r\n  int move(int a,\
-    \ int b) {\r\n    assert(a != b);\r\n    return (in_subtree(b, a) ? LA(b, depth[b]\
-    \ - depth[a] - 1) : parent[a]);\r\n  }\r\n\r\n  vc<pair<int, int>> get_path_decomposition(int\
-    \ u, int v, bool edge) {\r\n    // [\u59CB\u70B9, \u7D42\u70B9] \u306E\"\u9589\
-    \"\u533A\u9593\u5217\u3002\r\n    vc<pair<int, int>> up, down;\r\n    while (1)\
-    \ {\r\n      if (head[u] == head[v]) break;\r\n      if (LID[u] < LID[v]) {\r\n\
-    \        down.eb(LID[head[v]], LID[v]);\r\n        v = parent[head[v]];\r\n  \
-    \    } else {\r\n        up.eb(LID[u], LID[head[u]]);\r\n        u = parent[head[u]];\r\
-    \n      }\r\n    }\r\n    if (LID[u] < LID[v]) down.eb(LID[u] + edge, LID[v]);\r\
-    \n    elif (LID[v] + edge <= LID[u]) up.eb(LID[u], LID[v] + edge);\r\n    reverse(all(down));\r\
-    \n    up.insert(up.end(), all(down));\r\n    return up;\r\n  }\r\n\r\n  void debug()\
-    \ {\r\n    print(\"V\", V);\r\n    print(\"LID\", LID);\r\n    print(\"RID\",\
-    \ RID);\r\n    print(\"parent\", parent);\r\n    print(\"depth\", depth);\r\n\
-    \    print(\"head\", head);\r\n    print(\"in_tree(edge)\", in_tree);\r\n    print(\"\
-    root\", root);\r\n  }\r\n};\r\n#line 1 \"alg/monoid_reverse.hpp\"\ntemplate <class\
-    \ Monoid>\r\nstruct Monoid_Reverse {\r\n  using value_type = typename Monoid::value_type;\r\
-    \n  using X = value_type;\r\n  static constexpr X op(const X &x, const X &y) {\
-    \ return Monoid::op(y, x); }\r\n  static constexpr X unit = Monoid::unit;\r\n\
-    \  static const bool commute = Monoid::commute;\r\n};\r\n#line 2 \"alg/lazy_reverse.hpp\"\
-    \n\r\ntemplate <typename Lazy>\r\nstruct Lazy_Reverse {\r\n  using MX = Monoid_Reverse<typename\
-    \ Lazy::X_structure>;\r\n  using MA = typename Lazy::A_structure;\r\n  using X_structure\
-    \ = MX;\r\n  using A_structure = MA;\r\n  using X = typename MX::value_type;\r\
-    \n  using A = typename MA::value_type;\r\n  static constexpr X act(const X &x,\
-    \ const A &a) { return Lazy::act(x, a); }\r\n};\r\n#line 5 \"graph/lazytreemonoid.hpp\"\
-    \n\r\ntemplate <typename HLD, typename Lazy, bool edge = false>\r\nstruct LazyTreeMonoid\
-    \ {\r\n  using MonoX = typename Lazy::X_structure;\r\n  using MonoA = typename\
-    \ Lazy::A_structure;\r\n  using X = typename MonoX::value_type;\r\n  using A =\
-    \ typename MonoA::value_type;\r\n  using RevLazy = Lazy_Reverse<Lazy>;\r\n  HLD\
-    \ &hld;\r\n  int N;\r\n  LazySegTree<Lazy> seg;\r\n  LazySegTree<RevLazy> seg_r;\r\
-    \n\r\n  LazyTreeMonoid(HLD &hld) : hld(hld), N(hld.N), seg(hld.N) {\r\n    if\
-    \ (!MonoX::commute) seg_r = LazySegTree<RevLazy>(hld.N);\r\n  }\r\n\r\n  LazyTreeMonoid(HLD\
-    \ &hld, vc<X> &dat) : hld(hld), N(hld.N) {\r\n    vc<X> seg_raw(N, MonoX::unit);\r\
-    \n    if (!edge) {\r\n      FOR(v, N) seg_raw[hld.LID[v]] = dat[v];\r\n    } else\
-    \ {\r\n      FOR(e, N - 1) {\r\n        int v = hld.e_to_v(e);\r\n        seg_raw[hld.LID[v]]\
-    \ = dat[e];\r\n      }\r\n    }\r\n    seg = LazySegTree<Lazy>(seg_raw);\r\n \
-    \   if (!MonoX::commute) seg_r = LazySegTree<RevLazy>(seg_raw);\r\n  }\r\n\r\n\
-    \  void set(int i, X x) {\r\n    if (edge) i = hld.e_to_v(i);\r\n    i = hld.LID[i];\r\
+    \ else {\r\n      FOR(r, N) if (parent[r] == -1) {\r\n        head[r] = r;\r\n\
+    \        dfs_sz(r, -1);\r\n        dfs_hld(r, t1);\r\n      }\r\n    }\r\n   \
+    \ for (auto &&v: V) root[v] = (parent[v] == -1 ? v : root[parent[v]]);\r\n  }\r\
+    \n\r\n  void dfs_sz(int v, int p) {\r\n    auto &sz = RID;\r\n    parent[v] =\
+    \ p;\r\n    depth[v] = (p == -1 ? 0 : depth[p] + 1);\r\n    sz[v] = 1;\r\n   \
+    \ int l = G.indptr[v], r = G.indptr[v + 1];\r\n    auto &csr = G.csr_edges;\r\n\
+    \    // \u4F7F\u3046\u8FBA\u304C\u3042\u308C\u3070\u5148\u982D\u306B\u3059\u308B\
+    \r\n    FOR3_R(i, l, r - 1) {\r\n      if (depth[csr[i + 1].to] == -1) swap(csr[i],\
+    \ csr[i + 1]);\r\n    }\r\n    int hld_sz = 0;\r\n    for (int i = l; i < r; ++i)\
+    \ {\r\n      auto e = csr[i];\r\n      if (depth[e.to] != -1) continue;\r\n  \
+    \    in_tree[e.id] = 1;\r\n      dfs_sz(e.to, v);\r\n      sz[v] += sz[e.to];\r\
+    \n      if (chmax(hld_sz, sz[e.to]) && l < i) { swap(csr[l], csr[i]); }\r\n  \
+    \  }\r\n  }\r\n\r\n  void dfs_hld(int v, int &times) {\r\n    LID[v] = times++;\r\
+    \n    RID[v] += LID[v];\r\n    V[LID[v]] = v;\r\n    bool heavy = true;\r\n  \
+    \  for (auto &&e: G[v]) {\r\n      if (!in_tree[e.id] || depth[e.to] <= depth[v])\
+    \ continue;\r\n      head[e.to] = (heavy ? head[v] : e.to);\r\n      heavy = false;\r\
+    \n      dfs_hld(e.to, times);\r\n    }\r\n  }\r\n\r\n  int e_to_v(int eid) {\r\
+    \n    auto e = G.edges[eid];\r\n    return (parent[e.frm] == e.to ? e.frm : e.to);\r\
+    \n  }\r\n\r\n  int ELID(int v) { return 2 * LID[v] - depth[v]; }\r\n  int ERID(int\
+    \ v) { return 2 * RID[v] - depth[v] - 1; }\r\n\r\n  /* k: 0-indexed */\r\n  int\
+    \ LA(int v, int k) {\r\n    while (1) {\r\n      int u = head[v];\r\n      if\
+    \ (LID[v] - k >= LID[u]) return V[LID[v] - k];\r\n      k -= LID[v] - LID[u] +\
+    \ 1;\r\n      v = parent[u];\r\n    }\r\n  }\r\n\r\n  int LCA(int u, int v) {\r\
+    \n    for (;; v = parent[head[v]]) {\r\n      if (LID[u] > LID[v]) swap(u, v);\r\
+    \n      if (head[u] == head[v]) return u;\r\n    }\r\n  }\r\n\r\n  int subtree_size(int\
+    \ v) { return RID[v] - LID[v]; }\r\n\r\n  int dist(int a, int b) {\r\n    int\
+    \ c = LCA(a, b);\r\n    return depth[a] + depth[b] - 2 * depth[c];\r\n  }\r\n\r\
+    \n  bool in_subtree(int a, int b) { return LID[b] <= LID[a] && LID[a] < RID[b];\
+    \ }\r\n\r\n  int move(int a, int b) {\r\n    assert(a != b);\r\n    return (in_subtree(b,\
+    \ a) ? LA(b, depth[b] - depth[a] - 1) : parent[a]);\r\n  }\r\n\r\n  vc<pair<int,\
+    \ int>> get_path_decomposition(int u, int v, bool edge) {\r\n    // [\u59CB\u70B9\
+    , \u7D42\u70B9] \u306E\"\u9589\"\u533A\u9593\u5217\u3002\r\n    vc<pair<int, int>>\
+    \ up, down;\r\n    while (1) {\r\n      if (head[u] == head[v]) break;\r\n   \
+    \   if (LID[u] < LID[v]) {\r\n        down.eb(LID[head[v]], LID[v]);\r\n     \
+    \   v = parent[head[v]];\r\n      } else {\r\n        up.eb(LID[u], LID[head[u]]);\r\
+    \n        u = parent[head[u]];\r\n      }\r\n    }\r\n    if (LID[u] < LID[v])\
+    \ down.eb(LID[u] + edge, LID[v]);\r\n    elif (LID[v] + edge <= LID[u]) up.eb(LID[u],\
+    \ LID[v] + edge);\r\n    reverse(all(down));\r\n    up.insert(up.end(), all(down));\r\
+    \n    return up;\r\n  }\r\n\r\n  void debug() {\r\n    print(\"V\", V);\r\n  \
+    \  print(\"LID\", LID);\r\n    print(\"RID\", RID);\r\n    print(\"parent\", parent);\r\
+    \n    print(\"depth\", depth);\r\n    print(\"head\", head);\r\n    print(\"in_tree(edge)\"\
+    , in_tree);\r\n    print(\"root\", root);\r\n  }\r\n};\r\n#line 1 \"alg/monoid_reverse.hpp\"\
+    \ntemplate <class Monoid>\r\nstruct Monoid_Reverse {\r\n  using value_type = typename\
+    \ Monoid::value_type;\r\n  using X = value_type;\r\n  static constexpr X op(const\
+    \ X &x, const X &y) { return Monoid::op(y, x); }\r\n  static constexpr X unit\
+    \ = Monoid::unit;\r\n  static const bool commute = Monoid::commute;\r\n};\r\n\
+    #line 2 \"alg/lazy_reverse.hpp\"\n\r\ntemplate <typename Lazy>\r\nstruct Lazy_Reverse\
+    \ {\r\n  using MX = Monoid_Reverse<typename Lazy::X_structure>;\r\n  using MA\
+    \ = typename Lazy::A_structure;\r\n  using X_structure = MX;\r\n  using A_structure\
+    \ = MA;\r\n  using X = typename MX::value_type;\r\n  using A = typename MA::value_type;\r\
+    \n  static constexpr X act(const X &x, const A &a) { return Lazy::act(x, a); }\r\
+    \n};\r\n#line 5 \"graph/lazytreemonoid.hpp\"\n\r\ntemplate <typename HLD, typename\
+    \ Lazy, bool edge = false>\r\nstruct LazyTreeMonoid {\r\n  using MonoX = typename\
+    \ Lazy::X_structure;\r\n  using MonoA = typename Lazy::A_structure;\r\n  using\
+    \ X = typename MonoX::value_type;\r\n  using A = typename MonoA::value_type;\r\
+    \n  using RevLazy = Lazy_Reverse<Lazy>;\r\n  HLD &hld;\r\n  int N;\r\n  LazySegTree<Lazy>\
+    \ seg;\r\n  LazySegTree<RevLazy> seg_r;\r\n\r\n  LazyTreeMonoid(HLD &hld) : hld(hld),\
+    \ N(hld.N), seg(hld.N) {\r\n    if (!MonoX::commute) seg_r = LazySegTree<RevLazy>(hld.N);\r\
+    \n  }\r\n\r\n  LazyTreeMonoid(HLD &hld, vc<X> &dat) : hld(hld), N(hld.N) {\r\n\
+    \    vc<X> seg_raw(N, MonoX::unit);\r\n    if (!edge) {\r\n      FOR(v, N) seg_raw[hld.LID[v]]\
+    \ = dat[v];\r\n    } else {\r\n      FOR(e, N - 1) {\r\n        int v = hld.e_to_v(e);\r\
+    \n        seg_raw[hld.LID[v]] = dat[e];\r\n      }\r\n    }\r\n    seg = LazySegTree<Lazy>(seg_raw);\r\
+    \n    if (!MonoX::commute) seg_r = LazySegTree<RevLazy>(seg_raw);\r\n  }\r\n\r\
+    \n  void set(int i, X x) {\r\n    if (edge) i = hld.e_to_v(i);\r\n    i = hld.LID[i];\r\
     \n    seg.set(i, x);\r\n    if (!MonoX::commute) seg_r.set(i, x);\r\n  }\r\n\r\
     \n  X prod_path(int u, int v) {\r\n    auto pd = hld.get_path_decomposition(u,\
     \ v, edge);\r\n    X val = MonoX::unit;\r\n    for (auto &&[a, b]: pd) {\r\n \
@@ -255,7 +255,7 @@ data:
   isVerificationFile: false
   path: graph/lazytreemonoid.hpp
   requiredBy: []
-  timestamp: '2022-03-14 00:26:36+09:00'
+  timestamp: '2022-03-19 15:22:25+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph/lazytreemonoid.hpp
