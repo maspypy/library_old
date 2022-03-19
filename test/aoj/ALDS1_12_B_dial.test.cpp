@@ -16,7 +16,7 @@ void solve() {
       G.add(v, a, b);
     }
   }
-  G.prepare();
+  G.build();
   auto [dist, par] = dial(G, 0);
   FOR(v, N) print(v, dist[v]);
 }
