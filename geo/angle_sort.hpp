@@ -1,5 +1,6 @@
 #include "geo/base.hpp"
 
+// 偏角ソートに対する argsort
 template<typename Point>
 vector<int> angle_argsort(vector<Point>& P) {
   auto is_lower = [](Point P) { return (P.y < 0) || (P.y == 0 && P.x > 0); };
@@ -18,6 +19,8 @@ vector<int> angle_argsort(vector<Point>& P) {
   return I;
 }
 
+// inplace に偏角ソートする
+// index が欲しい場合は angle_argsort
 template<typename Point>
 void angle_sort(vector<Point>& P) {
   auto I = angle_argsort(P);
