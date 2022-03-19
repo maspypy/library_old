@@ -37,6 +37,7 @@ struct HLD {
       dfs_hld(r, t1);
     } else {
       FOR(r, N) if (parent[r] == -1) {
+        head[r] = r;
         dfs_sz(r, -1);
         dfs_hld(r, t1);
       }
