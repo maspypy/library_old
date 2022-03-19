@@ -13,7 +13,7 @@ void enumerate_triangles(Gr& G, F query) {
     else
       H.add(e.to, e.frm);
   }
-  H.prepare();
+  H.build();
 
   vc<bool> table(N);
   FOR(a, N) {

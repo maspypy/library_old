@@ -20,7 +20,7 @@ typename Graph::cost_type MinCostCycle(Graph& G) {
       auto& e = G.edges[j];
       Gi.add(e.frm, e.to, e.cost);
     }
-    Gi.prepare();
+    Gi.build();
     T x = (mx <= 1 ? bfs01(Gi, frm).fi[to] : dijkstra(Gi, frm).fi[to]);
     if (x == -1) x = INF;
     chmin(res, cost + x);
