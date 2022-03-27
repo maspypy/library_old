@@ -2,9 +2,6 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':warning:'
-    path: ds/cht_xy.hpp
-    title: ds/cht_xy.hpp
   - icon: ':heavy_check_mark:'
     path: geo/angle_sort.hpp
     title: geo/angle_sort.hpp
@@ -46,7 +43,6 @@ data:
   isVerificationFile: false
   path: geo/base.hpp
   requiredBy:
-  - ds/cht_xy.hpp
   - geo/angle_sort.hpp
   - geo/dynamicupperhull.hpp
   - geo/convexhull.hpp

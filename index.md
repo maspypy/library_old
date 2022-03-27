@@ -113,12 +113,12 @@ data:
     - icon: ':heavy_check_mark:'
       path: ds/cartesian_tree.hpp
       title: ds/cartesian_tree.hpp
+    - icon: ':heavy_check_mark:'
+      path: ds/cht.hpp
+      title: ds/cht.hpp
     - icon: ':warning:'
       path: ds/cht_monotone.hpp
       title: ds/cht_monotone.hpp
-    - icon: ':warning:'
-      path: ds/cht_xy.hpp
-      title: ds/cht_xy.hpp
     - icon: ':warning:'
       path: ds/cumsum2d.hpp
       title: ds/cumsum2d.hpp
@@ -730,6 +730,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/associative_array_hashmap.test.cpp
       title: test/library_checker/datastructure/associative_array_hashmap.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/library_checker/datastructure/line_add_get_min.test.cpp
+      title: test/library_checker/datastructure/line_add_get_min.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/persistent_queue.test.cpp
       title: test/library_checker/datastructure/persistent_queue.test.cpp

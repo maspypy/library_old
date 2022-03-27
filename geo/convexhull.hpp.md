@@ -4,10 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: geo/base.hpp
     title: geo/base.hpp
-  _extendedRequiredBy:
-  - icon: ':warning:'
-    path: ds/cht_xy.hpp
-    title: ds/cht_xy.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -100,8 +97,7 @@ data:
   - geo/base.hpp
   isVerificationFile: false
   path: geo/convexhull.hpp
-  requiredBy:
-  - ds/cht_xy.hpp
+  requiredBy: []
   timestamp: '2022-03-14 00:34:33+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

@@ -94,6 +94,9 @@ data:
     path: test/library_checker/datastructure/associative_array_hashmap.test.cpp
     title: test/library_checker/datastructure/associative_array_hashmap.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/line_add_get_min.test.cpp
+    title: test/library_checker/datastructure/line_add_get_min.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/persistent_queue.test.cpp
     title: test/library_checker/datastructure/persistent_queue.test.cpp
   - icon: ':heavy_check_mark:'
@@ -596,6 +599,7 @@ data:
   - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
   - test/library_checker/datastructure/persistent_queue.test.cpp
   - test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
+  - test/library_checker/datastructure/line_add_get_min.test.cpp
   - test/library_checker/datastructure/range_chmin_chmax_add_range_sum.test.cpp
   - test/library_checker/datastructure/persistent_unionfind.test.cpp
   - test/library_checker/datastructure/staticrmq_seg.test.cpp
