@@ -16,7 +16,7 @@ template <typename T>
 using is_not_modint_t = enable_if_t<!is_modint<T>::value>;
 
 struct Scanner {
-  FILE* fp;
+  FILE *fp;
   char line[(1 << 15) + 1];
   size_t st = 0, ed = 0;
   void reread() {
@@ -183,6 +183,44 @@ struct Printer {
     write(' ');
     write(val.second);
   }
+  template <class A, class B, class C>
+  void write(const tuple<A, B, C> &val) {
+    auto &[a, b, c] = val;
+    write(a);
+    write(' ');
+    write(b);
+    write(' ');
+    write(c);
+  }
+  template <class A, class B, class C, class D>
+  void write(const tuple<A, B, C, D> &val) {
+    auto &[a, b, c, d] = val;
+    write(a);
+    write(' ');
+    write(b);
+    write(' ');
+    write(c);
+    write(' ');
+    write(d);
+  }
+  template <class T, size_t S>
+  void write(const array<T, S> &val) {
+    auto n = val.size();
+    for (size_t i = 0; i < n; i++) {
+      if (i) write(' ');
+      write(val[i]);
+    }
+  }
+  void write(i128 val) {
+    string s;
+    while (val) {
+      s += '0' + int(val % 10);
+      val /= 10;
+    }
+    reverse(all(s));
+    if (len(s) == 0) s = "0";
+    write(s);
+  }
 };
 
 Scanner scanner = Scanner(stdin);
@@ -213,7 +251,7 @@ void read(Head &head, Tail &... tail) {
 #define STR(...)      \
   string __VA_ARGS__; \
   read(__VA_ARGS__)
-#define DBL(...)           \
+#define DBL(...)      \
   double __VA_ARGS__; \
   read(__VA_ARGS__)
 
