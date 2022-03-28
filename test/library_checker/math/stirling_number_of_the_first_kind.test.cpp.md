@@ -1,35 +1,35 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: mod/powertable.hpp
     title: mod/powertable.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: nt/primetable.hpp
     title: nt/primetable.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/convolution.hpp
     title: poly/convolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/poly_taylor_shift.hpp
     title: poly/poly_taylor_shift.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: seq/stirling_number_1.hpp
     title: seq/stirling_number_1.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/stirling_number_of_the_first_kind
@@ -99,7 +99,7 @@ data:
     \ <typename T>\r\nstruct is_modint : decltype(detail::check_value<T>(0)) {};\r\
     \ntemplate <typename T>\r\nusing is_modint_t = enable_if_t<is_modint<T>::value>;\r\
     \ntemplate <typename T>\r\nusing is_not_modint_t = enable_if_t<!is_modint<T>::value>;\r\
-    \n\r\nstruct Scanner {\r\n  FILE* fp;\r\n  char line[(1 << 15) + 1];\r\n  size_t\
+    \n\r\nstruct Scanner {\r\n  FILE *fp;\r\n  char line[(1 << 15) + 1];\r\n  size_t\
     \ st = 0, ed = 0;\r\n  void reread() {\r\n    memmove(line, line + st, ed - st);\r\
     \n    ed -= st;\r\n    st = 0;\r\n    ed += fread(line + ed, 1, (1 << 15) - ed,\
     \ fp);\r\n    line[ed] = '\\0';\r\n  }\r\n  bool succ() {\r\n    while (true)\
@@ -156,46 +156,57 @@ data:
     \n    for (size_t i = 0; i < n; i++) {\r\n      if (i) write(' ');\r\n      write(val[i]);\r\
     \n    }\r\n  }\r\n  template <class T, class U>\r\n  void write(const pair<T,\
     \ U> &val) {\r\n    write(val.first);\r\n    write(' ');\r\n    write(val.second);\r\
-    \n  }\r\n};\r\n\r\nScanner scanner = Scanner(stdin);\r\nPrinter printer = Printer(stdout);\r\
-    \n\r\nvoid flush() { printer.flush(); }\r\nvoid print() { printer.write('\\n');\
-    \ }\r\ntemplate <class Head, class... Tail>\r\nvoid print(Head &&head, Tail &&...\
-    \ tail) {\r\n  printer.write(head);\r\n  if (sizeof...(Tail)) printer.write('\
-    \ ');\r\n  print(forward<Tail>(tail)...);\r\n}\r\n\r\nvoid read() {}\r\ntemplate\
-    \ <class Head, class... Tail>\r\nvoid read(Head &head, Tail &... tail) {\r\n \
-    \ scanner.read(head);\r\n  read(tail...);\r\n}\r\n\r\n#define INT(...)   \\\r\n\
-    \  int __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define LL(...)   \\\r\n  ll\
-    \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define STR(...)      \\\r\n  string\
-    \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define DBL(...)           \\\r\n\
-    \  double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type, name,\
-    \ size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define VV(type,\
-    \ name, h, w)                     \\\r\n  vector<vector<type>> name(h, vector<type>(w));\
-    \ \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ? \"YES\" : \"NO\"\
-    ); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t = 1) { print(t ? \"\
-    Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\nvoid yes(bool t = 1)\
-    \ { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) { yes(!t); }\r\n#line\
-    \ 2 \"nt/primetable.hpp\"\nvc<ll>& primetable(int LIM) {\n  ++LIM;\n  const int\
-    \ S = 32768;\n  static int done = 2;\n  static vc<ll> primes = {2}, sieve(S +\
-    \ 1);\n\n  if(done >= LIM) return primes;\n  done  = LIM;\n\n  primes = {2}, sieve.assign(S\
-    \ + 1, 0);\n  const int R = LIM / 2;  \n  primes.reserve(int(LIM / log(LIM) *\
-    \ 1.1));\n  vc<pi> cp;\n  for (int i = 3; i <= S; i += 2) {\n    if (!sieve[i])\
-    \ {\n      cp.eb(i, i * i / 2);\n      for (int j = i * i; j <= S; j += 2 * i)\
-    \ sieve[j] = 1;\n    }\n  }\n  for (int L = 1; L <= R; L += S) {\n    array<bool,\
-    \ S> block{};\n    for (auto& [p, idx]: cp)\n      for (int i = idx; i < S + L;\
-    \ idx = (i += p)) block[i - L] = 1;\n    FOR(i, min(S, R - L)) if (!block[i])\
-    \ primes.eb((L + i) * 2 + 1);\n  }\n  return primes;\n}\n#line 3 \"mod/powertable.hpp\"\
-    \n\r\n// a^0, ..., a^{N-1}\r\ntemplate <typename mint>\r\nvc<mint> powertable_1(mint\
-    \ a, ll N) {\r\n  // table of a^i\r\n  vc<mint> f(N, 1);\r\n  FOR(i, N - 1) f[i\
-    \ + 1] = a * f[i];\r\n  return f;\r\n}\r\n\r\n// 0^e, ..., (N-1)^e\r\ntemplate\
-    \ <typename mint>\r\nvc<mint> powertable_2(ll e, ll N) {\r\n  auto& primes = primetable(N);\r\
-    \n  vc<mint> f(N, 1);\r\n  f[0] = mint(0).pow(e);\r\n  for (auto&& p: primes)\
-    \ {\r\n    if (p > N) break;\r\n    mint xp = mint(p).pow(e);\r\n    ll pp = p;\r\
-    \n    while (pp < N) {\r\n      ll i = pp;\r\n      while (i < N) {\r\n      \
-    \  f[i] *= xp;\r\n        i += pp;\r\n      }\r\n      pp *= p;\r\n    }\r\n \
-    \ }\r\n  return f;\r\n}\r\n#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct\
-    \ modint {\n  static constexpr bool is_modint = true;\n  int val;\n  constexpr\
-    \ modint(const ll val = 0) noexcept\n      : val(val >= 0 ? val % mod : (mod -\
-    \ (-val) % mod) % mod) {}\n  bool operator<(const modint &other) const {\n   \
-    \ return val < other.val;\n  } // To use std::map\n  modint &operator+=(const\
+    \n  }\r\n  template <class A, class B, class C>\r\n  void write(const tuple<A,\
+    \ B, C> &val) {\r\n    auto &[a, b, c] = val;\r\n    write(a);\r\n    write('\
+    \ ');\r\n    write(b);\r\n    write(' ');\r\n    write(c);\r\n  }\r\n  template\
+    \ <class A, class B, class C, class D>\r\n  void write(const tuple<A, B, C, D>\
+    \ &val) {\r\n    auto &[a, b, c, d] = val;\r\n    write(a);\r\n    write(' ');\r\
+    \n    write(b);\r\n    write(' ');\r\n    write(c);\r\n    write(' ');\r\n   \
+    \ write(d);\r\n  }\r\n  template <class T, size_t S>\r\n  void write(const array<T,\
+    \ S> &val) {\r\n    auto n = val.size();\r\n    for (size_t i = 0; i < n; i++)\
+    \ {\r\n      if (i) write(' ');\r\n      write(val[i]);\r\n    }\r\n  }\r\n  void\
+    \ write(i128 val) {\r\n    string s;\r\n    while (val) {\r\n      s += '0' +\
+    \ int(val % 10);\r\n      val /= 10;\r\n    }\r\n    reverse(all(s));\r\n    if\
+    \ (len(s) == 0) s = \"0\";\r\n    write(s);\r\n  }\r\n};\r\n\r\nScanner scanner\
+    \ = Scanner(stdin);\r\nPrinter printer = Printer(stdout);\r\n\r\nvoid flush()\
+    \ { printer.flush(); }\r\nvoid print() { printer.write('\\n'); }\r\ntemplate <class\
+    \ Head, class... Tail>\r\nvoid print(Head &&head, Tail &&... tail) {\r\n  printer.write(head);\r\
+    \n  if (sizeof...(Tail)) printer.write(' ');\r\n  print(forward<Tail>(tail)...);\r\
+    \n}\r\n\r\nvoid read() {}\r\ntemplate <class Head, class... Tail>\r\nvoid read(Head\
+    \ &head, Tail &... tail) {\r\n  scanner.read(head);\r\n  read(tail...);\r\n}\r\
+    \n\r\n#define INT(...)   \\\r\n  int __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\
+    #define LL(...)   \\\r\n  ll __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define\
+    \ STR(...)      \\\r\n  string __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define\
+    \ DBL(...)      \\\r\n  double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n\
+    #define VEC(type, name, size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\
+    \n#define VV(type, name, h, w)                     \\\r\n  vector<vector<type>>\
+    \ name(h, vector<type>(w)); \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t\
+    \ ? \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool\
+    \ t = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\
+    \nvoid yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1)\
+    \ { yes(!t); }\r\n#line 2 \"nt/primetable.hpp\"\nvc<ll>& primetable(int LIM) {\n\
+    \  ++LIM;\n  const int S = 32768;\n  static int done = 2;\n  static vc<ll> primes\
+    \ = {2}, sieve(S + 1);\n\n  if(done >= LIM) return primes;\n  done  = LIM;\n\n\
+    \  primes = {2}, sieve.assign(S + 1, 0);\n  const int R = LIM / 2;  \n  primes.reserve(int(LIM\
+    \ / log(LIM) * 1.1));\n  vc<pi> cp;\n  for (int i = 3; i <= S; i += 2) {\n   \
+    \ if (!sieve[i]) {\n      cp.eb(i, i * i / 2);\n      for (int j = i * i; j <=\
+    \ S; j += 2 * i) sieve[j] = 1;\n    }\n  }\n  for (int L = 1; L <= R; L += S)\
+    \ {\n    array<bool, S> block{};\n    for (auto& [p, idx]: cp)\n      for (int\
+    \ i = idx; i < S + L; idx = (i += p)) block[i - L] = 1;\n    FOR(i, min(S, R -\
+    \ L)) if (!block[i]) primes.eb((L + i) * 2 + 1);\n  }\n  return primes;\n}\n#line\
+    \ 3 \"mod/powertable.hpp\"\n\r\n// a^0, ..., a^{N-1}\r\ntemplate <typename mint>\r\
+    \nvc<mint> powertable_1(mint a, ll N) {\r\n  // table of a^i\r\n  vc<mint> f(N,\
+    \ 1);\r\n  FOR(i, N - 1) f[i + 1] = a * f[i];\r\n  return f;\r\n}\r\n\r\n// 0^e,\
+    \ ..., (N-1)^e\r\ntemplate <typename mint>\r\nvc<mint> powertable_2(ll e, ll N)\
+    \ {\r\n  auto& primes = primetable(N);\r\n  vc<mint> f(N, 1);\r\n  f[0] = mint(0).pow(e);\r\
+    \n  for (auto&& p: primes) {\r\n    if (p > N) break;\r\n    mint xp = mint(p).pow(e);\r\
+    \n    ll pp = p;\r\n    while (pp < N) {\r\n      ll i = pp;\r\n      while (i\
+    \ < N) {\r\n        f[i] *= xp;\r\n        i += pp;\r\n      }\r\n      pp *=\
+    \ p;\r\n    }\r\n  }\r\n  return f;\r\n}\r\n#line 2 \"mod/modint.hpp\"\ntemplate\
+    \ <int mod>\nstruct modint {\n  static constexpr bool is_modint = true;\n  int\
+    \ val;\n  constexpr modint(const ll val = 0) noexcept\n      : val(val >= 0 ?\
+    \ val % mod : (mod - (-val) % mod) % mod) {}\n  bool operator<(const modint &other)\
+    \ const {\n    return val < other.val;\n  } // To use std::map\n  modint &operator+=(const\
     \ modint &p) {\n    if ((val += p.val) >= mod) val -= mod;\n    return *this;\n\
     \  }\n  modint &operator-=(const modint &p) {\n    if ((val += mod - p.val) >=\
     \ mod) val -= mod;\n    return *this;\n  }\n  modint &operator*=(const modint\
@@ -447,8 +458,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
   requiredBy: []
-  timestamp: '2022-03-19 16:17:22+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-03-28 12:53:30+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
 layout: document

@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: alg/group_cntsum.hpp
     title: alg/group_cntsum.hpp
   - icon: ':heavy_check_mark:'
@@ -10,13 +10,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: alg/monoid_set.hpp
     title: alg/monoid_set.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ds/lazysegtree.hpp
     title: ds/lazysegtree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
   _extendedRequiredBy: []
@@ -93,7 +93,7 @@ data:
     \ <typename T>\r\nstruct is_modint : decltype(detail::check_value<T>(0)) {};\r\
     \ntemplate <typename T>\r\nusing is_modint_t = enable_if_t<is_modint<T>::value>;\r\
     \ntemplate <typename T>\r\nusing is_not_modint_t = enable_if_t<!is_modint<T>::value>;\r\
-    \n\r\nstruct Scanner {\r\n  FILE* fp;\r\n  char line[(1 << 15) + 1];\r\n  size_t\
+    \n\r\nstruct Scanner {\r\n  FILE *fp;\r\n  char line[(1 << 15) + 1];\r\n  size_t\
     \ st = 0, ed = 0;\r\n  void reread() {\r\n    memmove(line, line + st, ed - st);\r\
     \n    ed -= st;\r\n    st = 0;\r\n    ed += fread(line + ed, 1, (1 << 15) - ed,\
     \ fp);\r\n    line[ed] = '\\0';\r\n  }\r\n  bool succ() {\r\n    while (true)\
@@ -150,35 +150,46 @@ data:
     \n    for (size_t i = 0; i < n; i++) {\r\n      if (i) write(' ');\r\n      write(val[i]);\r\
     \n    }\r\n  }\r\n  template <class T, class U>\r\n  void write(const pair<T,\
     \ U> &val) {\r\n    write(val.first);\r\n    write(' ');\r\n    write(val.second);\r\
-    \n  }\r\n};\r\n\r\nScanner scanner = Scanner(stdin);\r\nPrinter printer = Printer(stdout);\r\
-    \n\r\nvoid flush() { printer.flush(); }\r\nvoid print() { printer.write('\\n');\
-    \ }\r\ntemplate <class Head, class... Tail>\r\nvoid print(Head &&head, Tail &&...\
-    \ tail) {\r\n  printer.write(head);\r\n  if (sizeof...(Tail)) printer.write('\
-    \ ');\r\n  print(forward<Tail>(tail)...);\r\n}\r\n\r\nvoid read() {}\r\ntemplate\
-    \ <class Head, class... Tail>\r\nvoid read(Head &head, Tail &... tail) {\r\n \
-    \ scanner.read(head);\r\n  read(tail...);\r\n}\r\n\r\n#define INT(...)   \\\r\n\
-    \  int __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define LL(...)   \\\r\n  ll\
-    \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define STR(...)      \\\r\n  string\
-    \ __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define DBL(...)           \\\r\n\
-    \  double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type, name,\
-    \ size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define VV(type,\
-    \ name, h, w)                     \\\r\n  vector<vector<type>> name(h, vector<type>(w));\
-    \ \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ? \"YES\" : \"NO\"\
-    ); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t = 1) { print(t ? \"\
-    Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\nvoid yes(bool t = 1)\
-    \ { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) { yes(!t); }\r\n#line\
-    \ 1 \"alg/group_cntsum.hpp\"\ntemplate <typename E = long long>\r\nstruct Group_CntSum\
-    \ {\r\n  using value_type = pair<E,E>;\r\n  using X = value_type;\r\n  static\
-    \ constexpr X op(const X &x, const X &y) { return {x.fi + y.fi, x.se + y.se};\
-    \ }\r\n  static constexpr X inverse(const X &x) { return {-x.fi, -x.se}; }\r\n\
-    \  static constexpr X unit = {0, 0};\r\n  static constexpr bool commute = true;\r\
-    \n};\r\n#line 1 \"alg/monoid_set.hpp\"\ntemplate <typename E, E none_val>\r\n\
-    struct Monoid_Set {\r\n  using value_type = E;\r\n  using X = value_type;\r\n\
-    \  static X op(X x, X y) { return (y == none_val ? x : y); }\r\n  static constexpr\
-    \ X unit = none_val;\r\n  static constexpr bool commute = false;\r\n};\n#line\
-    \ 3 \"alg/lazy_cntsum_set.hpp\"\n\r\ntemplate <typename E, E none_val>\r\nstruct\
-    \ Lazy_CntSum_Set {\r\n  using X_structure = Group_CntSum<E>;\r\n  using A_structure\
-    \ = Monoid_Set<E, none_val>;\r\n  using X = typename X_structure::value_type;\r\
+    \n  }\r\n  template <class A, class B, class C>\r\n  void write(const tuple<A,\
+    \ B, C> &val) {\r\n    auto &[a, b, c] = val;\r\n    write(a);\r\n    write('\
+    \ ');\r\n    write(b);\r\n    write(' ');\r\n    write(c);\r\n  }\r\n  template\
+    \ <class A, class B, class C, class D>\r\n  void write(const tuple<A, B, C, D>\
+    \ &val) {\r\n    auto &[a, b, c, d] = val;\r\n    write(a);\r\n    write(' ');\r\
+    \n    write(b);\r\n    write(' ');\r\n    write(c);\r\n    write(' ');\r\n   \
+    \ write(d);\r\n  }\r\n  template <class T, size_t S>\r\n  void write(const array<T,\
+    \ S> &val) {\r\n    auto n = val.size();\r\n    for (size_t i = 0; i < n; i++)\
+    \ {\r\n      if (i) write(' ');\r\n      write(val[i]);\r\n    }\r\n  }\r\n  void\
+    \ write(i128 val) {\r\n    string s;\r\n    while (val) {\r\n      s += '0' +\
+    \ int(val % 10);\r\n      val /= 10;\r\n    }\r\n    reverse(all(s));\r\n    if\
+    \ (len(s) == 0) s = \"0\";\r\n    write(s);\r\n  }\r\n};\r\n\r\nScanner scanner\
+    \ = Scanner(stdin);\r\nPrinter printer = Printer(stdout);\r\n\r\nvoid flush()\
+    \ { printer.flush(); }\r\nvoid print() { printer.write('\\n'); }\r\ntemplate <class\
+    \ Head, class... Tail>\r\nvoid print(Head &&head, Tail &&... tail) {\r\n  printer.write(head);\r\
+    \n  if (sizeof...(Tail)) printer.write(' ');\r\n  print(forward<Tail>(tail)...);\r\
+    \n}\r\n\r\nvoid read() {}\r\ntemplate <class Head, class... Tail>\r\nvoid read(Head\
+    \ &head, Tail &... tail) {\r\n  scanner.read(head);\r\n  read(tail...);\r\n}\r\
+    \n\r\n#define INT(...)   \\\r\n  int __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\
+    #define LL(...)   \\\r\n  ll __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define\
+    \ STR(...)      \\\r\n  string __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define\
+    \ DBL(...)      \\\r\n  double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n\
+    #define VEC(type, name, size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\
+    \n#define VV(type, name, h, w)                     \\\r\n  vector<vector<type>>\
+    \ name(h, vector<type>(w)); \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t\
+    \ ? \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool\
+    \ t = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\
+    \nvoid yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1)\
+    \ { yes(!t); }\r\n#line 1 \"alg/group_cntsum.hpp\"\ntemplate <typename E = long\
+    \ long>\r\nstruct Group_CntSum {\r\n  using value_type = pair<E,E>;\r\n  using\
+    \ X = value_type;\r\n  static constexpr X op(const X &x, const X &y) { return\
+    \ {x.fi + y.fi, x.se + y.se}; }\r\n  static constexpr X inverse(const X &x) {\
+    \ return {-x.fi, -x.se}; }\r\n  static constexpr X unit = {0, 0};\r\n  static\
+    \ constexpr bool commute = true;\r\n};\r\n#line 1 \"alg/monoid_set.hpp\"\ntemplate\
+    \ <typename E, E none_val>\r\nstruct Monoid_Set {\r\n  using value_type = E;\r\
+    \n  using X = value_type;\r\n  static X op(X x, X y) { return (y == none_val ?\
+    \ x : y); }\r\n  static constexpr X unit = none_val;\r\n  static constexpr bool\
+    \ commute = false;\r\n};\n#line 3 \"alg/lazy_cntsum_set.hpp\"\n\r\ntemplate <typename\
+    \ E, E none_val>\r\nstruct Lazy_CntSum_Set {\r\n  using X_structure = Group_CntSum<E>;\r\
+    \n  using A_structure = Monoid_Set<E, none_val>;\r\n  using X = typename X_structure::value_type;\r\
     \n  using A = typename A_structure::value_type;\r\n  static constexpr X act(const\
     \ X &x, const A &a) {\r\n    if(a == A_structure::unit) return x;\r\n    return\
     \ {x.fi, x.fi * a};\r\n  }\r\n};\n#line 2 \"ds/lazysegtree.hpp\"\n\ntemplate <typename\
@@ -264,7 +275,7 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
   requiredBy: []
-  timestamp: '2022-03-14 04:45:03+09:00'
+  timestamp: '2022-03-28 12:53:30+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
