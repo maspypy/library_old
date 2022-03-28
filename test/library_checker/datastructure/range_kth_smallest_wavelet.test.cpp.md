@@ -1,15 +1,9 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
-    path: alg/group_affine.hpp
-    title: alg/group_affine.hpp
-  - icon: ':question:'
-    path: ds/segtree.hpp
-    title: ds/segtree.hpp
-  - icon: ':question:'
-    path: mod/modint.hpp
-    title: mod/modint.hpp
+  - icon: ':x:'
+    path: ds/waveletmatrix.hpp
+    title: ds/waveletmatrix.hpp
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
@@ -18,18 +12,18 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/point_set_range_composite
+    PROBLEM: https://judge.yosupo.jp/problem/range_kth_smallest
     links:
-    - https://judge.yosupo.jp/problem/point_set_range_composite
-  bundledCode: "#line 1 \"test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/point_set_range_composite\"\
-    \n#line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
-    \nusing ll = long long;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing\
+    - https://judge.yosupo.jp/problem/range_kth_smallest
+  bundledCode: "#line 1 \"test/library_checker/datastructure/range_kth_smallest_wavelet.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/range_kth_smallest\"\n#line\
+    \ 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\n\
+    using ll = long long;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing\
     \ u32 = unsigned int;\nusing u64 = unsigned long long;\nusing i128 = __int128;\n\
     \ntemplate <class T>\nusing vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\n\
     template <class T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc\
@@ -175,148 +169,76 @@ data:
     \ ? \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool\
     \ t = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\
     \nvoid yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1)\
-    \ { yes(!t); }\r\n#line 4 \"test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp\"\
-    \n\n#line 2 \"ds/segtree.hpp\"\ntemplate <class Monoid>\nstruct SegTree {\n  using\
-    \ X = typename Monoid::value_type;\n  using value_type = X;\n  vc<X> dat;\n  int\
-    \ n, log, size;\n\n  SegTree() : SegTree(0) {}\n  SegTree(int n) : SegTree(vc<X>(n,\
-    \ Monoid::unit)) {}\n  SegTree(vc<X> v) : n(len(v)) {\n    log = 1;\n    while\
-    \ ((1 << log) < n) ++log;\n    size = 1 << log;\n    dat.assign(size << 1, Monoid::unit);\n\
-    \    FOR(i, n) dat[size + i] = v[i];\n    FOR3_R(i, 1, size) update(i);\n  }\n\
-    \n  X operator[](int i) { return dat[size + i]; }\n\n  void update(int i) { dat[i]\
-    \ = Monoid::op(dat[2 * i], dat[2 * i + 1]); }\n\n  void set(int i, X x) {\n  \
-    \  assert(i < n);\n    dat[i += size] = x;\n    while (i >>= 1) update(i);\n \
-    \ }\n\n  X prod(int L, int R) {\n    assert(L <= R);\n    assert(R <= n);\n  \
-    \  X vl = Monoid::unit, vr = Monoid::unit;\n    L += size, R += size;\n    while\
-    \ (L < R) {\n      if (L & 1) vl = Monoid::op(vl, dat[L++]);\n      if (R & 1)\
-    \ vr = Monoid::op(dat[--R], vr);\n      L >>= 1, R >>= 1;\n    }\n    return Monoid::op(vl,\
-    \ vr);\n  }\n\n  X prod_all() { return dat[1];}\n\n  template <class F>\n  int\
-    \ max_right(F &check, int L) {\n    assert(0 <= L && L <= n && check(Monoid::unit));\n\
-    \    if (L == n) return n;\n    L += size;\n    X sm = Monoid::unit;\n    do {\n\
-    \      while (L % 2 == 0) L >>= 1;\n      if (!check(Monoid::op(sm, dat[L])))\
-    \ {\n        while (L < size) {\n          L = 2 * L;\n          if (check(Monoid::op(sm,\
-    \ dat[L]))) {\n            sm = Monoid::op(sm, dat[L]);\n            L++;\n  \
-    \        }\n        }\n        return L - size;\n      }\n      sm = Monoid::op(sm,\
-    \ dat[L]);\n      L++;\n    } while ((L & -L) != L);\n    return n;\n  }\n\n \
-    \ template <class F>\n  int min_left(F &check, int R) {\n    assert(0 <= R &&\
-    \ R <= n && check(Monoid::unit));\n    if (R == 0) return 0;\n    R += size;\n\
-    \    X sm = Monoid::unit;\n    do {\n      --R;\n      while (R > 1 && (R % 2))\
-    \ R >>= 1;\n      if (!check(Monoid::op(dat[R], sm))) {\n        while (R < size)\
-    \ {\n          R = 2 * R + 1;\n          if (check(Monoid::op(dat[R], sm))) {\n\
-    \            sm = Monoid::op(dat[R], sm);\n            R--;\n          }\n   \
-    \     }\n        return R + 1 - size;\n      }\n      sm = Monoid::op(dat[R],\
-    \ sm);\n    } while ((R & -R) != R);\n    return 0;\n  }\n\n  void debug() { print(\"\
-    segtree\", dat); }\n};\n#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct\
-    \ modint {\n  static constexpr bool is_modint = true;\n  int val;\n  constexpr\
-    \ modint(const ll val = 0) noexcept\n      : val(val >= 0 ? val % mod : (mod -\
-    \ (-val) % mod) % mod) {}\n  bool operator<(const modint &other) const {\n   \
-    \ return val < other.val;\n  } // To use std::map\n  modint &operator+=(const\
-    \ modint &p) {\n    if ((val += p.val) >= mod) val -= mod;\n    return *this;\n\
-    \  }\n  modint &operator-=(const modint &p) {\n    if ((val += mod - p.val) >=\
-    \ mod) val -= mod;\n    return *this;\n  }\n  modint &operator*=(const modint\
-    \ &p) {\n    val = (int)(1LL * val * p.val % mod);\n    return *this;\n  }\n \
-    \ modint &operator/=(const modint &p) {\n    *this *= p.inverse();\n    return\
-    \ *this;\n  }\n  modint operator-() const { return modint(-val); }\n  modint operator+(const\
-    \ modint &p) const { return modint(*this) += p; }\n  modint operator-(const modint\
-    \ &p) const { return modint(*this) -= p; }\n  modint operator*(const modint &p)\
-    \ const { return modint(*this) *= p; }\n  modint operator/(const modint &p) const\
-    \ { return modint(*this) /= p; }\n  bool operator==(const modint &p) const { return\
-    \ val == p.val; }\n  bool operator!=(const modint &p) const { return val != p.val;\
-    \ }\n  modint inverse() const {\n    int a = val, b = mod, u = 1, v = 0, t;\n\
-    \    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b), swap(u -= t\
-    \ * v, v);\n    }\n    return modint(u);\n  }\n  modint pow(int64_t n) const {\n\
-    \    modint ret(1), mul(val);\n    while (n > 0) {\n      if (n & 1) ret *= mul;\n\
-    \      mul *= mul;\n      n >>= 1;\n    }\n    return ret;\n  }\n  static constexpr\
-    \ int get_mod() { return mod; }\n};\n\nstruct ArbitraryModInt {\n  static constexpr\
-    \ bool is_modint = true;\n  int val;\n  ArbitraryModInt() : val(0) {}\n  ArbitraryModInt(int64_t\
-    \ y)\n      : val(y >= 0 ? y % get_mod()\n                   : (get_mod() - (-y)\
-    \ % get_mod()) % get_mod()) {}\n  bool operator<(const ArbitraryModInt &other)\
-    \ const {\n    return val < other.val;\n  } // To use std::map<ArbitraryModInt,\
-    \ T>\n  static int &get_mod() {\n    static int mod = 0;\n    return mod;\n  }\n\
-    \  static void set_mod(int md) { get_mod() = md; }\n  ArbitraryModInt &operator+=(const\
-    \ ArbitraryModInt &p) {\n    if ((val += p.val) >= get_mod()) val -= get_mod();\n\
-    \    return *this;\n  }\n  ArbitraryModInt &operator-=(const ArbitraryModInt &p)\
-    \ {\n    if ((val += get_mod() - p.val) >= get_mod()) val -= get_mod();\n    return\
-    \ *this;\n  }\n  ArbitraryModInt &operator*=(const ArbitraryModInt &p) {\n   \
-    \ unsigned long long a = (unsigned long long)val * p.val;\n    unsigned xh = (unsigned)(a\
-    \ >> 32), xl = (unsigned)a, d, m;\n    asm(\"divl %4; \\n\\t\" : \"=a\"(d), \"\
-    =d\"(m) : \"d\"(xh), \"a\"(xl), \"r\"(get_mod()));\n    val = m;\n    return *this;\n\
-    \  }\n  ArbitraryModInt &operator/=(const ArbitraryModInt &p) {\n    *this *=\
-    \ p.inverse();\n    return *this;\n  }\n  ArbitraryModInt operator-() const {\
-    \ return ArbitraryModInt(-val); }\n  ArbitraryModInt operator+(const ArbitraryModInt\
-    \ &p) const {\n    return ArbitraryModInt(*this) += p;\n  }\n  ArbitraryModInt\
-    \ operator-(const ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this)\
-    \ -= p;\n  }\n  ArbitraryModInt operator*(const ArbitraryModInt &p) const {\n\
-    \    return ArbitraryModInt(*this) *= p;\n  }\n  ArbitraryModInt operator/(const\
-    \ ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this) /= p;\n  }\n\
-    \  bool operator==(const ArbitraryModInt &p) const { return val == p.val; }\n\
-    \  bool operator!=(const ArbitraryModInt &p) const { return val != p.val; }\n\
-    \  ArbitraryModInt inverse() const {\n    int a = val, b = get_mod(), u = 1, v\
-    \ = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b), swap(u\
-    \ -= t * v, v);\n    }\n    return ArbitraryModInt(u);\n  }\n  ArbitraryModInt\
-    \ pow(int64_t n) const {\n    ArbitraryModInt ret(1), mul(val);\n    while (n\
-    \ > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n  \
-    \  }\n    return ret;\n  }\n};\n\ntemplate<typename mint>\ntuple<mint, mint, mint>\
-    \ get_factorial_data(int n){\n  static constexpr int mod = mint::get_mod();\n\
-    \  assert(0 <= n && n < mod);\n  static vector<mint> fact = {1, 1};\n  static\
-    \ vector<mint> fact_inv = {1, 1};\n  static vector<mint> inv = {0, 1};\n  while(len(fact)\
-    \ <= n){\n    int k = len(fact);\n    fact.eb(fact[k - 1] * mint(k));\n    auto\
-    \ q = ceil(mod, k);\n    int r = k * q - mod;\n    inv.eb(inv[r] * mint(q));\n\
-    \    fact_inv.eb(fact_inv[k - 1] * inv[k]);\n  }\n  return {fact[n], fact_inv[n],\
-    \ inv[n]};\n}\n\ntemplate<typename mint>\nmint fact(int n){\n  static constexpr\
-    \ int mod = mint::get_mod();\n  assert(0 <= n);\n  if(n >= mod) return 0;\n  return\
-    \ get<0>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename mint>\nmint fact_inv(int\
-    \ n){\n  static constexpr int mod = mint::get_mod();\n  assert(0 <= n && n < mod);\n\
-    \  return get<1>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename mint>\n\
-    mint inv(int n){\n  static constexpr int mod = mint::get_mod();\n  assert(0 <=\
-    \ n && n < mod);\n  return get<2>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename\
-    \ mint>\nmint C(ll n, ll k, bool large = false) {\n  assert(n >= 0);\n  if (k\
-    \ < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n) * fact_inv<mint>(k)\
-    \ * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n  FOR(i, k) {\n\
-    \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\nusing\
-    \ modint107 = modint<1000000007>;\nusing modint998 = modint<998244353>;\nusing\
-    \ amint = ArbitraryModInt;\n#line 1 \"alg/group_affine.hpp\"\ntemplate <typename\
-    \ K>\nstruct Group_Affine {\n  using F = pair<K, K>;\n  using value_type = F;\n\
-    \  static constexpr F op(const F &x, const F &y) noexcept {\n    return F({x.fi\
-    \ * y.fi, x.se * y.fi + y.se});\n  }\n  static constexpr F inverse(const F &x)\
-    \ {\n    auto [a, b] = x;\n    a = K(1) / a;\n    return {a, a * (-b)};\n  }\n\
-    \  static constexpr K eval(const F &f, K x) noexcept { return f.fi * x + f.se;\
-    \ }\n  static constexpr F unit = {K(1), K(0)};\n  static constexpr bool commute\
-    \ = false;\n};\n#line 8 \"test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp\"\
-    \n\nusing mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using Mono = Group_Affine<mint>;\n\
-    \  using F = Mono::value_type;\n\n  vc<F> seg_raw(N);\n  FOR(i, N) {\n    LL(a,\
-    \ b);\n    seg_raw[i] = {a, b};\n  }\n\n  SegTree<Mono> seg(seg_raw);\n\n  FOR(q,\
-    \ Q) {\n    LL(t);\n    if (t == 0) {\n      LL(i, a, b);\n      seg.set(i, F({a,\
-    \ b}));\n    } else {\n      LL(L, R, x);\n      auto f = seg.prod(L, R);\n  \
-    \    print(Mono::eval(f, x));\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
-    \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  solve();\n\n\
-    \  return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_set_range_composite\"\
-    \n#include \"my_template.hpp\"\n#include \"other/io.hpp\"\n\n#include \"ds/segtree.hpp\"\
-    \n#include \"mod/modint.hpp\"\n#include \"alg/group_affine.hpp\"\n\nusing mint\
-    \ = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using Mono = Group_Affine<mint>;\n\
-    \  using F = Mono::value_type;\n\n  vc<F> seg_raw(N);\n  FOR(i, N) {\n    LL(a,\
-    \ b);\n    seg_raw[i] = {a, b};\n  }\n\n  SegTree<Mono> seg(seg_raw);\n\n  FOR(q,\
-    \ Q) {\n    LL(t);\n    if (t == 0) {\n      LL(i, a, b);\n      seg.set(i, F({a,\
-    \ b}));\n    } else {\n      LL(L, R, x);\n      auto f = seg.prod(L, R);\n  \
-    \    print(Mono::eval(f, x));\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
-    \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  solve();\n\n\
-    \  return 0;\n}\n"
+    \ { yes(!t); }\r\n#line 1 \"ds/waveletmatrix.hpp\"\n#include <immintrin.h>\r\n\
+    \r\nstruct bit_vector {\r\n  using u32 = uint32_t;\r\n  using i64 = int64_t;\r\
+    \n  using u64 = uint64_t;\r\n\r\n  static constexpr u32 w = 64;\r\n  vector<u64>\
+    \ block;\r\n  vector<u32> count;\r\n  u32 n, zeros;\r\n\r\n  inline u32 get(u32\
+    \ i) const { return u32(block[i / w] >> (i % w)) & 1u; }\r\n  inline void set(u32\
+    \ i) { block[i / w] |= 1LL << (i % w); }\r\n\r\n  bit_vector() {}\r\n  bit_vector(int\
+    \ _n) { init(_n); }\r\n  __attribute__((optimize(\"O3\", \"unroll-loops\"))) void\
+    \ init(int _n) {\r\n    n = zeros = _n;\r\n    block.resize(n / w + 1, 0);\r\n\
+    \    count.resize(block.size(), 0);\r\n  }\r\n\r\n  __attribute__((target(\"popcnt\"\
+    ))) void build() {\r\n    for (u32 i = 1; i < block.size(); ++i)\r\n      count[i]\
+    \ = count[i - 1] + _mm_popcnt_u64(block[i - 1]);\r\n    zeros = rank0(n);\r\n\
+    \  }\r\n\r\n  inline u32 rank0(u32 i) const { return i - rank1(i); }\r\n  __attribute__((target(\"\
+    bmi2,popcnt\"))) inline u32 rank1(u32 i) const {\r\n    return count[i / w] +\
+    \ _mm_popcnt_u64(_bzhi_u64(block[i / w], i % w));\r\n  }\r\n};\r\n\r\n\r\n/*\r\
+    \n\u30B3\u30F3\u30B9\u30C8\u30E9\u30AF\u30BF\uFF1Avector<T> \u3092\u6E21\u3059\
+    \r\n\u9759\u7684\u306A\u5217\u306B\u5BFE\u3057\u3066\u6B21\u304C O(log N) \u6642\
+    \u9593\u3067\u884C\u3048\u308B\r\n\u30FBfreq(l, r, lower, upper)\uFF1A[lower,\
+    \ upper) \u5185\u306E\u8981\u7D20\u306E\u6570\u3048\u4E0A\u3052\r\n\u30FBkth(l,\
+    \ r, lower, upper)\uFF1A[lower, upper) \u5185\u3092\u30BD\u30FC\u30C8\u3057\u305F\
+    \u3068\u304D\u306E k \u756A\u76EE\r\n*/\r\ntemplate <typename T>\r\nstruct WaveletMatrix\
+    \ {\r\n  using u32 = uint32_t;\r\n  using i64 = int64_t;\r\n  using u64 = uint64_t;\r\
+    \n\r\n  int n, lg;\r\n  vc<T> key;\r\n  vc<int> A;\r\n  vector<bit_vector> bv;\r\
+    \n\r\n  __attribute__((optimize(\"O3\"))) WaveletMatrix(const vc<T>& dat)\r\n\
+    \      : n(len(dat)) {\r\n    key = dat;\r\n    UNIQUE(key);\r\n    A.resize(n);\r\
+    \n    FOR(i, n) A[i] = LB(key, dat[i]);\r\n    lg = __lg(max(MAX(A), 1)) + 1;\r\
+    \n    bv.assign(lg, n);\r\n    vc<int> cur = A, nxt(n);\r\n    for (int h = lg\
+    \ - 1; h >= 0; --h) {\r\n      for (int i = 0; i < n; ++i)\r\n        if ((cur[i]\
+    \ >> h) & 1) bv[h].set(i);\r\n      bv[h].build();\r\n      array<decltype(begin(nxt)),\
+    \ 2> it{begin(nxt), begin(nxt) + bv[h].zeros};\r\n      for (int i = 0; i < n;\
+    \ ++i) *it[bv[h].get(i)]++ = cur[i];\r\n      swap(cur, nxt);\r\n    }\r\n  }\r\
+    \n\r\n  inline pair<u32, u32> succ0(int l, int r, int h) const {\r\n    return\
+    \ make_pair(bv[h].rank0(l), bv[h].rank0(r));\r\n  }\r\n\r\n  inline pair<u32,\
+    \ u32> succ1(int l, int r, int h) const {\r\n    u32 l0 = bv[h].rank0(l);\r\n\
+    \    u32 r0 = bv[h].rank0(r);\r\n    u32 zeros = bv[h].zeros;\r\n    return make_pair(l\
+    \ + zeros - l0, r + zeros - r0);\r\n  }\r\n\r\n  T kth(u32 l, u32 r, u32 k) const\
+    \ {\r\n    int res = 0;\r\n    for (int h = lg - 1; h >= 0; --h) {\r\n      u32\
+    \ l0 = bv[h].rank0(l), r0 = bv[h].rank0(r);\r\n      if (k < r0 - l0)\r\n    \
+    \    l = l0, r = r0;\r\n      else {\r\n        k -= r0 - l0;\r\n        res |=\
+    \ 1 << h;\r\n        l += bv[h].zeros - l0;\r\n        r += bv[h].zeros - r0;\r\
+    \n      }\r\n    }\r\n    return key[res];\r\n  }\r\n\r\n  int freq(int l, int\
+    \ r, T lower, T upper) {\r\n    return range_freq(l, r, upper) - range_freq(l,\
+    \ r, lower);\r\n  }\r\n\r\nprivate:\r\n  int freq_upper(int l, int r, T upper_t)\
+    \ {\r\n    int upper = LB(key, upper_t);\r\n    if (upper >= (1 << lg)) return\
+    \ r - l;\r\n    int ret = 0;\r\n    for (int h = lg - 1; h >= 0; --h) {\r\n  \
+    \    bool f = (upper >> h) & 1;\r\n      u32 l0 = bv[h].rank0(l), r0 = bv[h].rank0(r);\r\
+    \n      if (f) {\r\n        ret += r0 - l0;\r\n        l += bv[h].zeros - l0;\r\
+    \n        r += bv[h].zeros - r0;\r\n      } else {\r\n        l = l0;\r\n    \
+    \    r = r0;\r\n      }\r\n    }\r\n    return ret;\r\n  }\r\n};\n#line 5 \"test/library_checker/datastructure/range_kth_smallest_wavelet.test.cpp\"\
+    \n\nvoid solve() {\n  LL(N, Q);\n  VEC(int, A, N);\n  WaveletMatrix WM(A);\n \
+    \ FOR_(Q) {\n    LL(l, r, k);\n    print(WM.kth(l, r, k));\n  }\n}\n\nsigned main()\
+    \ {\n  solve();\n\n  return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_kth_smallest\"\n\
+    #include \"my_template.hpp\"\n#include \"other/io.hpp\"\n#include \"ds/waveletmatrix.hpp\"\
+    \n\nvoid solve() {\n  LL(N, Q);\n  VEC(int, A, N);\n  WaveletMatrix WM(A);\n \
+    \ FOR_(Q) {\n    LL(l, r, k);\n    print(WM.kth(l, r, k));\n  }\n}\n\nsigned main()\
+    \ {\n  solve();\n\n  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
-  - ds/segtree.hpp
-  - mod/modint.hpp
-  - alg/group_affine.hpp
+  - ds/waveletmatrix.hpp
   isVerificationFile: true
-  path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
+  path: test/library_checker/datastructure/range_kth_smallest_wavelet.test.cpp
   requiredBy: []
-  timestamp: '2022-03-28 12:53:30+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-03-28 18:36:06+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
+documentation_of: test/library_checker/datastructure/range_kth_smallest_wavelet.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
-- /verify/test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp.html
-title: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
+- /verify/test/library_checker/datastructure/range_kth_smallest_wavelet.test.cpp
+- /verify/test/library_checker/datastructure/range_kth_smallest_wavelet.test.cpp.html
+title: test/library_checker/datastructure/range_kth_smallest_wavelet.test.cpp
 ---

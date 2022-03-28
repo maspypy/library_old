@@ -2,34 +2,31 @@
 data:
   _extendedDependsOn:
   - icon: ':question:'
-    path: alg/group_affine.hpp
-    title: alg/group_affine.hpp
-  - icon: ':question:'
-    path: ds/segtree.hpp
-    title: ds/segtree.hpp
-  - icon: ':question:'
-    path: mod/modint.hpp
-    title: mod/modint.hpp
+    path: alg/group_add.hpp
+    title: alg/group_add.hpp
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
+  - icon: ':x:'
+    path: pds/segtree.hpp
+    title: pds/segtree.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/point_set_range_composite
+    PROBLEM: https://judge.yosupo.jp/problem/range_kth_smallest
     links:
-    - https://judge.yosupo.jp/problem/point_set_range_composite
-  bundledCode: "#line 1 \"test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/point_set_range_composite\"\
-    \n#line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
-    \nusing ll = long long;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing\
+    - https://judge.yosupo.jp/problem/range_kth_smallest
+  bundledCode: "#line 1 \"test/library_checker/datastructure/range_kth_smallest_pseg.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/range_kth_smallest\"\n#line\
+    \ 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\n\
+    using ll = long long;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing\
     \ u32 = unsigned int;\nusing u64 = unsigned long long;\nusing i128 = __int128;\n\
     \ntemplate <class T>\nusing vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\n\
     template <class T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc\
@@ -175,148 +172,63 @@ data:
     \ ? \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool\
     \ t = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\
     \nvoid yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1)\
-    \ { yes(!t); }\r\n#line 4 \"test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp\"\
-    \n\n#line 2 \"ds/segtree.hpp\"\ntemplate <class Monoid>\nstruct SegTree {\n  using\
-    \ X = typename Monoid::value_type;\n  using value_type = X;\n  vc<X> dat;\n  int\
-    \ n, log, size;\n\n  SegTree() : SegTree(0) {}\n  SegTree(int n) : SegTree(vc<X>(n,\
-    \ Monoid::unit)) {}\n  SegTree(vc<X> v) : n(len(v)) {\n    log = 1;\n    while\
-    \ ((1 << log) < n) ++log;\n    size = 1 << log;\n    dat.assign(size << 1, Monoid::unit);\n\
-    \    FOR(i, n) dat[size + i] = v[i];\n    FOR3_R(i, 1, size) update(i);\n  }\n\
-    \n  X operator[](int i) { return dat[size + i]; }\n\n  void update(int i) { dat[i]\
-    \ = Monoid::op(dat[2 * i], dat[2 * i + 1]); }\n\n  void set(int i, X x) {\n  \
-    \  assert(i < n);\n    dat[i += size] = x;\n    while (i >>= 1) update(i);\n \
-    \ }\n\n  X prod(int L, int R) {\n    assert(L <= R);\n    assert(R <= n);\n  \
-    \  X vl = Monoid::unit, vr = Monoid::unit;\n    L += size, R += size;\n    while\
-    \ (L < R) {\n      if (L & 1) vl = Monoid::op(vl, dat[L++]);\n      if (R & 1)\
-    \ vr = Monoid::op(dat[--R], vr);\n      L >>= 1, R >>= 1;\n    }\n    return Monoid::op(vl,\
-    \ vr);\n  }\n\n  X prod_all() { return dat[1];}\n\n  template <class F>\n  int\
-    \ max_right(F &check, int L) {\n    assert(0 <= L && L <= n && check(Monoid::unit));\n\
-    \    if (L == n) return n;\n    L += size;\n    X sm = Monoid::unit;\n    do {\n\
-    \      while (L % 2 == 0) L >>= 1;\n      if (!check(Monoid::op(sm, dat[L])))\
-    \ {\n        while (L < size) {\n          L = 2 * L;\n          if (check(Monoid::op(sm,\
-    \ dat[L]))) {\n            sm = Monoid::op(sm, dat[L]);\n            L++;\n  \
-    \        }\n        }\n        return L - size;\n      }\n      sm = Monoid::op(sm,\
-    \ dat[L]);\n      L++;\n    } while ((L & -L) != L);\n    return n;\n  }\n\n \
-    \ template <class F>\n  int min_left(F &check, int R) {\n    assert(0 <= R &&\
-    \ R <= n && check(Monoid::unit));\n    if (R == 0) return 0;\n    R += size;\n\
-    \    X sm = Monoid::unit;\n    do {\n      --R;\n      while (R > 1 && (R % 2))\
-    \ R >>= 1;\n      if (!check(Monoid::op(dat[R], sm))) {\n        while (R < size)\
-    \ {\n          R = 2 * R + 1;\n          if (check(Monoid::op(dat[R], sm))) {\n\
-    \            sm = Monoid::op(dat[R], sm);\n            R--;\n          }\n   \
-    \     }\n        return R + 1 - size;\n      }\n      sm = Monoid::op(dat[R],\
-    \ sm);\n    } while ((R & -R) != R);\n    return 0;\n  }\n\n  void debug() { print(\"\
-    segtree\", dat); }\n};\n#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct\
-    \ modint {\n  static constexpr bool is_modint = true;\n  int val;\n  constexpr\
-    \ modint(const ll val = 0) noexcept\n      : val(val >= 0 ? val % mod : (mod -\
-    \ (-val) % mod) % mod) {}\n  bool operator<(const modint &other) const {\n   \
-    \ return val < other.val;\n  } // To use std::map\n  modint &operator+=(const\
-    \ modint &p) {\n    if ((val += p.val) >= mod) val -= mod;\n    return *this;\n\
-    \  }\n  modint &operator-=(const modint &p) {\n    if ((val += mod - p.val) >=\
-    \ mod) val -= mod;\n    return *this;\n  }\n  modint &operator*=(const modint\
-    \ &p) {\n    val = (int)(1LL * val * p.val % mod);\n    return *this;\n  }\n \
-    \ modint &operator/=(const modint &p) {\n    *this *= p.inverse();\n    return\
-    \ *this;\n  }\n  modint operator-() const { return modint(-val); }\n  modint operator+(const\
-    \ modint &p) const { return modint(*this) += p; }\n  modint operator-(const modint\
-    \ &p) const { return modint(*this) -= p; }\n  modint operator*(const modint &p)\
-    \ const { return modint(*this) *= p; }\n  modint operator/(const modint &p) const\
-    \ { return modint(*this) /= p; }\n  bool operator==(const modint &p) const { return\
-    \ val == p.val; }\n  bool operator!=(const modint &p) const { return val != p.val;\
-    \ }\n  modint inverse() const {\n    int a = val, b = mod, u = 1, v = 0, t;\n\
-    \    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b), swap(u -= t\
-    \ * v, v);\n    }\n    return modint(u);\n  }\n  modint pow(int64_t n) const {\n\
-    \    modint ret(1), mul(val);\n    while (n > 0) {\n      if (n & 1) ret *= mul;\n\
-    \      mul *= mul;\n      n >>= 1;\n    }\n    return ret;\n  }\n  static constexpr\
-    \ int get_mod() { return mod; }\n};\n\nstruct ArbitraryModInt {\n  static constexpr\
-    \ bool is_modint = true;\n  int val;\n  ArbitraryModInt() : val(0) {}\n  ArbitraryModInt(int64_t\
-    \ y)\n      : val(y >= 0 ? y % get_mod()\n                   : (get_mod() - (-y)\
-    \ % get_mod()) % get_mod()) {}\n  bool operator<(const ArbitraryModInt &other)\
-    \ const {\n    return val < other.val;\n  } // To use std::map<ArbitraryModInt,\
-    \ T>\n  static int &get_mod() {\n    static int mod = 0;\n    return mod;\n  }\n\
-    \  static void set_mod(int md) { get_mod() = md; }\n  ArbitraryModInt &operator+=(const\
-    \ ArbitraryModInt &p) {\n    if ((val += p.val) >= get_mod()) val -= get_mod();\n\
-    \    return *this;\n  }\n  ArbitraryModInt &operator-=(const ArbitraryModInt &p)\
-    \ {\n    if ((val += get_mod() - p.val) >= get_mod()) val -= get_mod();\n    return\
-    \ *this;\n  }\n  ArbitraryModInt &operator*=(const ArbitraryModInt &p) {\n   \
-    \ unsigned long long a = (unsigned long long)val * p.val;\n    unsigned xh = (unsigned)(a\
-    \ >> 32), xl = (unsigned)a, d, m;\n    asm(\"divl %4; \\n\\t\" : \"=a\"(d), \"\
-    =d\"(m) : \"d\"(xh), \"a\"(xl), \"r\"(get_mod()));\n    val = m;\n    return *this;\n\
-    \  }\n  ArbitraryModInt &operator/=(const ArbitraryModInt &p) {\n    *this *=\
-    \ p.inverse();\n    return *this;\n  }\n  ArbitraryModInt operator-() const {\
-    \ return ArbitraryModInt(-val); }\n  ArbitraryModInt operator+(const ArbitraryModInt\
-    \ &p) const {\n    return ArbitraryModInt(*this) += p;\n  }\n  ArbitraryModInt\
-    \ operator-(const ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this)\
-    \ -= p;\n  }\n  ArbitraryModInt operator*(const ArbitraryModInt &p) const {\n\
-    \    return ArbitraryModInt(*this) *= p;\n  }\n  ArbitraryModInt operator/(const\
-    \ ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this) /= p;\n  }\n\
-    \  bool operator==(const ArbitraryModInt &p) const { return val == p.val; }\n\
-    \  bool operator!=(const ArbitraryModInt &p) const { return val != p.val; }\n\
-    \  ArbitraryModInt inverse() const {\n    int a = val, b = get_mod(), u = 1, v\
-    \ = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b), swap(u\
-    \ -= t * v, v);\n    }\n    return ArbitraryModInt(u);\n  }\n  ArbitraryModInt\
-    \ pow(int64_t n) const {\n    ArbitraryModInt ret(1), mul(val);\n    while (n\
-    \ > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n  \
-    \  }\n    return ret;\n  }\n};\n\ntemplate<typename mint>\ntuple<mint, mint, mint>\
-    \ get_factorial_data(int n){\n  static constexpr int mod = mint::get_mod();\n\
-    \  assert(0 <= n && n < mod);\n  static vector<mint> fact = {1, 1};\n  static\
-    \ vector<mint> fact_inv = {1, 1};\n  static vector<mint> inv = {0, 1};\n  while(len(fact)\
-    \ <= n){\n    int k = len(fact);\n    fact.eb(fact[k - 1] * mint(k));\n    auto\
-    \ q = ceil(mod, k);\n    int r = k * q - mod;\n    inv.eb(inv[r] * mint(q));\n\
-    \    fact_inv.eb(fact_inv[k - 1] * inv[k]);\n  }\n  return {fact[n], fact_inv[n],\
-    \ inv[n]};\n}\n\ntemplate<typename mint>\nmint fact(int n){\n  static constexpr\
-    \ int mod = mint::get_mod();\n  assert(0 <= n);\n  if(n >= mod) return 0;\n  return\
-    \ get<0>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename mint>\nmint fact_inv(int\
-    \ n){\n  static constexpr int mod = mint::get_mod();\n  assert(0 <= n && n < mod);\n\
-    \  return get<1>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename mint>\n\
-    mint inv(int n){\n  static constexpr int mod = mint::get_mod();\n  assert(0 <=\
-    \ n && n < mod);\n  return get<2>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename\
-    \ mint>\nmint C(ll n, ll k, bool large = false) {\n  assert(n >= 0);\n  if (k\
-    \ < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n) * fact_inv<mint>(k)\
-    \ * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n  FOR(i, k) {\n\
-    \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\nusing\
-    \ modint107 = modint<1000000007>;\nusing modint998 = modint<998244353>;\nusing\
-    \ amint = ArbitraryModInt;\n#line 1 \"alg/group_affine.hpp\"\ntemplate <typename\
-    \ K>\nstruct Group_Affine {\n  using F = pair<K, K>;\n  using value_type = F;\n\
-    \  static constexpr F op(const F &x, const F &y) noexcept {\n    return F({x.fi\
-    \ * y.fi, x.se * y.fi + y.se});\n  }\n  static constexpr F inverse(const F &x)\
-    \ {\n    auto [a, b] = x;\n    a = K(1) / a;\n    return {a, a * (-b)};\n  }\n\
-    \  static constexpr K eval(const F &f, K x) noexcept { return f.fi * x + f.se;\
-    \ }\n  static constexpr F unit = {K(1), K(0)};\n  static constexpr bool commute\
-    \ = false;\n};\n#line 8 \"test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp\"\
-    \n\nusing mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using Mono = Group_Affine<mint>;\n\
-    \  using F = Mono::value_type;\n\n  vc<F> seg_raw(N);\n  FOR(i, N) {\n    LL(a,\
-    \ b);\n    seg_raw[i] = {a, b};\n  }\n\n  SegTree<Mono> seg(seg_raw);\n\n  FOR(q,\
-    \ Q) {\n    LL(t);\n    if (t == 0) {\n      LL(i, a, b);\n      seg.set(i, F({a,\
-    \ b}));\n    } else {\n      LL(L, R, x);\n      auto f = seg.prod(L, R);\n  \
-    \    print(Mono::eval(f, x));\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
-    \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  solve();\n\n\
-    \  return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/point_set_range_composite\"\
-    \n#include \"my_template.hpp\"\n#include \"other/io.hpp\"\n\n#include \"ds/segtree.hpp\"\
-    \n#include \"mod/modint.hpp\"\n#include \"alg/group_affine.hpp\"\n\nusing mint\
-    \ = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using Mono = Group_Affine<mint>;\n\
-    \  using F = Mono::value_type;\n\n  vc<F> seg_raw(N);\n  FOR(i, N) {\n    LL(a,\
-    \ b);\n    seg_raw[i] = {a, b};\n  }\n\n  SegTree<Mono> seg(seg_raw);\n\n  FOR(q,\
-    \ Q) {\n    LL(t);\n    if (t == 0) {\n      LL(i, a, b);\n      seg.set(i, F({a,\
-    \ b}));\n    } else {\n      LL(L, R, x);\n      auto f = seg.prod(L, R);\n  \
-    \    print(Mono::eval(f, x));\n    }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
-    \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  solve();\n\n\
-    \  return 0;\n}\n"
+    \ { yes(!t); }\r\n#line 2 \"pds/segtree.hpp\"\ntemplate <class Monoid, int NODES\
+    \ = 20000000>\nstruct PersistentSegTree {\n  using X = typename Monoid::value_type;\n\
+    \  using value_type = X;\n\n  struct Node {\n    X x;\n    Node *lch, *rch;\n\
+    \    Node() {}\n    Node(const X &x) : x(x), lch(nullptr), rch(nullptr) {}\n \
+    \ };\n\n  Node *pool;\n  int pid;\n  ll n;\n  Node *nil;\n  vc<Node *> roots;\n\
+    \n  PersistentSegTree(int n) : pid(0), n(n), nil(nullptr) {\n    pool = new Node[NODES];\n\
+    \    nil = new_node(Monoid::unit);\n    nil->lch = nil->rch = nil;\n    roots.reserve(1\
+    \ << 18);\n    roots.push_back(nil);\n  }\n\nprivate:\n  Node *new_node(const\
+    \ X &x) {\n    pool[pid].x = x;\n    pool[pid].lch = pool[pid].rch = nil;\n  \
+    \  return &(pool[pid++]);\n  }\n\n  Node *merge(Node *l, Node *r) {\n    pool[pid].x\
+    \ = Monoid::op(l->x, r->x);\n    pool[pid].lch = l;\n    pool[pid].rch = r;\n\
+    \    return &(pool[pid++]);\n  }\n\n  Node *set(ll idx, const X &x, Node *n, ll\
+    \ l, ll r) {\n    if (l + 1 == r) return new_node(x);\n    ll m = (l + r) / 2;\n\
+    \    if (idx < m) return merge(set(idx, x, n->lch, l, m), n->rch);\n    return\
+    \ merge(n->lch, set(idx, x, n->rch, m, r));\n  }\n\n  X prod(ll a, ll b, Node\
+    \ *n, ll l, ll r) {\n    if (n == nil) return Monoid::unit;\n    if (r <= a ||\
+    \ b <= l) return Monoid::unit;\n    if (a <= l && r <= b) return n->x;\n    ll\
+    \ m = (l + r) / 2;\n    return Monoid::op(prod(a, b, n->lch, l, m), prod(a, b,\
+    \ n->rch, m, r));\n  }\n\npublic:\n  int time() { return len(roots) - 1; }\n\n\
+    \  int set(int t, ll idx, const X &x) {\n    Node *root = set(idx, x, roots[t],\
+    \ 0, n);\n    roots.eb(root);\n    return time();\n  }\n\n  X prod(int time, ll\
+    \ l, ll r) { return prod(l, r, roots[time], 0, n); }\n};\n#line 2 \"alg/group_add.hpp\"\
+    \ntemplate <class X, X ZERO = X(0)>\r\nstruct Group_Add {\r\n  using value_type\
+    \ = X;\r\n  static constexpr X op(const X &x, const X &y) noexcept { return x\
+    \ + y; }\r\n  static constexpr X inverse(const X &x) noexcept { return -x; }\r\
+    \n  static constexpr X power(const X &x, ll n) noexcept { return n * x; }\r\n\
+    \  static constexpr X unit = ZERO;\r\n  static constexpr bool commute = true;\r\
+    \n};\r\n#line 6 \"test/library_checker/datastructure/range_kth_smallest_pseg.test.cpp\"\
+    \n\nvoid solve() {\n  LL(N, Q);\n  PersistentSegTree<Group_Add<int>> seg(N);\n\
+    \  VEC(ll, A, N);\n  auto I = argsort(A);\n  vi times;\n  times.eb(seg.time());\n\
+    \  FOR(k, N) { times.eb(seg.set(times.back(), I[k], 1)); }\n  FOR_(Q) {\n    LL(L,\
+    \ R, k);\n    auto check = [&](ll t) -> bool { return seg.prod(t, L, R) <= k;\
+    \ };\n    ll t = binary_search(check, 0, N);\n    print(A[I[t]]);\n  }\n}\n\n\
+    signed main() {\n  solve();\n\n  return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/range_kth_smallest\"\n\
+    #include \"my_template.hpp\"\n#include \"other/io.hpp\"\n#include \"pds/segtree.hpp\"\
+    \n#include \"alg/group_add.hpp\"\n\nvoid solve() {\n  LL(N, Q);\n  PersistentSegTree<Group_Add<int>>\
+    \ seg(N);\n  VEC(ll, A, N);\n  auto I = argsort(A);\n  vi times;\n  times.eb(seg.time());\n\
+    \  FOR(k, N) { times.eb(seg.set(times.back(), I[k], 1)); }\n  FOR_(Q) {\n    LL(L,\
+    \ R, k);\n    auto check = [&](ll t) -> bool { return seg.prod(t, L, R) <= k;\
+    \ };\n    ll t = binary_search(check, 0, N);\n    print(A[I[t]]);\n  }\n}\n\n\
+    signed main() {\n  solve();\n\n  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
-  - ds/segtree.hpp
-  - mod/modint.hpp
-  - alg/group_affine.hpp
+  - pds/segtree.hpp
+  - alg/group_add.hpp
   isVerificationFile: true
-  path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
+  path: test/library_checker/datastructure/range_kth_smallest_pseg.test.cpp
   requiredBy: []
-  timestamp: '2022-03-28 12:53:30+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-03-28 12:54:05+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
+documentation_of: test/library_checker/datastructure/range_kth_smallest_pseg.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
-- /verify/test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp.html
-title: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
+- /verify/test/library_checker/datastructure/range_kth_smallest_pseg.test.cpp
+- /verify/test/library_checker/datastructure/range_kth_smallest_pseg.test.cpp.html
+title: test/library_checker/datastructure/range_kth_smallest_pseg.test.cpp
 ---
