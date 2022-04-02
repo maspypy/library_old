@@ -104,21 +104,21 @@ data:
   isVerificationFile: false
   path: ds/fenwick.hpp
   requiredBy:
-  - ds/fenwickraq.hpp
   - other/inversion.hpp
   - other/rectanglesums.hpp
   - graph/treeabelgroup.hpp
+  - ds/fenwickraq.hpp
   timestamp: '2022-02-16 02:43:16+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
-  - test/aoj/DSL_2_E_fenwick_raq.test.cpp
-  - test/aoj/ALDS1_5_inversion.test.cpp
-  - test/aoj/DSL_2_G_fenwick_raq.test.cpp
   - test/yukicoder/1038_centroid.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
+  - test/aoj/ALDS1_5_inversion.test.cpp
+  - test/aoj/DSL_2_E_fenwick_raq.test.cpp
+  - test/aoj/DSL_2_G_fenwick_raq.test.cpp
   - test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
-  - test/library_checker/datastructure/point_add_range_sum.test.cpp
   - test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
+  - test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
+  - test/library_checker/datastructure/point_add_range_sum.test.cpp
 documentation_of: ds/fenwick.hpp
 layout: document
 redirect_from:

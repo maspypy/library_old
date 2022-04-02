@@ -299,9 +299,9 @@ data:
   timestamp: '2022-03-17 18:01:38+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/library_checker/math/sharp_p_subset_sum.test.cpp
-  - test/library_checker/polynomial/pow_of_fps.test.cpp
   - test/library_checker/polynomial/exp_of_fps.test.cpp
+  - test/library_checker/polynomial/pow_of_fps.test.cpp
+  - test/library_checker/math/sharp_p_subset_sum.test.cpp
 documentation_of: poly/fps_exp.hpp
 layout: document
 redirect_from:

@@ -58,8 +58,8 @@ data:
   isVerificationFile: false
   path: ds/dualsegtree.hpp
   requiredBy:
-  - graph/dualtreemonoid.hpp
   - graph/minimum_spanning_tree.hpp
+  - graph/dualtreemonoid.hpp
   timestamp: '2022-01-01 20:04:54+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

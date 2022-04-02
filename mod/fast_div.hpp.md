@@ -2,26 +2,26 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: mod/binomial.hpp
     title: mod/binomial.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: mod/mod_kth_root.hpp
     title: mod/mod_kth_root.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: mod/mod_pow.hpp
     title: mod/mod_pow.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: mod/primitive_root.hpp
     title: mod/primitive_root.hpp
   - icon: ':x:'
     path: mod/tetration.hpp
     title: mod/tetration.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/math/binomial_coefficient.test.cpp
     title: test/library_checker/math/binomial_coefficient.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/math/kth_root_mod.test.cpp
     title: test/library_checker/math/kth_root_mod.test.cpp
   - icon: ':x:'
@@ -29,7 +29,7 @@ data:
     title: test/library_checker/math/tetration.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links:
     - https://judge.yosupo.jp/submission/46090
@@ -59,13 +59,13 @@ data:
   isVerificationFile: false
   path: mod/fast_div.hpp
   requiredBy:
-  - mod/binomial.hpp
   - mod/mod_kth_root.hpp
-  - mod/tetration.hpp
-  - mod/primitive_root.hpp
   - mod/mod_pow.hpp
+  - mod/binomial.hpp
+  - mod/primitive_root.hpp
+  - mod/tetration.hpp
   timestamp: '2022-01-14 01:43:46+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/library_checker/math/binomial_coefficient.test.cpp
   - test/library_checker/math/kth_root_mod.test.cpp

@@ -329,8 +329,8 @@ data:
   timestamp: '2022-03-17 18:01:38+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/library_checker/math/sum_of_exp_times_poly.test.cpp
   - test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
+  - test/library_checker/math/sum_of_exp_times_poly.test.cpp
 documentation_of: poly/lagrange_interpolate_iota.hpp
 layout: document
 redirect_from:

@@ -115,22 +115,22 @@ data:
   path: ds/segtree.hpp
   requiredBy:
   - mod/modular_subset_sum.hpp
-  - ds/range_mex_query.hpp
   - geo/manhattan_nns.hpp
   - other/uniqueproductquery.hpp
   - graph/treemonoid.hpp
-  - graph/treegroup.hpp
   - graph/minimum_spanning_tree.hpp
+  - graph/treegroup.hpp
+  - ds/range_mex_query.hpp
   timestamp: '2022-02-11 06:56:22+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
+  - test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
+  - test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
+  - test/library_checker/datastructure/staticrmq_seg.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-  - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-  - test/library_checker/datastructure/staticrmq_seg.test.cpp
-  - test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
-  - test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
 documentation_of: ds/segtree.hpp
 layout: document
 redirect_from:

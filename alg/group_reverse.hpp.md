@@ -37,8 +37,8 @@ data:
   timestamp: '2022-01-11 13:22:23+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
+  - test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
 documentation_of: alg/group_reverse.hpp
 layout: document
 redirect_from:

@@ -7,7 +7,7 @@ data:
   - icon: ':x:'
     path: mod/powertable.hpp
     title: mod/powertable.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: nt/primetable.hpp
     title: nt/primetable.hpp
   - icon: ':question:'
@@ -294,8 +294,8 @@ data:
   timestamp: '2022-03-19 16:17:22+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
   - test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
+  - test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
 documentation_of: poly/poly_taylor_shift.hpp
 layout: document
 redirect_from:

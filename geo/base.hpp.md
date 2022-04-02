@@ -43,9 +43,9 @@ data:
   isVerificationFile: false
   path: geo/base.hpp
   requiredBy:
-  - geo/angle_sort.hpp
-  - geo/dynamicupperhull.hpp
   - geo/convexhull.hpp
+  - geo/dynamicupperhull.hpp
+  - geo/angle_sort.hpp
   timestamp: '2022-03-14 00:13:01+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

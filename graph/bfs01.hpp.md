@@ -95,8 +95,8 @@ data:
   isVerificationFile: false
   path: graph/bfs01.hpp
   requiredBy:
-  - graph/mincostcycle.hpp
   - graph/tree_diameter.hpp
+  - graph/mincostcycle.hpp
   timestamp: '2022-03-19 16:40:52+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:

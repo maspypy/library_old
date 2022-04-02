@@ -171,17 +171,18 @@ data:
     \nvoid yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1)\
     \ { yes(!t); }\r\n#line 1 \"ds/hashmap.hpp\"\ntemplate <typename Val, int LOG\
     \ = 20>\r\nstruct HashMapLL {\r\n  int N;\r\n  ll* keys;\r\n  Val* vals;\r\n \
-    \ bitset<1 << LOG> used;\r\n  const int shift;\r\n  const uint64_t r = 11995408973635179863ULL;\r\
-    \n  HashMapLL()\r\n      : N(1 << LOG), keys(new ll[N]), vals(new Val[N]), shift(64\
-    \ - __lg(N)) {}\r\n  int hash(ll x) {\r\n    static const uint64_t FIXED_RANDOM\r\
-    \n        = std::chrono::steady_clock::now().time_since_epoch().count();\r\n \
-    \   return (uint64_t(x + FIXED_RANDOM) * r) >> shift;\r\n  }\r\n\r\n  int index(const\
+    \ vc<int> IDS;\r\n  bitset<1 << LOG> used;\r\n  const int shift;\r\n  const uint64_t\
+    \ r = 11995408973635179863ULL;\r\n  HashMapLL()\r\n      : N(1 << LOG), keys(new\
+    \ ll[N]), vals(new Val[N]), shift(64 - __lg(N)) {}\r\n  int hash(ll x) {\r\n \
+    \   static const uint64_t FIXED_RANDOM\r\n        = std::chrono::steady_clock::now().time_since_epoch().count();\r\
+    \n    return (uint64_t(x + FIXED_RANDOM) * r) >> shift;\r\n  }\r\n\r\n  int index(const\
     \ ll& key) {\r\n    int i = 0;\r\n    for (i = hash(key); used[i] && keys[i] !=\
     \ key; (i += 1) &= (N - 1)) {}\r\n    return i;\r\n  }\r\n\r\n  Val& operator[](const\
-    \ ll& key) {\r\n    int i = index(key);\r\n    if (!used[i]) used[i] = 1, keys[i]\
-    \ = key, vals[i] = Val{};\r\n    return vals[i];\r\n  }\r\n  bool contain(const\
-    \ ll& key) {\r\n    int i = index(key);\r\n    return used[i] && keys[i] == key;\r\
-    \n  }\r\n};\r\n#line 5 \"test/library_checker/datastructure/associative_array_hashmap.test.cpp\"\
+    \ ll& key) {\r\n    int i = index(key);\r\n    if (!used[i]) IDS.eb(i), used[i]\
+    \ = 1, keys[i] = key, vals[i] = Val{};\r\n    return vals[i];\r\n  }\r\n  bool\
+    \ contain(const ll& key) {\r\n    int i = index(key);\r\n    return used[i] &&\
+    \ keys[i] == key;\r\n  }\r\n\r\n  void reset(){\r\n    for(auto&& i : IDS) used[i]\
+    \ = 0;\r\n    IDS.clear();\r\n  }\r\n};\r\n#line 5 \"test/library_checker/datastructure/associative_array_hashmap.test.cpp\"\
     \n\r\nvoid solve() {\r\n  LL(Q);\r\n  HashMapLL<ll> A;\r\n  FOR(_, Q) {\r\n  \
     \  LL(t);\r\n    if (t == 0) {\r\n      LL(k, v);\r\n      A[k] = v;\r\n    }\
     \ else {\r\n      LL(k);\r\n      print(A[k]);\r\n    }\r\n  }\r\n}\r\n\r\nsigned\
@@ -199,7 +200,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/associative_array_hashmap.test.cpp
   requiredBy: []
-  timestamp: '2022-03-28 12:53:30+09:00'
+  timestamp: '2022-04-03 04:24:50+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/associative_array_hashmap.test.cpp

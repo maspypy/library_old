@@ -39,15 +39,15 @@ data:
   isVerificationFile: false
   path: alg/group_mul.hpp
   requiredBy:
-  - seq/interpolate_poly_exp_sum.hpp
   - alg/lazy_add_mul.hpp
   - poly/lagrange_interpolate_iota.hpp
+  - seq/interpolate_poly_exp_sum.hpp
   timestamp: '2022-01-11 13:22:23+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/899_bfsnumbering.test.cpp
-  - test/library_checker/math/sum_of_exp_times_poly.test.cpp
   - test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
+  - test/library_checker/math/sum_of_exp_times_poly.test.cpp
 documentation_of: alg/group_mul.hpp
 layout: document
 redirect_from:
