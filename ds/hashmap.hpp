@@ -3,6 +3,7 @@ struct HashMapLL {
   int N;
   ll* keys;
   Val* vals;
+  vc<int> IDS;
   bitset<1 << LOG> used;
   const int shift;
   const uint64_t r = 11995408973635179863ULL;
@@ -22,11 +23,16 @@ struct HashMapLL {
 
   Val& operator[](const ll& key) {
     int i = index(key);
-    if (!used[i]) used[i] = 1, keys[i] = key, vals[i] = Val{};
+    if (!used[i]) IDS.eb(i), used[i] = 1, keys[i] = key, vals[i] = Val{};
     return vals[i];
   }
   bool contain(const ll& key) {
     int i = index(key);
     return used[i] && keys[i] == key;
+  }
+
+  void reset(){
+    for(auto&& i : IDS) used[i] = 0;
+    IDS.clear();
   }
 };
