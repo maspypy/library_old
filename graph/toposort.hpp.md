@@ -13,7 +13,8 @@ data:
   _pathExtension: hpp
   _verificationStatusIcon: ':warning:'
   attributes:
-    links: []
+    links:
+    - https://codeforces.com/contest/798/problem/E
   bundledCode: "#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n\
     \  int frm, to;\n  T cost;\n  int id;\n};\n\ntemplate <typename T = int, bool\
     \ directed = false>\nstruct Graph {\n  int N, M;\n  using cost_type = T;\n  using\
@@ -53,27 +54,52 @@ data:
     \ <typename Graph>\r\npair<vector<int>, vector<int>> degree_inout(Graph& G) {\r\
     \n  vector<int> indeg(G.N), outdeg(G.N);\r\n  for (auto&& e: G.edges) { indeg[e.to]++,\
     \ outdeg[e.frm]++; }\r\n  return {indeg, outdeg};\r\n}\r\n#line 3 \"graph/toposort.hpp\"\
-    \n\ntemplate <typename Graph>\nvc<int> toposort(Graph& G) {\n  // DAG \u3058\u3083\
-    \u306A\u304B\u3063\u305F\u3089\u7A7A\u914D\u5217\n  assert(G.is_prepared());\n\
+    \n\n// DAG \u3058\u3083\u306A\u304B\u3063\u305F\u3089\u7A7A\u914D\u5217\ntemplate\
+    \ <typename Graph>\nvc<int> toposort(Graph& G) {\n  assert(G.is_prepared());\n\
     \  assert(G.is_directed());\n  auto [indeg, outdeg] = degree_inout(G);\n  vc<int>\
     \ V;\n  ll N = G.N;\n  FOR(v, N) if (indeg[v] == 0) V.eb(v);\n  ll p = 0;\n  while\
     \ (p < len(V)) {\n    auto v = V[p++];\n    for (auto&& e: G[v]) {\n      if (--indeg[e.to]\
     \ == 0) V.eb(e.to);\n    }\n  }\n  if(len(V) < N) {\n    V.clear();\n  }\n  return\
-    \ V;\n}\n"
-  code: "#include \"graph/base.hpp\"\n#include \"graph/degree.hpp\"\n\ntemplate <typename\
-    \ Graph>\nvc<int> toposort(Graph& G) {\n  // DAG \u3058\u3083\u306A\u304B\u3063\
-    \u305F\u3089\u7A7A\u914D\u5217\n  assert(G.is_prepared());\n  assert(G.is_directed());\n\
+    \ V;\n}\n\n\n// https://codeforces.com/contest/798/problem/E\n// toposort \u306E\
+    \u5019\u88DC\u3092\u3072\u3068\u3064\u51FA\u529B\u3059\u308B\u3002\u30C1\u30A7\
+    \u30C3\u30AF\u306F\u3057\u306A\u3044\u3002\n// \u967D\u306B\u30B0\u30E9\u30D5\u3092\
+    \u4F5C\u3089\u305A\u3001\u4F55\u3089\u304B\u306E\u30C7\u30FC\u30BF\u69CB\u9020\
+    \u3067\u672A\u8A2A\u554F\u306E\u884C\u304D\u5148\u3092\u63A2\u3059\u60F3\u5B9A\
+    \u3002\n// set_used(v)\uFF1Av \u3092\u4F7F\u7528\u6E08\u306B\u5909\u66F4\u3059\
+    \u308B\n// find_unused(v)\uFF1Av \u306E\u884C\u304D\u5148\u3092\u63A2\u3059\u3002\
+    \u306A\u3051\u308C\u3070 -1 \u3092\u8FD4\u3059\u3053\u3068\u3002\ntemplate <typename\
+    \ F1, typename F2>\nvc<int> toposort(int N, F1 set_used, F2 find_unused) {\n \
+    \ vc<int> V;\n  vc<bool> done(N);\n  auto dfs = [&](auto self, ll v) -> void {\n\
+    \    set_used(v);\n    done[v] = 1;\n    while (1) {\n      int to = find_unused(v);\n\
+    \      if (to == -1) break;\n      self(self, to);\n    }\n    V.eb(v);\n  };\n\
+    \  FOR(v, N) if (!done[v]) dfs(dfs, v);\n  return V;\n}\n"
+  code: "#include \"graph/base.hpp\"\n#include \"graph/degree.hpp\"\n\n// DAG \u3058\
+    \u3083\u306A\u304B\u3063\u305F\u3089\u7A7A\u914D\u5217\ntemplate <typename Graph>\n\
+    vc<int> toposort(Graph& G) {\n  assert(G.is_prepared());\n  assert(G.is_directed());\n\
     \  auto [indeg, outdeg] = degree_inout(G);\n  vc<int> V;\n  ll N = G.N;\n  FOR(v,\
     \ N) if (indeg[v] == 0) V.eb(v);\n  ll p = 0;\n  while (p < len(V)) {\n    auto\
     \ v = V[p++];\n    for (auto&& e: G[v]) {\n      if (--indeg[e.to] == 0) V.eb(e.to);\n\
-    \    }\n  }\n  if(len(V) < N) {\n    V.clear();\n  }\n  return V;\n}\n"
+    \    }\n  }\n  if(len(V) < N) {\n    V.clear();\n  }\n  return V;\n}\n\n\n// https://codeforces.com/contest/798/problem/E\n\
+    // toposort \u306E\u5019\u88DC\u3092\u3072\u3068\u3064\u51FA\u529B\u3059\u308B\
+    \u3002\u30C1\u30A7\u30C3\u30AF\u306F\u3057\u306A\u3044\u3002\n// \u967D\u306B\u30B0\
+    \u30E9\u30D5\u3092\u4F5C\u3089\u305A\u3001\u4F55\u3089\u304B\u306E\u30C7\u30FC\
+    \u30BF\u69CB\u9020\u3067\u672A\u8A2A\u554F\u306E\u884C\u304D\u5148\u3092\u63A2\
+    \u3059\u60F3\u5B9A\u3002\n// set_used(v)\uFF1Av \u3092\u4F7F\u7528\u6E08\u306B\
+    \u5909\u66F4\u3059\u308B\n// find_unused(v)\uFF1Av \u306E\u884C\u304D\u5148\u3092\
+    \u63A2\u3059\u3002\u306A\u3051\u308C\u3070 -1 \u3092\u8FD4\u3059\u3053\u3068\u3002\
+    \ntemplate <typename F1, typename F2>\nvc<int> toposort(int N, F1 set_used, F2\
+    \ find_unused) {\n  vc<int> V;\n  vc<bool> done(N);\n  auto dfs = [&](auto self,\
+    \ ll v) -> void {\n    set_used(v);\n    done[v] = 1;\n    while (1) {\n     \
+    \ int to = find_unused(v);\n      if (to == -1) break;\n      self(self, to);\n\
+    \    }\n    V.eb(v);\n  };\n  FOR(v, N) if (!done[v]) dfs(dfs, v);\n  return V;\n\
+    }\n"
   dependsOn:
   - graph/base.hpp
   - graph/degree.hpp
   isVerificationFile: false
   path: graph/toposort.hpp
   requiredBy: []
-  timestamp: '2022-03-19 16:40:52+09:00'
+  timestamp: '2022-04-05 13:09:22+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph/toposort.hpp
