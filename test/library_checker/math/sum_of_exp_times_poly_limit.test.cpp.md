@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: mod/powertable.hpp
     title: mod/powertable.hpp
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: nt/primetable.hpp
     title: nt/primetable.hpp
   - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: seq/limit_poly_exp_sum.hpp
     title: seq/limit_poly_exp_sum.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sum_of_exponential_times_polynomial_limit
@@ -143,9 +143,11 @@ data:
     \ void write(const string &s) {\r\n    for (char c: s) write(c);\r\n  }\r\n  void\
     \ write(const char *s) {\r\n    size_t len = strlen(s);\r\n    for (size_t i =\
     \ 0; i < len; i++) write(s[i]);\r\n  }\r\n  void write(const double &x) {\r\n\
-    \    ostringstream oss;\r\n    oss << setprecision(12) << x;\r\n    string s =\
-    \ oss.str();\r\n    write(s);\r\n  }\r\n  template <class T, is_modint_t<T> *\
-    \ = nullptr>\r\n  void write(T &ref) {\r\n    write(ref.val);\r\n  }\r\n  template\
+    \    ostringstream oss;\r\n    oss << setprecision(15) << x;\r\n    string s =\
+    \ oss.str();\r\n    write(s);\r\n  }\r\n  void write(const long double &x) {\r\
+    \n    ostringstream oss;\r\n    oss << setprecision(15) << x;\r\n    string s\
+    \ = oss.str();\r\n    write(s);\r\n  }\r\n  template <class T, is_modint_t<T>\
+    \ * = nullptr>\r\n  void write(T &ref) {\r\n    write(ref.val);\r\n  }\r\n  template\
     \ <class T>\r\n  void write(const vector<T> &val) {\r\n    auto n = val.size();\r\
     \n    for (size_t i = 0; i < n; i++) {\r\n      if (i) write(' ');\r\n      write(val[i]);\r\
     \n    }\r\n  }\r\n  template <class T, class U>\r\n  void write(const pair<T,\
@@ -297,8 +299,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/math/sum_of_exp_times_poly_limit.test.cpp
   requiredBy: []
-  timestamp: '2022-03-28 12:53:30+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-04-09 20:39:28+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/math/sum_of_exp_times_poly_limit.test.cpp
 layout: document

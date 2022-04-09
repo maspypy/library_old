@@ -2,37 +2,37 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: flow/bipartite.hpp
     title: flow/bipartite.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/bfs01.hpp
     title: graph/bfs01.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/bfsnumbering.hpp
     title: graph/bfsnumbering.hpp
   - icon: ':warning:'
     path: graph/bipartite_coloring.hpp
     title: graph/bipartite_coloring.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/centroid.hpp
     title: graph/centroid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/check_bipartite.hpp
     title: graph/check_bipartite.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/degree.hpp
     title: graph/degree.hpp
   - icon: ':heavy_check_mark:'
     path: graph/dial.hpp
     title: graph/dial.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/dijkstra.hpp
     title: graph/dijkstra.hpp
   - icon: ':warning:'
     path: graph/dualtreemonoid.hpp
     title: graph/dualtreemonoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/enumerate_triangles.hpp
     title: graph/enumerate_triangles.hpp
   - icon: ':warning:'
@@ -41,19 +41,19 @@ data:
   - icon: ':warning:'
     path: graph/functional.hpp
     title: graph/functional.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/hld.hpp
     title: graph/hld.hpp
   - icon: ':warning:'
     path: graph/lazytreemonoid.hpp
     title: graph/lazytreemonoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/mincostcycle.hpp
     title: graph/mincostcycle.hpp
   - icon: ':warning:'
     path: graph/minimum_spanning_tree.hpp
     title: graph/minimum_spanning_tree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/mis.hpp
     title: graph/mis.hpp
   - icon: ':warning:'
@@ -62,7 +62,7 @@ data:
   - icon: ':warning:'
     path: graph/reverse_graph.hpp
     title: graph/reverse_graph.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/scc.hpp
     title: graph/scc.hpp
   - icon: ':warning:'
@@ -71,106 +71,106 @@ data:
   - icon: ':warning:'
     path: graph/toposort.hpp
     title: graph/toposort.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/tree_all_distances.hpp
     title: graph/tree_all_distances.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/tree_diameter.hpp
     title: graph/tree_diameter.hpp
   - icon: ':warning:'
     path: graph/tree_dp.hpp
     title: graph/tree_dp.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/treeabelgroup.hpp
     title: graph/treeabelgroup.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/treegroup.hpp
     title: graph/treegroup.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/treemonoid.hpp
     title: graph/treemonoid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/two_edge_component.hpp
     title: graph/two_edge_component.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/twosat.hpp
     title: graph/twosat.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_12_B_dial.test.cpp
     title: test/aoj/ALDS1_12_B_dial.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
     title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
     title: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
     title: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
     title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
     title: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
     title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/graph/bipartitematching.test.cpp
     title: test/library_checker/graph/bipartitematching.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/graph/chromatic_number.test.cpp
     title: test/library_checker/graph/chromatic_number.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/graph/cycle_detection.test.cpp
     title: test/library_checker/graph/cycle_detection.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/graph/enumerate_triangles.test.cpp
     title: test/library_checker/graph/enumerate_triangles.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/graph/maximum_independent_set.test.cpp
     title: test/library_checker/graph/maximum_independent_set.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/graph/scc.test.cpp
     title: test/library_checker/graph/scc.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/graph/shortest_path.test.cpp
     title: test/library_checker/graph/shortest_path.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/graph/two_edge_component.test.cpp
     title: test/library_checker/graph/two_edge_component.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/math/twosat.test.cpp
     title: test/library_checker/math/twosat.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/tree/frequency_table_of_tree_distance.test.cpp
     title: test/library_checker/tree/frequency_table_of_tree_distance.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/tree/lca.test.cpp
     title: test/library_checker/tree/lca.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/tree/lca_directed.test.cpp
     title: test/library_checker/tree/lca_directed.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/tree/tree_diameter.test.cpp
     title: test/library_checker/tree/tree_diameter.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1002_centroid.test.cpp
     title: test/yukicoder/1002_centroid.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1038_centroid.test.cpp
     title: test/yukicoder/1038_centroid.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1320_mincostcycle.test.cpp
     title: test/yukicoder/1320_mincostcycle.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/899_bfsnumbering.test.cpp
     title: test/yukicoder/899_bfsnumbering.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n\
@@ -277,7 +277,7 @@ data:
   - graph/tree_all_distances.hpp
   - flow/bipartite.hpp
   timestamp: '2022-03-19 16:40:52+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/899_bfsnumbering.test.cpp
   - test/yukicoder/1320_mincostcycle.test.cpp

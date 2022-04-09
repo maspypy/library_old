@@ -4,13 +4,13 @@ data:
   - icon: ':warning:'
     path: alg/monoid_rollinghash.hpp
     title: alg/monoid_rollinghash.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
   - icon: ':warning:'
     path: mod/modint61.hpp
     title: mod/modint61.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: other/random.hpp
     title: other/random.hpp
   _extendedRequiredBy: []

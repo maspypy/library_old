@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
   - icon: ':question:'
@@ -10,20 +10,20 @@ data:
   - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/convolution.hpp
     title: poly/convolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/fps_inv.hpp
     title: poly/fps_inv.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/multipoint.hpp
     title: poly/multipoint.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/polynomial_interpolation
@@ -143,9 +143,11 @@ data:
     \ void write(const string &s) {\r\n    for (char c: s) write(c);\r\n  }\r\n  void\
     \ write(const char *s) {\r\n    size_t len = strlen(s);\r\n    for (size_t i =\
     \ 0; i < len; i++) write(s[i]);\r\n  }\r\n  void write(const double &x) {\r\n\
-    \    ostringstream oss;\r\n    oss << setprecision(12) << x;\r\n    string s =\
-    \ oss.str();\r\n    write(s);\r\n  }\r\n  template <class T, is_modint_t<T> *\
-    \ = nullptr>\r\n  void write(T &ref) {\r\n    write(ref.val);\r\n  }\r\n  template\
+    \    ostringstream oss;\r\n    oss << setprecision(15) << x;\r\n    string s =\
+    \ oss.str();\r\n    write(s);\r\n  }\r\n  void write(const long double &x) {\r\
+    \n    ostringstream oss;\r\n    oss << setprecision(15) << x;\r\n    string s\
+    \ = oss.str();\r\n    write(s);\r\n  }\r\n  template <class T, is_modint_t<T>\
+    \ * = nullptr>\r\n  void write(T &ref) {\r\n    write(ref.val);\r\n  }\r\n  template\
     \ <class T>\r\n  void write(const vector<T> &val) {\r\n    auto n = val.size();\r\
     \n    for (size_t i = 0; i < n; i++) {\r\n      if (i) write(' ');\r\n      write(val[i]);\r\
     \n    }\r\n  }\r\n  template <class T, class U>\r\n  void write(const pair<T,\
@@ -460,8 +462,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/polynomial/polynomial_interpolation.test.cpp
   requiredBy: []
-  timestamp: '2022-03-28 12:53:30+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-04-09 20:39:28+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/polynomial/polynomial_interpolation.test.cpp
 layout: document
