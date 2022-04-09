@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':question:'
     path: alg/monoid_reverse.hpp
     title: alg/monoid_reverse.hpp
   - icon: ':question:'
@@ -10,7 +10,7 @@ data:
   - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: graph/hld.hpp
     title: graph/hld.hpp
   _extendedRequiredBy:
@@ -18,10 +18,10 @@ data:
     path: graph/minimum_spanning_tree.hpp
     title: graph/minimum_spanning_tree.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
     title: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
     title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
   - icon: ':x:'
@@ -29,9 +29,10 @@ data:
     title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':question:'
   attributes:
-    links: []
+    links:
+    - https://codeforces.com/contest/1059/problem/E
   bundledCode: "#line 2 \"ds/segtree.hpp\"\ntemplate <class Monoid>\nstruct SegTree\
     \ {\n  using X = typename Monoid::value_type;\n  using value_type = X;\n  vc<X>\
     \ dat;\n  int n, log, size;\n\n  SegTree() : SegTree(0) {}\n  SegTree(int n) :\
@@ -175,27 +176,27 @@ data:
     \      X x = (a <= b ? seg.prod(a, b + 1)\r\n                    : (Monoid::commute\
     \ ? seg.prod(b, a + 1)\r\n                                       : seg_r.prod(b,\
     \ a + 1)));\r\n      val = Monoid::op(val, x);\r\n    }\r\n    return val;\r\n\
-    \  }\r\n\r\n  template <class F>\r\n  int find_path(F &check, int u, int v) {\r\
-    \n    /*\r\n    uv path \u4E0A\u3067 prod_path(u, x) \u304C check \u3092\u6E80\
-    \u305F\u3059\u6700\u521D\u306E x\r\n    \u306A\u3051\u308C\u3070 -1\r\n    */\r\
-    \n    if (check(prod_path(u, u))) return u;\r\n    auto pd = hld.get_path_decomposition(u,\
-    \ v, edge);\r\n    X val = Monoid::unit;\r\n    for (auto &&[a, b]: pd) {\r\n\
-    \      X x = (a <= b ? seg.prod(a, b + 1)\r\n                    : (Monoid::commute\
-    \ ? seg.prod(b, a + 1)\r\n                                       : seg_r.prod(b,\
-    \ a + 1)));\r\n      if (!check(Monoid::op(val, x))) {\r\n        val = Monoid::op(val,\
-    \ x);\r\n        continue;\r\n      }\r\n      auto check_tmp = [&](X x) -> bool\
-    \ { return !check(Monoid::op(val, x)); };\r\n      if (a <= b) {\r\n        auto\
-    \ i = seg.max_right(check_tmp, a);\r\n        return hld.LID[i];\r\n      } else\
-    \ {\r\n        auto i = (Monoid::commute ? seg.min_left(check_tmp, a + 1)\r\n\
-    \                                  : seg_r.min_left(check_tmp, a + 1));\r\n  \
-    \      --i;\r\n        return hld.LID[i];\r\n      }\r\n    }\r\n    return -1;\r\
-    \n  }\r\n\r\n  X prod_subtree(int u) {\r\n    int l = hld.LID[u], r = hld.RID[u];\r\
-    \n    return seg.prod(l + edge, r);\r\n  }\r\n\r\n  void debug() {\r\n    print(\"\
-    tree_monoid\");\r\n    hld.debug();\r\n    seg.debug();\r\n    seg_r.debug();\r\
-    \n  }\r\n\r\n  void doc() {\r\n    print(\"HL\u5206\u89E3 + \u30BB\u30B0\u6728\
-    \u3002\");\r\n    print(\"\u90E8\u5206\u6728\u30AF\u30A8\u30EA O(logN) \u6642\u9593\
-    \u3001\u30D1\u30B9\u30AF\u30A8\u30EA O(log^2N) \u6642\u9593\u3002\");\r\n  }\r\
-    \n};\r\n"
+    \  }\r\n\r\n  // uv path \u4E0A\u3067 prod_path(u, x) \u304C check \u3092\u6E80\
+    \u305F\u3059\u6700\u5F8C\u306E x\r\n  // \u306A\u3051\u308C\u3070 -1\r\n  // https://codeforces.com/contest/1059/problem/E\r\
+    \n  template <class F>\r\n  int max_path(F &check, int u, int v) {\r\n    if (!check(prod_path(u,\
+    \ u))) return -1;\r\n    auto pd = hld.get_path_decomposition(u, v, edge);\r\n\
+    \    X val = Monoid::unit;\r\n    for (auto &&[a, b]: pd) {\r\n      X x = (a\
+    \ <= b ? seg.prod(a, b + 1)\r\n                    : (Monoid::commute ? seg.prod(b,\
+    \ a + 1)\r\n                                       : seg_r.prod(b, a + 1)));\r\
+    \n      if (check(Monoid::op(val, x))) {\r\n        val = Monoid::op(val, x);\r\
+    \n        u = (hld.V[b]);\r\n        continue;\r\n      }\r\n      auto check_tmp\
+    \ = [&](X x) -> bool { return check(Monoid::op(val, x)); };\r\n      if (a <=\
+    \ b) {\r\n        auto i = seg.max_right(check_tmp, a);\r\n        return (i ==\
+    \ a ? u : hld.V[i - 1]);\r\n      } else {\r\n        auto i = (Monoid::commute\
+    \ ? seg.min_left(check_tmp, a + 1)\r\n                                  : seg_r.min_left(check_tmp,\
+    \ a + 1));\r\n        return (i == a + 1 ? u : hld.V[i]);\r\n      }\r\n    }\r\
+    \n    return v;\r\n  }\r\n\r\n  X prod_subtree(int u) {\r\n    int l = hld.LID[u],\
+    \ r = hld.RID[u];\r\n    return seg.prod(l + edge, r);\r\n  }\r\n\r\n  void debug()\
+    \ {\r\n    print(\"tree_monoid\");\r\n    hld.debug();\r\n    seg.debug();\r\n\
+    \    seg_r.debug();\r\n  }\r\n\r\n  void doc() {\r\n    print(\"HL\u5206\u89E3\
+    \ + \u30BB\u30B0\u6728\u3002\");\r\n    print(\"\u90E8\u5206\u6728\u30AF\u30A8\
+    \u30EA O(logN) \u6642\u9593\u3001\u30D1\u30B9\u30AF\u30A8\u30EA O(log^2N) \u6642\
+    \u9593\u3002\");\r\n  }\r\n};\r\n"
   code: "#include \"ds/segtree.hpp\"\r\n#include \"graph/hld.hpp\"\r\n#include \"\
     alg/monoid_reverse.hpp\"\r\n\r\ntemplate <typename HLD, typename Monoid, bool\
     \ edge = false>\r\nstruct TreeMonoid {\r\n  using RevMonoid = Monoid_Reverse<Monoid>;\r\
@@ -214,27 +215,27 @@ data:
     \      X x = (a <= b ? seg.prod(a, b + 1)\r\n                    : (Monoid::commute\
     \ ? seg.prod(b, a + 1)\r\n                                       : seg_r.prod(b,\
     \ a + 1)));\r\n      val = Monoid::op(val, x);\r\n    }\r\n    return val;\r\n\
-    \  }\r\n\r\n  template <class F>\r\n  int find_path(F &check, int u, int v) {\r\
-    \n    /*\r\n    uv path \u4E0A\u3067 prod_path(u, x) \u304C check \u3092\u6E80\
-    \u305F\u3059\u6700\u521D\u306E x\r\n    \u306A\u3051\u308C\u3070 -1\r\n    */\r\
-    \n    if (check(prod_path(u, u))) return u;\r\n    auto pd = hld.get_path_decomposition(u,\
-    \ v, edge);\r\n    X val = Monoid::unit;\r\n    for (auto &&[a, b]: pd) {\r\n\
-    \      X x = (a <= b ? seg.prod(a, b + 1)\r\n                    : (Monoid::commute\
-    \ ? seg.prod(b, a + 1)\r\n                                       : seg_r.prod(b,\
-    \ a + 1)));\r\n      if (!check(Monoid::op(val, x))) {\r\n        val = Monoid::op(val,\
-    \ x);\r\n        continue;\r\n      }\r\n      auto check_tmp = [&](X x) -> bool\
-    \ { return !check(Monoid::op(val, x)); };\r\n      if (a <= b) {\r\n        auto\
-    \ i = seg.max_right(check_tmp, a);\r\n        return hld.LID[i];\r\n      } else\
-    \ {\r\n        auto i = (Monoid::commute ? seg.min_left(check_tmp, a + 1)\r\n\
-    \                                  : seg_r.min_left(check_tmp, a + 1));\r\n  \
-    \      --i;\r\n        return hld.LID[i];\r\n      }\r\n    }\r\n    return -1;\r\
-    \n  }\r\n\r\n  X prod_subtree(int u) {\r\n    int l = hld.LID[u], r = hld.RID[u];\r\
-    \n    return seg.prod(l + edge, r);\r\n  }\r\n\r\n  void debug() {\r\n    print(\"\
-    tree_monoid\");\r\n    hld.debug();\r\n    seg.debug();\r\n    seg_r.debug();\r\
-    \n  }\r\n\r\n  void doc() {\r\n    print(\"HL\u5206\u89E3 + \u30BB\u30B0\u6728\
-    \u3002\");\r\n    print(\"\u90E8\u5206\u6728\u30AF\u30A8\u30EA O(logN) \u6642\u9593\
-    \u3001\u30D1\u30B9\u30AF\u30A8\u30EA O(log^2N) \u6642\u9593\u3002\");\r\n  }\r\
-    \n};\r\n"
+    \  }\r\n\r\n  // uv path \u4E0A\u3067 prod_path(u, x) \u304C check \u3092\u6E80\
+    \u305F\u3059\u6700\u5F8C\u306E x\r\n  // \u306A\u3051\u308C\u3070 -1\r\n  // https://codeforces.com/contest/1059/problem/E\r\
+    \n  template <class F>\r\n  int max_path(F &check, int u, int v) {\r\n    if (!check(prod_path(u,\
+    \ u))) return -1;\r\n    auto pd = hld.get_path_decomposition(u, v, edge);\r\n\
+    \    X val = Monoid::unit;\r\n    for (auto &&[a, b]: pd) {\r\n      X x = (a\
+    \ <= b ? seg.prod(a, b + 1)\r\n                    : (Monoid::commute ? seg.prod(b,\
+    \ a + 1)\r\n                                       : seg_r.prod(b, a + 1)));\r\
+    \n      if (check(Monoid::op(val, x))) {\r\n        val = Monoid::op(val, x);\r\
+    \n        u = (hld.V[b]);\r\n        continue;\r\n      }\r\n      auto check_tmp\
+    \ = [&](X x) -> bool { return check(Monoid::op(val, x)); };\r\n      if (a <=\
+    \ b) {\r\n        auto i = seg.max_right(check_tmp, a);\r\n        return (i ==\
+    \ a ? u : hld.V[i - 1]);\r\n      } else {\r\n        auto i = (Monoid::commute\
+    \ ? seg.min_left(check_tmp, a + 1)\r\n                                  : seg_r.min_left(check_tmp,\
+    \ a + 1));\r\n        return (i == a + 1 ? u : hld.V[i]);\r\n      }\r\n    }\r\
+    \n    return v;\r\n  }\r\n\r\n  X prod_subtree(int u) {\r\n    int l = hld.LID[u],\
+    \ r = hld.RID[u];\r\n    return seg.prod(l + edge, r);\r\n  }\r\n\r\n  void debug()\
+    \ {\r\n    print(\"tree_monoid\");\r\n    hld.debug();\r\n    seg.debug();\r\n\
+    \    seg_r.debug();\r\n  }\r\n\r\n  void doc() {\r\n    print(\"HL\u5206\u89E3\
+    \ + \u30BB\u30B0\u6728\u3002\");\r\n    print(\"\u90E8\u5206\u6728\u30AF\u30A8\
+    \u30EA O(logN) \u6642\u9593\u3001\u30D1\u30B9\u30AF\u30A8\u30EA O(log^2N) \u6642\
+    \u9593\u3002\");\r\n  }\r\n};\r\n"
   dependsOn:
   - ds/segtree.hpp
   - graph/hld.hpp
@@ -244,8 +245,8 @@ data:
   path: graph/treemonoid.hpp
   requiredBy:
   - graph/minimum_spanning_tree.hpp
-  timestamp: '2022-03-19 16:40:52+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-04-10 02:03:27+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
