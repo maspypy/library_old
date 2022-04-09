@@ -4,19 +4,19 @@ data:
   - icon: ':question:'
     path: alg/group_add.hpp
     title: alg/group_add.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: alg/monoid_reverse.hpp
     title: alg/monoid_reverse.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
   - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':question:'
+  - icon: ':x:'
     path: graph/hld.hpp
     title: graph/hld.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/treemonoid.hpp
     title: graph/treemonoid.hpp
   - icon: ':question:'
@@ -27,9 +27,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_add_subtree_sum
@@ -122,7 +122,9 @@ data:
     \ T, is_modint_t<T> * = nullptr>\r\n  bool read_single(T &ref) {\r\n    long long\
     \ val = 0;\r\n    bool f = read_single(val);\r\n    ref = T(val);\r\n    return\
     \ f;\r\n  }\r\n  bool read_single(double &ref) {\r\n    string s;\r\n    if (!read_single(s))\
-    \ return false;\r\n    ref = std::stod(s);\r\n    return true;\r\n  }\r\n  template\
+    \ return false;\r\n    ref = std::stod(s);\r\n    return true;\r\n  }\r\n  bool\
+    \ read_single(char &ref) {\r\n    string s;\r\n    if (!read_single(s) || s.size()\
+    \ != 1) return false;\r\n    ref = s[0];\r\n    return true;\r\n  }\r\n  template\
     \ <class T>\r\n  bool read_single(vector<T> &ref) {\r\n    for (auto &d: ref)\
     \ {\r\n      if (!read_single(d)) return false;\r\n    }\r\n    return true;\r\
     \n  }\r\n  template <class T, class U>\r\n  bool read_single(pair<T, U> &p) {\r\
@@ -179,6 +181,7 @@ data:
     \n\r\n#define INT(...)   \\\r\n  int __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\
     #define LL(...)   \\\r\n  ll __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define\
     \ STR(...)      \\\r\n  string __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define\
+    \ CHAR(...)      \\\r\n  char __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define\
     \ DBL(...)      \\\r\n  double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n\
     #define VEC(type, name, size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\
     \n#define VV(type, name, h, w)                     \\\r\n  vector<vector<type>>\
@@ -387,8 +390,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
   requiredBy: []
-  timestamp: '2022-04-09 20:39:28+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-04-09 22:35:37+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
 layout: document
