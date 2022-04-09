@@ -86,6 +86,12 @@ struct Scanner {
     ref = std::stod(s);
     return true;
   }
+  bool read_single(char &ref) {
+    string s;
+    if (!read_single(s) || s.size() != 1) return false;
+    ref = s[0];
+    return true;
+  }
   template <class T>
   bool read_single(vector<T> &ref) {
     for (auto &d: ref) {
@@ -256,6 +262,9 @@ void read(Head &head, Tail &... tail) {
   read(__VA_ARGS__)
 #define STR(...)      \
   string __VA_ARGS__; \
+  read(__VA_ARGS__)
+#define CHAR(...)      \
+  char __VA_ARGS__; \
   read(__VA_ARGS__)
 #define DBL(...)      \
   double __VA_ARGS__; \
