@@ -1,34 +1,33 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: alg/group_add.hpp
-    title: alg/group_add.hpp
-  - icon: ':heavy_check_mark:'
-    path: ds/fenwick2d.hpp
-    title: ds/fenwick2d.hpp
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
+  - icon: ':x:'
+    path: nt/divisors.hpp
+    title: nt/divisors.hpp
+  - icon: ':question:'
+    path: nt/factor.hpp
+    title: nt/factor.hpp
+  - icon: ':question:'
+    path: nt/primetest.hpp
+    title: nt/primetest.hpp
   - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/rectangle_sum
-    links:
-    - https://judge.yosupo.jp/problem/rectangle_sum
-  bundledCode: "#line 1 \"test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/rectangle_sum\"\n\n#line 1\
-    \ \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\nusing\
-    \ ll = long long;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing u32\
-    \ = unsigned int;\nusing u64 = unsigned long long;\nusing i128 = __int128;\n\n\
-    template <class T>\nusing vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\n\
+    links: []
+  bundledCode: "#line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace\
+    \ std;\n\nusing ll = long long;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\n\
+    using u32 = unsigned int;\nusing u64 = unsigned long long;\nusing i128 = __int128;\n\
+    \ntemplate <class T>\nusing vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\n\
     template <class T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc\
     \ = vector<vvvc<T>>;\ntemplate <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate\
     \ <class T>\nusing pq = priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T,\
@@ -172,87 +171,87 @@ data:
     \ ? \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool\
     \ t = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\
     \nvoid yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1)\
-    \ { yes(!t); }\r\n#line 5 \"test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp\"\
-    \n\n#line 2 \"alg/group_add.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\nstruct\
-    \ Group_Add {\r\n  using value_type = X;\r\n  static constexpr X op(const X &x,\
-    \ const X &y) noexcept { return x + y; }\r\n  static constexpr X inverse(const\
-    \ X &x) noexcept { return -x; }\r\n  static constexpr X power(const X &x, ll n)\
-    \ noexcept { return n * x; }\r\n  static constexpr X unit = ZERO;\r\n  static\
-    \ constexpr bool commute = true;\r\n};\r\n#line 2 \"ds/fenwick2d.hpp\"\ntemplate\
-    \ <typename AbelGroup, bool SMALL = false>\r\nstruct Fenwick2D {\r\n  using E\
-    \ = typename AbelGroup::value_type;\r\n  int N;\r\n  vi keyX;\r\n  int min_X;\r\
-    \n  vc<int> indptr;\r\n  vi keyY;\r\n  vc<E> dat;\r\n\r\n  Fenwick2D(vi& X, vi&\
-    \ Y, vc<E>& wt) { build(X, Y, wt); }\r\n\r\n  Fenwick2D(vi& X, vi& Y) {\r\n  \
-    \  vc<E> wt(len(X), AbelGroup::unit);\r\n    build(X, Y, wt);\r\n  }\r\n\r\n \
-    \ inline int xtoi(int x) {\r\n    return (SMALL ? clamp(x - min_X, 0, N) : LB(keyX,\
-    \ x));\r\n  }\r\n\r\n  inline int nxt(int i) {\r\n    i += 1;\r\n    return i\
-    \ + (i & -i) - 1;\r\n  }\r\n\r\n  inline int prev(int i) {\r\n    i += 1;\r\n\
-    \    return i - (i & -i) - 1;\r\n  }\r\n\r\n  void build(vi& X, vi& Y, vc<E>&\
-    \ wt) {\r\n    if (!SMALL) {\r\n      keyX = X;\r\n      UNIQUE(keyX);\r\n   \
-    \   N = len(keyX);\r\n    } else {\r\n      min_X = (len(X) == 0 ? 0 : MIN(X));\r\
-    \n      N = (len(X) == 0 ? 0 : MAX(X)) - min_X + 1;\r\n      keyX.resize(N);\r\
-    \n      FOR(i, N) keyX[i] = min_X + i;\r\n    }\r\n\r\n    vc<vi> keyY_raw(N);\r\
-    \n    vc<vc<E>> dat_raw(N);\r\n\r\n    auto I = argsort(Y);\r\n    for (auto&&\
-    \ i: I) {\r\n      int ix = xtoi(X[i]), y = Y[i];\r\n      while (ix < N) {\r\n\
-    \        auto& KY = keyY_raw[ix];\r\n        if (len(KY) == 0 || KY.back() < y)\
-    \ {\r\n          KY.eb(y);\r\n          dat_raw[ix].eb(wt[i]);\r\n        } else\
-    \ {\r\n          dat_raw[ix].back() = AbelGroup::op(dat_raw[ix].back(), wt[i]);\r\
-    \n        }\r\n        ix = nxt(ix);\r\n      }\r\n    }\r\n\r\n    indptr.assign(N\
-    \ + 1, 0);\r\n    FOR(i, N) indptr[i + 1] = indptr[i] + len(keyY_raw[i]);\r\n\
-    \    keyY.resize(indptr.back());\r\n    dat.resize(indptr.back());\r\n    FOR(i,\
-    \ N) FOR(j, indptr[i + 1] - indptr[i]) {\r\n      keyY[indptr[i] + j] = keyY_raw[i][j];\r\
-    \n      dat[indptr[i] + j] = dat_raw[i][j];\r\n    }\r\n    FOR(i, N) {\r\n  \
-    \    int n = indptr[i + 1] - indptr[i];\r\n      FOR(j, n - 1) {\r\n        int\
-    \ k = nxt(j);\r\n        if (k < n)\r\n          dat[indptr[i] + k]\r\n      \
-    \        = AbelGroup::op(dat[indptr[i] + k], dat[indptr[i] + j]);\r\n      }\r\
-    \n    }\r\n  }\r\n\r\n  void add_i(int i, ll y, E val) {\r\n    int LID = indptr[i],\
-    \ n = indptr[i + 1] - indptr[i];\r\n    auto it = keyY.begin() + LID;\r\n    int\
-    \ j = lower_bound(it, it + n, y) - it;\r\n    assert(keyY[LID + j] == y);\r\n\
-    \    while (j < n) {\r\n      dat[LID + j] = AbelGroup::op(dat[LID + j], val);\r\
-    \n      j = nxt(j);\r\n    }\r\n  }\r\n\r\n  void add(ll x, ll y, E val) {\r\n\
-    \    int i = xtoi(x);\r\n    assert(keyX[i] == x);\r\n    while (i < N) {\r\n\
-    \      add_i(i, y, val);\r\n      i = nxt(i);\r\n    }\r\n  }\r\n\r\n  E sum_i(int\
-    \ i, ll ly, ll ry) {\r\n    E pos = AbelGroup::unit;\r\n    E neg = AbelGroup::unit;\r\
-    \n    int LID = indptr[i], n = indptr[i + 1] - indptr[i];\r\n    auto it = keyY.begin()\
-    \ + LID;\r\n    int L = lower_bound(it, it + n, ly) - it - 1;\r\n    int R = lower_bound(it,\
-    \ it + n, ry) - it - 1;\r\n    while (L < R) {\r\n      pos = AbelGroup::op(pos,\
-    \ dat[LID + R]);\r\n      R = prev(R);\r\n    }\r\n    while (R < L) {\r\n   \
-    \   neg = AbelGroup::op(neg, dat[LID + L]);\r\n      L = prev(L);\r\n    }\r\n\
-    \    return AbelGroup::op(pos, AbelGroup::inverse(neg));\r\n  }\r\n\r\n  E sum(ll\
-    \ lx, ll ly, ll rx, ll ry) {\r\n    E ret = 0;\r\n    int L = xtoi(lx) - 1;\r\n\
-    \    int R = xtoi(rx) - 1;\r\n    while (L < R) {\r\n      ret += sum_i(R, ly,\
-    \ ry);\r\n      R = prev(R);\r\n    }\r\n    while (R < L) {\r\n      ret -= sum_i(L,\
-    \ ly, ry);\r\n      L = prev(L);\r\n    }\r\n    return ret;\r\n  }\r\n\r\n  void\
-    \ debug() {\r\n    print(\"keyX\", keyX);\r\n    print(\"indptr\", indptr);\r\n\
-    \    print(\"keyY\", keyY);\r\n    print(\"dat\", dat);\r\n  }\r\n};\n#line 7\
-    \ \"test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp\"\n\nvoid\
-    \ solve() {\n  LL(N, Q);\n  vi X(N), Y(N), W(N);\n  FOR(i, N) {\n    LL(x, y,\
-    \ w);\n    X[i] = x, Y[i] = y, W[i] = w;\n  }\n  Fenwick2D<Group_Add<ll>, false>\
-    \ bit(X, Y, W);\n  FOR(_, Q) {\n    LL(l, d, r, u);\n    print(bit.sum(l, d, r,\
-    \ u));\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
-    \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/rectangle_sum\"\n\n#include\
-    \ \"my_template.hpp\"\n#include \"other/io.hpp\"\n\n#include \"ds/fenwick2d.hpp\"\
-    \n\nvoid solve() {\n  LL(N, Q);\n  vi X(N), Y(N), W(N);\n  FOR(i, N) {\n    LL(x,\
-    \ y, w);\n    X[i] = x, Y[i] = y, W[i] = w;\n  }\n  Fenwick2D<Group_Add<ll>, false>\
-    \ bit(X, Y, W);\n  FOR(_, Q) {\n    LL(l, d, r, u);\n    print(bit.sum(l, d, r,\
-    \ u));\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
-    \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
+    \ { yes(!t); }\r\n#line 2 \"nt/primetest.hpp\"\nstruct m64 {\r\n    using i64\
+    \ = int64_t;\r\n    using u64 = uint64_t;\r\n    using u128 = __uint128_t;\r\n\
+    \r\n    inline static u64 m, r, n2; // r * m = -1 (mod 1<<64), n2 = 1<<128 (mod\
+    \ m)\r\n    static void set_mod(u64 m) {\r\n        assert(m < (1ull << 62));\r\
+    \n        assert((m & 1) == 1);\r\n        m64::m = m;\r\n        n2 = -u128(m)\
+    \ % m;\r\n        r = m;\r\n        FOR (_, 5) r *= 2 - m*r;\r\n        r = -r;\r\
+    \n        assert(r * m == -1ull);\r\n    }\r\n    static u64 reduce(u128 b) {\
+    \ return (b + u128(u64(b) * r) * m) >> 64; }\r\n\r\n    u64 x;\r\n    m64() :\
+    \ x(0) {}\r\n    m64(u64 x) : x(reduce(u128(x) * n2)){};\r\n    u64 val() const\
+    \ { u64 y = reduce(x); return y >= m ? y-m : y; }\r\n    m64 &operator+=(m64 y)\
+    \ {\r\n        x += y.x - (m << 1);\r\n        x = (i64(x) < 0 ? x + (m << 1)\
+    \ : x);\r\n        return *this;\r\n    }\r\n    m64 &operator-=(m64 y) {\r\n\
+    \        x -= y.x;\r\n        x = (i64(x) < 0 ? x + (m << 1) : x);\r\n       \
+    \ return *this;\r\n    }\r\n    m64 &operator*=(m64 y) { x = reduce(u128(x) *\
+    \ y.x); return *this; }\r\n    m64 operator+(m64 y) const { return m64(*this)\
+    \ += y; }\r\n    m64 operator-(m64 y) const { return m64(*this) -= y; }\r\n  \
+    \  m64 operator*(m64 y) const { return m64(*this) *= y; }\r\n    bool operator==(m64\
+    \ y) const { return (x >= m ? x-m : x) == (y.x >= m ? y.x-m : y.x); }\r\n    bool\
+    \ operator!=(m64 y) const { return not operator==(y); }\r\n    m64 pow(u64 n)\
+    \ const {\r\n        m64 y = 1, z = *this;\r\n        for ( ; n; n >>= 1, z *=\
+    \ z) if (n & 1) y *= z;\r\n        return y;\r\n    }\r\n};\r\n\r\nbool primetest(const\
+    \ uint64_t x) {\r\n    using u64 = uint64_t;\r\n    if (x == 2 or x == 3 or x\
+    \ == 5 or x == 7) return true;\r\n    if (x % 2 == 0 or x % 3 == 0 or x % 5 ==\
+    \ 0 or x % 7 == 0) return false;\r\n    if (x < 121) return x > 1;\r\n    const\
+    \ u64 d = (x-1) >> __builtin_ctzll(x-1);\r\n    m64::set_mod(x);\r\n    const\
+    \ m64 one(1), minus_one(x-1);\r\n    auto ok = [&](u64 a) {\r\n        auto y\
+    \ = m64(a).pow(d);\r\n        u64 t = d;\r\n        while (y != one and y != minus_one\
+    \ and t != x-1) y *= y, t <<= 1;\r\n        if (y != minus_one and t % 2 == 0)\
+    \ return false;\r\n        return true;\r\n    };\r\n    if (x < (1ull << 32))\
+    \ {\r\n        for (u64 a : { 2, 7, 61 }) if (not ok(a)) return false;\r\n   \
+    \ } else {\r\n        for (u64 a : { 2, 325, 9375, 28178, 450775, 9780504, 1795265022\
+    \ }) {\r\n            if (x <= a) return true;\r\n            if (not ok(a)) return\
+    \ false;\r\n        }\r\n    }\r\n    return true;\r\n}\n#line 3 \"nt/factor.hpp\"\
+    \n\nmt19937_64 rng_mt{random_device{}()};\nll rnd(ll n) { return uniform_int_distribution<ll>(0,\
+    \ n - 1)(rng_mt); }\n\nll rho(ll n, ll c) {\n  m64::set_mod(n);\n  assert(n >\
+    \ 1);\n  const m64 cc(c);\n  auto f = [&](m64 x) { return x * x + cc; };\n  m64\
+    \ x = 1, y = 2, z = 1, q = 1;\n  ll g = 1;\n  const ll m = 1LL << (__lg(n) / 5);\
+    \ // ?\n  for (ll r = 1; g == 1; r <<= 1) {\n    x = y;\n    FOR(_, r) y = f(y);\n\
+    \    for (ll k = 0; k < r and g == 1; k += m) {\n      z = y;\n      FOR(_, min(m,\
+    \ r - k)) y = f(y), q *= x - y;\n      g = gcd(q.val(), n);\n    }\n  }\n  if\
+    \ (g == n)\n    do {\n      z = f(z);\n      g = gcd((x - z).val(), n);\n    }\
+    \ while (g == 1);\n  return g;\n}\n\nll find_prime_factor(ll n) {\n  assert(n\
+    \ > 1);\n  if (primetest(n))\n    return n;\n  FOR(_, 100) {\n    ll m = rho(n,\
+    \ rnd(n));\n    if (primetest(m))\n      return m;\n    n = m;\n  }\n  cerr <<\
+    \ \"failed\" << endl;\n  assert(false);\n  return -1;\n}\n\nvc<pi> factor(ll n)\
+    \ {\n  assert(n >= 1);\n  vc<pi> pf;\n  FOR3(p, 2, 100) {\n    if (p * p > n)\n\
+    \      break;\n    if (n % p == 0) {\n      ll e = 0;\n      do {\n        n /=\
+    \ p, e += 1;\n      } while (n % p == 0);\n      pf.eb(p, e);\n    }\n  }\n  while\
+    \ (n > 1) {\n    ll p = find_prime_factor(n);\n    ll e = 0;\n    do {\n     \
+    \ n /= p, e += 1;\n    } while (n % p == 0);\n    pf.eb(p, e);\n  }\n  sort(all(pf));\n\
+    \  return pf;\n}\n#line 2 \"nt/divisors.hpp\"\nvc<ll> divisors(ll N) {\r\n  auto\
+    \ pf = factor(N);\r\n  vi div = {1};\r\n  for (auto&& [p, e]: pf) {\r\n    ll\
+    \ n = len(div);\r\n    ll pp = 1;\r\n    FOR3(i, 1, e + 1) {\r\n      pp *= p;\r\
+    \n      FOR(j, n) div.eb(div[j] * pp);\r\n    }\r\n  }\r\n  return div;\r\n}\n\
+    #line 4 \"test/aoj/ITP1_D_D_divisors.test.cpp\"\n\nvoid solve() {\n  LL(a, b,\
+    \ c);\n  auto divs = divisors(c);\n  ll ANS = 0;\n  for (auto&& d: divs)\n   \
+    \ if (a <= d && d <= b) ++ANS;\n  print(ANS);\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
+    \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  ll T = 1;\n\
+    \  // LL(T);\n  FOR(_, T) solve();\n\n  return 0;\n}\n"
+  code: "#include \"my_template.hpp\"\n#include \"other/io.hpp\"\n#include \"nt/divisors.hpp\"\
+    \n\nvoid solve() {\n  LL(a, b, c);\n  auto divs = divisors(c);\n  ll ANS = 0;\n\
+    \  for (auto&& d: divs)\n    if (a <= d && d <= b) ++ANS;\n  print(ANS);\n}\n\n\
+    signed main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout <<\
+    \ setprecision(15);\n\n  ll T = 1;\n  // LL(T);\n  FOR(_, T) solve();\n\n  return\
+    \ 0;\n}\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
-  - ds/fenwick2d.hpp
-  - alg/group_add.hpp
+  - nt/divisors.hpp
+  - nt/factor.hpp
+  - nt/primetest.hpp
   isVerificationFile: true
-  path: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
+  path: test/aoj/ITP1_D_D_divisors.test.cpp
   requiredBy: []
-  timestamp: '2022-03-28 12:53:30+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-04-09 20:32:37+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
+documentation_of: test/aoj/ITP1_D_D_divisors.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
-- /verify/test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp.html
-title: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
+- /verify/test/aoj/ITP1_D_D_divisors.test.cpp
+- /verify/test/aoj/ITP1_D_D_divisors.test.cpp.html
+title: test/aoj/ITP1_D_D_divisors.test.cpp
 ---
