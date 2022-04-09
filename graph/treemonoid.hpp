@@ -48,35 +48,34 @@ struct TreeMonoid {
     return val;
   }
 
+  // uv path 上で prod_path(u, x) が check を満たす最後の x
+  // なければ -1
+  // https://codeforces.com/contest/1059/problem/E
   template <class F>
-  int find_path(F &check, int u, int v) {
-    /*
-    uv path 上で prod_path(u, x) が check を満たす最初の x
-    なければ -1
-    */
-    if (check(prod_path(u, u))) return u;
+  int max_path(F &check, int u, int v) {
+    if (!check(prod_path(u, u))) return -1;
     auto pd = hld.get_path_decomposition(u, v, edge);
     X val = Monoid::unit;
     for (auto &&[a, b]: pd) {
       X x = (a <= b ? seg.prod(a, b + 1)
                     : (Monoid::commute ? seg.prod(b, a + 1)
                                        : seg_r.prod(b, a + 1)));
-      if (!check(Monoid::op(val, x))) {
+      if (check(Monoid::op(val, x))) {
         val = Monoid::op(val, x);
+        u = (hld.V[b]);
         continue;
       }
-      auto check_tmp = [&](X x) -> bool { return !check(Monoid::op(val, x)); };
+      auto check_tmp = [&](X x) -> bool { return check(Monoid::op(val, x)); };
       if (a <= b) {
         auto i = seg.max_right(check_tmp, a);
-        return hld.LID[i];
+        return (i == a ? u : hld.V[i - 1]);
       } else {
         auto i = (Monoid::commute ? seg.min_left(check_tmp, a + 1)
                                   : seg_r.min_left(check_tmp, a + 1));
-        --i;
-        return hld.LID[i];
+        return (i == a + 1 ? u : hld.V[i]);
       }
     }
-    return -1;
+    return v;
   }
 
   X prod_subtree(int u) {
