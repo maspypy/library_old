@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: alg/lazy_add_mul.hpp
     title: alg/lazy_add_mul.hpp
   - icon: ':heavy_check_mark:'
@@ -14,6 +14,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: alg/lazy_min_add.hpp
     title: alg/lazy_min_add.hpp
+  - icon: ':warning:'
+    path: alg/lazy_minmax_add.hpp
+    title: alg/lazy_minmax_add.hpp
   - icon: ':heavy_check_mark:'
     path: ds/fenwick.hpp
     title: ds/fenwick.hpp
@@ -96,12 +99,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1038_centroid.test.cpp
     title: test/yukicoder/1038_centroid.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/899_bfsnumbering.test.cpp
     title: test/yukicoder/899_bfsnumbering.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"alg/group_add.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\
@@ -131,9 +134,10 @@ data:
   - alg/lazy_cntsum_add.hpp
   - alg/lazy_cntminmincnt_add.hpp
   - alg/lazy_add_mul.hpp
+  - alg/lazy_minmax_add.hpp
   - alg/lazy_min_add.hpp
   timestamp: '2022-01-11 13:22:23+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/899_bfsnumbering.test.cpp
   - test/yukicoder/1038_centroid.test.cpp

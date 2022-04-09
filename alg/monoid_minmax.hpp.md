@@ -1,7 +1,10 @@
 ---
 data:
   _extendedDependsOn: []
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: alg/lazy_minmax_add.hpp
+    title: alg/lazy_minmax_add.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -21,7 +24,8 @@ data:
   dependsOn: []
   isVerificationFile: false
   path: alg/monoid_minmax.hpp
-  requiredBy: []
+  requiredBy:
+  - alg/lazy_minmax_add.hpp
   timestamp: '2022-03-07 00:57:26+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []

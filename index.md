@@ -3,7 +3,7 @@ data:
   libraryCategories:
   - name: alg
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: alg/group_add.hpp
       title: alg/group_add.hpp
     - icon: ':heavy_check_mark:'
@@ -12,7 +12,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: alg/group_cntsum.hpp
       title: alg/group_cntsum.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: alg/group_mul.hpp
       title: alg/group_mul.hpp
     - icon: ':heavy_check_mark:'
@@ -21,7 +21,7 @@ data:
     - icon: ':warning:'
       path: alg/group_xor.hpp
       title: alg/group_xor.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: alg/lazy_add_mul.hpp
       title: alg/lazy_add_mul.hpp
     - icon: ':heavy_check_mark:'
@@ -57,6 +57,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: alg/lazy_min_set.hpp
       title: alg/lazy_min_set.hpp
+    - icon: ':warning:'
+      path: alg/lazy_minmax_add.hpp
+      title: alg/lazy_minmax_add.hpp
     - icon: ':warning:'
       path: alg/lazy_reverse.hpp
       title: alg/lazy_reverse.hpp
@@ -155,7 +158,7 @@ data:
     - icon: ':warning:'
       path: ds/kdtree.hpp
       title: ds/kdtree.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: ds/lazysegtree.hpp
       title: ds/lazysegtree.hpp
     - icon: ':heavy_check_mark:'
@@ -227,13 +230,13 @@ data:
       title: geo/manhattan_nns.hpp
   - name: graph
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/base.hpp
       title: graph/base.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/bfs01.hpp
       title: graph/bfs01.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/bfsnumbering.hpp
       title: graph/bfsnumbering.hpp
     - icon: ':warning:'
@@ -260,7 +263,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/dial.hpp
       title: graph/dial.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: graph/dijkstra.hpp
       title: graph/dijkstra.hpp
     - icon: ':warning:'
@@ -281,7 +284,7 @@ data:
     - icon: ':warning:'
       path: graph/lazytreemonoid.hpp
       title: graph/lazytreemonoid.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: graph/mincostcycle.hpp
       title: graph/mincostcycle.hpp
     - icon: ':warning:'
@@ -346,10 +349,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: linalg/mat_inv.hpp
       title: linalg/mat_inv.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: linalg/mat_mul.hpp
       title: linalg/mat_mul.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: linalg/mat_pow.hpp
       title: linalg/mat_pow.hpp
     - icon: ':heavy_check_mark:'
@@ -390,7 +393,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: mod/mod_sqrt.hpp
       title: mod/mod_sqrt.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: mod/modint.hpp
       title: mod/modint.hpp
     - icon: ':warning:'
@@ -410,7 +413,7 @@ data:
       title: mod/tetration.hpp
   - name: .
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: my_template.hpp
       title: my_template.hpp
   - name: nt
@@ -474,7 +477,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: other/inversion.hpp
       title: other/inversion.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: other/io.hpp
       title: other/io.hpp
     - icon: ':warning:'
@@ -1036,13 +1039,13 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1038_centroid.test.cpp
       title: test/yukicoder/1038_centroid.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1320_mincostcycle.test.cpp
       title: test/yukicoder/1320_mincostcycle.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/1810_matpow.test.cpp
       title: test/yukicoder/1810_matpow.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/899_bfsnumbering.test.cpp
       title: test/yukicoder/899_bfsnumbering.test.cpp
 layout: toppage
