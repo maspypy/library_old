@@ -2,16 +2,17 @@
 #include "other/random.hpp"
 #include "ds/segtree.hpp"
 
+/*
+(|vals| + mod) * log^2(mod)
+verify: https://codeforces.com/gym/103428/problem/C
+*/
 vc<bool> modular_subset_sum(int mod, vc<int> vals) {
-  /*
-  (|vals| + mod) * log^2(mod)
-  */
   using Mono = Monoid_Rolling_Hash;
   RandomNumberGenerator RNG;
-  const ll base = RNG(0, Mono::M61);
+  const ll base = RNG(0, (1LL << 61) - 1);
   vc<bool> A(mod + mod);
   ll cnt = 0;
-  vc<pi> seg_raw(mod + mod);
+  vc<pair<modint61, modint61>> seg_raw(mod + mod);
   FOR(i, mod + mod) seg_raw[i] = {base, 0};
   SegTree<Mono> seg(seg_raw);
 
@@ -34,8 +35,8 @@ vc<bool> modular_subset_sum(int mod, vc<int> vals) {
       auto [L, R] = LR.back();
       LR.pop_back();
       if (L == R) continue;
-      ll x1 = seg.prod(L, R).se;
-      ll x2 = seg.prod(mod + L - val, mod + R - val).se;
+      modint61 x1 = seg.prod(L, R).se;
+      modint61 x2 = seg.prod(mod + L - val, mod + R - val).se;
       if (x1 == x2) continue;
       if (R == L + 1) {
         // 対称差 L が見つかった
