@@ -90,8 +90,8 @@ data:
   timestamp: '2022-03-19 16:40:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/graph/scc.test.cpp
   - test/library_checker/math/twosat.test.cpp
+  - test/library_checker/graph/scc.test.cpp
 documentation_of: graph/scc.hpp
 layout: document
 redirect_from:

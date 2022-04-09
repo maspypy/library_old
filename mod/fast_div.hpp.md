@@ -60,10 +60,10 @@ data:
   path: mod/fast_div.hpp
   requiredBy:
   - mod/mod_kth_root.hpp
+  - mod/tetration.hpp
   - mod/mod_pow.hpp
   - mod/binomial.hpp
   - mod/primitive_root.hpp
-  - mod/tetration.hpp
   timestamp: '2022-01-14 01:43:46+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

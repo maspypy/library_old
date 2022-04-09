@@ -50,14 +50,14 @@ data:
   path: ds/unionfind.hpp
   requiredBy:
   - graph/minimum_spanning_tree.hpp
-  - graph/check_bipartite.hpp
   - graph/functional.hpp
+  - graph/check_bipartite.hpp
   - flow/bipartite.hpp
   timestamp: '2022-01-12 05:33:30+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/datastructure/unionfind.test.cpp
   - test/library_checker/graph/bipartitematching.test.cpp
+  - test/library_checker/datastructure/unionfind.test.cpp
 documentation_of: ds/unionfind.hpp
 layout: document
 redirect_from:

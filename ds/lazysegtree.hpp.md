@@ -154,15 +154,15 @@ data:
   requiredBy:
   - other/rectangleunion.hpp
   - graph/minimum_spanning_tree.hpp
-  - graph/lazytreemonoid.hpp
   - graph/dualtreemonoid.hpp
+  - graph/lazytreemonoid.hpp
   timestamp: '2022-01-02 01:47:55+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/899_bfsnumbering.test.cpp
+  - test/aoj/DSL_2_H_min_add_lazy.test.cpp
   - test/aoj/DSL_2_F_min_set_lazy.test.cpp
   - test/aoj/DSL_4_A_rectangle_union.test.cpp
-  - test/aoj/DSL_2_H_min_add_lazy.test.cpp
   - test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
   - test/library_checker/datastructure/range_affine_range_sum.test.cpp
 documentation_of: ds/lazysegtree.hpp

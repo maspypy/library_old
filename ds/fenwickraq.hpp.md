@@ -80,8 +80,8 @@ data:
   timestamp: '2022-02-16 02:43:16+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/aoj/DSL_2_E_fenwick_raq.test.cpp
   - test/aoj/DSL_2_G_fenwick_raq.test.cpp
+  - test/aoj/DSL_2_E_fenwick_raq.test.cpp
 documentation_of: ds/fenwickraq.hpp
 layout: document
 redirect_from:

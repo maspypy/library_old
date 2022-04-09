@@ -5,10 +5,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/chromatic.hpp
     title: graph/chromatic.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linalg/spmat_det.hpp
     title: linalg/spmat_det.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: linalg/spmat_min_poly.hpp
     title: linalg/spmat_min_poly.hpp
   - icon: ':question:'
@@ -30,7 +30,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/sqrt_mod.test.cpp
     title: test/library_checker/math/sqrt_mod.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/matrix/sparse_matrix_det.test.cpp
     title: test/library_checker/matrix/sparse_matrix_det.test.cpp
   - icon: ':x:'
@@ -58,21 +58,21 @@ data:
   isVerificationFile: false
   path: other/random.hpp
   requiredBy:
-  - mod/modular_subset_sum.hpp
+  - graph/chromatic.hpp
   - mod/mod_sqrt.hpp
+  - mod/modular_subset_sum.hpp
   - poly/fps_sqrt.hpp
+  - string/rollinghash.hpp
   - linalg/spmat_min_poly.hpp
   - linalg/spmat_det.hpp
-  - string/rollinghash.hpp
-  - graph/chromatic.hpp
   timestamp: '2021-12-25 22:40:58+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/library_checker/matrix/sparse_matrix_det.test.cpp
-  - test/library_checker/polynomial/sqrt_of_fps.test.cpp
-  - test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
-  - test/library_checker/graph/chromatic_number.test.cpp
   - test/library_checker/math/sqrt_mod.test.cpp
+  - test/library_checker/graph/chromatic_number.test.cpp
+  - test/library_checker/string/zalgorithm_by_rollinghash.test.cpp
+  - test/library_checker/polynomial/sqrt_of_fps.test.cpp
 documentation_of: other/random.hpp
 layout: document
 redirect_from:

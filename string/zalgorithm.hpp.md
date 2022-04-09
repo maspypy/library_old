@@ -42,8 +42,8 @@ data:
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/string/run_enumerate.test.cpp
-  - test/library_checker/string/zalgorithm.test.cpp
   - test/library_checker/string/run_enumerate_vec.test.cpp
+  - test/library_checker/string/zalgorithm.test.cpp
 documentation_of: string/zalgorithm.hpp
 layout: document
 redirect_from:
