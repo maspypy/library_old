@@ -11,6 +11,12 @@ data:
   - icon: ':warning:'
     path: alg/lazy_cntsum_add.hpp
     title: alg/lazy_cntsum_add.hpp
+  - icon: ':warning:'
+    path: alg/lazy_cntsummin_add.hpp
+    title: alg/lazy_cntsummin_add.hpp
+  - icon: ':warning:'
+    path: alg/lazy_max_add.hpp
+    title: alg/lazy_max_add.hpp
   - icon: ':heavy_check_mark:'
     path: alg/lazy_min_add.hpp
     title: alg/lazy_min_add.hpp
@@ -132,8 +138,10 @@ data:
   - ds/fenwick2d_dense.hpp
   - ds/fenwick.hpp
   - alg/lazy_cntsum_add.hpp
+  - alg/lazy_max_add.hpp
   - alg/lazy_cntminmincnt_add.hpp
   - alg/lazy_add_mul.hpp
+  - alg/lazy_cntsummin_add.hpp
   - alg/lazy_minmax_add.hpp
   - alg/lazy_min_add.hpp
   timestamp: '2022-01-11 13:22:23+09:00'
