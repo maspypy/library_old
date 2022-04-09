@@ -2,6 +2,7 @@
 #include "graph/base.hpp"
 #include "graph/hld.hpp"
 
+// snippet 参照
 template <typename Graph, typename Data, typename F1, typename F2, typename F3>
 vc<Data> rerooting_dp(Graph& G, F1 fee, F2 fev, F3 fve, Data unit) {
   using E = typename Graph::edge_type;
