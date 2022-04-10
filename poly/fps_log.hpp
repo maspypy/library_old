@@ -3,7 +3,7 @@
 
 template <typename mint>
 vc<mint> fps_log(const vc<mint>& f) {
-  assert(f[0] == mint(0));
+  assert(f[0] == mint(1));
   ll N = len(f);
   vc<mint> df = f;
   FOR(i, N) df[i] *= mint(i);
