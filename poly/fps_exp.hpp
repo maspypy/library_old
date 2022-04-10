@@ -1,3 +1,4 @@
+#pragma once
 #include "poly/convolution.hpp"
 template <typename mint>
 vc<mint> fps_exp(vc<mint>& f) {

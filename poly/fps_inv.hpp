@@ -1,7 +1,8 @@
 #include "poly/convolution.hpp"
 
 template <typename mint>
-vc<mint> fps_inv(vc<mint>& F) {
+vc<mint> fps_inv(const vc<mint>& F) {
+  assert(F[0] != mint(0));
   vc<mint> G = {mint(1) / F[0]};
   G.reserve(len(F));
   ll N = len(F), n = 1;
