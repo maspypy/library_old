@@ -181,7 +181,8 @@ data:
     template <>\r\nlong double lc_inf<long double>() {\r\n  return 1 / .0;\r\n}\r\n\
     \r\ntemplate <typename T>\r\nT lc_div(T a, T b) {\r\n  return a / b - ((a ^ b)\
     \ < 0 and a % b);\r\n}\r\ntemplate <>\r\nlong double lc_div(long double a, long\
-    \ double b) {\r\n  return a / b;\r\n};\r\n\r\ntemplate <typename T, bool MINIMIZE\
+    \ double b) {\r\n  return a / b;\r\n};\r\ntemplate <>\r\ndouble lc_div(double\
+    \ a, double b) {\r\n  return a / b;\r\n};\r\n\r\ntemplate <typename T, bool MINIMIZE\
     \ = true>\r\nstruct LineContainer : multiset<Line<T>, less<>> {\r\n  using super\
     \ = multiset<Line<T>, less<>>;\r\n  using super::begin, super::end, super::insert,\
     \ super::erase;\r\n  using super::empty, super::lower_bound;\r\n  const T inf\
@@ -231,7 +232,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/line_add_get_min.test.cpp
   requiredBy: []
-  timestamp: '2022-04-09 22:35:37+09:00'
+  timestamp: '2022-04-10 16:38:07+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/line_add_get_min.test.cpp
