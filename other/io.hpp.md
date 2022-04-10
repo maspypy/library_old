@@ -13,6 +13,9 @@ data:
     path: test/aoj/ALDS1_1_C_primetest.test.cpp
     title: test/aoj/ALDS1_1_C_primetest.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/ALDS1_2_A_inversion.test.cpp
+    title: test/aoj/ALDS1_2_A_inversion.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_5_inversion.test.cpp
     title: test/aoj/ALDS1_5_inversion.test.cpp
   - icon: ':heavy_check_mark:'
@@ -385,6 +388,9 @@ data:
     path: test/yukicoder/1810_matpow.test.cpp
     title: test/yukicoder/1810_matpow.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/yukicoder/4_modular_subset_sum.test.cpp
+    title: test/yukicoder/4_modular_subset_sum.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/899_bfsnumbering.test.cpp
     title: test/yukicoder/899_bfsnumbering.test.cpp
   _isVerificationFailed: false
@@ -598,6 +604,7 @@ data:
   - test/yukicoder/899_bfsnumbering.test.cpp
   - test/yukicoder/1320_mincostcycle.test.cpp
   - test/yukicoder/1038_centroid.test.cpp
+  - test/yukicoder/4_modular_subset_sum.test.cpp
   - test/yukicoder/1002_centroid.test.cpp
   - test/aoj/ALDS1_5_inversion.test.cpp
   - test/aoj/DSL_2_G_fenwick_raq.test.cpp
@@ -616,6 +623,7 @@ data:
   - test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
   - test/aoj/DSL_2_D_dualsegtree.test.cpp
   - test/aoj/GRL_6_A_maxflow.test.cpp
+  - test/aoj/ALDS1_2_A_inversion.test.cpp
   - test/library_checker/matrix/matrix_product.test.cpp
   - test/library_checker/matrix/matrix_det.test.cpp
   - test/library_checker/matrix/hafnian_of_matrix.test.cpp

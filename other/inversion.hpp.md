@@ -10,6 +10,9 @@ data:
   _extendedRequiredBy: []
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/aoj/ALDS1_2_A_inversion.test.cpp
+    title: test/aoj/ALDS1_2_A_inversion.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_5_inversion.test.cpp
     title: test/aoj/ALDS1_5_inversion.test.cpp
   _isVerificationFailed: false
@@ -64,6 +67,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/ALDS1_5_inversion.test.cpp
+  - test/aoj/ALDS1_2_A_inversion.test.cpp
 documentation_of: other/inversion.hpp
 layout: document
 redirect_from:

@@ -105,7 +105,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: alg/monoid_reverse.hpp
       title: alg/monoid_reverse.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: alg/monoid_rollinghash.hpp
       title: alg/monoid_rollinghash.hpp
     - icon: ':heavy_check_mark:'
@@ -408,10 +408,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: mod/modint.hpp
       title: mod/modint.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: mod/modint61.hpp
       title: mod/modint61.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: mod/modular_subset_sum.hpp
       title: mod/modular_subset_sum.hpp
     - icon: ':heavy_check_mark:'
@@ -673,6 +673,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/ALDS1_1_C_primetest.test.cpp
       title: test/aoj/ALDS1_1_C_primetest.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/ALDS1_2_A_inversion.test.cpp
+      title: test/aoj/ALDS1_2_A_inversion.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/ALDS1_5_inversion.test.cpp
       title: test/aoj/ALDS1_5_inversion.test.cpp
@@ -1075,6 +1078,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1810_matpow.test.cpp
       title: test/yukicoder/1810_matpow.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/yukicoder/4_modular_subset_sum.test.cpp
+      title: test/yukicoder/4_modular_subset_sum.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/899_bfsnumbering.test.cpp
       title: test/yukicoder/899_bfsnumbering.test.cpp
