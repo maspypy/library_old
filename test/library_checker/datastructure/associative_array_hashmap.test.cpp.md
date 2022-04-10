@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ds/hashmap.hpp
     title: ds/hashmap.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
   _extendedRequiredBy: []
@@ -184,10 +184,12 @@ data:
     \ ll& key) {\r\n    int i = 0;\r\n    for (i = hash(key); used[i] && keys[i] !=\
     \ key; (i += 1) &= (N - 1)) {}\r\n    return i;\r\n  }\r\n\r\n  Val& operator[](const\
     \ ll& key) {\r\n    int i = index(key);\r\n    if (!used[i]) IDS.eb(i), used[i]\
-    \ = 1, keys[i] = key, vals[i] = Val{};\r\n    return vals[i];\r\n  }\r\n  bool\
-    \ contain(const ll& key) {\r\n    int i = index(key);\r\n    return used[i] &&\
-    \ keys[i] == key;\r\n  }\r\n\r\n  void reset(){\r\n    for(auto&& i : IDS) used[i]\
-    \ = 0;\r\n    IDS.clear();\r\n  }\r\n};\r\n#line 5 \"test/library_checker/datastructure/associative_array_hashmap.test.cpp\"\
+    \ = 1, keys[i] = key, vals[i] = Val{};\r\n    return vals[i];\r\n  }\r\n\r\n \
+    \ bool contain(const ll& key) {\r\n    int i = index(key);\r\n    return used[i]\
+    \ && keys[i] == key;\r\n  }\r\n\r\n  bool count(const ll& key) {\r\n    int i\
+    \ = index(key);\r\n    return used[i] && keys[i] == key;\r\n  }\r\n\r\n  void\
+    \ reset(){\r\n    for(auto&& i : IDS) used[i] = 0;\r\n    IDS.clear();\r\n  }\r\
+    \n};\r\n#line 5 \"test/library_checker/datastructure/associative_array_hashmap.test.cpp\"\
     \n\r\nvoid solve() {\r\n  LL(Q);\r\n  HashMapLL<ll> A;\r\n  FOR(_, Q) {\r\n  \
     \  LL(t);\r\n    if (t == 0) {\r\n      LL(k, v);\r\n      A[k] = v;\r\n    }\
     \ else {\r\n      LL(k);\r\n      print(A[k]);\r\n    }\r\n  }\r\n}\r\n\r\nsigned\
@@ -205,7 +207,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/associative_array_hashmap.test.cpp
   requiredBy: []
-  timestamp: '2022-04-09 22:35:37+09:00'
+  timestamp: '2022-04-11 04:12:12+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/associative_array_hashmap.test.cpp

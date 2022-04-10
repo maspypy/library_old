@@ -5,12 +5,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: geo/angle_sort.hpp
     title: geo/angle_sort.hpp
-  - icon: ':warning:'
+  - icon: ':x:'
     path: geo/convexhull.hpp
     title: geo/convexhull.hpp
   - icon: ':heavy_check_mark:'
     path: geo/dynamicupperhull.hpp
     title: geo/dynamicupperhull.hpp
+  - icon: ':x:'
+    path: geo/points_diameter.hpp
+    title: geo/points_diameter.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/geometry/convex_layers.test.cpp
@@ -18,27 +21,35 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/geometry/sort_points_by_argument.test.cpp
     title: test/library_checker/geometry/sort_points_by_argument.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: test/yukicoder/96_points_diameter.test.cpp
+    title: test/yukicoder/96_points_diameter.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"geo/base.hpp\"\n\ntemplate<typename X = long long>\nstruct\
     \ Point {\n  X x, y;\n  Point(X x=0, X y=0) : x(x), y(y) {}\n\n  template <typename\
-    \ S, typename T>\n  Point(pair<S, T> p) : x(p.fi), y(p.se) {}\n\n  Point operator-(Point\
-    \ p) const { return {x - p.x, y - p.y}; }\n  X det(Point p) const { return x *\
-    \ p.y - y * p.x; }\n  X dot(Point p) const { return x * p.x + y * p.y; }\n  bool\
-    \ operator<(Point p) const {\n    if (x != p.x) return x < p.x;\n    return y\
-    \ < p.y;\n  }\n  bool operator==(Point p) const { return x == p.x && y == p.y;\
-    \ }\n  Point operator-() const { return {-x, -y}; }\n};\n"
+    \ S, typename T>\n  Point(pair<S, T> p) : x(p.fi), y(p.se) {}\n\n  Point operator+(Point\
+    \ p) const { return {x + p.x, y + p.y}; }\n  Point operator-(Point p) const {\
+    \ return {x - p.x, y - p.y}; }\n  X det(Point p) const { return x * p.y - y *\
+    \ p.x; }\n  X dot(Point p) const { return x * p.x + y * p.y; }\n  pair<double,double>\
+    \ polar(){\n    double r = sqrt(x * x + y * y);\n    double theta = atan2(y, x);\n\
+    \    return {r, theta};\n  }\n  bool operator<(Point p) const {\n    if (x !=\
+    \ p.x) return x < p.x;\n    return y < p.y;\n  }\n  bool operator==(Point p) const\
+    \ { return x == p.x && y == p.y; }\n  Point operator-() const { return {-x, -y};\
+    \ }\n};\n"
   code: "#pragma once\n\ntemplate<typename X = long long>\nstruct Point {\n  X x,\
     \ y;\n  Point(X x=0, X y=0) : x(x), y(y) {}\n\n  template <typename S, typename\
-    \ T>\n  Point(pair<S, T> p) : x(p.fi), y(p.se) {}\n\n  Point operator-(Point p)\
-    \ const { return {x - p.x, y - p.y}; }\n  X det(Point p) const { return x * p.y\
-    \ - y * p.x; }\n  X dot(Point p) const { return x * p.x + y * p.y; }\n  bool operator<(Point\
-    \ p) const {\n    if (x != p.x) return x < p.x;\n    return y < p.y;\n  }\n  bool\
-    \ operator==(Point p) const { return x == p.x && y == p.y; }\n  Point operator-()\
-    \ const { return {-x, -y}; }\n};\n"
+    \ T>\n  Point(pair<S, T> p) : x(p.fi), y(p.se) {}\n\n  Point operator+(Point p)\
+    \ const { return {x + p.x, y + p.y}; }\n  Point operator-(Point p) const { return\
+    \ {x - p.x, y - p.y}; }\n  X det(Point p) const { return x * p.y - y * p.x; }\n\
+    \  X dot(Point p) const { return x * p.x + y * p.y; }\n  pair<double,double> polar(){\n\
+    \    double r = sqrt(x * x + y * y);\n    double theta = atan2(y, x);\n    return\
+    \ {r, theta};\n  }\n  bool operator<(Point p) const {\n    if (x != p.x) return\
+    \ x < p.x;\n    return y < p.y;\n  }\n  bool operator==(Point p) const { return\
+    \ x == p.x && y == p.y; }\n  Point operator-() const { return {-x, -y}; }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: geo/base.hpp
@@ -46,9 +57,11 @@ data:
   - geo/convexhull.hpp
   - geo/angle_sort.hpp
   - geo/dynamicupperhull.hpp
-  timestamp: '2022-03-14 00:13:01+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  - geo/points_diameter.hpp
+  timestamp: '2022-04-11 04:11:46+09:00'
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
+  - test/yukicoder/96_points_diameter.test.cpp
   - test/library_checker/geometry/convex_layers.test.cpp
   - test/library_checker/geometry/sort_points_by_argument.test.cpp
 documentation_of: geo/base.hpp

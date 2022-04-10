@@ -1,9 +1,21 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: linalg/mat_mul.hpp
-    title: linalg/mat_mul.hpp
+  - icon: ':question:'
+    path: ds/hashmap.hpp
+    title: ds/hashmap.hpp
+  - icon: ':question:'
+    path: ds/unionfind.hpp
+    title: ds/unionfind.hpp
+  - icon: ':question:'
+    path: geo/base.hpp
+    title: geo/base.hpp
+  - icon: ':x:'
+    path: geo/convexhull.hpp
+    title: geo/convexhull.hpp
+  - icon: ':x:'
+    path: geo/points_diameter.hpp
+    title: geo/points_diameter.hpp
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
@@ -12,24 +24,24 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_6_D
+    PROBLEM: https://yukicoder.me/problems/no/96
     links:
-    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_6_D
-  bundledCode: "#line 1 \"test/aoj/ITP1_6_D_matvec.test.cpp\"\n#define PROBLEM \\\n\
-    \  \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_6_D\"\n#line\
-    \ 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\n\
-    using ll = long long;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing\
-    \ u32 = unsigned int;\nusing u64 = unsigned long long;\nusing i128 = __int128;\n\
-    \ntemplate <class T>\nusing vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\n\
-    template <class T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc\
-    \ = vector<vvvc<T>>;\ntemplate <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate\
-    \ <class T>\nusing pq = priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T,\
-    \ vector<T>, greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
+    - https://yukicoder.me/problems/no/96
+  bundledCode: "#line 1 \"test/yukicoder/96_points_diameter.test.cpp\"\n#define PROBLEM\
+    \ \"https://yukicoder.me/problems/no/96\"\n#line 1 \"my_template.hpp\"\n#include\
+    \ <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\nusing pi =\
+    \ pair<ll, ll>;\nusing vi = vector<ll>;\nusing u32 = unsigned int;\nusing u64\
+    \ = unsigned long long;\nusing i128 = __int128;\n\ntemplate <class T>\nusing vc\
+    \ = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\ntemplate <class\
+    \ T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc = vector<vvvc<T>>;\n\
+    template <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate <class T>\nusing\
+    \ pq = priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T, vector<T>,\
+    \ greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
     #define vv(type, name, h, ...) \\\n  vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n\
     #define vvv(type, name, h, w, ...)   \\\n  vector<vector<vector<type>>> name(\
     \ \\\n      h, vector<vector<type>>(w, vector<type>(__VA_ARGS__)))\n#define vvvv(type,\
@@ -174,45 +186,140 @@ data:
     \ ? \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool\
     \ t = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\
     \nvoid yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1)\
-    \ { yes(!t); }\r\n#line 2 \"linalg/mat_mul.hpp\"\n\r\ntemplate <class T, is_modint_t<T>*\
-    \ = nullptr>\r\nvc<vc<T>> mat_mul(const vc<vc<T>>& A, const vc<vc<T>>& B) {\r\n\
-    \  // mod \u3092\u3068\u308B\u56DE\u6570\u3092\u6E1B\u3089\u3057\u3066\u307F\u308B\
-    \r\n  auto N = len(A), M = len(B), K = len(B[0]);\r\n  vv(T, C, N, K);\r\n  const\
-    \ u64 MOD2 = 8ull * T::get_mod() * T::get_mod();\r\n  FOR(n, N) {\r\n    vc<u64>\
-    \ tmp(K);\r\n    FOR(m, M) FOR(k, K) {\r\n      tmp[k] += u64(A[n][m].val) * B[m][k].val;\r\
-    \n      if (tmp[k] >= MOD2) tmp[k] -= MOD2;\r\n    }\r\n    FOR(k, K) C[n][k]\
-    \ = tmp[k];\r\n  }\r\n  return C;\r\n}\r\n\r\ntemplate <class T, is_not_modint_t<T>*\
-    \ = nullptr>\r\nvc<vc<T>> mat_mul(const vc<vc<T>>& A, const vc<vc<T>>& B) {\r\n\
-    \  auto N = len(A), M = len(B), K = len(B[0]);\r\n  vv(T, C, N, K);\r\n  FOR(n,\
-    \ N) FOR(m, M) FOR(k, K) C[n][k] += A[n][m] * B[m][k];\r\n  return C;\r\n}\r\n\
-    \r\ntemplate <class T>\r\nvc<T> mat_vec_mul(const vc<vc<T>>& A, const vc<T>& B)\
-    \ {\r\n  auto N = len(A), M = len(A[0]);\r\n  assert(len(B)==M);\r\n  vc<T> C(N);\r\
-    \n  FOR(i, N) FOR(j, M) C[i] += A[i][j] * B[j];\r\n  return C;\r\n}\r\n#line 6\
-    \ \"test/aoj/ITP1_6_D_matvec.test.cpp\"\n\nvoid solve() {\n  LL(H, W);\n  VV(ll,\
-    \ A, H, W);\n  VEC(ll, B, W);\n  auto C = mat_vec_mul(A, B);\n  for (auto&& c:\
-    \ C) print(c);\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
-    \  cout << setprecision(15);\n\n  ll T = 1;\n  // LL(T);\n  FOR(_, T) solve();\n\
-    \n  return 0;\n}\n"
-  code: "#define PROBLEM \\\n  \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_6_D\"\
-    \n#include \"my_template.hpp\"\n#include \"other/io.hpp\"\n#include \"linalg/mat_mul.hpp\"\
-    \n\nvoid solve() {\n  LL(H, W);\n  VV(ll, A, H, W);\n  VEC(ll, B, W);\n  auto\
-    \ C = mat_vec_mul(A, B);\n  for (auto&& c: C) print(c);\n}\n\nsigned main() {\n\
-    \  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\
-    \n  ll T = 1;\n  // LL(T);\n  FOR(_, T) solve();\n\n  return 0;\n}\n"
+    \ { yes(!t); }\r\n#line 1 \"ds/hashmap.hpp\"\ntemplate <typename Val, int LOG\
+    \ = 20>\r\nstruct HashMapLL {\r\n  int N;\r\n  ll* keys;\r\n  Val* vals;\r\n \
+    \ vc<int> IDS;\r\n  bitset<1 << LOG> used;\r\n  const int shift;\r\n  const uint64_t\
+    \ r = 11995408973635179863ULL;\r\n  HashMapLL()\r\n      : N(1 << LOG), keys(new\
+    \ ll[N]), vals(new Val[N]), shift(64 - __lg(N)) {}\r\n  int hash(ll x) {\r\n \
+    \   static const uint64_t FIXED_RANDOM\r\n        = std::chrono::steady_clock::now().time_since_epoch().count();\r\
+    \n    return (uint64_t(x + FIXED_RANDOM) * r) >> shift;\r\n  }\r\n\r\n  int index(const\
+    \ ll& key) {\r\n    int i = 0;\r\n    for (i = hash(key); used[i] && keys[i] !=\
+    \ key; (i += 1) &= (N - 1)) {}\r\n    return i;\r\n  }\r\n\r\n  Val& operator[](const\
+    \ ll& key) {\r\n    int i = index(key);\r\n    if (!used[i]) IDS.eb(i), used[i]\
+    \ = 1, keys[i] = key, vals[i] = Val{};\r\n    return vals[i];\r\n  }\r\n\r\n \
+    \ bool contain(const ll& key) {\r\n    int i = index(key);\r\n    return used[i]\
+    \ && keys[i] == key;\r\n  }\r\n\r\n  bool count(const ll& key) {\r\n    int i\
+    \ = index(key);\r\n    return used[i] && keys[i] == key;\r\n  }\r\n\r\n  void\
+    \ reset(){\r\n    for(auto&& i : IDS) used[i] = 0;\r\n    IDS.clear();\r\n  }\r\
+    \n};\r\n#line 2 \"ds/unionfind.hpp\"\n\nstruct UnionFind {\n  int num;\n  int\
+    \ comp;\n  vc<int> size, par;\n  UnionFind(int n) : num(n), comp(n), size(n, 1),\
+    \ par(n) {\n    iota(par.begin(), par.end(), 0);\n  }\n  int find(int x) {\n \
+    \   while (par[x] != x) {\n      par[x] = par[par[x]];\n      x = par[x];\n  \
+    \  }\n    return x;\n  }\n\n  int operator[](int x) { return find(x); }\n\n  bool\
+    \ merge(ll x, ll y) {\n    x = find(x);\n    y = find(y);\n    if (x == y) { return\
+    \ false; }\n    comp--;\n    if (size[x] < size[y]) swap(x, y);\n    size[x] +=\
+    \ size[y];\n    size[y] = 0;\n    par[y] = x;\n    return true;\n  }\n\n  vc<int>\
+    \ find_all() {\n    vc<int> A(num);\n    FOR(i, num) A[i] = find(i);\n    return\
+    \ A;\n  }\n};\n#line 2 \"geo/base.hpp\"\n\ntemplate<typename X = long long>\n\
+    struct Point {\n  X x, y;\n  Point(X x=0, X y=0) : x(x), y(y) {}\n\n  template\
+    \ <typename S, typename T>\n  Point(pair<S, T> p) : x(p.fi), y(p.se) {}\n\n  Point\
+    \ operator+(Point p) const { return {x + p.x, y + p.y}; }\n  Point operator-(Point\
+    \ p) const { return {x - p.x, y - p.y}; }\n  X det(Point p) const { return x *\
+    \ p.y - y * p.x; }\n  X dot(Point p) const { return x * p.x + y * p.y; }\n  pair<double,double>\
+    \ polar(){\n    double r = sqrt(x * x + y * y);\n    double theta = atan2(y, x);\n\
+    \    return {r, theta};\n  }\n  bool operator<(Point p) const {\n    if (x !=\
+    \ p.x) return x < p.x;\n    return y < p.y;\n  }\n  bool operator==(Point p) const\
+    \ { return x == p.x && y == p.y; }\n  Point operator-() const { return {-x, -y};\
+    \ }\n};\n#line 2 \"geo/convexhull.hpp\"\n\r\ntemplate<typename T>\r\nvector<T>\
+    \ ConvexHull(vector<pair<T, T>>& XY, string mode = \"full\",\r\n             \
+    \         bool inclusive = false, bool sorted = false) {\r\n  assert(mode == \"\
+    full\" || mode == \"lower\" || mode == \"upper\");\r\n  ll N = XY.size();\r\n\
+    \  if (N == 1) return {0};\r\n  if (N == 2) return {0, 1};\r\n  vc<int> I = argsort(XY);\r\
+    \n\r\n  auto check = [&](ll i, ll j, ll k) -> bool {\r\n    auto xi = XY[i].fi,\
+    \ yi = XY[i].se;\r\n    auto xj = XY[j].fi, yj = XY[j].se;\r\n    auto xk = XY[k].fi,\
+    \ yk = XY[k].se;\r\n    auto dx1 = xj - xi, dy1 = yj - yi;\r\n    auto dx2 = xk\
+    \ - xj, dy2 = yk - yj;\r\n    ll det = dx1 * dy2 - dy1 * dx2;\r\n    return (inclusive\
+    \ ? det >= 0 : det > 0);\r\n  };\r\n\r\n  auto calc = [&]() {\r\n    vector<int>\
+    \ P;\r\n    for (auto&& k: I) {\r\n      while (P.size() > 1) {\r\n        auto\
+    \ i = P[P.size() - 2];\r\n        auto j = P[P.size() - 1];\r\n        if (check(i,\
+    \ j, k)) break;\r\n        P.pop_back();\r\n      }\r\n      P.eb(k);\r\n    }\r\
+    \n    return P;\r\n  };\r\n\r\n  vc<int> P;\r\n  if (mode == \"full\" || mode\
+    \ == \"lower\") {\r\n    vc<int> Q = calc();\r\n    P.insert(P.end(), all(Q));\r\
+    \n  }\r\n  if (mode == \"full\" || mode == \"upper\") {\r\n    if (!P.empty())\
+    \ P.pop_back();\r\n    reverse(all(I));\r\n    vc<int> Q = calc();\r\n    P.insert(P.end(),\
+    \ all(Q));\r\n  }\r\n  if (mode == \"upper\") reverse(all(P));\r\n  if(len(P)\
+    \ >= 2 && P[0] == P.back()) P.pop_back();\r\n  return P;\r\n}\r\n\r\ntemplate<typename\
+    \ X>\r\nvc<int> ConvexHull(vector<Point<X>>& XY, string mode = \"full\",\r\n \
+    \                     bool inclusive = false, bool sorted = false) {\r\n  assert(mode\
+    \ == \"full\" || mode == \"lower\" || mode == \"upper\");\r\n  ll N = XY.size();\r\
+    \n  if (N == 1) return {0};\r\n  if (N == 2) return {0, 1};\r\n  vc<int> I = argsort(XY);\r\
+    \n\r\n  auto check = [&](ll i, ll j, ll k) -> bool {\r\n    auto xi = XY[i].x,\
+    \ yi = XY[i].y;\r\n    auto xj = XY[j].x, yj = XY[j].y;\r\n    auto xk = XY[k].x,\
+    \ yk = XY[k].y;\r\n    auto dx1 = xj - xi, dy1 = yj - yi;\r\n    auto dx2 = xk\
+    \ - xj, dy2 = yk - yj;\r\n    ll det = dx1 * dy2 - dy1 * dx2;\r\n    return (inclusive\
+    \ ? det >= 0 : det > 0);\r\n  };\r\n\r\n  auto calc = [&]() {\r\n    vc<int> P;\r\
+    \n    for (auto&& k: I) {\r\n      while (P.size() > 1) {\r\n        auto i =\
+    \ P[P.size() - 2];\r\n        auto j = P[P.size() - 1];\r\n        if (check(i,\
+    \ j, k)) break;\r\n        P.pop_back();\r\n      }\r\n      P.eb(k);\r\n    }\r\
+    \n    return P;\r\n  };\r\n\r\n  vc<int> P;\r\n  if (mode == \"full\" || mode\
+    \ == \"lower\") {\r\n    vc<int> Q = calc();\r\n    P.insert(P.end(), all(Q));\r\
+    \n  }\r\n  if (mode == \"full\" || mode == \"upper\") {\r\n    if (!P.empty())\
+    \ P.pop_back();\r\n    reverse(all(I));\r\n    vc<int> Q = calc();\r\n    P.insert(P.end(),\
+    \ all(Q));\r\n  }\r\n  if (mode == \"upper\") reverse(all(P));\r\n  if(len(P)\
+    \ >= 2 && P[0] == P.back()) P.pop_back();\r\n  return P;\r\n}\n#line 3 \"geo/points_diameter.hpp\"\
+    \n\n// \u6700\u9060\u70B9\u5BFE\u3068\u306A\u308B 2 \u70B9\u306E index \u3092\u304B\
+    \u3048\u3059\u3002\u7A7A\u96C6\u5408\u306F\u30A8\u30E9\u30FC\u3002\ntemplate <typename\
+    \ T>\npair<int, int> points_diameter(vc<Point<T>>& XY) {\n  ll N = len(XY);\n\
+    \  assert(N >= 1);\n  if (N == 1) return {0, 0};\n  auto I = ConvexHull(XY, \"\
+    full\");\n  pi res = {0, 0};\n  ll best = 0;\n  ll s = 0;\n  FOR(k, len(I)) {\n\
+    \    ll i = (k == 0 ? I.back() : I[k - 1]), j = I[k];\n    Point<T> A = XY[i],\
+    \ B = XY[j];\n    ll dx = B.x - A.x, dy = B.y - A.y;\n    Point<T> vec = {-dy,\
+    \ dx};\n    while (1) {\n      Point<T> p = XY[I[s]], q = XY[I[(s + 1) % len(I)]];\n\
+    \      if (vec.dot(p - q) < 0)\n        s = (s + 1) % len(I);\n      else\n  \
+    \      break;\n    }\n    Point<T> C = XY[I[s]];\n    if (chmax(best, (A - C).dot(A\
+    \ - C))) res = {i, I[s]};\n    if (chmax(best, (B - C).dot(B - C))) res = {j,\
+    \ I[s]};\n  }\n  return res;\n}\n#line 7 \"test/yukicoder/96_points_diameter.test.cpp\"\
+    \n\nusing P = Point<ll>;\n\nvoid solve() {\n  LL(N);\n  if (N == 0) return print(1);\n\
+    \  vc<P> XY(N);\n  FOR(i, N) {\n    LL(x, y);\n    XY[i] = {x, y};\n  }\n\n  HashMapLL<int>\
+    \ MP;\n  auto to_key = [&](P p) -> ll { return p.x * 1e6 + p.y; };\n  FOR(i, N)\
+    \ { MP[to_key(XY[i])] = i; }\n\n  UnionFind uf(N);\n  FOR(i, N) {\n    P p = XY[i];\n\
+    \    FOR3(dx, 0, 11) FOR3(dy, -10, 11) {\n      if (dx * dx + dy * dy > 100) continue;\n\
+    \      if (dx == 0 && dy == 0) continue;\n      P q = p;\n      q.x += dx, q.y\
+    \ += dy;\n      ll key = to_key(q);\n      if (!MP.count(key)) continue;\n   \
+    \   ll j = MP[key];\n      uf.merge(i, j);\n    }\n  }\n\n  vc<vi> IDS(N);\n \
+    \ FOR(v, N) IDS[uf[v]].eb(v);\n\n  using Re = double;\n  Re ANS = 2.0;\n\n  for\
+    \ (auto&& I: IDS) {\n    if (len(I) == 0) continue;\n    vc<P> xy;\n    for (auto&&\
+    \ i: I) xy.eb(XY[i]);\n    auto [a, b] = points_diameter(xy);\n    P vec = xy[b]\
+    \ - xy[a];\n    chmax(ANS, sqrt(Re(vec.dot(vec))) + 2.0);\n  }\n  print(ANS);\n\
+    }\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout\
+    \ << setprecision(15);\n\n  ll T = 1;\n  // LL(T);\n  FOR(_, T) solve();\n\n \
+    \ return 0;\n}\n"
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/96\"\n#include \"my_template.hpp\"\
+    \n#include \"other/io.hpp\"\n#include \"ds/hashmap.hpp\"\n#include \"ds/unionfind.hpp\"\
+    \n#include \"geo/points_diameter.hpp\"\n\nusing P = Point<ll>;\n\nvoid solve()\
+    \ {\n  LL(N);\n  if (N == 0) return print(1);\n  vc<P> XY(N);\n  FOR(i, N) {\n\
+    \    LL(x, y);\n    XY[i] = {x, y};\n  }\n\n  HashMapLL<int> MP;\n  auto to_key\
+    \ = [&](P p) -> ll { return p.x * 1e6 + p.y; };\n  FOR(i, N) { MP[to_key(XY[i])]\
+    \ = i; }\n\n  UnionFind uf(N);\n  FOR(i, N) {\n    P p = XY[i];\n    FOR3(dx,\
+    \ 0, 11) FOR3(dy, -10, 11) {\n      if (dx * dx + dy * dy > 100) continue;\n \
+    \     if (dx == 0 && dy == 0) continue;\n      P q = p;\n      q.x += dx, q.y\
+    \ += dy;\n      ll key = to_key(q);\n      if (!MP.count(key)) continue;\n   \
+    \   ll j = MP[key];\n      uf.merge(i, j);\n    }\n  }\n\n  vc<vi> IDS(N);\n \
+    \ FOR(v, N) IDS[uf[v]].eb(v);\n\n  using Re = double;\n  Re ANS = 2.0;\n\n  for\
+    \ (auto&& I: IDS) {\n    if (len(I) == 0) continue;\n    vc<P> xy;\n    for (auto&&\
+    \ i: I) xy.eb(XY[i]);\n    auto [a, b] = points_diameter(xy);\n    P vec = xy[b]\
+    \ - xy[a];\n    chmax(ANS, sqrt(Re(vec.dot(vec))) + 2.0);\n  }\n  print(ANS);\n\
+    }\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout\
+    \ << setprecision(15);\n\n  ll T = 1;\n  // LL(T);\n  FOR(_, T) solve();\n\n \
+    \ return 0;\n}\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
-  - linalg/mat_mul.hpp
+  - ds/hashmap.hpp
+  - ds/unionfind.hpp
+  - geo/points_diameter.hpp
+  - geo/convexhull.hpp
+  - geo/base.hpp
   isVerificationFile: true
-  path: test/aoj/ITP1_6_D_matvec.test.cpp
+  path: test/yukicoder/96_points_diameter.test.cpp
   requiredBy: []
-  timestamp: '2022-04-09 22:35:37+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-04-11 04:12:12+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/aoj/ITP1_6_D_matvec.test.cpp
+documentation_of: test/yukicoder/96_points_diameter.test.cpp
 layout: document
 redirect_from:
-- /verify/test/aoj/ITP1_6_D_matvec.test.cpp
-- /verify/test/aoj/ITP1_6_D_matvec.test.cpp.html
-title: test/aoj/ITP1_6_D_matvec.test.cpp
+- /verify/test/yukicoder/96_points_diameter.test.cpp
+- /verify/test/yukicoder/96_points_diameter.test.cpp.html
+title: test/yukicoder/96_points_diameter.test.cpp
 ---

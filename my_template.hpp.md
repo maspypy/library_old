@@ -402,9 +402,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/899_bfsnumbering.test.cpp
     title: test/yukicoder/899_bfsnumbering.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: test/yukicoder/96_points_diameter.test.cpp
+    title: test/yukicoder/96_points_diameter.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace\
@@ -525,13 +528,14 @@ data:
   requiredBy:
   - graph/bipartite_coloring.hpp
   timestamp: '2022-03-14 04:45:03+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1810_matpow.test.cpp
   - test/yukicoder/899_bfsnumbering.test.cpp
   - test/yukicoder/1320_mincostcycle.test.cpp
   - test/yukicoder/1038_centroid.test.cpp
   - test/yukicoder/4_modular_subset_sum.test.cpp
+  - test/yukicoder/96_points_diameter.test.cpp
   - test/yukicoder/1002_centroid.test.cpp
   - test/yukicoder/17_warshall_floyd.test.cpp
   - test/aoj/ALDS1_5_inversion.test.cpp

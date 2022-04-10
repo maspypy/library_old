@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: geo/base.hpp
     title: geo/base.hpp
   - icon: ':heavy_check_mark:'
     path: geo/dynamicupperhull.hpp
     title: geo/dynamicupperhull.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
   _extendedRequiredBy: []
@@ -180,12 +180,14 @@ data:
     \ { yes(!t); }\r\n#line 2 \"geo/base.hpp\"\n\ntemplate<typename X = long long>\n\
     struct Point {\n  X x, y;\n  Point(X x=0, X y=0) : x(x), y(y) {}\n\n  template\
     \ <typename S, typename T>\n  Point(pair<S, T> p) : x(p.fi), y(p.se) {}\n\n  Point\
-    \ operator-(Point p) const { return {x - p.x, y - p.y}; }\n  X det(Point p) const\
-    \ { return x * p.y - y * p.x; }\n  X dot(Point p) const { return x * p.x + y *\
-    \ p.y; }\n  bool operator<(Point p) const {\n    if (x != p.x) return x < p.x;\n\
-    \    return y < p.y;\n  }\n  bool operator==(Point p) const { return x == p.x\
-    \ && y == p.y; }\n  Point operator-() const { return {-x, -y}; }\n};\n#line 2\
-    \ \"geo/dynamicupperhull.hpp\"\n\r\n/*\r\nhttps://codeforces.com/blog/entry/75929\r\
+    \ operator+(Point p) const { return {x + p.x, y + p.y}; }\n  Point operator-(Point\
+    \ p) const { return {x - p.x, y - p.y}; }\n  X det(Point p) const { return x *\
+    \ p.y - y * p.x; }\n  X dot(Point p) const { return x * p.x + y * p.y; }\n  pair<double,double>\
+    \ polar(){\n    double r = sqrt(x * x + y * y);\n    double theta = atan2(y, x);\n\
+    \    return {r, theta};\n  }\n  bool operator<(Point p) const {\n    if (x !=\
+    \ p.x) return x < p.x;\n    return y < p.y;\n  }\n  bool operator==(Point p) const\
+    \ { return x == p.x && y == p.y; }\n  Point operator-() const { return {-x, -y};\
+    \ }\n};\n#line 2 \"geo/dynamicupperhull.hpp\"\n\r\n/*\r\nhttps://codeforces.com/blog/entry/75929\r\
     \n\u52D5\u7684\u51F8\u5305\u3002\r\nx \u5EA7\u6A19\u3067\u30BD\u30FC\u30C8\u3057\
     \u3066\u5B8C\u5168\u4E8C\u5206\u6728\u306E\u30BB\u30B0\u6728\u306E\u5F62\u306B\
     \u3057\u3066\u304A\u304F\u3002\r\n\u30BB\u30B0\u6728\u306E\u30DE\u30FC\u30B8\u90E8\
@@ -274,7 +276,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/geometry/convex_layers.test.cpp
   requiredBy: []
-  timestamp: '2022-04-09 22:35:37+09:00'
+  timestamp: '2022-04-11 04:11:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/geometry/convex_layers.test.cpp

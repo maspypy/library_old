@@ -4,13 +4,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: geo/angle_sort.hpp
     title: geo/angle_sort.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: geo/base.hpp
     title: geo/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
   _extendedRequiredBy: []
@@ -180,13 +180,15 @@ data:
     \ { yes(!t); }\r\n#line 2 \"geo/base.hpp\"\n\ntemplate<typename X = long long>\n\
     struct Point {\n  X x, y;\n  Point(X x=0, X y=0) : x(x), y(y) {}\n\n  template\
     \ <typename S, typename T>\n  Point(pair<S, T> p) : x(p.fi), y(p.se) {}\n\n  Point\
-    \ operator-(Point p) const { return {x - p.x, y - p.y}; }\n  X det(Point p) const\
-    \ { return x * p.y - y * p.x; }\n  X dot(Point p) const { return x * p.x + y *\
-    \ p.y; }\n  bool operator<(Point p) const {\n    if (x != p.x) return x < p.x;\n\
-    \    return y < p.y;\n  }\n  bool operator==(Point p) const { return x == p.x\
-    \ && y == p.y; }\n  Point operator-() const { return {-x, -y}; }\n};\n#line 2\
-    \ \"geo/angle_sort.hpp\"\n\r\n// \u504F\u89D2\u30BD\u30FC\u30C8\u306B\u5BFE\u3059\
-    \u308B argsort\r\ntemplate<typename Point>\r\nvector<int> angle_argsort(vector<Point>&\
+    \ operator+(Point p) const { return {x + p.x, y + p.y}; }\n  Point operator-(Point\
+    \ p) const { return {x - p.x, y - p.y}; }\n  X det(Point p) const { return x *\
+    \ p.y - y * p.x; }\n  X dot(Point p) const { return x * p.x + y * p.y; }\n  pair<double,double>\
+    \ polar(){\n    double r = sqrt(x * x + y * y);\n    double theta = atan2(y, x);\n\
+    \    return {r, theta};\n  }\n  bool operator<(Point p) const {\n    if (x !=\
+    \ p.x) return x < p.x;\n    return y < p.y;\n  }\n  bool operator==(Point p) const\
+    \ { return x == p.x && y == p.y; }\n  Point operator-() const { return {-x, -y};\
+    \ }\n};\n#line 2 \"geo/angle_sort.hpp\"\n\r\n// \u504F\u89D2\u30BD\u30FC\u30C8\
+    \u306B\u5BFE\u3059\u308B argsort\r\ntemplate<typename Point>\r\nvector<int> angle_argsort(vector<Point>&\
     \ P) {\r\n  auto is_lower = [](Point P) { return (P.y < 0) || (P.y == 0 && P.x\
     \ > 0); };\r\n  vector<int> lower, origin, upper;\r\n  Point O = {0, 0};\r\n \
     \ FOR(i, len(P)) {\r\n    if (P[i] == O) origin.eb(i);\r\n    elif (is_lower(P[i]))\
@@ -215,7 +217,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/geometry/sort_points_by_argument.test.cpp
   requiredBy: []
-  timestamp: '2022-04-09 22:35:37+09:00'
+  timestamp: '2022-04-11 04:11:46+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/geometry/sort_points_by_argument.test.cpp
