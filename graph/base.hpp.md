@@ -95,6 +95,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/twosat.hpp
     title: graph/twosat.hpp
+  - icon: ':x:'
+    path: graph/warshall_floyd.hpp
+    title: graph/warshall_floyd.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_12_B_dial.test.cpp
@@ -165,12 +168,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1320_mincostcycle.test.cpp
     title: test/yukicoder/1320_mincostcycle.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/17_warshall_floyd.test.cpp
+    title: test/yukicoder/17_warshall_floyd.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/899_bfsnumbering.test.cpp
     title: test/yukicoder/899_bfsnumbering.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n\
@@ -249,6 +255,7 @@ data:
   - graph/dijkstra.hpp
   - graph/bipartite_coloring.hpp
   - graph/dial.hpp
+  - graph/warshall_floyd.hpp
   - graph/degree.hpp
   - graph/two_edge_component.hpp
   - graph/minimum_spanning_tree.hpp
@@ -277,12 +284,13 @@ data:
   - graph/tree_all_distances.hpp
   - flow/bipartite.hpp
   timestamp: '2022-03-19 16:40:52+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/899_bfsnumbering.test.cpp
   - test/yukicoder/1320_mincostcycle.test.cpp
   - test/yukicoder/1038_centroid.test.cpp
   - test/yukicoder/1002_centroid.test.cpp
+  - test/yukicoder/17_warshall_floyd.test.cpp
   - test/aoj/ALDS1_12_B_dial.test.cpp
   - test/library_checker/math/twosat.test.cpp
   - test/library_checker/graph/cycle_detection.test.cpp

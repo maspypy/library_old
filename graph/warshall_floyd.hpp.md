@@ -4,20 +4,14 @@ data:
   - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: graph/mincostcycle.hpp
-    title: graph/mincostcycle.hpp
+  _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/graph/shortest_path.test.cpp
-    title: test/library_checker/graph/shortest_path.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/yukicoder/1320_mincostcycle.test.cpp
-    title: test/yukicoder/1320_mincostcycle.test.cpp
-  _isVerificationFailed: false
+  - icon: ':x:'
+    path: test/yukicoder/17_warshall_floyd.test.cpp
+    title: test/yukicoder/17_warshall_floyd.test.cpp
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n\
@@ -53,41 +47,30 @@ data:
     frm to cost id\");\n      for (auto&& e: edges) print(e.frm, e.to, e.cost, e.id);\n\
     \    } else {\n      print(\"indptr\", indptr);\n      print(\"frm to cost id\"\
     );\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e.frm, e.to, e.cost, e.id);\n\
-    \    }\n  }\n};\n#line 3 \"graph/dijkstra.hpp\"\n\ntemplate <typename Graph>\n\
-    pair<vector<typename Graph::cost_type>, vector<int>> dijkstra(Graph& G, int v)\
-    \ {\n  auto N = G.N;\n  using T = typename Graph::cost_type;\n  vector<T> dist(N,\
-    \ -1);\n  vector<int> par(N, -1);\n  using P = pair<T, int>;\n\n  priority_queue<P,\
-    \ vector<P>, greater<P>> que;\n\n  dist[v] = 0;\n  que.push(mp(T(0), v));\n  while\
-    \ (!que.empty()) {\n    auto [dv, v] = que.top();\n    que.pop();\n    if (dv\
-    \ > dist[v]) continue;\n    for (auto&& e: G[v]) {\n      if (dist[e.to] == -1\
-    \ || dist[e.to] > dist[e.frm] + e.cost) {\n        dist[e.to] = dist[e.frm] +\
-    \ e.cost;\n        par[e.to] = e.frm;\n        que.push(mp(dist[e.to], e.to));\n\
-    \      }\n    }\n  }\n  return mp(dist, par);\n}\n"
-  code: "#pragma once\n#include \"graph/base.hpp\"\n\ntemplate <typename Graph>\n\
-    pair<vector<typename Graph::cost_type>, vector<int>> dijkstra(Graph& G, int v)\
-    \ {\n  auto N = G.N;\n  using T = typename Graph::cost_type;\n  vector<T> dist(N,\
-    \ -1);\n  vector<int> par(N, -1);\n  using P = pair<T, int>;\n\n  priority_queue<P,\
-    \ vector<P>, greater<P>> que;\n\n  dist[v] = 0;\n  que.push(mp(T(0), v));\n  while\
-    \ (!que.empty()) {\n    auto [dv, v] = que.top();\n    que.pop();\n    if (dv\
-    \ > dist[v]) continue;\n    for (auto&& e: G[v]) {\n      if (dist[e.to] == -1\
-    \ || dist[e.to] > dist[e.frm] + e.cost) {\n        dist[e.to] = dist[e.frm] +\
-    \ e.cost;\n        par[e.to] = e.frm;\n        que.push(mp(dist[e.to], e.to));\n\
-    \      }\n    }\n  }\n  return mp(dist, par);\n}\n"
+    \    }\n  }\n};\n#line 3 \"graph/warshall_floyd.hpp\"\n\ntemplate <typename Graph,\
+    \ typename T>\nvc<vc<typename Graph::cost_type>> warshall_floyd(Graph& G, T INF)\
+    \ {\n  ll N = G.N;\n  vv(T, dist, N, N, INF);\n  FOR(v, N) {\n    dist[v][v] =\
+    \ 0;\n    for (auto&& e: G[v]) dist[v][e.to] = e.cost;\n  }\n  FOR(k, N) FOR(i,\
+    \ N) FOR(j, N) { chmin(dist[i][j], dist[i][k] + dist[k][j]); }\n  return dist;\n\
+    }\n"
+  code: "#pragma once\n#include \"graph/base.hpp\"\n\ntemplate <typename Graph, typename\
+    \ T>\nvc<vc<typename Graph::cost_type>> warshall_floyd(Graph& G, T INF) {\n  ll\
+    \ N = G.N;\n  vv(T, dist, N, N, INF);\n  FOR(v, N) {\n    dist[v][v] = 0;\n  \
+    \  for (auto&& e: G[v]) dist[v][e.to] = e.cost;\n  }\n  FOR(k, N) FOR(i, N) FOR(j,\
+    \ N) { chmin(dist[i][j], dist[i][k] + dist[k][j]); }\n  return dist;\n}"
   dependsOn:
   - graph/base.hpp
   isVerificationFile: false
-  path: graph/dijkstra.hpp
-  requiredBy:
-  - graph/mincostcycle.hpp
-  timestamp: '2022-03-19 16:40:52+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  path: graph/warshall_floyd.hpp
+  requiredBy: []
+  timestamp: '2022-04-10 15:31:33+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
-  - test/yukicoder/1320_mincostcycle.test.cpp
-  - test/library_checker/graph/shortest_path.test.cpp
-documentation_of: graph/dijkstra.hpp
+  - test/yukicoder/17_warshall_floyd.test.cpp
+documentation_of: graph/warshall_floyd.hpp
 layout: document
 redirect_from:
-- /library/graph/dijkstra.hpp
-- /library/graph/dijkstra.hpp.html
-title: graph/dijkstra.hpp
+- /library/graph/warshall_floyd.hpp
+- /library/graph/warshall_floyd.hpp.html
+title: graph/warshall_floyd.hpp
 ---

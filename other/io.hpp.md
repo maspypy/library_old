@@ -384,6 +384,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1320_mincostcycle.test.cpp
     title: test/yukicoder/1320_mincostcycle.test.cpp
+  - icon: ':x:'
+    path: test/yukicoder/17_warshall_floyd.test.cpp
+    title: test/yukicoder/17_warshall_floyd.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/1810_matpow.test.cpp
     title: test/yukicoder/1810_matpow.test.cpp
@@ -393,9 +396,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/899_bfsnumbering.test.cpp
     title: test/yukicoder/899_bfsnumbering.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':question:'
   attributes:
     links: []
   bundledCode: "#line 1 \"other/io.hpp\"\n// based on yosupo's fastio\r\n#include\
@@ -598,7 +601,7 @@ data:
   path: other/io.hpp
   requiredBy: []
   timestamp: '2022-04-09 22:35:37+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/yukicoder/1810_matpow.test.cpp
   - test/yukicoder/899_bfsnumbering.test.cpp
@@ -606,6 +609,7 @@ data:
   - test/yukicoder/1038_centroid.test.cpp
   - test/yukicoder/4_modular_subset_sum.test.cpp
   - test/yukicoder/1002_centroid.test.cpp
+  - test/yukicoder/17_warshall_floyd.test.cpp
   - test/aoj/ALDS1_5_inversion.test.cpp
   - test/aoj/DSL_2_G_fenwick_raq.test.cpp
   - test/aoj/DSL_2_H_min_add_lazy.test.cpp

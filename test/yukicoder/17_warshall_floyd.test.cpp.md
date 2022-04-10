@@ -1,9 +1,12 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
-    path: linalg/mat_mul.hpp
-    title: linalg/mat_mul.hpp
+  - icon: ':question:'
+    path: graph/base.hpp
+    title: graph/base.hpp
+  - icon: ':x:'
+    path: graph/warshall_floyd.hpp
+    title: graph/warshall_floyd.hpp
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
@@ -12,19 +15,15 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_6_D
-    links:
-    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_6_D
-  bundledCode: "#line 1 \"test/aoj/ITP1_6_D_matvec.test.cpp\"\n#define PROBLEM \\\n\
-    \  \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_6_D\"\n#line\
-    \ 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\n\
-    using ll = long long;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing\
-    \ u32 = unsigned int;\nusing u64 = unsigned long long;\nusing i128 = __int128;\n\
+    links: []
+  bundledCode: "#line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace\
+    \ std;\n\nusing ll = long long;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\n\
+    using u32 = unsigned int;\nusing u64 = unsigned long long;\nusing i128 = __int128;\n\
     \ntemplate <class T>\nusing vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\n\
     template <class T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc\
     \ = vector<vvvc<T>>;\ntemplate <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate\
@@ -174,45 +173,75 @@ data:
     \ ? \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool\
     \ t = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\
     \nvoid yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1)\
-    \ { yes(!t); }\r\n#line 2 \"linalg/mat_mul.hpp\"\n\r\ntemplate <class T, is_modint_t<T>*\
-    \ = nullptr>\r\nvc<vc<T>> mat_mul(const vc<vc<T>>& A, const vc<vc<T>>& B) {\r\n\
-    \  // mod \u3092\u3068\u308B\u56DE\u6570\u3092\u6E1B\u3089\u3057\u3066\u307F\u308B\
-    \r\n  auto N = len(A), M = len(B), K = len(B[0]);\r\n  vv(T, C, N, K);\r\n  const\
-    \ u64 MOD2 = 8ull * T::get_mod() * T::get_mod();\r\n  FOR(n, N) {\r\n    vc<u64>\
-    \ tmp(K);\r\n    FOR(m, M) FOR(k, K) {\r\n      tmp[k] += u64(A[n][m].val) * B[m][k].val;\r\
-    \n      if (tmp[k] >= MOD2) tmp[k] -= MOD2;\r\n    }\r\n    FOR(k, K) C[n][k]\
-    \ = tmp[k];\r\n  }\r\n  return C;\r\n}\r\n\r\ntemplate <class T, is_not_modint_t<T>*\
-    \ = nullptr>\r\nvc<vc<T>> mat_mul(const vc<vc<T>>& A, const vc<vc<T>>& B) {\r\n\
-    \  auto N = len(A), M = len(B), K = len(B[0]);\r\n  vv(T, C, N, K);\r\n  FOR(n,\
-    \ N) FOR(m, M) FOR(k, K) C[n][k] += A[n][m] * B[m][k];\r\n  return C;\r\n}\r\n\
-    \r\ntemplate <class T>\r\nvc<T> mat_vec_mul(const vc<vc<T>>& A, const vc<T>& B)\
-    \ {\r\n  auto N = len(A), M = len(A[0]);\r\n  assert(len(B)==M);\r\n  vc<T> C(N);\r\
-    \n  FOR(i, N) FOR(j, M) C[i] += A[i][j] * B[j];\r\n  return C;\r\n}\r\n#line 6\
-    \ \"test/aoj/ITP1_6_D_matvec.test.cpp\"\n\nvoid solve() {\n  LL(H, W);\n  VV(ll,\
-    \ A, H, W);\n  VEC(ll, B, W);\n  auto C = mat_vec_mul(A, B);\n  for (auto&& c:\
-    \ C) print(c);\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
+    \ { yes(!t); }\r\n#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct\
+    \ Edge {\n  int frm, to;\n  T cost;\n  int id;\n};\n\ntemplate <typename T = int,\
+    \ bool directed = false>\nstruct Graph {\n  int N, M;\n  using cost_type = T;\n\
+    \  using edge_type = Edge<T>;\n  vector<edge_type> edges;\n  vector<int> indptr;\n\
+    \  vector<edge_type> csr_edges;\n  bool prepared;\n\n  class OutgoingEdges {\n\
+    \  public:\n    OutgoingEdges(const Graph* G, int l, int r) : G(G), l(l), r(r)\
+    \ {}\n\n    const edge_type* begin() const {\n      if (l == r) { return 0; }\n\
+    \      return &G->csr_edges[l];\n    }\n\n    const edge_type* end() const {\n\
+    \      if (l == r) { return 0; }\n      return &G->csr_edges[r];\n    }\n\n  private:\n\
+    \    int l, r;\n    const Graph* G;\n  };\n\n  bool is_prepared() { return prepared;\
+    \ }\n  constexpr bool is_directed() { return directed; }\n\n  Graph() : N(0),\
+    \ M(0), prepared(0) {}\n  Graph(int N) : N(N), M(0), prepared(0) {}\n\n  void\
+    \ add(int frm, int to, T cost = 1, int i = -1) {\n    assert(!prepared && 0 <=\
+    \ frm && 0 <= to);\n    chmax(N, frm + 1);\n    chmax(N, to + 1);\n    if (i ==\
+    \ -1) i = M;\n    auto e = edge_type({frm, to, cost, i});\n    edges.eb(e);\n\
+    \    ++M;\n  }\n\n  // wt, off\n  void read_tree(bool wt = false, int off = 1)\
+    \ { read_graph(N - 1, wt, off); }\n\n  void read_graph(int M, bool wt = false,\
+    \ int off = 1) {\n    FOR_(M) {\n      INT(a, b);\n      a -= off, b -= off;\n\
+    \      if (!wt) {\n        add(a, b);\n      } else {\n        T c;\n        read(c);\n\
+    \        add(a, b, c);\n      }\n    }\n    build();\n  }\n\n  void read_parent(int\
+    \ off = 1) {\n    FOR3(v, 1, N) {\n      INT(p);\n      p -= off;\n      add(p,\
+    \ v);\n    }\n    build();\n  }\n\n  void build() {\n    assert(!prepared);\n\
+    \    prepared = true;\n    indptr.assign(N + 1, 0);\n    for (auto&& e: edges)\
+    \ {\n      indptr[e.frm + 1]++;\n      if (!directed) indptr[e.to + 1]++;\n  \
+    \  }\n    FOR(v, N) indptr[v + 1] += indptr[v];\n    auto counter = indptr;\n\
+    \    csr_edges.resize(indptr.back() + 1);\n    for (auto&& e: edges) {\n     \
+    \ csr_edges[counter[e.frm]++] = e;\n      if (!directed)\n        csr_edges[counter[e.to]++]\
+    \ = edge_type({e.to, e.frm, e.cost, e.id});\n    }\n  }\n\n  OutgoingEdges operator[](int\
+    \ v) const {\n    assert(prepared);\n    return {this, indptr[v], indptr[v + 1]};\n\
+    \  }\n\n  void debug() {\n    print(\"Graph\");\n    if (!prepared) {\n      print(\"\
+    frm to cost id\");\n      for (auto&& e: edges) print(e.frm, e.to, e.cost, e.id);\n\
+    \    } else {\n      print(\"indptr\", indptr);\n      print(\"frm to cost id\"\
+    );\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e.frm, e.to, e.cost, e.id);\n\
+    \    }\n  }\n};\n#line 3 \"graph/warshall_floyd.hpp\"\n\ntemplate <typename Graph,\
+    \ typename T>\nvc<vc<typename Graph::cost_type>> warshall_floyd(Graph& G, T INF)\
+    \ {\n  ll N = G.N;\n  vv(T, dist, N, N, INF);\n  FOR(v, N) {\n    dist[v][v] =\
+    \ 0;\n    for (auto&& e: G[v]) dist[v][e.to] = e.cost;\n  }\n  FOR(k, N) FOR(i,\
+    \ N) FOR(j, N) { chmin(dist[i][j], dist[i][k] + dist[k][j]); }\n  return dist;\n\
+    }\n#line 4 \"test/yukicoder/17_warshall_floyd.test.cpp\"\n\nvoid solve() {\n \
+    \ LL(N);\n  VEC(ll, COST, N);\n  Graph<ll> G(N);\n  LL(M);\n  G.read_graph(M,\
+    \ 1, 0);\n\n  const ll INF = 1LL << 60;\n  auto dist = warshall_floyd(G, INF);\n\
+    \n  ll ANS = INF;\n  FOR3(i, 1, N - 1) FOR3(j, 1, N - 1) if (i != j) {\n    chmin(ANS,\
+    \ dist[0][i] + dist[i][j] + dist[j][N - 1] + COST[i] + COST[j]);\n  }\n  print(ANS);\n\
+    }\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout\
+    \ << setprecision(15);\n\n  ll T = 1;\n  // LL(T);\n  FOR(_, T) solve();\n\n \
+    \ return 0;\n}\n"
+  code: "#include \"my_template.hpp\"\n#include \"other/io.hpp\"\n#include \"graph/warshall_floyd.hpp\"\
+    \n\nvoid solve() {\n  LL(N);\n  VEC(ll, COST, N);\n  Graph<ll> G(N);\n  LL(M);\n\
+    \  G.read_graph(M, 1, 0);\n\n  const ll INF = 1LL << 60;\n  auto dist = warshall_floyd(G,\
+    \ INF);\n\n  ll ANS = INF;\n  FOR3(i, 1, N - 1) FOR3(j, 1, N - 1) if (i != j)\
+    \ {\n    chmin(ANS, dist[0][i] + dist[i][j] + dist[j][N - 1] + COST[i] + COST[j]);\n\
+    \  }\n  print(ANS);\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
     \  cout << setprecision(15);\n\n  ll T = 1;\n  // LL(T);\n  FOR(_, T) solve();\n\
     \n  return 0;\n}\n"
-  code: "#define PROBLEM \\\n  \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ITP1_6_D\"\
-    \n#include \"my_template.hpp\"\n#include \"other/io.hpp\"\n#include \"linalg/mat_mul.hpp\"\
-    \n\nvoid solve() {\n  LL(H, W);\n  VV(ll, A, H, W);\n  VEC(ll, B, W);\n  auto\
-    \ C = mat_vec_mul(A, B);\n  for (auto&& c: C) print(c);\n}\n\nsigned main() {\n\
-    \  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\
-    \n  ll T = 1;\n  // LL(T);\n  FOR(_, T) solve();\n\n  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
-  - linalg/mat_mul.hpp
+  - graph/warshall_floyd.hpp
+  - graph/base.hpp
   isVerificationFile: true
-  path: test/aoj/ITP1_6_D_matvec.test.cpp
+  path: test/yukicoder/17_warshall_floyd.test.cpp
   requiredBy: []
-  timestamp: '2022-04-09 22:35:37+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-04-10 15:31:33+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
-documentation_of: test/aoj/ITP1_6_D_matvec.test.cpp
+documentation_of: test/yukicoder/17_warshall_floyd.test.cpp
 layout: document
 redirect_from:
-- /verify/test/aoj/ITP1_6_D_matvec.test.cpp
-- /verify/test/aoj/ITP1_6_D_matvec.test.cpp.html
-title: test/aoj/ITP1_6_D_matvec.test.cpp
+- /verify/test/yukicoder/17_warshall_floyd.test.cpp
+- /verify/test/yukicoder/17_warshall_floyd.test.cpp.html
+title: test/yukicoder/17_warshall_floyd.test.cpp
 ---
