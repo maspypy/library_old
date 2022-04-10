@@ -1,7 +1,8 @@
+// log_a b の計算
+// 「*」 が定義されたクラス、ハッシュ関数 H を持たせる
+// lb 以上の解をかえす
 template <typename X>
 ll discrete_log(X a, X b, ll LIM, function<ll(X)> H, int lb = 0) {
-  // * が定義されたクラス、ハッシュ関数 H を持たせる
-  // lb 以上の解をかえす
   {
     int n = lb;
     X p = a;
