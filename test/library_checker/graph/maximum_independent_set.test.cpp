@@ -2,7 +2,7 @@
 #include "my_template.hpp"
 #include "other/io.hpp"
 
-#include "graph/mis.hpp"
+#include "graph/maximum_independent_set.hpp"
 
 void solve() {
   LL(N, M);

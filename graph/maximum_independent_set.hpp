@@ -1,5 +1,6 @@
 #include "graph/base.hpp"
 
+// vertex id の vector を返す
 template <typename Graph>
 vector<int> maximum_independent_set(Graph& G, int trial = 1000000) {
   assert(G.is_prepared());
