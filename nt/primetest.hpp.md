@@ -28,6 +28,9 @@ data:
     title: nt/factor.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/aoj/ALDS1_1_C_primetest.test.cpp
+    title: test/aoj/ALDS1_1_C_primetest.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/ITP1_D_D_divisors.test.cpp
     title: test/aoj/ITP1_D_D_divisors.test.cpp
   - icon: ':heavy_check_mark:'
@@ -131,6 +134,7 @@ data:
   timestamp: '2021-12-25 22:40:58+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/aoj/ALDS1_1_C_primetest.test.cpp
   - test/aoj/ITP1_D_D_divisors.test.cpp
   - test/library_checker/math/binomial_coefficient.test.cpp
   - test/library_checker/math/kth_root_mod.test.cpp

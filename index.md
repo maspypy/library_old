@@ -671,6 +671,9 @@ data:
       path: test/aoj/ALDS1_12_B_dial.test.cpp
       title: test/aoj/ALDS1_12_B_dial.test.cpp
     - icon: ':heavy_check_mark:'
+      path: test/aoj/ALDS1_1_C_primetest.test.cpp
+      title: test/aoj/ALDS1_1_C_primetest.test.cpp
+    - icon: ':heavy_check_mark:'
       path: test/aoj/ALDS1_5_inversion.test.cpp
       title: test/aoj/ALDS1_5_inversion.test.cpp
     - icon: ':heavy_check_mark:'
