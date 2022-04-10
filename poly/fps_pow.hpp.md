@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/convolution.hpp
     title: poly/convolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/fps_exp.hpp
     title: poly/fps_exp.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/fps_inv.hpp
     title: poly/fps_inv.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/fps_log.hpp
     title: poly/fps_log.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/polynomial/pow_of_fps.test.cpp
     title: test/library_checker/polynomial/pow_of_fps.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n\
@@ -249,7 +249,7 @@ data:
     \ modint998>::value, vc<mint>> convolution(const vc<mint>& a, const vc<mint>&\
     \ b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return {};\r\n  if\
     \ (min(n, m) <= 60) return convolution_naive(a, b);\r\n  return convolution_garner(a,\
-    \ b);\r\n}\r\n#line 2 \"poly/fps_exp.hpp\"\ntemplate <typename mint>\r\nvc<mint>\
+    \ b);\r\n}\r\n#line 3 \"poly/fps_exp.hpp\"\ntemplate <typename mint>\r\nvc<mint>\
     \ fps_exp(vc<mint>& f) {\r\n  const int n = len(f);\r\n  assert(n > 0 && f[0]\
     \ == mint(0));\r\n  vc<mint> b = {1, (1 < n ? f[1] : 0)};\r\n  vc<mint> c = {1},\
     \ z1, z2 = {1, 1};\r\n  while (len(b) < n) {\r\n    int m = len(b);\r\n    auto\
@@ -267,26 +267,27 @@ data:
     \ m)) x[i] += f[i];\r\n    FOR(i, m) x[i] = 0;\r\n    ntt(x, 0);\r\n    FOR(i,\
     \ m + m) x[i] *= y[i];\r\n    ntt(x, 1);\r\n    b.insert(b.end(), x.begin() +\
     \ m, x.end());\r\n  }\r\n  b.resize(n);\r\n  return b;\r\n}\r\n#line 2 \"poly/fps_inv.hpp\"\
-    \n\r\ntemplate <typename mint>\r\nvc<mint> fps_inv(vc<mint>& F) {\r\n  vc<mint>\
-    \ G = {mint(1) / F[0]};\r\n  G.reserve(len(F));\r\n  ll N = len(F), n = 1;\r\n\
-    \  while (n < N) {\r\n    vc<mint> f(2 * n), g(2 * n);\r\n    FOR(i, min(N, 2\
-    \ * n)) f[i] = F[i];\r\n    FOR(i, n) g[i] = G[i];\r\n    ntt(f, false);\r\n \
-    \   ntt(g, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\n    ntt(f, true);\r\n\
-    \    FOR(i, n) f[i] = 0;\r\n    ntt(f, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\
-    \n    ntt(f, true);\r\n    FOR3(i, n, 2 * n) G.eb(f[i] * mint(-1));\r\n    n *=\
-    \ 2;\r\n  }\r\n  G.resize(N);\r\n  return G;\r\n}\r\n#line 2 \"poly/fps_log.hpp\"\
-    \n\r\ntemplate <typename mint>\r\nvc<mint> fps_log(vc<mint>& f) {\r\n  ll N =\
-    \ len(f);\r\n  vc<mint> df = f;\r\n  FOR(i, N) df[i] *= mint(i);\r\n  df.erase(df.begin());\r\
-    \n  auto f_inv = fps_inv(f);\r\n  f = convolution(df, f_inv);\r\n  f.resize(N\
-    \ - 1);\r\n  f.insert(f.begin(), 0);\r\n  FOR(i, N) f[i] *= inv<mint>(i);\r\n\
-    \  return f;\r\n}\r\n#line 3 \"poly/fps_pow.hpp\"\n\r\ntemplate <typename mint>\r\
-    \nvc<mint> fps_pow(vc<mint>& f, ll k) {\r\n  int n = len(f);\r\n  int d = n;\r\
-    \n  FOR_R(i, n) if (f[i] != 0) d = i;\r\n  ll off = d * k;\r\n  if (off >= n)\
-    \ return vc<mint>(n, 0);\r\n  mint c = f[d];\r\n  mint c_inv = mint(1) / mint(c);\r\
-    \n  vc<mint> g(n - off);\r\n  FOR(i, n - off) g[i] = f[d + i] * c_inv;\r\n  auto\
-    \ log_g = fps_log(g);\r\n  FOR(i, len(g)) log_g[i] *= mint(k);\r\n  g = fps_exp(log_g);\r\
-    \n  vc<mint> h(n);\r\n  c = c.pow(k);\r\n  FOR(i, len(g)) h[off + i] = g[i] *\
-    \ c;\r\n  return h;\r\n}\r\n"
+    \n\r\ntemplate <typename mint>\r\nvc<mint> fps_inv(const vc<mint>& F) {\r\n  assert(F[0]\
+    \ != mint(0));\r\n  vc<mint> G = {mint(1) / F[0]};\r\n  G.reserve(len(F));\r\n\
+    \  ll N = len(F), n = 1;\r\n  while (n < N) {\r\n    vc<mint> f(2 * n), g(2 *\
+    \ n);\r\n    FOR(i, min(N, 2 * n)) f[i] = F[i];\r\n    FOR(i, n) g[i] = G[i];\r\
+    \n    ntt(f, false);\r\n    ntt(g, false);\r\n    FOR(i, 2 * n) f[i] *= g[i];\r\
+    \n    ntt(f, true);\r\n    FOR(i, n) f[i] = 0;\r\n    ntt(f, false);\r\n    FOR(i,\
+    \ 2 * n) f[i] *= g[i];\r\n    ntt(f, true);\r\n    FOR3(i, n, 2 * n) G.eb(f[i]\
+    \ * mint(-1));\r\n    n *= 2;\r\n  }\r\n  G.resize(N);\r\n  return G;\r\n}\r\n\
+    #line 3 \"poly/fps_log.hpp\"\n\r\ntemplate <typename mint>\r\nvc<mint> fps_log(const\
+    \ vc<mint>& f) {\r\n  assert(f[0] == mint(0));\r\n  ll N = len(f);\r\n  vc<mint>\
+    \ df = f;\r\n  FOR(i, N) df[i] *= mint(i);\r\n  df.erase(df.begin());\r\n  auto\
+    \ f_inv = fps_inv(f);\r\n  auto g = convolution(df, f_inv);\r\n  g.resize(N -\
+    \ 1);\r\n  g.insert(g.begin(), 0);\r\n  FOR(i, N) g[i] *= inv<mint>(i);\r\n  return\
+    \ g;\r\n}\r\n#line 3 \"poly/fps_pow.hpp\"\n\r\ntemplate <typename mint>\r\nvc<mint>\
+    \ fps_pow(vc<mint>& f, ll k) {\r\n  int n = len(f);\r\n  int d = n;\r\n  FOR_R(i,\
+    \ n) if (f[i] != 0) d = i;\r\n  ll off = d * k;\r\n  if (off >= n) return vc<mint>(n,\
+    \ 0);\r\n  mint c = f[d];\r\n  mint c_inv = mint(1) / mint(c);\r\n  vc<mint> g(n\
+    \ - off);\r\n  FOR(i, n - off) g[i] = f[d + i] * c_inv;\r\n  auto log_g = fps_log(g);\r\
+    \n  FOR(i, len(g)) log_g[i] *= mint(k);\r\n  g = fps_exp(log_g);\r\n  vc<mint>\
+    \ h(n);\r\n  c = c.pow(k);\r\n  FOR(i, len(g)) h[off + i] = g[i] * c;\r\n  return\
+    \ h;\r\n}\r\n"
   code: "#include \"poly/fps_exp.hpp\"\r\n#include \"poly/fps_log.hpp\"\r\n\r\ntemplate\
     \ <typename mint>\r\nvc<mint> fps_pow(vc<mint>& f, ll k) {\r\n  int n = len(f);\r\
     \n  int d = n;\r\n  FOR_R(i, n) if (f[i] != 0) d = i;\r\n  ll off = d * k;\r\n\
@@ -304,8 +305,8 @@ data:
   isVerificationFile: false
   path: poly/fps_pow.hpp
   requiredBy: []
-  timestamp: '2022-03-17 18:01:38+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-04-11 02:20:18+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/polynomial/pow_of_fps.test.cpp
 documentation_of: poly/fps_pow.hpp

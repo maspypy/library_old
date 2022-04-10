@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/convolution.hpp
     title: poly/convolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/fps_exp.hpp
     title: poly/fps_exp.hpp
   _extendedRequiredBy: []
@@ -404,7 +404,7 @@ data:
     \ modint998>::value, vc<mint>> convolution(const vc<mint>& a, const vc<mint>&\
     \ b) {\r\n  int n = len(a), m = len(b);\r\n  if (!n || !m) return {};\r\n  if\
     \ (min(n, m) <= 60) return convolution_naive(a, b);\r\n  return convolution_garner(a,\
-    \ b);\r\n}\r\n#line 2 \"poly/fps_exp.hpp\"\ntemplate <typename mint>\r\nvc<mint>\
+    \ b);\r\n}\r\n#line 3 \"poly/fps_exp.hpp\"\ntemplate <typename mint>\r\nvc<mint>\
     \ fps_exp(vc<mint>& f) {\r\n  const int n = len(f);\r\n  assert(n > 0 && f[0]\
     \ == mint(0));\r\n  vc<mint> b = {1, (1 < n ? f[1] : 0)};\r\n  vc<mint> c = {1},\
     \ z1, z2 = {1, 1};\r\n  while (len(b) < n) {\r\n    int m = len(b);\r\n    auto\
@@ -441,7 +441,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/polynomial/exp_of_fps.test.cpp
   requiredBy: []
-  timestamp: '2022-04-09 22:35:37+09:00'
+  timestamp: '2022-04-11 02:20:18+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/polynomial/exp_of_fps.test.cpp
