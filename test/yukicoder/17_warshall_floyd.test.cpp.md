@@ -1,34 +1,38 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/warshall_floyd.hpp
     title: graph/warshall_floyd.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: other/io.hpp
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    links: []
-  bundledCode: "#line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace\
-    \ std;\n\nusing ll = long long;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\n\
-    using u32 = unsigned int;\nusing u64 = unsigned long long;\nusing i128 = __int128;\n\
-    \ntemplate <class T>\nusing vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\n\
-    template <class T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc\
-    \ = vector<vvvc<T>>;\ntemplate <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate\
-    \ <class T>\nusing pq = priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T,\
-    \ vector<T>, greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
+    PROBLEM: https://yukicoder.me/problems/no/17
+    links:
+    - https://yukicoder.me/problems/no/17
+  bundledCode: "#line 1 \"test/yukicoder/17_warshall_floyd.test.cpp\"\n#define PROBLEM\
+    \ \"https://yukicoder.me/problems/no/17\"\n#line 1 \"my_template.hpp\"\n#include\
+    \ <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\nusing pi =\
+    \ pair<ll, ll>;\nusing vi = vector<ll>;\nusing u32 = unsigned int;\nusing u64\
+    \ = unsigned long long;\nusing i128 = __int128;\n\ntemplate <class T>\nusing vc\
+    \ = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\ntemplate <class\
+    \ T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc = vector<vvvc<T>>;\n\
+    template <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate <class T>\nusing\
+    \ pq = priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T, vector<T>,\
+    \ greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
     #define vv(type, name, h, ...) \\\n  vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n\
     #define vvv(type, name, h, w, ...)   \\\n  vector<vector<vector<type>>> name(\
     \ \\\n      h, vector<vector<type>>(w, vector<type>(__VA_ARGS__)))\n#define vvvv(type,\
@@ -211,7 +215,7 @@ data:
     \ {\n  ll N = G.N;\n  vv(T, dist, N, N, INF);\n  FOR(v, N) {\n    dist[v][v] =\
     \ 0;\n    for (auto&& e: G[v]) dist[v][e.to] = e.cost;\n  }\n  FOR(k, N) FOR(i,\
     \ N) FOR(j, N) { chmin(dist[i][j], dist[i][k] + dist[k][j]); }\n  return dist;\n\
-    }\n#line 4 \"test/yukicoder/17_warshall_floyd.test.cpp\"\n\nvoid solve() {\n \
+    }\n#line 5 \"test/yukicoder/17_warshall_floyd.test.cpp\"\n\nvoid solve() {\n \
     \ LL(N);\n  VEC(ll, COST, N);\n  Graph<ll> G(N);\n  LL(M);\n  G.read_graph(M,\
     \ 1, 0);\n\n  const ll INF = 1LL << 60;\n  auto dist = warshall_floyd(G, INF);\n\
     \n  ll ANS = INF;\n  FOR3(i, 1, N - 1) FOR3(j, 1, N - 1) if (i != j) {\n    chmin(ANS,\
@@ -219,14 +223,15 @@ data:
     }\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout\
     \ << setprecision(15);\n\n  ll T = 1;\n  // LL(T);\n  FOR(_, T) solve();\n\n \
     \ return 0;\n}\n"
-  code: "#include \"my_template.hpp\"\n#include \"other/io.hpp\"\n#include \"graph/warshall_floyd.hpp\"\
-    \n\nvoid solve() {\n  LL(N);\n  VEC(ll, COST, N);\n  Graph<ll> G(N);\n  LL(M);\n\
-    \  G.read_graph(M, 1, 0);\n\n  const ll INF = 1LL << 60;\n  auto dist = warshall_floyd(G,\
-    \ INF);\n\n  ll ANS = INF;\n  FOR3(i, 1, N - 1) FOR3(j, 1, N - 1) if (i != j)\
-    \ {\n    chmin(ANS, dist[0][i] + dist[i][j] + dist[j][N - 1] + COST[i] + COST[j]);\n\
-    \  }\n  print(ANS);\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
-    \  cout << setprecision(15);\n\n  ll T = 1;\n  // LL(T);\n  FOR(_, T) solve();\n\
-    \n  return 0;\n}\n"
+  code: "#define PROBLEM \"https://yukicoder.me/problems/no/17\"\n#include \"my_template.hpp\"\
+    \n#include \"other/io.hpp\"\n#include \"graph/warshall_floyd.hpp\"\n\nvoid solve()\
+    \ {\n  LL(N);\n  VEC(ll, COST, N);\n  Graph<ll> G(N);\n  LL(M);\n  G.read_graph(M,\
+    \ 1, 0);\n\n  const ll INF = 1LL << 60;\n  auto dist = warshall_floyd(G, INF);\n\
+    \n  ll ANS = INF;\n  FOR3(i, 1, N - 1) FOR3(j, 1, N - 1) if (i != j) {\n    chmin(ANS,\
+    \ dist[0][i] + dist[i][j] + dist[j][N - 1] + COST[i] + COST[j]);\n  }\n  print(ANS);\n\
+    }\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout\
+    \ << setprecision(15);\n\n  ll T = 1;\n  // LL(T);\n  FOR(_, T) solve();\n\n \
+    \ return 0;\n}\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
@@ -235,8 +240,8 @@ data:
   isVerificationFile: true
   path: test/yukicoder/17_warshall_floyd.test.cpp
   requiredBy: []
-  timestamp: '2022-04-10 15:31:33+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-04-10 16:41:13+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yukicoder/17_warshall_floyd.test.cpp
 layout: document
