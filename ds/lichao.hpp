@@ -1,56 +1,88 @@
 #pragma once
-#include "my_template.hpp"
-
-template <typename T>
+template <typename T, T INF>
 struct LiChaoTree {
   struct Line {
     T a, b;
-
     Line(T a, T b) : a(a), b(b) {}
-
-    inline T get(T x) const { return a * x + b; }
-
-    inline bool over(const Line& b, const T& x) const {
-      return get(x) < b.get(x);
+    inline T eval(T x) const { return a * x + b; }
+    inline bool over(const Line &other, const T &x) const {
+      return eval(x) < other.eval(x);
     }
   };
 
   vector<T> xs;
   vector<Line> seg;
-  int sz;
+  int size;
 
-  LiChaoTree(const vector<T>& x, T INF) : xs(x) {
-    sort(all(xs));
-    sz = 1;
-    while (sz < xs.size()) sz <<= 1;
-    while (xs.size() < sz) xs.push_back(xs.back() + 1);
-    seg.assign(2 * sz - 1, Line(0, INF));
+  // コンストラクタ。クエリの来る x 全体を渡す。ソート不要。
+  LiChaoTree(const vector<T> &_xs) : xs(_xs) {
+    if (len(xs) == 0) xs.eb(0);
+    UNIQUE(xs);
+    size = 1;
+    while (size < len(xs)) size *= 2;
+    while (len(xs) < size) xs.eb(xs.back());
+    seg.assign(2 * size, Line(0, INF));
   }
 
-  void update(Line& x, int k, int l, int r) {
-    int mid = (l + r) >> 1;
-    auto latte = x.over(seg[k], xs[l]), malta = x.over(seg[k], xs[mid]);
-    if (malta) swap(seg[k], x);
-    if (l + 1 >= r)
-      return;
-    else if (latte != malta)
-      update(x, 2 * k + 1, l, mid);
-    else
-      update(x, 2 * k + 2, mid, r);
+  // y = ax + bなる直線を追加
+  void add(T a, T b) { inner_update(a, b, 0, size, 1); }
+
+  // [lx, rx) に線分 y = ax + b を追加
+  void add(T lx, T rx, T a, T b) {
+    int l = LB(xs, lx) + size;
+    int r = LB(xs, rx) + size;
+    while (l < r) {
+      if (l & 1) inner_update(a, b, l++);
+      if (r & 1) inner_update(a, b, --r);
+      l >>= 1, r >>= 1;
+    }
   }
 
-  void update(T a, T b) {  // ax+b
-    Line l(a, b);
-    update(l, 0, 0, sz);
+  T get_min(T x) {
+    int i = LB(xs, x);
+    assert(xs[i] == x);
+    return inner_query(x, i + size);
   }
 
-  T query(T x) {
-    ll k = LB(xs, x);
-    k += sz - 1;
-    T ret = seg[k].get(x);
-    while (k > 0) {
-      k = (k - 1) >> 1;
-      ret = min(ret, seg[k].get(x));
+  void debug() {
+    print("xs", xs);
+    print("seg");
+    FOR(i, len(seg)) print(i, seg[i].a, seg[i].b);
+  }
+
+private:
+  void inner_update(T a, T b, int l, int r, int idx) {
+    Line line(a, b);
+    while (1) {
+      int m = (l + r) >> 1;
+      bool l_over = line.over(seg[idx], xs[l]);
+      bool r_over = line.over(seg[idx], xs[r - 1]);
+      if (l_over == r_over) {
+        if (l_over) swap(seg[idx], line);
+        return;
+      }
+      bool m_over = line.over(seg[idx], xs[m]);
+      if (m_over) swap(seg[idx], line);
+      if (l_over != m_over)
+        idx = (idx << 1) | 0, r = m;
+      else
+        idx = (idx << 1) | 1, l = m;
+    }
+  }
+
+  void inner_update(T a, T b, int seg_idx) {
+    int left, right;
+    int upper_bit = 31 - __builtin_clz(seg_idx);
+    left = (size >> upper_bit) * (seg_idx - (1 << upper_bit));
+    right = left + (size >> upper_bit);
+    inner_update(a, b, left, right, seg_idx);
+  }
+
+  T inner_query(T x, int idx) {
+    T ret = INF;
+    while (idx >= 1) {
+      chmin(ret, seg[idx].eval(x));
+      idx >>= 1;
     }
     return ret;
   }
