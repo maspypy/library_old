@@ -1,11 +1,11 @@
 template <typename T, bool isMin>
-struct ConvexHullTrick {
+struct CHT_monotone {
 #define F first
 #define S second
   using P = pair<T, T>;
   deque<P> H;
 
-  ConvexHullTrick() = default;
+  CHT_monotone() = default;
 
   bool empty() const { return H.empty(); }
 
