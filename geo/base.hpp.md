@@ -5,13 +5,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: geo/angle_sort.hpp
     title: geo/angle_sort.hpp
-  - icon: ':x:'
+  - icon: ':warning:'
     path: geo/convexhull.hpp
     title: geo/convexhull.hpp
   - icon: ':heavy_check_mark:'
     path: geo/dynamicupperhull.hpp
     title: geo/dynamicupperhull.hpp
-  - icon: ':x:'
+  - icon: ':warning:'
     path: geo/points_diameter.hpp
     title: geo/points_diameter.hpp
   _extendedVerifiedWith:
@@ -21,12 +21,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/geometry/sort_points_by_argument.test.cpp
     title: test/library_checker/geometry/sort_points_by_argument.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/96_points_diameter.test.cpp
-    title: test/yukicoder/96_points_diameter.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"geo/base.hpp\"\n\ntemplate<typename X = long long>\nstruct\
@@ -59,9 +56,8 @@ data:
   - geo/dynamicupperhull.hpp
   - geo/points_diameter.hpp
   timestamp: '2022-04-11 04:11:46+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/96_points_diameter.test.cpp
   - test/library_checker/geometry/convex_layers.test.cpp
   - test/library_checker/geometry/sort_points_by_argument.test.cpp
 documentation_of: geo/base.hpp

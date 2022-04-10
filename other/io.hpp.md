@@ -396,12 +396,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/899_bfsnumbering.test.cpp
     title: test/yukicoder/899_bfsnumbering.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/96_points_diameter.test.cpp
-    title: test/yukicoder/96_points_diameter.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"other/io.hpp\"\n// based on yosupo's fastio\r\n#include\
@@ -604,14 +601,13 @@ data:
   path: other/io.hpp
   requiredBy: []
   timestamp: '2022-04-09 22:35:37+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/1810_matpow.test.cpp
   - test/yukicoder/899_bfsnumbering.test.cpp
   - test/yukicoder/1320_mincostcycle.test.cpp
   - test/yukicoder/1038_centroid.test.cpp
   - test/yukicoder/4_modular_subset_sum.test.cpp
-  - test/yukicoder/96_points_diameter.test.cpp
   - test/yukicoder/1002_centroid.test.cpp
   - test/yukicoder/17_warshall_floyd.test.cpp
   - test/aoj/ALDS1_5_inversion.test.cpp

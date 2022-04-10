@@ -1,20 +1,17 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: geo/base.hpp
     title: geo/base.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':warning:'
     path: geo/points_diameter.hpp
     title: geo/points_diameter.hpp
-  _extendedVerifiedWith:
-  - icon: ':x:'
-    path: test/yukicoder/96_points_diameter.test.cpp
-    title: test/yukicoder/96_points_diameter.test.cpp
-  _isVerificationFailed: true
+  _extendedVerifiedWith: []
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"geo/base.hpp\"\n\ntemplate<typename X = long long>\nstruct\
@@ -108,9 +105,8 @@ data:
   requiredBy:
   - geo/points_diameter.hpp
   timestamp: '2022-04-11 04:11:46+09:00'
-  verificationStatus: LIBRARY_ALL_WA
-  verifiedWith:
-  - test/yukicoder/96_points_diameter.test.cpp
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
 documentation_of: geo/convexhull.hpp
 layout: document
 redirect_from:

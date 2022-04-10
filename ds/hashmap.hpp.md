@@ -6,12 +6,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/associative_array_hashmap.test.cpp
     title: test/library_checker/datastructure/associative_array_hashmap.test.cpp
-  - icon: ':x:'
-    path: test/yukicoder/96_points_diameter.test.cpp
-    title: test/yukicoder/96_points_diameter.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"ds/hashmap.hpp\"\ntemplate <typename Val, int LOG = 20>\r\
@@ -51,9 +48,8 @@ data:
   path: ds/hashmap.hpp
   requiredBy: []
   timestamp: '2022-04-11 04:12:12+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/yukicoder/96_points_diameter.test.cpp
   - test/library_checker/datastructure/associative_array_hashmap.test.cpp
 documentation_of: ds/hashmap.hpp
 layout: document
