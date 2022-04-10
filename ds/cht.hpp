@@ -23,6 +23,10 @@ template <>
 long double lc_div(long double a, long double b) {
   return a / b;
 };
+template <>
+double lc_div(double a, double b) {
+  return a / b;
+};
 
 template <typename T, bool MINIMIZE = true>
 struct LineContainer : multiset<Line<T>, less<>> {
