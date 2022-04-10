@@ -1,15 +1,12 @@
 ---
 data:
   _extendedDependsOn:
+  - icon: ':heavy_check_mark:'
+    path: ds/lichao.hpp
+    title: ds/lichao.hpp
   - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
-    path: nt/primesum.hpp
-    title: nt/primesum.hpp
-  - icon: ':heavy_check_mark:'
-    path: nt/primetable.hpp
-    title: nt/primetable.hpp
   - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
@@ -20,19 +17,19 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/counting_primes
+    PROBLEM: https://judge.yosupo.jp/problem/segment_add_get_min
     links:
-    - https://judge.yosupo.jp/problem/counting_primes
-  bundledCode: "#line 1 \"test/library_checker/math/counting_primes.test.cpp\"\n#define\
-    \ PROBLEM \"https://judge.yosupo.jp/problem/counting_primes\"\r\n#line 1 \"my_template.hpp\"\
-    \n#include <bits/stdc++.h>\n\nusing namespace std;\n\nusing ll = long long;\n\
-    using pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing u32 = unsigned int;\n\
-    using u64 = unsigned long long;\nusing i128 = __int128;\n\ntemplate <class T>\n\
-    using vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\ntemplate\
-    \ <class T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc = vector<vvvc<T>>;\n\
-    template <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate <class T>\nusing\
-    \ pq = priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T, vector<T>,\
-    \ greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
+    - https://judge.yosupo.jp/problem/segment_add_get_min
+  bundledCode: "#line 1 \"test/library_checker/datastructure/segment_add_get_min.test.cpp\"\
+    \n#define PROBLEM \"https://judge.yosupo.jp/problem/segment_add_get_min\"\n#line\
+    \ 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\n\
+    using ll = long long;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing\
+    \ u32 = unsigned int;\nusing u64 = unsigned long long;\nusing i128 = __int128;\n\
+    \ntemplate <class T>\nusing vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\n\
+    template <class T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc\
+    \ = vector<vvvc<T>>;\ntemplate <class T>\nusing vvvvvc = vector<vvvvc<T>>;\ntemplate\
+    \ <class T>\nusing pq = priority_queue<T>;\ntemplate <class T>\nusing pqg = priority_queue<T,\
+    \ vector<T>, greater<T>>;\n\n#define vec(type, name, ...) vector<type> name(__VA_ARGS__)\n\
     #define vv(type, name, h, ...) \\\n  vector<vector<type>> name(h, vector<type>(__VA_ARGS__))\n\
     #define vvv(type, name, h, w, ...)   \\\n  vector<vector<vector<type>>> name(\
     \ \\\n      h, vector<vector<type>>(w, vector<type>(__VA_ARGS__)))\n#define vvvv(type,\
@@ -177,60 +174,76 @@ data:
     \ ? \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool\
     \ t = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\
     \nvoid yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1)\
-    \ { yes(!t); }\r\n#line 2 \"nt/primetable.hpp\"\nvc<ll>& primetable(int LIM) {\n\
-    \  ++LIM;\n  const int S = 32768;\n  static int done = 2;\n  static vc<ll> primes\
-    \ = {2}, sieve(S + 1);\n\n  if(done >= LIM) return primes;\n  done  = LIM;\n\n\
-    \  primes = {2}, sieve.assign(S + 1, 0);\n  const int R = LIM / 2;  \n  primes.reserve(int(LIM\
-    \ / log(LIM) * 1.1));\n  vc<pi> cp;\n  for (int i = 3; i <= S; i += 2) {\n   \
-    \ if (!sieve[i]) {\n      cp.eb(i, i * i / 2);\n      for (int j = i * i; j <=\
-    \ S; j += 2 * i) sieve[j] = 1;\n    }\n  }\n  for (int L = 1; L <= R; L += S)\
-    \ {\n    array<bool, S> block{};\n    for (auto& [p, idx]: cp)\n      for (int\
-    \ i = idx; i < S + L; idx = (i += p)) block[i - L] = 1;\n    FOR(i, min(S, R -\
-    \ L)) if (!block[i]) primes.eb((L + i) * 2 + 1);\n  }\n  return primes;\n}\n#line\
-    \ 2 \"nt/primesum.hpp\"\n\r\ntemplate <typename T>\r\npair<vc<T>, vc<T>> primesum_F(ll\
-    \ N, function<T(ll)> F) {\r\n  /*\r\n  N \u3068\u5B8C\u5168\u4E57\u6CD5\u7684\u95A2\
-    \u6570 f \u306E prefix sum \u95A2\u6570 F \u3092\u4E0E\u3048\u308B\u3002\r\n \
-    \ n = floor(N/d) \u3068\u306A\u308B n \u306B\u5BFE\u3059\u308B sum_{p <= n} f(p)\
-    \ \u3092\u8A08\u7B97\u3059\u308B\u3002\r\n\r\n  \u7279\u306B\u3001p^k \u306E\u548C\
-    \u3084\u3001mod m \u3054\u3068\u3067\u306E p^k \u306E\u548C\u304C\u8A08\u7B97\u3067\
-    \u304D\u308B\u3002\r\n\r\n  Complexity: O(N^{3/4}/logN) time, O(N^{1/2}) space.\r\
-    \n  */\r\n  ll sqN = sqrtl(N);\r\n  auto& primes = primetable(sqN);\r\n  vc<T>\
-    \ sum_lo(sqN + 1), sum_hi(sqN + 1);\r\n  FOR3(i, 1, sqN + 1) sum_lo[i] = F(i)\
-    \ - 1;\r\n  FOR3(i, 1, sqN + 1) sum_hi[i] = F(double(N) / i) - 1;\r\n  for (auto&&\
-    \ p: primes) {\r\n    ll pp = p * p;\r\n    if (pp > N) break;\r\n    ll R = min(sqN,\
-    \ N / pp);\r\n    ll M = sqN / p;\r\n    T x = sum_lo[p - 1];\r\n    T fp = sum_lo[p]\
-    \ - sum_lo[p - 1];\r\n    FOR3(i, 1, M + 1) sum_hi[i] -= fp * (sum_hi[i * p] -\
-    \ x);\r\n    FOR3(i, M + 1, R + 1) sum_hi[i] -= fp * (sum_lo[double(N) / (i *\
-    \ p)] - x);\r\n    FOR3_R(n, pp, sqN + 1) sum_lo[n] -= fp * (sum_lo[double(n)\
-    \ / p] - x);\r\n  }\r\n  return {sum_lo, sum_hi};\r\n}\r\n\r\ntemplate <typename\
-    \ T>\r\npair<vc<T>, vc<T>> primecnt(ll N) {\r\n  auto F = [&](ll N) -> T { return\
-    \ N; };\r\n  return primesum_F<T>(N, F);\r\n}\r\n\r\ntemplate <typename T>\r\n\
-    pair<vc<T>, vc<T>> primesum(ll N) {\r\n  auto F = [&](ll N) -> T {\r\n    return\
-    \ (N & 1 ? T((N + 1) / 2) * T(N) : T(N / 2) * T(N + 1));\r\n  };\r\n  return primesum_F<T>(N,\
-    \ F);\r\n}\r\n#line 5 \"test/library_checker/math/counting_primes.test.cpp\"\n\
-    \r\nvoid solve() {\r\n  LL(N);\r\n  auto [sum_lo, sum_hi] = primecnt<ll>(N);\r\
-    \n  print(sum_hi[1]);\r\n}\r\n\r\nsigned main() {\r\n  solve();\r\n\r\n  return\
-    \ 0;\r\n}\r\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/counting_primes\"\r\n#include\
-    \ \"my_template.hpp\"\r\n#include \"other/io.hpp\"\r\n#include \"nt/primesum.hpp\"\
-    \r\n\r\nvoid solve() {\r\n  LL(N);\r\n  auto [sum_lo, sum_hi] = primecnt<ll>(N);\r\
-    \n  print(sum_hi[1]);\r\n}\r\n\r\nsigned main() {\r\n  solve();\r\n\r\n  return\
-    \ 0;\r\n}\r\n"
+    \ { yes(!t); }\r\n#line 2 \"ds/lichao.hpp\"\ntemplate <typename T, T INF>\r\n\
+    struct LiChaoTree {\r\n  struct Line {\r\n    T a, b;\r\n    Line(T a, T b) :\
+    \ a(a), b(b) {}\r\n    inline T eval(T x) const { return a * x + b; }\r\n    inline\
+    \ bool over(const Line &other, const T &x) const {\r\n      return eval(x) < other.eval(x);\r\
+    \n    }\r\n  };\r\n\r\n  vector<T> xs;\r\n  vector<Line> seg;\r\n  int size;\r\
+    \n\r\n  // \u30B3\u30F3\u30B9\u30C8\u30E9\u30AF\u30BF\u3002\u30AF\u30A8\u30EA\u306E\
+    \u6765\u308B x \u5168\u4F53\u3092\u6E21\u3059\u3002\u30BD\u30FC\u30C8\u4E0D\u8981\
+    \u3002\r\n  LiChaoTree(const vector<T> &_xs) : xs(_xs) {\r\n    if (len(xs) ==\
+    \ 0) xs.eb(0);\r\n    UNIQUE(xs);\r\n    size = 1;\r\n    while (size < len(xs))\
+    \ size *= 2;\r\n    while (len(xs) < size) xs.eb(xs.back());\r\n    seg.assign(2\
+    \ * size, Line(0, INF));\r\n  }\r\n\r\n  // y = ax + b\u306A\u308B\u76F4\u7DDA\
+    \u3092\u8FFD\u52A0\r\n  void add(T a, T b) { inner_update(a, b, 0, size, 1); }\r\
+    \n\r\n  // [lx, rx) \u306B\u7DDA\u5206 y = ax + b \u3092\u8FFD\u52A0\r\n  void\
+    \ add(T lx, T rx, T a, T b) {\r\n    int l = LB(xs, lx) + size;\r\n    int r =\
+    \ LB(xs, rx) + size;\r\n    while (l < r) {\r\n      if (l & 1) inner_update(a,\
+    \ b, l++);\r\n      if (r & 1) inner_update(a, b, --r);\r\n      l >>= 1, r >>=\
+    \ 1;\r\n    }\r\n  }\r\n\r\n  T get_min(T x) {\r\n    int i = LB(xs, x);\r\n \
+    \   assert(xs[i] == x);\r\n    return inner_query(x, i + size);\r\n  }\r\n\r\n\
+    \  void debug() {\r\n    print(\"xs\", xs);\r\n    print(\"seg\");\r\n    FOR(i,\
+    \ len(seg)) print(i, seg[i].a, seg[i].b);\r\n  }\r\n\r\nprivate:\r\n  void inner_update(T\
+    \ a, T b, int l, int r, int idx) {\r\n    Line line(a, b);\r\n    while (1) {\r\
+    \n      int m = (l + r) >> 1;\r\n      bool l_over = line.over(seg[idx], xs[l]);\r\
+    \n      bool r_over = line.over(seg[idx], xs[r - 1]);\r\n      if (l_over == r_over)\
+    \ {\r\n        if (l_over) swap(seg[idx], line);\r\n        return;\r\n      }\r\
+    \n      bool m_over = line.over(seg[idx], xs[m]);\r\n      if (m_over) swap(seg[idx],\
+    \ line);\r\n      if (l_over != m_over)\r\n        idx = (idx << 1) | 0, r = m;\r\
+    \n      else\r\n        idx = (idx << 1) | 1, l = m;\r\n    }\r\n  }\r\n\r\n \
+    \ void inner_update(T a, T b, int seg_idx) {\r\n    int left, right;\r\n    int\
+    \ upper_bit = 31 - __builtin_clz(seg_idx);\r\n    left = (size >> upper_bit) *\
+    \ (seg_idx - (1 << upper_bit));\r\n    right = left + (size >> upper_bit);\r\n\
+    \    inner_update(a, b, left, right, seg_idx);\r\n  }\r\n\r\n  T inner_query(T\
+    \ x, int idx) {\r\n    T ret = INF;\r\n    while (idx >= 1) {\r\n      chmin(ret,\
+    \ seg[idx].eval(x));\r\n      idx >>= 1;\r\n    }\r\n    return ret;\r\n  }\r\n\
+    };\r\n#line 5 \"test/library_checker/datastructure/segment_add_get_min.test.cpp\"\
+    \n\nvoid solve() {\n  LL(N, Q);\n  using T = tuple<ll, ll, ll, ll, ll>;\n  vc<T>\
+    \ dat(N + Q);\n  FOR(i, N) {\n    LL(l, r, a, b);\n    dat[i] = {0, l, r, a, b};\n\
+    \  }\n  vi X;\n  FOR3(i, N, N + Q) {\n    LL(t);\n    if (t == 1) {\n      LL(x);\n\
+    \      dat[i] = {1, x, 0, 0, 0};\n      X.eb(x);\n    } else {\n      LL(l, r,\
+    \ a, b);\n      dat[i] = {0, l, r, a, b};\n    }\n  }\n\n  const ll INF = 1LL\
+    \ << 60;\n  LiChaoTree<ll, INF> seg(X);\n  FOR(i, N + Q) {\n    auto [t, l, r,\
+    \ a, b] = dat[i];\n    if (t == 0) {\n      seg.add(l, r, a, b);\n    } else {\n\
+    \      ll y = seg.get_min(l);\n      if (y == INF)\n        print(\"INFINITY\"\
+    );\n      else\n        print(y);\n    }\n  }\n}\n\nsigned main() {\n  solve();\n\
+    \n  return 0;\n}\n"
+  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/segment_add_get_min\"\n\
+    #include \"my_template.hpp\"\n#include \"other/io.hpp\"\n#include \"ds/lichao.hpp\"\
+    \n\nvoid solve() {\n  LL(N, Q);\n  using T = tuple<ll, ll, ll, ll, ll>;\n  vc<T>\
+    \ dat(N + Q);\n  FOR(i, N) {\n    LL(l, r, a, b);\n    dat[i] = {0, l, r, a, b};\n\
+    \  }\n  vi X;\n  FOR3(i, N, N + Q) {\n    LL(t);\n    if (t == 1) {\n      LL(x);\n\
+    \      dat[i] = {1, x, 0, 0, 0};\n      X.eb(x);\n    } else {\n      LL(l, r,\
+    \ a, b);\n      dat[i] = {0, l, r, a, b};\n    }\n  }\n\n  const ll INF = 1LL\
+    \ << 60;\n  LiChaoTree<ll, INF> seg(X);\n  FOR(i, N + Q) {\n    auto [t, l, r,\
+    \ a, b] = dat[i];\n    if (t == 0) {\n      seg.add(l, r, a, b);\n    } else {\n\
+    \      ll y = seg.get_min(l);\n      if (y == INF)\n        print(\"INFINITY\"\
+    );\n      else\n        print(y);\n    }\n  }\n}\n\nsigned main() {\n  solve();\n\
+    \n  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
-  - nt/primesum.hpp
-  - nt/primetable.hpp
+  - ds/lichao.hpp
   isVerificationFile: true
-  path: test/library_checker/math/counting_primes.test.cpp
+  path: test/library_checker/datastructure/segment_add_get_min.test.cpp
   requiredBy: []
-  timestamp: '2022-04-09 22:35:37+09:00'
+  timestamp: '2022-04-10 11:46:48+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/library_checker/math/counting_primes.test.cpp
+documentation_of: test/library_checker/datastructure/segment_add_get_min.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/math/counting_primes.test.cpp
-- /verify/test/library_checker/math/counting_primes.test.cpp.html
-title: test/library_checker/math/counting_primes.test.cpp
+- /verify/test/library_checker/datastructure/segment_add_get_min.test.cpp
+- /verify/test/library_checker/datastructure/segment_add_get_min.test.cpp.html
+title: test/library_checker/datastructure/segment_add_get_min.test.cpp
 ---
