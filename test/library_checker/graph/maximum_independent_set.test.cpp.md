@@ -5,8 +5,8 @@ data:
     path: graph/base.hpp
     title: graph/base.hpp
   - icon: ':heavy_check_mark:'
-    path: graph/mis.hpp
-    title: graph/mis.hpp
+    path: graph/maximum_independent_set.hpp
+    title: graph/maximum_independent_set.hpp
   - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
@@ -211,8 +211,9 @@ data:
     frm to cost id\");\n      for (auto&& e: edges) print(e.frm, e.to, e.cost, e.id);\n\
     \    } else {\n      print(\"indptr\", indptr);\n      print(\"frm to cost id\"\
     );\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e.frm, e.to, e.cost, e.id);\n\
-    \    }\n  }\n};\n#line 2 \"graph/mis.hpp\"\n\r\ntemplate <typename Graph>\r\n\
-    vector<int> maximum_independent_set(Graph& G, int trial = 1000000) {\r\n  assert(G.is_prepared());\r\
+    \    }\n  }\n};\n#line 2 \"graph/maximum_independent_set.hpp\"\n\r\n// vertex\
+    \ id \u306E vector \u3092\u8FD4\u3059\r\ntemplate <typename Graph>\r\nvector<int>\
+    \ maximum_independent_set(Graph& G, int trial = 1000000) {\r\n  assert(G.is_prepared());\r\
     \n  assert(!G.is_directed());\r\n  int N = G.N;\r\n  vector<uint64_t> bit(N);\r\
     \n  assert(N <= 64);\r\n  FOR(a, N) for (auto&& e: G[a]) bit[a] |= uint64_t(1)\
     \ << e.to;\r\n  vector<int> ord(N);\r\n  iota(begin(ord), end(ord), 0);\r\n  mt19937\
@@ -230,19 +231,20 @@ data:
     \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/maximum_independent_set\"\
     \r\n#include \"my_template.hpp\"\r\n#include \"other/io.hpp\"\r\n\r\n#include\
-    \ \"graph/mis.hpp\"\r\n\r\nvoid solve() {\r\n  LL(N, M);\r\n  Graph<int> G(N);\r\
-    \n  G.read_graph(M, 0, 0);\r\n  auto mis = maximum_independent_set(G);\r\n  print(len(mis));\r\
-    \n  print(mis);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \ \"graph/maximum_independent_set.hpp\"\r\n\r\nvoid solve() {\r\n  LL(N, M);\r\
+    \n  Graph<int> G(N);\r\n  G.read_graph(M, 0, 0);\r\n  auto mis = maximum_independent_set(G);\r\
+    \n  print(len(mis));\r\n  print(mis);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
+    \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
+    \n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
-  - graph/mis.hpp
+  - graph/maximum_independent_set.hpp
   - graph/base.hpp
   isVerificationFile: true
   path: test/library_checker/graph/maximum_independent_set.test.cpp
   requiredBy: []
-  timestamp: '2022-04-09 22:35:37+09:00'
+  timestamp: '2022-04-11 00:27:34+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/graph/maximum_independent_set.test.cpp

@@ -48,14 +48,14 @@ data:
     path: graph/lazytreemonoid.hpp
     title: graph/lazytreemonoid.hpp
   - icon: ':heavy_check_mark:'
+    path: graph/maximum_independent_set.hpp
+    title: graph/maximum_independent_set.hpp
+  - icon: ':heavy_check_mark:'
     path: graph/mincostcycle.hpp
     title: graph/mincostcycle.hpp
   - icon: ':warning:'
     path: graph/minimum_spanning_tree.hpp
     title: graph/minimum_spanning_tree.hpp
-  - icon: ':heavy_check_mark:'
-    path: graph/mis.hpp
-    title: graph/mis.hpp
   - icon: ':warning:'
     path: graph/rerooting_dp.hpp
     title: graph/rerooting_dp.hpp
@@ -253,6 +253,7 @@ data:
   requiredBy:
   - graph/centroid.hpp
   - graph/dijkstra.hpp
+  - graph/maximum_independent_set.hpp
   - graph/bipartite_coloring.hpp
   - graph/dial.hpp
   - graph/warshall_floyd.hpp
@@ -275,7 +276,6 @@ data:
   - graph/tree_diameter.hpp
   - graph/dualtreemonoid.hpp
   - graph/lazytreemonoid.hpp
-  - graph/mis.hpp
   - graph/hld.hpp
   - graph/bfs01.hpp
   - graph/mincostcycle.hpp
