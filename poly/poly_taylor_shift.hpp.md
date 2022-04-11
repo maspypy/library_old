@@ -4,54 +4,55 @@ data:
   - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: mod/powertable.hpp
     title: mod/powertable.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: nt/primetable.hpp
     title: nt/primetable.hpp
   - icon: ':question:'
     path: poly/convolution.hpp
     title: poly/convolution.hpp
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: seq/stirling_number_1.hpp
     title: seq/stirling_number_1.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
     title: test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
     title: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"nt/primetable.hpp\"\nvc<ll>& primetable(int LIM) {\n  ++LIM;\n\
-    \  const int S = 32768;\n  static int done = 2;\n  static vc<ll> primes = {2},\
-    \ sieve(S + 1);\n\n  if(done >= LIM) return primes;\n  done  = LIM;\n\n  primes\
-    \ = {2}, sieve.assign(S + 1, 0);\n  const int R = LIM / 2;  \n  primes.reserve(int(LIM\
-    \ / log(LIM) * 1.1));\n  vc<pi> cp;\n  for (int i = 3; i <= S; i += 2) {\n   \
-    \ if (!sieve[i]) {\n      cp.eb(i, i * i / 2);\n      for (int j = i * i; j <=\
-    \ S; j += 2 * i) sieve[j] = 1;\n    }\n  }\n  for (int L = 1; L <= R; L += S)\
-    \ {\n    array<bool, S> block{};\n    for (auto& [p, idx]: cp)\n      for (int\
-    \ i = idx; i < S + L; idx = (i += p)) block[i - L] = 1;\n    FOR(i, min(S, R -\
-    \ L)) if (!block[i]) primes.eb((L + i) * 2 + 1);\n  }\n  return primes;\n}\n#line\
-    \ 3 \"mod/powertable.hpp\"\n\r\n// a^0, ..., a^{N-1}\r\ntemplate <typename mint>\r\
-    \nvc<mint> powertable_1(mint a, ll N) {\r\n  // table of a^i\r\n  vc<mint> f(N,\
-    \ 1);\r\n  FOR(i, N - 1) f[i + 1] = a * f[i];\r\n  return f;\r\n}\r\n\r\n// 0^e,\
-    \ ..., (N-1)^e\r\ntemplate <typename mint>\r\nvc<mint> powertable_2(ll e, ll N)\
-    \ {\r\n  auto& primes = primetable(N);\r\n  vc<mint> f(N, 1);\r\n  f[0] = mint(0).pow(e);\r\
-    \n  for (auto&& p: primes) {\r\n    if (p > N) break;\r\n    mint xp = mint(p).pow(e);\r\
-    \n    ll pp = p;\r\n    while (pp < N) {\r\n      ll i = pp;\r\n      while (i\
-    \ < N) {\r\n        f[i] *= xp;\r\n        i += pp;\r\n      }\r\n      pp *=\
-    \ p;\r\n    }\r\n  }\r\n  return f;\r\n}\r\n#line 2 \"mod/modint.hpp\"\ntemplate\
-    \ <uint mod>\nstruct modint {\n  static constexpr bool is_modint = true;\n  uint\
-    \ val;\n  constexpr modint(const ll val = 0) noexcept\n      : val(val >= 0 ?\
-    \ val % mod : (mod - (-val) % mod) % mod) {}\n  bool operator<(const modint &other)\
-    \ const {\n    return val < other.val;\n  } // To use std::map\n  modint &operator+=(const\
+  bundledCode: "#line 2 \"nt/primetable.hpp\"\nvc<int> primetable(int LIM) {\n  ++LIM;\n\
+    \  const int S = 32768;\n  static int done = 2;\n  static vc<int> primes = {2},\
+    \ sieve(S + 1);\n\n  if (done < LIM) {\n    done = LIM;\n\n    primes = {2}, sieve.assign(S\
+    \ + 1, 0);\n    const int R = LIM / 2;\n    primes.reserve(int(LIM / log(LIM)\
+    \ * 1.1));\n    vc<pi> cp;\n    for (int i = 3; i <= S; i += 2) {\n      if (!sieve[i])\
+    \ {\n        cp.eb(i, i * i / 2);\n        for (int j = i * i; j <= S; j += 2\
+    \ * i) sieve[j] = 1;\n      }\n    }\n    for (int L = 1; L <= R; L += S) {\n\
+    \      array<bool, S> block{};\n      for (auto& [p, idx]: cp)\n        for (int\
+    \ i = idx; i < S + L; idx = (i += p)) block[i - L] = 1;\n      FOR(i, min(S, R\
+    \ - L)) if (!block[i]) primes.eb((L + i) * 2 + 1);\n    }\n  }\n  int k = LB(primes,\
+    \ LIM + 1);\n  return {primes.begin(), primes.begin() + k};\n}\n#line 3 \"mod/powertable.hpp\"\
+    \n\r\n// a^0, ..., a^{N-1}\r\ntemplate <typename mint>\r\nvc<mint> powertable_1(mint\
+    \ a, ll N) {\r\n  // table of a^i\r\n  vc<mint> f(N, 1);\r\n  FOR(i, N - 1) f[i\
+    \ + 1] = a * f[i];\r\n  return f;\r\n}\r\n\r\n// 0^e, ..., (N-1)^e\r\ntemplate\
+    \ <typename mint>\r\nvc<mint> powertable_2(ll e, ll N) {\r\n  auto& primes = primetable(N);\r\
+    \n  vc<mint> f(N, 1);\r\n  f[0] = mint(0).pow(e);\r\n  for (auto&& p: primes)\
+    \ {\r\n    if (p > N) break;\r\n    mint xp = mint(p).pow(e);\r\n    ll pp = p;\r\
+    \n    while (pp < N) {\r\n      ll i = pp;\r\n      while (i < N) {\r\n      \
+    \  f[i] *= xp;\r\n        i += pp;\r\n      }\r\n      pp *= p;\r\n    }\r\n \
+    \ }\r\n  return f;\r\n}\r\n#line 2 \"mod/modint.hpp\"\ntemplate <uint mod>\nstruct\
+    \ modint {\n  static constexpr bool is_modint = true;\n  uint val;\n  constexpr\
+    \ modint(const ll val = 0) noexcept\n      : val(val >= 0 ? val % mod : (mod -\
+    \ (-val) % mod) % mod) {}\n  bool operator<(const modint &other) const {\n   \
+    \ return val < other.val;\n  } // To use std::map\n  modint &operator+=(const\
     \ modint &p) {\n    if ((val += p.val) >= mod) val -= mod;\n    return *this;\n\
     \  }\n  modint &operator-=(const modint &p) {\n    if ((val += mod - p.val) >=\
     \ mod) val -= mod;\n    return *this;\n  }\n  modint &operator*=(const modint\
@@ -291,8 +292,8 @@ data:
   path: poly/poly_taylor_shift.hpp
   requiredBy:
   - seq/stirling_number_1.hpp
-  timestamp: '2022-04-11 22:58:28+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-04-12 00:53:33+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
   - test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
