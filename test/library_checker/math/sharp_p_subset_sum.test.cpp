@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/sharp_p_subset_sum"
 #include "my_template.hpp"
 #include "other/io.hpp"
-#include "other/sharp_p_subset_sum.hpp"
+#include "poly/sharp_p_subset_sum.hpp"
 
 using mint = modint998;
 void solve() {

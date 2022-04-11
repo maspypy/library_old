@@ -1,7 +1,7 @@
 #define PROBLEM "https://judge.yosupo.jp/problem/nim_product_64"
 #include "my_template.hpp"
 #include "other/io.hpp"
-#include "other/nim_product.hpp"
+#include "nt/nim_product.hpp"
 
 void solve() {
   u64 a, b;
