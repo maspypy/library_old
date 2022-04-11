@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: alg/group_add.hpp
     title: alg/group_add.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: ds/segtree2d.hpp
     title: ds/segtree2d.hpp
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/point_add_rectangle_sum
@@ -178,26 +178,26 @@ data:
     \ t = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\
     \nvoid yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1)\
     \ { yes(!t); }\r\n#line 5 \"test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp\"\
-    \n\r\n#line 2 \"alg/group_add.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\nstruct\
-    \ Group_Add {\r\n  using value_type = X;\r\n  static constexpr X op(const X &x,\
-    \ const X &y) noexcept { return x + y; }\r\n  static constexpr X inverse(const\
-    \ X &x) noexcept { return -x; }\r\n  static constexpr X power(const X &x, ll n)\
-    \ noexcept { return n * x; }\r\n  static constexpr X unit = ZERO;\r\n  static\
-    \ constexpr bool commute = true;\r\n};\r\n#line 1 \"ds/segtree2d.hpp\"\ntemplate\
-    \ <typename Monoid, typename XY, bool SMALL = false>\r\nstruct SegTree2D {\r\n\
-    \  using S = typename Monoid::value_type;\r\n  int N;\r\n  int full_N;\r\n  vc<XY>\
-    \ keyX;\r\n  int min_X;\r\n  vc<int> indptr;\r\n  vc<XY> keyY;\r\n  vc<S> dat;\r\
-    \n\r\n  inline int xtoi(int x) {\r\n    return (SMALL ? clamp(x - min_X, 0, N)\
-    \ : LB(keyX, x));\r\n  }\r\n\r\n  SegTree2D(vc<XY>& X, vc<XY>& Y, vc<S>& wt =\
-    \ vc<S>()) {\r\n    if (len(wt) == 0) wt = vc<S>(len(X), S(0));\r\n    assert(Monoid::commute);\
-    \ // \u53EF\u63DB\u30E2\u30CE\u30A4\u30C9\u306E\u307F\r\n    assert(len(X) ==\
-    \ len(Y) && len(X) == len(wt));\r\n\r\n    if (!SMALL) {\r\n      keyX = X;\r\n\
-    \      UNIQUE(keyX);\r\n      N = len(keyX);\r\n    } else {\r\n      min_X =\
-    \ (len(X) == 0 ? 0 : MIN(X));\r\n      N = (len(X) == 0 ? 0 : MAX(X)) - min_X\
-    \ + 1;\r\n      keyX.resize(N);\r\n      FOR(i, N) keyX[i] = min_X + i;\r\n  \
-    \  }\r\n\r\n    vc<vc<XY>> keyY_raw(N + N);\r\n    vc<vc<S>> dat_raw(N + N);\r\
-    \n\r\n    auto I = argsort(Y);\r\n    for (auto&& i: I) {\r\n      int ix = xtoi(X[i]),\
-    \ y = Y[i];\r\n      ix += N;\r\n      while (ix) {\r\n        auto& KY = keyY_raw[ix];\r\
+    \n\r\n#line 2 \"alg/group_add.hpp\"\ntemplate <class X>\r\nstruct Group_Add {\r\
+    \n  using value_type = X;\r\n  static constexpr X op(const X &x, const X &y) noexcept\
+    \ { return x + y; }\r\n  static constexpr X inverse(const X &x) noexcept { return\
+    \ -x; }\r\n  static constexpr X power(const X &x, ll n) noexcept { return n *\
+    \ x; }\r\n  static constexpr X unit() { return X(0); }\r\n  static constexpr bool\
+    \ commute = true;\r\n};\r\n#line 1 \"ds/segtree2d.hpp\"\ntemplate <typename Monoid,\
+    \ typename XY, bool SMALL = false>\r\nstruct SegTree2D {\r\n  using S = typename\
+    \ Monoid::value_type;\r\n  int N;\r\n  int full_N;\r\n  vc<XY> keyX;\r\n  int\
+    \ min_X;\r\n  vc<int> indptr;\r\n  vc<XY> keyY;\r\n  vc<S> dat;\r\n\r\n  inline\
+    \ int xtoi(int x) {\r\n    return (SMALL ? clamp(x - min_X, 0, N) : LB(keyX, x));\r\
+    \n  }\r\n\r\n  SegTree2D(vc<XY>& X, vc<XY>& Y, vc<S>& wt = vc<S>()) {\r\n    if\
+    \ (len(wt) == 0) wt = vc<S>(len(X), S(0));\r\n    assert(Monoid::commute); //\
+    \ \u53EF\u63DB\u30E2\u30CE\u30A4\u30C9\u306E\u307F\r\n    assert(len(X) == len(Y)\
+    \ && len(X) == len(wt));\r\n\r\n    if (!SMALL) {\r\n      keyX = X;\r\n     \
+    \ UNIQUE(keyX);\r\n      N = len(keyX);\r\n    } else {\r\n      min_X = (len(X)\
+    \ == 0 ? 0 : MIN(X));\r\n      N = (len(X) == 0 ? 0 : MAX(X)) - min_X + 1;\r\n\
+    \      keyX.resize(N);\r\n      FOR(i, N) keyX[i] = min_X + i;\r\n    }\r\n\r\n\
+    \    vc<vc<XY>> keyY_raw(N + N);\r\n    vc<vc<S>> dat_raw(N + N);\r\n\r\n    auto\
+    \ I = argsort(Y);\r\n    for (auto&& i: I) {\r\n      int ix = xtoi(X[i]), y =\
+    \ Y[i];\r\n      ix += N;\r\n      while (ix) {\r\n        auto& KY = keyY_raw[ix];\r\
     \n        if (len(KY) == 0 || KY.back() < y) {\r\n          KY.eb(y);\r\n    \
     \      dat_raw[ix].eb(wt[i]);\r\n        } else {\r\n          dat_raw[ix].back()\
     \ = Monoid::op(dat_raw[ix].back(), wt[i]);\r\n        }\r\n        ix >>= 1;\r\
@@ -265,8 +265,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
   requiredBy: []
-  timestamp: '2022-04-09 22:35:37+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-04-11 17:55:37+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
 layout: document

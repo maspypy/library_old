@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: mod/modint61.hpp
     title: mod/modint61.hpp
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: mod/modular_subset_sum.hpp
     title: mod/modular_subset_sum.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/4_modular_subset_sum.test.cpp
     title: test/yukicoder/4_modular_subset_sum.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"mod/modint61.hpp\"\nstruct modint61 {\r\n  static constexpr\
@@ -46,13 +46,13 @@ data:
     \      n >>= 1;\r\n    }\r\n    return ret;\r\n  }\r\n  static constexpr int get_mod()\
     \ { return mod; }\r\n};\r\n#line 3 \"alg/monoid_rollinghash.hpp\"\n\r\nstruct\
     \ Monoid_Rolling_Hash {\r\n  using value_type = pair<modint61, modint61>; // pow\
-    \ of base, val\r\n  using X = value_type;\r\n  static X op(X x, X y) {\r\n   \
-    \ return {x.fi * y.fi, x.se * y.fi + y.se};\r\n  }\r\n  static constexpr X unit\
-    \ = X(1, 0);\r\n  static constexpr bool commute = false;\r\n};\n"
+    \ of base, val\r\n  using X = value_type;\r\n  static X op(X x, X y) { return\
+    \ {x.fi * y.fi, x.se * y.fi + y.se}; }\r\n  static constexpr X unit() { return\
+    \ {1, 0}; }\r\n  static constexpr bool commute = false;\r\n};\n"
   code: "#pragma once\r\n#include \"mod/modint61.hpp\"\r\n\r\nstruct Monoid_Rolling_Hash\
     \ {\r\n  using value_type = pair<modint61, modint61>; // pow of base, val\r\n\
-    \  using X = value_type;\r\n  static X op(X x, X y) {\r\n    return {x.fi * y.fi,\
-    \ x.se * y.fi + y.se};\r\n  }\r\n  static constexpr X unit = X(1, 0);\r\n  static\
+    \  using X = value_type;\r\n  static X op(X x, X y) { return {x.fi * y.fi, x.se\
+    \ * y.fi + y.se}; }\r\n  static constexpr X unit() { return {1, 0}; }\r\n  static\
     \ constexpr bool commute = false;\r\n};"
   dependsOn:
   - mod/modint61.hpp
@@ -60,8 +60,8 @@ data:
   path: alg/monoid_rollinghash.hpp
   requiredBy:
   - mod/modular_subset_sum.hpp
-  timestamp: '2022-04-09 14:33:07+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-04-11 18:07:23+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/4_modular_subset_sum.test.cpp
 documentation_of: alg/monoid_rollinghash.hpp

@@ -10,14 +10,14 @@ data:
   - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: pds/segtree.hpp
     title: pds/segtree.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/range_kth_smallest
@@ -199,12 +199,12 @@ data:
     \  int set(int t, ll idx, const X &x) {\n    Node *root = set(idx, x, roots[t],\
     \ 0, n);\n    roots.eb(root);\n    return time();\n  }\n\n  X prod(int time, ll\
     \ l, ll r) { return prod(l, r, roots[time], 0, n); }\n};\n#line 2 \"alg/group_add.hpp\"\
-    \ntemplate <class X, X ZERO = X(0)>\r\nstruct Group_Add {\r\n  using value_type\
-    \ = X;\r\n  static constexpr X op(const X &x, const X &y) noexcept { return x\
-    \ + y; }\r\n  static constexpr X inverse(const X &x) noexcept { return -x; }\r\
-    \n  static constexpr X power(const X &x, ll n) noexcept { return n * x; }\r\n\
-    \  static constexpr X unit = ZERO;\r\n  static constexpr bool commute = true;\r\
-    \n};\r\n#line 6 \"test/library_checker/datastructure/range_kth_smallest_pseg.test.cpp\"\
+    \ntemplate <class X>\r\nstruct Group_Add {\r\n  using value_type = X;\r\n  static\
+    \ constexpr X op(const X &x, const X &y) noexcept { return x + y; }\r\n  static\
+    \ constexpr X inverse(const X &x) noexcept { return -x; }\r\n  static constexpr\
+    \ X power(const X &x, ll n) noexcept { return n * x; }\r\n  static constexpr X\
+    \ unit() { return X(0); }\r\n  static constexpr bool commute = true;\r\n};\r\n\
+    #line 6 \"test/library_checker/datastructure/range_kth_smallest_pseg.test.cpp\"\
     \n\nvoid solve() {\n  LL(N, Q);\n  PersistentSegTree<Group_Add<int>> seg(N);\n\
     \  VEC(ll, A, N);\n  auto I = argsort(A);\n  vi times;\n  times.eb(seg.time());\n\
     \  FOR(k, N) { times.eb(seg.set(times.back(), I[k], 1)); }\n  FOR_(Q) {\n    LL(L,\
@@ -227,8 +227,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/range_kth_smallest_pseg.test.cpp
   requiredBy: []
-  timestamp: '2022-04-09 22:35:37+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-04-11 17:55:37+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/range_kth_smallest_pseg.test.cpp
 layout: document

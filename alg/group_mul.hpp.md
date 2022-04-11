@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: alg/lazy_add_mul.hpp
     title: alg/lazy_add_mul.hpp
   - icon: ':heavy_check_mark:'
@@ -18,23 +18,24 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
     title: test/library_checker/polynomial/shift_of_sampling_points_of_polynomial.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/899_bfsnumbering.test.cpp
     title: test/yukicoder/899_bfsnumbering.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"alg/group_mul.hpp\"\ntemplate <class X>\r\nstruct Group_Mul\
     \ {\r\n  using value_type = X;\r\n  static constexpr X op(const X &x, const X\
     \ &y) noexcept { return x * y; }\r\n  static constexpr X inverse(const X &x) noexcept\
-    \ { return X(1) / x; }\r\n  static constexpr X unit = X(1);\r\n  static constexpr\
-    \ bool commute = true;\r\n};\r\n"
+    \ { return X(1) / x; }\r\n  static constexpr X unit() { return X(1); }\r\n  static\
+    \ constexpr bool commute = true;\r\n};\r\n"
   code: "template <class X>\r\nstruct Group_Mul {\r\n  using value_type = X;\r\n \
     \ static constexpr X op(const X &x, const X &y) noexcept { return x * y; }\r\n\
     \  static constexpr X inverse(const X &x) noexcept { return X(1) / x; }\r\n  static\
-    \ constexpr X unit = X(1);\r\n  static constexpr bool commute = true;\r\n};\r\n"
+    \ constexpr X unit() { return X(1); }\r\n  static constexpr bool commute = true;\r\
+    \n};\r\n"
   dependsOn: []
   isVerificationFile: false
   path: alg/group_mul.hpp
@@ -42,8 +43,8 @@ data:
   - poly/lagrange_interpolate_iota.hpp
   - seq/interpolate_poly_exp_sum.hpp
   - alg/lazy_add_mul.hpp
-  timestamp: '2022-01-11 13:22:23+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2022-04-11 17:55:37+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/899_bfsnumbering.test.cpp
   - test/library_checker/math/sum_of_exp_times_poly.test.cpp

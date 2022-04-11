@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: alg/group_affine.hpp
     title: alg/group_affine.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: alg/monoid_reverse.hpp
     title: alg/monoid_reverse.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
   - icon: ':question:'
@@ -16,10 +16,10 @@ data:
   - icon: ':question:'
     path: graph/hld.hpp
     title: graph/hld.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/treemonoid.hpp
     title: graph/treemonoid.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: mod/modint.hpp
     title: mod/modint.hpp
   - icon: ':question:'
@@ -30,9 +30,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_set_path_composite
@@ -392,10 +392,10 @@ data:
     , in_tree);\r\n    print(\"root\", root);\r\n  }\r\n};\r\n#line 1 \"alg/monoid_reverse.hpp\"\
     \ntemplate <class Monoid>\r\nstruct Monoid_Reverse {\r\n  using value_type = typename\
     \ Monoid::value_type;\r\n  using X = value_type;\r\n  static constexpr X op(const\
-    \ X &x, const X &y) { return Monoid::op(y, x); }\r\n  static constexpr X unit\
-    \ = Monoid::unit;\r\n  static const bool commute = Monoid::commute;\r\n};\r\n\
-    #line 4 \"graph/treemonoid.hpp\"\n\r\ntemplate <typename HLD, typename Monoid,\
-    \ bool edge = false>\r\nstruct TreeMonoid {\r\n  using RevMonoid = Monoid_Reverse<Monoid>;\r\
+    \ X &x, const X &y) { return Monoid::op(y, x); }\r\n  static constexpr X unit()\
+    \ { return Monoid::unit(); }\r\n  static const bool commute = Monoid::commute;\r\
+    \n};\r\n#line 4 \"graph/treemonoid.hpp\"\n\r\ntemplate <typename HLD, typename\
+    \ Monoid, bool edge = false>\r\nstruct TreeMonoid {\r\n  using RevMonoid = Monoid_Reverse<Monoid>;\r\
     \n  using X = typename Monoid::value_type;\r\n  HLD &hld;\r\n  int N;\r\n  SegTree<Monoid>\
     \ seg;\r\n  SegTree<RevMonoid> seg_r;\r\n\r\n  TreeMonoid(HLD &hld) : hld(hld),\
     \ N(hld.N), seg(hld.N) {\r\n    if (!Monoid::commute) seg_r = SegTree<RevMonoid>(hld.N);\r\
@@ -466,8 +466,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   requiredBy: []
-  timestamp: '2022-04-11 17:51:21+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-04-11 18:07:23+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
 layout: document

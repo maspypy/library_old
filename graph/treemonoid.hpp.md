@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: alg/monoid_reverse.hpp
     title: alg/monoid_reverse.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
   - icon: ':question:'
@@ -18,18 +18,18 @@ data:
     path: graph/minimum_spanning_tree.hpp
     title: graph/minimum_spanning_tree.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
     title: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
     title: test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
     title: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - https://codeforces.com/contest/1059/problem/E
@@ -157,10 +157,10 @@ data:
     , in_tree);\r\n    print(\"root\", root);\r\n  }\r\n};\r\n#line 1 \"alg/monoid_reverse.hpp\"\
     \ntemplate <class Monoid>\r\nstruct Monoid_Reverse {\r\n  using value_type = typename\
     \ Monoid::value_type;\r\n  using X = value_type;\r\n  static constexpr X op(const\
-    \ X &x, const X &y) { return Monoid::op(y, x); }\r\n  static constexpr X unit\
-    \ = Monoid::unit;\r\n  static const bool commute = Monoid::commute;\r\n};\r\n\
-    #line 4 \"graph/treemonoid.hpp\"\n\r\ntemplate <typename HLD, typename Monoid,\
-    \ bool edge = false>\r\nstruct TreeMonoid {\r\n  using RevMonoid = Monoid_Reverse<Monoid>;\r\
+    \ X &x, const X &y) { return Monoid::op(y, x); }\r\n  static constexpr X unit()\
+    \ { return Monoid::unit(); }\r\n  static const bool commute = Monoid::commute;\r\
+    \n};\r\n#line 4 \"graph/treemonoid.hpp\"\n\r\ntemplate <typename HLD, typename\
+    \ Monoid, bool edge = false>\r\nstruct TreeMonoid {\r\n  using RevMonoid = Monoid_Reverse<Monoid>;\r\
     \n  using X = typename Monoid::value_type;\r\n  HLD &hld;\r\n  int N;\r\n  SegTree<Monoid>\
     \ seg;\r\n  SegTree<RevMonoid> seg_r;\r\n\r\n  TreeMonoid(HLD &hld) : hld(hld),\
     \ N(hld.N), seg(hld.N) {\r\n    if (!Monoid::commute) seg_r = SegTree<RevMonoid>(hld.N);\r\
@@ -245,8 +245,8 @@ data:
   path: graph/treemonoid.hpp
   requiredBy:
   - graph/minimum_spanning_tree.hpp
-  timestamp: '2022-04-11 17:51:21+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-04-11 18:07:23+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp

@@ -4,10 +4,10 @@ data:
   - icon: ':warning:'
     path: alg/lazy_reverse.hpp
     title: alg/lazy_reverse.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: alg/monoid_reverse.hpp
     title: alg/monoid_reverse.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: ds/lazysegtree.hpp
     title: ds/lazysegtree.hpp
   - icon: ':question:'
@@ -174,17 +174,17 @@ data:
     , in_tree);\r\n    print(\"root\", root);\r\n  }\r\n};\r\n#line 1 \"alg/monoid_reverse.hpp\"\
     \ntemplate <class Monoid>\r\nstruct Monoid_Reverse {\r\n  using value_type = typename\
     \ Monoid::value_type;\r\n  using X = value_type;\r\n  static constexpr X op(const\
-    \ X &x, const X &y) { return Monoid::op(y, x); }\r\n  static constexpr X unit\
-    \ = Monoid::unit;\r\n  static const bool commute = Monoid::commute;\r\n};\r\n\
-    #line 2 \"alg/lazy_reverse.hpp\"\n\r\ntemplate <typename Lazy>\r\nstruct Lazy_Reverse\
-    \ {\r\n  using MX = Monoid_Reverse<typename Lazy::X_structure>;\r\n  using MA\
-    \ = typename Lazy::A_structure;\r\n  using X_structure = MX;\r\n  using A_structure\
-    \ = MA;\r\n  using X = typename MX::value_type;\r\n  using A = typename MA::value_type;\r\
-    \n  static constexpr X act(const X &x, const A &a) { return Lazy::act(x, a); }\r\
-    \n};\r\n#line 5 \"graph/lazytreemonoid.hpp\"\n\r\ntemplate <typename HLD, typename\
-    \ Lazy, bool edge = false>\r\nstruct LazyTreeMonoid {\r\n  using MonoX = typename\
-    \ Lazy::X_structure;\r\n  using MonoA = typename Lazy::A_structure;\r\n  using\
-    \ X = typename MonoX::value_type;\r\n  using A = typename MonoA::value_type;\r\
+    \ X &x, const X &y) { return Monoid::op(y, x); }\r\n  static constexpr X unit()\
+    \ { return Monoid::unit(); }\r\n  static const bool commute = Monoid::commute;\r\
+    \n};\r\n#line 2 \"alg/lazy_reverse.hpp\"\n\r\ntemplate <typename Lazy>\r\nstruct\
+    \ Lazy_Reverse {\r\n  using MX = Monoid_Reverse<typename Lazy::X_structure>;\r\
+    \n  using MA = typename Lazy::A_structure;\r\n  using X_structure = MX;\r\n  using\
+    \ A_structure = MA;\r\n  using X = typename MX::value_type;\r\n  using A = typename\
+    \ MA::value_type;\r\n  static constexpr X act(const X &x, const A &a) { return\
+    \ Lazy::act(x, a); }\r\n};\r\n#line 5 \"graph/lazytreemonoid.hpp\"\n\r\ntemplate\
+    \ <typename HLD, typename Lazy, bool edge = false>\r\nstruct LazyTreeMonoid {\r\
+    \n  using MonoX = typename Lazy::X_structure;\r\n  using MonoA = typename Lazy::A_structure;\r\
+    \n  using X = typename MonoX::value_type;\r\n  using A = typename MonoA::value_type;\r\
     \n  using RevLazy = Lazy_Reverse<Lazy>;\r\n  HLD &hld;\r\n  int N;\r\n  LazySegTree<Lazy>\
     \ seg;\r\n  LazySegTree<RevLazy> seg_r;\r\n\r\n  LazyTreeMonoid(HLD &hld) : hld(hld),\
     \ N(hld.N), seg(hld.N) {\r\n    if (!MonoX::commute) seg_r = LazySegTree<RevLazy>(hld.N);\r\
@@ -255,7 +255,7 @@ data:
   isVerificationFile: false
   path: graph/lazytreemonoid.hpp
   requiredBy: []
-  timestamp: '2022-04-11 17:43:05+09:00'
+  timestamp: '2022-04-11 18:07:23+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph/lazytreemonoid.hpp

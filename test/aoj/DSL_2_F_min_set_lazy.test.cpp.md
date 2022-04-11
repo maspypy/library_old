@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: alg/lazy_min_set.hpp
     title: alg/lazy_min_set.hpp
   - icon: ':question:'
@@ -10,7 +10,7 @@ data:
   - icon: ':question:'
     path: alg/monoid_set.hpp
     title: alg/monoid_set.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: ds/lazysegtree.hpp
     title: ds/lazysegtree.hpp
   - icon: ':question:'
@@ -21,9 +21,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F
@@ -244,9 +244,9 @@ data:
     \n};\r\n#line 1 \"alg/monoid_set.hpp\"\ntemplate <typename E, E none_val>\r\n\
     struct Monoid_Set {\r\n  using value_type = E;\r\n  using X = value_type;\r\n\
     \  static X op(X x, X y) { return (y == none_val ? x : y); }\r\n  static constexpr\
-    \ X unit = none_val;\r\n  static constexpr bool commute = false;\r\n};\n#line\
-    \ 3 \"alg/lazy_min_set.hpp\"\n\r\ntemplate <typename E, E INF, E none_val>\r\n\
-    struct Lazy_Min_Set {\r\n  using MX = Monoid_Min<E, INF>;\r\n  using MA = Monoid_Set<E,\
+    \ X unit() { return none_val; }\r\n  static constexpr bool commute = false;\r\n\
+    };\n#line 3 \"alg/lazy_min_set.hpp\"\n\r\ntemplate <typename E, E INF, E none_val>\r\
+    \nstruct Lazy_Min_Set {\r\n  using MX = Monoid_Min<E, INF>;\r\n  using MA = Monoid_Set<E,\
     \ none_val>;\r\n  using X_structure = MX;\r\n  using A_structure = MA;\r\n  using\
     \ X = typename MX::value_type;\r\n  using A = typename MA::value_type;\r\n  static\
     \ constexpr X act(const X &x, const A &a) { return (a==none_val ? x : a) ;}\r\n\
@@ -278,8 +278,8 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_F_min_set_lazy.test.cpp
   requiredBy: []
-  timestamp: '2022-04-11 17:43:05+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-04-11 18:07:23+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_F_min_set_lazy.test.cpp
 layout: document

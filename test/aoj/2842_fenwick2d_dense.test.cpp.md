@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: alg/group_add.hpp
     title: alg/group_add.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: ds/fenwick2d_dense.hpp
     title: ds/fenwick2d_dense.hpp
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=2842
@@ -177,13 +177,13 @@ data:
     \ ? \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool\
     \ t = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\
     \nvoid yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1)\
-    \ { yes(!t); }\r\n#line 2 \"alg/group_add.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\
-    \nstruct Group_Add {\r\n  using value_type = X;\r\n  static constexpr X op(const\
-    \ X &x, const X &y) noexcept { return x + y; }\r\n  static constexpr X inverse(const\
+    \ { yes(!t); }\r\n#line 2 \"alg/group_add.hpp\"\ntemplate <class X>\r\nstruct\
+    \ Group_Add {\r\n  using value_type = X;\r\n  static constexpr X op(const X &x,\
+    \ const X &y) noexcept { return x + y; }\r\n  static constexpr X inverse(const\
     \ X &x) noexcept { return -x; }\r\n  static constexpr X power(const X &x, ll n)\
-    \ noexcept { return n * x; }\r\n  static constexpr X unit = ZERO;\r\n  static\
-    \ constexpr bool commute = true;\r\n};\r\n#line 2 \"ds/fenwick2d_dense.hpp\"\n\
-    template <typename AbelGroup>\r\nstruct Fenwick2D_dense {\r\n  using E = typename\
+    \ noexcept { return n * x; }\r\n  static constexpr X unit() { return X(0); }\r\
+    \n  static constexpr bool commute = true;\r\n};\r\n#line 2 \"ds/fenwick2d_dense.hpp\"\
+    \ntemplate <typename AbelGroup>\r\nstruct Fenwick2D_dense {\r\n  using E = typename\
     \ AbelGroup::value_type;\r\n  int H, W;\r\n  vc<vc<E>> dat;\r\n\r\n  Fenwick2D_dense()\
     \ {}\r\n  Fenwick2D_dense(int H, int W) : H(H), W(W), dat(H + 1, vc<E>(W + 1))\
     \ {}\r\n\r\n  void add_x(int x, int y, E val) {\r\n    ++y;\r\n    while (y <=\
@@ -236,8 +236,8 @@ data:
   isVerificationFile: true
   path: test/aoj/2842_fenwick2d_dense.test.cpp
   requiredBy: []
-  timestamp: '2022-04-09 22:35:37+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-04-11 17:55:37+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/2842_fenwick2d_dense.test.cpp
 layout: document

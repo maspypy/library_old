@@ -4,7 +4,7 @@ data:
   - icon: ':warning:'
     path: alg/monoid_min_idx.hpp
     title: alg/monoid_min_idx.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
   _extendedRequiredBy: []
@@ -45,9 +45,9 @@ data:
     \            R--;\n          }\n        }\n        return R + 1 - size;\n    \
     \  }\n      sm = Monoid::op(dat[R], sm);\n    } while ((R & -R) != R);\n    return\
     \ 0;\n  }\n\n  void debug() { print(\"segtree\", dat); }\n};\n#line 1 \"alg/monoid_min_idx.hpp\"\
-    \ntemplate <typename T, T INF = 1LL << 60>\r\nstruct Monoid_Min_Idx {\r\n  using\
-    \ value_type = pair<T, ll>;\r\n  using X = value_type;\r\n  static X op(X x, X\
-    \ y) { return min(x, y); }\r\n  static constexpr X unit = X(INF, -1);\r\n  static\
+    \ntemplate <typename T, T INF>\r\nstruct Monoid_Min_Idx {\r\n  using value_type\
+    \ = pair<T, ll>;\r\n  using X = value_type;\r\n  static X op(X x, X y) { return\
+    \ min(x, y); }\r\n  static constexpr X unit() { return {INF, -1}; }\r\n  static\
     \ constexpr bool commute = true;\r\n};\r\n#line 3 \"geo/manhattan_nns.hpp\"\n\r\
     \n// https://codeforces.com/gym/103577/problem/K\r\n// \u70B9\u7FA4 FRM \u304B\
     \u3089\u70B9\u7FA4 TO \u3078\u306E\u6700\u8FD1\u70B9\u63A2\u7D22\r\n// vector\
@@ -98,7 +98,7 @@ data:
   isVerificationFile: false
   path: geo/manhattan_nns.hpp
   requiredBy: []
-  timestamp: '2022-04-11 17:38:39+09:00'
+  timestamp: '2022-04-11 18:07:23+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: geo/manhattan_nns.hpp

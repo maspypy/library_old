@@ -7,16 +7,16 @@ data:
   - icon: ':question:'
     path: alg/monoid_min.hpp
     title: alg/monoid_min.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: alg/monoid_reverse.hpp
     title: alg/monoid_reverse.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: ds/dualsegtree.hpp
     title: ds/dualsegtree.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: ds/lazysegtree.hpp
     title: ds/lazysegtree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
   - icon: ':heavy_check_mark:'
@@ -31,7 +31,7 @@ data:
   - icon: ':question:'
     path: graph/hld.hpp
     title: graph/hld.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/treemonoid.hpp
     title: graph/treemonoid.hpp
   _extendedRequiredBy: []
@@ -176,8 +176,8 @@ data:
     segtree\", dat); }\n};\n#line 1 \"alg/monoid_reverse.hpp\"\ntemplate <class Monoid>\r\
     \nstruct Monoid_Reverse {\r\n  using value_type = typename Monoid::value_type;\r\
     \n  using X = value_type;\r\n  static constexpr X op(const X &x, const X &y) {\
-    \ return Monoid::op(y, x); }\r\n  static constexpr X unit = Monoid::unit;\r\n\
-    \  static const bool commute = Monoid::commute;\r\n};\r\n#line 4 \"graph/treemonoid.hpp\"\
+    \ return Monoid::op(y, x); }\r\n  static constexpr X unit() { return Monoid::unit();\
+    \ }\r\n  static const bool commute = Monoid::commute;\r\n};\r\n#line 4 \"graph/treemonoid.hpp\"\
     \n\r\ntemplate <typename HLD, typename Monoid, bool edge = false>\r\nstruct TreeMonoid\
     \ {\r\n  using RevMonoid = Monoid_Reverse<Monoid>;\r\n  using X = typename Monoid::value_type;\r\
     \n  HLD &hld;\r\n  int N;\r\n  SegTree<Monoid> seg;\r\n  SegTree<RevMonoid> seg_r;\r\
@@ -306,10 +306,10 @@ data:
     \ X, X INF>\r\nstruct Monoid_Min {\r\n  using value_type = X;\r\n  static constexpr\
     \ X op(const X &x, const X &y) noexcept { return min(x, y); }\r\n  static constexpr\
     \ X unit() { return INF; }\r\n  static constexpr bool commute = true;\r\n};\r\n\
-    #line 1 \"alg/monoid_max.hpp\"\ntemplate <class X=long long, X INF=1LL<<60>\r\n\
-    struct Monoid_Max {\r\n  using value_type = X;\r\n  static constexpr X op(const\
-    \ X &x, const X &y) noexcept { return max(x, y); }\r\n  static constexpr X unit\
-    \ = -INF;\r\n  static constexpr bool commute = true;\r\n};\r\n#line 8 \"graph/minimum_spanning_tree.hpp\"\
+    #line 1 \"alg/monoid_max.hpp\"\ntemplate <class X, X INF>\r\nstruct Monoid_Max\
+    \ {\r\n  using value_type = X;\r\n  static constexpr X op(const X &x, const X\
+    \ &y) noexcept { return max(x, y); }\r\n  static constexpr X unit() { return -INF;\
+    \ }\r\n  static constexpr bool commute = true;\r\n};\r\n#line 8 \"graph/minimum_spanning_tree.hpp\"\
     \n\r\n// return : {T mst_cost, vc<bool> in_mst, Graph MST}\r\ntemplate <typename\
     \ T>\r\ntuple<T, vc<bool>, Graph<T>> minimum_spanning_tree(Graph<T>& G) {\r\n\
     \  int N = G.N;\r\n  int M = len(G.edges);\r\n  vc<pair<T, int>> edges;\r\n  FOR(i,\
@@ -376,7 +376,7 @@ data:
   isVerificationFile: false
   path: graph/minimum_spanning_tree.hpp
   requiredBy: []
-  timestamp: '2022-04-11 17:51:21+09:00'
+  timestamp: '2022-04-11 18:07:23+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph/minimum_spanning_tree.hpp

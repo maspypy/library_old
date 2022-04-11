@@ -4,10 +4,10 @@ data:
   - icon: ':question:'
     path: alg/group_add.hpp
     title: alg/group_add.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: alg/monoid_reverse.hpp
     title: alg/monoid_reverse.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
   - icon: ':question:'
@@ -16,7 +16,7 @@ data:
   - icon: ':question:'
     path: graph/hld.hpp
     title: graph/hld.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/treemonoid.hpp
     title: graph/treemonoid.hpp
   - icon: ':question:'
@@ -27,9 +27,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_add_path_sum
@@ -314,10 +314,10 @@ data:
     , in_tree);\r\n    print(\"root\", root);\r\n  }\r\n};\r\n#line 1 \"alg/monoid_reverse.hpp\"\
     \ntemplate <class Monoid>\r\nstruct Monoid_Reverse {\r\n  using value_type = typename\
     \ Monoid::value_type;\r\n  using X = value_type;\r\n  static constexpr X op(const\
-    \ X &x, const X &y) { return Monoid::op(y, x); }\r\n  static constexpr X unit\
-    \ = Monoid::unit;\r\n  static const bool commute = Monoid::commute;\r\n};\r\n\
-    #line 4 \"graph/treemonoid.hpp\"\n\r\ntemplate <typename HLD, typename Monoid,\
-    \ bool edge = false>\r\nstruct TreeMonoid {\r\n  using RevMonoid = Monoid_Reverse<Monoid>;\r\
+    \ X &x, const X &y) { return Monoid::op(y, x); }\r\n  static constexpr X unit()\
+    \ { return Monoid::unit(); }\r\n  static const bool commute = Monoid::commute;\r\
+    \n};\r\n#line 4 \"graph/treemonoid.hpp\"\n\r\ntemplate <typename HLD, typename\
+    \ Monoid, bool edge = false>\r\nstruct TreeMonoid {\r\n  using RevMonoid = Monoid_Reverse<Monoid>;\r\
     \n  using X = typename Monoid::value_type;\r\n  HLD &hld;\r\n  int N;\r\n  SegTree<Monoid>\
     \ seg;\r\n  SegTree<RevMonoid> seg_r;\r\n\r\n  TreeMonoid(HLD &hld) : hld(hld),\
     \ N(hld.N), seg(hld.N) {\r\n    if (!Monoid::commute) seg_r = SegTree<RevMonoid>(hld.N);\r\
@@ -354,17 +354,16 @@ data:
     \ + \u30BB\u30B0\u6728\u3002\");\r\n    print(\"\u90E8\u5206\u6728\u30AF\u30A8\
     \u30EA O(logN) \u6642\u9593\u3001\u30D1\u30B9\u30AF\u30A8\u30EA O(log^2N) \u6642\
     \u9593\u3002\");\r\n  }\r\n};\r\n#line 2 \"alg/group_add.hpp\"\ntemplate <class\
-    \ X, X ZERO = X(0)>\r\nstruct Group_Add {\r\n  using value_type = X;\r\n  static\
-    \ constexpr X op(const X &x, const X &y) noexcept { return x + y; }\r\n  static\
-    \ constexpr X inverse(const X &x) noexcept { return -x; }\r\n  static constexpr\
-    \ X power(const X &x, ll n) noexcept { return n * x; }\r\n  static constexpr X\
-    \ unit = ZERO;\r\n  static constexpr bool commute = true;\r\n};\r\n#line 7 \"\
-    test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp\"\n\r\
-    \nvoid solve() {\r\n  LL(N, Q);\r\n  VEC(ll, A, N);\r\n  Graph G(N);\r\n  G.read_tree(0,\
-    \ 0);\r\n\r\n  HLD hld(G);\r\n  const bool is_edge = false;\r\n  using Mono =\
-    \ Group_Add<ll>;\r\n  TreeMonoid<decltype(hld), Mono, is_edge> TM(hld, A);\r\n\
-    \r\n  FOR(_, Q) {\r\n    LL(t);\r\n    if (t == 0) {\r\n      LL(v, x);\r\n  \
-    \    A[v] += x;\r\n      TM.set(v, A[v]);\r\n    } else {\r\n      LL(u, v);\r\
+    \ X>\r\nstruct Group_Add {\r\n  using value_type = X;\r\n  static constexpr X\
+    \ op(const X &x, const X &y) noexcept { return x + y; }\r\n  static constexpr\
+    \ X inverse(const X &x) noexcept { return -x; }\r\n  static constexpr X power(const\
+    \ X &x, ll n) noexcept { return n * x; }\r\n  static constexpr X unit() { return\
+    \ X(0); }\r\n  static constexpr bool commute = true;\r\n};\r\n#line 7 \"test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp\"\
+    \n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  VEC(ll, A, N);\r\n  Graph G(N);\r\n \
+    \ G.read_tree(0, 0);\r\n\r\n  HLD hld(G);\r\n  const bool is_edge = false;\r\n\
+    \  using Mono = Group_Add<ll>;\r\n  TreeMonoid<decltype(hld), Mono, is_edge> TM(hld,\
+    \ A);\r\n\r\n  FOR(_, Q) {\r\n    LL(t);\r\n    if (t == 0) {\r\n      LL(v, x);\r\
+    \n      A[v] += x;\r\n      TM.set(v, A[v]);\r\n    } else {\r\n      LL(u, v);\r\
     \n      print(TM.prod_path(u, v));\r\n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\
     \n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\
     \n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
@@ -391,8 +390,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
   requiredBy: []
-  timestamp: '2022-04-11 17:51:21+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-04-11 18:07:23+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
 layout: document

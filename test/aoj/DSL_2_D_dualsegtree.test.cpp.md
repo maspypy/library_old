@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: alg/monoid_set.hpp
     title: alg/monoid_set.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: ds/dualsegtree.hpp
     title: ds/dualsegtree.hpp
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D
@@ -198,14 +198,14 @@ data:
     \ }\n};\n#line 1 \"alg/monoid_set.hpp\"\ntemplate <typename E, E none_val>\r\n\
     struct Monoid_Set {\r\n  using value_type = E;\r\n  using X = value_type;\r\n\
     \  static X op(X x, X y) { return (y == none_val ? x : y); }\r\n  static constexpr\
-    \ X unit = none_val;\r\n  static constexpr bool commute = false;\r\n};\n#line\
-    \ 7 \"test/aoj/DSL_2_D_dualsegtree.test.cpp\"\n\r\nvoid solve() {\r\n  using Mono\
-    \ = Monoid_Set<ll, (1LL << 31) - 1>;\r\n  LL(N, Q);\r\n  DualSegTree<Mono> seg(N);\r\
-    \n  FOR(_, Q) {\r\n    LL(t);\r\n    if (t == 0) {\r\n      LL(L, R, x);\r\n \
-    \     seg.apply(L, ++R, x);\r\n    } else {\r\n      LL(i);\r\n      print(seg.get(i));\r\
-    \n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  ll T = 1;\r\n  // LL(T);\r\n  FOR(_, T)\
-    \ solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \ X unit() { return none_val; }\r\n  static constexpr bool commute = false;\r\n\
+    };\n#line 7 \"test/aoj/DSL_2_D_dualsegtree.test.cpp\"\n\r\nvoid solve() {\r\n\
+    \  using Mono = Monoid_Set<ll, (1LL << 31) - 1>;\r\n  LL(N, Q);\r\n  DualSegTree<Mono>\
+    \ seg(N);\r\n  FOR(_, Q) {\r\n    LL(t);\r\n    if (t == 0) {\r\n      LL(L, R,\
+    \ x);\r\n      seg.apply(L, ++R, x);\r\n    } else {\r\n      LL(i);\r\n     \
+    \ print(seg.get(i));\r\n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
+    \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  ll T\
+    \ = 1;\r\n  // LL(T);\r\n  FOR(_, T) solve();\r\n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \\\r\n  \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_D\"\
     \r\n#include \"my_template.hpp\"\r\n#include \"other/io.hpp\"\r\n#include \"ds/dualsegtree.hpp\"\
     \r\n#include \"alg/monoid_set.hpp\"\r\n\r\nvoid solve() {\r\n  using Mono = Monoid_Set<ll,\
@@ -223,8 +223,8 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_D_dualsegtree.test.cpp
   requiredBy: []
-  timestamp: '2022-04-09 22:35:37+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-04-11 18:07:23+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_D_dualsegtree.test.cpp
 layout: document

@@ -1,16 +1,16 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: alg/monoid_rollinghash.hpp
     title: alg/monoid_rollinghash.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: mod/modint61.hpp
     title: mod/modint61.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: mod/modular_subset_sum.hpp
     title: mod/modular_subset_sum.hpp
   - icon: ':question:'
@@ -19,14 +19,14 @@ data:
   - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: other/random.hpp
     title: other/random.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/4
@@ -215,10 +215,10 @@ data:
     \n      mul = mul * mul;\r\n      n >>= 1;\r\n    }\r\n    return ret;\r\n  }\r\
     \n  static constexpr int get_mod() { return mod; }\r\n};\r\n#line 3 \"alg/monoid_rollinghash.hpp\"\
     \n\r\nstruct Monoid_Rolling_Hash {\r\n  using value_type = pair<modint61, modint61>;\
-    \ // pow of base, val\r\n  using X = value_type;\r\n  static X op(X x, X y) {\r\
-    \n    return {x.fi * y.fi, x.se * y.fi + y.se};\r\n  }\r\n  static constexpr X\
-    \ unit = X(1, 0);\r\n  static constexpr bool commute = false;\r\n};\n#line 1 \"\
-    other/random.hpp\"\nstruct RandomNumberGenerator {\n  mt19937 mt;\n\n  RandomNumberGenerator()\
+    \ // pow of base, val\r\n  using X = value_type;\r\n  static X op(X x, X y) {\
+    \ return {x.fi * y.fi, x.se * y.fi + y.se}; }\r\n  static constexpr X unit() {\
+    \ return {1, 0}; }\r\n  static constexpr bool commute = false;\r\n};\n#line 1\
+    \ \"other/random.hpp\"\nstruct RandomNumberGenerator {\n  mt19937 mt;\n\n  RandomNumberGenerator()\
     \ : mt(chrono::steady_clock::now().time_since_epoch().count()) {}\n\n  ll operator()(ll\
     \ a, ll b) {  // [a, b)\n    uniform_int_distribution<ll> dist(a, b - 1);\n  \
     \  return dist(mt);\n  }\n\n  ll operator()(ll b) {  // [0, b)\n    return (*this)(0,\
@@ -293,8 +293,8 @@ data:
   isVerificationFile: true
   path: test/yukicoder/4_modular_subset_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-04-11 17:38:39+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-04-11 18:07:23+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yukicoder/4_modular_subset_sum.test.cpp
 layout: document

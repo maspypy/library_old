@@ -1,19 +1,19 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: alg/group_affine.hpp
     title: alg/group_affine.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: alg/group_cntsum.hpp
     title: alg/group_cntsum.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: alg/lazy_cntsum_affine.hpp
     title: alg/lazy_cntsum_affine.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: ds/lazysegtree.hpp
     title: ds/lazysegtree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: mod/modint.hpp
     title: mod/modint.hpp
   - icon: ':question:'
@@ -24,9 +24,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/range_affine_range_sum
@@ -188,23 +188,23 @@ data:
     \nvoid yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1)\
     \ { yes(!t); }\r\n#line 4 \"test/library_checker/datastructure/range_affine_range_sum.test.cpp\"\
     \n\n#line 1 \"alg/group_cntsum.hpp\"\ntemplate <typename E = long long>\r\nstruct\
-    \ Group_CntSum {\r\n  using value_type = pair<E,E>;\r\n  using X = value_type;\r\
-    \n  static constexpr X op(const X &x, const X &y) { return {x.fi + y.fi, x.se\
-    \ + y.se}; }\r\n  static constexpr X inverse(const X &x) { return {-x.fi, -x.se};\
-    \ }\r\n  static constexpr X unit = {0, 0};\r\n  static constexpr bool commute\
-    \ = true;\r\n};\r\n#line 1 \"alg/group_affine.hpp\"\ntemplate <typename K>\nstruct\
-    \ Group_Affine {\n  using F = pair<K, K>;\n  using value_type = F;\n  static constexpr\
-    \ F op(const F &x, const F &y) noexcept {\n    return F({x.fi * y.fi, x.se * y.fi\
-    \ + y.se});\n  }\n  static constexpr F inverse(const F &x) {\n    auto [a, b]\
-    \ = x;\n    a = K(1) / a;\n    return {a, a * (-b)};\n  }\n  static constexpr\
-    \ K eval(const F &f, K x) noexcept { return f.fi * x + f.se; }\n  static constexpr\
-    \ F unit() { return {K(1), K(0)}; }\n  static constexpr bool commute = false;\n\
-    };\n#line 3 \"alg/lazy_cntsum_affine.hpp\"\n\r\ntemplate <typename E>\r\nstruct\
-    \ Lazy_CntSum_Affine {\r\n  using X_structure = Group_CntSum<E>;\r\n  using A_structure\
-    \ = Group_Affine<E>;\r\n  using X = typename X_structure::value_type;\r\n  using\
-    \ A = typename A_structure::value_type;\r\n  static constexpr X act(const X &x,\
-    \ const A &a) {\r\n    return {x.fi, x.fi * a.se + x.se * a.fi};\r\n  }\r\n};\n\
-    #line 2 \"ds/lazysegtree.hpp\"\n\ntemplate <typename Lazy>\nstruct LazySegTree\
+    \ Group_CntSum {\r\n  using value_type = pair<E, E>;\r\n  using X = value_type;\r\
+    \n  static constexpr X op(const X &x, const X &y) {\r\n    return {x.fi + y.fi,\
+    \ x.se + y.se};\r\n  }\r\n  static constexpr X inverse(const X &x) { return {-x.fi,\
+    \ -x.se}; }\r\n  static constexpr X unit() { return {0, 0}; }\r\n  static constexpr\
+    \ bool commute = true;\r\n};\r\n#line 1 \"alg/group_affine.hpp\"\ntemplate <typename\
+    \ K>\nstruct Group_Affine {\n  using F = pair<K, K>;\n  using value_type = F;\n\
+    \  static constexpr F op(const F &x, const F &y) noexcept {\n    return F({x.fi\
+    \ * y.fi, x.se * y.fi + y.se});\n  }\n  static constexpr F inverse(const F &x)\
+    \ {\n    auto [a, b] = x;\n    a = K(1) / a;\n    return {a, a * (-b)};\n  }\n\
+    \  static constexpr K eval(const F &f, K x) noexcept { return f.fi * x + f.se;\
+    \ }\n  static constexpr F unit() { return {K(1), K(0)}; }\n  static constexpr\
+    \ bool commute = false;\n};\n#line 3 \"alg/lazy_cntsum_affine.hpp\"\n\r\ntemplate\
+    \ <typename E>\r\nstruct Lazy_CntSum_Affine {\r\n  using X_structure = Group_CntSum<E>;\r\
+    \n  using A_structure = Group_Affine<E>;\r\n  using X = typename X_structure::value_type;\r\
+    \n  using A = typename A_structure::value_type;\r\n  static constexpr X act(const\
+    \ X &x, const A &a) {\r\n    return {x.fi, x.fi * a.se + x.se * a.fi};\r\n  }\r\
+    \n};\n#line 2 \"ds/lazysegtree.hpp\"\n\ntemplate <typename Lazy>\nstruct LazySegTree\
     \ {\n  using Monoid_X = typename Lazy::X_structure;\n  using Monoid_A = typename\
     \ Lazy::A_structure;\n  using X = typename Monoid_X::value_type;\n  using A =\
     \ typename Monoid_A::value_type;\n  int n, log, size;\n  vc<X> dat;\n  vc<A> laz;\n\
@@ -358,8 +358,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-04-11 17:48:58+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-04-11 17:55:37+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/range_affine_range_sum.test.cpp
 layout: document

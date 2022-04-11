@@ -4,10 +4,10 @@ data:
   - icon: ':question:'
     path: alg/group_add.hpp
     title: alg/group_add.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: alg/group_reverse.hpp
     title: alg/group_reverse.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
   - icon: ':question:'
@@ -16,7 +16,7 @@ data:
   - icon: ':question:'
     path: graph/hld.hpp
     title: graph/hld.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/treegroup.hpp
     title: graph/treegroup.hpp
   - icon: ':question:'
@@ -27,9 +27,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_add_path_sum
@@ -190,51 +190,50 @@ data:
     \ t = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\
     \nvoid yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1)\
     \ { yes(!t); }\r\n#line 4 \"test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp\"\
-    \n\r\n#line 2 \"alg/group_add.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\nstruct\
-    \ Group_Add {\r\n  using value_type = X;\r\n  static constexpr X op(const X &x,\
-    \ const X &y) noexcept { return x + y; }\r\n  static constexpr X inverse(const\
-    \ X &x) noexcept { return -x; }\r\n  static constexpr X power(const X &x, ll n)\
-    \ noexcept { return n * x; }\r\n  static constexpr X unit = ZERO;\r\n  static\
-    \ constexpr bool commute = true;\r\n};\r\n#line 2 \"ds/segtree.hpp\"\ntemplate\
-    \ <class Monoid>\nstruct SegTree {\n  using X = typename Monoid::value_type;\n\
-    \  using value_type = X;\n  vc<X> dat;\n  int n, log, size;\n\n  SegTree() : SegTree(0)\
-    \ {}\n  SegTree(int n) : SegTree(vc<X>(n, Monoid::unit())) {}\n  SegTree(vc<X>\
-    \ v) : n(len(v)) {\n    log = 1;\n    while ((1 << log) < n) ++log;\n    size\
-    \ = 1 << log;\n    dat.assign(size << 1, Monoid::unit());\n    FOR(i, n) dat[size\
-    \ + i] = v[i];\n    FOR3_R(i, 1, size) update(i);\n  }\n\n  X operator[](int i)\
-    \ { return dat[size + i]; }\n\n  void update(int i) { dat[i] = Monoid::op(dat[2\
-    \ * i], dat[2 * i + 1]); }\n\n  void set(int i, X x) {\n    assert(i < n);\n \
-    \   dat[i += size] = x;\n    while (i >>= 1) update(i);\n  }\n\n  X prod(int L,\
-    \ int R) {\n    assert(L <= R);\n    assert(R <= n);\n    X vl = Monoid::unit(),\
-    \ vr = Monoid::unit();\n    L += size, R += size;\n    while (L < R) {\n     \
-    \ if (L & 1) vl = Monoid::op(vl, dat[L++]);\n      if (R & 1) vr = Monoid::op(dat[--R],\
-    \ vr);\n      L >>= 1, R >>= 1;\n    }\n    return Monoid::op(vl, vr);\n  }\n\n\
-    \  X prod_all() { return dat[1]; }\n\n  template <class F>\n  int max_right(F\
-    \ &check, int L) {\n    assert(0 <= L && L <= n && check(Monoid::unit()));\n \
-    \   if (L == n) return n;\n    L += size;\n    X sm = Monoid::unit();\n    do\
-    \ {\n      while (L % 2 == 0) L >>= 1;\n      if (!check(Monoid::op(sm, dat[L])))\
-    \ {\n        while (L < size) {\n          L = 2 * L;\n          if (check(Monoid::op(sm,\
-    \ dat[L]))) {\n            sm = Monoid::op(sm, dat[L]);\n            L++;\n  \
-    \        }\n        }\n        return L - size;\n      }\n      sm = Monoid::op(sm,\
-    \ dat[L]);\n      L++;\n    } while ((L & -L) != L);\n    return n;\n  }\n\n \
-    \ template <class F>\n  int min_left(F &check, int R) {\n    assert(0 <= R &&\
-    \ R <= n && check(Monoid::unit()));\n    if (R == 0) return 0;\n    R += size;\n\
-    \    X sm = Monoid::unit();\n    do {\n      --R;\n      while (R > 1 && (R %\
-    \ 2)) R >>= 1;\n      if (!check(Monoid::op(dat[R], sm))) {\n        while (R\
-    \ < size) {\n          R = 2 * R + 1;\n          if (check(Monoid::op(dat[R],\
-    \ sm))) {\n            sm = Monoid::op(dat[R], sm);\n            R--;\n      \
-    \    }\n        }\n        return R + 1 - size;\n      }\n      sm = Monoid::op(dat[R],\
-    \ sm);\n    } while ((R & -R) != R);\n    return 0;\n  }\n\n  void debug() { print(\"\
-    segtree\", dat); }\n};\n#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\n\
-    struct Edge {\n  int frm, to;\n  T cost;\n  int id;\n};\n\ntemplate <typename\
-    \ T = int, bool directed = false>\nstruct Graph {\n  int N, M;\n  using cost_type\
-    \ = T;\n  using edge_type = Edge<T>;\n  vector<edge_type> edges;\n  vector<int>\
-    \ indptr;\n  vector<edge_type> csr_edges;\n  bool prepared;\n\n  class OutgoingEdges\
-    \ {\n  public:\n    OutgoingEdges(const Graph* G, int l, int r) : G(G), l(l),\
-    \ r(r) {}\n\n    const edge_type* begin() const {\n      if (l == r) { return\
-    \ 0; }\n      return &G->csr_edges[l];\n    }\n\n    const edge_type* end() const\
-    \ {\n      if (l == r) { return 0; }\n      return &G->csr_edges[r];\n    }\n\n\
-    \  private:\n    int l, r;\n    const Graph* G;\n  };\n\n  bool is_prepared()\
+    \n\r\n#line 2 \"alg/group_add.hpp\"\ntemplate <class X>\r\nstruct Group_Add {\r\
+    \n  using value_type = X;\r\n  static constexpr X op(const X &x, const X &y) noexcept\
+    \ { return x + y; }\r\n  static constexpr X inverse(const X &x) noexcept { return\
+    \ -x; }\r\n  static constexpr X power(const X &x, ll n) noexcept { return n *\
+    \ x; }\r\n  static constexpr X unit() { return X(0); }\r\n  static constexpr bool\
+    \ commute = true;\r\n};\r\n#line 2 \"ds/segtree.hpp\"\ntemplate <class Monoid>\n\
+    struct SegTree {\n  using X = typename Monoid::value_type;\n  using value_type\
+    \ = X;\n  vc<X> dat;\n  int n, log, size;\n\n  SegTree() : SegTree(0) {}\n  SegTree(int\
+    \ n) : SegTree(vc<X>(n, Monoid::unit())) {}\n  SegTree(vc<X> v) : n(len(v)) {\n\
+    \    log = 1;\n    while ((1 << log) < n) ++log;\n    size = 1 << log;\n    dat.assign(size\
+    \ << 1, Monoid::unit());\n    FOR(i, n) dat[size + i] = v[i];\n    FOR3_R(i, 1,\
+    \ size) update(i);\n  }\n\n  X operator[](int i) { return dat[size + i]; }\n\n\
+    \  void update(int i) { dat[i] = Monoid::op(dat[2 * i], dat[2 * i + 1]); }\n\n\
+    \  void set(int i, X x) {\n    assert(i < n);\n    dat[i += size] = x;\n    while\
+    \ (i >>= 1) update(i);\n  }\n\n  X prod(int L, int R) {\n    assert(L <= R);\n\
+    \    assert(R <= n);\n    X vl = Monoid::unit(), vr = Monoid::unit();\n    L +=\
+    \ size, R += size;\n    while (L < R) {\n      if (L & 1) vl = Monoid::op(vl,\
+    \ dat[L++]);\n      if (R & 1) vr = Monoid::op(dat[--R], vr);\n      L >>= 1,\
+    \ R >>= 1;\n    }\n    return Monoid::op(vl, vr);\n  }\n\n  X prod_all() { return\
+    \ dat[1]; }\n\n  template <class F>\n  int max_right(F &check, int L) {\n    assert(0\
+    \ <= L && L <= n && check(Monoid::unit()));\n    if (L == n) return n;\n    L\
+    \ += size;\n    X sm = Monoid::unit();\n    do {\n      while (L % 2 == 0) L >>=\
+    \ 1;\n      if (!check(Monoid::op(sm, dat[L]))) {\n        while (L < size) {\n\
+    \          L = 2 * L;\n          if (check(Monoid::op(sm, dat[L]))) {\n      \
+    \      sm = Monoid::op(sm, dat[L]);\n            L++;\n          }\n        }\n\
+    \        return L - size;\n      }\n      sm = Monoid::op(sm, dat[L]);\n     \
+    \ L++;\n    } while ((L & -L) != L);\n    return n;\n  }\n\n  template <class\
+    \ F>\n  int min_left(F &check, int R) {\n    assert(0 <= R && R <= n && check(Monoid::unit()));\n\
+    \    if (R == 0) return 0;\n    R += size;\n    X sm = Monoid::unit();\n    do\
+    \ {\n      --R;\n      while (R > 1 && (R % 2)) R >>= 1;\n      if (!check(Monoid::op(dat[R],\
+    \ sm))) {\n        while (R < size) {\n          R = 2 * R + 1;\n          if\
+    \ (check(Monoid::op(dat[R], sm))) {\n            sm = Monoid::op(dat[R], sm);\n\
+    \            R--;\n          }\n        }\n        return R + 1 - size;\n    \
+    \  }\n      sm = Monoid::op(dat[R], sm);\n    } while ((R & -R) != R);\n    return\
+    \ 0;\n  }\n\n  void debug() { print(\"segtree\", dat); }\n};\n#line 2 \"graph/base.hpp\"\
+    \n\ntemplate <typename T>\nstruct Edge {\n  int frm, to;\n  T cost;\n  int id;\n\
+    };\n\ntemplate <typename T = int, bool directed = false>\nstruct Graph {\n  int\
+    \ N, M;\n  using cost_type = T;\n  using edge_type = Edge<T>;\n  vector<edge_type>\
+    \ edges;\n  vector<int> indptr;\n  vector<edge_type> csr_edges;\n  bool prepared;\n\
+    \n  class OutgoingEdges {\n  public:\n    OutgoingEdges(const Graph* G, int l,\
+    \ int r) : G(G), l(l), r(r) {}\n\n    const edge_type* begin() const {\n     \
+    \ if (l == r) { return 0; }\n      return &G->csr_edges[l];\n    }\n\n    const\
+    \ edge_type* end() const {\n      if (l == r) { return 0; }\n      return &G->csr_edges[r];\n\
+    \    }\n\n  private:\n    int l, r;\n    const Graph* G;\n  };\n\n  bool is_prepared()\
     \ { return prepared; }\n  constexpr bool is_directed() { return directed; }\n\n\
     \  Graph() : N(0), M(0), prepared(0) {}\n  Graph(int N) : N(N), M(0), prepared(0)\
     \ {}\n\n  void add(int frm, int to, T cost = 1, int i = -1) {\n    assert(!prepared\
@@ -400,8 +399,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
   requiredBy: []
-  timestamp: '2022-04-11 17:51:21+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-04-11 17:55:37+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
 layout: document

@@ -9,12 +9,12 @@ data:
     title: alg/monoid_set.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_F_min_set_lazy.test.cpp
     title: test/aoj/DSL_2_F_min_set_lazy.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"alg/monoid_min.hpp\"\ntemplate <class X, X INF>\r\nstruct\
@@ -23,8 +23,8 @@ data:
     \ return INF; }\r\n  static constexpr bool commute = true;\r\n};\r\n#line 1 \"\
     alg/monoid_set.hpp\"\ntemplate <typename E, E none_val>\r\nstruct Monoid_Set {\r\
     \n  using value_type = E;\r\n  using X = value_type;\r\n  static X op(X x, X y)\
-    \ { return (y == none_val ? x : y); }\r\n  static constexpr X unit = none_val;\r\
-    \n  static constexpr bool commute = false;\r\n};\n#line 3 \"alg/lazy_min_set.hpp\"\
+    \ { return (y == none_val ? x : y); }\r\n  static constexpr X unit() { return\
+    \ none_val; }\r\n  static constexpr bool commute = false;\r\n};\n#line 3 \"alg/lazy_min_set.hpp\"\
     \n\r\ntemplate <typename E, E INF, E none_val>\r\nstruct Lazy_Min_Set {\r\n  using\
     \ MX = Monoid_Min<E, INF>;\r\n  using MA = Monoid_Set<E, none_val>;\r\n  using\
     \ X_structure = MX;\r\n  using A_structure = MA;\r\n  using X = typename MX::value_type;\r\
@@ -42,8 +42,8 @@ data:
   isVerificationFile: false
   path: alg/lazy_min_set.hpp
   requiredBy: []
-  timestamp: '2022-04-11 13:08:37+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-04-11 18:07:23+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DSL_2_F_min_set_lazy.test.cpp
 documentation_of: alg/lazy_min_set.hpp

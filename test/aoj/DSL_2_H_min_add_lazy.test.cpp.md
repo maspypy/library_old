@@ -10,7 +10,7 @@ data:
   - icon: ':question:'
     path: alg/monoid_min.hpp
     title: alg/monoid_min.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: ds/lazysegtree.hpp
     title: ds/lazysegtree.hpp
   - icon: ':question:'
@@ -183,25 +183,25 @@ data:
     \ ? \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool\
     \ t = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\
     \nvoid yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1)\
-    \ { yes(!t); }\r\n#line 2 \"alg/group_add.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\
-    \nstruct Group_Add {\r\n  using value_type = X;\r\n  static constexpr X op(const\
-    \ X &x, const X &y) noexcept { return x + y; }\r\n  static constexpr X inverse(const\
+    \ { yes(!t); }\r\n#line 2 \"alg/group_add.hpp\"\ntemplate <class X>\r\nstruct\
+    \ Group_Add {\r\n  using value_type = X;\r\n  static constexpr X op(const X &x,\
+    \ const X &y) noexcept { return x + y; }\r\n  static constexpr X inverse(const\
     \ X &x) noexcept { return -x; }\r\n  static constexpr X power(const X &x, ll n)\
-    \ noexcept { return n * x; }\r\n  static constexpr X unit = ZERO;\r\n  static\
-    \ constexpr bool commute = true;\r\n};\r\n#line 1 \"alg/monoid_min.hpp\"\ntemplate\
-    \ <class X, X INF>\r\nstruct Monoid_Min {\r\n  using value_type = X;\r\n  static\
-    \ constexpr X op(const X &x, const X &y) noexcept { return min(x, y); }\r\n  static\
-    \ constexpr X unit() { return INF; }\r\n  static constexpr bool commute = true;\r\
-    \n};\r\n#line 3 \"alg/lazy_min_add.hpp\"\n\r\ntemplate <typename E, E INF>\r\n\
-    struct Lazy_Min_Add {\r\n  using MX = Monoid_Min<E, INF>;\r\n  using MA = Group_Add<E>;\r\
-    \n  using X_structure = MX;\r\n  using A_structure = MA;\r\n  using X = typename\
-    \ MX::value_type;\r\n  using A = typename MA::value_type;\r\n  static constexpr\
-    \ X act(const X &x, const A &a) { \r\n    return min(MX::unit, x + a);\r\n  }\r\
-    \n};\n#line 2 \"ds/lazysegtree.hpp\"\n\ntemplate <typename Lazy>\nstruct LazySegTree\
-    \ {\n  using Monoid_X = typename Lazy::X_structure;\n  using Monoid_A = typename\
-    \ Lazy::A_structure;\n  using X = typename Monoid_X::value_type;\n  using A =\
-    \ typename Monoid_A::value_type;\n  int n, log, size;\n  vc<X> dat;\n  vc<A> laz;\n\
-    \n  LazySegTree() : LazySegTree(0) {}\n  LazySegTree(int n) : LazySegTree(vc<X>(n,\
+    \ noexcept { return n * x; }\r\n  static constexpr X unit() { return X(0); }\r\
+    \n  static constexpr bool commute = true;\r\n};\r\n#line 1 \"alg/monoid_min.hpp\"\
+    \ntemplate <class X, X INF>\r\nstruct Monoid_Min {\r\n  using value_type = X;\r\
+    \n  static constexpr X op(const X &x, const X &y) noexcept { return min(x, y);\
+    \ }\r\n  static constexpr X unit() { return INF; }\r\n  static constexpr bool\
+    \ commute = true;\r\n};\r\n#line 3 \"alg/lazy_min_add.hpp\"\n\r\ntemplate <typename\
+    \ E, E INF>\r\nstruct Lazy_Min_Add {\r\n  using MX = Monoid_Min<E, INF>;\r\n \
+    \ using MA = Group_Add<E>;\r\n  using X_structure = MX;\r\n  using A_structure\
+    \ = MA;\r\n  using X = typename MX::value_type;\r\n  using A = typename MA::value_type;\r\
+    \n  static constexpr X act(const X &x, const A &a) { \r\n    return min(MX::unit,\
+    \ x + a);\r\n  }\r\n};\n#line 2 \"ds/lazysegtree.hpp\"\n\ntemplate <typename Lazy>\n\
+    struct LazySegTree {\n  using Monoid_X = typename Lazy::X_structure;\n  using\
+    \ Monoid_A = typename Lazy::A_structure;\n  using X = typename Monoid_X::value_type;\n\
+    \  using A = typename Monoid_A::value_type;\n  int n, log, size;\n  vc<X> dat;\n\
+    \  vc<A> laz;\n\n  LazySegTree() : LazySegTree(0) {}\n  LazySegTree(int n) : LazySegTree(vc<X>(n,\
     \ Monoid_X::unit())) {}\n  LazySegTree(vc<X> v) : n(len(v)) {\n    log = 1;\n\
     \    while ((1 << log) < n) ++log;\n    size = 1 << log;\n    dat.assign(size\
     \ << 1, Monoid_X::unit());\n    laz.assign(size, Monoid_A::unit());\n    FOR(i,\
@@ -279,7 +279,7 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_H_min_add_lazy.test.cpp
   requiredBy: []
-  timestamp: '2022-04-11 17:43:05+09:00'
+  timestamp: '2022-04-11 17:55:37+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_H_min_add_lazy.test.cpp

@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: alg/group_add.hpp
     title: alg/group_add.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: ds/fenwick.hpp
     title: ds/fenwick.hpp
   - icon: ':question:'
@@ -13,7 +13,7 @@ data:
   - icon: ':question:'
     path: graph/hld.hpp
     title: graph/hld.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/treeabelgroup.hpp
     title: graph/treeabelgroup.hpp
   - icon: ':question:'
@@ -24,9 +24,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/vertex_add_path_sum
@@ -187,36 +187,35 @@ data:
     \ t = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\
     \nvoid yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1)\
     \ { yes(!t); }\r\n#line 4 \"test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp\"\
-    \n\r\n#line 2 \"alg/group_add.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\nstruct\
-    \ Group_Add {\r\n  using value_type = X;\r\n  static constexpr X op(const X &x,\
-    \ const X &y) noexcept { return x + y; }\r\n  static constexpr X inverse(const\
-    \ X &x) noexcept { return -x; }\r\n  static constexpr X power(const X &x, ll n)\
-    \ noexcept { return n * x; }\r\n  static constexpr X unit = ZERO;\r\n  static\
-    \ constexpr bool commute = true;\r\n};\r\n#line 3 \"ds/fenwick.hpp\"\n\ntemplate\
-    \ <typename AbelGroup>\nstruct FenwickTree {\n  using E = typename AbelGroup::value_type;\n\
-    \  int n;\n  vector<E> dat;\n  E total;\n\n  FenwickTree() : FenwickTree(0) {}\n\
-    \  FenwickTree(int n) : n(n), total(AbelGroup::unit) {\n    assert(AbelGroup::commute);\n\
-    \    dat.assign(n, AbelGroup::unit);\n  }\n  FenwickTree(vc<E> v) : n(len(v)),\
-    \ total(AbelGroup::unit) {\n    assert(AbelGroup::commute);\n    FOR(i, n) total\
-    \ = AbelGroup::op(total, v[i]);\n    dat = v;\n    FOR3(i, 1, n + 1) {\n     \
-    \ int j = i + (i & -i);\n      if (j <= n) dat[j - 1] = AbelGroup::op(dat[i -\
-    \ 1], dat[j - 1]);\n    }\n  }\n\n  E sum(int k) {\n    E ret = AbelGroup::unit;\n\
-    \    for (; k > 0; k -= k & -k) ret = AbelGroup::op(ret, dat[k - 1]);\n    return\
-    \ ret;\n  }\n\n  E sum(int L, int R) {\n    E pos = AbelGroup::unit;\n    while\
-    \ (L < R) {\n      pos = AbelGroup::op(pos, dat[R - 1]);\n      R -= R & -R;\n\
-    \    }\n    E neg = AbelGroup::unit;\n    while (R < L) {\n      neg = AbelGroup::op(neg,\
-    \ dat[L - 1]);\n      L -= L & -L;\n    }\n    return AbelGroup::op(pos, AbelGroup::inverse(neg));\n\
-    \  }\n\n  E sum_all() { return total; }\n\n  void add(int k, E x) {\n    total\
-    \ = AbelGroup::op(total, x);\n    for (++k; k <= n; k += k & -k) dat[k - 1] =\
-    \ AbelGroup::op(dat[k - 1], x);\n  }\n\n  template <class F>\n  int max_right(F&\
-    \ check) {\n    assert(check(E(0)));\n    ll i = 0;\n    E s = AbelGroup::unit;\n\
-    \    int k = 1;\n    int N = len(dat) + 1;\n    while (2 * k < N) k *= 2;\n  \
-    \  while (k) {\n      if (i + k < N && check(AbelGroup::op(s, dat[i + k - 1])))\
-    \ {\n        i += k;\n        s = AbelGroup::op(s, dat[i - 1]);\n      }\n   \
-    \   k >>= 1;\n    }\n    return i;\n  }\n\n  int find_kth(E k) {\n    auto check\
-    \ = [&](E x) -> bool { return x <= k; };\n    return max_right(check);\n  }\n\n\
-    \  void debug() { print(\"fenwick\", dat); }\n};\n#line 2 \"graph/base.hpp\"\n\
-    \ntemplate <typename T>\nstruct Edge {\n  int frm, to;\n  T cost;\n  int id;\n\
+    \n\r\n#line 2 \"alg/group_add.hpp\"\ntemplate <class X>\r\nstruct Group_Add {\r\
+    \n  using value_type = X;\r\n  static constexpr X op(const X &x, const X &y) noexcept\
+    \ { return x + y; }\r\n  static constexpr X inverse(const X &x) noexcept { return\
+    \ -x; }\r\n  static constexpr X power(const X &x, ll n) noexcept { return n *\
+    \ x; }\r\n  static constexpr X unit() { return X(0); }\r\n  static constexpr bool\
+    \ commute = true;\r\n};\r\n#line 3 \"ds/fenwick.hpp\"\n\ntemplate <typename AbelGroup>\n\
+    struct FenwickTree {\n  using E = typename AbelGroup::value_type;\n  int n;\n\
+    \  vector<E> dat;\n  E total;\n\n  FenwickTree() : FenwickTree(0) {}\n  FenwickTree(int\
+    \ n) : n(n), total(AbelGroup::unit) {\n    assert(AbelGroup::commute);\n    dat.assign(n,\
+    \ AbelGroup::unit);\n  }\n  FenwickTree(vc<E> v) : n(len(v)), total(AbelGroup::unit)\
+    \ {\n    assert(AbelGroup::commute);\n    FOR(i, n) total = AbelGroup::op(total,\
+    \ v[i]);\n    dat = v;\n    FOR3(i, 1, n + 1) {\n      int j = i + (i & -i);\n\
+    \      if (j <= n) dat[j - 1] = AbelGroup::op(dat[i - 1], dat[j - 1]);\n    }\n\
+    \  }\n\n  E sum(int k) {\n    E ret = AbelGroup::unit;\n    for (; k > 0; k -=\
+    \ k & -k) ret = AbelGroup::op(ret, dat[k - 1]);\n    return ret;\n  }\n\n  E sum(int\
+    \ L, int R) {\n    E pos = AbelGroup::unit;\n    while (L < R) {\n      pos =\
+    \ AbelGroup::op(pos, dat[R - 1]);\n      R -= R & -R;\n    }\n    E neg = AbelGroup::unit;\n\
+    \    while (R < L) {\n      neg = AbelGroup::op(neg, dat[L - 1]);\n      L -=\
+    \ L & -L;\n    }\n    return AbelGroup::op(pos, AbelGroup::inverse(neg));\n  }\n\
+    \n  E sum_all() { return total; }\n\n  void add(int k, E x) {\n    total = AbelGroup::op(total,\
+    \ x);\n    for (++k; k <= n; k += k & -k) dat[k - 1] = AbelGroup::op(dat[k - 1],\
+    \ x);\n  }\n\n  template <class F>\n  int max_right(F& check) {\n    assert(check(E(0)));\n\
+    \    ll i = 0;\n    E s = AbelGroup::unit;\n    int k = 1;\n    int N = len(dat)\
+    \ + 1;\n    while (2 * k < N) k *= 2;\n    while (k) {\n      if (i + k < N &&\
+    \ check(AbelGroup::op(s, dat[i + k - 1]))) {\n        i += k;\n        s = AbelGroup::op(s,\
+    \ dat[i - 1]);\n      }\n      k >>= 1;\n    }\n    return i;\n  }\n\n  int find_kth(E\
+    \ k) {\n    auto check = [&](E x) -> bool { return x <= k; };\n    return max_right(check);\n\
+    \  }\n\n  void debug() { print(\"fenwick\", dat); }\n};\n#line 2 \"graph/base.hpp\"\
+    \n\ntemplate <typename T>\nstruct Edge {\n  int frm, to;\n  T cost;\n  int id;\n\
     };\n\ntemplate <typename T = int, bool directed = false>\nstruct Graph {\n  int\
     \ N, M;\n  using cost_type = T;\n  using edge_type = Edge<T>;\n  vector<edge_type>\
     \ edges;\n  vector<int> indptr;\n  vector<edge_type> csr_edges;\n  bool prepared;\n\
@@ -372,8 +371,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
   requiredBy: []
-  timestamp: '2022-04-09 22:35:37+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-04-11 17:55:37+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
 layout: document

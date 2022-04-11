@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: alg/group_affine.hpp
     title: alg/group_affine.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/swag.hpp
     title: ds/swag.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: mod/modint.hpp
     title: mod/modint.hpp
   - icon: ':question:'
@@ -18,9 +18,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/queue_operate_all_composite
@@ -190,11 +190,11 @@ data:
     \ { return {K(1), K(0)}; }\n  static constexpr bool commute = false;\n};\n#line\
     \ 1 \"ds/swag.hpp\"\ntemplate <class Monoid>\nstruct SWAG {\n  using X = typename\
     \ Monoid::value_type;\n  using value_type = X;\n  int sz = 0;\n  vc<X> dat;\n\
-    \  vc<X> cum_l;\n  X cum_r;\n\n  SWAG() : cum_l({Monoid::unit}), cum_r(Monoid::unit)\
-    \ {}\n\n  int size(){\n    return sz;\n  }\n\n  void push(X x) {\n    ++sz;\n\
-    \    cum_r = Monoid::op(cum_r, x);\n    dat.eb(x);\n  }\n\n  void pop() {\n  \
-    \  --sz;\n    cum_l.pop_back();\n    if (len(cum_l) == 0) {\n      cum_l = {Monoid::unit};\n\
-    \      cum_r = Monoid::unit;\n      while (len(dat) > 1) {\n        cum_l.eb(Monoid::op(dat.back(),\
+    \  vc<X> cum_l;\n  X cum_r;\n\n  SWAG() : cum_l({Monoid::unit()}), cum_r(Monoid::unit())\
+    \ {}\n\n  int size() { return sz; }\n\n  void push(X x) {\n    ++sz;\n    cum_r\
+    \ = Monoid::op(cum_r, x);\n    dat.eb(x);\n  }\n\n  void pop() {\n    --sz;\n\
+    \    cum_l.pop_back();\n    if (len(cum_l) == 0) {\n      cum_l = {Monoid::unit()};\n\
+    \      cum_r = Monoid::unit();\n      while (len(dat) > 1) {\n        cum_l.eb(Monoid::op(dat.back(),\
     \ cum_l.back()));\n        dat.pop_back();\n      }\n      dat.pop_back();\n \
     \   }\n  }\n\n  X prod() { return Monoid::op(cum_l.back(), cum_r); }\n\n  void\
     \ debug() {\n    print(\"swag\");\n    print(\"dat\", dat);\n    print(\"cum_l\"\
@@ -296,8 +296,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
   requiredBy: []
-  timestamp: '2022-04-11 17:48:58+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-04-11 18:03:51+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
 layout: document

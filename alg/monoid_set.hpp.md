@@ -11,14 +11,14 @@ data:
   - icon: ':warning:'
     path: alg/lazy_max_set.hpp
     title: alg/lazy_max_set.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: alg/lazy_min_set.hpp
     title: alg/lazy_min_set.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/DSL_2_D_dualsegtree.test.cpp
     title: test/aoj/DSL_2_D_dualsegtree.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_F_min_set_lazy.test.cpp
     title: test/aoj/DSL_2_F_min_set_lazy.test.cpp
   - icon: ':x:'
@@ -32,11 +32,12 @@ data:
   bundledCode: "#line 1 \"alg/monoid_set.hpp\"\ntemplate <typename E, E none_val>\r\
     \nstruct Monoid_Set {\r\n  using value_type = E;\r\n  using X = value_type;\r\n\
     \  static X op(X x, X y) { return (y == none_val ? x : y); }\r\n  static constexpr\
-    \ X unit = none_val;\r\n  static constexpr bool commute = false;\r\n};\n"
+    \ X unit() { return none_val; }\r\n  static constexpr bool commute = false;\r\n\
+    };\n"
   code: "template <typename E, E none_val>\r\nstruct Monoid_Set {\r\n  using value_type\
     \ = E;\r\n  using X = value_type;\r\n  static X op(X x, X y) { return (y == none_val\
-    \ ? x : y); }\r\n  static constexpr X unit = none_val;\r\n  static constexpr bool\
-    \ commute = false;\r\n};"
+    \ ? x : y); }\r\n  static constexpr X unit() { return none_val; }\r\n  static\
+    \ constexpr bool commute = false;\r\n};"
   dependsOn: []
   isVerificationFile: false
   path: alg/monoid_set.hpp
@@ -45,7 +46,7 @@ data:
   - alg/lazy_cntsum_set.hpp
   - alg/lazy_max_set.hpp
   - alg/lazy_cntsummax_set.hpp
-  timestamp: '2022-01-11 13:22:23+09:00'
+  timestamp: '2022-04-11 18:07:23+09:00'
   verificationStatus: LIBRARY_SOME_WA
   verifiedWith:
   - test/aoj/DSL_2_F_min_set_lazy.test.cpp

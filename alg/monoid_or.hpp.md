@@ -9,17 +9,18 @@ data:
   attributes:
     links: []
   bundledCode: "#line 1 \"alg/monoid_or.hpp\"\ntemplate <typename E>\r\nstruct Monoid_Or\
-    \ {\r\n  using value_type = ll;\r\n  using X = value_type;\r\n  static X op(X\
-    \ x, X y) { return x | y; }\r\n  static constexpr X unit = X(0);\r\n  static constexpr\
-    \ bool commute = true;\r\n};\r\n"
-  code: "template <typename E>\r\nstruct Monoid_Or {\r\n  using value_type = ll;\r\
-    \n  using X = value_type;\r\n  static X op(X x, X y) { return x | y; }\r\n  static\
-    \ constexpr X unit = X(0);\r\n  static constexpr bool commute = true;\r\n};\r\n"
+    \ {\r\n  using value_type = E;\r\n  using X = value_type;\r\n  static X op(X x,\
+    \ X y) { return x | y; }\r\n  static constexpr X unit() { return 0; }\r\n  static\
+    \ constexpr bool commute = true;\r\n};\r\n"
+  code: "template <typename E>\r\nstruct Monoid_Or {\r\n  using value_type = E;\r\n\
+    \  using X = value_type;\r\n  static X op(X x, X y) { return x | y; }\r\n  static\
+    \ constexpr X unit() { return 0; }\r\n  static constexpr bool commute = true;\r\
+    \n};\r\n"
   dependsOn: []
   isVerificationFile: false
   path: alg/monoid_or.hpp
   requiredBy: []
-  timestamp: '2022-02-11 06:54:23+09:00'
+  timestamp: '2022-04-11 18:07:23+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: alg/monoid_or.hpp

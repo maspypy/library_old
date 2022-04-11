@@ -4,19 +4,19 @@ data:
   - icon: ':question:'
     path: alg/group_add.hpp
     title: alg/group_add.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: alg/group_mul.hpp
     title: alg/group_mul.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: alg/lazy_add_mul.hpp
     title: alg/lazy_add_mul.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: ds/lazysegtree.hpp
     title: ds/lazysegtree.hpp
   - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/bfsnumbering.hpp
     title: graph/bfsnumbering.hpp
   - icon: ':question:'
@@ -27,9 +27,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/899
@@ -302,20 +302,20 @@ data:
     \  return r + 1 - size;\n      }\n      sm = Monoid_X::op(dat[r], sm);\n    }\
     \ while ((r & -r) != r);\n    return 0;\n  }\n\n  void debug() { print(\"lazysegtree\
     \ getall:\", get_all()); }\n};\n#line 2 \"alg/group_add.hpp\"\ntemplate <class\
-    \ X, X ZERO = X(0)>\r\nstruct Group_Add {\r\n  using value_type = X;\r\n  static\
-    \ constexpr X op(const X &x, const X &y) noexcept { return x + y; }\r\n  static\
-    \ constexpr X inverse(const X &x) noexcept { return -x; }\r\n  static constexpr\
-    \ X power(const X &x, ll n) noexcept { return n * x; }\r\n  static constexpr X\
-    \ unit = ZERO;\r\n  static constexpr bool commute = true;\r\n};\r\n#line 1 \"\
-    alg/group_mul.hpp\"\ntemplate <class X>\r\nstruct Group_Mul {\r\n  using value_type\
-    \ = X;\r\n  static constexpr X op(const X &x, const X &y) noexcept { return x\
-    \ * y; }\r\n  static constexpr X inverse(const X &x) noexcept { return X(1) /\
-    \ x; }\r\n  static constexpr X unit = X(1);\r\n  static constexpr bool commute\
-    \ = true;\r\n};\r\n#line 3 \"alg/lazy_add_mul.hpp\"\n\r\ntemplate <typename E>\r\
-    \nstruct Lazy_Add_Mul {\r\n  using MX = Group_Add<E>;\r\n  using MA = Group_Mul<E>;\r\
-    \n  using X_structure = MX;\r\n  using A_structure = MA;\r\n  using X = typename\
-    \ MX::value_type;\r\n  using A = typename MA::value_type;\r\n  static constexpr\
-    \ X act(const X &x, const A &a) { return x * a; }\r\n};\r\n#line 7 \"test/yukicoder/899_bfsnumbering.test.cpp\"\
+    \ X>\r\nstruct Group_Add {\r\n  using value_type = X;\r\n  static constexpr X\
+    \ op(const X &x, const X &y) noexcept { return x + y; }\r\n  static constexpr\
+    \ X inverse(const X &x) noexcept { return -x; }\r\n  static constexpr X power(const\
+    \ X &x, ll n) noexcept { return n * x; }\r\n  static constexpr X unit() { return\
+    \ X(0); }\r\n  static constexpr bool commute = true;\r\n};\r\n#line 1 \"alg/group_mul.hpp\"\
+    \ntemplate <class X>\r\nstruct Group_Mul {\r\n  using value_type = X;\r\n  static\
+    \ constexpr X op(const X &x, const X &y) noexcept { return x * y; }\r\n  static\
+    \ constexpr X inverse(const X &x) noexcept { return X(1) / x; }\r\n  static constexpr\
+    \ X unit() { return X(1); }\r\n  static constexpr bool commute = true;\r\n};\r\
+    \n#line 3 \"alg/lazy_add_mul.hpp\"\n\r\ntemplate <typename E>\r\nstruct Lazy_Add_Mul\
+    \ {\r\n  using MX = Group_Add<E>;\r\n  using MA = Group_Mul<E>;\r\n  using X_structure\
+    \ = MX;\r\n  using A_structure = MA;\r\n  using X = typename MX::value_type;\r\
+    \n  using A = typename MA::value_type;\r\n  static constexpr X act(const X &x,\
+    \ const A &a) { return x * a; }\r\n};\r\n#line 7 \"test/yukicoder/899_bfsnumbering.test.cpp\"\
     \n\r\nvoid solve() {\r\n  LL(N);\r\n  Graph<int> G(N);\r\n  G.read_tree(0, 0);\r\
     \n\r\n  BFSNumbering BFS(G);\r\n  auto &ID = BFS.ID;\r\n  vi seg_raw(N);\r\n\r\
     \n  FOR(v, N) {\r\n    LL(a);\r\n    seg_raw[ID[v]] = a;\r\n  }\r\n\r\n  using\
@@ -359,8 +359,8 @@ data:
   isVerificationFile: true
   path: test/yukicoder/899_bfsnumbering.test.cpp
   requiredBy: []
-  timestamp: '2022-04-11 17:43:05+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-04-11 17:55:37+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yukicoder/899_bfsnumbering.test.cpp
 layout: document
