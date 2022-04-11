@@ -198,26 +198,26 @@ data:
     \ F &x, const F &y) noexcept {\n    return F({x.fi * y.fi, x.se * y.fi + y.se});\n\
     \  }\n  static constexpr F inverse(const F &x) {\n    auto [a, b] = x;\n    a\
     \ = K(1) / a;\n    return {a, a * (-b)};\n  }\n  static constexpr K eval(const\
-    \ F &f, K x) noexcept { return f.fi * x + f.se; }\n  static constexpr F unit =\
-    \ {K(1), K(0)};\n  static constexpr bool commute = false;\n};\n#line 2 \"mod/modint.hpp\"\
-    \ntemplate <int mod>\nstruct modint {\n  static constexpr bool is_modint = true;\n\
-    \  int val;\n  constexpr modint(const ll val = 0) noexcept\n      : val(val >=\
-    \ 0 ? val % mod : (mod - (-val) % mod) % mod) {}\n  bool operator<(const modint\
-    \ &other) const {\n    return val < other.val;\n  } // To use std::map\n  modint\
-    \ &operator+=(const modint &p) {\n    if ((val += p.val) >= mod) val -= mod;\n\
-    \    return *this;\n  }\n  modint &operator-=(const modint &p) {\n    if ((val\
-    \ += mod - p.val) >= mod) val -= mod;\n    return *this;\n  }\n  modint &operator*=(const\
-    \ modint &p) {\n    val = (int)(1LL * val * p.val % mod);\n    return *this;\n\
-    \  }\n  modint &operator/=(const modint &p) {\n    *this *= p.inverse();\n   \
-    \ return *this;\n  }\n  modint operator-() const { return modint(-val); }\n  modint\
-    \ operator+(const modint &p) const { return modint(*this) += p; }\n  modint operator-(const\
-    \ modint &p) const { return modint(*this) -= p; }\n  modint operator*(const modint\
-    \ &p) const { return modint(*this) *= p; }\n  modint operator/(const modint &p)\
-    \ const { return modint(*this) /= p; }\n  bool operator==(const modint &p) const\
-    \ { return val == p.val; }\n  bool operator!=(const modint &p) const { return\
-    \ val != p.val; }\n  modint inverse() const {\n    int a = val, b = mod, u = 1,\
-    \ v = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b),\
-    \ swap(u -= t * v, v);\n    }\n    return modint(u);\n  }\n  modint pow(int64_t\
+    \ F &f, K x) noexcept { return f.fi * x + f.se; }\n  static constexpr F unit()\
+    \ { return {K(1), K(0)}; }\n  static constexpr bool commute = false;\n};\n#line\
+    \ 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n  static constexpr\
+    \ bool is_modint = true;\n  int val;\n  constexpr modint(const ll val = 0) noexcept\n\
+    \      : val(val >= 0 ? val % mod : (mod - (-val) % mod) % mod) {}\n  bool operator<(const\
+    \ modint &other) const {\n    return val < other.val;\n  } // To use std::map\n\
+    \  modint &operator+=(const modint &p) {\n    if ((val += p.val) >= mod) val -=\
+    \ mod;\n    return *this;\n  }\n  modint &operator-=(const modint &p) {\n    if\
+    \ ((val += mod - p.val) >= mod) val -= mod;\n    return *this;\n  }\n  modint\
+    \ &operator*=(const modint &p) {\n    val = (int)(1LL * val * p.val % mod);\n\
+    \    return *this;\n  }\n  modint &operator/=(const modint &p) {\n    *this *=\
+    \ p.inverse();\n    return *this;\n  }\n  modint operator-() const { return modint(-val);\
+    \ }\n  modint operator+(const modint &p) const { return modint(*this) += p; }\n\
+    \  modint operator-(const modint &p) const { return modint(*this) -= p; }\n  modint\
+    \ operator*(const modint &p) const { return modint(*this) *= p; }\n  modint operator/(const\
+    \ modint &p) const { return modint(*this) /= p; }\n  bool operator==(const modint\
+    \ &p) const { return val == p.val; }\n  bool operator!=(const modint &p) const\
+    \ { return val != p.val; }\n  modint inverse() const {\n    int a = val, b = mod,\
+    \ u = 1, v = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -= t *\
+    \ b, b), swap(u -= t * v, v);\n    }\n    return modint(u);\n  }\n  modint pow(int64_t\
     \ n) const {\n    modint ret(1), mul(val);\n    while (n > 0) {\n      if (n &\
     \ 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n    return ret;\n\
     \  }\n  static constexpr int get_mod() { return mod; }\n};\n\nstruct ArbitraryModInt\
@@ -400,14 +400,14 @@ data:
     \ seg;\r\n  SegTree<RevMonoid> seg_r;\r\n\r\n  TreeMonoid(HLD &hld) : hld(hld),\
     \ N(hld.N), seg(hld.N) {\r\n    if (!Monoid::commute) seg_r = SegTree<RevMonoid>(hld.N);\r\
     \n  }\r\n\r\n  TreeMonoid(HLD &hld, vc<X> &dat) : hld(hld), N(hld.N) {\r\n   \
-    \ vc<X> seg_raw(N, Monoid::unit);\r\n    if (!edge) {\r\n      FOR(v, N) seg_raw[hld.LID[v]]\
+    \ vc<X> seg_raw(N, Monoid::unit());\r\n    if (!edge) {\r\n      FOR(v, N) seg_raw[hld.LID[v]]\
     \ = dat[v];\r\n    } else {\r\n      FOR(e, N - 1) {\r\n        int v = hld.e_to_v(e);\r\
     \n        seg_raw[hld.LID[v]] = dat[e];\r\n      }\r\n    }\r\n    seg = SegTree<Monoid>(seg_raw);\r\
     \n    if (!Monoid::commute) seg_r = SegTree<RevMonoid>(seg_raw);\r\n  }\r\n\r\n\
     \  void set(int i, X x) {\r\n    if (edge) i = hld.e_to_v(i);\r\n    i = hld.LID[i];\r\
     \n    seg.set(i, x);\r\n    if (!Monoid::commute) seg_r.set(i, x);\r\n  }\r\n\r\
     \n  X prod_path(int u, int v) {\r\n    auto pd = hld.get_path_decomposition(u,\
-    \ v, edge);\r\n    X val = Monoid::unit;\r\n    for (auto &&[a, b]: pd) {\r\n\
+    \ v, edge);\r\n    X val = Monoid::unit();\r\n    for (auto &&[a, b]: pd) {\r\n\
     \      X x = (a <= b ? seg.prod(a, b + 1)\r\n                    : (Monoid::commute\
     \ ? seg.prod(b, a + 1)\r\n                                       : seg_r.prod(b,\
     \ a + 1)));\r\n      val = Monoid::op(val, x);\r\n    }\r\n    return val;\r\n\
@@ -415,7 +415,7 @@ data:
     \u305F\u3059\u6700\u5F8C\u306E x\r\n  // \u306A\u3051\u308C\u3070 -1\r\n  // https://codeforces.com/contest/1059/problem/E\r\
     \n  template <class F>\r\n  int max_path(F &check, int u, int v) {\r\n    if (!check(prod_path(u,\
     \ u))) return -1;\r\n    auto pd = hld.get_path_decomposition(u, v, edge);\r\n\
-    \    X val = Monoid::unit;\r\n    for (auto &&[a, b]: pd) {\r\n      X x = (a\
+    \    X val = Monoid::unit();\r\n    for (auto &&[a, b]: pd) {\r\n      X x = (a\
     \ <= b ? seg.prod(a, b + 1)\r\n                    : (Monoid::commute ? seg.prod(b,\
     \ a + 1)\r\n                                       : seg_r.prod(b, a + 1)));\r\
     \n      if (check(Monoid::op(val, x))) {\r\n        val = Monoid::op(val, x);\r\
@@ -466,7 +466,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   requiredBy: []
-  timestamp: '2022-04-11 17:38:39+09:00'
+  timestamp: '2022-04-11 17:51:21+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp

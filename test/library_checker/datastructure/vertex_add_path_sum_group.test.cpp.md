@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: alg/group_add.hpp
     title: alg/group_add.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: alg/group_reverse.hpp
     title: alg/group_reverse.hpp
   - icon: ':question:'
@@ -16,7 +16,7 @@ data:
   - icon: ':question:'
     path: graph/hld.hpp
     title: graph/hld.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: graph/treegroup.hpp
     title: graph/treegroup.hpp
   - icon: ':question:'
@@ -321,32 +321,33 @@ data:
     \ntemplate <class Group>\r\nstruct Group_Reverse {\r\n  using value_type = typename\
     \ Group::value_type;\r\n  using X = value_type;\r\n  static constexpr X op(const\
     \ X &x, const X &y) { return Group::op(y, x); }\r\n  static constexpr X inverse(const\
-    \ X &x) { return Group::inverse(x); }\r\n  static constexpr X unit = Group::unit;\r\
-    \n  static const bool commute = Group::commute;\r\n};\r\n#line 4 \"graph/treegroup.hpp\"\
-    \n\r\n// \u4F5C\u3063\u3066\u307F\u305F\u3082\u306E\u306E\u3001HLD(log^2N)\u3088\
-    \u308A\u9045\u3044\u304C\u3061\uFF1F\r\ntemplate <typename HLD, typename Group,\
-    \ bool edge = false,\r\n          bool path_query = true, bool subtree_query =\
-    \ false>\r\nstruct TreeGroup {\r\n  using RevGroup = Group_Reverse<Group>;\r\n\
-    \  using X = typename Group::value_type;\r\n  HLD &hld;\r\n  int N;\r\n  SegTree<Group>\
-    \ seg, seg_subtree;\r\n  SegTree<RevGroup> seg_r;\r\n\r\n  TreeGroup(HLD &hld)\
-    \ : hld(hld), N(hld.N) {\r\n    if (path_query) {\r\n      seg = SegTree<Group>(2\
-    \ * N);\r\n      if (!Group::commute) seg_r = SegTree<RevGroup>(2 * N);\r\n  \
-    \  }\r\n    if (subtree_query) {\r\n      assert(Group::commute);\r\n      seg_subtree\
-    \ = SegTree<Group>(N);\r\n    }\r\n  }\r\n\r\n  TreeGroup(HLD &hld, vc<X> dat)\
-    \ : hld(hld), N(hld.N) {\r\n    if (path_query) {\r\n      vc<X> seg_raw(2 * N);\r\
-    \n      if (!edge) {\r\n        assert(len(dat) == N);\r\n        FOR(v, N) {\r\
-    \n          seg_raw[hld.ELID(v)] = dat[v];\r\n          seg_raw[hld.ERID(v)] =\
-    \ Group::inverse(dat[v]);\r\n        }\r\n      } else {\r\n        assert(len(dat)\
-    \ == N - 1);\r\n        FOR(e, N - 1) {\r\n          int v = hld.e_to_v(e);\r\n\
-    \          seg_raw[hld.ELID(v)] = dat[e];\r\n          seg_raw[hld.ERID(v)] =\
-    \ Group::inverse(dat[e]);\r\n        }\r\n      }\r\n      seg = SegTree<Group>(seg_raw);\r\
-    \n      if (!Group::commute) seg_r = SegTree<RevGroup>(seg_raw);\r\n    }\r\n\
-    \    if (subtree_query) {\r\n      assert(Group::commute);\r\n      vc<X> seg_raw(N);\r\
-    \n      if (!edge) {\r\n        assert(len(dat) == N);\r\n        FOR(v, N) seg_raw[hld.LID[v]]\
-    \ = dat[v];\r\n      } else {\r\n        assert(len(dat) == N - 1);\r\n      \
-    \  FOR(e, N - 1) {\r\n          int v = hld.e_to_v(e);\r\n          seg_raw[hld.LID[v]]\
-    \ = dat[e];\r\n        }\r\n      }\r\n      seg_subtree = SegTree<Group>(seg_raw);\r\
-    \n    }\r\n  }\r\n\r\n  void set_path(int v, X x) {\r\n    X inv_x = Group::inverse(x);\r\
+    \ X &x) { return Group::inverse(x); }\r\n  static constexpr X unit() { return\
+    \ Group::unit(); }\r\n  static const bool commute = Group::commute;\r\n};\r\n\
+    #line 4 \"graph/treegroup.hpp\"\n\r\n// \u4F5C\u3063\u3066\u307F\u305F\u3082\u306E\
+    \u306E\u3001HLD(log^2N)\u3088\u308A\u9045\u3044\u304C\u3061\uFF1F\r\ntemplate\
+    \ <typename HLD, typename Group, bool edge = false,\r\n          bool path_query\
+    \ = true, bool subtree_query = false>\r\nstruct TreeGroup {\r\n  using RevGroup\
+    \ = Group_Reverse<Group>;\r\n  using X = typename Group::value_type;\r\n  HLD\
+    \ &hld;\r\n  int N;\r\n  SegTree<Group> seg, seg_subtree;\r\n  SegTree<RevGroup>\
+    \ seg_r;\r\n\r\n  TreeGroup(HLD &hld) : hld(hld), N(hld.N) {\r\n    if (path_query)\
+    \ {\r\n      seg = SegTree<Group>(2 * N);\r\n      if (!Group::commute) seg_r\
+    \ = SegTree<RevGroup>(2 * N);\r\n    }\r\n    if (subtree_query) {\r\n      assert(Group::commute);\r\
+    \n      seg_subtree = SegTree<Group>(N);\r\n    }\r\n  }\r\n\r\n  TreeGroup(HLD\
+    \ &hld, vc<X> dat) : hld(hld), N(hld.N) {\r\n    if (path_query) {\r\n      vc<X>\
+    \ seg_raw(2 * N);\r\n      if (!edge) {\r\n        assert(len(dat) == N);\r\n\
+    \        FOR(v, N) {\r\n          seg_raw[hld.ELID(v)] = dat[v];\r\n         \
+    \ seg_raw[hld.ERID(v)] = Group::inverse(dat[v]);\r\n        }\r\n      } else\
+    \ {\r\n        assert(len(dat) == N - 1);\r\n        FOR(e, N - 1) {\r\n     \
+    \     int v = hld.e_to_v(e);\r\n          seg_raw[hld.ELID(v)] = dat[e];\r\n \
+    \         seg_raw[hld.ERID(v)] = Group::inverse(dat[e]);\r\n        }\r\n    \
+    \  }\r\n      seg = SegTree<Group>(seg_raw);\r\n      if (!Group::commute) seg_r\
+    \ = SegTree<RevGroup>(seg_raw);\r\n    }\r\n    if (subtree_query) {\r\n     \
+    \ assert(Group::commute);\r\n      vc<X> seg_raw(N);\r\n      if (!edge) {\r\n\
+    \        assert(len(dat) == N);\r\n        FOR(v, N) seg_raw[hld.LID[v]] = dat[v];\r\
+    \n      } else {\r\n        assert(len(dat) == N - 1);\r\n        FOR(e, N - 1)\
+    \ {\r\n          int v = hld.e_to_v(e);\r\n          seg_raw[hld.LID[v]] = dat[e];\r\
+    \n        }\r\n      }\r\n      seg_subtree = SegTree<Group>(seg_raw);\r\n   \
+    \ }\r\n  }\r\n\r\n  void set_path(int v, X x) {\r\n    X inv_x = Group::inverse(x);\r\
     \n    seg.set(hld.ELID(v), x);\r\n    seg.set(hld.ERID(v), inv_x);\r\n    if (!Group::commute)\
     \ {\r\n      seg_r.set(hld.ELID(v), x);\r\n      seg_r.set(hld.ERID(v), inv_x);\r\
     \n    }\r\n  }\r\n\r\n  void set_subtree(int v, X x) { seg_subtree.set(hld.LID[v],\
@@ -399,7 +400,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
   requiredBy: []
-  timestamp: '2022-04-11 17:38:39+09:00'
+  timestamp: '2022-04-11 17:51:21+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp

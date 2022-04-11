@@ -198,16 +198,17 @@ data:
     \ + y.se});\n  }\n  static constexpr F inverse(const F &x) {\n    auto [a, b]\
     \ = x;\n    a = K(1) / a;\n    return {a, a * (-b)};\n  }\n  static constexpr\
     \ K eval(const F &f, K x) noexcept { return f.fi * x + f.se; }\n  static constexpr\
-    \ F unit = {K(1), K(0)};\n  static constexpr bool commute = false;\n};\n#line\
-    \ 3 \"alg/lazy_cntsum_affine.hpp\"\n\r\ntemplate <typename E>\r\nstruct Lazy_CntSum_Affine\
-    \ {\r\n  using X_structure = Group_CntSum<E>;\r\n  using A_structure = Group_Affine<E>;\r\
-    \n  using X = typename X_structure::value_type;\r\n  using A = typename A_structure::value_type;\r\
-    \n  static constexpr X act(const X &x, const A &a) {\r\n    return {x.fi, x.fi\
-    \ * a.se + x.se * a.fi};\r\n  }\r\n};\n#line 2 \"ds/lazysegtree.hpp\"\n\ntemplate\
-    \ <typename Lazy>\nstruct LazySegTree {\n  using Monoid_X = typename Lazy::X_structure;\n\
-    \  using Monoid_A = typename Lazy::A_structure;\n  using X = typename Monoid_X::value_type;\n\
-    \  using A = typename Monoid_A::value_type;\n  int n, log, size;\n  vc<X> dat;\n\
-    \  vc<A> laz;\n\n  LazySegTree() : LazySegTree(0) {}\n  LazySegTree(int n) : LazySegTree(vc<X>(n,\
+    \ F unit() { return {K(1), K(0)}; }\n  static constexpr bool commute = false;\n\
+    };\n#line 3 \"alg/lazy_cntsum_affine.hpp\"\n\r\ntemplate <typename E>\r\nstruct\
+    \ Lazy_CntSum_Affine {\r\n  using X_structure = Group_CntSum<E>;\r\n  using A_structure\
+    \ = Group_Affine<E>;\r\n  using X = typename X_structure::value_type;\r\n  using\
+    \ A = typename A_structure::value_type;\r\n  static constexpr X act(const X &x,\
+    \ const A &a) {\r\n    return {x.fi, x.fi * a.se + x.se * a.fi};\r\n  }\r\n};\n\
+    #line 2 \"ds/lazysegtree.hpp\"\n\ntemplate <typename Lazy>\nstruct LazySegTree\
+    \ {\n  using Monoid_X = typename Lazy::X_structure;\n  using Monoid_A = typename\
+    \ Lazy::A_structure;\n  using X = typename Monoid_X::value_type;\n  using A =\
+    \ typename Monoid_A::value_type;\n  int n, log, size;\n  vc<X> dat;\n  vc<A> laz;\n\
+    \n  LazySegTree() : LazySegTree(0) {}\n  LazySegTree(int n) : LazySegTree(vc<X>(n,\
     \ Monoid_X::unit())) {}\n  LazySegTree(vc<X> v) : n(len(v)) {\n    log = 1;\n\
     \    while ((1 << log) < n) ++log;\n    size = 1 << log;\n    dat.assign(size\
     \ << 1, Monoid_X::unit());\n    laz.assign(size, Monoid_A::unit());\n    FOR(i,\
@@ -357,7 +358,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-04-11 17:43:05+09:00'
+  timestamp: '2022-04-11 17:48:58+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/range_affine_range_sum.test.cpp

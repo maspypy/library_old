@@ -28,12 +28,12 @@ data:
     \ + y.se});\n  }\n  static constexpr F inverse(const F &x) {\n    auto [a, b]\
     \ = x;\n    a = K(1) / a;\n    return {a, a * (-b)};\n  }\n  static constexpr\
     \ K eval(const F &f, K x) noexcept { return f.fi * x + f.se; }\n  static constexpr\
-    \ F unit = {K(1), K(0)};\n  static constexpr bool commute = false;\n};\n#line\
-    \ 3 \"alg/lazy_cntsum_affine.hpp\"\n\r\ntemplate <typename E>\r\nstruct Lazy_CntSum_Affine\
-    \ {\r\n  using X_structure = Group_CntSum<E>;\r\n  using A_structure = Group_Affine<E>;\r\
-    \n  using X = typename X_structure::value_type;\r\n  using A = typename A_structure::value_type;\r\
-    \n  static constexpr X act(const X &x, const A &a) {\r\n    return {x.fi, x.fi\
-    \ * a.se + x.se * a.fi};\r\n  }\r\n};\n"
+    \ F unit() { return {K(1), K(0)}; }\n  static constexpr bool commute = false;\n\
+    };\n#line 3 \"alg/lazy_cntsum_affine.hpp\"\n\r\ntemplate <typename E>\r\nstruct\
+    \ Lazy_CntSum_Affine {\r\n  using X_structure = Group_CntSum<E>;\r\n  using A_structure\
+    \ = Group_Affine<E>;\r\n  using X = typename X_structure::value_type;\r\n  using\
+    \ A = typename A_structure::value_type;\r\n  static constexpr X act(const X &x,\
+    \ const A &a) {\r\n    return {x.fi, x.fi * a.se + x.se * a.fi};\r\n  }\r\n};\n"
   code: "#include \"alg/group_cntsum.hpp\"\r\n#include \"alg/group_affine.hpp\"\r\n\
     \r\ntemplate <typename E>\r\nstruct Lazy_CntSum_Affine {\r\n  using X_structure\
     \ = Group_CntSum<E>;\r\n  using A_structure = Group_Affine<E>;\r\n  using X =\
@@ -46,7 +46,7 @@ data:
   isVerificationFile: false
   path: alg/lazy_cntsum_affine.hpp
   requiredBy: []
-  timestamp: '2022-01-11 13:47:23+09:00'
+  timestamp: '2022-04-11 17:48:58+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/datastructure/range_affine_range_sum.test.cpp
