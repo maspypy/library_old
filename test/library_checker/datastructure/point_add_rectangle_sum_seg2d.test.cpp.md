@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: alg/group_add.hpp
     title: alg/group_add.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: ds/segtree2d.hpp
     title: ds/segtree2d.hpp
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/point_add_rectangle_sum
@@ -203,8 +203,8 @@ data:
     \ = Monoid::op(dat_raw[ix].back(), wt[i]);\r\n        }\r\n        ix >>= 1;\r\
     \n      }\r\n    }\r\n\r\n    indptr.assign(N + N + 1, 0);\r\n    FOR(i, N + N)\
     \ indptr[i + 1] = indptr[i] + len(keyY_raw[i]);\r\n    int full_N = indptr.back();\r\
-    \n    keyY.resize(full_N);\r\n    dat.assign(2 * full_N, Monoid::unit);\r\n  \
-    \  FOR(i, N + N) {\r\n      int off = 2 * indptr[i], n = indptr[i + 1] - indptr[i];\r\
+    \n    keyY.resize(full_N);\r\n    dat.assign(2 * full_N, Monoid::unit());\r\n\
+    \    FOR(i, N + N) {\r\n      int off = 2 * indptr[i], n = indptr[i + 1] - indptr[i];\r\
     \n      FOR(j, n) {\r\n        keyY[indptr[i] + j] = keyY_raw[i][j];\r\n     \
     \   dat[off + n + j] = dat_raw[i][j];\r\n      }\r\n      FOR3_R(j, 1, n)\r\n\
     \      dat[off + j] = Monoid::op(dat[off + 2 * j + 0], dat[off + 2 * j + 1]);\r\
@@ -219,17 +219,17 @@ data:
     \ ry) {\r\n    int LID = indptr[i], n = indptr[i + 1] - indptr[i];\r\n    auto\
     \ it = keyY.begin() + LID;\r\n    int L = lower_bound(it, it + n, ly) - it;\r\n\
     \    int R = lower_bound(it, it + n, ry) - it;\r\n    int off = 2 * LID;\r\n \
-    \   L += n;\r\n    R += n;\r\n    S val = Monoid::unit;\r\n    while (L < R) {\r\
-    \n      if (L & 1) val = Monoid::op(val, dat[off + (L++)]);\r\n      if (R & 1)\
-    \ val = Monoid::op(dat[off + (--R)], val);\r\n      L >>= 1;\r\n      R >>= 1;\r\
-    \n    }\r\n    return val;\r\n  }\r\n\r\n  S prod(XY lx, XY ly, XY rx, XY ry)\
-    \ {\r\n    int L = xtoi(lx);\r\n    int R = xtoi(rx);\r\n    L += N;\r\n    R\
-    \ += N;\r\n    S val = Monoid::unit;\r\n    while (L < R) {\r\n      if (L & 1)\
-    \ val = Monoid::op(val, prod_i(L++, ly, ry));\r\n      if (R & 1) val = Monoid::op(prod_i(--R,\
-    \ ly, ry), val);\r\n      L >>= 1;\r\n      R >>= 1;\r\n    }\r\n    return val;\r\
-    \n  }\r\n\r\n  void debug() {\r\n    print(\"keyX\", keyX);\r\n    print(\"indptr\"\
-    , indptr);\r\n    print(\"keyY\", keyY);\r\n    print(\"dat\", dat);\r\n  }\r\n\
-    };\n#line 8 \"test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp\"\
+    \   L += n;\r\n    R += n;\r\n    S val = Monoid::unit();\r\n    while (L < R)\
+    \ {\r\n      if (L & 1) val = Monoid::op(val, dat[off + (L++)]);\r\n      if (R\
+    \ & 1) val = Monoid::op(dat[off + (--R)], val);\r\n      L >>= 1;\r\n      R >>=\
+    \ 1;\r\n    }\r\n    return val;\r\n  }\r\n\r\n  S prod(XY lx, XY ly, XY rx, XY\
+    \ ry) {\r\n    int L = xtoi(lx);\r\n    int R = xtoi(rx);\r\n    L += N;\r\n \
+    \   R += N;\r\n    S val = Monoid::unit();\r\n    while (L < R) {\r\n      if\
+    \ (L & 1) val = Monoid::op(val, prod_i(L++, ly, ry));\r\n      if (R & 1) val\
+    \ = Monoid::op(prod_i(--R, ly, ry), val);\r\n      L >>= 1;\r\n      R >>= 1;\r\
+    \n    }\r\n    return val;\r\n  }\r\n\r\n  void debug() {\r\n    print(\"keyX\"\
+    , keyX);\r\n    print(\"indptr\", indptr);\r\n    print(\"keyY\", keyY);\r\n \
+    \   print(\"dat\", dat);\r\n  }\r\n};\n#line 8 \"test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp\"\
     \n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  vc<int> X(N), Y(N);\r\n  vi W(N);\r\n\
     \  FOR(i, N) {\r\n    LL(x, y, w);\r\n    X[i] = x, Y[i] = y, W[i] = w;\r\n  }\r\
     \n  using QQ = tuple<ll, ll, ll, ll>;\r\n  vc<QQ> query(Q);\r\n  FOR(q, Q) {\r\
@@ -265,8 +265,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
   requiredBy: []
-  timestamp: '2022-04-11 17:55:37+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-04-11 18:35:19+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
 layout: document

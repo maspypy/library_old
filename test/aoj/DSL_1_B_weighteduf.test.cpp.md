@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: alg/group_add.hpp
     title: alg/group_add.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: ds/weightedunionfind.hpp
     title: ds/weightedunionfind.hpp
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_1_B
@@ -185,19 +185,19 @@ data:
     \n  static constexpr bool commute = true;\r\n};\r\n#line 1 \"ds/weightedunionfind.hpp\"\
     \ntemplate <typename Group>\r\nstruct WeightedUnionFind {\r\n  using E = typename\
     \ Group::value_type;\r\n  int N;\r\n  vc<E> vals;\r\n  vc<int> par;\r\n  vc<int>\
-    \ size;\r\n\r\n  WeightedUnionFind(int N) : N(N), vals(N), size(N, 1) {\r\n  \
-    \  par.resize(N);\r\n    iota(all(par), 0);\r\n  }\r\n\r\n  pair<int, E> get(int\
-    \ v) {\r\n    E res = Group::unit;\r\n    while (v != par[v]) {\r\n      res =\
-    \ Group::op(vals[v], res);\r\n      res = Group::op(vals[par[v]], res);\r\n  \
-    \    vals[v] = Group::op(vals[par[v]], vals[v]);\r\n      v = par[v] = par[par[v]];\r\
-    \n    }\r\n    return {v, res};\r\n  }\r\n\r\n  bool merge(int frm, int to, E\
-    \ x) {\r\n    auto [v1, x1] = get(frm);\r\n    auto [v2, x2] = get(to);\r\n  \
-    \  if (v1 == v2) return false;\r\n    if(size[v1] < size[v2]) {\r\n      swap(v1,\
-    \ v2);\r\n      swap(x1, x2);\r\n      x = Group::inverse(x);\r\n    }\r\n   \
-    \ x = Group::op(x1, x);\r\n    x = Group::op(x, Group::inverse(x2));\r\n    vals[v2]\
-    \ = x;\r\n    par[v2] = v1;\r\n    size[v1] += size[v2];\r\n    return true;\r\
-    \n  }\r\n\r\n  void debug() {\r\n    print(\"par\", par);\r\n    print(\"vals\"\
-    , vals);\r\n    print(\"size\", size);\r\n  }\r\n};\n#line 7 \"test/aoj/DSL_1_B_weighteduf.test.cpp\"\
+    \ size;\r\n\r\n  WeightedUnionFind(int N) : N(N), vals(N, Group::unit()), size(N,\
+    \ 1) {\r\n    par.resize(N);\r\n    iota(all(par), 0);\r\n  }\r\n\r\n  pair<int,\
+    \ E> get(int v) {\r\n    E res = Group::unit();\r\n    while (v != par[v]) {\r\
+    \n      res = Group::op(vals[v], res);\r\n      res = Group::op(vals[par[v]],\
+    \ res);\r\n      vals[v] = Group::op(vals[par[v]], vals[v]);\r\n      v = par[v]\
+    \ = par[par[v]];\r\n    }\r\n    return {v, res};\r\n  }\r\n\r\n  bool merge(int\
+    \ frm, int to, E x) {\r\n    auto [v1, x1] = get(frm);\r\n    auto [v2, x2] =\
+    \ get(to);\r\n    if (v1 == v2) return false;\r\n    if (size[v1] < size[v2])\
+    \ {\r\n      swap(v1, v2);\r\n      swap(x1, x2);\r\n      x = Group::inverse(x);\r\
+    \n    }\r\n    x = Group::op(x1, x);\r\n    x = Group::op(x, Group::inverse(x2));\r\
+    \n    vals[v2] = x;\r\n    par[v2] = v1;\r\n    size[v1] += size[v2];\r\n    return\
+    \ true;\r\n  }\r\n\r\n  void debug() {\r\n    print(\"par\", par);\r\n    print(\"\
+    vals\", vals);\r\n    print(\"size\", size);\r\n  }\r\n};\n#line 7 \"test/aoj/DSL_1_B_weighteduf.test.cpp\"\
     \n\nvoid solve() {\n  LL(N, Q);\n  WeightedUnionFind<Group_Add<ll>> uf(N);\n \
     \ FOR_(Q) {\n    LL(t);\n    if (t == 0) {\n      LL(a, b, c);\n      uf.merge(a,\
     \ b, c);\n    } else {\n      LL(a, b);\n      auto [ra, xa] = uf.get(a);\n  \
@@ -222,8 +222,8 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_1_B_weighteduf.test.cpp
   requiredBy: []
-  timestamp: '2022-04-11 17:55:37+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-04-11 18:35:19+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DSL_1_B_weighteduf.test.cpp
 layout: document
