@@ -114,9 +114,6 @@ data:
     - icon: ':warning:'
       path: alg/monoid_xor_basis.hpp
       title: alg/monoid_xor_basis.hpp
-    - icon: ':warning:'
-      path: alg/monoid_xorbasis.hpp
-      title: alg/monoid_xorbasis.hpp
   - name: ds
     pages:
     - icon: ':heavy_check_mark:'
