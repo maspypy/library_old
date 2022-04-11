@@ -19,7 +19,7 @@ struct PersistentSegTree {
 
   PersistentSegTree(int n) : pid(0), n(n), nil(nullptr) {
     pool = new Node[NODES];
-    nil = new_node(Monoid::unit);
+    nil = new_node(Monoid::unit());
     nil->lch = nil->rch = nil;
     roots.reserve(1 << 18);
     roots.push_back(nil);
@@ -47,8 +47,8 @@ private:
   }
 
   X prod(ll a, ll b, Node *n, ll l, ll r) {
-    if (n == nil) return Monoid::unit;
-    if (r <= a || b <= l) return Monoid::unit;
+    if (n == nil) return Monoid::unit();
+    if (r <= a || b <= l) return Monoid::unit();
     if (a <= l && r <= b) return n->x;
     ll m = (l + r) / 2;
     return Monoid::op(prod(a, b, n->lch, l, m), prod(a, b, n->rch, m, r));
