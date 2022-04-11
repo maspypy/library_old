@@ -12,7 +12,7 @@ struct Fenwick2D {
   Fenwick2D(vi& X, vi& Y, vc<E>& wt) { build(X, Y, wt); }
 
   Fenwick2D(vi& X, vi& Y) {
-    vc<E> wt(len(X), AbelGroup::unit);
+    vc<E> wt(len(X), AbelGroup::unit());
     build(X, Y, wt);
   }
 
@@ -100,8 +100,8 @@ struct Fenwick2D {
   }
 
   E sum_i(int i, ll ly, ll ry) {
-    E pos = AbelGroup::unit;
-    E neg = AbelGroup::unit;
+    E pos = AbelGroup::unit();
+    E neg = AbelGroup::unit();
     int LID = indptr[i], n = indptr[i + 1] - indptr[i];
     auto it = keyY.begin() + LID;
     int L = lower_bound(it, it + n, ly) - it - 1;

@@ -25,8 +25,8 @@ struct Fenwick2D_dense {
   }
 
   E sum_x(int x, int ly, int ry) {
-    E pos = AbelGroup::unit;
-    E neg = AbelGroup::unit;
+    E pos = AbelGroup::unit();
+    E neg = AbelGroup::unit();
     while (ly < ry) {
       pos = AbelGroup::op(pos, dat[x][ry]);
       ry -= ry & -ry;
@@ -39,8 +39,8 @@ struct Fenwick2D_dense {
   }
 
   E sum(int lx, int ly, int rx, int ry) {
-    E pos = AbelGroup::unit;
-    E neg = AbelGroup::unit;
+    E pos = AbelGroup::unit();
+    E neg = AbelGroup::unit();
     while (lx < rx) {
       pos = AbelGroup::op(pos, sum_x(rx, ly, ry));
       rx -= rx & -rx;
@@ -52,7 +52,7 @@ struct Fenwick2D_dense {
     return AbelGroup::op(pos, AbelGroup::inverse(neg));
   }
 
-  void debug(){
+  void debug() {
     print("Fenwick2d dat");
     FOR(x, H + 1) print(dat[x]);
   }

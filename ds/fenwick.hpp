@@ -9,11 +9,11 @@ struct FenwickTree {
   E total;
 
   FenwickTree() : FenwickTree(0) {}
-  FenwickTree(int n) : n(n), total(AbelGroup::unit) {
+  FenwickTree(int n) : n(n), total(AbelGroup::unit()) {
     assert(AbelGroup::commute);
-    dat.assign(n, AbelGroup::unit);
+    dat.assign(n, AbelGroup::unit());
   }
-  FenwickTree(vc<E> v) : n(len(v)), total(AbelGroup::unit) {
+  FenwickTree(vc<E> v) : n(len(v)), total(AbelGroup::unit()) {
     assert(AbelGroup::commute);
     FOR(i, n) total = AbelGroup::op(total, v[i]);
     dat = v;
@@ -24,18 +24,18 @@ struct FenwickTree {
   }
 
   E sum(int k) {
-    E ret = AbelGroup::unit;
+    E ret = AbelGroup::unit();
     for (; k > 0; k -= k & -k) ret = AbelGroup::op(ret, dat[k - 1]);
     return ret;
   }
 
   E sum(int L, int R) {
-    E pos = AbelGroup::unit;
+    E pos = AbelGroup::unit();
     while (L < R) {
       pos = AbelGroup::op(pos, dat[R - 1]);
       R -= R & -R;
     }
-    E neg = AbelGroup::unit;
+    E neg = AbelGroup::unit();
     while (R < L) {
       neg = AbelGroup::op(neg, dat[L - 1]);
       L -= L & -L;
@@ -54,7 +54,7 @@ struct FenwickTree {
   int max_right(F& check) {
     assert(check(E(0)));
     ll i = 0;
-    E s = AbelGroup::unit;
+    E s = AbelGroup::unit();
     int k = 1;
     int N = len(dat) + 1;
     while (2 * k < N) k *= 2;
