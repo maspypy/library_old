@@ -11,7 +11,7 @@ struct DualSegTree {
     log = 1;
     while ((1 << log) < n) ++log;
     size = 1 << log;
-    laz.assign(size << 1, Monoid::unit);
+    laz.assign(size << 1, Monoid::unit());
   }
 
   void all_apply(int k, A a) { laz[k] = Monoid::op(laz[k], a); }
@@ -19,7 +19,7 @@ struct DualSegTree {
   void push(int k) {
     all_apply(2 * k, laz[k]);
     all_apply(2 * k + 1, laz[k]);
-    laz[k] = Monoid::unit;
+    laz[k] = Monoid::unit();
   }
 
   A get(int p) {
