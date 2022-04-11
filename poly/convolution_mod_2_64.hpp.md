@@ -9,12 +9,12 @@ data:
     title: poly/convolution.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/convolution/convolution_mod_2_64.test.cpp
     title: test/library_checker/convolution/convolution_mod_2_64.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"mod/modint.hpp\"\ntemplate <uint mod>\nstruct modint {\n\
@@ -24,7 +24,7 @@ data:
     \  } // To use std::map\n  modint &operator+=(const modint &p) {\n    if ((val\
     \ += p.val) >= mod) val -= mod;\n    return *this;\n  }\n  modint &operator-=(const\
     \ modint &p) {\n    if ((val += mod - p.val) >= mod) val -= mod;\n    return *this;\n\
-    \  }\n  modint &operator*=(const modint &p) {\n    val = (int)(1LL * val * p.val\
+    \  }\n  modint &operator*=(const modint &p) {\n    val = (uint)(1LL * val * p.val\
     \ % mod);\n    return *this;\n  }\n  modint &operator/=(const modint &p) {\n \
     \   *this *= p.inverse();\n    return *this;\n  }\n  modint operator-() const\
     \ { return modint(-val); }\n  modint operator+(const modint &p) const { return\
@@ -300,8 +300,8 @@ data:
   isVerificationFile: false
   path: poly/convolution_mod_2_64.hpp
   requiredBy: []
-  timestamp: '2022-04-11 21:42:48+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-04-11 22:17:44+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/convolution/convolution_mod_2_64.test.cpp
 documentation_of: poly/convolution_mod_2_64.hpp

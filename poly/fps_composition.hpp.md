@@ -24,7 +24,7 @@ data:
     \  } // To use std::map\n  modint &operator+=(const modint &p) {\n    if ((val\
     \ += p.val) >= mod) val -= mod;\n    return *this;\n  }\n  modint &operator-=(const\
     \ modint &p) {\n    if ((val += mod - p.val) >= mod) val -= mod;\n    return *this;\n\
-    \  }\n  modint &operator*=(const modint &p) {\n    val = (int)(1LL * val * p.val\
+    \  }\n  modint &operator*=(const modint &p) {\n    val = (uint)(1LL * val * p.val\
     \ % mod);\n    return *this;\n  }\n  modint &operator/=(const modint &p) {\n \
     \   *this *= p.inverse();\n    return *this;\n  }\n  modint operator-() const\
     \ { return modint(-val); }\n  modint operator+(const modint &p) const { return\
@@ -272,7 +272,7 @@ data:
   isVerificationFile: false
   path: poly/fps_composition.hpp
   requiredBy: []
-  timestamp: '2022-04-11 21:42:48+09:00'
+  timestamp: '2022-04-11 22:17:44+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/polynomial/composition_of_fps.test.cpp
