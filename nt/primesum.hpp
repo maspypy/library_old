@@ -11,7 +11,7 @@ pair<vc<T>, vc<T>> primesum_F(ll N, function<T(ll)> F) {
   Complexity: O(N^{3/4}/logN) time, O(N^{1/2}) space.
   */
   ll sqN = sqrtl(N);
-  auto& primes = primetable(sqN);
+  auto primes = primetable(sqN);
   vc<T> sum_lo(sqN + 1), sum_hi(sqN + 1);
   FOR3(i, 1, sqN + 1) sum_lo[i] = F(i) - 1;
   FOR3(i, 1, sqN + 1) sum_hi[i] = F(double(N) / i) - 1;

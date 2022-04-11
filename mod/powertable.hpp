@@ -13,7 +13,7 @@ vc<mint> powertable_1(mint a, ll N) {
 // 0^e, ..., (N-1)^e
 template <typename mint>
 vc<mint> powertable_2(ll e, ll N) {
-  auto& primes = primetable(N);
+  auto primes = primetable(N);
   vc<mint> f(N, 1);
   f[0] = mint(0).pow(e);
   for (auto&& p: primes) {

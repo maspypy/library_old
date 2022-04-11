@@ -5,7 +5,7 @@ T multiplicative_sum(ll N, FUNC F, vc<T>& sum_lo, vc<T>& sum_hi) {
   // black algorithm in
   // http://baihacker.github.io/main/2020/The_prefix-sum_of_multiplicative_function_the_black_algorithm.html
   ll sqN = sqrtl(N);
-  auto& P = primetable(sqN);
+  auto P = primetable(sqN);
   auto get = [&](ll d) -> T {
     return (d <= sqN ? sum_lo[d] : sum_hi[double(N) / d]);
   };
