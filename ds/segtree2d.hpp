@@ -52,7 +52,7 @@ struct SegTree2D {
     FOR(i, N + N) indptr[i + 1] = indptr[i] + len(keyY_raw[i]);
     int full_N = indptr.back();
     keyY.resize(full_N);
-    dat.assign(2 * full_N, Monoid::unit);
+    dat.assign(2 * full_N, Monoid::unit());
     FOR(i, N + N) {
       int off = 2 * indptr[i], n = indptr[i + 1] - indptr[i];
       FOR(j, n) {
@@ -96,7 +96,7 @@ struct SegTree2D {
     int off = 2 * LID;
     L += n;
     R += n;
-    S val = Monoid::unit;
+    S val = Monoid::unit();
     while (L < R) {
       if (L & 1) val = Monoid::op(val, dat[off + (L++)]);
       if (R & 1) val = Monoid::op(dat[off + (--R)], val);
@@ -111,7 +111,7 @@ struct SegTree2D {
     int R = xtoi(rx);
     L += N;
     R += N;
-    S val = Monoid::unit;
+    S val = Monoid::unit();
     while (L < R) {
       if (L & 1) val = Monoid::op(val, prod_i(L++, ly, ry));
       if (R & 1) val = Monoid::op(prod_i(--R, ly, ry), val);
