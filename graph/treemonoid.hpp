@@ -16,7 +16,7 @@ struct TreeMonoid {
   }
 
   TreeMonoid(HLD &hld, vc<X> &dat) : hld(hld), N(hld.N) {
-    vc<X> seg_raw(N, Monoid::unit);
+    vc<X> seg_raw(N, Monoid::unit());
     if (!edge) {
       FOR(v, N) seg_raw[hld.LID[v]] = dat[v];
     } else {
@@ -38,7 +38,7 @@ struct TreeMonoid {
 
   X prod_path(int u, int v) {
     auto pd = hld.get_path_decomposition(u, v, edge);
-    X val = Monoid::unit;
+    X val = Monoid::unit();
     for (auto &&[a, b]: pd) {
       X x = (a <= b ? seg.prod(a, b + 1)
                     : (Monoid::commute ? seg.prod(b, a + 1)
@@ -55,7 +55,7 @@ struct TreeMonoid {
   int max_path(F &check, int u, int v) {
     if (!check(prod_path(u, u))) return -1;
     auto pd = hld.get_path_decomposition(u, v, edge);
-    X val = Monoid::unit;
+    X val = Monoid::unit();
     for (auto &&[a, b]: pd) {
       X x = (a <= b ? seg.prod(a, b + 1)
                     : (Monoid::commute ? seg.prod(b, a + 1)
