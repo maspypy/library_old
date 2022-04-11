@@ -4,7 +4,7 @@
 #include "other/io.hpp"
 
 #include "ds/fenwick.hpp"
-#include "other/rectanglesums.hpp"
+#include "ds/rectanglesums.hpp"
 
 void solve() {
   LL(N, Q);
