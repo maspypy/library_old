@@ -1,32 +1,32 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linalg/spmat_det.hpp
     title: linalg/spmat_det.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: linalg/spmat_min_poly.hpp
     title: linalg/spmat_min_poly.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: other/random.hpp
     title: other/random.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: seq/find_linear_rec.hpp
     title: seq/find_linear_rec.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/sparse_matrix_det
@@ -212,8 +212,8 @@ data:
     \ N) r *= c[i];\r\n  for (auto&& [i, j, x]: dat) x *= c[i];\r\n  auto f = spmat_min_poly(N,\
     \ dat);\r\n  f.resize(N + 1);\r\n  T det = f.back();\r\n  if (N & 1) det *= -1;\r\
     \n  det /= r;\r\n  return det;\r\n}\r\n#line 5 \"test/library_checker/matrix/sparse_matrix_det.test.cpp\"\
-    \n\r\n#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n  static\
-    \ constexpr bool is_modint = true;\n  int val;\n  constexpr modint(const ll val\
+    \n\r\n#line 2 \"mod/modint.hpp\"\ntemplate <uint mod>\nstruct modint {\n  static\
+    \ constexpr bool is_modint = true;\n  uint val;\n  constexpr modint(const ll val\
     \ = 0) noexcept\n      : val(val >= 0 ? val % mod : (mod - (-val) % mod) % mod)\
     \ {}\n  bool operator<(const modint &other) const {\n    return val < other.val;\n\
     \  } // To use std::map\n  modint &operator+=(const modint &p) {\n    if ((val\
@@ -232,14 +232,14 @@ data:
     \     t = a / b;\n      swap(a -= t * b, b), swap(u -= t * v, v);\n    }\n   \
     \ return modint(u);\n  }\n  modint pow(int64_t n) const {\n    modint ret(1),\
     \ mul(val);\n    while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n\
-    \      n >>= 1;\n    }\n    return ret;\n  }\n  static constexpr int get_mod()\
+    \      n >>= 1;\n    }\n    return ret;\n  }\n  static constexpr uint get_mod()\
     \ { return mod; }\n};\n\nstruct ArbitraryModInt {\n  static constexpr bool is_modint\
-    \ = true;\n  int val;\n  ArbitraryModInt() : val(0) {}\n  ArbitraryModInt(int64_t\
+    \ = true;\n  uint val;\n  ArbitraryModInt() : val(0) {}\n  ArbitraryModInt(int64_t\
     \ y)\n      : val(y >= 0 ? y % get_mod()\n                   : (get_mod() - (-y)\
     \ % get_mod()) % get_mod()) {}\n  bool operator<(const ArbitraryModInt &other)\
     \ const {\n    return val < other.val;\n  } // To use std::map<ArbitraryModInt,\
-    \ T>\n  static int &get_mod() {\n    static int mod = 0;\n    return mod;\n  }\n\
-    \  static void set_mod(int md) { get_mod() = md; }\n  ArbitraryModInt &operator+=(const\
+    \ T>\n  static uint &get_mod() {\n    static uint mod = 0;\n    return mod;\n\
+    \  }\n  static void set_mod(int md) { get_mod() = md; }\n  ArbitraryModInt &operator+=(const\
     \ ArbitraryModInt &p) {\n    if ((val += p.val) >= get_mod()) val -= get_mod();\n\
     \    return *this;\n  }\n  ArbitraryModInt &operator-=(const ArbitraryModInt &p)\
     \ {\n    if ((val += get_mod() - p.val) >= get_mod()) val -= get_mod();\n    return\
@@ -304,8 +304,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/matrix/sparse_matrix_det.test.cpp
   requiredBy: []
-  timestamp: '2022-04-09 22:35:37+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-04-11 21:42:48+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/matrix/sparse_matrix_det.test.cpp
 layout: document
