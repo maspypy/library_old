@@ -1,22 +1,22 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: nt/primetable.hpp
     title: nt/primetable.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/math/totient_sum.test.cpp
     title: test/library_checker/math/totient_sum.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links:
     - http://baihacker.github.io/main/2020/The_prefix-sum_of_multiplicative_function_the_black_algorithm.html
-  bundledCode: "#line 2 \"nt/primetable.hpp\"\nvc<int> primetable(int LIM) {\n  ++LIM;\n\
-    \  const int S = 32768;\n  static int done = 2;\n  static vc<int> primes = {2},\
+  bundledCode: "#line 2 \"nt/primetable.hpp\"\nvc<ll> primetable(int LIM) {\n  ++LIM;\n\
+    \  const int S = 32768;\n  static int done = 2;\n  static vc<ll> primes = {2},\
     \ sieve(S + 1);\n\n  if (done < LIM) {\n    done = LIM;\n\n    primes = {2}, sieve.assign(S\
     \ + 1, 0);\n    const int R = LIM / 2;\n    primes.reserve(int(LIM / log(LIM)\
     \ * 1.1));\n    vc<pi> cp;\n    for (int i = 3; i <= S; i += 2) {\n      if (!sieve[i])\
@@ -64,8 +64,8 @@ data:
   isVerificationFile: false
   path: nt/multiplicative_sum.hpp
   requiredBy: []
-  timestamp: '2022-04-12 01:19:19+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-04-12 01:40:36+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/math/totient_sum.test.cpp
 documentation_of: nt/multiplicative_sum.hpp

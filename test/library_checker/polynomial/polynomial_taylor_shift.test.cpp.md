@@ -7,13 +7,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: mod/powertable.hpp
     title: mod/powertable.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: nt/primetable.hpp
     title: nt/primetable.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: other/io.hpp
     title: other/io.hpp
   - icon: ':heavy_check_mark:'
@@ -256,8 +256,8 @@ data:
     \ * fact_inv<mint>(k) * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n\
     \  FOR(i, k) { x *= mint(n - i); }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\
     \nusing modint107 = modint<1000000007>;\nusing modint998 = modint<998244353>;\n\
-    using amint = ArbitraryModInt;\n#line 2 \"nt/primetable.hpp\"\nvc<int> primetable(int\
-    \ LIM) {\n  ++LIM;\n  const int S = 32768;\n  static int done = 2;\n  static vc<int>\
+    using amint = ArbitraryModInt;\n#line 2 \"nt/primetable.hpp\"\nvc<ll> primetable(int\
+    \ LIM) {\n  ++LIM;\n  const int S = 32768;\n  static int done = 2;\n  static vc<ll>\
     \ primes = {2}, sieve(S + 1);\n\n  if (done < LIM) {\n    done = LIM;\n\n    primes\
     \ = {2}, sieve.assign(S + 1, 0);\n    const int R = LIM / 2;\n    primes.reserve(int(LIM\
     \ / log(LIM) * 1.1));\n    vc<pi> cp;\n    for (int i = 3; i <= S; i += 2) {\n\
@@ -458,7 +458,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
   requiredBy: []
-  timestamp: '2022-04-12 01:19:19+09:00'
+  timestamp: '2022-04-12 01:40:36+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp

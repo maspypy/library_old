@@ -17,10 +17,10 @@ data:
   - icon: ':warning:'
     path: nt/mobius_table.hpp
     title: nt/mobius_table.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: nt/multiplicative_sum.hpp
     title: nt/multiplicative_sum.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: nt/primesum.hpp
     title: nt/primesum.hpp
   - icon: ':heavy_check_mark:'
@@ -33,7 +33,7 @@ data:
     path: seq/stirling_number_1.hpp
     title: seq/stirling_number_1.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/math/counting_primes.test.cpp
     title: test/library_checker/math/counting_primes.test.cpp
   - icon: ':heavy_check_mark:'
@@ -54,19 +54,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/sum_of_exp_times_poly_limit.test.cpp
     title: test/library_checker/math/sum_of_exp_times_poly_limit.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/math/totient_sum.test.cpp
     title: test/library_checker/math/totient_sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
     title: test/library_checker/polynomial/polynomial_taylor_shift.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"nt/primetable.hpp\"\nvc<int> primetable(int LIM) {\n  ++LIM;\n\
-    \  const int S = 32768;\n  static int done = 2;\n  static vc<int> primes = {2},\
+  bundledCode: "#line 2 \"nt/primetable.hpp\"\nvc<ll> primetable(int LIM) {\n  ++LIM;\n\
+    \  const int S = 32768;\n  static int done = 2;\n  static vc<ll> primes = {2},\
     \ sieve(S + 1);\n\n  if (done < LIM) {\n    done = LIM;\n\n    primes = {2}, sieve.assign(S\
     \ + 1, 0);\n    const int R = LIM / 2;\n    primes.reserve(int(LIM / log(LIM)\
     \ * 1.1));\n    vc<pi> cp;\n    for (int i = 3; i <= S; i += 2) {\n      if (!sieve[i])\
@@ -76,11 +76,11 @@ data:
     \ i = idx; i < S + L; idx = (i += p)) block[i - L] = 1;\n      FOR(i, min(S, R\
     \ - L)) if (!block[i]) primes.eb((L + i) * 2 + 1);\n    }\n  }\n  int k = LB(primes,\
     \ LIM + 1);\n  return {primes.begin(), primes.begin() + k};\n}\n"
-  code: "#pragma once\nvc<int> primetable(int LIM) {\n  ++LIM;\n  const int S = 32768;\n\
-    \  static int done = 2;\n  static vc<int> primes = {2}, sieve(S + 1);\n\n  if\
-    \ (done < LIM) {\n    done = LIM;\n\n    primes = {2}, sieve.assign(S + 1, 0);\n\
-    \    const int R = LIM / 2;\n    primes.reserve(int(LIM / log(LIM) * 1.1));\n\
-    \    vc<pi> cp;\n    for (int i = 3; i <= S; i += 2) {\n      if (!sieve[i]) {\n\
+  code: "#pragma once\nvc<ll> primetable(int LIM) {\n  ++LIM;\n  const int S = 32768;\n\
+    \  static int done = 2;\n  static vc<ll> primes = {2}, sieve(S + 1);\n\n  if (done\
+    \ < LIM) {\n    done = LIM;\n\n    primes = {2}, sieve.assign(S + 1, 0);\n   \
+    \ const int R = LIM / 2;\n    primes.reserve(int(LIM / log(LIM) * 1.1));\n   \
+    \ vc<pi> cp;\n    for (int i = 3; i <= S; i += 2) {\n      if (!sieve[i]) {\n\
     \        cp.eb(i, i * i / 2);\n        for (int j = i * i; j <= S; j += 2 * i)\
     \ sieve[j] = 1;\n      }\n    }\n    for (int L = 1; L <= R; L += S) {\n     \
     \ array<bool, S> block{};\n      for (auto& [p, idx]: cp)\n        for (int i\
@@ -101,8 +101,8 @@ data:
   - nt/lcm_convolution.hpp
   - nt/gcd_convolution.hpp
   - nt/mobius_table.hpp
-  timestamp: '2022-04-12 00:53:33+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  timestamp: '2022-04-12 01:40:36+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/math/sum_of_exp_times_poly_limit.test.cpp
   - test/library_checker/math/enumerate_primes.test.cpp

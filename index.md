@@ -443,7 +443,7 @@ data:
       title: mod/tetration.hpp
   - name: .
     pages:
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: my_template.hpp
       title: my_template.hpp
   - name: nt
@@ -475,16 +475,16 @@ data:
     - icon: ':heavy_check_mark:'
       path: nt/multiplicative_convolution_mod2n.hpp
       title: nt/multiplicative_convolution_mod2n.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: nt/multiplicative_sum.hpp
       title: nt/multiplicative_sum.hpp
     - icon: ':heavy_check_mark:'
       path: nt/nim_product.hpp
       title: nt/nim_product.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: nt/primesum.hpp
       title: nt/primesum.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: nt/primetable.hpp
       title: nt/primetable.hpp
     - icon: ':heavy_check_mark:'
@@ -519,7 +519,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: other/inversion.hpp
       title: other/inversion.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: other/io.hpp
       title: other/io.hpp
     - icon: ':heavy_check_mark:'
@@ -916,7 +916,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/math/binomial_coefficient.test.cpp
       title: test/library_checker/math/binomial_coefficient.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/math/counting_primes.test.cpp
       title: test/library_checker/math/counting_primes.test.cpp
     - icon: ':heavy_check_mark:'
@@ -970,7 +970,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/math/tetration.test.cpp
       title: test/library_checker/math/tetration.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/library_checker/math/totient_sum.test.cpp
       title: test/library_checker/math/totient_sum.test.cpp
     - icon: ':heavy_check_mark:'

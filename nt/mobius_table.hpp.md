@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: nt/primetable.hpp
     title: nt/primetable.hpp
   - icon: ':heavy_check_mark:'
@@ -14,8 +14,8 @@ data:
   _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 2 \"nt/primetable.hpp\"\nvc<int> primetable(int LIM) {\n  ++LIM;\n\
-    \  const int S = 32768;\n  static int done = 2;\n  static vc<int> primes = {2},\
+  bundledCode: "#line 2 \"nt/primetable.hpp\"\nvc<ll> primetable(int LIM) {\n  ++LIM;\n\
+    \  const int S = 32768;\n  static int done = 2;\n  static vc<ll> primes = {2},\
     \ sieve(S + 1);\n\n  if (done < LIM) {\n    done = LIM;\n\n    primes = {2}, sieve.assign(S\
     \ + 1, 0);\n    const int R = LIM / 2;\n    primes.reserve(int(LIM / log(LIM)\
     \ * 1.1));\n    vc<pi> cp;\n    for (int i = 3; i <= S; i += 2) {\n      if (!sieve[i])\
@@ -47,7 +47,7 @@ data:
   isVerificationFile: false
   path: nt/mobius_table.hpp
   requiredBy: []
-  timestamp: '2022-04-12 01:19:19+09:00'
+  timestamp: '2022-04-12 01:40:36+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: nt/mobius_table.hpp

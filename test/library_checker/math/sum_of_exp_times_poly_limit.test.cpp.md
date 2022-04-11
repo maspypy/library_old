@@ -7,13 +7,13 @@ data:
   - icon: ':heavy_check_mark:'
     path: mod/powertable.hpp
     title: mod/powertable.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: nt/primetable.hpp
     title: nt/primetable.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: other/io.hpp
     title: other/io.hpp
   - icon: ':heavy_check_mark:'
@@ -261,8 +261,8 @@ data:
     \u3001c \u304C\u7B54\u3067\u3042\u308B\r\n  */\r\n  mint c = 0;\r\n  int d = len(a)\
     \ - 1;\r\n  mint p = 1;\r\n  FOR(i, d + 1) {\r\n    c += a[d - i] * p * C<mint>(d,\
     \ i);\r\n    p *= -r;\r\n  }\r\n  c /= (mint(1) - r).pow(d);\r\n  return c;\r\n\
-    }\r\n#line 2 \"nt/primetable.hpp\"\nvc<int> primetable(int LIM) {\n  ++LIM;\n\
-    \  const int S = 32768;\n  static int done = 2;\n  static vc<int> primes = {2},\
+    }\r\n#line 2 \"nt/primetable.hpp\"\nvc<ll> primetable(int LIM) {\n  ++LIM;\n \
+    \ const int S = 32768;\n  static int done = 2;\n  static vc<ll> primes = {2},\
     \ sieve(S + 1);\n\n  if (done < LIM) {\n    done = LIM;\n\n    primes = {2}, sieve.assign(S\
     \ + 1, 0);\n    const int R = LIM / 2;\n    primes.reserve(int(LIM / log(LIM)\
     \ * 1.1));\n    vc<pi> cp;\n    for (int i = 3; i <= S; i += 2) {\n      if (!sieve[i])\
@@ -303,7 +303,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/math/sum_of_exp_times_poly_limit.test.cpp
   requiredBy: []
-  timestamp: '2022-04-12 01:19:19+09:00'
+  timestamp: '2022-04-12 01:40:36+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/math/sum_of_exp_times_poly_limit.test.cpp
