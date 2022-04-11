@@ -12,9 +12,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/enumerate_primes
@@ -186,14 +186,14 @@ data:
     \ i = idx; i < S + L; idx = (i += p)) block[i - L] = 1;\n      FOR(i, min(S, R\
     \ - L)) if (!block[i]) primes.eb((L + i) * 2 + 1);\n    }\n  }\n  int k = LB(primes,\
     \ LIM + 1);\n  return {primes.begin(), primes.begin() + k};\n}\n#line 6 \"test/library_checker/math/enumerate_primes.test.cpp\"\
-    \n\nvoid solve() {\n  LL(N, A, B);\n  auto& primes = primetable(N);\n  int pi_N\
+    \n\nvoid solve() {\n  LL(N, A, B);\n  auto primes = primetable(N);\n  int pi_N\
     \ = UB(primes, N);\n\n  vc<int> ANS;\n  while (B < pi_N) {\n    ANS.eb(primes[B]);\n\
     \    B += A;\n  }\n  print(pi_N, len(ANS));\n  print(ANS);\n}\n\nsigned main()\
     \ {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\
     \n  solve();\n\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/enumerate_primes\"\n#include\
     \ \"my_template.hpp\"\n#include \"other/io.hpp\"\n\n#include \"nt/primetable.hpp\"\
-    \n\nvoid solve() {\n  LL(N, A, B);\n  auto& primes = primetable(N);\n  int pi_N\
+    \n\nvoid solve() {\n  LL(N, A, B);\n  auto primes = primetable(N);\n  int pi_N\
     \ = UB(primes, N);\n\n  vc<int> ANS;\n  while (B < pi_N) {\n    ANS.eb(primes[B]);\n\
     \    B += A;\n  }\n  print(pi_N, len(ANS));\n  print(ANS);\n}\n\nsigned main()\
     \ {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\
@@ -205,8 +205,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/math/enumerate_primes.test.cpp
   requiredBy: []
-  timestamp: '2022-04-12 00:53:33+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-04-12 01:31:54+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/math/enumerate_primes.test.cpp
 layout: document
