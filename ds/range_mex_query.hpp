@@ -1,11 +1,12 @@
-// https://codeforces.com/contest/1436/problem/E
 
 #include "ds/segtree.hpp"
 #include "alg/monoid_min.hpp"
+
+// 配列は static
+// クエリも先読みする
+// example: https://codeforces.com/contest/1436/problem/E
 template <int BEGIN, typename T = ll>
 struct RangeMexQuery {
-  // 配列は static
-  // クエリも先読みする
   vc<T>& A;
   vc<pair<int, int>> query;
 
