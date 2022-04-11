@@ -2,8 +2,10 @@
 
 template <typename mint>
 mint coef_of_rational_fps(vector<mint> A, vector<mint> B, ll N) {
-  if(len(A)==0) return 0;
-  assert(B[0] == 1);
+  if (len(A) == 0) return 0;
+  assert(len(A) < len(B));
+  while (len(A) + 1 < len(B)) A.eb(0);
+  assert(B[0] == mint(1));
   assert(len(B) == len(A) + 1);
   while (N) {
     vc<mint> B1 = B;
