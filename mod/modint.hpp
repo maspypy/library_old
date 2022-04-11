@@ -24,7 +24,7 @@ struct modint {
     *this *= p.inverse();
     return *this;
   }
-  modint operator-() const { return modint(-val); }
+  modint operator-() const { return modint(get_mod() - val); }
   modint operator+(const modint &p) const { return modint(*this) += p; }
   modint operator-(const modint &p) const { return modint(*this) -= p; }
   modint operator*(const modint &p) const { return modint(*this) *= p; }
@@ -85,7 +85,7 @@ struct ArbitraryModInt {
     *this *= p.inverse();
     return *this;
   }
-  ArbitraryModInt operator-() const { return ArbitraryModInt(-val); }
+  ArbitraryModInt operator-() const { return ArbitraryModInt(get_mod() - val); }
   ArbitraryModInt operator+(const ArbitraryModInt &p) const {
     return ArbitraryModInt(*this) += p;
   }
@@ -119,14 +119,14 @@ struct ArbitraryModInt {
   }
 };
 
-template<typename mint>
-tuple<mint, mint, mint> get_factorial_data(int n){
+template <typename mint>
+tuple<mint, mint, mint> get_factorial_data(int n) {
   static constexpr int mod = mint::get_mod();
   assert(0 <= n && n < mod);
   static vector<mint> fact = {1, 1};
   static vector<mint> fact_inv = {1, 1};
   static vector<mint> inv = {0, 1};
-  while(len(fact) <= n){
+  while (len(fact) <= n) {
     int k = len(fact);
     fact.eb(fact[k - 1] * mint(k));
     auto q = ceil(mod, k);
@@ -137,38 +137,36 @@ tuple<mint, mint, mint> get_factorial_data(int n){
   return {fact[n], fact_inv[n], inv[n]};
 }
 
-template<typename mint>
-mint fact(int n){
+template <typename mint>
+mint fact(int n) {
   static constexpr int mod = mint::get_mod();
   assert(0 <= n);
-  if(n >= mod) return 0;
+  if (n >= mod) return 0;
   return get<0>(get_factorial_data<mint>(n));
 }
 
-template<typename mint>
-mint fact_inv(int n){
+template <typename mint>
+mint fact_inv(int n) {
   static constexpr int mod = mint::get_mod();
   assert(0 <= n && n < mod);
   return get<1>(get_factorial_data<mint>(n));
 }
 
-template<typename mint>
-mint inv(int n){
+template <typename mint>
+mint inv(int n) {
   static constexpr int mod = mint::get_mod();
   assert(0 <= n && n < mod);
   return get<2>(get_factorial_data<mint>(n));
 }
 
-template<typename mint>
+template <typename mint>
 mint C(ll n, ll k, bool large = false) {
   assert(n >= 0);
   if (k < 0 || n < k) return 0;
   if (!large) return fact<mint>(n) * fact_inv<mint>(k) * fact_inv<mint>(n - k);
   k = min(k, n - k);
   mint x(1);
-  FOR(i, k) {
-    x *= mint(n - i);
-  }
+  FOR(i, k) { x *= mint(n - i); }
   x *= fact_inv<mint>(k);
   return x;
 }
