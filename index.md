@@ -9,10 +9,10 @@ data:
     - icon: ':question:'
       path: alg/group_affine.hpp
       title: alg/group_affine.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: alg/group_cntsum.hpp
       title: alg/group_cntsum.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: alg/group_mul.hpp
       title: alg/group_mul.hpp
     - icon: ':x:'
@@ -21,7 +21,7 @@ data:
     - icon: ':warning:'
       path: alg/group_xor.hpp
       title: alg/group_xor.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: alg/lazy_add_mul.hpp
       title: alg/lazy_add_mul.hpp
     - icon: ':warning:'
@@ -30,10 +30,10 @@ data:
     - icon: ':warning:'
       path: alg/lazy_cntsum_add.hpp
       title: alg/lazy_cntsum_add.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: alg/lazy_cntsum_affine.hpp
       title: alg/lazy_cntsum_affine.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: alg/lazy_cntsum_set.hpp
       title: alg/lazy_cntsum_set.hpp
     - icon: ':warning:'
@@ -170,7 +170,7 @@ data:
     - icon: ':warning:'
       path: ds/kdtree.hpp
       title: ds/kdtree.hpp
-    - icon: ':question:'
+    - icon: ':x:'
       path: ds/lazysegtree.hpp
       title: ds/lazysegtree.hpp
     - icon: ':heavy_check_mark:'
@@ -260,7 +260,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/bfs01.hpp
       title: graph/bfs01.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: graph/bfsnumbering.hpp
       title: graph/bfsnumbering.hpp
     - icon: ':warning:'
@@ -703,7 +703,7 @@ data:
     - icon: ':x:'
       path: test/aoj/DSL_2_H_min_add_lazy.test.cpp
       title: test/aoj/DSL_2_H_min_add_lazy.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
       title: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
     - icon: ':x:'
@@ -805,7 +805,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
       title: test/library_checker/datastructure/queue_operate_all_composite.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
       title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
     - icon: ':heavy_check_mark:'
@@ -1093,7 +1093,7 @@ data:
     - icon: ':x:'
       path: test/yukicoder/4_modular_subset_sum.test.cpp
       title: test/yukicoder/4_modular_subset_sum.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/899_bfsnumbering.test.cpp
       title: test/yukicoder/899_bfsnumbering.test.cpp
 layout: toppage

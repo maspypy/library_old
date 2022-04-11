@@ -8,7 +8,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/bfs01.hpp
     title: graph/bfs01.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/bfsnumbering.hpp
     title: graph/bfsnumbering.hpp
   - icon: ':warning:'
@@ -171,7 +171,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/17_warshall_floyd.test.cpp
     title: test/yukicoder/17_warshall_floyd.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/899_bfsnumbering.test.cpp
     title: test/yukicoder/899_bfsnumbering.test.cpp
   _isVerificationFailed: true

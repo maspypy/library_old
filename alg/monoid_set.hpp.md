@@ -2,7 +2,7 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: alg/lazy_cntsum_set.hpp
     title: alg/lazy_cntsum_set.hpp
   - icon: ':warning:'
@@ -21,7 +21,7 @@ data:
   - icon: ':x:'
     path: test/aoj/DSL_2_F_min_set_lazy.test.cpp
     title: test/aoj/DSL_2_F_min_set_lazy.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
     title: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
   _isVerificationFailed: true
