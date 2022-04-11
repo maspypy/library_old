@@ -7,7 +7,7 @@ data:
   - icon: ':x:'
     path: nt/primesum.hpp
     title: nt/primesum.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: nt/primetable.hpp
     title: nt/primetable.hpp
   - icon: ':question:'
@@ -195,21 +195,21 @@ data:
     \u308B sum_{p <= n} f(p) \u3092\u8A08\u7B97\u3059\u308B\u3002\r\n\r\n  \u7279\u306B\
     \u3001p^k \u306E\u548C\u3084\u3001mod m \u3054\u3068\u3067\u306E p^k \u306E\u548C\
     \u304C\u8A08\u7B97\u3067\u304D\u308B\u3002\r\n\r\n  Complexity: O(N^{3/4}/logN)\
-    \ time, O(N^{1/2}) space.\r\n  */\r\n  ll sqN = sqrtl(N);\r\n  auto& primes =\
-    \ primetable(sqN);\r\n  vc<T> sum_lo(sqN + 1), sum_hi(sqN + 1);\r\n  FOR3(i, 1,\
-    \ sqN + 1) sum_lo[i] = F(i) - 1;\r\n  FOR3(i, 1, sqN + 1) sum_hi[i] = F(double(N)\
-    \ / i) - 1;\r\n  for (auto&& p: primes) {\r\n    ll pp = p * p;\r\n    if (pp\
-    \ > N) break;\r\n    ll R = min(sqN, N / pp);\r\n    ll M = sqN / p;\r\n    T\
-    \ x = sum_lo[p - 1];\r\n    T fp = sum_lo[p] - sum_lo[p - 1];\r\n    FOR3(i, 1,\
-    \ M + 1) sum_hi[i] -= fp * (sum_hi[i * p] - x);\r\n    FOR3(i, M + 1, R + 1) sum_hi[i]\
-    \ -= fp * (sum_lo[double(N) / (i * p)] - x);\r\n    FOR3_R(n, pp, sqN + 1) sum_lo[n]\
-    \ -= fp * (sum_lo[double(n) / p] - x);\r\n  }\r\n  return {sum_lo, sum_hi};\r\n\
-    }\r\n\r\ntemplate <typename T>\r\npair<vc<T>, vc<T>> primecnt(ll N) {\r\n  auto\
-    \ F = [&](ll N) -> T { return N; };\r\n  return primesum_F<T>(N, F);\r\n}\r\n\r\
-    \ntemplate <typename T>\r\npair<vc<T>, vc<T>> primesum(ll N) {\r\n  auto F = [&](ll\
-    \ N) -> T {\r\n    return (N & 1 ? T((N + 1) / 2) * T(N) : T(N / 2) * T(N + 1));\r\
-    \n  };\r\n  return primesum_F<T>(N, F);\r\n}\r\n#line 5 \"test/library_checker/math/counting_primes.test.cpp\"\
-    \n\r\nvoid solve() {\r\n  LL(N);\r\n  auto [sum_lo, sum_hi] = primecnt<ll>(N);\r\
+    \ time, O(N^{1/2}) space.\r\n  */\r\n  ll sqN = sqrtl(N);\r\n  auto primes = primetable(sqN);\r\
+    \n  vc<T> sum_lo(sqN + 1), sum_hi(sqN + 1);\r\n  FOR3(i, 1, sqN + 1) sum_lo[i]\
+    \ = F(i) - 1;\r\n  FOR3(i, 1, sqN + 1) sum_hi[i] = F(double(N) / i) - 1;\r\n \
+    \ for (auto&& p: primes) {\r\n    ll pp = p * p;\r\n    if (pp > N) break;\r\n\
+    \    ll R = min(sqN, N / pp);\r\n    ll M = sqN / p;\r\n    T x = sum_lo[p - 1];\r\
+    \n    T fp = sum_lo[p] - sum_lo[p - 1];\r\n    FOR3(i, 1, M + 1) sum_hi[i] -=\
+    \ fp * (sum_hi[i * p] - x);\r\n    FOR3(i, M + 1, R + 1) sum_hi[i] -= fp * (sum_lo[double(N)\
+    \ / (i * p)] - x);\r\n    FOR3_R(n, pp, sqN + 1) sum_lo[n] -= fp * (sum_lo[double(n)\
+    \ / p] - x);\r\n  }\r\n  return {sum_lo, sum_hi};\r\n}\r\n\r\ntemplate <typename\
+    \ T>\r\npair<vc<T>, vc<T>> primecnt(ll N) {\r\n  auto F = [&](ll N) -> T { return\
+    \ N; };\r\n  return primesum_F<T>(N, F);\r\n}\r\n\r\ntemplate <typename T>\r\n\
+    pair<vc<T>, vc<T>> primesum(ll N) {\r\n  auto F = [&](ll N) -> T {\r\n    return\
+    \ (N & 1 ? T((N + 1) / 2) * T(N) : T(N / 2) * T(N + 1));\r\n  };\r\n  return primesum_F<T>(N,\
+    \ F);\r\n}\r\n#line 5 \"test/library_checker/math/counting_primes.test.cpp\"\n\
+    \r\nvoid solve() {\r\n  LL(N);\r\n  auto [sum_lo, sum_hi] = primecnt<ll>(N);\r\
     \n  print(sum_hi[1]);\r\n}\r\n\r\nsigned main() {\r\n  solve();\r\n\r\n  return\
     \ 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/counting_primes\"\r\n#include\
@@ -225,7 +225,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/math/counting_primes.test.cpp
   requiredBy: []
-  timestamp: '2022-04-12 00:53:33+09:00'
+  timestamp: '2022-04-12 01:19:19+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/math/counting_primes.test.cpp
