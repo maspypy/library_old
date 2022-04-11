@@ -8,19 +8,19 @@ data:
   - icon: ':heavy_check_mark:'
     path: alg/lazy_cntsum_affine.hpp
     title: alg/lazy_cntsum_affine.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: alg/lazy_cntsum_set.hpp
     title: alg/lazy_cntsum_set.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
     title: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/range_affine_range_sum.test.cpp
     title: test/library_checker/datastructure/range_affine_range_sum.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"alg/group_cntsum.hpp\"\ntemplate <typename E = long long>\r\
@@ -43,7 +43,7 @@ data:
   - alg/lazy_cntsum_set.hpp
   - alg/lazy_cntsum_affine.hpp
   timestamp: '2022-04-11 17:55:37+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
   - test/library_checker/datastructure/range_affine_range_sum.test.cpp

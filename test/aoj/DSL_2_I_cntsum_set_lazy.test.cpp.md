@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: alg/group_cntsum.hpp
     title: alg/group_cntsum.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: alg/lazy_cntsum_set.hpp
     title: alg/lazy_cntsum_set.hpp
   - icon: ':question:'
@@ -21,9 +21,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_I
@@ -196,7 +196,7 @@ data:
     \r\ntemplate <typename E, E none_val>\r\nstruct Lazy_CntSum_Set {\r\n  using X_structure\
     \ = Group_CntSum<E>;\r\n  using A_structure = Monoid_Set<E, none_val>;\r\n  using\
     \ X = typename X_structure::value_type;\r\n  using A = typename A_structure::value_type;\r\
-    \n  static constexpr X act(const X &x, const A &a) {\r\n    if(a == A_structure::unit)\
+    \n  static constexpr X act(const X &x, const A &a) {\r\n    if (a == A_structure::unit())\
     \ return x;\r\n    return {x.fi, x.fi * a};\r\n  }\r\n};\n#line 2 \"ds/lazysegtree.hpp\"\
     \n\ntemplate <typename Lazy>\nstruct LazySegTree {\n  using Monoid_X = typename\
     \ Lazy::X_structure;\n  using Monoid_A = typename Lazy::A_structure;\n  using\
@@ -281,8 +281,8 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
   requiredBy: []
-  timestamp: '2022-04-11 18:07:23+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-04-11 18:49:27+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
 layout: document

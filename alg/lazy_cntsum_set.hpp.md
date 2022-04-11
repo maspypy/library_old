@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: alg/group_cntsum.hpp
     title: alg/group_cntsum.hpp
   - icon: ':question:'
@@ -9,12 +9,12 @@ data:
     title: alg/monoid_set.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
     title: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"alg/group_cntsum.hpp\"\ntemplate <typename E = long long>\r\
@@ -30,13 +30,13 @@ data:
     \ <typename E, E none_val>\r\nstruct Lazy_CntSum_Set {\r\n  using X_structure\
     \ = Group_CntSum<E>;\r\n  using A_structure = Monoid_Set<E, none_val>;\r\n  using\
     \ X = typename X_structure::value_type;\r\n  using A = typename A_structure::value_type;\r\
-    \n  static constexpr X act(const X &x, const A &a) {\r\n    if(a == A_structure::unit)\
+    \n  static constexpr X act(const X &x, const A &a) {\r\n    if (a == A_structure::unit())\
     \ return x;\r\n    return {x.fi, x.fi * a};\r\n  }\r\n};\n"
   code: "#include \"alg/group_cntsum.hpp\"\r\n#include \"alg/monoid_set.hpp\"\r\n\r\
     \ntemplate <typename E, E none_val>\r\nstruct Lazy_CntSum_Set {\r\n  using X_structure\
     \ = Group_CntSum<E>;\r\n  using A_structure = Monoid_Set<E, none_val>;\r\n  using\
     \ X = typename X_structure::value_type;\r\n  using A = typename A_structure::value_type;\r\
-    \n  static constexpr X act(const X &x, const A &a) {\r\n    if(a == A_structure::unit)\
+    \n  static constexpr X act(const X &x, const A &a) {\r\n    if (a == A_structure::unit())\
     \ return x;\r\n    return {x.fi, x.fi * a};\r\n  }\r\n};"
   dependsOn:
   - alg/group_cntsum.hpp
@@ -44,8 +44,8 @@ data:
   isVerificationFile: false
   path: alg/lazy_cntsum_set.hpp
   requiredBy: []
-  timestamp: '2022-04-11 18:07:23+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-04-11 18:49:27+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
 documentation_of: alg/lazy_cntsum_set.hpp

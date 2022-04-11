@@ -21,7 +21,7 @@ data:
   - icon: ':x:'
     path: test/aoj/DSL_2_H_min_add_lazy.test.cpp
     title: test/aoj/DSL_2_H_min_add_lazy.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
     title: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
   - icon: ':heavy_check_mark:'
