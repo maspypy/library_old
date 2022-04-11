@@ -1,4 +1,4 @@
-template <int sigma>
+template <int sigma, int off='a'>
 struct Trie {
   int n_node;
   vector<array<int, sigma>> TO;
@@ -23,7 +23,7 @@ struct Trie {
   int add(string S, ll val = 1) {
     int v = 0;
     for (auto&& ss : S) {
-      int s = ss - 'a';
+      int s = ss - off;
       if (TO[v][s] == -1) {
         TO[v][s] = create_node();
         PAR[TO[v][s]] = v;
