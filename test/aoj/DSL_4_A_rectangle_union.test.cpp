@@ -2,7 +2,7 @@
   "https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_4_A"
 #include "my_template.hpp"
 #include "other/io.hpp"
-#include "other/rectangleunion.hpp"
+#include "ds/rectangleunion.hpp"
 
 void solve() {
   LL(N);
