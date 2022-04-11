@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: alg/monoid_min.hpp
     title: alg/monoid_min.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
   _extendedRequiredBy: []
@@ -45,25 +45,24 @@ data:
     \            sm = Monoid::op(dat[R], sm);\n            R--;\n          }\n   \
     \     }\n        return R + 1 - size;\n      }\n      sm = Monoid::op(dat[R],\
     \ sm);\n    } while ((R & -R) != R);\n    return 0;\n  }\n\n  void debug() { print(\"\
-    segtree\", dat); }\n};\n#line 1 \"alg/monoid_min.hpp\"\ntemplate <class X=long\
-    \ long, X INF=1LL<<60>\r\nstruct Monoid_Min {\r\n  using value_type = X;\r\n \
-    \ static constexpr X op(const X &x, const X &y) noexcept { return min(x, y); }\r\
-    \n  static constexpr X unit = INF;\r\n  static constexpr bool commute = true;\r\
-    \n};\r\n#line 5 \"ds/range_mex_query.hpp\"\ntemplate <int BEGIN, typename T =\
-    \ ll>\r\nstruct RangeMexQuery {\r\n  // \u914D\u5217\u306F static\r\n  // \u30AF\
-    \u30A8\u30EA\u3082\u5148\u8AAD\u307F\u3059\u308B\r\n  vc<T>& A;\r\n  vc<pair<int,\
-    \ int>> query;\r\n\r\n  RangeMexQuery(vc<T>& A) : A(A) {}\r\n  void add(int l,\
-    \ int r) { query.eb(l, r); }\r\n\r\n  vc<T> calc() {\r\n    int N = len(A);\r\n\
-    \    // segtree, value -> last idx\r\n    using Mono = Monoid_Min<int, 1 << 30>;\r\
-    \n    vc<int> seg_raw(N + 2, -1);\r\n    SegTree<Mono> seg(seg_raw);\r\n\r\n \
-    \   int Q = len(query);\r\n    vc<T> ANS(Q);\r\n    vc<vc<int>> IDS(N + 1);\r\n\
-    \    FOR(q, Q) {\r\n      auto [L, R] = query[q];\r\n      IDS[R].eb(q);\r\n \
-    \   }\r\n\r\n    FOR(i, N + 1) {\r\n      // solve query\r\n      for (auto&&\
-    \ q: IDS[i]) {\r\n        auto [L, R] = query[q];\r\n        auto check = [&](int\
-    \ x) -> bool { return x >= L; };\r\n        int mex = seg.max_right(check, BEGIN);\r\
-    \n        ANS[q] = mex;\r\n      }\r\n      // update segtree\r\n      if (i <\
-    \ N && A[i] < N + 2) seg.set(A[i], i);\r\n    }\r\n    return ANS;\r\n  }\r\n\
-    };\r\n"
+    segtree\", dat); }\n};\n#line 1 \"alg/monoid_min.hpp\"\ntemplate <class X, X INF>\r\
+    \nstruct Monoid_Min {\r\n  using value_type = X;\r\n  static constexpr X op(const\
+    \ X &x, const X &y) noexcept { return min(x, y); }\r\n  static constexpr X unit()\
+    \ { return INF; }\r\n  static constexpr bool commute = true;\r\n};\r\n#line 5\
+    \ \"ds/range_mex_query.hpp\"\ntemplate <int BEGIN, typename T = ll>\r\nstruct\
+    \ RangeMexQuery {\r\n  // \u914D\u5217\u306F static\r\n  // \u30AF\u30A8\u30EA\
+    \u3082\u5148\u8AAD\u307F\u3059\u308B\r\n  vc<T>& A;\r\n  vc<pair<int, int>> query;\r\
+    \n\r\n  RangeMexQuery(vc<T>& A) : A(A) {}\r\n  void add(int l, int r) { query.eb(l,\
+    \ r); }\r\n\r\n  vc<T> calc() {\r\n    int N = len(A);\r\n    // segtree, value\
+    \ -> last idx\r\n    using Mono = Monoid_Min<int, 1 << 30>;\r\n    vc<int> seg_raw(N\
+    \ + 2, -1);\r\n    SegTree<Mono> seg(seg_raw);\r\n\r\n    int Q = len(query);\r\
+    \n    vc<T> ANS(Q);\r\n    vc<vc<int>> IDS(N + 1);\r\n    FOR(q, Q) {\r\n    \
+    \  auto [L, R] = query[q];\r\n      IDS[R].eb(q);\r\n    }\r\n\r\n    FOR(i, N\
+    \ + 1) {\r\n      // solve query\r\n      for (auto&& q: IDS[i]) {\r\n       \
+    \ auto [L, R] = query[q];\r\n        auto check = [&](int x) -> bool { return\
+    \ x >= L; };\r\n        int mex = seg.max_right(check, BEGIN);\r\n        ANS[q]\
+    \ = mex;\r\n      }\r\n      // update segtree\r\n      if (i < N && A[i] < N\
+    \ + 2) seg.set(A[i], i);\r\n    }\r\n    return ANS;\r\n  }\r\n};\r\n"
   code: "// https://codeforces.com/contest/1436/problem/E\r\n\r\n#include \"ds/segtree.hpp\"\
     \r\n#include \"alg/monoid_min.hpp\"\r\ntemplate <int BEGIN, typename T = ll>\r\
     \nstruct RangeMexQuery {\r\n  // \u914D\u5217\u306F static\r\n  // \u30AF\u30A8\
@@ -86,7 +85,7 @@ data:
   isVerificationFile: false
   path: ds/range_mex_query.hpp
   requiredBy: []
-  timestamp: '2022-02-18 04:18:10+09:00'
+  timestamp: '2022-04-11 13:08:37+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: ds/range_mex_query.hpp

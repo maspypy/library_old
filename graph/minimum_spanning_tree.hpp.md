@@ -4,7 +4,7 @@ data:
   - icon: ':warning:'
     path: alg/monoid_max.hpp
     title: alg/monoid_max.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: alg/monoid_min.hpp
     title: alg/monoid_min.hpp
   - icon: ':heavy_check_mark:'
@@ -13,10 +13,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: ds/dualsegtree.hpp
     title: ds/dualsegtree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ds/lazysegtree.hpp
     title: ds/lazysegtree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
   - icon: ':heavy_check_mark:'
@@ -303,11 +303,11 @@ data:
     \ a + 1, x));\r\n    }\r\n    return;\r\n  }\r\n\r\n  void apply_subtree(int u,\
     \ X x) {\r\n    int l = hld.LID[u], r = hld.RID[u];\r\n    return seg.apply(l\
     \ + edge, r, x);\r\n  }\r\n};\r\n#line 1 \"alg/monoid_min.hpp\"\ntemplate <class\
-    \ X=long long, X INF=1LL<<60>\r\nstruct Monoid_Min {\r\n  using value_type = X;\r\
-    \n  static constexpr X op(const X &x, const X &y) noexcept { return min(x, y);\
-    \ }\r\n  static constexpr X unit = INF;\r\n  static constexpr bool commute = true;\r\
-    \n};\r\n#line 1 \"alg/monoid_max.hpp\"\ntemplate <class X=long long, X INF=1LL<<60>\r\
-    \nstruct Monoid_Max {\r\n  using value_type = X;\r\n  static constexpr X op(const\
+    \ X, X INF>\r\nstruct Monoid_Min {\r\n  using value_type = X;\r\n  static constexpr\
+    \ X op(const X &x, const X &y) noexcept { return min(x, y); }\r\n  static constexpr\
+    \ X unit() { return INF; }\r\n  static constexpr bool commute = true;\r\n};\r\n\
+    #line 1 \"alg/monoid_max.hpp\"\ntemplate <class X=long long, X INF=1LL<<60>\r\n\
+    struct Monoid_Max {\r\n  using value_type = X;\r\n  static constexpr X op(const\
     \ X &x, const X &y) noexcept { return max(x, y); }\r\n  static constexpr X unit\
     \ = -INF;\r\n  static constexpr bool commute = true;\r\n};\r\n#line 8 \"graph/minimum_spanning_tree.hpp\"\
     \n\r\n// return : {T mst_cost, vc<bool> in_mst, Graph MST}\r\ntemplate <typename\
@@ -376,7 +376,7 @@ data:
   isVerificationFile: false
   path: graph/minimum_spanning_tree.hpp
   requiredBy: []
-  timestamp: '2022-04-10 02:03:27+09:00'
+  timestamp: '2022-04-11 13:08:37+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph/minimum_spanning_tree.hpp
