@@ -11,13 +11,13 @@ struct LazySegTree {
   vc<A> laz;
 
   LazySegTree() : LazySegTree(0) {}
-  LazySegTree(int n) : LazySegTree(vc<X>(n, Monoid_X::unit)) {}
+  LazySegTree(int n) : LazySegTree(vc<X>(n, Monoid_X::unit())) {}
   LazySegTree(vc<X> v) : n(len(v)) {
     log = 1;
     while ((1 << log) < n) ++log;
     size = 1 << log;
-    dat.assign(size << 1, Monoid_X::unit);
-    laz.assign(size, Monoid_A::unit);
+    dat.assign(size << 1, Monoid_X::unit());
+    laz.assign(size, Monoid_A::unit());
     FOR(i, n) dat[size + i] = v[i];
     FOR3_R(i, 1, size) update(i);
   }
@@ -32,7 +32,7 @@ struct LazySegTree {
   void push(int k) {
     all_apply(2 * k, laz[k]);
     all_apply(2 * k + 1, laz[k]);
-    laz[k] = Monoid_A::unit;
+    laz[k] = Monoid_A::unit();
   }
 
   void set(int p, X x) {
@@ -57,7 +57,7 @@ struct LazySegTree {
 
   X prod(int l, int r) {
     assert(0 <= l && l <= r && r <= n);
-    if (l == r) return Monoid_X::unit;
+    if (l == r) return Monoid_X::unit();
 
     l += size;
     r += size;
@@ -67,7 +67,7 @@ struct LazySegTree {
       if (((r >> i) << i) != r) push((r - 1) >> i);
     }
 
-    X xl = Monoid_X::unit, xr = Monoid_X::unit;
+    X xl = Monoid_X::unit(), xr = Monoid_X::unit();
     while (l < r) {
       if (l & 1) xl = Monoid_X::op(xl, dat[l++]);
       if (r & 1) xr = Monoid_X::op(dat[--r], xr);
@@ -120,11 +120,11 @@ struct LazySegTree {
   template <typename C>
   int max_right(C& check, int l) {
     assert(0 <= l && l <= n);
-    assert(check(Monoid_X::unit));
+    assert(check(Monoid_X::unit()));
     if (l == n) return n;
     l += size;
     for (int i = log; i >= 1; i--) push(l >> i);
-    X sm = Monoid_X::unit;
+    X sm = Monoid_X::unit();
     do {
       while (l % 2 == 0) l >>= 1;
       if (!check(Monoid_X::op(sm, dat[l]))) {
@@ -147,11 +147,11 @@ struct LazySegTree {
   template <typename C>
   int min_left(C& check, int r) {
     assert(0 <= r && r <= n);
-    assert(check(Monoid_X::unit));
+    assert(check(Monoid_X::unit()));
     if (r == 0) return 0;
     r += size;
     for (int i = log; i >= 1; i--) push((r - 1) >> i);
-    X sm = Monoid_X::unit;
+    X sm = Monoid_X::unit();
     do {
       r--;
       while (r > 1 && (r % 2)) r >>= 1;
