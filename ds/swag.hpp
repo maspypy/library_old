@@ -7,11 +7,9 @@ struct SWAG {
   vc<X> cum_l;
   X cum_r;
 
-  SWAG() : cum_l({Monoid::unit}), cum_r(Monoid::unit) {}
+  SWAG() : cum_l({Monoid::unit()}), cum_r(Monoid::unit()) {}
 
-  int size(){
-    return sz;
-  }
+  int size() { return sz; }
 
   void push(X x) {
     ++sz;
@@ -23,8 +21,8 @@ struct SWAG {
     --sz;
     cum_l.pop_back();
     if (len(cum_l) == 0) {
-      cum_l = {Monoid::unit};
-      cum_r = Monoid::unit;
+      cum_l = {Monoid::unit()};
+      cum_r = Monoid::unit();
       while (len(dat) > 1) {
         cum_l.eb(Monoid::op(dat.back(), cum_l.back()));
         dat.pop_back();
