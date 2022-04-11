@@ -7,7 +7,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: nt/primetest.hpp
     title: nt/primetest.hpp
-  _extendedRequiredBy: []
+  _extendedRequiredBy:
+  - icon: ':warning:'
+    path: nt/zeta_on_divisors.hpp
+    title: nt/zeta_on_divisors.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/ITP1_D_D_divisors.test.cpp
@@ -80,7 +83,8 @@ data:
   - nt/primetest.hpp
   isVerificationFile: false
   path: nt/divisors.hpp
-  requiredBy: []
+  requiredBy:
+  - nt/zeta_on_divisors.hpp
   timestamp: '2022-03-14 22:46:26+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

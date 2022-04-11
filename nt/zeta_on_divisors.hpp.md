@@ -2,51 +2,22 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: nt/primetest.hpp
-    title: nt/primetest.hpp
-  _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
-    path: mod/binomial.hpp
-    title: mod/binomial.hpp
-  - icon: ':heavy_check_mark:'
-    path: mod/mod_kth_root.hpp
-    title: mod/mod_kth_root.hpp
-  - icon: ':heavy_check_mark:'
-    path: mod/primitive_root.hpp
-    title: mod/primitive_root.hpp
-  - icon: ':heavy_check_mark:'
-    path: mod/tetration.hpp
-    title: mod/tetration.hpp
-  - icon: ':heavy_check_mark:'
     path: nt/divisors.hpp
     title: nt/divisors.hpp
   - icon: ':heavy_check_mark:'
-    path: nt/euler_phi.hpp
-    title: nt/euler_phi.hpp
-  - icon: ':warning:'
-    path: nt/zeta_on_divisors.hpp
-    title: nt/zeta_on_divisors.hpp
-  _extendedVerifiedWith:
+    path: nt/factor.hpp
+    title: nt/factor.hpp
   - icon: ':heavy_check_mark:'
-    path: test/aoj/ITP1_D_D_divisors.test.cpp
-    title: test/aoj/ITP1_D_D_divisors.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/math/binomial_coefficient.test.cpp
-    title: test/library_checker/math/binomial_coefficient.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/math/factorize.test.cpp
-    title: test/library_checker/math/factorize.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/math/kth_root_mod.test.cpp
-    title: test/library_checker/math/kth_root_mod.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/math/tetration.test.cpp
-    title: test/library_checker/math/tetration.test.cpp
+    path: nt/primetest.hpp
+    title: nt/primetest.hpp
+  _extendedRequiredBy: []
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
-    links: []
+    links:
+    - https://codeforces.com/contest/820/problem/E
   bundledCode: "#line 2 \"nt/primetest.hpp\"\nstruct m64 {\r\n    using i64 = int64_t;\r\
     \n    using u64 = uint64_t;\r\n    using u128 = __uint128_t;\r\n\r\n    inline\
     \ static u64 m, r, n2; // r * m = -1 (mod 1<<64), n2 = 1<<128 (mod m)\r\n    static\
@@ -96,49 +67,42 @@ data:
     \      ll e = 0;\n      do {\n        n /= p, e += 1;\n      } while (n % p ==\
     \ 0);\n      pf.eb(p, e);\n    }\n  }\n  while (n > 1) {\n    ll p = find_prime_factor(n);\n\
     \    ll e = 0;\n    do {\n      n /= p, e += 1;\n    } while (n % p == 0);\n \
-    \   pf.eb(p, e);\n  }\n  sort(all(pf));\n  return pf;\n}\n"
-  code: "#pragma once\n#include \"nt/primetest.hpp\"\n\nmt19937_64 rng_mt{random_device{}()};\n\
-    ll rnd(ll n) { return uniform_int_distribution<ll>(0, n - 1)(rng_mt); }\n\nll\
-    \ rho(ll n, ll c) {\n  m64::set_mod(n);\n  assert(n > 1);\n  const m64 cc(c);\n\
-    \  auto f = [&](m64 x) { return x * x + cc; };\n  m64 x = 1, y = 2, z = 1, q =\
-    \ 1;\n  ll g = 1;\n  const ll m = 1LL << (__lg(n) / 5); // ?\n  for (ll r = 1;\
-    \ g == 1; r <<= 1) {\n    x = y;\n    FOR(_, r) y = f(y);\n    for (ll k = 0;\
-    \ k < r and g == 1; k += m) {\n      z = y;\n      FOR(_, min(m, r - k)) y = f(y),\
-    \ q *= x - y;\n      g = gcd(q.val(), n);\n    }\n  }\n  if (g == n)\n    do {\n\
-    \      z = f(z);\n      g = gcd((x - z).val(), n);\n    } while (g == 1);\n  return\
-    \ g;\n}\n\nll find_prime_factor(ll n) {\n  assert(n > 1);\n  if (primetest(n))\n\
-    \    return n;\n  FOR(_, 100) {\n    ll m = rho(n, rnd(n));\n    if (primetest(m))\n\
-    \      return m;\n    n = m;\n  }\n  cerr << \"failed\" << endl;\n  assert(false);\n\
-    \  return -1;\n}\n\nvc<pi> factor(ll n) {\n  assert(n >= 1);\n  vc<pi> pf;\n \
-    \ FOR3(p, 2, 100) {\n    if (p * p > n)\n      break;\n    if (n % p == 0) {\n\
-    \      ll e = 0;\n      do {\n        n /= p, e += 1;\n      } while (n % p ==\
-    \ 0);\n      pf.eb(p, e);\n    }\n  }\n  while (n > 1) {\n    ll p = find_prime_factor(n);\n\
-    \    ll e = 0;\n    do {\n      n /= p, e += 1;\n    } while (n % p == 0);\n \
-    \   pf.eb(p, e);\n  }\n  sort(all(pf));\n  return pf;\n}\n"
+    \   pf.eb(p, e);\n  }\n  sort(all(pf));\n  return pf;\n}\n#line 2 \"nt/divisors.hpp\"\
+    \nvc<ll> divisors(ll N) {\r\n  auto pf = factor(N);\r\n  vi div = {1};\r\n  for\
+    \ (auto&& [p, e]: pf) {\r\n    ll n = len(div);\r\n    ll pp = 1;\r\n    FOR3(i,\
+    \ 1, e + 1) {\r\n      pp *= p;\r\n      FOR(j, n) div.eb(div[j] * pp);\r\n  \
+    \  }\r\n  }\r\n  return div;\r\n}\n#line 3 \"nt/zeta_on_divisors.hpp\"\n\r\ntemplate\
+    \ <typename T>\r\npair<vi, vc<T>> multiplier_mobius_on_divisors(ll N, function<ll(T)>\
+    \ f) {\r\n  /*\r\n  \u7D04\u6570\u3054\u3068\u306E\u96C6\u8A08 \u2192 gcd\u3054\
+    \u3068\u306E\u96C6\u8A08\u306B\u5909\u63DB\r\n  https://codeforces.com/contest/820/problem/E\r\
+    \n  */\r\n  auto pf = factor(N);\r\n  auto div = divisors(N);\r\n  ll n = len(div);\r\
+    \n  vi DP(n);\r\n  FOR(i, n) DP[i] = f(div[i]);\r\n\r\n  ll k = 1;\r\n  for (auto&&\
+    \ [p, e]: pf) {\r\n    ll mod = k * (e + 1);\r\n    FOR(i, len(div) / mod) {\r\
+    \n      FOR(j, mod - k) { DP[mod * i + j] -= DP[mod * i + j + k]; }\r\n    }\r\
+    \n    k *= (e + 1);\r\n  }\r\n  return {div, DP};\r\n}\r\n"
+  code: "#include \"nt/factor.hpp\"\r\n#include \"nt/divisors.hpp\"\r\n\r\ntemplate\
+    \ <typename T>\r\npair<vi, vc<T>> multiplier_mobius_on_divisors(ll N, function<ll(T)>\
+    \ f) {\r\n  /*\r\n  \u7D04\u6570\u3054\u3068\u306E\u96C6\u8A08 \u2192 gcd\u3054\
+    \u3068\u306E\u96C6\u8A08\u306B\u5909\u63DB\r\n  https://codeforces.com/contest/820/problem/E\r\
+    \n  */\r\n  auto pf = factor(N);\r\n  auto div = divisors(N);\r\n  ll n = len(div);\r\
+    \n  vi DP(n);\r\n  FOR(i, n) DP[i] = f(div[i]);\r\n\r\n  ll k = 1;\r\n  for (auto&&\
+    \ [p, e]: pf) {\r\n    ll mod = k * (e + 1);\r\n    FOR(i, len(div) / mod) {\r\
+    \n      FOR(j, mod - k) { DP[mod * i + j] -= DP[mod * i + j + k]; }\r\n    }\r\
+    \n    k *= (e + 1);\r\n  }\r\n  return {div, DP};\r\n}\r\n"
   dependsOn:
+  - nt/factor.hpp
   - nt/primetest.hpp
-  isVerificationFile: false
-  path: nt/factor.hpp
-  requiredBy:
-  - mod/mod_kth_root.hpp
-  - mod/tetration.hpp
-  - mod/binomial.hpp
-  - mod/primitive_root.hpp
-  - nt/zeta_on_divisors.hpp
   - nt/divisors.hpp
-  - nt/euler_phi.hpp
-  timestamp: '2021-12-25 22:40:58+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/aoj/ITP1_D_D_divisors.test.cpp
-  - test/library_checker/math/binomial_coefficient.test.cpp
-  - test/library_checker/math/kth_root_mod.test.cpp
-  - test/library_checker/math/factorize.test.cpp
-  - test/library_checker/math/tetration.test.cpp
-documentation_of: nt/factor.hpp
+  isVerificationFile: false
+  path: nt/zeta_on_divisors.hpp
+  requiredBy: []
+  timestamp: '2022-04-11 19:28:55+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: nt/zeta_on_divisors.hpp
 layout: document
 redirect_from:
-- /library/nt/factor.hpp
-- /library/nt/factor.hpp.html
-title: nt/factor.hpp
+- /library/nt/zeta_on_divisors.hpp
+- /library/nt/zeta_on_divisors.hpp.html
+title: nt/zeta_on_divisors.hpp
 ---

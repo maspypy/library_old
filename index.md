@@ -490,6 +490,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: nt/zeta.hpp
       title: nt/zeta.hpp
+    - icon: ':warning:'
+      path: nt/zeta_on_divisors.hpp
+      title: nt/zeta_on_divisors.hpp
   - name: other
     pages:
     - icon: ':warning:'
@@ -504,6 +507,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: other/for_nck.hpp
       title: other/for_nck.hpp
+    - icon: ':warning:'
+      path: other/generate_multisets.hpp
+      title: other/generate_multisets.hpp
     - icon: ':heavy_check_mark:'
       path: other/integer_kth_root.hpp
       title: other/integer_kth_root.hpp
@@ -516,6 +522,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: other/io2.hpp
       title: other/io2.hpp
+    - icon: ':warning:'
+      path: other/maxplus_convolution_concave.hpp
+      title: other/maxplus_convolution_concave.hpp
     - icon: ':warning:'
       path: other/monge_shortest_path.hpp
       title: other/monge_shortest_path.hpp

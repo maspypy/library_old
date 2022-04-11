@@ -26,6 +26,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: nt/factor.hpp
     title: nt/factor.hpp
+  - icon: ':warning:'
+    path: nt/zeta_on_divisors.hpp
+    title: nt/zeta_on_divisors.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_1_C_primetest.test.cpp
@@ -128,6 +131,7 @@ data:
   - mod/tetration.hpp
   - mod/binomial.hpp
   - mod/primitive_root.hpp
+  - nt/zeta_on_divisors.hpp
   - nt/factor.hpp
   - nt/divisors.hpp
   - nt/euler_phi.hpp
