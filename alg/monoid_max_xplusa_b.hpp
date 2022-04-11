@@ -1,3 +1,6 @@
+#pragma once
+
+// max(x+a, b) の合成
 template <typename T, T INF>
 struct Monoid_Max_xplusa_b {
   using value_type = pi;
@@ -10,6 +13,6 @@ struct Monoid_Max_xplusa_b {
     chmax(f, -INF);
     return {e, f};
   }
-  static constexpr X unit = X(0, -INF);
+  static constexpr X unit() { return {0, -INF}; }
   static constexpr bool commute = false;
 };

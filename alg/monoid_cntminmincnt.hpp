@@ -1,3 +1,4 @@
+#pragma once
 // 全体の個数、最小値、最小値の個数
 template <ll INF>
 struct Monoid_CntMinMincnt {
@@ -10,6 +11,6 @@ struct Monoid_CntMinMincnt {
     if (xmin == ymin) return {xcnt + ycnt, xmin, xmincnt + ymincnt};
     return {xcnt + ycnt, xmin, xmincnt};
   }
-  static constexpr X unit = X(0, INF, 0);
+  static constexpr X unit() { return {0, INF, 0}; }
   static constexpr bool commute = true;
 };

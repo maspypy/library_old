@@ -1,3 +1,5 @@
+#pragma once
+
 struct Monoid_CntSumMax {
   static constexpr ll INF = 1LL << 60;
   using value_type = tuple<ll, ll, ll>;
@@ -7,6 +9,6 @@ struct Monoid_CntSumMax {
     auto [yc, ys, ym] = y;
     return {xc + yc, xs + ys, max(xm, ym)};
   }
-  static constexpr X unit = X({0, 0, -INF});
+  static constexpr X unit() { return {0, 0, -INF}; }
   static constexpr bool commute = true;
 };
