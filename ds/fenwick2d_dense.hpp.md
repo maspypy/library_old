@@ -6,12 +6,12 @@ data:
     title: alg/group_add.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/2842_fenwick2d_dense.test.cpp
     title: test/aoj/2842_fenwick2d_dense.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"alg/group_add.hpp\"\ntemplate <class X>\r\nstruct Group_Add\
@@ -27,16 +27,16 @@ data:
     \ AbelGroup::op(dat[x][y], val);\r\n      y += y & -y;\r\n    }\r\n  }\r\n\r\n\
     \  void add(int x, int y, E val) {\r\n    ++x;\r\n    while (x <= H) {\r\n   \
     \   add_x(x, y, val);\r\n      x += x & -x;\r\n    }\r\n  }\r\n\r\n  E sum_x(int\
-    \ x, int ly, int ry) {\r\n    E pos = AbelGroup::unit;\r\n    E neg = AbelGroup::unit;\r\
+    \ x, int ly, int ry) {\r\n    E pos = AbelGroup::unit();\r\n    E neg = AbelGroup::unit();\r\
     \n    while (ly < ry) {\r\n      pos = AbelGroup::op(pos, dat[x][ry]);\r\n   \
     \   ry -= ry & -ry;\r\n    }\r\n    while (ry < ly) {\r\n      neg = AbelGroup::op(neg,\
     \ dat[x][ly]);\r\n      ly -= ly & -ly;\r\n    }\r\n    return AbelGroup::op(pos,\
     \ AbelGroup::inverse(neg));\r\n  }\r\n\r\n  E sum(int lx, int ly, int rx, int\
-    \ ry) {\r\n    E pos = AbelGroup::unit;\r\n    E neg = AbelGroup::unit;\r\n  \
-    \  while (lx < rx) {\r\n      pos = AbelGroup::op(pos, sum_x(rx, ly, ry));\r\n\
-    \      rx -= rx & -rx;\r\n    }\r\n    while (rx < lx) {\r\n      neg = AbelGroup::op(neg,\
+    \ ry) {\r\n    E pos = AbelGroup::unit();\r\n    E neg = AbelGroup::unit();\r\n\
+    \    while (lx < rx) {\r\n      pos = AbelGroup::op(pos, sum_x(rx, ly, ry));\r\
+    \n      rx -= rx & -rx;\r\n    }\r\n    while (rx < lx) {\r\n      neg = AbelGroup::op(neg,\
     \ sum_x(lx, ly, ry));\r\n      lx -= lx & -lx;\r\n    }\r\n    return AbelGroup::op(pos,\
-    \ AbelGroup::inverse(neg));\r\n  }\r\n\r\n  void debug(){\r\n    print(\"Fenwick2d\
+    \ AbelGroup::inverse(neg));\r\n  }\r\n\r\n  void debug() {\r\n    print(\"Fenwick2d\
     \ dat\");\r\n    FOR(x, H + 1) print(dat[x]);\r\n  }\r\n};\r\n"
   code: "#include \"alg/group_add.hpp\"\r\ntemplate <typename AbelGroup>\r\nstruct\
     \ Fenwick2D_dense {\r\n  using E = typename AbelGroup::value_type;\r\n  int H,\
@@ -46,24 +46,24 @@ data:
     \ AbelGroup::op(dat[x][y], val);\r\n      y += y & -y;\r\n    }\r\n  }\r\n\r\n\
     \  void add(int x, int y, E val) {\r\n    ++x;\r\n    while (x <= H) {\r\n   \
     \   add_x(x, y, val);\r\n      x += x & -x;\r\n    }\r\n  }\r\n\r\n  E sum_x(int\
-    \ x, int ly, int ry) {\r\n    E pos = AbelGroup::unit;\r\n    E neg = AbelGroup::unit;\r\
+    \ x, int ly, int ry) {\r\n    E pos = AbelGroup::unit();\r\n    E neg = AbelGroup::unit();\r\
     \n    while (ly < ry) {\r\n      pos = AbelGroup::op(pos, dat[x][ry]);\r\n   \
     \   ry -= ry & -ry;\r\n    }\r\n    while (ry < ly) {\r\n      neg = AbelGroup::op(neg,\
     \ dat[x][ly]);\r\n      ly -= ly & -ly;\r\n    }\r\n    return AbelGroup::op(pos,\
     \ AbelGroup::inverse(neg));\r\n  }\r\n\r\n  E sum(int lx, int ly, int rx, int\
-    \ ry) {\r\n    E pos = AbelGroup::unit;\r\n    E neg = AbelGroup::unit;\r\n  \
-    \  while (lx < rx) {\r\n      pos = AbelGroup::op(pos, sum_x(rx, ly, ry));\r\n\
-    \      rx -= rx & -rx;\r\n    }\r\n    while (rx < lx) {\r\n      neg = AbelGroup::op(neg,\
+    \ ry) {\r\n    E pos = AbelGroup::unit();\r\n    E neg = AbelGroup::unit();\r\n\
+    \    while (lx < rx) {\r\n      pos = AbelGroup::op(pos, sum_x(rx, ly, ry));\r\
+    \n      rx -= rx & -rx;\r\n    }\r\n    while (rx < lx) {\r\n      neg = AbelGroup::op(neg,\
     \ sum_x(lx, ly, ry));\r\n      lx -= lx & -lx;\r\n    }\r\n    return AbelGroup::op(pos,\
-    \ AbelGroup::inverse(neg));\r\n  }\r\n\r\n  void debug(){\r\n    print(\"Fenwick2d\
+    \ AbelGroup::inverse(neg));\r\n  }\r\n\r\n  void debug() {\r\n    print(\"Fenwick2d\
     \ dat\");\r\n    FOR(x, H + 1) print(dat[x]);\r\n  }\r\n};\r\n"
   dependsOn:
   - alg/group_add.hpp
   isVerificationFile: false
   path: ds/fenwick2d_dense.hpp
   requiredBy: []
-  timestamp: '2022-04-11 17:55:37+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-04-11 18:23:30+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/2842_fenwick2d_dense.test.cpp
 documentation_of: ds/fenwick2d_dense.hpp

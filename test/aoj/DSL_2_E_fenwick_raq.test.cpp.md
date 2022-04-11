@@ -4,10 +4,10 @@ data:
   - icon: ':question:'
     path: alg/group_add.hpp
     title: alg/group_add.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: ds/fenwick.hpp
     title: ds/fenwick.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: ds/fenwickraq.hpp
     title: ds/fenwickraq.hpp
   - icon: ':question:'
@@ -18,9 +18,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_E
@@ -188,21 +188,21 @@ data:
     \n  static constexpr bool commute = true;\r\n};\r\n#line 3 \"ds/fenwick.hpp\"\n\
     \ntemplate <typename AbelGroup>\nstruct FenwickTree {\n  using E = typename AbelGroup::value_type;\n\
     \  int n;\n  vector<E> dat;\n  E total;\n\n  FenwickTree() : FenwickTree(0) {}\n\
-    \  FenwickTree(int n) : n(n), total(AbelGroup::unit) {\n    assert(AbelGroup::commute);\n\
-    \    dat.assign(n, AbelGroup::unit);\n  }\n  FenwickTree(vc<E> v) : n(len(v)),\
-    \ total(AbelGroup::unit) {\n    assert(AbelGroup::commute);\n    FOR(i, n) total\
+    \  FenwickTree(int n) : n(n), total(AbelGroup::unit()) {\n    assert(AbelGroup::commute);\n\
+    \    dat.assign(n, AbelGroup::unit());\n  }\n  FenwickTree(vc<E> v) : n(len(v)),\
+    \ total(AbelGroup::unit()) {\n    assert(AbelGroup::commute);\n    FOR(i, n) total\
     \ = AbelGroup::op(total, v[i]);\n    dat = v;\n    FOR3(i, 1, n + 1) {\n     \
     \ int j = i + (i & -i);\n      if (j <= n) dat[j - 1] = AbelGroup::op(dat[i -\
-    \ 1], dat[j - 1]);\n    }\n  }\n\n  E sum(int k) {\n    E ret = AbelGroup::unit;\n\
+    \ 1], dat[j - 1]);\n    }\n  }\n\n  E sum(int k) {\n    E ret = AbelGroup::unit();\n\
     \    for (; k > 0; k -= k & -k) ret = AbelGroup::op(ret, dat[k - 1]);\n    return\
-    \ ret;\n  }\n\n  E sum(int L, int R) {\n    E pos = AbelGroup::unit;\n    while\
+    \ ret;\n  }\n\n  E sum(int L, int R) {\n    E pos = AbelGroup::unit();\n    while\
     \ (L < R) {\n      pos = AbelGroup::op(pos, dat[R - 1]);\n      R -= R & -R;\n\
-    \    }\n    E neg = AbelGroup::unit;\n    while (R < L) {\n      neg = AbelGroup::op(neg,\
+    \    }\n    E neg = AbelGroup::unit();\n    while (R < L) {\n      neg = AbelGroup::op(neg,\
     \ dat[L - 1]);\n      L -= L & -L;\n    }\n    return AbelGroup::op(pos, AbelGroup::inverse(neg));\n\
     \  }\n\n  E sum_all() { return total; }\n\n  void add(int k, E x) {\n    total\
     \ = AbelGroup::op(total, x);\n    for (++k; k <= n; k += k & -k) dat[k - 1] =\
     \ AbelGroup::op(dat[k - 1], x);\n  }\n\n  template <class F>\n  int max_right(F&\
-    \ check) {\n    assert(check(E(0)));\n    ll i = 0;\n    E s = AbelGroup::unit;\n\
+    \ check) {\n    assert(check(E(0)));\n    ll i = 0;\n    E s = AbelGroup::unit();\n\
     \    int k = 1;\n    int N = len(dat) + 1;\n    while (2 * k < N) k *= 2;\n  \
     \  while (k) {\n      if (i + k < N && check(AbelGroup::op(s, dat[i + k - 1])))\
     \ {\n        i += k;\n        s = AbelGroup::op(s, dat[i - 1]);\n      }\n   \
@@ -243,8 +243,8 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_E_fenwick_raq.test.cpp
   requiredBy: []
-  timestamp: '2022-04-11 17:55:37+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-04-11 18:23:30+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_E_fenwick_raq.test.cpp
 layout: document

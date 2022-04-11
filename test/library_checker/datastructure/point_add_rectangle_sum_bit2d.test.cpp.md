@@ -4,7 +4,7 @@ data:
   - icon: ':question:'
     path: alg/group_add.hpp
     title: alg/group_add.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: ds/fenwick2d.hpp
     title: ds/fenwick2d.hpp
   - icon: ':question:'
@@ -15,9 +15,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/point_add_rectangle_sum
@@ -187,9 +187,9 @@ data:
     \ bool SMALL = false>\r\nstruct Fenwick2D {\r\n  using E = typename AbelGroup::value_type;\r\
     \n  int N;\r\n  vi keyX;\r\n  int min_X;\r\n  vc<int> indptr;\r\n  vi keyY;\r\n\
     \  vc<E> dat;\r\n\r\n  Fenwick2D(vi& X, vi& Y, vc<E>& wt) { build(X, Y, wt); }\r\
-    \n\r\n  Fenwick2D(vi& X, vi& Y) {\r\n    vc<E> wt(len(X), AbelGroup::unit);\r\n\
-    \    build(X, Y, wt);\r\n  }\r\n\r\n  inline int xtoi(int x) {\r\n    return (SMALL\
-    \ ? clamp(x - min_X, 0, N) : LB(keyX, x));\r\n  }\r\n\r\n  inline int nxt(int\
+    \n\r\n  Fenwick2D(vi& X, vi& Y) {\r\n    vc<E> wt(len(X), AbelGroup::unit());\r\
+    \n    build(X, Y, wt);\r\n  }\r\n\r\n  inline int xtoi(int x) {\r\n    return\
+    \ (SMALL ? clamp(x - min_X, 0, N) : LB(keyX, x));\r\n  }\r\n\r\n  inline int nxt(int\
     \ i) {\r\n    i += 1;\r\n    return i + (i & -i) - 1;\r\n  }\r\n\r\n  inline int\
     \ prev(int i) {\r\n    i += 1;\r\n    return i - (i & -i) - 1;\r\n  }\r\n\r\n\
     \  void build(vi& X, vi& Y, vc<E>& wt) {\r\n    if (!SMALL) {\r\n      keyX =\
@@ -216,9 +216,9 @@ data:
     \ + j] = AbelGroup::op(dat[LID + j], val);\r\n      j = nxt(j);\r\n    }\r\n \
     \ }\r\n\r\n  void add(ll x, ll y, E val) {\r\n    int i = xtoi(x);\r\n    assert(keyX[i]\
     \ == x);\r\n    while (i < N) {\r\n      add_i(i, y, val);\r\n      i = nxt(i);\r\
-    \n    }\r\n  }\r\n\r\n  E sum_i(int i, ll ly, ll ry) {\r\n    E pos = AbelGroup::unit;\r\
-    \n    E neg = AbelGroup::unit;\r\n    int LID = indptr[i], n = indptr[i + 1] -\
-    \ indptr[i];\r\n    auto it = keyY.begin() + LID;\r\n    int L = lower_bound(it,\
+    \n    }\r\n  }\r\n\r\n  E sum_i(int i, ll ly, ll ry) {\r\n    E pos = AbelGroup::unit();\r\
+    \n    E neg = AbelGroup::unit();\r\n    int LID = indptr[i], n = indptr[i + 1]\
+    \ - indptr[i];\r\n    auto it = keyY.begin() + LID;\r\n    int L = lower_bound(it,\
     \ it + n, ly) - it - 1;\r\n    int R = lower_bound(it, it + n, ry) - it - 1;\r\
     \n    while (L < R) {\r\n      pos = AbelGroup::op(pos, dat[LID + R]);\r\n   \
     \   R = prev(R);\r\n    }\r\n    while (R < L) {\r\n      neg = AbelGroup::op(neg,\
@@ -262,8 +262,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
   requiredBy: []
-  timestamp: '2022-04-11 17:55:37+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-04-11 18:23:30+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/datastructure/point_add_rectangle_sum_bit2d.test.cpp
 layout: document
