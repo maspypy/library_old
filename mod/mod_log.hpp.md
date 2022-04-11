@@ -4,17 +4,17 @@ data:
   - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: other/discrete_log.hpp
     title: other/discrete_log.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/math/discrete_logarithm_mod.test.cpp
     title: test/library_checker/math/discrete_logarithm_mod.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"mod/modint.hpp\"\ntemplate <uint mod>\nstruct modint {\n\
@@ -27,12 +27,12 @@ data:
     \  }\n  modint &operator*=(const modint &p) {\n    val = (uint)(1LL * val * p.val\
     \ % mod);\n    return *this;\n  }\n  modint &operator/=(const modint &p) {\n \
     \   *this *= p.inverse();\n    return *this;\n  }\n  modint operator-() const\
-    \ { return modint(-val); }\n  modint operator+(const modint &p) const { return\
-    \ modint(*this) += p; }\n  modint operator-(const modint &p) const { return modint(*this)\
-    \ -= p; }\n  modint operator*(const modint &p) const { return modint(*this) *=\
-    \ p; }\n  modint operator/(const modint &p) const { return modint(*this) /= p;\
-    \ }\n  bool operator==(const modint &p) const { return val == p.val; }\n  bool\
-    \ operator!=(const modint &p) const { return val != p.val; }\n  modint inverse()\
+    \ { return modint(get_mod() - val); }\n  modint operator+(const modint &p) const\
+    \ { return modint(*this) += p; }\n  modint operator-(const modint &p) const {\
+    \ return modint(*this) -= p; }\n  modint operator*(const modint &p) const { return\
+    \ modint(*this) *= p; }\n  modint operator/(const modint &p) const { return modint(*this)\
+    \ /= p; }\n  bool operator==(const modint &p) const { return val == p.val; }\n\
+    \  bool operator!=(const modint &p) const { return val != p.val; }\n  modint inverse()\
     \ const {\n    int a = val, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n \
     \     t = a / b;\n      swap(a -= t * b, b), swap(u -= t * v, v);\n    }\n   \
     \ return modint(u);\n  }\n  modint pow(int64_t n) const {\n    modint ret(1),\
@@ -54,9 +54,9 @@ data:
     =d\"(m) : \"d\"(xh), \"a\"(xl), \"r\"(get_mod()));\n    val = m;\n    return *this;\n\
     \  }\n  ArbitraryModInt &operator/=(const ArbitraryModInt &p) {\n    *this *=\
     \ p.inverse();\n    return *this;\n  }\n  ArbitraryModInt operator-() const {\
-    \ return ArbitraryModInt(-val); }\n  ArbitraryModInt operator+(const ArbitraryModInt\
-    \ &p) const {\n    return ArbitraryModInt(*this) += p;\n  }\n  ArbitraryModInt\
-    \ operator-(const ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this)\
+    \ return ArbitraryModInt(get_mod() - val); }\n  ArbitraryModInt operator+(const\
+    \ ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this) += p;\n  }\n\
+    \  ArbitraryModInt operator-(const ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this)\
     \ -= p;\n  }\n  ArbitraryModInt operator*(const ArbitraryModInt &p) const {\n\
     \    return ArbitraryModInt(*this) *= p;\n  }\n  ArbitraryModInt operator/(const\
     \ ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this) /= p;\n  }\n\
@@ -67,29 +67,29 @@ data:
     \ -= t * v, v);\n    }\n    return ArbitraryModInt(u);\n  }\n  ArbitraryModInt\
     \ pow(int64_t n) const {\n    ArbitraryModInt ret(1), mul(val);\n    while (n\
     \ > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n  \
-    \  }\n    return ret;\n  }\n};\n\ntemplate<typename mint>\ntuple<mint, mint, mint>\
-    \ get_factorial_data(int n){\n  static constexpr int mod = mint::get_mod();\n\
+    \  }\n    return ret;\n  }\n};\n\ntemplate <typename mint>\ntuple<mint, mint,\
+    \ mint> get_factorial_data(int n) {\n  static constexpr int mod = mint::get_mod();\n\
     \  assert(0 <= n && n < mod);\n  static vector<mint> fact = {1, 1};\n  static\
-    \ vector<mint> fact_inv = {1, 1};\n  static vector<mint> inv = {0, 1};\n  while(len(fact)\
-    \ <= n){\n    int k = len(fact);\n    fact.eb(fact[k - 1] * mint(k));\n    auto\
-    \ q = ceil(mod, k);\n    int r = k * q - mod;\n    inv.eb(inv[r] * mint(q));\n\
+    \ vector<mint> fact_inv = {1, 1};\n  static vector<mint> inv = {0, 1};\n  while\
+    \ (len(fact) <= n) {\n    int k = len(fact);\n    fact.eb(fact[k - 1] * mint(k));\n\
+    \    auto q = ceil(mod, k);\n    int r = k * q - mod;\n    inv.eb(inv[r] * mint(q));\n\
     \    fact_inv.eb(fact_inv[k - 1] * inv[k]);\n  }\n  return {fact[n], fact_inv[n],\
-    \ inv[n]};\n}\n\ntemplate<typename mint>\nmint fact(int n){\n  static constexpr\
-    \ int mod = mint::get_mod();\n  assert(0 <= n);\n  if(n >= mod) return 0;\n  return\
-    \ get<0>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename mint>\nmint fact_inv(int\
-    \ n){\n  static constexpr int mod = mint::get_mod();\n  assert(0 <= n && n < mod);\n\
-    \  return get<1>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename mint>\n\
-    mint inv(int n){\n  static constexpr int mod = mint::get_mod();\n  assert(0 <=\
-    \ n && n < mod);\n  return get<2>(get_factorial_data<mint>(n));\n}\n\ntemplate<typename\
-    \ mint>\nmint C(ll n, ll k, bool large = false) {\n  assert(n >= 0);\n  if (k\
-    \ < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n) * fact_inv<mint>(k)\
-    \ * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n  FOR(i, k) {\n\
-    \    x *= mint(n - i);\n  }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\nusing\
-    \ modint107 = modint<1000000007>;\nusing modint998 = modint<998244353>;\nusing\
-    \ amint = ArbitraryModInt;\n#line 1 \"other/discrete_log.hpp\"\n// log_a b \u306E\
-    \u8A08\u7B97\r\n// \u300C*\u300D \u304C\u5B9A\u7FA9\u3055\u308C\u305F\u30AF\u30E9\
-    \u30B9\u3001\u30CF\u30C3\u30B7\u30E5\u95A2\u6570 H \u3092\u6301\u305F\u305B\u308B\
-    \r\n// lb \u4EE5\u4E0A\u306E\u89E3\u3092\u304B\u3048\u3059\r\ntemplate <typename\
+    \ inv[n]};\n}\n\ntemplate <typename mint>\nmint fact(int n) {\n  static constexpr\
+    \ int mod = mint::get_mod();\n  assert(0 <= n);\n  if (n >= mod) return 0;\n \
+    \ return get<0>(get_factorial_data<mint>(n));\n}\n\ntemplate <typename mint>\n\
+    mint fact_inv(int n) {\n  static constexpr int mod = mint::get_mod();\n  assert(0\
+    \ <= n && n < mod);\n  return get<1>(get_factorial_data<mint>(n));\n}\n\ntemplate\
+    \ <typename mint>\nmint inv(int n) {\n  static constexpr int mod = mint::get_mod();\n\
+    \  assert(0 <= n && n < mod);\n  return get<2>(get_factorial_data<mint>(n));\n\
+    }\n\ntemplate <typename mint>\nmint C(ll n, ll k, bool large = false) {\n  assert(n\
+    \ >= 0);\n  if (k < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n)\
+    \ * fact_inv<mint>(k) * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n\
+    \  FOR(i, k) { x *= mint(n - i); }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\
+    \nusing modint107 = modint<1000000007>;\nusing modint998 = modint<998244353>;\n\
+    using amint = ArbitraryModInt;\n#line 1 \"other/discrete_log.hpp\"\n// log_a b\
+    \ \u306E\u8A08\u7B97\r\n// \u300C*\u300D \u304C\u5B9A\u7FA9\u3055\u308C\u305F\u30AF\
+    \u30E9\u30B9\u3001\u30CF\u30C3\u30B7\u30E5\u95A2\u6570 H \u3092\u6301\u305F\u305B\
+    \u308B\r\n// lb \u4EE5\u4E0A\u306E\u89E3\u3092\u304B\u3048\u3059\r\ntemplate <typename\
     \ X>\r\nll discrete_log(X a, X b, ll LIM, function<ll(X)> H, int lb = 0) {\r\n\
     \  {\r\n    int n = lb;\r\n    X p = a;\r\n    while (n) {\r\n      if (n & 1)\
     \ b /= p;\r\n      p *= p;\r\n      n /= 2;\r\n    }\r\n  }\r\n\r\n  ll K = 1;\r\
@@ -123,8 +123,8 @@ data:
   isVerificationFile: false
   path: mod/mod_log.hpp
   requiredBy: []
-  timestamp: '2022-04-11 22:17:44+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-04-11 22:58:28+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/math/discrete_logarithm_mod.test.cpp
 documentation_of: mod/mod_log.hpp
