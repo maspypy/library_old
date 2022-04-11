@@ -17,7 +17,7 @@ struct modint {
     return *this;
   }
   modint &operator*=(const modint &p) {
-    val = (int)(1LL * val * p.val % mod);
+    val = (uint)(1LL * val * p.val % mod);
     return *this;
   }
   modint &operator/=(const modint &p) {
