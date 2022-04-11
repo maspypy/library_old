@@ -15,9 +15,6 @@ data:
     path: nt/multiplicative_convolution_mod2n.hpp
     title: nt/multiplicative_convolution_mod2n.hpp
   - icon: ':heavy_check_mark:'
-    path: other/sharp_p_subset_sum.hpp
-    title: other/sharp_p_subset_sum.hpp
-  - icon: ':heavy_check_mark:'
     path: poly/convolution.hpp
     title: poly/convolution.hpp
   - icon: ':warning:'
@@ -68,6 +65,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/poly_taylor_shift.hpp
     title: poly/poly_taylor_shift.hpp
+  - icon: ':warning:'
+    path: poly/sharp_p_subset_sum.hpp
+    title: poly/sharp_p_subset_sum.hpp
   - icon: ':heavy_check_mark:'
     path: seq/coef_of_rational_fps.hpp
     title: seq/coef_of_rational_fps.hpp
@@ -153,9 +153,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/lcm_convolution.test.cpp
     title: test/library_checker/math/lcm_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/math/sharp_p_subset_sum.test.cpp
-    title: test/library_checker/math/sharp_p_subset_sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/sqrt_mod.test.cpp
     title: test/library_checker/math/sqrt_mod.test.cpp
@@ -382,10 +379,10 @@ data:
   isVerificationFile: false
   path: mod/modint.hpp
   requiredBy:
-  - other/sharp_p_subset_sum.hpp
   - graph/tree_all_distances.hpp
   - mod/mod_sqrt.hpp
   - mod/mod_log.hpp
+  - poly/sharp_p_subset_sum.hpp
   - poly/convolution2d.hpp
   - poly/fps_composition.hpp
   - poly/poly_divmod.hpp
@@ -421,7 +418,6 @@ data:
   - test/library_checker/matrix/charactereistic_poly.test.cpp
   - test/library_checker/matrix/inverse_matrix.test.cpp
   - test/library_checker/matrix/solve_linear.test.cpp
-  - test/library_checker/math/sharp_p_subset_sum.test.cpp
   - test/library_checker/math/sum_of_exp_times_poly_limit.test.cpp
   - test/library_checker/math/find_linear_recurrence.test.cpp
   - test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp

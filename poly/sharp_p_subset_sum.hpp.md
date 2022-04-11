@@ -11,13 +11,10 @@ data:
     path: poly/fps_exp.hpp
     title: poly/fps_exp.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/math/sharp_p_subset_sum.test.cpp
-    title: test/library_checker/math/sharp_p_subset_sum.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"mod/modint.hpp\"\ntemplate <int mod>\nstruct modint {\n\
@@ -260,7 +257,7 @@ data:
     \ = x[i] * inv<mint>(i + 1);\r\n    x[0] = 0;\r\n\r\n    FOR3(i, m, min(n, m +\
     \ m)) x[i] += f[i];\r\n    FOR(i, m) x[i] = 0;\r\n    ntt(x, 0);\r\n    FOR(i,\
     \ m + m) x[i] *= y[i];\r\n    ntt(x, 1);\r\n    b.insert(b.end(), x.begin() +\
-    \ m, x.end());\r\n  }\r\n  b.resize(n);\r\n  return b;\r\n}\r\n#line 2 \"other/sharp_p_subset_sum.hpp\"\
+    \ m, x.end());\r\n  }\r\n  b.resize(n);\r\n  return b;\r\n}\r\n#line 2 \"poly/sharp_p_subset_sum.hpp\"\
     \ntemplate<typename mint>\r\nvc<mint> sharp_p_subset_sum(vc<int> S, int LIM) {\r\
     \n  auto CNT = bincount(S, LIM);\r\n  vc<mint> logf(LIM);\r\n  FOR3(x, 1, LIM)\
     \ {\r\n    FOR3(d, 1, (LIM-1) / x + 1) {\r\n      if (d & 1)\r\n        logf[d\
@@ -278,16 +275,15 @@ data:
   - poly/convolution.hpp
   - mod/modint.hpp
   isVerificationFile: false
-  path: other/sharp_p_subset_sum.hpp
+  path: poly/sharp_p_subset_sum.hpp
   requiredBy: []
-  timestamp: '2022-04-11 02:20:18+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/library_checker/math/sharp_p_subset_sum.test.cpp
-documentation_of: other/sharp_p_subset_sum.hpp
+  timestamp: '2022-04-11 16:29:05+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: poly/sharp_p_subset_sum.hpp
 layout: document
 redirect_from:
-- /library/other/sharp_p_subset_sum.hpp
-- /library/other/sharp_p_subset_sum.hpp.html
-title: other/sharp_p_subset_sum.hpp
+- /library/poly/sharp_p_subset_sum.hpp
+- /library/poly/sharp_p_subset_sum.hpp.html
+title: poly/sharp_p_subset_sum.hpp
 ---

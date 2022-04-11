@@ -6,6 +6,9 @@ data:
     path: ds/range_mex_query.hpp
     title: ds/range_mex_query.hpp
   - icon: ':warning:'
+    path: ds/uniqueproductquery.hpp
+    title: ds/uniqueproductquery.hpp
+  - icon: ':warning:'
     path: geo/manhattan_nns.hpp
     title: geo/manhattan_nns.hpp
   - icon: ':warning:'
@@ -20,9 +23,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: mod/modular_subset_sum.hpp
     title: mod/modular_subset_sum.hpp
-  - icon: ':warning:'
-    path: other/uniqueproductquery.hpp
-    title: other/uniqueproductquery.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
@@ -117,12 +117,12 @@ data:
   isVerificationFile: false
   path: ds/segtree.hpp
   requiredBy:
-  - other/uniqueproductquery.hpp
   - graph/minimum_spanning_tree.hpp
   - graph/treegroup.hpp
   - graph/treemonoid.hpp
   - mod/modular_subset_sum.hpp
   - geo/manhattan_nns.hpp
+  - ds/uniqueproductquery.hpp
   - ds/range_mex_query.hpp
   timestamp: '2022-02-11 06:56:22+09:00'
   verificationStatus: LIBRARY_SOME_WA

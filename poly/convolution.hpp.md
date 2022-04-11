@@ -11,9 +11,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: nt/multiplicative_convolution_mod2n.hpp
     title: nt/multiplicative_convolution_mod2n.hpp
-  - icon: ':heavy_check_mark:'
-    path: other/sharp_p_subset_sum.hpp
-    title: other/sharp_p_subset_sum.hpp
   - icon: ':warning:'
     path: poly/convolution2d.hpp
     title: poly/convolution2d.hpp
@@ -62,6 +59,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/poly_taylor_shift.hpp
     title: poly/poly_taylor_shift.hpp
+  - icon: ':warning:'
+    path: poly/sharp_p_subset_sum.hpp
+    title: poly/sharp_p_subset_sum.hpp
   - icon: ':heavy_check_mark:'
     path: seq/coef_of_rational_fps.hpp
     title: seq/coef_of_rational_fps.hpp
@@ -105,9 +105,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/math/sharp_p_subset_sum.test.cpp
-    title: test/library_checker/math/sharp_p_subset_sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
     title: test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
@@ -545,8 +542,8 @@ data:
   isVerificationFile: false
   path: poly/convolution.hpp
   requiredBy:
-  - other/sharp_p_subset_sum.hpp
   - graph/tree_all_distances.hpp
+  - poly/sharp_p_subset_sum.hpp
   - poly/convolution2d.hpp
   - poly/fps_composition.hpp
   - poly/poly_divmod.hpp
@@ -572,7 +569,6 @@ data:
   timestamp: '2022-03-17 18:01:38+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/math/sharp_p_subset_sum.test.cpp
   - test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
   - test/library_checker/math/sum_of_exp_times_poly.test.cpp
   - test/library_checker/math/stirling_number_of_the_first_kind.test.cpp

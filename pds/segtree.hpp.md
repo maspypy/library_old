@@ -3,8 +3,8 @@ data:
   _extendedDependsOn: []
   _extendedRequiredBy:
   - icon: ':warning:'
-    path: other/uniqueproductquery.hpp
-    title: other/uniqueproductquery.hpp
+    path: ds/uniqueproductquery.hpp
+    title: ds/uniqueproductquery.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/range_kth_smallest_pseg.test.cpp
@@ -60,7 +60,7 @@ data:
   isVerificationFile: false
   path: pds/segtree.hpp
   requiredBy:
-  - other/uniqueproductquery.hpp
+  - ds/uniqueproductquery.hpp
   timestamp: '2022-03-19 00:47:35+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:

@@ -74,7 +74,7 @@ data:
     \ n->rch, m, r));\n  }\n\npublic:\n  int time() { return len(roots) - 1; }\n\n\
     \  int set(int t, ll idx, const X &x) {\n    Node *root = set(idx, x, roots[t],\
     \ 0, n);\n    roots.eb(root);\n    return time();\n  }\n\n  X prod(int time, ll\
-    \ l, ll r) { return prod(l, r, roots[time], 0, n); }\n};\n#line 4 \"other/uniqueproductquery.hpp\"\
+    \ l, ll r) { return prod(l, r, roots[time], 0, n); }\n};\n#line 4 \"ds/uniqueproductquery.hpp\"\
     \n\r\n// sample\uFF1Ahttps://codeforces.com/contest/703/problem/D\r\n// [L, R)\
     \ \u5185\u306E\u8981\u7D20 (long long)\u3092 UNIQUE \u3057\u305F\u4E0A\u3067\u3001\
     f(x) \u306E\u7DCF\u7A4D\u3092\u3068\u3063\u305F\u3082\u306E\u3092\u8A08\u7B97\u3002\
@@ -150,15 +150,15 @@ data:
   - ds/segtree.hpp
   - pds/segtree.hpp
   isVerificationFile: false
-  path: other/uniqueproductquery.hpp
+  path: ds/uniqueproductquery.hpp
   requiredBy: []
-  timestamp: '2022-04-10 00:21:05+09:00'
+  timestamp: '2022-04-11 16:29:48+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
-documentation_of: other/uniqueproductquery.hpp
+documentation_of: ds/uniqueproductquery.hpp
 layout: document
 redirect_from:
-- /library/other/uniqueproductquery.hpp
-- /library/other/uniqueproductquery.hpp.html
-title: other/uniqueproductquery.hpp
+- /library/ds/uniqueproductquery.hpp
+- /library/ds/uniqueproductquery.hpp.html
+title: ds/uniqueproductquery.hpp
 ---

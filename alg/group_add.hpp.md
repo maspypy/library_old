@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: alg/lazy_add_mul.hpp
     title: alg/lazy_add_mul.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: alg/lazy_cntminmincnt_add.hpp
     title: alg/lazy_cntminmincnt_add.hpp
   - icon: ':warning:'
@@ -35,21 +35,21 @@ data:
   - icon: ':heavy_check_mark:'
     path: ds/fenwickraq.hpp
     title: ds/fenwickraq.hpp
+  - icon: ':warning:'
+    path: ds/rectanglesums.hpp
+    title: ds/rectanglesums.hpp
+  - icon: ':warning:'
+    path: ds/rectangleunion.hpp
+    title: ds/rectangleunion.hpp
+  - icon: ':warning:'
+    path: ds/uniqueproductquery.hpp
+    title: ds/uniqueproductquery.hpp
   - icon: ':heavy_check_mark:'
     path: graph/treeabelgroup.hpp
     title: graph/treeabelgroup.hpp
   - icon: ':heavy_check_mark:'
     path: other/inversion.hpp
     title: other/inversion.hpp
-  - icon: ':heavy_check_mark:'
-    path: other/rectanglesums.hpp
-    title: other/rectanglesums.hpp
-  - icon: ':heavy_check_mark:'
-    path: other/rectangleunion.hpp
-    title: other/rectangleunion.hpp
-  - icon: ':warning:'
-    path: other/uniqueproductquery.hpp
-    title: other/uniqueproductquery.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/2842_fenwick2d_dense.test.cpp
@@ -73,9 +73,6 @@ data:
     path: test/aoj/DSL_2_H_min_add_lazy.test.cpp
     title: test/aoj/DSL_2_H_min_add_lazy.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/aoj/DSL_4_A_rectangle_union.test.cpp
-    title: test/aoj/DSL_4_A_rectangle_union.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/point_add_range_sum.test.cpp
     title: test/library_checker/datastructure/point_add_range_sum.test.cpp
   - icon: ':heavy_check_mark:'
@@ -90,9 +87,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
     title: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
-    title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
     title: test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
@@ -135,12 +129,12 @@ data:
   isVerificationFile: false
   path: alg/group_add.hpp
   requiredBy:
-  - other/uniqueproductquery.hpp
-  - other/rectangleunion.hpp
-  - other/rectanglesums.hpp
   - other/inversion.hpp
   - graph/treeabelgroup.hpp
+  - ds/uniqueproductquery.hpp
   - ds/fenwick2d.hpp
+  - ds/rectangleunion.hpp
+  - ds/rectanglesums.hpp
   - ds/fenwickraq.hpp
   - ds/fenwick2d_dense.hpp
   - ds/fenwick.hpp
@@ -160,11 +154,9 @@ data:
   - test/aoj/DSL_2_G_fenwick_raq.test.cpp
   - test/aoj/DSL_2_H_min_add_lazy.test.cpp
   - test/aoj/2842_fenwick2d_dense.test.cpp
-  - test/aoj/DSL_4_A_rectangle_union.test.cpp
   - test/aoj/DSL_1_B_weighteduf.test.cpp
   - test/aoj/DSL_2_E_fenwick_raq.test.cpp
   - test/aoj/ALDS1_2_A_inversion.test.cpp
-  - test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
   - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp

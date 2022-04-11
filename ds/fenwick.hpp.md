@@ -8,15 +8,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: ds/fenwickraq.hpp
     title: ds/fenwickraq.hpp
+  - icon: ':warning:'
+    path: ds/rectanglesums.hpp
+    title: ds/rectanglesums.hpp
   - icon: ':heavy_check_mark:'
     path: graph/treeabelgroup.hpp
     title: graph/treeabelgroup.hpp
   - icon: ':heavy_check_mark:'
     path: other/inversion.hpp
     title: other/inversion.hpp
-  - icon: ':heavy_check_mark:'
-    path: other/rectanglesums.hpp
-    title: other/rectanglesums.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_2_A_inversion.test.cpp
@@ -33,9 +33,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/point_add_range_sum.test.cpp
     title: test/library_checker/datastructure/point_add_range_sum.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
-    title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
     title: test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
@@ -107,9 +104,9 @@ data:
   isVerificationFile: false
   path: ds/fenwick.hpp
   requiredBy:
-  - other/rectanglesums.hpp
   - other/inversion.hpp
   - graph/treeabelgroup.hpp
+  - ds/rectanglesums.hpp
   - ds/fenwickraq.hpp
   timestamp: '2022-02-16 02:43:16+09:00'
   verificationStatus: LIBRARY_ALL_AC
@@ -119,7 +116,6 @@ data:
   - test/aoj/DSL_2_G_fenwick_raq.test.cpp
   - test/aoj/DSL_2_E_fenwick_raq.test.cpp
   - test/aoj/ALDS1_2_A_inversion.test.cpp
-  - test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
   - test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
   - test/library_checker/datastructure/point_add_range_sum.test.cpp

@@ -8,13 +8,10 @@ data:
     path: ds/fenwick.hpp
     title: ds/fenwick.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
-    title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"alg/group_add.hpp\"\ntemplate <class X, X ZERO = X(0)>\r\
@@ -45,7 +42,7 @@ data:
     \ {\n        i += k;\n        s = AbelGroup::op(s, dat[i - 1]);\n      }\n   \
     \   k >>= 1;\n    }\n    return i;\n  }\n\n  int find_kth(E k) {\n    auto check\
     \ = [&](E x) -> bool { return x <= k; };\n    return max_right(check);\n  }\n\n\
-    \  void debug() { print(\"fenwick\", dat); }\n};\n#line 2 \"other/rectanglesums.hpp\"\
+    \  void debug() { print(\"fenwick\", dat); }\n};\n#line 2 \"ds/rectanglesums.hpp\"\
     \n\r\ntemplate <typename WT = ll, bool SMALL = false>\r\nstruct RectangleSums\
     \ {\r\n  int N;\r\n  int n, Q;\r\n  vi X, Y;\r\n  vi keyX, keyY;\r\n  ll min_x,\
     \ max_x, min_y, max_y;\r\n  vc<WT> wt;\r\n  vc<vc<pair<int, WT>>> add;\r\n  vc<vc<tuple<int,\
@@ -124,16 +121,15 @@ data:
   - ds/fenwick.hpp
   - alg/group_add.hpp
   isVerificationFile: false
-  path: other/rectanglesums.hpp
+  path: ds/rectanglesums.hpp
   requiredBy: []
-  timestamp: '2022-03-08 00:35:00+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
-documentation_of: other/rectanglesums.hpp
+  timestamp: '2022-04-11 16:29:48+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: ds/rectanglesums.hpp
 layout: document
 redirect_from:
-- /library/other/rectanglesums.hpp
-- /library/other/rectanglesums.hpp.html
-title: other/rectanglesums.hpp
+- /library/ds/rectanglesums.hpp
+- /library/ds/rectanglesums.hpp.html
+title: ds/rectanglesums.hpp
 ---

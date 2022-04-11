@@ -9,15 +9,12 @@ data:
     title: poly/convolution.hpp
   _extendedRequiredBy:
   - icon: ':heavy_check_mark:'
-    path: other/sharp_p_subset_sum.hpp
-    title: other/sharp_p_subset_sum.hpp
-  - icon: ':heavy_check_mark:'
     path: poly/fps_pow.hpp
     title: poly/fps_pow.hpp
+  - icon: ':warning:'
+    path: poly/sharp_p_subset_sum.hpp
+    title: poly/sharp_p_subset_sum.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/math/sharp_p_subset_sum.test.cpp
-    title: test/library_checker/math/sharp_p_subset_sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/polynomial/exp_of_fps.test.cpp
     title: test/library_checker/polynomial/exp_of_fps.test.cpp
@@ -294,12 +291,11 @@ data:
   isVerificationFile: false
   path: poly/fps_exp.hpp
   requiredBy:
-  - other/sharp_p_subset_sum.hpp
+  - poly/sharp_p_subset_sum.hpp
   - poly/fps_pow.hpp
   timestamp: '2022-04-11 02:20:18+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
-  - test/library_checker/math/sharp_p_subset_sum.test.cpp
   - test/library_checker/polynomial/exp_of_fps.test.cpp
   - test/library_checker/polynomial/pow_of_fps.test.cpp
 documentation_of: poly/fps_exp.hpp

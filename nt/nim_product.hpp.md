@@ -2,19 +2,16 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/math/nim_product.test.cpp
-    title: test/library_checker/math/nim_product.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
-  bundledCode: "#line 1 \"other/nim_product.hpp\"\nu64 naive_nim_product(u64 x, u64\
-    \ y, int k = 6) {\r\n  if (x == 0 || y == 0) return 0;\r\n  if (x == 1) return\
-    \ y;\r\n  if (y == 1) return x;\r\n  int B = 1 << (k - 1);\r\n  u64 mask = (1ULL\
-    \ << B) - 1;\r\n  u64 a = x >> B, b = x & mask;\r\n  u64 c = y >> B, d = y & mask;\r\
+  bundledCode: "#line 1 \"nt/nim_product.hpp\"\nu64 naive_nim_product(u64 x, u64 y,\
+    \ int k = 6) {\r\n  if (x == 0 || y == 0) return 0;\r\n  if (x == 1) return y;\r\
+    \n  if (y == 1) return x;\r\n  int B = 1 << (k - 1);\r\n  u64 mask = (1ULL <<\
+    \ B) - 1;\r\n  u64 a = x >> B, b = x & mask;\r\n  u64 c = y >> B, d = y & mask;\r\
     \n  tie(a, b, c) = mt(naive_nim_product(a, c, k - 1),\r\n                    naive_nim_product(a\
     \ ^ b, c ^ d, k - 1),\r\n                    naive_nim_product(b, d, k - 1));\r\
     \n  b = a ^ b ^ c;\r\n  return (a << B) ^ naive_nim_product(1ULL << (B - 1), a,\
@@ -45,16 +42,15 @@ data:
     \n  }\r\n  return v;\r\n}"
   dependsOn: []
   isVerificationFile: false
-  path: other/nim_product.hpp
+  path: nt/nim_product.hpp
   requiredBy: []
-  timestamp: '2022-01-15 19:02:18+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/library_checker/math/nim_product.test.cpp
-documentation_of: other/nim_product.hpp
+  timestamp: '2022-04-11 16:29:05+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: nt/nim_product.hpp
 layout: document
 redirect_from:
-- /library/other/nim_product.hpp
-- /library/other/nim_product.hpp.html
-title: other/nim_product.hpp
+- /library/nt/nim_product.hpp
+- /library/nt/nim_product.hpp.html
+title: nt/nim_product.hpp
 ---

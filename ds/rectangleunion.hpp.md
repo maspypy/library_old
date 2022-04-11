@@ -4,23 +4,20 @@ data:
   - icon: ':question:'
     path: alg/group_add.hpp
     title: alg/group_add.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: alg/lazy_cntminmincnt_add.hpp
     title: alg/lazy_cntminmincnt_add.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':warning:'
     path: alg/monoid_cntminmincnt.hpp
     title: alg/monoid_cntminmincnt.hpp
   - icon: ':question:'
     path: ds/lazysegtree.hpp
     title: ds/lazysegtree.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
-    path: test/aoj/DSL_4_A_rectangle_union.test.cpp
-    title: test/aoj/DSL_4_A_rectangle_union.test.cpp
+  _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':warning:'
   attributes:
     links: []
   bundledCode: "#line 2 \"ds/lazysegtree.hpp\"\n\ntemplate <typename Lazy>\nstruct\
@@ -97,7 +94,7 @@ data:
     \n  using X = typename MX::value_type;\r\n  using A = typename MA::value_type;\r\
     \n  static constexpr X act(const X &x, const A &a) {\r\n    auto [xcnt, xmin,\
     \ xmincnt] = x;\r\n    return {xcnt, min(INF, xmin + a), xmincnt};\r\n  }\r\n\
-    };\n#line 3 \"other/rectangleunion.hpp\"\n\r\nstruct RectangleUnion {\r\n  using\
+    };\n#line 3 \"ds/rectangleunion.hpp\"\n\r\nstruct RectangleUnion {\r\n  using\
     \ RECT = tuple<ll, ll, ll, ll>;\r\n  vc<RECT> rectangles;\r\n  vi X, Y;\r\n\r\n\
     \  void add_rect(ll xl, ll yl, ll xr, ll yr) {\r\n    assert(xl < xr && yl < yr);\r\
     \n    X.eb(xl), X.eb(xr), Y.eb(yl), Y.eb(yr);\r\n    rectangles.eb(xl, xr, yl,\
@@ -136,16 +133,15 @@ data:
   - alg/monoid_cntminmincnt.hpp
   - alg/group_add.hpp
   isVerificationFile: false
-  path: other/rectangleunion.hpp
+  path: ds/rectangleunion.hpp
   requiredBy: []
-  timestamp: '2022-03-14 00:24:27+09:00'
-  verificationStatus: LIBRARY_ALL_AC
-  verifiedWith:
-  - test/aoj/DSL_4_A_rectangle_union.test.cpp
-documentation_of: other/rectangleunion.hpp
+  timestamp: '2022-04-11 16:29:48+09:00'
+  verificationStatus: LIBRARY_NO_TESTS
+  verifiedWith: []
+documentation_of: ds/rectangleunion.hpp
 layout: document
 redirect_from:
-- /library/other/rectangleunion.hpp
-- /library/other/rectangleunion.hpp.html
-title: other/rectangleunion.hpp
+- /library/ds/rectangleunion.hpp
+- /library/ds/rectangleunion.hpp.html
+title: ds/rectangleunion.hpp
 ---

@@ -24,7 +24,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: alg/lazy_add_mul.hpp
       title: alg/lazy_add_mul.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: alg/lazy_cntminmincnt_add.hpp
       title: alg/lazy_cntminmincnt_add.hpp
     - icon: ':warning:'
@@ -72,7 +72,7 @@ data:
     - icon: ':warning:'
       path: alg/monoid_cntmaxmaxcnt.hpp
       title: alg/monoid_cntmaxmaxcnt.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':warning:'
       path: alg/monoid_cntminmincnt.hpp
       title: alg/monoid_cntminmincnt.hpp
     - icon: ':warning:'
@@ -185,6 +185,12 @@ data:
     - icon: ':warning:'
       path: ds/range_mex_query.hpp
       title: ds/range_mex_query.hpp
+    - icon: ':warning:'
+      path: ds/rectanglesums.hpp
+      title: ds/rectanglesums.hpp
+    - icon: ':warning:'
+      path: ds/rectangleunion.hpp
+      title: ds/rectangleunion.hpp
     - icon: ':question:'
       path: ds/segtree.hpp
       title: ds/segtree.hpp
@@ -203,6 +209,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: ds/unionfind.hpp
       title: ds/unionfind.hpp
+    - icon: ':warning:'
+      path: ds/uniqueproductquery.hpp
+      title: ds/uniqueproductquery.hpp
     - icon: ':heavy_check_mark:'
       path: ds/waveletmatrix.hpp
       title: ds/waveletmatrix.hpp
@@ -463,6 +472,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: nt/multiplicative_sum.hpp
       title: nt/multiplicative_sum.hpp
+    - icon: ':warning:'
+      path: nt/nim_product.hpp
+      title: nt/nim_product.hpp
     - icon: ':heavy_check_mark:'
       path: nt/primesum.hpp
       title: nt/primesum.hpp
@@ -505,23 +517,8 @@ data:
       path: other/monge_shortest_path.hpp
       title: other/monge_shortest_path.hpp
     - icon: ':heavy_check_mark:'
-      path: other/nim_product.hpp
-      title: other/nim_product.hpp
-    - icon: ':heavy_check_mark:'
       path: other/random.hpp
       title: other/random.hpp
-    - icon: ':heavy_check_mark:'
-      path: other/rectanglesums.hpp
-      title: other/rectanglesums.hpp
-    - icon: ':heavy_check_mark:'
-      path: other/rectangleunion.hpp
-      title: other/rectangleunion.hpp
-    - icon: ':heavy_check_mark:'
-      path: other/sharp_p_subset_sum.hpp
-      title: other/sharp_p_subset_sum.hpp
-    - icon: ':warning:'
-      path: other/uniqueproductquery.hpp
-      title: other/uniqueproductquery.hpp
   - name: pds
     pages:
     - icon: ':heavy_check_mark:'
@@ -592,6 +589,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: poly/poly_taylor_shift.hpp
       title: poly/poly_taylor_shift.hpp
+    - icon: ':warning:'
+      path: poly/sharp_p_subset_sum.hpp
+      title: poly/sharp_p_subset_sum.hpp
   - name: seq
     pages:
     - icon: ':heavy_check_mark:'
@@ -703,7 +703,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
       title: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/aoj/DSL_4_A_rectangle_union.test.cpp
       title: test/aoj/DSL_4_A_rectangle_union.test.cpp
     - icon: ':heavy_check_mark:'
@@ -817,7 +817,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
       title: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
       title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
     - icon: ':heavy_check_mark:'
@@ -928,10 +928,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/library_checker/math/lcm_convolution.test.cpp
       title: test/library_checker/math/lcm_convolution.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/math/nim_product.test.cpp
       title: test/library_checker/math/nim_product.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/library_checker/math/sharp_p_subset_sum.test.cpp
       title: test/library_checker/math/sharp_p_subset_sum.test.cpp
     - icon: ':heavy_check_mark:'

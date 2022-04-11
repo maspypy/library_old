@@ -43,9 +43,6 @@ data:
     path: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
     title: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/aoj/DSL_4_A_rectangle_union.test.cpp
-    title: test/aoj/DSL_4_A_rectangle_union.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_6_A_maxflow.test.cpp
     title: test/aoj/GRL_6_A_maxflow.test.cpp
   - icon: ':heavy_check_mark:'
@@ -148,9 +145,6 @@ data:
     path: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
     title: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
   - icon: ':heavy_check_mark:'
-    path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
-    title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
-  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/segment_add_get_min.test.cpp
     title: test/library_checker/datastructure/segment_add_get_min.test.cpp
   - icon: ':heavy_check_mark:'
@@ -252,12 +246,6 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/lcm_convolution.test.cpp
     title: test/library_checker/math/lcm_convolution.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/math/nim_product.test.cpp
-    title: test/library_checker/math/nim_product.test.cpp
-  - icon: ':heavy_check_mark:'
-    path: test/library_checker/math/sharp_p_subset_sum.test.cpp
-    title: test/library_checker/math/sharp_p_subset_sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/sqrt_mod.test.cpp
     title: test/library_checker/math/sqrt_mod.test.cpp
@@ -544,7 +532,6 @@ data:
   - test/aoj/ALDS1_1_C_primetest.test.cpp
   - test/aoj/DSL_2_F_min_set_lazy.test.cpp
   - test/aoj/ITP2_11_D_for_nCk.test.cpp
-  - test/aoj/DSL_4_A_rectangle_union.test.cpp
   - test/aoj/DSL_1_B_weighteduf.test.cpp
   - test/aoj/ITP1_D_D_divisors.test.cpp
   - test/aoj/DSL_2_E_fenwick_raq.test.cpp
@@ -560,7 +547,6 @@ data:
   - test/library_checker/matrix/charactereistic_poly.test.cpp
   - test/library_checker/matrix/inverse_matrix.test.cpp
   - test/library_checker/matrix/solve_linear.test.cpp
-  - test/library_checker/math/sharp_p_subset_sum.test.cpp
   - test/library_checker/math/sum_of_exp_times_poly_limit.test.cpp
   - test/library_checker/math/find_linear_recurrence.test.cpp
   - test/library_checker/math/enumerate_primes.test.cpp
@@ -573,7 +559,6 @@ data:
   - test/library_checker/math/totient_sum.test.cpp
   - test/library_checker/math/sqrt_mod.test.cpp
   - test/library_checker/math/kth_root_mod.test.cpp
-  - test/library_checker/math/nim_product.test.cpp
   - test/library_checker/math/sum_of_exp_times_poly.test.cpp
   - test/library_checker/math/factorize.test.cpp
   - test/library_checker/math/counting_primes.test.cpp
@@ -630,7 +615,6 @@ data:
   - test/library_checker/datastructure/staticrmq_seg.test.cpp
   - test/library_checker/datastructure/static_range_sum.test.cpp
   - test/library_checker/datastructure/range_chmin_chmax_add_range_sum.test.cpp
-  - test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
   - test/library_checker/datastructure/persistent_unionfind.test.cpp
   - test/library_checker/datastructure/staticrmq_sparse.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
