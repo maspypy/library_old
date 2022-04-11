@@ -11,6 +11,6 @@ struct Group_Affine {
     return {a, a * (-b)};
   }
   static constexpr K eval(const F &f, K x) noexcept { return f.fi * x + f.se; }
-  static constexpr F unit = {K(1), K(0)};
+  static constexpr F unit() { return {K(1), K(0)}; }
   static constexpr bool commute = false;
 };
