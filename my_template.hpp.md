@@ -24,7 +24,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_1_B_weighteduf.test.cpp
     title: test/aoj/DSL_1_B_weighteduf.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_D_dualsegtree.test.cpp
     title: test/aoj/DSL_2_D_dualsegtree.test.cpp
   - icon: ':heavy_check_mark:'
@@ -36,12 +36,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_G_fenwick_raq.test.cpp
     title: test/aoj/DSL_2_G_fenwick_raq.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_H_min_add_lazy.test.cpp
     title: test/aoj/DSL_2_H_min_add_lazy.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
     title: test/aoj/DSL_2_I_cntsum_set_lazy.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/DSL_4_A_rectangle_union.test.cpp
+    title: test/aoj/DSL_4_A_rectangle_union.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_6_A_maxflow.test.cpp
     title: test/aoj/GRL_6_A_maxflow.test.cpp
@@ -135,7 +138,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/range_chmin_chmax_add_range_sum.test.cpp
     title: test/library_checker/datastructure/range_chmin_chmax_add_range_sum.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/range_kth_smallest_pseg.test.cpp
     title: test/library_checker/datastructure/range_kth_smallest_pseg.test.cpp
   - icon: ':heavy_check_mark:'
@@ -144,6 +147,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
     title: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
+    title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/segment_add_get_min.test.cpp
     title: test/library_checker/datastructure/segment_add_get_min.test.cpp
@@ -249,6 +255,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/lcm_convolution.test.cpp
     title: test/library_checker/math/lcm_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/math/nim_product.test.cpp
+    title: test/library_checker/math/nim_product.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/math/sharp_p_subset_sum.test.cpp
+    title: test/library_checker/math/sharp_p_subset_sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/sqrt_mod.test.cpp
     title: test/library_checker/math/sqrt_mod.test.cpp
@@ -393,9 +405,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/899_bfsnumbering.test.cpp
     title: test/yukicoder/899_bfsnumbering.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace\
@@ -516,7 +528,7 @@ data:
   requiredBy:
   - graph/bipartite_coloring.hpp
   timestamp: '2022-03-14 04:45:03+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/1810_matpow.test.cpp
   - test/yukicoder/899_bfsnumbering.test.cpp
@@ -535,6 +547,7 @@ data:
   - test/aoj/ALDS1_1_C_primetest.test.cpp
   - test/aoj/DSL_2_F_min_set_lazy.test.cpp
   - test/aoj/ITP2_11_D_for_nCk.test.cpp
+  - test/aoj/DSL_4_A_rectangle_union.test.cpp
   - test/aoj/DSL_1_B_weighteduf.test.cpp
   - test/aoj/ITP1_D_D_divisors.test.cpp
   - test/aoj/DSL_2_E_fenwick_raq.test.cpp
@@ -550,6 +563,7 @@ data:
   - test/library_checker/matrix/charactereistic_poly.test.cpp
   - test/library_checker/matrix/inverse_matrix.test.cpp
   - test/library_checker/matrix/solve_linear.test.cpp
+  - test/library_checker/math/sharp_p_subset_sum.test.cpp
   - test/library_checker/math/sum_of_exp_times_poly_limit.test.cpp
   - test/library_checker/math/find_linear_recurrence.test.cpp
   - test/library_checker/math/enumerate_primes.test.cpp
@@ -562,6 +576,7 @@ data:
   - test/library_checker/math/totient_sum.test.cpp
   - test/library_checker/math/sqrt_mod.test.cpp
   - test/library_checker/math/kth_root_mod.test.cpp
+  - test/library_checker/math/nim_product.test.cpp
   - test/library_checker/math/sum_of_exp_times_poly.test.cpp
   - test/library_checker/math/factorize.test.cpp
   - test/library_checker/math/counting_primes.test.cpp
@@ -618,6 +633,7 @@ data:
   - test/library_checker/datastructure/staticrmq_seg.test.cpp
   - test/library_checker/datastructure/static_range_sum.test.cpp
   - test/library_checker/datastructure/range_chmin_chmax_add_range_sum.test.cpp
+  - test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
   - test/library_checker/datastructure/persistent_unionfind.test.cpp
   - test/library_checker/datastructure/staticrmq_sparse.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp

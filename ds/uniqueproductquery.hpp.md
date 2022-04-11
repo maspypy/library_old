@@ -1,13 +1,13 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: alg/group_add.hpp
     title: alg/group_add.hpp
   - icon: ':heavy_check_mark:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: pds/segtree.hpp
     title: pds/segtree.hpp
   _extendedRequiredBy: []
@@ -58,7 +58,7 @@ data:
     \ Node {\n    X x;\n    Node *lch, *rch;\n    Node() {}\n    Node(const X &x)\
     \ : x(x), lch(nullptr), rch(nullptr) {}\n  };\n\n  Node *pool;\n  int pid;\n \
     \ ll n;\n  Node *nil;\n  vc<Node *> roots;\n\n  PersistentSegTree(int n) : pid(0),\
-    \ n(n), nil(nullptr) {\n    pool = new Node[NODES];\n    nil = new_node(Monoid::unit);\n\
+    \ n(n), nil(nullptr) {\n    pool = new Node[NODES];\n    nil = new_node(Monoid::unit());\n\
     \    nil->lch = nil->rch = nil;\n    roots.reserve(1 << 18);\n    roots.push_back(nil);\n\
     \  }\n\nprivate:\n  Node *new_node(const X &x) {\n    pool[pid].x = x;\n    pool[pid].lch\
     \ = pool[pid].rch = nil;\n    return &(pool[pid++]);\n  }\n\n  Node *merge(Node\
@@ -67,8 +67,8 @@ data:
     \ idx, const X &x, Node *n, ll l, ll r) {\n    if (l + 1 == r) return new_node(x);\n\
     \    ll m = (l + r) / 2;\n    if (idx < m) return merge(set(idx, x, n->lch, l,\
     \ m), n->rch);\n    return merge(n->lch, set(idx, x, n->rch, m, r));\n  }\n\n\
-    \  X prod(ll a, ll b, Node *n, ll l, ll r) {\n    if (n == nil) return Monoid::unit;\n\
-    \    if (r <= a || b <= l) return Monoid::unit;\n    if (a <= l && r <= b) return\
+    \  X prod(ll a, ll b, Node *n, ll l, ll r) {\n    if (n == nil) return Monoid::unit();\n\
+    \    if (r <= a || b <= l) return Monoid::unit();\n    if (a <= l && r <= b) return\
     \ n->x;\n    ll m = (l + r) / 2;\n    return Monoid::op(prod(a, b, n->lch, l,\
     \ m), prod(a, b, n->rch, m, r));\n  }\n\npublic:\n  int time() { return len(roots)\
     \ - 1; }\n\n  int set(int t, ll idx, const X &x) {\n    Node *root = set(idx,\
@@ -152,7 +152,7 @@ data:
   isVerificationFile: false
   path: ds/uniqueproductquery.hpp
   requiredBy: []
-  timestamp: '2022-04-11 17:55:37+09:00'
+  timestamp: '2022-04-11 19:12:14+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: ds/uniqueproductquery.hpp

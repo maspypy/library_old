@@ -4,16 +4,16 @@ data:
   - icon: ':warning:'
     path: alg/monoid_max.hpp
     title: alg/monoid_max.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: alg/monoid_min.hpp
     title: alg/monoid_min.hpp
   - icon: ':heavy_check_mark:'
     path: alg/monoid_reverse.hpp
     title: alg/monoid_reverse.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: ds/dualsegtree.hpp
     title: ds/dualsegtree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/lazysegtree.hpp
     title: ds/lazysegtree.hpp
   - icon: ':heavy_check_mark:'
@@ -273,9 +273,9 @@ data:
     \ <typename Monoid>\nstruct DualSegTree {\n  using A = typename Monoid::value_type;\n\
     \  int n, log, size;\n  vc<A> laz;\n\n  DualSegTree() : DualSegTree(0) {}\n  DualSegTree(int\
     \ n) : n(n) {\n    log = 1;\n    while ((1 << log) < n) ++log;\n    size = 1 <<\
-    \ log;\n    laz.assign(size << 1, Monoid::unit);\n  }\n\n  void all_apply(int\
+    \ log;\n    laz.assign(size << 1, Monoid::unit());\n  }\n\n  void all_apply(int\
     \ k, A a) { laz[k] = Monoid::op(laz[k], a); }\n\n  void push(int k) {\n    all_apply(2\
-    \ * k, laz[k]);\n    all_apply(2 * k + 1, laz[k]);\n    laz[k] = Monoid::unit;\n\
+    \ * k, laz[k]);\n    all_apply(2 * k + 1, laz[k]);\n    laz[k] = Monoid::unit();\n\
     \  }\n\n  A get(int p) {\n    assert(0 <= p && p < n);\n    p += size;\n    for\
     \ (int i = log; i >= 1; i--) push(p >> i);\n    return laz[p];\n  }\n\n  vc<A>\
     \ get_all() {\n    FOR(i, size) push(i);\n    return {laz.begin() + size, laz.begin()\
@@ -376,7 +376,7 @@ data:
   isVerificationFile: false
   path: graph/minimum_spanning_tree.hpp
   requiredBy: []
-  timestamp: '2022-04-11 18:07:23+09:00'
+  timestamp: '2022-04-11 19:10:33+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph/minimum_spanning_tree.hpp

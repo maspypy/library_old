@@ -1,20 +1,20 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: alg/group_add.hpp
     title: alg/group_add.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: alg/monoid_min.hpp
     title: alg/monoid_min.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_H_min_add_lazy.test.cpp
     title: test/aoj/DSL_2_H_min_add_lazy.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"alg/group_add.hpp\"\ntemplate <class X>\r\nstruct Group_Add\
@@ -30,21 +30,21 @@ data:
     \ {\r\n  using MX = Monoid_Min<E, INF>;\r\n  using MA = Group_Add<E>;\r\n  using\
     \ X_structure = MX;\r\n  using A_structure = MA;\r\n  using X = typename MX::value_type;\r\
     \n  using A = typename MA::value_type;\r\n  static constexpr X act(const X &x,\
-    \ const A &a) { \r\n    return min(MX::unit, x + a);\r\n  }\r\n};\n"
+    \ const A &a) {\r\n    return min(MX::unit(), x + a);\r\n  }\r\n};\n"
   code: "#include \"alg/group_add.hpp\"\r\n#include \"alg/monoid_min.hpp\"\r\n\r\n\
     template <typename E, E INF>\r\nstruct Lazy_Min_Add {\r\n  using MX = Monoid_Min<E,\
     \ INF>;\r\n  using MA = Group_Add<E>;\r\n  using X_structure = MX;\r\n  using\
     \ A_structure = MA;\r\n  using X = typename MX::value_type;\r\n  using A = typename\
-    \ MA::value_type;\r\n  static constexpr X act(const X &x, const A &a) { \r\n \
-    \   return min(MX::unit, x + a);\r\n  }\r\n};"
+    \ MA::value_type;\r\n  static constexpr X act(const X &x, const A &a) {\r\n  \
+    \  return min(MX::unit(), x + a);\r\n  }\r\n};"
   dependsOn:
   - alg/group_add.hpp
   - alg/monoid_min.hpp
   isVerificationFile: false
   path: alg/lazy_min_add.hpp
   requiredBy: []
-  timestamp: '2022-04-11 17:55:37+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-04-11 19:14:58+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/aoj/DSL_2_H_min_add_lazy.test.cpp
 documentation_of: alg/lazy_min_add.hpp

@@ -65,7 +65,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: poly/poly_taylor_shift.hpp
     title: poly/poly_taylor_shift.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: poly/sharp_p_subset_sum.hpp
     title: poly/sharp_p_subset_sum.hpp
   - icon: ':heavy_check_mark:'
@@ -153,6 +153,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/lcm_convolution.test.cpp
     title: test/library_checker/math/lcm_convolution.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/math/sharp_p_subset_sum.test.cpp
+    title: test/library_checker/math/sharp_p_subset_sum.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/math/sqrt_mod.test.cpp
     title: test/library_checker/math/sqrt_mod.test.cpp
@@ -418,6 +421,7 @@ data:
   - test/library_checker/matrix/charactereistic_poly.test.cpp
   - test/library_checker/matrix/inverse_matrix.test.cpp
   - test/library_checker/matrix/solve_linear.test.cpp
+  - test/library_checker/math/sharp_p_subset_sum.test.cpp
   - test/library_checker/math/sum_of_exp_times_poly_limit.test.cpp
   - test/library_checker/math/find_linear_recurrence.test.cpp
   - test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp

@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: alg/lazy_add_mul.hpp
     title: alg/lazy_add_mul.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: alg/lazy_cntminmincnt_add.hpp
     title: alg/lazy_cntminmincnt_add.hpp
   - icon: ':warning:'
@@ -17,7 +17,7 @@ data:
   - icon: ':warning:'
     path: alg/lazy_max_add.hpp
     title: alg/lazy_max_add.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: alg/lazy_min_add.hpp
     title: alg/lazy_min_add.hpp
   - icon: ':warning:'
@@ -35,10 +35,10 @@ data:
   - icon: ':heavy_check_mark:'
     path: ds/fenwickraq.hpp
     title: ds/fenwickraq.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: ds/rectanglesums.hpp
     title: ds/rectanglesums.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: ds/rectangleunion.hpp
     title: ds/rectangleunion.hpp
   - icon: ':warning:'
@@ -69,9 +69,12 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_G_fenwick_raq.test.cpp
     title: test/aoj/DSL_2_G_fenwick_raq.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_H_min_add_lazy.test.cpp
     title: test/aoj/DSL_2_H_min_add_lazy.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/DSL_4_A_rectangle_union.test.cpp
+    title: test/aoj/DSL_4_A_rectangle_union.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/point_add_range_sum.test.cpp
     title: test/library_checker/datastructure/point_add_range_sum.test.cpp
@@ -81,12 +84,15 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
     title: test/library_checker/datastructure/point_add_rectangle_sum_seg2d.test.cpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/range_kth_smallest_pseg.test.cpp
     title: test/library_checker/datastructure/range_kth_smallest_pseg.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
     title: test/library_checker/datastructure/rectangle_sum_bit2d.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
+    title: test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
     title: test/library_checker/datastructure/staticf_range_inversions_mo.test.cpp
@@ -108,9 +114,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/yukicoder/899_bfsnumbering.test.cpp
     title: test/yukicoder/899_bfsnumbering.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':question:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"alg/group_add.hpp\"\ntemplate <class X>\r\nstruct Group_Add\
@@ -146,7 +152,7 @@ data:
   - alg/lazy_minmax_add.hpp
   - alg/lazy_min_add.hpp
   timestamp: '2022-04-11 17:55:37+09:00'
-  verificationStatus: LIBRARY_SOME_WA
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/899_bfsnumbering.test.cpp
   - test/yukicoder/1038_centroid.test.cpp
@@ -154,9 +160,11 @@ data:
   - test/aoj/DSL_2_G_fenwick_raq.test.cpp
   - test/aoj/DSL_2_H_min_add_lazy.test.cpp
   - test/aoj/2842_fenwick2d_dense.test.cpp
+  - test/aoj/DSL_4_A_rectangle_union.test.cpp
   - test/aoj/DSL_1_B_weighteduf.test.cpp
   - test/aoj/DSL_2_E_fenwick_raq.test.cpp
   - test/aoj/ALDS1_2_A_inversion.test.cpp
+  - test/library_checker/datastructure/rectangle_sum_sweep.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_group.test.cpp
   - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp

@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: alg/group_add.hpp
     title: alg/group_add.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: alg/lazy_min_add.hpp
     title: alg/lazy_min_add.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: alg/monoid_min.hpp
     title: alg/monoid_min.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: ds/lazysegtree.hpp
     title: ds/lazysegtree.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: other/io.hpp
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_H
@@ -196,7 +196,7 @@ data:
     \ E, E INF>\r\nstruct Lazy_Min_Add {\r\n  using MX = Monoid_Min<E, INF>;\r\n \
     \ using MA = Group_Add<E>;\r\n  using X_structure = MX;\r\n  using A_structure\
     \ = MA;\r\n  using X = typename MX::value_type;\r\n  using A = typename MA::value_type;\r\
-    \n  static constexpr X act(const X &x, const A &a) { \r\n    return min(MX::unit,\
+    \n  static constexpr X act(const X &x, const A &a) {\r\n    return min(MX::unit(),\
     \ x + a);\r\n  }\r\n};\n#line 2 \"ds/lazysegtree.hpp\"\n\ntemplate <typename Lazy>\n\
     struct LazySegTree {\n  using Monoid_X = typename Lazy::X_structure;\n  using\
     \ Monoid_A = typename Lazy::A_structure;\n  using X = typename Monoid_X::value_type;\n\
@@ -279,8 +279,8 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_H_min_add_lazy.test.cpp
   requiredBy: []
-  timestamp: '2022-04-11 17:55:37+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-04-11 19:14:58+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_H_min_add_lazy.test.cpp
 layout: document
