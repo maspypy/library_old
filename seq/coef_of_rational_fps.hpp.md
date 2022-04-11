@@ -12,12 +12,12 @@ data:
     path: seq/interpolate_linear_rec.hpp
     title: seq/interpolate_linear_rec.hpp
   _extendedVerifiedWith:
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
     title: test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"mod/modint.hpp\"\ntemplate <uint mod>\nstruct modint {\n\
@@ -245,7 +245,8 @@ data:
     \ (min(n, m) <= 60) return convolution_naive(a, b);\r\n  return convolution_garner(a,\
     \ b);\r\n}\r\n#line 2 \"seq/coef_of_rational_fps.hpp\"\n\r\ntemplate <typename\
     \ mint>\r\nmint coef_of_rational_fps(vector<mint> A, vector<mint> B, ll N) {\r\
-    \n  if(len(A)==0) return 0;\r\n  assert(B[0] == 1);\r\n  assert(len(B) == len(A)\
+    \n  if (len(A) == 0) return 0;\r\n  assert(len(A) < len(B));\r\n  while (len(A)\
+    \ + 1 < len(B)) A.eb(0);\r\n  assert(B[0] == mint(1));\r\n  assert(len(B) == len(A)\
     \ + 1);\r\n  while (N) {\r\n    vc<mint> B1 = B;\r\n    FOR(i, len(B1)) if (i\
     \ & 1) B1[i] = -B1[i];\r\n    A = convolution(A, B1);\r\n    B = convolution(B,\
     \ B1);\r\n    FOR(i, len(B1)) B[i] = B[2 * i];\r\n    if (N & 1) {\r\n      FOR(i,\
@@ -253,14 +254,15 @@ data:
     \ 1) A[i] = A[2 * i];\r\n    }\r\n    A.resize(len(B1) - 1);\r\n    B.resize(len(B1));\r\
     \n    N /= 2;\r\n  }\r\n  return A[0];\r\n}\n"
   code: "#include \"poly/convolution.hpp\"\r\n\r\ntemplate <typename mint>\r\nmint\
-    \ coef_of_rational_fps(vector<mint> A, vector<mint> B, ll N) {\r\n  if(len(A)==0)\
-    \ return 0;\r\n  assert(B[0] == 1);\r\n  assert(len(B) == len(A) + 1);\r\n  while\
-    \ (N) {\r\n    vc<mint> B1 = B;\r\n    FOR(i, len(B1)) if (i & 1) B1[i] = -B1[i];\r\
-    \n    A = convolution(A, B1);\r\n    B = convolution(B, B1);\r\n    FOR(i, len(B1))\
-    \ B[i] = B[2 * i];\r\n    if (N & 1) {\r\n      FOR(i, len(B1) - 1) A[i] = A[2\
-    \ * i | 1];\r\n    } else {\r\n      FOR(i, len(B1) - 1) A[i] = A[2 * i];\r\n\
-    \    }\r\n    A.resize(len(B1) - 1);\r\n    B.resize(len(B1));\r\n    N /= 2;\r\
-    \n  }\r\n  return A[0];\r\n}"
+    \ coef_of_rational_fps(vector<mint> A, vector<mint> B, ll N) {\r\n  if (len(A)\
+    \ == 0) return 0;\r\n  assert(len(A) < len(B));\r\n  while (len(A) + 1 < len(B))\
+    \ A.eb(0);\r\n  assert(B[0] == mint(1));\r\n  assert(len(B) == len(A) + 1);\r\n\
+    \  while (N) {\r\n    vc<mint> B1 = B;\r\n    FOR(i, len(B1)) if (i & 1) B1[i]\
+    \ = -B1[i];\r\n    A = convolution(A, B1);\r\n    B = convolution(B, B1);\r\n\
+    \    FOR(i, len(B1)) B[i] = B[2 * i];\r\n    if (N & 1) {\r\n      FOR(i, len(B1)\
+    \ - 1) A[i] = A[2 * i | 1];\r\n    } else {\r\n      FOR(i, len(B1) - 1) A[i]\
+    \ = A[2 * i];\r\n    }\r\n    A.resize(len(B1) - 1);\r\n    B.resize(len(B1));\r\
+    \n    N /= 2;\r\n  }\r\n  return A[0];\r\n}"
   dependsOn:
   - poly/convolution.hpp
   - mod/modint.hpp
@@ -268,8 +270,8 @@ data:
   path: seq/coef_of_rational_fps.hpp
   requiredBy:
   - seq/interpolate_linear_rec.hpp
-  timestamp: '2022-04-11 22:58:28+09:00'
-  verificationStatus: LIBRARY_ALL_WA
+  timestamp: '2022-04-11 23:26:08+09:00'
+  verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/library_checker/math/kth_term_of_linearly_recurrent_sequence.test.cpp
 documentation_of: seq/coef_of_rational_fps.hpp

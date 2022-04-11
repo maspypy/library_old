@@ -7,10 +7,10 @@ data:
   - icon: ':question:'
     path: poly/convolution.hpp
     title: poly/convolution.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: seq/coef_of_rational_fps.hpp
     title: seq/coef_of_rational_fps.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: seq/find_linear_rec.hpp
     title: seq/find_linear_rec.hpp
   _extendedRequiredBy: []
@@ -254,7 +254,8 @@ data:
     \ (min(n, m) <= 60) return convolution_naive(a, b);\r\n  return convolution_garner(a,\
     \ b);\r\n}\r\n#line 2 \"seq/coef_of_rational_fps.hpp\"\n\r\ntemplate <typename\
     \ mint>\r\nmint coef_of_rational_fps(vector<mint> A, vector<mint> B, ll N) {\r\
-    \n  if(len(A)==0) return 0;\r\n  assert(B[0] == 1);\r\n  assert(len(B) == len(A)\
+    \n  if (len(A) == 0) return 0;\r\n  assert(len(A) < len(B));\r\n  while (len(A)\
+    \ + 1 < len(B)) A.eb(0);\r\n  assert(B[0] == mint(1));\r\n  assert(len(B) == len(A)\
     \ + 1);\r\n  while (N) {\r\n    vc<mint> B1 = B;\r\n    FOR(i, len(B1)) if (i\
     \ & 1) B1[i] = -B1[i];\r\n    A = convolution(A, B1);\r\n    B = convolution(B,\
     \ B1);\r\n    FOR(i, len(B1)) B[i] = B[2 * i];\r\n    if (N & 1) {\r\n      FOR(i,\
@@ -276,7 +277,7 @@ data:
   isVerificationFile: false
   path: seq/interpolate_linear_rec.hpp
   requiredBy: []
-  timestamp: '2022-04-11 22:58:28+09:00'
+  timestamp: '2022-04-11 23:26:08+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: seq/interpolate_linear_rec.hpp
