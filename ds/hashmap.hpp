@@ -37,8 +37,24 @@ struct HashMapLL {
     return used[i] && keys[i] == key;
   }
 
-  void reset(){
-    for(auto&& i : IDS) used[i] = 0;
+  void reset() {
+    for (auto&& i: IDS) used[i] = 0;
     IDS.clear();
   }
+};
+
+template <typename KEY, typename VAL>
+struct HashMap {
+  HashMapLL<VAL, 20> MP;
+  function<ll(KEY)> f;
+  HashMap(function<ll(KEY)> f) : MP(), f(f) {}
+  int index(const KEY& key) { return MP.index(f(key)); }
+
+  VAL& operator[](const KEY& key) { return MP[f(key)]; }
+
+  bool contain(const KEY& key) { return MP.contain(f(key)); }
+
+  bool count(const KEY& key) { return MP.count(f(key)); }
+
+  void reset() { MP.reset(); }
 };
