@@ -6,8 +6,6 @@ T MinCostCycle(Graph& G) {
   int M = G.M;
   int N = G.N;
   T mx = 0;
-  T INF = 1;
-  for (auto&& e: G.edges) chmax(mx, e.cost), INF += e.cost;
   T res = INF;
 
   FOR(i, M) {
