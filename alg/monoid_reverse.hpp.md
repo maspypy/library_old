@@ -8,13 +8,16 @@ data:
   - icon: ':warning:'
     path: graph/lazytreemonoid.hpp
     title: graph/lazytreemonoid.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: graph/minimum_spanning_tree.hpp
     title: graph/minimum_spanning_tree.hpp
   - icon: ':heavy_check_mark:'
     path: graph/treemonoid.hpp
     title: graph/treemonoid.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_2_A_mst.test.cpp
+    title: test/aoj/GRL_2_A_mst.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
     title: test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp
@@ -50,6 +53,7 @@ data:
   timestamp: '2022-04-11 18:07:23+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/aoj/GRL_2_A_mst.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   - test/library_checker/datastructure/vertex_add_subtree_sum_monoid.test.cpp
   - test/library_checker/datastructure/vertex_add_path_sum_monoid_c.test.cpp

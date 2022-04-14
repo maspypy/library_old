@@ -49,6 +49,9 @@ data:
     path: test/aoj/GRL_1_C_warshallfloyd.test.cpp
     title: test/aoj/GRL_1_C_warshallfloyd.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_2_A_mst.test.cpp
+    title: test/aoj/GRL_2_A_mst.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_6_A_maxflow.test.cpp
     title: test/aoj/GRL_6_A_maxflow.test.cpp
   - icon: ':heavy_check_mark:'
@@ -644,6 +647,7 @@ data:
   - test/aoj/DSL_2_D_dualsegtree.test.cpp
   - test/aoj/GRL_6_A_maxflow.test.cpp
   - test/aoj/ALDS1_2_A_inversion.test.cpp
+  - test/aoj/GRL_2_A_mst.test.cpp
   - test/library_checker/matrix/matrix_product.test.cpp
   - test/library_checker/matrix/matrix_det.test.cpp
   - test/library_checker/matrix/hafnian_of_matrix.test.cpp

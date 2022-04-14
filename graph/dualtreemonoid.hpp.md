@@ -14,13 +14,16 @@ data:
     path: graph/hld.hpp
     title: graph/hld.hpp
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: graph/minimum_spanning_tree.hpp
     title: graph/minimum_spanning_tree.hpp
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_2_A_mst.test.cpp
+    title: test/aoj/GRL_2_A_mst.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"ds/lazysegtree.hpp\"\n\ntemplate <typename Lazy>\nstruct\
@@ -230,8 +233,9 @@ data:
   requiredBy:
   - graph/minimum_spanning_tree.hpp
   timestamp: '2022-04-11 19:10:33+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/aoj/GRL_2_A_mst.test.cpp
 documentation_of: graph/dualtreemonoid.hpp
 layout: document
 redirect_from:

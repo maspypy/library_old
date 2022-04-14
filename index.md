@@ -84,7 +84,7 @@ data:
     - icon: ':warning:'
       path: alg/monoid_cntsummin.hpp
       title: alg/monoid_cntsummin.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: alg/monoid_max.hpp
       title: alg/monoid_max.hpp
     - icon: ':warning:'
@@ -302,7 +302,7 @@ data:
     - icon: ':question:'
       path: graph/dijkstra.hpp
       title: graph/dijkstra.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: graph/dualtreemonoid.hpp
       title: graph/dualtreemonoid.hpp
     - icon: ':heavy_check_mark:'
@@ -329,7 +329,7 @@ data:
     - icon: ':x:'
       path: graph/mincostcycle.hpp
       title: graph/mincostcycle.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: graph/minimum_spanning_tree.hpp
       title: graph/minimum_spanning_tree.hpp
     - icon: ':warning:'
@@ -739,6 +739,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/GRL_1_C_warshallfloyd.test.cpp
       title: test/aoj/GRL_1_C_warshallfloyd.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/GRL_2_A_mst.test.cpp
+      title: test/aoj/GRL_2_A_mst.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/GRL_6_A_maxflow.test.cpp
       title: test/aoj/GRL_6_A_maxflow.test.cpp

@@ -5,7 +5,7 @@ data:
     path: graph/base.hpp
     title: graph/base.hpp
   _extendedRequiredBy:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: graph/dualtreemonoid.hpp
     title: graph/dualtreemonoid.hpp
   - icon: ':warning:'
@@ -14,7 +14,7 @@ data:
   - icon: ':warning:'
     path: graph/lazytreemonoid.hpp
     title: graph/lazytreemonoid.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: graph/minimum_spanning_tree.hpp
     title: graph/minimum_spanning_tree.hpp
   - icon: ':warning:'
@@ -36,6 +36,9 @@ data:
     path: graph/two_edge_component.hpp
     title: graph/two_edge_component.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_2_A_mst.test.cpp
+    title: test/aoj/GRL_2_A_mst.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
     title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
@@ -239,6 +242,7 @@ data:
   timestamp: '2022-03-19 16:40:52+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/aoj/GRL_2_A_mst.test.cpp
   - test/library_checker/graph/two_edge_component.test.cpp
   - test/library_checker/tree/lca.test.cpp
   - test/library_checker/tree/lca_directed.test.cpp

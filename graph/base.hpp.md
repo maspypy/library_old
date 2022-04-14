@@ -32,7 +32,7 @@ data:
   - icon: ':question:'
     path: graph/dijkstra.hpp
     title: graph/dijkstra.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: graph/dualtreemonoid.hpp
     title: graph/dualtreemonoid.hpp
   - icon: ':heavy_check_mark:'
@@ -59,7 +59,7 @@ data:
   - icon: ':x:'
     path: graph/mincostcycle.hpp
     title: graph/mincostcycle.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: graph/minimum_spanning_tree.hpp
     title: graph/minimum_spanning_tree.hpp
   - icon: ':warning:'
@@ -114,6 +114,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_1_C_warshallfloyd.test.cpp
     title: test/aoj/GRL_1_C_warshallfloyd.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_2_A_mst.test.cpp
+    title: test/aoj/GRL_2_A_mst.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
     title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
@@ -308,6 +311,7 @@ data:
   - test/aoj/ALDS1_12_B_dial.test.cpp
   - test/aoj/GRL_1_C_warshallfloyd.test.cpp
   - test/aoj/GRL_1_B_bellmanford.test.cpp
+  - test/aoj/GRL_2_A_mst.test.cpp
   - test/library_checker/math/twosat.test.cpp
   - test/library_checker/graph/cycle_detection.test.cpp
   - test/library_checker/graph/maximum_independent_set.test.cpp

@@ -17,7 +17,7 @@ data:
   - icon: ':warning:'
     path: ds/range_mex_query.hpp
     title: ds/range_mex_query.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: graph/minimum_spanning_tree.hpp
     title: graph/minimum_spanning_tree.hpp
   _extendedVerifiedWith:
@@ -27,6 +27,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/DSL_2_H_min_add_lazy.test.cpp
     title: test/aoj/DSL_2_H_min_add_lazy.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_2_A_mst.test.cpp
+    title: test/aoj/GRL_2_A_mst.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/staticrmq_seg.test.cpp
     title: test/library_checker/datastructure/staticrmq_seg.test.cpp
@@ -61,6 +64,7 @@ data:
   verifiedWith:
   - test/aoj/DSL_2_H_min_add_lazy.test.cpp
   - test/aoj/DSL_2_F_min_set_lazy.test.cpp
+  - test/aoj/GRL_2_A_mst.test.cpp
   - test/library_checker/datastructure/staticrmq_seg.test.cpp
   - test/library_checker/datastructure/staticrmq_sparse.test.cpp
 documentation_of: alg/monoid_min.hpp

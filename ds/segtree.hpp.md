@@ -11,7 +11,7 @@ data:
   - icon: ':warning:'
     path: geo/manhattan_nns.hpp
     title: geo/manhattan_nns.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: graph/minimum_spanning_tree.hpp
     title: graph/minimum_spanning_tree.hpp
   - icon: ':heavy_check_mark:'
@@ -24,6 +24,9 @@ data:
     path: mod/modular_subset_sum.hpp
     title: mod/modular_subset_sum.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_2_A_mst.test.cpp
+    title: test/aoj/GRL_2_A_mst.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
     title: test/library_checker/datastructure/point_set_range_composite_monoid.test.cpp
@@ -128,6 +131,7 @@ data:
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
   - test/yukicoder/4_modular_subset_sum.test.cpp
+  - test/aoj/GRL_2_A_mst.test.cpp
   - test/library_checker/datastructure/staticrmq_seg.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite_monoid.test.cpp
   - test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp

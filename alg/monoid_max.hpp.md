@@ -14,13 +14,16 @@ data:
   - icon: ':warning:'
     path: alg/lazy_max_set.hpp
     title: alg/lazy_max_set.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: graph/minimum_spanning_tree.hpp
     title: graph/minimum_spanning_tree.hpp
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_2_A_mst.test.cpp
+    title: test/aoj/GRL_2_A_mst.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 1 \"alg/monoid_max.hpp\"\ntemplate <class X, X INF>\r\nstruct\
@@ -41,8 +44,9 @@ data:
   - alg/lazy_max_add.hpp
   - alg/lazy_max_set.hpp
   timestamp: '2022-04-11 18:02:25+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/aoj/GRL_2_A_mst.test.cpp
 documentation_of: alg/monoid_max.hpp
 layout: document
 redirect_from:

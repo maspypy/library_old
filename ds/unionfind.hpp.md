@@ -11,10 +11,13 @@ data:
   - icon: ':warning:'
     path: graph/functional.hpp
     title: graph/functional.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: graph/minimum_spanning_tree.hpp
     title: graph/minimum_spanning_tree.hpp
   _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_2_A_mst.test.cpp
+    title: test/aoj/GRL_2_A_mst.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/unionfind.test.cpp
     title: test/library_checker/datastructure/unionfind.test.cpp
@@ -58,6 +61,7 @@ data:
   timestamp: '2022-04-14 18:23:56+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/aoj/GRL_2_A_mst.test.cpp
   - test/library_checker/graph/bipartitematching.test.cpp
   - test/library_checker/datastructure/unionfind.test.cpp
 documentation_of: ds/unionfind.hpp

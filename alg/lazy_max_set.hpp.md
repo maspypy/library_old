@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: alg/monoid_max.hpp
     title: alg/monoid_max.hpp
   - icon: ':heavy_check_mark:'
