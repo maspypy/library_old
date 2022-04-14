@@ -32,7 +32,7 @@ tuple<T, vc<bool>, Graph<T>> minimum_spanning_tree(Graph<T>& G) {
     auto& e = G.edges[i];
     MST.add(e.frm, e.to, e.cost);
   }
-  MST.prepare();
+  MST.build();
   return {mst_cost, in_mst, MST};
 }
 
