@@ -4,10 +4,10 @@ data:
   - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':x:'
+  - icon: ':question:'
     path: graph/dijkstra.hpp
     title: graph/dijkstra.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/restore_path.hpp
     title: graph/restore_path.hpp
   - icon: ':question:'
@@ -18,9 +18,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://judge.yosupo.jp/problem/shortest_path
@@ -241,7 +241,7 @@ data:
     \ 8 \"test/library_checker/graph/shortest_path.test.cpp\"\n\r\nvoid solve() {\r\
     \n  LL(N, M, s, t);\r\n  Graph<ll, true> G(N);\r\n  G.read_graph(M, 1, 0);\r\n\
     \r\n  const ll INF = 1LL << 60;\r\n\r\n  auto [dist, par] = dijkstra<ll, INF>(G,\
-    \ s);\r\n  if (dist[t] == -1) return print(-1);\r\n\r\n  vector<int> pth = restore_path(par,\
+    \ s);\r\n  if (dist[t] == INF) return print(-1);\r\n\r\n  vector<int> pth = restore_path(par,\
     \ t);\r\n  print(dist[t], len(pth) - 1);\r\n  FOR(i, len(pth) - 1) print(pth[i],\
     \ pth[i + 1]);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
     \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
@@ -250,7 +250,7 @@ data:
     \r\n#include \"graph/restore_path.hpp\"\r\n\r\nvoid solve() {\r\n  LL(N, M, s,\
     \ t);\r\n  Graph<ll, true> G(N);\r\n  G.read_graph(M, 1, 0);\r\n\r\n  const ll\
     \ INF = 1LL << 60;\r\n\r\n  auto [dist, par] = dijkstra<ll, INF>(G, s);\r\n  if\
-    \ (dist[t] == -1) return print(-1);\r\n\r\n  vector<int> pth = restore_path(par,\
+    \ (dist[t] == INF) return print(-1);\r\n\r\n  vector<int> pth = restore_path(par,\
     \ t);\r\n  print(dist[t], len(pth) - 1);\r\n  FOR(i, len(pth) - 1) print(pth[i],\
     \ pth[i + 1]);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
     \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
@@ -263,8 +263,8 @@ data:
   isVerificationFile: true
   path: test/library_checker/graph/shortest_path.test.cpp
   requiredBy: []
-  timestamp: '2022-04-15 04:44:03+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-04-15 05:01:12+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/graph/shortest_path.test.cpp
 layout: document
