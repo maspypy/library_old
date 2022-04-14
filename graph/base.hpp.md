@@ -5,7 +5,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: flow/bipartite.hpp
     title: flow/bipartite.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: graph/bellmanford.hpp
     title: graph/bellmanford.hpp
   - icon: ':question:'
@@ -108,6 +108,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/ALDS1_12_B_dial.test.cpp
     title: test/aoj/ALDS1_12_B_dial.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_1_B_bellmanford.test.cpp
+    title: test/aoj/GRL_1_B_bellmanford.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
     title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
@@ -300,6 +303,7 @@ data:
   - test/yukicoder/1002_centroid.test.cpp
   - test/yukicoder/17_warshall_floyd.test.cpp
   - test/aoj/ALDS1_12_B_dial.test.cpp
+  - test/aoj/GRL_1_B_bellmanford.test.cpp
   - test/library_checker/math/twosat.test.cpp
   - test/library_checker/graph/cycle_detection.test.cpp
   - test/library_checker/graph/maximum_independent_set.test.cpp

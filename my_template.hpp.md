@@ -46,6 +46,9 @@ data:
     path: test/aoj/DSL_4_A_rectangle_union.test.cpp
     title: test/aoj/DSL_4_A_rectangle_union.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_1_B_bellmanford.test.cpp
+    title: test/aoj/GRL_1_B_bellmanford.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_6_A_maxflow.test.cpp
     title: test/aoj/GRL_6_A_maxflow.test.cpp
   - icon: ':heavy_check_mark:'
@@ -554,6 +557,7 @@ data:
   - test/aoj/ALDS1_1_C_primetest.test.cpp
   - test/aoj/DSL_2_F_min_set_lazy.test.cpp
   - test/aoj/ITP2_11_D_for_nCk.test.cpp
+  - test/aoj/GRL_1_B_bellmanford.test.cpp
   - test/aoj/DSL_4_A_rectangle_union.test.cpp
   - test/aoj/DSL_1_B_weighteduf.test.cpp
   - test/aoj/ITP1_D_D_divisors.test.cpp

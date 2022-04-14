@@ -266,7 +266,7 @@ data:
     - icon: ':question:'
       path: graph/base.hpp
       title: graph/base.hpp
-    - icon: ':warning:'
+    - icon: ':heavy_check_mark:'
       path: graph/bellmanford.hpp
       title: graph/bellmanford.hpp
     - icon: ':question:'
@@ -733,6 +733,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/DSL_4_A_rectangle_union.test.cpp
       title: test/aoj/DSL_4_A_rectangle_union.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/GRL_1_B_bellmanford.test.cpp
+      title: test/aoj/GRL_1_B_bellmanford.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/GRL_6_A_maxflow.test.cpp
       title: test/aoj/GRL_6_A_maxflow.test.cpp

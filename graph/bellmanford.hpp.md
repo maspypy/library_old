@@ -5,10 +5,13 @@ data:
     path: graph/base.hpp
     title: graph/base.hpp
   _extendedRequiredBy: []
-  _extendedVerifiedWith: []
+  _extendedVerifiedWith:
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_1_B_bellmanford.test.cpp
+    title: test/aoj/GRL_1_B_bellmanford.test.cpp
   _isVerificationFailed: false
   _pathExtension: hpp
-  _verificationStatusIcon: ':warning:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n\
@@ -49,33 +52,36 @@ data:
     \u3002O(NM) \u6642\u9593\u3002\n// \u5230\u9054\u4E0D\u53EF\u80FD\uFF1AINF\n//\
     \ \u8CA0\u9589\u8DEF\u3092\u7D4C\u7531\u3057\u3066\u3044\u304F\u3089\u3067\u3082\
     \u5C0F\u3055\u304F\u3067\u304D\u308B\uFF1A-INF\ntemplate <typename T, T INF, typename\
-    \ Graph>\nvc<T> BellmanFord(Graph& G, int s) {\n  int N = G.N;\n  vc<T> dist(N,\
-    \ INF);\n  dist[s] = 0;\n  int loop = 0;\n  while (1) {\n    ++loop;\n    bool\
-    \ upd = 0;\n    FOR(v, N) {\n      if (dist[v] == INF) continue;\n      for (auto&&\
-    \ e: G[v]) {\n        T before = dist[e.to];\n        T after = dist[v] + e.cost;\n\
-    \        chmax(after, -INF);\n        if (before > after) {\n          upd = 1;\n\
-    \          if (loop >= N) after = -INF;\n          dist[e.to] = after;\n     \
-    \   }\n      }\n    }\n    if (!upd) break;\n  }\n  return dist;\n}\n"
+    \ Graph>\npair<vc<T>, vc<int>> BellmanFord(Graph& G, int s) {\n  int N = G.N;\n\
+    \  vc<T> dist(N, INF);\n  vc<int> par(N, -1);\n  dist[s] = 0;\n  int loop = 0;\n\
+    \  while (1) {\n    ++loop;\n    bool upd = 0;\n    FOR(v, N) {\n      if (dist[v]\
+    \ == INF) continue;\n      for (auto&& e: G[v]) {\n        T before = dist[e.to];\n\
+    \        T after = dist[v] + e.cost;\n        chmax(after, -INF);\n        if\
+    \ (before > after) {\n          par[e.to] = v;\n          upd = 1;\n         \
+    \ if (loop >= N) after = -INF;\n          dist[e.to] = after;\n        }\n   \
+    \   }\n    }\n    if (!upd) break;\n  }\n  return {dist, par};\n}\n"
   code: "#pragma once\n#include \"graph/base.hpp\"\n\n// \u5358\u4E00\u59CB\u70B9\u6700\
     \u77ED\u8DEF\u3002\u8CA0\u9589\u8DEF\u3042\u308A\u3067\u3082\u3088\u3044\u3002\
     O(NM) \u6642\u9593\u3002\n// \u5230\u9054\u4E0D\u53EF\u80FD\uFF1AINF\n// \u8CA0\
     \u9589\u8DEF\u3092\u7D4C\u7531\u3057\u3066\u3044\u304F\u3089\u3067\u3082\u5C0F\
     \u3055\u304F\u3067\u304D\u308B\uFF1A-INF\ntemplate <typename T, T INF, typename\
-    \ Graph>\nvc<T> BellmanFord(Graph& G, int s) {\n  int N = G.N;\n  vc<T> dist(N,\
-    \ INF);\n  dist[s] = 0;\n  int loop = 0;\n  while (1) {\n    ++loop;\n    bool\
-    \ upd = 0;\n    FOR(v, N) {\n      if (dist[v] == INF) continue;\n      for (auto&&\
-    \ e: G[v]) {\n        T before = dist[e.to];\n        T after = dist[v] + e.cost;\n\
-    \        chmax(after, -INF);\n        if (before > after) {\n          upd = 1;\n\
-    \          if (loop >= N) after = -INF;\n          dist[e.to] = after;\n     \
-    \   }\n      }\n    }\n    if (!upd) break;\n  }\n  return dist;\n}\n"
+    \ Graph>\npair<vc<T>, vc<int>> BellmanFord(Graph& G, int s) {\n  int N = G.N;\n\
+    \  vc<T> dist(N, INF);\n  vc<int> par(N, -1);\n  dist[s] = 0;\n  int loop = 0;\n\
+    \  while (1) {\n    ++loop;\n    bool upd = 0;\n    FOR(v, N) {\n      if (dist[v]\
+    \ == INF) continue;\n      for (auto&& e: G[v]) {\n        T before = dist[e.to];\n\
+    \        T after = dist[v] + e.cost;\n        chmax(after, -INF);\n        if\
+    \ (before > after) {\n          par[e.to] = v;\n          upd = 1;\n         \
+    \ if (loop >= N) after = -INF;\n          dist[e.to] = after;\n        }\n   \
+    \   }\n    }\n    if (!upd) break;\n  }\n  return {dist, par};\n}\n"
   dependsOn:
   - graph/base.hpp
   isVerificationFile: false
   path: graph/bellmanford.hpp
   requiredBy: []
-  timestamp: '2022-04-14 18:26:42+09:00'
-  verificationStatus: LIBRARY_NO_TESTS
-  verifiedWith: []
+  timestamp: '2022-04-15 04:39:34+09:00'
+  verificationStatus: LIBRARY_ALL_AC
+  verifiedWith:
+  - test/aoj/GRL_1_B_bellmanford.test.cpp
 documentation_of: graph/bellmanford.hpp
 layout: document
 redirect_from:
