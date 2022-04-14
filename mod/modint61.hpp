@@ -59,5 +59,5 @@ struct modint61 {
     }
     return ret;
   }
-  static constexpr int get_mod() { return mod; }
+  static constexpr ll get_mod() { return mod; }
 };
