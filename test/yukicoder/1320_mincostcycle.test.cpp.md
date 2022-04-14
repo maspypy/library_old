@@ -4,13 +4,13 @@ data:
   - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/bfs01.hpp
     title: graph/bfs01.hpp
-  - icon: ':question:'
+  - icon: ':heavy_check_mark:'
     path: graph/dijkstra.hpp
     title: graph/dijkstra.hpp
-  - icon: ':x:'
+  - icon: ':heavy_check_mark:'
     path: graph/mincostcycle.hpp
     title: graph/mincostcycle.hpp
   - icon: ':question:'
@@ -21,9 +21,9 @@ data:
     title: other/io.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: true
+  _isVerificationFailed: false
   _pathExtension: cpp
-  _verificationStatusIcon: ':x:'
+  _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/1320
@@ -258,8 +258,7 @@ data:
     \     que.push_front(e.to);\n        else\n          que.push_back(e.to);\n  \
     \    }\n    }\n  }\n  return {dist, par, root};\n}\n#line 3 \"graph/mincostcycle.hpp\"\
     \n\r\ntemplate <typename T, T INF, typename Graph>\r\nT MinCostCycle(Graph& G)\
-    \ {\r\n  int M = G.M;\r\n  int N = G.N;\r\n  T mx = 0;\r\n  T INF = 1;\r\n  for\
-    \ (auto&& e: G.edges) chmax(mx, e.cost), INF += e.cost;\r\n  T res = INF;\r\n\r\
+    \ {\r\n  int M = G.M;\r\n  int N = G.N;\r\n  T mx = 0;\r\n  T res = INF;\r\n\r\
     \n  FOR(i, M) {\r\n    auto& e = G.edges[i];\r\n    T cost = e.cost;\r\n    int\
     \ frm = e.to, to = e.frm;\r\n    Graph Gi(N);\r\n    FOR(j, M) if (i != j) {\r\
     \n      auto& e = G.edges[j];\r\n      Gi.add(e.frm, e.to, e.cost);\r\n    }\r\
@@ -295,8 +294,8 @@ data:
   isVerificationFile: true
   path: test/yukicoder/1320_mincostcycle.test.cpp
   requiredBy: []
-  timestamp: '2022-04-15 05:19:46+09:00'
-  verificationStatus: TEST_WRONG_ANSWER
+  timestamp: '2022-04-15 05:25:57+09:00'
+  verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/yukicoder/1320_mincostcycle.test.cpp
 layout: document
