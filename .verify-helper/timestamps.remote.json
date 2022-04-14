@@ -73,6 +73,7 @@
 "test/library_checker/graph/enumerate_triangles.test.cpp": "2022-04-14 19:49:38 +0900",
 "test/library_checker/graph/maximum_independent_set.test.cpp": "2022-04-14 19:49:38 +0900",
 "test/library_checker/graph/scc.test.cpp": "2022-04-14 19:49:38 +0900",
+"test/library_checker/graph/shortest_path.test.cpp": "2022-04-15 05:01:12 +0900",
 "test/library_checker/graph/two_edge_component.test.cpp": "2022-04-14 19:49:38 +0900",
 "test/library_checker/math/binomial_coefficient.test.cpp": "2022-04-14 19:49:38 +0900",
 "test/library_checker/math/counting_primes.test.cpp": "2022-04-14 19:49:38 +0900",
