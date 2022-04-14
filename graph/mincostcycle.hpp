@@ -1,7 +1,7 @@
 #include "graph/dijkstra.hpp"
 #include "graph/bfs01.hpp"
 
-template <typename Graph>
+template <typename T, T INF, typename Graph>
 typename Graph::cost_type MinCostCycle(Graph& G) {
   using T = typename Graph::cost_type;
   int M = G.M;
@@ -21,7 +21,8 @@ typename Graph::cost_type MinCostCycle(Graph& G) {
       Gi.add(e.frm, e.to, e.cost);
     }
     Gi.build();
-    T x = (mx <= 1 ? bfs01(Gi, frm).fi[to] : dijkstra(Gi, frm).fi[to]);
+
+    T x = (mx <= 1 ? bfs01(Gi, frm).fi[to] : dijkstra<T, INF>(Gi, frm).fi[to]);
     if (x == -1) x = INF;
     chmin(res, cost + x);
   }
