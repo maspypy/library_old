@@ -14,6 +14,7 @@
 "test/aoj/DSL_4_A_rectangle_union.test.cpp": "2022-04-14 19:49:38 +0900",
 "test/aoj/GRL_1_B_bellmanford.test.cpp": "2022-04-15 04:39:51 +0900",
 "test/aoj/GRL_1_C_warshallfloyd.test.cpp": "2022-04-15 04:57:28 +0900",
+"test/aoj/GRL_2_A_mst.test.cpp": "2022-04-15 05:20:10 +0900",
 "test/aoj/GRL_6_A_maxflow.test.cpp": "2022-04-14 19:49:38 +0900",
 "test/aoj/ITP1_6_D_matvec.test.cpp": "2022-04-14 19:49:38 +0900",
 "test/aoj/ITP1_9_A_split.test.cpp": "2022-04-14 18:25:31 +0900",
