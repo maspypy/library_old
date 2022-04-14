@@ -62,3 +62,10 @@ void print(Head&& head, Tail&&... tail) {
   if (sizeof...(Tail)) cout << " ";
   print(forward<Tail>(tail)...);
 }
+
+void YES(bool t = 1) { print(t ? "YES" : "NO"); }
+void NO(bool t = 1) { YES(!t); }
+void Yes(bool t = 1) { print(t ? "Yes" : "No"); }
+void No(bool t = 1) { Yes(!t); }
+void yes(bool t = 1) { print(t ? "yes" : "no"); }
+void no(bool t = 1) { yes(!t); }
