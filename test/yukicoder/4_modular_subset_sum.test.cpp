@@ -7,8 +7,8 @@ void solve() {
   LL(N);
   VEC(int, A, N);
   ll S = SUM(A);
-  auto can = modular_subset_sum(S + 1, A);
-  if (can[S / 2] && S % 2 == 0) {
+  Modular_Subset_Sum MSS(S + 1, A);
+  if (MSS[S / 2] && S % 2 == 0) {
     print("possible");
   } else {
     print("impossible");

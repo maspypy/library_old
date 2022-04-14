@@ -5,14 +5,15 @@
 
 void solve() {
   LL(T, N, M);
+  const ll INF = 1LL << 60;
   if (T == 0) {
     Graph<ll, 0> G(N);
     G.read_graph(M, true);
-    print(MinCostCycle(G));
+    print(MinCostCycle<ll, INF>(G));
   } else {
     Graph<ll, 1> G(N);
     G.read_graph(M, true);
-    print(MinCostCycle(G));
+    print(MinCostCycle<ll, INF>(G));
   }
 }
 
