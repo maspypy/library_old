@@ -49,7 +49,7 @@ data:
     \ * b, b), swap(u -= t * v, v);\r\n    }\r\n    return modint61(u);\r\n  }\r\n\
     \  modint61 pow(int64_t n) const {\r\n    modint61 ret(1), mul(val);\r\n    while\
     \ (n > 0) {\r\n      if (n & 1) ret = ret * mul;\r\n      mul = mul * mul;\r\n\
-    \      n >>= 1;\r\n    }\r\n    return ret;\r\n  }\r\n  static constexpr int get_mod()\
+    \      n >>= 1;\r\n    }\r\n    return ret;\r\n  }\r\n  static constexpr ll get_mod()\
     \ { return mod; }\r\n};\r\n#line 3 \"alg/monoid_rollinghash.hpp\"\n\r\nstruct\
     \ Monoid_Rolling_Hash {\r\n  using value_type = pair<modint61, modint61>; // pow\
     \ of base, val\r\n  using X = value_type;\r\n  static X op(X x, X y) { return\
@@ -148,7 +148,7 @@ data:
   isVerificationFile: false
   path: mod/modular_subset_sum.hpp
   requiredBy: []
-  timestamp: '2022-04-14 18:27:07+09:00'
+  timestamp: '2022-04-15 04:34:30+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/4_modular_subset_sum.test.cpp

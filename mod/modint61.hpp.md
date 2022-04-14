@@ -43,7 +43,7 @@ data:
     \ * b, b), swap(u -= t * v, v);\r\n    }\r\n    return modint61(u);\r\n  }\r\n\
     \  modint61 pow(int64_t n) const {\r\n    modint61 ret(1), mul(val);\r\n    while\
     \ (n > 0) {\r\n      if (n & 1) ret = ret * mul;\r\n      mul = mul * mul;\r\n\
-    \      n >>= 1;\r\n    }\r\n    return ret;\r\n  }\r\n  static constexpr int get_mod()\
+    \      n >>= 1;\r\n    }\r\n    return ret;\r\n  }\r\n  static constexpr ll get_mod()\
     \ { return mod; }\r\n};\r\n"
   code: "#pragma once\r\nstruct modint61 {\r\n  static constexpr bool is_modint =\
     \ true;\r\n  static constexpr ll mod = (1LL << 61) - 1;\r\n  ll val;\r\n  constexpr\
@@ -71,7 +71,7 @@ data:
     \ * b, b), swap(u -= t * v, v);\r\n    }\r\n    return modint61(u);\r\n  }\r\n\
     \  modint61 pow(int64_t n) const {\r\n    modint61 ret(1), mul(val);\r\n    while\
     \ (n > 0) {\r\n      if (n & 1) ret = ret * mul;\r\n      mul = mul * mul;\r\n\
-    \      n >>= 1;\r\n    }\r\n    return ret;\r\n  }\r\n  static constexpr int get_mod()\
+    \      n >>= 1;\r\n    }\r\n    return ret;\r\n  }\r\n  static constexpr ll get_mod()\
     \ { return mod; }\r\n};\r\n"
   dependsOn: []
   isVerificationFile: false
@@ -79,7 +79,7 @@ data:
   requiredBy:
   - mod/modular_subset_sum.hpp
   - alg/monoid_rollinghash.hpp
-  timestamp: '2022-04-09 14:33:07+09:00'
+  timestamp: '2022-04-15 04:34:30+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/4_modular_subset_sum.test.cpp
