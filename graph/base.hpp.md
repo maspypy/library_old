@@ -101,7 +101,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/twosat.hpp
     title: graph/twosat.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/warshall_floyd.hpp
     title: graph/warshall_floyd.hpp
   _extendedVerifiedWith:
@@ -111,6 +111,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_1_B_bellmanford.test.cpp
     title: test/aoj/GRL_1_B_bellmanford.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_1_C_warshallfloyd.test.cpp
+    title: test/aoj/GRL_1_C_warshallfloyd.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
     title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
@@ -177,7 +180,7 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1320_mincostcycle.test.cpp
     title: test/yukicoder/1320_mincostcycle.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/17_warshall_floyd.test.cpp
     title: test/yukicoder/17_warshall_floyd.test.cpp
   - icon: ':heavy_check_mark:'
@@ -303,6 +306,7 @@ data:
   - test/yukicoder/1002_centroid.test.cpp
   - test/yukicoder/17_warshall_floyd.test.cpp
   - test/aoj/ALDS1_12_B_dial.test.cpp
+  - test/aoj/GRL_1_C_warshallfloyd.test.cpp
   - test/aoj/GRL_1_B_bellmanford.test.cpp
   - test/library_checker/math/twosat.test.cpp
   - test/library_checker/graph/cycle_detection.test.cpp

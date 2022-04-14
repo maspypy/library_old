@@ -374,7 +374,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: graph/twosat.hpp
       title: graph/twosat.hpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':question:'
       path: graph/warshall_floyd.hpp
       title: graph/warshall_floyd.hpp
   - name: linalg
@@ -736,6 +736,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/aoj/GRL_1_B_bellmanford.test.cpp
       title: test/aoj/GRL_1_B_bellmanford.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/aoj/GRL_1_C_warshallfloyd.test.cpp
+      title: test/aoj/GRL_1_C_warshallfloyd.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/aoj/GRL_6_A_maxflow.test.cpp
       title: test/aoj/GRL_6_A_maxflow.test.cpp
@@ -1114,7 +1117,7 @@ data:
     - icon: ':x:'
       path: test/yukicoder/1320_mincostcycle.test.cpp
       title: test/yukicoder/1320_mincostcycle.test.cpp
-    - icon: ':heavy_check_mark:'
+    - icon: ':x:'
       path: test/yukicoder/17_warshall_floyd.test.cpp
       title: test/yukicoder/17_warshall_floyd.test.cpp
     - icon: ':heavy_check_mark:'

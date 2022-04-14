@@ -49,6 +49,9 @@ data:
     path: test/aoj/GRL_1_B_bellmanford.test.cpp
     title: test/aoj/GRL_1_B_bellmanford.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_1_C_warshallfloyd.test.cpp
+    title: test/aoj/GRL_1_C_warshallfloyd.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_6_A_maxflow.test.cpp
     title: test/aoj/GRL_6_A_maxflow.test.cpp
   - icon: ':heavy_check_mark:'
@@ -399,7 +402,7 @@ data:
   - icon: ':x:'
     path: test/yukicoder/1320_mincostcycle.test.cpp
     title: test/yukicoder/1320_mincostcycle.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/17_warshall_floyd.test.cpp
     title: test/yukicoder/17_warshall_floyd.test.cpp
   - icon: ':heavy_check_mark:'
@@ -556,6 +559,7 @@ data:
   - test/aoj/2842_fenwick2d_dense.test.cpp
   - test/aoj/ALDS1_1_C_primetest.test.cpp
   - test/aoj/DSL_2_F_min_set_lazy.test.cpp
+  - test/aoj/GRL_1_C_warshallfloyd.test.cpp
   - test/aoj/ITP2_11_D_for_nCk.test.cpp
   - test/aoj/GRL_1_B_bellmanford.test.cpp
   - test/aoj/DSL_4_A_rectangle_union.test.cpp
