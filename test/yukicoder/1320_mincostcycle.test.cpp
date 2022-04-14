@@ -9,11 +9,15 @@ void solve() {
   if (T == 0) {
     Graph<ll, 0> G(N);
     G.read_graph(M, true);
-    print(MinCostCycle<ll, INF>(G));
+    ll x = MinCostCycle<ll, INF>(G);
+    if (x == INF) x = -1;
+    print(x);
   } else {
     Graph<ll, 1> G(N);
     G.read_graph(M, true);
-    print(MinCostCycle<ll, INF>(G));
+    ll x = MinCostCycle<ll, INF>(G);
+    if (x == INF) x = -1;
+    print(x);
   }
 }
 
