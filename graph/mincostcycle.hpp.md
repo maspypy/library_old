@@ -90,27 +90,27 @@ data:
     \ = root[e.frm];\n        par[e.to] = e.frm;\n        if (e.cost == 0)\n     \
     \     que.push_front(e.to);\n        else\n          que.push_back(e.to);\n  \
     \    }\n    }\n  }\n  return {dist, par, root};\n}\n#line 3 \"graph/mincostcycle.hpp\"\
-    \n\r\ntemplate <typename Graph>\r\ntypename Graph::cost_type MinCostCycle(Graph&\
+    \n\r\ntemplate <typename T, T INF, typename Graph>\r\ntypename Graph::cost_type\
+    \ MinCostCycle(Graph& G) {\r\n  using T = typename Graph::cost_type;\r\n  int\
+    \ M = G.M;\r\n  int N = G.N;\r\n  T mx = 0;\r\n  T INF = 1;\r\n  for (auto&& e:\
+    \ G.edges) chmax(mx, e.cost), INF += e.cost;\r\n  T res = INF;\r\n\r\n  FOR(i,\
+    \ M) {\r\n    auto& e = G.edges[i];\r\n    T cost = e.cost;\r\n    int frm = e.to,\
+    \ to = e.frm;\r\n    Graph Gi(N);\r\n    FOR(j, M) if (i != j) {\r\n      auto&\
+    \ e = G.edges[j];\r\n      Gi.add(e.frm, e.to, e.cost);\r\n    }\r\n    Gi.build();\r\
+    \n\r\n    T x = (mx <= 1 ? bfs01(Gi, frm).fi[to] : dijkstra<T, INF>(Gi, frm).fi[to]);\r\
+    \n    if (x == -1) x = INF;\r\n    chmin(res, cost + x);\r\n  }\r\n  if (res ==\
+    \ INF) res = -1;\r\n  return res;\r\n}\n"
+  code: "#include \"graph/dijkstra.hpp\"\r\n#include \"graph/bfs01.hpp\"\r\n\r\ntemplate\
+    \ <typename T, T INF, typename Graph>\r\ntypename Graph::cost_type MinCostCycle(Graph&\
     \ G) {\r\n  using T = typename Graph::cost_type;\r\n  int M = G.M;\r\n  int N\
     \ = G.N;\r\n  T mx = 0;\r\n  T INF = 1;\r\n  for (auto&& e: G.edges) chmax(mx,\
     \ e.cost), INF += e.cost;\r\n  T res = INF;\r\n\r\n  FOR(i, M) {\r\n    auto&\
     \ e = G.edges[i];\r\n    T cost = e.cost;\r\n    int frm = e.to, to = e.frm;\r\
     \n    Graph Gi(N);\r\n    FOR(j, M) if (i != j) {\r\n      auto& e = G.edges[j];\r\
-    \n      Gi.add(e.frm, e.to, e.cost);\r\n    }\r\n    Gi.build();\r\n    T x =\
-    \ (mx <= 1 ? bfs01(Gi, frm).fi[to] : dijkstra(Gi, frm).fi[to]);\r\n    if (x ==\
-    \ -1) x = INF;\r\n    chmin(res, cost + x);\r\n  }\r\n  if (res == INF) res =\
-    \ -1;\r\n  return res;\r\n}\n"
-  code: "#include \"graph/dijkstra.hpp\"\r\n#include \"graph/bfs01.hpp\"\r\n\r\ntemplate\
-    \ <typename Graph>\r\ntypename Graph::cost_type MinCostCycle(Graph& G) {\r\n \
-    \ using T = typename Graph::cost_type;\r\n  int M = G.M;\r\n  int N = G.N;\r\n\
-    \  T mx = 0;\r\n  T INF = 1;\r\n  for (auto&& e: G.edges) chmax(mx, e.cost), INF\
-    \ += e.cost;\r\n  T res = INF;\r\n\r\n  FOR(i, M) {\r\n    auto& e = G.edges[i];\r\
-    \n    T cost = e.cost;\r\n    int frm = e.to, to = e.frm;\r\n    Graph Gi(N);\r\
-    \n    FOR(j, M) if (i != j) {\r\n      auto& e = G.edges[j];\r\n      Gi.add(e.frm,\
-    \ e.to, e.cost);\r\n    }\r\n    Gi.build();\r\n    T x = (mx <= 1 ? bfs01(Gi,\
-    \ frm).fi[to] : dijkstra(Gi, frm).fi[to]);\r\n    if (x == -1) x = INF;\r\n  \
-    \  chmin(res, cost + x);\r\n  }\r\n  if (res == INF) res = -1;\r\n  return res;\r\
-    \n}"
+    \n      Gi.add(e.frm, e.to, e.cost);\r\n    }\r\n    Gi.build();\r\n\r\n    T\
+    \ x = (mx <= 1 ? bfs01(Gi, frm).fi[to] : dijkstra<T, INF>(Gi, frm).fi[to]);\r\n\
+    \    if (x == -1) x = INF;\r\n    chmin(res, cost + x);\r\n  }\r\n  if (res ==\
+    \ INF) res = -1;\r\n  return res;\r\n}"
   dependsOn:
   - graph/dijkstra.hpp
   - graph/base.hpp
@@ -118,7 +118,7 @@ data:
   isVerificationFile: false
   path: graph/mincostcycle.hpp
   requiredBy: []
-  timestamp: '2022-04-15 04:34:04+09:00'
+  timestamp: '2022-04-15 04:44:16+09:00'
   verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/1320_mincostcycle.test.cpp

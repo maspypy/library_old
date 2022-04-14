@@ -108,7 +108,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: alg/monoid_reverse.hpp
       title: alg/monoid_reverse.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: alg/monoid_rollinghash.hpp
       title: alg/monoid_rollinghash.hpp
     - icon: ':heavy_check_mark:'
@@ -203,7 +203,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: ds/rectangleunion.hpp
       title: ds/rectangleunion.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: ds/segtree.hpp
       title: ds/segtree.hpp
     - icon: ':heavy_check_mark:'
@@ -438,10 +438,10 @@ data:
     - icon: ':heavy_check_mark:'
       path: mod/modint.hpp
       title: mod/modint.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: mod/modint61.hpp
       title: mod/modint61.hpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: mod/modular_subset_sum.hpp
       title: mod/modular_subset_sum.hpp
     - icon: ':heavy_check_mark:'
@@ -543,7 +543,7 @@ data:
     - icon: ':warning:'
       path: other/monge_shortest_path.hpp
       title: other/monge_shortest_path.hpp
-    - icon: ':question:'
+    - icon: ':heavy_check_mark:'
       path: other/random.hpp
       title: other/random.hpp
   - name: pds
@@ -1120,7 +1120,7 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/1810_matpow.test.cpp
       title: test/yukicoder/1810_matpow.test.cpp
-    - icon: ':x:'
+    - icon: ':heavy_check_mark:'
       path: test/yukicoder/4_modular_subset_sum.test.cpp
       title: test/yukicoder/4_modular_subset_sum.test.cpp
     - icon: ':heavy_check_mark:'

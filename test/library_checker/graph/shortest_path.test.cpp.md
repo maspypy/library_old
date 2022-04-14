@@ -240,20 +240,20 @@ data:
     \ pth.eb(par[pth.back()]);\r\n  reverse(all(pth));\r\n  return pth;\r\n}\n#line\
     \ 8 \"test/library_checker/graph/shortest_path.test.cpp\"\n\r\nvoid solve() {\r\
     \n  LL(N, M, s, t);\r\n  Graph<ll, true> G(N);\r\n  G.read_graph(M, 1, 0);\r\n\
-    \r\n  auto [dist, par] = dijkstra(G, s);\r\n  if (dist[t] == -1) return print(-1);\r\
-    \n\r\n  vector<int> pth = restore_path(par, t);\r\n  print(dist[t], len(pth) -\
-    \ 1);\r\n  FOR(i, len(pth) - 1) print(pth[i], pth[i + 1]);\r\n}\r\n\r\nsigned\
-    \ main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n  cout\
-    \ << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \r\n  const ll INF = 1LL << 60;\r\n\r\n  auto [dist, par] = dijkstra<ll, INF>(G,\
+    \ s);\r\n  if (dist[t] == -1) return print(-1);\r\n\r\n  vector<int> pth = restore_path(par,\
+    \ t);\r\n  print(dist[t], len(pth) - 1);\r\n  FOR(i, len(pth) - 1) print(pth[i],\
+    \ pth[i + 1]);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \"https://judge.yosupo.jp/problem/shortest_path\"\r\n\r\n\
     #include \"my_template.hpp\"\r\n#include \"other/io.hpp\"\r\n\r\n#include \"graph/dijkstra.hpp\"\
     \r\n#include \"graph/restore_path.hpp\"\r\n\r\nvoid solve() {\r\n  LL(N, M, s,\
-    \ t);\r\n  Graph<ll, true> G(N);\r\n  G.read_graph(M, 1, 0);\r\n\r\n  auto [dist,\
-    \ par] = dijkstra(G, s);\r\n  if (dist[t] == -1) return print(-1);\r\n\r\n  vector<int>\
-    \ pth = restore_path(par, t);\r\n  print(dist[t], len(pth) - 1);\r\n  FOR(i, len(pth)\
-    \ - 1) print(pth[i], pth[i + 1]);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\
-    \n  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  solve();\r\
-    \n\r\n  return 0;\r\n}\r\n"
+    \ t);\r\n  Graph<ll, true> G(N);\r\n  G.read_graph(M, 1, 0);\r\n\r\n  const ll\
+    \ INF = 1LL << 60;\r\n\r\n  auto [dist, par] = dijkstra<ll, INF>(G, s);\r\n  if\
+    \ (dist[t] == -1) return print(-1);\r\n\r\n  vector<int> pth = restore_path(par,\
+    \ t);\r\n  print(dist[t], len(pth) - 1);\r\n  FOR(i, len(pth) - 1) print(pth[i],\
+    \ pth[i + 1]);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
+    \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
@@ -263,7 +263,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/graph/shortest_path.test.cpp
   requiredBy: []
-  timestamp: '2022-04-15 04:34:04+09:00'
+  timestamp: '2022-04-15 04:44:03+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/graph/shortest_path.test.cpp
