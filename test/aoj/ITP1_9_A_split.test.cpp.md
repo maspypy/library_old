@@ -1,7 +1,7 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   - icon: ':heavy_check_mark:'
@@ -51,18 +51,18 @@ data:
     \ { return __builtin_popcount(x); }\nint popcnt(u32 x) { return __builtin_popcount(x);\
     \ }\nint popcnt(ll x) { return __builtin_popcountll(x); }\nint popcnt(u64 x) {\
     \ return __builtin_popcountll(x); }\n// (0, 1, 2, 3, 4) -> (-1, 0, 1, 1, 2)\n\
-    int topbit(int x) { return (x==0 ? -1 : 31 - __builtin_clz(x)); }\nint topbit(u32\
-    \ x) { return (x==0 ? -1 : 31 - __builtin_clz(x)); }\nint topbit(ll x) { return\
-    \ (x==0 ? -1 : 63 - __builtin_clzll(x)); }\nint topbit(u64 x) { return (x==0 ?\
-    \ -1 : 63 - __builtin_clzll(x)); }\n// (0, 1, 2, 3, 4) -> (-1, 0, 1, 0, 2)\nint\
-    \ lowbit(int x) { return (x==0 ? -1 : 31 - __builtin_clz(x)); }\nint lowbit(u32\
-    \ x) { return (x==0 ? -1 : 31 - __builtin_clz(x)); }\nint lowbit(ll x) { return\
-    \ (x==0 ? -1 : 63 - __builtin_clzll(x)); }\nint lowbit(u64 x) { return (x==0 ?\
-    \ -1 : 63 - __builtin_clzll(x)); }\n\ntemplate <typename T, typename U>\nT ceil(T\
-    \ x, U y) {\n  return (x > 0 ? (x + y - 1) / y : x / y);\n}\n\ntemplate <typename\
-    \ T, typename U>\nT floor(T x, U y) {\n  return (x > 0 ? x / y : (x - y + 1) /\
-    \ y);\n}\n\ntemplate <typename T, typename U>\npair<T, T> divmod(T x, U y) {\n\
-    \  T q = floor(x, y);\n  return {q, x - q * y};\n}\n\nll binary_search(function<bool(ll)>\
+    int topbit(int x) { return (x == 0 ? -1 : 31 - __builtin_clz(x)); }\nint topbit(u32\
+    \ x) { return (x == 0 ? -1 : 31 - __builtin_clz(x)); }\nint topbit(ll x) { return\
+    \ (x == 0 ? -1 : 63 - __builtin_clzll(x)); }\nint topbit(u64 x) { return (x ==\
+    \ 0 ? -1 : 63 - __builtin_clzll(x)); }\n// (0, 1, 2, 3, 4) -> (-1, 0, 1, 0, 2)\n\
+    int lowbit(int x) { return (x == 0 ? -1 : 31 - __builtin_clz(x)); }\nint lowbit(u32\
+    \ x) { return (x == 0 ? -1 : 31 - __builtin_clz(x)); }\nint lowbit(ll x) { return\
+    \ (x == 0 ? -1 : 63 - __builtin_clzll(x)); }\nint lowbit(u64 x) { return (x ==\
+    \ 0 ? -1 : 63 - __builtin_clzll(x)); }\n\ntemplate <typename T, typename U>\n\
+    T ceil(T x, U y) {\n  return (x > 0 ? (x + y - 1) / y : x / y);\n}\n\ntemplate\
+    \ <typename T, typename U>\nT floor(T x, U y) {\n  return (x > 0 ? x / y : (x\
+    \ - y + 1) / y);\n}\n\ntemplate <typename T, typename U>\npair<T, T> divmod(T\
+    \ x, U y) {\n  T q = floor(x, y);\n  return {q, x - q * y};\n}\n\nll binary_search(function<bool(ll)>\
     \ check, ll ok, ll ng) {\n  assert(check(ok));\n  while (abs(ok - ng) > 1) {\n\
     \    auto x = (ng + ok) / 2;\n    if (check(x))\n      ok = x;\n    else\n   \
     \   ng = x;\n  }\n  return ok;\n}\n\ntemplate <class T, class S>\ninline bool\
@@ -77,29 +77,35 @@ data:
     \ &&x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate <typename T>\nvector<int> argsort(vector<T>\
     \ &A) {\n  // stable\n  vector<int> ids(A.size());\n  iota(all(ids), 0);\n  sort(all(ids),\n\
     \       [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j] && i < j); });\n\
-    \  return ids;\n}\n#line 1 \"other/io2.hpp\"\n#define INT(...) \\\r\n  int __VA_ARGS__;\
-    \ \\\r\n  IN(__VA_ARGS__)\r\n#define LL(...) \\\r\n  ll __VA_ARGS__; \\\r\n  IN(__VA_ARGS__)\r\
-    \n#define STR(...) \\\r\n  string __VA_ARGS__; \\\r\n  IN(__VA_ARGS__)\r\n#define\
-    \ CHR(...) \\\r\n  char __VA_ARGS__; \\\r\n  IN(__VA_ARGS__)\r\n#define DBL(...)\
-    \ \\\r\n  long double __VA_ARGS__; \\\r\n  IN(__VA_ARGS__)\r\n\r\n#define VEC(type,\
-    \ name, size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define\
-    \ VV(type, name, h, w)                     \\\r\n  vector<vector<type>> name(h,\
-    \ vector<type>(w)); \\\r\n  read(name)\r\n\r\nvoid read(int &a) { cin >> a; }\r\
-    \nvoid read(long long &a) { cin >> a; }\r\nvoid read(char &a) { cin >> a; }\r\n\
-    void read(double &a) { cin >> a; }\r\nvoid read(long double &a) { cin >> a; }\r\
-    \nvoid read(string &a) { cin >> a; }\r\ntemplate <class T, class S> void read(pair<T,\
-    \ S> &p) { read(p.first), read(p.second); }\r\ntemplate <class T> void read(vector<T>\
-    \ &a) {for(auto &i : a) read(i);}\r\ntemplate <class T> void read(T &a) { cin\
-    \ >> a; }\r\nvoid IN() {}\r\ntemplate <class Head, class... Tail> void IN(Head\
-    \ &head, Tail &...tail) {\r\n  read(head);\r\n  IN(tail...);\r\n}\r\n\r\ntemplate\
-    \ <typename T, typename U>\r\nostream& operator<<(ostream& os, const pair<T, U>&\
-    \ A) {\r\n  os << A.fi << \" \" << A.se;\r\n  return os;\r\n}\r\n\r\ntemplate\
-    \ <typename T>\r\nostream& operator<<(ostream& os, const vector<T>& A) {\r\n \
-    \ for (size_t i = 0; i < A.size(); i++) {\r\n    if(i) os << \" \";\r\n    os\
-    \ << A[i];\r\n  }\r\n  return os;\r\n}\r\n\r\nvoid print() {\r\n  cout << \"\\\
-    n\";\r\n  cout.flush();\r\n}\r\n\r\ntemplate <class Head, class... Tail>\r\nvoid\
-    \ print(Head&& head, Tail&&... tail) {\r\n  cout << head;\r\n  if (sizeof...(Tail))\
-    \ cout << \" \";\r\n  print(forward<Tail>(tail)...);\r\n}\r\n#line 1 \"string/split.hpp\"\
+    \  return ids;\n}\n\n// A[I[0]], A[I[1]], ...\ntemplate <typename T>\nvc<T> rearrange(const\
+    \ vc<T> &A, const vc<int> &I) {\n  int n = len(A);\n  assert(len(I) == n);\n \
+    \ vc<T> B(n);\n  FOR(i, n) B[i] = A[I[i]];\n  return B;\n}\n#line 1 \"other/io2.hpp\"\
+    \n#define INT(...) \\\r\n  int __VA_ARGS__; \\\r\n  IN(__VA_ARGS__)\r\n#define\
+    \ LL(...) \\\r\n  ll __VA_ARGS__; \\\r\n  IN(__VA_ARGS__)\r\n#define STR(...)\
+    \ \\\r\n  string __VA_ARGS__; \\\r\n  IN(__VA_ARGS__)\r\n#define CHR(...) \\\r\
+    \n  char __VA_ARGS__; \\\r\n  IN(__VA_ARGS__)\r\n#define DBL(...) \\\r\n  long\
+    \ double __VA_ARGS__; \\\r\n  IN(__VA_ARGS__)\r\n\r\n#define VEC(type, name, size)\
+    \ \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define VV(type, name,\
+    \ h, w)                     \\\r\n  vector<vector<type>> name(h, vector<type>(w));\
+    \ \\\r\n  read(name)\r\n\r\nvoid read(int &a) { cin >> a; }\r\nvoid read(long\
+    \ long &a) { cin >> a; }\r\nvoid read(char &a) { cin >> a; }\r\nvoid read(double\
+    \ &a) { cin >> a; }\r\nvoid read(long double &a) { cin >> a; }\r\nvoid read(string\
+    \ &a) { cin >> a; }\r\ntemplate <class T, class S> void read(pair<T, S> &p) {\
+    \ read(p.first), read(p.second); }\r\ntemplate <class T> void read(vector<T> &a)\
+    \ {for(auto &i : a) read(i);}\r\ntemplate <class T> void read(T &a) { cin >> a;\
+    \ }\r\nvoid IN() {}\r\ntemplate <class Head, class... Tail> void IN(Head &head,\
+    \ Tail &...tail) {\r\n  read(head);\r\n  IN(tail...);\r\n}\r\n\r\ntemplate <typename\
+    \ T, typename U>\r\nostream& operator<<(ostream& os, const pair<T, U>& A) {\r\n\
+    \  os << A.fi << \" \" << A.se;\r\n  return os;\r\n}\r\n\r\ntemplate <typename\
+    \ T>\r\nostream& operator<<(ostream& os, const vector<T>& A) {\r\n  for (size_t\
+    \ i = 0; i < A.size(); i++) {\r\n    if(i) os << \" \";\r\n    os << A[i];\r\n\
+    \  }\r\n  return os;\r\n}\r\n\r\nvoid print() {\r\n  cout << \"\\n\";\r\n  cout.flush();\r\
+    \n}\r\n\r\ntemplate <class Head, class... Tail>\r\nvoid print(Head&& head, Tail&&...\
+    \ tail) {\r\n  cout << head;\r\n  if (sizeof...(Tail)) cout << \" \";\r\n  print(forward<Tail>(tail)...);\r\
+    \n}\r\n\r\nvoid YES(bool t = 1) { print(t ? \"YES\" : \"NO\"); }\r\nvoid NO(bool\
+    \ t = 1) { YES(!t); }\r\nvoid Yes(bool t = 1) { print(t ? \"Yes\" : \"No\"); }\r\
+    \nvoid No(bool t = 1) { Yes(!t); }\r\nvoid yes(bool t = 1) { print(t ? \"yes\"\
+    \ : \"no\"); }\r\nvoid no(bool t = 1) { yes(!t); }\r\n#line 1 \"string/split.hpp\"\
     \nvc<string> split(string S, char sep = ',') {\r\n  vc<string> res = {\"\"};\r\
     \n  for (auto&& s: S) {\r\n    if (s == sep)\r\n      res.eb(\"\");\r\n    else\r\
     \n      res.back() += s;\r\n  }\r\n  return res;\r\n}\r\n\r\nvc<string> split(string\
@@ -127,7 +133,7 @@ data:
   isVerificationFile: true
   path: test/aoj/ITP1_9_A_split.test.cpp
   requiredBy: []
-  timestamp: '2022-04-09 21:41:32+09:00'
+  timestamp: '2022-04-14 18:25:31+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/ITP1_9_A_split.test.cpp

@@ -1,10 +1,10 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
   _extendedRequiredBy: []
@@ -77,18 +77,18 @@ data:
     \ { return __builtin_popcount(x); }\nint popcnt(u32 x) { return __builtin_popcount(x);\
     \ }\nint popcnt(ll x) { return __builtin_popcountll(x); }\nint popcnt(u64 x) {\
     \ return __builtin_popcountll(x); }\n// (0, 1, 2, 3, 4) -> (-1, 0, 1, 1, 2)\n\
-    int topbit(int x) { return (x==0 ? -1 : 31 - __builtin_clz(x)); }\nint topbit(u32\
-    \ x) { return (x==0 ? -1 : 31 - __builtin_clz(x)); }\nint topbit(ll x) { return\
-    \ (x==0 ? -1 : 63 - __builtin_clzll(x)); }\nint topbit(u64 x) { return (x==0 ?\
-    \ -1 : 63 - __builtin_clzll(x)); }\n// (0, 1, 2, 3, 4) -> (-1, 0, 1, 0, 2)\nint\
-    \ lowbit(int x) { return (x==0 ? -1 : 31 - __builtin_clz(x)); }\nint lowbit(u32\
-    \ x) { return (x==0 ? -1 : 31 - __builtin_clz(x)); }\nint lowbit(ll x) { return\
-    \ (x==0 ? -1 : 63 - __builtin_clzll(x)); }\nint lowbit(u64 x) { return (x==0 ?\
-    \ -1 : 63 - __builtin_clzll(x)); }\n\ntemplate <typename T, typename U>\nT ceil(T\
-    \ x, U y) {\n  return (x > 0 ? (x + y - 1) / y : x / y);\n}\n\ntemplate <typename\
-    \ T, typename U>\nT floor(T x, U y) {\n  return (x > 0 ? x / y : (x - y + 1) /\
-    \ y);\n}\n\ntemplate <typename T, typename U>\npair<T, T> divmod(T x, U y) {\n\
-    \  T q = floor(x, y);\n  return {q, x - q * y};\n}\n\nll binary_search(function<bool(ll)>\
+    int topbit(int x) { return (x == 0 ? -1 : 31 - __builtin_clz(x)); }\nint topbit(u32\
+    \ x) { return (x == 0 ? -1 : 31 - __builtin_clz(x)); }\nint topbit(ll x) { return\
+    \ (x == 0 ? -1 : 63 - __builtin_clzll(x)); }\nint topbit(u64 x) { return (x ==\
+    \ 0 ? -1 : 63 - __builtin_clzll(x)); }\n// (0, 1, 2, 3, 4) -> (-1, 0, 1, 0, 2)\n\
+    int lowbit(int x) { return (x == 0 ? -1 : 31 - __builtin_clz(x)); }\nint lowbit(u32\
+    \ x) { return (x == 0 ? -1 : 31 - __builtin_clz(x)); }\nint lowbit(ll x) { return\
+    \ (x == 0 ? -1 : 63 - __builtin_clzll(x)); }\nint lowbit(u64 x) { return (x ==\
+    \ 0 ? -1 : 63 - __builtin_clzll(x)); }\n\ntemplate <typename T, typename U>\n\
+    T ceil(T x, U y) {\n  return (x > 0 ? (x + y - 1) / y : x / y);\n}\n\ntemplate\
+    \ <typename T, typename U>\nT floor(T x, U y) {\n  return (x > 0 ? x / y : (x\
+    \ - y + 1) / y);\n}\n\ntemplate <typename T, typename U>\npair<T, T> divmod(T\
+    \ x, U y) {\n  T q = floor(x, y);\n  return {q, x - q * y};\n}\n\nll binary_search(function<bool(ll)>\
     \ check, ll ok, ll ng) {\n  assert(check(ok));\n  while (abs(ok - ng) > 1) {\n\
     \    auto x = (ng + ok) / 2;\n    if (check(x))\n      ok = x;\n    else\n   \
     \   ng = x;\n  }\n  return ok;\n}\n\ntemplate <class T, class S>\ninline bool\
@@ -103,21 +103,24 @@ data:
     \ &&x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate <typename T>\nvector<int> argsort(vector<T>\
     \ &A) {\n  // stable\n  vector<int> ids(A.size());\n  iota(all(ids), 0);\n  sort(all(ids),\n\
     \       [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j] && i < j); });\n\
-    \  return ids;\n}\n#line 4 \"graph/bipartite_coloring.hpp\"\n\npair<int, vi> bipartite_edge_coloring(Graph<ll>&\
-    \ G) {\n  auto N = G.N;\n  vi deg(N);\n  vi ANS(G.M, -1);\n  FORIN(e, G.edges)\
-    \ {\n    ++deg[e.frm];\n    ++deg[e.to];\n  }\n  ll C = MAX(deg);\n  // \u9802\
-    \u70B9, \u8272 -> \u8FBA\u756A\u53F7\n  vv(int, TO, N, C, -1);\n\n  FOR(id, G.M)\
-    \ {\n    auto const a = G.edges[id].frm, b = G.edges[id].to;\n    [&] {\n    \
-    \  // a \u3067\u5B9F\u73FE\u3057\u3066\u3044\u306A\u3044\u8272 ca \u3068 b \u3067\
-    \u5B9F\u73FE\u3057\u3066\u3044\u306A\u3044\u8272 cb \u3092\u3072\u3068\u3064\u3068\
-    \u308B\u3002\n      int ca = -1, cb = -1;\n      FOR(c, C) if (TO[a][c] == -1)\
-    \ {\n        ca = c;\n        break;\n      }\n      FOR(c, C) if (TO[b][c] ==\
-    \ -1) {\n        cb = c;\n        break;\n      }\n      int v = a, w = b, eid\
-    \ = id, cv = ca, cw = cb;\n      while (1) {\n        ANS[eid] = cv;\n       \
-    \ TO[v][cv] = eid;\n        TO[w][cw] = -1;\n        if (TO[w][cv] == -1) {\n\
-    \          TO[w][cv] = eid;\n          break;\n        }\n        swap(eid, TO[w][cv]);\n\
-    \        auto const& e = G.edges[eid];\n        v = w;\n        w ^= e.frm ^ e.to;\n\
-    \        swap(cv, cw);\n      }\n    }();\n  }\n  return {C, ANS};\n}\n"
+    \  return ids;\n}\n\n// A[I[0]], A[I[1]], ...\ntemplate <typename T>\nvc<T> rearrange(const\
+    \ vc<T> &A, const vc<int> &I) {\n  int n = len(A);\n  assert(len(I) == n);\n \
+    \ vc<T> B(n);\n  FOR(i, n) B[i] = A[I[i]];\n  return B;\n}\n#line 4 \"graph/bipartite_coloring.hpp\"\
+    \n\npair<int, vi> bipartite_edge_coloring(Graph<ll>& G) {\n  auto N = G.N;\n \
+    \ vi deg(N);\n  vi ANS(G.M, -1);\n  FORIN(e, G.edges) {\n    ++deg[e.frm];\n \
+    \   ++deg[e.to];\n  }\n  ll C = MAX(deg);\n  // \u9802\u70B9, \u8272 -> \u8FBA\
+    \u756A\u53F7\n  vv(int, TO, N, C, -1);\n\n  FOR(id, G.M) {\n    auto const a =\
+    \ G.edges[id].frm, b = G.edges[id].to;\n    [&] {\n      // a \u3067\u5B9F\u73FE\
+    \u3057\u3066\u3044\u306A\u3044\u8272 ca \u3068 b \u3067\u5B9F\u73FE\u3057\u3066\
+    \u3044\u306A\u3044\u8272 cb \u3092\u3072\u3068\u3064\u3068\u308B\u3002\n     \
+    \ int ca = -1, cb = -1;\n      FOR(c, C) if (TO[a][c] == -1) {\n        ca = c;\n\
+    \        break;\n      }\n      FOR(c, C) if (TO[b][c] == -1) {\n        cb =\
+    \ c;\n        break;\n      }\n      int v = a, w = b, eid = id, cv = ca, cw =\
+    \ cb;\n      while (1) {\n        ANS[eid] = cv;\n        TO[v][cv] = eid;\n \
+    \       TO[w][cw] = -1;\n        if (TO[w][cv] == -1) {\n          TO[w][cv] =\
+    \ eid;\n          break;\n        }\n        swap(eid, TO[w][cv]);\n        auto\
+    \ const& e = G.edges[eid];\n        v = w;\n        w ^= e.frm ^ e.to;\n     \
+    \   swap(cv, cw);\n      }\n    }();\n  }\n  return {C, ANS};\n}\n"
   code: "#pragma once\n#include \"graph/base.hpp\"\n#include \"my_template.hpp\"\n\
     \npair<int, vi> bipartite_edge_coloring(Graph<ll>& G) {\n  auto N = G.N;\n  vi\
     \ deg(N);\n  vi ANS(G.M, -1);\n  FORIN(e, G.edges) {\n    ++deg[e.frm];\n    ++deg[e.to];\n\
@@ -140,7 +143,7 @@ data:
   isVerificationFile: false
   path: graph/bipartite_coloring.hpp
   requiredBy: []
-  timestamp: '2022-03-19 16:40:52+09:00'
+  timestamp: '2022-04-14 18:25:31+09:00'
   verificationStatus: LIBRARY_NO_TESTS
   verifiedWith: []
 documentation_of: graph/bipartite_coloring.hpp

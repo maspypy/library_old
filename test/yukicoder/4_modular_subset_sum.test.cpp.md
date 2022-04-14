@@ -1,32 +1,32 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: alg/monoid_rollinghash.hpp
     title: alg/monoid_rollinghash.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: mod/modint61.hpp
     title: mod/modint61.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: mod/modular_subset_sum.hpp
     title: mod/modular_subset_sum.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: my_template.hpp
     title: my_template.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: other/io.hpp
     title: other/io.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: other/random.hpp
     title: other/random.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith: []
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: cpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
     PROBLEM: https://yukicoder.me/problems/no/4
@@ -63,18 +63,18 @@ data:
     \ { return __builtin_popcount(x); }\nint popcnt(u32 x) { return __builtin_popcount(x);\
     \ }\nint popcnt(ll x) { return __builtin_popcountll(x); }\nint popcnt(u64 x) {\
     \ return __builtin_popcountll(x); }\n// (0, 1, 2, 3, 4) -> (-1, 0, 1, 1, 2)\n\
-    int topbit(int x) { return (x==0 ? -1 : 31 - __builtin_clz(x)); }\nint topbit(u32\
-    \ x) { return (x==0 ? -1 : 31 - __builtin_clz(x)); }\nint topbit(ll x) { return\
-    \ (x==0 ? -1 : 63 - __builtin_clzll(x)); }\nint topbit(u64 x) { return (x==0 ?\
-    \ -1 : 63 - __builtin_clzll(x)); }\n// (0, 1, 2, 3, 4) -> (-1, 0, 1, 0, 2)\nint\
-    \ lowbit(int x) { return (x==0 ? -1 : 31 - __builtin_clz(x)); }\nint lowbit(u32\
-    \ x) { return (x==0 ? -1 : 31 - __builtin_clz(x)); }\nint lowbit(ll x) { return\
-    \ (x==0 ? -1 : 63 - __builtin_clzll(x)); }\nint lowbit(u64 x) { return (x==0 ?\
-    \ -1 : 63 - __builtin_clzll(x)); }\n\ntemplate <typename T, typename U>\nT ceil(T\
-    \ x, U y) {\n  return (x > 0 ? (x + y - 1) / y : x / y);\n}\n\ntemplate <typename\
-    \ T, typename U>\nT floor(T x, U y) {\n  return (x > 0 ? x / y : (x - y + 1) /\
-    \ y);\n}\n\ntemplate <typename T, typename U>\npair<T, T> divmod(T x, U y) {\n\
-    \  T q = floor(x, y);\n  return {q, x - q * y};\n}\n\nll binary_search(function<bool(ll)>\
+    int topbit(int x) { return (x == 0 ? -1 : 31 - __builtin_clz(x)); }\nint topbit(u32\
+    \ x) { return (x == 0 ? -1 : 31 - __builtin_clz(x)); }\nint topbit(ll x) { return\
+    \ (x == 0 ? -1 : 63 - __builtin_clzll(x)); }\nint topbit(u64 x) { return (x ==\
+    \ 0 ? -1 : 63 - __builtin_clzll(x)); }\n// (0, 1, 2, 3, 4) -> (-1, 0, 1, 0, 2)\n\
+    int lowbit(int x) { return (x == 0 ? -1 : 31 - __builtin_clz(x)); }\nint lowbit(u32\
+    \ x) { return (x == 0 ? -1 : 31 - __builtin_clz(x)); }\nint lowbit(ll x) { return\
+    \ (x == 0 ? -1 : 63 - __builtin_clzll(x)); }\nint lowbit(u64 x) { return (x ==\
+    \ 0 ? -1 : 63 - __builtin_clzll(x)); }\n\ntemplate <typename T, typename U>\n\
+    T ceil(T x, U y) {\n  return (x > 0 ? (x + y - 1) / y : x / y);\n}\n\ntemplate\
+    \ <typename T, typename U>\nT floor(T x, U y) {\n  return (x > 0 ? x / y : (x\
+    \ - y + 1) / y);\n}\n\ntemplate <typename T, typename U>\npair<T, T> divmod(T\
+    \ x, U y) {\n  T q = floor(x, y);\n  return {q, x - q * y};\n}\n\nll binary_search(function<bool(ll)>\
     \ check, ll ok, ll ng) {\n  assert(check(ok));\n  while (abs(ok - ng) > 1) {\n\
     \    auto x = (ng + ok) / 2;\n    if (check(x))\n      ok = x;\n    else\n   \
     \   ng = x;\n  }\n  return ok;\n}\n\ntemplate <class T, class S>\ninline bool\
@@ -89,12 +89,14 @@ data:
     \ &&x: A) { ++C[x]; }\n  return C;\n}\n\ntemplate <typename T>\nvector<int> argsort(vector<T>\
     \ &A) {\n  // stable\n  vector<int> ids(A.size());\n  iota(all(ids), 0);\n  sort(all(ids),\n\
     \       [&](int i, int j) { return A[i] < A[j] || (A[i] == A[j] && i < j); });\n\
-    \  return ids;\n}\n#line 1 \"other/io.hpp\"\n// based on yosupo's fastio\r\n#include\
-    \ <unistd.h>\r\n\r\nnamespace detail {\r\ntemplate <typename T, decltype(&T::is_modint)\
-    \ = &T::is_modint>\r\nstd::true_type check_value(int);\r\ntemplate <typename T>\r\
-    \nstd::false_type check_value(long);\r\n} // namespace detail\r\n\r\ntemplate\
-    \ <typename T>\r\nstruct is_modint : decltype(detail::check_value<T>(0)) {};\r\
-    \ntemplate <typename T>\r\nusing is_modint_t = enable_if_t<is_modint<T>::value>;\r\
+    \  return ids;\n}\n\n// A[I[0]], A[I[1]], ...\ntemplate <typename T>\nvc<T> rearrange(const\
+    \ vc<T> &A, const vc<int> &I) {\n  int n = len(A);\n  assert(len(I) == n);\n \
+    \ vc<T> B(n);\n  FOR(i, n) B[i] = A[I[i]];\n  return B;\n}\n#line 1 \"other/io.hpp\"\
+    \n// based on yosupo's fastio\r\n#include <unistd.h>\r\n\r\nnamespace detail {\r\
+    \ntemplate <typename T, decltype(&T::is_modint) = &T::is_modint>\r\nstd::true_type\
+    \ check_value(int);\r\ntemplate <typename T>\r\nstd::false_type check_value(long);\r\
+    \n} // namespace detail\r\n\r\ntemplate <typename T>\r\nstruct is_modint : decltype(detail::check_value<T>(0))\
+    \ {};\r\ntemplate <typename T>\r\nusing is_modint_t = enable_if_t<is_modint<T>::value>;\r\
     \ntemplate <typename T>\r\nusing is_not_modint_t = enable_if_t<!is_modint<T>::value>;\r\
     \n\r\nstruct Scanner {\r\n  FILE *fp;\r\n  char line[(1 << 15) + 1];\r\n  size_t\
     \ st = 0, ed = 0;\r\n  void reread() {\r\n    memmove(line, line + st, ed - st);\r\
@@ -252,29 +254,36 @@ data:
     \            R--;\n          }\n        }\n        return R + 1 - size;\n    \
     \  }\n      sm = Monoid::op(dat[R], sm);\n    } while ((R & -R) != R);\n    return\
     \ 0;\n  }\n\n  void debug() { print(\"segtree\", dat); }\n};\n#line 4 \"mod/modular_subset_sum.hpp\"\
-    \n\r\n/*\r\n(|vals| + mod) * log^2(mod)\r\nverify: https://codeforces.com/gym/103428/problem/C\r\
-    \n*/\r\nvc<bool> modular_subset_sum(int mod, vc<int> vals) {\r\n  using Mono =\
-    \ Monoid_Rolling_Hash;\r\n  RandomNumberGenerator RNG;\r\n  const ll base = RNG(0,\
-    \ (1LL << 61) - 1);\r\n  vc<bool> A(mod + mod);\r\n  ll cnt = 0;\r\n  vc<pair<modint61,\
-    \ modint61>> seg_raw(mod + mod);\r\n  FOR(i, mod + mod) seg_raw[i] = {base, 0};\r\
-    \n  SegTree<Mono> seg(seg_raw);\r\n\r\n  auto add = [&](ll x) -> void {\r\n  \
-    \  ++cnt;\r\n    A[x] = A[x + mod] = 1;\r\n    seg.set(x, {base, 1});\r\n    seg.set(x\
-    \ + mod, {base, 1});\r\n  };\r\n\r\n  add(0);\r\n\r\n  for (auto&& val: vals)\
-    \ {\r\n    val %= mod;\r\n    if (cnt == mod) break;\r\n    vc<pi> LR;\r\n   \
-    \ LR.eb(0, mod);\r\n    vi ADD;\r\n    while (len(LR)) {\r\n      auto [L, R]\
-    \ = LR.back();\r\n      LR.pop_back();\r\n      if (L == R) continue;\r\n    \
-    \  modint61 x1 = seg.prod(L, R).se;\r\n      modint61 x2 = seg.prod(mod + L -\
-    \ val, mod + R - val).se;\r\n      if (x1 == x2) continue;\r\n      if (R == L\
-    \ + 1) {\r\n        // \u5BFE\u79F0\u5DEE L \u304C\u898B\u3064\u304B\u3063\u305F\
-    \r\n        if (!A[L]) ADD.eb(L);\r\n        continue;\r\n      }\r\n      ll\
-    \ M = (L + R) / 2;\r\n      LR.eb(L, M);\r\n      LR.eb(M, R);\r\n    }\r\n  \
-    \  for (auto&& a: ADD) add(a);\r\n  }\r\n\r\n  A.resize(mod);\r\n  return A;\r\
-    \n}\n#line 5 \"test/yukicoder/4_modular_subset_sum.test.cpp\"\n\nvoid solve()\
-    \ {\n  LL(N);\n  VEC(int, A, N);\n  ll S = SUM(A);\n  auto can = modular_subset_sum(S\
-    \ + 1, A);\n  if (can[S / 2] && S % 2 == 0) {\n    print(\"possible\");\n  } else\
-    \ {\n    print(\"impossible\");\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n\
-    \  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\n  ll T = 1;\n\
-    \  // LL(T);\n  FOR(_, T) solve();\n\n  return 0;\n}\n"
+    \n\r\n/*\r\n\u8A08\u7B97\u91CF\uFF1A(|vals| + mod) * log^2(mod)\r\n\u30FBcan(x)\
+    \ \u307E\u305F\u306F [x] \u3067 bool \u3092\u8FD4\u3059\u3002\r\n\u30FBrestore(x)\
+    \ \u3067\u5FA9\u5143\u3002\r\n*/\r\nstruct Modular_Subset_Sum {\r\n  int mod;\r\
+    \n  vc<int>& vals;\r\n  vc<int> par;\r\n\r\n  Modular_Subset_Sum(int mod, vc<int>&\
+    \ vals) : mod(mod), vals(vals) {\r\n    par.assign(mod, -1);\r\n\r\n    using\
+    \ Mono = Monoid_Rolling_Hash;\r\n    RandomNumberGenerator RNG;\r\n    const ll\
+    \ base = RNG(0, (1LL << 61) - 1);\r\n    vc<pair<modint61, modint61>> seg_raw(mod\
+    \ + mod);\r\n    FOR(i, mod + mod) seg_raw[i] = {base, 0};\r\n    SegTree<Mono>\
+    \ seg(seg_raw);\r\n\r\n    auto add = [&](int x, int i) -> void {\r\n      par[x]\
+    \ = i;\r\n      seg.set(x, {base, 1});\r\n      seg.set(x + mod, {base, 1});\r\
+    \n    };\r\n\r\n    add(0, -1);\r\n\r\n    FOR(i, len(vals)) {\r\n      ll val\
+    \ = vals[i];\r\n      val %= mod;\r\n      vc<pair<int, int>> LR;\r\n      LR.eb(0,\
+    \ mod);\r\n      vc<int> ADD;\r\n      while (len(LR)) {\r\n        auto [L, R]\
+    \ = LR.back();\r\n        LR.pop_back();\r\n        if (L == R) continue;\r\n\
+    \        modint61 x1 = seg.prod(L, R).se;\r\n        modint61 x2 = seg.prod(mod\
+    \ + L - val, mod + R - val).se;\r\n        if (x1 == x2) continue;\r\n       \
+    \ if (R == L + 1) {\r\n          // \u5BFE\u79F0\u5DEE L \u304C\u898B\u3064\u304B\
+    \u3063\u305F\r\n          if (!can(L)) ADD.eb(L);\r\n          continue;\r\n \
+    \       }\r\n        ll M = (L + R) / 2;\r\n        LR.eb(L, M);\r\n        LR.eb(M,\
+    \ R);\r\n      }\r\n      for (auto&& a: ADD) add(a, i);\r\n    }\r\n  }\r\n\r\
+    \n  bool can(int x) { return (x == 0 || par[x] != -1); }\r\n  bool operator[](int\
+    \ x) { return can(x); }\r\n  vc<int> restore(int x) {\r\n    vc<int> res;\r\n\
+    \    while (x) {\r\n      int i = par[x];\r\n      res.eb(i);\r\n      x -= vals[i];\r\
+    \n      if (x < 0) x += mod;\r\n    }\r\n    reverse(all(res));\r\n    return\
+    \ res;\r\n  }\r\n};\r\n#line 5 \"test/yukicoder/4_modular_subset_sum.test.cpp\"\
+    \n\nvoid solve() {\n  LL(N);\n  VEC(int, A, N);\n  ll S = SUM(A);\n  auto can\
+    \ = modular_subset_sum(S + 1, A);\n  if (can[S / 2] && S % 2 == 0) {\n    print(\"\
+    possible\");\n  } else {\n    print(\"impossible\");\n  }\n}\n\nsigned main()\
+    \ {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\
+    \n  ll T = 1;\n  // LL(T);\n  FOR(_, T) solve();\n\n  return 0;\n}\n"
   code: "#define PROBLEM \"https://yukicoder.me/problems/no/4\"\n#include \"my_template.hpp\"\
     \n#include \"other/io.hpp\"\n#include \"mod/modular_subset_sum.hpp\"\n\nvoid solve()\
     \ {\n  LL(N);\n  VEC(int, A, N);\n  ll S = SUM(A);\n  auto can = modular_subset_sum(S\
@@ -293,8 +302,8 @@ data:
   isVerificationFile: true
   path: test/yukicoder/4_modular_subset_sum.test.cpp
   requiredBy: []
-  timestamp: '2022-04-11 18:07:23+09:00'
-  verificationStatus: TEST_ACCEPTED
+  timestamp: '2022-04-14 18:27:07+09:00'
+  verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/yukicoder/4_modular_subset_sum.test.cpp
 layout: document

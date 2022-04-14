@@ -9,6 +9,9 @@ data:
     path: alg/lazy_cntsummax_set.hpp
     title: alg/lazy_cntsummax_set.hpp
   - icon: ':warning:'
+    path: alg/lazy_cntsummin_set.hpp
+    title: alg/lazy_cntsummin_set.hpp
+  - icon: ':warning:'
     path: alg/lazy_max_set.hpp
     title: alg/lazy_max_set.hpp
   - icon: ':heavy_check_mark:'
@@ -42,6 +45,7 @@ data:
   isVerificationFile: false
   path: alg/monoid_set.hpp
   requiredBy:
+  - alg/lazy_cntsummin_set.hpp
   - alg/lazy_min_set.hpp
   - alg/lazy_cntsum_set.hpp
   - alg/lazy_max_set.hpp

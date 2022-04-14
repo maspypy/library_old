@@ -1,26 +1,26 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/centroid.hpp
     title: graph/centroid.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/convolution.hpp
     title: poly/convolution.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/tree/frequency_table_of_tree_distance.test.cpp
     title: test/library_checker/tree/frequency_table_of_tree_distance.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n\
@@ -101,14 +101,14 @@ data:
     \     if (cdep[e.to] < cdep[root]) continue;\r\n          par[e.to] = v;\r\n \
     \         dat.eb(e.to, f(val, e));\r\n        }\r\n      }\r\n      res.eb(dat);\r\
     \n      res[0].insert(res[0].end(), all(dat));\r\n    }\r\n    return res;\r\n\
-    \  }\r\n};\r\n#line 2 \"mod/modint.hpp\"\ntemplate <uint mod>\nstruct modint {\n\
-    \  static constexpr bool is_modint = true;\n  uint val;\n  constexpr modint(const\
+    \  }\r\n};\r\n#line 2 \"mod/modint.hpp\"\ntemplate <u32 mod>\nstruct modint {\n\
+    \  static constexpr bool is_modint = true;\n  u32 val;\n  constexpr modint(const\
     \ ll val = 0) noexcept\n      : val(val >= 0 ? val % mod : (mod - (-val) % mod)\
     \ % mod) {}\n  bool operator<(const modint &other) const {\n    return val < other.val;\n\
     \  } // To use std::map\n  modint &operator+=(const modint &p) {\n    if ((val\
     \ += p.val) >= mod) val -= mod;\n    return *this;\n  }\n  modint &operator-=(const\
     \ modint &p) {\n    if ((val += mod - p.val) >= mod) val -= mod;\n    return *this;\n\
-    \  }\n  modint &operator*=(const modint &p) {\n    val = (uint)(1LL * val * p.val\
+    \  }\n  modint &operator*=(const modint &p) {\n    val = (u32)(1LL * val * p.val\
     \ % mod);\n    return *this;\n  }\n  modint &operator/=(const modint &p) {\n \
     \   *this *= p.inverse();\n    return *this;\n  }\n  modint operator-() const\
     \ { return modint(get_mod() - val); }\n  modint operator+(const modint &p) const\
@@ -121,14 +121,14 @@ data:
     \     t = a / b;\n      swap(a -= t * b, b), swap(u -= t * v, v);\n    }\n   \
     \ return modint(u);\n  }\n  modint pow(int64_t n) const {\n    modint ret(1),\
     \ mul(val);\n    while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n\
-    \      n >>= 1;\n    }\n    return ret;\n  }\n  static constexpr uint get_mod()\
+    \      n >>= 1;\n    }\n    return ret;\n  }\n  static constexpr u32 get_mod()\
     \ { return mod; }\n};\n\nstruct ArbitraryModInt {\n  static constexpr bool is_modint\
-    \ = true;\n  uint val;\n  ArbitraryModInt() : val(0) {}\n  ArbitraryModInt(int64_t\
+    \ = true;\n  u32 val;\n  ArbitraryModInt() : val(0) {}\n  ArbitraryModInt(int64_t\
     \ y)\n      : val(y >= 0 ? y % get_mod()\n                   : (get_mod() - (-y)\
     \ % get_mod()) % get_mod()) {}\n  bool operator<(const ArbitraryModInt &other)\
     \ const {\n    return val < other.val;\n  } // To use std::map<ArbitraryModInt,\
-    \ T>\n  static uint &get_mod() {\n    static uint mod = 0;\n    return mod;\n\
-    \  }\n  static void set_mod(int md) { get_mod() = md; }\n  ArbitraryModInt &operator+=(const\
+    \ T>\n  static u32 &get_mod() {\n    static u32 mod = 0;\n    return mod;\n  }\n\
+    \  static void set_mod(int md) { get_mod() = md; }\n  ArbitraryModInt &operator+=(const\
     \ ArbitraryModInt &p) {\n    if ((val += p.val) >= get_mod()) val -= get_mod();\n\
     \    return *this;\n  }\n  ArbitraryModInt &operator-=(const ArbitraryModInt &p)\
     \ {\n    if ((val += get_mod() - p.val) >= get_mod()) val -= get_mod();\n    return\
@@ -352,8 +352,8 @@ data:
   isVerificationFile: false
   path: graph/tree_all_distances.hpp
   requiredBy: []
-  timestamp: '2022-04-12 00:41:19+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-04-14 18:24:13+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/tree/frequency_table_of_tree_distance.test.cpp
 documentation_of: graph/tree_all_distances.hpp

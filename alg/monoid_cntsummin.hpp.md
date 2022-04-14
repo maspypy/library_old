@@ -5,6 +5,9 @@ data:
   - icon: ':warning:'
     path: alg/lazy_cntsummin_add.hpp
     title: alg/lazy_cntsummin_add.hpp
+  - icon: ':warning:'
+    path: alg/lazy_cntsummin_set.hpp
+    title: alg/lazy_cntsummin_set.hpp
   _extendedVerifiedWith: []
   _isVerificationFailed: false
   _pathExtension: hpp
@@ -27,6 +30,7 @@ data:
   isVerificationFile: false
   path: alg/monoid_cntsummin.hpp
   requiredBy:
+  - alg/lazy_cntsummin_set.hpp
   - alg/lazy_cntsummin_add.hpp
   timestamp: '2022-04-11 18:02:25+09:00'
   verificationStatus: LIBRARY_NO_TESTS

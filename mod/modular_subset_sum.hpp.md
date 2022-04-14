@@ -1,29 +1,28 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: alg/monoid_rollinghash.hpp
     title: alg/monoid_rollinghash.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: mod/modint61.hpp
     title: mod/modint61.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: other/random.hpp
     title: other/random.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/4_modular_subset_sum.test.cpp
     title: test/yukicoder/4_modular_subset_sum.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
-    links:
-    - https://codeforces.com/gym/103428/problem/C
+    links: []
   bundledCode: "#line 2 \"mod/modint61.hpp\"\nstruct modint61 {\r\n  static constexpr\
     \ bool is_modint = true;\r\n  static constexpr ll mod = (1LL << 61) - 1;\r\n \
     \ ll val;\r\n  constexpr modint61(const ll val = 0) : val(val) {}\r\n  bool operator<(const\
@@ -90,43 +89,57 @@ data:
     \            R--;\n          }\n        }\n        return R + 1 - size;\n    \
     \  }\n      sm = Monoid::op(dat[R], sm);\n    } while ((R & -R) != R);\n    return\
     \ 0;\n  }\n\n  void debug() { print(\"segtree\", dat); }\n};\n#line 4 \"mod/modular_subset_sum.hpp\"\
-    \n\r\n/*\r\n(|vals| + mod) * log^2(mod)\r\nverify: https://codeforces.com/gym/103428/problem/C\r\
-    \n*/\r\nvc<bool> modular_subset_sum(int mod, vc<int> vals) {\r\n  using Mono =\
-    \ Monoid_Rolling_Hash;\r\n  RandomNumberGenerator RNG;\r\n  const ll base = RNG(0,\
-    \ (1LL << 61) - 1);\r\n  vc<bool> A(mod + mod);\r\n  ll cnt = 0;\r\n  vc<pair<modint61,\
-    \ modint61>> seg_raw(mod + mod);\r\n  FOR(i, mod + mod) seg_raw[i] = {base, 0};\r\
-    \n  SegTree<Mono> seg(seg_raw);\r\n\r\n  auto add = [&](ll x) -> void {\r\n  \
-    \  ++cnt;\r\n    A[x] = A[x + mod] = 1;\r\n    seg.set(x, {base, 1});\r\n    seg.set(x\
-    \ + mod, {base, 1});\r\n  };\r\n\r\n  add(0);\r\n\r\n  for (auto&& val: vals)\
-    \ {\r\n    val %= mod;\r\n    if (cnt == mod) break;\r\n    vc<pi> LR;\r\n   \
-    \ LR.eb(0, mod);\r\n    vi ADD;\r\n    while (len(LR)) {\r\n      auto [L, R]\
-    \ = LR.back();\r\n      LR.pop_back();\r\n      if (L == R) continue;\r\n    \
-    \  modint61 x1 = seg.prod(L, R).se;\r\n      modint61 x2 = seg.prod(mod + L -\
-    \ val, mod + R - val).se;\r\n      if (x1 == x2) continue;\r\n      if (R == L\
-    \ + 1) {\r\n        // \u5BFE\u79F0\u5DEE L \u304C\u898B\u3064\u304B\u3063\u305F\
-    \r\n        if (!A[L]) ADD.eb(L);\r\n        continue;\r\n      }\r\n      ll\
-    \ M = (L + R) / 2;\r\n      LR.eb(L, M);\r\n      LR.eb(M, R);\r\n    }\r\n  \
-    \  for (auto&& a: ADD) add(a);\r\n  }\r\n\r\n  A.resize(mod);\r\n  return A;\r\
-    \n}\n"
+    \n\r\n/*\r\n\u8A08\u7B97\u91CF\uFF1A(|vals| + mod) * log^2(mod)\r\n\u30FBcan(x)\
+    \ \u307E\u305F\u306F [x] \u3067 bool \u3092\u8FD4\u3059\u3002\r\n\u30FBrestore(x)\
+    \ \u3067\u5FA9\u5143\u3002\r\n*/\r\nstruct Modular_Subset_Sum {\r\n  int mod;\r\
+    \n  vc<int>& vals;\r\n  vc<int> par;\r\n\r\n  Modular_Subset_Sum(int mod, vc<int>&\
+    \ vals) : mod(mod), vals(vals) {\r\n    par.assign(mod, -1);\r\n\r\n    using\
+    \ Mono = Monoid_Rolling_Hash;\r\n    RandomNumberGenerator RNG;\r\n    const ll\
+    \ base = RNG(0, (1LL << 61) - 1);\r\n    vc<pair<modint61, modint61>> seg_raw(mod\
+    \ + mod);\r\n    FOR(i, mod + mod) seg_raw[i] = {base, 0};\r\n    SegTree<Mono>\
+    \ seg(seg_raw);\r\n\r\n    auto add = [&](int x, int i) -> void {\r\n      par[x]\
+    \ = i;\r\n      seg.set(x, {base, 1});\r\n      seg.set(x + mod, {base, 1});\r\
+    \n    };\r\n\r\n    add(0, -1);\r\n\r\n    FOR(i, len(vals)) {\r\n      ll val\
+    \ = vals[i];\r\n      val %= mod;\r\n      vc<pair<int, int>> LR;\r\n      LR.eb(0,\
+    \ mod);\r\n      vc<int> ADD;\r\n      while (len(LR)) {\r\n        auto [L, R]\
+    \ = LR.back();\r\n        LR.pop_back();\r\n        if (L == R) continue;\r\n\
+    \        modint61 x1 = seg.prod(L, R).se;\r\n        modint61 x2 = seg.prod(mod\
+    \ + L - val, mod + R - val).se;\r\n        if (x1 == x2) continue;\r\n       \
+    \ if (R == L + 1) {\r\n          // \u5BFE\u79F0\u5DEE L \u304C\u898B\u3064\u304B\
+    \u3063\u305F\r\n          if (!can(L)) ADD.eb(L);\r\n          continue;\r\n \
+    \       }\r\n        ll M = (L + R) / 2;\r\n        LR.eb(L, M);\r\n        LR.eb(M,\
+    \ R);\r\n      }\r\n      for (auto&& a: ADD) add(a, i);\r\n    }\r\n  }\r\n\r\
+    \n  bool can(int x) { return (x == 0 || par[x] != -1); }\r\n  bool operator[](int\
+    \ x) { return can(x); }\r\n  vc<int> restore(int x) {\r\n    vc<int> res;\r\n\
+    \    while (x) {\r\n      int i = par[x];\r\n      res.eb(i);\r\n      x -= vals[i];\r\
+    \n      if (x < 0) x += mod;\r\n    }\r\n    reverse(all(res));\r\n    return\
+    \ res;\r\n  }\r\n};\r\n"
   code: "#include \"alg/monoid_rollinghash.hpp\"\r\n#include \"other/random.hpp\"\r\
-    \n#include \"ds/segtree.hpp\"\r\n\r\n/*\r\n(|vals| + mod) * log^2(mod)\r\nverify:\
-    \ https://codeforces.com/gym/103428/problem/C\r\n*/\r\nvc<bool> modular_subset_sum(int\
-    \ mod, vc<int> vals) {\r\n  using Mono = Monoid_Rolling_Hash;\r\n  RandomNumberGenerator\
-    \ RNG;\r\n  const ll base = RNG(0, (1LL << 61) - 1);\r\n  vc<bool> A(mod + mod);\r\
-    \n  ll cnt = 0;\r\n  vc<pair<modint61, modint61>> seg_raw(mod + mod);\r\n  FOR(i,\
-    \ mod + mod) seg_raw[i] = {base, 0};\r\n  SegTree<Mono> seg(seg_raw);\r\n\r\n\
-    \  auto add = [&](ll x) -> void {\r\n    ++cnt;\r\n    A[x] = A[x + mod] = 1;\r\
-    \n    seg.set(x, {base, 1});\r\n    seg.set(x + mod, {base, 1});\r\n  };\r\n\r\
-    \n  add(0);\r\n\r\n  for (auto&& val: vals) {\r\n    val %= mod;\r\n    if (cnt\
-    \ == mod) break;\r\n    vc<pi> LR;\r\n    LR.eb(0, mod);\r\n    vi ADD;\r\n  \
-    \  while (len(LR)) {\r\n      auto [L, R] = LR.back();\r\n      LR.pop_back();\r\
-    \n      if (L == R) continue;\r\n      modint61 x1 = seg.prod(L, R).se;\r\n  \
-    \    modint61 x2 = seg.prod(mod + L - val, mod + R - val).se;\r\n      if (x1\
-    \ == x2) continue;\r\n      if (R == L + 1) {\r\n        // \u5BFE\u79F0\u5DEE\
-    \ L \u304C\u898B\u3064\u304B\u3063\u305F\r\n        if (!A[L]) ADD.eb(L);\r\n\
-    \        continue;\r\n      }\r\n      ll M = (L + R) / 2;\r\n      LR.eb(L, M);\r\
-    \n      LR.eb(M, R);\r\n    }\r\n    for (auto&& a: ADD) add(a);\r\n  }\r\n\r\n\
-    \  A.resize(mod);\r\n  return A;\r\n}"
+    \n#include \"ds/segtree.hpp\"\r\n\r\n/*\r\n\u8A08\u7B97\u91CF\uFF1A(|vals| + mod)\
+    \ * log^2(mod)\r\n\u30FBcan(x) \u307E\u305F\u306F [x] \u3067 bool \u3092\u8FD4\
+    \u3059\u3002\r\n\u30FBrestore(x) \u3067\u5FA9\u5143\u3002\r\n*/\r\nstruct Modular_Subset_Sum\
+    \ {\r\n  int mod;\r\n  vc<int>& vals;\r\n  vc<int> par;\r\n\r\n  Modular_Subset_Sum(int\
+    \ mod, vc<int>& vals) : mod(mod), vals(vals) {\r\n    par.assign(mod, -1);\r\n\
+    \r\n    using Mono = Monoid_Rolling_Hash;\r\n    RandomNumberGenerator RNG;\r\n\
+    \    const ll base = RNG(0, (1LL << 61) - 1);\r\n    vc<pair<modint61, modint61>>\
+    \ seg_raw(mod + mod);\r\n    FOR(i, mod + mod) seg_raw[i] = {base, 0};\r\n   \
+    \ SegTree<Mono> seg(seg_raw);\r\n\r\n    auto add = [&](int x, int i) -> void\
+    \ {\r\n      par[x] = i;\r\n      seg.set(x, {base, 1});\r\n      seg.set(x +\
+    \ mod, {base, 1});\r\n    };\r\n\r\n    add(0, -1);\r\n\r\n    FOR(i, len(vals))\
+    \ {\r\n      ll val = vals[i];\r\n      val %= mod;\r\n      vc<pair<int, int>>\
+    \ LR;\r\n      LR.eb(0, mod);\r\n      vc<int> ADD;\r\n      while (len(LR)) {\r\
+    \n        auto [L, R] = LR.back();\r\n        LR.pop_back();\r\n        if (L\
+    \ == R) continue;\r\n        modint61 x1 = seg.prod(L, R).se;\r\n        modint61\
+    \ x2 = seg.prod(mod + L - val, mod + R - val).se;\r\n        if (x1 == x2) continue;\r\
+    \n        if (R == L + 1) {\r\n          // \u5BFE\u79F0\u5DEE L \u304C\u898B\u3064\
+    \u304B\u3063\u305F\r\n          if (!can(L)) ADD.eb(L);\r\n          continue;\r\
+    \n        }\r\n        ll M = (L + R) / 2;\r\n        LR.eb(L, M);\r\n       \
+    \ LR.eb(M, R);\r\n      }\r\n      for (auto&& a: ADD) add(a, i);\r\n    }\r\n\
+    \  }\r\n\r\n  bool can(int x) { return (x == 0 || par[x] != -1); }\r\n  bool operator[](int\
+    \ x) { return can(x); }\r\n  vc<int> restore(int x) {\r\n    vc<int> res;\r\n\
+    \    while (x) {\r\n      int i = par[x];\r\n      res.eb(i);\r\n      x -= vals[i];\r\
+    \n      if (x < 0) x += mod;\r\n    }\r\n    reverse(all(res));\r\n    return\
+    \ res;\r\n  }\r\n};\r\n"
   dependsOn:
   - alg/monoid_rollinghash.hpp
   - mod/modint61.hpp
@@ -135,8 +148,8 @@ data:
   isVerificationFile: false
   path: mod/modular_subset_sum.hpp
   requiredBy: []
-  timestamp: '2022-04-11 18:07:23+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-04-14 18:27:07+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/4_modular_subset_sum.test.cpp
 documentation_of: mod/modular_subset_sum.hpp

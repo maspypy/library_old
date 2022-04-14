@@ -1,23 +1,23 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: graph/base.hpp
     title: graph/base.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/bfs01.hpp
     title: graph/bfs01.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/dijkstra.hpp
     title: graph/dijkstra.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/yukicoder/1320_mincostcycle.test.cpp
     title: test/yukicoder/1320_mincostcycle.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"graph/base.hpp\"\n\ntemplate <typename T>\nstruct Edge {\n\
@@ -62,33 +62,47 @@ data:
     \ > dist[v]) continue;\n    for (auto&& e: G[v]) {\n      if (dist[e.to] == -1\
     \ || dist[e.to] > dist[e.frm] + e.cost) {\n        dist[e.to] = dist[e.frm] +\
     \ e.cost;\n        par[e.to] = e.frm;\n        que.push(mp(dist[e.to], e.to));\n\
-    \      }\n    }\n  }\n  return mp(dist, par);\n}\n#line 3 \"graph/bfs01.hpp\"\n\
-    \ntemplate <typename Graph>\npair<vc<ll>, vc<int>> bfs01(Graph& G, ll v) {\n \
-    \ assert(G.is_prepared());\n  int N = G.N;\n  vc<ll> dist(N, -1);\n  vc<int> par(N,\
-    \ -1);\n  deque<int> que;\n\n  dist[v] = 0;\n  que.push_front(v);\n  while (!que.empty())\
-    \ {\n    auto v = que.front();\n    que.pop_front();\n    for (auto&& e: G[v])\
-    \ {\n      if (dist[e.to] == -1 || dist[e.to] > dist[e.frm] + e.cost) {\n    \
-    \    dist[e.to] = dist[e.frm] + e.cost;\n        par[e.to] = e.frm;\n        if\
-    \ (e.cost == 0)\n          que.push_front(e.to);\n        else\n          que.push_back(e.to);\n\
-    \      }\n    }\n  }\n  return {dist, par};\n}\n\ntemplate <typename Graph>\n\
-    pair<vc<ll>, vc<int>> bfs01(Graph& G, vc<int> vs) {\n  assert(G.is_prepared());\n\
-    \  int N = G.N;\n  vc<ll> dist(N, -1);\n  vc<int> par(N, -1);\n  deque<int> que;\n\
-    \n  for (auto&& v: vs) {\n    dist[v] = 0;\n    que.push_front(v);\n  }\n\n  while\
-    \ (!que.empty()) {\n    auto v = que.front();\n    que.pop_front();\n    for (auto&&\
-    \ e: G[v]) {\n      if (dist[e.to] == -1 || dist[e.to] > dist[e.frm] + e.cost)\
-    \ {\n        dist[e.to] = dist[e.frm] + e.cost;\n        par[e.to] = e.frm;\n\
-    \        if (e.cost == 0)\n          que.push_front(e.to);\n        else\n   \
-    \       que.push_back(e.to);\n      }\n    }\n  }\n  return {dist, par};\n}\n\
-    #line 3 \"graph/mincostcycle.hpp\"\n\r\ntemplate <typename Graph>\r\ntypename\
-    \ Graph::cost_type MinCostCycle(Graph& G) {\r\n  using T = typename Graph::cost_type;\r\
-    \n  int M = G.M;\r\n  int N = G.N;\r\n  T mx = 0;\r\n  T INF = 1;\r\n  for (auto&&\
-    \ e: G.edges) chmax(mx, e.cost), INF += e.cost;\r\n  T res = INF;\r\n\r\n  FOR(i,\
-    \ M) {\r\n    auto& e = G.edges[i];\r\n    T cost = e.cost;\r\n    int frm = e.to,\
-    \ to = e.frm;\r\n    Graph Gi(N);\r\n    FOR(j, M) if (i != j) {\r\n      auto&\
-    \ e = G.edges[j];\r\n      Gi.add(e.frm, e.to, e.cost);\r\n    }\r\n    Gi.build();\r\
-    \n    T x = (mx <= 1 ? bfs01(Gi, frm).fi[to] : dijkstra(Gi, frm).fi[to]);\r\n\
-    \    if (x == -1) x = INF;\r\n    chmin(res, cost + x);\r\n  }\r\n  if (res ==\
-    \ INF) res = -1;\r\n  return res;\r\n}\n"
+    \      }\n    }\n  }\n  return mp(dist, par);\n}\n\n// \u591A\u70B9\u30B9\u30BF\
+    \u30FC\u30C8\u3002[dist, par, root]\ntemplate <typename Graph>\ntuple<vector<typename\
+    \ Graph::cost_type>, vector<int>, vector<int>> dijkstra(\n    Graph& G, vc<int>\
+    \ vs) {\n  assert(G.is_prepared());\n  int N = G.N;\n  using T = typename Graph::cost_type;\n\
+    \  vc<ll> dist(N, -1);\n  vc<int> par(N, -1);\n  vc<int> root(N, -1);\n\n  using\
+    \ P = pair<T, int>;\n\n  priority_queue<P, vector<P>, greater<P>> que;\n\n  for\
+    \ (auto&& v: vs) {\n    dist[v] = 0;\n    root[v] = v;\n    que.emplace(T(0),\
+    \ v);\n  }\n\n  while (!que.empty()) {\n    auto [dv, v] = que.top();\n    que.pop();\n\
+    \    if (dv > dist[v]) continue;\n    for (auto&& e: G[v]) {\n      if (dist[e.to]\
+    \ == -1 || dist[e.to] > dist[e.frm] + e.cost) {\n        dist[e.to] = dist[e.frm]\
+    \ + e.cost;\n        root[e.to] = root[e.frm];\n        par[e.to] = e.frm;\n \
+    \       que.push(mp(dist[e.to], e.to));\n      }\n    }\n  }\n  return {dist,\
+    \ par, root};\n}\n#line 3 \"graph/bfs01.hpp\"\n\ntemplate <typename Graph>\npair<vc<ll>,\
+    \ vc<int>> bfs01(Graph& G, ll v) {\n  assert(G.is_prepared());\n  int N = G.N;\n\
+    \  vc<ll> dist(N, -1);\n  vc<int> par(N, -1);\n  deque<int> que;\n\n  dist[v]\
+    \ = 0;\n  que.push_front(v);\n  while (!que.empty()) {\n    auto v = que.front();\n\
+    \    que.pop_front();\n    for (auto&& e: G[v]) {\n      if (dist[e.to] == -1\
+    \ || dist[e.to] > dist[e.frm] + e.cost) {\n        dist[e.to] = dist[e.frm] +\
+    \ e.cost;\n        par[e.to] = e.frm;\n        if (e.cost == 0)\n          que.push_front(e.to);\n\
+    \        else\n          que.push_back(e.to);\n      }\n    }\n  }\n  return {dist,\
+    \ par};\n}\n\n// \u591A\u70B9\u30B9\u30BF\u30FC\u30C8\u3002[dist, par, root]\n\
+    template <typename Graph>\ntuple<vc<ll>, vc<int>, vc<int>> bfs01(Graph& G, vc<int>\
+    \ vs) {\n  assert(G.is_prepared());\n  int N = G.N;\n  vc<ll> dist(N, -1);\n \
+    \ vc<int> par(N, -1);\n  vc<int> root(N, -1);\n  deque<int> que;\n\n  for (auto&&\
+    \ v: vs) {\n    dist[v] = 0;\n    root[v] = v;\n    que.push_front(v);\n  }\n\n\
+    \  while (!que.empty()) {\n    auto v = que.front();\n    que.pop_front();\n \
+    \   for (auto&& e: G[v]) {\n      if (dist[e.to] == -1 || dist[e.to] > dist[e.frm]\
+    \ + e.cost) {\n        dist[e.to] = dist[e.frm] + e.cost;\n        root[e.to]\
+    \ = root[e.frm];\n        par[e.to] = e.frm;\n        if (e.cost == 0)\n     \
+    \     que.push_front(e.to);\n        else\n          que.push_back(e.to);\n  \
+    \    }\n    }\n  }\n  return {dist, par, root};\n}\n#line 3 \"graph/mincostcycle.hpp\"\
+    \n\r\ntemplate <typename Graph>\r\ntypename Graph::cost_type MinCostCycle(Graph&\
+    \ G) {\r\n  using T = typename Graph::cost_type;\r\n  int M = G.M;\r\n  int N\
+    \ = G.N;\r\n  T mx = 0;\r\n  T INF = 1;\r\n  for (auto&& e: G.edges) chmax(mx,\
+    \ e.cost), INF += e.cost;\r\n  T res = INF;\r\n\r\n  FOR(i, M) {\r\n    auto&\
+    \ e = G.edges[i];\r\n    T cost = e.cost;\r\n    int frm = e.to, to = e.frm;\r\
+    \n    Graph Gi(N);\r\n    FOR(j, M) if (i != j) {\r\n      auto& e = G.edges[j];\r\
+    \n      Gi.add(e.frm, e.to, e.cost);\r\n    }\r\n    Gi.build();\r\n    T x =\
+    \ (mx <= 1 ? bfs01(Gi, frm).fi[to] : dijkstra(Gi, frm).fi[to]);\r\n    if (x ==\
+    \ -1) x = INF;\r\n    chmin(res, cost + x);\r\n  }\r\n  if (res == INF) res =\
+    \ -1;\r\n  return res;\r\n}\n"
   code: "#include \"graph/dijkstra.hpp\"\r\n#include \"graph/bfs01.hpp\"\r\n\r\ntemplate\
     \ <typename Graph>\r\ntypename Graph::cost_type MinCostCycle(Graph& G) {\r\n \
     \ using T = typename Graph::cost_type;\r\n  int M = G.M;\r\n  int N = G.N;\r\n\
@@ -107,8 +121,8 @@ data:
   isVerificationFile: false
   path: graph/mincostcycle.hpp
   requiredBy: []
-  timestamp: '2022-03-19 19:04:50+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-04-14 18:24:41+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/yukicoder/1320_mincostcycle.test.cpp
 documentation_of: graph/mincostcycle.hpp

@@ -2,10 +2,10 @@
 data:
   _extendedDependsOn: []
   _extendedRequiredBy:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: flow/bipartite.hpp
     title: flow/bipartite.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: graph/check_bipartite.hpp
     title: graph/check_bipartite.hpp
   - icon: ':warning:'
@@ -15,15 +15,15 @@ data:
     path: graph/minimum_spanning_tree.hpp
     title: graph/minimum_spanning_tree.hpp
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/datastructure/unionfind.test.cpp
     title: test/library_checker/datastructure/unionfind.test.cpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/graph/bipartitematching.test.cpp
     title: test/library_checker/graph/bipartitematching.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"ds/unionfind.hpp\"\n\nstruct UnionFind {\n  int num;\n \
@@ -35,7 +35,8 @@ data:
     \ { return false; }\n    comp--;\n    if (size[x] < size[y]) swap(x, y);\n   \
     \ size[x] += size[y];\n    size[y] = 0;\n    par[y] = x;\n    return true;\n \
     \ }\n\n  vc<int> find_all() {\n    vc<int> A(num);\n    FOR(i, num) A[i] = find(i);\n\
-    \    return A;\n  }\n};\n"
+    \    return A;\n  }\n\n  void reset(){\n    comp = num;\n    size.assign(num,\
+    \ 1);\n    iota(all(par), 0);\n  }\n};\n"
   code: "#pragma once\n\nstruct UnionFind {\n  int num;\n  int comp;\n  vc<int> size,\
     \ par;\n  UnionFind(int n) : num(n), comp(n), size(n, 1), par(n) {\n    iota(par.begin(),\
     \ par.end(), 0);\n  }\n  int find(int x) {\n    while (par[x] != x) {\n      par[x]\
@@ -44,7 +45,8 @@ data:
     \ y = find(y);\n    if (x == y) { return false; }\n    comp--;\n    if (size[x]\
     \ < size[y]) swap(x, y);\n    size[x] += size[y];\n    size[y] = 0;\n    par[y]\
     \ = x;\n    return true;\n  }\n\n  vc<int> find_all() {\n    vc<int> A(num);\n\
-    \    FOR(i, num) A[i] = find(i);\n    return A;\n  }\n};\n"
+    \    FOR(i, num) A[i] = find(i);\n    return A;\n  }\n\n  void reset(){\n    comp\
+    \ = num;\n    size.assign(num, 1);\n    iota(all(par), 0);\n  }\n};\n"
   dependsOn: []
   isVerificationFile: false
   path: ds/unionfind.hpp
@@ -53,8 +55,8 @@ data:
   - graph/functional.hpp
   - graph/check_bipartite.hpp
   - flow/bipartite.hpp
-  timestamp: '2022-01-12 05:33:30+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-04-14 18:23:56+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/graph/bipartitematching.test.cpp
   - test/library_checker/datastructure/unionfind.test.cpp

@@ -1,29 +1,29 @@
 ---
 data:
   _extendedDependsOn:
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: mod/modint.hpp
     title: mod/modint.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: mod/powertable.hpp
     title: mod/powertable.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: nt/primetable.hpp
     title: nt/primetable.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: poly/convolution.hpp
     title: poly/convolution.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: poly/poly_taylor_shift.hpp
     title: poly/poly_taylor_shift.hpp
   _extendedRequiredBy: []
   _extendedVerifiedWith:
-  - icon: ':heavy_check_mark:'
+  - icon: ':x:'
     path: test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
     title: test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
-  _isVerificationFailed: false
+  _isVerificationFailed: true
   _pathExtension: hpp
-  _verificationStatusIcon: ':heavy_check_mark:'
+  _verificationStatusIcon: ':x:'
   attributes:
     links: []
   bundledCode: "#line 2 \"nt/primetable.hpp\"\nvc<ll> primetable(int LIM) {\n  ++LIM;\n\
@@ -45,16 +45,16 @@ data:
     \ {\r\n    if (p > N) break;\r\n    mint xp = mint(p).pow(e);\r\n    ll pp = p;\r\
     \n    while (pp < N) {\r\n      ll i = pp;\r\n      while (i < N) {\r\n      \
     \  f[i] *= xp;\r\n        i += pp;\r\n      }\r\n      pp *= p;\r\n    }\r\n \
-    \ }\r\n  return f;\r\n}\r\n#line 2 \"mod/modint.hpp\"\ntemplate <uint mod>\nstruct\
-    \ modint {\n  static constexpr bool is_modint = true;\n  uint val;\n  constexpr\
+    \ }\r\n  return f;\r\n}\r\n#line 2 \"mod/modint.hpp\"\ntemplate <u32 mod>\nstruct\
+    \ modint {\n  static constexpr bool is_modint = true;\n  u32 val;\n  constexpr\
     \ modint(const ll val = 0) noexcept\n      : val(val >= 0 ? val % mod : (mod -\
     \ (-val) % mod) % mod) {}\n  bool operator<(const modint &other) const {\n   \
     \ return val < other.val;\n  } // To use std::map\n  modint &operator+=(const\
     \ modint &p) {\n    if ((val += p.val) >= mod) val -= mod;\n    return *this;\n\
     \  }\n  modint &operator-=(const modint &p) {\n    if ((val += mod - p.val) >=\
     \ mod) val -= mod;\n    return *this;\n  }\n  modint &operator*=(const modint\
-    \ &p) {\n    val = (uint)(1LL * val * p.val % mod);\n    return *this;\n  }\n\
-    \  modint &operator/=(const modint &p) {\n    *this *= p.inverse();\n    return\
+    \ &p) {\n    val = (u32)(1LL * val * p.val % mod);\n    return *this;\n  }\n \
+    \ modint &operator/=(const modint &p) {\n    *this *= p.inverse();\n    return\
     \ *this;\n  }\n  modint operator-() const { return modint(get_mod() - val); }\n\
     \  modint operator+(const modint &p) const { return modint(*this) += p; }\n  modint\
     \ operator-(const modint &p) const { return modint(*this) -= p; }\n  modint operator*(const\
@@ -66,12 +66,12 @@ data:
     \ swap(u -= t * v, v);\n    }\n    return modint(u);\n  }\n  modint pow(int64_t\
     \ n) const {\n    modint ret(1), mul(val);\n    while (n > 0) {\n      if (n &\
     \ 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n    }\n    return ret;\n\
-    \  }\n  static constexpr uint get_mod() { return mod; }\n};\n\nstruct ArbitraryModInt\
-    \ {\n  static constexpr bool is_modint = true;\n  uint val;\n  ArbitraryModInt()\
+    \  }\n  static constexpr u32 get_mod() { return mod; }\n};\n\nstruct ArbitraryModInt\
+    \ {\n  static constexpr bool is_modint = true;\n  u32 val;\n  ArbitraryModInt()\
     \ : val(0) {}\n  ArbitraryModInt(int64_t y)\n      : val(y >= 0 ? y % get_mod()\n\
     \                   : (get_mod() - (-y) % get_mod()) % get_mod()) {}\n  bool operator<(const\
     \ ArbitraryModInt &other) const {\n    return val < other.val;\n  } // To use\
-    \ std::map<ArbitraryModInt, T>\n  static uint &get_mod() {\n    static uint mod\
+    \ std::map<ArbitraryModInt, T>\n  static u32 &get_mod() {\n    static u32 mod\
     \ = 0;\n    return mod;\n  }\n  static void set_mod(int md) { get_mod() = md;\
     \ }\n  ArbitraryModInt &operator+=(const ArbitraryModInt &p) {\n    if ((val +=\
     \ p.val) >= get_mod()) val -= get_mod();\n    return *this;\n  }\n  ArbitraryModInt\
@@ -296,8 +296,8 @@ data:
   isVerificationFile: false
   path: seq/stirling_number_1.hpp
   requiredBy: []
-  timestamp: '2022-04-12 01:40:36+09:00'
-  verificationStatus: LIBRARY_ALL_AC
+  timestamp: '2022-04-14 18:24:13+09:00'
+  verificationStatus: LIBRARY_ALL_WA
   verifiedWith:
   - test/library_checker/math/stirling_number_of_the_first_kind.test.cpp
 documentation_of: seq/stirling_number_1.hpp
