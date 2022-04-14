@@ -5,9 +5,10 @@
 // 到達不可能：INF
 // 負閉路を経由していくらでも小さくできる：-INF
 template <typename T, T INF, typename Graph>
-vc<T> BellmanFord(Graph& G, int s) {
+pair<vc<T>, vc<int>> BellmanFord(Graph& G, int s) {
   int N = G.N;
   vc<T> dist(N, INF);
+  vc<int> par(N, -1);
   dist[s] = 0;
   int loop = 0;
   while (1) {
@@ -20,6 +21,7 @@ vc<T> BellmanFord(Graph& G, int s) {
         T after = dist[v] + e.cost;
         chmax(after, -INF);
         if (before > after) {
+          par[e.to] = v;
           upd = 1;
           if (loop >= N) after = -INF;
           dist[e.to] = after;
@@ -28,5 +30,5 @@ vc<T> BellmanFord(Graph& G, int s) {
     }
     if (!upd) break;
   }
-  return dist;
+  return {dist, par};
 }
