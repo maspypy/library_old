@@ -23,6 +23,11 @@ struct FenwickTree {
     }
   }
 
+  void reset(){
+    total = AbelGroup::unit();
+    dat.assign(n, AbelGroup::unit());
+  }
+
   E sum(int k) {
     E ret = AbelGroup::unit();
     for (; k > 0; k -= k & -k) ret = AbelGroup::op(ret, dat[k - 1]);

@@ -34,4 +34,10 @@ struct UnionFind {
     FOR(i, num) A[i] = find(i);
     return A;
   }
+
+  void reset(){
+    comp = num;
+    size.assign(num, 1);
+    iota(all(par), 0);
+  }
 };
