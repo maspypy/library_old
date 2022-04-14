@@ -4,7 +4,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: alg/lazy_min_set.hpp
     title: alg/lazy_min_set.hpp
-  - icon: ':heavy_check_mark:'
+  - icon: ':question:'
     path: alg/monoid_min.hpp
     title: alg/monoid_min.hpp
   - icon: ':heavy_check_mark:'
@@ -165,101 +165,102 @@ data:
     \ write(d);\r\n  }\r\n  template <class T, size_t S>\r\n  void write(const array<T,\
     \ S> &val) {\r\n    auto n = val.size();\r\n    for (size_t i = 0; i < n; i++)\
     \ {\r\n      if (i) write(' ');\r\n      write(val[i]);\r\n    }\r\n  }\r\n  void\
-    \ write(i128 val) {\r\n    string s;\r\n    while (val) {\r\n      s += '0' +\
-    \ int(val % 10);\r\n      val /= 10;\r\n    }\r\n    reverse(all(s));\r\n    if\
-    \ (len(s) == 0) s = \"0\";\r\n    write(s);\r\n  }\r\n};\r\n\r\nScanner scanner\
-    \ = Scanner(stdin);\r\nPrinter printer = Printer(stdout);\r\n\r\nvoid flush()\
-    \ { printer.flush(); }\r\nvoid print() { printer.write('\\n'); }\r\ntemplate <class\
-    \ Head, class... Tail>\r\nvoid print(Head &&head, Tail &&... tail) {\r\n  printer.write(head);\r\
-    \n  if (sizeof...(Tail)) printer.write(' ');\r\n  print(forward<Tail>(tail)...);\r\
-    \n}\r\n\r\nvoid read() {}\r\ntemplate <class Head, class... Tail>\r\nvoid read(Head\
-    \ &head, Tail &... tail) {\r\n  scanner.read(head);\r\n  read(tail...);\r\n}\r\
-    \n\r\n#define INT(...)   \\\r\n  int __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\
-    #define LL(...)   \\\r\n  ll __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define\
-    \ STR(...)      \\\r\n  string __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define\
-    \ CHAR(...)      \\\r\n  char __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define\
-    \ DBL(...)      \\\r\n  double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n\
-    #define VEC(type, name, size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\
-    \n#define VV(type, name, h, w)                     \\\r\n  vector<vector<type>>\
-    \ name(h, vector<type>(w)); \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t\
-    \ ? \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool\
-    \ t = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\
-    \nvoid yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1)\
-    \ { yes(!t); }\r\n#line 2 \"ds/lazysegtree.hpp\"\n\ntemplate <typename Lazy>\n\
-    struct LazySegTree {\n  using Monoid_X = typename Lazy::X_structure;\n  using\
-    \ Monoid_A = typename Lazy::A_structure;\n  using X = typename Monoid_X::value_type;\n\
-    \  using A = typename Monoid_A::value_type;\n  int n, log, size;\n  vc<X> dat;\n\
-    \  vc<A> laz;\n\n  LazySegTree() : LazySegTree(0) {}\n  LazySegTree(int n) : LazySegTree(vc<X>(n,\
-    \ Monoid_X::unit())) {}\n  LazySegTree(vc<X> v) : n(len(v)) {\n    log = 1;\n\
-    \    while ((1 << log) < n) ++log;\n    size = 1 << log;\n    dat.assign(size\
-    \ << 1, Monoid_X::unit());\n    laz.assign(size, Monoid_A::unit());\n    FOR(i,\
-    \ n) dat[size + i] = v[i];\n    FOR3_R(i, 1, size) update(i);\n  }\n\n  void update(int\
-    \ k) { dat[k] = Monoid_X::op(dat[2 * k], dat[2 * k + 1]); }\n\n  void all_apply(int\
-    \ k, A a) {\n    dat[k] = Lazy::act(dat[k], a);\n    if (k < size) laz[k] = Monoid_A::op(laz[k],\
-    \ a);\n  }\n\n  void push(int k) {\n    all_apply(2 * k, laz[k]);\n    all_apply(2\
-    \ * k + 1, laz[k]);\n    laz[k] = Monoid_A::unit();\n  }\n\n  void set(int p,\
-    \ X x) {\n    assert(0 <= p && p < n);\n    p += size;\n    for (int i = log;\
-    \ i >= 1; i--) push(p >> i);\n    dat[p] = x;\n    for (int i = 1; i <= log; i++)\
-    \ update(p >> i);\n  }\n\n  X get(int p) {\n    assert(0 <= p && p < n);\n   \
-    \ p += size;\n    for (int i = log; i >= 1; i--) push(p >> i);\n    return dat[p];\n\
-    \  }\n\n  vc<X> get_all() {\n    FOR(i, size) push(i);\n    return {dat.begin()\
-    \ + size, dat.begin() + size + n};\n  }\n\n  X prod(int l, int r) {\n    assert(0\
-    \ <= l && l <= r && r <= n);\n    if (l == r) return Monoid_X::unit();\n\n   \
-    \ l += size;\n    r += size;\n\n    for (int i = log; i >= 1; i--) {\n      if\
-    \ (((l >> i) << i) != l) push(l >> i);\n      if (((r >> i) << i) != r) push((r\
-    \ - 1) >> i);\n    }\n\n    X xl = Monoid_X::unit(), xr = Monoid_X::unit();\n\
-    \    while (l < r) {\n      if (l & 1) xl = Monoid_X::op(xl, dat[l++]);\n    \
-    \  if (r & 1) xr = Monoid_X::op(dat[--r], xr);\n      l >>= 1;\n      r >>= 1;\n\
-    \    }\n\n    return Monoid_X::op(xl, xr);\n  }\n\n  X prod_all() { return dat[1];\
-    \ }\n\n  void apply(int p, A a) {\n    assert(0 <= p && p < n);\n    p += size;\n\
-    \    dat[p] = Lazy::act(dat[p], a);\n    for (int i = 1; i <= log; i++) update(p\
-    \ >> i);\n  }\n\n  void apply(int l, int r, A a) {\n    assert(0 <= l && l <=\
-    \ r && r <= n);\n    if (l == r) return;\n\n    l += size;\n    r += size;\n\n\
-    \    for (int i = log; i >= 1; i--) {\n      if (((l >> i) << i) != l) push(l\
-    \ >> i);\n      if (((r >> i) << i) != r) push((r - 1) >> i);\n    }\n\n    {\n\
-    \      int l2 = l, r2 = r;\n      while (l < r) {\n        if (l & 1) all_apply(l++,\
-    \ a);\n        if (r & 1) all_apply(--r, a);\n        l >>= 1;\n        r >>=\
-    \ 1;\n      }\n      l = l2;\n      r = r2;\n    }\n\n    for (int i = 1; i <=\
-    \ log; i++) {\n      if (((l >> i) << i) != l) update(l >> i);\n      if (((r\
-    \ >> i) << i) != r) update((r - 1) >> i);\n    }\n  }\n\n  template <typename\
-    \ C>\n  int max_right(C& check, int l) {\n    assert(0 <= l && l <= n);\n    assert(check(Monoid_X::unit()));\n\
-    \    if (l == n) return n;\n    l += size;\n    for (int i = log; i >= 1; i--)\
-    \ push(l >> i);\n    X sm = Monoid_X::unit();\n    do {\n      while (l % 2 ==\
-    \ 0) l >>= 1;\n      if (!check(Monoid_X::op(sm, dat[l]))) {\n        while (l\
-    \ < size) {\n          push(l);\n          l = (2 * l);\n          if (check(Monoid_X::op(sm,\
-    \ dat[l]))) {\n            sm = Monoid_X::op(sm, dat[l]);\n            l++;\n\
-    \          }\n        }\n        return l - size;\n      }\n      sm = Monoid_X::op(sm,\
-    \ dat[l]);\n      l++;\n    } while ((l & -l) != l);\n    return n;\n  }\n\n \
-    \ template <typename C>\n  int min_left(C& check, int r) {\n    assert(0 <= r\
-    \ && r <= n);\n    assert(check(Monoid_X::unit()));\n    if (r == 0) return 0;\n\
-    \    r += size;\n    for (int i = log; i >= 1; i--) push((r - 1) >> i);\n    X\
-    \ sm = Monoid_X::unit();\n    do {\n      r--;\n      while (r > 1 && (r % 2))\
-    \ r >>= 1;\n      if (!check(Monoid_X::op(dat[r], sm))) {\n        while (r <\
-    \ size) {\n          push(r);\n          r = (2 * r + 1);\n          if (check(Monoid_X::op(dat[r],\
-    \ sm))) {\n            sm = Monoid_X::op(dat[r], sm);\n            r--;\n    \
-    \      }\n        }\n        return r + 1 - size;\n      }\n      sm = Monoid_X::op(dat[r],\
-    \ sm);\n    } while ((r & -r) != r);\n    return 0;\n  }\n\n  void debug() { print(\"\
-    lazysegtree getall:\", get_all()); }\n};\n#line 1 \"alg/monoid_min.hpp\"\ntemplate\
-    \ <class X, X INF>\r\nstruct Monoid_Min {\r\n  using value_type = X;\r\n  static\
-    \ constexpr X op(const X &x, const X &y) noexcept { return min(x, y); }\r\n  static\
-    \ constexpr X unit() { return INF; }\r\n  static constexpr bool commute = true;\r\
-    \n};\r\n#line 1 \"alg/monoid_set.hpp\"\ntemplate <typename E, E none_val>\r\n\
-    struct Monoid_Set {\r\n  using value_type = E;\r\n  using X = value_type;\r\n\
-    \  static X op(X x, X y) { return (y == none_val ? x : y); }\r\n  static constexpr\
-    \ X unit() { return none_val; }\r\n  static constexpr bool commute = false;\r\n\
-    };\n#line 3 \"alg/lazy_min_set.hpp\"\n\r\ntemplate <typename E, E INF, E none_val>\r\
-    \nstruct Lazy_Min_Set {\r\n  using MX = Monoid_Min<E, INF>;\r\n  using MA = Monoid_Set<E,\
-    \ none_val>;\r\n  using X_structure = MX;\r\n  using A_structure = MA;\r\n  using\
-    \ X = typename MX::value_type;\r\n  using A = typename MA::value_type;\r\n  static\
-    \ constexpr X act(const X &x, const A &a) { return (a==none_val ? x : a) ;}\r\n\
-    };\r\n#line 7 \"test/aoj/DSL_2_F_min_set_lazy.test.cpp\"\n\r\nvoid solve() {\r\
-    \n  LL(N, Q);\r\n  const ll MAX = (1LL << 31) - 1;\r\n  using Lazy = Lazy_Min_Set<ll,\
-    \ MAX, -1>;\r\n  LazySegTree<Lazy> seg(N);\r\n  FOR(_, Q) {\r\n    LL(t);\r\n\
-    \    if (t == 0) {\r\n      LL(L, R, x);\r\n      seg.apply(L, ++R, x);\r\n  \
-    \  } else {\r\n      LL(L, R);\r\n      print(seg.prod(L, ++R));\r\n    }\r\n\
-    \  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
-    \n  cout << setprecision(15);\r\n\r\n  ll T = 1;\r\n  // LL(T);\r\n  FOR(_, T)\
-    \ solve();\r\n\r\n  return 0;\r\n}\r\n"
+    \ write(i128 val) {\r\n    string s;\r\n    bool negative = 0;\r\n    if(val <\
+    \ 0){\r\n      negative = 1;\r\n      val = -val;\r\n    }\r\n    while (val)\
+    \ {\r\n      s += '0' + int(val % 10);\r\n      val /= 10;\r\n    }\r\n    if(negative)\
+    \ s += \"-\";\r\n    reverse(all(s));\r\n    if (len(s) == 0) s = \"0\";\r\n \
+    \   write(s);\r\n  }\r\n};\r\n\r\nScanner scanner = Scanner(stdin);\r\nPrinter\
+    \ printer = Printer(stdout);\r\n\r\nvoid flush() { printer.flush(); }\r\nvoid\
+    \ print() { printer.write('\\n'); }\r\ntemplate <class Head, class... Tail>\r\n\
+    void print(Head &&head, Tail &&... tail) {\r\n  printer.write(head);\r\n  if (sizeof...(Tail))\
+    \ printer.write(' ');\r\n  print(forward<Tail>(tail)...);\r\n}\r\n\r\nvoid read()\
+    \ {}\r\ntemplate <class Head, class... Tail>\r\nvoid read(Head &head, Tail &...\
+    \ tail) {\r\n  scanner.read(head);\r\n  read(tail...);\r\n}\r\n\r\n#define INT(...)\
+    \   \\\r\n  int __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define LL(...)   \\\
+    \r\n  ll __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define STR(...)      \\\r\n\
+    \  string __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define CHAR(...)      \\\r\
+    \n  char __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define DBL(...)      \\\r\n\
+    \  double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type, name,\
+    \ size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define VV(type,\
+    \ name, h, w)                     \\\r\n  vector<vector<type>> name(h, vector<type>(w));\
+    \ \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ? \"YES\" : \"NO\"\
+    ); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t = 1) { print(t ? \"\
+    Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\nvoid yes(bool t = 1)\
+    \ { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) { yes(!t); }\r\n#line\
+    \ 2 \"ds/lazysegtree.hpp\"\n\ntemplate <typename Lazy>\nstruct LazySegTree {\n\
+    \  using Monoid_X = typename Lazy::X_structure;\n  using Monoid_A = typename Lazy::A_structure;\n\
+    \  using X = typename Monoid_X::value_type;\n  using A = typename Monoid_A::value_type;\n\
+    \  int n, log, size;\n  vc<X> dat;\n  vc<A> laz;\n\n  LazySegTree() : LazySegTree(0)\
+    \ {}\n  LazySegTree(int n) : LazySegTree(vc<X>(n, Monoid_X::unit())) {}\n  LazySegTree(vc<X>\
+    \ v) : n(len(v)) {\n    log = 1;\n    while ((1 << log) < n) ++log;\n    size\
+    \ = 1 << log;\n    dat.assign(size << 1, Monoid_X::unit());\n    laz.assign(size,\
+    \ Monoid_A::unit());\n    FOR(i, n) dat[size + i] = v[i];\n    FOR3_R(i, 1, size)\
+    \ update(i);\n  }\n\n  void update(int k) { dat[k] = Monoid_X::op(dat[2 * k],\
+    \ dat[2 * k + 1]); }\n\n  void all_apply(int k, A a) {\n    dat[k] = Lazy::act(dat[k],\
+    \ a);\n    if (k < size) laz[k] = Monoid_A::op(laz[k], a);\n  }\n\n  void push(int\
+    \ k) {\n    all_apply(2 * k, laz[k]);\n    all_apply(2 * k + 1, laz[k]);\n   \
+    \ laz[k] = Monoid_A::unit();\n  }\n\n  void set(int p, X x) {\n    assert(0 <=\
+    \ p && p < n);\n    p += size;\n    for (int i = log; i >= 1; i--) push(p >> i);\n\
+    \    dat[p] = x;\n    for (int i = 1; i <= log; i++) update(p >> i);\n  }\n\n\
+    \  X get(int p) {\n    assert(0 <= p && p < n);\n    p += size;\n    for (int\
+    \ i = log; i >= 1; i--) push(p >> i);\n    return dat[p];\n  }\n\n  vc<X> get_all()\
+    \ {\n    FOR(i, size) push(i);\n    return {dat.begin() + size, dat.begin() +\
+    \ size + n};\n  }\n\n  X prod(int l, int r) {\n    assert(0 <= l && l <= r &&\
+    \ r <= n);\n    if (l == r) return Monoid_X::unit();\n\n    l += size;\n    r\
+    \ += size;\n\n    for (int i = log; i >= 1; i--) {\n      if (((l >> i) << i)\
+    \ != l) push(l >> i);\n      if (((r >> i) << i) != r) push((r - 1) >> i);\n \
+    \   }\n\n    X xl = Monoid_X::unit(), xr = Monoid_X::unit();\n    while (l < r)\
+    \ {\n      if (l & 1) xl = Monoid_X::op(xl, dat[l++]);\n      if (r & 1) xr =\
+    \ Monoid_X::op(dat[--r], xr);\n      l >>= 1;\n      r >>= 1;\n    }\n\n    return\
+    \ Monoid_X::op(xl, xr);\n  }\n\n  X prod_all() { return dat[1]; }\n\n  void apply(int\
+    \ p, A a) {\n    assert(0 <= p && p < n);\n    p += size;\n    dat[p] = Lazy::act(dat[p],\
+    \ a);\n    for (int i = 1; i <= log; i++) update(p >> i);\n  }\n\n  void apply(int\
+    \ l, int r, A a) {\n    assert(0 <= l && l <= r && r <= n);\n    if (l == r) return;\n\
+    \n    l += size;\n    r += size;\n\n    for (int i = log; i >= 1; i--) {\n   \
+    \   if (((l >> i) << i) != l) push(l >> i);\n      if (((r >> i) << i) != r) push((r\
+    \ - 1) >> i);\n    }\n\n    {\n      int l2 = l, r2 = r;\n      while (l < r)\
+    \ {\n        if (l & 1) all_apply(l++, a);\n        if (r & 1) all_apply(--r,\
+    \ a);\n        l >>= 1;\n        r >>= 1;\n      }\n      l = l2;\n      r = r2;\n\
+    \    }\n\n    for (int i = 1; i <= log; i++) {\n      if (((l >> i) << i) != l)\
+    \ update(l >> i);\n      if (((r >> i) << i) != r) update((r - 1) >> i);\n   \
+    \ }\n  }\n\n  template <typename C>\n  int max_right(C& check, int l) {\n    assert(0\
+    \ <= l && l <= n);\n    assert(check(Monoid_X::unit()));\n    if (l == n) return\
+    \ n;\n    l += size;\n    for (int i = log; i >= 1; i--) push(l >> i);\n    X\
+    \ sm = Monoid_X::unit();\n    do {\n      while (l % 2 == 0) l >>= 1;\n      if\
+    \ (!check(Monoid_X::op(sm, dat[l]))) {\n        while (l < size) {\n         \
+    \ push(l);\n          l = (2 * l);\n          if (check(Monoid_X::op(sm, dat[l])))\
+    \ {\n            sm = Monoid_X::op(sm, dat[l]);\n            l++;\n          }\n\
+    \        }\n        return l - size;\n      }\n      sm = Monoid_X::op(sm, dat[l]);\n\
+    \      l++;\n    } while ((l & -l) != l);\n    return n;\n  }\n\n  template <typename\
+    \ C>\n  int min_left(C& check, int r) {\n    assert(0 <= r && r <= n);\n    assert(check(Monoid_X::unit()));\n\
+    \    if (r == 0) return 0;\n    r += size;\n    for (int i = log; i >= 1; i--)\
+    \ push((r - 1) >> i);\n    X sm = Monoid_X::unit();\n    do {\n      r--;\n  \
+    \    while (r > 1 && (r % 2)) r >>= 1;\n      if (!check(Monoid_X::op(dat[r],\
+    \ sm))) {\n        while (r < size) {\n          push(r);\n          r = (2 *\
+    \ r + 1);\n          if (check(Monoid_X::op(dat[r], sm))) {\n            sm =\
+    \ Monoid_X::op(dat[r], sm);\n            r--;\n          }\n        }\n      \
+    \  return r + 1 - size;\n      }\n      sm = Monoid_X::op(dat[r], sm);\n    }\
+    \ while ((r & -r) != r);\n    return 0;\n  }\n\n  void debug() { print(\"lazysegtree\
+    \ getall:\", get_all()); }\n};\n#line 1 \"alg/monoid_min.hpp\"\ntemplate <class\
+    \ X, X INF>\r\nstruct Monoid_Min {\r\n  using value_type = X;\r\n  static constexpr\
+    \ X op(const X &x, const X &y) noexcept { return min(x, y); }\r\n  static constexpr\
+    \ X unit() { return INF; }\r\n  static constexpr bool commute = true;\r\n};\r\n\
+    #line 1 \"alg/monoid_set.hpp\"\ntemplate <typename E, E none_val>\r\nstruct Monoid_Set\
+    \ {\r\n  using value_type = E;\r\n  using X = value_type;\r\n  static X op(X x,\
+    \ X y) { return (y == none_val ? x : y); }\r\n  static constexpr X unit() { return\
+    \ none_val; }\r\n  static constexpr bool commute = false;\r\n};\n#line 3 \"alg/lazy_min_set.hpp\"\
+    \n\r\ntemplate <typename E, E INF, E none_val>\r\nstruct Lazy_Min_Set {\r\n  using\
+    \ MX = Monoid_Min<E, INF>;\r\n  using MA = Monoid_Set<E, none_val>;\r\n  using\
+    \ X_structure = MX;\r\n  using A_structure = MA;\r\n  using X = typename MX::value_type;\r\
+    \n  using A = typename MA::value_type;\r\n  static constexpr X act(const X &x,\
+    \ const A &a) { return (a==none_val ? x : a) ;}\r\n};\r\n#line 7 \"test/aoj/DSL_2_F_min_set_lazy.test.cpp\"\
+    \n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  const ll MAX = (1LL << 31) - 1;\r\n \
+    \ using Lazy = Lazy_Min_Set<ll, MAX, -1>;\r\n  LazySegTree<Lazy> seg(N);\r\n \
+    \ FOR(_, Q) {\r\n    LL(t);\r\n    if (t == 0) {\r\n      LL(L, R, x);\r\n   \
+    \   seg.apply(L, ++R, x);\r\n    } else {\r\n      LL(L, R);\r\n      print(seg.prod(L,\
+    \ ++R));\r\n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n\
+    \  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  ll T =\
+    \ 1;\r\n  // LL(T);\r\n  FOR(_, T) solve();\r\n\r\n  return 0;\r\n}\r\n"
   code: "#define PROBLEM \\\r\n  \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F\"\
     \r\n#include \"my_template.hpp\"\r\n#include \"other/io.hpp\"\r\n#include \"ds/lazysegtree.hpp\"\
     \r\n#include \"alg/lazy_min_set.hpp\"\r\n\r\nvoid solve() {\r\n  LL(N, Q);\r\n\
@@ -280,7 +281,7 @@ data:
   isVerificationFile: true
   path: test/aoj/DSL_2_F_min_set_lazy.test.cpp
   requiredBy: []
-  timestamp: '2022-04-14 18:25:31+09:00'
+  timestamp: '2022-04-14 19:49:38+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/DSL_2_F_min_set_lazy.test.cpp

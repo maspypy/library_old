@@ -7,7 +7,7 @@ data:
   - icon: ':x:'
     path: graph/bfs01.hpp
     title: graph/bfs01.hpp
-  - icon: ':question:'
+  - icon: ':x:'
     path: graph/dijkstra.hpp
     title: graph/dijkstra.hpp
   _extendedRequiredBy: []

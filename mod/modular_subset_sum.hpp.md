@@ -4,13 +4,13 @@ data:
   - icon: ':x:'
     path: alg/monoid_rollinghash.hpp
     title: alg/monoid_rollinghash.hpp
-  - icon: ':question:'
+  - icon: ':x:'
     path: ds/segtree.hpp
     title: ds/segtree.hpp
   - icon: ':x:'
     path: mod/modint61.hpp
     title: mod/modint61.hpp
-  - icon: ':question:'
+  - icon: ':x:'
     path: other/random.hpp
     title: other/random.hpp
   _extendedRequiredBy: []

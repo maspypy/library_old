@@ -156,36 +156,38 @@ data:
     \ write(d);\r\n  }\r\n  template <class T, size_t S>\r\n  void write(const array<T,\
     \ S> &val) {\r\n    auto n = val.size();\r\n    for (size_t i = 0; i < n; i++)\
     \ {\r\n      if (i) write(' ');\r\n      write(val[i]);\r\n    }\r\n  }\r\n  void\
-    \ write(i128 val) {\r\n    string s;\r\n    while (val) {\r\n      s += '0' +\
-    \ int(val % 10);\r\n      val /= 10;\r\n    }\r\n    reverse(all(s));\r\n    if\
-    \ (len(s) == 0) s = \"0\";\r\n    write(s);\r\n  }\r\n};\r\n\r\nScanner scanner\
-    \ = Scanner(stdin);\r\nPrinter printer = Printer(stdout);\r\n\r\nvoid flush()\
-    \ { printer.flush(); }\r\nvoid print() { printer.write('\\n'); }\r\ntemplate <class\
-    \ Head, class... Tail>\r\nvoid print(Head &&head, Tail &&... tail) {\r\n  printer.write(head);\r\
-    \n  if (sizeof...(Tail)) printer.write(' ');\r\n  print(forward<Tail>(tail)...);\r\
-    \n}\r\n\r\nvoid read() {}\r\ntemplate <class Head, class... Tail>\r\nvoid read(Head\
-    \ &head, Tail &... tail) {\r\n  scanner.read(head);\r\n  read(tail...);\r\n}\r\
-    \n\r\n#define INT(...)   \\\r\n  int __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\
-    #define LL(...)   \\\r\n  ll __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define\
-    \ STR(...)      \\\r\n  string __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define\
-    \ CHAR(...)      \\\r\n  char __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define\
-    \ DBL(...)      \\\r\n  double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n\
-    #define VEC(type, name, size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\
-    \n#define VV(type, name, h, w)                     \\\r\n  vector<vector<type>>\
-    \ name(h, vector<type>(w)); \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t\
-    \ ? \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool\
-    \ t = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\
-    \nvoid yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1)\
-    \ { yes(!t); }\r\n#line 5 \"test/aoj/GRL_6_A_maxflow.test.cpp\"\n\r\n#line 1 \"\
-    flow/maxflow.hpp\"\ntemplate <typename Cap = int>\nstruct MaxFlowGraph {\n  const\
-    \ Cap INF;\n\n  struct Edge {\n    int frm, to;\n    Cap cap;\n    int idx;\n\
-    \  };\n\n  int N;\n  vc<int> indptr;\n  vc<Edge> edges;\n  vc<Cap> edge_flow;\n\
-    \n  vc<Edge> csr_edges;\n  vc<int> rev;\n  vc<int> level, deq;\n  bool calculated;\n\
-    \n  MaxFlowGraph() : INF(numeric_limits<Cap>::max()), N(0), calculated(0) {}\n\
-    \n  void add(int frm, int to, Cap cap) {\n    chmax(N, frm + 1);\n    chmax(N,\
-    \ to + 1);\n    edges.eb(Edge({frm, to, cap, int(edges.size())}));\n  }\n\n  void\
-    \ _build() {\n    indptr.resize(N + 1);\n    level.resize(N);\n    deq.resize(N);\n\
-    \    int M = len(edges);\n    for (auto&& e: edges) { indptr[e.frm + 1]++, indptr[e.to\
+    \ write(i128 val) {\r\n    string s;\r\n    bool negative = 0;\r\n    if(val <\
+    \ 0){\r\n      negative = 1;\r\n      val = -val;\r\n    }\r\n    while (val)\
+    \ {\r\n      s += '0' + int(val % 10);\r\n      val /= 10;\r\n    }\r\n    if(negative)\
+    \ s += \"-\";\r\n    reverse(all(s));\r\n    if (len(s) == 0) s = \"0\";\r\n \
+    \   write(s);\r\n  }\r\n};\r\n\r\nScanner scanner = Scanner(stdin);\r\nPrinter\
+    \ printer = Printer(stdout);\r\n\r\nvoid flush() { printer.flush(); }\r\nvoid\
+    \ print() { printer.write('\\n'); }\r\ntemplate <class Head, class... Tail>\r\n\
+    void print(Head &&head, Tail &&... tail) {\r\n  printer.write(head);\r\n  if (sizeof...(Tail))\
+    \ printer.write(' ');\r\n  print(forward<Tail>(tail)...);\r\n}\r\n\r\nvoid read()\
+    \ {}\r\ntemplate <class Head, class... Tail>\r\nvoid read(Head &head, Tail &...\
+    \ tail) {\r\n  scanner.read(head);\r\n  read(tail...);\r\n}\r\n\r\n#define INT(...)\
+    \   \\\r\n  int __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define LL(...)   \\\
+    \r\n  ll __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define STR(...)      \\\r\n\
+    \  string __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define CHAR(...)      \\\r\
+    \n  char __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define DBL(...)      \\\r\n\
+    \  double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type, name,\
+    \ size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define VV(type,\
+    \ name, h, w)                     \\\r\n  vector<vector<type>> name(h, vector<type>(w));\
+    \ \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ? \"YES\" : \"NO\"\
+    ); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t = 1) { print(t ? \"\
+    Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\nvoid yes(bool t = 1)\
+    \ { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) { yes(!t); }\r\n#line\
+    \ 5 \"test/aoj/GRL_6_A_maxflow.test.cpp\"\n\r\n#line 1 \"flow/maxflow.hpp\"\n\
+    template <typename Cap = int>\nstruct MaxFlowGraph {\n  const Cap INF;\n\n  struct\
+    \ Edge {\n    int frm, to;\n    Cap cap;\n    int idx;\n  };\n\n  int N;\n  vc<int>\
+    \ indptr;\n  vc<Edge> edges;\n  vc<Cap> edge_flow;\n\n  vc<Edge> csr_edges;\n\
+    \  vc<int> rev;\n  vc<int> level, deq;\n  bool calculated;\n\n  MaxFlowGraph()\
+    \ : INF(numeric_limits<Cap>::max()), N(0), calculated(0) {}\n\n  void add(int\
+    \ frm, int to, Cap cap) {\n    chmax(N, frm + 1);\n    chmax(N, to + 1);\n   \
+    \ edges.eb(Edge({frm, to, cap, int(edges.size())}));\n  }\n\n  void _build() {\n\
+    \    indptr.resize(N + 1);\n    level.resize(N);\n    deq.resize(N);\n    int\
+    \ M = len(edges);\n    for (auto&& e: edges) { indptr[e.frm + 1]++, indptr[e.to\
     \ + 1]++; }\n    FOR(v, N) indptr[v + 1] += indptr[v];\n    auto counter = indptr;\n\
     \n    edge_flow.resize(M);\n    csr_edges.resize(2 * M);\n    rev.resize(2 * M);\n\
     \    for (auto&& e: edges) {\n      int i = counter[e.frm], j = counter[e.to];\n\
@@ -231,7 +233,7 @@ data:
   isVerificationFile: true
   path: test/aoj/GRL_6_A_maxflow.test.cpp
   requiredBy: []
-  timestamp: '2022-04-14 18:25:31+09:00'
+  timestamp: '2022-04-14 19:49:38+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/aoj/GRL_6_A_maxflow.test.cpp

@@ -156,38 +156,40 @@ data:
     \ write(d);\r\n  }\r\n  template <class T, size_t S>\r\n  void write(const array<T,\
     \ S> &val) {\r\n    auto n = val.size();\r\n    for (size_t i = 0; i < n; i++)\
     \ {\r\n      if (i) write(' ');\r\n      write(val[i]);\r\n    }\r\n  }\r\n  void\
-    \ write(i128 val) {\r\n    string s;\r\n    while (val) {\r\n      s += '0' +\
-    \ int(val % 10);\r\n      val /= 10;\r\n    }\r\n    reverse(all(s));\r\n    if\
-    \ (len(s) == 0) s = \"0\";\r\n    write(s);\r\n  }\r\n};\r\n\r\nScanner scanner\
-    \ = Scanner(stdin);\r\nPrinter printer = Printer(stdout);\r\n\r\nvoid flush()\
-    \ { printer.flush(); }\r\nvoid print() { printer.write('\\n'); }\r\ntemplate <class\
-    \ Head, class... Tail>\r\nvoid print(Head &&head, Tail &&... tail) {\r\n  printer.write(head);\r\
-    \n  if (sizeof...(Tail)) printer.write(' ');\r\n  print(forward<Tail>(tail)...);\r\
-    \n}\r\n\r\nvoid read() {}\r\ntemplate <class Head, class... Tail>\r\nvoid read(Head\
-    \ &head, Tail &... tail) {\r\n  scanner.read(head);\r\n  read(tail...);\r\n}\r\
-    \n\r\n#define INT(...)   \\\r\n  int __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\
-    #define LL(...)   \\\r\n  ll __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define\
-    \ STR(...)      \\\r\n  string __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define\
-    \ CHAR(...)      \\\r\n  char __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define\
-    \ DBL(...)      \\\r\n  double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n\
-    #define VEC(type, name, size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\
-    \n#define VV(type, name, h, w)                     \\\r\n  vector<vector<type>>\
-    \ name(h, vector<type>(w)); \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t\
-    \ ? \"YES\" : \"NO\"); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool\
-    \ t = 1) { print(t ? \"Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\
-    \nvoid yes(bool t = 1) { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1)\
-    \ { yes(!t); }\r\n#line 4 \"test/library_checker/string/enumerate_palindromes.test.cpp\"\
-    \n\r\n#line 1 \"string/manacher.hpp\"\ntemplate <bool CALC_ALL, typename STRING>\r\
-    \nvector<int> longest_palindrome(STRING s) {\r\n  if (CALC_ALL) {\r\n    int n\
-    \ = len(s);\r\n    assert(n > 0);\r\n    s.resize(2 * n - 1);\r\n    FOR_R(i,\
-    \ n) s[2 * i] = s[i];\r\n    FOR(i, n - 1) s[2 * i + 1] = '-';\r\n  }\r\n  vector<int>\
-    \ A(len(s));\r\n  int i = 0, j = 0;\r\n  while (i < len(s)) {\r\n    while (i\
-    \ - j >= 0 && i + j < len(s) && s[i - j] == s[i + j]) ++j;\r\n    A[i] = j;\r\n\
-    \    int k = 1;\r\n    while (i - k >= 0 && i + k < len(s) && k + A[i - k] < j)\
-    \ {\r\n      A[i + k] = A[i - k];\r\n      ++k;\r\n    }\r\n    i += k, j -= k;\r\
-    \n  }\r\n  if (CALC_ALL) {\r\n    FOR(i, len(A)) {\r\n      if (!((i ^ A[i]) &\
-    \ 1)) A[i]--;\r\n    }\r\n  } else {\r\n    for (auto&& x: A) x = 2 * x - 1;\r\
-    \n  }\r\n  return A;\r\n}\r\n#line 6 \"test/library_checker/string/enumerate_palindromes.test.cpp\"\
+    \ write(i128 val) {\r\n    string s;\r\n    bool negative = 0;\r\n    if(val <\
+    \ 0){\r\n      negative = 1;\r\n      val = -val;\r\n    }\r\n    while (val)\
+    \ {\r\n      s += '0' + int(val % 10);\r\n      val /= 10;\r\n    }\r\n    if(negative)\
+    \ s += \"-\";\r\n    reverse(all(s));\r\n    if (len(s) == 0) s = \"0\";\r\n \
+    \   write(s);\r\n  }\r\n};\r\n\r\nScanner scanner = Scanner(stdin);\r\nPrinter\
+    \ printer = Printer(stdout);\r\n\r\nvoid flush() { printer.flush(); }\r\nvoid\
+    \ print() { printer.write('\\n'); }\r\ntemplate <class Head, class... Tail>\r\n\
+    void print(Head &&head, Tail &&... tail) {\r\n  printer.write(head);\r\n  if (sizeof...(Tail))\
+    \ printer.write(' ');\r\n  print(forward<Tail>(tail)...);\r\n}\r\n\r\nvoid read()\
+    \ {}\r\ntemplate <class Head, class... Tail>\r\nvoid read(Head &head, Tail &...\
+    \ tail) {\r\n  scanner.read(head);\r\n  read(tail...);\r\n}\r\n\r\n#define INT(...)\
+    \   \\\r\n  int __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define LL(...)   \\\
+    \r\n  ll __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define STR(...)      \\\r\n\
+    \  string __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define CHAR(...)      \\\r\
+    \n  char __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n#define DBL(...)      \\\r\n\
+    \  double __VA_ARGS__; \\\r\n  read(__VA_ARGS__)\r\n\r\n#define VEC(type, name,\
+    \ size) \\\r\n  vector<type> name(size);    \\\r\n  read(name)\r\n#define VV(type,\
+    \ name, h, w)                     \\\r\n  vector<vector<type>> name(h, vector<type>(w));\
+    \ \\\r\n  read(name)\r\n\r\nvoid YES(bool t = 1) { print(t ? \"YES\" : \"NO\"\
+    ); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t = 1) { print(t ? \"\
+    Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\nvoid yes(bool t = 1)\
+    \ { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) { yes(!t); }\r\n#line\
+    \ 4 \"test/library_checker/string/enumerate_palindromes.test.cpp\"\n\r\n#line\
+    \ 1 \"string/manacher.hpp\"\ntemplate <bool CALC_ALL, typename STRING>\r\nvector<int>\
+    \ longest_palindrome(STRING s) {\r\n  if (CALC_ALL) {\r\n    int n = len(s);\r\
+    \n    assert(n > 0);\r\n    s.resize(2 * n - 1);\r\n    FOR_R(i, n) s[2 * i] =\
+    \ s[i];\r\n    FOR(i, n - 1) s[2 * i + 1] = '-';\r\n  }\r\n  vector<int> A(len(s));\r\
+    \n  int i = 0, j = 0;\r\n  while (i < len(s)) {\r\n    while (i - j >= 0 && i\
+    \ + j < len(s) && s[i - j] == s[i + j]) ++j;\r\n    A[i] = j;\r\n    int k = 1;\r\
+    \n    while (i - k >= 0 && i + k < len(s) && k + A[i - k] < j) {\r\n      A[i\
+    \ + k] = A[i - k];\r\n      ++k;\r\n    }\r\n    i += k, j -= k;\r\n  }\r\n  if\
+    \ (CALC_ALL) {\r\n    FOR(i, len(A)) {\r\n      if (!((i ^ A[i]) & 1)) A[i]--;\r\
+    \n    }\r\n  } else {\r\n    for (auto&& x: A) x = 2 * x - 1;\r\n  }\r\n  return\
+    \ A;\r\n}\r\n#line 6 \"test/library_checker/string/enumerate_palindromes.test.cpp\"\
     \n\r\nvoid solve() {\r\n  STR(S);\r\n  auto A = longest_palindrome<1>(S);\r\n\
     \  print(A);\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\
     \n  cout << setprecision(15);\r\n\r\n  solve();\r\n\r\n  return 0;\r\n}\r\n"
@@ -203,7 +205,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/string/enumerate_palindromes.test.cpp
   requiredBy: []
-  timestamp: '2022-04-14 18:25:31+09:00'
+  timestamp: '2022-04-14 19:49:38+09:00'
   verificationStatus: TEST_WRONG_ANSWER
   verifiedWith: []
 documentation_of: test/library_checker/string/enumerate_palindromes.test.cpp
