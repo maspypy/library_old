@@ -3,7 +3,6 @@
 
 template <typename T, T INF, typename Graph>
 typename Graph::cost_type MinCostCycle(Graph& G) {
-  using T = typename Graph::cost_type;
   int M = G.M;
   int N = G.N;
   T mx = 0;
