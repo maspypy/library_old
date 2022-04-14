@@ -1,41 +1,37 @@
 #pragma once
 #include "graph/base.hpp"
 
-template <typename Graph>
-pair<vector<typename Graph::cost_type>, vector<int>> dijkstra(Graph& G, int v) {
+template <typename T, T INF, typename Graph>
+pair<vc<T>, vc<int>> dijkstra(Graph& G, int v) {
   auto N = G.N;
-  using T = typename Graph::cost_type;
-  vector<T> dist(N, -1);
+  vector<T> dist(N, INF);
   vector<int> par(N, -1);
   using P = pair<T, int>;
 
   priority_queue<P, vector<P>, greater<P>> que;
 
   dist[v] = 0;
-  que.push(mp(T(0), v));
+  que.emplace(0, v);
   while (!que.empty()) {
     auto [dv, v] = que.top();
     que.pop();
     if (dv > dist[v]) continue;
     for (auto&& e: G[v]) {
-      if (dist[e.to] == -1 || dist[e.to] > dist[e.frm] + e.cost) {
-        dist[e.to] = dist[e.frm] + e.cost;
+      if (chmin(dist[e.to], dist[e.frm] + e.cost)) {
         par[e.to] = e.frm;
-        que.push(mp(dist[e.to], e.to));
+        que.emplace(dist[e.to], e.to);
       }
     }
   }
-  return mp(dist, par);
+  return {dist, par};
 }
 
 // 多点スタート。[dist, par, root]
-template <typename Graph>
-tuple<vector<typename Graph::cost_type>, vector<int>, vector<int>> dijkstra(
-    Graph& G, vc<int> vs) {
+template <typename T, T INF, typename Graph>
+tuple<vc<T>, vc<int>, vc<int>> dijkstra(Graph& G, vc<int> vs) {
   assert(G.is_prepared());
   int N = G.N;
-  using T = typename Graph::cost_type;
-  vc<ll> dist(N, -1);
+  vc<ll> dist(N, INF);
   vc<int> par(N, -1);
   vc<int> root(N, -1);
 
@@ -54,8 +50,7 @@ tuple<vector<typename Graph::cost_type>, vector<int>, vector<int>> dijkstra(
     que.pop();
     if (dv > dist[v]) continue;
     for (auto&& e: G[v]) {
-      if (dist[e.to] == -1 || dist[e.to] > dist[e.frm] + e.cost) {
-        dist[e.to] = dist[e.frm] + e.cost;
+      if (chmin(dist[e.to], dist[e.frm] + e.cost)) {
         root[e.to] = root[e.frm];
         par[e.to] = e.frm;
         que.push(mp(dist[e.to], e.to));
