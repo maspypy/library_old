@@ -225,10 +225,16 @@ struct Printer {
   }
   void write(i128 val) {
     string s;
+    bool negative = 0;
+    if(val < 0){
+      negative = 1;
+      val = -val;
+    }
     while (val) {
       s += '0' + int(val % 10);
       val /= 10;
     }
+    if(negative) s += "-";
     reverse(all(s));
     if (len(s) == 0) s = "0";
     write(s);
