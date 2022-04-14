@@ -2,7 +2,7 @@
 #include "graph/bfs01.hpp"
 
 template <typename T, T INF, typename Graph>
-typename Graph::cost_type MinCostCycle(Graph& G) {
+T MinCostCycle(Graph& G) {
   int M = G.M;
   int N = G.N;
   T mx = 0;
