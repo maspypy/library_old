@@ -1,19 +1,13 @@
 #pragma once
 #include "graph/base.hpp"
 
+/*
+HL分解。O(N) 時間構築。
+LCA, LA などは O(logN) 時間。
+木以外、非連結でも使えるようにした。dfs順序や親がとれる。
+*/
 template <typename Graph>
 struct HLD {
-  void doc() {
-    print("HL分解。O(N) 時間構築。");
-    print("LCA, LA などは O(logN) 時間。");
-    print("木の問題では真っ先にこれを作る。");
-    print("→ 木DPや木クエリに派生。");
-    print("");
-    print("木以外、非連結でも使えるようにした。dfs順序や親がとれる。");
-    print("edge idx -> in_tree (辺が tree に入っているか) もとれる。");
-    print("LCA とかは今のところ壊れている。");
-  }
-
   Graph &G;
   int N;
   vector<int> LID, RID, head, V, parent, depth, root;
@@ -104,6 +98,9 @@ struct HLD {
       if (head[u] == head[v]) return u;
     }
   }
+
+  int lca(int u, int v) { return LCA(u, v);}
+  int la(int u, int v) { return LA(u, v);}
 
   int subtree_size(int v) { return RID[v] - LID[v]; }
 
