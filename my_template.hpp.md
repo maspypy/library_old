@@ -421,6 +421,9 @@ data:
     path: test/yukicoder/4_modular_subset_sum.test.cpp
     title: test/yukicoder/4_modular_subset_sum.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/yukicoder/502_factorial107.test.cpp
+    title: test/yukicoder/502_factorial107.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/yukicoder/899_bfsnumbering.test.cpp
     title: test/yukicoder/899_bfsnumbering.test.cpp
   _isVerificationFailed: false
@@ -552,6 +555,7 @@ data:
   timestamp: '2022-04-14 18:25:31+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/yukicoder/502_factorial107.test.cpp
   - test/yukicoder/1810_matpow.test.cpp
   - test/yukicoder/899_bfsnumbering.test.cpp
   - test/yukicoder/1320_mincostcycle.test.cpp

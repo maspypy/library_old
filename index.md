@@ -415,6 +415,12 @@ data:
       path: mod/binomial.hpp
       title: mod/binomial.hpp
     - icon: ':heavy_check_mark:'
+      path: mod/factorial107.hpp
+      title: mod/factorial107.hpp
+    - icon: ':warning:'
+      path: mod/factorial998.hpp
+      title: mod/factorial998.hpp
+    - icon: ':heavy_check_mark:'
       path: mod/fast_div.hpp
       title: mod/fast_div.hpp
     - icon: ':warning:'
@@ -1135,6 +1141,9 @@ data:
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/4_modular_subset_sum.test.cpp
       title: test/yukicoder/4_modular_subset_sum.test.cpp
+    - icon: ':heavy_check_mark:'
+      path: test/yukicoder/502_factorial107.test.cpp
+      title: test/yukicoder/502_factorial107.test.cpp
     - icon: ':heavy_check_mark:'
       path: test/yukicoder/899_bfsnumbering.test.cpp
       title: test/yukicoder/899_bfsnumbering.test.cpp
