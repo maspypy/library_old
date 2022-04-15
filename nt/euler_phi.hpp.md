@@ -13,6 +13,9 @@ data:
     title: mod/tetration.hpp
   _extendedVerifiedWith:
   - icon: ':heavy_check_mark:'
+    path: test/aoj/NTL_1_D_eulerphi.test.cpp
+    title: test/aoj/NTL_1_D_eulerphi.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/math/tetration.test.cpp
     title: test/library_checker/math/tetration.test.cpp
   _isVerificationFailed: false
@@ -84,6 +87,7 @@ data:
   timestamp: '2022-01-14 03:06:57+09:00'
   verificationStatus: LIBRARY_ALL_AC
   verifiedWith:
+  - test/aoj/NTL_1_D_eulerphi.test.cpp
   - test/library_checker/math/tetration.test.cpp
 documentation_of: nt/euler_phi.hpp
 layout: document

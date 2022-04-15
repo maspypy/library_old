@@ -2,20 +2,17 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: alg/lazy_min_set.hpp
-    title: alg/lazy_min_set.hpp
-  - icon: ':heavy_check_mark:'
-    path: alg/monoid_min.hpp
-    title: alg/monoid_min.hpp
-  - icon: ':heavy_check_mark:'
-    path: alg/monoid_set.hpp
-    title: alg/monoid_set.hpp
-  - icon: ':heavy_check_mark:'
-    path: ds/lazysegtree.hpp
-    title: ds/lazysegtree.hpp
-  - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
+  - icon: ':heavy_check_mark:'
+    path: nt/euler_phi.hpp
+    title: nt/euler_phi.hpp
+  - icon: ':heavy_check_mark:'
+    path: nt/factor.hpp
+    title: nt/factor.hpp
+  - icon: ':heavy_check_mark:'
+    path: nt/primetest.hpp
+    title: nt/primetest.hpp
   - icon: ':heavy_check_mark:'
     path: other/io.hpp
     title: other/io.hpp
@@ -26,13 +23,13 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F
+    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_D
     links:
-    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F
-  bundledCode: "#line 1 \"test/aoj/DSL_2_F_min_set_lazy.test.cpp\"\n#define PROBLEM\
-    \ \\\r\n  \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F\"\
-    \r\n#line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
-    \nusing ll = long long;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing\
+    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_D
+  bundledCode: "#line 1 \"test/aoj/NTL_1_D_eulerphi.test.cpp\"\n#define PROBLEM \\\
+    \n  \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_D\"\n#line\
+    \ 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\n\
+    using ll = long long;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing\
     \ u32 = unsigned int;\nusing u64 = unsigned long long;\nusing i128 = __int128;\n\
     \ntemplate <class T>\nusing vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\n\
     template <class T>\nusing vvvc = vector<vvc<T>>;\ntemplate <class T>\nusing vvvvc\
@@ -187,110 +184,82 @@ data:
     ); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t = 1) { print(t ? \"\
     Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\nvoid yes(bool t = 1)\
     \ { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) { yes(!t); }\r\n#line\
-    \ 2 \"ds/lazysegtree.hpp\"\n\ntemplate <typename Lazy>\nstruct LazySegTree {\n\
-    \  using Monoid_X = typename Lazy::X_structure;\n  using Monoid_A = typename Lazy::A_structure;\n\
-    \  using X = typename Monoid_X::value_type;\n  using A = typename Monoid_A::value_type;\n\
-    \  int n, log, size;\n  vc<X> dat;\n  vc<A> laz;\n\n  LazySegTree() : LazySegTree(0)\
-    \ {}\n  LazySegTree(int n) : LazySegTree(vc<X>(n, Monoid_X::unit())) {}\n  LazySegTree(vc<X>\
-    \ v) : n(len(v)) {\n    log = 1;\n    while ((1 << log) < n) ++log;\n    size\
-    \ = 1 << log;\n    dat.assign(size << 1, Monoid_X::unit());\n    laz.assign(size,\
-    \ Monoid_A::unit());\n    FOR(i, n) dat[size + i] = v[i];\n    FOR3_R(i, 1, size)\
-    \ update(i);\n  }\n\n  void reset() {\n    fill(all(dat), Monoid_X::unit());\n\
-    \    fill(all(laz), Monoid_A::unit());\n  }\n\n  void reset(const vc<X>& v) {\n\
-    \    assert(len(v) == n);\n    reset();\n    FOR(i, n) dat[size + i] = v[i];\n\
-    \    FOR3_R(i, 1, size) update(i);\n  }\n\n  void update(int k) { dat[k] = Monoid_X::op(dat[2\
-    \ * k], dat[2 * k + 1]); }\n\n  void all_apply(int k, A a) {\n    dat[k] = Lazy::act(dat[k],\
-    \ a);\n    if (k < size) laz[k] = Monoid_A::op(laz[k], a);\n  }\n\n  void push(int\
-    \ k) {\n    all_apply(2 * k, laz[k]);\n    all_apply(2 * k + 1, laz[k]);\n   \
-    \ laz[k] = Monoid_A::unit();\n  }\n\n  void set(int p, X x) {\n    assert(0 <=\
-    \ p && p < n);\n    p += size;\n    for (int i = log; i >= 1; i--) push(p >> i);\n\
-    \    dat[p] = x;\n    for (int i = 1; i <= log; i++) update(p >> i);\n  }\n\n\
-    \  X get(int p) {\n    assert(0 <= p && p < n);\n    p += size;\n    for (int\
-    \ i = log; i >= 1; i--) push(p >> i);\n    return dat[p];\n  }\n\n  vc<X> get_all()\
-    \ {\n    FOR(i, size) push(i);\n    return {dat.begin() + size, dat.begin() +\
-    \ size + n};\n  }\n\n  X prod(int l, int r) {\n    assert(0 <= l && l <= r &&\
-    \ r <= n);\n    if (l == r) return Monoid_X::unit();\n\n    l += size;\n    r\
-    \ += size;\n\n    for (int i = log; i >= 1; i--) {\n      if (((l >> i) << i)\
-    \ != l) push(l >> i);\n      if (((r >> i) << i) != r) push((r - 1) >> i);\n \
-    \   }\n\n    X xl = Monoid_X::unit(), xr = Monoid_X::unit();\n    while (l < r)\
-    \ {\n      if (l & 1) xl = Monoid_X::op(xl, dat[l++]);\n      if (r & 1) xr =\
-    \ Monoid_X::op(dat[--r], xr);\n      l >>= 1;\n      r >>= 1;\n    }\n\n    return\
-    \ Monoid_X::op(xl, xr);\n  }\n\n  X prod_all() { return dat[1]; }\n\n  void apply(int\
-    \ p, A a) {\n    assert(0 <= p && p < n);\n    p += size;\n    dat[p] = Lazy::act(dat[p],\
-    \ a);\n    for (int i = 1; i <= log; i++) update(p >> i);\n  }\n\n  void apply(int\
-    \ l, int r, A a) {\n    assert(0 <= l && l <= r && r <= n);\n    if (l == r) return;\n\
-    \n    l += size;\n    r += size;\n\n    for (int i = log; i >= 1; i--) {\n   \
-    \   if (((l >> i) << i) != l) push(l >> i);\n      if (((r >> i) << i) != r) push((r\
-    \ - 1) >> i);\n    }\n\n    {\n      int l2 = l, r2 = r;\n      while (l < r)\
-    \ {\n        if (l & 1) all_apply(l++, a);\n        if (r & 1) all_apply(--r,\
-    \ a);\n        l >>= 1;\n        r >>= 1;\n      }\n      l = l2;\n      r = r2;\n\
-    \    }\n\n    for (int i = 1; i <= log; i++) {\n      if (((l >> i) << i) != l)\
-    \ update(l >> i);\n      if (((r >> i) << i) != r) update((r - 1) >> i);\n   \
-    \ }\n  }\n\n  template <typename C>\n  int max_right(C& check, int l) {\n    assert(0\
-    \ <= l && l <= n);\n    assert(check(Monoid_X::unit()));\n    if (l == n) return\
-    \ n;\n    l += size;\n    for (int i = log; i >= 1; i--) push(l >> i);\n    X\
-    \ sm = Monoid_X::unit();\n    do {\n      while (l % 2 == 0) l >>= 1;\n      if\
-    \ (!check(Monoid_X::op(sm, dat[l]))) {\n        while (l < size) {\n         \
-    \ push(l);\n          l = (2 * l);\n          if (check(Monoid_X::op(sm, dat[l])))\
-    \ {\n            sm = Monoid_X::op(sm, dat[l]);\n            l++;\n          }\n\
-    \        }\n        return l - size;\n      }\n      sm = Monoid_X::op(sm, dat[l]);\n\
-    \      l++;\n    } while ((l & -l) != l);\n    return n;\n  }\n\n  template <typename\
-    \ C>\n  int min_left(C& check, int r) {\n    assert(0 <= r && r <= n);\n    assert(check(Monoid_X::unit()));\n\
-    \    if (r == 0) return 0;\n    r += size;\n    for (int i = log; i >= 1; i--)\
-    \ push((r - 1) >> i);\n    X sm = Monoid_X::unit();\n    do {\n      r--;\n  \
-    \    while (r > 1 && (r % 2)) r >>= 1;\n      if (!check(Monoid_X::op(dat[r],\
-    \ sm))) {\n        while (r < size) {\n          push(r);\n          r = (2 *\
-    \ r + 1);\n          if (check(Monoid_X::op(dat[r], sm))) {\n            sm =\
-    \ Monoid_X::op(dat[r], sm);\n            r--;\n          }\n        }\n      \
-    \  return r + 1 - size;\n      }\n      sm = Monoid_X::op(dat[r], sm);\n    }\
-    \ while ((r & -r) != r);\n    return 0;\n  }\n\n  void debug() { print(\"lazysegtree\
-    \ getall:\", get_all()); }\n};\n#line 1 \"alg/monoid_min.hpp\"\ntemplate <class\
-    \ X, X INF>\r\nstruct Monoid_Min {\r\n  using value_type = X;\r\n  static constexpr\
-    \ X op(const X &x, const X &y) noexcept { return min(x, y); }\r\n  static constexpr\
-    \ X unit() { return INF; }\r\n  static constexpr bool commute = true;\r\n};\r\n\
-    #line 1 \"alg/monoid_set.hpp\"\ntemplate <typename E, E none_val>\r\nstruct Monoid_Set\
-    \ {\r\n  using value_type = E;\r\n  using X = value_type;\r\n  static X op(X x,\
-    \ X y) { return (y == none_val ? x : y); }\r\n  static constexpr X unit() { return\
-    \ none_val; }\r\n  static constexpr bool commute = false;\r\n};\n#line 3 \"alg/lazy_min_set.hpp\"\
-    \n\r\ntemplate <typename E, E INF, E none_val>\r\nstruct Lazy_Min_Set {\r\n  using\
-    \ MX = Monoid_Min<E, INF>;\r\n  using MA = Monoid_Set<E, none_val>;\r\n  using\
-    \ X_structure = MX;\r\n  using A_structure = MA;\r\n  using X = typename MX::value_type;\r\
-    \n  using A = typename MA::value_type;\r\n  static constexpr X act(const X &x,\
-    \ const A &a) { return (a==none_val ? x : a) ;}\r\n};\r\n#line 7 \"test/aoj/DSL_2_F_min_set_lazy.test.cpp\"\
-    \n\r\nvoid solve() {\r\n  LL(N, Q);\r\n  const ll MAX = (1LL << 31) - 1;\r\n \
-    \ using Lazy = Lazy_Min_Set<ll, MAX, -1>;\r\n  LazySegTree<Lazy> seg(N);\r\n \
-    \ FOR(_, Q) {\r\n    LL(t);\r\n    if (t == 0) {\r\n      LL(L, R, x);\r\n   \
-    \   seg.apply(L, ++R, x);\r\n    } else {\r\n      LL(L, R);\r\n      print(seg.prod(L,\
-    \ ++R));\r\n    }\r\n  }\r\n}\r\n\r\nsigned main() {\r\n  cin.tie(nullptr);\r\n\
-    \  ios::sync_with_stdio(false);\r\n  cout << setprecision(15);\r\n\r\n  ll T =\
-    \ 1;\r\n  // LL(T);\r\n  FOR(_, T) solve();\r\n\r\n  return 0;\r\n}\r\n"
-  code: "#define PROBLEM \\\r\n  \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F\"\
-    \r\n#include \"my_template.hpp\"\r\n#include \"other/io.hpp\"\r\n#include \"ds/lazysegtree.hpp\"\
-    \r\n#include \"alg/lazy_min_set.hpp\"\r\n\r\nvoid solve() {\r\n  LL(N, Q);\r\n\
-    \  const ll MAX = (1LL << 31) - 1;\r\n  using Lazy = Lazy_Min_Set<ll, MAX, -1>;\r\
-    \n  LazySegTree<Lazy> seg(N);\r\n  FOR(_, Q) {\r\n    LL(t);\r\n    if (t == 0)\
-    \ {\r\n      LL(L, R, x);\r\n      seg.apply(L, ++R, x);\r\n    } else {\r\n \
-    \     LL(L, R);\r\n      print(seg.prod(L, ++R));\r\n    }\r\n  }\r\n}\r\n\r\n\
-    signed main() {\r\n  cin.tie(nullptr);\r\n  ios::sync_with_stdio(false);\r\n \
-    \ cout << setprecision(15);\r\n\r\n  ll T = 1;\r\n  // LL(T);\r\n  FOR(_, T) solve();\r\
-    \n\r\n  return 0;\r\n}\r\n"
+    \ 2 \"nt/primetest.hpp\"\nstruct m64 {\r\n    using i64 = int64_t;\r\n    using\
+    \ u64 = uint64_t;\r\n    using u128 = __uint128_t;\r\n\r\n    inline static u64\
+    \ m, r, n2; // r * m = -1 (mod 1<<64), n2 = 1<<128 (mod m)\r\n    static void\
+    \ set_mod(u64 m) {\r\n        assert(m < (1ull << 62));\r\n        assert((m &\
+    \ 1) == 1);\r\n        m64::m = m;\r\n        n2 = -u128(m) % m;\r\n        r\
+    \ = m;\r\n        FOR (_, 5) r *= 2 - m*r;\r\n        r = -r;\r\n        assert(r\
+    \ * m == -1ull);\r\n    }\r\n    static u64 reduce(u128 b) { return (b + u128(u64(b)\
+    \ * r) * m) >> 64; }\r\n\r\n    u64 x;\r\n    m64() : x(0) {}\r\n    m64(u64 x)\
+    \ : x(reduce(u128(x) * n2)){};\r\n    u64 val() const { u64 y = reduce(x); return\
+    \ y >= m ? y-m : y; }\r\n    m64 &operator+=(m64 y) {\r\n        x += y.x - (m\
+    \ << 1);\r\n        x = (i64(x) < 0 ? x + (m << 1) : x);\r\n        return *this;\r\
+    \n    }\r\n    m64 &operator-=(m64 y) {\r\n        x -= y.x;\r\n        x = (i64(x)\
+    \ < 0 ? x + (m << 1) : x);\r\n        return *this;\r\n    }\r\n    m64 &operator*=(m64\
+    \ y) { x = reduce(u128(x) * y.x); return *this; }\r\n    m64 operator+(m64 y)\
+    \ const { return m64(*this) += y; }\r\n    m64 operator-(m64 y) const { return\
+    \ m64(*this) -= y; }\r\n    m64 operator*(m64 y) const { return m64(*this) *=\
+    \ y; }\r\n    bool operator==(m64 y) const { return (x >= m ? x-m : x) == (y.x\
+    \ >= m ? y.x-m : y.x); }\r\n    bool operator!=(m64 y) const { return not operator==(y);\
+    \ }\r\n    m64 pow(u64 n) const {\r\n        m64 y = 1, z = *this;\r\n       \
+    \ for ( ; n; n >>= 1, z *= z) if (n & 1) y *= z;\r\n        return y;\r\n    }\r\
+    \n};\r\n\r\nbool primetest(const uint64_t x) {\r\n    using u64 = uint64_t;\r\n\
+    \    if (x == 2 or x == 3 or x == 5 or x == 7) return true;\r\n    if (x % 2 ==\
+    \ 0 or x % 3 == 0 or x % 5 == 0 or x % 7 == 0) return false;\r\n    if (x < 121)\
+    \ return x > 1;\r\n    const u64 d = (x-1) >> __builtin_ctzll(x-1);\r\n    m64::set_mod(x);\r\
+    \n    const m64 one(1), minus_one(x-1);\r\n    auto ok = [&](u64 a) {\r\n    \
+    \    auto y = m64(a).pow(d);\r\n        u64 t = d;\r\n        while (y != one\
+    \ and y != minus_one and t != x-1) y *= y, t <<= 1;\r\n        if (y != minus_one\
+    \ and t % 2 == 0) return false;\r\n        return true;\r\n    };\r\n    if (x\
+    \ < (1ull << 32)) {\r\n        for (u64 a : { 2, 7, 61 }) if (not ok(a)) return\
+    \ false;\r\n    } else {\r\n        for (u64 a : { 2, 325, 9375, 28178, 450775,\
+    \ 9780504, 1795265022 }) {\r\n            if (x <= a) return true;\r\n       \
+    \     if (not ok(a)) return false;\r\n        }\r\n    }\r\n    return true;\r\
+    \n}\n#line 3 \"nt/factor.hpp\"\n\nmt19937_64 rng_mt{random_device{}()};\nll rnd(ll\
+    \ n) { return uniform_int_distribution<ll>(0, n - 1)(rng_mt); }\n\nll rho(ll n,\
+    \ ll c) {\n  m64::set_mod(n);\n  assert(n > 1);\n  const m64 cc(c);\n  auto f\
+    \ = [&](m64 x) { return x * x + cc; };\n  m64 x = 1, y = 2, z = 1, q = 1;\n  ll\
+    \ g = 1;\n  const ll m = 1LL << (__lg(n) / 5); // ?\n  for (ll r = 1; g == 1;\
+    \ r <<= 1) {\n    x = y;\n    FOR(_, r) y = f(y);\n    for (ll k = 0; k < r and\
+    \ g == 1; k += m) {\n      z = y;\n      FOR(_, min(m, r - k)) y = f(y), q *=\
+    \ x - y;\n      g = gcd(q.val(), n);\n    }\n  }\n  if (g == n)\n    do {\n  \
+    \    z = f(z);\n      g = gcd((x - z).val(), n);\n    } while (g == 1);\n  return\
+    \ g;\n}\n\nll find_prime_factor(ll n) {\n  assert(n > 1);\n  if (primetest(n))\n\
+    \    return n;\n  FOR(_, 100) {\n    ll m = rho(n, rnd(n));\n    if (primetest(m))\n\
+    \      return m;\n    n = m;\n  }\n  cerr << \"failed\" << endl;\n  assert(false);\n\
+    \  return -1;\n}\n\nvc<pi> factor(ll n) {\n  assert(n >= 1);\n  vc<pi> pf;\n \
+    \ FOR3(p, 2, 100) {\n    if (p * p > n)\n      break;\n    if (n % p == 0) {\n\
+    \      ll e = 0;\n      do {\n        n /= p, e += 1;\n      } while (n % p ==\
+    \ 0);\n      pf.eb(p, e);\n    }\n  }\n  while (n > 1) {\n    ll p = find_prime_factor(n);\n\
+    \    ll e = 0;\n    do {\n      n /= p, e += 1;\n    } while (n % p == 0);\n \
+    \   pf.eb(p, e);\n  }\n  sort(all(pf));\n  return pf;\n}\n#line 2 \"nt/euler_phi.hpp\"\
+    \nll euler_phi(ll n) {\r\n  auto pf = factor(n);\r\n  for (auto&& [p, e]: pf)\
+    \ n -= n / p;\r\n  return n;\r\n}\r\n#line 6 \"test/aoj/NTL_1_D_eulerphi.test.cpp\"\
+    \n\nvoid solve() {\n  LL(N);\n  print(euler_phi(N));\n}\n\nsigned main() {\n \
+    \ cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\
+    \n  ll T = 1;\n  // LL(T);\n  FOR(_, T) solve();\n\n  return 0;\n}\n"
+  code: "#define PROBLEM \\\n  \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=NTL_1_D\"\
+    \n#include \"my_template.hpp\"\n#include \"other/io.hpp\"\n#include \"nt/euler_phi.hpp\"\
+    \n\nvoid solve() {\n  LL(N);\n  print(euler_phi(N));\n}\n\nsigned main() {\n \
+    \ cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n  cout << setprecision(15);\n\
+    \n  ll T = 1;\n  // LL(T);\n  FOR(_, T) solve();\n\n  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
-  - ds/lazysegtree.hpp
-  - alg/lazy_min_set.hpp
-  - alg/monoid_min.hpp
-  - alg/monoid_set.hpp
+  - nt/euler_phi.hpp
+  - nt/factor.hpp
+  - nt/primetest.hpp
   isVerificationFile: true
-  path: test/aoj/DSL_2_F_min_set_lazy.test.cpp
+  path: test/aoj/NTL_1_D_eulerphi.test.cpp
   requiredBy: []
-  timestamp: '2022-04-15 23:23:33+09:00'
+  timestamp: '2022-04-15 23:24:28+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/aoj/DSL_2_F_min_set_lazy.test.cpp
+documentation_of: test/aoj/NTL_1_D_eulerphi.test.cpp
 layout: document
 redirect_from:
-- /verify/test/aoj/DSL_2_F_min_set_lazy.test.cpp
-- /verify/test/aoj/DSL_2_F_min_set_lazy.test.cpp.html
-title: test/aoj/DSL_2_F_min_set_lazy.test.cpp
+- /verify/test/aoj/NTL_1_D_eulerphi.test.cpp
+- /verify/test/aoj/NTL_1_D_eulerphi.test.cpp.html
+title: test/aoj/NTL_1_D_eulerphi.test.cpp
 ---

@@ -214,15 +214,17 @@ data:
     frm to cost id\");\n      for (auto&& e: edges) print(e.frm, e.to, e.cost, e.id);\n\
     \    } else {\n      print(\"indptr\", indptr);\n      print(\"frm to cost id\"\
     );\n      FOR(v, N) for (auto&& e: (*this)[v]) print(e.frm, e.to, e.cost, e.id);\n\
-    \    }\n  }\n};\n#line 1 \"graph/cycle_detection.hpp\"\ntemplate <typename Graph>\r\
-    \nvc<int> cycle_detection(Graph& G, bool is_edge) {\r\n  assert(G.is_directed());\r\
-    \n  assert(G.is_prepared());\r\n  if (!is_edge) {\r\n    auto C = cycle_detection(G,\
-    \ true);\r\n    if (len(C) == 0) return C;\r\n    vc<int> ANS(len(C) + 1);\r\n\
-    \    FOR(i, len(C)) {\r\n      auto e = G.edges[C[i]];\r\n      ANS[i + 0] = e.frm;\r\
-    \n      ANS[i + 1] = e.to;\r\n    }\r\n    return ANS;\r\n  }\r\n\r\n  int N =\
-    \ G.N;\r\n  vc<int> used(N);\r\n  vc<int> path; // edge\r\n  vc<pair<int, int>>\
-    \ par(N);\r\n  vector<int> ANS;\r\n\r\n  auto dfs = [&](auto self, int v) -> void\
-    \ {\r\n    used[v] = 1;\r\n    for (auto&& e: G[v]) {\r\n      if (len(ANS)) return;\r\
+    \    }\n  }\n};\n#line 2 \"graph/cycle_detection.hpp\"\n\r\n// \u8FBA\u306E\u5217\
+    \ or \u9802\u70B9\u5217\u306E vector \u3092\u8FD4\u3059\r\n// \u898B\u3064\u304B\
+    \u3089\u306A\u304B\u3063\u305F\u5834\u5408\u306B\u306F\u3001\u7A7A vector\r\n\
+    template <typename Graph>\r\nvc<int> cycle_detection(Graph& G, bool is_edge =\
+    \ 0) {\r\n  assert(G.is_directed());\r\n  assert(G.is_prepared());\r\n  if (!is_edge)\
+    \ {\r\n    auto C = cycle_detection(G, true);\r\n    if (len(C) == 0) return C;\r\
+    \n    vc<int> ANS(len(C));\r\n    FOR(i, len(C)) {\r\n      auto e = G.edges[C[i]];\r\
+    \n      ANS[i] = e.frm;\r\n    }\r\n    return ANS;\r\n  }\r\n\r\n  int N = G.N;\r\
+    \n  vc<int> used(N);\r\n  vc<int> path; // edge\r\n  vc<pair<int, int>> par(N);\r\
+    \n  vector<int> ANS;\r\n\r\n  auto dfs = [&](auto self, int v) -> void {\r\n \
+    \   used[v] = 1;\r\n    for (auto&& e: G[v]) {\r\n      if (len(ANS)) return;\r\
     \n      if (!used[e.to]) {\r\n        par[e.to] = {v, e.id};\r\n        self(self,\
     \ e.to);\r\n      }\r\n      elif (used[e.to] == 1) {\r\n        ANS = {e.id};\r\
     \n        int cur = v;\r\n        while (cur != e.to) {\r\n          ANS.eb(par[cur].se);\r\
@@ -250,7 +252,7 @@ data:
   isVerificationFile: true
   path: test/library_checker/graph/cycle_detection.test.cpp
   requiredBy: []
-  timestamp: '2022-04-14 19:49:38+09:00'
+  timestamp: '2022-04-15 23:24:05+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
 documentation_of: test/library_checker/graph/cycle_detection.test.cpp

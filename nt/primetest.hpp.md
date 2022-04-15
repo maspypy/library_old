@@ -37,6 +37,9 @@ data:
     path: test/aoj/ITP1_D_D_divisors.test.cpp
     title: test/aoj/ITP1_D_D_divisors.test.cpp
   - icon: ':heavy_check_mark:'
+    path: test/aoj/NTL_1_D_eulerphi.test.cpp
+    title: test/aoj/NTL_1_D_eulerphi.test.cpp
+  - icon: ':heavy_check_mark:'
     path: test/library_checker/graph/chromatic_number.test.cpp
     title: test/library_checker/graph/chromatic_number.test.cpp
   - icon: ':heavy_check_mark:'
@@ -140,6 +143,7 @@ data:
   verifiedWith:
   - test/aoj/ALDS1_1_C_primetest.test.cpp
   - test/aoj/ITP1_D_D_divisors.test.cpp
+  - test/aoj/NTL_1_D_eulerphi.test.cpp
   - test/library_checker/math/binomial_coefficient.test.cpp
   - test/library_checker/math/kth_root_mod.test.cpp
   - test/library_checker/math/factorize.test.cpp

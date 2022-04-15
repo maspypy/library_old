@@ -2,14 +2,23 @@
 data:
   _extendedDependsOn:
   - icon: ':heavy_check_mark:'
-    path: alg/group_affine.hpp
-    title: alg/group_affine.hpp
+    path: alg/group_add.hpp
+    title: alg/group_add.hpp
   - icon: ':heavy_check_mark:'
-    path: alg/group_reverse.hpp
-    title: alg/group_reverse.hpp
+    path: alg/group_cntsum.hpp
+    title: alg/group_cntsum.hpp
   - icon: ':heavy_check_mark:'
-    path: ds/segtree.hpp
-    title: ds/segtree.hpp
+    path: alg/lazy_cntsum_add.hpp
+    title: alg/lazy_cntsum_add.hpp
+  - icon: ':heavy_check_mark:'
+    path: alg/lazy_reverse.hpp
+    title: alg/lazy_reverse.hpp
+  - icon: ':heavy_check_mark:'
+    path: alg/monoid_reverse.hpp
+    title: alg/monoid_reverse.hpp
+  - icon: ':heavy_check_mark:'
+    path: ds/lazysegtree.hpp
+    title: ds/lazysegtree.hpp
   - icon: ':heavy_check_mark:'
     path: graph/base.hpp
     title: graph/base.hpp
@@ -17,11 +26,8 @@ data:
     path: graph/hld.hpp
     title: graph/hld.hpp
   - icon: ':heavy_check_mark:'
-    path: graph/treegroup.hpp
-    title: graph/treegroup.hpp
-  - icon: ':heavy_check_mark:'
-    path: mod/modint.hpp
-    title: mod/modint.hpp
+    path: graph/lazytreemonoid.hpp
+    title: graph/lazytreemonoid.hpp
   - icon: ':heavy_check_mark:'
     path: my_template.hpp
     title: my_template.hpp
@@ -35,12 +41,12 @@ data:
   _verificationStatusIcon: ':heavy_check_mark:'
   attributes:
     '*NOT_SPECIAL_COMMENTS*': ''
-    PROBLEM: https://judge.yosupo.jp/problem/vertex_set_path_composite
+    PROBLEM: https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_E
     links:
-    - https://judge.yosupo.jp/problem/vertex_set_path_composite
-  bundledCode: "#line 1 \"test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp\"\
-    \n#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_set_path_composite\"\
-    \n#line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
+    - https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_E
+  bundledCode: "#line 1 \"test/aoj/GRL_5_E_lazytreemonoid.test.cpp\"\n#define PROBLEM\
+    \ \\\n  \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_E\"\n\
+    #line 1 \"my_template.hpp\"\n#include <bits/stdc++.h>\n\nusing namespace std;\n\
     \nusing ll = long long;\nusing pi = pair<ll, ll>;\nusing vi = vector<ll>;\nusing\
     \ u32 = unsigned int;\nusing u64 = unsigned long long;\nusing i128 = __int128;\n\
     \ntemplate <class T>\nusing vc = vector<T>;\ntemplate <class T>\nusing vvc = vector<vc<T>>;\n\
@@ -196,115 +202,80 @@ data:
     ); }\r\nvoid NO(bool t = 1) { YES(!t); }\r\nvoid Yes(bool t = 1) { print(t ? \"\
     Yes\" : \"No\"); }\r\nvoid No(bool t = 1) { Yes(!t); }\r\nvoid yes(bool t = 1)\
     \ { print(t ? \"yes\" : \"no\"); }\r\nvoid no(bool t = 1) { yes(!t); }\r\n#line\
-    \ 4 \"test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp\"\
-    \n\n#line 2 \"mod/modint.hpp\"\ntemplate <u32 mod>\nstruct modint {\n  static\
-    \ constexpr bool is_modint = true;\n  u32 val;\n  constexpr modint(const ll val\
-    \ = 0) noexcept\n      : val(val >= 0 ? val % mod : (mod - (-val) % mod) % mod)\
-    \ {}\n  bool operator<(const modint &other) const {\n    return val < other.val;\n\
-    \  } // To use std::map\n  modint &operator+=(const modint &p) {\n    if ((val\
-    \ += p.val) >= mod) val -= mod;\n    return *this;\n  }\n  modint &operator-=(const\
-    \ modint &p) {\n    if ((val += mod - p.val) >= mod) val -= mod;\n    return *this;\n\
-    \  }\n  modint &operator*=(const modint &p) {\n    val = (u32)(1LL * val * p.val\
-    \ % mod);\n    return *this;\n  }\n  modint &operator/=(const modint &p) {\n \
-    \   *this *= p.inverse();\n    return *this;\n  }\n  modint operator-() const\
-    \ { return modint(get_mod() - val); }\n  modint operator+(const modint &p) const\
-    \ { return modint(*this) += p; }\n  modint operator-(const modint &p) const {\
-    \ return modint(*this) -= p; }\n  modint operator*(const modint &p) const { return\
-    \ modint(*this) *= p; }\n  modint operator/(const modint &p) const { return modint(*this)\
-    \ /= p; }\n  bool operator==(const modint &p) const { return val == p.val; }\n\
-    \  bool operator!=(const modint &p) const { return val != p.val; }\n  modint inverse()\
-    \ const {\n    int a = val, b = mod, u = 1, v = 0, t;\n    while (b > 0) {\n \
-    \     t = a / b;\n      swap(a -= t * b, b), swap(u -= t * v, v);\n    }\n   \
-    \ return modint(u);\n  }\n  modint pow(int64_t n) const {\n    modint ret(1),\
-    \ mul(val);\n    while (n > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n\
-    \      n >>= 1;\n    }\n    return ret;\n  }\n  static constexpr u32 get_mod()\
-    \ { return mod; }\n};\n\nstruct ArbitraryModInt {\n  static constexpr bool is_modint\
-    \ = true;\n  u32 val;\n  ArbitraryModInt() : val(0) {}\n  ArbitraryModInt(int64_t\
-    \ y)\n      : val(y >= 0 ? y % get_mod()\n                   : (get_mod() - (-y)\
-    \ % get_mod()) % get_mod()) {}\n  bool operator<(const ArbitraryModInt &other)\
-    \ const {\n    return val < other.val;\n  } // To use std::map<ArbitraryModInt,\
-    \ T>\n  static u32 &get_mod() {\n    static u32 mod = 0;\n    return mod;\n  }\n\
-    \  static void set_mod(int md) { get_mod() = md; }\n  ArbitraryModInt &operator+=(const\
-    \ ArbitraryModInt &p) {\n    if ((val += p.val) >= get_mod()) val -= get_mod();\n\
-    \    return *this;\n  }\n  ArbitraryModInt &operator-=(const ArbitraryModInt &p)\
-    \ {\n    if ((val += get_mod() - p.val) >= get_mod()) val -= get_mod();\n    return\
-    \ *this;\n  }\n  ArbitraryModInt &operator*=(const ArbitraryModInt &p) {\n   \
-    \ unsigned long long a = (unsigned long long)val * p.val;\n    unsigned xh = (unsigned)(a\
-    \ >> 32), xl = (unsigned)a, d, m;\n    asm(\"divl %4; \\n\\t\" : \"=a\"(d), \"\
-    =d\"(m) : \"d\"(xh), \"a\"(xl), \"r\"(get_mod()));\n    val = m;\n    return *this;\n\
-    \  }\n  ArbitraryModInt &operator/=(const ArbitraryModInt &p) {\n    *this *=\
-    \ p.inverse();\n    return *this;\n  }\n  ArbitraryModInt operator-() const {\
-    \ return ArbitraryModInt(get_mod() - val); }\n  ArbitraryModInt operator+(const\
-    \ ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this) += p;\n  }\n\
-    \  ArbitraryModInt operator-(const ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this)\
-    \ -= p;\n  }\n  ArbitraryModInt operator*(const ArbitraryModInt &p) const {\n\
-    \    return ArbitraryModInt(*this) *= p;\n  }\n  ArbitraryModInt operator/(const\
-    \ ArbitraryModInt &p) const {\n    return ArbitraryModInt(*this) /= p;\n  }\n\
-    \  bool operator==(const ArbitraryModInt &p) const { return val == p.val; }\n\
-    \  bool operator!=(const ArbitraryModInt &p) const { return val != p.val; }\n\
-    \  ArbitraryModInt inverse() const {\n    int a = val, b = get_mod(), u = 1, v\
-    \ = 0, t;\n    while (b > 0) {\n      t = a / b;\n      swap(a -= t * b, b), swap(u\
-    \ -= t * v, v);\n    }\n    return ArbitraryModInt(u);\n  }\n  ArbitraryModInt\
-    \ pow(int64_t n) const {\n    ArbitraryModInt ret(1), mul(val);\n    while (n\
-    \ > 0) {\n      if (n & 1) ret *= mul;\n      mul *= mul;\n      n >>= 1;\n  \
-    \  }\n    return ret;\n  }\n};\n\ntemplate <typename mint>\ntuple<mint, mint,\
-    \ mint> get_factorial_data(int n) {\n  static constexpr int mod = mint::get_mod();\n\
-    \  assert(0 <= n && n < mod);\n  static vector<mint> fact = {1, 1};\n  static\
-    \ vector<mint> fact_inv = {1, 1};\n  static vector<mint> inv = {0, 1};\n  while\
-    \ (len(fact) <= n) {\n    int k = len(fact);\n    fact.eb(fact[k - 1] * mint(k));\n\
-    \    auto q = ceil(mod, k);\n    int r = k * q - mod;\n    inv.eb(inv[r] * mint(q));\n\
-    \    fact_inv.eb(fact_inv[k - 1] * inv[k]);\n  }\n  return {fact[n], fact_inv[n],\
-    \ inv[n]};\n}\n\ntemplate <typename mint>\nmint fact(int n) {\n  static constexpr\
-    \ int mod = mint::get_mod();\n  assert(0 <= n);\n  if (n >= mod) return 0;\n \
-    \ return get<0>(get_factorial_data<mint>(n));\n}\n\ntemplate <typename mint>\n\
-    mint fact_inv(int n) {\n  static constexpr int mod = mint::get_mod();\n  assert(0\
-    \ <= n && n < mod);\n  return get<1>(get_factorial_data<mint>(n));\n}\n\ntemplate\
-    \ <typename mint>\nmint inv(int n) {\n  static constexpr int mod = mint::get_mod();\n\
-    \  assert(0 <= n && n < mod);\n  return get<2>(get_factorial_data<mint>(n));\n\
-    }\n\ntemplate <typename mint>\nmint C(ll n, ll k, bool large = false) {\n  assert(n\
-    \ >= 0);\n  if (k < 0 || n < k) return 0;\n  if (!large) return fact<mint>(n)\
-    \ * fact_inv<mint>(k) * fact_inv<mint>(n - k);\n  k = min(k, n - k);\n  mint x(1);\n\
-    \  FOR(i, k) { x *= mint(n - i); }\n  x *= fact_inv<mint>(k);\n  return x;\n}\n\
-    \nusing modint107 = modint<1000000007>;\nusing modint998 = modint<998244353>;\n\
-    using amint = ArbitraryModInt;\n#line 2 \"ds/segtree.hpp\"\ntemplate <class Monoid>\n\
-    struct SegTree {\n  using X = typename Monoid::value_type;\n  using value_type\
-    \ = X;\n  vc<X> dat;\n  int n, log, size;\n\n  SegTree() : SegTree(0) {}\n  SegTree(int\
-    \ n) : SegTree(vc<X>(n, Monoid::unit())) {}\n  SegTree(vc<X> v) : n(len(v)) {\n\
-    \    log = 1;\n    while ((1 << log) < n) ++log;\n    size = 1 << log;\n    dat.assign(size\
-    \ << 1, Monoid::unit());\n    FOR(i, n) dat[size + i] = v[i];\n    FOR3_R(i, 1,\
-    \ size) update(i);\n  }\n\n  X operator[](int i) { return dat[size + i]; }\n\n\
-    \  void update(int i) { dat[i] = Monoid::op(dat[2 * i], dat[2 * i + 1]); }\n\n\
-    \  void set(int i, X x) {\n    assert(i < n);\n    dat[i += size] = x;\n    while\
-    \ (i >>= 1) update(i);\n  }\n\n  X prod(int L, int R) {\n    assert(L <= R);\n\
-    \    assert(R <= n);\n    X vl = Monoid::unit(), vr = Monoid::unit();\n    L +=\
-    \ size, R += size;\n    while (L < R) {\n      if (L & 1) vl = Monoid::op(vl,\
-    \ dat[L++]);\n      if (R & 1) vr = Monoid::op(dat[--R], vr);\n      L >>= 1,\
-    \ R >>= 1;\n    }\n    return Monoid::op(vl, vr);\n  }\n\n  X prod_all() { return\
-    \ dat[1]; }\n\n  template <class F>\n  int max_right(F &check, int L) {\n    assert(0\
-    \ <= L && L <= n && check(Monoid::unit()));\n    if (L == n) return n;\n    L\
-    \ += size;\n    X sm = Monoid::unit();\n    do {\n      while (L % 2 == 0) L >>=\
-    \ 1;\n      if (!check(Monoid::op(sm, dat[L]))) {\n        while (L < size) {\n\
-    \          L = 2 * L;\n          if (check(Monoid::op(sm, dat[L]))) {\n      \
-    \      sm = Monoid::op(sm, dat[L]);\n            L++;\n          }\n        }\n\
-    \        return L - size;\n      }\n      sm = Monoid::op(sm, dat[L]);\n     \
-    \ L++;\n    } while ((L & -L) != L);\n    return n;\n  }\n\n  template <class\
-    \ F>\n  int min_left(F &check, int R) {\n    assert(0 <= R && R <= n && check(Monoid::unit()));\n\
-    \    if (R == 0) return 0;\n    R += size;\n    X sm = Monoid::unit();\n    do\
-    \ {\n      --R;\n      while (R > 1 && (R % 2)) R >>= 1;\n      if (!check(Monoid::op(dat[R],\
-    \ sm))) {\n        while (R < size) {\n          R = 2 * R + 1;\n          if\
-    \ (check(Monoid::op(dat[R], sm))) {\n            sm = Monoid::op(dat[R], sm);\n\
-    \            R--;\n          }\n        }\n        return R + 1 - size;\n    \
-    \  }\n      sm = Monoid::op(dat[R], sm);\n    } while ((R & -R) != R);\n    return\
-    \ 0;\n  }\n\n  void debug() { print(\"segtree\", dat); }\n};\n#line 2 \"graph/base.hpp\"\
-    \n\ntemplate <typename T>\nstruct Edge {\n  int frm, to;\n  T cost;\n  int id;\n\
-    };\n\ntemplate <typename T = int, bool directed = false>\nstruct Graph {\n  int\
-    \ N, M;\n  using cost_type = T;\n  using edge_type = Edge<T>;\n  vector<edge_type>\
-    \ edges;\n  vector<int> indptr;\n  vector<edge_type> csr_edges;\n  bool prepared;\n\
-    \n  class OutgoingEdges {\n  public:\n    OutgoingEdges(const Graph* G, int l,\
-    \ int r) : G(G), l(l), r(r) {}\n\n    const edge_type* begin() const {\n     \
-    \ if (l == r) { return 0; }\n      return &G->csr_edges[l];\n    }\n\n    const\
-    \ edge_type* end() const {\n      if (l == r) { return 0; }\n      return &G->csr_edges[r];\n\
-    \    }\n\n  private:\n    int l, r;\n    const Graph* G;\n  };\n\n  bool is_prepared()\
+    \ 2 \"alg/group_add.hpp\"\ntemplate <class X>\r\nstruct Group_Add {\r\n  using\
+    \ value_type = X;\r\n  static constexpr X op(const X &x, const X &y) noexcept\
+    \ { return x + y; }\r\n  static constexpr X inverse(const X &x) noexcept { return\
+    \ -x; }\r\n  static constexpr X power(const X &x, ll n) noexcept { return n *\
+    \ x; }\r\n  static constexpr X unit() { return X(0); }\r\n  static constexpr bool\
+    \ commute = true;\r\n};\r\n#line 1 \"graph/lazytreemonoid.hpp\"\n// https://codeforces.com/contest/916/problem/E\r\
+    \n#line 2 \"ds/lazysegtree.hpp\"\n\ntemplate <typename Lazy>\nstruct LazySegTree\
+    \ {\n  using Monoid_X = typename Lazy::X_structure;\n  using Monoid_A = typename\
+    \ Lazy::A_structure;\n  using X = typename Monoid_X::value_type;\n  using A =\
+    \ typename Monoid_A::value_type;\n  int n, log, size;\n  vc<X> dat;\n  vc<A> laz;\n\
+    \n  LazySegTree() : LazySegTree(0) {}\n  LazySegTree(int n) : LazySegTree(vc<X>(n,\
+    \ Monoid_X::unit())) {}\n  LazySegTree(vc<X> v) : n(len(v)) {\n    log = 1;\n\
+    \    while ((1 << log) < n) ++log;\n    size = 1 << log;\n    dat.assign(size\
+    \ << 1, Monoid_X::unit());\n    laz.assign(size, Monoid_A::unit());\n    FOR(i,\
+    \ n) dat[size + i] = v[i];\n    FOR3_R(i, 1, size) update(i);\n  }\n\n  void reset()\
+    \ {\n    fill(all(dat), Monoid_X::unit());\n    fill(all(laz), Monoid_A::unit());\n\
+    \  }\n\n  void reset(const vc<X>& v) {\n    assert(len(v) == n);\n    reset();\n\
+    \    FOR(i, n) dat[size + i] = v[i];\n    FOR3_R(i, 1, size) update(i);\n  }\n\
+    \n  void update(int k) { dat[k] = Monoid_X::op(dat[2 * k], dat[2 * k + 1]); }\n\
+    \n  void all_apply(int k, A a) {\n    dat[k] = Lazy::act(dat[k], a);\n    if (k\
+    \ < size) laz[k] = Monoid_A::op(laz[k], a);\n  }\n\n  void push(int k) {\n   \
+    \ all_apply(2 * k, laz[k]);\n    all_apply(2 * k + 1, laz[k]);\n    laz[k] = Monoid_A::unit();\n\
+    \  }\n\n  void set(int p, X x) {\n    assert(0 <= p && p < n);\n    p += size;\n\
+    \    for (int i = log; i >= 1; i--) push(p >> i);\n    dat[p] = x;\n    for (int\
+    \ i = 1; i <= log; i++) update(p >> i);\n  }\n\n  X get(int p) {\n    assert(0\
+    \ <= p && p < n);\n    p += size;\n    for (int i = log; i >= 1; i--) push(p >>\
+    \ i);\n    return dat[p];\n  }\n\n  vc<X> get_all() {\n    FOR(i, size) push(i);\n\
+    \    return {dat.begin() + size, dat.begin() + size + n};\n  }\n\n  X prod(int\
+    \ l, int r) {\n    assert(0 <= l && l <= r && r <= n);\n    if (l == r) return\
+    \ Monoid_X::unit();\n\n    l += size;\n    r += size;\n\n    for (int i = log;\
+    \ i >= 1; i--) {\n      if (((l >> i) << i) != l) push(l >> i);\n      if (((r\
+    \ >> i) << i) != r) push((r - 1) >> i);\n    }\n\n    X xl = Monoid_X::unit(),\
+    \ xr = Monoid_X::unit();\n    while (l < r) {\n      if (l & 1) xl = Monoid_X::op(xl,\
+    \ dat[l++]);\n      if (r & 1) xr = Monoid_X::op(dat[--r], xr);\n      l >>= 1;\n\
+    \      r >>= 1;\n    }\n\n    return Monoid_X::op(xl, xr);\n  }\n\n  X prod_all()\
+    \ { return dat[1]; }\n\n  void apply(int p, A a) {\n    assert(0 <= p && p < n);\n\
+    \    p += size;\n    dat[p] = Lazy::act(dat[p], a);\n    for (int i = 1; i <=\
+    \ log; i++) update(p >> i);\n  }\n\n  void apply(int l, int r, A a) {\n    assert(0\
+    \ <= l && l <= r && r <= n);\n    if (l == r) return;\n\n    l += size;\n    r\
+    \ += size;\n\n    for (int i = log; i >= 1; i--) {\n      if (((l >> i) << i)\
+    \ != l) push(l >> i);\n      if (((r >> i) << i) != r) push((r - 1) >> i);\n \
+    \   }\n\n    {\n      int l2 = l, r2 = r;\n      while (l < r) {\n        if (l\
+    \ & 1) all_apply(l++, a);\n        if (r & 1) all_apply(--r, a);\n        l >>=\
+    \ 1;\n        r >>= 1;\n      }\n      l = l2;\n      r = r2;\n    }\n\n    for\
+    \ (int i = 1; i <= log; i++) {\n      if (((l >> i) << i) != l) update(l >> i);\n\
+    \      if (((r >> i) << i) != r) update((r - 1) >> i);\n    }\n  }\n\n  template\
+    \ <typename C>\n  int max_right(C& check, int l) {\n    assert(0 <= l && l <=\
+    \ n);\n    assert(check(Monoid_X::unit()));\n    if (l == n) return n;\n    l\
+    \ += size;\n    for (int i = log; i >= 1; i--) push(l >> i);\n    X sm = Monoid_X::unit();\n\
+    \    do {\n      while (l % 2 == 0) l >>= 1;\n      if (!check(Monoid_X::op(sm,\
+    \ dat[l]))) {\n        while (l < size) {\n          push(l);\n          l = (2\
+    \ * l);\n          if (check(Monoid_X::op(sm, dat[l]))) {\n            sm = Monoid_X::op(sm,\
+    \ dat[l]);\n            l++;\n          }\n        }\n        return l - size;\n\
+    \      }\n      sm = Monoid_X::op(sm, dat[l]);\n      l++;\n    } while ((l &\
+    \ -l) != l);\n    return n;\n  }\n\n  template <typename C>\n  int min_left(C&\
+    \ check, int r) {\n    assert(0 <= r && r <= n);\n    assert(check(Monoid_X::unit()));\n\
+    \    if (r == 0) return 0;\n    r += size;\n    for (int i = log; i >= 1; i--)\
+    \ push((r - 1) >> i);\n    X sm = Monoid_X::unit();\n    do {\n      r--;\n  \
+    \    while (r > 1 && (r % 2)) r >>= 1;\n      if (!check(Monoid_X::op(dat[r],\
+    \ sm))) {\n        while (r < size) {\n          push(r);\n          r = (2 *\
+    \ r + 1);\n          if (check(Monoid_X::op(dat[r], sm))) {\n            sm =\
+    \ Monoid_X::op(dat[r], sm);\n            r--;\n          }\n        }\n      \
+    \  return r + 1 - size;\n      }\n      sm = Monoid_X::op(dat[r], sm);\n    }\
+    \ while ((r & -r) != r);\n    return 0;\n  }\n\n  void debug() { print(\"lazysegtree\
+    \ getall:\", get_all()); }\n};\n#line 2 \"graph/base.hpp\"\n\ntemplate <typename\
+    \ T>\nstruct Edge {\n  int frm, to;\n  T cost;\n  int id;\n};\n\ntemplate <typename\
+    \ T = int, bool directed = false>\nstruct Graph {\n  int N, M;\n  using cost_type\
+    \ = T;\n  using edge_type = Edge<T>;\n  vector<edge_type> edges;\n  vector<int>\
+    \ indptr;\n  vector<edge_type> csr_edges;\n  bool prepared;\n\n  class OutgoingEdges\
+    \ {\n  public:\n    OutgoingEdges(const Graph* G, int l, int r) : G(G), l(l),\
+    \ r(r) {}\n\n    const edge_type* begin() const {\n      if (l == r) { return\
+    \ 0; }\n      return &G->csr_edges[l];\n    }\n\n    const edge_type* end() const\
+    \ {\n      if (l == r) { return 0; }\n      return &G->csr_edges[r];\n    }\n\n\
+    \  private:\n    int l, r;\n    const Graph* G;\n  };\n\n  bool is_prepared()\
     \ { return prepared; }\n  constexpr bool is_directed() { return directed; }\n\n\
     \  Graph() : N(0), M(0), prepared(0) {}\n  Graph(int N) : N(N), M(0), prepared(0)\
     \ {}\n\n  void add(int frm, int to, T cost = 1, int i = -1) {\n    assert(!prepared\
@@ -382,105 +353,101 @@ data:
     V\", V);\r\n    print(\"LID\", LID);\r\n    print(\"RID\", RID);\r\n    print(\"\
     parent\", parent);\r\n    print(\"depth\", depth);\r\n    print(\"head\", head);\r\
     \n    print(\"in_tree(edge)\", in_tree);\r\n    print(\"root\", root);\r\n  }\r\
-    \n};\r\n#line 1 \"alg/group_reverse.hpp\"\ntemplate <class Group>\r\nstruct Group_Reverse\
-    \ {\r\n  using value_type = typename Group::value_type;\r\n  using X = value_type;\r\
-    \n  static constexpr X op(const X &x, const X &y) { return Group::op(y, x); }\r\
-    \n  static constexpr X inverse(const X &x) { return Group::inverse(x); }\r\n \
-    \ static constexpr X unit() { return Group::unit(); }\r\n  static const bool commute\
-    \ = Group::commute;\r\n};\r\n#line 4 \"graph/treegroup.hpp\"\n\r\n// \u4F5C\u3063\
-    \u3066\u307F\u305F\u3082\u306E\u306E\u3001HLD(log^2N)\u3088\u308A\u9045\u3044\u304C\
-    \u3061\uFF1F\r\ntemplate <typename HLD, typename Group, bool edge = false,\r\n\
-    \          bool path_query = true, bool subtree_query = false>\r\nstruct TreeGroup\
-    \ {\r\n  using RevGroup = Group_Reverse<Group>;\r\n  using X = typename Group::value_type;\r\
-    \n  HLD &hld;\r\n  int N;\r\n  SegTree<Group> seg, seg_subtree;\r\n  SegTree<RevGroup>\
-    \ seg_r;\r\n\r\n  TreeGroup(HLD &hld) : hld(hld), N(hld.N) {\r\n    if (path_query)\
-    \ {\r\n      seg = SegTree<Group>(2 * N);\r\n      if (!Group::commute) seg_r\
-    \ = SegTree<RevGroup>(2 * N);\r\n    }\r\n    if (subtree_query) {\r\n      assert(Group::commute);\r\
-    \n      seg_subtree = SegTree<Group>(N);\r\n    }\r\n  }\r\n\r\n  TreeGroup(HLD\
-    \ &hld, vc<X> dat) : hld(hld), N(hld.N) {\r\n    if (path_query) {\r\n      vc<X>\
-    \ seg_raw(2 * N);\r\n      if (!edge) {\r\n        assert(len(dat) == N);\r\n\
-    \        FOR(v, N) {\r\n          seg_raw[hld.ELID(v)] = dat[v];\r\n         \
-    \ seg_raw[hld.ERID(v)] = Group::inverse(dat[v]);\r\n        }\r\n      } else\
-    \ {\r\n        assert(len(dat) == N - 1);\r\n        FOR(e, N - 1) {\r\n     \
-    \     int v = hld.e_to_v(e);\r\n          seg_raw[hld.ELID(v)] = dat[e];\r\n \
-    \         seg_raw[hld.ERID(v)] = Group::inverse(dat[e]);\r\n        }\r\n    \
-    \  }\r\n      seg = SegTree<Group>(seg_raw);\r\n      if (!Group::commute) seg_r\
-    \ = SegTree<RevGroup>(seg_raw);\r\n    }\r\n    if (subtree_query) {\r\n     \
-    \ assert(Group::commute);\r\n      vc<X> seg_raw(N);\r\n      if (!edge) {\r\n\
-    \        assert(len(dat) == N);\r\n        FOR(v, N) seg_raw[hld.LID[v]] = dat[v];\r\
-    \n      } else {\r\n        assert(len(dat) == N - 1);\r\n        FOR(e, N - 1)\
-    \ {\r\n          int v = hld.e_to_v(e);\r\n          seg_raw[hld.LID[v]] = dat[e];\r\
-    \n        }\r\n      }\r\n      seg_subtree = SegTree<Group>(seg_raw);\r\n   \
-    \ }\r\n  }\r\n\r\n  void set_path(int v, X x) {\r\n    X inv_x = Group::inverse(x);\r\
-    \n    seg.set(hld.ELID(v), x);\r\n    seg.set(hld.ERID(v), inv_x);\r\n    if (!Group::commute)\
-    \ {\r\n      seg_r.set(hld.ELID(v), x);\r\n      seg_r.set(hld.ERID(v), inv_x);\r\
-    \n    }\r\n  }\r\n\r\n  void set_subtree(int v, X x) { seg_subtree.set(hld.LID[v],\
-    \ x); }\r\n\r\n  void set(int i, X x) {\r\n    int v = (edge ? hld.e_to_v(i) :\
-    \ i);\r\n    if (path_query) set_path(v, x);\r\n    if (subtree_query) set_subtree(v,\
-    \ x);\r\n  }\r\n\r\n  X prod_path(int frm, int to) {\r\n    assert(path_query);\r\
-    \n    int lca = hld.LCA(frm, to);\r\n    // [frm, lca)\r\n    X x1 = (Group::commute\
-    \ ? seg.prod(hld.ELID(lca) + 1, hld.ELID(frm) + 1)\r\n                       \
-    \    : seg_r.prod(hld.ELID(lca) + 1, hld.ELID(frm) + 1));\r\n    // edge \u306A\
-    \u3089 (lca, to]\u3001vertex \u306A\u3089 [lca, to]\r\n    X x2 = seg.prod(hld.ELID(lca)\
-    \ + edge, hld.ELID(to) + 1);\r\n    return Group::op(x1, x2);\r\n  }\r\n\r\n \
-    \ X prod_subtree(int u) {\r\n    assert(subtree_query);\r\n    int l = hld.LID[u],\
-    \ r = hld.RID[u];\r\n    return seg_subtree.prod(l + edge, r);\r\n  }\r\n\r\n\
-    \  void debug() {\r\n    print(\"hld\");\r\n    hld.debug();\r\n    print(\"seg\"\
-    );\r\n    seg.debug();\r\n    print(\"seg_r\");\r\n    seg_r.debug();\r\n    print(\"\
-    seg_subtree\");\r\n    seg_subtree.debug();\r\n  }\r\n\r\n  void doc() {\r\n \
-    \   print(\"EulerTour + \u30BB\u30B0\u6728\u3002\");\r\n    print(\"\u9006\u5143\
-    \u3092\u5229\u7528\u3057\u3066\u3001\u30D1\u30B9\u30AF\u30A8\u30EA\u3092 O(logN)\
-    \ \u6642\u9593\u3067\u884C\u3046\u3002\");\r\n    print(\"\u90E8\u5206\u6728\u30AF\
-    \u30A8\u30EA O(logN) \u6642\u9593\u3001\u30D1\u30B9\u30AF\u30A8\u30EA O(logN)\
-    \ \u6642\u9593\u3002\");\r\n  }\r\n};\n#line 1 \"alg/group_affine.hpp\"\ntemplate\
-    \ <typename K>\nstruct Group_Affine {\n  using F = pair<K, K>;\n  using value_type\
-    \ = F;\n  static constexpr F op(const F &x, const F &y) noexcept {\n    return\
-    \ F({x.fi * y.fi, x.se * y.fi + y.se});\n  }\n  static constexpr F inverse(const\
-    \ F &x) {\n    auto [a, b] = x;\n    a = K(1) / a;\n    return {a, a * (-b)};\n\
-    \  }\n  static constexpr K eval(const F &f, K x) noexcept { return f.fi * x +\
-    \ f.se; }\n  static constexpr F unit() { return {K(1), K(0)}; }\n  static constexpr\
-    \ bool commute = false;\n};\n#line 8 \"test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp\"\
-    \n\nusing mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using Mono = Group_Affine<mint>;\n\
-    \  using E = Mono::value_type;\n  vc<E> A(N);\n  FOR(i, N) {\n    LL(a, b);\n\
-    \    A[i] = mp(mint(a), mint(b));\n  }\n\n  Graph<int> G(N);\n  G.read_tree(0,\
-    \ 0);\n\n  HLD hld(G);\n  TreeGroup<decltype(hld), Mono, false, true, false> TG(hld,\
-    \ A);\n\n  FOR(_, Q) {\n    LL(t);\n    if (t == 0) {\n      LL(v, c, d);\n  \
-    \    TG.set(v, E({mint(c), mint(d)}));\n    } else {\n      LL(u, v, x);\n   \
-    \   auto e = TG.prod_path(u, v);\n      print(e.fi * mint(x) + e.se);\n    }\n\
-    \  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
-    \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
-  code: "#define PROBLEM \"https://judge.yosupo.jp/problem/vertex_set_path_composite\"\
-    \n#include \"my_template.hpp\"\n#include \"other/io.hpp\"\n\n#include \"mod/modint.hpp\"\
-    \n#include \"graph/treegroup.hpp\"\n#include \"alg/group_affine.hpp\"\n\nusing\
-    \ mint = modint998;\n\nvoid solve() {\n  LL(N, Q);\n  using Mono = Group_Affine<mint>;\n\
-    \  using E = Mono::value_type;\n  vc<E> A(N);\n  FOR(i, N) {\n    LL(a, b);\n\
-    \    A[i] = mp(mint(a), mint(b));\n  }\n\n  Graph<int> G(N);\n  G.read_tree(0,\
-    \ 0);\n\n  HLD hld(G);\n  TreeGroup<decltype(hld), Mono, false, true, false> TG(hld,\
-    \ A);\n\n  FOR(_, Q) {\n    LL(t);\n    if (t == 0) {\n      LL(v, c, d);\n  \
-    \    TG.set(v, E({mint(c), mint(d)}));\n    } else {\n      LL(u, v, x);\n   \
-    \   auto e = TG.prod_path(u, v);\n      print(e.fi * mint(x) + e.se);\n    }\n\
-    \  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
-    \  cout << setprecision(15);\n\n  solve();\n\n  return 0;\n}\n"
+    \n};\r\n#line 1 \"alg/monoid_reverse.hpp\"\ntemplate <class Monoid>\r\nstruct\
+    \ Monoid_Reverse {\r\n  using value_type = typename Monoid::value_type;\r\n  using\
+    \ X = value_type;\r\n  static constexpr X op(const X &x, const X &y) { return\
+    \ Monoid::op(y, x); }\r\n  static constexpr X unit() { return Monoid::unit();\
+    \ }\r\n  static const bool commute = Monoid::commute;\r\n};\r\n#line 2 \"alg/lazy_reverse.hpp\"\
+    \n\r\ntemplate <typename Lazy>\r\nstruct Lazy_Reverse {\r\n  using MX = Monoid_Reverse<typename\
+    \ Lazy::X_structure>;\r\n  using MA = typename Lazy::A_structure;\r\n  using X_structure\
+    \ = MX;\r\n  using A_structure = MA;\r\n  using X = typename MX::value_type;\r\
+    \n  using A = typename MA::value_type;\r\n  static constexpr X act(const X &x,\
+    \ const A &a) { return Lazy::act(x, a); }\r\n};\r\n#line 5 \"graph/lazytreemonoid.hpp\"\
+    \n\r\ntemplate <typename HLD, typename Lazy, bool edge = false>\r\nstruct LazyTreeMonoid\
+    \ {\r\n  using MonoX = typename Lazy::X_structure;\r\n  using MonoA = typename\
+    \ Lazy::A_structure;\r\n  using X = typename MonoX::value_type;\r\n  using A =\
+    \ typename MonoA::value_type;\r\n  using RevLazy = Lazy_Reverse<Lazy>;\r\n  HLD\
+    \ &hld;\r\n  int N;\r\n  LazySegTree<Lazy> seg;\r\n  LazySegTree<RevLazy> seg_r;\r\
+    \n\r\n  LazyTreeMonoid(HLD &hld) : hld(hld), N(hld.N), seg(hld.N) {\r\n    if\
+    \ (!MonoX::commute) seg_r = LazySegTree<RevLazy>(hld.N);\r\n  }\r\n\r\n  LazyTreeMonoid(HLD\
+    \ &hld, vc<X> &dat) : hld(hld), N(hld.N) {\r\n    vc<X> seg_raw(N, MonoX::unit());\r\
+    \n    if (!edge) {\r\n      FOR(v, N) seg_raw[hld.LID[v]] = dat[v];\r\n    } else\
+    \ {\r\n      FOR(e, N - 1) {\r\n        int v = hld.e_to_v(e);\r\n        seg_raw[hld.LID[v]]\
+    \ = dat[e];\r\n      }\r\n    }\r\n    seg = LazySegTree<Lazy>(seg_raw);\r\n \
+    \   if (!MonoX::commute) seg_r = LazySegTree<RevLazy>(seg_raw);\r\n  }\r\n\r\n\
+    \  void set(int i, X x) {\r\n    if (edge) i = hld.e_to_v(i);\r\n    i = hld.LID[i];\r\
+    \n    seg.set(i, x);\r\n    if (!MonoX::commute) seg_r.set(i, x);\r\n  }\r\n\r\
+    \n  X prod_path(int u, int v) {\r\n    auto pd = hld.get_path_decomposition(u,\
+    \ v, edge);\r\n    X val = MonoX::unit();\r\n    for (auto &&[a, b]: pd) {\r\n\
+    \      X x = (a <= b ? seg.prod(a, b + 1)\r\n                    : (MonoX::commute\
+    \ ? seg.prod(b, a + 1)\r\n                                       : seg_r.prod(b,\
+    \ a + 1)));\r\n      val = MonoX::op(val, x);\r\n    }\r\n    return val;\r\n\
+    \  }\r\n\r\n  X prod_subtree(int u) {\r\n    int l = hld.LID[u], r = hld.RID[u];\r\
+    \n    return seg.prod(l + edge, r);\r\n  }\r\n\r\n  X prod_all() {\r\n    return\
+    \ seg.prod_all();\r\n  }\r\n\r\n  void apply_path(int u, int v, A a) {\r\n   \
+    \ auto pd = hld.get_path_decomposition(u, v, edge);\r\n    for (auto &&[x, y]:\
+    \ pd) {\r\n      int l = min(x, y), r = max(x, y);\r\n      seg.apply(l, r + 1,\
+    \ a);\r\n      if(!MonoX::commute) seg_r.apply(l, r + 1, a);\r\n    }\r\n  }\r\
+    \n\r\n  void apply_subtree(int u, A a) {\r\n    int l = hld.LID[u], r = hld.RID[u];\r\
+    \n    return seg.apply(l + edge, r, a);\r\n  }\r\n\r\n  void debug() {\r\n   \
+    \ print(\"tree_monoid\");\r\n    hld.debug();\r\n    seg.debug();\r\n    seg_r.debug();\r\
+    \n  }\r\n\r\n  void doc() {\r\n    print(\"HL\u5206\u89E3 + \u30BB\u30B0\u6728\
+    \u3002\");\r\n    print(\"\u90E8\u5206\u6728\u30AF\u30A8\u30EA O(logN) \u6642\u9593\
+    \u3001\u30D1\u30B9\u30AF\u30A8\u30EA O(log^2N) \u6642\u9593\u3002\");\r\n  }\r\
+    \n};\r\n#line 1 \"alg/group_cntsum.hpp\"\ntemplate <typename E = long long>\r\n\
+    struct Group_CntSum {\r\n  using value_type = pair<E, E>;\r\n  using X = value_type;\r\
+    \n  static constexpr X op(const X &x, const X &y) {\r\n    return {x.fi + y.fi,\
+    \ x.se + y.se};\r\n  }\r\n  static constexpr X inverse(const X &x) { return {-x.fi,\
+    \ -x.se}; }\r\n  static constexpr X unit() { return {0, 0}; }\r\n  static constexpr\
+    \ bool commute = true;\r\n};\r\n#line 3 \"alg/lazy_cntsum_add.hpp\"\n\r\ntemplate\
+    \ <typename E>\r\nstruct Lazy_CntSum_Add {\r\n  using MX = Group_CntSum<E>;\r\n\
+    \  using MA = Group_Add<E>;\r\n  using X_structure = MX;\r\n  using A_structure\
+    \ = MA;\r\n  using X = typename MX::value_type;\r\n  using A = typename MA::value_type;\r\
+    \n  static constexpr X act(const X &x, const A &a) {\r\n    return {x.fi, x.se\
+    \ + x.fi * a};\r\n  }\r\n};\r\n#line 8 \"test/aoj/GRL_5_E_lazytreemonoid.test.cpp\"\
+    \n\nvoid solve() {\n  LL(N);\n  Graph G(N);\n  FOR(v, N) {\n    LL(k);\n    FOR_(k)\
+    \ {\n      LL(to);\n      G.add(v, to);\n    }\n  }\n  G.build();\n  HLD hld(G);\n\
+    \  vc<pi> seg_raw(N - 1, {1, 0});\n  LazyTreeMonoid<decltype(hld), Lazy_CntSum_Add<ll>,\
+    \ 1> TM(hld, seg_raw);\n  LL(Q);\n  FOR_(Q) {\n    LL(t);\n    if (t == 0) {\n\
+    \      LL(v, x);\n      TM.apply_path(0, v, x);\n      // TM.apply_path(hld.parent[v],\
+    \ v, x);\n    } else {\n      LL(v);\n      print(TM.prod_path(0, v).se);\n  \
+    \  }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
+    \  cout << setprecision(15);\n\n  ll T = 1;\n  // LL(T);\n  FOR(_, T) solve();\n\
+    \n  return 0;\n}\n"
+  code: "#define PROBLEM \\\n  \"https://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_5_E\"\
+    \n#include \"my_template.hpp\"\n#include \"other/io.hpp\"\n#include \"alg/group_add.hpp\"\
+    \n#include \"graph/lazytreemonoid.hpp\"\n#include \"alg/lazy_cntsum_add.hpp\"\n\
+    \nvoid solve() {\n  LL(N);\n  Graph G(N);\n  FOR(v, N) {\n    LL(k);\n    FOR_(k)\
+    \ {\n      LL(to);\n      G.add(v, to);\n    }\n  }\n  G.build();\n  HLD hld(G);\n\
+    \  vc<pi> seg_raw(N - 1, {1, 0});\n  LazyTreeMonoid<decltype(hld), Lazy_CntSum_Add<ll>,\
+    \ 1> TM(hld, seg_raw);\n  LL(Q);\n  FOR_(Q) {\n    LL(t);\n    if (t == 0) {\n\
+    \      LL(v, x);\n      TM.apply_path(0, v, x);\n      // TM.apply_path(hld.parent[v],\
+    \ v, x);\n    } else {\n      LL(v);\n      print(TM.prod_path(0, v).se);\n  \
+    \  }\n  }\n}\n\nsigned main() {\n  cin.tie(nullptr);\n  ios::sync_with_stdio(false);\n\
+    \  cout << setprecision(15);\n\n  ll T = 1;\n  // LL(T);\n  FOR(_, T) solve();\n\
+    \n  return 0;\n}\n"
   dependsOn:
   - my_template.hpp
   - other/io.hpp
-  - mod/modint.hpp
-  - graph/treegroup.hpp
-  - ds/segtree.hpp
+  - alg/group_add.hpp
+  - graph/lazytreemonoid.hpp
+  - ds/lazysegtree.hpp
   - graph/hld.hpp
   - graph/base.hpp
-  - alg/group_reverse.hpp
-  - alg/group_affine.hpp
+  - alg/lazy_reverse.hpp
+  - alg/monoid_reverse.hpp
+  - alg/lazy_cntsum_add.hpp
+  - alg/group_cntsum.hpp
   isVerificationFile: true
-  path: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
+  path: test/aoj/GRL_5_E_lazytreemonoid.test.cpp
   requiredBy: []
-  timestamp: '2022-04-15 23:24:46+09:00'
+  timestamp: '2022-04-15 23:25:17+09:00'
   verificationStatus: TEST_ACCEPTED
   verifiedWith: []
-documentation_of: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
+documentation_of: test/aoj/GRL_5_E_lazytreemonoid.test.cpp
 layout: document
 redirect_from:
-- /verify/test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
-- /verify/test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp.html
-title: test/library_checker/datastructure/vertex_set_path_composite_group.test.cpp
+- /verify/test/aoj/GRL_5_E_lazytreemonoid.test.cpp
+- /verify/test/aoj/GRL_5_E_lazytreemonoid.test.cpp.html
+title: test/aoj/GRL_5_E_lazytreemonoid.test.cpp
 ---

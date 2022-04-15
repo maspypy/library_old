@@ -24,6 +24,9 @@ data:
     path: graph/check_bipartite.hpp
     title: graph/check_bipartite.hpp
   - icon: ':heavy_check_mark:'
+    path: graph/cycle_detection.hpp
+    title: graph/cycle_detection.hpp
+  - icon: ':heavy_check_mark:'
     path: graph/degree.hpp
     title: graph/degree.hpp
   - icon: ':heavy_check_mark:'
@@ -50,7 +53,7 @@ data:
   - icon: ':heavy_check_mark:'
     path: graph/hld.hpp
     title: graph/hld.hpp
-  - icon: ':warning:'
+  - icon: ':heavy_check_mark:'
     path: graph/lazytreemonoid.hpp
     title: graph/lazytreemonoid.hpp
   - icon: ':heavy_check_mark:'
@@ -117,6 +120,9 @@ data:
   - icon: ':heavy_check_mark:'
     path: test/aoj/GRL_2_A_mst.test.cpp
     title: test/aoj/GRL_2_A_mst.test.cpp
+  - icon: ':heavy_check_mark:'
+    path: test/aoj/GRL_5_E_lazytreemonoid.test.cpp
+    title: test/aoj/GRL_5_E_lazytreemonoid.test.cpp
   - icon: ':heavy_check_mark:'
     path: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
     title: test/library_checker/datastructure/vertex_add_path_sum_abelgroup.test.cpp
@@ -282,6 +288,7 @@ data:
   - graph/twosat.hpp
   - graph/bellmanford.hpp
   - graph/tree_dp.hpp
+  - graph/cycle_detection.hpp
   - graph/functional.hpp
   - graph/treegroup.hpp
   - graph/find_nontransitive_triple.hpp
@@ -311,6 +318,7 @@ data:
   - test/aoj/ALDS1_12_B_dial.test.cpp
   - test/aoj/GRL_1_C_warshallfloyd.test.cpp
   - test/aoj/GRL_1_B_bellmanford.test.cpp
+  - test/aoj/GRL_5_E_lazytreemonoid.test.cpp
   - test/aoj/GRL_2_A_mst.test.cpp
   - test/library_checker/math/twosat.test.cpp
   - test/library_checker/graph/cycle_detection.test.cpp
