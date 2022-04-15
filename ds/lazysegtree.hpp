@@ -22,6 +22,18 @@ struct LazySegTree {
     FOR3_R(i, 1, size) update(i);
   }
 
+  void reset() {
+    fill(all(dat), Monoid_X::unit());
+    fill(all(laz), Monoid_A::unit());
+  }
+
+  void reset(const vc<X>& v) {
+    assert(len(v) == n);
+    reset();
+    FOR(i, n) dat[size + i] = v[i];
+    FOR3_R(i, 1, size) update(i);
+  }
+
   void update(int k) { dat[k] = Monoid_X::op(dat[2 * k], dat[2 * k + 1]); }
 
   void all_apply(int k, A a) {
