@@ -1,15 +1,18 @@
+#include "graph/base.hpp"
+
+// 辺の列 or 頂点列の vector を返す
+// 見つからなかった場合には、空 vector
 template <typename Graph>
-vc<int> cycle_detection(Graph& G, bool is_edge) {
+vc<int> cycle_detection(Graph& G, bool is_edge = 0) {
   assert(G.is_directed());
   assert(G.is_prepared());
   if (!is_edge) {
     auto C = cycle_detection(G, true);
     if (len(C) == 0) return C;
-    vc<int> ANS(len(C) + 1);
+    vc<int> ANS(len(C));
     FOR(i, len(C)) {
       auto e = G.edges[C[i]];
-      ANS[i + 0] = e.frm;
-      ANS[i + 1] = e.to;
+      ANS[i] = e.frm;
     }
     return ANS;
   }
