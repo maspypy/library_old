@@ -20,7 +20,7 @@ struct LazyTreeMonoid {
   }
 
   LazyTreeMonoid(HLD &hld, vc<X> &dat) : hld(hld), N(hld.N) {
-    vc<X> seg_raw(N, MonoX::unit);
+    vc<X> seg_raw(N, MonoX::unit());
     if (!edge) {
       FOR(v, N) seg_raw[hld.LID[v]] = dat[v];
     } else {
@@ -42,7 +42,7 @@ struct LazyTreeMonoid {
 
   X prod_path(int u, int v) {
     auto pd = hld.get_path_decomposition(u, v, edge);
-    X val = MonoX::unit;
+    X val = MonoX::unit();
     for (auto &&[a, b]: pd) {
       X x = (a <= b ? seg.prod(a, b + 1)
                     : (MonoX::commute ? seg.prod(b, a + 1)
